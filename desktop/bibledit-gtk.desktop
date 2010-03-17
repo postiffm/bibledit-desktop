@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Bibledit-Gtk
+Comment=Bible Editor
+Icon=bibledit
+Exec=bibledit-gtk
+Type=Application
+Categories=Office;
+
