@@ -49,10 +49,6 @@ ReferenceExchangeDialog::ReferenceExchangeDialog(int dummy) {
   shortcuts.button(checkbutton_santafe);
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_santafe), settings->genconfig.reference_exchange_send_to_santafefocus_get());
 
-  checkbutton_onlinebible = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "checkbutton_onlinebible"));
-  shortcuts.button(checkbutton_onlinebible);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_onlinebible), settings->genconfig.reference_exchange_send_to_onlinebible_get());
-
   GSList *radiobutton_receive_group = NULL;
 
   radiobutton_off = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "radiobutton_off"));
@@ -65,12 +61,6 @@ ReferenceExchangeDialog::ReferenceExchangeDialog(int dummy) {
   radiobutton_receive_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_santafe));
   shortcuts.button(radiobutton_santafe);
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_santafe), settings->genconfig.reference_exchange_receive_from_santafefocus_get());
-
-  radiobutton_onlinebible = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "radiobutton_onlinebible"));
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_onlinebible), radiobutton_receive_group);
-  radiobutton_receive_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_onlinebible));
-  shortcuts.button(radiobutton_onlinebible);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_onlinebible), settings->genconfig.reference_exchange_receive_from_onlinebible_get());
 
   vbox_outpost = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "vbox_outpost"));
 
@@ -88,8 +78,6 @@ ReferenceExchangeDialog::ReferenceExchangeDialog(int dummy) {
   g_signal_connect((gpointer)okbutton, "clicked", G_CALLBACK(on_okbutton_clicked), gpointer(this));
   g_signal_connect((gpointer)checkbutton_santafe, "toggled", G_CALLBACK(on_button_outpost_requirement_toggled), gpointer(this));
   g_signal_connect_after((gpointer)radiobutton_santafe, "toggled", G_CALLBACK(on_button_outpost_requirement_toggled), gpointer(this));
-  g_signal_connect((gpointer)checkbutton_onlinebible, "toggled", G_CALLBACK(on_button_outpost_requirement_toggled), gpointer(this));
-  g_signal_connect_after((gpointer)radiobutton_onlinebible, "toggled", G_CALLBACK(on_button_outpost_requirement_toggled), gpointer(this));
 
   // Set gui.
   on_outpost();
@@ -113,8 +101,6 @@ void ReferenceExchangeDialog::on_okbutton() {
   settings->genconfig.bibledit_web_url_set(gtk_entry_get_text(GTK_ENTRY(entry_url)));
   settings->genconfig.reference_exchange_send_to_santafefocus_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_santafe)));
   settings->genconfig.reference_exchange_receive_from_santafefocus_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_santafe)));
-  settings->genconfig.reference_exchange_send_to_onlinebible_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_onlinebible)));
-  settings->genconfig.reference_exchange_receive_from_onlinebible_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_onlinebible)));
 }
 
 void ReferenceExchangeDialog::on_button_outpost_requirement_toggled(GtkToggleButton *togglebutton, gpointer user_data) {
@@ -128,10 +114,6 @@ void ReferenceExchangeDialog::on_outpost()
   if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_santafe)))
     outpost_needed = true;
   if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_santafe)))
-    outpost_needed = true;
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_onlinebible)))
-    outpost_needed = true;
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_onlinebible)))
     outpost_needed = true;
   bool outpost_running = program_is_running(BIBLEDIT_WINDOWS_OUTPOST_EXE);
   if (outpost_needed && (!outpost_running)) {
