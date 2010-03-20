@@ -43,8 +43,6 @@ protected:
   GtkWidget *textview;
   GtkWidget *checkbutton_session;
   GtkWidget *radiobutton_main;
-  GtkWidget *radiobutton_dbus;
-  GtkWidget *radiobutton_shell;
   GtkWidget *radiobutton_shutdown;
   GtkWidget *button_diag;
 
