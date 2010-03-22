@@ -43,10 +43,6 @@ enum AreaType { atRaw,
                 atAll,
                 atSelection };
 
-enum WineType { wtWine,
-                wtCxoffice,
-                wtUnknown };
-
 enum OriginReferencesActionType { oratNothing,
                                   oratRemoveReferences,
                                   oratAddReference,
