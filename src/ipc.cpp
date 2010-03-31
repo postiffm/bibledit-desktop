@@ -53,7 +53,7 @@ ustring interprocess_communication_message_url(InterprocessCommunicationMessageT
   return interprocess_communication_message_url(message, channel, subject_string, payload);
 }
 
-ustring interprocess_communication_message_url(InterprocessCommunicationMessageType message, // Todo
+ustring interprocess_communication_message_url(InterprocessCommunicationMessageType message,
                                                InterprocessCommunicationChannelType channel,
                                                const ustring &subject,
                                                const ustring &payload) {
