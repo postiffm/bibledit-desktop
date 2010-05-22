@@ -24,7 +24,6 @@
 #include "generalconfig.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "ipc.h"
 #include "maintenance.h"
 #include "progresswindow.h"
 #include "projectutils.h"

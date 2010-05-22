@@ -26,6 +26,4 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-bool bibletime_reference_receive(ustring text, Reference &reference);
-
 #endif

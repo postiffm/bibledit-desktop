@@ -95,8 +95,6 @@ public:
   // Question dialogs.
   map<int, bool> yes_no_always_dialog_enabled;
   map<int, int> yes_no_always_dialog_response;
-  // Reference exchange.
-  bool receiving_references;
 
 private:
 };
