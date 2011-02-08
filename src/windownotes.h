@@ -50,6 +50,7 @@ public:
   bool note_being_edited();
   GtkWidget *references_available_signal_button;
   vector<Reference> available_references;
+  void set_fonts();
 
 private:
   GtkWidget *notebook1;

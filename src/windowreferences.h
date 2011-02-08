@@ -41,6 +41,7 @@ public:
   void goto_next();
   void goto_previous();
   void copy();
+  void set_fonts();
 
 protected:
   GtkWidget *scrolledwindow;

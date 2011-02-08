@@ -69,6 +69,8 @@ WindowReferences::WindowReferences(GtkWidget *parent_layout, GtkAccelGroup *acce
   last_focused_widget = htmlview;
   gtk_widget_grab_focus(last_focused_widget);
 
+  set_fonts();
+
   // Load previously saved references.
   load();
   html_link_clicked("");
@@ -739,4 +741,16 @@ void WindowReferences::goto_next_previous_internal(bool next) {
 
 void WindowReferences::copy() {
   gtk_html_copy(GTK_HTML(htmlview));
+}
+
+void WindowReferences::set_fonts() {
+  extern Settings *settings;
+  if (!settings->genconfig.text_editor_font_default_get()) {
+    PangoFontDescription *desired_font_description = pango_font_description_from_string(settings->genconfig.text_editor_font_name_get().c_str());
+    const char *desired_font_family = pango_font_description_get_family(desired_font_description);
+    PangoContext *pango_context = gtk_widget_get_pango_context(htmlview);
+    PangoFontDescription *font_desc = pango_context_get_font_description(pango_context);
+    pango_font_description_set_family(font_desc, desired_font_family);
+    pango_font_description_free(desired_font_description);
+  }
 }
