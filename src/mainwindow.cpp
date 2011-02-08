@@ -683,6 +683,10 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   gtk_widget_show(image34980);
   gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(file_restore), image34980);
 
+  close1 = gtk_image_menu_item_new_from_stock("gtk-close", NULL);
+  gtk_widget_show(close1);
+  gtk_container_add(GTK_CONTAINER(menuitem_file_menu), close1);
+
   quit1 = gtk_image_menu_item_new_from_stock("gtk-quit", NULL);
   gtk_widget_show(quit1);
   gtk_container_add(GTK_CONTAINER(menuitem_file_menu), quit1);
@@ -1585,6 +1589,8 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   g_signal_connect((gpointer)file_export, "activate", G_CALLBACK(on_file_export_activate), gpointer(this));
   g_signal_connect((gpointer)file_backup, "activate", G_CALLBACK(on_file_backup_activate), gpointer(this));
   g_signal_connect((gpointer)file_restore, "activate", G_CALLBACK(on_file_restore_activate), gpointer(this));
+  if (close1)
+    g_signal_connect((gpointer)close1, "activate", G_CALLBACK(on_close1_activate), gpointer(this));
   if (quit1)
     g_signal_connect((gpointer)quit1, "activate", G_CALLBACK(on_quit1_activate), gpointer(this));
   if (menuitem_edit)
@@ -1944,6 +1950,10 @@ void MainWindow::deleteproject() {
       project_delete(dialog.focus);
     }
   }
+}
+
+void MainWindow::on_close1_activate(GtkMenuItem *menuitem, gpointer user_data) {
+  ((MainWindow *)user_data)->accelerator_close_window();
 }
 
 void MainWindow::on_quit1_activate(GtkMenuItem *menuitem, gpointer user_data) {
@@ -2757,7 +2767,7 @@ void MainWindow::on_tool_send_reference() {
   payload.append(navigation.reference.verse);
   extern Settings *settings;
   ustring url = settings->genconfig.bibledit_web_url_get();
-  ustring user = settings->genconfig.bibledit_web_user_get(); // Todo
+  ustring user = settings->genconfig.bibledit_web_user_get();
   url.append("/ipc/setmessage.php?user=" + user + "&subject=focus&message=");
   url.append(payload);
   extern URLTransport *urltransport;
@@ -5669,7 +5679,7 @@ void MainWindow::interprocess_communications_initiate_listener() {
   interprocess_communications_initiate_listener_event_id = 0;
   extern Settings *settings;
   ustring url = settings->genconfig.bibledit_web_url_get();
-  ustring user = settings->genconfig.bibledit_web_user_get(); // Todo
+  ustring user = settings->genconfig.bibledit_web_user_get();
   url.append("/ipc/getmessage.php?user=" + user + "&channel=bibleditgtk&id=");
   url.append(convert_to_string(interprocess_communications_initiate_listener_message_id));
   extern URLTransport *urltransport;
