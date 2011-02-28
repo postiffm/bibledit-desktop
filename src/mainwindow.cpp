@@ -1974,7 +1974,7 @@ void MainWindow::on_help_main_activate(GtkMenuItem *menuitem, gpointer user_data
 }
 
 void MainWindow::on_help_main() {
-  htmlbrowser(html_server_url("site/index.html"), false, true);
+  htmlbrowser(html_server_url("index.html"), false, true);
 }
 
 void MainWindow::on_about1_activate(GtkMenuItem *menuitem, gpointer user_data) {
