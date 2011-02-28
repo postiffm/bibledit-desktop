@@ -41,30 +41,30 @@ InDialogHelp::InDialogHelp(GtkWidget *dialog, GtkBuilder *builder, Shortcuts *sh
   if (!mytopic)
     mytopic = "menu-none/no-help-available";
 
-  //helpbutton = gtk_toggle_button_new();
-  helpbutton = gtk_button_new();
-  gtk_widget_show(helpbutton);
-  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->action_area), helpbutton, FALSE, FALSE, 0);
-  GTK_WIDGET_SET_FLAGS(helpbutton, GTK_CAN_DEFAULT);
+  // Help menu for dialogs and assistants was disabled to make maintenance easier.
+  //helpbutton = gtk_button_new();
+  //gtk_widget_show(helpbutton);
+  //gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->action_area), helpbutton, FALSE, FALSE, 0);
+  //GTK_WIDGET_SET_FLAGS(helpbutton, GTK_CAN_DEFAULT);
 
-  alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
-  gtk_widget_show(alignment);
-  gtk_container_add(GTK_CONTAINER(helpbutton), alignment);
+  //alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
+  //gtk_widget_show(alignment);
+  //gtk_container_add(GTK_CONTAINER(helpbutton), alignment);
 
-  hbox = gtk_hbox_new(FALSE, 2);
-  gtk_widget_show(hbox);
-  gtk_container_add(GTK_CONTAINER(alignment), hbox);
+  //hbox = gtk_hbox_new(FALSE, 2);
+  //gtk_widget_show(hbox);
+  //gtk_container_add(GTK_CONTAINER(alignment), hbox);
 
-  image = gtk_image_new_from_stock("gtk-help", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show(image);
-  gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
+  //image = gtk_image_new_from_stock("gtk-help", GTK_ICON_SIZE_BUTTON);
+  //gtk_widget_show(image);
+  //gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
 
-  label = gtk_label_new_with_mnemonic("_Help");
-  gtk_widget_show(label);
-  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  //label = gtk_label_new_with_mnemonic("_Help");
+  //gtk_widget_show(label);
+  //gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
   if (shortcuts) {
-    shortcuts->label(label);
+    //shortcuts->label(label);
   }
 
   if (builder) {
@@ -85,8 +85,8 @@ InDialogHelp::InDialogHelp(GtkWidget *dialog, GtkBuilder *builder, Shortcuts *sh
     }
   }
 
-  g_signal_connect((gpointer)helpbutton, "clicked", G_CALLBACK(on_helpbutton_activated), gpointer(this));
-  g_signal_connect((gpointer)dialog, "delete_event", G_CALLBACK(on_dialog_delete_event), gpointer(this));
+  //g_signal_connect((gpointer) helpbutton, "clicked", G_CALLBACK(on_helpbutton_activated), gpointer(this));
+  //g_signal_connect((gpointer) dialog, "delete_event", G_CALLBACK(on_dialog_delete_event), gpointer(this));
 }
 
 InDialogHelp::~InDialogHelp() {
