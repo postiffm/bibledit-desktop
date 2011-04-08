@@ -1253,7 +1253,7 @@ void Usfm2Text::output_text_note(ustring &line, Usfm2XslFoStyle *stylepointer, U
   if (!inrange.in_range())
     return;
 
-  // Bail out if this notes is not to be printed.
+  // Bail out if this note is not to be printed.
   if (!stylepointer->print)
     return;
 
