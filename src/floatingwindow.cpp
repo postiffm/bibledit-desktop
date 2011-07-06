@@ -134,19 +134,28 @@ gboolean FloatingWindow::on_title_bar_motion_notify_event(GtkWidget *widget, Gdk
   return ((FloatingWindow *)user_data)->on_title_bar_motion_notify(event);
 }
 
-gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) {
+gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // Todo
+{
   if (dragging_window) {
     gint event_x = event->x_root;
     gint event_y = event->y_root;
     if (previous_root_x >= 0) {
       bool move_box = false;
       if (event_x != previous_root_x) {
-        my_gdk_rectangle.x = my_gdk_rectangle.x + event_x - previous_root_x;
-        move_box = true;
+        gint new_x = my_gdk_rectangle.x + event_x - previous_root_x;
+        // The user cannot move the window off the window at the left side.
+        if (new_x >= 0) {
+          my_gdk_rectangle.x = new_x;
+          move_box = true;
+        }
       }
       if (event_y != previous_root_y) {
-        my_gdk_rectangle.y = my_gdk_rectangle.y + event_y - previous_root_y;
-        move_box = true;
+        gint new_y = my_gdk_rectangle.y + event_y - previous_root_y;
+        // The user cannot move the window under the toolbar or menubar.
+        if (new_y >= 0) {
+          my_gdk_rectangle.y = new_y;
+          move_box = true;
+        }
       }
       if (move_box) {
         rectangle_set(my_gdk_rectangle);
@@ -517,7 +526,8 @@ GdkRectangle FloatingWindow::rectangle_get() {
   return my_gdk_rectangle;
 }
 
-void FloatingWindow::rectangle_set(const GdkRectangle &rectangle) {
+void FloatingWindow::rectangle_set(const GdkRectangle &rectangle) // Todo
+{
   my_gdk_rectangle = rectangle;
   gtk_layout_move(GTK_LAYOUT(layout), vbox_window, my_gdk_rectangle.x, my_gdk_rectangle.y);
   gtk_widget_set_size_request(vbox_window, my_gdk_rectangle.width, my_gdk_rectangle.height);
