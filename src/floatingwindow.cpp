@@ -134,8 +134,7 @@ gboolean FloatingWindow::on_title_bar_motion_notify_event(GtkWidget *widget, Gdk
   return ((FloatingWindow *)user_data)->on_title_bar_motion_notify(event);
 }
 
-gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // Todo
-{
+gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) {
   if (dragging_window) {
     gint event_x = event->x_root;
     gint event_y = event->y_root;
@@ -526,8 +525,7 @@ GdkRectangle FloatingWindow::rectangle_get() {
   return my_gdk_rectangle;
 }
 
-void FloatingWindow::rectangle_set(const GdkRectangle &rectangle) // Todo
-{
+void FloatingWindow::rectangle_set(const GdkRectangle &rectangle) {
   my_gdk_rectangle = rectangle;
   gtk_layout_move(GTK_LAYOUT(layout), vbox_window, my_gdk_rectangle.x, my_gdk_rectangle.y);
   gtk_widget_set_size_request(vbox_window, my_gdk_rectangle.width, my_gdk_rectangle.height);
