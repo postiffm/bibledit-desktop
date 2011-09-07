@@ -256,7 +256,9 @@ void ReplacingDialog::set_gui()
           verse2 = verse.casefold();
         // Colour words in the original window.
         size_t offposition = verse2.find(searchword);
-        while (offposition != string::npos) {
+        unsigned int infinite_loop_counter = 0;
+        while ((offposition != string::npos) && (infinite_loop_counter < 10)) {
+          infinite_loop_counter++;
           // Handle differences in length between normal text and casefold.
           if (!mycasesensitive) {
             ustring normal_text = verse.substr(0, offposition);
