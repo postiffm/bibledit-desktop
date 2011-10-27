@@ -134,15 +134,10 @@ gboolean FloatingWindow::on_title_bar_motion_notify_event(GtkWidget *widget, Gdk
   return ((FloatingWindow *)user_data)->on_title_bar_motion_notify(event);
 }
 
-gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // Todo
-{
+gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) {
   if (dragging_window) {
     guint layout_width, layout_height;
     gtk_layout_get_size(GTK_LAYOUT(layout), &layout_width, &layout_height);
-
-    cout << "layout width " << layout_width << " height " << layout_height << endl; // Todo
-    cout << "window width " << my_gdk_rectangle.width << endl;                      // Todo
-
     gint event_x = event->x_root;
     gint event_y = event->y_root;
     if (previous_root_x >= 0) {
@@ -151,7 +146,7 @@ gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // To
         gint new_x = my_gdk_rectangle.x + event_x - previous_root_x;
         // The window does not move beyond the left or right side
         if (new_x >= 0) {
-          if ((new_x + my_gdk_rectangle.width) < layout_width) {
+          if ((new_x + my_gdk_rectangle.width) <= layout_width) {
             my_gdk_rectangle.x = new_x;
             move_box = true;
           }
@@ -161,7 +156,7 @@ gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // To
         gint new_y = my_gdk_rectangle.y + event_y - previous_root_y;
         // The window does not move beyond the top or bottom.
         if (new_y >= 0) {
-          if ((new_y + my_gdk_rectangle.height) < layout_height) {
+          if ((new_y + my_gdk_rectangle.height) <= layout_height) {
             my_gdk_rectangle.y = new_y;
             move_box = true;
           }
@@ -169,7 +164,6 @@ gboolean FloatingWindow::on_title_bar_motion_notify(GdkEventMotion *event) // To
       }
       if (move_box) {
         rectangle_set(my_gdk_rectangle);
-        cout << "moving to x " << my_gdk_rectangle.x << " y " << my_gdk_rectangle.y << endl; // Todo
       }
     }
     previous_root_x = event_x;
@@ -204,26 +198,39 @@ gboolean FloatingWindow::on_status_bar_motion_notify_event(GtkWidget *widget, Gd
   return ((FloatingWindow *)user_data)->on_status_bar_motion_notify(event);
 }
 
-gboolean FloatingWindow::on_status_bar_motion_notify(GdkEventMotion *event) // Todo
-{
+gboolean FloatingWindow::on_status_bar_motion_notify(GdkEventMotion *event) {
   if (resizing_window) {
     gw_destroy_source(resize_event_id);
     resize_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 200, GSourceFunc(on_resize_timeout), gpointer(this), NULL);
     gtk_widget_hide(vbox_client);
+    guint layout_width, layout_height;
+    gtk_layout_get_size(GTK_LAYOUT(layout), &layout_width, &layout_height);
     gint event_x = event->x_root;
     gint event_y = event->y_root;
     if (previous_root_x >= 0) {
       bool resize_box = false;
       if (event_x != previous_root_x) {
-        my_gdk_rectangle.width = my_gdk_rectangle.width + event_x - previous_root_x;
-        resize_box = true;
+        gint new_width = my_gdk_rectangle.width + event_x - previous_root_x;
+        // Window should not become too narrow, or too wide for the screen.
+        if (new_width >= 100) {
+          if ((my_gdk_rectangle.x + new_width) <= layout_width) {
+            my_gdk_rectangle.width = new_width;
+            resize_box = true;
+          }
+        }
       }
       if (event_y != previous_root_y) {
-        my_gdk_rectangle.height = my_gdk_rectangle.height + event_y - previous_root_y;
-        resize_box = true;
+        gint new_height = my_gdk_rectangle.height + event_y - previous_root_y;
+        // Window should not become too short, or too tall for the screen.
+        if (new_height >= 100) {
+          if ((my_gdk_rectangle.y + new_height) <= layout_height) {
+            my_gdk_rectangle.height = new_height;
+            resize_box = true;
+          }
+        }
       }
       if (resize_box) {
-        gtk_widget_set_size_request(vbox_window, my_gdk_rectangle.width, my_gdk_rectangle.height); // Todo
+        gtk_widget_set_size_request(vbox_window, my_gdk_rectangle.width, my_gdk_rectangle.height);
       }
     }
     previous_root_x = event_x;
