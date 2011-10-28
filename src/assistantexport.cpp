@@ -203,11 +203,11 @@ ExportAssistant::ExportAssistant(WindowReferences *references_window, WindowStyl
   gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_bible_opendocument), radiobutton_bible_type_group);
   radiobutton_bible_type_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_bible_opendocument));
 
-  //radiobutton_bible_gobible = gtk_radio_button_new_with_mnemonic (NULL, "Go Bible");
-  //gtk_widget_show (radiobutton_bible_gobible);
-  //gtk_box_pack_start (GTK_BOX (vbox_bible_type), radiobutton_bible_gobible, FALSE, FALSE, 0);
-  //gtk_radio_button_set_group (GTK_RADIO_BUTTON (radiobutton_bible_gobible), radiobutton_bible_type_group);
-  //radiobutton_bible_type_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radiobutton_bible_gobible));
+  radiobutton_bible_gobible = gtk_radio_button_new_with_mnemonic(NULL, "Go Bible");
+  gtk_widget_show(radiobutton_bible_gobible);
+  gtk_box_pack_start(GTK_BOX(vbox_bible_type), radiobutton_bible_gobible, FALSE, FALSE, 0);
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_bible_gobible), radiobutton_bible_type_group);
+  radiobutton_bible_type_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_bible_gobible));
 
   Shortcuts shortcuts_select_bible_type(0);
   shortcuts_select_bible_type.button(radiobutton_bible_usfm);
@@ -215,7 +215,7 @@ ExportAssistant::ExportAssistant(WindowReferences *references_window, WindowStyl
   shortcuts_select_bible_type.button(radiobutton_bible_osis);
   shortcuts_select_bible_type.button(radiobutton_bible_sword);
   shortcuts_select_bible_type.button(radiobutton_bible_opendocument);
-  //shortcuts_select_bible_type.button (radiobutton_bible_gobible);
+  shortcuts_select_bible_type.button(radiobutton_bible_gobible);
   shortcuts_select_bible_type.consider_assistant();
   shortcuts_select_bible_type.process();
 
@@ -752,7 +752,11 @@ void ExportAssistant::on_assistant_apply() {
       break;
     }
     case ebtGoBible: {
-      export_to_go_bible(bible_name, foldername);
+      if (gw_find_program_in_path("gobiblecreator")) {
+        export_to_go_bible(bible_name, foldername);
+      } else {
+        gtkw_dialog_info(NULL, "The GoBibleCreator was not found. Install it. See the online help.");
+      }
       break;
     }
     }
@@ -1012,9 +1016,9 @@ ExportBibleType ExportAssistant::get_bible_type() {
   if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_bible_opendocument))) {
     return ebtOpenDocument;
   }
-  //if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radiobutton_bible_gobible))) {
-  //return ebtGoBible;
-  //}
+  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_bible_gobible))) {
+    return ebtGoBible;
+  }
   return ebtUSFM;
 }
 
