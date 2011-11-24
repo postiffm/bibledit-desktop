@@ -198,7 +198,7 @@ ustring OdtFootnote::transform_main_parts(const ustring &line) {
   // Deal with each paragraph.
   for (unsigned int i = 0; i < paragraphs.size(); i++) {
     // Choose the right paragraph.
-    XslFoFootnoteParagraph *paragraph;
+    XslFoFootnoteParagraph *paragraph; // Todo
     if (i == 0)
       paragraph = standardparagraph;
     else
@@ -382,7 +382,7 @@ ustring OdtEndnote::transform_main_parts(const ustring &line) {
   // Deal with each paragraph.
   for (unsigned int i = 0; i < paragraphs.size(); i++) {
     // Choose the right paragraph.
-    XslFoFootnoteParagraph *paragraph;
+    XslFoFootnoteParagraph *paragraph; // Todo
     if (i == 0)
       paragraph = standardparagraph;
     else
