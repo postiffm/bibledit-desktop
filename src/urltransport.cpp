@@ -22,7 +22,7 @@
 #include "libraries.h"
 #include "tiny_utilities.h"
 #include "utilities.h"
-#include <glib/gthread.h>
+#include <glib.h>
 #include <libsoup/soup.h>
 
 URLTransport::URLTransport(int dummy)

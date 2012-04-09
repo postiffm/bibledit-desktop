@@ -31,7 +31,7 @@
 #include "uname.h"
 #include "unixwrappers.h"
 #include "utilities.h"
-#include <glib/gthread.h>
+#include <glib.h>
 
 #define STAGE_ZERO 0
 #define STAGE_START 1

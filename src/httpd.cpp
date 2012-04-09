@@ -31,7 +31,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include <errno.h>
-#include <glib/gthread.h>
+#include <glib.h>
 
 Httpd::Httpd(bool dummy)
 // This is a basic webserver tailored to Bibledit's specific needs.

@@ -30,7 +30,7 @@
 #include "uname.h"
 #include "unixwrappers.h"
 #include "utilities.h"
-#include <glib/gthread.h>
+#include <glib.h>
 
 VCS::VCS(bool dummy)
 // This controls the git calls.

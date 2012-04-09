@@ -24,7 +24,6 @@
 
 #include "ustring.h"
 #include <glib.h>
-#include <glib/gmacros.h>
 
 // Helper to deal with memory allocated
 // by GLib functions in an exception-safe manner.

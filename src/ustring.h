@@ -24,8 +24,7 @@
 
 #include "ustring-glib.h"
 #include <cstddef> /* for ptrdiff_t */
-#include <glib/gmacros.h>
-#include <glib/gunicode.h>
+#include <glib.h>
 #include <iosfwd>
 #include <iterator>
 #include <string>
