@@ -82,7 +82,7 @@ int date_time_julian_day_get_current()
 {
   // New GDate using the current date.
   GDate *date = g_date_new();
-  g_date_set_time(date, date_time_seconds_get_current());
+  g_date_set_time_t(date, date_time_seconds_get_current());
   // Get the Julian day out of it.
   int julian_day = g_date_get_julian(date);
   // Free memory.
@@ -227,7 +227,7 @@ int date_time_seconds_to_julian(int seconds)
   GTime time = seconds;
   GDate *date;
   date = g_date_new();
-  g_date_set_time(date, time);
+  g_date_set_time_t(date, time);
   int julian_day = g_date_get_julian(date);
   g_date_free(date);
   return julian_day;
