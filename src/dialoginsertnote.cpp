@@ -926,8 +926,8 @@ gboolean InsertNoteDialog::on_textview_content_key_press_event(GtkWidget *widget
 {
   // Do not allow newlines in the editor, but when pressing Enter, go to the next widget.
   switch (event->keyval) {
-  case GDK_Return:
-  case GDK_KP_Enter:
+  case GDK_KEY_Return:
+  case GDK_KEY_KP_Enter:
     ((InsertNoteDialog *)user_data)->focus_next_widget(widget);
     return true;
   }
