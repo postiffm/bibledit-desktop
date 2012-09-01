@@ -20,8 +20,7 @@
 #ifndef _HTML_COLOR_H_
 #define _HTML_COLOR_H_
 
-#include <gdk/gdkcolor.h>
-#include <gdk/gdktypes.h>
+#include <gdk/gdk.h>
 extern "C" {
 #include <gtkhtml/htmltypes.h>
 }

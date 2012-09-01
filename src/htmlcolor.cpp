@@ -17,10 +17,8 @@
  **  
  */
 
-#include <config.h>
-#include <gdk/gdk.h>
-
 #include "htmlcolor.h"
+#include <config.h>
 
 HTMLColor *html_color_new(void) {
   HTMLColor *nc = g_new0(HTMLColor, 1);
