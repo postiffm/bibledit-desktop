@@ -20,8 +20,8 @@
 #include "checks.h"
 #include "bible.h"
 #include "directories.h"
+#include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "htmlbrowser.h"
 #include "settings.h"
 #include "style.h"
 #include "tiny_utilities.h"
@@ -93,7 +93,7 @@ void DisplayCheckingResults::word_inventory(const vector<ustring> &words, const 
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "wordinventory.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::usfm_count(const vector<ustring> &usfms, const vector<unsigned int> &count, const ustring &stylesheet) {
@@ -127,7 +127,7 @@ void DisplayCheckingResults::usfm_count(const vector<ustring> &usfms, const vect
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "usfmcount.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::character_count(const vector<ustring> &chars, const vector<unsigned int> &count) {
@@ -164,7 +164,7 @@ void DisplayCheckingResults::character_count(const vector<ustring> &chars, const
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "charactercount.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::references_inventory(const vector<ustring> &verses, const vector<ustring> &references) {
@@ -195,7 +195,7 @@ void DisplayCheckingResults::references_inventory(const vector<ustring> &verses,
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "referenceinventory.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::ot_quotations_in_nt(const vector<ustring> nt_refs, const vector<ustring> nt_texts, const vector<VectorUstring> &ot_refs, const vector<VectorUstring> &ot_texts, const gchar *mainheading) {
@@ -242,7 +242,7 @@ void DisplayCheckingResults::ot_quotations_in_nt(const vector<ustring> nt_refs, 
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "nt-ot-quotations.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::parallel_passages(const vector<OtNtParallelDataSection> &data, const gchar *mainheading) {
@@ -266,7 +266,7 @@ void DisplayCheckingResults::parallel_passages(const vector<OtNtParallelDataSect
   ustring outputfilename;
   outputfilename = gw_build_filename(directories_get_temp(), "parallelpassages.html");
   write_lines(outputfilename, html);
-  htmlbrowser(outputfilename);
+  gtkw_show_uri(outputfilename);
 }
 
 void DisplayCheckingResults::start(const ustring &title) {

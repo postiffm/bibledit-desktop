@@ -19,8 +19,8 @@
 
 #include "htmlwriter.h"
 #include "directories.h"
+#include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "htmlbrowser.h"
 #include "tiny_utilities.h"
 
 HtmlWriter::HtmlWriter(const ustring &title, bool include_java_scripts, bool include_bibledit_css, bool include_bar_graph_css) {
@@ -114,7 +114,7 @@ HtmlWriter::~HtmlWriter() {
   xmlTextWriterFlush(writer);
   ustring filename = gw_build_filename(directories_get_temp(), "document.html");
   g_file_set_contents(filename.c_str(), (const gchar *)buffer->content, -1, NULL);
-  htmlbrowser(filename, false);
+  gtkw_show_uri(filename, false);
   if (writer)
     xmlFreeTextWriter(writer);
   if (buffer)

@@ -25,11 +25,11 @@
 #include "dialogreviewanchors.h"
 #include "directories.h"
 #include "gtkwrappers.h"
+#include "gtkwrappers.h"
 #include "gui.h"
 #include "gwrappers.h"
 #include "help.h"
 #include "html.h"
-#include "htmlbrowser.h"
 #include "libraries.h"
 #include "progresswindow.h"
 #include "resource_conversion_utils.h"
@@ -551,7 +551,7 @@ void ResourceConverterDialog::on_view_file_button_clicked(GtkButton *button, gpo
 void ResourceConverterDialog::on_view_file_button() {
   ustring tempfile = gw_build_filename(directories_get_temp(), "resource-converter-view-file");
   write_lines(tempfile, lines);
-  htmlbrowser(tempfile, false);
+  gtkw_show_uri(tempfile, false);
 }
 
 bool ResourceConverterDialog::view_file_gui() {

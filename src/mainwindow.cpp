@@ -84,7 +84,7 @@
 #include "gwrappers.h"
 #include "help.h"
 #include "highlight.h"
-#include "htmlbrowser.h"
+#include "htmlbrowser.h" // Todo
 #include "htmlcolor.h"
 #include "hyphenate.h"
 #include "import.h"
@@ -3176,7 +3176,7 @@ void MainWindow::on_check_httpd() {
   }
   // Did the browser request a url too difficult for it to handle?
   if (!httpd.difficult_url.empty()) {
-    htmlbrowser(httpd.difficult_url, true, true);
+    htmlbrowser(httpd.difficult_url, true, true); // Todo
     httpd.difficult_url.clear();
   }
 }

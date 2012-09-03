@@ -30,7 +30,6 @@
 #include "export_translation_notes.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "htmlbrowser.h"
 #include "java.h"
 #include "libraries.h"
 #include "mapping.h"
@@ -802,7 +801,7 @@ void export_to_usfm_changes(const ustring &project, int time_from, ustring comme
   ustring htmlfile = gw_build_filename(workingdirectory, "backup.html");
   write_lines(htmlfile, rt.lines);
   unix_cp(gw_build_filename(directories_get_package_data(), "bibledit.css"), gw_build_filename(workingdirectory, "bibledit.css"));
-  htmlbrowser(htmlfile, false);
+  gtkw_show_uri(htmlfile, false);
 }
 
 void export_to_go_bible(const ustring &project, const ustring &foldername)

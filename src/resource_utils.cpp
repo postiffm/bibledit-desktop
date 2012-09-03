@@ -24,7 +24,6 @@
 #include "gtkwrappers.h"
 #include "gwrappers.h"
 #include "html.h"
-#include "htmlbrowser.h"
 #include "settings.h"
 #include "tiny_utilities.h"
 #include "unixwrappers.h"

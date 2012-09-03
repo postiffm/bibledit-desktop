@@ -20,7 +20,7 @@
 #include "dialogmaintenance.h"
 #include "help.h"
 #include "html.h"
-#include "htmlbrowser.h"
+#include "htmlbrowser.h" // Todo
 #include "kjv.h"
 #include "mechonmamre.h"
 
@@ -105,7 +105,7 @@ void MaintenanceDialog::html_link_clicked(const gchar *url)
 
   else if (active_url == mechon_mamre_download_url()) {
     display_another_page = false;
-    htmlbrowser("http://www.mechon-mamre.org/dlct.htm", false, true);
+    htmlbrowser("http://www.mechon-mamre.org/dlct.htm", false, true); // Todo
   }
 
   else if (active_url == mechon_mamre_import_url()) {

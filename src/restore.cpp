@@ -23,7 +23,6 @@
 #include "export_utils.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "htmlbrowser.h"
 #include "notes_utils.h"
 #include "projectutils.h"
 #include "resource_utils.h"
