@@ -82,9 +82,9 @@ const gchar *helpcommand(int index) {
   return command;
 }
 
-void htmlbrowser(const ustring &filename, bool network, bool no_tamper)
-// Get the name of an existing browser, and view the file through it.
-// If "no_tamper", there is no tampering with the "filename".
+void htmlbrowser(const ustring &filename, bool network, bool no_tamper) // Todo replace this with another version that uses gtk_show_uri.
+// View the file through the default browser.
+// no_tamper: No tampering with the "filename".
 {
   // Get the prefix.
   ustring prefix;
