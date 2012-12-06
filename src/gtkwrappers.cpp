@@ -20,6 +20,7 @@
 #include "gtkwrappers.h"
 #include "gwrappers.h"
 #include "libraries.h"
+#include "windowsoutpost.h"
 #include <glib.h>
 
 void gtkw_dialog_info(GtkWidget *parent, const ustring &info) {
