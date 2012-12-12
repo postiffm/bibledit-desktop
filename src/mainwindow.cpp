@@ -252,6 +252,10 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   } else {
     window_main = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   }
+
+  // Size and position of window and screen layout.
+  ScreenLayoutDimensions *dimensions = new ScreenLayoutDimensions(window_main);
+  dimensions->verify();
   gtk_widget_show(window_main);
   g_signal_connect((gpointer)window_main, "delete_event", G_CALLBACK(on_window_delete_event), gpointer(this));
 
@@ -1548,7 +1552,7 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   scrolledwindow_layout = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow_layout);
   gtk_box_pack_start(GTK_BOX(vbox_main), scrolledwindow_layout, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_layout), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_layout), GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_layout), GTK_SHADOW_IN);
 
   layout = gtk_layout_new(NULL, NULL);
@@ -1787,9 +1791,6 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   // Appearance of text in editor.
   set_fonts();
 
-  // Size and position of window and screen layout.
-  ScreenLayoutDimensions *dimensions = new ScreenLayoutDimensions(window_main);
-  dimensions->verify();
   // If the windows are attached, apply the dimensions with a delay.
   // This delay will also take care of object destruction.
   dimensions->apply();
