@@ -75,3 +75,7 @@ void SelectProjectGui::focus() {
 void SelectProjectGui::set_label(const ustring &text) {
   gtk_label_set_text_with_mnemonic(GTK_LABEL(label), text.c_str());
 }
+
+void SelectProjectGui::set_sensitive(bool active) {
+  gtk_widget_set_sensitive(button, active);
+}
