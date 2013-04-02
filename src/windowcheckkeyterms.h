@@ -20,15 +20,13 @@
 #ifndef INCLUDED_WINDOW_CHECK_KEYTERMS_H
 #define INCLUDED_WINDOW_CHECK_KEYTERMS_H
 
+#include "editor.h"
 #include "floatingwindow.h"
+#include "htmlwriter2.h"
 #include "reference.h"
 #include "ustring.h"
 #include <gtk/gtk.h>
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-}
-#include "editor.h"
-#include "htmlwriter2.h"
+#include <webkit/webkit.h>
 
 class WindowCheckKeyterms : public FloatingWindow {
 public:
@@ -41,6 +39,7 @@ public:
   ustring collection();
   void reload_collections();
   vector<Reference> references;
+  void set_fonts();
 
 protected:
   GtkWidget *vbox;
@@ -54,7 +53,7 @@ private:
   GtkWidget *combobox_collection;
   GtkWidget *label_list;
   GtkWidget *scrolledwindow_terms;
-  GtkWidget *htmlview_terms;
+  GtkWidget *webview_terms;
   GtkWidget *treeview_renderings;
 
   // Underlying constructions.
@@ -62,10 +61,9 @@ private:
   GtkTreeSelection *treeselect_renderings;
 
   // Callbacks.
-  static gboolean on_html_link_clicked(GtkHTML *html, const gchar *url, gpointer user_data);
+  static gboolean on_navigation_policy_decision_requested(WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
+  void navigation_policy_decision_requested(WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
   void html_link_clicked(const gchar *url);
-  static void on_html_submit(GtkHTML *html, const gchar *method, const gchar *url, const gchar *encoding, gpointer user_data);
-  void html_submit(const gchar *method, const gchar *url, const gchar *encoding);
   static void on_combobox_keyterm_collection_changed(GtkComboBox *combobox, gpointer user_data);
   static void keyterm_whole_word_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
   static void keyterm_case_sensitive_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
