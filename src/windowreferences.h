@@ -21,13 +21,11 @@
 #define INCLUDED_WINDOW_REFERENCES_H
 
 #include "floatingwindow.h"
+#include "htmlwriter2.h"
 #include "reference.h"
 #include "ustring.h"
 #include <gtk/gtk.h>
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-}
-#include "htmlwriter2.h"
+#include <webkit/webkit.h>
 
 class WindowReferences : public FloatingWindow {
 public:
@@ -45,14 +43,15 @@ public:
 
 protected:
   GtkWidget *scrolledwindow;
-  GtkWidget *htmlview;
+  GtkWidget *webview;
 
 private:
   void open();
   void load(const ustring &filename);
   void clear();
-  static gboolean on_html_link_clicked(GtkHTML *html, const gchar *url, gpointer user_data);
-  void html_link_clicked(const gchar *url);
+  static gboolean on_navigation_policy_decision_requested(WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
+  void navigation_policy_decision_requested(WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+  void load_webview(const gchar *url);
   ustring active_url;
   map<ustring, unsigned int> scrolling_position;
   void html_write_references(HtmlWriter2 &htmlwriter);
