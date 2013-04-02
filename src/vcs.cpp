@@ -38,7 +38,7 @@ VCS::VCS(bool dummy)
   mypause = false;
   thread_running = false;
   thread_run = true;
-  g_thread_create(GThreadFunc(thread_start), gpointer(this), false, NULL);
+  g_thread_create(GThreadFunc(thread_start), gpointer(this), false, NULL); // Todo compiler warning.
 }
 
 VCS::~VCS() {
