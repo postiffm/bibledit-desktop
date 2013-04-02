@@ -70,7 +70,7 @@ void WindowsOutpost::Start()
 // This effectually starts the whole system.
 {
   thread_run = true;
-  g_thread_create(GThreadFunc(thread_start), gpointer(this), false, NULL); // Todo compiler warning.
+  g_thread_new("windowsoutpost", GThreadFunc(thread_start), gpointer(this));
 }
 
 ustring WindowsOutpost::BibleWorksReferenceGet()
