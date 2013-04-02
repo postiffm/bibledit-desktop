@@ -17,7 +17,7 @@
 **  
 */
 
-#include "htmlbrowser.h" // Todo
+#include "htmlbrowser.h"
 #include "constants.h"
 #include "directories.h"
 #include "gtkwrappers.h"
@@ -82,7 +82,7 @@ const gchar *helpcommand(int index) {
   return command;
 }
 
-void htmlbrowser(const ustring &filename, bool network, bool no_tamper) // Todo replace this with another version that uses gtk_show_uri.
+void htmlbrowser(const ustring &filename, bool network, bool no_tamper)
 // View the file through the default browser.
 // no_tamper: No tampering with the "filename".
 {
