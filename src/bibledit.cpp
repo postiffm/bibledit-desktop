@@ -17,7 +17,6 @@
  **  
  */
 
-#include "c_url.h"
 #include "constants.h"
 #include "dialogsystemlog.h"
 #include "directories.h"
