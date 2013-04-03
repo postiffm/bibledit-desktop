@@ -125,6 +125,8 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup
   // Main focused widget.
   last_focused_widget = combobox_collection;
   gtk_widget_grab_focus(last_focused_widget);
+
+  set_fonts();
 }
 
 WindowCheckKeyterms::~WindowCheckKeyterms() {

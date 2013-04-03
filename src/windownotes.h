@@ -29,6 +29,7 @@ extern "C" {
 }
 #include "displayprojectnotes.h"
 #include "note_editor.h"
+#include <webkit/webkit.h>
 
 class WindowNotes : public FloatingWindow {
 public:
@@ -55,7 +56,7 @@ public:
 private:
   GtkWidget *notebook1;
   GtkWidget *scrolledwindow_notes;
-  GtkWidget *htmlview_notes;
+  GtkWidget *webview_notes;
   GtkWidget *hbox14;
   GtkWidget *vbox_note_editor;
   GtkWidget *toolbar_note_editor;
@@ -168,8 +169,9 @@ private:
 
   void get_references_from_id(gint id);
 
-  static gboolean on_html_link_clicked(GtkHTML *html, const gchar *url, gpointer user_data);
-  void html_link_clicked(GtkHTML *html, const gchar *url);
+  static gboolean on_navigation_policy_decision_requested(WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
+  void navigation_policy_decision_requested(WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+  void html_link_clicked(const gchar *url);
   void delete_ids(const vector<gint> &ids);
 
   static void on_button_more_clicked(GtkButton *button, gpointer user_data);
