@@ -85,7 +85,6 @@
 #include "help.h"
 #include "highlight.h"
 #include "htmlbrowser.h"
-#include "htmlcolor.h"
 #include "hyphenate.h"
 #include "import.h"
 #include "keyboard.h"
@@ -240,9 +239,6 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group) :
   // the accelerator key for viewing USFM code was changed to Ctrl-\.
   // The backslash is the first character of the USFM code.
   gtk_accel_group_connect(accelerator_group, GDK_KEY_backslash, GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_view_usfm_code), gpointer(this), NULL));
-  // For notes editor.
-  gtk_accel_group_connect(accelerator_group, '[', GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_left_square_bracket), gpointer(this), NULL));
-  gtk_accel_group_connect(accelerator_group, ']', GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_right_square_bracket), gpointer(this), NULL));
 
   // GUI build.
 
@@ -5150,30 +5146,6 @@ void MainWindow::accelerator_view_usfm_code(gpointer user_data) {
 void MainWindow::accelerator_view_usfm_code_toggle() {
   bool active = gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_usfm_code));
   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_usfm_code), !active);
-}
-
-void MainWindow::accelerator_left_square_bracket(gpointer user_data) {
-  ((MainWindow *)user_data)->left_square_bracket();
-}
-
-void MainWindow::left_square_bracket() {
-  if (window_notes) {
-    if (window_notes->focused) {
-      window_notes->increase_indent();
-    }
-  }
-}
-
-void MainWindow::accelerator_right_square_bracket(gpointer user_data) {
-  ((MainWindow *)user_data)->right_square_bracket();
-}
-
-void MainWindow::right_square_bracket() {
-  if (window_notes) {
-    if (window_notes->focused) {
-      window_notes->decrease_indent();
-    }
-  }
 }
 
 /*
