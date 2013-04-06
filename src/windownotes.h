@@ -20,15 +20,12 @@
 #ifndef INCLUDED_WINDOW_NOTES_H
 #define INCLUDED_WINDOW_NOTES_H
 
+#include "displayprojectnotes.h"
 #include "floatingwindow.h"
+#include "note_editor.h"
 #include "reference.h"
 #include "ustring.h"
 #include <gtk/gtk.h>
-extern "C" {
-#include <gtkhtml/gtkhtml.h>
-}
-#include "displayprojectnotes.h"
-#include "note_editor.h"
 #include <webkit/webkit.h>
 
 class WindowNotes : public FloatingWindow {
@@ -94,7 +91,7 @@ private:
   GtkWidget *toolitem_note_edit_color;
   GtkWidget *colorbutton_note_edit;
   GtkWidget *scrolledwindow_note_editor;
-  GtkWidget *htmlview_note_editor;
+  GtkWidget *webview_note_editor;
   GtkWidget *scrolledwindow_controls;
   GtkWidget *vbox_controls;
   GtkWidget *hbox_ok_cancel;
@@ -119,12 +116,12 @@ private:
   // Formatting
   static void on_combobox_note_edit_font_size_changed(GtkComboBox *combobox, gpointer user_data);
   void combobox_note_edit_font_size_changed();
-  static void on_note_editor_insertion_font_style_changed(GtkHTML *html, GtkHTMLFontStyle style, gpointer user_data);
-  void note_editor_insertion_font_style_changed(GtkHTMLFontStyle style);
+  // Todo static void on_note_editor_insertion_font_style_changed (GtkHTML * html, GtkHTMLFontStyle style, gpointer user_data);
+  // Todo void note_editor_insertion_font_style_changed (GtkHTMLFontStyle style);
   static void on_combobox_note_edit_paragraph_style_changed(GtkComboBox *combobox, gpointer user_data);
   void combobox_note_edit_paragraph_style_changed();
-  static void on_note_editor_current_paragraph_style_changed(GtkHTML *html, GtkHTMLParagraphStyle style, gpointer user_data);
-  void note_editor_current_paragraph_style_changed(GtkHTMLParagraphStyle style);
+  // Todo static void on_note_editor_current_paragraph_style_changed (GtkHTML * html, GtkHTMLParagraphStyle style, gpointer user_data);
+  // Todo void note_editor_current_paragraph_style_changed (GtkHTMLParagraphStyle style);
   static void on_togglebutton_note_edit_bold_toggled(GtkToggleButton *togglebutton, gpointer user_data);
   void togglebutton_note_edit_bold_toggled();
   static void on_togglebutton_note_edit_italics_toggled(GtkToggleButton *togglebutton, gpointer user_data);
@@ -139,15 +136,15 @@ private:
   void togglebutton_note_edit_center_justify_toggled();
   static void on_togglebutton_note_edit_right_justify_toggled(GtkToggleButton *togglebutton, gpointer user_data);
   void togglebutton_note_edit_right_justify_toggled();
-  static void on_current_paragraph_alignment_changed(GtkHTML *html, GtkHTMLParagraphAlignment new_alignment, gpointer user_data);
-  void current_paragraph_alignment_changed(GtkHTMLParagraphAlignment new_alignment);
+  // Todo static void on_current_paragraph_alignment_changed (GtkHTML *html, GtkHTMLParagraphAlignment new_alignment, gpointer user_data);
+  // Todo void current_paragraph_alignment_changed (GtkHTMLParagraphAlignment new_alignment);
   static void on_button_note_edit_decrease_indent_clicked(GtkButton *button, gpointer user_data);
   static void on_button_note_edit_increase_indent_clicked(GtkButton *button, gpointer user_data);
-  static void on_current_paragraph_indentation_changed(GtkHTML *html, guint new_indentation, gpointer user_data);
+  // Todo static void on_current_paragraph_indentation_changed (GtkHTML *html, guint new_indentation, gpointer user_data);
   void current_paragraph_indentation_changed(guint new_indentation);
   static void on_colorbutton_note_edit_color_set(GtkColorButton *colorbutton, gpointer user_data);
   void colorbutton_note_edit_color_set(GtkColorButton *colorbutton);
-  static void on_insertion_color_changed(GtkHTML *html, GdkColor *color, gpointer user_data);
+  // Todo static void on_insertion_color_changed (GtkHTML *html, GdkColor *color, gpointer user_data);
   void insertion_color_changed(GdkColor *color);
 
   guint redisplay_source_id;
@@ -165,7 +162,7 @@ private:
   static void on_button_ok_clicked(GtkButton *button, gpointer user_data);
   void on_notes_button_ok();
   void on_notes_button_ok_cancel();
-  static gboolean note_save_receiver(const HTMLEngine *engine, const char *data, unsigned int len, void *user_data);
+  // Todo static gboolean note_save_receiver (const HTMLEngine * engine, const char *data, unsigned int len, void *user_data);
 
   void get_references_from_id(gint id);
 

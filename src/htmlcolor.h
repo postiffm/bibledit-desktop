@@ -21,9 +21,6 @@
 #define _HTML_COLOR_H_
 
 #include <gdk/gdk.h>
-extern "C" {
-#include <gtkhtml/htmltypes.h>
-}
 
 struct _HTMLColor {
   GdkColor color;
@@ -31,18 +28,18 @@ struct _HTMLColor {
   guint refcount;
 };
 
-HTMLColor *html_color_new(void);
-HTMLColor *html_color_new_from_gdk_color(const GdkColor *color);
-HTMLColor *html_color_new_from_rgb(gushort red, gushort green, gushort blue);
+// Todo HTMLColor * html_color_new(void);
+// Todo HTMLColor * html_color_new_from_gdk_color(const GdkColor *color);
+// Todo HTMLColor * html_color_new_from_rgb(gushort red, gushort green, gushort blue);
 
-void html_color_ref(HTMLColor *color);
-void html_color_unref(HTMLColor *color);
+// Todo void html_color_ref(HTMLColor *color);
+// Todo void html_color_unref(HTMLColor *color);
 
-void html_color_alloc(HTMLColor *color, HTMLPainter *painter);
-void html_color_free(HTMLColor *color, HTMLPainter *painter);
+// Todo void html_color_alloc(HTMLColor *color, HTMLPainter *painter);
+// Todo void html_color_free(HTMLColor *color, HTMLPainter *painter);
 
-gboolean html_color_equal(HTMLColor *color1, HTMLColor *color2);
+// Todo gboolean html_color_equal(HTMLColor *color1, HTMLColor *color2);
 
-void html_color_set(HTMLColor *color, GdkColor *c);
+// Todo void html_color_set(HTMLColor *color, GdkColor *c);
 
 #endif

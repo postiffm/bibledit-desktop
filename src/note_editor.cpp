@@ -95,14 +95,16 @@ vector<ustring> note_editor_font_size_names_list()
 // This gives a list of possible font sizes.
 {
   vector<ustring> list;
-  for (int i = GTK_HTML_FONT_STYLE_SIZE_1; i <= GTK_HTML_FONT_STYLE_SIZE_7; i++) {
-    list.push_back(note_editor_font_size_enum_to_name(GtkHTMLFontStyle(i)));
-  }
+  // Todo for (int i = GTK_HTML_FONT_STYLE_SIZE_1; i <= GTK_HTML_FONT_STYLE_SIZE_7; i++) {
+  // Todo   list.push_back(note_editor_font_size_enum_to_name(GtkHTMLFontStyle(i)));
+  // Todo }
   return list;
 }
 
-GtkHTMLFontStyle note_editor_font_size_name_to_enum(const ustring &style)
-// This accepts a name of a font size and returns the style enum.
+/*
+// Todo 
+GtkHTMLFontStyle note_editor_font_size_name_to_enum(const ustring & style)
+// Todo // This accepts a name of a font size and returns the style enum.
 {
   GtkHTMLFontStyle enumeration = GTK_HTML_FONT_STYLE_DEFAULT;
   for (int i = GTK_HTML_FONT_STYLE_DEFAULT; i <= GTK_HTML_FONT_STYLE_SIZE_7; i++) {
@@ -111,7 +113,10 @@ GtkHTMLFontStyle note_editor_font_size_name_to_enum(const ustring &style)
   }
   return enumeration;
 }
+*/
 
+/*
+// Todo 
 ustring note_editor_font_size_enum_to_name(GtkHTMLFontStyle style)
 // Accepts a font size enumeration and returns the name of it.
 {
@@ -134,18 +139,21 @@ ustring note_editor_font_size_enum_to_name(GtkHTMLFontStyle style)
     return "+4";
   return "Unknown";
 }
+*/
 
 vector<ustring> note_editor_paragraph_style_names_list()
 // This gives a list of possible paragraph styles.
 {
   vector<ustring> list;
-  for (int i = 0; i < GTK_HTML_PARAGRAPH_STYLE_ITEMALPHA; i++) {
-    list.push_back(note_editor_paragraph_style_enum_to_name(GtkHTMLParagraphStyle(i)));
-  }
+  // Todo for (int i = 0; i < GTK_HTML_PARAGRAPH_STYLE_ITEMALPHA; i++) {
+  // Todo list.push_back(note_editor_paragraph_style_enum_to_name(GtkHTMLParagraphStyle(i)));
+  // Todo }
   return list;
 }
 
-GtkHTMLParagraphStyle note_editor_paragraph_style_name_to_enum(const ustring &style)
+/*
+// Todo 
+GtkHTMLParagraphStyle note_editor_paragraph_style_name_to_enum(const ustring & style)
 // This accepts the name of a paragraph style, and returns the style enum.
 {
   GtkHTMLParagraphStyle enumeration = GTK_HTML_PARAGRAPH_STYLE_NORMAL;
@@ -155,7 +163,10 @@ GtkHTMLParagraphStyle note_editor_paragraph_style_name_to_enum(const ustring &st
   }
   return enumeration;
 }
+*/
 
+/*
+// Todo 
 ustring note_editor_paragraph_style_enum_to_name(GtkHTMLParagraphStyle style)
 // Accepts a paragraph style enumeration and returns the name of it.
 {
@@ -189,3 +200,4 @@ ustring note_editor_paragraph_style_enum_to_name(GtkHTMLParagraphStyle style)
   }
   return "";
 }
+*/

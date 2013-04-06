@@ -20,7 +20,10 @@
 #include "htmlcolor.h"
 #include <config.h>
 
-HTMLColor *html_color_new(void) {
+/*
+// Todo 
+HTMLColor *html_color_new(void)
+{
   HTMLColor *nc = g_new0(HTMLColor, 1);
 
   nc->refcount = 1;
@@ -28,7 +31,9 @@ HTMLColor *html_color_new(void) {
   return nc;
 }
 
-HTMLColor *html_color_new_from_gdk_color(const GdkColor *color) {
+
+HTMLColor *html_color_new_from_gdk_color(const GdkColor * color)
+{
   HTMLColor *nc = html_color_new();
 
   nc->color = *color;
@@ -36,7 +41,9 @@ HTMLColor *html_color_new_from_gdk_color(const GdkColor *color) {
   return nc;
 }
 
-HTMLColor *html_color_new_from_rgb(gushort red, gushort green, gushort blue) {
+
+HTMLColor *html_color_new_from_rgb(gushort red, gushort green, gushort blue)
+{
   HTMLColor *nc = html_color_new();
 
   nc->color.red = red;
@@ -46,22 +53,28 @@ HTMLColor *html_color_new_from_rgb(gushort red, gushort green, gushort blue) {
   return nc;
 }
 
-void html_color_ref(HTMLColor *color) {
+
+void html_color_ref(HTMLColor * color)
+{
   g_assert(color);
 
   color->refcount++;
 }
 
-void html_color_unref(HTMLColor *color) {
+
+void html_color_unref(HTMLColor * color)
+{
   g_assert(color);
   g_assert(color->refcount > 0);
 
   color->refcount--;
 
   if (!color->refcount) {
-    /* if (color->allocated)
-       g_warning ("FIXME, color free\n"); */
-    /* FIXME commented out to catch g_asserts on refcount so we could hunt "too much unrefs" bugs */
+    // if (color->allocated)
+    //   g_warning ("FIXME, color free\n");
+    // FIXME commented out to catch g_asserts on refcount so we could hunt "too much unrefs" bugs
     g_free(color);
   }
 }
+
+*/
