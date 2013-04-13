@@ -86,7 +86,7 @@ RemoteRepositoryAssistant::RemoteRepositoryAssistant(int dummy) : AssistantBase(
   // System for trying out git.
   git_tried_and_okay = false;
 
-  label_try_git = gtk_label_new("The content tracker has been tested and works fine");
+  label_try_git = gtk_label_new("The local content tracker has been tested and works fine");
   gtk_widget_show(label_try_git);
   page_number_try_git = gtk_assistant_append_page(GTK_ASSISTANT(assistant), label_try_git);
 
@@ -306,22 +306,25 @@ void RemoteRepositoryAssistant::on_assistant_prepare(GtkWidget *page) {
   ProjectConfiguration *projectconfig = settings->projectconfig(bible);
 
   if (page == checkbutton_use_repository) {
-    // Set all values in the GUI, according to the project configuration if it is a Bible, or the general configuration for project notes.
+    // Set all values in the GUI, according to the project configuration if it is a Bible,
+    // or the general configuration for project notes.
 
     // Whether to use the remote repository.
     bool use_remote_repository = false;
-    if (bible_notes_selector_bible())
+    if (bible_notes_selector_bible()) {
       use_remote_repository = projectconfig->git_use_remote_repository_get();
-    else
+    } else {
       use_remote_repository = settings->genconfig.consultation_notes_git_use_remote_repository_get();
+    }
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_use_repository), use_remote_repository);
 
     // Set the repository location.
     ustring repository_url;
-    if (bible_notes_selector_bible())
+    if (bible_notes_selector_bible()) {
       repository_url = projectconfig->git_remote_repository_url_get();
-    else
+    } else {
       repository_url = settings->genconfig.consultation_notes_git_remote_repository_url_get();
+    }
     ignore_entry_repository_changed = true;
     gtk_entry_set_text(GTK_ENTRY(entry_repository), repository_url.c_str());
     ignore_entry_repository_changed = false;
@@ -420,7 +423,7 @@ void RemoteRepositoryAssistant::on_assistant_apply() {
     unix_rmdir(destination_data_directory);
     unix_mv(persistent_clone_directory, destination_data_directory);
     // Switch rename detection off.
-    // This is necessary for the consultation notes, since git has been seen to detect spurious renames.
+    // This is necessary for the consultation notes, since git has been seen to cause spurious renames.
     GwSpawn spawn("git");
     spawn.workingdirectory(destination_data_directory);
     spawn.arg("config");
@@ -848,7 +851,6 @@ ustring RemoteRepositoryAssistant::repository_url_get()
   ustring url;
   url = gtk_entry_get_text(GTK_ENTRY(entry_repository));
   url = trim(url);
-  replace_text(url, "http", "");
   return url;
 }
 
