@@ -510,10 +510,10 @@ void ProjectDialog::on_book_add() {
     selection = dialog.selectionset;
     vector<unsigned int> ids = books_type_to_ids(btUnknown);
     ProgressWindow progresswindow("Adding books", false);
-    progresswindow.set_iterate(0, 1, ids.size());
+    progresswindow.set_iterate(0, 1, selection.size());
     for (unsigned int i = 0; i < ids.size(); i++) {
-      progresswindow.iterate();
       if (!(selection.find(ids[i]) == selection.end())) {
+        progresswindow.iterate();
         vector<ustring> booktemplate;
         // If the book is found in the templates, take that, else create it.
         ustring englishbook = books_id_to_english(ids[i]);
