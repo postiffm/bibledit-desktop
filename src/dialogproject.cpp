@@ -59,6 +59,7 @@ ProjectDialog::ProjectDialog(bool newproject) {
   } else {
     currentprojectname = settings->genconfig.project_get();
   }
+  focusbook = 0;
 
   // Get project information.
   ProjectConfiguration *projectconfig = settings->projectconfig(settings->genconfig.project_get());
@@ -473,6 +474,14 @@ void ProjectDialog::on_ok() {
       vector<ustring> lines = project_retrieve_chapter(newprojectname, source_books[i], source_chapters[i]);
     }
   }
+
+  // Set the book to focus in the editor.
+  if (focusbook == 0) {
+    vector<unsigned int> books = project_get_books(newprojectname);
+    if (books.size() > 0) {
+      focusbook = books[0];
+    }
+  }
 }
 
 void ProjectDialog::on_cancel() {
@@ -539,6 +548,10 @@ void ProjectDialog::on_book_add() {
         }
         CategorizeChapterVerse ccv(booktemplate);
         project_store_book(currentprojectname, ids[i], ccv);
+        // The book to be focused in the Bible text editor.
+        if (focusbook == 0) {
+          focusbook = ids[i];
+        }
       }
     }
   }
@@ -586,8 +599,9 @@ void ProjectDialog::on_book_delete() {
     }
   }
   // Update GUI.
-
   set_gui();
+  // No book yet to focus in the Bible text editor.
+  focusbook = 0;
 }
 
 void ProjectDialog::projectdialog_on_nameentry_changed(GtkEditable *editable, gpointer user_data) {

@@ -1841,6 +1841,8 @@ void MainWindow::newproject() {
   ProjectDialog projectdialog(true);
   if (projectdialog.run() == GTK_RESPONSE_OK) {
     on_file_project_open(projectdialog.newprojectname, false);
+    // Focus the desired book.
+    navigation.display(Reference(projectdialog.focusbook, 1, "1"));
   }
 }
 
@@ -1861,6 +1863,8 @@ void MainWindow::editproject() {
     }
     // As anything could have been changed to the project, reopen it.
     reload_all_editors(false);
+    // Focus the desired book.
+    navigation.display(Reference(projectdialog.focusbook, 1, "1"));
   }
 }
 
