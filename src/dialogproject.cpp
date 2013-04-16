@@ -105,7 +105,7 @@ ProjectDialog::ProjectDialog(bool newproject) {
 
   shortcuts.button(checkbutton_editable);
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable), projectconfig->editable_get());
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable), projectconfig->editable_get() || newproject);
 
   table1 = gtk_table_new(3, 3, FALSE);
   gtk_widget_show(table1);
