@@ -80,6 +80,7 @@ void ScreenLayoutDimensions::verify()
     settings->genconfig.window_x_position_set(x);
     settings->genconfig.window_y_position_set(y);
   }
+  cout << "gtk_window_set_default_size, window " << mywindow << ", width " << width << ", height: " << height << endl; // Todo
   gtk_window_set_default_size(GTK_WINDOW(mywindow), width, height);
   gtk_window_set_position(GTK_WINDOW(mywindow), GTK_WIN_POS_CENTER);
 }
@@ -88,7 +89,7 @@ void ScreenLayoutDimensions::apply()
 // Applies the stored dimensions to the main window.
 {
   // The dimension are applies with a delay so as to give the window a change to settle.
-  g_timeout_add(100, GSourceFunc(on_timeout), gpointer(this));
+  g_timeout_add(300, GSourceFunc(on_timeout), gpointer(this));
 }
 
 void ScreenLayoutDimensions::save()
@@ -129,10 +130,25 @@ void ScreenLayoutDimensions::timeout()
   gint height = settings->genconfig.window_height_get();
   gint x = settings->genconfig.window_x_position_get();
   gint y = settings->genconfig.window_y_position_get();
-  gtk_window_resize(mywindow, width, height);
-  gtk_window_move(mywindow, x, y);
-  if (settings->genconfig.window_maximized_get() || settings->genconfig.start_program_maximized_get()) {
-    gtk_window_maximize(GTK_WINDOW(mywindow));
+  cout << "Intending to deal with window: " << mywindow << endl; // Todo
+  cout << "Desired width: " << width << endl;                    // Todo
+  cout << "Desired height: " << height << endl;                  // Todo
+  cout << "Desired x: " << x << endl;                            // Todo
+  cout << "Desired y: " << y << endl;                            // Todo
+  if (mywindow) {
+    if ((width > 50) && (height > 50)) {
+      if ((x >= 0) && (y >= 0)) {
+        cout << "Not resizing window " << mywindow << " to width " << width << " and height " << height << endl; // Todo
+        // The following crashes at times with macports on Mac OS X:
+        //gtk_window_resize (mywindow, width, height);
+        cout << "Moving window " << mywindow << " to x " << x << " and y " << y << endl; // Todo
+        gtk_window_move(mywindow, x, y);
+      }
+    }
+    if (settings->genconfig.window_maximized_get() || settings->genconfig.start_program_maximized_get()) {
+      cout << "Maximizing the window" << endl; // Todo
+      gtk_window_maximize(GTK_WINDOW(mywindow));
+    }
   }
   delete this;
 }
