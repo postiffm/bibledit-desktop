@@ -112,8 +112,14 @@ public:
   ustring character_style_on_start_typing;
 
   void book_set(unsigned int book_in);
+
+  // Chapter loading / saving.
   void chapter_load(unsigned int chapter_in);
+  vector<ustring> loaded_chapter_lines;
   void chapter_save();
+  GtkWidget *reload_signal;           // Todo is this used?
+  unsigned int reload_chapter_number; // Todo how does this work?
+
   ustring text_get_selection();
   void text_insert(ustring text);
 
@@ -125,8 +131,6 @@ public:
   GtkWidget *quick_references_button;
 
   GtkWidget *new_styles_signal;
-  GtkWidget *reload_signal;
-  unsigned int reload_chapter_number;
 
   Reference current_reference;
   bool go_to_new_reference_highlight;
