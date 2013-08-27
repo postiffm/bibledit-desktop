@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 
 enum RuntimeType { rtXeTeX,
+                   rtPHP,
                    rtLast };
 
 const gchar *runtime_program(RuntimeType type);
