@@ -236,7 +236,14 @@ void merge_editor_and_file(vector<ustring> merge_base,
   spawn.arg(userfile);
   spawn.arg(serverfile);
   spawn.arg(outputfile);
+  spawn.read();
   spawn.run();
+  for (unsigned int i = 0; i < spawn.standardout.size(); i++) {
+    gw_message(spawn.standardout[i]);
+  }
+  for (unsigned int i = 0; i < spawn.standarderr.size(); i++) {
+    gw_message(spawn.standarderr[i]);
+  }
   ReadText rt(outputfile, true);
   CategorizeChapterVerse ccv(rt.lines);
   project_store_chapter(project, book, ccv);
