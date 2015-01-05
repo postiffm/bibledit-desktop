@@ -227,7 +227,7 @@ void RestoreAssistant::on_assistant_apply_signal(GtkAssistant *assistant, gpoint
 
 void RestoreAssistant::on_assistant_apply() {
   // Unpack the tarball.
-  ustring unpack_directory = gw_build_filename(directories_get_temp(), "restore");
+  ustring unpack_directory = gw_build_filename(Directories->get_temp(), "restore");
   unix_rmdir(unpack_directory);
   gw_mkdir_with_parents(unpack_directory);
   if (uncompress(filename, unpack_directory)) {

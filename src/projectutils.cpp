@@ -104,7 +104,7 @@ void projects_initial_check()
 vector<ustring> projects_get_all()
 // Gets sorted list of all projects.
 {
-  ReadDirectories rd(directories_get_projects(), "", "");
+  ReadDirectories rd(Directories->get_projects(), "", "");
   sort(rd.directories.begin(), rd.directories.end());
   return rd.directories;
 }
@@ -145,7 +145,7 @@ ustring project_data_filename_chapter(const ustring &project, unsigned int book,
 }
 
 bool project_exists(const ustring &project) {
-  return g_file_test(gw_build_filename(directories_get_projects(), project).c_str(), G_FILE_TEST_IS_DIR);
+  return g_file_test(gw_build_filename(Directories->get_projects(), project).c_str(), G_FILE_TEST_IS_DIR);
 }
 
 void project_create_restore(const ustring &project, const ustring &restore_from) {
@@ -170,15 +170,15 @@ void project_delete(const ustring &project)
   if (project.empty())
     return;
   // Delete the whole project, including all databases and the repository.
-  ustring directory = gw_build_filename(directories_get_projects(), project);
+  ustring directory = gw_build_filename(Directories->get_projects(), project);
   unix_rmdir(directory);
 }
 
 void project_copy(const ustring &project, const ustring &newproject)
 // Copies "project" to "newproject.
 {
-  ustring olddirectory = gw_build_filename(directories_get_projects(), project);
-  ustring newdirectory = gw_build_filename(directories_get_projects(), newproject);
+  ustring olddirectory = gw_build_filename(Directories->get_projects(), project);
+  ustring newdirectory = gw_build_filename(Directories->get_projects(), newproject);
   unix_cp_r(olddirectory, newdirectory);
   // Statistics have been copied too. Do initial check.
   statistics_initial_check_project(newproject, false);
@@ -189,8 +189,8 @@ void project_copy(const ustring &project, const ustring &newproject)
 
 void project_move(const ustring &project, const ustring &newproject) {
   // This moves the whole project, including the databases.
-  ustring oldname = (gw_build_filename(directories_get_projects(), project));
-  ustring newname = (gw_build_filename(directories_get_projects(), newproject));
+  ustring oldname = (gw_build_filename(Directories->get_projects(), project));
+  ustring newname = (gw_build_filename(Directories->get_projects(), newproject));
   unix_mv(oldname, newname);
   // Move project notes.
   notes_change_project(project, newproject);

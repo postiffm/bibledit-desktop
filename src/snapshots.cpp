@@ -32,11 +32,11 @@
 ustring old_snapshots_content_database(const ustring &project)
 // Gives the old snapshots content database for a given project.
 {
-  return gw_build_filename(directories_get_projects(), project, "snapshots.sql");
+  return gw_build_filename(Directories->get_projects(), project, "snapshots.sql");
 }
 
 ustring snapshots_directory(const ustring &project) {
-  return gw_build_filename(directories_get_projects(), project, "snapshots");
+  return gw_build_filename(Directories->get_projects(), project, "snapshots");
 }
 
 ustring snapshots_database(const ustring &project, unsigned int book, unsigned int chapter) {

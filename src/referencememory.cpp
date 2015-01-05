@@ -41,7 +41,7 @@
 ustring references_memory_database_filename()
 // Returns the filename of the database.
 {
-  return gw_build_filename(directories_get_configuration(), "referencememory.sql1");
+  return gw_build_filename(Directories->get_configuration(), "referencememory.sql1");
 }
 
 void references_memory_database_verify()

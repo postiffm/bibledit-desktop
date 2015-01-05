@@ -32,7 +32,7 @@
 #include <glib.h>
 
 ustring references_hidden_ones_get_filename(const ustring &project) {
-  return gw_build_filename(directories_get_projects(), project, "hidden-references");
+  return gw_build_filename(Directories->get_projects(), project, "hidden-references");
 }
 
 vector<ustring> references_hidden_ones_load(const ustring &project)

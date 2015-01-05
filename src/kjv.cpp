@@ -130,7 +130,7 @@ void kjv_action_page(HtmlWriter2 &htmlwriter) {
 }
 
 ustring kjv_sql_filename() {
-  return gw_build_filename(directories_get_package_data(), "kjv.sql");
+  return gw_build_filename(Directories->get_package_data(), "kjv.sql");
 }
 
 void kjv_import_sword(const ustring &textfile, const ustring &database) {

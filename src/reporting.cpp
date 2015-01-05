@@ -762,7 +762,7 @@ void reporting_produce_status_report(const ustring &project, bool planning, bool
     if (csv_export) {
       vector<ustring> csv;
       csv.push_back("\"project\"," + convert_to_string(percentage));
-      ustring filename = gw_build_filename(directories_get_temp(), "project_complete.csv");
+      ustring filename = gw_build_filename(Directories->get_temp(), "project_complete.csv");
       write_lines(filename, csv);
       htmlwriter.hyperlinkedparagraph("The above data in csv format", filename);
       htmlwriter.paragraph("");
@@ -787,7 +787,7 @@ void reporting_produce_status_report(const ustring &project, bool planning, bool
       for (unsigned int i = 0; i < texts.size(); i++) {
         csv.push_back("\"" + texts[i] + "\"," + convert_to_string(percentages[i]));
       }
-      ustring filename = gw_build_filename(directories_get_temp(), "books_complete.csv");
+      ustring filename = gw_build_filename(Directories->get_temp(), "books_complete.csv");
       write_lines(filename, csv);
       htmlwriter.hyperlinkedparagraph("The above data in csv format", filename);
       htmlwriter.paragraph("");

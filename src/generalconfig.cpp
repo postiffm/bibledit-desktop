@@ -31,7 +31,7 @@
 #include <libxml/xmlwriter.h>
 
 ustring general_configuration_filename() {
-  return gw_build_filename(directories_get_configuration(), "configuration.1.xml");
+  return gw_build_filename(Directories->get_configuration(), "configuration.1.xml");
 }
 
 void upgrade_configuration() {

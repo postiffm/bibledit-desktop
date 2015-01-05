@@ -17,6 +17,7 @@
  **  
  */
 
+#include "directories.h"
 #include "gwrappers.h"
 #include "libraries.h"
 #include "localizedbooks.h"
@@ -28,6 +29,7 @@
 #include "vcs.h"
 #include "versifications.h"
 
+directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;
 Versifications *versifications;
@@ -45,6 +47,9 @@ int main(int argc, char *argv[]) {
   // Settings object.
   Settings mysettings(true);
   settings = &mysettings;
+
+  // Create a new directories 'factory' and initialize it with argv[0]
+  Directories = new directories(argv[0]);
 
   // Bibledit can read from or write to Bible data.
   // Syntax: bibledit-rdwrt -r|-w ...

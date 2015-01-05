@@ -34,7 +34,7 @@
 #include <sqlite3.h>
 
 ustring maintenance_database_filename() {
-  return gw_build_filename(directories_get_temp(), "maintenance3.sql");
+  return gw_build_filename(Directories->get_temp(), "maintenance3.sql");
 }
 
 void maintenance_initialize()

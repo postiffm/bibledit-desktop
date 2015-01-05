@@ -60,7 +60,7 @@ ResourceAssistant::ResourceAssistant(const ustring &resource_template) : Assista
   {
     if (!edited_resource_template.empty()) {
       ustring resource_directory = gw_path_get_dirname(edited_resource_template);
-      if (resource_directory == directories_get_package_data()) {
+      if (resource_directory == Directories->get_package_data()) {
         // It's a template, copy the template only.
         unix_cp(edited_resource_template, working_configuration_file());
       } else {
@@ -554,7 +554,7 @@ void ResourceAssistant::on_assistant_apply() {
 
   // Move the Resource into place.
   ustring directory = shell_clean_filename(title());
-  directory = gw_build_filename(directories_get_resources(), directory);
+  directory = gw_build_filename(Directories->get_resources(), directory);
   unix_rmdir(directory);
   unix_mv(working_directory(), directory);
 
@@ -622,7 +622,7 @@ ustring ResourceAssistant::title()
 }
 
 ustring ResourceAssistant::working_directory() {
-  return gw_build_filename(directories_get_temp(), "resource-editor");
+  return gw_build_filename(Directories->get_temp(), "resource-editor");
 }
 
 ustring ResourceAssistant::working_configuration_file() {

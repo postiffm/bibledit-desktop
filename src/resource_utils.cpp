@@ -30,7 +30,7 @@
 #include "utilities.h"
 
 ustring resource_viewer_directory() {
-  return gw_build_filename(directories_get_temp(), "resource_viewer");
+  return gw_build_filename(Directories->get_temp(), "resource_viewer");
 }
 
 void resource_viewer_ensure_directory()
@@ -71,8 +71,8 @@ bool resource_add_name_to_deleted_ones_if_standard_template(const ustring &filen
  */
 {
   ustring directory = gw_path_get_dirname(filename);
-  if (directory == directories_get_package_data()) {
-    ustring deleted_filename = gw_build_filename(directories_get_resources(), "deleted");
+  if (directory == Directories->get_package_data()) {
+    ustring deleted_filename = gw_build_filename(Directories->get_resources(), "deleted");
     ReadText rt(deleted_filename, true, true);
     ustring title = resource_get_title(filename);
     rt.lines.push_back(title);
@@ -88,9 +88,9 @@ vector<ustring> resource_get_resources(vector<ustring> &filenames, bool list_del
   filenames.clear();
 
   // Read the user's templates.
-  ReadDirectories rd(directories_get_resources(), "", "");
+  ReadDirectories rd(Directories->get_resources(), "", "");
   for (unsigned int i = 0; i < rd.directories.size(); i++) {
-    ustring filename = gw_build_filename(directories_get_resources(), rd.directories[i], resource_template_ini());
+    ustring filename = gw_build_filename(Directories->get_resources(), rd.directories[i], resource_template_ini());
     if (g_file_test(filename.c_str(), G_FILE_TEST_IS_REGULAR)) {
       filenames.push_back(filename);
       resources.push_back(resource_get_title(filename));
@@ -102,7 +102,7 @@ vector<ustring> resource_get_resources(vector<ustring> &filenames, bool list_del
   // override any templates named the same.
   ustring deleted_filename;
   if (!list_deleted_ones)
-    deleted_filename = gw_build_filename(directories_get_resources(), "deleted");
+    deleted_filename = gw_build_filename(Directories->get_resources(), "deleted");
   ReadText rt(deleted_filename, true, true);
   set<ustring> unwanted_ones(rt.lines.begin(), rt.lines.end());
   for (unsigned int i = 0; i < resources.size(); i++) {
@@ -121,9 +121,9 @@ vector<ustring> resource_get_resources(vector<ustring> &filenames, bool list_del
     unwanted_ones.insert("NetBible");
   }
   // Read the templates that come with Bibledit.
-  ReadFiles rf(directories_get_package_data(), "resource", ".ini");
+  ReadFiles rf(Directories->get_package_data(), "resource", ".ini");
   for (unsigned int i = 0; i < rf.files.size(); i++) {
-    ustring filename = gw_build_filename(directories_get_package_data(), rf.files[i]);
+    ustring filename = gw_build_filename(Directories->get_package_data(), rf.files[i]);
     ustring title = resource_get_title(filename);
     if (unwanted_ones.find(title) != unwanted_ones.end())
       continue;
