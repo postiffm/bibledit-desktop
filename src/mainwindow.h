@@ -37,9 +37,12 @@
 #include "httpd.h"
 #include "note_editor.h"
 #include "reference.h"
+#include "settings.h"
+#include "urltransport.h"
 #include "urltransport.h"
 #include "usfm.h"
 #include "ustring.h"
+#include "vcs.h"
 #include "windowcheckkeyterms.h"
 #include "windowcheckusfm.h"
 #include "windoweditor.h"
@@ -54,8 +57,14 @@
 #include <gtk/gtk.h>
 
 class MainWindow {
+private:
+  GtkAccelGroup *accelerator_group;
+  Settings *settings;
+  URLTransport *urltransport;
+  VCS *vcs;
+
 public:
-  MainWindow(unsigned long xembed, GtkAccelGroup *accelerator_group);
+  MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, Settings *_settings, URLTransport *_urltransport, VCS *_vcs);
   ~MainWindow();
   int run();
 
