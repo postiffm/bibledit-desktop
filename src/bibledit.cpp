@@ -17,6 +17,7 @@
  **  
  */
 
+#include "books.h" // TEMP - MAP
 #include "constants.h"
 #include "dialogsystemlog.h"
 #include "directories.h"
@@ -73,6 +74,7 @@ int main(int argc, char *argv[]) {
 
   // Create a new directories 'factory' and initialize it with argv[0]
   Directories = new directories(argv[0]);
+  books_init(); // TEMP - MAP
 
   // Check on required directory structure.
   Directories->check_structure();
