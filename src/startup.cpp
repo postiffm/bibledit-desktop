@@ -20,6 +20,7 @@
 #include "startup.h"
 #include "gtkwrappers.h"
 #include "shell.h"
+#include <config.h>
 
 bool check_bibledit_startup_okay(int argc, char *argv[])
 // Returns true if it is okay to start bibledit.

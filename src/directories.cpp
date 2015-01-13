@@ -20,7 +20,6 @@
 #include "directories.h"
 #include "constants.h"
 #include "gwrappers.h"
-#include "libraries.h"
 #include "restore.h"
 #include "shell.h"
 #include "tiny_utilities.h"
@@ -69,16 +68,15 @@ directories::directories(char *argv0) {
   // ... Then add two more dirs back on, resulting in
   // <something>Bibledit-Gtk\editor\share\bibledit
   package_data = gw_build_filename(package_data, "share", "bibledit");
-}
 #else
   // For Linux, this is hard-coded to match the variable set in config.h
   package_data = PACKAGE_DATA_DIR;
 #endif
-package_data = fix_slashes(package_data);
+  package_data = fix_slashes(package_data);
 
-// The root directory of all data.
-root = tiny_directories_get_root();
-root = fix_slashes(root);
+  // The root directory of all data.
+  root = tiny_directories_get_root();
+  root = fix_slashes(root);
 }
 
 directories::~directories() {

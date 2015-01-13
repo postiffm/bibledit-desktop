@@ -21,6 +21,7 @@
 #define INCLUDED_WINDOWSOUTPOST_H
 
 #include "libraries.h"
+#include <config.h>
 #ifndef WIN32
 #include <arpa/inet.h>
 #include <netdb.h>
