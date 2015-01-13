@@ -22,6 +22,7 @@
 #include "progresswindow.h"
 #include "unixwrappers.h"
 #include "utilities.h"
+#include <config.h>
 #include <glib.h>
 #ifdef WIN32
 #include <windows.h>

@@ -21,6 +21,7 @@
 #define INCLUDED_UNAME_H
 
 #include "libraries.h"
+#include <config.h>
 #include <glib.h>
 #include <gtk/gtk.h>
 #ifndef WIN32
