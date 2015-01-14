@@ -122,6 +122,7 @@ bool ScreenLayoutDimensions::on_timeout(gpointer data) {
   return false;
 }
 
+// MAP: Why not apply the dimensions immediately?
 void ScreenLayoutDimensions::timeout()
 // Apply the dimensions after a timeout.
 {
