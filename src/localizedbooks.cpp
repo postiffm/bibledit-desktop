@@ -26,7 +26,6 @@
 #include "utilities.h"
 #include <libxml/xmlreader.h>
 
-//extern typeof(book_record) books_table[];
 extern book_record books_table[];
 
 BookLocalization::BookLocalization(const ustring &language_in, const ustring &filename) {
