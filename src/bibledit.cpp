@@ -17,7 +17,7 @@
  **  
  */
 
-#include "books.h" // TEMP - MAP
+#include "books.h"
 #include "constants.h"
 #include "dialogsystemlog.h"
 #include "directories.h"
@@ -40,6 +40,9 @@
 #include "utilities.h"
 #include "vcs.h"
 #include "versifications.h"
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <libintl.h>
 #include <libxml/nanohttp.h>
 #include <libxml/xmlreader.h>
 #include <new>
