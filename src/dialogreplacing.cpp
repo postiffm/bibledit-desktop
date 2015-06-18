@@ -30,6 +30,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   extern Settings *settings;
@@ -41,7 +42,7 @@ ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   mylanguage = projectconfig->language_get();
 
   replacedialog = gtk_dialog_new();
-  gtk_window_set_title(GTK_WINDOW(replacedialog), "Replace");
+  gtk_window_set_title(GTK_WINDOW(replacedialog), _("Replace"));
   gtk_window_set_destroy_with_parent(GTK_WINDOW(replacedialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(replacedialog));
@@ -56,7 +57,7 @@ ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, TRUE, TRUE, 0);
 
-  label1 = gtk_label_new("Do you wish to replace this text: ...");
+  label1 = gtk_label_new(_("Do you wish to replace this text: ..."));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(vbox1), label1, FALSE, FALSE, 4);
 
@@ -72,7 +73,7 @@ ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview1), GTK_WRAP_WORD);
   gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview1), FALSE);
 
-  label2 = gtk_label_new("... with this text? It can be edited also.");
+  label2 = gtk_label_new(_("... with this text? It can be edited also."));
   gtk_widget_show(label2);
   gtk_box_pack_start(GTK_BOX(vbox1), label2, FALSE, FALSE, 4);
 
@@ -118,7 +119,7 @@ ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   gtk_widget_show(image1);
   gtk_box_pack_start(GTK_BOX(hbox4), image1, FALSE, FALSE, 0);
 
-  label3 = gtk_label_new_with_mnemonic("_All");
+  label3 = gtk_label_new_with_mnemonic(_("_All"));
   gtk_widget_show(label3);
   gtk_box_pack_start(GTK_BOX(hbox4), label3, FALSE, FALSE, 0);
 
@@ -194,7 +195,7 @@ void ReplacingDialog::replacedialog_on_allbutton_clicked(GtkButton *button, gpoi
 }
 
 void ReplacingDialog::on_allbutton_clicked() {
-  ProgressWindow progresswindow("Replacing", false);
+  ProgressWindow progresswindow(_("Replacing"), false);
   progresswindow.set_iterate(0, 1, references.size() - referencepointer);
   while (referencepointer < references.size()) {
     progresswindow.iterate();

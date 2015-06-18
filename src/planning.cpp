@@ -28,6 +28,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include "versification.h"
+#include <glib/gi18n.h>
 #include <math.h>
 
 void planning_edit(const ustring &project)
@@ -47,7 +48,7 @@ void planning_edit(const ustring &project)
       addables.push_back(planning_assemble_task(addable_books[i], addable_tasks[i]));
     }
   }
-  EditListDialog dialog(&tasks, "Planned Tasks", "of planned tasks: add, remove or reorder them", true, true, false, false, false, false, true, &addables);
+  EditListDialog dialog(&tasks, _("Planned Tasks"), _("of planned tasks: add, remove or reorder them"), true, true, false, false, false, false, true, &addables);
   if (dialog.run() == GTK_RESPONSE_OK) {
     settings->projectconfig(project)->planning_tasks_set(tasks);
   }
@@ -75,10 +76,10 @@ void planning_produce_report(const ustring &project, HtmlWriter &htmlwriter)
     return;
 
   // Heading.
-  htmlwriter.heading(1, "Planning " + project);
+  htmlwriter.heading(1, _("Planning ") + project);
 
   // Current date.
-  htmlwriter.paragraph("Produced on " + date_time_julian_human_readable(date_time_julian_day_get_current(), true) + ".");
+  htmlwriter.paragraph(_("Produced on ") + date_time_julian_human_readable(date_time_julian_day_get_current(), true) + ".");
 
   // Settings.
   extern Settings *settings;
@@ -92,9 +93,9 @@ void planning_produce_report(const ustring &project, HtmlWriter &htmlwriter)
   {
     int startdate = projectconfig->planning_project_start_get();
     int currentdate = date_time_julian_day_get_current();
-    ustring paragraphtext = "The project started on " + date_time_julian_human_readable(startdate, false) + ", ";
+    ustring paragraphtext = _("The project started on ") + date_time_julian_human_readable(startdate, false) + ", ";
     unsigned int percentage = reporting_get_percentage_ready_project(&projectstatus);
-    paragraphtext.append("and " + convert_to_string(percentage) + " percent of the work has been done. ");
+    paragraphtext.append(_("and ") + convert_to_string(percentage) + _(" percent of the work has been done. "));
     bool calculation_possible = ((currentdate > startdate + 30) && (percentage > 1));
     if (calculation_possible) {
       double days_done = currentdate - startdate;
@@ -104,9 +105,9 @@ void planning_produce_report(const ustring &project, HtmlWriter &htmlwriter)
       int enddate = currentdate + days_todo;
       guint year_complete, month_complete, day_complete;
       date_time_normal_get_year_month_day(enddate, year_complete, month_complete, day_complete);
-      paragraphtext.append("If the work is carried on with the same pace it will be completed in the year " + convert_to_string(year_complete) + ", God willing.");
+      paragraphtext.append(_("If the work is carried on with the same pace it will be completed in the year ") + convert_to_string(year_complete) + _(", God willing."));
     } else {
-      paragraphtext.append("At this stage it is not yet possible to estimate when it will finish.");
+      paragraphtext.append(_("At this stage it is not yet possible to estimate when it will finish."));
     }
     htmlwriter.paragraph(paragraphtext);
   }
@@ -114,12 +115,12 @@ void planning_produce_report(const ustring &project, HtmlWriter &htmlwriter)
   // List of planned tasks, including their dates.
   {
     vector<ustring> column_headers;
-    column_headers.push_back("Book");
-    column_headers.push_back("Task");
-    column_headers.push_back("Start");
-    column_headers.push_back("Duration (days)");
-    column_headers.push_back("Complete (%)");
-    column_headers.push_back("Finish");
+    column_headers.push_back(_("Book"));
+    column_headers.push_back(_("Task"));
+    column_headers.push_back(_("Start"));
+    column_headers.push_back(_("Duration (days)"));
+    column_headers.push_back(_("Complete (%)"));
+    column_headers.push_back(_("Finish"));
 
     vector<bool> centers;
     centers.push_back(false);
@@ -153,19 +154,19 @@ void planning_produce_report(const ustring &project, HtmlWriter &htmlwriter)
       row.push_back(task);
       day += 1;
       if (percentage_complete)
-        row.push_back("Already started");
+        row.push_back(_("Already started"));
       else
         row.push_back(date_time_julian_get_month_and_year(day));
       row.push_back(convert_to_string(duration));
       row.push_back(convert_to_string(percentage_complete));
       day += (unsigned int)(round(duration * 7 / 5 * (100 - percentage_complete) / 100));
       if (percentage_complete == 100)
-        row.push_back("Already finished");
+        row.push_back(_("Already finished"));
       else
         row.push_back(date_time_julian_get_month_and_year(day));
       cell_texts.push_back(row);
     }
 
-    htmlwriter.table("Planned tasks", column_headers, cell_texts, "", &centers, 0);
+    htmlwriter.table(_("Planned tasks"), column_headers, cell_texts, "", &centers, 0);
   }
 }

@@ -33,6 +33,7 @@
 #include "sqlite_reader.h"
 #include "tiny_utilities.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 #include <sqlite3.h>
 
 void search_string_basic(const ustring &project, bool use_book_selection, unsigned int currentchapter, vector<Reference> &results)
@@ -60,7 +61,7 @@ results: will contain the search results.
   // Get all books.
   vector<unsigned int> books = project_get_books(project);
   // Progress.
-  ProgressWindow progresswindow("Searching", false);
+  ProgressWindow progresswindow(_("Searching"), false);
   progresswindow.set_iterate(0, 1, books.size());
   // Go through all books.
   for (unsigned int bk = 0; bk < books.size(); bk++) {
@@ -342,7 +343,7 @@ vector<Reference> search_in_bibledit()
   bool area_verse = settings->session.area_verse;
 
   // Progress information.
-  ProgressWindow progresswindow("Searching", true);
+  ProgressWindow progresswindow(_("Searching"), true);
 
   // The string to search for.
   // Note any apostrophies need to be doubled for SQLite.

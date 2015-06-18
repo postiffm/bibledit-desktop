@@ -22,6 +22,7 @@
 #include "gwrappers.h"
 #include "resource_utils.h"
 #include "tiny_utilities.h"
+#include <glib/gi18n.h>
 
 void backup_bible(const ustring &bible, const ustring &filename)
 // Backs up a complete Bible.
@@ -32,7 +33,7 @@ void backup_bible(const ustring &bible, const ustring &filename)
   spawn.arg(filename);
   spawn.arg(".");
   spawn.workingdirectory(tiny_project_directory(bible));
-  spawn.progress("Backing up Bible " + bible, false);
+  spawn.progress(_("Backing up Bible ") + bible, false);
   spawn.run();
 }
 
@@ -43,7 +44,7 @@ void backup_notes(const ustring &filename) {
   spawn.arg(filename);
   spawn.arg(".");
   spawn.workingdirectory(Directories->get_notes());
-  spawn.progress("Backing up notes", false);
+  spawn.progress(_("Backing up notes"), false);
   spawn.run();
 }
 
@@ -68,7 +69,7 @@ void backup_resource(const ustring &resource, const ustring &filename)
   spawn.arg(filename);
   spawn.arg(".");
   spawn.workingdirectory(folder);
-  spawn.progress("Backing up Resource " + resource, false);
+  spawn.progress(_("Backing up Resource ") + resource, false);
   spawn.run();
 }
 
@@ -79,6 +80,6 @@ void backup_all(const ustring &filename) {
   spawn.arg(filename);
   spawn.arg(".");
   spawn.workingdirectory(Directories->get_root());
-  spawn.progress("Backing up everything", false);
+  spawn.progress(_("Backing up everything"), false);
   spawn.run();
 }

@@ -22,11 +22,12 @@
 #include "progresswindow.h"
 #include "roman.h"
 #include "tiny_utilities.h"
+#include <glib/gi18n.h>
 
 const gchar *resource_conversion_type_to_text(ResourceConversionType type) {
   switch (type) {
   case rctChapterStartsAtPatternVerseOneStartsAtChapterVerseStartsAtPattern:
-    return "Chapter starts at a pattern, verse 1 starts at chapter, verse starts at a pattern";
+    return _("Chapter starts at a pattern, verse 1 starts at chapter, verse starts at a pattern");
   case rctEnd:
     return "";
   }
@@ -79,7 +80,7 @@ void resource_conversion_insert_anchors(vector<ustring> &lines, const ustring &c
   unsigned int current_chapter = 0;
 
   // Go through all the lines, show progress.
-  ProgressWindow progresswindow("Processing...", false);
+  ProgressWindow progresswindow(_("Processing..."), false);
   progresswindow.set_iterate(0, 1, lines.size());
   for (unsigned int i = 0; i < lines.size(); i++) {
     progresswindow.iterate();

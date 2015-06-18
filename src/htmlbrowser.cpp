@@ -27,6 +27,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include "windowsoutpost.h"
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
 #define NUMBER_OF_BROWSERS 10
@@ -123,8 +124,8 @@ void htmlbrowser(const ustring &filename, bool network, bool no_tamper)
     // No suitable browser was found.
     // Inform the user about it, and what to do to solve it.
     ustring message;
-    message = "The help cannot be displayed, because there is no suitable browser installed.\n";
-    message.append("Install one of the following supported browsers:\n");
+    message = _("The help cannot be displayed, because there is no suitable browser installed.\n");
+    message.append(_("Install one of the following supported browsers:\n"));
     for (unsigned int i = 0; i < NUMBER_OF_BROWSERS; i++) {
       message.append(helpcommand(i));
       message.append("\n");

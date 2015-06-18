@@ -35,6 +35,7 @@
 #include "utilities.h"
 #include <gdk/gdkkeysyms.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 
 InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   extern Settings *settings;
@@ -42,16 +43,16 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   allow_entry_activate = true;
 
   insertnotedialog = gtk_dialog_new();
-  ustring title = "Insert ";
+  ustring title = _("Insert ");
   switch (dialogtype) {
   case indtFootnote:
-    title.append("footnote");
+    title.append(_("footnote"));
     break;
   case indtEndnote:
-    title.append("endnote");
+    title.append(_("endnote"));
     break;
   case indtCrossreference:
-    title.append("crossreference");
+    title.append(_("crossreference"));
     break;
   }
   gtk_window_set_title(GTK_WINDOW(insertnotedialog), title.c_str());
@@ -73,25 +74,25 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_box_pack_start(GTK_BOX(vbox1), hbox1, TRUE, TRUE, 0);
   gtk_container_set_border_width(GTK_CONTAINER(hbox1), 1);
 
-  label1 = gtk_label_new_with_mnemonic("N_umbering");
+  label1 = gtk_label_new_with_mnemonic(_("N_umbering"));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(hbox1), label1, FALSE, FALSE, 0);
 
   GSList *radiobutton_numbering_automatic_group = NULL;
 
-  radiobutton_numbering_automatic = gtk_radio_button_new_with_mnemonic(NULL, "Automatic");
+  radiobutton_numbering_automatic = gtk_radio_button_new_with_mnemonic(NULL, _("Automatic"));
   gtk_widget_show(radiobutton_numbering_automatic);
   gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_automatic, FALSE, FALSE, 0);
   gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_automatic), radiobutton_numbering_automatic_group);
   radiobutton_numbering_automatic_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_automatic));
 
-  radiobutton_numbering_none = gtk_radio_button_new_with_mnemonic(NULL, "None");
+  radiobutton_numbering_none = gtk_radio_button_new_with_mnemonic(NULL, _("None"));
   gtk_widget_show(radiobutton_numbering_none);
   gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_none, FALSE, FALSE, 0);
   gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_none), radiobutton_numbering_automatic_group);
   radiobutton_numbering_automatic_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_none));
 
-  radiobutton_numbering_character = gtk_radio_button_new_with_mnemonic(NULL, "Character");
+  radiobutton_numbering_character = gtk_radio_button_new_with_mnemonic(NULL, _("Character"));
   gtk_widget_show(radiobutton_numbering_character);
   gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_character, FALSE, FALSE, 0);
   gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_character), radiobutton_numbering_automatic_group);
@@ -108,7 +109,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_widget_show(hseparator1);
   gtk_box_pack_start(GTK_BOX(vbox1), hseparator1, TRUE, TRUE, 6);
 
-  checkbutton_automatic_reference = gtk_check_button_new_with_mnemonic("Automatically insert the current _reference");
+  checkbutton_automatic_reference = gtk_check_button_new_with_mnemonic(_("Automatically insert the current _reference"));
   gtk_widget_show(checkbutton_automatic_reference);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_automatic_reference, FALSE, FALSE, 0);
 
@@ -117,7 +118,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_box_pack_start(GTK_BOX(vbox1), hbox2, FALSE, FALSE, 0);
   gtk_container_set_border_width(GTK_CONTAINER(hbox2), 1);
 
-  checkbutton_chapter = gtk_check_button_new_with_mnemonic("Cha_pter");
+  checkbutton_chapter = gtk_check_button_new_with_mnemonic(_("Cha_pter"));
   gtk_widget_show(checkbutton_chapter);
   gtk_box_pack_start(GTK_BOX(hbox2), checkbutton_chapter, FALSE, FALSE, 0);
 
@@ -127,7 +128,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_entry_set_max_length(GTK_ENTRY(entry_reference_separator), 3);
   gtk_entry_set_width_chars(GTK_ENTRY(entry_reference_separator), 3);
 
-  checkbutton_verse = gtk_check_button_new_with_mnemonic("_Verse");
+  checkbutton_verse = gtk_check_button_new_with_mnemonic(_("_Verse"));
   gtk_widget_show(checkbutton_verse);
   gtk_box_pack_start(GTK_BOX(hbox2), checkbutton_verse, FALSE, FALSE, 0);
 
@@ -171,7 +172,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_widget_show(image2);
   gtk_box_pack_start(GTK_BOX(hbox7), image2, FALSE, FALSE, 0);
 
-  label4 = gtk_label_new_with_mnemonic("_Add content");
+  label4 = gtk_label_new_with_mnemonic(_("_Add content"));
   gtk_widget_show(label4);
   gtk_box_pack_start(GTK_BOX(hbox7), label4, FALSE, FALSE, 0);
 
@@ -181,7 +182,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_widget_show(hseparator3);
   gtk_box_pack_start(GTK_BOX(vbox1), hseparator3, TRUE, TRUE, 6);
 
-  label2 = gtk_label_new_with_mnemonic("_Templates");
+  label2 = gtk_label_new_with_mnemonic(_("_Templates"));
   gtk_widget_show(label2);
   gtk_box_pack_start(GTK_BOX(vbox1), label2, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label2), 0, 0.5);
@@ -207,7 +208,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   gtk_widget_show(dialog_action_area1);
   gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
 
-  new InDialogHelp(insertnotedialog, NULL, NULL, "menu-none/insert-footnote-endnote-crossreference");
+  new InDialogHelp(insertnotedialog, NULL, NULL, _("menu-none/insert-footnote-endnote-crossreference"));
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
@@ -522,7 +523,7 @@ void InsertNoteDialog::on_button_add()
     defaultheight = (int)(sizerequisition.height * 0.8);
   }
 
-  label_size = gtk_label_new("Size");
+  label_size = gtk_label_new(_("Size"));
   gtk_widget_show(label_size);
   gtk_box_pack_start(GTK_BOX(hbox8), label_size, FALSE, FALSE, 0);
 
@@ -533,7 +534,7 @@ void InsertNoteDialog::on_button_add()
   gtk_box_pack_start(GTK_BOX(hbox8), spinbutton_size, FALSE, FALSE, 0);
   gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spinbutton_size), TRUE);
 
-  checkbutton_content = gtk_check_button_new_with_mnemonic("Remember content");
+  checkbutton_content = gtk_check_button_new_with_mnemonic(_("Remember content"));
   gtk_widget_show(checkbutton_content);
   gtk_box_pack_start(GTK_BOX(hbox8), checkbutton_content, FALSE, FALSE, 0);
 
@@ -541,7 +542,7 @@ void InsertNoteDialog::on_button_add()
   gtk_widget_show(vseparator2);
   gtk_box_pack_start(GTK_BOX(hbox8), vseparator2, TRUE, TRUE, 0);
 
-  checkbutton_tidy = gtk_check_button_new_with_mnemonic("Tidy text");
+  checkbutton_tidy = gtk_check_button_new_with_mnemonic(_("Tidy text"));
   gtk_widget_show(checkbutton_tidy);
   gtk_box_pack_start(GTK_BOX(hbox8), checkbutton_tidy, FALSE, FALSE, 0);
 
@@ -696,7 +697,7 @@ void InsertNoteDialog::on_button_template_new_clicked(GtkButton *button, gpointe
 }
 
 void InsertNoteDialog::on_button_template_new() {
-  EntryDialog dialog("Template", "Enter a name for a new template", "");
+  EntryDialog dialog(_("Template"), _("Enter a name for a new template"), "");
   dialog.run();
   GwSpawn spawn("touch");
   spawn.arg(gw_build_filename(Directories->get_configuration(), template_filename_get(dialog.entered_value)));
@@ -940,7 +941,7 @@ gboolean InsertNoteDialog::on_textview_content_key_press_event(GtkWidget *widget
 void InsertNoteDialog::set_dynamic_shortcuts() {
 
   for (unsigned int i = 0; i < buttons_remove_label.size(); i++) {
-    ustring label = "_" + convert_to_string(i) + " Remove";
+    ustring label = "_" + convert_to_string(i) + _(" Remove");
     gtk_label_set_text_with_mnemonic(GTK_LABEL(buttons_remove_label[i]), label.c_str());
   }
 }

@@ -23,6 +23,7 @@
 #include "stylesheetutils.h"
 #include "tiny_utilities.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 #include <libxml/xmlreader.h>
 #include <libxml/xmlwriter.h>
 
@@ -39,7 +40,7 @@ Stylesheet::Stylesheet(const ustring &name_in) {
   gchar *contents;
   g_file_get_contents(filename.c_str(), &contents, NULL, NULL);
   if (contents == NULL) {
-    gw_critical("Failure reading stylesheet " + filename);
+    gw_critical(_("Failure reading stylesheet ") + filename);
     return;
   }
 

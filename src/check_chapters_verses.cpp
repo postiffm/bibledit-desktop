@@ -27,6 +27,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include "versification.h"
+#include <glib/gi18n.h>
 
 CheckChaptersVerses::CheckChaptersVerses(const ustring &project, const vector<unsigned int> &books, bool gui)
 /*
@@ -47,7 +48,7 @@ gui: show graphical progressbar.
     mybooks = project_get_books(project);
   progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Checking chapters and verses", true);
+    progresswindow = new ProgressWindow(_("Checking chapters and verses"), true);
     progresswindow->set_iterate(0, 1, mybooks.size());
   }
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
@@ -105,14 +106,14 @@ void CheckChaptersVerses::new_chapter_check(unsigned int book, unsigned int chap
   }
   // Check whether the chapter number follows the previous one.
   if ((int)chapter != (previous_chapter + 1)) {
-    ustring msg = "Chapter out of sequence following " + convert_to_string(int(previous_chapter));
+    ustring msg = _("Chapter out of sequence following ") + convert_to_string(int(previous_chapter));
     message(book, chapter, "0", msg);
   }
   previous_chapter = chapter;
 
   // Check whether the number is within limits.
   if (chapter > highest_chapter)
-    message(book, chapter, "0", "Extra chapter or wrong versification");
+    message(book, chapter, "0", _("Extra chapter or wrong versification"));
 }
 
 void CheckChaptersVerses::last_chapter_check(unsigned int book, vector<unsigned int> &chapters)
@@ -122,7 +123,7 @@ void CheckChaptersVerses::last_chapter_check(unsigned int book, vector<unsigned 
   if (!chapters.empty())
     lastchapter = chapters[chapters.size() - 1];
   if (lastchapter < highest_chapter)
-    message(book, lastchapter, "0", "Less than " + convert_to_string(highest_chapter) + " chapters or wrong versification");
+    message(book, lastchapter, "0", _("Less than ") + convert_to_string(highest_chapter) + _(" chapters or wrong versification"));
 }
 
 void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, const vector<ustring> &verses)
@@ -133,12 +134,12 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
   // Check whether there are any verses at all. If not, stop further
   // processing because the following code assumes there are verses.
   if (verses.empty()) {
-    message(book, chapter, "1", "Chapter has no verses");
+    message(book, chapter, "1", _("Chapter has no verses"));
     return;
   }
   // Check for verses in chapter 0, which indicates the \c 1 marker wasn't there.
   if ((chapter == 0) && (verses.size() > 1)) {
-    message(book, chapter, "1", "Chapter marker missing");
+    message(book, chapter, "1", _("Chapter marker missing"));
   }
   // Transform the verses in the internally used encoding, so as to accomodate
   // for sequences and ranges.
@@ -160,13 +161,13 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
         start_expanded_verse++;
       // Checking on range start.
       if (start_range.find("a") != string::npos)
-        message(book, chapter, verses[i], "Range starts with \"a\"");
+        message(book, chapter, verses[i], _("Range starts with \"a\""));
       int end_expanded_verse = 2 * convert_to_int(number_in_string(end_range));
       if (end_range.find("a") == string::npos)
         end_expanded_verse++;
       // Check on range end.
       if (end_range.find("b") != string::npos)
-        message(book, chapter, verses[i], "Range ends with \"b\"");
+        message(book, chapter, verses[i], _("Range ends with \"b\""));
       for (int i2 = start_expanded_verse; i2 <= end_expanded_verse; i2++) {
         expanded_verses.push_back(i2);
         verses_pointers.push_back(i);
@@ -179,7 +180,7 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
         // In case of an unusual range formation, do not hang, but give message.
         iterations++;
         if (iterations > 50) {
-          message(book, chapter, verses[i], "Unusual verse sequence");
+          message(book, chapter, verses[i], _("Unusual verse sequence"));
           break;
         }
         size_t position = vs.find(",");
@@ -209,7 +210,7 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
     unsigned int verse;
     verse = expanded_verses[i] / 2;
     if (verse > highest_verse) {
-      message(book, chapter, convert_to_string(verse), "Extra verse or wrong versification");
+      message(book, chapter, convert_to_string(verse), _("Extra verse or wrong versification"));
     }
   }
 
@@ -219,11 +220,11 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
     ustring previous_verse_text;
     unsigned int pointer = verses_pointers[i];
     if (pointer == 0)
-      previous_verse_text = "beginning";
+      previous_verse_text = _("beginning");
     else
       previous_verse_text = verses[pointer - 1];
     if ((int)expanded_verses[i] != previous_verse + 1) {
-      message(book, chapter, verses[pointer], "Verse out of sequence following " + previous_verse_text);
+      message(book, chapter, verses[pointer], _("Verse out of sequence following ") + previous_verse_text);
     }
     previous_verse = expanded_verses[i];
   }
@@ -232,7 +233,7 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
   int highverse = expanded_verses[expanded_verses.size() - 1];
   highverse = highverse / 2;
   if (highverse < (int)highest_verse) {
-    message(book, chapter, verses[verses.size() - 1], "Not enough verses in chapter");
+    message(book, chapter, verses[verses.size() - 1], _("Not enough verses in chapter"));
   }
   // Clear storage.
   expanded_verses.clear();

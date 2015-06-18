@@ -23,8 +23,9 @@
 #include "libraries.h"
 #include "tiny_utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
-WindowOutline::WindowOutline(GtkWidget *parent_layout, GtkAccelGroup *accelerator_group, bool startup) : FloatingWindow(parent_layout, widOutline, "Outline", startup), myreference(0)
+WindowOutline::WindowOutline(GtkWidget *parent_layout, GtkAccelGroup *accelerator_group, bool startup) : FloatingWindow(parent_layout, widOutline, _("Outline"), startup), myreference(0)
 // Window showing outline.
 {
   // Outline object.

@@ -40,6 +40,7 @@
 #include "utilities.h"
 #include <gdk/gdkkeysyms.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
@@ -217,9 +218,7 @@ void USFMView::chapter_save()
   bool reload = false;
   bool save_action_is_over = false;
   if (chaptertext.empty()) {
-    if (gtkw_dialog_question(NULL, "The chapter is empty.\n"
-                                   "Do you wish to delete this chapter?",
-                             GTK_RESPONSE_YES) == GTK_RESPONSE_YES) {
+    if (gtkw_dialog_question(NULL, _("The chapter is empty.\nDo you wish to delete this chapter?"), GTK_RESPONSE_YES) == GTK_RESPONSE_YES) {
       project_remove_chapter(project, book, chapter);
       save_action_is_over = true;
       reload = true;
@@ -261,11 +260,7 @@ void USFMView::chapter_save()
     if (chapter_in_text != chapter) {
       unsigned int confirmed_chapter_number;
       ustring message;
-      message = "Chapter " + convert_to_string(chapter) + " was loaded, "
-                                                          "but it appears that the chapter number has been changed to " +
-                convert_to_string(chapter_in_text) + ".\n"
-                                                     "Do you wish to save the text as a different chapter, that is, as chapter " +
-                convert_to_string(chapter_in_text) + "?";
+      message = _("Chapter ") + convert_to_string(chapter) + _(" was loaded, but it appears that the chapter number has been changed to ") + convert_to_string(chapter_in_text) + _(".\nDo you wish to save the text as a different chapter, that is, as chapter ") + convert_to_string(chapter_in_text) + "?";
       if (gtkw_dialog_question(NULL, message.c_str()) == GTK_RESPONSE_YES) {
         confirmed_chapter_number = chapter_in_text;
         reload = true;
@@ -281,10 +276,9 @@ void USFMView::chapter_save()
         vector<unsigned int> chapters = project_get_chapters(project, book);
         set<unsigned int> chapter_set(chapters.begin(), chapters.end());
         if (chapter_set.find(confirmed_chapter_number) != chapter_set.end()) {
-          message = "The new chapter number already exists\n"
-                    "Do you wish to overwrite it?";
+          message = _("The new chapter number already exists\nDo you wish to overwrite it?");
           if (gtkw_dialog_question(NULL, message.c_str()) == GTK_RESPONSE_NO) {
-            gtkw_dialog_info(NULL, "The changes have been discarded");
+            gtkw_dialog_info(NULL, _("The changes have been discarded"));
             save_action_is_over = true;
             reload = true;
           }
@@ -671,7 +665,7 @@ vector<ustring> USFMView::spelling_get_misspelled() {
 void USFMView::spelling_approve(const vector<ustring> &words) {
   // Approve all the words in the list.
   // Since this may take time, a windows will show the progress.
-  ProgressWindow progresswindow("Adding words to dictionary", false);
+  ProgressWindow progresswindow(_("Adding words to dictionary"), false);
   progresswindow.set_iterate(0, 1, words.size());
   for (unsigned int i = 0; i < words.size(); i++) {
     progresswindow.iterate();

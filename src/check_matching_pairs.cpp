@@ -26,6 +26,7 @@
 #include "tiny_utilities.h"
 #include "usfmtools.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 MatchingPairOpener::MatchingPairOpener(const ustring &char_in, gunichar unichar_in, unsigned int book_in, int chapter_in, const ustring &verse_in, const ustring &context_in) {
   character = char_in;
@@ -72,7 +73,7 @@ gui: whether to show graphical progressbar.
 
   progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Matching pairs", true);
+    progresswindow = new ProgressWindow(_("Matching pairs"), true);
     progresswindow->set_iterate(0, 1, mybooks.size());
   }
 
@@ -176,7 +177,7 @@ void CheckMatchingPairs::check_matched_pairs(ustring &text)
         }
         if (give_message) {
           // Give message;
-          message(book, chapter, verse, "Pair not opened: " + get_context(text, i));
+          message(book, chapter, verse, _("Pair not opened: ") + get_context(text, i));
         }
       }
     }
@@ -189,7 +190,7 @@ void CheckMatchingPairs::check_pairs_clean()
 {
   // Check for them and give messages.
   for (unsigned int i = 0; i < openers.size(); i++) {
-    message(openers[i].book, openers[i].chapter, openers[i].verse, "Pair not closed: " + openers[i].context);
+    message(openers[i].book, openers[i].chapter, openers[i].verse, _("Pair not closed: ") + openers[i].context);
   }
   // Clear them up.
   openers.clear();

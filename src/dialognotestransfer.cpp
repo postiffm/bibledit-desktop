@@ -32,11 +32,12 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 NotesTransferDialog::NotesTransferDialog(int dummy) {
 
   notestransferdialog = gtk_dialog_new();
-  gtk_window_set_title(GTK_WINDOW(notestransferdialog), "Transfer To Project Notes");
+  gtk_window_set_title(GTK_WINDOW(notestransferdialog), _("Transfer To Project Notes"));
   gtk_window_set_position(GTK_WINDOW(notestransferdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(notestransferdialog), TRUE);
 
@@ -47,7 +48,7 @@ NotesTransferDialog::NotesTransferDialog(int dummy) {
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, FALSE, FALSE, 0);
 
-  label1 = gtk_label_new("This will transfer all text from the currently opened project into the Project notes.");
+  label1 = gtk_label_new(_("This will transfer all text from the currently opened project into the Project notes."));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(vbox1), label1, FALSE, FALSE, 0);
   gtk_label_set_line_wrap(GTK_LABEL(label1), TRUE);
@@ -57,7 +58,7 @@ NotesTransferDialog::NotesTransferDialog(int dummy) {
   gtk_widget_show(hbox1);
   gtk_box_pack_start(GTK_BOX(vbox1), hbox1, TRUE, TRUE, 0);
 
-  label2 = gtk_label_new("The notes will be put into category");
+  label2 = gtk_label_new(_("The notes will be put into category"));
   gtk_widget_show(label2);
   gtk_box_pack_start(GTK_BOX(hbox1), label2, FALSE, FALSE, 0);
 
@@ -65,7 +66,7 @@ NotesTransferDialog::NotesTransferDialog(int dummy) {
   gtk_widget_show(combobox1);
   gtk_box_pack_start(GTK_BOX(hbox1), combobox1, TRUE, TRUE, 0);
 
-  label3 = gtk_label_new("The transfer cannot be undone.");
+  label3 = gtk_label_new(_("The transfer cannot be undone."));
   gtk_widget_show(label3);
   gtk_box_pack_start(GTK_BOX(vbox1), label3, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label3), 0, 0.5);
@@ -114,7 +115,7 @@ void NotesTransferDialog::on_okbutton() {
   ustring project = settings->genconfig.project_get();
 
   // Progress.
-  ProgressWindow progresswindow("Transferring text to notes", false);
+  ProgressWindow progresswindow(_("Transferring text to notes"), false);
 
   // Get the category into which to insert notes.
   ustring category = combobox_get_active_string(combobox1);

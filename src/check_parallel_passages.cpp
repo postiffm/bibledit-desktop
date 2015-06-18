@@ -26,6 +26,7 @@
 #include "tiny_utilities.h"
 #include "usfmtools.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 CheckOTQuotationsInNT::CheckOTQuotationsInNT(const ustring &project, const vector<unsigned int> &books, bool includetext) {
   // Language and versification system.
@@ -49,7 +50,7 @@ CheckOTQuotationsInNT::CheckOTQuotationsInNT(const ustring &project, const vecto
   }
 
   // GUI.
-  progresswindow = new ProgressWindow("Producing passages", true);
+  progresswindow = new ProgressWindow(_("Producing passages"), true);
   progresswindow->set_iterate(0, 1, use_ot_order ? otquotations.quotations_ot_order.size() : otquotations.quotations_nt_order.size());
 
   // Go through the quotations.
@@ -84,7 +85,7 @@ CheckOTQuotationsInNT::CheckOTQuotationsInNT(const ustring &project, const vecto
     }
     nt_texts.push_back(reference_verse_text);
     references.push_back(reference);
-    comments.push_back("Quoted in New Testament");
+    comments.push_back(_("Quoted in New Testament"));
 
     // Go through the OT quotations processing them.
     vector<ustring> refs_store;
@@ -113,7 +114,7 @@ CheckOTQuotationsInNT::CheckOTQuotationsInNT(const ustring &project, const vecto
                     (use_ot_order ? otquotations.quotations_ot_order[i].referents[i2].chapter : otquotations.quotations_nt_order[i].referents[i2].chapter),
                     (use_ot_order ? otquotations.quotations_ot_order[i].referents[i2].verse : otquotations.quotations_nt_order[i].referents[i2].verse));
       references.push_back(ref.human_readable(""));
-      comments.push_back("Old Testament verse quoted from");
+      comments.push_back(_("Old Testament verse quoted from"));
     }
     // Save data.
     ot_refs.push_back(refs_store);
@@ -151,7 +152,7 @@ CheckParallelPassages::CheckParallelPassages(bool nt, const ustring &project, co
   // GUI.
   progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Producing passages", true);
+    progresswindow = new ProgressWindow(_("Producing passages"), true);
     progresswindow->set_iterate(0, 1, otntparallels.sections.size());
   }
   // Go through each section.
@@ -184,7 +185,7 @@ CheckParallelPassages::CheckParallelPassages(bool nt, const ustring &project, co
         }
         dataset.data.push_back(verse);
         references.push_back(books_id_to_english(mapped_reference.book) + " " + convert_to_string(mapped_reference.chapter) + ":" + mapped_reference.verse);
-        comments.push_back("Parallel");
+        comments.push_back(_("Parallel"));
       }
 
       datasection.sets.push_back(dataset);
@@ -214,7 +215,7 @@ CheckParallelPassages::CheckParallelPassages(bool nt, const ustring &project, co
           }
           dataset2.data.push_back(verse);
           references.push_back(books_id_to_english(mapped_reference.book) + " " + convert_to_string(mapped_reference.chapter) + ":" + mapped_reference.verse);
-          comments.push_back("Parallel");
+          comments.push_back(_("Parallel"));
         }
         datasection.sets.push_back(dataset2);
       }

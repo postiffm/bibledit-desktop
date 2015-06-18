@@ -19,6 +19,7 @@
 
 #include "robinson.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 bool robinson_define_parsing_person(ustring &definition, ustring &parsing)
 // This looks in the "parsing" whether the person is given.
@@ -28,11 +29,11 @@ bool robinson_define_parsing_person(ustring &definition, ustring &parsing)
   ustring person = parsing.substr(0, 1);
   bool person_found = true;
   if (person == "1") {
-    definition.append(" first person");
+    definition.append(_(" first person"));
   } else if (person == "2") {
-    definition.append(" second person");
+    definition.append(_(" second person"));
   } else if (person == "3") {
-    definition.append(" third person");
+    definition.append(_(" third person"));
   } else {
     person_found = false;
   }
@@ -48,17 +49,17 @@ void robinson_define_parsing_case(ustring &definition, ustring &parsing)
   ustring case_code = parsing.substr(0, 1);
   parsing.erase(0, 1);
   if (case_code == "N") {
-    definition.append(" nominative");
+    definition.append(_(" nominative"));
   } else if (case_code == "V") {
-    definition.append(" vocative");
+    definition.append(_(" vocative"));
   } else if (case_code == "G") {
-    definition.append(" genitive");
+    definition.append(_(" genitive"));
   } else if (case_code == "D") {
-    definition.append(" dative");
+    definition.append(_(" dative"));
   } else if (case_code == "A") {
-    definition.append(" accusative");
+    definition.append(_(" accusative"));
   } else {
-    definition.append(" case \"" + case_code + "\"");
+    definition.append(_(" case \"") + case_code + "\"");
   }
 }
 
@@ -68,12 +69,12 @@ void robinson_define_parsing_number(ustring &definition, ustring &parsing)
   ustring number = parsing.substr(0, 1);
   parsing.erase(0, 1);
   if (number == "S") {
-    definition.append(" singular");
+    definition.append(_(" singular"));
   } else if (number == "P") {
-    definition.append(" plural");
+    definition.append(_(" plural"));
   } else {
     if (!number.empty()) {
-      definition.append(" number \"" + number + "\"");
+      definition.append(_(" number \"") + number + "\"");
     }
   }
 }
@@ -84,14 +85,14 @@ void robinson_define_parsing_gender(ustring &definition, ustring &parsing)
   ustring gender = parsing.substr(0, 1);
   parsing.erase(0, 1);
   if (gender == "M") {
-    definition.append(" masculine");
+    definition.append(_(" masculine"));
   } else if (gender == "F") {
-    definition.append(" feminine");
+    definition.append(_(" feminine"));
   } else if (gender == "N") {
-    definition.append(" neuter");
+    definition.append(_(" neuter"));
   } else {
     if (!gender.empty()) {
-      definition.append(" gender \"" + gender + "\"");
+      definition.append(_(" gender \"") + gender + "\"");
     }
   }
 }
@@ -108,37 +109,37 @@ There may be old content that uses -C for crasis, but at the time of writing thi
   */
   bool known_parsing = true;
   if (parsing == "S") {
-    definition.append(" superlative");
+    definition.append(_(" superlative"));
   } else if (parsing == "C") {
-    definition.append(" comparative");
+    definition.append(_(" comparative"));
   } else if (parsing == "ABB") {
-    definition.append(" abbreviated");
+    definition.append(_(" abbreviated"));
   } else if (parsing == "I") {
-    definition.append(" interrogative");
+    definition.append(_(" interrogative"));
   } else if (parsing == "N") {
-    definition.append(" negative");
+    definition.append(_(" negative"));
   } else if (parsing == "K") {
-    definition.append(" merged by crasis with a second word; declension is that of the second word");
+    definition.append(_(" merged by crasis with a second word; declension is that of the second word"));
   } else if (parsing == "ATT") {
-    definition.append(" Attic Greek form");
+    definition.append(_(" Attic Greek form"));
   } else if (parsing == "LI") {
-    definition.append(" letter indeclinable");
+    definition.append(_(" letter indeclinable"));
   } else if (parsing == "PRI") {
-    definition.append(" proper indeclinable");
+    definition.append(_(" proper indeclinable"));
   } else if (parsing == "OI") {
-    definition.append(" other indeclinable");
+    definition.append(_(" other indeclinable"));
   } else if (parsing == "NUI") {
-    definition.append(" numeral indeclinable");
+    definition.append(_(" numeral indeclinable"));
   } else if (parsing == "AP") {
-    definition.append(" apocopated form");
+    definition.append(_(" apocopated form"));
   } else if (parsing == "A") {
-    definition.append(" Aeolic");
+    definition.append(_(" Aeolic"));
   } else if (parsing == "M") {
-    definition.append(" middle significance");
+    definition.append(_(" middle significance"));
   } else {
     if (!silent) {
       if (!parsing.empty()) {
-        definition.append(" unknown suffix \"" + parsing + "\"");
+        definition.append(_(" unknown suffix \"") + parsing + "\"");
       }
     }
     known_parsing = false;
@@ -151,25 +152,25 @@ void robinson_define_parsing_tense(ustring &definition, ustring &parsing)
 {
   ustring number = parsing.substr(0, 1);
   if (number == "2") {
-    definition.append(" second");
+    definition.append(_(" second"));
     parsing.erase(0, 1);
   }
   ustring tense = parsing.substr(0, 1);
   bool remove_code = true;
   if (tense == "P") {
-    definition.append(" present");
+    definition.append(_(" present"));
   } else if (tense == "I") {
-    definition.append(" imperfect");
+    definition.append(_(" imperfect"));
   } else if (tense == "F") {
-    definition.append(" future");
+    definition.append(_(" future"));
   } else if (tense == "A") {
-    definition.append(" aorist");
+    definition.append(_(" aorist"));
   } else if (tense == "R") {
-    definition.append(" perfect");
+    definition.append(_(" perfect"));
   } else if (tense == "L") {
-    definition.append(" pluperfect");
+    definition.append(_(" pluperfect"));
   } else if (tense == "X") {
-    definition.append(" no tense stated (adverbial imperative)");
+    definition.append(_(" no tense stated (adverbial imperative)"));
   } else {
     remove_code = false;
   }
@@ -184,23 +185,23 @@ void robinson_define_parsing_voice(ustring &definition, ustring &parsing)
   ustring voice = parsing.substr(0, 1);
   bool remove_code = true;
   if (voice == "A") {
-    definition.append(" active");
+    definition.append(_(" active"));
   } else if (voice == "M") {
-    definition.append(" middle");
+    definition.append(_(" middle"));
   } else if (voice == "P") {
-    definition.append(" passive");
+    definition.append(_(" passive"));
   } else if (voice == "E") {
-    definition.append(" middle or passive");
+    definition.append(_(" middle or passive"));
   } else if (voice == "D") {
-    definition.append(" middle deponent");
+    definition.append(_(" middle deponent"));
   } else if (voice == "O") {
-    definition.append(" passive deponent");
+    definition.append(_(" passive deponent"));
   } else if (voice == "N") {
-    definition.append(" middle or passive deponent");
+    definition.append(_(" middle or passive deponent"));
   } else if (voice == "X") {
-    definition.append(" no voice stated");
+    definition.append(_(" no voice stated"));
   } else if (voice == "Q") {
-    definition.append(" impersonal active");
+    definition.append(_(" impersonal active"));
   } else {
     remove_code = false;
   }
@@ -215,17 +216,17 @@ void robinson_define_parsing_mood(ustring &definition, ustring &parsing)
   ustring mood = parsing.substr(0, 1);
   bool remove_code = true;
   if (mood == "I") {
-    definition.append(" indicative");
+    definition.append(_(" indicative"));
   } else if (mood == "S") {
-    definition.append(" subjunctive");
+    definition.append(_(" subjunctive"));
   } else if (mood == "O") {
-    definition.append(" optative");
+    definition.append(_(" optative"));
   } else if (mood == "M") {
-    definition.append(" imperative");
+    definition.append(_(" imperative"));
   } else if (mood == "N") {
-    definition.append(" infinitive");
+    definition.append(_(" infinitive"));
   } else if (mood == "P") {
-    definition.append(" participle");
+    definition.append(_(" participle"));
   } else {
     remove_code = false;
   }
@@ -256,7 +257,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
     bit3 = parse.words[3];
 
   if (bit0 == "A") {
-    definition = "adjective";
+    definition = _("adjective");
     if (!robinson_define_parsing_suffix(definition, bit1, true)) {
       robinson_define_parsing_case(definition, bit1);
       robinson_define_parsing_number(definition, bit1);
@@ -269,18 +270,18 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "ADV") {
-    definition = "adverb or adverb and particle combined";
+    definition = _("adverb or adverb and particle combined");
     robinson_define_parsing_suffix(definition, bit1, false);
     return true;
   }
 
   if (parsing == "ARAM") {
-    definition = "indeclinable Aramaic transliterated word";
+    definition = _("indeclinable Aramaic transliterated word");
     return true;
   }
 
   if (bit0 == "C") {
-    definition = "reciprocal pronoun";
+    definition = _("reciprocal pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -289,7 +290,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "COND") {
-    definition = "conditional particle or conjunction";
+    definition = _("conditional particle or conjunction");
     if (bit1 == "C") {
       bit1 = "K";
     }
@@ -298,12 +299,12 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "CONJ") {
-    definition = "conjunction or conjunctive particle";
+    definition = _("conjunction or conjunctive particle");
     return true;
   }
 
   if (bit0 == "D") {
-    definition = "demonstrative pronoun";
+    definition = _("demonstrative pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -316,7 +317,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "F") {
-    definition = "reflexive pronoun";
+    definition = _("reflexive pronoun");
     // It has person 1,2,3 added, e.g. F-3ASF.
     robinson_define_parsing_person(definition, bit1);
     robinson_define_parsing_case(definition, bit1);
@@ -330,12 +331,12 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "HEB") {
-    definition = "indeclinable Hebrew transliterated word";
+    definition = _("indeclinable Hebrew transliterated word");
     return true;
   }
 
   if (bit0 == "I") {
-    definition = "interrogative pronoun";
+    definition = _("interrogative pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -344,12 +345,12 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "INJ") {
-    definition = "interjection";
+    definition = _("interjection");
     return true;
   }
 
   if (bit0 == "K") {
-    definition = "correlative pronoun";
+    definition = _("correlative pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -358,7 +359,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "N") {
-    definition = "noun";
+    definition = _("noun");
     if (!robinson_define_parsing_suffix(definition, bit1, true)) {
       robinson_define_parsing_case(definition, bit1);
       robinson_define_parsing_number(definition, bit1);
@@ -369,7 +370,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "P") {
-    definition = "personal pronoun";
+    definition = _("personal pronoun");
     // It optionally can have person 1,2,3 added, e.g.
     // P-GSM (personal pronoun genetive singular masculine)
     // P-1GS (personal pronoun first person genetive singular)
@@ -386,18 +387,18 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "PREP") {
-    definition = "preposition";
+    definition = _("preposition");
     return true;
   }
 
   if (bit0 == "PRT") {
-    definition = "particle, disjunctive particle";
+    definition = _("particle, disjunctive particle");
     robinson_define_parsing_suffix(definition, bit1, false);
     return true;
   }
 
   if (bit0 == "Q") {
-    definition = "correlative or interrogative pronoun";
+    definition = _("correlative or interrogative pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -406,7 +407,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "R") {
-    definition = "relative pronoun";
+    definition = _("relative pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -415,7 +416,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "S") {
-    definition = "possessive pronoun";
+    definition = _("possessive pronoun");
     // It has person 1,2,3 added, e.g. S-1DPM.
     robinson_define_parsing_person(definition, bit1);
     robinson_define_parsing_case(definition, bit1);
@@ -426,7 +427,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "T") {
-    definition = "definite article";
+    definition = _("definite article");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);
@@ -435,7 +436,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "V") {
-    definition = "verb";
+    definition = _("verb");
     // The verb always has tense voice mood, such as in, e.g., "V-2ADN".
     robinson_define_parsing_tense(definition, bit1);
     robinson_define_parsing_voice(definition, bit1);
@@ -462,7 +463,7 @@ bool robinson_define_parsing(ustring parsing, ustring &definition)
   }
 
   if (bit0 == "X") {
-    definition = "indefinite pronoun";
+    definition = _("indefinite pronoun");
     robinson_define_parsing_case(definition, bit1);
     robinson_define_parsing_number(definition, bit1);
     robinson_define_parsing_gender(definition, bit1);

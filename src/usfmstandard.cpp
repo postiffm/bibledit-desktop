@@ -21,6 +21,7 @@
 #include "directories.h"
 #include "gwrappers.h"
 #include "tiny_utilities.h"
+#include <glib/gi18n.h>
 #include <libxml/xmlreader.h>
 
 USFMStandard::USFMStandard(int dummy) {
@@ -34,7 +35,7 @@ void USFMStandard::load() {
   // Bail out if the usfm standard is not there.
   ustring xmlfilename = gw_build_filename(Directories->get_package_data(), "usfm.xml");
   if (!g_file_test(xmlfilename.c_str(), G_FILE_TEST_IS_REGULAR)) {
-    gw_critical("Can't find USFM standard file");
+    gw_critical(_("Can't find USFM standard file"));
     return;
   }
 

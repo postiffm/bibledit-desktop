@@ -25,6 +25,7 @@
 #include "tiny_utilities.h"
 #include "usfmtools.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 CheckValidateUsfm::CheckValidateUsfm(const ustring &project, const vector<unsigned int> &books, bool gui, bool checksheet)
 /*
@@ -49,7 +50,7 @@ checksheet: check whether markers are in the stylesheet of the project.
   // GUI.
   progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Validating markers", true);
+    progresswindow = new ProgressWindow(_("Validating markers"), true);
     progresswindow->set_iterate(0, 1, mybooks.size());
   }
   // Check each book.
@@ -98,21 +99,21 @@ void CheckValidateUsfm::check(const ustring &text)
   ustring marker = usfm_extract_marker_within_line(line);
   if (marker.empty()) {
     // No marker found.
-    message("Line without USFM");
+    message(_("Line without USFM"));
   }
   while (!marker.empty()) {
 
     if (marker == "id") {
       // Is the line long enough?
       if (line.length() < 3) {
-        message("ID line is too short: " + line);
+        message(_("ID line is too short: ") + line);
       } else {
         ustring id = line.substr(0, 3);
         unsigned int myid = books_paratext_to_id(id);
         if (myid == 0)
-          message("Unknown id " + id);
+          message(_("Unknown id ") + id);
         if (id != upperCase(id))
-          message("Non-uppercase id code");
+          message(_("Non-uppercase id code"));
       }
     } else if (marker == "c") {
     } else if (marker == "v") {
@@ -126,7 +127,7 @@ void CheckValidateUsfm::check(const ustring &text)
         ustring character = verse_number.substr(i, 1);
         if (number_in_string(character) != character) {
           if ((character != "a") || (character != "b") || (character != "-") || (character != ",")) {
-            message("Unusual character in verse number " + verse_number);
+            message(_("Unusual character in verse number ") + verse_number);
             break;
           }
         }
@@ -368,15 +369,15 @@ void CheckValidateUsfm::check(const ustring &text)
     } else if (marker == "x") {
       check_on_endmarker(line, marker, false);
     } else if (marker.find("*") != string::npos) {
-      message("Unmatched end marker " + marker);
+      message(_("Unmatched end marker ") + marker);
     } else {
-      message("Unknown USFM " + marker);
+      message(_("Unknown USFM ") + marker);
     }
 
     // Optionally check whether this marker is in the stylesheet.
     if (mychecksheet) {
       if (styles.find(marker) == styles.end()) {
-        message("Marker " + marker + " not in stylesheet");
+        message(_("Marker ") + marker + _(" not in stylesheet"));
       }
     }
     // Extract any next marker in this line.
@@ -393,7 +394,7 @@ void CheckValidateUsfm::check(const ustring &text)
       marker.erase(pos, 1);
     }
     if ((marker == "id") || (marker == "c") || (marker == "v") || (marker == "add") || (marker == "bdit") || (marker == "bd") || (marker == "bk") || (marker == "b") || (marker == "ca") || (marker == "cd") || (marker == "cls") || (marker == "cl") || (marker == "conc") || (marker == "cov") || (marker == "cp") || (marker == "dc") || (marker == "d") || (marker == "em") || (marker == "fdc") || (marker == "fe") || (marker == "fig") || (marker == "fk") || (marker == "fl") || (marker == "fm") || (marker == "fp") || (marker == "fqa") || (marker == "fq") || (marker == "fr") || (marker == "ft") || (marker == "fv") || (marker == "f") || (marker == "glo") || (marker == "h1") || (marker == "h2") || (marker == "h3") || (marker == "h") || (marker == "ib") || (marker == "ide") || (marker == "idx") || (marker == "ie") || (marker == "iex") || (marker == "imi") || (marker == "imq") || (marker == "imt1") || (marker == "imt2") || (marker == "imt3") || (marker == "imt4") || (marker == "imte") || (marker == "imt") || (marker == "im") || (marker == "intro") || (marker == "io1") || (marker == "io2") || (marker == "io3") || (marker == "io4") || (marker == "ior") || (marker == "iot") || (marker == "io") || (marker == "ipi") || (marker == "ipq") || (marker == "ipr") || (marker == "ip") || (marker == "iq1") || (marker == "iq2") || (marker == "iq3") || (marker == "iq") || (marker == "is1") || (marker == "is2") || (marker == "is") || (marker == "it") || (marker == "k1") || (marker == "k2") || (marker == "k") || (marker == "li1") || (marker == "li2") || (marker == "li3") || (marker == "li4") || (marker == "lit") || (marker == "li") || (marker == "maps") || (marker == "mi") || (marker == "mr") || (marker == "ms1") || (marker == "ms2") || (marker == "ms") || (marker == "mt1") || (marker == "mt2") || (marker == "mt3") || (marker == "mt4") || (marker == "mte1") || (marker == "mte2") || (marker == "mte") || (marker == "mt") || (marker == "m") || (marker == "nb") || (marker == "nd") || (marker == "ndx") || (marker == "no") || (marker == "ord") || (marker == "p1") || (marker == "p2") || (marker == "pb") || (marker == "pc") || (marker == "pi1") || (marker == "pi2") || (marker == "pi3") || (marker == "pi") || (marker == "pmc") || (marker == "pmo") || (marker == "pmr") || (marker == "pm") || (marker == "pn") || (marker == "pref") || (marker == "pro") || (marker == "pubinfo") || (marker == "pub") || (marker == "p") || (marker == "q1") || (marker == "q2") || (marker == "q3") || (marker == "qac") || (marker == "qa") || (marker == "qc") || (marker == "qm1") || (marker == "qm2") || (marker == "qm3") || (marker == "qm") || (marker == "qr") || (marker == "qs") || (marker == "qt") || (marker == "q") || (marker == "rem") || (marker == "restore") || (marker == "r") || (marker == "rq") || (marker == "s1") || (marker == "s2") || (marker == "s3") || (marker == "s4") || (marker == "sc") || (marker == "sig") || (marker == "sls") || (marker == "spine") || (marker == "sp") || (marker == "sr") || (marker == "s") || (marker == "tc1") || (marker == "tc2") || (marker == "tc3") || (marker == "tc4") || (marker == "tcr1") || (marker == "tcr2") || (marker == "tcr3") || (marker == "tcr4") || (marker == "th1") || (marker == "th2") || (marker == "th3") || (marker == "th4") || (marker == "thr1") || (marker == "thr2") || (marker == "thr3") || (marker == "thr4") || (marker == "tl") || (marker == "toc1") || (marker == "toc2") || (marker == "toc3") || (marker == "toc") || (marker == "tr") || (marker == "va") || (marker == "vp") || (marker == "wg") || (marker == "wh") || (marker == "wj") || (marker == "w") || (marker == "xdc") || (marker == "xk") || (marker == "xo") || (marker == "xq") || (marker == "xt") || (marker == "x")) {
-      message("Normal slash for /" + originalmarker);
+      message(_("Normal slash for /") + originalmarker);
     }
     // Extract any next marker in this line.
     marker = usfm_extract_marker_with_forwardslash(line);
@@ -402,7 +403,7 @@ void CheckValidateUsfm::check(const ustring &text)
   // Check for widow backslashes.
   line = utext + " ";
   if ((line.find("\\ ") != string::npos) || (line == "\\")) {
-    message("Widow backslash");
+    message(_("Widow backslash"));
   }
 }
 
@@ -424,13 +425,13 @@ void CheckValidateUsfm::check_on_endmarker(ustring &line, const ustring &marker,
     // Not found: Error message.
     // No error message if the endmarker is optional.
     if (!optional) {
-      message("Endmarker " + endmarker + " not found");
+      message(_("Endmarker ") + endmarker + _(" not found"));
     }
   }
 }
 
 void CheckValidateUsfm::deprecated_marker(const ustring &marker) {
-  message("Deprecated marker " + marker);
+  message(_("Deprecated marker ") + marker);
 }
 
 ustring CheckValidateUsfm::usfm_extract_marker_with_forwardslash(ustring &line)

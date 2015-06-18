@@ -25,6 +25,7 @@
 #include "settings.h"
 #include "tiny_utilities.h"
 #include "unixwrappers.h"
+#include <glib/gi18n.h>
 
 AssistantBase::AssistantBase(const ustring &title, const gchar *helptopic)
 // Base class for each assistant.
@@ -34,8 +35,9 @@ AssistantBase::AssistantBase(const ustring &title, const gchar *helptopic)
   topic = helptopic;
 
   // If no help is given, take a default one.
-  if (!topic)
-    topic = "none";
+  if (!topic) {
+    topic = _("none");
+  }
 
   // Signalling button.
   signal_button = gtk_button_new();
@@ -55,7 +57,7 @@ AssistantBase::AssistantBase(const ustring &title, const gchar *helptopic)
   gtk_assistant_append_page(GTK_ASSISTANT(assistant), label_intro);
   gtk_label_set_line_wrap(GTK_LABEL(label_intro), TRUE);
 
-  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), label_intro, "Introduction");
+  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), label_intro, _("Introduction"));
   gtk_assistant_set_page_type(GTK_ASSISTANT(assistant), label_intro, GTK_ASSISTANT_PAGE_INTRO);
   gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant), label_intro, true);
 
@@ -76,7 +78,7 @@ AssistantBase::AssistantBase(const ustring &title, const gchar *helptopic)
   //gtk_widget_show(image);
   //gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
 
-  //GtkWidget *label = gtk_label_new_with_mnemonic("_Help");
+  //GtkWidget *label = gtk_label_new_with_mnemonic(_("_Help"));
   //gtk_widget_show(label);
   //gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 

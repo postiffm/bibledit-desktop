@@ -33,6 +33,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 BulkSpellingDialog::BulkSpellingDialog(const vector<ustring> words) {
   gtkbuilder = gtk_builder_new();
@@ -43,7 +44,7 @@ BulkSpellingDialog::BulkSpellingDialog(const vector<ustring> words) {
   dialog = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "dialog"));
 
   label = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "label"));
-  gtk_label_set_text(GTK_LABEL(label), "All the words that are misspelled are visible below.\nClick on a word to approve the spelling.");
+  gtk_label_set_text(GTK_LABEL(label), _("All the words that are misspelled are visible below.\nClick on a word to approve the spelling."));
 
   vbox = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "vbox"));
 

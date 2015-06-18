@@ -36,6 +36,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include "xmlutils.h"
+#include <glib/gi18n.h>
 
 /*
  Some properties of the stylesheet are not implemented for certain reasons.
@@ -59,7 +60,7 @@ OpenDocument::OpenDocument(const ustring &project, const ustring &filename, set<
     return;
 
   // Progress information.
-  progresswindow = new ProgressWindow("Exporting to OpenDocument", true);
+  progresswindow = new ProgressWindow(_("Exporting to OpenDocument"), true);
 
   // Prepare for inline text markers, notes and xrefs.
   usfm_inline_markers = new UsfmInlineMarkers(*usfm);

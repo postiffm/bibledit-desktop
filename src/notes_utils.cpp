@@ -37,6 +37,7 @@
 #include "utilities.h"
 #include "versification.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <sqlite3.h>
 
 void notes_store_index_entry(sqlite3 *db, gint32 id);
@@ -511,7 +512,7 @@ void notes_display(ustring &note_buffer, vector<unsigned int> ids, unsigned int 
     set<unsigned int> id_set(ids.begin(), ids.end());
     if (id_set.find(edited_note_id) == id_set.end()) {
       notes_display_internal(language, show_reference_text, show_summary, note_buffer, edited_note_id,
-                             "The following note is displayed because it was created or edited. Normally it would not have been displayed.",
+                             _("The following note is displayed because it was created or edited. Normally it would not have been displayed."),
                              cursor_id, cursor_offset);
     }
   }
@@ -585,7 +586,7 @@ void notes_get_references_from_editor(GtkTextBuffer *textbuffer, vector<Referenc
           previousreference.verse = reference.verse;
         }
       } else {
-        messages.push_back("Reference " + lines[i] + " is not valid and has been removed.");
+        messages.push_back(_("Reference ") + lines[i] + _(" is not valid and has been removed."));
       }
     }
   }
@@ -602,15 +603,15 @@ void notes_categories_check()
 {
   if (!g_file_test(notes_categories_filename().c_str(), G_FILE_TEST_IS_REGULAR)) {
     vector<ustring> categories;
-    categories.push_back("No issue");
-    categories.push_back("For myself");
-    categories.push_back("For subteam");
-    categories.push_back("For team");
-    categories.push_back("For scholar");
-    categories.push_back("For panel");
-    categories.push_back("For church");
-    categories.push_back("For consultant");
-    categories.push_back("For Bible society");
+    categories.push_back(_("No issue"));
+    categories.push_back(_("For myself"));
+    categories.push_back(_("For subteam"));
+    categories.push_back(_("For team"));
+    categories.push_back(_("For scholar"));
+    categories.push_back(_("For panel"));
+    categories.push_back(_("For church"));
+    categories.push_back(_("For consultant"));
+    categories.push_back(_("For Bible society"));
     write_lines(notes_categories_filename(), categories);
   }
 }
@@ -825,7 +826,7 @@ void notes_convert_database_to_plain_files() {
   }
 
   // Progress window.
-  ProgressWindow progresswindow("Converting project notes", false);
+  ProgressWindow progresswindow(_("Converting project notes"), false);
 
   // Access the database.
   sqlite3 *db;
@@ -1031,7 +1032,7 @@ void notes_store_index_entry(sqlite3 *db, gint32 id) {
 void notes_create_index()
 // This creates an index for the notes stored in plain files.
 {
-  ProgressWindow progresswindow("Creating notes index", false);
+  ProgressWindow progresswindow(_("Creating notes index"), false);
 
   // Remove any old index.
   unlink(notes_index_filename().c_str());
@@ -1115,7 +1116,7 @@ void notes_handle_vcs_feedback(const ustring &directory, const ustring &feedback
     }
 
     if (note_id != 0) {
-      gw_message("Change detected for note " + convert_to_string(note_id));
+      gw_message(_("Change detected for note ") + convert_to_string(note_id));
       // Update the index.
       sqlite3 *db;
       sqlite3_open(notes_index_filename().c_str(), &db);

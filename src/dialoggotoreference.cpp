@@ -33,6 +33,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include <gdk/gdkkeysyms.h>
+#include <glib/gi18n.h>
 
 GotoReferenceDialog::GotoReferenceDialog(unsigned int currentbook, unsigned int currentchapter, const ustring &currentverse) : reference(0) {
   // Init variables

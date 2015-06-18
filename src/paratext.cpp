@@ -22,6 +22,7 @@
 #include "gwrappers.h"
 #include "styles.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 ExportParatextStylesheet::ExportParatextStylesheet(int dummy) {
   // Load the standard Paratext stylesheet.
@@ -31,7 +32,7 @@ ExportParatextStylesheet::ExportParatextStylesheet(int dummy) {
   }
   // Indicate it was exported from bibledit.
   if (!stylesheet_lines.empty()) {
-    stylesheet_lines[0].append("# Exported from Bibledit-Gtk");
+    stylesheet_lines[0].append(_("# Exported from Bibledit-Gtk"));
   }
 }
 

@@ -24,6 +24,7 @@
 #include "projectutils.h"
 #include "tiny_utilities.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 void read_write_data(int argc, char *argv[], bool read, bool write)
 /*
@@ -71,7 +72,7 @@ It may write to stdout or stderr, as it sees fit.
 {
   // There should be 5 parameters given.
   if (argc != 6) {
-    gw_critical("Read/write data needs 5 parameters");
+    gw_critical(_("Read/write data needs 5 parameters"));
     return;
   }
 
@@ -80,7 +81,7 @@ It may write to stdout or stderr, as it sees fit.
   // Second parameter: project. The project must be existing in Bibledit.
   ustring project = argv[2];
   if (!project_exists(project)) {
-    gw_critical("Project " + project + " does not exist");
+    gw_critical(_("Project does not exist: ") + project);
     return;
   }
 
@@ -91,7 +92,7 @@ It may write to stdout or stderr, as it sees fit.
     return;
   }
   if (!project_book_exists(project, book)) {
-    gw_critical("Book " + string(argv[3]) + " does not exist in project " + project);
+    gw_critical(_("Book ") + string(argv[3]) + _(" does not exist in project ") + project);
     return;
   }
 
@@ -104,7 +105,7 @@ It may write to stdout or stderr, as it sees fit.
     vector<unsigned int> chapters = project_get_chapters(project, book);
     set<int> chapterset(chapters.begin(), chapters.end());
     if (chapterset.find(chapter) == chapterset.end()) {
-      gw_critical("Chapter " + convert_to_string(chapter) + " does not exist in project " + project + " book " + string(argv[3]));
+      gw_critical(_("Chapter ") + convert_to_string(chapter) + _(" does not exist in project ") + project + _(" book ") + string(argv[3]));
       return;
     }
   }

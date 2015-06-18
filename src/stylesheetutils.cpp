@@ -34,6 +34,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include "xmlutils.h"
+#include <glib/gi18n.h>
 #include <libxml/xmlreader.h>
 #include <libxml/xmlwriter.h>
 
@@ -132,12 +133,12 @@ ustring stylesheet_import(const ustring &filename)
     }
   }
   if (name.empty()) {
-    gtkw_dialog_error(NULL, filename + ": Unrecognized stylesheet");
+    gtkw_dialog_error(NULL, _("Unrecognized stylesheet: ") + filename);
     return "";
   }
   // Check whether it already exists.
   if (stylesheet_exists(name)) {
-    gtkw_dialog_error(NULL, "Stylesheet " + name + " already exists");
+    gtkw_dialog_error(NULL, _("Stylesheet already exists: ") + name);
     return "";
   }
   // Get the path of the new stylesheet.
@@ -322,7 +323,7 @@ void stylesheets_upgrade()
     ReadFiles rf(Directories->get_stylesheets(), "", ".xml1");
     for (unsigned int i = 0; i < rf.files.size(); i++) {
       ustring filename = gw_build_filename(Directories->get_stylesheets(), rf.files[i]);
-      gw_message("Updating stylesheet " + filename);
+      gw_message(_("Updating stylesheet: ") + filename);
       ReadText rt(filename, true, false);
       stylesheet_upgrade_value(rt.lines, "r", "subtype", "2");
       unlink(filename.c_str());

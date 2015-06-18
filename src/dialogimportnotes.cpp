@@ -33,6 +33,7 @@
 #include "utilities.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <sqlite3.h>
 
 #define TEMP_FILE "bibledit.import.notes"
@@ -61,7 +62,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy) {
   gtk_widget_show(vbox4);
   gtk_container_add(GTK_CONTAINER(notebook), vbox4);
 
-  label13 = gtk_label_new("You are going to import notes into your notes editor.\n\nClick Forward to continue.");
+  label13 = gtk_label_new(_("You are going to import notes into your notes editor.\n\nClick Forward to continue."));
   gtk_widget_show(label13);
   gtk_box_pack_start(GTK_BOX(vbox4), label13, FALSE, FALSE, 5);
   gtk_misc_set_alignment(GTK_MISC(label13), 0, 0.5);
@@ -74,7 +75,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy) {
   gtk_widget_show(vbox2);
   gtk_container_add(GTK_CONTAINER(notebook), vbox2);
 
-  label6 = gtk_label_new("Select the file to import");
+  label6 = gtk_label_new(_("Select the file to import"));
   gtk_widget_show(label6);
   gtk_box_pack_start(GTK_BOX(vbox2), label6, FALSE, FALSE, 10);
 
@@ -110,7 +111,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy) {
   gtk_widget_show(vbox5);
   gtk_container_add(GTK_CONTAINER(notebook), vbox5);
 
-  label18 = gtk_label_new("We now know which file to import.\nThe next thing is to check if the file is in Unicode format.\n\nIf it is not in Unicode format, you will be asked to convert it.\n\nNote: The conversion may take time, depending on the size of the file.");
+  label18 = gtk_label_new(_("We now know which file to import.\nThe next thing is to check if the file is in Unicode format.\n\nIf it is not in Unicode format, you will be asked to convert it.\n\nNote: The conversion may take time, depending on the size of the file."));
   gtk_widget_show(label18);
   gtk_box_pack_start(GTK_BOX(vbox5), label18, FALSE, FALSE, 10);
   gtk_misc_set_alignment(GTK_MISC(label18), 0, 0.5);
@@ -123,7 +124,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy) {
   gtk_widget_show(vbox6);
   gtk_container_add(GTK_CONTAINER(notebook), vbox6);
 
-  label19 = gtk_label_new("It's now in Unicode format.");
+  label19 = gtk_label_new(_("It's now in Unicode format."));
   gtk_widget_show(label19);
   gtk_box_pack_start(GTK_BOX(vbox6), label19, FALSE, FALSE, 10);
   gtk_misc_set_alignment(GTK_MISC(label19), 0, 0.5);
@@ -136,7 +137,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy) {
   gtk_widget_show(vbox8);
   gtk_container_add(GTK_CONTAINER(notebook), vbox8);
 
-  label23 = gtk_label_new("All preparation is now ready.\n\nPress Apply to actually import the notes.");
+  label23 = gtk_label_new(_("All preparation is now ready.\n\nPress Apply to actually import the notes."));
   gtk_widget_show(label23);
   gtk_box_pack_start(GTK_BOX(vbox8), label23, FALSE, FALSE, 10);
   gtk_misc_set_alignment(GTK_MISC(label23), 0, 0.5);
@@ -220,7 +221,7 @@ void ImportNotesDialog::on_select_file_button_clicked(GtkButton *button, gpointe
 }
 
 void ImportNotesDialog::on_select_file_button() {
-  ustring filename = gtkw_file_chooser_open(importnotesdialog, "Open a file", "");
+  ustring filename = gtkw_file_chooser_open(importnotesdialog, _("Open a file"), "");
   if (filename.empty())
     return;
   file_to_import = filename;
@@ -283,7 +284,7 @@ void ImportNotesDialog::select_file_page() {
     ustring info_for_user;
     switch (import_format) {
     case ifUnknown: {
-      info_for_user = "Bibledit-Gtk does not recognize the format of this file";
+      info_for_user = _("Bibledit-Gtk does not recognize the format of this file");
       break;
     }
     case ifBibleditNotesVersion3: {
@@ -377,7 +378,7 @@ The various handlers will then store the data in the database.
     cerr << error->message << endl;
     g_error_free(error);
     was_error = true;
-    error_message = "Error reading xml file";
+    error_message = _("Error reading xml file");
     return;
   }
   // Set up parser.
@@ -394,14 +395,14 @@ The various handlers will then store the data in the database.
     if (!g_markup_parse_context_parse(context, contents, length, NULL)) {
       g_markup_parse_context_free(context);
       was_error = true;
-      error_message = "Error parsing the xml file";
+      error_message = _("Error parsing the xml file");
     }
   }
   if (!was_error) {
     if (!g_markup_parse_context_end_parse(context, NULL)) {
       g_markup_parse_context_free(context);
       was_error = true;
-      error_message = "Error finishing parsing the xml file";
+      error_message = _("Error finishing parsing the xml file");
     }
   }
   if (!was_error)

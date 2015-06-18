@@ -31,6 +31,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 ustring log_file_name(LogFileType type, bool previous) {
   ustring filename;
@@ -49,7 +50,7 @@ ustring log_file_name(LogFileType type, bool previous) {
     break;
   }
   if (previous) {
-    filename.append(".old");
+    filename.append(_(".old"));
   }
   return gw_build_filename(Directories->get_temp(), filename);
 }
@@ -200,9 +201,9 @@ void SystemlogDialog::on_button_diagnostics_clicked(GtkButton *button, gpointer 
 void SystemlogDialog::on_button_diagnostics() {
   // Show selection dialog.
   vector<ustring> labels;
-  labels.push_back("General settings");
-  labels.push_back("Project settings");
-  CheckbuttonDialog dialog("Diagnostics", "Tick the items to include in the diagnostics report", labels, "11");
+  labels.push_back(_("General settings"));
+  labels.push_back(_("Project settings"));
+  CheckbuttonDialog dialog(_("Diagnostics"), _("Tick the items to include in the diagnostics report"), labels, "11");
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
 
@@ -211,7 +212,7 @@ void SystemlogDialog::on_button_diagnostics() {
 
   // General settings.
   if (bitpattern_take(dialog.bitpattern)) {
-    lines.push_back("\nGeneral settings\n");
+    lines.push_back(_("\nGeneral settings\n"));
     ReadText rt(general_configuration_filename(), true, false);
     for (unsigned int i = 0; i < rt.lines.size(); i++) {
       lines.push_back(rt.lines[i]);
@@ -221,7 +222,7 @@ void SystemlogDialog::on_button_diagnostics() {
   if (bitpattern_take(dialog.bitpattern)) {
     vector<ustring> projects = projects_get_all();
     for (unsigned int i = 0; i < projects.size(); i++) {
-      lines.push_back("\nProject " + projects[i] + " settings\n");
+      lines.push_back(_("\nProject ") + projects[i] + _(" settings\n"));
       ReadText rt(project_configuration_filename(projects[i]), true, false);
       for (unsigned int i = 0; i < rt.lines.size(); i++) {
         lines.push_back(rt.lines[i]);
@@ -229,7 +230,7 @@ void SystemlogDialog::on_button_diagnostics() {
     }
   }
   // Add the diagnostics info to the logfile.
-  ustring diagnosticsfile = gw_build_filename(Directories->get_temp(), "diagnostics");
+  ustring diagnosticsfile = gw_build_filename(Directories->get_temp(), _("diagnostics"));
   write_lines(diagnosticsfile, lines);
   shell_pipe_file_append(diagnosticsfile, logfilename());
   unlink(diagnosticsfile.c_str());

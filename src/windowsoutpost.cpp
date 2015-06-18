@@ -32,6 +32,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 #define STAGE_ZERO 0
 #define STAGE_START 1
@@ -340,7 +341,7 @@ void WindowsOutpost::telnet(const ustring &hostname) {
       if (connect(sock, (struct sockaddr *)&address, sizeof(address)))
 #endif
       {
-        log("No connection possible");
+        log(_("No connection possible"));
 #ifdef WIN32
         closesocket(sock);
 #else
@@ -354,15 +355,15 @@ void WindowsOutpost::telnet(const ustring &hostname) {
 #else
         fcntl(sock, F_SETFL, fcntl(sock, F_GETFL, 0) | O_NONBLOCK);
 #endif
-        log("Connected");
+        log(_("Connected"));
         connected = true;
       }
     } else {
-      log("No socket available");
+      log(_("No socket available"));
     }
   } else {
     /* We can't find an IP number */
-    log("Error looking up hostname");
+    log(_("Error looking up hostname"));
   }
 }
 
@@ -404,7 +405,7 @@ void WindowsOutpost::send_line(const ustring &command)
 #ifndef WIN32
     perror(NULL);
 #endif
-    log("Error sending data");
+    log(_("Error sending data"));
     clear();
   }
 }
@@ -437,7 +438,7 @@ immediately with a null string.
       perror(NULL);
       close(sock);
 #endif
-      log("Error receiving data");
+      log(_("Error receiving data"));
       clear();
     }
   }
@@ -481,7 +482,7 @@ void windowsoutpost_open_url(const ustring &url)
       if (connect(sock, (struct sockaddr *)&address, sizeof(address)))
 #endif
       {
-        cerr << "Cannot connect to Windows Outpost" << endl;
+        cerr << _("Cannot connect to Windows Outpost") << endl;
 #ifdef WIN32
         closesocket(sock);
 #else
@@ -499,13 +500,13 @@ void windowsoutpost_open_url(const ustring &url)
         if (write(sock, command.c_str(), command.length()))
           ;
 #endif
-        cout << "Outpost opens " << url << endl;
+        cout << _("Outpost opens ") << url << endl;
       }
     } else {
-      cout << "No socket available" << endl;
+      cout << _("No socket available") << endl;
     }
   } else {
-    cout << "Error looking up hostname" << endl;
+    cout << _("Error looking up hostname") << endl;
   }
 }
 

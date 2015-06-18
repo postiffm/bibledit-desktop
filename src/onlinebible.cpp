@@ -35,6 +35,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include "versification.h"
+#include <glib/gi18n.h>
 
 bool online_bible_is_running()
 // Returns true if the Online Bible runs on Wine.
@@ -63,7 +64,7 @@ bool online_bible_ok_reply_validate(ustring &reply)
 void import_online_bible(WindowsOutpost *windows_outpost, const ustring &online_bible, const ustring &bibledit_bible, vector<ustring> &summary_messages) {
   ustring response;
 
-  ProgressWindow progresswindow("Import", true);
+  ProgressWindow progresswindow(_("Import"), true);
 
   // Get the books in this Online Bible.
   vector<ustring> books;
@@ -75,7 +76,7 @@ void import_online_bible(WindowsOutpost *windows_outpost, const ustring &online_
 
   // Bail out if there were no books.
   if (books.empty()) {
-    summary_messages.push_back("Could not get the names of the books");
+    summary_messages.push_back(_("Could not get the names of the books"));
     return;
   }
 
@@ -91,7 +92,7 @@ void import_online_bible(WindowsOutpost *windows_outpost, const ustring &online_
 
     // If it could not find a matching Bibledit equivalent, skip this book.
     if (book_id == 0) {
-      summary_messages.push_back("Could not find a matching book for " + book_olb);
+      summary_messages.push_back(_("Could not find a matching book for ") + book_olb);
       continue;
     }
     /*
@@ -154,15 +155,15 @@ void import_online_bible(WindowsOutpost *windows_outpost, const ustring &online_
 
         // Did the user cancel the import? (Could be, because it takes a huge amount of time).
         if (progresswindow.cancel) {
-          summary_messages.push_back("The rest of the import was cancelled");
-          summary_messages.push_back("What has been imported already remains");
+          summary_messages.push_back(_("The rest of the import was cancelled"));
+          summary_messages.push_back(_("What has been imported already remains"));
           return;
         }
 
         // Get and store the verse text.
         response = windows_outpost->OnlineBibleDirectCommandResponseGet("GetVerseText " + online_bible + " \"" + book_olb + " " + convert_to_string(ch) + ":" + convert_to_string(vs) + "\"");
         if (!online_bible_ok_reply_validate(response)) {
-          response = "Verse text could not be imported";
+          response = _("Verse text could not be imported");
         }
         chapter_contents.push_back("\\v " + convert_to_string(vs) + " " + response);
       }

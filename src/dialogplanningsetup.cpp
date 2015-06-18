@@ -29,6 +29,7 @@
 #include "reporting.h"
 #include "settings.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 PlanningSetupDialog::PlanningSetupDialog(int dummy) {
   // Initialize variables
@@ -104,7 +105,7 @@ void PlanningSetupDialog::on_button_tasks_clicked(GtkButton *button, gpointer us
 
 void PlanningSetupDialog::on_button_tasks() {
   // Run the dialog for editing the tasks.
-  EditListDialog dialog(&tasks, "Tasks", "of tasks - add, remove, or re-order them", true, true, false, false, false, false, true, NULL);
+  EditListDialog dialog(&tasks, _("Tasks"), _("of tasks - add, remove, or re-order them"), true, true, false, false, false, false, true, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Get the appropriate values for the durations, aligned to the tasks.
     durations.clear();

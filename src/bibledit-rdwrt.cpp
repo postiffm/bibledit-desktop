@@ -29,6 +29,7 @@
 #include "urltransport.h"
 #include "vcs.h"
 #include "versifications.h"
+#include <glib/gi18n.h>
 
 directories *Directories;
 Settings *settings;
@@ -66,7 +67,7 @@ int main(int argc, char *argv[]) {
     read_write_data(argc, argv, readdata, writedata);
   } else {
     // Nothing to do.
-    gw_message("Nothing was done");
+    gw_message(_("Nothing was done"));
   }
 
   // Quit.

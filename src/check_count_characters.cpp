@@ -25,6 +25,7 @@
 #include "stylesheetutils.h"
 #include "usfmtools.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 CheckCountCharacters::CheckCountCharacters(const ustring &project, const vector<unsigned int> &books, bool sortcharacter, bool sortcount, bool gui)
 /*
@@ -45,7 +46,7 @@ gui: show graphical progressbar.
   // GUI.
   progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Counting characters", true);
+    progresswindow = new ProgressWindow(_("Counting characters"), true);
     progresswindow->set_iterate(0, 1, mybooks.size());
   }
   // Check each book.

@@ -24,6 +24,7 @@
 #include "libraries.h"
 #include "listview.h"
 #include "stylesheetutils.h"
+#include <glib/gi18n.h>
 
 OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, const ustring &currentstylesheet) {
   // Get all stylesheets and the title.
@@ -34,7 +35,7 @@ OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, 
   case osdtSwitch: {
     // Show all stylesheets.
     stylesheet_get_ones_available(stylesheets);
-    title = "Switch stylesheet";
+    title = _("Switch stylesheet");
     break;
   }
   case osdtDelete: {
@@ -44,7 +45,7 @@ OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, 
     for (unsigned int i = 0; i < temp_sheets.size(); i++)
       if (temp_sheets[i] != currentstylesheet)
         stylesheets.push_back(temp_sheets[i]);
-    title = "Delete stylesheet";
+    title = _("Delete stylesheet");
     break;
   }
   }
@@ -61,7 +62,7 @@ OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, 
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, TRUE, TRUE, 0);
 
-  label1 = gtk_label_new("Type the first couple of characters of the stylesheet, or select it,\nand then press OK or Enter");
+  label1 = gtk_label_new(_("Type the first couple of characters of the stylesheet, or select it,\nand then press OK or Enter"));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(vbox1), label1, FALSE, FALSE, 4);
 

@@ -23,6 +23,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <libsoup/soup.h>
 
 URLTransport::URLTransport(int dummy)
@@ -127,7 +128,7 @@ void URLTransport::log(const ustring &message)
 // It does not output the same message repeatedly.
 {
   if (message != last_message) {
-    gw_message("Webserver Access: " + message);
+    gw_message(_("Webserver Access: ") + message);
     last_message = message;
   }
 }

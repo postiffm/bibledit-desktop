@@ -30,6 +30,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 GuiNavigation::GuiNavigation(int dummy) : reference(0), track(0) {
   // Initialize variables.
@@ -930,7 +931,7 @@ void GuiNavigation::on_list_back() {
   for (unsigned int i = 0; i < references.size(); i++) {
     labels.push_back(references[i].human_readable(language));
   }
-  RadiobuttonDialog dialog("Go back", "Where would you like to go back to?", labels, 0, true);
+  RadiobuttonDialog dialog(_("Go back"), _("Where would you like to go back to?"), labels, 0, true);
   if (dialog.run() == GTK_RESPONSE_OK) {
     for (unsigned int i = 0; i <= dialog.selection; i++) {
       on_back();
@@ -945,7 +946,7 @@ void GuiNavigation::on_list_forward() {
   for (unsigned int i = 0; i < references.size(); i++) {
     labels.push_back(references[i].human_readable(language));
   }
-  RadiobuttonDialog dialog("Go forward", "Where would you like to go forward to?", labels, 0, true);
+  RadiobuttonDialog dialog(_("Go forward"), _("Where would you like to go forward to?"), labels, 0, true);
   if (dialog.run() == GTK_RESPONSE_OK) {
     for (unsigned int i = 0; i <= dialog.selection; i++) {
       on_forward();

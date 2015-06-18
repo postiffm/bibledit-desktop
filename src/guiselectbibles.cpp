@@ -22,6 +22,7 @@
 #include "libraries.h"
 #include "projectutils.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 SelectBiblesGui::SelectBiblesGui(GtkWidget *box, Shortcuts &shortcuts) {
   // Create the GUI.
@@ -68,10 +69,10 @@ SelectBiblesGui::SelectBiblesGui(GtkWidget *box, Shortcuts &shortcuts) {
   gtk_tree_view_set_model(GTK_TREE_VIEW(treeview), GTK_TREE_MODEL(store));
   g_object_unref(store);
   GtkCellRenderer *renderer0 = gtk_cell_renderer_toggle_new();
-  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview), -1, "Enabled", renderer0, "active", 0, NULL);
+  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview), -1, _("Enabled"), renderer0, "active", 0, NULL);
   g_signal_connect(renderer0, "toggled", G_CALLBACK(on_enabled_toggled), gpointer(this));
   GtkCellRenderer *renderer1 = gtk_cell_renderer_text_new();
-  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview), -1, "Bible", renderer1, "text", 1, NULL);
+  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview), -1, _("Bible"), renderer1, "text", 1, NULL);
   gtk_tree_selection_set_mode(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)), GTK_SELECTION_MULTIPLE);
 }
 

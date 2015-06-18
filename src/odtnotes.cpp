@@ -27,6 +27,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 OdtFootnote::OdtFootnote(const Usfm &usfm)
 // Stores the properties for all the footnote related styles.
@@ -133,7 +134,7 @@ void OdtFootnote::transform2(ustring &line, const ustring &opening_marker, const
     size_t closing_position;
     closing_position = line.find(closing_marker, opening_position);
     if (closing_position == string::npos) {
-      gw_warning("Missing endmarker: " + line);
+      gw_warning(_("Missing endmarker: ") + line);
       return;
     }
     // Take out this bit of the line, transform it, and insert it again.
@@ -317,7 +318,7 @@ void OdtEndnote::transform(ustring &line)
     size_t closing_position;
     closing_position = line.find(closing_marker, opening_position);
     if (closing_position == string::npos) {
-      gw_warning("Missing endmarker: " + line);
+      gw_warning(_("Missing endmarker: ") + line);
       return;
     }
     // Take out this bit of the line, transform it, and insert it again.
@@ -485,7 +486,7 @@ void OdtXref::transform(ustring &line)
     size_t closing_position;
     closing_position = line.find(closing_marker, opening_position);
     if (closing_position == string::npos) {
-      gw_warning("Missing endmarker: " + line);
+      gw_warning(_("Missing endmarker: ") + line);
       return;
     }
     // Take out this bit of the line, transform it, and insert it again.

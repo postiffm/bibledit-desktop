@@ -28,6 +28,7 @@
 #include "tiny_utilities.h"
 #include "unixwrappers.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 ustring resource_viewer_directory() {
   return gw_build_filename(Directories->get_temp(), "resource_viewer");
@@ -305,7 +306,7 @@ ustring resource_select(ustring *filename)
   vector<ustring> filenames;
   vector<ustring> resources = resource_get_resources(filenames, false);
   quick_sort(resources, filenames, 0, resources.size());
-  ListviewDialog dialog("Open resource", resources, "", false, NULL);
+  ListviewDialog dialog(_("Open resource"), resources, "", false, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     resource = dialog.focus;
   }

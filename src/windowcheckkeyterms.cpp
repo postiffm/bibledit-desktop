@@ -35,8 +35,9 @@
 #include "xmlutils.h"
 #include <gdk/gdkkeysyms.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 
-WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup *accelerator_group, bool startup) : FloatingWindow(parent_layout, widCheckKeyterms, "Check keyterms", startup), myreference(0)
+WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup *accelerator_group, bool startup) : FloatingWindow(parent_layout, widCheckKeyterms, _("Check keyterms"), startup), myreference(0)
 // Window for checking keyterms.
 {
   // Save / initialize variables.
@@ -57,7 +58,7 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup
   gtk_widget_show(hbox_collection);
   gtk_box_pack_start(GTK_BOX(vbox), hbox_collection, FALSE, FALSE, 0);
 
-  label_collection = gtk_label_new_with_mnemonic("_Collection");
+  label_collection = gtk_label_new_with_mnemonic(_("_Collection"));
   gtk_widget_show(label_collection);
   gtk_box_pack_start(GTK_BOX(hbox_collection), label_collection, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_collection), 0, 0.5);
@@ -68,7 +69,7 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup
 
   connect_focus_signals(combobox_collection);
 
-  label_list = gtk_label_new_with_mnemonic("_List");
+  label_list = gtk_label_new_with_mnemonic(_("_List"));
   gtk_widget_show(label_list);
   gtk_box_pack_start(GTK_BOX(vbox), label_list, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_list), 0, 0.5);
@@ -101,11 +102,11 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget *parent_layout, GtkAccelGroup
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview_renderings), column);
   renderer_renderings = gtk_cell_renderer_toggle_new();
   g_signal_connect(renderer_renderings, "toggled", G_CALLBACK(keyterm_case_sensitive_toggled), gpointer(this));
-  column = gtk_tree_view_column_new_with_attributes("Case\nsensitive", renderer_renderings, "active", 1, NULL);
+  column = gtk_tree_view_column_new_with_attributes(_("Case\nsensitive"), renderer_renderings, "active", 1, NULL);
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview_renderings), column);
   renderer_renderings = gtk_cell_renderer_text_new();
   g_signal_connect(renderer_renderings, "edited", G_CALLBACK(cell_edited), gpointer(this));
-  column = gtk_tree_view_column_new_with_attributes("Rendering", renderer_renderings, "text", 2, "editable", 3, NULL);
+  column = gtk_tree_view_column_new_with_attributes(_("Rendering"), renderer_renderings, "text", 2, "editable", 3, NULL);
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview_renderings), column);
   treeselect_renderings = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_renderings));
   gtk_tree_selection_set_mode(treeselect_renderings, GTK_SELECTION_SINGLE);
@@ -135,7 +136,7 @@ WindowCheckKeyterms::~WindowCheckKeyterms() {
 }
 
 void WindowCheckKeyterms::go_to_term(unsigned int id) {
-  ustring url = "keyterm " + convert_to_string(id);
+  ustring url = _("keyterm ") + convert_to_string(id);
   html_link_clicked(url.c_str());
 }
 
@@ -336,7 +337,7 @@ bool WindowCheckKeyterms::find_renderings(const ustring &text, const vector<ustr
 }
 
 ustring WindowCheckKeyterms::enter_new_rendering_here() {
-  return "<Enter new rendering here>";
+  return _("<Enter new rendering here>");
 }
 
 void WindowCheckKeyterms::get_renderings(vector<ustring> &renderings, vector<bool> &wholewords, vector<bool> &casesensitives) {
@@ -409,7 +410,7 @@ void WindowCheckKeyterms::html_link_clicked(const gchar *url) {
   HtmlWriter2 htmlwriter("");
   bool display_another_page = false;
 
-  if (active_url.find("keyterm ") == 0) {
+  if (active_url.find(_("keyterm ")) == 0) {
     // Store url of this keyterm.
     last_keyword_url = active_url;
     // Get the keyterm identifier.
@@ -425,7 +426,7 @@ void WindowCheckKeyterms::html_link_clicked(const gchar *url) {
     display_another_page = true;
   }
 
-  else if (active_url.find("goto ") == 0) {
+  else if (active_url.find(_("goto ")) == 0) {
     // Signal the editors to go to a reference.
     ustring url = active_url;
     url.erase(0, 5);
@@ -434,7 +435,7 @@ void WindowCheckKeyterms::html_link_clicked(const gchar *url) {
     gtk_button_clicked(GTK_BUTTON(signal));
   }
 
-  else if (active_url.find("send") == 0) {
+  else if (active_url.find(_("send")) == 0) {
     // Send the references to the references window.
     ustring url = active_url;
     new_reference_showing = NULL;
@@ -444,10 +445,10 @@ void WindowCheckKeyterms::html_link_clicked(const gchar *url) {
   else {
     // Give the starting page with all keyterms of the active selection.
     show_collections = true;
-    if (collection().find("Biblical") != string::npos) {
-      if (collection().find("Hebrew") != string::npos) {
+    if (collection().find(_("Biblical")) != string::npos) {
+      if (collection().find(_("Hebrew")) != string::npos) {
         htmlwriter.paragraph_open();
-        htmlwriter.text_add("Key Terms in Biblical Hebrew: The entries are an experimental sample set, not yet fully reviewed and approved. The KTBH team would welcome feed-back to christopher_samuel@sil.org.");
+        htmlwriter.text_add(_("Key Terms in Biblical Hebrew: The entries are an experimental sample set, not yet fully reviewed and approved. The KTBH team would welcome feed-back to christopher_samuel@sil.org."));
         htmlwriter.paragraph_close();
       }
     }
@@ -456,7 +457,7 @@ void WindowCheckKeyterms::html_link_clicked(const gchar *url) {
     keyterms_get_terms("", collection(), terms, ids);
     for (unsigned int i = 0; i < terms.size(); i++) {
       htmlwriter.paragraph_open();
-      htmlwriter.hyperlink_add("keyterm " + convert_to_string(ids[i]), terms[i]);
+      htmlwriter.hyperlink_add(_("keyterm ") + convert_to_string(ids[i]), terms[i]);
       htmlwriter.paragraph_close();
     }
     display_another_page = true;
@@ -494,7 +495,7 @@ void WindowCheckKeyterms::html_write_keyterms(HtmlWriter2 &htmlwriter, unsigned 
   htmlwriter.paragraph_open();
   htmlwriter.hyperlink_add("index", "[Index]");
   htmlwriter.text_add(" ");
-  htmlwriter.hyperlink_add("send", "[Send to references window]");
+  htmlwriter.hyperlink_add("send", _("[Send to references window]"));
   htmlwriter.paragraph_close();
 
   // Add the keyterm itself.
@@ -557,7 +558,7 @@ void WindowCheckKeyterms::html_write_keyterms(HtmlWriter2 &htmlwriter, unsigned 
         // Add the reference's text.
         ustring verse = project_retrieve_verse(project, reference.book, reference.chapter, reference.verse);
         if (verse.empty()) {
-          verse.append("<empty>");
+          verse.append(_("<empty>"));
         } else {
           CategorizeLine cl(verse);
           cl.remove_verse_number(reference.verse);

@@ -33,6 +33,7 @@
 #include "usfmtools.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 Usfm2Text::Usfm2Text(Text2Pdf *text2pdf_in, bool show_progress) {
   // Initialize variables.
@@ -49,7 +50,7 @@ Usfm2Text::Usfm2Text(Text2Pdf *text2pdf_in, bool show_progress) {
   progresswindow = NULL;
   progress_event_id = 0;
   if (show_progress) {
-    progresswindow = new ProgressWindow("Processing", true);
+    progresswindow = new ProgressWindow(_("Processing"), true);
     progress_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 500, GSourceFunc(signal_progress_timeout), gpointer(this), NULL);
   }
   cancel = false;
@@ -1496,7 +1497,7 @@ void Usfm2Text::output_picture(ustring &line, Usfm2XslFoStyle *stylepointer, Usf
   }
   // If the picture file does not exist, quit.
   if (!g_file_test(file.c_str(), G_FILE_TEST_IS_REGULAR)) {
-    gw_warning("Picture " + file + " does not exist");
+    gw_warning(_("Picture does not exist: ") + file);
     return;
   }
   // Close any currently opened styles.

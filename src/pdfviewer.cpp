@@ -26,6 +26,7 @@
 #include "uname.h"
 #include "unixwrappers.h"
 #include "windowsoutpost.h"
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
 void pdfviewer_run(const gchar *command, const gchar *argument, const ustring &filename) {
@@ -68,7 +69,7 @@ void pdfviewer_view(const ustring &filename) {
 
   // If we're here, it shows that no suitable viewer was found.
   // Inform the user about it, and what to do to solve it.
-  ustring message = "The file cannot be displayed, because there is no suitable pdf viewer installed.\n";
-  message.append("Install a supported pdf viewer, or set up your own under Preferences");
+  ustring message = _("The file cannot be displayed, because there is no suitable pdf viewer installed.\n");
+  message.append(_("Install a supported pdf viewer, or set up your own under Preferences"));
   gtkw_dialog_error(NULL, message);
 }

@@ -31,6 +31,7 @@
 #include "unixwrappers.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <sqlite3.h>
 
 ustring keyterms_get_user_filename()
@@ -244,7 +245,7 @@ void keyterms_import_textfile(const ustring &textfile, ustring category)
           readreferences = true;
         }
       } catch (exception &ex) {
-        ustring msg = "Skipping: ";
+        ustring msg = _("Skipping: ");
         msg.append(ex.what());
         gw_critical(msg);
       }
@@ -338,7 +339,7 @@ void keyterms_import_otkey_db(const ustring &textfile, ustring category) {
           comments.push_back(line);
         }
       } catch (exception &ex) {
-        ustring msg = "Skipping: ";
+        ustring msg = _("Skipping: ");
         msg.append(ex.what());
         gw_critical(msg);
       }
@@ -486,7 +487,7 @@ void keyterms_import_ktref_db(const ustring &textfile, ustring category) {
           comments.push_back(line);
         }
       } catch (exception &ex) {
-        ustring msg = "Skipping: ";
+        ustring msg = _("Skipping: ");
         msg.append(ex.what());
         gw_critical(msg);
       }
@@ -667,7 +668,7 @@ void keyterms_import_ktbh_txt(const ustring &textfile, ustring category) {
     vector<Reference> references;
 
     // Go through all the lines.
-    ProgressWindow progresswindow("Importing", false);
+    ProgressWindow progresswindow(_("Importing"), false);
     progresswindow.set_iterate(0, 1, lines.size());
     for (unsigned int i = 0; i < lines.size(); i++) {
       progresswindow.iterate();
@@ -697,13 +698,13 @@ void keyterms_import_ktbh_txt(const ustring &textfile, ustring category) {
         // Key reference.
         else if (line.find("\\keyref ") == 0) {
           ustring ref = line.substr(8, 10000);
-          comments.push_back("Key Reference:");
+          comments.push_back(_("Key Reference:"));
           keyterms_import_ktbh_txt_references(ref, references, comments);
         }
 
         // References.
         else if (line.find("\\refsc ") == 0) {
-          comments.push_back("References:");
+          comments.push_back(_("References:"));
           ustring ref = line.substr(7, 10000);
           keyterms_import_ktbh_txt_references(ref, references, comments);
         }
@@ -713,7 +714,7 @@ void keyterms_import_ktbh_txt(const ustring &textfile, ustring category) {
           keyterms_import_ktbh_txt_comments(line, comments);
         }
       } catch (exception &ex) {
-        ustring msg = "Skipping: ";
+        ustring msg = _("Skipping: ");
         msg.append(ex.what());
         cout << msg << endl;
       }

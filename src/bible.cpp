@@ -28,6 +28,7 @@
 #include "tiny_utilities.h"
 #include "unixwrappers.h"
 #include "utilities.h"
+#include <glib/gi18n.h>
 
 void quick_swap2(unsigned int &a, unsigned int &b) {
   unsigned int t = a;
@@ -81,7 +82,7 @@ void sort_references(vector<Reference> &references)
     // Sort the references.
     quick_sort(numerical, references, 0, numerical.size());
   } catch (exception &ex) {
-    cerr << "Sorting references: " << ex.what() << endl;
+    cerr << _("Sorting references: ") << ex.what() << endl;
   }
 }
 

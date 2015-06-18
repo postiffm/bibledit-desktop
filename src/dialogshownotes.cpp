@@ -31,6 +31,7 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glib/gi18n.h>
 
 ShowNotesDialog::ShowNotesDialog(int dummy) {
   event_id = 0;
@@ -297,7 +298,7 @@ void ShowNotesDialog::set_gui() {
 }
 
 ustring ShowNotesDialog::all_categories() {
-  return "All categories";
+  return _("All categories");
 }
 
 GtkToggleButton *ShowNotesDialog::reference_get_button(int selector) {
@@ -420,10 +421,10 @@ void ShowNotesDialog::timeout() {
   notes_select(ids, id_cursor, currentreference, category, refselection, editedselection, currentprojectselection, from_day, to_day);
 
   // Update GUI.
-  ustring message = "This selection would display " + convert_to_string(ids.size()) + " ";
+  ustring message = _("This selection would display ") + convert_to_string(ids.size()) + " ";
   if (ids.size() == 1)
-    message.append("note");
+    message.append(_("note"));
   else
-    message.append("notes");
+    message.append(_("notes"));
   gtk_label_set_text(GTK_LABEL(label_result), message.c_str());
 }
