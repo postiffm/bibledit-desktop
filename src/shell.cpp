@@ -26,6 +26,7 @@
 #include "tiny_utilities.h"
 #include "unixwrappers.h"
 #include "utilities.h"
+#include <config.h>
 
 bool program_is_running(const ustring &commandline)
 // Returns true if the program given on "commandline" is running.

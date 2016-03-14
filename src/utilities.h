@@ -41,6 +41,7 @@ bool replace_text_between(ustring &line, const ustring &start, const ustring &en
 void quick_sort(vector<unsigned int> &one, vector<ustring> &two, unsigned int beg, unsigned int end);
 void quick_sort(vector<ustring> &one, vector<unsigned int> &two, unsigned int beg, unsigned int end);
 void quick_sort(vector<unsigned int> &one, vector<unsigned int> &two, unsigned int beg, unsigned int end);
+void quick_sort(vector<size_t> &one, vector<size_t> &two, unsigned int beg, unsigned int end);
 void quick_sort(vector<unsigned int> &one, vector<bool> &two, unsigned int beg, unsigned int end);
 void quick_sort(vector<int> &one, vector<unsigned int> &two, unsigned int beg, unsigned int end);
 void quick_sort(vector<ustring> &one, vector<ustring> &two, unsigned int beg, unsigned int end);

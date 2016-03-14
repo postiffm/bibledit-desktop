@@ -648,7 +648,7 @@ void ResourceAssistant::on_button_add_files(bool gui_only) {
   ReadFiles rf(working_directory(), "", "");
   ustring text;
   text.append(_("Files in resource: "));
-  text.append(convert_to_string(rf.files.size()));
+  text.append(convert_to_string((unsigned int)rf.files.size()));
   gtk_label_set_text(GTK_LABEL(label_files), text.c_str());
 }
 
@@ -667,7 +667,7 @@ void ResourceAssistant::on_button_add_folders(bool gui_only) {
   ReadDirectories rd(working_directory(), "", "");
   ustring text;
   text.append(_("Directories in resource: "));
-  text.append(convert_to_string(rd.directories.size()));
+  text.append(convert_to_string((unsigned int)rd.directories.size()));
   gtk_label_set_text(GTK_LABEL(label_folders), text.c_str());
 }
 
@@ -701,7 +701,7 @@ void ResourceAssistant::on_button_bookset(bool update_gui_only) {
     }
   }
   ustring text = _("Abbreviations entered: ");
-  text.append(convert_to_string(books.size()));
+  text.append(convert_to_string((unsigned int)books.size()));
   gtk_label_set_text(GTK_LABEL(label_bookset), text.c_str());
 }
 
@@ -743,7 +743,7 @@ void ResourceAssistant::on_button_bookset2(bool update_gui_only) {
     }
   }
   ustring text = _("Abbreviations entered: ");
-  text.append(convert_to_string(books2.size()));
+  text.append(convert_to_string((unsigned int)books2.size()));
   gtk_label_set_text(GTK_LABEL(label_bookset2), text.c_str());
 }
 
