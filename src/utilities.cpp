@@ -183,41 +183,71 @@ bool replace_text_between(ustring &line, const ustring &start, const ustring &en
   return replacements_done;
 }
 
-void quick_swap(ustring &a, ustring &b) {
+// looks like a template macro
+//#define quick_swap(t, a, b) { t temp = a; a = b; b = temp; }
+
+// Function template for swapping elements in the container
+template <typename T>
+void quick_swap(T &a, T &b) {
+  T temp = a;
+  a = b;
+  b = temp;
+}
+
+// Instantiations of several quick_swap variants...cannot inline these
+template void quick_swap<ustring>(ustring &a, ustring &b);
+template void quick_swap<size_t>(size_t &a, size_t &b);
+template void quick_swap<int>(int &a, int &b);
+template void quick_swap<bool>(bool &a, bool &b);
+template void quick_swap<long unsigned int>(long unsigned int &a, long unsigned int &b);
+
+/*
+void quick_swap(ustring & a, ustring & b)
+{
   ustring t = a;
   a = b;
   b = t;
 }
 
-void quick_swap(unsigned int &a, unsigned int &b) {
+
+void quick_swap(unsigned int &a, unsigned int &b)
+{
   unsigned int t = a;
   a = b;
   b = t;
 }
 
-void quick_swap(size_t &a, size_t &b) {
+void quick_swap(size_t &a, size_t &b)
+{
   size_t t = a;
   a = b;
   b = t;
 }
 
-void quick_swap(long unsigned int &a, long unsigned int &b) {
+
+void quick_swap(long unsigned int &a, long unsigned int &b)
+{
   long unsigned int t = a;
   a = b;
   b = t;
 }
 
-void quick_swap(int &a, int &b) {
+
+void quick_swap(int &a, int &b)
+{
   int t = a;
   a = b;
   b = t;
 }
 
-void quick_swap(bool &a, bool &b) {
+
+void quick_swap(bool & a, bool & b)
+{
   bool t = a;
   a = b;
   b = t;
 }
+*/
 
 void quick_sort(vector<unsigned int> &one, vector<ustring> &two, unsigned int beg, unsigned int end)
 /*
@@ -270,7 +300,9 @@ void quick_sort(vector<ustring> &one, vector<unsigned int> &two, unsigned int be
   }
 }
 
-void quick_sort(vector<unsigned int> &one, vector<unsigned int> &two, unsigned int beg, unsigned int end) {
+/* Duplicate of size_t version below...
+void quick_sort(vector < unsigned int >&one, vector < unsigned int >&two, unsigned int beg, unsigned int end)
+{
   if (end > beg + 1) {
     unsigned int piv = one[beg];
     unsigned int l = beg + 1;
@@ -291,7 +323,7 @@ void quick_sort(vector<unsigned int> &one, vector<unsigned int> &two, unsigned i
     quick_sort(one, two, r, end);
   }
 }
-
+*/
 void quick_sort(vector<size_t> &one, vector<size_t> &two, unsigned int beg, unsigned int end) {
   if (end > beg + 1) {
     unsigned int piv = one[beg];
