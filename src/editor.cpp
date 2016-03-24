@@ -157,6 +157,8 @@ Editor2::Editor2(GtkWidget *vbox_in, const ustring &project_in) : current_refere
   spelling_timeout_event_id = 0;
   textview_button_press_event_id = 0;
 
+  go_to_new_reference_highlight = false; // 3/22/2016 MAP
+
   // Tag for highlighting search words and current verse.
   // For convenience the GtkTextBuffer function is called.
   // This adds the tag to the GtkTextTagTable, making it available
