@@ -31,6 +31,7 @@
 #include "stylesheetutils.h"
 #include "tidy.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
 #include "usfmtools.h"
 #include "utilities.h"
 #include <gdk/gdkkeysyms.h>
@@ -711,7 +712,7 @@ void InsertNoteDialog::on_button_template_delete_clicked(GtkButton *button, gpoi
 
 void InsertNoteDialog::on_button_template_delete() {
   ustring filename = gw_build_filename(Directories->get_configuration(), template_filename_get(combobox_get_active_string(combobox_templates)));
-  unlink(filename.c_str());
+  unix_unlink(filename.c_str());
   templates_load("", true);
 }
 

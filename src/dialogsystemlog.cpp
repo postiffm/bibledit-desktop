@@ -233,7 +233,7 @@ void SystemlogDialog::on_button_diagnostics() {
   ustring diagnosticsfile = gw_build_filename(Directories->get_temp(), _("diagnostics"));
   write_lines(diagnosticsfile, lines);
   shell_pipe_file_append(diagnosticsfile, logfilename());
-  unlink(diagnosticsfile.c_str());
+  unix_unlink(diagnosticsfile.c_str());
 }
 
 void SystemlogDialog::on_radiobutton_toggled(GtkToggleButton *togglebutton, gpointer user_data) {

@@ -99,7 +99,7 @@ void notes_delete_one(int id)
 // Deletes the note with id.
 {
   // Unlink the note file.
-  unlink(notes_file_name(id).c_str());
+  unix_unlink(notes_file_name(id).c_str());
   // Remove the entry from the index database
   sqlite3 *db;
   sqlite3_open(notes_index_filename().c_str(), &db);
@@ -869,7 +869,7 @@ void notes_convert_database_to_plain_files() {
       }
     }
     // Delete the notes database that was converted.
-    unlink(database_filename.c_str());
+    unix_unlink(database_filename.c_str());
   } catch (exception &ex) {
     gw_critical(ex.what());
   }
@@ -1035,7 +1035,7 @@ void notes_create_index()
   ProgressWindow progresswindow(_("Creating notes index"), false);
 
   // Remove any old index.
-  unlink(notes_index_filename().c_str());
+  unix_unlink(notes_index_filename().c_str());
 
   // Create index database.
   sqlite3 *db;
@@ -1067,7 +1067,7 @@ void notes_create_index()
 
   } catch (exception &ex) {
     gw_critical(ex.what());
-    unlink(notes_index_filename().c_str());
+    unix_unlink(notes_index_filename().c_str());
   }
 
   // Close connection.

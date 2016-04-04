@@ -26,6 +26,7 @@
 #include "progresswindow.h"
 #include "projectutils.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
 #include "utilities.h"
 #include <glib/gi18n.h>
 #include <sqlite3.h>
@@ -92,7 +93,7 @@ void snapshots_initialize_project(const ustring &project)
       snapshots_shoot_chapter(project, book, chapter, content, seconds, persistent);
     }
     sqlite3_close(db);
-    unlink(old_filename.c_str());
+    unix_unlink(old_filename.c_str());
   } else {
     snapshots_shoot_project(project);
   }

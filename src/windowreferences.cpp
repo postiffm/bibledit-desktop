@@ -36,6 +36,7 @@
 #include "referenceutils.h"
 #include "settings.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
 #include "usfmtools.h"
 #include "utilities.h"
 #include <glib.h>
@@ -255,7 +256,7 @@ void WindowReferences::load(const ustring &filename)
 
 void WindowReferences::save() {
   // Remove existing database.
-  unlink(references_database_filename().c_str());
+  unix_unlink(references_database_filename().c_str());
   // Some database variables.
   sqlite3 *db;
   int rc;

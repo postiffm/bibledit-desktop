@@ -24,6 +24,7 @@
 #include "progresswindow.h"
 #include "projectutils.h"
 #include "reference.h"
+#include "unixwrappers.h"
 #include "utilities.h"
 #include <glib/gi18n.h>
 #include <sqlite3.h>
@@ -70,7 +71,7 @@ void statistics_initial_check_project(const ustring &project, bool gui)
   // Since the system is out of order, remove any old database.
   if (g_file_test(filename.c_str(), G_FILE_TEST_IS_REGULAR)) {
     gw_message(_("Removing Statistics Database for project ") + project);
-    unlink(filename.c_str());
+    unix_unlink(filename.c_str());
   }
   return;
 

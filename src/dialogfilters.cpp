@@ -27,6 +27,7 @@
 #include "help.h"
 #include "scripts.h"
 #include "shortcuts.h"
+#include "unixwrappers.h"
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -328,7 +329,7 @@ void FiltersDialog::on_button_delete_clicked(GtkButton *button, gpointer user_da
 void FiltersDialog::on_button_delete() {
   ustring filter = combobox_get_active_string(combobox_filters);
   ustring filename = script_get_path(filter, NULL);
-  unlink(filename.c_str());
+  unix_unlink(filename.c_str());
   load_filters("");
 }
 
@@ -384,7 +385,7 @@ void FiltersDialog::on_rulesbuffer_changed_execute() {
     spawn.run();
     if (spawn.exitstatus != 0) {
       ustring tecfile = script_get_path(scriptname, scripttype, true);
-      unlink(tecfile.c_str());
+      unix_unlink(tecfile.c_str());
       spawn.read();
       spawn.run();
       compile_errors = spawn.standarderr;

@@ -242,9 +242,6 @@ void GwSpawn::describe()
     description.append("; ");
   }
   description.append(myprogram);
-  if (myprogram.find("|") != ustring::npos) {
-    gw_message("This is a strange name for a program!");
-  }
 
   for (unsigned int i = 0; i < myarguments.size(); i++) {
     description.append(" ");
