@@ -294,7 +294,7 @@ ImportAssistant::ImportAssistant(WindowReferences *references_window, WindowStyl
   gtk_assistant_set_page_type(GTK_ASSISTANT(assistant), label_progress, GTK_ASSISTANT_PAGE_PROGRESS);
   gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant), label_progress, true);
 
-  label_summary = gtk_label_new(_("Import done"));
+  label_summary = gtk_label_new(_("Import is done"));
   gtk_widget_show(label_summary);
   summary_page_number = gtk_assistant_append_page(GTK_ASSISTANT(assistant), label_summary);
 

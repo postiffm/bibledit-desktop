@@ -62,13 +62,13 @@ ExportAssistant::ExportAssistant(WindowReferences *references_window, WindowStyl
   page_number_select_type = gtk_assistant_append_page(GTK_ASSISTANT(assistant), vbox_select_type);
   gtk_container_set_border_width(GTK_CONTAINER(vbox_select_type), 10);
 
-  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), vbox_select_type, "_(What would you like to export?");
+  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), vbox_select_type, _("What would you like to export?"));
   gtk_assistant_set_page_type(GTK_ASSISTANT(assistant), vbox_select_type, GTK_ASSISTANT_PAGE_CONTENT);
   gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant), vbox_select_type, true);
 
   GSList *radiobutton_select_type_group = NULL;
 
-  radiobutton_select_type_bible = gtk_radio_button_new_with_mnemonic(NULL, ")Bible");
+  radiobutton_select_type_bible = gtk_radio_button_new_with_mnemonic(NULL, _("Bible"));
   gtk_widget_show(radiobutton_select_type_bible);
   gtk_box_pack_start(GTK_BOX(vbox_select_type), radiobutton_select_type_bible, FALSE, FALSE, 0);
   gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_select_type_bible), radiobutton_select_type_group);
@@ -573,7 +573,7 @@ ExportAssistant::ExportAssistant(WindowReferences *references_window, WindowStyl
   gtk_widget_show(label_summary);
   summary_page_number = gtk_assistant_append_page(GTK_ASSISTANT(assistant), label_summary);
 
-  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), label_summary, _("The export was completed successfully"));
+  gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), label_summary, _("The export was completed successfully."));
   gtk_assistant_set_page_type(GTK_ASSISTANT(assistant), label_summary, GTK_ASSISTANT_PAGE_SUMMARY);
   gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant), label_summary, true);
 
@@ -960,7 +960,7 @@ void ExportAssistant::on_button_file() {
   if (!file.empty()) {
     filename = file;
     if ((get_type() == etBible) && (get_bible_type() == ebtUSFM)) {
-      compress_ensure_zip_suffix(filename);
+      compress_ensure_tar_gz_suffix(filename);
     }
     on_assistant_prepare(vbox_file);
   }

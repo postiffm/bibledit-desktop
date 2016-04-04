@@ -22,13 +22,16 @@
 #include "gwrappers.h"
 #include "resource_utils.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
 #include <glib/gi18n.h>
 
 void backup_bible(const ustring &bible, const ustring &filename)
 // Backs up a complete Bible.
 {
-  unlink(filename.c_str());
-  GwSpawn spawn("tar");
+  unix_unlink(filename);
+  GwSpawn spawn(Directories->get_tar());
+  spawn.read();               // save output for examination
+  spawn.arg("--force-local"); // to permit : in filename (like C:\Users\...)
   spawn.arg("-czf");
   spawn.arg(filename);
   spawn.arg(".");
@@ -38,8 +41,9 @@ void backup_bible(const ustring &bible, const ustring &filename)
 }
 
 void backup_notes(const ustring &filename) {
-  unlink(filename.c_str());
-  GwSpawn spawn("tar");
+  unix_unlink(filename);
+  GwSpawn spawn(Directories->get_tar());
+  spawn.arg("--force-local"); // to permit : in filename (like C:\Users\...)
   spawn.arg("-czf");
   spawn.arg(filename);
   spawn.arg(".");
@@ -63,8 +67,9 @@ void backup_resource(const ustring &resource, const ustring &filename)
     return;
   }
   ustring folder = gw_path_get_dirname(templatename);
-  unlink(filename.c_str());
-  GwSpawn spawn("tar");
+  unix_unlink(filename);
+  GwSpawn spawn(Directories->get_tar());
+  spawn.arg("--force-local"); // to permit : in filename (like C:\Users\...)
   spawn.arg("-czf");
   spawn.arg(filename);
   spawn.arg(".");
@@ -74,8 +79,9 @@ void backup_resource(const ustring &resource, const ustring &filename)
 }
 
 void backup_all(const ustring &filename) {
-  unlink(filename.c_str());
-  GwSpawn spawn("tar");
+  unix_unlink(filename);
+  GwSpawn spawn(Directories->get_tar());
+  spawn.arg("--force-local"); // to permit : in filename (like C:\Users\...)
   spawn.arg("-czf");
   spawn.arg(filename);
   spawn.arg(".");
