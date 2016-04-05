@@ -272,8 +272,9 @@ void Editor2::chapter_load(unsigned int chapter_in)
   // because the formatter looks for "\toc ". The space will solve the issue.
   ustring line;
   for (unsigned int i = 0; i < loaded_chapter_lines.size(); i++) {
-    if (!line.empty())
+    if (!line.empty()) {
       line.append(" ");
+    }
     line.append(loaded_chapter_lines[i]);
   }
   line.append(" ");
@@ -281,10 +282,12 @@ void Editor2::chapter_load(unsigned int chapter_in)
   // Load in editor.
   text_load(line, "", false);
 
-  // Clean up extra spaces before the insertion points in all the newly created textbuffers.
+  // Clean up extra spaces before the insertion points in all the
+  // newly created textbuffers.
   for (unsigned int i = 0; i < actions_done.size(); i++) {
     EditorAction *action = actions_done[i];
-    if ((action->type == eatCreateParagraph) || (action->type == eatCreateNoteParagraph)) {
+    if ((action->type == eatCreateParagraph) ||
+        (action->type == eatCreateNoteParagraph)) {
       EditorActionCreateParagraph *paragraph = static_cast<EditorActionCreateParagraph *>(action);
       EditorActionDeleteText *trim_action = paragraph_delete_last_character_if_space(paragraph);
       if (trim_action) {
@@ -2773,10 +2776,12 @@ void Editor2::textview_key_release_event(GtkWidget *widget, GdkEventKey *event) 
         }
         // Move the insertion point to the position just before the joined text.
         editor_paragraph_insertion_point_set_offset(preceding_paragraph, initial_offset);
+        // Focus the preceding paragraph. This must be done  before deleting the
+        // current_paragraph (which has focus), otherwise the blinking cursor is lost.
+        give_focus(preceding_paragraph->textview);
         // Remove the current paragraph.
         apply_editor_action(new EditorActionDeleteParagraph(current_paragraph));
-        // Focus the preceding paragraph.
-        give_focus(preceding_paragraph->textview);
+        // WAS HERE BUT LOST cursor: give_focus (preceding_paragraph->textview);
         // Insert the One Action boundary.
         apply_editor_action(new EditorAction(eatOneActionBoundary));
       }

@@ -69,6 +69,9 @@ SystemlogDialog::SystemlogDialog(int dummy) {
 
   dialog = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "dialog"));
 
+  // Experimental - trying to make this window not modal, so it can float always to the side.
+  //gtk_window_set_modal(dialog, false);
+
   textview = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "textview"));
   //gtk_widget_grab_focus(textview); // omitting this doesn't seem to change the modality of the window
 
