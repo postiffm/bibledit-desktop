@@ -65,6 +65,8 @@ Stylesheet::Stylesheet(const ustring &name_in) {
             free(attribute);
           }
         }
+        free(element_name);
+        element_name = NULL;
         break;
       }
       case XML_READER_TYPE_TEXT: {
@@ -144,6 +146,8 @@ Stylesheet::Stylesheet(const ustring &name_in) {
             style = NULL;
           }
         }
+        free(element_name);
+        element_name = NULL;
         break;
       }
       }
