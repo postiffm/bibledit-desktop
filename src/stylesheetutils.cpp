@@ -19,6 +19,7 @@
 
 #include "stylesheetutils.h"
 #include "constants.h"
+#include "debug.h"
 #include "directories.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
@@ -520,12 +521,14 @@ set<ustring> stylesheet_get_styles_of_type(StylesheetType stylesheettype) {
 ustring stylesheet_get_actual()
 // Gets the actual stylesheet.
 {
+  DEBUG("Getting stylesheet")
   // Get the stylesheet from the configuration, with a fallback.
   extern Settings *settings;
   ustring sheet = settings->genconfig.stylesheet_get();
   if (sheet.empty()) {
     sheet = STANDARDSHEET;
   }
+  DEBUG(sheet)
 
   // See whether it exists.
   vector<ustring> stylesheets;
