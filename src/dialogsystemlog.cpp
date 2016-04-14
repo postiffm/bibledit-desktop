@@ -19,6 +19,7 @@
 
 #include "dialogsystemlog.h"
 #include "constants.h"
+#include "debug.h"
 #include "dialogcheckbutton.h"
 #include "directories.h"
 #include "generalconfig.h"
@@ -47,6 +48,9 @@ ustring log_file_name(LogFileType type, bool previous) {
     break;
   case lftShutdown:
     filename = "shutdown.log";
+    break;
+  case lftSettings:
+    filename = "settings.log";
     break;
   }
   if (previous) {
@@ -93,20 +97,26 @@ SystemlogDialog::SystemlogDialog(int dummy) {
   radiobuttongroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_shutdown));
   g_signal_connect((gpointer)radiobutton_shutdown, "toggled", G_CALLBACK(on_radiobutton_toggled), gpointer(this));
 
-  button_diag = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "button_diag"));
-  g_signal_connect((gpointer)button_diag, "clicked", G_CALLBACK(on_button_diagnostics_clicked), gpointer(this));
-  shortcuts.button(button_diag);
+  radiobutton_settings = GTK_WIDGET(gtk_builder_get_object(gtkbuilder, "radiobutton_settings"));
+  shortcuts.button(radiobutton_settings);
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_settings), radiobuttongroup);
+  radiobuttongroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_settings));
+  g_signal_connect((gpointer)radiobutton_settings, "toggled", G_CALLBACK(on_radiobutton_toggled), gpointer(this));
 
-  InDialogHelp *indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, NULL);
+  /* button_diag = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "button_diag"));
+  g_signal_connect((gpointer) button_diag, "clicked", G_CALLBACK(on_button_diagnostics_clicked), gpointer(this));
+  shortcuts.button (button_diag);
+
+  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, NULL);
 
   GtkWidget *cancelbutton;
   cancelbutton = indialoghelp->cancelbutton;
   gtk_widget_grab_default(cancelbutton);
   shortcuts.stockbutton(cancelbutton);
 
-  GtkWidget *okbutton = indialoghelp->okbutton;
+  GtkWidget * okbutton = indialoghelp->okbutton;
   shortcuts.stockbutton(okbutton);
-  gtk_widget_hide(okbutton);
+  gtk_widget_hide (okbutton); */
 
   shortcuts.process();
 
@@ -138,6 +148,15 @@ bool SystemlogDialog::show_script_dialog_load(gpointer data) {
 void SystemlogDialog::load(bool force) {
   // Text buffer.
   GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
+
+  // Write contents of settings file (yes, I know...inefficient) (was called "diagnostics")
+  if (currentLogFileType() == lftSettings) {
+    // For the main logfile, it is updated by every gw_message() and so on
+    // For the shutdown log, that is updated by itself as well
+    // Only the settings may change from time to time and I want to make sure
+    // to write those to disk and not present the user with stale info.
+    writeSettings();
+  }
 
   // In cases that message keep streaming in, it may happen that the user tries to copy
   // the messages. He selects the text, but before he can copy it to the clipboard,
@@ -191,12 +210,46 @@ void SystemlogDialog::on_checkbutton1_toggled(GtkToggleButton *togglebutton, gpo
 }
 
 ustring SystemlogDialog::logfilename() {
-  LogFileType type = lftMain;
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_shutdown)))
-    type = lftShutdown;
+  LogFileType type = currentLogFileType();
   return log_file_name(type, gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_session)));
 }
 
+LogFileType SystemlogDialog::currentLogFileType() {
+  LogFileType type = lftMain;
+  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_shutdown))) {
+    type = lftShutdown;
+  } else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_settings))) {
+    type = lftSettings;
+  }
+  return type;
+}
+
+void SystemlogDialog::writeSettings() {
+  // Container to hold output text.
+  vector<ustring> lines;
+
+  lines.push_back(_("\nGeneral settings\n"));
+  ReadText rt(general_configuration_filename(), true, false);
+  for (unsigned int i = 0; i < rt.lines.size(); i++) {
+    lines.push_back(rt.lines[i]);
+  }
+
+  vector<ustring> projects = projects_get_all();
+  for (unsigned int i = 0; i < projects.size(); i++) {
+    lines.push_back(_("\nProject settings for ") + projects[i] + _("\n"));
+    ReadText rt(project_configuration_filename(projects[i]), true, false);
+    for (unsigned int i = 0; i < rt.lines.size(); i++) {
+      lines.push_back(rt.lines[i]);
+    }
+  }
+
+  // Add the settings info to the temp directory.
+  ustring settingsfile = gw_build_filename(Directories->get_temp(), _("settings.log"));
+  write_lines(settingsfile, lines); // This closes the file when done.
+  return;
+}
+
+#ifdef OLDSTUFF
 void SystemlogDialog::on_button_diagnostics_clicked(GtkButton *button, gpointer user_data) {
   ((SystemlogDialog *)user_data)->on_button_diagnostics();
 }
@@ -234,10 +287,30 @@ void SystemlogDialog::on_button_diagnostics() {
   }
   // Add the diagnostics info to the logfile.
   ustring diagnosticsfile = gw_build_filename(Directories->get_temp(), _("diagnostics"));
-  write_lines(diagnosticsfile, lines);
+  write_lines(diagnosticsfile, lines); // This closes the file when done.
+  // If the logfile open is lftMain, the problem in Windows is that since fd=1 (stdout)
+  // and fd=2 (stderr) are both open to bibledit.log, Windows says
+  // it cannot write to an open file. Linux and msys2 can do it just fine for some reason.
+  // So, we close it, write, and re-open. Hassle, but clean way to do it.
+  /* if (currentLogFileType() == lftMain) {
+	  DEBUG("Temporarily closing main log file")
+	  close(1); // stdout ==> bibledit.log
+	  close(2); // have to close stderr also, because it points to same logfile!
+  } */
+  // Now do the "appending" of the diagnostics file to the log file
   shell_pipe_file_append(diagnosticsfile, logfilename());
+  // Thus far works, but the log file doesn't seem to reopen
+  /*   if (currentLogFileType() == lftMain) {
+	  int fd = open(log_file_name(lftMain, false).c_str(), O_APPEND);
+	  // This should open it back up to fd=1
+	  assert(fd == 1);
+	  close(2);
+      dup(1); // duplicate stderr(2) onto stdout(1), as in bibledit.cpp
+	  DEBUG("Reopened main log file")
+  } */
   unix_unlink(diagnosticsfile.c_str());
 }
+#endif
 
 void SystemlogDialog::on_radiobutton_toggled(GtkToggleButton *togglebutton, gpointer user_data) {
   ((SystemlogDialog *)user_data)->on_radiobutton(togglebutton);
