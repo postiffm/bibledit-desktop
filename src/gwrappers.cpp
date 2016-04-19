@@ -144,7 +144,9 @@ void gw_mkdir_with_parents(const ustring &directory)
 // directories properly. Hence we are stuck with mkdir.
 {
   ustring s;
-  GwSpawn spawn("mkdir");
+  GwSpawn spawn(Directories->get_mkdir());
+  spawn.arg(Directories->get_mkdir_args());
+  /*   GwSpawn spawn("mkdir");
 #ifndef WIN32
   spawn.arg("-p");
 #endif
@@ -152,7 +154,7 @@ void gw_mkdir_with_parents(const ustring &directory)
 #ifdef WIN32
   spawn.devnull();
 #endif
-  spawn.run();
+ */ spawn.run();
 }
 
 // Same as above, but takes ustring
