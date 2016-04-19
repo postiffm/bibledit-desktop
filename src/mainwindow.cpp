@@ -1913,7 +1913,7 @@ void MainWindow::on_help_main_activate(GtkMenuItem *menuitem, gpointer user_data
 }
 
 void MainWindow::on_help_main() {
-  gtkw_show_uri(html_server_url("index.html"), false);
+  gtkw_show_uri(html_server_url("site/home.html"), false);
 }
 
 void MainWindow::on_about1_activate(GtkMenuItem *menuitem, gpointer user_data) {

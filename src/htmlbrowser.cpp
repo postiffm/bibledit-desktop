@@ -19,6 +19,7 @@
 
 #include "htmlbrowser.h"
 #include "constants.h"
+#include "debug.h"
 #include "directories.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
@@ -136,5 +137,6 @@ void htmlbrowser(const ustring &filename, bool network, bool no_tamper)
 
 ustring html_server_url(const ustring &url) {
   ustring server_url = gw_build_filename(Directories->get_package_data(), url);
+  DEBUG("Server url " + server_url)
   return server_url;
 }

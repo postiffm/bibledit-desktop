@@ -21,6 +21,7 @@
 #include "bible.h"
 #include "bibleworks.h"
 #include "books.h"
+#include "debug.h"
 #include "directories.h"
 #include "gwrappers.h"
 #include "libraries.h"
@@ -491,6 +492,7 @@ void windowsoutpost_open_url(const ustring &url)
 #endif
       } else {
         ustring command = "open " + url + "\n";
+        DEBUG(command)
 #ifdef WIN32
         u_long socketmode = 1; // Set non-blocking
         ioctlsocket(sock, FIONBIO, &socketmode);

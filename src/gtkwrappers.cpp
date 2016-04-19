@@ -18,9 +18,10 @@
 */
 
 #include "gtkwrappers.h"
+#include "debug.h"
+#include "directories.h"
 #include "gwrappers.h"
 #include "libraries.h"
-#include "windowsoutpost.h"
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -191,19 +192,26 @@ void gtkw_show_uri(ustring uri, bool internet) {
     prefix = "http://";
   else
     prefix = "file://";
-  uri = prefix + uri;
 
 // Handle if Windows.
 #ifdef WIN32
-
-  windowsoutpost_open_url(uri);
+  // False start on fixing error in Windows: it doesn't require slashes to be forward.
+  //	uri = Directories->backslashes_to_forwardslashes(uri);
+  DEBUG("Showing URI " + uri)
+  GwSpawn spawn(uri);
+  spawn.run();
+  // Got rid of outpost for this one
+  //windowsoutpost_open_url(uri);
   return;
+// Maybe need to quote the filenames
+//    uri = "\"" + uri + "\"";
 #endif
-
+  uri = prefix + uri;
+  DEBUG("Showing URI " + uri)
   // Handle Unix.
   GError *error = NULL;
   if (!gtk_show_uri(NULL, uri.c_str(), GDK_CURRENT_TIME, &error)) {
-    ustring message = _("Trying to opening ") + uri + ": " + error->message;
+    ustring message = _("Trying to open ") + uri + ": " + error->message;
     cerr << message << endl;
     gtkw_dialog_error(NULL, message);
     g_error_free(error);
