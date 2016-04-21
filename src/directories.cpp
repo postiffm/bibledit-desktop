@@ -359,9 +359,9 @@ void directories::find_utilities(void) {
       // We have a DOS mkdir command
       mkdir = "mkdir"; // no mkdir_args; going to assume that Command Extensions are enabled
     } else {
-      // Check for tar (Unix)
+      // Check for mkdir (Unix)
       GwSpawn spawn("mkdir");
-      spawn.arg("--version");
+      spawn.arg("--help"); // TODO: Something is messed up here. It creates Bibledit-x.y.z\--help as a directory!!!
       spawn.run();
       if (spawn.exitstatus == 0) {
         // We have a mkdir command. Use it.
@@ -370,7 +370,7 @@ void directories::find_utilities(void) {
       } else {
         // Check for mkdir.exe in the rundir (Windows directly through msys2/mingw binary)
         GwSpawn spawn(rundir + "\\mkdir.exe");
-        spawn.arg("--version");
+        spawn.arg("--help");
         if (spawn.exitstatus == 0) {
           mkdir = rundir + "\\mkdir.exe";
           mkdir_args = "-p";
