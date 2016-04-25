@@ -29,6 +29,7 @@
 #include "assistantremoterepository.h"
 #include "assistantresource.h"
 #include "assistantrestore.h"
+#include "dialogsystemlog.h"
 #include "displayprojectnotes.h"
 #include "editor.h"
 #include "floatingwindow.h"
@@ -316,6 +317,7 @@ protected:
   GtkWidget *help_main;
   GtkWidget *image17520;
   GtkWidget *system_log1;
+  SystemlogDialog *syslogdialog;
   GtkWidget *image4388;
   GtkWidget *about1;
   GtkWidget *toolbar;

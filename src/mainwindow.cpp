@@ -26,6 +26,7 @@
 #include "compareutils.h"
 #include "constants.h"
 #include "date_time_utils.h"
+#include "debug.h"
 #include "dialogbook.h"
 #include "dialogbulkspelling.h"
 #include "dialogchapternumber.h"
@@ -1457,6 +1458,7 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   gtk_widget_show(image17520);
   gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(help_main), image17520);
 
+  syslogdialog = NULL;
   system_log1 = gtk_image_menu_item_new_with_mnemonic(_("_System log"));
   gtk_widget_show(system_log1);
   gtk_container_add(GTK_CONTAINER(menuitem_help_menu), system_log1);
@@ -1743,6 +1745,9 @@ MainWindow::~MainWindow() {
   // Destroy the Outpost
   delete windowsoutpost;
 
+  // The possibly always-on Help | System log dialog box
+  delete syslogdialog;
+
   // Do shutdown actions.
   shutdown_actions();
   // Destroying the window is done by Gtk itself.
@@ -1904,8 +1909,13 @@ void MainWindow::on_system_log1_activate(GtkMenuItem *menuitem, gpointer user_da
 }
 
 void MainWindow::viewlog() {
-  SystemlogDialog dialog(0);
-  dialog.run();
+  if (!syslogdialog) {
+    syslogdialog = new SystemlogDialog(0);
+  }
+  // This window can float while the user does other things, so the syslogdialog has some
+  // persistent state to manage this feature. It takes care of killing the window, restarting a
+  // new one, etc.
+  syslogdialog->run();
 }
 
 void MainWindow::on_help_main_activate(GtkMenuItem *menuitem, gpointer user_data) {
