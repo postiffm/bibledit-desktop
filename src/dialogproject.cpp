@@ -23,6 +23,7 @@
 #include "combobox.h"
 #include "constants.h"
 #include "date_time_utils.h"
+#include "debug.h"
 #include "dialogdictionary.h"
 #include "dialogselectbooks.h"
 #include "directories.h"
@@ -49,8 +50,13 @@
 #define NEW_PROJECT _("New Project")
 
 ProjectDialog::ProjectDialog(bool newproject) {
+  DEBUG("New ProjectDialog with newproject=" + std::to_string(newproject))
   // Settings.
   extern Settings *settings;
+  // If we are doing a new project, it is "changed" by default. If
+  // not doing a new project, it is not changed, at least yet.
+  isChanged = newproject;
+  isNewProject = newproject; // see on_cancel
 
   // Save variables.
   if (newproject) {
@@ -390,6 +396,7 @@ void ProjectDialog::on_ok() {
   if (currentprojectname != newprojectname) {
     // Move project.
     project_move(currentprojectname, newprojectname);
+    isChanged = true;
   }
   // Save settings.
   extern Settings *settings;
@@ -415,7 +422,7 @@ void ProjectDialog::on_ok() {
 
   // If the project depends on another, do the copy through the script.
   if (depend_switch && (!depend_project.empty())) {
-
+    isChanged = true;
     // Progress information.
     ProgressWindow progresswindow(_("Updating project"), false);
 
@@ -487,7 +494,9 @@ void ProjectDialog::on_ok() {
 
 void ProjectDialog::on_cancel() {
   // Remove the "New Project". It was created but not used.
-  project_delete(NEW_PROJECT);
+  if (isNewProject) {
+    project_delete(NEW_PROJECT);
+  }
 }
 
 void ProjectDialog::on_book_add() {
@@ -588,6 +597,7 @@ void ProjectDialog::on_book_delete() {
       return;
     if (gtkw_dialog_question(projectdialog, _("Are you really sure to delete something worth perhaps months of work?")) != GTK_RESPONSE_YES)
       return;
+    isChanged = true;
     vector<unsigned int> ids = books_type_to_ids(btUnknown);
     ProgressWindow progresswindow(_("Deleting books"), false);
     progresswindow.set_iterate(0, 1, ids.size());

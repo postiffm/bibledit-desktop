@@ -138,314 +138,314 @@ directories::directories(char *argv0) {
   restore = fix_slashes(restore);
 }
 
-void directories::find_utilities(void) {
-  // Find some utilities that we need to use (cp, rm, tar, zip, etc.)
+void directories::find_utilities(void){
+    // Find some utilities that we need to use (cp, rm, tar, zip, etc.)
 
-  //---------------------------------------------
-  // Copy
-  //---------------------------------------------
-  {
-    // Check for cp (Unix)
-    GwSpawn spawn("cp");
+    //---------------------------------------------
+    // Copy
+    //---------------------------------------------
+    {
+        // Check for cp (Unix)
+        GwSpawn spawn("cp");
+spawn.arg("--version");
+spawn.run();
+if (spawn.exitstatus == 0) {
+  // We have a cp command. Use it.
+  copy = "cp";
+} else {
+  // Check for copy (Windows/DOS through cmd.exe)
+  GwSpawn spawn("copy");
+  spawn.arg("/?");
+  if (spawn.exitstatus == 0) {
+    copy = "copy";
+  } else {
+    // Check for cp.exe in the rundir (Windows directly through msys2/mingw binary)
+    GwSpawn spawn(rundir + "\\cp.exe");
     spawn.arg("--version");
-    spawn.run();
     if (spawn.exitstatus == 0) {
-      // We have a cp command. Use it.
-      copy = "cp";
+      copy = rundir + "\\cp.exe";
     } else {
-      // Check for copy (Windows/DOS through cmd.exe)
-      GwSpawn spawn("copy");
-      spawn.arg("/?");
-      if (spawn.exitstatus == 0) {
-        copy = "copy";
-      } else {
-        // Check for cp.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\cp.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          copy = rundir + "\\cp.exe";
-        } else {
-          gw_message("Cannot find a suitable copy utility");
-        }
-      }
+      gw_message("Cannot find a suitable copy utility");
     }
   }
+}
+}
 
-  //---------------------------------------------
-  // Copy recursive
-  //---------------------------------------------
-  {
-    // Check for cp (Unix)
-    GwSpawn spawn("cp");
-    spawn.arg("--version");
-    spawn.run();
+//---------------------------------------------
+// Copy recursive
+//---------------------------------------------
+{
+  // Check for cp (Unix)
+  GwSpawn spawn("cp");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a cp command. Use it.
+    copy_recursive = "cp";
+    copy_recursive_args = "-r";
+  } else {
+    // Check for copy (Windows/DOS through cmd.exe)
+    GwSpawn spawn("xcopy");
+    spawn.arg("/?");
     if (spawn.exitstatus == 0) {
-      // We have a cp command. Use it.
-      copy_recursive = "cp";
-      copy_recursive_args = "-r";
+      copy_recursive = "xcopy";
+      copy_recursive_args = "/E/I/Y";
     } else {
-      // Check for copy (Windows/DOS through cmd.exe)
-      GwSpawn spawn("xcopy");
-      spawn.arg("/?");
-      if (spawn.exitstatus == 0) {
-        copy_recursive = "xcopy";
-        copy_recursive_args = "/E/I/Y";
-      } else {
-        // Check for cp.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\cp.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          copy_recursive = rundir + "\\cp.exe";
-          copy_recursive_args = "-r";
-        } else {
-          gw_message("Cannot find a suitable recursive copy utility");
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Move
-  //---------------------------------------------
-  {
-    // Check for mv (Unix)
-    GwSpawn spawn("mv");
-    spawn.arg("--version");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a mv command. Use it.
-      move = "mv";
-      move_args = "-f";
-    } else {
-      // Check for move (Windows/DOS through cmd.exe)
-      GwSpawn spawn("move");
-      spawn.arg("/?");
-      if (spawn.exitstatus == 0) {
-        move = "move";
-        move_args = "/Y";
-      } else {
-        // Check for mv.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\mv.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          move = rundir + "\\mv.exe";
-          move_args = "-f";
-        } else {
-          gw_message(_("Cannot find a suitable move utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Zip
-  //---------------------------------------------
-  {
-    // Check for gzip (Unix)
-    GwSpawn spawn("gzip");
-    spawn.arg("--version");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a gzip command. Use it.
-      zip = "gzip";
-    } else {
-      // Check for gzip.exe in the rundir (Windows directly through msys2/mingw binary)
-      GwSpawn spawn(rundir + "\\gzip.exe");
+      // Check for cp.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\cp.exe");
       spawn.arg("--version");
       if (spawn.exitstatus == 0) {
-        zip = rundir + "\\gzip.exe";
+        copy_recursive = rundir + "\\cp.exe";
+        copy_recursive_args = "-r";
+      } else {
+        gw_message("Cannot find a suitable recursive copy utility");
+      }
+    }
+  }
+}
+
+//---------------------------------------------
+// Move
+//---------------------------------------------
+{
+  // Check for mv (Unix)
+  GwSpawn spawn("mv");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a mv command. Use it.
+    move = "mv";
+    move_args = "-f";
+  } else {
+    // Check for move (Windows/DOS through cmd.exe)
+    GwSpawn spawn("move");
+    spawn.arg("/?");
+    if (spawn.exitstatus == 0) {
+      move = "move";
+      move_args = "/Y";
+    } else {
+      // Check for mv.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\mv.exe");
+      spawn.arg("--version");
+      if (spawn.exitstatus == 0) {
+        move = rundir + "\\mv.exe";
+        move_args = "-f";
+      } else {
+        gw_message(_("Cannot find a suitable move utility"));
+      }
+    }
+  }
+}
+
+//---------------------------------------------
+// Zip
+//---------------------------------------------
+{
+  // Check for gzip (Unix)
+  GwSpawn spawn("gzip");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a gzip command. Use it.
+    zip = "gzip";
+  } else {
+    // Check for gzip.exe in the rundir (Windows directly through msys2/mingw binary)
+    GwSpawn spawn(rundir + "\\gzip.exe");
+    spawn.arg("--version");
+    if (spawn.exitstatus == 0) {
+      zip = rundir + "\\gzip.exe";
+    } else {
+      gw_message(_("Cannot find a suitable zip utility"));
+    }
+  }
+}
+
+//---------------------------------------------
+// Tar
+//---------------------------------------------
+{
+  // Check for tar (Unix)
+  GwSpawn spawn("tar");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a tar command. Use it.
+    tar = "tar";
+  } else {
+    // Check for tar.exe in the rundir (Windows directly through msys2/mingw binary)
+    GwSpawn spawn(rundir + "\\tar.exe");
+    spawn.arg("--version");
+    if (spawn.exitstatus == 0) {
+      tar = rundir + "\\tar.exe";
+    } else {
+      gw_message(_("Cannot find a suitable tar utility"));
+    }
+  }
+}
+
+//---------------------------------------------
+// Rm
+//---------------------------------------------
+{
+  // Check for rm (Unix)
+  GwSpawn spawn("rm");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a rm command. Use it.
+    rm = "rm";
+  } else {
+    // Check for del (Windows/DOS through cmd.exe)
+    GwSpawn spawn("del");
+    spawn.arg("/?");
+    if (spawn.exitstatus == 0) {
+      rm = "del";
+    } else {
+      // Check for rm.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\rm.exe");
+      spawn.arg("--version");
+      if (spawn.exitstatus == 0) {
+        rm = rundir + "\\rm.exe";
+      } else {
+        gw_message(_("Cannot find a suitable rm/del utility"));
+      }
+    }
+  }
+}
+
+//---------------------------------------------
+// Rmdir
+//---------------------------------------------
+{
+  // Check for rm (Unix)
+  GwSpawn spawn("rm");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a rm command. Use it.
+    rmdir = "rm";
+    rmdir_args = "-rf";
+  } else {
+    // Check for rmdir (Windows/DOS through cmd.exe)
+    GwSpawn spawn("rmdir");
+    spawn.arg("/?");
+    if (spawn.exitstatus == 0) {
+      rmdir = "rmdir";
+      rmdir_args = "/s/q";
+    } else {
+      // Check for rm.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\rm.exe");
+      spawn.arg("--version");
+      if (spawn.exitstatus == 0) {
+        rmdir = rundir + "\\rm.exe";
+        rmdir_args = "-rf";
+      }
+      // We have rmdir.exe, but it only works if the directories are empty
+      else {
+        gw_message(_("Cannot find a suitable rmdir utility"));
+      }
+    }
+  }
+}
+
+//---------------------------------------------
+// mkdir
+//---------------------------------------------
+{
+#ifdef WIN32
+  // mkdir (md) does not play nice. If you run it with /?, it returns code 1, not 0. So
+  // I rely on the #ifdef to just "know" that we have compiled on Windows and can assume
+  // that mkdir is available.
+  mkdir = "mkdir"; // no mkdir_args
+#else
+  // Check for mkdir (Unix)
+  GwSpawn spawn("mkdir");
+  spawn.arg("--help"); // TODO: Something is messed up here. It creates Bibledit-x.y.z\--help as a directory!!!
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a mkdir command. Use it.
+    mkdir = "mkdir";
+    mkdir_args = "-p";
+  } else {
+    // Check for mkdir.exe in the rundir (Windows directly through msys2/mingw binary)
+    GwSpawn spawn(rundir + "\\mkdir.exe");
+    spawn.arg("--help");
+    if (spawn.exitstatus == 0) {
+      mkdir = rundir + "\\mkdir.exe";
+      mkdir_args = "-p";
+    } else {
+      gw_message(_("Cannot find a suitable mkdir utility"));
+    }
+  }
+}
+#endif
+}
+
+//---------------------------------------------
+// Zip
+//---------------------------------------------
+{
+  // Check for zip (Unix)
+  GwSpawn spawn("zip");
+  spawn.arg("--version");
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have a zip command. Use it.
+    zip = "zip";
+  } else {
+    // Check for zip.exe (Windows/DOS through cmd.exe)
+    GwSpawn spawn("zip.exe");
+    spawn.arg("--version"); // This is not standard for Windows, but in zip 3.0 by Info-ZIP that's what works
+    if (spawn.exitstatus == 0) {
+      zip = "zip.exe";
+    } else {
+      // Check for zip.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\zip.exe");
+      spawn.arg("--version");
+      if (spawn.exitstatus == 0) {
+        zip = rundir + "\\zip.exe";
       } else {
         gw_message(_("Cannot find a suitable zip utility"));
       }
     }
   }
+}
 
-  //---------------------------------------------
-  // Tar
-  //---------------------------------------------
-  {
-    // Check for tar (Unix)
-    GwSpawn spawn("tar");
-    spawn.arg("--version");
-    spawn.run();
+//---------------------------------------------
+// Unzip
+//---------------------------------------------
+{
+  // Check for unzip (Unix)
+  GwSpawn spawn("unzip");
+  spawn.arg("--version"); // unzip.exe on Windows and Linux (on my systems at least) returns 10 even though it is present and runs --version because it doesn't know the --version flag
+  spawn.run();
+  if (spawn.exitstatus == 0) {
+    // We have an unzip command. Use it.
+    unzip = "unzip";
+  } else {
+    // Check for zip.exe (Windows/DOS through cmd.exe)
+    GwSpawn spawn("unzip.exe");
+    spawn.arg("--version"); // This is not standard for Windows, but in unzip 6.0 by Info-ZIP that's what works
     if (spawn.exitstatus == 0) {
-      // We have a tar command. Use it.
-      tar = "tar";
+      unzip = "unzip.exe";
     } else {
-      // Check for tar.exe in the rundir (Windows directly through msys2/mingw binary)
-      GwSpawn spawn(rundir + "\\tar.exe");
+      // Check for unzip.exe in the rundir (Windows directly through msys2/mingw binary)
+      GwSpawn spawn(rundir + "\\unzip.exe");
       spawn.arg("--version");
       if (spawn.exitstatus == 0) {
-        tar = rundir + "\\tar.exe";
+        unzip = rundir + "\\unzip.exe";
       } else {
-        gw_message(_("Cannot find a suitable tar utility"));
+        gw_message(_("Cannot find a suitable unzip utility"));
       }
     }
   }
+}
 
-  //---------------------------------------------
-  // Rm
-  //---------------------------------------------
-  {
-    // Check for rm (Unix)
-    GwSpawn spawn("rm");
-    spawn.arg("--version");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a rm command. Use it.
-      rm = "rm";
-    } else {
-      // Check for del (Windows/DOS through cmd.exe)
-      GwSpawn spawn("del");
-      spawn.arg("/?");
-      if (spawn.exitstatus == 0) {
-        rm = "del";
-      } else {
-        // Check for rm.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\rm.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          rm = rundir + "\\rm.exe";
-        } else {
-          gw_message(_("Cannot find a suitable rm/del utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Rmdir
-  //---------------------------------------------
-  {
-    // Check for rm (Unix)
-    GwSpawn spawn("rm");
-    spawn.arg("--version");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a rm command. Use it.
-      rmdir = "rm";
-      rmdir_args = "-rf";
-    } else {
-      // Check for rmdir (Windows/DOS through cmd.exe)
-      GwSpawn spawn("rmdir");
-      spawn.arg("/?");
-      if (spawn.exitstatus == 0) {
-        rmdir = "rmdir";
-        rmdir_args = "/s/q";
-      } else {
-        // Check for rm.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\rm.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          rmdir = rundir + "\\rm.exe";
-          rmdir_args = "-rf";
-        }
-        // We have rmdir.exe, but it only works if the directories are empty
-        else {
-          gw_message(_("Cannot find a suitable rmdir utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // mkdir
-  //---------------------------------------------
-  {
-    GwSpawn spawn("mkdir");
-    spawn.arg("/?");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a DOS mkdir command
-      mkdir = "mkdir"; // no mkdir_args; going to assume that Command Extensions are enabled
-    } else {
-      // Check for mkdir (Unix)
-      GwSpawn spawn("mkdir");
-      spawn.arg("--help"); // TODO: Something is messed up here. It creates Bibledit-x.y.z\--help as a directory!!!
-      spawn.run();
-      if (spawn.exitstatus == 0) {
-        // We have a mkdir command. Use it.
-        mkdir = "mkdir";
-        mkdir_args = "-p";
-      } else {
-        // Check for mkdir.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\mkdir.exe");
-        spawn.arg("--help");
-        if (spawn.exitstatus == 0) {
-          mkdir = rundir + "\\mkdir.exe";
-          mkdir_args = "-p";
-        } else {
-          gw_message(_("Cannot find a suitable mkdir utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Zip
-  //---------------------------------------------
-  {
-    // Check for zip (Unix)
-    GwSpawn spawn("zip");
-    spawn.arg("--version");
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have a zip command. Use it.
-      zip = "zip";
-    } else {
-      // Check for zip.exe (Windows/DOS through cmd.exe)
-      GwSpawn spawn("zip.exe");
-      spawn.arg("--version"); // This is not standard for Windows, but in zip 3.0 by Info-ZIP that's what works
-      if (spawn.exitstatus == 0) {
-        zip = "zip.exe";
-      } else {
-        // Check for zip.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\zip.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          zip = rundir + "\\zip.exe";
-        } else {
-          gw_message(_("Cannot find a suitable zip utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Unzip
-  //---------------------------------------------
-  {
-    // Check for unzip (Unix)
-    GwSpawn spawn("unzip");
-    spawn.arg("--version"); // unzip.exe on Windows and Linux (on my systems at least) returns 10 even though it is present and runs --version because it doesn't know the --version flag
-    spawn.run();
-    if (spawn.exitstatus == 0) {
-      // We have an unzip command. Use it.
-      unzip = "unzip";
-    } else {
-      // Check for zip.exe (Windows/DOS through cmd.exe)
-      GwSpawn spawn("unzip.exe");
-      spawn.arg("--version"); // This is not standard for Windows, but in unzip 6.0 by Info-ZIP that's what works
-      if (spawn.exitstatus == 0) {
-        unzip = "unzip.exe";
-      } else {
-        // Check for unzip.exe in the rundir (Windows directly through msys2/mingw binary)
-        GwSpawn spawn(rundir + "\\unzip.exe");
-        spawn.arg("--version");
-        if (spawn.exitstatus == 0) {
-          unzip = rundir + "\\unzip.exe";
-        } else {
-          gw_message(_("Cannot find a suitable unzip utility"));
-        }
-      }
-    }
-  }
-
-  //---------------------------------------------
-  // Bibledit Outpost for Windows
-  //---------------------------------------------
-  bwoutpost = gw_build_filename(rundir, BIBLEDIT_WINDOWS_OUTPOST_EXE);
-  bwoutpost_exeonly = BIBLEDIT_WINDOWS_OUTPOST_EXE;
+//---------------------------------------------
+// Bibledit Outpost for Windows
+//---------------------------------------------
+bwoutpost = gw_build_filename(rundir, BIBLEDIT_WINDOWS_OUTPOST_EXE);
+bwoutpost_exeonly = BIBLEDIT_WINDOWS_OUTPOST_EXE;
 }
 
 directories::~directories() {
