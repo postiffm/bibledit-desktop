@@ -1867,7 +1867,7 @@ void MainWindow::editproject() {
       // project properties dialog.
       // As anything could have been changed to the project, reopen it.
       reload_all_editors(false);
-      // Focus the desired book.
+      // Focus the desired book...the last one added in Bible order?
       navigation.display(Reference(projectdialog.focusbook, 1, "1"));
     }
   }
