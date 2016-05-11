@@ -24,6 +24,12 @@
 #include "tiny_utilities.h"
 #include "utilities.h"
 
+Reference::Reference() {
+  book = 0;
+  chapter = 0;
+  verse.clear();
+}
+
 Reference::Reference(int dummy) {
   book = 0;
   chapter = 0;
@@ -41,10 +47,11 @@ ustring Reference::human_readable(const ustring &language)
 // it takes the English names of the books.
 {
   ustring s;
-  if (language.empty())
+  if (language.empty()) {
     s.append(books_id_to_english(book));
-  else
+  } else {
     s.append(books_id_to_name(language, book));
+  }
   s.append(" ");
   s.append(convert_to_string(chapter));
   s.append(":");
@@ -79,4 +86,16 @@ void Reference::assign(const Reference &reference) {
   book = reference.book;
   chapter = reference.chapter;
   verse = reference.verse;
+}
+
+void Reference::assign(unsigned int book_in, unsigned int chapter_in, const ustring &verse_in) {
+  book = book_in;
+  chapter = chapter_in;
+  verse = verse_in;
+}
+
+void Reference::clear(void) {
+  book = 0;
+  chapter = 0;
+  verse.clear();
 }

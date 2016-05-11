@@ -77,7 +77,9 @@ The following things need to be tested after a change was made to the Editor obj
 * 
 */
 
-Editor2::Editor2(GtkWidget *vbox_in, const ustring &project_in) : current_reference(0, 1000, "") {
+Editor2::Editor2(GtkWidget *vbox_in, const ustring &project_in) {
+  Reference dummyRef(0, 1000, "");
+  current_reference_set(dummyRef);
   // Save and initialize variables.
   project = project_in;
   do_not_process_child_anchors_being_deleted = false;
@@ -404,7 +406,7 @@ void Editor2::chapter_save()
     return;
 
   // Get the USFM text.
-  ustring chaptertext = get_chapter();
+  ustring chaptertext = chapter_get_ustring();
 
   // Flags for use below.
   bool reload = false;
@@ -521,16 +523,20 @@ ustring Editor2::text_get_selection()
   return text;
 }
 
-void Editor2::text_insert(ustring text)
+void Editor2::insert_text(const ustring &text)
 // This inserts plain or USFM text at the cursor location of the focused textview.
 // If text is selected, this is erased first.
 {
   // If the text is not editable, bail out.
-  if (!editable)
+  if (!editable) {
     return;
+  }
+
   // If no paragraph is in focus, bail out.
-  if (!focused_paragraph)
+  if (!focused_paragraph) {
     return;
+  }
+
   // Buffer.
   GtkTextBuffer *textbuffer = focused_paragraph->textbuffer;
   // Erase selected text.
@@ -563,12 +569,14 @@ void Editor2::show_quick_references_execute()
   event_id_show_quick_references = 0;
 
   // If we're not in a note, bail out.
-  if (last_focused_type() != etvtNote)
+  if (last_focused_type() != etvtNote) {
     return;
+  }
 
   // If we're not in a paragraph, bail out.
-  if (!focused_paragraph)
+  if (!focused_paragraph) {
     return;
+  }
 
   // Get the text of the focused note.
   GtkTextBuffer *note_buffer = focused_paragraph->textbuffer;
@@ -892,7 +900,7 @@ bool Editor2::can_redo() {
   return !actions_undone.empty();
 }
 
-void Editor2::set_font() {
+void Editor2::font_set() {
   vector<GtkWidget *> textviews = editor_get_widgets(vbox_paragraphs);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     set_font_textview(textviews[i]);
@@ -1898,7 +1906,7 @@ void Editor2::highlight_thread_main() {
   }
 }
 
-ustring Editor2::get_chapter() {
+ustring Editor2::chapter_get_ustring() {
   ustring chaptertext;
   vector<GtkWidget *> textviews = editor_get_widgets(vbox_paragraphs);
   for (unsigned int i = 0; i < textviews.size(); i++) {

@@ -18,6 +18,7 @@
  */
 
 #include "displayprojectnotes.h"
+#include "debug.h"
 #include "mainwindow.h"
 #include "notes_utils.h"
 #include <glib.h>
@@ -41,6 +42,7 @@ DisplayProjectNotes::DisplayProjectNotes(const ustring &reference, GtkWidget *we
   // Start main thread.
   // New g_thread_new ("displayprojectnotes", GThreadFunc (thread_start), gpointer(this));
   g_thread_create(GThreadFunc(thread_start), gpointer(this), false, NULL);
+  DEBUG("Started thread")
 }
 
 DisplayProjectNotes::~DisplayProjectNotes() {
