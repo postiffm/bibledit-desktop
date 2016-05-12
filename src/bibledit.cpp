@@ -47,6 +47,10 @@
 #include <libxml/nanohttp.h>
 #include <libxml/xmlreader.h>
 #include <new>
+//#ifdef WIN32
+//#include <Windows.h>
+//#endif
+//#include "debug.h"
 
 directories *Directories;
 Settings *settings;
@@ -84,6 +88,19 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+#ifdef WIN32
+// Do this after bibledit_startup...sets debug level.
+// Try to open a Windows Console. Opening works.
+// Doesn't capture anything of value because
+// printf goes there, but write(1, ...) does not???
+//if (global_debug_level && AllocConsole()) {
+//freopen("CONOUT$", "wt", stdout);
+//freopen("CONOUT$", "wt", stderr);
+//SetConsoleTitle("Bibledit Debug Console");
+//printf("Successfully allocated console.\n");
+//}
+#endif
+
   books_init(); // TEMP - MAP
 
   Directories->find_utilities();  // Find core utilities like copy, rm, etc. Must do before next.
@@ -100,6 +117,7 @@ int main(int argc, char *argv[]) {
     // descriptor. Therefore the following commands cause stdout to be
     // redirected to the logfile.
     //int stdin_copy = dup(0);
+    //if (global_debug_level) { printf("Redirecting stdout/stderr to logfile.\n"); }
     int stdout_copy = dup(1);
     int stderr_copy = dup(2);
     close(1);
