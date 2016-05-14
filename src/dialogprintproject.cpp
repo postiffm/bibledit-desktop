@@ -87,8 +87,9 @@ PrintProjectDialog::PrintProjectDialog(int dummy) {
   shortcuts.label(label5);
 
   bool expand = false;
-  if (settings->session.print_references_in_notes_in_full)
+  if (settings->session.print_references_in_notes_in_full) {
     expand = true;
+  }
 
   expander1 = gtk_expander_new(NULL);
   gtk_widget_show(expander1);
@@ -102,6 +103,8 @@ PrintProjectDialog::PrintProjectDialog(int dummy) {
   checkbutton_full_references = gtk_check_button_new_with_mnemonic(_("Write the references in the notes in full"));
   gtk_widget_show(checkbutton_full_references);
   gtk_box_pack_start(GTK_BOX(vbox_expander), checkbutton_full_references, FALSE, FALSE, 0);
+
+  // TO DO: Add options for 1 column, double spaced here
 
   shortcuts.button(checkbutton_full_references);
 

@@ -18,6 +18,7 @@
 */
 
 #include "config.xml.h"
+#include "debug.h"
 #include "gwrappers.h"
 #include "tiny_utilities.h"
 #include "utilities.h"
@@ -73,6 +74,7 @@ vector<ustring> config_xml_vector_string_get(const ustring &file, const ustring 
   // resource creation, but it appeared that it didn't solve the problem.
   // Yet the mutex was left, because the configurations are accessed in
   // a thread, so it is always good to have a mutex in place.
+  DEBUG("Locking mutex")
   // New
   static GMutex config_xml_vector_string_get_mutex = G_STATIC_MUTEX_INIT;
   // New
@@ -131,6 +133,7 @@ vector<ustring> config_xml_vector_string_get(const ustring &file, const ustring 
       g_free(contents);
   }
 
+  DEBUG("Unlocking mutex")
   // New
   g_mutex_unlock(&config_xml_vector_string_get_mutex);
   // Old g_static_mutex_unlock(&config_xml_vector_string_get_mutex);
