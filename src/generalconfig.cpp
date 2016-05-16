@@ -244,6 +244,7 @@ void GeneralConfiguration::save()
   SAVE_VALUE(paper_top_margin);
   SAVE_VALUE(paper_bottom_margin);
   SAVE_VALUE(printdate);
+  SAVE_VALUE(printdraft);
   SAVE_VALUE(header_font_size);
   SAVE_VALUE(print_engine_use_intermediate_text);
   SAVE_VALUE(print_changes_only);
@@ -454,6 +455,7 @@ IMPLEMENT(double, double_get, paper_outside_margin, 1)
 IMPLEMENT(double, double_get, paper_top_margin, 2)
 IMPLEMENT(double, double_get, paper_bottom_margin, 2)
 IMPLEMENT(bool, bool_get, printdate, true)
+IMPLEMENT(bool, bool_get, printdraft, false)
 IMPLEMENT(double, double_get, header_font_size, 12)
 IMPLEMENT(bool, bool_get, print_engine_use_intermediate_text, false)
 IMPLEMENT(bool, bool_get, print_changes_only, false)
