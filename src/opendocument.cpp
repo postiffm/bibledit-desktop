@@ -26,6 +26,7 @@
 #include "gwrappers.h"
 #include "projectutils.h"
 #include "resource_utils.h"
+#include "settings.h"
 #include "shell.h"
 #include "stylesheetutils.h"
 #include "textreplacement.h"

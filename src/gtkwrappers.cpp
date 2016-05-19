@@ -22,6 +22,7 @@
 #include "directories.h"
 #include "gwrappers.h"
 #include "libraries.h"
+#include <config.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -188,16 +189,17 @@ ustring gtkw_file_chooser_save(GtkWidget *parent, const ustring &title, const us
 
 void gtkw_show_uri(ustring uri, bool internet) {
   ustring prefix;
-  if (internet)
+  if (internet) {
     prefix = "http://";
-  else
+  } else {
     prefix = "file://";
+  }
 
-// Handle if Windows.
 #ifdef WIN32
-  // False start on fixing error in Windows: it doesn't require slashes to be forward.
-  //	uri = Directories->backslashes_to_forwardslashes(uri);
-  DEBUG("Showing URI " + uri)
+  // Handle if Windows.
+  // The problem is that gtk_show_uri is not working right on Windows
+  // We do something similar to what is done at https://build.opensuse.org/package/view_file?file=0012-Work-around-disfunctional-gtk_show_uri-on-Windows.patch&package=mingw32-evince&project=home%3Ahiberis%3Awix&rev=93e9eb22b7da0de079015d2b2014e02c
+  DEBUG("Showing URI Windows " + uri)
   GwSpawn spawn(uri);
   spawn.run();
   // Got rid of outpost for this one
@@ -205,9 +207,9 @@ void gtkw_show_uri(ustring uri, bool internet) {
   return;
 // Maybe need to quote the filenames
 //    uri = "\"" + uri + "\"";
-#endif
+#else
   uri = prefix + uri;
-  DEBUG("Showing URI " + uri)
+  DEBUG("Showing URI Unix " + uri)
   // Handle Unix.
   GError *error = NULL;
   if (!gtk_show_uri(NULL, uri.c_str(), GDK_CURRENT_TIME, &error)) {
@@ -216,4 +218,5 @@ void gtkw_show_uri(ustring uri, bool internet) {
     gtkw_dialog_error(NULL, message);
     g_error_free(error);
   }
+#endif
 }
