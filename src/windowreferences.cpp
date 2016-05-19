@@ -19,6 +19,7 @@
 
 #include "windowreferences.h"
 #include "bible.h"
+#include "debug.h"
 #include "dialogeditlist.h"
 #include "dialogentry3.h"
 #include "dialogreferencesettings.h"
@@ -167,9 +168,11 @@ void WindowReferences::open() {
 void WindowReferences::load()
 // Loads references from database.
 {
+  DEBUG("Called")
   // Bail out if there are no references.
-  if (!g_file_test(references_database_filename().c_str(), G_FILE_TEST_IS_REGULAR))
+  if (!g_file_test(references_database_filename().c_str(), G_FILE_TEST_IS_REGULAR)) {
     return;
+  }
 
   // Language.
   extern Settings *settings;
@@ -182,6 +185,7 @@ void WindowReferences::load()
   int rc;
   char *error = NULL;
   try {
+    DEBUG("10")
     // Open database.
     rc = sqlite3_open(references_database_filename().c_str(), &db);
     if (rc)
@@ -197,6 +201,7 @@ void WindowReferences::load()
       if (rc != SQLITE_OK) {
         throw runtime_error(error);
       }
+      DEBUG("20...sqlitereader.elements=" + std::to_string(sqlitereader.ustring0.size()))
       for (unsigned int i = 0; i < sqlitereader.ustring0.size(); i++) {
         Reference reference(convert_to_int(sqlitereader.ustring0[i]), convert_to_int(sqlitereader.ustring1[i]), sqlitereader.ustring2[i]);
         references.push_back(reference);
@@ -205,6 +210,7 @@ void WindowReferences::load()
     }
     // Read the searchwords.
     {
+      DEBUG("30")
       SqliteReader sqlitereader(0);
       char *sql;
       sql = g_strdup_printf("select word, casesensitive, glob, matchbegin, matchend, areatype, areaid, areaintro, areaheading, areachapter, areastudy, areanotes, areaxref, areaverse from highlights;");
@@ -226,6 +232,7 @@ void WindowReferences::load()
   } catch (exception &ex) {
     gw_critical(ex.what());
   }
+  DEBUG("40")
   // Close connection.
   sqlite3_close(db);
 }
@@ -257,6 +264,7 @@ void WindowReferences::load(const ustring &filename)
 
 void WindowReferences::save() {
   // Remove existing database.
+  DEBUG("Called")
   unix_unlink(references_database_filename().c_str());
   // Some database variables.
   sqlite3 *db;
@@ -276,13 +284,16 @@ void WindowReferences::save() {
     if (rc) {
       throw runtime_error(sqlite3_errmsg(db));
     }
+    DEBUG("Step 10")
     // Set it to store references fast.
     sql = g_strdup_printf("PRAGMA synchronous=OFF;");
     rc = sqlite3_exec(db, sql, NULL, NULL, &error);
     g_free(sql);
+    DEBUG("Step 20")
     if (rc) {
       throw runtime_error(sqlite3_errmsg(db));
     }
+    DEBUG("Step 21...references.size=" + std::to_string(references.size()))
     // Store the references and the comments.
     for (unsigned int i = 0; i < references.size(); i++) {
       sql = g_strdup_printf("insert into refs values (%d, %d, '%s', '%s')", references[i].book_get(), references[i].chapter_get(), references[i].verse_get().c_str(), double_apostrophy(comments[i]).c_str());
@@ -292,6 +303,7 @@ void WindowReferences::save() {
         throw runtime_error(sqlite3_errmsg(db));
       }
     }
+    DEBUG("Step 30")
     // Create table for the searchwords.
     sql = g_strdup_printf("create table highlights (word text, casesensitive integer, glob integer, matchbegin integer, matchend integer, areatype integer, areaid integer, areaintro integer, areaheading integer, areachapter integer, areastudy integer, areanotes integer, areaxref integer, areaverse integer);");
     rc = sqlite3_exec(db, sql, NULL, NULL, &error);
@@ -301,6 +313,7 @@ void WindowReferences::save() {
     }
     // Store the searchwords and related data.
     extern Settings *settings;
+    DEBUG("Step 40...highlights.size=" + std::to_string(settings->session.highlights.size()))
     for (unsigned int i = 0; i < settings->session.highlights.size(); i++) {
       sql = g_strdup_printf("insert into highlights values ('%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)",
                             double_apostrophy(settings->session.highlights[i].word).c_str(),
@@ -317,6 +330,7 @@ void WindowReferences::save() {
   } catch (exception &ex) {
     gw_critical(ex.what());
   }
+  DEBUG("Finished")
   // Close db.
   sqlite3_close(db);
 }
