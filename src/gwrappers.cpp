@@ -136,6 +136,14 @@ void gw_destroy_source(guint &event_id)
   event_id = 0;
 }
 
+// Append an error message to the startup log file
+void startup_error(const ustring &msg) {
+  ustring errfilename = gw_build_filename(g_get_tmp_dir(), "bibledit.startup.txt");
+  FILE *errfile = fopen(errfilename.c_str(), "a"); // always append to end
+  fprintf(errfile, "%s\n", msg.c_str());
+  fclose(errfile);
+}
+
 void gw_mkdir_with_parents(const ustring &directory)
 // Creates directory, with the parents, if need be.
 // Function mkdir could be used (see man 2 mkdir), but this does not allow for
@@ -144,11 +152,12 @@ void gw_mkdir_with_parents(const ustring &directory)
 // Later one g_mkdir_with_parents () was used, but this did not create
 // directories properly. Hence we are stuck with mkdir.
 {
+#if 0
   ustring s;
-  GwSpawn spawn(Directories->get_mkdir());
-  spawn.arg(Directories->get_mkdir_args());
-  spawn.arg(directory);
-  /*   GwSpawn spawn("mkdir");
+  GwSpawn spawn (Directories->get_mkdir());
+  spawn.arg (Directories->get_mkdir_args());
+  spawn.arg (directory);
+/*   GwSpawn spawn("mkdir");
 #ifndef WIN32
   spawn.arg("-p");
 #endif
@@ -156,7 +165,34 @@ void gw_mkdir_with_parents(const ustring &directory)
 #ifdef WIN32
   spawn.devnull();
 #endif
- */ spawn.run();
+ */  spawn.run();
+#endif
+
+#ifdef WIN32
+  // Use Windows system call to do this "right"
+  bool retval = CreateDirectory(directory.c_str(), NULL);
+  // Returns 0 if OK
+  // Returns non-zero if error, and GetLastError will tell us:
+  // ERROR_ALREADY_EXISTS The specified directory already exists.
+  // ERROR_PATH_NOT_FOUND One or more intermediate directories do not exist; this function will only create the final directory in the path.
+  if (retval == 0) {
+    int lasterr = GetLastError();
+    if (lasterr == ERROR_ALREADY_EXISTS) {
+      // Not really an error, just informative
+      startup_error("Already exists " + directory);
+    } else if (lasterr == ERROR_PATH_NOT_FOUND) {
+      startup_error("Cannot create " + directory + " because intermediate directories don't exist.");
+    }
+  } else {
+    // Not really an error, just informative
+    startup_error("Created " + directory);
+  }
+#else
+  GwSpawn spawn(Directories->get_mkdir());
+  spawn.arg(Directories->get_mkdir_args());
+  spawn.arg(directory);
+  spawn.run();
+#endif
 }
 
 // Same as above, but takes ustring
