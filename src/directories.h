@@ -55,6 +55,7 @@ private:
   ustring templates;
   ustring templates_user;
   ustring restore;
+  ustring path;
 
 public:
   ustring fix_slashes(const ustring &tofix);
@@ -74,6 +75,7 @@ private:
   ustring tar;
   ustring zip;
   ustring unzip;
+  ustring gzip;
   ustring git;
   ustring bibledit_git;
   ustring curl;
@@ -124,6 +126,7 @@ public:
   ustring get_templates_user(); // Returns the directory with the user's custom raw templates
   ustring get_package_data();   // Returns the package data directory
   ustring get_restore();        // Returns the directory to restore from
+  ustring get_path();           // Returns the path environment variable
 
   // To do: integrate runtime.h/.cpp with this stuff, perhaps in a Utilities object or similar.
   ustring get_copy();
@@ -140,6 +143,7 @@ public:
   ustring get_tar();
   ustring get_zip();
   ustring get_unzip();
+  ustring get_gzip();
   ustring get_git();
   ustring get_bibledit_git();
   ustring get_curl();
