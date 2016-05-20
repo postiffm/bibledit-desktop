@@ -235,6 +235,7 @@ void WindowReferences::load()
   DEBUG("40")
   // Close connection.
   sqlite3_close(db);
+  DEBUG("50")
 }
 
 void WindowReferences::load(const ustring &filename)
@@ -348,9 +349,10 @@ void WindowReferences::save() {
   } catch (exception &ex) {
     gw_critical(ex.what());
   }
-  DEBUG("Finished")
+  DEBUG("Step 50")
   // Close db.
   sqlite3_close(db);
+  DEBUG("Step 60")
 }
 
 void WindowReferences::save(const ustring &filename) {
