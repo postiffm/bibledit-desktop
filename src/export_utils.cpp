@@ -54,7 +54,7 @@
 #include <glib/gi18n.h>
 #include <libxml/xmlwriter.h>
 
-void export_to_usfm(const ustring &project, ustring location, bool zip) {
+void export_to_usfm(const ustring &project, ustring location, bool zip, bool combined) {
   // (Temporal) output directory.
   ustring tempdir = gw_build_filename(Directories->get_temp(), "usfm-export");
   unix_rmdir(tempdir);
@@ -73,8 +73,9 @@ void export_to_usfm(const ustring &project, ustring location, bool zip) {
     SelectBooksDialog dialog(false);
     dialog.language(projectconfig->language_get());
     dialog.selection_set(selectedbooks);
-    if (dialog.run() != GTK_RESPONSE_OK)
+    if (dialog.run() != GTK_RESPONSE_OK) {
       return;
+    }
     selectedbooks = dialog.selectionset;
     books.assign(selectedbooks.begin(), selectedbooks.end());
   }
@@ -83,21 +84,32 @@ void export_to_usfm(const ustring &project, ustring location, bool zip) {
   ProgressWindow progresswindow(_("Exporting project"), false);
   progresswindow.set_iterate(0, 1, books.size());
 
+  if (combined) {
+    unix_unlink(location);
+  }
+
   // Export all books to usfm.
   for (unsigned int i = 0; i < books.size(); i++) {
     // Progress info.
     progresswindow.iterate();
     vector<ustring> lines = project_retrieve_book(project, books[i]);
-    char padded[3];
-    sprintf(padded, "%02d", books[i]);
-    ustring padded2(padded);
-    ustring filename = padded2 + " " + books_id_to_english(books[i]) + ".usfm";
-    replace_text(filename, " ", "_");
-    if (zip)
+    ustring filename;
+    if (combined) {
+      filename = project + ".combined.usfm";
+    } else {
+      char padded[3];
+      sprintf(padded, "%02d", books[i]);
+      ustring padded2(padded);
+      filename = padded2 + " " + books_id_to_english(books[i]) + ".usfm";
+      replace_text(filename, " ", "_");
+    }
+    if (zip) {
       filename = gw_build_filename(tempdir, filename);
-    else
+    } else {
       filename = gw_build_filename(location, filename);
-    write_lines(filename, lines);
+    }
+    // If we are combining files, then we append to the end of the file
+    write_lines(filename, lines, /*append*/ combined);
   }
 
   // Compress them?
