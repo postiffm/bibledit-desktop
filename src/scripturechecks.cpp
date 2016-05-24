@@ -347,15 +347,17 @@ void scripture_checks_nt_quotations_from_ot(WindowReferences *references_window)
 
 void scripture_checks_synoptic_parallels_from_nt(WindowReferences *references_window) {
   CheckDialog dialog(cdtSynopticParallelsNT);
-  if (dialog.run() != GTK_RESPONSE_OK)
+  if (dialog.run() != GTK_RESPONSE_OK) {
     return;
+  }
   extern Settings *settings;
   ustring second_project;
 
-  if (settings->session.check_include_second_project)
+  if (settings->session.check_include_second_project) {
     second_project = settings->genconfig.check_markers_compare_project_get();
-  else
+  } else {
     second_project = "";
+  }
 
   CheckParallelPassages check(true, settings->genconfig.project_get(), checks_generate_booknames(), settings->session.check_include_verse_text, true, second_project);
   checks_display_references_comments(check.references, check.comments, references_window);
