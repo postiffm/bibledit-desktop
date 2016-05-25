@@ -138,7 +138,7 @@ void gw_destroy_source(guint &event_id)
 }
 
 // Append an error message to the startup log file
-void startup_error(const ustring &msg) {
+void mkdir_info(const ustring &msg) {
   ustring errfilename = gw_build_filename(g_get_tmp_dir(), "bibledit.startup.txt");
   FILE *errfile = fopen(errfilename.c_str(), "a"); // always append to end
   fprintf(errfile, "%s\n", msg.c_str());
@@ -181,13 +181,19 @@ void gw_mkdir_with_parents(const ustring &directory)
     int lasterr = GetLastError();
     if (lasterr == ERROR_ALREADY_EXISTS) {
       // Not really an error, just informative
-      startup_error("Already exists " + directory);
+      mkdir_info("Already exists " + directory);
     } else if (lasterr == ERROR_PATH_NOT_FOUND) {
-      startup_error("Cannot create " + directory + " because intermediate directories don't exist.");
+      mkdir_info("Cannot create " + directory + " because intermediate directories don't exist.");
+      // Strip off last part of directory and try again recursively
+      Glib::ustring::size_type idx = directory.find_last_of("\\");
+      ustring newdir = directory.substr(0, idx);
+      gw_mkdir_with_parents(newdir);
+      // Now try the full path again
+      gw_mkdir_with_parents(directory);
     }
   } else {
     // Not really an error, just informative
-    startup_error("Created " + directory);
+    mkdir_info("Created " + directory);
   }
 #else
   GwSpawn spawn(Directories->get_mkdir());
