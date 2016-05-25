@@ -29,6 +29,7 @@
 #else
 #include <sys/wait.h>
 #endif
+#include "debug.h"
 #include "directories.h"
 #include "shell.h"
 #include "tiny_utilities.h"
@@ -142,6 +143,7 @@ void startup_error(const ustring &msg) {
   FILE *errfile = fopen(errfilename.c_str(), "a"); // always append to end
   fprintf(errfile, "%s\n", msg.c_str());
   fclose(errfile);
+  DEBUG(msg)
 }
 
 void gw_mkdir_with_parents(const ustring &directory)
@@ -232,8 +234,9 @@ void GwSpawn::arg(ustring value)
   // Quote the argument.
   value = shell_quote_space(value);
 #else
-  // Escape the '.
+  // Escape any '.
   replace_text(value, "'", "\\'");
+  value = shell_quote_space(value);
 #endif
   // Save argument.
   myarguments.push_back(value);
