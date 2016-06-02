@@ -29,14 +29,15 @@ enum BookType { btOldTestament,
 
 typedef struct
 {
-  const char *name;        // English name.
-  const char *osis;        // Osis name.
-  const char *paratext;    // Paratext ID.
-  const char *bibleworks;  // BibleWorks name.
-  const char *onlinebible; // Online Bible name.
-  unsigned int id;         // Bibledit's internal id.
-  BookType type;           // The type of the book.
-  bool onechapter;         // The book has one chapter.
+  const char *name;            // English name.
+  const char *osis;            // Osis name.
+  const char *paratext;        // Paratext ID.
+  const char *bibleworks;      // BibleWorks name, also Biblegateway and Blue Letter Bible
+  const char *onlinebible;     // Online Bible name.
+  const char *biblestudytools; // For biblestudytools.com
+  unsigned int id;             // Bibledit's internal id.
+  BookType type;               // The type of the book.
+  bool onechapter;             // The book has one chapter.
 } book_record;
 
 unsigned int bookdata_books_count();
