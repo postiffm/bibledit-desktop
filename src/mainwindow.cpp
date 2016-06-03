@@ -128,6 +128,9 @@
 #include <glib/gi18n.h>
 #include <signal.h>
 #include <sqlite3.h>
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 /*
  |
@@ -941,19 +944,25 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   view_external_submenu = gtk_menu_new();
   gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_verse_external), view_external_submenu);
 
-  view_biblegateway = gtk_image_menu_item_new_with_mnemonic(_("_Bible Gateway"));
+#ifdef WIN32
+  view_bibleworks = gtk_image_menu_item_new_with_mnemonic(_("_Bibleworks"));
+  gtk_widget_show(view_bibleworks);
+  gtk_container_add(GTK_CONTAINER(view_external_submenu), view_bibleworks);
+#endif
+
+  view_biblegateway = gtk_image_menu_item_new_with_mnemonic(_("Bible _Gateway"));
   gtk_widget_show(view_biblegateway);
   gtk_container_add(GTK_CONTAINER(view_external_submenu), view_biblegateway);
 
-  view_biblestudytools = gtk_image_menu_item_new_with_mnemonic(_("_Bible Study Tools"));
+  view_biblestudytools = gtk_image_menu_item_new_with_mnemonic(_("Bible _Study Tools"));
   gtk_widget_show(view_biblestudytools);
   gtk_container_add(GTK_CONTAINER(view_external_submenu), view_biblestudytools);
 
-  view_blueletterbible = gtk_image_menu_item_new_with_mnemonic(_("_Blue Letter Bible"));
+  view_blueletterbible = gtk_image_menu_item_new_with_mnemonic(_("Blue _Letter Bible"));
   gtk_widget_show(view_blueletterbible);
   gtk_container_add(GTK_CONTAINER(view_external_submenu), view_blueletterbible);
 
-  view_bibleorg = gtk_image_menu_item_new_with_mnemonic(_("_Bible.org (book)"));
+  view_bibleorg = gtk_image_menu_item_new_with_mnemonic(_("Bible._org (book)"));
   gtk_widget_show(view_bibleorg);
   gtk_container_add(GTK_CONTAINER(view_external_submenu), view_bibleorg);
 
@@ -1672,6 +1681,11 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   if (view_outline)
     g_signal_connect((gpointer)view_outline, "activate", G_CALLBACK(on_view_outline_activate), gpointer(this));
   g_signal_connect((gpointer)view_tile_windows, "activate", G_CALLBACK(on_view_tile_windows_activate), gpointer(this));
+#ifdef WIN32
+  if (view_bibleworks) {
+    g_signal_connect((gpointer)view_bibleworks, "activate", G_CALLBACK(on_view_bibleworks_activate), gpointer(this));
+  }
+#endif
   if (view_biblegateway) {
     g_signal_connect((gpointer)view_biblegateway, "activate", G_CALLBACK(on_view_biblegateway_activate), gpointer(this));
   }
@@ -4441,6 +4455,23 @@ void MainWindow::on_view_tile_windows()
     }
   }
 }
+
+#ifdef WIN32
+void MainWindow::on_view_bibleworks_activate(GtkMenuItem *menuitem, gpointer user_data) {
+  ((MainWindow *)user_data)->on_view_bibleworks();
+}
+
+void MainWindow::on_view_bibleworks(void) {
+  extern book_record books_table[];
+  Reference current_reference = navigation.get_current_ref();
+
+  // For now, we jump to the verse
+  ustring book(books_table[current_reference.book_get()].bibleworks);
+  ustring searchstring = book + " " + std::to_string(current_reference.chapter_get()) + current_reference.verse_get();
+
+  // OLE connection to Bibleworks
+}
+#endif
 
 void MainWindow::on_view_biblegateway_activate(GtkMenuItem *menuitem, gpointer user_data) {
   ((MainWindow *)user_data)->on_view_biblegateway();
