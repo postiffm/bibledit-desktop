@@ -35,7 +35,8 @@ enum WindowID { widShowRelatedVerses,
                 widMenu,
                 widShowVerses,
                 widCheckUSFM,
-                widSourceLanguages };
+                widSourceLanguages,
+                widTabbed };
 
 class WindowData {
 public:
