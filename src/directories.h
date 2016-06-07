@@ -25,7 +25,7 @@
 **
 ** March 2016: Added a lot of new functionality to track paths
 ** of various utilities. Goal was to make bibledit more cross-platform
-** compatible.
+** compatible. June 2016: consolidated pdfviewer logic from pdfviewer.cpp.
 */
 
 #ifndef INCLUDED_DIRECTORIES_H
@@ -76,6 +76,9 @@ private:
   ustring zip;
   ustring unzip;
   ustring gzip;
+  ustring pdfviewer;
+  ustring pdfviewer_args;
+  void find_pdfviewer(void); // routine to do the heavy lifting...
   ustring git;
   ustring bibledit_git;
   ustring curl;
@@ -144,6 +147,8 @@ public:
   ustring get_zip();
   ustring get_unzip();
   ustring get_gzip();
+  ustring get_pdfviewer();
+  ustring get_pdfviewer_args();
   ustring get_git();
   ustring get_bibledit_git();
   ustring get_curl();
