@@ -1,7 +1,6 @@
-# Files that we don't want to git to think about
+# Specific generated files/directories
+Makefile
 Makefile.in
-aclocal.m4
-m4/*.m4
 INSTALL
 compile
 config.guess
@@ -14,6 +13,22 @@ install-sh
 libtool
 ltmain.sh
 missing
+config.status
 po/Makefile.in.in
 po/fr.gmo
 po/stamp-it
+autom4te.cache
+
+# File types
+*.log
+*~
+.deps
+*.o
+*.m4
+
+# Binaries
+git/bibledit-git
+shutdown/bibledit-shutdown
+src/bibledit-gtk
+src/bibledit-rdwrt
+src/concordance
