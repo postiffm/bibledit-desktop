@@ -146,7 +146,7 @@ private:
   // Fontsize in points.
   GtkWidget *hbox2;
   GtkWidget *label8;
-  GtkObject *spinbuttonfontsize_adj;
+  GObject *spinbuttonfontsize_adj;
   GtkWidget *spinbuttonfontsize;
   GtkWidget *label9;
   void fontsize_points_create ();
@@ -220,15 +220,15 @@ private:
   GtkWidget *label18;
   GtkWidget *label19;
   GtkWidget *label20;
-  GtkObject *spinbutton_first_adj;
+  GObject *spinbutton_first_adj;
   GtkWidget *spinbutton_first;
-  GtkObject *spinbutton_before_adj;
+  GObject *spinbutton_before_adj;
   GtkWidget *spinbutton_before;
-  GtkObject *spinbutton_after_adj;
+  GObject *spinbutton_after_adj;
   GtkWidget *spinbutton_after;
-  GtkObject *spinbutton_left_adj;
+  GObject *spinbutton_left_adj;
   GtkWidget *spinbutton_left;
-  GtkObject *spinbutton_right_adj;
+  GObject *spinbutton_right_adj;
   GtkWidget *spinbutton_right;
   ustring justification;
   double spacebefore;
@@ -306,7 +306,7 @@ private:
   // Column number.
   GtkWidget *hbox15;
   GtkWidget *label62;
-  GtkObject *spinbutton_column_number_adj;
+  GObject *spinbutton_column_number_adj;
   GtkWidget *spinbutton_column_number;
   void column_number_create ();
 

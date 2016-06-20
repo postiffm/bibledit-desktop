@@ -239,7 +239,7 @@ protected:
   // Words - Inventory.
   GtkWidget *wordcount_hbox1;
   GtkWidget *wordcount_checkbutton1;
-  GtkObject *wordcount_spinbutton1_adj;
+  GObject *wordcount_spinbutton1_adj;
   GtkWidget *wordcount_spinbutton1;
   GtkWidget *wordcount_label2;
   GtkWidget *wordcount_label1;
