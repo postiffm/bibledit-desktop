@@ -37,10 +37,10 @@ private:
   // Page setup.
   GtkWidget *hbox1;
   GtkWidget *table1;
-  GtkObject *spinbutton_height_adj;
+  GObject *spinbutton_height_adj;
   GtkWidget *spinbutton_height;
   GtkWidget *label4;
-  GtkObject *spinbutton_width_adj;
+  GObject *spinbutton_width_adj;
   GtkWidget *spinbutton_width;
   GtkWidget *label3;
   GtkWidget *label2;
@@ -54,15 +54,15 @@ private:
   GtkWidget *label8;
   GtkWidget *label9;
   GtkWidget *label10;
-  GtkObject *spinbutton_left_adj;
+  GObject *spinbutton_left_adj;
   GtkWidget *spinbutton_left;
-  GtkObject *spinbutton_right_adj;
+  GObject *spinbutton_right_adj;
   GtkWidget *spinbutton_right;
-  GtkObject *spinbutton_top_adj;
+  GObject *spinbutton_top_adj;
   GtkWidget *spinbutton_top;
-  GtkObject *spinbutton_bottom_adj;
+  GObject *spinbutton_bottom_adj;
   GtkWidget *spinbutton_bottom;
-  GtkObject *spinbutton_columngap_adj;
+  GObject *spinbutton_columngap_adj;
   GtkWidget *spinbutton_columngap;
   GtkWidget *vseparator2;
   GtkWidget *vbox1;
@@ -70,7 +70,7 @@ private:
   GtkWidget *draftchkbox;
   GtkWidget *hbox2;
   GtkWidget *label12;
-  GtkObject *spinbutton_header_font_size_adj;
+  GObject *spinbutton_header_font_size_adj;
   GtkWidget *spinbutton_header_font_size;
   GtkWidget *label13;
   GtkWidget *label1;
