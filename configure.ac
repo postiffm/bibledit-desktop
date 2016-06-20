@@ -25,7 +25,7 @@ AC_PROG_CXX
 AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
 AC_HEADER_STDC
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.24.0 gdk-2.0,,AC_MSG_ERROR(Gtk2 development version >= 2.24.0 is needed.))
+PKG_CHECK_MODULES([GTK3], gtk+-3.0 gdk-3.0,,AC_MSG_ERROR(Gtk3 development version is needed.))
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
@@ -206,7 +206,7 @@ PKG_CHECK_MODULES(PANGO, [pango >= 1.8.0],
    [AC_MSG_WARN([Enabling word-breaking workarounds since pango < 1.8.0])])
 
 
-PKG_CHECK_MODULES(GTKSOURCEVIEW, gtksourceview-2.0 >= 2.2.0)
+PKG_CHECK_MODULES(GTKSOURCEVIEW, gtksourceview-3.0 >= 3.0.0)
 AC_SUBST(GTKSOURCEVIEW_CFLAGS)
 AC_SUBST(GTKSOURCEVIEW_LIBS)
 
