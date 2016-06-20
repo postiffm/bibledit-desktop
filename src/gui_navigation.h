@@ -66,13 +66,13 @@ private:
   GtkWidget *button_list_forward;
   GtkWidget *image_list_forward;
   GtkWidget *combo_book;
-  GtkObject *spinbutton_book_adj;
+  GObject *spinbutton_book_adj;
   GtkWidget *spinbutton_book;
   GtkWidget *combo_chapter;
-  GtkObject *spinbutton_chapter_adj;
+  GObject *spinbutton_chapter_adj;
   GtkWidget *spinbutton_chapter;
   GtkWidget *combo_verse;
-  GtkObject *spinbutton_verse_adj;
+  GObject *spinbutton_verse_adj;
   GtkWidget *spinbutton_verse;
   GtkWidget *entry_free;
 
