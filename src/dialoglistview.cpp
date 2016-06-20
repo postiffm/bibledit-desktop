@@ -265,7 +265,7 @@ void ListviewDialog::on_focus()
 }
 
 
-void ListviewDialog::on_notebook1_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, guint page_num, gpointer user_data)
+void ListviewDialog::on_notebook1_switch_page(GtkNotebook * notebook, GtkWidget * page, guint page_num, gpointer user_data)
 {
   ((ListviewDialog *) user_data)->on_switch_page();
 }

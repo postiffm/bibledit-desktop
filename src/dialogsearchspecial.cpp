@@ -518,7 +518,7 @@ void SearchSpecialDialog::on_control_f()
 }
 
 
-void SearchSpecialDialog::on_notebook_mode_switch_page(GtkNotebook * notebook, GtkNotebookPage * page, guint page_num, gpointer user_data)
+void SearchSpecialDialog::on_notebook_mode_switch_page(GtkNotebook * notebook, GtkWidget * page, guint page_num, gpointer user_data)
 {
   ((SearchSpecialDialog *) user_data)->on_mode_change(page_num);
 }

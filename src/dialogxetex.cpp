@@ -202,7 +202,7 @@ void XeTeXDialog::set_gui()
 }
 
 
-void XeTeXDialog::on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page, guint page_num, gpointer user_data)
+void XeTeXDialog::on_notebook_switch_page (GtkNotebook *notebook, GtkWidget *page, guint page_num, gpointer user_data)
 {
   ((XeTeXDialog *) user_data)->on_notebook(page_num);
 }

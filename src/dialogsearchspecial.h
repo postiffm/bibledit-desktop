@@ -103,7 +103,7 @@ private:
   void on_button_area();
   static void on_searchspecialdialog_activate_focus(GtkWindow *window, gpointer user_data);
   void on_control_f();
-  static void on_notebook_mode_switch_page(GtkNotebook *notebook, GtkNotebookPage *page, guint page_num, gpointer user_data);
+  static void on_notebook_mode_switch_page(GtkNotebook *notebook, GtkWidget *page, guint page_num, gpointer user_data);
   void on_mode_change(guint page_num);
   DialogPresenter * dialogpresenter;
 };
