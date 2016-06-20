@@ -24,6 +24,7 @@
 
 #include "libraries.h"
 #include <gtk/gtk.h>
+#include <gtk/gtkx.h>
 
 
 void gtkw_dialog_info (GtkWidget * parent, const ustring& info);
