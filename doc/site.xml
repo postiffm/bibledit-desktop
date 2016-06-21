@@ -1247,6 +1247,18 @@ place the window there. It will also size the window so that it fills that open
 space. If there is no sufficient space available to place a window in, then
 Bibledit will look for the largest window, make it half the size, and place the
 new window in the open space so created.</p>
+<h2><a name="TOC-Commandline-parameters"/>Commandline parameters</h2>
+<p>--debug. For debugging in gdb.</p>
+
+<p>-r|-w &lt;project&gt; &lt;book&gt; chapter|0 fileName. For reading from or writing to Bibledit USFM data. See source file readwrite.cpp for more information.</p>
+
+</div></body></html>
+
+<name>site/gtk/reference/internals.html</name></url><url><loc>https://sites.google.com/site/bibledit/gtk/reference/keyboard-accelerators</loc><priority>0.5</priority><dir>site/gtk/reference</dir><html><head/><body><div id="menu"/><div id="content">
+
+<h1>Keyboard accelerators</h1>
+
+<p>Accelerators are keystrokes that accelerate access to certain functions.</p>
 
 <h2><a name="TOC-Commandline-parameters"/>Commandline parameters</h2>
 
@@ -3607,7 +3619,7 @@ exported to SWORD format.</p>
 <p>Displays paragraphs, headings and titles in BibleTime when exporting to
 Sword format.</p>
 
-<p>Runs on OLPC - One Laptop Per Child.</p>
+<p>Runs on OLPC - One Laptop Per Child (support dropped from 2014 forward).</p>
 
 <p>Automatically updates older stylesheets to stylesheets version 2.</p>
 
@@ -4249,8 +4261,6 @@ rendering.</p>
 
 <p>The dependency on the dillo browser has been dropped, it now uses
 bibledit-help for in-dialog help.</p>
-
-<p>Supports --xembed for on the XO machine.</p>
 
 <p>A resource converter was build for the new resource system, and the previous
 converter was removed.</p></div></body></html><name>site/gtk/reference/changes-log/version-3-x/version-3-0.html</name></url><url><loc>./site/gtk/reference/changes-log/version-3-x/version-3-1.html</loc><priority>0.5</priority><dir>site/gtk/reference/changes-log/version-3-x</dir><html><head/><body><div id="menu"/><div id="content"><h1>Version 3.1</h1><p>22 March 2008</p>
