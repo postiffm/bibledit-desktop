@@ -281,10 +281,10 @@ SearchSpecialDialog::SearchSpecialDialog(int dummy)
   combobox_results = gtk_combo_box_text_new();
   gtk_widget_show(combobox_results);
   gtk_box_pack_start(GTK_BOX(vbox7), combobox_results, TRUE, TRUE, 0);
-  gtk_combo_box_append_text(GTK_COMBO_BOX(combobox_results), RESULTS_LOAD);
-  gtk_combo_box_append_text(GTK_COMBO_BOX(combobox_results), RESULTS_ADD);
-  gtk_combo_box_append_text(GTK_COMBO_BOX(combobox_results), RESULTS_REMOVE);
-  gtk_combo_box_append_text(GTK_COMBO_BOX(combobox_results), RESULTS_SHARE);
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox_results), RESULTS_LOAD);
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox_results), RESULTS_ADD);
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox_results), RESULTS_REMOVE);
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox_results), RESULTS_SHARE);
 
   // Set selected value in combobox.
   int index = 0;
