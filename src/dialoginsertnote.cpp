@@ -195,7 +195,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
   gtk_widget_show(hbox3);
   gtk_box_pack_start(GTK_BOX(vbox1), hbox3, TRUE, TRUE, 0);
 
-  combobox_templates = gtk_combo_box_new_text();
+  combobox_templates = gtk_combo_box_text_new();
   gtk_widget_show(combobox_templates);
   gtk_box_pack_start(GTK_BOX(hbox3), combobox_templates, TRUE, TRUE, 0);
   gtk_widget_set_can_default (GTK_WIDGET (combobox_templates), true);
@@ -574,7 +574,7 @@ void InsertNoteDialog::on_button_add()
   gtk_widget_show(hbox8);
   gtk_box_pack_start(GTK_BOX(vbox2), hbox8, TRUE, TRUE, 0);
 
-  combobox_style = gtk_combo_box_new_text();
+  combobox_style = gtk_combo_box_text_new();
   gtk_widget_show(combobox_style);
   gtk_box_pack_start(GTK_BOX(hbox8), combobox_style, TRUE, TRUE, 0);
 

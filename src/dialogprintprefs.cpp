@@ -89,7 +89,7 @@ PrintPreferencesDialog::PrintPreferencesDialog(int dummy)
   gtk_table_attach(GTK_TABLE(table1), label2, 0, 1, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment(GTK_MISC(label2), 1, 0.5);
 
-  combo_format = gtk_combo_box_new_text();
+  combo_format = gtk_combo_box_text_new();
   gtk_widget_show(combo_format);
   gtk_table_attach(GTK_TABLE(table1), combo_format, 1, 2, 1, 2, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (0), 0, 0);
   {

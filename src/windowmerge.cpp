@@ -70,7 +70,7 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_box_pack_start(GTK_BOX(vbox1), label6, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label6), 0, 0.5);
 
-  combobox_master = gtk_combo_box_new_text();
+  combobox_master = gtk_combo_box_text_new();
   gtk_widget_show(combobox_master);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_master, FALSE, FALSE, 0);
 
@@ -81,7 +81,7 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_box_pack_start(GTK_BOX(vbox1), label7, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 
-  combobox_edited = gtk_combo_box_new_text();
+  combobox_edited = gtk_combo_box_text_new();
   gtk_widget_show(combobox_edited);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_edited, FALSE, FALSE, 0);
 

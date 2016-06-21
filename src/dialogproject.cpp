@@ -199,7 +199,7 @@ ProjectDialog::ProjectDialog (bool newproject)
 
   shortcuts.label(label11);
 
-  combobox_versification = gtk_combo_box_new_text();
+  combobox_versification = gtk_combo_box_text_new();
   gtk_widget_show(combobox_versification);
   gtk_table_attach(GTK_TABLE(table2), combobox_versification, 1, 2, 0, 1, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (GTK_FILL), 0, 0);
 
@@ -216,7 +216,7 @@ ProjectDialog::ProjectDialog (bool newproject)
 
   shortcuts.label(label12);
 
-  combobox_language = gtk_combo_box_new_text();
+  combobox_language = gtk_combo_box_text_new();
   gtk_widget_show(combobox_language);
   gtk_table_attach(GTK_TABLE(table2), combobox_language, 1, 2, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (GTK_FILL), 0, 0);
 
@@ -256,7 +256,7 @@ ProjectDialog::ProjectDialog (bool newproject)
   gtk_widget_show(label_depend);
   gtk_box_pack_start(GTK_BOX(hbox_depend), label_depend, FALSE, FALSE, 0);
 
-  combobox_depend = gtk_combo_box_new_text();
+  combobox_depend = gtk_combo_box_text_new();
   gtk_widget_show(combobox_depend);
   gtk_box_pack_start(GTK_BOX(hbox_depend), combobox_depend, TRUE, TRUE, 0);
 

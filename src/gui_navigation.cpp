@@ -140,7 +140,7 @@ void GuiNavigation::build(GtkWidget * toolbar)
   gtk_widget_show(GTK_WIDGET(toolitem3));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem3), -1);
 
-  combo_book = gtk_combo_box_new_text();
+  combo_book = gtk_combo_box_text_new();
   gtk_widget_show(combo_book);
   gtk_container_add(GTK_CONTAINER(toolitem3), combo_book);
   gtk_widget_set_can_focus (combo_book, false);
@@ -164,7 +164,7 @@ void GuiNavigation::build(GtkWidget * toolbar)
   gtk_widget_show(GTK_WIDGET(toolitem6));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem6), -1);
 
-  combo_chapter = gtk_combo_box_new_text();
+  combo_chapter = gtk_combo_box_text_new();
   gtk_widget_show(combo_chapter);
   gtk_container_add(GTK_CONTAINER(toolitem6), combo_chapter);
   gtk_widget_set_can_focus (combo_chapter, false);
@@ -188,7 +188,7 @@ void GuiNavigation::build(GtkWidget * toolbar)
   gtk_widget_show(GTK_WIDGET(toolitem8));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem8), -1);
 
-  combo_verse = gtk_combo_box_new_text();
+  combo_verse = gtk_combo_box_text_new();
   gtk_widget_show(combo_verse);
   gtk_container_add(GTK_CONTAINER(toolitem8), combo_verse);
   gtk_widget_set_can_focus (combo_verse, false);

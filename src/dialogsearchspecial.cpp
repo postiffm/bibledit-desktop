@@ -278,7 +278,7 @@ SearchSpecialDialog::SearchSpecialDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(vbox7), label14, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label14), 0, 0.5);
 
-  combobox_results = gtk_combo_box_new_text();
+  combobox_results = gtk_combo_box_text_new();
   gtk_widget_show(combobox_results);
   gtk_box_pack_start(GTK_BOX(vbox7), combobox_results, TRUE, TRUE, 0);
   gtk_combo_box_append_text(GTK_COMBO_BOX(combobox_results), RESULTS_LOAD);

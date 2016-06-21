@@ -44,7 +44,7 @@ ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring 
   gtk_box_pack_start(GTK_BOX(vbox1), label_note_project, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_note_project), 0, 0.5);
 
-  combobox_note_project = gtk_combo_box_new_text();
+  combobox_note_project = gtk_combo_box_text_new();
   gtk_widget_show(combobox_note_project);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_note_project, FALSE, FALSE, 0);
 

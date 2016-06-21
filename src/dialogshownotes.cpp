@@ -91,12 +91,12 @@ ShowNotesDialog::ShowNotesDialog(int dummy)
   radiobutton_date_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_at_any_time));
   g_signal_connect ((gpointer) radiobutton_at_any_time, "clicked", G_CALLBACK (on_button_clicked), gpointer (this));
 
-  // Glade-3 does not seem to be able to work with gtk_combo_box_new_text yet. Workaround below.
+  // Glade-3 does not seem to be able to work with gtk_combo_box_text_new yet. Workaround below.
   label_category = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_category"));
   hbox_category = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "hbox_category"));
   combobox_category = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "combobox_category"));
   gtk_widget_destroy (combobox_category);
-  combobox_category = gtk_combo_box_new_text();
+  combobox_category = gtk_combo_box_text_new();
   gtk_widget_show(combobox_category);
   gtk_box_pack_start(GTK_BOX(hbox_category), combobox_category, TRUE, TRUE, 0);
   gtk_label_set_mnemonic_widget(GTK_LABEL(label_category), combobox_category);

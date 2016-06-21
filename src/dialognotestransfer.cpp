@@ -63,7 +63,7 @@ NotesTransferDialog::NotesTransferDialog(int dummy)
   gtk_widget_show(label2);
   gtk_box_pack_start(GTK_BOX(hbox1), label2, FALSE, FALSE, 0);
 
-  combobox1 = gtk_combo_box_new_text();
+  combobox1 = gtk_combo_box_text_new();
   gtk_widget_show(combobox1);
   gtk_box_pack_start(GTK_BOX(hbox1), combobox1, TRUE, TRUE, 0);
 

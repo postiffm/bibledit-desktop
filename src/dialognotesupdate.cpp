@@ -72,7 +72,7 @@ NotesUpdateDialog::NotesUpdateDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(vbox1), label7, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 
-  combobox_project_from = gtk_combo_box_new_text();
+  combobox_project_from = gtk_combo_box_text_new();
   gtk_widget_show(combobox_project_from);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_project_from, TRUE, TRUE, 0);
 
@@ -84,7 +84,7 @@ NotesUpdateDialog::NotesUpdateDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(vbox1), label8, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label8), 0, 0.5);
 
-  combobox_project_to = gtk_combo_box_new_text();
+  combobox_project_to = gtk_combo_box_text_new();
   gtk_widget_show(combobox_project_to);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_project_to, TRUE, TRUE, 0);
 
@@ -108,7 +108,7 @@ NotesUpdateDialog::NotesUpdateDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(vbox2), label10, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
 
-  combobox_category_from = gtk_combo_box_new_text();
+  combobox_category_from = gtk_combo_box_text_new();
   gtk_widget_show(combobox_category_from);
   gtk_box_pack_start(GTK_BOX(vbox2), combobox_category_from, TRUE, TRUE, 0);
 
@@ -120,7 +120,7 @@ NotesUpdateDialog::NotesUpdateDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(vbox2), label11, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label11), 0, 0.5);
 
-  combobox_category_to = gtk_combo_box_new_text();
+  combobox_category_to = gtk_combo_box_text_new();
   gtk_widget_show(combobox_category_to);
   gtk_box_pack_start(GTK_BOX(vbox2), combobox_category_to, TRUE, TRUE, 0);
 

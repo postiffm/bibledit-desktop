@@ -63,7 +63,7 @@ WindowCheckUSFM::WindowCheckUSFM(GtkWidget * parent_layout, GtkAccelGroup *accel
   
   shortcuts.label (label_filter);
 
-  combobox_filter = gtk_combo_box_new_text ();
+  combobox_filter = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_filter);
   gtk_box_pack_start (GTK_BOX (vbox_filter), combobox_filter, FALSE, FALSE, 0);
 

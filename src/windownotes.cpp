@@ -189,7 +189,7 @@ WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_box_pack_start(GTK_BOX(vbox_controls), label_note_category, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_note_category), 0, 0.5);
 
-  combobox_note_category = gtk_combo_box_new_text();
+  combobox_note_category = gtk_combo_box_text_new();
   gtk_widget_show(combobox_note_category);
   gtk_box_pack_start(GTK_BOX(vbox_controls), combobox_note_category, FALSE, FALSE, 0);
 

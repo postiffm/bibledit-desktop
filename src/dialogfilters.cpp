@@ -140,7 +140,7 @@ FiltersDialog::FiltersDialog(int dummy)
 
   shortcuts.stockbutton(button_new);
 
-  combobox_filters = gtk_combo_box_new_text();
+  combobox_filters = gtk_combo_box_text_new();
   gtk_widget_show(combobox_filters);
   gtk_box_pack_start(GTK_BOX(hbox1), combobox_filters, TRUE, TRUE, 0);
 
