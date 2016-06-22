@@ -548,7 +548,7 @@ void InsertNoteDialog::on_button_add()
   GtkWidget *hbox8;
   GtkWidget *combobox_style;
   GtkWidget *label_size;
-  GObject *spinbutton_size_adj;
+  GtkAdjustment *spinbutton_size_adj;
   GtkWidget *spinbutton_size;
   GtkWidget *checkbutton_content;
   GtkWidget *vseparator2;
