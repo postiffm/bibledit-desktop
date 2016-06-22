@@ -356,7 +356,6 @@ StylesheetDialog::StylesheetDialog(const ustring & stylesheet, const ustring & s
   vbox13 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox13);
   gtk_container_add(GTK_CONTAINER(notebook_subtype), vbox13);
-  gtk_notebook_set_tab_label_packing(GTK_NOTEBOOK(notebook_subtype), vbox13, FALSE, FALSE, GTK_PACK_START);
 
   label55 = gtk_label_new(_("This one:"));
   gtk_widget_show(label55);
