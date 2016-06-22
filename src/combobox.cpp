@@ -61,7 +61,7 @@ void combobox_clear_strings(GtkWidget * combobox)
 // Clear the strings loaded in the combobox.
 {
   for (int i = combobox_get_string_count(combobox) - 1; i >= 0; i--)
-    gtk_combo_box_remove_text(GTK_COMBO_BOX(combobox), i);
+    gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combobox), i);
 }
 
 vector < ustring > combobox_get_strings(GtkWidget * combobox)
