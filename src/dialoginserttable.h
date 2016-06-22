@@ -41,9 +41,9 @@ protected:
   GtkWidget *table1;
   GtkWidget *label2;
   GtkWidget *label3;
-  GObject *spinbutton_rows_adj;
+  GtkAdjustment *spinbutton_rows_adj;
   GtkWidget *spinbutton_rows;
-  GObject *spinbutton_columns_adj;
+  GtkAdjustment *spinbutton_columns_adj;
   GtkWidget *spinbutton_columns;
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton;
