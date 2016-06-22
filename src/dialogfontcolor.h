@@ -54,7 +54,7 @@ protected:
   GtkWidget *fontselection;
   GtkWidget *hbox_line_spacing;
   GtkWidget *label7;
-  GObject *spinbutton_line_spacing_adj;
+  GtkAdjustment *spinbutton_line_spacing_adj;
   GtkWidget *spinbutton_line_spacing;
   GtkWidget *label8;
   GtkWidget *hseparator1;

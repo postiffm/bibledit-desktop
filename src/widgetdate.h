@@ -43,11 +43,11 @@ private:
   GtkWidget *label_hour;
   GtkWidget *label_minute;
   GtkWidget *label_second;
-  GObject *spinbutton_minute_adj;
+  GtkAdjustment *spinbutton_minute_adj;
   GtkWidget *spinbutton_minute;
-  GObject *spinbutton_second_adj;
+  GtkAdjustment *spinbutton_second_adj;
   GtkWidget *spinbutton_second;
-  GObject *spinbutton_hour_adj;
+  GtkAdjustment *spinbutton_hour_adj;
   GtkWidget *spinbutton_hour;
   guint * my_seconds_since_epoch;
   static void on_spinbutton_changed (GtkEditable *editable, gpointer user_data);
