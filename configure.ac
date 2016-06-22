@@ -24,9 +24,6 @@ AC_PROG_CXX
 AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
 AC_HEADER_STDC
-PKG_CHECK_MODULES([GTK3], gtk+-3.0 gdk-3.0,,AC_MSG_ERROR(Gtk3 development version is needed.))
-AC_SUBST(GTK_LIBS)
-AC_SUBST(GTK_CFLAGS)
 
 
 PKG_PROG_PKG_CONFIG
@@ -163,9 +160,9 @@ AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
 
 
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.12.0,,AC_MSG_ERROR(gtk+ development version >= 2.12.0 is needed.))
-AC_SUBST(GTK_CFLAGS)
-AC_SUBST(GTK_LIBS)
+PKG_CHECK_MODULES(GTK3, gtk+-3.0 >= 3.20,,AC_MSG_ERROR(gtk+ development version >= 3.20.0 is needed.))
+AC_SUBST(GTK3_CFLAGS)
+AC_SUBST(GTK3_LIBS)
 
 
 PKG_CHECK_MODULES(GTHREAD, gthread-2.0 >= 2.16.0,,AC_MSG_ERROR(gthread development version >= 2.16.0 is needed.))
@@ -210,9 +207,9 @@ AC_SUBST(GTKSOURCEVIEW_CFLAGS)
 AC_SUBST(GTKSOURCEVIEW_LIBS)
 
 
-PKG_CHECK_MODULES(WEBKIT, webkit-1.0 >= 1.0.0,,AC_MSG_ERROR(libwebkit development version >= 1.0.0 is needed.))
-AC_SUBST(WEBKIT_CFLAGS)
-AC_SUBST(WEBKIT_LIBS)
+PKG_CHECK_MODULES(WEBKITGTK, webkitgtk-3.0 >= 1.0.0,,AC_MSG_ERROR(libwebkitgtk-3.0 development version >= 1.0.0 is needed.))
+AC_SUBST(WEBKITGTK_CFLAGS)
+AC_SUBST(WEBKITGTK_LIBS)
 
 
 PKG_CHECK_MODULES(LIBSOUP, libsoup-2.4 >= 2.42,,AC_MSG_ERROR(libsoup-2.4 development version >= 2.42 is needed.))
