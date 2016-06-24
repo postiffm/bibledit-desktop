@@ -18,6 +18,7 @@ po/Makefile.in.in
 po/fr.gmo
 po/stamp-it
 autom4te.cache
+.libs
 
 # File types
 *.log
@@ -25,6 +26,7 @@ autom4te.cache
 .deps
 *.o
 *.m4
+*.exe
 
 # Binaries
 git/bibledit-git
