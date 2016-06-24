@@ -4,11 +4,11 @@ bibledit_git_SOURCES = bibledit-git.cpp
 
 AM_CXXFLAGS = -Wall
 AM_CXXFLAGS += $(GLIB_CFLAGS)
-AM_CXXFLAGS += $(GTK_CFLAGS)
+AM_CXXFLAGS += $(GTK3_CFLAGS)
 
 LIBS = -Wall 
 LIBS += $(GLIB_LIBS)
-LIBS += $(GTK_LIBS)
+LIBS += $(GTK3_LIBS)
 
 if LINUX
 endif
