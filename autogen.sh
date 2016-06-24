@@ -30,9 +30,11 @@ then
   case "$MSYSTEM" in
     MINGW32)
 	  ACLOCAL="/mingw32/share/aclocal"
+	  AUTOCONFARCHIVE="/usr/share/aclocal"
     ;;
     MINGW64)
 	  ACLOCAL="/mingw64/share/aclocal"
+	  AUTOCONFARCHIVE="/usr/share/aclocal"
     ;;
     MSYS)
       error_exit "copying autoconf macros (you are using an MSYS shell instead of a MINGW shell?)"
@@ -46,6 +48,7 @@ then
 elif [ $unamestr == "Linux" ]
 then
   ACLOCAL="/usr/share/aclocal"
+  AUTOCONFARCHIVE="/usr/share/aclocal"
 else
   error_exit "figuring out what system I am on, so I can copy autoconf macros"
 fi
@@ -57,6 +60,8 @@ cp -f "$ACLOCAL/glibc21.m4" m4/
 cp -f "$ACLOCAL/iconv.m4" m4/
 cp -f "$ACLOCAL/lcmessage.m4" m4/
 cp -f "$ACLOCAL/progtest.m4" m4/
+# aclocal should handle this by itself, but it copies the stdcxx_11.m4 variant
+#cp -f "$AUTOCONFARCHIVE/ax_cxx_compile_stdcxx.m4" m4/
 # What to do about isc-posix.m4?
 
 echo "Running glib-gettextize..."

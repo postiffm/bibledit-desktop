@@ -49,6 +49,7 @@ pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-python2-pygtk
 pacman -S --noconfirm msys/gtk-doc
 pacman -S --noconfirm msys/git
 #pacman -S --noconfirm msys/glib2-devel
+pacman -S --noconfirm autoconf-archive
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-sqlite3 msys/libsqlite-devel msys/sqlite msys/sqlite-doc
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-gtksourceview2 $MINGWDIR/mingw-w64-$PLATFORM-gtksourceviewmm3
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-webkitgtk2 $MINGWDIR/mingw-w64-$PLATFORM-webkitgtk3
