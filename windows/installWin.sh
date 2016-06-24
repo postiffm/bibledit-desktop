@@ -186,6 +186,15 @@ cp $DLLS/libenchant.dll "$BIN"
 #libenchant_myspell.dll libenchant_ispell.dll
 # which reside in /$MINGWDIR/lib/enchant/...
 cp $DLLS/libgdk-win32-2.0-0.dll "$BIN"
+# Below added 6/24/2016 in support of gtk3 transition
+cp $DLLS/libgdk-3-0.dll "$BIN"
+cp $DLLS/libcairo-gobject-2.dll "$BIN"
+cp $DLLS/libepoxy-0.dll "$BIN"
+cp $DLLS/libgtk-3-0.dll "$BIN"
+cp $DLLS/libgtksourceview-3.0-1.dll "$BIN"
+cp $DLLS/libwebkitgtk-3.0-0.dll "$BIN"
+cp $DLLS/libjavascriptcoregtk-3.0-0.dll "$BIN"
+# Above added 6/24/20116
 cp $DLLS/libglib-2.0-0.dll "$BIN"
 cp $DLLS/libgobject-2.0-0.dll "$BIN"
 cp $DLLS/libgtk-win32-2.0-0.dll "$BIN"
