@@ -5,7 +5,7 @@
 # Also can create a self-extracting installer (see -g option) to distribute
 # the package to other computers.
 
-VERSION="4.9.6"
+VERSION="4.9.7"
 
 full=1
 docs=0
