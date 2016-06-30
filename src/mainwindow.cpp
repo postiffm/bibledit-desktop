@@ -2053,10 +2053,12 @@ void MainWindow::deleteproject ()
     if (all_projects[i] == settings->genconfig.project_get())
       include = false;
     ProjectConfiguration *projectconfig = settings->projectconfig(all_projects[i]);
-    if (!projectconfig->editable_get())
+    if (!projectconfig->editable_get()) {
       include = false;
-    if (include)
+	}
+    if (include) {
       projects.push_back(all_projects[i]);
+	}
   }
   // User interface.
   ListviewDialog dialog(_("Delete project"), projects, "", true, NULL);
@@ -3726,29 +3728,26 @@ void MainWindow::on_style_apply (ustring marker)
   
   // Get the last focused Editor. If none, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window)
-    return;
+  if (!editor_window) { return; }
 
   // Focus the editor.
   editor_window->focus_set ();
   
   // Bail out if the editor is not editable.
-  if (!editor_window->editable())
-    return;
+  if (!editor_window->editable()) { return; }
 
-  // Bail out if there's no styles window.
-  if (marker == "")
-    if (!window_styles)
-      return;
+  // Bail out if there's no styles window and we haven't already been told what style to use.
+  if (marker == "") {
+    if (!window_styles) { return; }
+  }
 
   // Get the focused style(s).
   ustring selected_style;
-  if (marker == "") selected_style = window_styles->get_focus();
-  else selected_style = marker;
+  if (marker == "") { selected_style = window_styles->get_focus(); }
+  else { selected_style = marker; }
 
   // Only proceed when a style has been selected.
-  if (selected_style.empty())
-    return;
+  if (selected_style.empty()) { return; }
 
   // Get the Style object.
   Style style(settings->genconfig.stylesheet_get(), selected_style, false);
@@ -3779,7 +3778,7 @@ void MainWindow::on_style_apply (ustring marker)
         if (style.subtype == fentFootnote) {
           InsertNoteDialog dialog(indtFootnote);
           if (dialog.run() == GTK_RESPONSE_OK) {
-            editor_window->insert_note(style.marker, dialog.rawtext);
+            editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
             style_was_used = false;
           }
@@ -3788,7 +3787,7 @@ void MainWindow::on_style_apply (ustring marker)
         if (style.subtype == fentEndnote) {
           InsertNoteDialog dialog(indtEndnote);
           if (dialog.run() == GTK_RESPONSE_OK) {
-            editor_window->insert_note(style.marker, dialog.rawtext);
+            editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
             style_was_used = false;
           }
@@ -3798,7 +3797,7 @@ void MainWindow::on_style_apply (ustring marker)
       if (style.type == stCrossreference) {
         InsertNoteDialog dialog(indtCrossreference);
         if (dialog.run() == GTK_RESPONSE_OK) {
-          editor_window->insert_note(style.marker, dialog.rawtext);
+          editor_window->insert_note(style.marker, dialog.rawtext_get());
         } else {
           style_was_used = false;
         }
@@ -5156,14 +5155,14 @@ void MainWindow::on_file_project_open(const ustring & project, bool startup)
 
   // Display a new editor.
   WindowEditor *editor_window = new WindowEditor(project, layout, accelerator_group, startup);
-  g_signal_connect((gpointer) editor_window->delete_signal_button, "clicked", G_CALLBACK(on_window_editor_delete_button_clicked), gpointer(this));
-  g_signal_connect((gpointer) editor_window->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-  g_signal_connect((gpointer) editor_window->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
-  g_signal_connect((gpointer) editor_window->new_styles_signal, "clicked", G_CALLBACK(on_editor_style_changed), gpointer(this));
+  g_signal_connect((gpointer) editor_window->delete_signal_button,    "clicked", G_CALLBACK(on_window_editor_delete_button_clicked), gpointer(this));
+  g_signal_connect((gpointer) editor_window->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+  g_signal_connect((gpointer) editor_window->new_verse_signal,        "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
+  g_signal_connect((gpointer) editor_window->new_styles_signal,       "clicked", G_CALLBACK(on_editor_style_changed), gpointer(this));
   g_signal_connect((gpointer) editor_window->quick_references_button, "clicked", G_CALLBACK(on_show_quick_references_signal_button_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->word_double_clicked_signal, "clicked", G_CALLBACK(on_send_word_to_toolbox_signalled), gpointer(this));
-  g_signal_connect((gpointer) editor_window->reload_signal, "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
-  g_signal_connect((gpointer) editor_window->changed_signal, "clicked", G_CALLBACK(on_editor_changed_clicked), gpointer(this));
+  g_signal_connect((gpointer) editor_window->reload_signal,           "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
+  g_signal_connect((gpointer) editor_window->changed_signal,          "clicked", G_CALLBACK(on_editor_changed_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->spelling_checked_signal, "clicked", G_CALLBACK(on_editor_spelling_checked_button_clicked), gpointer(this));
   editor_windows.push_back(editor_window);
 
@@ -5286,8 +5285,7 @@ void MainWindow::handle_editor_focus()
   gtk_window_set_title(GTK_WINDOW(window_main), title.c_str());
 
   // If we've no project bail out.
-  if (project.empty())
-    return;
+  if (project.empty()) { return; }
 
   // Project configuration.
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
@@ -5328,8 +5326,7 @@ void MainWindow::save_editors()
 void MainWindow::goto_next_previous_project(bool next)
 {
   // Bail out if there are not enough windows to switch.
-  if (editor_windows.size() < 2)
-    return;
+  if (editor_windows.size() < 2) { return; }
 
   // Get the focused project window and its offset.
   WindowEditor *present_window = last_focused_editor_window();
@@ -5343,12 +5340,12 @@ void MainWindow::goto_next_previous_project(bool next)
   // Move offset to next (or previous) window.
   if (next) {
     offset++;
-    if ((unsigned int)(offset) >= editor_windows.size())
-      offset = 0;
+    if ((unsigned int)(offset) >= editor_windows.size()) { offset = 0; }
   } else {
     offset--;
-    if (offset < 0)
+    if (offset < 0) {
       offset = editor_windows.size() - 1;
+	}
   }
 
   // Focus the new window.
@@ -5503,12 +5500,12 @@ void MainWindow::on_file_projects_merge()
   on_window_merge_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(file_projects_merge))) {
     window_merge = new WindowMerge(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
-    g_signal_connect((gpointer) window_merge->delete_signal_button, "clicked", G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->delete_signal_button,    "clicked", G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_merge->editors_get_text_button, "clicked", G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->new_reference_button, "clicked", G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->save_editors_button, "clicked", G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->reload_editors_button, "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->new_reference_button,    "clicked", G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->save_editors_button,     "clicked", G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->reload_editors_button,   "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
     vector < ustring> open_projects;
     for (unsigned int i = 0; i < editor_windows.size(); i++) {
       open_projects.push_back(editor_windows[i]->project());

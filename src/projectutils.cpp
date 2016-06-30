@@ -70,8 +70,7 @@ Makes changes in-place.
 void project_store_chapter_internal(const ustring & project, unsigned int book, unsigned int chapter, CategorizeChapterVerse & ccv, unsigned int first, unsigned int last, unsigned int timestamp)
 {
   // Bail out if the project does not exist.
-  if (!project_exists(project))
-    return;
+  if (!project_exists(project)) { return; }
 
   // Store statistics.
   statistics_record_store_chapter(project, book, chapter, ccv, first, last);
@@ -79,8 +78,9 @@ void project_store_chapter_internal(const ustring & project, unsigned int book, 
   // Store data.
   try {
     ustring chapterdirectory = project_data_directory_chapter(project, book, chapter);
-    if (!g_file_test(chapterdirectory.c_str(), G_FILE_TEST_IS_DIR))
+    if (!g_file_test(chapterdirectory.c_str(), G_FILE_TEST_IS_DIR)) {
       gw_mkdir_with_parents(chapterdirectory);
+	}
     ustring filename = project_data_filename_chapter(project, book, chapter, false);
     vector < ustring > data;
     for (unsigned int i = first; i < last; i++) {

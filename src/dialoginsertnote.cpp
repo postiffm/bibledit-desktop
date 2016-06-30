@@ -38,6 +38,7 @@
 #include "screen.h"
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
 {
@@ -701,10 +702,12 @@ void InsertNoteDialog::templates_load(const ustring & template_name, bool update
 {
   updategui = update_gui;
   ReadFiles rd(Directories->get_configuration(), template_filename_get(""), "");
-  for (unsigned int i = 0; i < rd.files.size(); i++)
+  for (unsigned int i = 0; i < rd.files.size(); i++) {
     rd.files[i].erase(0, template_filename_get("").length());
-  if (rd.files.size() == 0)
+  }
+  if (rd.files.size() == 0) {
     rd.files.push_back("");
+  }
   combobox_set_strings(combobox_templates, rd.files);
   for (unsigned int i = 0; i < rd.files.size(); i++) {
     if (rd.files[i] == template_name) {
@@ -967,12 +970,15 @@ void InsertNoteDialog::on_okbutton()
     }
   }
   // Add numbering.
-  if (notetemplate.numbering == 0)
+  if (notetemplate.numbering == 0) {
     rawtext.append("+");
-  else if (notetemplate.numbering == 1)
+  }
+  else if (notetemplate.numbering == 1) {
     rawtext.append("-");
-  else
+  }
+  else {
     rawtext.append(notetemplate.anchor);
+  }
   rawtext.append(" ");
   // Deal with the reference.
   ustring reference = reference_get();
@@ -1003,6 +1009,7 @@ void InsertNoteDialog::on_okbutton()
   }
   // Remove last space.
   rawtext = trim(rawtext);
+  DEBUG("Inserting note rawtext="+rawtext)
 }
 
 

@@ -164,6 +164,12 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   spelling_timeout_event_id = 0;
   textview_button_press_event_id = 0;
 
+  // Styles are used to uniquely identify footnotes/endnotes/etc. This 
+  // var keeps track of the last one used. This was a static in editor_aids.cpp
+  // but that meant it was shared between editor windows, which caused very strange
+  // bugs with footnotes being duplicated or lost. postiffm 6/30/2016.
+  note_style_num = 0;
+
   go_to_new_reference_highlight = false; // 3/22/2016 MAP
   
   // Tag for highlighting search words and current verse.
@@ -179,7 +185,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 
   currHighlightedVerse = "0";
   
-  // Automatic saving of the file, periodically.
+  // Automatic saving of the file, periodically (every minute)
   save_timeout_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 60000, GSourceFunc(on_save_timeout), gpointer(this), NULL);
 }
 
@@ -259,21 +265,20 @@ void Editor2::chapter_load(unsigned int chapter_in)
   extern Settings *settings;
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
 
-  // Reset note style generator.
-  {
-    ustring dummy;
-    get_next_note_caller_and_style (entFootnote, dummy, dummy, true);
-  }
+  // Reset note style number
+  note_style_num = 0;
   
   // Load text in memory and cache it for later use.
   loaded_chapter_lines = project_retrieve_chapter(project, book, chapter);
 
   // Whether chapter is editable.
   editable = true;
-  if (loaded_chapter_lines.empty())
+  if (loaded_chapter_lines.empty()) {
     editable = false;
-  if (!projectconfig->editable_get())
+  }
+  if (!projectconfig->editable_get()) {
     editable = false;
+  }
 
   // Get rid of possible previous widgets with their data.
   gtk_container_foreach(GTK_CONTAINER(vbox_paragraphs), on_container_tree_callback_destroy, gpointer(this));
@@ -337,7 +342,7 @@ void Editor2::text_load (ustring text, ustring character_style, bool note_mode)
 {
   // Clean away possible new lines.
   replace_text (text, "\n", " ");
-
+  //DEBUG("text="+text)
   // Load the text into the editor by creating and applying editor actions.
   ustring marker_text;
   size_t marker_pos;
@@ -373,11 +378,13 @@ void Editor2::text_load (ustring text, ustring character_style, bool note_mode)
     if (!handled && !note_mode) {
       ustring raw_note;
       if (text_starts_note_raw (text, character_style, marker_text, marker_pos, marker_length, is_opener, marker_found, raw_note)) {
+		//DEBUG("Starting raw_note")
         editor_start_note_raw (raw_note, marker_text);
         handled = true;
       }
     }
     if (!handled) {
+	  //DEBUG("about to editor_text_fallback text="+text)
       editor_text_fallback (text, character_style, marker_pos, marker_found);
     }
   }
@@ -402,20 +409,17 @@ void Editor2::chapter_save()
   reload_chapter_number = chapter;
 
   // If the text is not editable, bail out.
-  if (!editable)
-    return;
+  if (!editable) { return; }
 
   // If the text was not changed, bail out.
-  if (editor_actions_size_at_no_save == actions_done.size())
-    return;
+  if (editor_actions_size_at_no_save == actions_done.size()) { return; }
     
   // If the project is empty, bail out.
-  if (project.empty())
-    return;
+  if (project.empty()) { return; }
 
   // Get the USFM text.
   ustring chaptertext = chapter_get_ustring();
-
+  //DEBUG("chapter="+chaptertext)
   // Flags for use below.
   bool reload = false;
   bool save_action_is_over = false;
@@ -434,6 +438,8 @@ void Editor2::chapter_save()
     }
   }
 
+	//DEBUG("Saving chapter")
+  
   // If the text has not yet been dealt with, save it.  
   if (!save_action_is_over) {
     // Clean it up a bit and divide it into lines.
@@ -1150,7 +1156,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
   }
   // Optionally handle plain-text style and return.
   if (plaintext) {
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, G_TYPE_STRING);
     int fontsize = (int)(12 * font_multiplier);
     ustring font = "Courier " + convert_to_string(fontsize);
@@ -1161,7 +1167,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
   }
   // Fontsize.
   if (paragraph) {
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, G_TYPE_DOUBLE);
     double fontsize = style->fontsize * font_multiplier;
     g_value_set_double(&gvalue, fontsize);
@@ -1175,7 +1181,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     PangoStyle pangostyle = PANGO_STYLE_NORMAL;
     if ((style->italic == ON) || (style->italic == TOGGLE))
       pangostyle = PANGO_STYLE_ITALIC;
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_STYLE);
     g_value_set_enum(&gvalue, pangostyle);
     g_object_set_property(G_OBJECT(tag), "style", &gvalue);
@@ -1185,7 +1191,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     PangoWeight pangoweight = PANGO_WEIGHT_NORMAL;
     if ((style->bold == ON) || (style->bold == TOGGLE))
       pangoweight = PANGO_WEIGHT_BOLD;
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_WEIGHT);
     g_value_set_enum(&gvalue, pangoweight);
     g_object_set_property(G_OBJECT(tag), "weight", &gvalue);
@@ -1195,7 +1201,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     PangoUnderline pangounderline = PANGO_UNDERLINE_NONE;
     if ((style->underline == ON) || (style->underline == TOGGLE))
       pangounderline = PANGO_UNDERLINE_SINGLE;
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_UNDERLINE);
     g_value_set_enum(&gvalue, pangounderline);
     g_object_set_property(G_OBJECT(tag), "underline", &gvalue);
@@ -1215,7 +1221,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
      */
     if ((style->smallcaps == ON) || (style->smallcaps == TOGGLE)) {
       double percentage = (double)0.6 * font_multiplier;
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_DOUBLE);
       g_value_set_double(&gvalue, percentage);
       g_object_set_property(G_OBJECT(tag), "scale", &gvalue);
@@ -1232,7 +1238,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     // Rise n pixels.
     {
       gint rise = 6 * PANGO_SCALE;
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, rise);
       g_object_set_property(G_OBJECT(tag), "rise", &gvalue);
@@ -1241,7 +1247,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     // Smaller size.
     {
       double percentage = 0.7;
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_DOUBLE);
       g_value_set_double(&gvalue, percentage);
       g_object_set_property(G_OBJECT(tag), "scale", &gvalue);
@@ -1266,7 +1272,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       gtkjustification = GTK_JUSTIFY_LEFT;
     }
     {
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, GTK_TYPE_JUSTIFICATION);
       g_value_set_enum(&gvalue, gtkjustification);
       g_object_set_property(G_OBJECT(tag), "justification", &gvalue);
@@ -1276,7 +1282,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     // For property "pixels-above/below-...", only values >= 0 are valid.
     if (style->spacebefore > 0) {
       gint spacebefore = (gint) (4 * style->spacebefore);
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, spacebefore);
       g_object_set_property(G_OBJECT(tag), "pixels-above-lines", &gvalue);
@@ -1285,7 +1291,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 
     if (style->spaceafter > 0) {
       gint spaceafter = (gint) (4 * style->spaceafter);
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, spaceafter);
       g_object_set_property(G_OBJECT(tag), "pixels-below-lines", &gvalue);
@@ -1296,7 +1302,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       gint leftmargin = (gint) (4 * style->leftmargin);
       // A little left margin is desired to make selecting words easier.
       leftmargin += 5;
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, leftmargin);
       g_object_set_property(G_OBJECT(tag), "left-margin", &gvalue);
@@ -1305,7 +1311,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 
     if (style->rightmargin > 0) {
       gint rightmargin = (gint) (4 * style->rightmargin);
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, rightmargin);
       g_object_set_property(G_OBJECT(tag), "right-margin", &gvalue);
@@ -1314,7 +1320,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 
     {
       gint firstlineindent = (gint) (4 * style->firstlineindent);
-      GValue gvalue = { 0, };
+      GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, firstlineindent);
       g_object_set_property(G_OBJECT(tag), "indent", &gvalue);
@@ -1326,7 +1332,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
   {
     GdkColor color;
     color_decimal_to_gdk(style->color, &color);
-    GValue gvalue = { 0, };
+    GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, GDK_TYPE_COLOR);
     g_value_set_boxed(&gvalue, &color);
     g_object_set_property(G_OBJECT(tag), "foreground-gdk", &gvalue);
@@ -1359,7 +1365,7 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   if (focused_paragraph->type == eatCreateNoteParagraph) {
     replace_text (utext, "\n", " ");
   }
-
+  //DEBUG("utext="+utext)
   // Get offset of text insertion point.
   gint text_insertion_offset = gtk_text_iter_get_offset (pos_iter) - utext.length();
 
@@ -1377,6 +1383,7 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
     ustring paragraph_style;
     GtkTextIter iter = *pos_iter;
     get_styles_at_iterator(iter, paragraph_style, character_style_to_be_applied);
+	//DEBUG("paragraph_style="+paragraph_style+" and character_style_to_be_applied="+character_style_to_be_applied)
     if (character_style_to_be_applied.find (note_starting_style ()) == 0) {
       character_style_to_be_applied.clear();
     }
@@ -1442,6 +1449,9 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   // Else treat it as if the user is typing text.
   if (utext.find ("\\") != string::npos) {
     // Load USFM code.
+	//DEBUG("about to text_load, text="+ustring(text))
+	//DEBUG("about to text_load, utext="+utext)
+	//DEBUG("about to text_load, character_style_to_be_applied="+character_style_to_be_applied)
     text_load (text, character_style_to_be_applied, false);
   } else {
     // Load plain text. Handle new lines as well.
@@ -1830,7 +1840,9 @@ void Editor2::insert_note(const ustring & marker, const ustring & rawtext)
   usfmcode.append (usfm_get_full_opening_marker (marker));
   usfmcode.append (rawtext);
   usfmcode.append (usfm_get_full_closing_marker (marker));
+  //DEBUG("usfmcode="+usfmcode)
   if (focused_paragraph) {
+	//DEBUG("Inserting note at cursor of focused paragraph")
     gtk_text_buffer_insert_at_cursor (focused_paragraph->textbuffer, usfmcode.c_str(), -1);
   }
 }
@@ -1973,6 +1985,7 @@ ustring Editor2::chapter_get_ustring()
       chaptertext.append ("\n");
     }
     chaptertext.append (paragraph_text);
+	//DEBUG("paragraph_text="+paragraph_text)
   }
   return chaptertext;
 }
@@ -2285,6 +2298,7 @@ void Editor2::apply_editor_action (EditorAction * action, EditorActionApplicatio
         case eaaRedo:    insert_action->redo (widget_that_should_grab_focus); break;
       }
       contents_was_changed = true;
+	  //DEBUG("Just did insert_action->apply")
       break;
     }
 
@@ -2580,6 +2594,7 @@ ustring Editor2::usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter
         note_text.append (usfm_get_full_closing_marker(note_paragraph->opening_closing_marker));
         // Add the note to the main text.
         text.append (note_text);
+		//DEBUG("Appended note_text="+note_text)
       }
       
     } else {
@@ -2596,8 +2611,9 @@ ustring Editor2::usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter
         buf[length] = '\0';
         new_character = buf;
         line_break = (new_character.find_first_of("\n\r") == 0);
-        if (line_break)
+        if (line_break) {
           new_character.clear();
+		}
       }
   
       // Flags for whether styles are opening or closing.
@@ -2724,23 +2740,31 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   if ((marker_found) && (marker_pos == 0)) {
     // It should not occur that a marker is right at the start and was not handled.
     // It gets handled here to prevent an infinite loop.
+	// ACTUALLY: This happens as "standard practice" when the user inserts a new footenote.
+	// Like \f + \fr 6:12 \f* or something like that. That seems malformed according to the 
+	// USFM standard, but it is what we are getting from the note insert dialog.
+	//DEBUG("Case 1")
     insertion = line.substr(0, 1);
     line.erase(0, 1);
   }
   else if ((marker_found) && (marker_pos != string::npos) && (marker_pos > 0)) {
     // Load text till the next marker.
+	//DEBUG("Case 2")
     insertion = line.substr(0, marker_pos);
     line.erase(0, marker_pos);
   } 
   else {
     // No markup found: The whole line is loaded at once.
+	//DEBUG("Case 3")
     insertion = line;
     line.clear();
   }
-
+  //DEBUG("insertion="+insertion)
+  
   // Get the currently focused paragraph. If there's none, create one.
   EditorActionCreateParagraph * paragraph = focused_paragraph;
   if (paragraph == NULL) {
+	//DEBUG("about to editor_start_new_standard_paragraph")
     editor_start_new_standard_paragraph (unknown_style());
   }
   
@@ -2748,8 +2772,14 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   paragraph = focused_paragraph;
   gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
   EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, insertion);
+  //DEBUG("about to apply_editor_action (insert_action) insertion="+insertion)
+  // BUG occurs in the next call: footnote is somehow magically changed from text=insertion to text=that of the first footnote in chapter?
   apply_editor_action (insert_action);
+  // I may have jumped to a conclusion. The bug may occur in the next call, actually.
+  //ustring chaptertext = chapter_get_ustring();
+  //DEBUG("chapter just after apply_editor_action="+chaptertext)
   if (!character_style.empty()) {
+	//DEBUG("Applying style to new inserted text")
     EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (paragraph, character_style, insertion_offset, insertion.length());
     apply_editor_action (style_action);
   }
@@ -2823,6 +2853,19 @@ bool Editor2::text_starts_note_raw(ustring & line, ustring & character_style, co
   return false;
 }
 
+void Editor2::get_next_note_caller_and_style (EditorNoteType type, ustring& caller, ustring& style, bool restart)
+// Gets the next note caller style.
+// Since note callers have sequential numbers, it needs another one for each note.
+{
+  switch (type) {
+    case entFootnote:       caller = "f"; break;
+    case entEndnote:        caller = "e"; break;
+    case entCrossreference: caller = "x"; break;
+  }
+  note_style_num++;
+  style = note_starting_style ();
+  style.append (convert_to_string (note_style_num));
+}
 
 void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_text)
 // Starts a note in the editor.
@@ -2835,6 +2878,7 @@ void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_te
   {
     get_next_note_caller_and_style (note_type, caller_in_text, caller_style, false);
     Style style ("", caller_style, false);
+	//DEBUG("caller_style="+caller_style)
     style.superscript = true;
     create_or_update_text_style(&style, false, false, font_size_multiplier);
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
@@ -2852,7 +2896,8 @@ void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_te
   if (!raw_note.empty()) {
     caller_in_usfm = raw_note.substr(0, 1);
     raw_note.erase(0, 1);
-    raw_note = trim(raw_note);
+	raw_note = trim(raw_note);
+	//DEBUG("raw_note="+raw_note)
   }
 
   // New note paragraph.
@@ -2973,7 +3018,7 @@ gboolean Editor2::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
   // for some other reason. Not sure why 4/7/2016.
   // textbuffer_delete_range_was_fired = false;
   keystrokeNum++;
-  DEBUG(ustring(gdk_keyval_name (event->keyval))+" keystroke="+std::to_string(unsigned(keystrokeNum)))
+  //DEBUG(ustring(gdk_keyval_name (event->keyval))+" keystroke="+std::to_string(unsigned(keystrokeNum)))
 
   // Store data for paragraph crossing control.
   paragraph_crossing_textview_at_key_press = widget;

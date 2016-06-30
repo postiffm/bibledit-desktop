@@ -22,7 +22,6 @@
 #include "gwrappers.h"
 #include "editor_aids.h"
 
-
 EditorAction::EditorAction(EditorActionType type_in)
 {
   // The type of this EditorAction.

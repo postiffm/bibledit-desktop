@@ -14,17 +14,17 @@ General Debugging
    cd C:\Program Files (x86)\Bibledit-4.9.4\ or 
    \msys64\mingw32\bin\gdb editor\bin\bibledit-gtk.exe   
    
-2. I sometimes preferr to use gdb from emacs.
+2. I sometimes prefer to use gdb from emacs.
 	1. From DOS command prompt run
 	   \msys64\mingw64\bin\emacs or your stock Windows version of emacs
    	2. Once in emacs, do M-x (Alt-X) and type
 	   gud-gdb <enter> and make the command line like this
 	   C:/msys64/mingw64/bin/gdb --fullname
 	3. Once successfully running gdb, type
-	   file "C:/Program Files/Bibledit-4.9.4/editor/bin/bibledit-gtk.exe"
+	   file "C:/Program Files/Bibledit-4.9.7/editor/bin/bibledit-gtk.exe"
 	   (Assuming you are running 64bit version of Bibledit, change to Program Files (x86)
 	   if needed).
-	4. cd C:/Program Files/Bibledit-4.9.4
+	4. cd C:/Program Files/Bibledit-4.9.7
 	   to fix up the working directory.
 	5. Verify by typing pwd and make sure it says the same directory as above
 	6. set args --debug

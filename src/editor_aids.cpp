@@ -29,7 +29,7 @@
 #include "gwrappers.h"
 #include "bible.h"
 
-
+// TO DO: With static variables in here, this is a candidate to move into the Editor2 class.
 void marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
 /*
  Given a "project", and a "marker", this function gives the "type" and the 
@@ -1363,39 +1363,19 @@ const gchar * usfm_clipboard_code ()
   return "<USFM>";
 }
 
-
-void get_next_note_caller_and_style (EditorNoteType type, ustring& caller, ustring& style, bool restart)
-// Gets the next note caller style.
-// Since note callers have sequential numbers, it needs another one for each note.
-{
-  static unsigned int last_offset = 0;
-  if (restart) {
-    last_offset = 0;
-    return;
-  }
-  switch (type) {
-    case entFootnote:       caller = "f"; break;
-    case entEndnote:        caller = "e"; break;
-    case entCrossreference: caller = "x"; break;
-  }
-  last_offset++;
-  style = note_starting_style ();
-  style.append (convert_to_string (last_offset));
-}
-
-
 void textbuffer_apply_named_tag(GtkTextBuffer * buffer, const ustring & name, const GtkTextIter * start, const GtkTextIter * end)
 // Applies the tag on the textbuffer, if the tag exists.
 // Else applies the "unknown" style.
 {
   GtkTextTagTable *table = gtk_text_buffer_get_tag_table(buffer);
   GtkTextTag *tag = gtk_text_tag_table_lookup(table, name.c_str());
-  if (tag)
+  if (tag) {
     gtk_text_buffer_apply_tag_by_name(buffer, name.c_str(), start, end);
-  else
+  }
+  else {
     gtk_text_buffer_apply_tag_by_name(buffer, unknown_style(), start, end);
+  }
 }
-
 
 void textbuffer_insert_with_named_tags(GtkTextBuffer * buffer, GtkTextIter * iter, const ustring & text, ustring first_tag_name, ustring second_tag_name)
 // Inserts text into the buffer applying one or two named tags at the same time.

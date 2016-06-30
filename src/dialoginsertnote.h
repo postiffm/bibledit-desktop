@@ -33,9 +33,13 @@ public:
   InsertNoteDialog (NoteType dialogtype);
   ~InsertNoteDialog ();
   int run ();
-  ustring rawtext;
-protected:
+
 private:
+  ustring rawtext;
+public:
+  ustring &rawtext_get(void) { return rawtext; }
+
+  private:
   // Dialog.
   GtkWidget *insertnotedialog;
   GtkWidget *dialog_vbox1;
