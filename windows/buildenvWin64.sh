@@ -63,9 +63,9 @@ pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-glade
 pacman -S --noconfirm msys/libxml2-devel
 mkdir -v -p ~/$BUILD_DIR
 cd ~/$BUILD_DIR
-git clone https://github.com/teusbenschop/bibledit.git
-
-echo "Git cloned into the directory ~/$BUILD_DIR/bibledit"
+#git clone https://github.com/teusbenschop/bibledit.git
+git clone https://github.com/postiffm/bibledit-gtk.git
+echo "Git cloned into the directory ~/$BUILD_DIR/bibledit-gtk"
 
 checkForZLIB1()
 {
