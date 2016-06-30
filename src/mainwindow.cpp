@@ -2001,10 +2001,12 @@ void MainWindow::deleteproject() {
     if (all_projects[i] == settings->genconfig.project_get())
       include = false;
     ProjectConfiguration *projectconfig = settings->projectconfig(all_projects[i]);
-    if (!projectconfig->editable_get())
+    if (!projectconfig->editable_get()) {
       include = false;
-    if (include)
+    }
+    if (include) {
       projects.push_back(all_projects[i]);
+    }
   }
   // User interface.
   ListviewDialog dialog(_("Delete project"), projects, "", true, NULL);
@@ -3443,31 +3445,37 @@ void MainWindow::on_style_apply(ustring marker) {
 
   // Get the last focused Editor. If none, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window)
+  if (!editor_window) {
     return;
+  }
 
   // Focus the editor.
   editor_window->focus_set();
 
   // Bail out if the editor is not editable.
-  if (!editor_window->editable())
+  if (!editor_window->editable()) {
     return;
+  }
 
-  // Bail out if there's no styles window.
-  if (marker == "")
-    if (!window_styles)
+  // Bail out if there's no styles window and we haven't already been told what style to use.
+  if (marker == "") {
+    if (!window_styles) {
       return;
+    }
+  }
 
   // Get the focused style(s).
   ustring selected_style;
-  if (marker == "")
+  if (marker == "") {
     selected_style = window_styles->get_focus();
-  else
+  } else {
     selected_style = marker;
+  }
 
   // Only proceed when a style has been selected.
-  if (selected_style.empty())
+  if (selected_style.empty()) {
     return;
+  }
 
   // Get the Style object.
   Style style(settings->genconfig.stylesheet_get(), selected_style, false);
@@ -3498,7 +3506,7 @@ void MainWindow::on_style_apply(ustring marker) {
         if (style.subtype == fentFootnote) {
           InsertNoteDialog dialog(indtFootnote);
           if (dialog.run() == GTK_RESPONSE_OK) {
-            editor_window->insert_note(style.marker, dialog.rawtext);
+            editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
             style_was_used = false;
           }
@@ -3507,7 +3515,7 @@ void MainWindow::on_style_apply(ustring marker) {
         if (style.subtype == fentEndnote) {
           InsertNoteDialog dialog(indtEndnote);
           if (dialog.run() == GTK_RESPONSE_OK) {
-            editor_window->insert_note(style.marker, dialog.rawtext);
+            editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
             style_was_used = false;
           }
@@ -3517,7 +3525,7 @@ void MainWindow::on_style_apply(ustring marker) {
       if (style.type == stCrossreference) {
         InsertNoteDialog dialog(indtCrossreference);
         if (dialog.run() == GTK_RESPONSE_OK) {
-          editor_window->insert_note(style.marker, dialog.rawtext);
+          editor_window->insert_note(style.marker, dialog.rawtext_get());
         } else {
           style_was_used = false;
         }
@@ -4837,8 +4845,9 @@ void MainWindow::handle_editor_focus() {
   gtk_window_set_title(GTK_WINDOW(window_main), title.c_str());
 
   // If we've no project bail out.
-  if (project.empty())
+  if (project.empty()) {
     return;
+  }
 
   // Project configuration.
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
@@ -4877,8 +4886,9 @@ void MainWindow::save_editors()
 
 void MainWindow::goto_next_previous_project(bool next) {
   // Bail out if there are not enough windows to switch.
-  if (editor_windows.size() < 2)
+  if (editor_windows.size() < 2) {
     return;
+  }
 
   // Get the focused project window and its offset.
   WindowEditor *present_window = last_focused_editor_window();
@@ -4892,12 +4902,14 @@ void MainWindow::goto_next_previous_project(bool next) {
   // Move offset to next (or previous) window.
   if (next) {
     offset++;
-    if ((unsigned int)(offset) >= editor_windows.size())
+    if ((unsigned int)(offset) >= editor_windows.size()) {
       offset = 0;
+    }
   } else {
     offset--;
-    if (offset < 0)
+    if (offset < 0) {
       offset = editor_windows.size() - 1;
+    }
   }
 
   // Focus the new window.

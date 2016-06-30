@@ -458,7 +458,7 @@ echo '%FILE2%=' >> "$SEDFILE"
 	
 	/c/Windows/System32/iexpress.exe //N "C:\\tempBibleEditFolderForInstall\\Install-BiblEdit.SED"
 	mv "$TEMPDIR/Bibledit-$VERSION.exe" "windows/Bibledit-$VERSION.exe"
-	echo "Installer Bibledit-$VERSION.exe has been created. Output exe is in ~/64bit/bibledit/gtk/windows or ~/32bit/bibledit/gtk/windows"
+	echo "Installer Bibledit-$VERSION.exe has been created. Output exe is in windows/Bibledit-$VERSION.exe"
 	rm "$TEMPDIR" -rf
 	exit 0;
 fi

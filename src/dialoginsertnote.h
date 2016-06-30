@@ -29,9 +29,13 @@ public:
   InsertNoteDialog(NoteType dialogtype);
   ~InsertNoteDialog();
   int run();
+
+private:
   ustring rawtext;
 
-protected:
+public:
+  ustring &rawtext_get(void) { return rawtext; }
+
 private:
   // Dialog.
   GtkWidget *insertnotedialog;
