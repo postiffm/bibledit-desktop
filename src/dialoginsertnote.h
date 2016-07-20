@@ -1,45 +1,42 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
-
 
 #ifndef INCLUDED_DIALOG_INSERT_NOTE_H
 #define INCLUDED_DIALOG_INSERT_NOTE_H
 
-
-#include <gtk/gtk.h>
-#include "types.h"
 #include "editor_aids.h"
+#include "types.h"
+#include <gtk/gtk.h>
 
-
-class InsertNoteDialog
-{
+class InsertNoteDialog {
 public:
-  InsertNoteDialog (NoteType dialogtype);
-  ~InsertNoteDialog ();
-  int run ();
+  InsertNoteDialog(NoteType dialogtype);
+  ~InsertNoteDialog();
+  int run();
 
 private:
   ustring rawtext;
+
 public:
   ustring &rawtext_get(void) { return rawtext; }
 
-  private:
+private:
   // Dialog.
   GtkWidget *insertnotedialog;
   GtkWidget *dialog_vbox1;
@@ -95,49 +92,63 @@ public:
   vector<bool> content_endmarkers;
   vector<ustring> content_names;
   bool allow_entry_activate;
-  static void on_radiobutton_numbering_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_numbering (GtkToggleButton *togglebutton);
-  int numbering_get ();
-  void numbering_set (int numbering);
-  static void on_entry_numbering_activate (GtkEntry *entry, gpointer user_data);
-  static void on_checkbutton_automatic_reference_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_checkbutton_automatic_reference ();
-  static void on_checkbutton_chapter_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_checkbutton_chapter ();
-  void separator_sensitive_set ();
-  static void on_entry_reference_separator_changed (GtkEditable *editable, gpointer user_data);
-  void on_entry_reference_separator_changed2 ();
-  static void on_entry_reference_separator_activate (GtkEntry *entry, gpointer user_data);
-  static void on_checkbutton_verse_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_checkbutton_verse ();
-  static void on_entry_reference_suffix_changed (GtkEditable *editable, gpointer user_data);
-  void on_entry_reference_suffix_changed2 ();
-  static void on_entry_reference_suffix_activate (GtkEntry *entry, gpointer user_data);
-  ustring reference_get ();
-  static void on_button_content_clicked (GtkButton *button, gpointer user_data);
-  void on_button_content_remove (GtkButton *button);
-  void vector_remove_content (vector<GtkWidget *>& container, int offset);
-  static void on_button_add_clicked (GtkButton *button, gpointer user_data);
-  void on_button_add ();
-  ustring template_filename_get (const ustring& template_name);
-  void templates_load (const ustring& template_name, bool update_gui);
+  static void on_radiobutton_numbering_toggled(GtkToggleButton *togglebutton,
+                                               gpointer user_data);
+  void on_radiobutton_numbering(GtkToggleButton *togglebutton);
+  int numbering_get();
+  void numbering_set(int numbering);
+  static void on_entry_numbering_activate(GtkEntry *entry, gpointer user_data);
+  static void
+  on_checkbutton_automatic_reference_toggled(GtkToggleButton *togglebutton,
+                                             gpointer user_data);
+  void on_checkbutton_automatic_reference();
+  static void on_checkbutton_chapter_toggled(GtkToggleButton *togglebutton,
+                                             gpointer user_data);
+  void on_checkbutton_chapter();
+  void separator_sensitive_set();
+  static void on_entry_reference_separator_changed(GtkEditable *editable,
+                                                   gpointer user_data);
+  void on_entry_reference_separator_changed2();
+  static void on_entry_reference_separator_activate(GtkEntry *entry,
+                                                    gpointer user_data);
+  static void on_checkbutton_verse_toggled(GtkToggleButton *togglebutton,
+                                           gpointer user_data);
+  void on_checkbutton_verse();
+  static void on_entry_reference_suffix_changed(GtkEditable *editable,
+                                                gpointer user_data);
+  void on_entry_reference_suffix_changed2();
+  static void on_entry_reference_suffix_activate(GtkEntry *entry,
+                                                 gpointer user_data);
+  ustring reference_get();
+  static void on_button_content_clicked(GtkButton *button, gpointer user_data);
+  void on_button_content_remove(GtkButton *button);
+  void vector_remove_content(vector<GtkWidget *> &container, int offset);
+  static void on_button_add_clicked(GtkButton *button, gpointer user_data);
+  void on_button_add();
+  ustring template_filename_get(const ustring &template_name);
+  void templates_load(const ustring &template_name, bool update_gui);
   bool updategui;
-  static void on_combobox_templates_changed (GtkComboBox *combobox, gpointer user_data);
-  void on_combobox_templates ();  
-  static void on_button_template_new_clicked (GtkButton *button, gpointer user_data);
-  void on_button_template_new ();
-  static void on_button_template_delete_clicked (GtkButton *button, gpointer user_data);
-  void on_button_template_delete ();
-  void focus_next_widget (GtkWidget * widget);
-  static bool on_timeout (gpointer data);
-  void timeout ();
-  static void on_okbutton1_clicked (GtkButton *button, gpointer user_data);
-  void on_okbutton ();
-  static void on_spinbutton_size_value_changed (GtkSpinButton *spinbutton, gpointer user_data);
-  void on_spinbutton_size (GtkSpinButton *spinbutton);
-  static gboolean on_textview_content_key_press_event (GtkWidget *widget, GdkEventKey *event, gpointer user_data);
-  void set_dynamic_shortcuts ();
+  static void on_combobox_templates_changed(GtkComboBox *combobox,
+                                            gpointer user_data);
+  void on_combobox_templates();
+  static void on_button_template_new_clicked(GtkButton *button,
+                                             gpointer user_data);
+  void on_button_template_new();
+  static void on_button_template_delete_clicked(GtkButton *button,
+                                                gpointer user_data);
+  void on_button_template_delete();
+  void focus_next_widget(GtkWidget *widget);
+  static bool on_timeout(gpointer data);
+  void timeout();
+  static void on_okbutton1_clicked(GtkButton *button, gpointer user_data);
+  void on_okbutton();
+  static void on_spinbutton_size_value_changed(GtkSpinButton *spinbutton,
+                                               gpointer user_data);
+  void on_spinbutton_size(GtkSpinButton *spinbutton);
+  static gboolean on_textview_content_key_press_event(GtkWidget *widget,
+                                                      GdkEventKey *event,
+                                                      gpointer user_data);
+  void set_dynamic_shortcuts();
 };
-
 
 #endif

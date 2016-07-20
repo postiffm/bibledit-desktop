@@ -1,40 +1,38 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogreplacing.h"
-#include "utilities.h"
 #include "bible.h"
-#include "usfm.h"
-#include "usfmtools.h"
-#include "projectutils.h"
-#include "progresswindow.h"
-#include "help.h"
 #include "books.h"
+#include "help.h"
+#include "libraries.h"
+#include "progresswindow.h"
+#include "projectutils.h"
 #include "settings.h"
 #include "tiny_utilities.h"
+#include "usfm.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
-{
+ReplacingDialog::ReplacingDialog(const vector<Reference> &references_in) {
   extern Settings *settings;
   searchfor = settings->session.searchword;
   replacewith = settings->session.replaceword;
@@ -47,7 +45,7 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   gtk_window_set_title(GTK_WINDOW(replacedialog), _("Replace"));
   gtk_window_set_destroy_with_parent(GTK_WINDOW(replacedialog), TRUE);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(replacedialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(replacedialog));
   gtk_widget_show(dialog_vbox1);
 
   referencelabel = gtk_label_new("referencelabel");
@@ -97,7 +95,7 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   gtk_widget_show(yesbutton);
   gtk_box_pack_start(GTK_BOX(hbox3), yesbutton, FALSE, FALSE, 4);
   gtk_widget_set_size_request(yesbutton, 80, -1);
-  gtk_widget_set_can_default (GTK_WIDGET (yesbutton), true);
+  gtk_widget_set_can_default(GTK_WIDGET(yesbutton), true);
 
   nobutton = gtk_button_new_from_stock("gtk-no");
   gtk_widget_show(nobutton);
@@ -130,9 +128,10 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   gtk_box_pack_start(GTK_BOX(hbox3), cancelbutton, FALSE, FALSE, 4);
   gtk_widget_set_size_request(cancelbutton, 80, -1);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(replacedialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(replacedialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(replacedialog, NULL, NULL, NULL);
 
@@ -143,13 +142,23 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   textbuffer1 = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview1));
   textbuffer2 = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview2));
   // Produce the tags for colouring the search/replace words.
-  tag1 = gtk_text_buffer_create_tag(textbuffer1, "referencetag", "background", "khaki", NULL);
-  tag2 = gtk_text_buffer_create_tag(textbuffer2, "referencetag", "background", "khaki", NULL);
+  tag1 = gtk_text_buffer_create_tag(textbuffer1, "referencetag", "background",
+                                    "khaki", NULL);
+  tag2 = gtk_text_buffer_create_tag(textbuffer2, "referencetag", "background",
+                                    "khaki", NULL);
 
-  g_signal_connect((gpointer) yesbutton, "clicked", G_CALLBACK(replacedialog_on_yesbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) nobutton, "clicked", G_CALLBACK(replacedialog_on_nobutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) allbutton, "clicked", G_CALLBACK(replacedialog_on_allbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) cancelbutton, "clicked", G_CALLBACK(replacedialog_on_cancelbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)yesbutton, "clicked",
+                   G_CALLBACK(replacedialog_on_yesbutton_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)nobutton, "clicked",
+                   G_CALLBACK(replacedialog_on_nobutton_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)allbutton, "clicked",
+                   G_CALLBACK(replacedialog_on_allbutton_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)cancelbutton, "clicked",
+                   G_CALLBACK(replacedialog_on_cancelbutton_clicked),
+                   gpointer(this));
 
   // Next one added to Glade's code.
   gtk_dialog_set_default_response(GTK_DIALOG(replacedialog), GTK_RESPONSE_OK);
@@ -161,27 +170,16 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   set_gui();
 }
 
+ReplacingDialog::~ReplacingDialog() { gtk_widget_destroy(replacedialog); }
 
-ReplacingDialog::~ReplacingDialog()
-{
-  gtk_widget_destroy(replacedialog);
+int ReplacingDialog::run() { return gtk_dialog_run(GTK_DIALOG(replacedialog)); }
+
+void ReplacingDialog::replacedialog_on_yesbutton_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((ReplacingDialog *)user_data)->on_yesbutton_clicked();
 }
 
-
-int ReplacingDialog::run()
-{
-  return gtk_dialog_run(GTK_DIALOG(replacedialog));
-}
-
-
-void ReplacingDialog::replacedialog_on_yesbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ReplacingDialog *) user_data)->on_yesbutton_clicked();
-}
-
-
-void ReplacingDialog::on_yesbutton_clicked()
-{
+void ReplacingDialog::on_yesbutton_clicked() {
   accept_change();
   referencepointer++;
   set_gui();
@@ -189,30 +187,24 @@ void ReplacingDialog::on_yesbutton_clicked()
     on_cancelbutton_clicked();
 }
 
-
-void ReplacingDialog::replacedialog_on_nobutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ReplacingDialog *) user_data)->on_nobutton_clicked();
+void ReplacingDialog::replacedialog_on_nobutton_clicked(GtkButton *button,
+                                                        gpointer user_data) {
+  ((ReplacingDialog *)user_data)->on_nobutton_clicked();
 }
 
-
-void ReplacingDialog::on_nobutton_clicked()
-{
+void ReplacingDialog::on_nobutton_clicked() {
   referencepointer++;
   set_gui();
   if (referencepointer >= references.size())
     on_cancelbutton_clicked();
 }
 
-
-void ReplacingDialog::replacedialog_on_allbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ReplacingDialog *) user_data)->on_allbutton_clicked();
+void ReplacingDialog::replacedialog_on_allbutton_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((ReplacingDialog *)user_data)->on_allbutton_clicked();
 }
 
-
-void ReplacingDialog::on_allbutton_clicked()
-{
+void ReplacingDialog::on_allbutton_clicked() {
   ProgressWindow progresswindow(_("Replacing"), false);
   progresswindow.set_iterate(0, 1, references.size() - referencepointer);
   while (referencepointer < references.size()) {
@@ -221,30 +213,28 @@ void ReplacingDialog::on_allbutton_clicked()
   }
 }
 
-
-void ReplacingDialog::replacedialog_on_cancelbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ReplacingDialog *) user_data)->on_cancelbutton_clicked();
+void ReplacingDialog::replacedialog_on_cancelbutton_clicked(
+    GtkButton *button, gpointer user_data) {
+  ((ReplacingDialog *)user_data)->on_cancelbutton_clicked();
 }
 
-
-void ReplacingDialog::on_cancelbutton_clicked()
-{
+void ReplacingDialog::on_cancelbutton_clicked() {
   gtk_dialog_response(GTK_DIALOG(replacedialog), GTK_RESPONSE_NONE);
 }
-
 
 void ReplacingDialog::set_gui()
 // The GUI is filled with all data needed.
 {
   if (referencepointer < references.size()) {
     // Show reference.
-    gtk_label_set_text(GTK_LABEL(referencelabel), references[referencepointer].human_readable(mylanguage).c_str());
+    gtk_label_set_text(
+        GTK_LABEL(referencelabel),
+        references[referencepointer].human_readable(mylanguage).c_str());
     // Get the verse.
-    ustring line = project_retrieve_verse(myproject,
-					  references[referencepointer].book_get(),
-					  references[referencepointer].chapter_get(),
-					  references[referencepointer].verse_get());
+    ustring line = project_retrieve_verse(
+        myproject, references[referencepointer].book_get(),
+        references[referencepointer].chapter_get(),
+        references[referencepointer].verse_get());
     // Verse exists?
     if (!line.empty()) {
       // Parse into lines.
@@ -273,8 +263,8 @@ void ReplacingDialog::set_gui()
         gtk_text_buffer_insert_at_cursor(textbuffer1, verse.c_str(), -1);
         gtk_text_buffer_insert_at_cursor(textbuffer1, "\n", -1);
         // Storage for later colouring of text.
-        vector < int >colourlines;
-        vector < size_t > colourpositions;
+        vector<int> colourlines;
+        vector<size_t> colourpositions;
         // Start producing modified text.
         ustring verse2;
         if (mycasesensitive)
@@ -296,10 +286,13 @@ void ReplacingDialog::set_gui()
           }
           GtkTextIter begin;
           GtkTextIter end;
-          gtk_text_buffer_get_iter_at_line_offset(textbuffer1, &begin, i, offposition);
-          gtk_text_buffer_get_iter_at_line_offset(textbuffer1, &end, i, offposition + searchword.length());
+          gtk_text_buffer_get_iter_at_line_offset(textbuffer1, &begin, i,
+                                                  offposition);
+          gtk_text_buffer_get_iter_at_line_offset(
+              textbuffer1, &end, i, offposition + searchword.length());
           gtk_text_buffer_apply_tag(textbuffer1, tag1, &begin, &end);
-          offposition = verse2.find(searchword, offposition + searchword.length());
+          offposition =
+              verse2.find(searchword, offposition + searchword.length());
         }
         // Continue producing modified text.
         ustring sfm(parseline.lines[i]);
@@ -321,7 +314,8 @@ void ReplacingDialog::set_gui()
               verse2 = verse;
             else
               verse2 = verse.casefold();
-            offposition = verse2.find(searchword, offposition + replacewith.length());
+            offposition =
+                verse2.find(searchword, offposition + replacewith.length());
           }
         }
         // Insert modified text into the second buffer.
@@ -331,15 +325,17 @@ void ReplacingDialog::set_gui()
         for (unsigned int i = 0; i < colourlines.size(); i++) {
           GtkTextIter begin;
           GtkTextIter end;
-          gtk_text_buffer_get_iter_at_line_offset(textbuffer2, &begin, colourlines[i], colourpositions[i]);
-          gtk_text_buffer_get_iter_at_line_offset(textbuffer2, &end, colourlines[i], colourpositions[i] + replacewith.length());
+          gtk_text_buffer_get_iter_at_line_offset(
+              textbuffer2, &begin, colourlines[i], colourpositions[i]);
+          gtk_text_buffer_get_iter_at_line_offset(
+              textbuffer2, &end, colourlines[i],
+              colourpositions[i] + replacewith.length());
           gtk_text_buffer_apply_tag(textbuffer2, tag2, &begin, &end);
         }
       }
     }
   }
 }
-
 
 void ReplacingDialog::accept_change()
 /*
@@ -351,7 +347,7 @@ void ReplacingDialog::accept_change()
   GtkTextBuffer *buffer;
   buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview2));
   // Put the modified text back into the book.
-  vector < ustring > verses;
+  vector<ustring> verses;
   int linecount = gtk_text_buffer_get_line_count(GTK_TEXT_BUFFER(buffer));
   for (int i = 0; i < linecount; i++) {
     GtkTextIter begin;
@@ -359,7 +355,8 @@ void ReplacingDialog::accept_change()
     gtk_text_buffer_get_iter_at_line(GTK_TEXT_BUFFER(buffer), &begin, i);
     gtk_text_buffer_get_iter_at_line(GTK_TEXT_BUFFER(buffer), &end, i + 1);
     gtk_text_iter_backward_char(&end);
-    gchar *txt = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(buffer), &begin, &end, false);
+    gchar *txt =
+        gtk_text_buffer_get_text(GTK_TEXT_BUFFER(buffer), &begin, &end, false);
     ustring s = txt;
     s = trim(s);
     if (s.length()) {
@@ -375,11 +372,8 @@ void ReplacingDialog::accept_change()
     data.append(verses[i]);
   }
   if (verses.size() > 0) {
-    project_store_verse(myproject,
-			references[referencepointer].book_get(),
-			references[referencepointer].chapter_get(),
-			references[referencepointer].verse_get(),
-			data);
+    project_store_verse(myproject, references[referencepointer].book_get(),
+                        references[referencepointer].chapter_get(),
+                        references[referencepointer].verse_get(), data);
   }
 }
-

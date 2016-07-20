@@ -1,39 +1,36 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
 #include "utilities.h"
-#include <glib.h>
 #include "constants.h"
-#include "gwrappers.h"
 #include "directories.h"
-#include <errno.h>
+#include "gwrappers.h"
+#include "libraries.h"
 #include "shell.h"
 #include "tiny_utilities.h"
+#include <errno.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 
 #define MY_NUMBERS "0123456789"
 
-
-ustring number_in_string(const ustring & str)
-{
+ustring number_in_string(const ustring &str) {
   // Looks for and returns a positive number in a string.
   ustring output = str;
   output.erase(0, output.find_first_of(MY_NUMBERS));
@@ -44,12 +41,9 @@ ustring number_in_string(const ustring & str)
   return output;
 }
 
-
 #undef MY_NUMBERS
 
-
-unsigned int digit_count_in_string(const ustring & str)
-{
+unsigned int digit_count_in_string(const ustring &str) {
   unsigned int digitcount = 0;
   string s(str);
   for (unsigned int i = 0; i < s.length(); i++) {
@@ -59,29 +53,23 @@ unsigned int digit_count_in_string(const ustring & str)
   return digitcount;
 }
 
-
-ustring upperCase(const ustring & s)
-{
-// Make an uppercase copy of s
+ustring upperCase(const ustring &s) {
+  // Make an uppercase copy of s
   string upper(s);
   for (size_t i = 0; i < s.length(); ++i)
     upper[i] = toupper(upper[i]);
   return upper;
 }
 
-
-ustring lowerCase(const ustring & s)
-{
-// Make a lowercase copy of s
+ustring lowerCase(const ustring &s) {
+  // Make a lowercase copy of s
   string lower(s);
   for (size_t i = 0; i < s.length(); ++i)
     lower[i] = tolower(lower[i]);
   return lower;
 }
 
-
-ustring remove_spaces(const ustring & s)
-{
+ustring remove_spaces(const ustring &s) {
   ustring s2 = s;
   size_t spacepos = s2.find(" ");
   while (spacepos != string::npos) {
@@ -91,9 +79,7 @@ ustring remove_spaces(const ustring & s)
   return s2;
 }
 
-
-void write_lines(const ustring & file, vector < ustring > &lines, bool append)
-{
+void write_lines(const ustring &file, vector<ustring> &lines, bool append) {
   WriteText wt(file, append);
   for (unsigned int i = 0; i < lines.size(); i++) {
     wt.text(lines[i]);
@@ -101,24 +87,18 @@ void write_lines(const ustring & file, vector < ustring > &lines, bool append)
   }
 }
 
-
-ustring temporary_file(const ustring & filename)
-{
+ustring temporary_file(const ustring &filename) {
   return gw_build_filename(Directories->get_temp(), filename);
 }
 
-
-ustring string_reverse(const ustring & s)
-{
+ustring string_reverse(const ustring &s) {
   ustring returnvalue;
   for (int i = s.length() - 1; i >= 0; i--)
     returnvalue.append(s.substr(i, 1));
   return returnvalue;
 }
 
-
-ustring double_apostrophy(const ustring & line)
-{
+ustring double_apostrophy(const ustring &line) {
   /*
      SQLite needs any apostrophy in the data to be prefixed by another one.
      This function does that.
@@ -135,24 +115,20 @@ ustring double_apostrophy(const ustring & line)
   return returnvalue;
 }
 
-
-unsigned int file_get_modification_time(const ustring & filename)
-{
+unsigned int file_get_modification_time(const ustring &filename) {
   struct stat statbuf;
   stat(filename.c_str(), &statbuf);
   return statbuf.st_mtime;
 }
 
-
-unsigned int file_get_size(const ustring & filename)
-{
+unsigned int file_get_size(const ustring &filename) {
   struct stat statbuf;
   stat(filename.c_str(), &statbuf);
   return statbuf.st_size;
 }
 
-
-void textbuffer_get_lines(GtkTextBuffer * buffer, vector < ustring > &lines, bool trimline)
+void textbuffer_get_lines(GtkTextBuffer *buffer, vector<ustring> &lines,
+                          bool trimline)
 // Reads all the lines in the textbuffer.
 {
   // We need to know the number of lines.
@@ -181,29 +157,31 @@ void textbuffer_get_lines(GtkTextBuffer * buffer, vector < ustring > &lines, boo
   }
 }
 
-
-bool replace_text(ustring & line, const ustring & look_for, const ustring & replace_with)
+bool replace_text(ustring &line, const ustring &look_for,
+                  const ustring &replace_with)
 // Replaces some text. Returns true if any replacement was done.
 {
   bool replacements_done = false;
-  size_t offposition = line.find (look_for);
+  size_t offposition = line.find(look_for);
   while (offposition != string::npos) {
-    line.replace (offposition, look_for.length (), replace_with);
-    offposition = line.find (look_for, offposition + replace_with.length ());
+    line.replace(offposition, look_for.length(), replace_with);
+    offposition = line.find(look_for, offposition + replace_with.length());
     replacements_done = true;
   }
   return replacements_done;
 }
 
-
-bool replace_text_between(ustring & line, const ustring & start, const ustring & end, const ustring & replacement)
-// Replaces text that starts with "start" and ends with "end" with "replacement".
+bool replace_text_between(ustring &line, const ustring &start,
+                          const ustring &end, const ustring &replacement)
+// Replaces text that starts with "start" and ends with "end" with
+// "replacement".
 // Returns true if replacement was done.
 {
   bool replacements_done = false;
   size_t beginpos = line.find(start);
   size_t endpos = line.find(end);
-  while ((beginpos != string::npos) && (endpos != string::npos) && (endpos > beginpos)) {
+  while ((beginpos != string::npos) && (endpos != string::npos) &&
+         (endpos > beginpos)) {
     line.replace(beginpos, endpos - beginpos + end.length(), replacement);
     beginpos = line.find(start, beginpos + replacement.length());
     endpos = line.find(end, beginpos + replacement.length());
@@ -213,17 +191,20 @@ bool replace_text_between(ustring & line, const ustring & start, const ustring &
 }
 
 // Function template for swapping elements in the container
-template<typename T> void quick_swap(T &a, T &b)
-{
-  T temp = a; a = b; b = temp;
+template <typename T> void quick_swap(T &a, T &b) {
+  T temp = a;
+  a = b;
+  b = temp;
 }
 
 // Instantiations of several quick_swap variants...cannot inline these
 template void quick_swap<ustring>(ustring &a, ustring &b);
-template void quick_swap<long long unsigned> (long long unsigned  &a, long long unsigned &b);
-template void quick_swap<int> (int     &a, int     &b);
-template void quick_swap<bool>(bool    &a, bool    &b);
-template void quick_swap<long unsigned int>(long unsigned int &a, long unsigned int &b);
+template void quick_swap<long long unsigned>(long long unsigned &a,
+                                             long long unsigned &b);
+template void quick_swap<int>(int &a, int &b);
+template void quick_swap<bool>(bool &a, bool &b);
+template void quick_swap<long unsigned int>(long unsigned int &a,
+                                            long unsigned int &b);
 
 // Watch for inefficiencies in above, and turn into a macro if so
 
@@ -278,12 +259,13 @@ void quick_swap(bool & a, bool & b)
 /*
 This function is unusual in the sense that it does not sort one container, as
 the big majority of sort functions do, but it accepts two containers.
-It sorts on the first, and reorders the second container at the same time, 
+It sorts on the first, and reorders the second container at the same time,
 following the reordering done in the first container.
 */
 // Function template for sorting the containers
-template<typename T1, typename T2> void quick_sort(vector<T1> &one, vector <T2> &two, unsigned int beg, unsigned int end)
-{
+template <typename T1, typename T2>
+void quick_sort(vector<T1> &one, vector<T2> &two, unsigned int beg,
+                unsigned int end) {
   if (end > beg + 1) {
     T1 piv = one[beg];
     unsigned int l = beg + 1;
@@ -304,18 +286,37 @@ template<typename T1, typename T2> void quick_sort(vector<T1> &one, vector <T2> 
     quick_sort(one, two, r, end);
   }
 }
-// Instantiations of several of these special quick_sort variants...cannot inline these
-template void quick_sort<unsigned int, ustring>     (vector <unsigned int> &one, vector <ustring>      &two, unsigned int beg, unsigned int end);
-template void quick_sort<ustring, unsigned int>     (vector <ustring>      &one, vector <unsigned int> &two, unsigned int beg, unsigned int end);
-template void quick_sort<unsigned int, unsigned int>(vector <unsigned int> &one, vector <unsigned int> &two, unsigned int beg, unsigned int end);
-template void quick_sort<long long unsigned int, long long unsigned int>(vector<long long unsigned int>&one, vector<long long unsigned int>& two, unsigned int beg, unsigned int end);
-template void quick_sort<int, unsigned int>         (vector <int>          &one, vector<unsigned int>  &two, unsigned int beg, unsigned int end);
-template void quick_sort<ustring, ustring>          (vector <ustring>      &one, vector <ustring>      &two, unsigned int beg, unsigned int end);
-template void quick_sort<long unsigned int, long unsigned int>(vector <long unsigned int> &one, vector <long unsigned int> &two, unsigned int beg, unsigned int end);
+// Instantiations of several of these special quick_sort variants...cannot
+// inline these
+template void quick_sort<unsigned int, ustring>(vector<unsigned int> &one,
+                                                vector<ustring> &two,
+                                                unsigned int beg,
+                                                unsigned int end);
+template void quick_sort<ustring, unsigned int>(vector<ustring> &one,
+                                                vector<unsigned int> &two,
+                                                unsigned int beg,
+                                                unsigned int end);
+template void quick_sort<unsigned int, unsigned int>(vector<unsigned int> &one,
+                                                     vector<unsigned int> &two,
+                                                     unsigned int beg,
+                                                     unsigned int end);
+template void quick_sort<long long unsigned int, long long unsigned int>(
+    vector<long long unsigned int> &one, vector<long long unsigned int> &two,
+    unsigned int beg, unsigned int end);
+template void quick_sort<int, unsigned int>(vector<int> &one,
+                                            vector<unsigned int> &two,
+                                            unsigned int beg, unsigned int end);
+template void quick_sort<ustring, ustring>(vector<ustring> &one,
+                                           vector<ustring> &two,
+                                           unsigned int beg, unsigned int end);
+template void quick_sort<long unsigned int, long unsigned int>(
+    vector<long unsigned int> &one, vector<long unsigned int> &two,
+    unsigned int beg, unsigned int end);
 
 // Similar to above, but "bool" type needs special handling
-template<typename T1> void quick_sort(vector<T1> &one, vector <bool> &two, unsigned int beg, unsigned int end)
- {
+template <typename T1>
+void quick_sort(vector<T1> &one, vector<bool> &two, unsigned int beg,
+                unsigned int end) {
   if (end > beg + 1) {
     T1 piv = one[beg];
     unsigned int l = beg + 1;
@@ -344,12 +345,15 @@ template<typename T1> void quick_sort(vector<T1> &one, vector <bool> &two, unsig
     quick_sort(one, two, r, end);
   }
 }
-template void quick_sort<unsigned int> (vector <unsigned int> &one, vector<bool> &two, unsigned int beg, unsigned int end);
-template void quick_sort<ustring>      (vector <ustring>      &one, vector<bool> &two, unsigned int beg, unsigned int end);
-
+template void quick_sort<unsigned int>(vector<unsigned int> &one,
+                                       vector<bool> &two, unsigned int beg,
+                                       unsigned int end);
+template void quick_sort<ustring>(vector<ustring> &one, vector<bool> &two,
+                                  unsigned int beg, unsigned int end);
 
 /*
-void quick_sort(vector < unsigned int >&one, vector < ustring > &two, unsigned int beg, unsigned int end)
+void quick_sort(vector < unsigned int >&one, vector < ustring > &two, unsigned
+int beg, unsigned int end)
 {
   if (end > beg + 1) {
     unsigned int piv = one[beg];
@@ -372,7 +376,8 @@ void quick_sort(vector < unsigned int >&one, vector < ustring > &two, unsigned i
   }
 }
 
-void quick_sort(vector < ustring > &one, vector < unsigned int >&two, unsigned int beg, unsigned int end)
+void quick_sort(vector < ustring > &one, vector < unsigned int >&two, unsigned
+int beg, unsigned int end)
 {
   if (end > beg + 1) {
     ustring piv = one[beg];
@@ -395,7 +400,8 @@ void quick_sort(vector < ustring > &one, vector < unsigned int >&two, unsigned i
   }
 }
 
-void quick_sort(vector < unsigned int >&one, vector < unsigned int >&two, unsigned int beg, unsigned int end)
+void quick_sort(vector < unsigned int >&one, vector < unsigned int >&two,
+unsigned int beg, unsigned int end)
 {
   if (end > beg + 1) {
     unsigned int piv = one[beg];
@@ -418,7 +424,8 @@ void quick_sort(vector < unsigned int >&one, vector < unsigned int >&two, unsign
   }
 }
 
-void quick_sort (vector<long long unsigned int>& one,       vector<long long unsigned int>& two,       unsigned int beg, unsigned int end)
+void quick_sort (vector<long long unsigned int>& one,       vector<long long
+unsigned int>& two,       unsigned int beg, unsigned int end)
 {
   if (end > beg + 1) {
     unsigned int piv = one[beg];
@@ -442,7 +449,8 @@ void quick_sort (vector<long long unsigned int>& one,       vector<long long uns
 }
 
 
-void quick_sort (vector<unsigned int>& one, vector<bool>& two, unsigned int beg, unsigned int end)
+void quick_sort (vector<unsigned int>& one, vector<bool>& two, unsigned int beg,
+unsigned int end)
 {
   if (end > beg + 1) {
     unsigned int piv = one[beg];
@@ -474,7 +482,8 @@ void quick_sort (vector<unsigned int>& one, vector<bool>& two, unsigned int beg,
 }
 
 
-void quick_sort(vector < int >&one, vector < unsigned int >&two, unsigned int beg, unsigned int end)
+void quick_sort(vector < int >&one, vector < unsigned int >&two, unsigned int
+beg, unsigned int end)
 {
   if (end > beg + 1) {
     int piv = one[beg];
@@ -497,7 +506,8 @@ void quick_sort(vector < int >&one, vector < unsigned int >&two, unsigned int be
   }
 }
 
-void quick_sort(vector < ustring > &one, vector < ustring > &two, unsigned int beg, unsigned int end)
+void quick_sort(vector < ustring > &one, vector < ustring > &two, unsigned int
+beg, unsigned int end)
 {
   if (end > beg + 1) {
     ustring piv = one[beg];
@@ -521,7 +531,8 @@ void quick_sort(vector < ustring > &one, vector < ustring > &two, unsigned int b
 }
 
 
-void quick_sort(vector < ustring > &one, vector < bool > &two, unsigned int beg, unsigned int end)
+void quick_sort(vector < ustring > &one, vector < bool > &two, unsigned int beg,
+unsigned int end)
 {
   if (end > beg + 1) {
     ustring piv = one[beg];
@@ -554,8 +565,7 @@ void quick_sort(vector < ustring > &one, vector < bool > &two, unsigned int beg,
 */
 
 /* A regular single vector sorting routine */
-void quick_sort(vector < ustring > &one, unsigned int beg, unsigned int end)
-{
+void quick_sort(vector<ustring> &one, unsigned int beg, unsigned int end) {
   if (end > beg + 1) {
     ustring piv = one[beg];
     unsigned int l = beg + 1;
@@ -576,7 +586,8 @@ void quick_sort(vector < ustring > &one, unsigned int beg, unsigned int end)
 }
 
 /*
-void quick_sort(vector <long unsigned int>& one, vector <long unsigned int>& two, unsigned int beg, unsigned int end)
+void quick_sort(vector <long unsigned int>& one, vector <long unsigned int>&
+two, unsigned int beg, unsigned int end)
 {
   if (end > beg + 1) {
     long unsigned int piv = one[beg];
@@ -600,8 +611,8 @@ void quick_sort(vector <long unsigned int>& one, vector <long unsigned int>& two
 }
 */
 
-gchar *de_windows_notepad(gchar * contents)
-// Some Windows textfiles, probably the ones created with Notepad, have 
+gchar *de_windows_notepad(gchar *contents)
+// Some Windows textfiles, probably the ones created with Notepad, have
 // the "feature" to put \xEF\xBB\xBF at the start of the file.
 // This function removes those characters.
 {
@@ -615,16 +626,15 @@ gchar *de_windows_notepad(gchar * contents)
   return returnvalue;
 }
 
-
-void de_byte_order_mark (ustring& line)
+void de_byte_order_mark(ustring &line)
 // Some textfiles start with a byte order mark.
 // This function remove it.
 {
-  if (line.find ("﻿") == 0) { // Note that there's text between the quotation marks.
-    line.erase (0, 1);
+  if (line.find("﻿") ==
+      0) { // Note that there's text between the quotation marks.
+    line.erase(0, 1);
   }
 }
-
 
 ustring spaces(unsigned int count)
 // Returns "count" spaces.
@@ -635,15 +645,13 @@ ustring spaces(unsigned int count)
   return space;
 }
 
-
-void bitpattern_add(ustring & pattern, bool setting)
+void bitpattern_add(ustring &pattern, bool setting)
 // Adds one bit for "setting" to "pattern".
 {
   pattern.append(convert_to_string(setting));
 }
 
-
-bool bitpattern_take(ustring & pattern)
+bool bitpattern_take(ustring &pattern)
 // Return the next bit from "pattern" and removes it from that string.
 // This implies that settngs from the pattern must be taken in the same order
 // that they were added.
@@ -656,9 +664,7 @@ bool bitpattern_take(ustring & pattern)
   return setting;
 }
 
-
-ustring character_to_decimal_entity(const ustring & character)
-{
+ustring character_to_decimal_entity(const ustring &character) {
   gunichar unichar;
   gunichar *uc;
   uc = g_utf8_to_ucs4_fast(character.c_str(), -1, NULL);
@@ -670,9 +676,7 @@ ustring character_to_decimal_entity(const ustring & character)
   return udec;
 }
 
-
-ustring character_to_hexadecimal_entity(const ustring & character)
-{
+ustring character_to_hexadecimal_entity(const ustring &character) {
   gunichar unichar;
   gunichar *uc;
   uc = g_utf8_to_ucs4_fast(character.c_str(), -1, NULL);
@@ -684,41 +688,36 @@ ustring character_to_hexadecimal_entity(const ustring & character)
   return udec;
 }
 
-
-void string_append_line(ustring & container, const ustring & line)
-{
+void string_append_line(ustring &container, const ustring &line) {
   if (!container.empty()) {
     container.append("\n");
   }
   container.append(line);
 }
 
-
 ustring present_working_directory()
 // Gives the present working directory.
 {
   char pwd[10000];
-  if (getcwd(pwd, 10000)) ;
+  if (getcwd(pwd, 10000))
+    ;
   ustring s(pwd);
   return s;
 }
 
-
-bool vector_strings_equal (const vector <ustring>& vector1, const vector <ustring>& vector2)
-{
+bool vector_strings_equal(const vector<ustring> &vector1,
+                          const vector<ustring> &vector2) {
   if (vector1.size() != vector2.size())
     return false;
-  
+
   for (unsigned int i = 0; i < vector1.size(); i++)
     if (vector1[i] != vector2[i])
       return false;
-  
+
   return true;
 }
 
-
-int clamp (int in, int min, int max)
-{
+int clamp(int in, int min, int max) {
   if (in < min)
     in = min;
   if (in > max)
@@ -726,65 +725,55 @@ int clamp (int in, int min, int max)
   return in;
 }
 
-
-ReadDirectories::ReadDirectories(const ustring & path, const ustring & prefix, const ustring & suffix)
-{
+ReadDirectories::ReadDirectories(const ustring &path, const ustring &prefix,
+                                 const ustring &suffix) {
   // Reads the directories in directory "path" that end on "suffix".
   // It does not return regular files.
   try {
     GDir *dir = g_dir_open(path.c_str(), 0, NULL);
     const gchar *s;
-    vector < ustring > entries;
+    vector<ustring> entries;
     while ((s = g_dir_read_name(dir)) != NULL)
       entries.push_back(s);
     g_dir_close(dir);
     for (unsigned int i = 0; i < entries.size(); i++) {
       if (g_str_has_suffix(entries[i].c_str(), suffix.c_str()))
         if (g_str_has_prefix(entries[i].c_str(), prefix.c_str()))
-          if (g_file_test(gw_build_filename(path, entries[i]).c_str(), G_FILE_TEST_IS_DIR))
+          if (g_file_test(gw_build_filename(path, entries[i]).c_str(),
+                          G_FILE_TEST_IS_DIR))
             directories.push_back(entries[i]);
     }
-  }
-  catch(...) {
+  } catch (...) {
   }
 }
 
+ReadDirectories::~ReadDirectories() {}
 
-ReadDirectories::~ReadDirectories()
-{
-}
-
-
-ReadFiles::ReadFiles(const ustring & path, const ustring & prefix, const ustring & suffix)
-{
+ReadFiles::ReadFiles(const ustring &path, const ustring &prefix,
+                     const ustring &suffix) {
   // Reads the regular files in directory "path" that end on "suffix".
   // It does not return directories.
   try {
     GDir *dir = g_dir_open(path.c_str(), 0, NULL);
     const gchar *s;
-    vector < ustring > entries;
+    vector<ustring> entries;
     while ((s = g_dir_read_name(dir)) != NULL)
       entries.push_back(s);
     g_dir_close(dir);
     for (unsigned int i = 0; i < entries.size(); i++) {
       if (g_str_has_suffix(entries[i].c_str(), suffix.c_str()))
         if (g_str_has_prefix(entries[i].c_str(), prefix.c_str()))
-          if (!g_file_test(gw_build_filename(path, entries[i]).c_str(), G_FILE_TEST_IS_DIR))
+          if (!g_file_test(gw_build_filename(path, entries[i]).c_str(),
+                           G_FILE_TEST_IS_DIR))
             files.push_back(entries[i]);
     }
-  }
-  catch(...) {
+  } catch (...) {
   }
 }
 
+ReadFiles::~ReadFiles() {}
 
-ReadFiles::~ReadFiles()
-{
-}
-
-
-ReadText::ReadText(const ustring & file, bool silent, bool trimming)
-{
+ReadText::ReadText(const ustring &file, bool silent, bool trimming) {
   // Reads the text and stores it line by line, trimmed, into "lines".
   // If "silent" is true, then no exception will be thrown in case of an error.
   // The lines will be trimmed if "trimming" is true.
@@ -804,22 +793,20 @@ ReadText::ReadText(const ustring & file, bool silent, bool trimming)
   }
 }
 
+ReadText::~ReadText() {}
 
-ReadText::~ReadText()
-{
-}
-
-
-WriteText::WriteText(const ustring & file, bool append)
-{
-/*
-  This opens a textfile for writing.
-  At first it uses the streaming system (e.g. out << text << endl), but because
-  this causes crashes on Macintosh when writing Unicode, this has been changed
-  to regular Linux calls: open, write.
-*/
+WriteText::WriteText(const ustring &file, bool append) {
+  /*
+    This opens a textfile for writing.
+    At first it uses the streaming system (e.g. out << text << endl), but
+    because
+    this causes crashes on Macintosh when writing Unicode, this has been changed
+    to regular Linux calls: open, write.
+  */
   int openflags = O_CREAT | O_WRONLY | O_TRUNC; // default to truncate
-  if (append) { openflags = O_CREAT | O_WRONLY | O_APPEND; }
+  if (append) {
+    openflags = O_CREAT | O_WRONLY | O_APPEND;
+  }
 
   fd = open(file.c_str(), openflags, 0666);
   if (fd < 0) {
@@ -828,23 +815,19 @@ WriteText::WriteText(const ustring & file, bool append)
   }
 }
 
+WriteText::~WriteText() { close(fd); }
 
-WriteText::~WriteText()
-{
-  close(fd);
-}
-
-
-void WriteText::text(const ustring & text)
+void WriteText::text(const ustring &text)
 // Write the text. For calculating the lenght, do not use text.length(),
-// because this gives the number of unicode characters, not the length in bytes. 
+// because this gives the number of unicode characters, not the length in bytes.
 // Use strlen () instead.
 {
-  if (write(fd, text.c_str(), strlen(text.c_str()))) ;
+  if (write(fd, text.c_str(), strlen(text.c_str())))
+    ;
 }
 
-
-Parse::Parse(const ustring & line, bool remove_punctuation, const ustring & separator)
+Parse::Parse(const ustring &line, bool remove_punctuation,
+             const ustring &separator)
 // Parses a line of text in its separate words.
 // remove_punctuation: remove some standard punctuation.
 // separator: standard this is a space, but can be modified.
@@ -867,13 +850,9 @@ Parse::Parse(const ustring & line, bool remove_punctuation, const ustring & sepa
   }
 }
 
+Parse::~Parse() {}
 
-Parse::~Parse()
-{
-}
-
-
-ParseWords::ParseWords(const ustring & text)
+ParseWords::ParseWords(const ustring &text)
 // Parses a line of text in its separate words.
 // Note: This is comparable to object Parse, but does a better job.
 {
@@ -883,7 +862,7 @@ ParseWords::ParseWords(const ustring & text)
   GtkTextBuffer *textbuffer;
   textbuffer = gtk_text_buffer_new(NULL);
   gtk_text_buffer_set_text(textbuffer, text2.c_str(), -1);
-  // Iterators.  
+  // Iterators.
   GtkTextIter startiter, enditer;
   // Parse into separate words.
   gtk_text_buffer_get_start_iter(textbuffer, &enditer);

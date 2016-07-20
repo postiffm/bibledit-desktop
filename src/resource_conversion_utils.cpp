@@ -1,45 +1,44 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "resource_conversion_utils.h"
-#include "tiny_utilities.h"
 #include "gwrappers.h"
 #include "progresswindow.h"
 #include "roman.h"
+#include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-const gchar *resource_conversion_type_to_text(ResourceConversionType type)
-{
+const gchar *resource_conversion_type_to_text(ResourceConversionType type) {
   switch (type) {
   case rctChapterStartsAtPatternVerseOneStartsAtChapterVerseStartsAtPattern:
-    return _("Chapter starts at a pattern, verse 1 starts at chapter, verse starts at a pattern");
+    return _("Chapter starts at a pattern, verse 1 starts at chapter, verse "
+             "starts at a pattern");
   case rctEnd:
     return "";
   }
   return "";
 }
 
-ResourceConversionType resource_conversion_text_to_type(const ustring & text)
-{
+ResourceConversionType resource_conversion_text_to_type(const ustring &text) {
   for (unsigned int i = 0; i < rctEnd; i++) {
     if (text == resource_conversion_type_to_text(ResourceConversionType(i)))
-      return (ResourceConversionType) i;
+      return (ResourceConversionType)i;
   }
   return rctEnd;
 }
@@ -50,7 +49,8 @@ const gchar *resource_conversion_anchor_prefix()
   return "be_anc_";
 }
 
-ustring resource_conversion_create_anchor_chapter_verse(unsigned int chapter, unsigned int verse)
+ustring resource_conversion_create_anchor_chapter_verse(unsigned int chapter,
+                                                        unsigned int verse)
 // Create an anchor for the resource converter that includes chapter and verse.
 {
   ustring anchor;
@@ -63,19 +63,29 @@ ustring resource_conversion_create_anchor_chapter_verse(unsigned int chapter, un
   return anchor;
 }
 
-void resource_conversion_insert_anchors(vector < ustring > &lines, const ustring & chapter_prefix, unsigned int chapter_pattern, const ustring & chapter_suffix, const ustring & verse_prefix, unsigned int verse_pattern, const ustring & verse_suffix)
+void resource_conversion_insert_anchors(vector<ustring> &lines,
+                                        const ustring &chapter_prefix,
+                                        unsigned int chapter_pattern,
+                                        const ustring &chapter_suffix,
+                                        const ustring &verse_prefix,
+                                        unsigned int verse_pattern,
+                                        const ustring &verse_suffix)
 // Inserts the appropriate anchors in the lines.
 {
   // Chapter patterns to look for.
-  vector < ustring > chapter_patterns;
+  vector<ustring> chapter_patterns;
   for (unsigned int i = 0; i <= 150; i++) {
-    chapter_patterns.push_back(chapter_prefix + integer_or_roman_numeral(i, chapter_pattern) + chapter_suffix);
+    chapter_patterns.push_back(chapter_prefix +
+                               integer_or_roman_numeral(i, chapter_pattern) +
+                               chapter_suffix);
   }
 
   // Verse patterns to look for.
-  vector < ustring > verse_patterns;
+  vector<ustring> verse_patterns;
   for (unsigned int i = 0; i <= 150; i++) {
-    verse_patterns.push_back(verse_prefix + integer_or_roman_numeral(i, verse_pattern) + verse_suffix);
+    verse_patterns.push_back(verse_prefix +
+                             integer_or_roman_numeral(i, verse_pattern) +
+                             verse_suffix);
   }
 
   // Current chapter.
@@ -87,13 +97,14 @@ void resource_conversion_insert_anchors(vector < ustring > &lines, const ustring
   for (unsigned int i = 0; i < lines.size(); i++) {
     progresswindow.iterate();
 
-    // Insert chapter and verse 1 anchors.    
+    // Insert chapter and verse 1 anchors.
     for (unsigned int i2 = 0; i2 < chapter_patterns.size(); i2++) {
       size_t pos = lines[i].find(chapter_patterns[i2]);
       if (pos != string::npos) {
         current_chapter = i2;
         pos += chapter_prefix.length();
-        lines[i].insert(pos, resource_conversion_create_anchor_chapter_verse(current_chapter, 1));
+        lines[i].insert(pos, resource_conversion_create_anchor_chapter_verse(
+                                 current_chapter, 1));
       }
     }
 
@@ -105,7 +116,8 @@ void resource_conversion_insert_anchors(vector < ustring > &lines, const ustring
         if (pos != string::npos) {
           unsigned int verse = i2;
           pos += verse_prefix.length();
-          ustring anchor = resource_conversion_create_anchor_chapter_verse(current_chapter, verse);
+          ustring anchor = resource_conversion_create_anchor_chapter_verse(
+              current_chapter, verse);
           lines[i].insert(pos, anchor);
           pos += anchor.length();
           pos += verse_patterns[i2].length();
@@ -113,11 +125,10 @@ void resource_conversion_insert_anchors(vector < ustring > &lines, const ustring
         }
       } while (pos != string::npos);
     }
-
   }
 }
 
-void resource_conversion_remove_anchors(vector < ustring > &lines)
+void resource_conversion_remove_anchors(vector<ustring> &lines)
 // This removes any anchors that were inserted by the resource converter.
 // This is so as to prevent double anchors from coming in.
 {

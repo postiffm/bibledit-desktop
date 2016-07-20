@@ -1,41 +1,45 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include "libraries.h"
-#include <glib.h>
 #include "originreferences.h"
-#include "utilities.h"
-#include "projectutils.h"
-#include "settings.h"
-#include "progresswindow.h"
+#include "books.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "usfmtools.h"
 #include "help.h"
-#include "usfm.h"
-#include "books.h"
-#include "tiny_utilities.h"
+#include "libraries.h"
+#include "progresswindow.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "usfm.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes, bool affectendnotes, bool affectxrefs, OriginReferencesActionType action, bool includebook, bool includechapter, const ustring & separator, bool includeverse, const ustring & suffix, bool gui)
-{
+OriginReferences::OriginReferences(const ustring &project, bool affectfootnotes,
+                                   bool affectendnotes, bool affectxrefs,
+                                   OriginReferencesActionType action,
+                                   bool includebook, bool includechapter,
+                                   const ustring &separator, bool includeverse,
+                                   const ustring &suffix, bool gui) {
   // Progress.
   ProgressWindow *progresswindow = NULL;
   if (gui)
@@ -54,14 +58,14 @@ OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes
   errorcount = 0;
   extern Settings *settings;
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
-  stylesheet = stylesheet_get_actual ();
+  stylesheet = stylesheet_get_actual();
   language = projectconfig->language_get();
 
   // Get the relevant markers.
   get_relevant_markers();
 
   // Go through the books in the project.
-  vector < unsigned int >books = project_get_books(project);
+  vector<unsigned int> books = project_get_books(project);
   if (gui)
     progresswindow->set_iterate(0, 1, books.size());
   for (unsigned int bk = 0; bk < books.size(); bk++) {
@@ -71,24 +75,38 @@ OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes
       progresswindow->iterate();
 
     // Go through the chapters in this book.
-    vector < unsigned int >chapters = project_get_chapters(project, books[bk]);
+    vector<unsigned int> chapters = project_get_chapters(project, books[bk]);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
 
       // Go through the verses in this chapter.
-      vector < ustring > verses = project_get_verses(project, books[bk], chapters[ch]);
+      vector<ustring> verses =
+          project_get_verses(project, books[bk], chapters[ch]);
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
 
         // Retrieve each verse and process it.
-        ustring text = project_retrieve_verse(project, books[bk], chapters[ch], verses[vs]);
+        ustring text = project_retrieve_verse(project, books[bk], chapters[ch],
+                                              verses[vs]);
         unsigned int previous_affected_count = affectedcount;
         if (affectfootnotes)
-          handle_notes(text, books[bk], chapters[ch], verses[vs], footnote_opener, footnote_closer, foot_end_note_origin_reference_opener, foot_end_note_origin_reference_closer, foot_end_note_text_opener, foot_end_note_text_closer);
+          handle_notes(text, books[bk], chapters[ch], verses[vs],
+                       footnote_opener, footnote_closer,
+                       foot_end_note_origin_reference_opener,
+                       foot_end_note_origin_reference_closer,
+                       foot_end_note_text_opener, foot_end_note_text_closer);
         if (affectendnotes)
-          handle_notes(text, books[bk], chapters[ch], verses[vs], endnote_opener, endnote_closer, foot_end_note_origin_reference_opener, foot_end_note_origin_reference_closer, foot_end_note_text_opener, foot_end_note_text_closer);
+          handle_notes(text, books[bk], chapters[ch], verses[vs],
+                       endnote_opener, endnote_closer,
+                       foot_end_note_origin_reference_opener,
+                       foot_end_note_origin_reference_closer,
+                       foot_end_note_text_opener, foot_end_note_text_closer);
         if (affectxrefs)
-          handle_notes(text, books[bk], chapters[ch], verses[vs], xref_opener, xref_closer, xref_origin_reference_opener, xref_origin_reference_closer, xref_text_opener, xref_text_closer);
+          handle_notes(text, books[bk], chapters[ch], verses[vs], xref_opener,
+                       xref_closer, xref_origin_reference_opener,
+                       xref_origin_reference_closer, xref_text_opener,
+                       xref_text_closer);
         if (affectedcount != previous_affected_count) {
-          project_store_verse(project, books[bk], chapters[ch], verses[vs], text);
+          project_store_verse(project, books[bk], chapters[ch], verses[vs],
+                              text);
         }
       }
     }
@@ -96,7 +114,8 @@ OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes
 
   // Give statistics.
   ustring message;
-  message.append(_("Relevant notes found: ") + convert_to_string(notescount) + "\n");
+  message.append(_("Relevant notes found: ") + convert_to_string(notescount) +
+                 "\n");
   if (action != oratNothing) {
     if (action == oratAddReference)
       message.append(_("Origin references added: "));
@@ -106,10 +125,12 @@ OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes
       message.append(_("Text labels added: "));
     message.append(convert_to_string(affectedcount) + "\n");
     if (finecount)
-      message.append(_("Notes not affected because they already were fine: ") + convert_to_string(finecount) + "\n");
+      message.append(_("Notes not affected because they already were fine: ") +
+                     convert_to_string(finecount) + "\n");
   }
   if (errorcount)
-    message.append(_("Notes with structural errors: ") + convert_to_string(errorcount) + "\n");
+    message.append(_("Notes with structural errors: ") +
+                   convert_to_string(errorcount) + "\n");
   if (gui)
     gtkw_dialog_info(NULL, message);
   else
@@ -120,12 +141,9 @@ OriginReferences::OriginReferences(const ustring & project, bool affectfootnotes
     delete progresswindow;
 }
 
-OriginReferences::~OriginReferences()
-{
-}
+OriginReferences::~OriginReferences() {}
 
-void OriginReferences::get_relevant_markers()
-{
+void OriginReferences::get_relevant_markers() {
   // Set default values in case they cannot be retrieved from the stylesheet.
   footnote_opener = usfm_get_full_opening_marker("f");
   footnote_closer = usfm_get_full_closing_marker("f");
@@ -142,50 +160,47 @@ void OriginReferences::get_relevant_markers()
   xref_text_opener = usfm_get_full_opening_marker("xt");
   xref_text_closer = usfm_get_full_opening_marker("xt");
 
-  // Retrieve some values from the stylesheet.  
+  // Retrieve some values from the stylesheet.
   Usfm usfm(stylesheet);
   for (unsigned int i = 0; i < usfm.styles.size(); i++) {
     if (usfm.styles[i].type == stFootEndNote) {
-      FootEndNoteType footnotetype = (FootEndNoteType) usfm.styles[i].subtype;
+      FootEndNoteType footnotetype = (FootEndNoteType)usfm.styles[i].subtype;
       switch (footnotetype) {
-      case fentFootnote:
-        {
-          footnote_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          footnote_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          break;
-        }
-      case fentEndnote:
-        {
-          endnote_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          endnote_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          break;
-        }
-      case fentStandardContent:
-        {
-          foot_end_note_text_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          foot_end_note_text_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          break;
-        }
+      case fentFootnote: {
+        footnote_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        footnote_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        break;
+      }
+      case fentEndnote: {
+        endnote_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        endnote_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        break;
+      }
+      case fentStandardContent: {
+        foot_end_note_text_opener =
+            usfm_get_full_opening_marker(usfm.styles[i].marker);
+        foot_end_note_text_closer =
+            usfm_get_full_closing_marker(usfm.styles[i].marker);
+        break;
+      }
       case fentContent:
       case fentContentWithEndmarker:
       case fentParagraph:;
       }
     }
     if (usfm.styles[i].type == stCrossreference) {
-      CrossreferenceType xreftype = (CrossreferenceType) usfm.styles[i].subtype;
+      CrossreferenceType xreftype = (CrossreferenceType)usfm.styles[i].subtype;
       switch (xreftype) {
-      case ctCrossreference:
-        {
-          xref_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          xref_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          break;
-        }
-      case ctStandardContent:
-        {
-          xref_text_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          xref_text_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          break;
-        }
+      case ctCrossreference: {
+        xref_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        xref_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        break;
+      }
+      case ctStandardContent: {
+        xref_text_opener = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        xref_text_closer = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        break;
+      }
       case ctContent:
       case ctContentWithEndmarker:;
       }
@@ -193,7 +208,11 @@ void OriginReferences::get_relevant_markers()
   }
 }
 
-void OriginReferences::handle_notes(ustring & line, int book, int chapter, const ustring & verse, const ustring & note_opener, const ustring & note_closer, const ustring & origin_ref_opener, const ustring & origin_ref_closer, const ustring & text_opener, const ustring & text_closer)
+void OriginReferences::handle_notes(
+    ustring &line, int book, int chapter, const ustring &verse,
+    const ustring &note_opener, const ustring &note_closer,
+    const ustring &origin_ref_opener, const ustring &origin_ref_closer,
+    const ustring &text_opener, const ustring &text_closer)
 // Extract a note, call the handler, insert the changed note again.
 {
   // Variables.
@@ -216,32 +235,34 @@ void OriginReferences::handle_notes(ustring & line, int book, int chapter, const
     }
     // Take out this bit of the line, transform it, and insert it again.
     ustring footnote;
-    footnote = line.substr(opening_position + note_opener.length(), closing_position - opening_position - note_closer.length());
-    line.erase(opening_position, closing_position - opening_position + note_closer.length());
+    footnote =
+        line.substr(opening_position + note_opener.length(),
+                    closing_position - opening_position - note_closer.length());
+    line.erase(opening_position,
+               closing_position - opening_position + note_closer.length());
 
     switch (myaction) {
-    case oratNothing:
-      {
-        finecount++;
-        break;
-      }
-    case oratRemoveReferences:
-      {
-        remove_reference(footnote, origin_ref_opener, origin_ref_closer);
-        break;
-      }
-    case oratAddReference:
-      {
-        ustring reference;
-        reference = origin_reference_produce(myincludebook, book, language, myincludechapter, chapter, myseparator, myincludeverse, verse, mysuffix, false);
-        add_reference(footnote, origin_ref_opener, reference);
-        break;
-      }
-    case oratTextLabels:
-      {
-        add_text_marker(footnote, origin_ref_opener, origin_ref_closer, text_opener, text_opener);
-        break;
-      }
+    case oratNothing: {
+      finecount++;
+      break;
+    }
+    case oratRemoveReferences: {
+      remove_reference(footnote, origin_ref_opener, origin_ref_closer);
+      break;
+    }
+    case oratAddReference: {
+      ustring reference;
+      reference = origin_reference_produce(
+          myincludebook, book, language, myincludechapter, chapter, myseparator,
+          myincludeverse, verse, mysuffix, false);
+      add_reference(footnote, origin_ref_opener, reference);
+      break;
+    }
+    case oratTextLabels: {
+      add_text_marker(footnote, origin_ref_opener, origin_ref_closer,
+                      text_opener, text_opener);
+      break;
+    }
     }
     line.insert(opening_position, note_opener + footnote + note_closer);
 
@@ -250,8 +271,8 @@ void OriginReferences::handle_notes(ustring & line, int book, int chapter, const
   }
 }
 
-void OriginReferences::remove_reference(ustring & line, const ustring & opener, const ustring & closer)
-{
+void OriginReferences::remove_reference(ustring &line, const ustring &opener,
+                                        const ustring &closer) {
   size_t opener_position = line.find(opener);
   if (opener_position == string::npos) {
     finecount++;
@@ -268,8 +289,8 @@ void OriginReferences::remove_reference(ustring & line, const ustring & opener, 
   affectedcount++;
 }
 
-void OriginReferences::add_reference(ustring & line, const ustring & opener, const ustring & reference)
-{
+void OriginReferences::add_reference(ustring &line, const ustring &opener,
+                                     const ustring &reference) {
   // If the opener is already in, the note is fine. Bail out.
   size_t position = line.find(opener);
   if (position != string::npos) {
@@ -288,7 +309,11 @@ void OriginReferences::add_reference(ustring & line, const ustring & opener, con
   affectedcount++;
 }
 
-void OriginReferences::add_text_marker(ustring & line, const ustring & referenceopener, const ustring & referencecloser, const ustring & textopener, const ustring & textcloser)
+void OriginReferences::add_text_marker(ustring &line,
+                                       const ustring &referenceopener,
+                                       const ustring &referencecloser,
+                                       const ustring &textopener,
+                                       const ustring &textcloser)
 // Adds a text marker, only the opening marker, if it is not yet in the line.
 {
   // If the text opener or closer is already in, things appear to be fine.
@@ -335,8 +360,13 @@ void OriginReferences::add_text_marker(ustring & line, const ustring & reference
   }
 }
 
-ustring origin_reference_produce(bool includebook, unsigned int book, const ustring & language, bool includechapter, int chapter, const ustring & separator, bool includeverse, const ustring & verse, const ustring & suffix, bool example)
-// Produces the text of the origin references, as can be inserted in a Bible note.
+ustring origin_reference_produce(bool includebook, unsigned int book,
+                                 const ustring &language, bool includechapter,
+                                 int chapter, const ustring &separator,
+                                 bool includeverse, const ustring &verse,
+                                 const ustring &suffix, bool example)
+// Produces the text of the origin references, as can be inserted in a Bible
+// note.
 // If "example" is set, then the reference will be surrounded by brackets.
 {
   ustring result;

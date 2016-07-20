@@ -1,56 +1,58 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogeditdictionary.h"
-#include "help.h"
-#include "spelling.h"
-#include "utilities.h"
-#include "shortcuts.h"
-#include "tiny_utilities.h"
-#include "projectutils.h"
 #include "dialoglistview.h"
 #include "gtkwrappers.h"
+#include "help.h"
+#include "libraries.h"
+#include "projectutils.h"
 #include "screen.h"
+#include "shortcuts.h"
+#include "spelling.h"
+#include "tiny_utilities.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
-{
+EditDictionaryDialog::EditDictionaryDialog(const ustring &dictionary) {
   mydictionary = dictionary;
   Shortcuts shortcuts(0);
 
   textviewdialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(textviewdialog), _("Edit Dictionary"));
-  gtk_window_set_position(GTK_WINDOW(textviewdialog), GTK_WIN_POS_CENTER_ON_PARENT);
-  gtk_window_set_type_hint(GTK_WINDOW(textviewdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_position(GTK_WINDOW(textviewdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_type_hint(GTK_WINDOW(textviewdialog),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(textviewdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(textviewdialog));
   gtk_widget_show(dialog_vbox1);
 
   scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), scrolledwindow1, TRUE, TRUE, 0);
   // Never show horizontal scrollbar.
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow1), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow1), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow1),
+                                 GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow1),
+                                      GTK_SHADOW_IN);
 
   textview1 = gtk_text_view_new();
   gtk_widget_show(textview1);
@@ -64,15 +66,18 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   label4 = gtk_label_new(_("Import from"));
   gtk_widget_show(label4);
-  gtk_table_attach(GTK_TABLE(table1), label4, 1, 2, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), label4, 1, 2, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   label5 = gtk_label_new(_("Export to"));
   gtk_widget_show(label5);
-  gtk_table_attach(GTK_TABLE(table1), label5, 2, 3, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), label5, 2, 3, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   button_import_dict = gtk_button_new();
   gtk_widget_show(button_import_dict);
-  gtk_table_attach(GTK_TABLE(table1), button_import_dict, 1, 2, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_import_dict, 1, 2, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment3 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment3);
@@ -94,7 +99,8 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   button_import_file = gtk_button_new();
   gtk_widget_show(button_import_file);
-  gtk_table_attach(GTK_TABLE(table1), button_import_file, 1, 2, 2, 3, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_import_file, 1, 2, 2, 3,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment2 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment2);
@@ -116,7 +122,8 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   button_sort = gtk_button_new();
   gtk_widget_show(button_sort);
-  gtk_table_attach(GTK_TABLE(table1), button_sort, 0, 1, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_sort, 0, 1, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment1 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment1);
@@ -138,7 +145,8 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   button_export_dict = gtk_button_new();
   gtk_widget_show(button_export_dict);
-  gtk_table_attach(GTK_TABLE(table1), button_export_dict, 2, 3, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_export_dict, 2, 3, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment4 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment4);
@@ -160,7 +168,8 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   button_export_file = gtk_button_new();
   gtk_widget_show(button_export_file);
-  gtk_table_attach(GTK_TABLE(table1), button_export_file, 2, 3, 2, 3, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_export_file, 2, 3, 2, 3,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment5 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment5);
@@ -182,7 +191,8 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   button_count = gtk_button_new();
   gtk_widget_show(button_count);
-  gtk_table_attach(GTK_TABLE(table1), button_count, 3, 4, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), button_count, 3, 4, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment6 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment6);
@@ -202,38 +212,49 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
 
   shortcuts.label(label8);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(textviewdialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(textviewdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
-  new InDialogHelp(textviewdialog, NULL, &shortcuts, "file/project/project-properties/dictionaries/edit");
+  new InDialogHelp(textviewdialog, NULL, &shortcuts,
+                   "file/project/project-properties/dictionaries/edit");
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(textviewdialog), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(textviewdialog), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(textviewdialog), okbutton1, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(textviewdialog), okbutton1,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
   shortcuts.stockbutton(cancelbutton1);
   shortcuts.stockbutton(okbutton1);
   shortcuts.process();
 
-  g_signal_connect((gpointer) button_sort, "clicked", G_CALLBACK(on_button_sort_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_import_dict, "clicked", G_CALLBACK(on_button_import_dict_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_import_file, "clicked", G_CALLBACK(on_button_import_file_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_export_dict, "clicked", G_CALLBACK(on_button_export_dict_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_export_file, "clicked", G_CALLBACK(on_button_export_file_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(on_okbutton1_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_count, "clicked", G_CALLBACK(on_button_count_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_sort, "clicked",
+                   G_CALLBACK(on_button_sort_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_import_dict, "clicked",
+                   G_CALLBACK(on_button_import_dict_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_import_file, "clicked",
+                   G_CALLBACK(on_button_import_file_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_export_dict, "clicked",
+                   G_CALLBACK(on_button_export_dict_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_export_file, "clicked",
+                   G_CALLBACK(on_button_export_file_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(on_okbutton1_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_count, "clicked",
+                   G_CALLBACK(on_button_count_clicked), gpointer(this));
 
   gtk_widget_grab_focus(textview1);
   gtk_widget_grab_default(okbutton1);
 
-  // Load dictionary.  
+  // Load dictionary.
   gtk_text_view_set_editable(GTK_TEXT_VIEW(textview1), true);
   textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview1));
   filename = spelling_dictionary_filename(dictionary);
@@ -245,33 +266,26 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
     g_free(contents);
   }
 
-  new DialogAutoScaler (textviewdialog, G_MAXINT);
+  new DialogAutoScaler(textviewdialog, G_MAXINT);
 }
 
-
-EditDictionaryDialog::~EditDictionaryDialog()
-{
+EditDictionaryDialog::~EditDictionaryDialog() {
   gtk_widget_destroy(textviewdialog);
 }
 
-
-int EditDictionaryDialog::run()
-{
+int EditDictionaryDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(textviewdialog));
 }
 
-
-void EditDictionaryDialog::on_button_sort_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_sort(NULL);
+void EditDictionaryDialog::on_button_sort_clicked(GtkButton *button,
+                                                  gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_sort(NULL);
 }
 
-
-void EditDictionaryDialog::on_button_sort(vector < ustring > *lines_ptr)
-{
-  vector < ustring > lines;
-  vector < ustring > content;
-  set < ustring > contentset;
+void EditDictionaryDialog::on_button_sort(vector<ustring> *lines_ptr) {
+  vector<ustring> lines;
+  vector<ustring> content;
+  set<ustring> contentset;
   if (lines_ptr)
     lines = *lines_ptr;
   else
@@ -295,21 +309,19 @@ void EditDictionaryDialog::on_button_sort(vector < ustring > *lines_ptr)
   gtk_text_buffer_place_cursor(textbuffer, &iter);
 }
 
-
-void EditDictionaryDialog::on_button_import_dict_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_import_dict();
+void EditDictionaryDialog::on_button_import_dict_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_import_dict();
 }
 
-
-void EditDictionaryDialog::on_button_import_dict()
-{
-  vector < ustring > dictionaries = get_other_editable_dictionaries();
-  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL);
+void EditDictionaryDialog::on_button_import_dict() {
+  vector<ustring> dictionaries = get_other_editable_dictionaries();
+  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false,
+                        NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring filename = spelling_dictionary_filename(dialog.focus);
     ReadText rt(filename, true, false);
-    vector < ustring > lines;
+    vector<ustring> lines;
     textbuffer_get_lines(textbuffer, lines, true);
     for (unsigned int i = 0; i < rt.lines.size(); i++) {
       lines.push_back(rt.lines[i]);
@@ -318,20 +330,17 @@ void EditDictionaryDialog::on_button_import_dict()
   }
 }
 
-
-void EditDictionaryDialog::on_button_import_file_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_import_file();
+void EditDictionaryDialog::on_button_import_file_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_import_file();
 }
 
-
-void EditDictionaryDialog::on_button_import_file()
-{
+void EditDictionaryDialog::on_button_import_file() {
   ustring filename = gtkw_file_chooser_open(textviewdialog, "", "");
   if (filename.empty())
     return;
   ReadText rt(filename, true, false);
-  vector < ustring > lines;
+  vector<ustring> lines;
   textbuffer_get_lines(textbuffer, lines, true);
   for (unsigned int i = 0; i < rt.lines.size(); i++) {
     lines.push_back(rt.lines[i]);
@@ -339,71 +348,61 @@ void EditDictionaryDialog::on_button_import_file()
   on_button_sort(&lines);
 }
 
-
-void EditDictionaryDialog::on_button_export_dict_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_export_dict();
+void EditDictionaryDialog::on_button_export_dict_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_export_dict();
 }
 
-
-void EditDictionaryDialog::on_button_export_dict()
-{
-  vector < ustring > dictionaries = get_other_editable_dictionaries();
-  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL);
+void EditDictionaryDialog::on_button_export_dict() {
+  vector<ustring> dictionaries = get_other_editable_dictionaries();
+  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false,
+                        NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring filename = spelling_dictionary_filename(dialog.focus);
-    vector < ustring > lines;
+    vector<ustring> lines;
     textbuffer_get_lines(textbuffer, lines, true);
     write_lines(filename, lines);
   }
 }
 
-
-void EditDictionaryDialog::on_button_export_file_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_export_file();
+void EditDictionaryDialog::on_button_export_file_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_export_file();
 }
 
-
-void EditDictionaryDialog::on_button_export_file()
-{
+void EditDictionaryDialog::on_button_export_file() {
   ustring filename = gtkw_file_chooser_save(textviewdialog, "", "");
   if (filename.empty())
     return;
-  vector < ustring > lines;
+  vector<ustring> lines;
   textbuffer_get_lines(textbuffer, lines, true);
   write_lines(filename, lines);
 }
 
-
-void EditDictionaryDialog::on_button_count_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_button_count();
+void EditDictionaryDialog::on_button_count_clicked(GtkButton *button,
+                                                   gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_button_count();
 }
 
-
-void EditDictionaryDialog::on_button_count()
-{
-  vector < ustring > lines;
+void EditDictionaryDialog::on_button_count() {
+  vector<ustring> lines;
   textbuffer_get_lines(textbuffer, lines, true);
   int wordcount = lines.size();
   for (unsigned int i = 0; i < lines.size(); i++) {
     if (lines[i].empty())
       wordcount--;
   }
-  gtkw_dialog_info(textviewdialog, _("Word count is ") + convert_to_string(wordcount));
+  gtkw_dialog_info(textviewdialog,
+                   _("Word count is ") + convert_to_string(wordcount));
   write_lines(filename, lines);
 }
 
-
-void EditDictionaryDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((EditDictionaryDialog *) user_data)->on_okbutton();
+void EditDictionaryDialog::on_okbutton1_clicked(GtkButton *button,
+                                                gpointer user_data) {
+  ((EditDictionaryDialog *)user_data)->on_okbutton();
 }
 
-
-void EditDictionaryDialog::on_okbutton()
-{
+void EditDictionaryDialog::on_okbutton() {
   GtkTextIter startiter, enditer;
   gtk_text_buffer_get_start_iter(textbuffer, &startiter);
   gtk_text_buffer_get_end_iter(textbuffer, &enditer);
@@ -412,13 +411,11 @@ void EditDictionaryDialog::on_okbutton()
   g_free(txt); // Postiff: plug memory leak
 }
 
-
-vector < ustring > EditDictionaryDialog::get_other_editable_dictionaries()
-{
-  vector < ustring > dictionaries;
+vector<ustring> EditDictionaryDialog::get_other_editable_dictionaries() {
+  vector<ustring> dictionaries;
   if (mydictionary != spelling_global_dictionary())
     dictionaries.push_back(spelling_global_dictionary());
-  vector < ustring > projects = projects_get_all();
+  vector<ustring> projects = projects_get_all();
   for (unsigned int i = 0; i < projects.size(); i++) {
     if (mydictionary != spelling_project_dictionary(projects[i])) {
       dictionaries.push_back(spelling_project_dictionary(projects[i]));
@@ -426,5 +423,3 @@ vector < ustring > EditDictionaryDialog::get_other_editable_dictionaries()
   }
   return dictionaries;
 }
-
-

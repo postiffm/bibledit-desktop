@@ -1,182 +1,187 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-#include "libraries.h"
-#include <glib.h>
 #include "windowcheckusfm.h"
+#include "combobox.h"
 #include "floatingwindow.h"
+#include "gui.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "scripts.h"
 #include "settings.h"
 #include "shortcuts.h"
-#include "gwrappers.h"
-#include "gui.h" 
+#include "tiny_utilities.h"
 #include "utilities.h"
 #include "versification.h"
-#include "tiny_utilities.h"
-#include "combobox.h"
-#include "scripts.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-WindowCheckUSFM::WindowCheckUSFM(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widCheckUSFM, _("Check USFM"), startup)
+WindowCheckUSFM::WindowCheckUSFM(GtkWidget *parent_layout,
+                                 GtkAccelGroup *accelerator_group, bool startup)
+    : FloatingWindow(parent_layout, widCheckUSFM, _("Check USFM"), startup)
 // Window for checking USFM.
 {
   // Initialize variables.
   textbuffer = NULL;
-  
-  Shortcuts shortcuts (0);
-  
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_widget_show (vbox);
-  gtk_container_add (GTK_CONTAINER (vbox_client), vbox);
 
-  checkbutton_verses_at_start = gtk_check_button_new_with_mnemonic (_("Verses in raw text are at line start"));
-  gtk_widget_show (checkbutton_verses_at_start);
-  gtk_box_pack_start (GTK_BOX (vbox), checkbutton_verses_at_start, FALSE, FALSE, 0);
-  
-  shortcuts.button (checkbutton_verses_at_start);
-  connect_focus_signals (checkbutton_verses_at_start);
+  Shortcuts shortcuts(0);
 
-  vbox_filter = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (vbox_filter);
-  gtk_box_pack_start (GTK_BOX (vbox), vbox_filter, TRUE, TRUE, 0);
+  vbox = gtk_vbox_new(FALSE, 6);
+  gtk_widget_show(vbox);
+  gtk_container_add(GTK_CONTAINER(vbox_client), vbox);
 
-  label_filter = gtk_label_new (_("Filter"));
-  gtk_widget_show (label_filter);
-  gtk_box_pack_start (GTK_BOX (vbox_filter), label_filter, FALSE, FALSE, 0);
-  gtk_misc_set_alignment (GTK_MISC (label_filter), 0, 0.5);
-  
-  shortcuts.label (label_filter);
+  checkbutton_verses_at_start = gtk_check_button_new_with_mnemonic(
+      _("Verses in raw text are at line start"));
+  gtk_widget_show(checkbutton_verses_at_start);
+  gtk_box_pack_start(GTK_BOX(vbox), checkbutton_verses_at_start, FALSE, FALSE,
+                     0);
 
-  combobox_filter = gtk_combo_box_new_text ();
-  gtk_widget_show (combobox_filter);
-  gtk_box_pack_start (GTK_BOX (vbox_filter), combobox_filter, FALSE, FALSE, 0);
+  shortcuts.button(checkbutton_verses_at_start);
+  connect_focus_signals(checkbutton_verses_at_start);
 
-  connect_focus_signals (combobox_filter);
-  
-  button_filter = gtk_button_new ();
-  gtk_widget_show (button_filter);
-  gtk_box_pack_start (GTK_BOX (vbox_filter), button_filter, FALSE, FALSE, 0);
+  vbox_filter = gtk_vbox_new(FALSE, 0);
+  gtk_widget_show(vbox_filter);
+  gtk_box_pack_start(GTK_BOX(vbox), vbox_filter, TRUE, TRUE, 0);
 
-  connect_focus_signals (button_filter);
-  
-  alignment4 = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_widget_show (alignment4);
-  gtk_container_add (GTK_CONTAINER (button_filter), alignment4);
+  label_filter = gtk_label_new(_("Filter"));
+  gtk_widget_show(label_filter);
+  gtk_box_pack_start(GTK_BOX(vbox_filter), label_filter, FALSE, FALSE, 0);
+  gtk_misc_set_alignment(GTK_MISC(label_filter), 0, 0.5);
 
-  hbox6 = gtk_hbox_new (FALSE, 2);
-  gtk_widget_show (hbox6);
-  gtk_container_add (GTK_CONTAINER (alignment4), hbox6);
+  shortcuts.label(label_filter);
 
-  image4 = gtk_image_new_from_stock ("gtk-clear", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image4);
-  gtk_box_pack_start (GTK_BOX (hbox6), image4, FALSE, FALSE, 0);
+  combobox_filter = gtk_combo_box_new_text();
+  gtk_widget_show(combobox_filter);
+  gtk_box_pack_start(GTK_BOX(vbox_filter), combobox_filter, FALSE, FALSE, 0);
 
-  label10 = gtk_label_new_with_mnemonic (_("Filter text"));
-  gtk_widget_show (label10);
-  gtk_box_pack_start (GTK_BOX (hbox6), label10, FALSE, FALSE, 0);
-  
-  shortcuts.label (label10);
+  connect_focus_signals(combobox_filter);
 
-  button_discover_markup = gtk_button_new ();
-  gtk_widget_show (button_discover_markup);
-  gtk_box_pack_start (GTK_BOX (vbox), button_discover_markup, FALSE, FALSE, 0);
+  button_filter = gtk_button_new();
+  gtk_widget_show(button_filter);
+  gtk_box_pack_start(GTK_BOX(vbox_filter), button_filter, FALSE, FALSE, 0);
 
-  connect_focus_signals (button_discover_markup);
-  
-  alignment3 = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_widget_show (alignment3);
-  gtk_container_add (GTK_CONTAINER (button_discover_markup), alignment3);
+  connect_focus_signals(button_filter);
 
-  hbox5 = gtk_hbox_new (FALSE, 2);
-  gtk_widget_show (hbox5);
-  gtk_container_add (GTK_CONTAINER (alignment3), hbox5);
+  alignment4 = gtk_alignment_new(0.5, 0.5, 0, 0);
+  gtk_widget_show(alignment4);
+  gtk_container_add(GTK_CONTAINER(button_filter), alignment4);
 
-  image3 = gtk_image_new_from_stock ("gtk-zoom-fit", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image3);
-  gtk_box_pack_start (GTK_BOX (hbox5), image3, FALSE, FALSE, 0);
+  hbox6 = gtk_hbox_new(FALSE, 2);
+  gtk_widget_show(hbox6);
+  gtk_container_add(GTK_CONTAINER(alignment4), hbox6);
 
-  label8 = gtk_label_new_with_mnemonic (_("Discover markup"));
-  gtk_widget_show (label8);
-  gtk_box_pack_start (GTK_BOX (hbox5), label8, FALSE, FALSE, 0);
+  image4 = gtk_image_new_from_stock("gtk-clear", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show(image4);
+  gtk_box_pack_start(GTK_BOX(hbox6), image4, FALSE, FALSE, 0);
 
-  shortcuts.label (label8);
-  
-  hbox_information = gtk_hbox_new (FALSE, 5);
-  gtk_widget_show (hbox_information);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox_information, TRUE, TRUE, 0);
+  label10 = gtk_label_new_with_mnemonic(_("Filter text"));
+  gtk_widget_show(label10);
+  gtk_box_pack_start(GTK_BOX(hbox6), label10, FALSE, FALSE, 0);
 
-  image5 = gtk_image_new_from_stock ("gtk-apply", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image5);
-  gtk_box_pack_start (GTK_BOX (hbox_information), image5, FALSE, TRUE, 0);
+  shortcuts.label(label10);
 
-  label_information_ok = gtk_label_new ("Ok");
-  gtk_widget_show (label_information_ok);
-  gtk_box_pack_start (GTK_BOX (hbox_information), label_information_ok, FALSE, FALSE, 0);
+  button_discover_markup = gtk_button_new();
+  gtk_widget_show(button_discover_markup);
+  gtk_box_pack_start(GTK_BOX(vbox), button_discover_markup, FALSE, FALSE, 0);
 
-  label_information_text = gtk_label_new ("Information");
-  gtk_widget_show (label_information_text);
-  gtk_box_pack_start (GTK_BOX (hbox_information), label_information_text, FALSE, FALSE, 0);
-  gtk_label_set_line_wrap (GTK_LABEL (label_information_text), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label_information_text), 0, 0.5);
+  connect_focus_signals(button_discover_markup);
+
+  alignment3 = gtk_alignment_new(0.5, 0.5, 0, 0);
+  gtk_widget_show(alignment3);
+  gtk_container_add(GTK_CONTAINER(button_discover_markup), alignment3);
+
+  hbox5 = gtk_hbox_new(FALSE, 2);
+  gtk_widget_show(hbox5);
+  gtk_container_add(GTK_CONTAINER(alignment3), hbox5);
+
+  image3 = gtk_image_new_from_stock("gtk-zoom-fit", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show(image3);
+  gtk_box_pack_start(GTK_BOX(hbox5), image3, FALSE, FALSE, 0);
+
+  label8 = gtk_label_new_with_mnemonic(_("Discover markup"));
+  gtk_widget_show(label8);
+  gtk_box_pack_start(GTK_BOX(hbox5), label8, FALSE, FALSE, 0);
+
+  shortcuts.label(label8);
+
+  hbox_information = gtk_hbox_new(FALSE, 5);
+  gtk_widget_show(hbox_information);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox_information, TRUE, TRUE, 0);
+
+  image5 = gtk_image_new_from_stock("gtk-apply", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show(image5);
+  gtk_box_pack_start(GTK_BOX(hbox_information), image5, FALSE, TRUE, 0);
+
+  label_information_ok = gtk_label_new("Ok");
+  gtk_widget_show(label_information_ok);
+  gtk_box_pack_start(GTK_BOX(hbox_information), label_information_ok, FALSE,
+                     FALSE, 0);
+
+  label_information_text = gtk_label_new("Information");
+  gtk_widget_show(label_information_text);
+  gtk_box_pack_start(GTK_BOX(hbox_information), label_information_text, FALSE,
+                     FALSE, 0);
+  gtk_label_set_line_wrap(GTK_LABEL(label_information_text), TRUE);
+  gtk_misc_set_alignment(GTK_MISC(label_information_text), 0, 0.5);
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label_filter), combobox_filter);
 
-  g_signal_connect ((gpointer) button_filter, "clicked", G_CALLBACK (on_button_filter_clicked), gpointer(this));
-  g_signal_connect ((gpointer) button_discover_markup, "clicked", G_CALLBACK (on_button_discover_markup_clicked), gpointer(this));
-  
+  g_signal_connect((gpointer)button_filter, "clicked",
+                   G_CALLBACK(on_button_filter_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_discover_markup, "clicked",
+                   G_CALLBACK(on_button_discover_markup_clicked),
+                   gpointer(this));
+
   shortcuts.process();
-  
-  // Load the available filters.  
-  vector < ustring > filters = scripts_get_all();
+
+  // Load the available filters.
+  vector<ustring> filters = scripts_get_all();
   combobox_set_strings(combobox_filter, filters);
   combobox_set_index(combobox_filter, 0);
-  
+
   // Main focused widget.
   last_focused_widget = button_discover_markup;
-  gtk_widget_grab_focus (last_focused_widget);
+  gtk_widget_grab_focus(last_focused_widget);
 }
 
+WindowCheckUSFM::~WindowCheckUSFM() {}
 
-WindowCheckUSFM::~WindowCheckUSFM()
-{
+void WindowCheckUSFM::on_button_discover_markup_clicked(GtkButton *button,
+                                                        gpointer user_data) {
+  ((WindowCheckUSFM *)user_data)->on_button_discover_markup();
 }
 
-
-void WindowCheckUSFM::on_button_discover_markup_clicked (GtkButton *button, gpointer user_data)
-{
-  ((WindowCheckUSFM *) user_data)->on_button_discover_markup();
-}
-
-
-void WindowCheckUSFM::on_button_discover_markup ()
+void WindowCheckUSFM::on_button_discover_markup()
 // Discovers the USFM markup of the text.
 {
   // Save cursor location.
   GtkTextIter iter;
-  gtk_text_buffer_get_iter_at_mark(textbuffer, &iter, gtk_text_buffer_get_insert(textbuffer));
+  gtk_text_buffer_get_iter_at_mark(textbuffer, &iter,
+                                   gtk_text_buffer_get_insert(textbuffer));
   gint cursoroffset = gtk_text_iter_get_offset(&iter);
 
   // Consecutive discoveries.
   bool discoveries_passed = true;
 
-  // Get the text from the buffer.  
-  vector <ustring> lines;
+  // Get the text from the buffer.
+  vector<ustring> lines;
   textbuffer_get_lines(textbuffer, lines, false);
 
   // Go through the lines.
@@ -187,20 +192,23 @@ void WindowCheckUSFM::on_button_discover_markup ()
       continue;
 
     // Trim the line.
-    lines[i] = trim (lines[i]);
-    
+    lines[i] = trim(lines[i]);
+
     // Remove chapter markup.
     if (lines[i].find("\\c") != string::npos) {
       lines[i].clear();
       continue;
     }
-    
-    // Skip line starting with a backslash. The rationale is that this line already has markup.
+
+    // Skip line starting with a backslash. The rationale is that this line
+    // already has markup.
     if (lines[i].substr(0, 1) == "\\")
       continue;
 
-    // If the line is a number on its own, and the number agrees with the chapter number
-    // that was set, it silently removes this line. But if it differs, an error comes up.
+    // If the line is a number on its own, and the number agrees with the
+    // chapter number
+    // that was set, it silently removes this line. But if it differs, an error
+    // comes up.
     if (discoveries_passed) {
       if (number_in_string(lines[i]) == lines[i]) {
         unsigned int number = convert_to_int(number_in_string(lines[i]));
@@ -208,19 +216,21 @@ void WindowCheckUSFM::on_button_discover_markup ()
           lines[i].clear();
           continue;
         }
-        ustring msg = _("The line that contains ") + lines[i] + _(" looks like a chapter number, but the number differs from the chapter that was set");
+        ustring msg = _("The line that contains ") + lines[i] +
+                      _(" looks like a chapter number, but the number differs "
+                        "from the chapter that was set");
         gtk_label_set_text(GTK_LABEL(label_information_text), msg.c_str());
         discoveries_passed = false;
       }
     }
-    
-    // If the line has no number in it, 
+
+    // If the line has no number in it,
     // and it ends with some type of punctuation,
     // it is considered a a normal paragraph.
     // If no punctuation at the end, it is a section heading.
     if (discoveries_passed) {
       if (number_in_string(lines[i]).empty()) {
-        ustring last_character = lines[i].substr(lines[i].length() -1, 1);
+        ustring last_character = lines[i].substr(lines[i].length() - 1, 1);
         gunichar unichar = g_utf8_get_char(last_character.c_str());
         if (g_unichar_ispunct(unichar)) {
           lines[i].insert(0, "\\p ");
@@ -230,7 +240,7 @@ void WindowCheckUSFM::on_button_discover_markup ()
         continue;
       }
     }
-    
+
     // If a number is found in the line, then this is considered a verse number.
     // The first time a number is found, a \p is prefixed.
     bool paragraph_open = false;
@@ -239,8 +249,9 @@ void WindowCheckUSFM::on_button_discover_markup ()
       ustring number = number_in_string(lines[i]);
       // Setting for having the number only at the start of the line.
       bool treat_as_normal_paragraph = false;
-      if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton_verses_at_start))) {
-        if (lines[i].find (number) != 0) {
+      if (gtk_toggle_button_get_active(
+              GTK_TOGGLE_BUTTON(checkbutton_verses_at_start))) {
+        if (lines[i].find(number) != 0) {
           number.clear();
           treat_as_normal_paragraph = true;
         }
@@ -252,7 +263,7 @@ void WindowCheckUSFM::on_button_discover_markup ()
 
       } else {
 
-        // Find all verse numbers.   
+        // Find all verse numbers.
         while (!number.empty()) {
           if (!paragraph_open) {
             output.append("\\p");
@@ -270,17 +281,16 @@ void WindowCheckUSFM::on_button_discover_markup ()
           lines[i] = trim(lines[i]);
           number = number_in_string(lines[i]);
           // Setting for discovering only first number in a paragraph.
-          if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton_verses_at_start))) {
+          if (gtk_toggle_button_get_active(
+                  GTK_TOGGLE_BUTTON(checkbutton_verses_at_start))) {
             number.clear();
           }
         }
-
       }
       // Store line.
       output.append(lines[i]);
       lines[i] = output;
     }
-
   }
 
   // Make one block of text.
@@ -310,18 +320,16 @@ void WindowCheckUSFM::on_button_discover_markup ()
     on_editors_changed();
 }
 
-  
-void WindowCheckUSFM::on_button_filter_clicked (GtkButton *button, gpointer user_data)
-{
-  ((WindowCheckUSFM *) user_data)->on_button_filter();
+void WindowCheckUSFM::on_button_filter_clicked(GtkButton *button,
+                                               gpointer user_data) {
+  ((WindowCheckUSFM *)user_data)->on_button_filter();
 }
 
-
-void WindowCheckUSFM::on_button_filter ()
+void WindowCheckUSFM::on_button_filter()
 // Filter the text.
 {
   // Save the text from the buffer to disk.
-  vector < ustring > lines;
+  vector<ustring> lines;
   textbuffer_get_lines(textbuffer, lines, false);
   write_lines(script_temporal_input_file(), lines);
 
@@ -330,13 +338,16 @@ void WindowCheckUSFM::on_button_filter ()
   bool straightthrough = scriptname == scripts_straight_through();
 
   // Run filter.
-  ustring error = script_filter(scriptname, straightthrough, script_temporal_input_file(), script_temporal_output_file());
+  ustring error =
+      script_filter(scriptname, straightthrough, script_temporal_input_file(),
+                    script_temporal_output_file());
   if (!error.empty())
     gw_message(error);
 
-  // Show output in textview.  
+  // Show output in textview.
   gchar *outputtext;
-  g_file_get_contents(script_temporal_output_file().c_str(), &outputtext, NULL, NULL);
+  g_file_get_contents(script_temporal_output_file().c_str(), &outputtext, NULL,
+                      NULL);
   if (outputtext) {
     gtk_text_buffer_set_text(textbuffer, outputtext, -1);
     g_free(outputtext);
@@ -345,8 +356,10 @@ void WindowCheckUSFM::on_button_filter ()
   }
 }
 
-
-void WindowCheckUSFM::set_parameters (GtkTextBuffer * buffer, const ustring& project_in, unsigned int book_in, unsigned int chapter_in)
+void WindowCheckUSFM::set_parameters(GtkTextBuffer *buffer,
+                                     const ustring &project_in,
+                                     unsigned int book_in,
+                                     unsigned int chapter_in)
 // This function is called if any of the parameters changed.
 {
   // Set the new data;
@@ -357,20 +370,20 @@ void WindowCheckUSFM::set_parameters (GtkTextBuffer * buffer, const ustring& pro
   book = book_in;
   chapter = chapter_in;
   // Set controls active if there's a textbuffer available.
-  gtk_widget_set_sensitive (checkbutton_verses_at_start, textbuffer != NULL);
-  gtk_widget_set_sensitive (label_filter, textbuffer != NULL);
-  gtk_widget_set_sensitive (combobox_filter, textbuffer != NULL);
-  gtk_widget_set_sensitive (button_filter, textbuffer != NULL);
-  gtk_widget_set_sensitive (button_discover_markup, textbuffer != NULL);
+  gtk_widget_set_sensitive(checkbutton_verses_at_start, textbuffer != NULL);
+  gtk_widget_set_sensitive(label_filter, textbuffer != NULL);
+  gtk_widget_set_sensitive(combobox_filter, textbuffer != NULL);
+  gtk_widget_set_sensitive(button_filter, textbuffer != NULL);
+  gtk_widget_set_sensitive(button_discover_markup, textbuffer != NULL);
   // Editors changed.
   gw_destroy_source(editors_changed_event_id);
-  editors_changed_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_editors_changed_timeout), gpointer(this), NULL);
+  editors_changed_event_id = g_timeout_add_full(
+      G_PRIORITY_DEFAULT, 100, GSourceFunc(on_editors_changed_timeout),
+      gpointer(this), NULL);
 }
 
-
-bool WindowCheckUSFM::on_editors_changed_timeout(gpointer user_data)
-{
-  ((WindowCheckUSFM *) user_data)->on_editors_changed();
+bool WindowCheckUSFM::on_editors_changed_timeout(gpointer user_data) {
+  ((WindowCheckUSFM *)user_data)->on_editors_changed();
   return false;
 }
 
@@ -386,17 +399,20 @@ void WindowCheckUSFM::on_editors_changed()
   // See whether a textbuffer is available.
   if (checks_going) {
     if (textbuffer == NULL) {
-      gtk_label_set_text(GTK_LABEL(label_information_text), _("Inactive. To activate, open or focus a project, and view the USFM code."));
+      gtk_label_set_text(GTK_LABEL(label_information_text),
+                         _("Inactive. To activate, open or focus a project, "
+                           "and view the USFM code."));
       checks_going = false;
     }
   }
-  
+
   // See whether text is available.
   if (checks_going) {
     GtkTextIter enditer;
     gtk_text_buffer_get_end_iter(textbuffer, &enditer);
     if (gtk_text_iter_get_offset(&enditer) < 5) {
-      gtk_label_set_text(GTK_LABEL(label_information_text), _("There is no text. Put text into the editor"));
+      gtk_label_set_text(GTK_LABEL(label_information_text),
+                         _("There is no text. Put text into the editor"));
       checks_going = false;
     }
   }
@@ -404,7 +420,9 @@ void WindowCheckUSFM::on_editors_changed()
     GtkTextIter enditer;
     gtk_text_buffer_get_end_iter(textbuffer, &enditer);
     if (gtk_text_iter_get_offset(&enditer) < 10) {
-      gtk_label_set_text(GTK_LABEL(label_information_text), _("There isn't much text. Put more text into the editor"));
+      gtk_label_set_text(
+          GTK_LABEL(label_information_text),
+          _("There isn't much text. Put more text into the editor"));
       checks_going = false;
     }
   }
@@ -420,7 +438,8 @@ void WindowCheckUSFM::on_editors_changed()
   // Check whether the chapter seems ok.
   if (checks_going) {
     if (chapter < 0) {
-      gtk_label_set_text(GTK_LABEL(label_information_text), _("Unknown chapter"));
+      gtk_label_set_text(GTK_LABEL(label_information_text),
+                         _("Unknown chapter"));
       checks_going = false;
     }
   }
@@ -429,26 +448,29 @@ void WindowCheckUSFM::on_editors_changed()
   if (checks_going) {
 
     // Get the text from the textbuffer.
-    vector < ustring > lines;
+    vector<ustring> lines;
     textbuffer_get_lines(textbuffer, lines, false);
-    
+
     // Get the actual verses, and the verses that don't start a line.
-    vector < ustring > non_line_starters;
-    vector < ustring > actual_verses = get_verses(&non_line_starters);
-    set < ustring > actual_verses_set(actual_verses.begin(), actual_verses.end());
+    vector<ustring> non_line_starters;
+    vector<ustring> actual_verses = get_verses(&non_line_starters);
+    set<ustring> actual_verses_set(actual_verses.begin(), actual_verses.end());
 
     // Get the required verses in the book/chapter.
-    vector < ustring > required_verses;
-    ustring last_verse = versification_get_last_verse(versification, book, chapter);
+    vector<ustring> required_verses;
+    ustring last_verse =
+        versification_get_last_verse(versification, book, chapter);
     for (unsigned int i = 1; i <= convert_to_int(last_verse); i++) {
       required_verses.push_back(convert_to_string(i));
     }
-    set < ustring > required_verses_set(required_verses.begin(), required_verses.end());
+    set<ustring> required_verses_set(required_verses.begin(),
+                                     required_verses.end());
 
     // See whether any verses are missing.
     ustring missing_verses;
     for (unsigned int i = 0; i < required_verses.size(); i++) {
-      if (actual_verses_set.find(required_verses[i]) == actual_verses_set.end()) {
+      if (actual_verses_set.find(required_verses[i]) ==
+          actual_verses_set.end()) {
         if (!missing_verses.empty())
           missing_verses.append(", ");
         missing_verses.append(required_verses[i]);
@@ -456,14 +478,16 @@ void WindowCheckUSFM::on_editors_changed()
     }
     if (!missing_verses.empty()) {
       missing_verses.insert(0, _("Missing verses: "));
-      gtk_label_set_text(GTK_LABEL(label_information_text), missing_verses.c_str());
+      gtk_label_set_text(GTK_LABEL(label_information_text),
+                         missing_verses.c_str());
       checks_going = false;
     }
     // See whether there are extra verses.
     if (checks_going) {
       ustring extra_verses;
       for (unsigned int i = 0; i < actual_verses.size(); i++) {
-        if (required_verses_set.find(actual_verses[i]) == required_verses_set.end()) {
+        if (required_verses_set.find(actual_verses[i]) ==
+            required_verses_set.end()) {
           if (!extra_verses.empty())
             extra_verses.append(", ");
           extra_verses.append(actual_verses[i]);
@@ -471,14 +495,15 @@ void WindowCheckUSFM::on_editors_changed()
       }
       if (!extra_verses.empty()) {
         extra_verses.insert(0, _("Extra verses: "));
-        gtk_label_set_text(GTK_LABEL(label_information_text), extra_verses.c_str());
+        gtk_label_set_text(GTK_LABEL(label_information_text),
+                           extra_verses.c_str());
         checks_going = false;
       }
     }
     // See whether there are double verses.
     if (checks_going) {
       ustring double_verses;
-      set < ustring > double_set;
+      set<ustring> double_set;
       for (unsigned int i = 0; i < actual_verses.size(); i++) {
         if (double_set.find(actual_verses[i]) != double_set.end()) {
           if (!double_verses.empty())
@@ -489,7 +514,8 @@ void WindowCheckUSFM::on_editors_changed()
       }
       if (!double_verses.empty()) {
         double_verses.insert(0, "Double verses: ");
-        gtk_label_set_text(GTK_LABEL(label_information_text), double_verses.c_str());
+        gtk_label_set_text(GTK_LABEL(label_information_text),
+                           double_verses.c_str());
         checks_going = false;
       }
     }
@@ -500,7 +526,8 @@ void WindowCheckUSFM::on_editors_changed()
         unsigned int nextverse = convert_to_int(actual_verses[i + 1]);
         if (nextverse != currentverse + 1) {
           if (checks_going) {
-            ustring msg(_("Verse ") + actual_verses[i + 1] + _(" is out of sequence"));
+            ustring msg(_("Verse ") + actual_verses[i + 1] +
+                        _(" is out of sequence"));
             gtk_label_set_text(GTK_LABEL(label_information_text), msg.c_str());
             checks_going = false;
           }
@@ -521,21 +548,20 @@ void WindowCheckUSFM::on_editors_changed()
         checks_going = false;
       }
     }
-
   }
 
   // Final okay info in gui.
   gui_okay(image5, label_information_ok, checks_going);
   if (checks_going) {
-    gtk_label_set_text(GTK_LABEL(label_information_text), _("Everything seems to be fine."));
+    gtk_label_set_text(GTK_LABEL(label_information_text),
+                       _("Everything seems to be fine."));
   }
 }
 
-
-vector < ustring > WindowCheckUSFM::get_verses(vector < ustring > *non_line_starters)
+vector<ustring> WindowCheckUSFM::get_verses(vector<ustring> *non_line_starters)
 // Gets the verse numbers from the textbuffer, and cleans them at the same time.
 {
-  vector < ustring > verses;
+  vector<ustring> verses;
   GtkTextIter iter;
   ustring marker, verse;
   bool in_usfm = false;
@@ -545,7 +571,7 @@ vector < ustring > WindowCheckUSFM::get_verses(vector < ustring > *non_line_star
   do {
     gunichar character = gtk_text_iter_get_char(&iter);
     gchar buf[7];
-    gint length = g_unichar_to_utf8(character, (gchar *) & buf);
+    gint length = g_unichar_to_utf8(character, (gchar *)&buf);
     buf[length] = '\0';
     if (in_verse) {
       verse.append(buf);
@@ -578,5 +604,3 @@ vector < ustring > WindowCheckUSFM::get_verses(vector < ustring > *non_line_star
   } while (gtk_text_iter_forward_char(&iter));
   return verses;
 }
-
-

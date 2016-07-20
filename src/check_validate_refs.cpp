@@ -1,34 +1,35 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_validate_refs.h"
-#include "projectutils.h"
-#include "settings.h"
-#include "utilities.h"
 #include "books.h"
+#include "projectutils.h"
 #include "reference.h"
 #include "referenceutils.h"
-#include "versification.h"
+#include "settings.h"
 #include "tiny_utilities.h"
+#include "utilities.h"
+#include "versification.h"
 #include <glib/gi18n.h>
 
-CheckValidateReferences::CheckValidateReferences(const ustring & project, const vector < unsigned int >&books, bool gui)
+CheckValidateReferences::CheckValidateReferences(
+    const ustring &project, const vector<unsigned int> &books, bool gui)
 /*
 It checks on the correctness and existence of the references found in the
 text and in the notes.
@@ -46,7 +47,7 @@ gui: whether to show graphical progressbar.
   language = projectconfig->language_get();
 
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
 
@@ -68,12 +69,12 @@ gui: whether to show graphical progressbar.
     book = mybooks[bk];
 
     // Go through each chapter.
-    vector < unsigned int >chapters = project_get_chapters(project, book);
+    vector<unsigned int> chapters = project_get_chapters(project, book);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
       chapter = chapters[ch];
 
       // Go through each verse.
-      vector < ustring > verses = project_get_verses(project, book, chapter);
+      vector<ustring> verses = project_get_verses(project, book, chapter);
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
         verse = verses[vs];
 
@@ -85,14 +86,13 @@ gui: whether to show graphical progressbar.
   }
 }
 
-CheckValidateReferences::~CheckValidateReferences()
-{
+CheckValidateReferences::~CheckValidateReferences() {
   // Clean up.
   if (progresswindow)
     delete progresswindow;
 }
 
-void CheckValidateReferences::check(const ustring & text)
+void CheckValidateReferences::check(const ustring &text)
 // Do the actual check of one verse.
 {
   // Bail out if the verse is empty.
@@ -103,28 +103,34 @@ void CheckValidateReferences::check(const ustring & text)
   ReferencesScanner refscanner(language, book, text);
   for (unsigned int i = 0; i < references.size(); i++) {
 
-    // Check whether the reference fits within the limits of the versification system.
+    // Check whether the reference fits within the limits of the versification
+    // system.
     bool reference_fits = true;
     unsigned int highest_chapter = 0;
-    vector < unsigned int >chapters = versification_get_chapters(versification, refscanner.references[i].book_get());
+    vector<unsigned int> chapters = versification_get_chapters(
+        versification, refscanner.references[i].book_get());
     if (!chapters.empty())
       highest_chapter = chapters[chapters.size() - 1];
     if (refscanner.references[i].chapter_get() > highest_chapter)
       reference_fits = false;
-    unsigned int last_verse = convert_to_int(versification_get_last_verse(versification, 
-									  refscanner.references[i].book_get(),
-									  refscanner.references[i].chapter_get()));
-    unsigned int this_verse = convert_to_int(refscanner.references[i].verse_get());
+    unsigned int last_verse = convert_to_int(versification_get_last_verse(
+        versification, refscanner.references[i].book_get(),
+        refscanner.references[i].chapter_get()));
+    unsigned int this_verse =
+        convert_to_int(refscanner.references[i].verse_get());
     if (this_verse > last_verse)
       reference_fits = false;
     if (!reference_fits) {
-      message(refscanner.references[i].human_readable(language) + _(" does not fit in the versification system"));
+      message(refscanner.references[i].human_readable(language) +
+              _(" does not fit in the versification system"));
     }
     // Check whether the reference exists in the project.
     if (reference_fits) {
-      ustring versetext = project_retrieve_verse(myproject, refscanner.references[i]);
+      ustring versetext =
+          project_retrieve_verse(myproject, refscanner.references[i]);
       if (versetext.empty()) {
-        message(refscanner.references[i].human_readable(language) + _(" contains no text"));
+        message(refscanner.references[i].human_readable(language) +
+                _(" contains no text"));
       }
     }
   }
@@ -148,7 +154,8 @@ void CheckValidateReferences::check(const ustring & text)
               referencefound = true;
         }
         if (!referencefound) {
-          message(_("Unrecognized chapter ") + convert_to_string(mychapter) + _(" and verse ") + myverse);
+          message(_("Unrecognized chapter ") + convert_to_string(mychapter) +
+                  _(" and verse ") + myverse);
         }
       }
       mytext.erase(0, 3);
@@ -159,8 +166,8 @@ void CheckValidateReferences::check(const ustring & text)
   }
 }
 
-void CheckValidateReferences::message(const ustring & message)
-{
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+void CheckValidateReferences::message(const ustring &message) {
+  references.push_back(books_id_to_english(book) + " " +
+                       convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }

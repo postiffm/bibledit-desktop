@@ -1,39 +1,38 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogselectbooks.h"
-#include "utilities.h"
 #include "bible.h"
-#include "dialogselectchapters.h"
-#include "projectutils.h"
 #include "books.h"
+#include "dialogselectchapters.h"
+#include "gwrappers.h"
+#include "help.h"
+#include "libraries.h"
+#include "listview.h"
+#include "projectutils.h"
+#include "screen.h"
 #include "scriptureportions.h"
 #include "settings.h"
-#include "help.h"
 #include "shortcuts.h"
-#include "listview.h"
+#include "utilities.h"
 #include <gdk/gdkkeysyms.h>
-#include "gwrappers.h"
-#include "screen.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
 SelectBooksDialog::SelectBooksDialog(bool showportions, GtkWindow *parent)
@@ -63,10 +62,12 @@ bookset: Indicator for the caller's relevant books.
   }
   gtk_window_set_title(GTK_WINDOW(selectbooksdialog), title.c_str());
   gtk_window_set_transient_for(GTK_WINDOW(selectbooksdialog), parent);
-  gtk_window_set_position(GTK_WINDOW(selectbooksdialog), GTK_WIN_POS_CENTER_ALWAYS); // was GTK_WIN_POS_CENTER_ON_PARENT
+  gtk_window_set_position(
+      GTK_WINDOW(selectbooksdialog),
+      GTK_WIN_POS_CENTER_ALWAYS); // was GTK_WIN_POS_CENTER_ON_PARENT
   gtk_window_set_modal(GTK_WINDOW(selectbooksdialog), TRUE);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(selectbooksdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(selectbooksdialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
@@ -90,8 +91,10 @@ bookset: Indicator for the caller's relevant books.
   scrolledwindowbooks = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindowbooks);
   gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindowbooks, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindowbooks), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindowbooks), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindowbooks),
+                                 GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindowbooks),
+                                      GTK_SHADOW_IN);
 
   treeviewbooks = gtk_tree_view_new();
   gtk_widget_show(treeviewbooks);
@@ -113,14 +116,15 @@ bookset: Indicator for the caller's relevant books.
     scrolledwindowportions = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_show(scrolledwindowportions);
     gtk_box_pack_start(GTK_BOX(vbox3), scrolledwindowportions, TRUE, TRUE, 0);
-    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindowportions), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindowportions), GTK_SHADOW_IN);
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindowportions),
+                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type(
+        GTK_SCROLLED_WINDOW(scrolledwindowportions), GTK_SHADOW_IN);
 
     treeviewportions = gtk_tree_view_new();
     gtk_widget_show(treeviewportions);
     gtk_container_add(GTK_CONTAINER(scrolledwindowportions), treeviewportions);
     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeviewportions), FALSE);
-
   }
 
   table1 = gtk_table_new(2, 3, FALSE);
@@ -129,7 +133,8 @@ bookset: Indicator for the caller's relevant books.
 
   nobutton = gtk_button_new();
   gtk_widget_show(nobutton);
-  gtk_table_attach(GTK_TABLE(table1), nobutton, 0, 1, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), nobutton, 0, 1, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment1 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment1);
@@ -151,7 +156,8 @@ bookset: Indicator for the caller's relevant books.
 
   otbutton = gtk_button_new();
   gtk_widget_show(otbutton);
-  gtk_table_attach(GTK_TABLE(table1), otbutton, 1, 2, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), otbutton, 1, 2, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment2 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment2);
@@ -173,7 +179,8 @@ bookset: Indicator for the caller's relevant books.
 
   ntbutton = gtk_button_new();
   gtk_widget_show(ntbutton);
-  gtk_table_attach(GTK_TABLE(table1), ntbutton, 2, 3, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), ntbutton, 2, 3, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment3 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment3);
@@ -195,7 +202,8 @@ bookset: Indicator for the caller's relevant books.
 
   otherbutton = gtk_button_new();
   gtk_widget_show(otherbutton);
-  gtk_table_attach(GTK_TABLE(table1), otherbutton, 0, 1, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), otherbutton, 0, 1, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment6 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment6);
@@ -217,7 +225,8 @@ bookset: Indicator for the caller's relevant books.
 
   allbutton = gtk_button_new();
   gtk_widget_show(allbutton);
-  gtk_table_attach(GTK_TABLE(table1), allbutton, 1, 2, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), allbutton, 1, 2, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment4 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment4);
@@ -239,7 +248,8 @@ bookset: Indicator for the caller's relevant books.
 
   currentbutton = gtk_button_new();
   gtk_widget_show(currentbutton);
-  gtk_table_attach(GTK_TABLE(table1), currentbutton, 2, 3, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), currentbutton, 2, 3, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment5 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment5);
@@ -259,9 +269,11 @@ bookset: Indicator for the caller's relevant books.
 
   shortcuts.label(label10);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(selectbooksdialog));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(selectbooksdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   const gchar *helpfile;
   if (showportions) {
@@ -273,31 +285,44 @@ bookset: Indicator for the caller's relevant books.
 
   cancelbutton = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(selectbooksdialog), cancelbutton, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(selectbooksdialog), cancelbutton,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton), true);
 
   shortcuts.stockbutton(cancelbutton);
 
   okbutton = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(selectbooksdialog), okbutton, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(selectbooksdialog), okbutton,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton), true);
 
   shortcuts.stockbutton(okbutton);
 
   shortcuts.process();
 
-  g_signal_connect((gpointer) treeviewbooks, "key_press_event", G_CALLBACK(on_treeviewbooks_key_press_event), gpointer(this));
+  g_signal_connect((gpointer)treeviewbooks, "key_press_event",
+                   G_CALLBACK(on_treeviewbooks_key_press_event),
+                   gpointer(this));
   if (myshowportions) {
-    g_signal_connect((gpointer) treeviewportions, "row_activated", G_CALLBACK(on_treeviewportions_row_activated), gpointer(this));
+    g_signal_connect((gpointer)treeviewportions, "row_activated",
+                     G_CALLBACK(on_treeviewportions_row_activated),
+                     gpointer(this));
   }
-  g_signal_connect((gpointer) nobutton, "clicked", G_CALLBACK(on_nobutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) otbutton, "clicked", G_CALLBACK(on_otbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) ntbutton, "clicked", G_CALLBACK(on_ntbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) otherbutton, "clicked", G_CALLBACK(on_otherbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) allbutton, "clicked", G_CALLBACK(on_allbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) currentbutton, "clicked", G_CALLBACK(on_currentbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(on_okbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)nobutton, "clicked",
+                   G_CALLBACK(on_nobutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)otbutton, "clicked",
+                   G_CALLBACK(on_otbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)ntbutton, "clicked",
+                   G_CALLBACK(on_ntbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)otherbutton, "clicked",
+                   G_CALLBACK(on_otherbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)allbutton, "clicked",
+                   G_CALLBACK(on_allbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)currentbutton, "clicked",
+                   G_CALLBACK(on_currentbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton, "clicked",
+                   G_CALLBACK(on_okbutton_clicked), gpointer(this));
 
   gtk_widget_grab_focus(treeviewbooks);
   gtk_widget_grab_default(okbutton);
@@ -309,10 +334,12 @@ bookset: Indicator for the caller's relevant books.
   // Storage, renderer, column and selection for books.
   {
     storebooks = gtk_list_store_new(1, G_TYPE_STRING);
-    gtk_tree_view_set_model(GTK_TREE_VIEW(treeviewbooks), GTK_TREE_MODEL(storebooks));
+    gtk_tree_view_set_model(GTK_TREE_VIEW(treeviewbooks),
+                            GTK_TREE_MODEL(storebooks));
     g_object_unref(storebooks);
     GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
-    columnbooks = gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
+    columnbooks =
+        gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
     gtk_tree_view_append_column(GTK_TREE_VIEW(treeviewbooks), columnbooks);
     selectbooks = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeviewbooks));
     gtk_tree_selection_set_mode(selectbooks, GTK_SELECTION_MULTIPLE);
@@ -321,12 +348,16 @@ bookset: Indicator for the caller's relevant books.
   // Storage, renderer, column and selection for portions.
   if (myshowportions) {
     storeportions = gtk_list_store_new(1, G_TYPE_STRING);
-    gtk_tree_view_set_model(GTK_TREE_VIEW(treeviewportions), GTK_TREE_MODEL(storeportions));
+    gtk_tree_view_set_model(GTK_TREE_VIEW(treeviewportions),
+                            GTK_TREE_MODEL(storeportions));
     g_object_unref(storeportions);
     GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
-    columnportions = gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(treeviewportions), columnportions);
-    selectportions = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeviewportions));
+    columnportions =
+        gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(treeviewportions),
+                                columnportions);
+    selectportions =
+        gtk_tree_view_get_selection(GTK_TREE_VIEW(treeviewportions));
     gtk_tree_selection_set_mode(selectportions, GTK_SELECTION_SINGLE);
   }
   // Load content.
@@ -338,27 +369,24 @@ bookset: Indicator for the caller's relevant books.
   // Update gui.
   update_gui_event_id = 0;
   if (myshowportions) {
-    update_gui_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_update_gui_timeout), gpointer(this), NULL);
+    update_gui_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100,
+                                             GSourceFunc(on_update_gui_timeout),
+                                             gpointer(this), NULL);
   }
 
-  new DialogAutoScaler (selectbooksdialog, G_MAXINT);
+  new DialogAutoScaler(selectbooksdialog, G_MAXINT);
 }
 
-
-SelectBooksDialog::~SelectBooksDialog()
-{
+SelectBooksDialog::~SelectBooksDialog() {
   gw_destroy_source(update_gui_event_id);
   gtk_widget_destroy(selectbooksdialog);
 }
 
-
-int SelectBooksDialog::run()
-{
+int SelectBooksDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(selectbooksdialog));
 }
 
-
-void SelectBooksDialog::language(const ustring & language)
+void SelectBooksDialog::language(const ustring &language)
 /*
 Sets the language to display the books in.
 The language has been set already, but can be set here too if another language
@@ -370,31 +398,27 @@ It will reload the books.
   loadbooks();
 }
 
-
-void SelectBooksDialog::selectables(vector < unsigned int >&selectablebooks)
-// Sets the selectables books, if this is different from the books in the project.
+void SelectBooksDialog::selectables(vector<unsigned int> &selectablebooks)
+// Sets the selectables books, if this is different from the books in the
+// project.
 {
   myselectables = selectablebooks;
   loadbooks();
 }
 
-
-void SelectBooksDialog::selection_set(const set < unsigned int >&selectedbooks)
+void SelectBooksDialog::selection_set(const set<unsigned int> &selectedbooks)
 // Sets the selected books.
 {
   myselection = selectedbooks;
   loadbooks();
 }
 
-
-gboolean SelectBooksDialog::on_treeviewbooks_key_press_event(GtkWidget * widget, GdkEventKey * event, gpointer user_data)
-{
-  return ((SelectBooksDialog *) user_data)->on_treeviewbooks_key_press(event);
+gboolean SelectBooksDialog::on_treeviewbooks_key_press_event(
+    GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+  return ((SelectBooksDialog *)user_data)->on_treeviewbooks_key_press(event);
 }
 
-
-gboolean SelectBooksDialog::on_treeviewbooks_key_press(GdkEventKey * event)
-{
+gboolean SelectBooksDialog::on_treeviewbooks_key_press(GdkEventKey *event) {
   // Take special action on Enter: OK button.
   if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
     on_okbutton();
@@ -405,21 +429,19 @@ gboolean SelectBooksDialog::on_treeviewbooks_key_press(GdkEventKey * event)
   return false;
 }
 
-
-void SelectBooksDialog::on_treeviewportions_row_activated(GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * column, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_treeviewportions_row();
+void SelectBooksDialog::on_treeviewportions_row_activated(
+    GtkTreeView *treeview, GtkTreePath *path, GtkTreeViewColumn *column,
+    gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_treeviewportions_row();
 }
 
-
-void SelectBooksDialog::on_treeviewportions_row()
-{
+void SelectBooksDialog::on_treeviewportions_row() {
   // Get the selected portion and the offset of it, and the corresponding book.
   ustring portion = listview_get_active_string(treeviewportions);
   int offset = listview_get_active_offset(treeviewportions);
   unsigned int book;
   {
-    vector < ustring > books = listview_get_strings(treeviewbooks);
+    vector<ustring> books = listview_get_strings(treeviewbooks);
     book = books_name_to_id(mylanguage, books[offset]);
   }
 
@@ -427,38 +449,34 @@ void SelectBooksDialog::on_treeviewportions_row()
   SelectChaptersDialog dialog(myproject, book, portion);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Store new portion in treeview.
-    GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeviewportions));
+    GtkTreeModel *model =
+        gtk_tree_view_get_model(GTK_TREE_VIEW(treeviewportions));
     GtkTreeIter iter;
     if (gtk_tree_selection_get_selected(selectportions, &model, &iter)) {
-      gtk_list_store_set(storeportions, &iter, 0, dialog.new_selection.c_str(), -1);
+      gtk_list_store_set(storeportions, &iter, 0, dialog.new_selection.c_str(),
+                         -1);
     }
   }
   // Unselect everything.
   gtk_tree_selection_unselect_all(selectportions);
 }
 
-
-void SelectBooksDialog::on_nobutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_no();
+void SelectBooksDialog::on_nobutton_clicked(GtkButton *button,
+                                            gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_no();
 }
 
-
-void SelectBooksDialog::on_button_no()
-{
+void SelectBooksDialog::on_button_no() {
   gtk_tree_selection_unselect_all(selectbooks);
 }
 
-
-void SelectBooksDialog::on_otbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_ot();
+void SelectBooksDialog::on_otbutton_clicked(GtkButton *button,
+                                            gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_ot();
 }
 
-
-void SelectBooksDialog::on_button_ot()
-{
-  vector < unsigned int >ids = books_type_to_ids(btOldTestament);
+void SelectBooksDialog::on_button_ot() {
+  vector<unsigned int> ids = books_type_to_ids(btOldTestament);
   myselection.clear();
   for (unsigned int i = 0; i < ids.size(); i++) {
     myselection.insert(ids[i]);
@@ -466,16 +484,13 @@ void SelectBooksDialog::on_button_ot()
   loadbooks();
 }
 
-
-void SelectBooksDialog::on_ntbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_nt();
+void SelectBooksDialog::on_ntbutton_clicked(GtkButton *button,
+                                            gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_nt();
 }
 
-
-void SelectBooksDialog::on_button_nt()
-{
-  vector < unsigned int >ids = books_type_to_ids(btNewTestament);
+void SelectBooksDialog::on_button_nt() {
+  vector<unsigned int> ids = books_type_to_ids(btNewTestament);
   myselection.clear();
   for (unsigned int i = 0; i < ids.size(); i++) {
     myselection.insert(ids[i]);
@@ -483,17 +498,14 @@ void SelectBooksDialog::on_button_nt()
   loadbooks();
 }
 
-
-void SelectBooksDialog::on_otherbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_other();
+void SelectBooksDialog::on_otherbutton_clicked(GtkButton *button,
+                                               gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_other();
 }
 
-
-void SelectBooksDialog::on_button_other()
-{
+void SelectBooksDialog::on_button_other() {
   myselection.clear();
-  vector < unsigned int >ids = books_type_to_ids(btFrontBackMatter);
+  vector<unsigned int> ids = books_type_to_ids(btFrontBackMatter);
   for (unsigned int i = 0; i < ids.size(); i++) {
     myselection.insert(ids[i]);
   }
@@ -504,46 +516,38 @@ void SelectBooksDialog::on_button_other()
   loadbooks();
 }
 
-
-void SelectBooksDialog::on_allbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_all();
+void SelectBooksDialog::on_allbutton_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_all();
 }
 
-
-void SelectBooksDialog::on_button_all()
-{
+void SelectBooksDialog::on_button_all() {
   gtk_tree_selection_select_all(selectbooks);
 }
 
-
-void SelectBooksDialog::on_currentbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_button_current();
+void SelectBooksDialog::on_currentbutton_clicked(GtkButton *button,
+                                                 gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_button_current();
 }
 
-
-void SelectBooksDialog::on_button_current()
-{
+void SelectBooksDialog::on_button_current() {
   myselection.clear();
   extern Settings *settings;
   myselection.insert(settings->genconfig.book_get());
   loadbooks();
 }
 
-
-void SelectBooksDialog::on_okbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->on_okbutton();
+void SelectBooksDialog::on_okbutton_clicked(GtkButton *button,
+                                            gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->on_okbutton();
 }
 
-
-void SelectBooksDialog::on_okbutton()
-{
+void SelectBooksDialog::on_okbutton() {
   // Get the list of books now selected.
   selection.clear();
-  vector < ustring > books;
-  gtk_tree_selection_selected_foreach(selectbooks, selection_foreach_function, gpointer(&books));
+  vector<ustring> books;
+  gtk_tree_selection_selected_foreach(selectbooks, selection_foreach_function,
+                                      gpointer(&books));
   for (unsigned int i = 0; i < books.size(); i++) {
     unsigned int book = books_name_to_id(mylanguage, books[i]);
     if (book)
@@ -557,11 +561,11 @@ void SelectBooksDialog::on_okbutton()
   // If portions are showing, store the values there too.
   if (myshowportions) {
     // Get books, includes and portions.
-    vector < ustring > reordered_books;
-    vector < bool > reordered_includes;
-    vector < ustring > reordered_portions;
+    vector<ustring> reordered_books;
+    vector<bool> reordered_includes;
+    vector<ustring> reordered_portions;
     {
-      vector < ustring > books = listview_get_strings(treeviewbooks);
+      vector<ustring> books = listview_get_strings(treeviewbooks);
       for (unsigned int i = 0; i < books.size(); i++) {
         unsigned int book = books_name_to_id(mylanguage, books[i]);
         reordered_books.push_back(books_id_to_english(book));
@@ -579,9 +583,7 @@ void SelectBooksDialog::on_okbutton()
   }
 }
 
-
-void SelectBooksDialog::selection_display(set < unsigned int >&books)
-{
+void SelectBooksDialog::selection_display(set<unsigned int> &books) {
   // Get the model
   GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeviewbooks));
   // Some variables needed.
@@ -606,8 +608,10 @@ void SelectBooksDialog::selection_display(set < unsigned int >&books)
       if (path) {
         gtk_tree_selection_select_iter(selectbooks, &iter);
         if (!focused) {
-          gtk_tree_view_set_cursor(GTK_TREE_VIEW(treeviewbooks), path, NULL, false);
-          gtk_tree_view_scroll_to_cell(GTK_TREE_VIEW(treeviewbooks), path, NULL, true, 0.5, 0.5);
+          gtk_tree_view_set_cursor(GTK_TREE_VIEW(treeviewbooks), path, NULL,
+                                   false);
+          gtk_tree_view_scroll_to_cell(GTK_TREE_VIEW(treeviewbooks), path, NULL,
+                                       true, 0.5, 0.5);
           focused = true;
         }
       }
@@ -622,11 +626,9 @@ void SelectBooksDialog::selection_display(set < unsigned int >&books)
   }
 }
 
-
-void SelectBooksDialog::loadbooks()
-{
+void SelectBooksDialog::loadbooks() {
   // Translate and load the selectable books.
-  vector < ustring > ubooks;
+  vector<ustring> ubooks;
   for (unsigned int i = 0; i < myselectables.size(); i++) {
     ubooks.push_back(books_id_to_name(mylanguage, myselectables[i]));
   }
@@ -635,25 +637,25 @@ void SelectBooksDialog::loadbooks()
   selection_display(myselection);
 }
 
-
-void SelectBooksDialog::selection_foreach_function(GtkTreeModel * model, GtkTreePath * path, GtkTreeIter * iter, gpointer data)
-{
+void SelectBooksDialog::selection_foreach_function(GtkTreeModel *model,
+                                                   GtkTreePath *path,
+                                                   GtkTreeIter *iter,
+                                                   gpointer data) {
   gchar *book;
   gtk_tree_model_get(model, iter, 0, &book, -1);
-  ((vector < ustring > *)data)->push_back(book);
+  ((vector<ustring> *)data)->push_back(book);
   g_free(book);
 }
 
-
-void SelectBooksDialog::loadportions()
-{
+void SelectBooksDialog::loadportions() {
   // Get the list of (included) books and their portions.
   myselectables.clear();
   myselection.clear();
-  vector < ustring > portions;
+  vector<ustring> portions;
   ScripturePortions scriptureportions(myproject);
   for (unsigned int i = 0; i < scriptureportions.reordered_books.size(); i++) {
-    unsigned int book = books_english_to_id(scriptureportions.reordered_books[i]);
+    unsigned int book =
+        books_english_to_id(scriptureportions.reordered_books[i]);
     myselectables.push_back(book);
     if (scriptureportions.reordered_includes[i])
       myselection.insert(book);
@@ -664,16 +666,12 @@ void SelectBooksDialog::loadportions()
   listview_set_strings(treeviewportions, storeportions, portions);
 }
 
-
-bool SelectBooksDialog::on_update_gui_timeout(gpointer user_data)
-{
-  ((SelectBooksDialog *) user_data)->update_gui();
+bool SelectBooksDialog::on_update_gui_timeout(gpointer user_data) {
+  ((SelectBooksDialog *)user_data)->update_gui();
   return true;
 }
 
-
-void SelectBooksDialog::update_gui()
-{
+void SelectBooksDialog::update_gui() {
   // Get the upper corners of the visible area of both treeviews.
   // If one changed, then the other will be scrolled to the same position,
   // and vice versa.
@@ -681,13 +679,14 @@ void SelectBooksDialog::update_gui()
   gtk_tree_view_get_visible_rect(GTK_TREE_VIEW(treeviewbooks), &gdk_rectangle);
   if (gdk_rectangle.y != treeviewbooks_previous_y) {
     treeviewbooks_previous_y = gdk_rectangle.y;
-    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(treeviewportions), -1, gdk_rectangle.y);
+    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(treeviewportions), -1,
+                                  gdk_rectangle.y);
   }
-  gtk_tree_view_get_visible_rect(GTK_TREE_VIEW(treeviewportions), &gdk_rectangle);
+  gtk_tree_view_get_visible_rect(GTK_TREE_VIEW(treeviewportions),
+                                 &gdk_rectangle);
   if (gdk_rectangle.y != treeviewportions_previous_y) {
     treeviewportions_previous_y = gdk_rectangle.y;
-    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(treeviewbooks), -1, gdk_rectangle.y);
+    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(treeviewbooks), -1,
+                                  gdk_rectangle.y);
   }
 }
-
-

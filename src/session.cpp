@@ -1,31 +1,30 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
-#include "libraries.h"
 #include "session.h"
 #include "constants.h"
-#include "sqlite_reader.h"
 #include "directories.h"
 #include "gwrappers.h"
+#include "libraries.h"
+#include "sqlite_reader.h"
 #include "utilities.h"
-
 
 Session::Session(int dummy)
 // Stores settings valid only during one session. If the program stops, this
@@ -59,7 +58,7 @@ Session::Session(int dummy)
   print_dialog_options_expanded = false;
   print_references_in_notes_in_full = false;
   print_crop_marks = false;
-  
+
   bnmu_add_book = false;
   bnmu_add_chapter = false;
   bnmu_add_verse = true;
@@ -71,7 +70,4 @@ Session::Session(int dummy)
   merge_action = 0;
 }
 
-
-Session::~Session()
-{
-}
+Session::~Session() {}

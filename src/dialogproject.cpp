@@ -1,58 +1,55 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
 #include "dialogproject.h"
-#include "utilities.h"
-#include "projectutils.h"
-#include "projectutils.h"
-#include "dialogselectbooks.h"
 #include "bible.h"
-#include "directories.h"
-#include <glib.h>
-#include "stylesheetutils.h"
-#include "constants.h"
-#include "gwrappers.h"
-#include "gtkwrappers.h"
-#include "combobox.h"
-#include "versification.h"
-#include "shell.h"
 #include "books.h"
-#include "settings.h"
+#include "combobox.h"
+#include "constants.h"
 #include "date_time_utils.h"
-#include "help.h"
-#include "progresswindow.h"
-#include "localizedbooks.h"
-#include "versifications.h"
-#include "shortcuts.h"
-#include "tiny_utilities.h"
-#include "scripts.h"
-#include "dialogdictionary.h"
-#include <glib/gi18n.h>
 #include "debug.h"
+#include "dialogdictionary.h"
+#include "dialogselectbooks.h"
+#include "directories.h"
+#include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "help.h"
+#include "libraries.h"
+#include "localizedbooks.h"
+#include "progresswindow.h"
+#include "projectutils.h"
+#include "projectutils.h"
+#include "scripts.h"
+#include "settings.h"
+#include "shell.h"
+#include "shortcuts.h"
+#include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "utilities.h"
+#include "versification.h"
+#include "versifications.h"
+#include <glib.h>
+#include <glib/gi18n.h>
 
 #define NEW_PROJECT _("New Project")
 
-
-ProjectDialog::ProjectDialog (bool newproject)
-{
+ProjectDialog::ProjectDialog(bool newproject) {
   DEBUG("New ProjectDialog with newproject=" + std::to_string(newproject))
   // Settings.
   extern Settings *settings;
@@ -60,30 +57,33 @@ ProjectDialog::ProjectDialog (bool newproject)
   // not doing a new project, it is not changed, at least yet.
   isChanged = newproject;
   isNewProject = newproject; // see on_cancel
-  
+
   // Save variables.
   if (newproject) {
     // Make "New Project".
-    project_create_restore (NEW_PROJECT, "");
+    project_create_restore(NEW_PROJECT, "");
     currentprojectname = NEW_PROJECT;
   } else {
-    currentprojectname = settings->genconfig.project_get ();
+    currentprojectname = settings->genconfig.project_get();
   }
   focusbook = 0;
 
   // Get project information.
-  ProjectConfiguration *projectconfig = settings->projectconfig(settings->genconfig.project_get());
+  ProjectConfiguration *projectconfig =
+      settings->projectconfig(settings->genconfig.project_get());
 
   // Shortcuts.
   Shortcuts shortcuts(0);
 
   projectdialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(projectdialog), _("Project properties"));
-  gtk_window_set_position(GTK_WINDOW(projectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_position(GTK_WINDOW(projectdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(projectdialog), TRUE);
-  gtk_window_set_type_hint(GTK_WINDOW(projectdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_type_hint(GTK_WINDOW(projectdialog),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(projectdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(projectdialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
@@ -110,13 +110,14 @@ ProjectDialog::ProjectDialog (bool newproject)
   gtk_widget_show(messagelabel);
   gtk_box_pack_start(GTK_BOX(vbox1), messagelabel, FALSE, FALSE, 0);
 
-  checkbutton_editable = gtk_check_button_new_with_mnemonic (_("Editable"));
+  checkbutton_editable = gtk_check_button_new_with_mnemonic(_("Editable"));
   gtk_widget_show(checkbutton_editable);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_editable, FALSE, FALSE, 0);
 
   shortcuts.button(checkbutton_editable);
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable), projectconfig->editable_get() || newproject);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable),
+                               projectconfig->editable_get() || newproject);
 
   table1 = gtk_table_new(3, 3, FALSE);
   gtk_widget_show(table1);
@@ -127,19 +128,26 @@ ProjectDialog::ProjectDialog (bool newproject)
 
   label9 = gtk_label_new(_("Remove books"));
   gtk_widget_show(label9);
-  gtk_table_attach(GTK_TABLE(table1), label9, 2, 3, 0, 1, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), label9, 2, 3, 0, 1,
+                   (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+                   (GtkAttachOptions)(0), 0, 0);
 
   label8 = gtk_label_new(_("Add books"));
   gtk_widget_show(label8);
-  gtk_table_attach(GTK_TABLE(table1), label8, 0, 1, 0, 1, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), label8, 0, 1, 0, 1,
+                   (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+                   (GtkAttachOptions)(0), 0, 0);
 
   vseparator1 = gtk_vseparator_new();
   gtk_widget_show(vseparator1);
-  gtk_table_attach(GTK_TABLE(table1), vseparator1, 1, 2, 0, 3, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), vseparator1, 1, 2, 0, 3,
+                   (GtkAttachOptions)(GTK_FILL),
+                   (GtkAttachOptions)(GTK_EXPAND | GTK_FILL), 0, 0);
 
   addbutton = gtk_button_new();
   gtk_widget_show(addbutton);
-  gtk_table_attach(GTK_TABLE(table1), addbutton, 0, 1, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), addbutton, 0, 1, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment1 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment1);
@@ -161,7 +169,8 @@ ProjectDialog::ProjectDialog (bool newproject)
 
   deletebutton = gtk_button_new();
   gtk_widget_show(deletebutton);
-  gtk_table_attach(GTK_TABLE(table1), deletebutton, 2, 3, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table1), deletebutton, 2, 3, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
 
   alignment2 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment2);
@@ -194,61 +203,75 @@ ProjectDialog::ProjectDialog (bool newproject)
 
   label11 = gtk_label_new_with_mnemonic(_("Versification"));
   gtk_widget_show(label11);
-  gtk_table_attach(GTK_TABLE(table2), label11, 0, 1, 0, 1, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table2), label11, 0, 1, 0, 1,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
   gtk_misc_set_alignment(GTK_MISC(label11), 0, 0.5);
 
   shortcuts.label(label11);
 
   combobox_versification = gtk_combo_box_new_text();
   gtk_widget_show(combobox_versification);
-  gtk_table_attach(GTK_TABLE(table2), combobox_versification, 1, 2, 0, 1, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (GTK_FILL), 0, 0);
+  gtk_table_attach(GTK_TABLE(table2), combobox_versification, 1, 2, 0, 1,
+                   (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+                   (GtkAttachOptions)(GTK_FILL), 0, 0);
 
   // Load versifications.
   extern Versifications *versifications;
-  vector < ustring > systems = versifications->systems_get();
+  vector<ustring> systems = versifications->systems_get();
   combobox_set_strings(combobox_versification, systems);
-  combobox_set_string(combobox_versification, projectconfig->versification_get());
+  combobox_set_string(combobox_versification,
+                      projectconfig->versification_get());
 
   label12 = gtk_label_new_with_mnemonic(_("Language"));
   gtk_widget_show(label12);
-  gtk_table_attach(GTK_TABLE(table2), label12, 0, 1, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (0), 0, 0);
+  gtk_table_attach(GTK_TABLE(table2), label12, 0, 1, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(0), 0, 0);
   gtk_misc_set_alignment(GTK_MISC(label12), 0, 0.5);
 
   shortcuts.label(label12);
 
   combobox_language = gtk_combo_box_new_text();
   gtk_widget_show(combobox_language);
-  gtk_table_attach(GTK_TABLE(table2), combobox_language, 1, 2, 1, 2, (GtkAttachOptions) (GTK_FILL), (GtkAttachOptions) (GTK_FILL), 0, 0);
+  gtk_table_attach(GTK_TABLE(table2), combobox_language, 1, 2, 1, 2,
+                   (GtkAttachOptions)(GTK_FILL), (GtkAttachOptions)(GTK_FILL),
+                   0, 0);
 
   // Load languages.
   extern BookLocalizations *booklocalizations;
-  vector < ustring > languages = booklocalizations->localizations_get();
+  vector<ustring> languages = booklocalizations->localizations_get();
   combobox_set_strings(combobox_language, languages);
   combobox_set_string(combobox_language, projectconfig->language_get());
 
-  checkbutton_right_to_left = gtk_check_button_new_with_mnemonic(_("Predominantly right-to-left text"));
+  checkbutton_right_to_left =
+      gtk_check_button_new_with_mnemonic(_("Predominantly right-to-left text"));
   gtk_widget_show(checkbutton_right_to_left);
-  gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_right_to_left, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_right_to_left, FALSE, FALSE,
+                     0);
 
   shortcuts.button(checkbutton_right_to_left);
 
   // Set RTL.
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_right_to_left), projectconfig->right_to_left_get());
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_right_to_left),
+                               projectconfig->right_to_left_get());
 
   hbox_depend = gtk_hbox_new(FALSE, 5);
   gtk_widget_show(hbox_depend);
   gtk_box_pack_start(GTK_BOX(vbox1), hbox_depend, TRUE, TRUE, 0);
 
-  checkbutton_dependent = gtk_check_button_new_with_mnemonic(_("Depend upon project"));
+  checkbutton_dependent =
+      gtk_check_button_new_with_mnemonic(_("Depend upon project"));
   gtk_widget_show(checkbutton_dependent);
-  gtk_box_pack_start(GTK_BOX(hbox_depend), checkbutton_dependent, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox_depend), checkbutton_dependent, FALSE, FALSE,
+                     0);
 
   shortcuts.button(checkbutton_dependent);
 
   // Set depend-button state.
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_dependent), projectconfig->depending_on_switch_get());
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_dependent),
+                               projectconfig->depending_on_switch_get());
 
-  button_depend = gtk_button_new_with_mnemonic(dependent_project(projectconfig->depending_on_project_get()).c_str());
+  button_depend = gtk_button_new_with_mnemonic(
+      dependent_project(projectconfig->depending_on_project_get()).c_str());
   gtk_widget_show(button_depend);
   gtk_box_pack_start(GTK_BOX(hbox_depend), button_depend, FALSE, FALSE, 0);
 
@@ -272,52 +295,77 @@ ProjectDialog::ProjectDialog (bool newproject)
   gtk_widget_show(hbox_spelling);
   gtk_box_pack_start(GTK_BOX(vbox1), hbox_spelling, TRUE, TRUE, 0);
 
-  checkbutton_spelling = gtk_check_button_new_with_mnemonic(_("Check spelling"));
+  checkbutton_spelling =
+      gtk_check_button_new_with_mnemonic(_("Check spelling"));
   gtk_widget_show(checkbutton_spelling);
-  gtk_box_pack_start(GTK_BOX(hbox_spelling), checkbutton_spelling, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox_spelling), checkbutton_spelling, FALSE, FALSE,
+                     0);
 
   shortcuts.button(checkbutton_spelling);
 
   // Set the spelling. A new project has the spelling on by default.
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_spelling), projectconfig->spelling_check_get() || newproject);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_spelling),
+                               projectconfig->spelling_check_get() ||
+                                   newproject);
 
   button_dictionaries = gtk_button_new_with_mnemonic(_("Dictionaries"));
   gtk_widget_show(button_dictionaries);
-  gtk_box_pack_start(GTK_BOX(hbox_spelling), button_dictionaries, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox_spelling), button_dictionaries, FALSE, FALSE,
+                     0);
 
   shortcuts.button(button_dictionaries);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(projectdialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(projectdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
-  new InDialogHelp(projectdialog, NULL, &shortcuts, "file/project/project-properties");
+  new InDialogHelp(projectdialog, NULL, &shortcuts,
+                   "file/project/project-properties");
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(projectdialog), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(projectdialog), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(projectdialog), okbutton1, GTK_RESPONSE_OK);
+  gtk_dialog_add_action_widget(GTK_DIALOG(projectdialog), okbutton1,
+                               GTK_RESPONSE_OK);
   gtk_widget_set_sensitive(okbutton1, FALSE);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
   shortcuts.stockbutton(cancelbutton1);
   shortcuts.stockbutton(okbutton1);
   shortcuts.process();
 
-  g_signal_connect((gpointer) nameentry, "changed", G_CALLBACK(projectdialog_on_nameentry_changed), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_editable, "toggled", G_CALLBACK(on_checkbutton_editable_toggled), gpointer(this));
-  g_signal_connect((gpointer) addbutton, "clicked", G_CALLBACK(projectdialog_on_addbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) deletebutton, "clicked", G_CALLBACK(projectdialog_on_deletebutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) cancelbutton1, "clicked", G_CALLBACK(projectdialog_on_cancelbutton1_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(projectdialog_on_okbutton1_clicked), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_dependent, "toggled", G_CALLBACK(on_checkbutton_dependent_toggled), gpointer(this));
-  g_signal_connect((gpointer) button_depend, "clicked", G_CALLBACK(on_button_depend_clicked), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_spelling, "toggled", G_CALLBACK(on_checkbutton_spelling_toggled), gpointer(this));
-  g_signal_connect((gpointer) button_dictionaries, "clicked", G_CALLBACK(on_button_dictionaries_clicked), gpointer(this));
+  g_signal_connect((gpointer)nameentry, "changed",
+                   G_CALLBACK(projectdialog_on_nameentry_changed),
+                   gpointer(this));
+  g_signal_connect((gpointer)checkbutton_editable, "toggled",
+                   G_CALLBACK(on_checkbutton_editable_toggled), gpointer(this));
+  g_signal_connect((gpointer)addbutton, "clicked",
+                   G_CALLBACK(projectdialog_on_addbutton_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)deletebutton, "clicked",
+                   G_CALLBACK(projectdialog_on_deletebutton_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)cancelbutton1, "clicked",
+                   G_CALLBACK(projectdialog_on_cancelbutton1_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(projectdialog_on_okbutton1_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)checkbutton_dependent, "toggled",
+                   G_CALLBACK(on_checkbutton_dependent_toggled),
+                   gpointer(this));
+  g_signal_connect((gpointer)button_depend, "clicked",
+                   G_CALLBACK(on_button_depend_clicked), gpointer(this));
+  g_signal_connect((gpointer)checkbutton_spelling, "toggled",
+                   G_CALLBACK(on_checkbutton_spelling_toggled), gpointer(this));
+  g_signal_connect((gpointer)button_dictionaries, "clicked",
+                   G_CALLBACK(on_button_dictionaries_clicked), gpointer(this));
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label1), nameentry);
 
@@ -332,21 +380,11 @@ ProjectDialog::ProjectDialog (bool newproject)
   set_gui();
 }
 
+ProjectDialog::~ProjectDialog() { gtk_widget_destroy(projectdialog); }
 
-ProjectDialog::~ProjectDialog()
-{
-  gtk_widget_destroy(projectdialog);
-}
+int ProjectDialog::run() { return gtk_dialog_run(GTK_DIALOG(projectdialog)); }
 
-
-int ProjectDialog::run()
-{
-  return gtk_dialog_run(GTK_DIALOG(projectdialog));
-}
-
-
-void ProjectDialog::set_gui()
-{
+void ProjectDialog::set_gui() {
   bool sensitive = true;
   newprojectname = gtk_entry_get_text(GTK_ENTRY(nameentry));
   newprojectname = trim(newprojectname);
@@ -354,24 +392,28 @@ void ProjectDialog::set_gui()
   // Reject "New Project" as a name.
   if (newprojectname == NEW_PROJECT) {
     sensitive = false;
-    gtk_label_set_text(GTK_LABEL(messagelabel), _("(the name of the project should be changed)"));
+    gtk_label_set_text(GTK_LABEL(messagelabel),
+                       _("(the name of the project should be changed)"));
   }
   // Reject empty names.
   if (newprojectname.empty()) {
     sensitive = false;
-    gtk_label_set_text(GTK_LABEL(messagelabel), _("(the project needs a name)"));
+    gtk_label_set_text(GTK_LABEL(messagelabel),
+                       _("(the project needs a name)"));
   }
   // Reject names that already exist.
   if (currentprojectname != newprojectname) {
     if (project_exists(newprojectname)) {
       sensitive = false;
-      gtk_label_set_text(GTK_LABEL(messagelabel), _("(a project with this name already exists)"));
+      gtk_label_set_text(GTK_LABEL(messagelabel),
+                         _("(a project with this name already exists)"));
     }
   }
   // Reject "data".
   if (newprojectname == "data") {
     sensitive = false;
-    gtk_label_set_text(GTK_LABEL(messagelabel), _("(this name is not allowed)"));
+    gtk_label_set_text(GTK_LABEL(messagelabel),
+                       _("(this name is not allowed)"));
   }
   // Deal with the sensitivity of the dialog.
   gtk_widget_set_sensitive(okbutton1, sensitive);
@@ -379,11 +421,14 @@ void ProjectDialog::set_gui()
     gtk_label_set_text(GTK_LABEL(messagelabel), "");
 
   // If non-editable, set widgets insensitive.
-  bool editable = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_editable));
+  bool editable =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_editable));
   gtk_widget_set_sensitive(nameentry, editable);
   gtk_widget_set_sensitive(messagelabel, editable);
   gtk_widget_set_sensitive(addbutton, editable);
-  gtk_widget_set_sensitive(deletebutton, editable && project_get_books(currentprojectname).size() > 0);
+  gtk_widget_set_sensitive(
+      deletebutton,
+      editable && project_get_books(currentprojectname).size() > 0);
   gtk_widget_set_sensitive(combobox_versification, editable);
   gtk_widget_set_sensitive(combobox_language, editable);
   gtk_widget_set_sensitive(label1, editable);
@@ -393,34 +438,40 @@ void ProjectDialog::set_gui()
   gtk_widget_set_sensitive(label12, editable);
   gtk_widget_set_sensitive(checkbutton_right_to_left, editable);
   if (editable) {
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_dependent), false);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_dependent),
+                                 false);
   }
   // Spelling widgets.
-  sensitive = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_spelling));
+  sensitive =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_spelling));
   gtk_widget_set_sensitive(button_dictionaries, sensitive);
 }
 
-
-void ProjectDialog::on_ok ()
-{
+void ProjectDialog::on_ok() {
   // Deal with possible new projectname.
   if (currentprojectname != newprojectname) {
     // Move project.
-    project_move (currentprojectname, newprojectname);
-	isChanged = true;
+    project_move(currentprojectname, newprojectname);
+    isChanged = true;
   }
   // Save settings.
   extern Settings *settings;
   settings->genconfig.project_set(newprojectname);
-  ProjectConfiguration *projectconfig = settings->projectconfig (settings->genconfig.project_get ());
-  projectconfig->versification_set(combobox_get_active_string(combobox_versification));
+  ProjectConfiguration *projectconfig =
+      settings->projectconfig(settings->genconfig.project_get());
+  projectconfig->versification_set(
+      combobox_get_active_string(combobox_versification));
   projectconfig->language_set(combobox_get_active_string(combobox_language));
-  projectconfig->editable_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_editable)));
-  projectconfig->right_to_left_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_right_to_left)));
-  projectconfig->spelling_check_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_spelling)));
+  projectconfig->editable_set(
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_editable)));
+  projectconfig->right_to_left_set(gtk_toggle_button_get_active(
+      GTK_TOGGLE_BUTTON(checkbutton_right_to_left)));
+  projectconfig->spelling_check_set(
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_spelling)));
 
   // Save diglot-related settings.
-  bool depend_switch = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_dependent));
+  bool depend_switch =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_dependent));
   projectconfig->depending_on_switch_set(depend_switch);
   ustring depend_project = dependent_project();
   projectconfig->depending_on_project_set(depend_project);
@@ -433,19 +484,20 @@ void ProjectDialog::on_ok ()
 
   // If the project depends on another, do the copy through the script.
   if (depend_switch && (!depend_project.empty())) {
-	isChanged = true;
+    isChanged = true;
     // Progress information.
     ProgressWindow progresswindow(_("Updating project"), false);
 
     progresswindow.set_fraction(0.1);
 
     // Get the list of book/chapters that is in the source project.
-    vector < unsigned int >source_books;
-    vector < unsigned int >source_chapters;
+    vector<unsigned int> source_books;
+    vector<unsigned int> source_chapters;
     {
-      vector < unsigned int >books = project_get_books(depend_project);
+      vector<unsigned int> books = project_get_books(depend_project);
       for (unsigned int b = 0; b < books.size(); b++) {
-        vector < unsigned int >chapters = project_get_chapters(depend_project, books[b]);
+        vector<unsigned int> chapters =
+            project_get_chapters(depend_project, books[b]);
         for (unsigned c = 0; c < chapters.size(); c++) {
           source_books.push_back(books[b]);
           source_chapters.push_back(chapters[c]);
@@ -455,12 +507,14 @@ void ProjectDialog::on_ok ()
 
     progresswindow.set_fraction(0.2);
 
-    // Delete the books and chapters from this project that are not in the source project.
+    // Delete the books and chapters from this project that are not in the
+    // source project.
     {
-      vector < unsigned int >books = project_get_books(newprojectname);
+      vector<unsigned int> books = project_get_books(newprojectname);
       for (unsigned int b = 0; b < books.size(); b++) {
         if (project_book_exists(depend_project, books[b])) {
-          vector < unsigned int >chapters = project_get_chapters(newprojectname, books[b]);
+          vector<unsigned int> chapters =
+              project_get_chapters(newprojectname, books[b]);
           for (unsigned c = 0; c < chapters.size(); c++) {
             bool exists = false;
             for (unsigned int i = 0; i < source_books.size(); i++) {
@@ -483,55 +537,53 @@ void ProjectDialog::on_ok ()
     progresswindow.set_iterate(0.2, 1, source_books.size());
 
     // Copy everything from the source project to this project.
-    // We need to "touch" the files of the project it depends on to make them 
+    // We need to "touch" the files of the project it depends on to make them
     // look newer, so as to ensure that they get loaded.
     for (unsigned int i = 0; i < source_books.size(); i++) {
       progresswindow.iterate();
       GwSpawn spawn("touch");
-      spawn.arg(project_data_filename_chapter(depend_project, source_books[i], source_chapters[i], false));
+      spawn.arg(project_data_filename_chapter(depend_project, source_books[i],
+                                              source_chapters[i], false));
       spawn.run();
-      vector < ustring > lines = project_retrieve_chapter(newprojectname, source_books[i], source_chapters[i]);
+      vector<ustring> lines = project_retrieve_chapter(
+          newprojectname, source_books[i], source_chapters[i]);
     }
-
   }
-  
+
   // Set the book to focus in the editor.
   if (focusbook == 0) {
-    vector <unsigned int> books = project_get_books (newprojectname);
-    if (books.size () > 0) {
-      focusbook = books [0];
+    vector<unsigned int> books = project_get_books(newprojectname);
+    if (books.size() > 0) {
+      focusbook = books[0];
     }
   }
-
 }
 
-
-void ProjectDialog::on_cancel()
-{
+void ProjectDialog::on_cancel() {
   // Remove the "New Project". It was created but not used.
-  if (isNewProject) { project_delete(NEW_PROJECT); }
+  if (isNewProject) {
+    project_delete(NEW_PROJECT);
+  }
 }
 
-
-void ProjectDialog::on_book_add()
-{
-/*
- * This gives the user the possibility to add books that are still missing in 
- * the project. Only those books that are not yet in the project are shown.
- * If the user adds book(s), templates of the book are placed in the project.
- * The templates contain markers for chapters, verses, and the basics.
- */
-  vector <unsigned int> selectables;
-  set <unsigned int> selection;
-  vector <unsigned int> scripture_books = project_get_books (currentprojectname);
-  set <unsigned int> currentbooks;
+void ProjectDialog::on_book_add() {
+  /*
+   * This gives the user the possibility to add books that are still missing in
+   * the project. Only those books that are not yet in the project are shown.
+   * If the user adds book(s), templates of the book are placed in the project.
+   * The templates contain markers for chapters, verses, and the basics.
+   */
+  vector<unsigned int> selectables;
+  set<unsigned int> selection;
+  vector<unsigned int> scripture_books = project_get_books(currentprojectname);
+  set<unsigned int> currentbooks;
   for (unsigned int i = 0; i < scripture_books.size(); i++)
-    currentbooks.insert (scripture_books[i]);
+    currentbooks.insert(scripture_books[i]);
   {
-    vector <unsigned int> ids = books_type_to_ids (btUnknown);
+    vector<unsigned int> ids = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < ids.size(); i++) {
       if (currentbooks.find(ids[i]) == currentbooks.end())
-        selectables.push_back (ids[i]);
+        selectables.push_back(ids[i]);
     }
   }
   books_standard_order(selectables);
@@ -542,24 +594,27 @@ void ProjectDialog::on_book_add()
   int result = dialog.run();
   if (result == GTK_RESPONSE_OK) {
     selection = dialog.selectionset;
-    vector <unsigned int> ids = books_type_to_ids(btUnknown);
-    ProgressWindow progresswindow (_("Adding books"), false);
-    progresswindow.set_iterate (0, 1, selection.size());
+    vector<unsigned int> ids = books_type_to_ids(btUnknown);
+    ProgressWindow progresswindow(_("Adding books"), false);
+    progresswindow.set_iterate(0, 1, selection.size());
     for (unsigned int i = 0; i < ids.size(); i++) {
       if (!(selection.find(ids[i]) == selection.end())) {
-	isChanged = true;
+        isChanged = true;
         progresswindow.iterate();
-        vector <ustring> booktemplate;
+        vector<ustring> booktemplate;
         // If the book is found in the templates, take that, else create it.
-        ustring englishbook = books_id_to_english (ids[i]);
+        ustring englishbook = books_id_to_english(ids[i]);
         ustring templatefile = englishbook.casefold() + ".usfm";
         replace_text(templatefile, " ", "_");
-        templatefile = gw_build_filename(Directories->get_package_data(), templatefile);
+        templatefile =
+            gw_build_filename(Directories->get_package_data(), templatefile);
         if (g_file_test(templatefile.c_str(), G_FILE_TEST_IS_REGULAR)) {
           ReadText rt(templatefile, true, false);
           booktemplate.assign(rt.lines.begin(), rt.lines.end());
         } else {
-          versification_create_book_template(combobox_get_active_string(combobox_versification), ids[i], booktemplate);
+          versification_create_book_template(
+              combobox_get_active_string(combobox_versification), ids[i],
+              booktemplate);
         }
         // Change any _year_ to the current year, so as to remain fresh always.
         ustring myyear;
@@ -585,17 +640,15 @@ void ProjectDialog::on_book_add()
   set_gui();
 }
 
-
-void ProjectDialog::on_book_delete()
-{
-  vector < unsigned int >selectables;
-  set < unsigned int >selection;
-  vector < unsigned int >scripture_books = project_get_books(currentprojectname);
-  set < unsigned int >currentbooks;
+void ProjectDialog::on_book_delete() {
+  vector<unsigned int> selectables;
+  set<unsigned int> selection;
+  vector<unsigned int> scripture_books = project_get_books(currentprojectname);
+  set<unsigned int> currentbooks;
   for (unsigned int i = 0; i < scripture_books.size(); i++)
     currentbooks.insert(scripture_books[i]);
   {
-    vector < unsigned int >ids = books_type_to_ids(btUnknown);
+    vector<unsigned int> ids = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < ids.size(); i++) {
       if (currentbooks.find(ids[i]) != currentbooks.end())
         selectables.push_back(ids[i]);
@@ -611,12 +664,16 @@ void ProjectDialog::on_book_delete()
     selection = dialog.selectionset;
     if (selection.empty())
       return;
-    if (gtkw_dialog_question(projectdialog, _("Are you sure you want to delete the books?")) != GTK_RESPONSE_YES)
+    if (gtkw_dialog_question(projectdialog,
+                             _("Are you sure you want to delete the books?")) !=
+        GTK_RESPONSE_YES)
       return;
-    if (gtkw_dialog_question(projectdialog, _("Are you really sure to delete something worth perhaps months of work?")) != GTK_RESPONSE_YES)
+    if (gtkw_dialog_question(projectdialog,
+                             _("Are you really sure to delete something worth "
+                               "perhaps months of work?")) != GTK_RESPONSE_YES)
       return;
     isChanged = true;
-    vector < unsigned int >ids = books_type_to_ids(btUnknown);
+    vector<unsigned int> ids = books_type_to_ids(btUnknown);
     ProgressWindow progresswindow(_("Deleting books"), false);
     progresswindow.set_iterate(0, 1, ids.size());
     for (unsigned int i = 0; i < ids.size(); i++) {
@@ -626,7 +683,6 @@ void ProjectDialog::on_book_delete()
       }
       progresswindow.iterate();
     }
-
   }
   // Update GUI.
   set_gui();
@@ -634,91 +690,73 @@ void ProjectDialog::on_book_delete()
   focusbook = 0;
 }
 
-
-
-void ProjectDialog::projectdialog_on_nameentry_changed(GtkEditable * editable, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->set_gui();
+void ProjectDialog::projectdialog_on_nameentry_changed(GtkEditable *editable,
+                                                       gpointer user_data) {
+  ((ProjectDialog *)user_data)->set_gui();
 }
 
-
-void ProjectDialog::projectdialog_on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_ok();
+void ProjectDialog::projectdialog_on_okbutton1_clicked(GtkButton *button,
+                                                       gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_ok();
 }
 
-
-void ProjectDialog::projectdialog_on_addbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_book_add();
+void ProjectDialog::projectdialog_on_addbutton_clicked(GtkButton *button,
+                                                       gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_book_add();
 }
 
-
-void ProjectDialog::projectdialog_on_deletebutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_book_delete();
+void ProjectDialog::projectdialog_on_deletebutton_clicked(GtkButton *button,
+                                                          gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_book_delete();
 }
 
-
-void ProjectDialog::projectdialog_on_cancelbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_cancel();
+void ProjectDialog::projectdialog_on_cancelbutton1_clicked(GtkButton *button,
+                                                           gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_cancel();
 }
 
-
-void ProjectDialog::on_checkbutton_editable_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->set_gui();
+void ProjectDialog::on_checkbutton_editable_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((ProjectDialog *)user_data)->set_gui();
 }
 
-
-void ProjectDialog::on_checkbutton_dependent_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_checkbutton_dependent();
+void ProjectDialog::on_checkbutton_dependent_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_checkbutton_dependent();
 }
 
-
-void ProjectDialog::on_checkbutton_dependent()
-{
-  bool on = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_dependent));
+void ProjectDialog::on_checkbutton_dependent() {
+  bool on =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_dependent));
   if (on) {
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable), false);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_editable),
+                                 false);
   }
   gtk_widget_set_sensitive(button_depend, on);
   gtk_widget_set_sensitive(label_depend, on);
   gtk_widget_set_sensitive(combobox_depend, on);
 }
 
-
-void ProjectDialog::on_button_depend_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_button_depend();
+void ProjectDialog::on_button_depend_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_button_depend();
 }
 
-
-void ProjectDialog::on_button_depend()
-{
+void ProjectDialog::on_button_depend() {
   ustring project(dependent_project());
   if (project_select(project)) {
     gtk_button_set_label(GTK_BUTTON(button_depend), project.c_str());
   }
 }
 
-
-ustring ProjectDialog::dependent_project(const ustring & project)
-{
+ustring ProjectDialog::dependent_project(const ustring &project) {
   ustring label(project);
   if (label.empty() || !project_exists(project))
     label = none_project();
   return label;
 }
 
-
-ustring ProjectDialog::none_project()
-{
-  return "<none>";
-}
-
+ustring ProjectDialog::none_project() { return "<none>"; }
 
 ustring ProjectDialog::dependent_project()
 // Gets the project name from the button.
@@ -729,21 +767,17 @@ ustring ProjectDialog::dependent_project()
   return project;
 }
 
-
-void ProjectDialog::on_button_dictionaries_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->on_button_dictionaries();
+void ProjectDialog::on_button_dictionaries_clicked(GtkButton *button,
+                                                   gpointer user_data) {
+  ((ProjectDialog *)user_data)->on_button_dictionaries();
 }
 
-
-void ProjectDialog::on_button_dictionaries()
-{
+void ProjectDialog::on_button_dictionaries() {
   DictionaryDialog dialog(currentprojectname);
   dialog.run();
 }
 
-
-void ProjectDialog::on_checkbutton_spelling_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((ProjectDialog *) user_data)->set_gui();
+void ProjectDialog::on_checkbutton_spelling_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((ProjectDialog *)user_data)->set_gui();
 }

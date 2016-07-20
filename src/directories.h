@@ -1,20 +1,20 @@
 /*
 ** Copyright (©) 2015-2016 Matt Postiff.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 /*
@@ -34,7 +34,7 @@
 #include "libraries.h"
 
 class directories {
- private:
+private:
   // Directory bibledit is run from (e.g. /usr/bin or
   // C:\Program Files\Bibledit\editor\bin)
   ustring rundir;
@@ -56,7 +56,7 @@ class directories {
   ustring templates_user;
   ustring restore;
   ustring path;
-  
+
 public:
   ustring fix_slashes(const ustring &tofix);
   ustring backslashes_to_forwardslashes(const ustring &tofix);
@@ -98,8 +98,8 @@ private:
   ustring merge;
   ustring bwoutpost;         // full path to the bwoutpost.exe executable
   ustring bwoutpost_exeonly; // just bwoutpost.exe
-  
- public: 
+
+public:
   // Must initialize this class with argv[0] so it knows where the
   // program was run from. See bibledit.cpp and bibledit-rdwrt.cpp for
   // this.
@@ -113,59 +113,61 @@ private:
   // A routine to dump the list of directories and utilities to the log file
   void print();
 
-  void check_structure ();
-	 
+  void check_structure();
+
   // These should hold the correct platform path, with right style slashes
-  ustring get_root ();            // Returns the root directory of all data
-  ustring get_projects ();        // Returns the directory with all the projects
-  ustring get_notes ();           // Returns the directory with the notes
-  ustring get_stylesheets ();     // Returns the directory with the stylesheets
-  ustring get_configuration ();   // Returns the directory with the configuration
-  ustring get_pictures ();        // Returns the directory with the pictures
-  ustring get_resources ();       // Returns the directory with the resources
-  ustring get_scripts ();         // Returns the directory with the scripts
-  ustring get_temp ();            // Returns the temporary directory bibledit uses
-  ustring get_templates ();       // Returns the directory with the templates
-  ustring get_templates_user ();  // Returns the directory with the user's custom raw templates
-  ustring get_package_data ();    // Returns the package data directory
-  ustring get_restore ();         // Returns the directory to restore from
-  ustring get_path ();            // Returns the path environment variable
-  
-  // To do: integrate runtime.h/.cpp with this stuff, perhaps in a Utilities object or similar.
-  ustring get_copy ();
-  ustring get_copy_recursive ();
-  ustring get_copy_recursive_args ();
-  ustring get_move ();
-  ustring get_move_args ();
-  ustring get_rm ();
-  ustring get_rmdir ();
-  ustring get_rmdir_args ();
-  ustring get_diff ();
-  ustring get_mkdir ();
-  ustring get_mkdir_args ();
-  ustring get_tar ();
-  ustring get_zip ();
-  ustring get_unzip ();
-  ustring get_gzip ();
-  ustring get_pdfviewer ();
-  ustring get_pdfviewer_args ();
-  ustring get_git ();
-  ustring get_bibledit_git ();
-  ustring get_curl ();
-  ustring get_gobiblecreator ();
-  ustring get_bibledit_shutdown ();
-  ustring get_php ();
-  ustring get_xetex ();
-  ustring get_teckit_compile ();
-  ustring get_head ();
-  ustring get_touch ();
-  ustring get_osis2mod ();
-  ustring get_cmdshell ();
+  ustring get_root();           // Returns the root directory of all data
+  ustring get_projects();       // Returns the directory with all the projects
+  ustring get_notes();          // Returns the directory with the notes
+  ustring get_stylesheets();    // Returns the directory with the stylesheets
+  ustring get_configuration();  // Returns the directory with the configuration
+  ustring get_pictures();       // Returns the directory with the pictures
+  ustring get_resources();      // Returns the directory with the resources
+  ustring get_scripts();        // Returns the directory with the scripts
+  ustring get_temp();           // Returns the temporary directory bibledit uses
+  ustring get_templates();      // Returns the directory with the templates
+  ustring get_templates_user(); // Returns the directory with the user's custom
+                                // raw templates
+  ustring get_package_data();   // Returns the package data directory
+  ustring get_restore();        // Returns the directory to restore from
+  ustring get_path();           // Returns the path environment variable
+
+  // To do: integrate runtime.h/.cpp with this stuff, perhaps in a Utilities
+  // object or similar.
+  ustring get_copy();
+  ustring get_copy_recursive();
+  ustring get_copy_recursive_args();
+  ustring get_move();
+  ustring get_move_args();
+  ustring get_rm();
+  ustring get_rmdir();
+  ustring get_rmdir_args();
+  ustring get_diff();
+  ustring get_mkdir();
+  ustring get_mkdir_args();
+  ustring get_tar();
+  ustring get_zip();
+  ustring get_unzip();
+  ustring get_gzip();
+  ustring get_pdfviewer();
+  ustring get_pdfviewer_args();
+  ustring get_git();
+  ustring get_bibledit_git();
+  ustring get_curl();
+  ustring get_gobiblecreator();
+  ustring get_bibledit_shutdown();
+  ustring get_php();
+  ustring get_xetex();
+  ustring get_teckit_compile();
+  ustring get_head();
+  ustring get_touch();
+  ustring get_osis2mod();
+  ustring get_cmdshell();
   // what about helpcommand?
-  ustring get_tasklist (); // aka ps in unix
-  ustring get_merge ();
-  ustring get_bwoutpost ();
-  ustring get_bwoutpost_exeonly ();
+  ustring get_tasklist(); // aka ps in unix
+  ustring get_merge();
+  ustring get_bwoutpost();
+  ustring get_bwoutpost_exeonly();
 };
 
 // Declared in bibledit.cpp and bibledit-rdwrt.cpp

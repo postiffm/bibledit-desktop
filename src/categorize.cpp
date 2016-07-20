@@ -1,29 +1,30 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-#include "utilities.h"
 #include "categorize.h"
-#include "usfmtools.h"
-#include "tiny_utilities.h"
 #include "gwrappers.h"
+#include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 
-CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
+CategorizeChapterVerse::CategorizeChapterVerse(const vector<ustring> &lines)
 // Categorizes the lines by adding chapter and verse information to it.
 // It expects each \c and \v to start a new line, i.e. the lines are "clean".
 // Gives one line per verse.
@@ -39,14 +40,15 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
     // Extract the marker, and deal with it.
     ustring ln = lines[i];
     ustring marker = usfm_extract_marker(ln);
-    // Chapter. 
+    // Chapter.
     if (marker == "c") {
       ustring number_in_line = number_in_string(ln);
       // Only accept the number if it is well-formed.
-      if ((ln.substr(0, number_in_line.length()) == number_in_line) && (!number_in_line.empty())) {
+      if ((ln.substr(0, number_in_line.length()) == number_in_line) &&
+          (!number_in_line.empty())) {
         chapternumber = convert_to_int(number_in_line);
         if (i == 0)
-          previous_chapter = chapternumber;     // For one-chapter texts
+          previous_chapter = chapternumber; // For one-chapter texts
         versenumber = "0";
       }
     }
@@ -65,7 +67,8 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
       }
     }
     // Store data.
-    if ((chapternumber != previous_chapter) || (versenumber != previous_verse)) {
+    if ((chapternumber != previous_chapter) ||
+        (versenumber != previous_verse)) {
       store(previous_chapter, previous_verse, text);
       text.clear();
       previous_chapter = chapternumber;
@@ -80,15 +83,15 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
     store(chapternumber, versenumber, text);
 }
 
-void CategorizeChapterVerse::store(unsigned int chapternumber, const ustring & versenumber, const ustring & text)
-{
+void CategorizeChapterVerse::store(unsigned int chapternumber,
+                                   const ustring &versenumber,
+                                   const ustring &text) {
   chapter.push_back(chapternumber);
   verse.push_back(versenumber);
   line.push_back(text);
 }
 
-CategorizeLine::CategorizeLine(const ustring & data)
-{
+CategorizeLine::CategorizeLine(const ustring &data) {
   // As the data may exist of several lines, handle those separately.
   ParseLine parseline(data);
   for (unsigned int ln = 0; ln < parseline.lines.size(); ln++) {
@@ -128,8 +131,11 @@ CategorizeLine::CategorizeLine(const ustring & data)
       endposition = line.find(closing_marker);
       while ((beginposition != string::npos) && (endposition != string::npos)) {
         ustring notetext;
-        notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
+        notetext =
+            line.substr(beginposition + opening_marker.length(),
+                        endposition - beginposition - closing_marker.length());
+        line.erase(beginposition,
+                   endposition - beginposition + closing_marker.length());
         clear_out_any_marker(notetext);
         append_text(note, notetext);
         beginposition = line.find(opening_marker);
@@ -141,8 +147,11 @@ CategorizeLine::CategorizeLine(const ustring & data)
       endposition = line.find(closing_marker);
       while ((beginposition != string::npos) && (endposition != string::npos)) {
         ustring notetext;
-        notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
+        notetext =
+            line.substr(beginposition + opening_marker.length(),
+                        endposition - beginposition - closing_marker.length());
+        line.erase(beginposition,
+                   endposition - beginposition + closing_marker.length());
         clear_out_any_marker(notetext);
         append_text(note, notetext);
         beginposition = line.find(opening_marker);
@@ -158,8 +167,11 @@ CategorizeLine::CategorizeLine(const ustring & data)
       endposition = line.find(closing_marker);
       while ((beginposition != string::npos) && (endposition != string::npos)) {
         ustring referencetext;
-        referencetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
+        referencetext =
+            line.substr(beginposition + opening_marker.length(),
+                        endposition - beginposition - closing_marker.length());
+        line.erase(beginposition,
+                   endposition - beginposition + closing_marker.length());
         clear_out_any_marker(referencetext);
         append_text(ref, referencetext);
         beginposition = line.find(opening_marker);
@@ -198,7 +210,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
         line.clear();
       }
     }
-    // Extended study notes. As these use the existing footnote markers, 
+    // Extended study notes. As these use the existing footnote markers,
     // deal with the study notes first.
     if (!line.empty()) {
       if (is_study_marker(actual_marker)) {
@@ -218,19 +230,16 @@ CategorizeLine::CategorizeLine(const ustring & data)
     }
     // Store previous marker.
     previous_marker = marker;
-
   }
 }
 
-void CategorizeLine::append_text(ustring & container, const ustring & text)
-{
+void CategorizeLine::append_text(ustring &container, const ustring &text) {
   if (!container.empty())
     container.append(" ");
   container.append(text);
 }
 
-void CategorizeLine::clear_out_any_marker(ustring & line)
-{
+void CategorizeLine::clear_out_any_marker(ustring &line) {
   size_t startpos = 0;
   startpos = line.find("\\", startpos);
   while (startpos != string::npos) {
@@ -247,38 +256,49 @@ void CategorizeLine::clear_out_any_marker(ustring & line)
   }
 }
 
-bool CategorizeLine::is_id_marker(const ustring & marker)
-{
-  return ((marker == "id") || (marker == "ide") || (marker == "rem") || (marker == "h") || (marker == "h1") || (marker == "h2") || (marker == "h3") || (marker == "toc") || (marker == "toc1") || (marker == "toc2")
-          || (marker == "toc3"));
+bool CategorizeLine::is_id_marker(const ustring &marker) {
+  return ((marker == "id") || (marker == "ide") || (marker == "rem") ||
+          (marker == "h") || (marker == "h1") || (marker == "h2") ||
+          (marker == "h3") || (marker == "toc") || (marker == "toc1") ||
+          (marker == "toc2") || (marker == "toc3"));
 }
 
-bool CategorizeLine::is_intro_marker(const ustring & marker)
-{
-  return ((marker == "imt") || (marker == "imt1") || (marker == "imt2") || (marker == "imt3") || (marker == "imt4") || (marker == "is") || (marker == "is1") || (marker == "is2") || (marker == "ip") || (marker == "ipi")
-          || (marker == "im") || (marker == "imi") || (marker == "ipq") || (marker == "imq") || (marker == "ipr") || (marker == "ib") || (marker == "iex") || (marker == "iq") || (marker == "iq1") || (marker == "iq2")
-          || (marker == "iq3") || (marker == "iot") || (marker == "io") || (marker == "io") || (marker == "io1") || (marker == "io2") || (marker == "io3") || (marker == "io4") || (marker == "imte") || (marker == "ie"));
+bool CategorizeLine::is_intro_marker(const ustring &marker) {
+  return ((marker == "imt") || (marker == "imt1") || (marker == "imt2") ||
+          (marker == "imt3") || (marker == "imt4") || (marker == "is") ||
+          (marker == "is1") || (marker == "is2") || (marker == "ip") ||
+          (marker == "ipi") || (marker == "im") || (marker == "imi") ||
+          (marker == "ipq") || (marker == "imq") || (marker == "ipr") ||
+          (marker == "ib") || (marker == "iex") || (marker == "iq") ||
+          (marker == "iq1") || (marker == "iq2") || (marker == "iq3") ||
+          (marker == "iot") || (marker == "io") || (marker == "io") ||
+          (marker == "io1") || (marker == "io2") || (marker == "io3") ||
+          (marker == "io4") || (marker == "imte") || (marker == "ie"));
 }
 
-bool CategorizeLine::is_head_marker(const ustring & marker)
-{
-  return ((marker == "mt") || (marker == "mt1") || (marker == "mt2") || (marker == "mt3") || (marker == "mt4") || (marker == "mte") || (marker == "mte1") || (marker == "mte2") || (marker == "mte3")
-          || (marker == "mte4") || (marker == "ms") || (marker == "ms1") || (marker == "ms2") || (marker == "ms3") || (marker == "ms4") || (marker == "mr") || (marker == "s") || (marker == "s1") || (marker == "s2")
-          || (marker == "s3") || (marker == "s4") || (marker == "sr") || (marker == "r") || (marker == "rq") || (marker == "d") || (marker == "sp"));
+bool CategorizeLine::is_head_marker(const ustring &marker) {
+  return ((marker == "mt") || (marker == "mt1") || (marker == "mt2") ||
+          (marker == "mt3") || (marker == "mt4") || (marker == "mte") ||
+          (marker == "mte1") || (marker == "mte2") || (marker == "mte3") ||
+          (marker == "mte4") || (marker == "ms") || (marker == "ms1") ||
+          (marker == "ms2") || (marker == "ms3") || (marker == "ms4") ||
+          (marker == "mr") || (marker == "s") || (marker == "s1") ||
+          (marker == "s2") || (marker == "s3") || (marker == "s4") ||
+          (marker == "sr") || (marker == "r") || (marker == "rq") ||
+          (marker == "d") || (marker == "sp"));
 }
 
-bool CategorizeLine::is_chap_marker(const ustring & marker)
-{
-  return ((marker == "c") || (marker == "ca") || (marker == "cl") || (marker == "cp") || (marker == "cd"));
+bool CategorizeLine::is_chap_marker(const ustring &marker) {
+  return ((marker == "c") || (marker == "ca") || (marker == "cl") ||
+          (marker == "cp") || (marker == "cd"));
 }
 
-bool CategorizeLine::is_study_marker(const ustring & marker)
-{
-  return ((marker == "env") || (marker == "enw") || (marker == "enk") || (marker == "enc"));
+bool CategorizeLine::is_study_marker(const ustring &marker) {
+  return ((marker == "env") || (marker == "enw") || (marker == "enk") ||
+          (marker == "enc"));
 }
 
-ustring CategorizeLine::footnote_opener(bool full)
-{
+ustring CategorizeLine::footnote_opener(bool full) {
   ustring opener;
   if (full)
     opener.append("\\");
@@ -288,15 +308,9 @@ ustring CategorizeLine::footnote_opener(bool full)
   return opener;
 }
 
+ustring CategorizeLine::footnote_closer() { return "\\f*"; }
 
-ustring CategorizeLine::footnote_closer()
-{
-  return "\\f*";
-}
-
-
-ustring CategorizeLine::endnote_opener(bool full)
-{
+ustring CategorizeLine::endnote_opener(bool full) {
   ustring opener;
   if (full)
     opener.append("\\");
@@ -306,15 +320,9 @@ ustring CategorizeLine::endnote_opener(bool full)
   return opener;
 }
 
+ustring CategorizeLine::endnote_closer() { return "\\fe*"; }
 
-ustring CategorizeLine::endnote_closer()
-{
-  return "\\fe*";
-}
-
-
-ustring CategorizeLine::xref_opener(bool full)
-{
+ustring CategorizeLine::xref_opener(bool full) {
   ustring opener;
   if (full)
     opener.append("\\");
@@ -324,14 +332,9 @@ ustring CategorizeLine::xref_opener(bool full)
   return opener;
 }
 
+ustring CategorizeLine::xref_closer() { return "\\x*"; }
 
-ustring CategorizeLine::xref_closer()
-{
-  return "\\x*";
-}
-
-
-bool CategorizeLine::is_verse_marker(const ustring & marker)
+bool CategorizeLine::is_verse_marker(const ustring &marker)
 // We take the rough and fast road and say that if the marker is nothing else,
 // then it is a verse marker.
 {
@@ -354,8 +357,7 @@ bool CategorizeLine::is_verse_marker(const ustring & marker)
   return is_verse;
 }
 
-
-void CategorizeLine::remove_verse_number(const ustring & versenumber)
+void CategorizeLine::remove_verse_number(const ustring &versenumber)
 // This removes the verse number if "versenumber" is found in the text.
 {
   size_t pos = verse.find(" ");

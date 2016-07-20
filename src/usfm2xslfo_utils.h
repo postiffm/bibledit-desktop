@@ -1,30 +1,27 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
-
 
 #ifndef INCLUDED_USFM2XSLFO_UTILS_H
 #define INCLUDED_USFM2XSLFO_UTILS_H
 
-
 #include "libraries.h"
 #include "style.h"
-
 
 enum Usfm2XslFoStyleType {
   u2xtIdentifierBook,
@@ -79,12 +76,10 @@ enum Usfm2XslFoStyleType {
   u2xtSubjectIndexEntry
 };
 
-
-class Usfm2XslFoStyle
-{
+class Usfm2XslFoStyle {
 public:
-  Usfm2XslFoStyle (const ustring& marker_in);
-  ~Usfm2XslFoStyle ();
+  Usfm2XslFoStyle(const ustring &marker_in);
+  ~Usfm2XslFoStyle();
   ustring marker;
   Usfm2XslFoStyleType type;
   double fontsize;
@@ -117,38 +112,31 @@ public:
   int table_column_number;
   ustring wordlist_entry_addition;
   bool restart_paragraph;
+
 private:
 };
 
+vector<Usfm2XslFoStyle> usfm2xslfo_read_stylesheet(const ustring &stylesheet);
 
-vector <Usfm2XslFoStyle> usfm2xslfo_read_stylesheet (const ustring& stylesheet);
-
-
-class XslFoTableCell
-{
+class XslFoTableCell {
 public:
-  XslFoTableCell (Usfm2XslFoStyle * style_in, const ustring& text_in);
-  Usfm2XslFoStyle * style;
+  XslFoTableCell(Usfm2XslFoStyle *style_in, const ustring &text_in);
+  Usfm2XslFoStyle *style;
   ustring text;
 };
 
-
-class XslFoTableRow
-{
+class XslFoTableRow {
 public:
-  XslFoTableRow (int dummy);
-  vector <XslFoTableCell> cells;
+  XslFoTableRow(int dummy);
+  vector<XslFoTableCell> cells;
 };
 
-
-class ChapterLabel
-{
+class ChapterLabel {
 public:
-  ChapterLabel (unsigned int book_in, unsigned int chapter_in, ustring label_in);
+  ChapterLabel(unsigned int book_in, unsigned int chapter_in, ustring label_in);
   unsigned int book;
   unsigned int chapter;
   ustring label;
 };
-
 
 #endif

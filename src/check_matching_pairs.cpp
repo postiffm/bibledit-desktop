@@ -1,35 +1,38 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_matching_pairs.h"
+#include "books.h"
 #include "projectutils.h"
+#include "scripturechecks.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
-#include "usfmtools.h"
-#include "books.h"
-#include "scripturechecks.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-MatchingPairOpener::MatchingPairOpener(const ustring & char_in, gunichar unichar_in, unsigned int book_in, int chapter_in, const ustring & verse_in, const ustring & context_in)
-{
+MatchingPairOpener::MatchingPairOpener(const ustring &char_in,
+                                       gunichar unichar_in,
+                                       unsigned int book_in, int chapter_in,
+                                       const ustring &verse_in,
+                                       const ustring &context_in) {
   character = char_in;
   unichar = unichar_in;
   book = book_in;
@@ -38,7 +41,9 @@ MatchingPairOpener::MatchingPairOpener(const ustring & char_in, gunichar unichar
   context = context_in;
 }
 
-CheckMatchingPairs::CheckMatchingPairs(const ustring & project, const vector < unsigned int >&books, const ustring & ignore, bool gui)
+CheckMatchingPairs::CheckMatchingPairs(const ustring &project,
+                                       const vector<unsigned int> &books,
+                                       const ustring &ignore, bool gui)
 /*
 It checks matching pairs of punctuation, e.g. the ( matches with the ).
 project: project to check.
@@ -48,7 +53,7 @@ gui: whether to show graphical progressbar.
 */
 {
   cancelled = false;
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
 
@@ -88,10 +93,10 @@ gui: whether to show graphical progressbar.
       }
     }
 
-    vector < unsigned int >chapters = project_get_chapters(project, book);
+    vector<unsigned int> chapters = project_get_chapters(project, book);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
       chapter = chapters[ch];
-      vector < ustring > verses = project_get_verses(project, book, chapter);
+      vector<ustring> verses = project_get_verses(project, book, chapter);
 
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
         verse = verses[vs];
@@ -113,13 +118,12 @@ gui: whether to show graphical progressbar.
   }
 }
 
-CheckMatchingPairs::~CheckMatchingPairs()
-{
+CheckMatchingPairs::~CheckMatchingPairs() {
   if (progresswindow)
     delete progresswindow;
 }
 
-ustring CheckMatchingPairs::get_context(ustring & line, unsigned int offset)
+ustring CheckMatchingPairs::get_context(ustring &line, unsigned int offset)
 // Returns the context at offset: A couple of words before and after.
 {
   // Result.
@@ -128,7 +132,7 @@ ustring CheckMatchingPairs::get_context(ustring & line, unsigned int offset)
   GtkTextBuffer *textbuffer;
   textbuffer = gtk_text_buffer_new(NULL);
   gtk_text_buffer_set_text(textbuffer, line.c_str(), -1);
-  // Iterators.  
+  // Iterators.
   GtkTextIter iter1;
   GtkTextIter iter2;
   // Find boundaries of context to return.
@@ -143,7 +147,7 @@ ustring CheckMatchingPairs::get_context(ustring & line, unsigned int offset)
   return returnvalue;
 }
 
-void CheckMatchingPairs::check_matched_pairs(ustring & text)
+void CheckMatchingPairs::check_matched_pairs(ustring &text)
 // Checks on matched pairs. Output any problems found.
 {
   for (unsigned int i = 0; i < text.length(); i++) {
@@ -159,7 +163,8 @@ void CheckMatchingPairs::check_matched_pairs(ustring & text)
       // See whether this one opens or closes a pair.
       if (gopeners.find(unichar) != gopeners.end()) {
         // It opens: Add data.
-        MatchingPairOpener opener(text.substr(i, 1), unichar, book, chapter, verse, get_context(text, i));
+        MatchingPairOpener opener(text.substr(i, 1), unichar, book, chapter,
+                                  verse, get_context(text, i));
         openers.push_back(opener);
         continue;
       } else {
@@ -179,7 +184,8 @@ void CheckMatchingPairs::check_matched_pairs(ustring & text)
         }
         if (give_message) {
           // Give message;
-          message(book, chapter, verse, _("Pair not opened: ") + get_context(text, i));
+          message(book, chapter, verse,
+                  _("Pair not opened: ") + get_context(text, i));
         }
       }
     }
@@ -187,19 +193,21 @@ void CheckMatchingPairs::check_matched_pairs(ustring & text)
 }
 
 void CheckMatchingPairs::check_pairs_clean()
-// See if there is still any opening punctuation that have not been matched with 
+// See if there is still any opening punctuation that have not been matched with
 // closing punctuation.
 {
   // Check for them and give messages.
   for (unsigned int i = 0; i < openers.size(); i++) {
-    message(openers[i].book, openers[i].chapter, openers[i].verse, _("Pair not closed: ") + openers[i].context);
+    message(openers[i].book, openers[i].chapter, openers[i].verse,
+            _("Pair not closed: ") + openers[i].context);
   }
   // Clear them up.
   openers.clear();
 }
 
-void CheckMatchingPairs::message(unsigned int book, unsigned int chapter, const ustring & verse, const ustring & message)
-{
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+void CheckMatchingPairs::message(unsigned int book, unsigned int chapter,
+                                 const ustring &verse, const ustring &message) {
+  references.push_back(books_id_to_english(book) + " " +
+                       convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }

@@ -1,65 +1,60 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
-#include "settings.h"
+#include "config.xml.h"
+#include "date_time_utils.h"
 #include "directories.h"
 #include "gwrappers.h"
+#include "settings.h"
+#include "shell.h"
 #include "sqlite3.h"
 #include "sqlite_reader.h"
 #include "utilities.h"
-#include "date_time_utils.h"
-#include "shell.h"
+#include "windowsoutpost.h"
 #include <libxml/xmlreader.h>
 #include <libxml/xmlwriter.h>
-#include "config.xml.h"
-#include "windowsoutpost.h"
 
-
-ustring general_configuration_filename()
-{
-  return gw_build_filename(Directories->get_configuration(), "configuration.1.xml");
+ustring general_configuration_filename() {
+  return gw_build_filename(Directories->get_configuration(),
+                           "configuration.1.xml");
 }
 
-
-void upgrade_configuration()
-{
-}
-
+void upgrade_configuration() {}
 
 /*
- A test was done on to see if the cause of irregular crashes of Bibledit, 
- when used a lot, is, that GeneralConfiguration was always left open in mainwindow.
+ A test was done on to see if the cause of irregular crashes of Bibledit,
+ when used a lot, is, that GeneralConfiguration was always left open in
+ mainwindow.
  It is now always closed.
  Several versions later it appeared that the random crashes had stopped.
- The conclusion is that the database should always be closed after use, 
+ The conclusion is that the database should always be closed after use,
  and not left open.
- Note: The above is still true in general, but the configuration no longer 
+ Note: The above is still true in general, but the configuration no longer
  uses the database, hence it is not relevant in this particular case.
  */
 
-
 GeneralConfiguration::GeneralConfiguration(bool save_on_destroy)
 /*
- This version of the general configuration uses a fast, in-memory system 
+ This version of the general configuration uses a fast, in-memory system
  for storing and retrieving the data.
- It loads the values from file only when needed. 
+ It loads the values from file only when needed.
  Once the values have been loaded in memory, they remain there,
  and the next times the values are queried, they are taken from memory,
  instead of loading them from disk again. This speeds the system up greatly.
@@ -70,7 +65,7 @@ GeneralConfiguration::GeneralConfiguration(bool save_on_destroy)
   // Save parameters.
   my_save_on_destroy = save_on_destroy;
 
-  // Function definition for initializing variables.
+// Function definition for initializing variables.
 #define INITIALIZE(parameter) parameter##_loaded = false
 
   // Initialize variables.
@@ -207,21 +202,20 @@ GeneralConfiguration::GeneralConfiguration(bool save_on_destroy)
   INITIALIZE(bibledit_web_user);
 }
 
-
-GeneralConfiguration::~GeneralConfiguration()
-{
+GeneralConfiguration::~GeneralConfiguration() {
   if (my_save_on_destroy) {
     save();
   }
 }
 
-
 void GeneralConfiguration::save()
 // Saves all settings to disk.
 {
-  vector < ConfigXmlPair > values;
+  vector<ConfigXmlPair> values;
 
-#define SAVE_VALUE(item) if (item##_loaded) config_xml_values_set_assemble (values, item##_key(), item)
+#define SAVE_VALUE(item)                                                       \
+  if (item##_loaded)                                                           \
+  config_xml_values_set_assemble(values, item##_key(), item)
 
   SAVE_VALUE(screen_width);
   SAVE_VALUE(screen_height);
@@ -330,8 +324,8 @@ void GeneralConfiguration::save()
   SAVE_VALUE(encoding);
   SAVE_VALUE(features_mode);
   SAVE_VALUE(features_list);
-  SAVE_VALUE(remember_verse_per_chapter); 
-  SAVE_VALUE(start_program_maximized); 
+  SAVE_VALUE(remember_verse_per_chapter);
+  SAVE_VALUE(start_program_maximized);
   SAVE_VALUE(administration_password);
   SAVE_VALUE(print_references_projects);
   SAVE_VALUE(dialogpositions_x);
@@ -358,19 +352,18 @@ void GeneralConfiguration::save()
   config_xml_values_set_execute(general_configuration_filename(), values);
 }
 
-
-bool GeneralConfiguration::bool_get(const gchar * key, bool & store, bool & loaded, bool standard)
-{
+bool GeneralConfiguration::bool_get(const gchar *key, bool &store, bool &loaded,
+                                    bool standard) {
   if (!loaded) {
-    store = config_xml_bool_get(general_configuration_filename(), key, standard);
+    store =
+        config_xml_bool_get(general_configuration_filename(), key, standard);
     loaded = true;
   }
   return store;
 }
 
-
-int GeneralConfiguration::int_get(const gchar * key, int &store, bool & loaded, int standard)
-{
+int GeneralConfiguration::int_get(const gchar *key, int &store, bool &loaded,
+                                  int standard) {
   if (!loaded) {
     store = config_xml_int_get(general_configuration_filename(), key, standard);
     loaded = true;
@@ -378,29 +371,30 @@ int GeneralConfiguration::int_get(const gchar * key, int &store, bool & loaded, 
   return store;
 }
 
-
-ustring GeneralConfiguration::string_get(const gchar * key, ustring & store, bool & loaded, const ustring & standard)
-{
+ustring GeneralConfiguration::string_get(const gchar *key, ustring &store,
+                                         bool &loaded,
+                                         const ustring &standard) {
   if (!loaded) {
-    store = config_xml_string_get(general_configuration_filename(), key, standard);
+    store =
+        config_xml_string_get(general_configuration_filename(), key, standard);
     loaded = true;
   }
   return store;
 }
 
-
-double GeneralConfiguration::double_get(const gchar * key, double &store, bool & loaded, double standard)
-{
+double GeneralConfiguration::double_get(const gchar *key, double &store,
+                                        bool &loaded, double standard) {
   if (!loaded) {
-    store = config_xml_double_get(general_configuration_filename(), key, standard);
+    store =
+        config_xml_double_get(general_configuration_filename(), key, standard);
     loaded = true;
   }
   return store;
 }
 
-
-vector < bool > GeneralConfiguration::vector_bool_get(const gchar * key, vector < bool > &store, bool & loaded, void *dummy)
-{
+vector<bool> GeneralConfiguration::vector_bool_get(const gchar *key,
+                                                   vector<bool> &store,
+                                                   bool &loaded, void *dummy) {
   if (!loaded) {
     store = config_xml_vector_bool_get(general_configuration_filename(), key);
     loaded = true;
@@ -408,9 +402,10 @@ vector < bool > GeneralConfiguration::vector_bool_get(const gchar * key, vector 
   return store;
 }
 
-
-vector < ustring > GeneralConfiguration::vector_string_get(const gchar * key, vector < ustring > &store, bool & loaded, void *dummy)
-{
+vector<ustring> GeneralConfiguration::vector_string_get(const gchar *key,
+                                                        vector<ustring> &store,
+                                                        bool &loaded,
+                                                        void *dummy) {
   if (!loaded) {
     store = config_xml_vector_string_get(general_configuration_filename(), key);
     loaded = true;
@@ -418,9 +413,9 @@ vector < ustring > GeneralConfiguration::vector_string_get(const gchar * key, ve
   return store;
 }
 
-
-vector < int >GeneralConfiguration::vector_int_get(const gchar * key, vector < int >&store, bool & loaded, void *dummy)
-{
+vector<int> GeneralConfiguration::vector_int_get(const gchar *key,
+                                                 vector<int> &store,
+                                                 bool &loaded, void *dummy) {
   if (!loaded) {
     store = config_xml_vector_int_get(general_configuration_filename(), key);
     loaded = true;
@@ -428,9 +423,10 @@ vector < int >GeneralConfiguration::vector_int_get(const gchar * key, vector < i
   return store;
 }
 
-
-vector < double >GeneralConfiguration::vector_double_get(const gchar * key, vector < double >&store, bool & loaded, void *dummy)
-{
+vector<double> GeneralConfiguration::vector_double_get(const gchar *key,
+                                                       vector<double> &store,
+                                                       bool &loaded,
+                                                       void *dummy) {
   if (!loaded) {
     store = config_xml_vector_double_get(general_configuration_filename(), key);
     loaded = true;
@@ -438,37 +434,29 @@ vector < double >GeneralConfiguration::vector_double_get(const gchar * key, vect
   return store;
 }
 
-
 // Definitions of the implementation of the code in the general configuration.
-#define IMPLEMENT(type, getter, store, defaultvalue) \
-const gchar * GeneralConfiguration::store##_key () \
-{ \
-  return #store; \
-} \
-type GeneralConfiguration::store##_get () \
-{ \
-  return getter (store##_key (), store, store##_loaded, defaultvalue); \
-} \
-void GeneralConfiguration::store##_set (type value) \
-{ \
-  store = value; \
-}
+#define IMPLEMENT(type, getter, store, defaultvalue)                           \
+  const gchar *GeneralConfiguration::store##_key() { return #store; }          \
+  type GeneralConfiguration::store##_get() {                                   \
+    return getter(store##_key(), store, store##_loaded, defaultvalue);         \
+  }                                                                            \
+  void GeneralConfiguration::store##_set(type value) { store = value; }
 
 // Code to make everything work.
 IMPLEMENT(int, int_get, screen_width, 0)
 IMPLEMENT(int, int_get, screen_height, 0)
-IMPLEMENT (int, int_get, window_width, 0)
-IMPLEMENT (int, int_get, window_height, 0)
-IMPLEMENT (int, int_get, window_x_position, 0)
-IMPLEMENT (int, int_get, window_y_position, 0)
-IMPLEMENT (bool, bool_get, window_maximized, true)
-IMPLEMENT(vector < int >, vector_int_get, window_widths, NULL)
-IMPLEMENT(vector < int >, vector_int_get, window_heights, NULL)
-IMPLEMENT(vector < int >, vector_int_get, window_x_positions, NULL)
-IMPLEMENT(vector < int >, vector_int_get, window_y_positions, NULL)
-IMPLEMENT(vector < int >, vector_int_get, window_ids, NULL)
-IMPLEMENT(vector < ustring >, vector_string_get, window_titles, NULL)
-IMPLEMENT(vector < bool >, vector_bool_get, window_shows, NULL)
+IMPLEMENT(int, int_get, window_width, 0)
+IMPLEMENT(int, int_get, window_height, 0)
+IMPLEMENT(int, int_get, window_x_position, 0)
+IMPLEMENT(int, int_get, window_y_position, 0)
+IMPLEMENT(bool, bool_get, window_maximized, true)
+IMPLEMENT(vector<int>, vector_int_get, window_widths, NULL)
+IMPLEMENT(vector<int>, vector_int_get, window_heights, NULL)
+IMPLEMENT(vector<int>, vector_int_get, window_x_positions, NULL)
+IMPLEMENT(vector<int>, vector_int_get, window_y_positions, NULL)
+IMPLEMENT(vector<int>, vector_int_get, window_ids, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, window_titles, NULL)
+IMPLEMENT(vector<bool>, vector_bool_get, window_shows, NULL)
 IMPLEMENT(ustring, string_get, project, "")
 IMPLEMENT(int, int_get, book, 0)
 IMPLEMENT(ustring, string_get, chapter, "")
@@ -477,7 +465,8 @@ IMPLEMENT(ustring, string_get, stylesheet, "")
 IMPLEMENT(ustring, string_get, references_file, "")
 IMPLEMENT(ustring, string_get, export_to_bibleworks_filename, "")
 IMPLEMENT(ustring, string_get, export_to_sword_module_path, g_get_home_dir())
-IMPLEMENT(ustring, string_get, export_to_sword_install_path, gw_build_filename(g_get_home_dir(), ".sword"))
+IMPLEMENT(ustring, string_get, export_to_sword_install_path,
+          gw_build_filename(g_get_home_dir(), ".sword"))
 IMPLEMENT(ustring, string_get, paper_format, "A4")
 IMPLEMENT(double, double_get, paper_width, 21.0)
 IMPLEMENT(double, double_get, paper_height, 29.7)
@@ -494,8 +483,10 @@ IMPLEMENT(bool, bool_get, print_changes_only, false)
 IMPLEMENT(ustring, string_get, project_to_compare_with, "")
 IMPLEMENT(int, int_get, notes_selection_reference, nsrtCurrentVerse)
 IMPLEMENT(int, int_get, notes_selection_edited, nsetAny)
-IMPLEMENT(int, int_get, notes_selection_date_from, date_time_julian_day_get_current())
-IMPLEMENT(int, int_get, notes_selection_date_to, date_time_julian_day_get_current())
+IMPLEMENT(int, int_get, notes_selection_date_from,
+          date_time_julian_day_get_current())
+IMPLEMENT(int, int_get, notes_selection_date_to,
+          date_time_julian_day_get_current())
 IMPLEMENT(ustring, string_get, notes_selection_category, "")
 IMPLEMENT(bool, bool_get, notes_selection_current_project, false)
 IMPLEMENT(bool, bool_get, notes_display_project, false)
@@ -509,35 +500,38 @@ IMPLEMENT(bool, bool_get, check_markers_compare_all_markers, true)
 IMPLEMENT(ustring, string_get, check_markers_compare_include_only, "")
 IMPLEMENT(ustring, string_get, check_markers_compare_ignore, "")
 IMPLEMENT(bool, bool_get, check_markers_compare_ignore_verse_zero, false)
-IMPLEMENT(ustring, string_get, check_capitalization_punctuation, CAPITALIZATION_PUNCTUATION)
-IMPLEMENT(ustring, string_get, check_capitalization_ignore, CAPITALIZATION_LOWERCASE)
+IMPLEMENT(ustring, string_get, check_capitalization_punctuation,
+          CAPITALIZATION_PUNCTUATION)
+IMPLEMENT(ustring, string_get, check_capitalization_ignore,
+          CAPITALIZATION_LOWERCASE)
 IMPLEMENT(bool, bool_get, check_capitalization_allow_any_prefixes, false)
 IMPLEMENT(bool, bool_get, check_repetition_ignore_case, false)
 IMPLEMENT(bool, bool_get, check_repetition_show_only_these, false)
 IMPLEMENT(bool, bool_get, check_repetition_ignore_these, false)
 IMPLEMENT(ustring, string_get, check_matching_pairs_ignore, "")
 IMPLEMENT(int, int_get, check_words_inventory_not_include_words_count, 0)
-IMPLEMENT(ustring, string_get, check_words_inventory_word_forming_characters, "")
+IMPLEMENT(ustring, string_get, check_words_inventory_word_forming_characters,
+          "")
 IMPLEMENT(ustring, string_get, check_markers_spacing_include, "xo")
-IMPLEMENT(vector < bool >, vector_bool_get, styles_category_expanded, NULL)
+IMPLEMENT(vector<bool>, vector_bool_get, styles_category_expanded, NULL)
 IMPLEMENT(ustring, string_get, insert_footnote_template, "")
 IMPLEMENT(ustring, string_get, insert_endnote_template, "")
 IMPLEMENT(ustring, string_get, insert_xref_template, "")
 IMPLEMENT(bool, bool_get, parallel_bible_keep_verses_together, true)
 IMPLEMENT(ustring, string_get, parallel_bible_chapters_verses, "")
 IMPLEMENT(bool, bool_get, parallel_bible_include_verse_zero, false)
-IMPLEMENT(vector < ustring >, vector_string_get, printing_fonts, NULL)
-IMPLEMENT(vector < ustring >, vector_string_get, parallel_bible_projects, NULL)
-IMPLEMENT(vector < bool >, vector_bool_get, parallel_bible_enabled, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, printing_fonts, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, parallel_bible_projects, NULL)
+IMPLEMENT(vector<bool>, vector_bool_get, parallel_bible_enabled, NULL)
 #ifdef WIN32
-  IMPLEMENT(bool, bool_get, use_outpost, true)
+IMPLEMENT(bool, bool_get, use_outpost, true)
 #else
-  IMPLEMENT(bool, bool_get, use_outpost, false)
+IMPLEMENT(bool, bool_get, use_outpost, false)
 #endif
 IMPLEMENT(ustring, string_get, mychecks, "")
 IMPLEMENT(bool, bool_get, tidy_translate, false)
-IMPLEMENT(vector < int >, vector_int_get, tidy_books, NULL)
-IMPLEMENT(vector < ustring >, vector_string_get, tidy_texts, NULL)
+IMPLEMENT(vector<int>, vector_int_get, tidy_books, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, tidy_texts, NULL)
 IMPLEMENT(bool, bool_get, tidy_normalize_hyphens, false)
 IMPLEMENT(bool, bool_get, tidy_space_between_chapter_verse, false)
 IMPLEMENT(bool, bool_get, tidy_space_series_verses, false)
@@ -566,24 +560,25 @@ IMPLEMENT(int, int_get, text_editor_selection_color, 4294343)
 IMPLEMENT(ustring, string_get, encoding, "WINDOWS-1258")
 IMPLEMENT(int, int_get, features_mode, 1)
 IMPLEMENT(ustring, string_get, features_list, "")
-IMPLEMENT(bool, bool_get, remember_verse_per_chapter, false) 
+IMPLEMENT(bool, bool_get, remember_verse_per_chapter, false)
 IMPLEMENT(bool, bool_get, start_program_maximized, false)
 IMPLEMENT(ustring, string_get, administration_password, "")
-IMPLEMENT(vector < ustring >, vector_string_get, print_references_projects, NULL)
-IMPLEMENT(vector < int >, vector_int_get, dialogpositions_x, NULL)
-IMPLEMENT(vector < int >, vector_int_get, dialogpositions_y, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, print_references_projects, NULL)
+IMPLEMENT(vector<int>, vector_int_get, dialogpositions_x, NULL)
+IMPLEMENT(vector<int>, vector_int_get, dialogpositions_y, NULL)
 IMPLEMENT(bool, bool_get, text_replacement, false)
-IMPLEMENT(vector < ustring >, vector_string_get, text_replacement_originals, NULL)
-IMPLEMENT(vector < ustring >, vector_string_get, text_replacement_replacements, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, text_replacement_originals, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, text_replacement_replacements,
+          NULL)
 IMPLEMENT(bool, bool_get, pdf_viewer_automatic, true)
-IMPLEMENT(ustring, string_get, pdf_viewer_path, "") 
-IMPLEMENT(ustring, string_get, pdf_viewer_arguments, "") 
-IMPLEMENT(vector < ustring >, vector_string_get, project_tasks_names, NULL) 
-IMPLEMENT(vector < double >, vector_double_get, project_tasks_durations, NULL) 
-IMPLEMENT(int, int_get, print_job, 0) 
-IMPLEMENT(vector < ustring >, vector_string_get, projects_displaying_verses, NULL)
+IMPLEMENT(ustring, string_get, pdf_viewer_path, "")
+IMPLEMENT(ustring, string_get, pdf_viewer_arguments, "")
+IMPLEMENT(vector<ustring>, vector_string_get, project_tasks_names, NULL)
+IMPLEMENT(vector<double>, vector_double_get, project_tasks_durations, NULL)
+IMPLEMENT(int, int_get, print_job, 0)
+IMPLEMENT(vector<ustring>, vector_string_get, projects_displaying_verses, NULL)
 IMPLEMENT(bool, bool_get, compare_disregard_notes, false)
-IMPLEMENT(vector <ustring>, vector_string_get, source_language_names, NULL)
+IMPLEMENT(vector<ustring>, vector_string_get, source_language_names, NULL)
 IMPLEMENT(bool, bool_get, reference_window_show_verse_text, true)
 IMPLEMENT(bool, bool_get, reference_window_show_relevant_bits, false)
 IMPLEMENT(bool, bool_get, consultation_notes_git_use_remote_repository, false)

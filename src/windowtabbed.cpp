@@ -1,46 +1,50 @@
 /*
  ** Copyright (©) 2016 Matt Postiff.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-#include "libraries.h"
-#include <glib.h>
 #include "windowtabbed.h"
-#include "help.h"
-#include "floatingwindow.h"
-#include "keyterms.h"
-#include "tiny_utilities.h"
-#include "utilities.h"
-#include <gdk/gdkkeysyms.h>
-#include "combobox.h"
-#include "settings.h"
-#include "projectutils.h"
-#include "categorize.h"
-#include "mapping.h"
 #include "bible.h"
 #include "books.h"
-#include "xmlutils.h"
+#include "categorize.h"
+#include "combobox.h"
+#include "floatingwindow.h"
 #include "gwrappers.h"
+#include "help.h"
+#include "keyterms.h"
+#include "libraries.h"
+#include "mapping.h"
+#include "projectutils.h"
+#include "settings.h"
+#include "tiny_utilities.h"
+#include "utilities.h"
+#include "xmlutils.h"
+#include <gdk/gdkkeysyms.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 
-WindowTabbed::WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widTabbed, _("Information"), startup)
-  // widTabbed above may not be specific enough for what windowdata wants to do (storing window positions, etc.)
-  // May pass that in; also have to pass in title info since it will vary; this is a generic container class
+WindowTabbed::WindowTabbed(GtkWidget *parent_layout,
+                           GtkAccelGroup *accelerator_group, bool startup)
+    : FloatingWindow(parent_layout, widTabbed, _("Information"), startup)
+// widTabbed above may not be specific enough for what windowdata wants to do
+// (storing window positions, etc.)
+// May pass that in; also have to pass in title info since it will vary; this is
+// a generic container class
 {
   // Build gui.
   vbox = gtk_vbox_new(FALSE, 0);
@@ -56,7 +60,7 @@ WindowTabbed::WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator
   // Produce the signal to be given on a new reference.
   signal_button = gtk_button_new();
   gtk_box_pack_start(GTK_BOX(vbox), signal_button, FALSE, FALSE, 0);
-  
+
 #if 0
   // Save / initialize variables.
   keyword_id = 0;
@@ -149,49 +153,52 @@ WindowTabbed::WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator
 #endif
 }
 
-WindowTabbed::~WindowTabbed()
-{
+WindowTabbed::~WindowTabbed() {
   // Close all tabs
-//  my_editor = NULL;
-//  gw_destroy_source (text_changed_event_id);
+  //  my_editor = NULL;
+  //  gw_destroy_source (text_changed_event_id);
   // Destroy signal button.
   gtk_widget_destroy(signal_button);
 }
 
-void WindowTabbed::Concordance(void)
-{
-	// Create a new concordance tab
+void WindowTabbed::Concordance(void) {
+  // Create a new concordance tab
 
-	// Create the view for the notebook page
-	GtkWidget *scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
- 
-	GtkWidget *tab_label = gtk_label_new_with_mnemonic (_("_Concordance"));
-	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, tab_label);
-	
-	webview = webkit_web_view_new();
-	gtk_widget_show (webview);
-	gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
-	
-	connect_focus_signals (webview);
-	
-	// Create concordance information
-	
-	// Show it in the view
-	HtmlWriter2 htmlwriter ("");
-	htmlwriter.text_add ("Concordance features are almost ready...");
-	
+  // Create the view for the notebook page
+  GtkWidget *scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+  gtk_widget_show(scrolledwindow);
+  // gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow),
+                                      GTK_SHADOW_IN);
+
+  GtkWidget *tab_label = gtk_label_new_with_mnemonic(_("_Concordance"));
+  gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, tab_label);
+
+  webview = webkit_web_view_new();
+  gtk_widget_show(webview);
+  gtk_container_add(GTK_CONTAINER(scrolledwindow), webview);
+
+  connect_focus_signals(webview);
+
+  // Create concordance information
+
+  // Show it in the view
+  HtmlWriter2 htmlwriter("");
+  htmlwriter.text_add("Concordance features are almost ready...");
+
   htmlwriter.finish();
-//  if (display_another_page) {
-    // Load the page.
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);
-    // Scroll to the position that possibly was stored while this url was last active.
-    //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
-    //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
-//  }
+  //  if (display_another_page) {
+  // Load the page.
+  webkit_web_view_load_string(WEBKIT_WEB_VIEW(webview), htmlwriter.html.c_str(),
+                              NULL, NULL, NULL);
+  // Scroll to the position that possibly was stored while this url was last
+  // active.
+  // GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment
+  // (GTK_SCROLLED_WINDOW (scrolledwindow));
+  // gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
+  //  }
 }
 
 #if 0

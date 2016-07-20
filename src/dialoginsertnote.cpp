@@ -1,47 +1,45 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialoginsertnote.h"
-#include "utilities.h"
-#include "directories.h"
-#include "unixwrappers.h"
 #include "combobox.h"
-#include "dialogentry.h"
-#include "gwrappers.h"
-#include "notetemplate.h"
-#include "usfmtools.h"
-#include "stylesheetutils.h"
-#include "shell.h"
-#include "settings.h"
-#include <gdk/gdkkeysyms.h>
-#include "help.h"
-#include "tidy.h"
-#include "screen.h"
-#include "tiny_utilities.h"
-#include <glib/gi18n.h>
 #include "debug.h"
+#include "dialogentry.h"
+#include "directories.h"
+#include "gwrappers.h"
+#include "help.h"
+#include "libraries.h"
+#include "notetemplate.h"
+#include "screen.h"
+#include "settings.h"
+#include "shell.h"
+#include "stylesheetutils.h"
+#include "tidy.h"
+#include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <gdk/gdkkeysyms.h>
+#include <glib.h>
+#include <glib/gi18n.h>
 
-InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
-{
+InsertNoteDialog::InsertNoteDialog(NoteType dialogtype) {
   extern Settings *settings;
   mydialogtype = dialogtype;
   allow_entry_activate = true;
@@ -60,13 +58,15 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
     break;
   }
   gtk_window_set_title(GTK_WINDOW(insertnotedialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(insertnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_position(GTK_WINDOW(insertnotedialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(insertnotedialog), TRUE);
   gtk_window_set_resizable(GTK_WINDOW(insertnotedialog), FALSE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(insertnotedialog), TRUE);
-  gtk_window_set_type_hint(GTK_WINDOW(insertnotedialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_type_hint(GTK_WINDOW(insertnotedialog),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(insertnotedialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(insertnotedialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
@@ -84,23 +84,35 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
 
   GSList *radiobutton_numbering_automatic_group = NULL;
 
-  radiobutton_numbering_automatic = gtk_radio_button_new_with_mnemonic(NULL, _("Automatic"));
+  radiobutton_numbering_automatic =
+      gtk_radio_button_new_with_mnemonic(NULL, _("Automatic"));
   gtk_widget_show(radiobutton_numbering_automatic);
-  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_automatic, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_automatic), radiobutton_numbering_automatic_group);
-  radiobutton_numbering_automatic_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_automatic));
+  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_automatic, FALSE,
+                     FALSE, 0);
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_automatic),
+                             radiobutton_numbering_automatic_group);
+  radiobutton_numbering_automatic_group = gtk_radio_button_get_group(
+      GTK_RADIO_BUTTON(radiobutton_numbering_automatic));
 
-  radiobutton_numbering_none = gtk_radio_button_new_with_mnemonic(NULL, _("None"));
+  radiobutton_numbering_none =
+      gtk_radio_button_new_with_mnemonic(NULL, _("None"));
   gtk_widget_show(radiobutton_numbering_none);
-  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_none, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_none), radiobutton_numbering_automatic_group);
-  radiobutton_numbering_automatic_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_none));
+  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_none, FALSE, FALSE,
+                     0);
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_none),
+                             radiobutton_numbering_automatic_group);
+  radiobutton_numbering_automatic_group =
+      gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_none));
 
-  radiobutton_numbering_character = gtk_radio_button_new_with_mnemonic(NULL, _("Character"));
+  radiobutton_numbering_character =
+      gtk_radio_button_new_with_mnemonic(NULL, _("Character"));
   gtk_widget_show(radiobutton_numbering_character);
-  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_character, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_character), radiobutton_numbering_automatic_group);
-  radiobutton_numbering_automatic_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_numbering_character));
+  gtk_box_pack_start(GTK_BOX(hbox1), radiobutton_numbering_character, FALSE,
+                     FALSE, 0);
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_numbering_character),
+                             radiobutton_numbering_automatic_group);
+  radiobutton_numbering_automatic_group = gtk_radio_button_get_group(
+      GTK_RADIO_BUTTON(radiobutton_numbering_character));
 
   entry_numbering = gtk_entry_new();
   gtk_widget_show(entry_numbering);
@@ -113,9 +125,11 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
   gtk_widget_show(hseparator1);
   gtk_box_pack_start(GTK_BOX(vbox1), hseparator1, TRUE, TRUE, 6);
 
-  checkbutton_automatic_reference = gtk_check_button_new_with_mnemonic(_("Automatically insert the current _reference"));
+  checkbutton_automatic_reference = gtk_check_button_new_with_mnemonic(
+      _("Automatically insert the current _reference"));
   gtk_widget_show(checkbutton_automatic_reference);
-  gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_automatic_reference, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_automatic_reference, FALSE,
+                     FALSE, 0);
 
   hbox2 = gtk_hbox_new(FALSE, 2);
   gtk_widget_show(hbox2);
@@ -128,7 +142,8 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
 
   entry_reference_separator = gtk_entry_new();
   gtk_widget_show(entry_reference_separator);
-  gtk_box_pack_start(GTK_BOX(hbox2), entry_reference_separator, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox2), entry_reference_separator, FALSE, FALSE,
+                     0);
   gtk_entry_set_max_length(GTK_ENTRY(entry_reference_separator), 3);
   gtk_entry_set_width_chars(GTK_ENTRY(entry_reference_separator), 3);
 
@@ -148,7 +163,8 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
 
   label_automatic_reference = gtk_label_new("");
   gtk_widget_show(label_automatic_reference);
-  gtk_box_pack_start(GTK_BOX(hbox2), label_automatic_reference, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox2), label_automatic_reference, FALSE, FALSE,
+                     0);
 
   // Add content button.
 
@@ -198,7 +214,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
   combobox_templates = gtk_combo_box_new_text();
   gtk_widget_show(combobox_templates);
   gtk_box_pack_start(GTK_BOX(hbox3), combobox_templates, TRUE, TRUE, 0);
-  gtk_widget_set_can_default (GTK_WIDGET (combobox_templates), true);
+  gtk_widget_set_can_default(GTK_WIDGET(combobox_templates), true);
 
   button_template_new = gtk_button_new_from_stock("gtk-new");
   gtk_widget_show(button_template_new);
@@ -208,74 +224,104 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
   gtk_widget_show(button_template_delete);
   gtk_box_pack_start(GTK_BOX(hbox3), button_template_delete, FALSE, FALSE, 0);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(insertnotedialog));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(insertnotedialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
-  new InDialogHelp(insertnotedialog, NULL, NULL, _("menu-none/insert-footnote-endnote-crossreference"));
+  new InDialogHelp(insertnotedialog, NULL, NULL,
+                   _("menu-none/insert-footnote-endnote-crossreference"));
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(insertnotedialog), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(insertnotedialog), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(insertnotedialog), okbutton1, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(insertnotedialog), okbutton1,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
-  g_signal_connect((gpointer) radiobutton_numbering_automatic, "toggled", G_CALLBACK(on_radiobutton_numbering_toggled), gpointer(this));
-  g_signal_connect((gpointer) radiobutton_numbering_none, "toggled", G_CALLBACK(on_radiobutton_numbering_toggled), gpointer(this));
-  g_signal_connect((gpointer) radiobutton_numbering_character, "toggled", G_CALLBACK(on_radiobutton_numbering_toggled), gpointer(this));
-  g_signal_connect((gpointer) entry_numbering, "activate", G_CALLBACK(on_entry_numbering_activate), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_automatic_reference, "toggled", G_CALLBACK(on_checkbutton_automatic_reference_toggled), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_chapter, "toggled", G_CALLBACK(on_checkbutton_chapter_toggled), gpointer(this));
-  g_signal_connect((gpointer) entry_reference_separator, "changed", G_CALLBACK(on_entry_reference_separator_changed), gpointer(this));
-  g_signal_connect((gpointer) entry_reference_separator, "activate", G_CALLBACK(on_entry_reference_separator_activate), gpointer(this));
-  g_signal_connect((gpointer) checkbutton_verse, "toggled", G_CALLBACK(on_checkbutton_verse_toggled), gpointer(this));
-  g_signal_connect((gpointer) entry_reference_suffix, "changed", G_CALLBACK(on_entry_reference_suffix_changed), gpointer(this));
-  g_signal_connect((gpointer) entry_reference_suffix, "activate", G_CALLBACK(on_entry_reference_suffix_activate), gpointer(this));
-  g_signal_connect((gpointer) button_add, "clicked", G_CALLBACK(on_button_add_clicked), gpointer(this));
-  g_signal_connect((gpointer) combobox_templates, "changed", G_CALLBACK(on_combobox_templates_changed), gpointer(this));
-  g_signal_connect((gpointer) button_template_new, "clicked", G_CALLBACK(on_button_template_new_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_template_delete, "clicked", G_CALLBACK(on_button_template_delete_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(on_okbutton1_clicked), gpointer(this));
+  g_signal_connect((gpointer)radiobutton_numbering_automatic, "toggled",
+                   G_CALLBACK(on_radiobutton_numbering_toggled),
+                   gpointer(this));
+  g_signal_connect((gpointer)radiobutton_numbering_none, "toggled",
+                   G_CALLBACK(on_radiobutton_numbering_toggled),
+                   gpointer(this));
+  g_signal_connect((gpointer)radiobutton_numbering_character, "toggled",
+                   G_CALLBACK(on_radiobutton_numbering_toggled),
+                   gpointer(this));
+  g_signal_connect((gpointer)entry_numbering, "activate",
+                   G_CALLBACK(on_entry_numbering_activate), gpointer(this));
+  g_signal_connect((gpointer)checkbutton_automatic_reference, "toggled",
+                   G_CALLBACK(on_checkbutton_automatic_reference_toggled),
+                   gpointer(this));
+  g_signal_connect((gpointer)checkbutton_chapter, "toggled",
+                   G_CALLBACK(on_checkbutton_chapter_toggled), gpointer(this));
+  g_signal_connect((gpointer)entry_reference_separator, "changed",
+                   G_CALLBACK(on_entry_reference_separator_changed),
+                   gpointer(this));
+  g_signal_connect((gpointer)entry_reference_separator, "activate",
+                   G_CALLBACK(on_entry_reference_separator_activate),
+                   gpointer(this));
+  g_signal_connect((gpointer)checkbutton_verse, "toggled",
+                   G_CALLBACK(on_checkbutton_verse_toggled), gpointer(this));
+  g_signal_connect((gpointer)entry_reference_suffix, "changed",
+                   G_CALLBACK(on_entry_reference_suffix_changed),
+                   gpointer(this));
+  g_signal_connect((gpointer)entry_reference_suffix, "activate",
+                   G_CALLBACK(on_entry_reference_suffix_activate),
+                   gpointer(this));
+  g_signal_connect((gpointer)button_add, "clicked",
+                   G_CALLBACK(on_button_add_clicked), gpointer(this));
+  g_signal_connect((gpointer)combobox_templates, "changed",
+                   G_CALLBACK(on_combobox_templates_changed), gpointer(this));
+  g_signal_connect((gpointer)button_template_new, "clicked",
+                   G_CALLBACK(on_button_template_new_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_template_delete, "clicked",
+                   G_CALLBACK(on_button_template_delete_clicked),
+                   gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(on_okbutton1_clicked), gpointer(this));
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label2), combobox_templates);
 
   // Load available content markers.
-  vector < Style > styles;
+  vector<Style> styles;
   stylesheet_get_styles(settings->genconfig.stylesheet_get(), styles);
   for (unsigned int i = 0; i < styles.size(); i++) {
     switch (dialogtype) {
     case indtFootnote:
-    case indtEndnote:
-      {
-        if (styles[i].type == stFootEndNote) {
-          if ((styles[i].subtype == fentStandardContent)
-              || (styles[i].subtype == fentContent)
-              || (styles[i].subtype == fentContentWithEndmarker)
-              || (styles[i].subtype == fentParagraph)) {
-            content_markers.push_back(styles[i].marker);
-            content_endmarkers.push_back(styles[i].subtype == fentContentWithEndmarker);
-            content_names.push_back(styles[i].name);
-          }
+    case indtEndnote: {
+      if (styles[i].type == stFootEndNote) {
+        if ((styles[i].subtype == fentStandardContent) ||
+            (styles[i].subtype == fentContent) ||
+            (styles[i].subtype == fentContentWithEndmarker) ||
+            (styles[i].subtype == fentParagraph)) {
+          content_markers.push_back(styles[i].marker);
+          content_endmarkers.push_back(styles[i].subtype ==
+                                       fentContentWithEndmarker);
+          content_names.push_back(styles[i].name);
         }
-        break;
       }
-    case indtCrossreference:
-      {
-        if (styles[i].type == stCrossreference) {
-          if ((styles[i].subtype == ctStandardContent)
-              || (styles[i].subtype == ctContent)
-              || (styles[i].subtype == ctContentWithEndmarker)) {
-            content_markers.push_back(styles[i].marker);
-            content_endmarkers.push_back(styles[i].subtype == ctContentWithEndmarker);
-            content_names.push_back(styles[i].name);
-          }
+      break;
+    }
+    case indtCrossreference: {
+      if (styles[i].type == stCrossreference) {
+        if ((styles[i].subtype == ctStandardContent) ||
+            (styles[i].subtype == ctContent) ||
+            (styles[i].subtype == ctContentWithEndmarker)) {
+          content_markers.push_back(styles[i].marker);
+          content_endmarkers.push_back(styles[i].subtype ==
+                                       ctContentWithEndmarker);
+          content_names.push_back(styles[i].name);
         }
-        break;
       }
+      break;
+    }
     }
   }
 
@@ -298,83 +344,76 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
   dialog_position_restore(dptInsertNote, insertnotedialog);
 }
 
-
-InsertNoteDialog::~InsertNoteDialog()
-{
+InsertNoteDialog::~InsertNoteDialog() {
   dialog_position_save(dptInsertNote, insertnotedialog);
   gtk_widget_destroy(insertnotedialog);
 }
 
-
-int InsertNoteDialog::run()
-{
+int InsertNoteDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(insertnotedialog));
 }
 
-
-void InsertNoteDialog::on_radiobutton_numbering_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_radiobutton_numbering(togglebutton);
+void InsertNoteDialog::on_radiobutton_numbering_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_radiobutton_numbering(togglebutton);
 }
 
-
-void InsertNoteDialog::on_radiobutton_numbering(GtkToggleButton * togglebutton)
-{
+void InsertNoteDialog::on_radiobutton_numbering(GtkToggleButton *togglebutton) {
   gtk_label_set_mnemonic_widget(GTK_LABEL(label1), GTK_WIDGET(togglebutton));
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_character))) {
+  if (gtk_toggle_button_get_active(
+          GTK_TOGGLE_BUTTON(radiobutton_numbering_character))) {
     gtk_widget_set_sensitive(entry_numbering, true);
   } else {
     gtk_widget_set_sensitive(entry_numbering, false);
   }
 }
 
-
-int InsertNoteDialog::numbering_get()
-{
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_none)))
+int InsertNoteDialog::numbering_get() {
+  if (gtk_toggle_button_get_active(
+          GTK_TOGGLE_BUTTON(radiobutton_numbering_none)))
     return ntNone;
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_character)))
+  if (gtk_toggle_button_get_active(
+          GTK_TOGGLE_BUTTON(radiobutton_numbering_character)))
     return ntCharacter;
   return ntAutomatic;
 }
 
-
-void InsertNoteDialog::numbering_set(int numbering)
-{
-  NumberingType numberingtype = (NumberingType) numbering;
+void InsertNoteDialog::numbering_set(int numbering) {
+  NumberingType numberingtype = (NumberingType)numbering;
   switch (numberingtype) {
   case ntAutomatic:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_automatic), true);
-    on_radiobutton_numbering(GTK_TOGGLE_BUTTON(radiobutton_numbering_automatic));
+    gtk_toggle_button_set_active(
+        GTK_TOGGLE_BUTTON(radiobutton_numbering_automatic), true);
+    on_radiobutton_numbering(
+        GTK_TOGGLE_BUTTON(radiobutton_numbering_automatic));
     break;
   case ntNone:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_none), true);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_none),
+                                 true);
     on_radiobutton_numbering(GTK_TOGGLE_BUTTON(radiobutton_numbering_none));
     break;
   case ntCharacter:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_numbering_character), true);
-    on_radiobutton_numbering(GTK_TOGGLE_BUTTON(radiobutton_numbering_character));
+    gtk_toggle_button_set_active(
+        GTK_TOGGLE_BUTTON(radiobutton_numbering_character), true);
+    on_radiobutton_numbering(
+        GTK_TOGGLE_BUTTON(radiobutton_numbering_character));
     break;
   }
-
 }
 
-
-void InsertNoteDialog::on_entry_numbering_activate(GtkEntry * entry, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->focus_next_widget(GTK_WIDGET(entry));
+void InsertNoteDialog::on_entry_numbering_activate(GtkEntry *entry,
+                                                   gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->focus_next_widget(GTK_WIDGET(entry));
 }
 
-
-void InsertNoteDialog::on_checkbutton_automatic_reference_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_checkbutton_automatic_reference();
+void InsertNoteDialog::on_checkbutton_automatic_reference_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_checkbutton_automatic_reference();
 }
 
-
-void InsertNoteDialog::on_checkbutton_automatic_reference()
-{
-  bool active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
+void InsertNoteDialog::on_checkbutton_automatic_reference() {
+  bool active = gtk_toggle_button_get_active(
+      GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
   gtk_widget_set_sensitive(checkbutton_chapter, active);
   gtk_widget_set_sensitive(checkbutton_verse, active);
   gtk_widget_set_sensitive(entry_reference_suffix, active);
@@ -383,79 +422,63 @@ void InsertNoteDialog::on_checkbutton_automatic_reference()
   on_checkbutton_verse();
 }
 
-
-void InsertNoteDialog::on_checkbutton_chapter_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_checkbutton_chapter();
+void InsertNoteDialog::on_checkbutton_chapter_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_checkbutton_chapter();
 }
 
-
-void InsertNoteDialog::on_checkbutton_chapter()
-{
+void InsertNoteDialog::on_checkbutton_chapter() {
   separator_sensitive_set();
   reference_get();
 }
 
-
-void InsertNoteDialog::separator_sensitive_set()
-{
-  bool sensitive = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
+void InsertNoteDialog::separator_sensitive_set() {
+  bool sensitive = gtk_toggle_button_get_active(
+      GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
   if (sensitive)
-    sensitive = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
+    sensitive =
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
   if (sensitive)
-    sensitive = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
+    sensitive =
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
   gtk_widget_set_sensitive(entry_reference_separator, sensitive);
 }
 
-
-void InsertNoteDialog::on_entry_reference_separator_changed(GtkEditable * editable, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_entry_reference_separator_changed2();
+void InsertNoteDialog::on_entry_reference_separator_changed(
+    GtkEditable *editable, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_entry_reference_separator_changed2();
 }
 
-
-void InsertNoteDialog::on_entry_reference_separator_changed2()
-{
+void InsertNoteDialog::on_entry_reference_separator_changed2() {
   reference_get();
 }
 
-
-void InsertNoteDialog::on_entry_reference_separator_activate(GtkEntry * entry, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->focus_next_widget(GTK_WIDGET(entry));
+void InsertNoteDialog::on_entry_reference_separator_activate(
+    GtkEntry *entry, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->focus_next_widget(GTK_WIDGET(entry));
 }
 
-
-void InsertNoteDialog::on_checkbutton_verse_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_checkbutton_verse();
+void InsertNoteDialog::on_checkbutton_verse_toggled(
+    GtkToggleButton *togglebutton, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_checkbutton_verse();
 }
 
-
-void InsertNoteDialog::on_checkbutton_verse()
-{
+void InsertNoteDialog::on_checkbutton_verse() {
   separator_sensitive_set();
   reference_get();
 }
 
-
-void InsertNoteDialog::on_entry_reference_suffix_changed(GtkEditable * editable, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_entry_reference_suffix_changed2();
+void InsertNoteDialog::on_entry_reference_suffix_changed(GtkEditable *editable,
+                                                         gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_entry_reference_suffix_changed2();
 }
 
+void InsertNoteDialog::on_entry_reference_suffix_changed2() { reference_get(); }
 
-void InsertNoteDialog::on_entry_reference_suffix_changed2()
-{
-  reference_get();
+void InsertNoteDialog::on_entry_reference_suffix_activate(GtkEntry *entry,
+                                                          gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->focus_next_widget(GTK_WIDGET(entry));
 }
-
-
-void InsertNoteDialog::on_entry_reference_suffix_activate(GtkEntry * entry, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->focus_next_widget(GTK_WIDGET(entry));
-}
-
 
 ustring InsertNoteDialog::reference_get()
 // Returns the reference as is going to be inserted in the note.
@@ -466,19 +489,22 @@ ustring InsertNoteDialog::reference_get()
   // Configuration
   extern Settings *settings;
   // If the separator widget is sensitive, get the chapter and verse.
-  if (gtk_widget_get_sensitive (entry_reference_separator)) {
-    result = settings->genconfig.chapter_get()
-        + gtk_entry_get_text(GTK_ENTRY(entry_reference_separator))
-        + settings->genconfig.verse_get();
-  } else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter))) {
+  if (gtk_widget_get_sensitive(entry_reference_separator)) {
+    result = settings->genconfig.chapter_get() +
+             gtk_entry_get_text(GTK_ENTRY(entry_reference_separator)) +
+             settings->genconfig.verse_get();
+  } else if (gtk_toggle_button_get_active(
+                 GTK_TOGGLE_BUTTON(checkbutton_chapter))) {
     result = settings->genconfig.chapter_get();
-  } else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse))) {
+  } else if (gtk_toggle_button_get_active(
+                 GTK_TOGGLE_BUTTON(checkbutton_verse))) {
     result = settings->genconfig.verse_get();
   }
   // Add the suffix.
   result.append(gtk_entry_get_text(GTK_ENTRY(entry_reference_suffix)));
   // See whether we to insert it.
-  if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_automatic_reference)))
+  if (!gtk_toggle_button_get_active(
+          GTK_TOGGLE_BUTTON(checkbutton_automatic_reference)))
     result.clear();
   // Set the label.
   ustring label;
@@ -489,15 +515,12 @@ ustring InsertNoteDialog::reference_get()
   return result;
 }
 
-
-void InsertNoteDialog::on_button_content_clicked(GtkButton * button, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_button_content_remove(button);
+void InsertNoteDialog::on_button_content_clicked(GtkButton *button,
+                                                 gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_button_content_remove(button);
 }
 
-
-void InsertNoteDialog::on_button_content_remove(GtkButton * button)
-{
+void InsertNoteDialog::on_button_content_remove(GtkButton *button) {
   // Get the offset of the widget to remove.
   int widget_offset = -1;
   for (unsigned int i = 0; i < buttons_remove.size(); i++) {
@@ -523,21 +546,20 @@ void InsertNoteDialog::on_button_content_remove(GtkButton * button)
   set_dynamic_shortcuts();
 }
 
-
-void InsertNoteDialog::vector_remove_content(vector < GtkWidget * >&container, int offset)
-{
-  vector < GtkWidget * >::iterator iter;
+void InsertNoteDialog::vector_remove_content(vector<GtkWidget *> &container,
+                                             int offset) {
+  vector<GtkWidget *>::iterator iter;
   iter = container.begin();
-  for (int i = 0; i < offset; i++) { iter++; }
+  for (int i = 0; i < offset; i++) {
+    iter++;
+  }
   container.erase(iter);
 }
 
-
-void InsertNoteDialog::on_button_add_clicked(GtkButton * button, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_button_add();
+void InsertNoteDialog::on_button_add_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_button_add();
 }
-
 
 void InsertNoteDialog::on_button_add()
 // Adds a new content entry to the gui.
@@ -583,21 +605,25 @@ void InsertNoteDialog::on_button_add()
   {
     GtkRequisition sizerequisition;
     gtk_widget_size_request(combobox_style, &sizerequisition);
-    defaultheight = (int)(sizerequisition.height/* * 0.8*/);
+    defaultheight = (int)(sizerequisition.height /* * 0.8*/);
   }
 
   label_size = gtk_label_new(_("Size"));
   gtk_widget_show(label_size);
   gtk_box_pack_start(GTK_BOX(hbox8), label_size, FALSE, FALSE, 0);
 
-  spinbutton_size_adj = gtk_adjustment_new(defaultheight*5, defaultheight, 30 * defaultheight, defaultheight, 3 * defaultheight, 0);
-  spinbutton_size = gtk_spin_button_new(GTK_ADJUSTMENT(spinbutton_size_adj), 1, 0);
+  spinbutton_size_adj =
+      gtk_adjustment_new(defaultheight * 5, defaultheight, 30 * defaultheight,
+                         defaultheight, 3 * defaultheight, 0);
+  spinbutton_size =
+      gtk_spin_button_new(GTK_ADJUSTMENT(spinbutton_size_adj), 1, 0);
   gtk_widget_show(spinbutton_size);
   gtk_widget_set_size_request(spinbutton_size, defaultheight / 2, -1);
   gtk_box_pack_start(GTK_BOX(hbox8), spinbutton_size, FALSE, FALSE, 0);
   gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spinbutton_size), TRUE);
 
-  checkbutton_content = gtk_check_button_new_with_mnemonic(_("Remember content"));
+  checkbutton_content =
+      gtk_check_button_new_with_mnemonic(_("Remember content"));
   gtk_widget_show(checkbutton_content);
   gtk_box_pack_start(GTK_BOX(hbox8), checkbutton_content, FALSE, FALSE, 0);
 
@@ -636,9 +662,11 @@ void InsertNoteDialog::on_button_add()
   scrolledwindow_content = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow_content);
   gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindow_content, FALSE, FALSE, 0);
-  gtk_widget_set_size_request(scrolledwindow_content, -1, defaultheight*5);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_content), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_content), GTK_SHADOW_IN);
+  gtk_widget_set_size_request(scrolledwindow_content, -1, defaultheight * 5);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_content),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(
+      GTK_SCROLLED_WINDOW(scrolledwindow_content), GTK_SHADOW_IN);
 
   textview_content = gtk_text_view_new();
   gtk_widget_show(textview_content);
@@ -646,16 +674,22 @@ void InsertNoteDialog::on_button_add()
   gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview_content), FALSE);
   gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview_content), GTK_WRAP_WORD);
 
-  g_signal_connect((gpointer) button_remove, "clicked", G_CALLBACK(on_button_content_clicked), gpointer(this));
-  g_signal_connect((gpointer) spinbutton_size, "value_changed", G_CALLBACK(on_spinbutton_size_value_changed), gpointer(this));
-  g_signal_connect((gpointer) textview_content, "key_press_event", G_CALLBACK(on_textview_content_key_press_event), gpointer(this));
+  g_signal_connect((gpointer)button_remove, "clicked",
+                   G_CALLBACK(on_button_content_clicked), gpointer(this));
+  g_signal_connect((gpointer)spinbutton_size, "value_changed",
+                   G_CALLBACK(on_spinbutton_size_value_changed),
+                   gpointer(this));
+  g_signal_connect((gpointer)textview_content, "key_press_event",
+                   G_CALLBACK(on_textview_content_key_press_event),
+                   gpointer(this));
 
   gtk_box_reorder_child(GTK_BOX(vbox1), vbox2, vbox2s.size() + 4);
 
-  vector < ustring > lines;
+  vector<ustring> lines;
   for (unsigned int i = 0; i < content_markers.size(); i++) {
     ustring line;
-    line.append(content_names[i] + " (" + usfm_get_full_opening_marker(content_markers[i]));
+    line.append(content_names[i] + " (" +
+                usfm_get_full_opening_marker(content_markers[i]));
     if (content_endmarkers[i])
       line.append("..." + usfm_get_full_closing_marker(content_markers[i]));
     line.append(")");
@@ -678,9 +712,7 @@ void InsertNoteDialog::on_button_add()
   set_dynamic_shortcuts();
 }
 
-
-ustring InsertNoteDialog::template_filename_get(const ustring & template_name)
-{
+ustring InsertNoteDialog::template_filename_get(const ustring &template_name) {
   ustring filename;
   switch (mydialogtype) {
   case indtFootnote:
@@ -697,9 +729,8 @@ ustring InsertNoteDialog::template_filename_get(const ustring & template_name)
   return filename;
 }
 
-
-void InsertNoteDialog::templates_load(const ustring & template_name, bool update_gui)
-{
+void InsertNoteDialog::templates_load(const ustring &template_name,
+                                      bool update_gui) {
   updategui = update_gui;
   ReadFiles rd(Directories->get_configuration(), template_filename_get(""), "");
   for (unsigned int i = 0; i < rd.files.size(); i++) {
@@ -717,28 +748,37 @@ void InsertNoteDialog::templates_load(const ustring & template_name, bool update
   updategui = true;
 }
 
-
-void InsertNoteDialog::on_combobox_templates_changed(GtkComboBox * combobox, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_combobox_templates();
+void InsertNoteDialog::on_combobox_templates_changed(GtkComboBox *combobox,
+                                                     gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_combobox_templates();
 }
-
 
 void InsertNoteDialog::on_combobox_templates()
 // On a change of template, reload the values in the gui.
 {
   // Do nothing if we wish the gui not to be updated.
-  if (!updategui) { return; }
+  if (!updategui) {
+    return;
+  }
   // Load the template.
   ustring template_name = combobox_get_active_string(combobox_templates);
-  NoteTemplate notetemplate(gw_build_filename(Directories->get_configuration(), template_filename_get(template_name)), mydialogtype, false);
+  NoteTemplate notetemplate(
+      gw_build_filename(Directories->get_configuration(),
+                        template_filename_get(template_name)),
+      mydialogtype, false);
   // Set values in the fixed gui.
   gtk_entry_set_text(GTK_ENTRY(entry_numbering), notetemplate.anchor.c_str());
-  gtk_entry_set_text(GTK_ENTRY(entry_reference_separator), notetemplate.reference_division.c_str());
-  gtk_entry_set_text(GTK_ENTRY(entry_reference_suffix), notetemplate.reference_suffix.c_str());
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_chapter), notetemplate.reference_chapter);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_verse), notetemplate.reference_verse);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_automatic_reference), notetemplate.automatic_reference);
+  gtk_entry_set_text(GTK_ENTRY(entry_reference_separator),
+                     notetemplate.reference_division.c_str());
+  gtk_entry_set_text(GTK_ENTRY(entry_reference_suffix),
+                     notetemplate.reference_suffix.c_str());
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_chapter),
+                               notetemplate.reference_chapter);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_verse),
+                               notetemplate.reference_verse);
+  gtk_toggle_button_set_active(
+      GTK_TOGGLE_BUTTON(checkbutton_automatic_reference),
+      notetemplate.automatic_reference);
   // Clear away the dynamic gui.
   while (buttons_remove.size() > 0)
     on_button_content_remove(GTK_BUTTON(buttons_remove[0]));
@@ -746,14 +786,19 @@ void InsertNoteDialog::on_combobox_templates()
   for (unsigned int i = 0; i < notetemplate.content_markers.size(); i++) {
     on_button_add();
     combobox_set_string(combobox_styles[i], notetemplate.content_markers[i]);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton_sizes[i]), notetemplate.content_sizes[i]);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton_sizes[i]),
+                              notetemplate.content_sizes[i]);
     on_spinbutton_size(GTK_SPIN_BUTTON(spinbutton_sizes[i]));
     if (notetemplate.content_remembers[i]) {
-      GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_contents[i]));
-      gtk_text_buffer_set_text(textbuffer, notetemplate.content_texts[i].c_str(), -1);
+      GtkTextBuffer *textbuffer =
+          gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_contents[i]));
+      gtk_text_buffer_set_text(textbuffer,
+                               notetemplate.content_texts[i].c_str(), -1);
     }
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_contents[i]), notetemplate.content_remembers[i]);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_tidies[i]), notetemplate.content_tidies[i]);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_contents[i]),
+                                 notetemplate.content_remembers[i]);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_tidies[i]),
+                                 notetemplate.content_tidies[i]);
   }
   // Set remainder of gui.
   numbering_set(notetemplate.numbering);
@@ -763,41 +808,37 @@ void InsertNoteDialog::on_combobox_templates()
   focus_next_widget(entry_reference_suffix);
 }
 
-
-void InsertNoteDialog::on_button_template_new_clicked(GtkButton * button, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_button_template_new();
+void InsertNoteDialog::on_button_template_new_clicked(GtkButton *button,
+                                                      gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_button_template_new();
 }
 
-
-void InsertNoteDialog::on_button_template_new()
-{
+void InsertNoteDialog::on_button_template_new() {
   EntryDialog dialog(_("Template"), _("Enter a name for a new template"), "");
   dialog.run();
   GwSpawn spawn("touch");
-  spawn.arg(gw_build_filename(Directories->get_configuration(), template_filename_get(dialog.entered_value)));
+  spawn.arg(gw_build_filename(Directories->get_configuration(),
+                              template_filename_get(dialog.entered_value)));
   spawn.run();
   templates_load(dialog.entered_value, false);
 }
 
-
-void InsertNoteDialog::on_button_template_delete_clicked(GtkButton * button, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_button_template_delete();
+void InsertNoteDialog::on_button_template_delete_clicked(GtkButton *button,
+                                                         gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_button_template_delete();
 }
 
-
-void InsertNoteDialog::on_button_template_delete()
-{
-  ustring filename = gw_build_filename(Directories->get_configuration(), template_filename_get(combobox_get_active_string(combobox_templates)));
+void InsertNoteDialog::on_button_template_delete() {
+  ustring filename = gw_build_filename(
+      Directories->get_configuration(),
+      template_filename_get(combobox_get_active_string(combobox_templates)));
   unix_unlink(filename.c_str());
   templates_load("", true);
 }
 
-
-void InsertNoteDialog::focus_next_widget(GtkWidget * widget)
+void InsertNoteDialog::focus_next_widget(GtkWidget *widget)
 /*
-The point of this function is that, when an entry is focused and it gets 
+The point of this function is that, when an entry is focused and it gets
 activated (by Enter), then the next entry should be focused.
 This enables the user to quickly navigate through the gui and enter values.
 At the end the Ok button should be focused.
@@ -821,100 +862,97 @@ At the end the Ok button should be focused.
     current_entry = 3;
   else {
     for (unsigned int i = 0; i < textview_contents.size(); i++)
-      if (gtk_widget_has_focus (textview_contents[i]))
+      if (gtk_widget_has_focus(textview_contents[i]))
         current_entry = 4;
   }
   switch (current_entry) {
-  case 0:
-    {
-      if (gtk_widget_get_sensitive (entry_numbering)) {
-        gtk_widget_grab_focus(entry_numbering);
-        break;
-      }
-    }
-  case 1:
-    {
-      if (gtk_widget_get_sensitive (entry_reference_separator)) {
-        gtk_widget_grab_focus(entry_reference_separator);
-        break;
-      }
-    }
-  case 2:
-    {
-      if (gtk_widget_get_sensitive (entry_reference_suffix)) {
-        gtk_widget_grab_focus(entry_reference_suffix);
-        break;
-      }
-    }
-  case 3:
-    {
-      if (textview_contents.empty())
-        break;
-      gtk_widget_grab_focus(textview_contents[0]);
+  case 0: {
+    if (gtk_widget_get_sensitive(entry_numbering)) {
+      gtk_widget_grab_focus(entry_numbering);
       break;
     }
-  case 4:
-    {
-      unsigned int focused_entry = 0;
-      for (unsigned int i = 0; i < textview_contents.size(); i++) {
-        if (gtk_widget_has_focus (textview_contents[i]))
-          focused_entry = i;
-      }
-      focused_entry++;
-      if (focused_entry < textview_contents.size()) {
-        gtk_widget_grab_focus(textview_contents[focused_entry]);
-        break;
-      }
+  }
+  case 1: {
+    if (gtk_widget_get_sensitive(entry_reference_separator)) {
+      gtk_widget_grab_focus(entry_reference_separator);
+      break;
     }
-  case 5:
-    {
-      gtk_widget_grab_focus(okbutton1);
+  }
+  case 2: {
+    if (gtk_widget_get_sensitive(entry_reference_suffix)) {
+      gtk_widget_grab_focus(entry_reference_suffix);
+      break;
     }
+  }
+  case 3: {
+    if (textview_contents.empty())
+      break;
+    gtk_widget_grab_focus(textview_contents[0]);
+    break;
+  }
+  case 4: {
+    unsigned int focused_entry = 0;
+    for (unsigned int i = 0; i < textview_contents.size(); i++) {
+      if (gtk_widget_has_focus(textview_contents[i]))
+        focused_entry = i;
+    }
+    focused_entry++;
+    if (focused_entry < textview_contents.size()) {
+      gtk_widget_grab_focus(textview_contents[focused_entry]);
+      break;
+    }
+  }
+  case 5: {
+    gtk_widget_grab_focus(okbutton1);
+  }
   }
 }
 
 // MAP: I believe these two routines can be eliminated. Just set the
 // bool on on_timeout is set up.
-bool InsertNoteDialog::on_timeout(gpointer data)
-{
-  ((InsertNoteDialog *) data)->timeout();
+bool InsertNoteDialog::on_timeout(gpointer data) {
+  ((InsertNoteDialog *)data)->timeout();
   return false;
 }
 
+void InsertNoteDialog::timeout() { allow_entry_activate = true; }
 
-void InsertNoteDialog::timeout()
-{
-  allow_entry_activate = true;
+void InsertNoteDialog::on_okbutton1_clicked(GtkButton *button,
+                                            gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_okbutton();
 }
 
-
-void InsertNoteDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_okbutton();
-}
-
-
-void InsertNoteDialog::on_okbutton()
-{
+void InsertNoteDialog::on_okbutton() {
   // Save the current gui.
   extern Settings *settings;
-  NoteTemplate notetemplate(gw_build_filename(Directories->get_configuration(), template_filename_get(combobox_get_active_string(combobox_templates))), mydialogtype, true);
+  NoteTemplate notetemplate(
+      gw_build_filename(Directories->get_configuration(),
+                        template_filename_get(
+                            combobox_get_active_string(combobox_templates))),
+      mydialogtype, true);
   notetemplate.numbering = numbering_get();
   notetemplate.anchor = gtk_entry_get_text(GTK_ENTRY(entry_numbering));
-  notetemplate.automatic_reference = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
-  notetemplate.reference_chapter = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
-  notetemplate.reference_division = gtk_entry_get_text(GTK_ENTRY(entry_reference_separator));
-  notetemplate.reference_verse = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
-  notetemplate.reference_suffix = gtk_entry_get_text(GTK_ENTRY(entry_reference_suffix));
+  notetemplate.automatic_reference = gtk_toggle_button_get_active(
+      GTK_TOGGLE_BUTTON(checkbutton_automatic_reference));
+  notetemplate.reference_chapter =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
+  notetemplate.reference_division =
+      gtk_entry_get_text(GTK_ENTRY(entry_reference_separator));
+  notetemplate.reference_verse =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
+  notetemplate.reference_suffix =
+      gtk_entry_get_text(GTK_ENTRY(entry_reference_suffix));
   notetemplate.content_markers.clear();
   notetemplate.content_texts.clear();
   notetemplate.content_remembers.clear();
   notetemplate.content_tidies.clear();
   notetemplate.content_sizes.clear();
   for (unsigned int i = 0; i < vbox2s.size(); i++) {
-    notetemplate.content_markers.push_back(combobox_get_active_string(combobox_styles[i]));
+    notetemplate.content_markers.push_back(
+        combobox_get_active_string(combobox_styles[i]));
     // Get text, and convert new lines to spaces, as notes don't have newlines.
-    GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_contents[i]));
+    GtkTextBuffer *textbuffer =
+        gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_contents[i]));
     GtkTextIter start;
     gtk_text_buffer_get_start_iter(textbuffer, &start);
     GtkTextIter end;
@@ -923,60 +961,59 @@ void InsertNoteDialog::on_okbutton()
     ustring text = txt;
     g_free(txt); // Postiff: plug memory leak
     replace_text(text, "\n", " ");
-    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_tidies[i]))) {
+    if (gtk_toggle_button_get_active(
+            GTK_TOGGLE_BUTTON(checkbutton_tidies[i]))) {
       tidy_text(text);
     }
     notetemplate.content_texts.push_back(text);
-    notetemplate.content_remembers.push_back(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_contents[i])));
-    notetemplate.content_tidies.push_back(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_tidies[i])));
+    notetemplate.content_remembers.push_back(gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(checkbutton_contents[i])));
+    notetemplate.content_tidies.push_back(
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_tidies[i])));
     gtk_spin_button_update(GTK_SPIN_BUTTON(spinbutton_sizes[i]));
-    gint size = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton_sizes[i]));
+    gint size =
+        gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton_sizes[i]));
     notetemplate.content_sizes.push_back(size);
   }
   switch (mydialogtype) {
-  case indtFootnote:
-    {
-      settings->genconfig.insert_footnote_template_set(combobox_get_active_string(combobox_templates));
-      break;
-    }
-  case indtEndnote:
-    {
-      settings->genconfig.insert_endnote_template_set(combobox_get_active_string(combobox_templates));
-      break;
-    }
-  case indtCrossreference:
-    {
-      settings->genconfig.insert_xref_template_set(combobox_get_active_string(combobox_templates));
-      break;
-    }
+  case indtFootnote: {
+    settings->genconfig.insert_footnote_template_set(
+        combobox_get_active_string(combobox_templates));
+    break;
+  }
+  case indtEndnote: {
+    settings->genconfig.insert_endnote_template_set(
+        combobox_get_active_string(combobox_templates));
+    break;
+  }
+  case indtCrossreference: {
+    settings->genconfig.insert_xref_template_set(
+        combobox_get_active_string(combobox_templates));
+    break;
+  }
   }
   // Get some markers.
   ustring reference_marker;
   switch (mydialogtype) {
-  case indtFootnote:
-    {
-      reference_marker = "fr";
-      break;
-    }
-  case indtEndnote:
-    {
-      reference_marker = "fr";
-      break;
-    }
-  case indtCrossreference:
-    {
-      reference_marker = "xo";
-      break;
-    }
+  case indtFootnote: {
+    reference_marker = "fr";
+    break;
+  }
+  case indtEndnote: {
+    reference_marker = "fr";
+    break;
+  }
+  case indtCrossreference: {
+    reference_marker = "xo";
+    break;
+  }
   }
   // Add numbering.
   if (notetemplate.numbering == 0) {
     rawtext.append("+");
-  }
-  else if (notetemplate.numbering == 1) {
+  } else if (notetemplate.numbering == 1) {
     rawtext.append("-");
-  }
-  else {
+  } else {
     rawtext.append(notetemplate.anchor);
   }
   rawtext.append(" ");
@@ -991,7 +1028,8 @@ void InsertNoteDialog::on_okbutton()
     ustring marker;
     size_t position, length;
     bool b;
-    usfm_search_marker(notetemplate.content_markers[i], marker, position, length, b);
+    usfm_search_marker(notetemplate.content_markers[i], marker, position,
+                       length, b);
     if (!notetemplate.content_texts[i].empty()) {
       rawtext.append(usfm_get_full_opening_marker(marker));
       rawtext.append(trim(notetemplate.content_texts[i]));
@@ -1009,18 +1047,15 @@ void InsertNoteDialog::on_okbutton()
   }
   // Remove last space.
   rawtext = trim(rawtext);
-  DEBUG("Inserting note rawtext="+rawtext)
+  DEBUG("Inserting note rawtext=" + rawtext)
 }
 
-
-void InsertNoteDialog::on_spinbutton_size_value_changed(GtkSpinButton * spinbutton, gpointer user_data)
-{
-  ((InsertNoteDialog *) user_data)->on_spinbutton_size(spinbutton);
+void InsertNoteDialog::on_spinbutton_size_value_changed(
+    GtkSpinButton *spinbutton, gpointer user_data) {
+  ((InsertNoteDialog *)user_data)->on_spinbutton_size(spinbutton);
 }
 
-
-void InsertNoteDialog::on_spinbutton_size(GtkSpinButton * spinbutton)
-{
+void InsertNoteDialog::on_spinbutton_size(GtkSpinButton *spinbutton) {
   // Get the offset of the widget to resize. Bail out if not found.
   int widget_offset = -1;
   for (unsigned int i = 0; i < spinbutton_sizes.size(); i++) {
@@ -1030,32 +1065,31 @@ void InsertNoteDialog::on_spinbutton_size(GtkSpinButton * spinbutton)
   if (widget_offset < 0)
     return;
   // Resize the widget.
-  gtk_widget_set_size_request(scrolledwindow_contents[widget_offset], -1, gtk_spin_button_get_value_as_int(spinbutton));
+  gtk_widget_set_size_request(scrolledwindow_contents[widget_offset], -1,
+                              gtk_spin_button_get_value_as_int(spinbutton));
 }
 
-
-gboolean InsertNoteDialog::on_textview_content_key_press_event(GtkWidget * widget, GdkEventKey * event, gpointer user_data)
+gboolean InsertNoteDialog::on_textview_content_key_press_event(
+    GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 // Handles pressing keys in the content textviews.
 {
-  // Do not allow newlines in the editor, but when pressing Enter, go to the next widget.
+  // Do not allow newlines in the editor, but when pressing Enter, go to the
+  // next widget.
   switch (event->keyval) {
   case GDK_KEY_Return:
   case GDK_KEY_KP_Enter:
-    ((InsertNoteDialog *) user_data)->focus_next_widget(widget);
+    ((InsertNoteDialog *)user_data)->focus_next_widget(widget);
     return true;
   }
-  // Handle other keypresses as usual. 
+  // Handle other keypresses as usual.
   return false;
 }
 
-
-void InsertNoteDialog::set_dynamic_shortcuts()
-{
+void InsertNoteDialog::set_dynamic_shortcuts() {
 
   for (unsigned int i = 0; i < buttons_remove_label.size(); i++) {
     ustring label = "_" + convert_to_string(i) + _(" Remove");
-    gtk_label_set_text_with_mnemonic(GTK_LABEL(buttons_remove_label[i]), label.c_str());
+    gtk_label_set_text_with_mnemonic(GTK_LABEL(buttons_remove_label[i]),
+                                     label.c_str());
   }
 }
-
-

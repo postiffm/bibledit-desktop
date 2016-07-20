@@ -1,67 +1,66 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include "utilities.h"
-#include "export_utils.h"
+#include "export_translation_notes.h"
 #include "bible.h"
+#include "date_time_utils.h"
+#include "export_utils.h"
+#include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "notes_utils.h"
+#include "sqlite_reader.h"
+#include "tiny_utilities.h"
 #include "usfm.h"
 #include "usfmtools.h"
-#include "notes_utils.h"
-#include "date_time_utils.h"
-#include "export_translation_notes.h"
-#include "gwrappers.h"
-#include "gtkwrappers.h"
-#include "tiny_utilities.h"
-#include "sqlite_reader.h"
+#include "utilities.h"
 
+ExportTranslationNotes::ExportTranslationNotes(
+    const ustring &filename, const vector<unsigned int> &ids_to_display,
+    bool export_all)
+    // Exports the notes from the database.
+    /*
+    The exported xml file will look so:
 
-ExportTranslationNotes::ExportTranslationNotes(const ustring & filename, const vector < unsigned int >&ids_to_display, bool export_all)
-// Exports the notes from the database.
-/*
-The exported xml file will look so:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <bibledit-notes version="3">
+      <note>
+        <reference>
+        </reference>
+        <project>
+        </project>
+        <category>
+        </category>
+        <text>
+        </text>
+        <date-created>
+        </date-created>
+        <date-modified>
+        </date-modified>
+        <user>
+        </user>
+      </note>
+    </bibledit-notes>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<bibledit-notes version="3">
-  <note>
-    <reference>
-    </reference>
-    <project>
-    </project>
-    <category>
-    </category>
-    <text>
-    </text>
-    <date-created>
-    </date-created>
-    <date-modified>
-    </date-modified>
-    <user>
-    </user>
-  </note>
-</bibledit-notes>
-
-This is subject to change as bibledit's notes system develops.
-*/
-:progresswindow("Exporting notes", true)
-{
+    This is subject to change as bibledit's notes system develops.
+    */
+    : progresswindow("Exporting notes", true) {
   // Save variables.
   my_export_all = export_all;
 
@@ -78,43 +77,46 @@ This is subject to change as bibledit's notes system develops.
 
     // Connect to index database.
     // Note: The index is not the source of the notes.
-    // This implies that, if the index is not up-to-date, 
+    // This implies that, if the index is not up-to-date,
     // then the export will not be correct.
     error = NULL;
     rc = sqlite3_open(notes_index_filename().c_str(), &db);
     if (rc)
       throw runtime_error(sqlite3_errmsg(db));
     sqlite3_busy_timeout(db, 1000);
-    
+
     // Currently this is the notes table schema:
-    // id integer, reference text, project text, category text, casefolded text, created integer, modified integer
+    // id integer, reference text, project text, category text, casefolded text,
+    // created integer, modified integer
 
     // Get the number of notes.
     SqliteReader sqlitereader(0);
-    rc = sqlite3_exec(db, "select count(*) from notes;", sqlitereader.callback, &sqlitereader, &error);
+    rc = sqlite3_exec(db, "select count(*) from notes;", sqlitereader.callback,
+                      &sqlitereader, &error);
     if (rc != SQLITE_OK) {
       throw runtime_error(error);
     }
     if (!sqlitereader.ustring0.empty()) {
-      notes_count = convert_to_int (sqlitereader.ustring0[0]);
+      notes_count = convert_to_int(sqlitereader.ustring0[0]);
     }
     progresswindow.set_iterate(0, 1, notes_count);
 
     // Exporting everything or a selection?
-    set < gint > ids(ids_to_display.begin(), ids_to_display.end());
+    set<gint> ids(ids_to_display.begin(), ids_to_display.end());
     my_ids = &ids;
 
     // Go through all the notes.
     note_counter = 0;
-    rc = sqlite3_exec(db, "select reference, project, category, casefolded, created, modified from notes;", data_callback, this, &error);
+    rc = sqlite3_exec(db, "select reference, project, category, casefolded, "
+                          "created, modified from notes;",
+                      data_callback, this, &error);
     if (rc != SQLITE_OK) {
       throw runtime_error(error);
     }
     // Closing lines.
     wt.text("</bibledit-notes>\n");
 
-  }
-  catch(exception & ex) {
+  } catch (exception &ex) {
     if (!progresswindow.cancel) {
       gtkw_dialog_error(NULL, ex.what());
       gw_critical(ex.what());
@@ -122,22 +124,17 @@ This is subject to change as bibledit's notes system develops.
   }
 }
 
-
-ExportTranslationNotes::~ExportTranslationNotes()
-{
-  // Close connection.  
+ExportTranslationNotes::~ExportTranslationNotes() {
+  // Close connection.
   sqlite3_close(db);
 }
 
-
-int ExportTranslationNotes::data_callback(void *userdata, int argc, char **argv, char **column_names)
-{
-  return ((ExportTranslationNotes *) userdata)->on_data(argc, argv);
+int ExportTranslationNotes::data_callback(void *userdata, int argc, char **argv,
+                                          char **column_names) {
+  return ((ExportTranslationNotes *)userdata)->on_data(argc, argv);
 }
 
-
-int ExportTranslationNotes::on_data(int argc, char **argv)
-{
+int ExportTranslationNotes::on_data(int argc, char **argv) {
   // Progress information.
   note_counter++;
   progresswindow.iterate();
@@ -200,4 +197,3 @@ int ExportTranslationNotes::on_data(int argc, char **argv)
 
   return 0;
 }
-

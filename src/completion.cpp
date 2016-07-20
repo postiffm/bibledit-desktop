@@ -1,26 +1,26 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "completion.h"
 #include "settings.h"
 
-void completion_setup(GtkWidget * entry, CompletionType completiontype)
+void completion_setup(GtkWidget *entry, CompletionType completiontype)
 // Sets up completion on an entry.
 {
   // Create completion.
@@ -35,7 +35,7 @@ void completion_setup(GtkWidget * entry, CompletionType completiontype)
   GtkListStore *store;
   store = gtk_list_store_new(1, G_TYPE_STRING);
   GtkTreeIter iter;
-  vector < ustring > completiontable;
+  vector<ustring> completiontable;
   switch (completiontype) {
   case cpSearch:
     completiontable = settings->session.completion_search;
@@ -55,7 +55,7 @@ void completion_setup(GtkWidget * entry, CompletionType completiontype)
   gtk_entry_completion_set_text_column(completion, 0);
 }
 
-void completion_finish(GtkWidget * entry, CompletionType completiontype)
+void completion_finish(GtkWidget *entry, CompletionType completiontype)
 // Finalizes completion on an entry.
 {
   // Get the word to add to the completion table.
@@ -64,7 +64,7 @@ void completion_finish(GtkWidget * entry, CompletionType completiontype)
   if (word.length() == 0)
     return;
   // Word already in table? Finish now.
-  vector < ustring > completiontable;
+  vector<ustring> completiontable;
   extern Settings *settings;
   switch (completiontype) {
   case cpSearch:

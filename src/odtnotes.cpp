@@ -1,36 +1,35 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include "utilities.h"
-#include <glib.h>
-#include "constants.h"
 #include "odtnotes.h"
+#include "constants.h"
 #include "date_time_utils.h"
 #include "gwrappers.h"
+#include "libraries.h"
 #include "settings.h"
-#include "usfmtools.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-OdtFootnote::OdtFootnote(const Usfm & usfm)
+OdtFootnote::OdtFootnote(const Usfm &usfm)
 // Stores the properties for all the footnote related styles.
 {
   // Store and initialize variables.
@@ -46,95 +45,104 @@ OdtFootnote::OdtFootnote(const Usfm & usfm)
   for (unsigned int i = 0; i < usfm.styles.size(); i++) {
     if (usfm.styles[i].type == stFootEndNote) {
       // Check subtype.
-      FootEndNoteType footnotetype = (FootEndNoteType) usfm.styles[i].subtype;
+      FootEndNoteType footnotetype = (FootEndNoteType)usfm.styles[i].subtype;
       switch (footnotetype) {
-      case fentFootnote:
-        {
-          // Store data for the markers and the anchor.
-          opening_markers.push_back (usfm_get_full_opening_marker(usfm.styles[i].marker));
-          closing_markers.push_back (usfm_get_full_closing_marker(usfm.styles[i].marker));
-          note_numbering_type = (NoteNumberingType) usfm.styles[i].userint1;
-          note_numbering_restart = (NoteNumberingRestartType) usfm.styles[i].userint2;
-          note_numbering_user_sequence = usfm.styles[i].userstring1;
-          break;
-        }
-      case fentEndnote:
-        {
-          // Endnotes not dealt with here.
-          break;
-        }
-      case fentStandardContent:
-        {
-          // Standard content.
-          if (!standardparagraph)
-            standardparagraph = new XslFoFootnoteParagraph(usfm.styles[i].marker, usfm.styles[i].fontsize, usfm.styles[i].italic, usfm.styles[i].bold, usfm.styles[i].underline, usfm.styles[i].smallcaps, usfm.styles[i].justification, usfm.styles[i].spacebefore, usfm.styles[i].spaceafter, usfm.styles[i].leftmargin, usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent, usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case fentFootnote: {
+        // Store data for the markers and the anchor.
+        opening_markers.push_back(
+            usfm_get_full_opening_marker(usfm.styles[i].marker));
+        closing_markers.push_back(
+            usfm_get_full_closing_marker(usfm.styles[i].marker));
+        note_numbering_type = (NoteNumberingType)usfm.styles[i].userint1;
+        note_numbering_restart =
+            (NoteNumberingRestartType)usfm.styles[i].userint2;
+        note_numbering_user_sequence = usfm.styles[i].userstring1;
+        break;
+      }
+      case fentEndnote: {
+        // Endnotes not dealt with here.
+        break;
+      }
+      case fentStandardContent: {
+        // Standard content.
+        if (!standardparagraph)
+          standardparagraph = new XslFoFootnoteParagraph(
+              usfm.styles[i].marker, usfm.styles[i].fontsize,
+              usfm.styles[i].italic, usfm.styles[i].bold,
+              usfm.styles[i].underline, usfm.styles[i].smallcaps,
+              usfm.styles[i].justification, usfm.styles[i].spacebefore,
+              usfm.styles[i].spaceafter, usfm.styles[i].leftmargin,
+              usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent,
+              usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       case fentContent:
-      case fentContentWithEndmarker:
-        {
-          // Store data for the footnote body.
-          content_marker.push_back(usfm_get_full_opening_marker(usfm.styles[i].marker));
-          content_apocrypha.push_back(usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
-      case fentParagraph:
-        {
-          // Store relevant data for a paragraph marker.
-          if (!extraparagraph)
-            extraparagraph = new XslFoFootnoteParagraph(usfm.styles[i].marker, usfm.styles[i].fontsize, usfm.styles[i].italic, usfm.styles[i].bold, usfm.styles[i].underline, usfm.styles[i].smallcaps, usfm.styles[i].justification, usfm.styles[i].spacebefore, usfm.styles[i].spaceafter, usfm.styles[i].leftmargin, usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent, usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case fentContentWithEndmarker: {
+        // Store data for the footnote body.
+        content_marker.push_back(
+            usfm_get_full_opening_marker(usfm.styles[i].marker));
+        content_apocrypha.push_back(usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
+      case fentParagraph: {
+        // Store relevant data for a paragraph marker.
+        if (!extraparagraph)
+          extraparagraph = new XslFoFootnoteParagraph(
+              usfm.styles[i].marker, usfm.styles[i].fontsize,
+              usfm.styles[i].italic, usfm.styles[i].bold,
+              usfm.styles[i].underline, usfm.styles[i].smallcaps,
+              usfm.styles[i].justification, usfm.styles[i].spacebefore,
+              usfm.styles[i].spaceafter, usfm.styles[i].leftmargin,
+              usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent,
+              usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       }
     }
   }
   // Ensure that both of the paragraph styles are there.
   if (!standardparagraph)
-    standardparagraph = new XslFoFootnoteParagraph("ft", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
+    standardparagraph = new XslFoFootnoteParagraph(
+        "ft", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
   if (!extraparagraph)
-    extraparagraph = new XslFoFootnoteParagraph("fp", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 3, false);
+    extraparagraph = new XslFoFootnoteParagraph(
+        "fp", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 3, false);
   // Create footnote caller object.
-  notecaller = new NoteCaller(note_numbering_type, note_numbering_user_sequence);
+  notecaller =
+      new NoteCaller(note_numbering_type, note_numbering_user_sequence);
 }
 
-
-OdtFootnote::~OdtFootnote()
-{
+OdtFootnote::~OdtFootnote() {
   delete notecaller;
   delete standardparagraph;
   delete extraparagraph;
 }
 
-
-void OdtFootnote::new_book()
-{
+void OdtFootnote::new_book() {
   if (note_numbering_restart == nnrtBook)
     notecaller->reset();
   new_chapter();
 }
 
-
-void OdtFootnote::new_chapter()
-{
+void OdtFootnote::new_chapter() {
   if (note_numbering_restart == nnrtChapter)
     notecaller->reset();
 }
 
-
-void OdtFootnote::transform(ustring & line)
+void OdtFootnote::transform(ustring &line)
 // Replace all footnote related content with corresponding OpenDocument code.
 {
   // Transform all of the possible markers for the note.
   for (unsigned int i = 0; i < opening_markers.size(); i++) {
-    transform2 (line, opening_markers[i], closing_markers[i]);
+    transform2(line, opening_markers[i], closing_markers[i]);
   }
 }
 
-
-void OdtFootnote::transform2 (ustring& line, const ustring& opening_marker, const ustring& closing_marker)
+void OdtFootnote::transform2(ustring &line, const ustring &opening_marker,
+                             const ustring &closing_marker)
 // Replace all footnote related content with corresponding OpenDocument code.
 {
   // Variables.
@@ -153,8 +161,11 @@ void OdtFootnote::transform2 (ustring& line, const ustring& opening_marker, cons
     }
     // Take out this bit of the line, transform it, and insert it again.
     ustring footnote;
-    footnote = line.substr(opening_position + opening_marker.length(), closing_position - opening_position - closing_marker.length());
-    line.erase(opening_position, closing_position - opening_position + closing_marker.length());
+    footnote = line.substr(opening_position + opening_marker.length(),
+                           closing_position - opening_position -
+                               closing_marker.length());
+    line.erase(opening_position,
+               closing_position - opening_position + closing_marker.length());
     if (show) {
       footnote = transform_main_parts(footnote);
       line.insert(opening_position, footnote);
@@ -164,9 +175,7 @@ void OdtFootnote::transform2 (ustring& line, const ustring& opening_marker, cons
   }
 }
 
-
-ustring OdtFootnote::transform_main_parts(const ustring & line)
-{
+ustring OdtFootnote::transform_main_parts(const ustring &line) {
   // Variables.
   ustring odtcode;
   ustring s;
@@ -179,14 +188,15 @@ ustring OdtFootnote::transform_main_parts(const ustring & line)
   replace_text(odtcode, "xx", convert_to_string(note_id));
   note_id++;
 
-  // Extract the footnote caller.    
+  // Extract the footnote caller.
   ustring caller;
   if (footnote.length() > 0) {
     caller = footnote.substr(0, 1);
     caller = trim(caller);
     if (caller == "+") {
       caller = notecaller->get_caller();
-      // if (note_numbering_restart == nnrtPage); See how to work with the various callers.
+      // if (note_numbering_restart == nnrtPage); See how to work with the
+      // various callers.
     } else if (caller == "-") {
       caller.clear();
     }
@@ -202,7 +212,7 @@ ustring OdtFootnote::transform_main_parts(const ustring & line)
   odtcode.append("<text:note-body><text:p text:style-name=\"Footnote\">");
 
   // Divide the footnote into paragraphs, if there are more than one.
-  vector < ustring > paragraphs;
+  vector<ustring> paragraphs;
   size_t pos;
   pos = footnote.find(extraparagraph->marker_open);
   while (pos != string::npos) {
@@ -221,7 +231,9 @@ ustring OdtFootnote::transform_main_parts(const ustring & line)
     else
       paragraph = extraparagraph;
     // Format actual text, and comply with footnote nesting, see USFM standard.
-    paragraphs[i] = usfm_notes_handle_nesting(paragraphs[i], paragraph->marker_open, paragraph->marker_close, note_markers);
+    paragraphs[i] =
+        usfm_notes_handle_nesting(paragraphs[i], paragraph->marker_open,
+                                  paragraph->marker_close, note_markers);
 
     // Insert the paragraph
     odtcode.append(paragraphs[i]);
@@ -234,8 +246,7 @@ ustring OdtFootnote::transform_main_parts(const ustring & line)
   return odtcode;
 }
 
-
-OdtEndnote::OdtEndnote(const Usfm & usfm)
+OdtEndnote::OdtEndnote(const Usfm &usfm)
 // Stores the properties for all the endnote related styles.
 {
   // Store and initialize variables.
@@ -251,85 +262,92 @@ OdtEndnote::OdtEndnote(const Usfm & usfm)
   for (unsigned int i = 0; i < usfm.styles.size(); i++) {
     if (usfm.styles[i].type == stFootEndNote) {
       // Check subtype.
-      FootEndNoteType footnotetype = (FootEndNoteType) usfm.styles[i].subtype;
+      FootEndNoteType footnotetype = (FootEndNoteType)usfm.styles[i].subtype;
       switch (footnotetype) {
-      case fentFootnote:
-        {
-          // Footnotes not dealt with here.
-          break;
-        }
-      case fentEndnote:
-        {
-          // Store data for the markers and the anchor.
-          opening_marker = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          closing_marker = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          // note_numbering_type = (NoteNumberingType) usfm.styles[i].userint1;
-          // note_numbering_restart = (NoteNumberingRestartType) usfm.styles[i].userint2;
-          // note_numbering_user_sequence = usfm.styles[i].userstring1;
-          break;
-        }
-      case fentStandardContent:
-        {
-          // Standard content.
-          if (!standardparagraph)
-            standardparagraph = new XslFoFootnoteParagraph(usfm.styles[i].marker, usfm.styles[i].fontsize, usfm.styles[i].italic, usfm.styles[i].bold, usfm.styles[i].underline, usfm.styles[i].smallcaps, usfm.styles[i].justification, usfm.styles[i].spacebefore, usfm.styles[i].spaceafter, usfm.styles[i].leftmargin, usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent, usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case fentFootnote: {
+        // Footnotes not dealt with here.
+        break;
+      }
+      case fentEndnote: {
+        // Store data for the markers and the anchor.
+        opening_marker = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        closing_marker = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        // note_numbering_type = (NoteNumberingType) usfm.styles[i].userint1;
+        // note_numbering_restart = (NoteNumberingRestartType)
+        // usfm.styles[i].userint2;
+        // note_numbering_user_sequence = usfm.styles[i].userstring1;
+        break;
+      }
+      case fentStandardContent: {
+        // Standard content.
+        if (!standardparagraph)
+          standardparagraph = new XslFoFootnoteParagraph(
+              usfm.styles[i].marker, usfm.styles[i].fontsize,
+              usfm.styles[i].italic, usfm.styles[i].bold,
+              usfm.styles[i].underline, usfm.styles[i].smallcaps,
+              usfm.styles[i].justification, usfm.styles[i].spacebefore,
+              usfm.styles[i].spaceafter, usfm.styles[i].leftmargin,
+              usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent,
+              usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       case fentContent:
-      case fentContentWithEndmarker:
-        {
-          // Store data for the footnote body.
-          content_marker.push_back(usfm_get_full_opening_marker(usfm.styles[i].marker));
-          content_apocrypha.push_back(usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
-      case fentParagraph:
-        {
-          // Store relevant data for a paragraph marker.
-          if (!extraparagraph)
-            extraparagraph = new XslFoFootnoteParagraph(usfm.styles[i].marker, usfm.styles[i].fontsize, usfm.styles[i].italic, usfm.styles[i].bold, usfm.styles[i].underline, usfm.styles[i].smallcaps, usfm.styles[i].justification, usfm.styles[i].spacebefore, usfm.styles[i].spaceafter, usfm.styles[i].leftmargin, usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent, usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case fentContentWithEndmarker: {
+        // Store data for the footnote body.
+        content_marker.push_back(
+            usfm_get_full_opening_marker(usfm.styles[i].marker));
+        content_apocrypha.push_back(usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
+      case fentParagraph: {
+        // Store relevant data for a paragraph marker.
+        if (!extraparagraph)
+          extraparagraph = new XslFoFootnoteParagraph(
+              usfm.styles[i].marker, usfm.styles[i].fontsize,
+              usfm.styles[i].italic, usfm.styles[i].bold,
+              usfm.styles[i].underline, usfm.styles[i].smallcaps,
+              usfm.styles[i].justification, usfm.styles[i].spacebefore,
+              usfm.styles[i].spaceafter, usfm.styles[i].leftmargin,
+              usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent,
+              usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       }
     }
   }
   // Ensure that both of the paragraph styles are there.
   if (!standardparagraph)
-    standardparagraph = new XslFoFootnoteParagraph("ft", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
+    standardparagraph = new XslFoFootnoteParagraph(
+        "ft", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
   if (!extraparagraph)
-    extraparagraph = new XslFoFootnoteParagraph("fp", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 3, false);
+    extraparagraph = new XslFoFootnoteParagraph(
+        "fp", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 3, false);
   // Create footnote caller object.
-  notecaller = new NoteCaller(note_numbering_type, note_numbering_user_sequence);
+  notecaller =
+      new NoteCaller(note_numbering_type, note_numbering_user_sequence);
 }
 
-
-OdtEndnote::~OdtEndnote()
-{
+OdtEndnote::~OdtEndnote() {
   delete notecaller;
   delete standardparagraph;
   delete extraparagraph;
 }
 
-
-void OdtEndnote::new_book()
-{
+void OdtEndnote::new_book() {
   if (note_numbering_restart == nnrtBook)
     notecaller->reset();
   new_chapter();
 }
 
-
-void OdtEndnote::new_chapter()
-{
+void OdtEndnote::new_chapter() {
   if (note_numbering_restart == nnrtChapter)
     notecaller->reset();
 }
 
-
-void OdtEndnote::transform(ustring & line)
+void OdtEndnote::transform(ustring &line)
 // Replace all endnote related content with corresponding OpenDocument code.
 {
   // If no opening marker in stylesheet, bail out.
@@ -352,8 +370,11 @@ void OdtEndnote::transform(ustring & line)
     }
     // Take out this bit of the line, transform it, and insert it again.
     ustring note;
-    note = line.substr(opening_position + opening_marker.length(), closing_position - opening_position - closing_marker.length());
-    line.erase(opening_position, closing_position - opening_position + closing_marker.length());
+    note = line.substr(opening_position + opening_marker.length(),
+                       closing_position - opening_position -
+                           closing_marker.length());
+    line.erase(opening_position,
+               closing_position - opening_position + closing_marker.length());
     if (show) {
       note = transform_main_parts(note);
       line.insert(opening_position, note);
@@ -363,9 +384,7 @@ void OdtEndnote::transform(ustring & line)
   }
 }
 
-
-ustring OdtEndnote::transform_main_parts(const ustring & line)
-{
+ustring OdtEndnote::transform_main_parts(const ustring &line) {
   // Variables.
   ustring odtcode;
   ustring s;
@@ -378,14 +397,15 @@ ustring OdtEndnote::transform_main_parts(const ustring & line)
   replace_text(odtcode, "xx", convert_to_string(note_id));
   note_id++;
 
-  // Extract the footnote caller.    
+  // Extract the footnote caller.
   ustring caller;
   if (endnote.length() > 0) {
     caller = endnote.substr(0, 1);
     caller = trim(caller);
     if (caller == "+") {
       caller = notecaller->get_caller();
-      // if (note_numbering_restart == nnrtPage); See how to work with the various callers.
+      // if (note_numbering_restart == nnrtPage); See how to work with the
+      // various callers.
     } else if (caller == "-") {
       caller.clear();
     }
@@ -401,7 +421,7 @@ ustring OdtEndnote::transform_main_parts(const ustring & line)
   odtcode.append("<text:note-body><text:p text:style-name=\"Endnote\">");
 
   // Divide the footnote into paragraphs, if there are more than one.
-  vector < ustring > paragraphs;
+  vector<ustring> paragraphs;
   size_t pos;
   pos = endnote.find(extraparagraph->marker_open);
   while (pos != string::npos) {
@@ -420,7 +440,9 @@ ustring OdtEndnote::transform_main_parts(const ustring & line)
     else
       paragraph = extraparagraph;
     // Format actual text, and comply with footnote nesting, see USFM standard.
-    paragraphs[i] = usfm_notes_handle_nesting(paragraphs[i], paragraph->marker_open, paragraph->marker_close, note_markers);
+    paragraphs[i] =
+        usfm_notes_handle_nesting(paragraphs[i], paragraph->marker_open,
+                                  paragraph->marker_close, note_markers);
 
     // Insert the paragraph
     odtcode.append(paragraphs[i]);
@@ -433,8 +455,7 @@ ustring OdtEndnote::transform_main_parts(const ustring & line)
   return odtcode;
 }
 
-
-OdtXref::OdtXref(const Usfm & usfm)
+OdtXref::OdtXref(const Usfm &usfm)
 // Stores the properties for all the xref related styles.
 {
   // Store and initialize variables.
@@ -448,69 +469,70 @@ OdtXref::OdtXref(const Usfm & usfm)
   for (unsigned int i = 0; i < usfm.styles.size(); i++) {
     if (usfm.styles[i].type == stCrossreference) {
       // Check subtype.
-      CrossreferenceType xreftype = (CrossreferenceType) usfm.styles[i].subtype;
+      CrossreferenceType xreftype = (CrossreferenceType)usfm.styles[i].subtype;
       switch (xreftype) {
-      case ctCrossreference:
-        {
-          // Store data for the markers and the anchor.
-          opening_marker = usfm_get_full_opening_marker(usfm.styles[i].marker);
-          closing_marker = usfm_get_full_closing_marker(usfm.styles[i].marker);
-          note_numbering_type = (NoteNumberingType) usfm.styles[i].userint1;
-          note_numbering_restart = (NoteNumberingRestartType) usfm.styles[i].userint2;
-          note_numbering_user_sequence = usfm.styles[i].userstring1;
-          break;
-        }
-      case ctStandardContent:
-        {
-          // Standard content.
-          if (!standardparagraph)
-            standardparagraph = new XslFoFootnoteParagraph(usfm.styles[i].marker, usfm.styles[i].fontsize, usfm.styles[i].italic, usfm.styles[i].bold, usfm.styles[i].underline, usfm.styles[i].smallcaps, usfm.styles[i].justification, usfm.styles[i].spacebefore, usfm.styles[i].spaceafter, usfm.styles[i].leftmargin, usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent, usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case ctCrossreference: {
+        // Store data for the markers and the anchor.
+        opening_marker = usfm_get_full_opening_marker(usfm.styles[i].marker);
+        closing_marker = usfm_get_full_closing_marker(usfm.styles[i].marker);
+        note_numbering_type = (NoteNumberingType)usfm.styles[i].userint1;
+        note_numbering_restart =
+            (NoteNumberingRestartType)usfm.styles[i].userint2;
+        note_numbering_user_sequence = usfm.styles[i].userstring1;
+        break;
+      }
+      case ctStandardContent: {
+        // Standard content.
+        if (!standardparagraph)
+          standardparagraph = new XslFoFootnoteParagraph(
+              usfm.styles[i].marker, usfm.styles[i].fontsize,
+              usfm.styles[i].italic, usfm.styles[i].bold,
+              usfm.styles[i].underline, usfm.styles[i].smallcaps,
+              usfm.styles[i].justification, usfm.styles[i].spacebefore,
+              usfm.styles[i].spaceafter, usfm.styles[i].leftmargin,
+              usfm.styles[i].rightmargin, usfm.styles[i].firstlineindent,
+              usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       case ctContent:
-      case ctContentWithEndmarker:
-        {
-          // Store data for the footnote body.
-          content_marker.push_back(usfm_get_full_opening_marker(usfm.styles[i].marker));
-          content_apocrypha.push_back(usfm.styles[i].userbool1);
-          note_markers.insert(usfm.styles[i].marker);
-          break;
-        }
+      case ctContentWithEndmarker: {
+        // Store data for the footnote body.
+        content_marker.push_back(
+            usfm_get_full_opening_marker(usfm.styles[i].marker));
+        content_apocrypha.push_back(usfm.styles[i].userbool1);
+        note_markers.insert(usfm.styles[i].marker);
+        break;
+      }
       }
     }
   }
   // Ensure that the paragraph style is there.
   if (!standardparagraph)
-    standardparagraph = new XslFoFootnoteParagraph("xt", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
+    standardparagraph = new XslFoFootnoteParagraph(
+        "xt", 11, OFF, OFF, OFF, OFF, JUSTIFIED, 0, 0, 3, 0, 0, false);
   // Create caller object.
-  notecaller = new NoteCaller(note_numbering_type, note_numbering_user_sequence);
+  notecaller =
+      new NoteCaller(note_numbering_type, note_numbering_user_sequence);
 }
 
-
-OdtXref::~OdtXref()
-{
+OdtXref::~OdtXref() {
   delete notecaller;
   delete standardparagraph;
 }
 
-
-void OdtXref::new_book()
-{
+void OdtXref::new_book() {
   if (note_numbering_restart == nnrtBook)
     notecaller->reset();
   new_chapter();
 }
 
-
-void OdtXref::new_chapter()
-{
+void OdtXref::new_chapter() {
   if (note_numbering_restart == nnrtChapter)
     notecaller->reset();
 }
 
-
-void OdtXref::transform(ustring & line)
+void OdtXref::transform(ustring &line)
 // Replace all xref related content with corresponding OpenDocument code.
 {
   // If no opening marker in stylesheet, bail out.
@@ -533,8 +555,11 @@ void OdtXref::transform(ustring & line)
     }
     // Take out this bit of the line, transform it, and insert it again.
     ustring footnote;
-    footnote = line.substr(opening_position + opening_marker.length(), closing_position - opening_position - closing_marker.length());
-    line.erase(opening_position, closing_position - opening_position + closing_marker.length());
+    footnote = line.substr(opening_position + opening_marker.length(),
+                           closing_position - opening_position -
+                               closing_marker.length());
+    line.erase(opening_position,
+               closing_position - opening_position + closing_marker.length());
     if (show) {
       footnote = transform_main_parts(footnote);
       line.insert(opening_position, footnote);
@@ -544,9 +569,7 @@ void OdtXref::transform(ustring & line)
   }
 }
 
-
-ustring OdtXref::transform_main_parts(const ustring & line)
-{
+ustring OdtXref::transform_main_parts(const ustring &line) {
   // Variables.
   ustring odtcode;
   ustring s;
@@ -555,18 +578,20 @@ ustring OdtXref::transform_main_parts(const ustring & line)
   ustring footnote(line);
 
   // Add first bit of code.
-  odtcode.append("<text:note text:id=\"xrnxx\" text:note-class=\"crossreference\">");
+  odtcode.append(
+      "<text:note text:id=\"xrnxx\" text:note-class=\"crossreference\">");
   replace_text(odtcode, "xx", convert_to_string(note_id));
   note_id++;
 
-  // Extract the note caller.    
+  // Extract the note caller.
   ustring caller;
   if (footnote.length() > 0) {
     caller = footnote.substr(0, 1);
     caller = trim(caller);
     if (caller == "+") {
       caller = notecaller->get_caller();
-      // if (note_numbering_restart == nnrtPage); See how to work with the various callers.
+      // if (note_numbering_restart == nnrtPage); See how to work with the
+      // various callers.
     } else if (caller == "-") {
       caller.clear();
     }
@@ -584,7 +609,9 @@ ustring OdtXref::transform_main_parts(const ustring & line)
   // Deal with the xref.
   {
     // Format actual text, and comply with footnote nesting, see USFM standard.
-    footnote = usfm_notes_handle_nesting(footnote, standardparagraph->marker_open, standardparagraph->marker_close, note_markers);
+    footnote = usfm_notes_handle_nesting(
+        footnote, standardparagraph->marker_open,
+        standardparagraph->marker_close, note_markers);
 
     // Insert the paragraph
     odtcode.append(footnote);

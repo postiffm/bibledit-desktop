@@ -1,31 +1,32 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include "libraries.h"
 #include "tidy.h"
-#include "utilities.h"
-#include "settings.h"
 #include "books.h"
-#include "unixwrappers.h"
+#include "libraries.h"
+#include "settings.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "utilities.h"
 
-void tidy_pattern(ustring & text, const gchar * pattern, size_t window, const ustring & lookfor, const ustring & replacewith)
+void tidy_pattern(ustring &text, const gchar *pattern, size_t window,
+                  const ustring &lookfor, const ustring &replacewith)
 /*
 This routine replaces "lookfor" with "replacewith" in "text", provided that
 a certain length of text, with length "window" agrees with a certain "pattern".
@@ -45,8 +46,7 @@ a certain length of text, with length "window" agrees with a certain "pattern".
   }
 }
 
-void tidy_text(ustring & text)
-{
+void tidy_text(ustring &text) {
   // No text: bail out.
   if (text.empty())
     return;
@@ -57,15 +57,16 @@ void tidy_text(ustring & text)
   // Handle book translation.
   if (settings->genconfig.tidy_translate_get()) {
     // Retrieve the language into which to translate books.
-    ProjectConfiguration *projectconfig = settings->projectconfig(settings->genconfig.project_get());
+    ProjectConfiguration *projectconfig =
+        settings->projectconfig(settings->genconfig.project_get());
     ustring language = projectconfig->language_get();
     // Get the texts to translate, and the books.
-    vector < ustring > texts = settings->genconfig.tidy_texts_get();
-    vector < int >books = settings->genconfig.tidy_books_get();
+    vector<ustring> texts = settings->genconfig.tidy_texts_get();
+    vector<int> books = settings->genconfig.tidy_books_get();
     if (books.size() == texts.size()) {
       // Handle the | character.
-      vector < ustring > newtexts;
-      vector < ustring > newbooks;
+      vector<ustring> newtexts;
+      vector<ustring> newbooks;
       for (unsigned int i = 0; i < texts.size(); i++) {
         Parse parse(texts[i], false, "|");
         for (unsigned int i2 = 0; i2 < parse.words.size(); i2++) {
@@ -106,7 +107,8 @@ void tidy_text(ustring & text)
       text.append(".");
   }
   // Handle pattern change:
-  // Jer. 10. 12. & 51. 15. - Change the & to a ; in pattern number-dot-(space)-&-(space)-number.
+  // Jer. 10. 12. & 51. 15. - Change the & to a ; in pattern
+  // number-dot-(space)-&-(space)-number.
   if (settings->genconfig.tidy_ampersand_semicolon_get()) {
     tidy_pattern(text, ". & [0-9]", 5, ". &", ";");
   }

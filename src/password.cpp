@@ -1,38 +1,42 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
 #include "password.h"
-#include "settings.h"
 #include "dialogentry.h"
 #include "gtkwrappers.h"
+#include "settings.h"
 #include <glib/gi18n.h>
 
-void password_edit(GtkWidget * window)
+void password_edit(GtkWidget *window)
 // The routine to edit the administrator's password.
 {
   // Get the current administrator's password.
   extern Settings *settings;
   ustring currentpassword = settings->genconfig.administration_password_get();
 
-  // If the password is set, first ask for the current password before proceeding.
+  // If the password is set, first ask for the current password before
+  // proceeding.
   if (!currentpassword.empty()) {
-    EntryDialog dialog(_("Password"), _("Please provide the current password before proceeding"), "");
+    EntryDialog dialog(
+        _("Password"),
+        _("Please provide the current password before proceeding"), "");
     dialog.text_invisible();
     if (dialog.run() != GTK_RESPONSE_OK)
       return;
@@ -45,19 +49,18 @@ void password_edit(GtkWidget * window)
   ustring message;
   if (currentpassword.empty()) {
     message.append(_("The current password is unset"));
-  }
-  else {
+  } else {
     message.append(_("The current password is set"));
   }
   message.append("\n\n");
   if (currentpassword.empty()) {
     message.append("Would you like to set an administrator's password?");
-  }
-  else {
+  } else {
     message.append("Would you like to set another administrator's password?");
   }
 
-  if (gtkw_dialog_question(window, message, GTK_RESPONSE_YES) != GTK_RESPONSE_YES)
+  if (gtkw_dialog_question(window, message, GTK_RESPONSE_YES) !=
+      GTK_RESPONSE_YES)
     return;
 
   // Set another password.
@@ -89,14 +92,13 @@ void password_edit(GtkWidget * window)
   // Give feedback.
   if (password1.empty()) {
     message.append("The password has been erased");
-  }
-  else {
+  } else {
     message.append("The password has been set");
   }
   gtkw_dialog_info(window, message);
 }
 
-bool password_pass(GtkWidget * window)
+bool password_pass(GtkWidget *window)
 // Ask the user for a password.
 // Returns true if the user provides a correct password.
 {
@@ -109,7 +111,8 @@ bool password_pass(GtkWidget * window)
     return true;
 
   // Request the user to provide the password.
-  EntryDialog dialog(_("Password"), _("Provide the administrator's password"), "");
+  EntryDialog dialog(_("Password"), _("Provide the administrator's password"),
+                     "");
   dialog.text_invisible();
   if (dialog.run() != GTK_RESPONSE_OK)
     return false;

@@ -1,28 +1,29 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
 #include "html.h"
-#include "utilities.h"
 #include "tiny_utilities.h"
+#include "utilities.h"
 
-ustring html_remove_code_between_less_than_and_greater_than_signs(const ustring & text)
-{
+ustring
+html_remove_code_between_less_than_and_greater_than_signs(const ustring &text) {
   ustring clean_line(text);
   unsigned int infinite_loop_counter = 0;
   while (true) {
@@ -40,8 +41,7 @@ ustring html_remove_code_between_less_than_and_greater_than_signs(const ustring 
   return clean_line;
 }
 
-ustring html_create_anchor(const ustring & anchor, const ustring & text)
-{
+ustring html_create_anchor(const ustring &anchor, const ustring &text) {
   ustring result;
   result.append("<a name=\"");
   result.append(anchor);
@@ -51,7 +51,7 @@ ustring html_create_anchor(const ustring & anchor, const ustring & text)
   return result;
 }
 
-ustring html_extract_title(const ustring & filename)
+ustring html_extract_title(const ustring &filename)
 // Extracts the title from the file: <title>Page Title</title>
 {
   ustring title;
@@ -72,9 +72,10 @@ ustring html_extract_title(const ustring & filename)
   return title;
 }
 
-void html_entities_to_utf8(ustring & code)
+void html_entities_to_utf8(ustring &code)
 // Change html entities to utf8 code, e.g. &#949; becomes ε.
-// The entities for < and > and & remain because they are supposed to be given like &amp;, etc.
+// The entities for < and > and & remain because they are supposed to be given
+// like &amp;, etc.
 {
   size_t ampersand_pos = 0;
   while (true) {
@@ -107,9 +108,7 @@ void html_entities_to_utf8(ustring & code)
   }
 }
 
-
-int html_hexit(char c)
-{
+int html_hexit(char c) {
   if (c >= '0' && c <= '9')
     return c - '0';
   if (c >= 'a' && c <= 'f')
@@ -118,7 +117,6 @@ int html_hexit(char c)
     return c - 'A' + 10;
   return 0;
 }
-
 
 void html_url_decode(char *buf)
 // Decode string %xx -> char (in place)
@@ -136,12 +134,11 @@ void html_url_decode(char *buf)
 
       if (isxdigit((int)s[0]) && isxdigit((int)s[1])) {
         v = html_hexit(s[0]) * 16 + html_hexit(s[1]);
-        if (v) {                /* do not decode %00 to null char */
+        if (v) { /* do not decode %00 to null char */
           *w = (char)v;
           p = &s[1];
         }
       }
-
     }
 
     if (!v)
@@ -151,5 +148,3 @@ void html_url_decode(char *buf)
   }
   *w = '\0';
 }
-
-

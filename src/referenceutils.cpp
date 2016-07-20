@@ -1,60 +1,56 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include "utilities.h"
 #include "referenceutils.h"
-#include "directories.h"
-#include "constants.h"
-#include "gwrappers.h"
-#include "settings.h"
-#include "books.h"
-#include "unixwrappers.h"
-#include "projectutils.h"
-#include "tiny_utilities.h"
-#include <glib.h>
 #include "bible.h"
+#include "books.h"
+#include "constants.h"
+#include "directories.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "projectutils.h"
+#include "settings.h"
+#include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "utilities.h"
+#include <glib.h>
 
-
-ustring references_hidden_ones_get_filename(const ustring & project)
-{
-  return gw_build_filename(Directories->get_projects(), project, "hidden-references");
+ustring references_hidden_ones_get_filename(const ustring &project) {
+  return gw_build_filename(Directories->get_projects(), project,
+                           "hidden-references");
 }
 
-
-vector < ustring > references_hidden_ones_load(const ustring& project)
+vector<ustring> references_hidden_ones_load(const ustring &project)
 // Loads the references that are hidden in this project.
 {
   ReadText rt(references_hidden_ones_get_filename(project), true, false);
   return rt.lines;
 }
 
-
-void references_hidden_ones_save(const ustring& project, vector < ustring > &references)
+void references_hidden_ones_save(const ustring &project,
+                                 vector<ustring> &references)
 // Saves the references that are hidden in this project.
 {
   write_lines(references_hidden_ones_get_filename(project), references);
 }
 
-
-bool text_contains_reference(const ustring & text)
+bool text_contains_reference(const ustring &text)
 /*
 Finds out whether the text looks like a reference.
 A reference, e.g. Mt.5.5 or Mt.5:5 or John 10:5 follows a certain pattern,
@@ -67,8 +63,7 @@ Patterns:
   return unix_fnmatch("*[0-9][:,.][0-9]*", text);
 }
 
-
-bool text_starts_chapter_verse(const ustring & text)
+bool text_starts_chapter_verse(const ustring &text)
 /*
 Returns true if the text starts with a chapter/verse pair.
 It looks for these patterns:
@@ -87,11 +82,12 @@ It looks for these patterns:
   return false;
 }
 
-
-ReferencesScanner::ReferencesScanner(const ustring & language, int book, const ustring & text)
+ReferencesScanner::ReferencesScanner(const ustring &language, int book,
+                                     const ustring &text)
 /*
-This extracts references from the text. 
-It expects a mix of booknames, abbreviated booknames and chapter and text information.
+This extracts references from the text.
+It expects a mix of booknames, abbreviated booknames and chapter and text
+information.
 
 language: language of the abbreviations
 book: currently opened book
@@ -109,11 +105,12 @@ Provides: vector of Reference objects.
   in_chapter_verse_state = false;
   maximum_book_name_length = 0;
 
-  // Produce a list of all booknames, both full names and abbreviations, 
+  // Produce a list of all booknames, both full names and abbreviations,
   // sorted from longest name to shortest name.
-  // Make a mapping between alle names, full ones and abbreviations, to book ids.
+  // Make a mapping between alle names, full ones and abbreviations, to book
+  // ids.
   {
-    vector < unsigned int >bookids = books_type_to_ids(btUnknown);
+    vector<unsigned int> bookids = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < bookids.size(); i++) {
       ustring bookname;
       bookname = books_id_to_abbreviation(language, bookids[i]);
@@ -127,9 +124,10 @@ Provides: vector of Reference objects.
       all_book_names.push_back(bookname);
       names_or_abbreviations_to_books[bookname] = bookids[i];
     }
-    vector < unsigned int >booklengths;
+    vector<unsigned int> booklengths;
     for (unsigned int i = 0; i < all_book_names.size(); i++) {
-      booklengths.push_back(maximum_book_name_length - all_book_names[i].length());
+      booklengths.push_back(maximum_book_name_length -
+                            all_book_names[i].length());
     }
     quick_sort(booklengths, all_book_names, 0, booklengths.size());
   }
@@ -152,12 +150,18 @@ Provides: vector of Reference objects.
       // the following tokens are scanned: any numeral, a dot (.), a comma (,),
       // a colon (:), or a hyphen (-).
       // If anything else is scanned, the chapter/verse state is left.
-      // And if a book name starts at the scanned token, then the state if left too.
-      if (g_unichar_isdigit(current_unichar_token)) ;
-      else if (current_ustring_token == ".") ;
-      else if (current_ustring_token == ",") ;
-      else if (current_ustring_token == ":") ;
-      else if (current_ustring_token == "-") ;
+      // And if a book name starts at the scanned token, then the state if left
+      // too.
+      if (g_unichar_isdigit(current_unichar_token))
+        ;
+      else if (current_ustring_token == ".")
+        ;
+      else if (current_ustring_token == ",")
+        ;
+      else if (current_ustring_token == ":")
+        ;
+      else if (current_ustring_token == "-")
+        ;
       else
         in_chapter_verse_state = false;
       if (in_chapter_verse_state) {
@@ -175,8 +179,10 @@ Provides: vector of Reference objects.
 
     } else {
 
-      // If we are not in the chapter/verse state, then if a digit is encountered,
-      // and that digit seems to start a chunk of text that seems to start a reference,
+      // If we are not in the chapter/verse state, then if a digit is
+      // encountered,
+      // and that digit seems to start a chunk of text that seems to start a
+      // reference,
       // or if the text just preceding our pointer seems to indicate a book,
       // then we enter the verse/chapter state.
       if (g_unichar_isdigit(current_unichar_token)) {
@@ -190,7 +196,6 @@ Provides: vector of Reference objects.
             in_chapter_verse_state = true;
         }
       }
-
     }
 
     // If the end of the chapter/verse state has been reached, interprete it.
@@ -207,12 +212,10 @@ Provides: vector of Reference objects.
     } else {
       preceding_text.append(current_ustring_token);
     }
-
   }
 }
 
-void ReferencesScanner::interprete()
-{
+void ReferencesScanner::interprete() {
   // Interprete the data to find the book.
   unsigned int book = interprete_book();
   if (book)
@@ -223,17 +226,21 @@ void ReferencesScanner::interprete()
 }
 
 unsigned int ReferencesScanner::interprete_book()
-// This routine finds the book, basing itself upon the data collected by the scanner.
+// This routine finds the book, basing itself upon the data collected by the
+// scanner.
 {
-  // Bail out if there is nothing to interprete. In that case the book remains as is.
+  // Bail out if there is nothing to interprete. In that case the book remains
+  // as is.
   preceding_text = trim(preceding_text);
   if (preceding_text.empty())
     return 0;
 
   // Go through the list of book names we have, and see if the book is there.
-  // Note that these books are sorted from long to short for better book matching.
-  // If this were not done, we might find at times that a text like 3 John 3 was 
-  // found once at "3 John" and once again at "John", the latter of which is incorrect.
+  // Note that these books are sorted from long to short for better book
+  // matching.
+  // If this were not done, we might find at times that a text like 3 John 3 was
+  // found once at "3 John" and once again at "John", the latter of which is
+  // incorrect.
   for (unsigned int i = 0; i < all_book_names.size(); i++) {
     if (all_book_names[i].length() > preceding_text.length())
       continue;
@@ -254,16 +261,16 @@ Some possible texts to interprete:
 
 Text: 10.1
 Interpretation: chapter 10 verse 1.
-  
+
 Text: 10:1
 Interpretation: chapteer 10 verse 1.
-  
+
 Text: 2
 Interpretation: chapter 2
 
 Text:  24.1-4
 Interpretation: chapter 24 verse 1 to 4.
-  
+
 Text: 24.14,15,18
 Interpretation: chapter 24 verse 14, verse 15 and verse 18.
 
@@ -298,16 +305,15 @@ In case of e.g. Genesis 1, take all verses of Genesis 1.
   }
   // Interprete the normal case.
   interprete_verses(bit_before_dot, bit_after_dot);
-
 }
 
-void ReferencesScanner::interprete_single_text(const ustring & text)
-{
+void ReferencesScanner::interprete_single_text(const ustring &text) {
   if (books_id_to_one_chapter(current_book)) {
     interprete_verses("1", text);
   } else {
     extern Settings *settings;
-    vector < ustring > verses = project_get_verses(settings->genconfig.project_get(), current_book, convert_to_int(text));
+    vector<ustring> verses = project_get_verses(
+        settings->genconfig.project_get(), current_book, convert_to_int(text));
     for (unsigned int i = 0; i < verses.size(); i++) {
       Reference reference(current_book, convert_to_int(text), verses[i]);
       references.push_back(reference);
@@ -315,11 +321,12 @@ void ReferencesScanner::interprete_single_text(const ustring & text)
   }
 }
 
-void ReferencesScanner::interprete_verses(const ustring & chapter, const ustring & verse)
-{
-  vector < unsigned int >verses = verse_range_sequence(verse);
+void ReferencesScanner::interprete_verses(const ustring &chapter,
+                                          const ustring &verse) {
+  vector<unsigned int> verses = verse_range_sequence(verse);
   for (unsigned int i = 0; i < verses.size(); i++) {
-    Reference reference(current_book, convert_to_int(chapter), convert_to_string(verses[i]));
+    Reference reference(current_book, convert_to_int(chapter),
+                        convert_to_string(verses[i]));
     references.push_back(reference);
   }
 }

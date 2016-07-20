@@ -1,38 +1,37 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include <glib.h>
 #include "dialogfilters.h"
-#include "help.h"
-#include "shortcuts.h"
-#include "scripts.h"
 #include "combobox.h"
 #include "dialogentry.h"
-#include "gtkwrappers.h"
-#include "gwrappers.h"
 #include "dialogradiobutton.h"
 #include "directories.h"
+#include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "help.h"
+#include "scripts.h"
+#include "shortcuts.h"
 #include "unixwrappers.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-FiltersDialog::FiltersDialog(int dummy)
-{
+FiltersDialog::FiltersDialog(int dummy) {
   rulesbuffer_changed_event_id = 0;
 
   Shortcuts shortcuts(0);
@@ -40,10 +39,11 @@ FiltersDialog::FiltersDialog(int dummy)
   filterdialog = gtk_dialog_new();
   gtk_widget_set_size_request(filterdialog, 640, 640);
   gtk_window_set_title(GTK_WINDOW(filterdialog), _("Filters"));
-  gtk_window_set_position(GTK_WINDOW(filterdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_position(GTK_WINDOW(filterdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(filterdialog), TRUE);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (filterdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(filterdialog));
   gtk_widget_show(dialog_vbox1);
 
   label_rules = gtk_label_new(_("Rules"));
@@ -55,9 +55,12 @@ FiltersDialog::FiltersDialog(int dummy)
 
   scrolledwindow_rules = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow_rules);
-  gtk_box_pack_start(GTK_BOX(dialog_vbox1), scrolledwindow_rules, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_rules), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_rules), GTK_SHADOW_IN);
+  gtk_box_pack_start(GTK_BOX(dialog_vbox1), scrolledwindow_rules, TRUE, TRUE,
+                     0);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_rules),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_rules),
+                                      GTK_SHADOW_IN);
 
   textview_rules = gtk_text_view_new();
   gtk_widget_show(textview_rules);
@@ -80,8 +83,10 @@ FiltersDialog::FiltersDialog(int dummy)
   scrolledwindow_input = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow_input);
   gtk_box_pack_start(GTK_BOX(hbox2), scrolledwindow_input, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_input), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_input), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_input),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_input),
+                                      GTK_SHADOW_IN);
 
   textview_input = gtk_text_view_new();
   gtk_widget_show(textview_input);
@@ -90,7 +95,9 @@ FiltersDialog::FiltersDialog(int dummy)
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label2), textview_input);
 
-  gtk_text_buffer_set_text(gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_input)), _("\\p This is text to try the filter on."), -1);
+  gtk_text_buffer_set_text(
+      gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_input)),
+      _("\\p This is text to try the filter on."), -1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox1);
@@ -121,8 +128,10 @@ FiltersDialog::FiltersDialog(int dummy)
   scrolledwindow_output = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow_output);
   gtk_box_pack_start(GTK_BOX(hbox2), scrolledwindow_output, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_output), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow_output), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow_output),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(
+      GTK_SCROLLED_WINDOW(scrolledwindow_output), GTK_SHADOW_IN);
 
   textview_output = gtk_text_view_new();
   gtk_widget_show(textview_output);
@@ -154,33 +163,43 @@ FiltersDialog::FiltersDialog(int dummy)
 
   shortcuts.stockbutton(button_delete);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(filterdialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(filterdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
-  new InDialogHelp(filterdialog, NULL, &shortcuts, _("menu-preferences/filters"));
+  new InDialogHelp(filterdialog, NULL, &shortcuts,
+                   _("menu-preferences/filters"));
 
   cancelbutton = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(filterdialog), cancelbutton, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(filterdialog), cancelbutton,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton), true);
 
   okbutton = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(filterdialog), okbutton, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(filterdialog), okbutton,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton), true);
 
   shortcuts.stockbutton(cancelbutton);
   shortcuts.stockbutton(okbutton);
   shortcuts.process();
 
-  g_signal_connect((gpointer) button_try, "clicked", G_CALLBACK(on_button_try_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_new, "clicked", G_CALLBACK(on_button_new_clicked), gpointer(this));
-  g_signal_connect((gpointer) combobox_filters, "changed", G_CALLBACK(on_combobox_filters_changed), gpointer(this));
-  g_signal_connect((gpointer) button_delete, "clicked", G_CALLBACK(on_button_delete_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(on_okbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_try, "clicked",
+                   G_CALLBACK(on_button_try_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_new, "clicked",
+                   G_CALLBACK(on_button_new_clicked), gpointer(this));
+  g_signal_connect((gpointer)combobox_filters, "changed",
+                   G_CALLBACK(on_combobox_filters_changed), gpointer(this));
+  g_signal_connect((gpointer)button_delete, "clicked",
+                   G_CALLBACK(on_button_delete_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton, "clicked",
+                   G_CALLBACK(on_okbutton_clicked), gpointer(this));
 
-  g_signal_connect_after((gpointer) rulesbuffer, "changed", G_CALLBACK(on_rulesbuffer_changed), gpointer(this));
+  g_signal_connect_after((gpointer)rulesbuffer, "changed",
+                         G_CALLBACK(on_rulesbuffer_changed), gpointer(this));
 
   gtk_widget_grab_focus(textview_rules);
   gtk_widget_grab_default(okbutton);
@@ -188,19 +207,12 @@ FiltersDialog::FiltersDialog(int dummy)
   load_filters("");
 }
 
-FiltersDialog::~FiltersDialog()
-{
-  gtk_widget_destroy(filterdialog);
-}
+FiltersDialog::~FiltersDialog() { gtk_widget_destroy(filterdialog); }
 
-int FiltersDialog::run()
-{
-  return gtk_dialog_run(GTK_DIALOG(filterdialog));
-}
+int FiltersDialog::run() { return gtk_dialog_run(GTK_DIALOG(filterdialog)); }
 
-void FiltersDialog::load_filters(const ustring & selection)
-{
-  vector < ustring > filters = scripts_get_all();
+void FiltersDialog::load_filters(const ustring &selection) {
+  vector<ustring> filters = scripts_get_all();
   combobox_set_strings(combobox_filters, filters);
   if (!selection.empty())
     combobox_set_string(combobox_filters, selection);
@@ -211,22 +223,23 @@ void FiltersDialog::load_filters(const ustring & selection)
   on_combobox_filters();
 }
 
-void FiltersDialog::on_button_try_clicked(GtkButton * button, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_button_try();
+void FiltersDialog::on_button_try_clicked(GtkButton *button,
+                                          gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_button_try();
 }
 
-void FiltersDialog::on_button_try()
-{
+void FiltersDialog::on_button_try() {
   // Iterators.
   GtkTextIter startiter, enditer;
 
   // Input text.
-  GtkTextBuffer *inputbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_input));
+  GtkTextBuffer *inputbuffer =
+      gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_input));
   gtk_text_buffer_get_start_iter(inputbuffer, &startiter);
   gtk_text_buffer_get_end_iter(inputbuffer, &enditer);
   ustring inputfile = script_temporal_input_file();
-  gchar *txt = gtk_text_buffer_get_text(inputbuffer, &startiter, &enditer, false);
+  gchar *txt =
+      gtk_text_buffer_get_text(inputbuffer, &startiter, &enditer, false);
   g_file_set_contents(inputfile.c_str(), txt, -1, NULL);
   g_free(txt); // Postiff: plug memory leak
 
@@ -238,12 +251,14 @@ void FiltersDialog::on_button_try()
   ustring outputfile = script_temporal_output_file();
 
   // Run filter.
-  ustring error = script_filter(scriptname, straightthrough, inputfile, outputfile);
+  ustring error =
+      script_filter(scriptname, straightthrough, inputfile, outputfile);
 
-  // Show output in textview.  
+  // Show output in textview.
   gchar *outputtext;
   g_file_get_contents(outputfile.c_str(), &outputtext, NULL, NULL);
-  GtkTextBuffer *outputbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_output));
+  GtkTextBuffer *outputbuffer =
+      gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_output));
   if (outputtext) {
     gtk_text_buffer_set_text(outputbuffer, outputtext, -1);
     g_free(outputtext);
@@ -259,21 +274,22 @@ void FiltersDialog::on_button_try()
   if (!compile_errors.empty()) {
     gtk_text_buffer_set_text(outputbuffer, "", -1);
     for (unsigned int i = 0; i < compile_errors.size(); i++) {
-      gtk_text_buffer_insert_at_cursor(outputbuffer, compile_errors[i].c_str(), -1);
+      gtk_text_buffer_insert_at_cursor(outputbuffer, compile_errors[i].c_str(),
+                                       -1);
       gtk_text_buffer_insert_at_cursor(outputbuffer, "\n", -1);
     }
   }
 }
 
-void FiltersDialog::on_button_new_clicked(GtkButton * button, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_button_new();
+void FiltersDialog::on_button_new_clicked(GtkButton *button,
+                                          gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_button_new();
 }
 
-void FiltersDialog::on_button_new()
-{
+void FiltersDialog::on_button_new() {
   // Enter the name of the new script.
-  EntryDialog namedialog(_("New script"), _("Enter the name of the new script"), "");
+  EntryDialog namedialog(_("New script"), _("Enter the name of the new script"),
+                         "");
   if (namedialog.run() != GTK_RESPONSE_OK)
     return;
 
@@ -282,25 +298,28 @@ void FiltersDialog::on_button_new()
     return;
   }
   // Enter the type of the new script.
-  vector < ustring > types;
+  vector<ustring> types;
   for (unsigned int i = 0; i < stEnd; i++)
-    types.push_back(script_get_named_type((ScriptType) i));
-  RadiobuttonDialog typedialog(_("Script type"), _("Select the type of the script"), types, 0, false);
+    types.push_back(script_get_named_type((ScriptType)i));
+  RadiobuttonDialog typedialog(
+      _("Script type"), _("Select the type of the script"), types, 0, false);
   if (typedialog.run() != GTK_RESPONSE_OK)
     return;
 
   // Handle the rest.
-  g_file_set_contents(script_get_path(namedialog.entered_value, (ScriptType) typedialog.selection).c_str(), "", -1, NULL);
+  g_file_set_contents(script_get_path(namedialog.entered_value,
+                                      (ScriptType)typedialog.selection)
+                          .c_str(),
+                      "", -1, NULL);
   load_filters(namedialog.entered_value);
 }
 
-void FiltersDialog::on_combobox_filters_changed(GtkComboBox * combobox, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_combobox_filters();
+void FiltersDialog::on_combobox_filters_changed(GtkComboBox *combobox,
+                                                gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_combobox_filters();
 }
 
-void FiltersDialog::on_combobox_filters()
-{
+void FiltersDialog::on_combobox_filters() {
   // Clear rules buffer.
   gtk_text_buffer_set_text(rulesbuffer, "", -1);
 
@@ -310,7 +329,8 @@ void FiltersDialog::on_combobox_filters()
   // Set the type of the script.
   ScriptType scripttype;
   script_get_path(filter, &scripttype);
-  gtk_label_set_text(GTK_LABEL(label_type), script_get_named_type(scripttype).c_str());
+  gtk_label_set_text(GTK_LABEL(label_type),
+                     script_get_named_type(scripttype).c_str());
 
   // Set sensitivity of widgets.
   bool editable = true;
@@ -334,47 +354,42 @@ void FiltersDialog::on_combobox_filters()
   gtk_text_buffer_set_modified(rulesbuffer, false);
 }
 
-void FiltersDialog::on_button_delete_clicked(GtkButton * button, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_button_delete();
+void FiltersDialog::on_button_delete_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_button_delete();
 }
 
-void FiltersDialog::on_button_delete()
-{
+void FiltersDialog::on_button_delete() {
   ustring filter = combobox_get_active_string(combobox_filters);
   ustring filename = script_get_path(filter, NULL);
   unix_unlink(filename.c_str());
   load_filters("");
 }
 
-void FiltersDialog::on_okbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_okbutton();
+void FiltersDialog::on_okbutton_clicked(GtkButton *button, gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_okbutton();
 }
 
-void FiltersDialog::on_okbutton()
-{
+void FiltersDialog::on_okbutton() {}
+
+void FiltersDialog::on_rulesbuffer_changed(GtkTextBuffer *textbuffer,
+                                           gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_rulesbuffer();
 }
 
-void FiltersDialog::on_rulesbuffer_changed(GtkTextBuffer * textbuffer, gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_rulesbuffer();
-}
-
-void FiltersDialog::on_rulesbuffer()
-{
+void FiltersDialog::on_rulesbuffer() {
   gw_destroy_source(rulesbuffer_changed_event_id);
-  rulesbuffer_changed_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_rulesbuffer_changed_timeout), gpointer(this), NULL);
+  rulesbuffer_changed_event_id = g_timeout_add_full(
+      G_PRIORITY_DEFAULT, 100, GSourceFunc(on_rulesbuffer_changed_timeout),
+      gpointer(this), NULL);
 }
 
-bool FiltersDialog::on_rulesbuffer_changed_timeout(gpointer user_data)
-{
-  ((FiltersDialog *) user_data)->on_rulesbuffer_changed_execute();
+bool FiltersDialog::on_rulesbuffer_changed_timeout(gpointer user_data) {
+  ((FiltersDialog *)user_data)->on_rulesbuffer_changed_execute();
   return false;
 }
 
-void FiltersDialog::on_rulesbuffer_changed_execute()
-{
+void FiltersDialog::on_rulesbuffer_changed_execute() {
   // Bail out if there's no change in the rules buffer.
   if (!gtk_text_buffer_get_modified(rulesbuffer))
     return;
@@ -392,7 +407,8 @@ void FiltersDialog::on_rulesbuffer_changed_execute()
   GtkTextIter startiter, enditer;
   gtk_text_buffer_get_start_iter(rulesbuffer, &startiter);
   gtk_text_buffer_get_end_iter(rulesbuffer, &enditer);
-  gchar *txt = gtk_text_buffer_get_text(rulesbuffer, &startiter, &enditer, false);
+  gchar *txt =
+      gtk_text_buffer_get_text(rulesbuffer, &startiter, &enditer, false);
   g_file_set_contents(scriptfile.c_str(), txt, -1, NULL);
   g_free(txt); // Postiff: plug memory leak
 
@@ -402,7 +418,8 @@ void FiltersDialog::on_rulesbuffer_changed_execute()
     GwSpawn spawn("teckit_compile");
     spawn.workingdirectory(Directories->get_scripts());
     spawn.arg(scriptfile);
-    // To compile UTF-8 source that lacks an encoding signature, the -u flag must be specified on the compiler command line.
+    // To compile UTF-8 source that lacks an encoding signature, the -u flag
+    // must be specified on the compiler command line.
     spawn.arg("-u");
     spawn.run();
     if (spawn.exitstatus != 0) {

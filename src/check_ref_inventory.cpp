@@ -1,32 +1,34 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_ref_inventory.h"
-#include "projectutils.h"
-#include "settings.h"
-#include "utilities.h"
 #include "books.h"
 #include "checks.h"
+#include "projectutils.h"
 #include "referenceutils.h"
+#include "settings.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-CheckReferenceInventory::CheckReferenceInventory(const ustring & project, const vector < unsigned int >&books, bool includetext, bool gui)
+CheckReferenceInventory::CheckReferenceInventory(
+    const ustring &project, const vector<unsigned int> &books, bool includetext,
+    bool gui)
 /*
 It makes an inventory of the references in the project.
 project: project to check.
@@ -41,7 +43,7 @@ gui: show graphical progressbar.
   extern Settings *settings;
   ustring language = settings->projectconfig(project, false)->language_get();
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
   // GUI.
@@ -60,12 +62,14 @@ gui: show graphical progressbar.
       }
     }
     // Check each chapter.
-    vector < unsigned int >chapters = project_get_chapters(project, mybooks[bk]);
+    vector<unsigned int> chapters = project_get_chapters(project, mybooks[bk]);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
       // Check each verse.
-      vector < ustring > verses2 = project_get_verses(project, mybooks[bk], chapters[ch]);
+      vector<ustring> verses2 =
+          project_get_verses(project, mybooks[bk], chapters[ch]);
       for (unsigned int vs = 0; vs < verses2.size(); vs++) {
-        ustring text = project_retrieve_verse(project, mybooks[bk], chapters[ch], verses2[vs]);
+        ustring text = project_retrieve_verse(project, mybooks[bk],
+                                              chapters[ch], verses2[vs]);
         // Check for references the verse has.
         if (text_contains_reference(text)) {
           // Retrieve the references.
@@ -82,10 +86,12 @@ gui: show graphical progressbar.
                 else
                   human_readable_references.append(", ");
               }
-              human_readable_references.append(refscanner.references[i].human_readable(language));
+              human_readable_references.append(
+                  refscanner.references[i].human_readable(language));
               if (includetext) {
                 human_readable_references.append(" ");
-                ustring text = project_retrieve_verse(project, refscanner.references[i]);
+                ustring text =
+                    project_retrieve_verse(project, refscanner.references[i]);
                 if (text.empty())
                   text = "<empty>";
                 human_readable_references.append(text);
@@ -99,8 +105,7 @@ gui: show graphical progressbar.
   }
 }
 
-CheckReferenceInventory::~CheckReferenceInventory()
-{
+CheckReferenceInventory::~CheckReferenceInventory() {
   if (progresswindow)
     delete progresswindow;
 }

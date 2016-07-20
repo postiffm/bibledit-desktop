@@ -1,36 +1,35 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "stylesheet.h"
-#include "utilities.h"
-#include "gwrappers.h"
 #include "directories.h"
-#include "tiny_utilities.h"
-#include <libxml/xmlwriter.h>
-#include <libxml/xmlreader.h>
+#include "gwrappers.h"
 #include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
+#include <libxml/xmlreader.h>
+#include <libxml/xmlwriter.h>
 
-Stylesheet::Stylesheet(const ustring & name_in)
-{
+Stylesheet::Stylesheet(const ustring &name_in) {
   gw_message("Creating Stylesheet called '" + name_in + "'");
-  
+
   // Save the sheet's name.
   name = name_in;
 
@@ -44,137 +43,135 @@ Stylesheet::Stylesheet(const ustring & name_in)
   g_file_get_contents(filename.c_str(), &contents, NULL, NULL);
   if (contents == NULL) {
     gw_critical(_("Failure reading stylesheet ") + filename);
-		return;
+    return;
   }
 
-  // Parse the stylesheet.  
+  // Parse the stylesheet.
   xmlParserInputBufferPtr inputbuffer;
-  inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents), XML_CHAR_ENCODING_NONE);
+  inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents),
+                                              XML_CHAR_ENCODING_NONE);
   ustring value;
   xmlTextReaderPtr reader = xmlNewTextReader(inputbuffer, NULL);
   if (reader) {
-    StyleV2 * style = NULL;
+    StyleV2 *style = NULL;
     while ((xmlTextReaderRead(reader) == 1)) {
       switch (xmlTextReaderNodeType(reader)) {
-      case XML_READER_TYPE_ELEMENT:
-	{
-	  xmlChar *element_name = xmlTextReaderName(reader);
-	  if (!xmlStrcmp(element_name, BAD_CAST "style")) {
-	    char *attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "marker");
-	    if (attribute) {
-	      style = new StyleV2 (0);
-	      style->marker = attribute;
-	      free(attribute);
-	    }
-	  }
-	  free(element_name); element_name = NULL;
-	  break;
-	}
-      case XML_READER_TYPE_TEXT:
-	{
-	  xmlChar *text = xmlTextReaderValue(reader);
-	  if (text) {
-	    value = (gchar *) text;
-	    xmlFree(text);
-	  }	
-	  break;
-	}
-      case XML_READER_TYPE_END_ELEMENT:
-	{
-	  xmlChar *element_name = xmlTextReaderName(reader);
-	  if (style) {
-	    if (!xmlStrcmp(element_name, BAD_CAST "marker"))
-	      style->marker = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "name"))
-	      style->name = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "info"))
-	      style->info = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "type"))
-	      style->type = (StyleType) convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "subtype"))
-	      style->subtype = convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "fontsize"))
-	      style->fontsize = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "italic"))
-	      style->italic = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "bold"))
-	      style->bold = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "underline"))
-	      style->underline = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "smallcaps"))
-	      style->smallcaps = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "superscript"))
-	      style->superscript = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "justification"))
-	      style->justification = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "spacebefore"))
-	      style->spacebefore = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "spaceafter"))
-	      style->spaceafter = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "leftmargin"))
-	      style->leftmargin = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "rightmargin"))
-	      style->rightmargin = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "firstlineindent"))
-	      style->firstlineindent = convert_to_double(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "spancolumns"))
-	      style->spancolumns = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "color"))
-	      style->color = convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "print"))
-	      style->print = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userbool1"))
-	      style->userbool1 = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userbool2"))
-	      style->userbool2 = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userbool3"))
-	      style->userbool3 = convert_to_bool(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userint1"))
-	      style->userint1 = convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userint2"))
-	      style->userint2 = convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userint3"))
-	      style->userint3 = convert_to_int(value);
-	    if (!xmlStrcmp(element_name, BAD_CAST "userstring1"))
-	      style->userstring1 = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "userstring2"))
-	      style->userstring2 = value;
-	    if (!xmlStrcmp(element_name, BAD_CAST "userstring3"))
-	      style->userstring3 = value;
-	  }
-	  value.clear();
-	  if (!xmlStrcmp(element_name, BAD_CAST "style")) {
-	    if (style) {
-	      insert (style);
-	      style = NULL;
-	    }
-	  }
-	  free(element_name); element_name = NULL;
-	  break;
-	}
+      case XML_READER_TYPE_ELEMENT: {
+        xmlChar *element_name = xmlTextReaderName(reader);
+        if (!xmlStrcmp(element_name, BAD_CAST "style")) {
+          char *attribute =
+              (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "marker");
+          if (attribute) {
+            style = new StyleV2(0);
+            style->marker = attribute;
+            free(attribute);
+          }
+        }
+        free(element_name);
+        element_name = NULL;
+        break;
+      }
+      case XML_READER_TYPE_TEXT: {
+        xmlChar *text = xmlTextReaderValue(reader);
+        if (text) {
+          value = (gchar *)text;
+          xmlFree(text);
+        }
+        break;
+      }
+      case XML_READER_TYPE_END_ELEMENT: {
+        xmlChar *element_name = xmlTextReaderName(reader);
+        if (style) {
+          if (!xmlStrcmp(element_name, BAD_CAST "marker"))
+            style->marker = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "name"))
+            style->name = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "info"))
+            style->info = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "type"))
+            style->type = (StyleType)convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "subtype"))
+            style->subtype = convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "fontsize"))
+            style->fontsize = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "italic"))
+            style->italic = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "bold"))
+            style->bold = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "underline"))
+            style->underline = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "smallcaps"))
+            style->smallcaps = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "superscript"))
+            style->superscript = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "justification"))
+            style->justification = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "spacebefore"))
+            style->spacebefore = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "spaceafter"))
+            style->spaceafter = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "leftmargin"))
+            style->leftmargin = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "rightmargin"))
+            style->rightmargin = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "firstlineindent"))
+            style->firstlineindent = convert_to_double(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "spancolumns"))
+            style->spancolumns = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "color"))
+            style->color = convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "print"))
+            style->print = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userbool1"))
+            style->userbool1 = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userbool2"))
+            style->userbool2 = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userbool3"))
+            style->userbool3 = convert_to_bool(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userint1"))
+            style->userint1 = convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userint2"))
+            style->userint2 = convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userint3"))
+            style->userint3 = convert_to_int(value);
+          if (!xmlStrcmp(element_name, BAD_CAST "userstring1"))
+            style->userstring1 = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "userstring2"))
+            style->userstring2 = value;
+          if (!xmlStrcmp(element_name, BAD_CAST "userstring3"))
+            style->userstring3 = value;
+        }
+        value.clear();
+        if (!xmlStrcmp(element_name, BAD_CAST "style")) {
+          if (style) {
+            insert(style);
+            style = NULL;
+          }
+        }
+        free(element_name);
+        element_name = NULL;
+        break;
+      }
       }
     }
   }
 
   // Free memory.
-	if (reader)
-		xmlFreeTextReader(reader);
-	if (inputbuffer)
-		xmlFreeParserInputBuffer(inputbuffer);
-	if (contents)
-		g_free(contents);
+  if (reader)
+    xmlFreeTextReader(reader);
+  if (inputbuffer)
+    xmlFreeParserInputBuffer(inputbuffer);
+  if (contents)
+    g_free(contents);
 }
 
-
-Stylesheet::~Stylesheet()
-{
+Stylesheet::~Stylesheet() {
   for (unsigned int i = 0; i < styles.size(); i++) {
     delete styles[i];
   }
 }
 
-
-void Stylesheet::save ()
+void Stylesheet::save()
 // Saves the stylesheet to its native xml format.
 {
   // If no name is given, we work with the template. It can't be saved.
@@ -191,11 +188,12 @@ void Stylesheet::save ()
   // Get the combined information, and write it to the document.
   for (unsigned int i = 0; i < styles.size(); i++) {
 
-    StyleV2 * style = styles[i];
+    StyleV2 *style = styles[i];
 
     // Open a style for the marker
     xmlTextWriterStartElement(writer, BAD_CAST "style");
-    xmlTextWriterWriteFormatAttribute (writer, BAD_CAST "marker", "%s", style->marker.c_str());
+    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "marker", "%s",
+                                      style->marker.c_str());
 
     // Write values.
 
@@ -203,7 +201,7 @@ void Stylesheet::save ()
       xmlTextWriterStartElement(writer, BAD_CAST "name");
       xmlTextWriterWriteFormatString(writer, "%s", style->name.c_str());
       xmlTextWriterEndElement(writer);
-    }        
+    }
 
     if (!style->info.empty()) {
       xmlTextWriterStartElement(writer, BAD_CAST "info");
@@ -220,7 +218,8 @@ void Stylesheet::save ()
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "fontsize");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->fontsize).c_str());
+    xmlTextWriterWriteFormatString(writer, "%s",
+                                   convert_to_string(style->fontsize).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "italic");
@@ -240,7 +239,8 @@ void Stylesheet::save ()
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "superscript");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->superscript).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->superscript).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "justification");
@@ -248,27 +248,33 @@ void Stylesheet::save ()
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "spacebefore");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->spacebefore).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->spacebefore).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "spaceafter");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->spaceafter).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->spaceafter).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "leftmargin");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->leftmargin).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->leftmargin).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "rightmargin");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->rightmargin).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->rightmargin).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "firstlineindent");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->firstlineindent).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->firstlineindent).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "spancolumns");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->spancolumns).c_str());
+    xmlTextWriterWriteFormatString(
+        writer, "%s", convert_to_string(style->spancolumns).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "color");
@@ -276,19 +282,23 @@ void Stylesheet::save ()
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "print");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->print).c_str());
+    xmlTextWriterWriteFormatString(writer, "%s",
+                                   convert_to_string(style->print).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "userbool1");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->userbool1).c_str());
+    xmlTextWriterWriteFormatString(writer, "%s",
+                                   convert_to_string(style->userbool1).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "userbool2");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->userbool2).c_str());
+    xmlTextWriterWriteFormatString(writer, "%s",
+                                   convert_to_string(style->userbool2).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "userbool3");
-    xmlTextWriterWriteFormatString(writer, "%s", convert_to_string (style->userbool3).c_str());
+    xmlTextWriterWriteFormatString(writer, "%s",
+                                   convert_to_string(style->userbool3).c_str());
     xmlTextWriterEndElement(writer);
 
     xmlTextWriterStartElement(writer, BAD_CAST "userint1");
@@ -322,8 +332,9 @@ void Stylesheet::save ()
   // Close document and write it to disk.
   xmlTextWriterEndDocument(writer);
   xmlTextWriterFlush(writer);
-  ustring filename = stylesheet_xml_filename (name);
-  g_file_set_contents(filename.c_str(), (const gchar *)buffer->content, -1, NULL);
+  ustring filename = stylesheet_xml_filename(name);
+  g_file_set_contents(filename.c_str(), (const gchar *)buffer->content, -1,
+                      NULL);
 
   // Free memory.
   if (writer)
@@ -332,38 +343,35 @@ void Stylesheet::save ()
     xmlBufferFree(buffer);
 }
 
-
-StyleV2 * Stylesheet::style (const ustring& marker)
+StyleV2 *Stylesheet::style(const ustring &marker)
 // This returns the style for "marker" if the marker is in the stylesheet.
 // Else it returns NULL..
 {
-  StyleV2 * style = styles_map[marker];
+  StyleV2 *style = styles_map[marker];
   return style;
 }
 
-
-void Stylesheet::erase (const ustring& marker)
+void Stylesheet::erase(const ustring &marker)
 // Erases the Style for "marker".
 {
-  StyleV2 * style_to_erase = style (marker);
+  StyleV2 *style_to_erase = style(marker);
   if (style_to_erase == NULL)
     return;
-  
-  vector <StyleV2 *> styles2 = styles;
+
+  vector<StyleV2 *> styles2 = styles;
   styles.clear();
   for (unsigned int i = 0; i < styles2.size(); i++) {
     if (styles2[i] != style_to_erase) {
-      styles.push_back (styles2[i]);
+      styles.push_back(styles2[i]);
     }
-  } 
+  }
   delete style_to_erase;
-  styles_map[marker] = NULL;  
+  styles_map[marker] = NULL;
 }
 
-
-void Stylesheet::insert (StyleV2 * style)
+void Stylesheet::insert(StyleV2 *style)
 // Inserts "style" into the stylesheet.
 {
-  styles.push_back (style);
+  styles.push_back(style);
   styles_map[style->marker] = style;
 }

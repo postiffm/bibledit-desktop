@@ -1,48 +1,54 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "windowstyles.h"
-#include "help.h"
-#include "floatingwindow.h"
-#include "tiny_utilities.h"
-#include "utilities.h"
 #include "combobox.h"
-#include "settings.h"
-#include "projectutils.h"
-#include "stylesheetutils.h"
-#include "keyboard.h"
-#include "dialognewstylesheet.h"
-#include "gtkwrappers.h"
-#include "dialogstylesheet.h"
-#include "dialogopenstylesheet.h"
-#include "usfmtools.h"
 #include "dialogentry.h"
-#include "projectutils.h"
+#include "dialognewstylesheet.h"
+#include "dialogopenstylesheet.h"
+#include "dialogstylesheet.h"
+#include "floatingwindow.h"
+#include "gtkwrappers.h"
 #include "gwrappers.h"
+#include "help.h"
+#include "keyboard.h"
+#include "libraries.h"
+#include "projectutils.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "styles.h"
+#include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-WindowStyles::WindowStyles(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, GtkWidget *stl, GtkWidget *stl_menu, GtkWidget *stl_expand_all, GtkWidget *stl_collapse_all, GtkWidget *stl_insert, GtkWidget *stl_edit_mode, GtkWidget *stl_new, GtkWidget *stl_properties, GtkWidget *stl_delete, GtkWidget *stlsheet_switch, GtkWidget *stlsheet_new, GtkWidget *stlsheet_delete, GtkWidget *stlsheet_rename):
-FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
+WindowStyles::WindowStyles(
+    GtkWidget *parent_layout, GtkAccelGroup *accelerator_group, bool startup,
+    GtkWidget *stl, GtkWidget *stl_menu, GtkWidget *stl_expand_all,
+    GtkWidget *stl_collapse_all, GtkWidget *stl_insert,
+    GtkWidget *stl_edit_mode, GtkWidget *stl_new, GtkWidget *stl_properties,
+    GtkWidget *stl_delete, GtkWidget *stlsheet_switch, GtkWidget *stlsheet_new,
+    GtkWidget *stlsheet_delete, GtkWidget *stlsheet_rename)
+    : FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
 // Styles window.
 {
   // Variables.
@@ -73,7 +79,8 @@ FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
   scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow);
   gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   treestore = gtk_tree_store_new(1, G_TYPE_STRING);
 
@@ -82,11 +89,12 @@ FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
   gtk_container_add(GTK_CONTAINER(scrolledwindow), treeview);
   gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), false);
 
-  connect_focus_signals (treeview);
+  connect_focus_signals(treeview);
 
   GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
 
-  treecolumn = gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
+  treecolumn =
+      gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), treecolumn);
 
   treeselect = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
@@ -104,34 +112,63 @@ FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
   delete_stylesheet_handler_id = 0;
   rename_stylesheet_handler_id = 0;
   if (style)
-    styles_menu_handler_id = g_signal_connect((gpointer) style, "activate", G_CALLBACK(on_style_menu_activate), gpointer(this));
+    styles_menu_handler_id =
+        g_signal_connect((gpointer)style, "activate",
+                         G_CALLBACK(on_style_menu_activate), gpointer(this));
   if (style_expand_all)
-    expand_all_handler_id = g_signal_connect((gpointer) style_expand_all, "activate", G_CALLBACK(on_expand_all_activate), gpointer(this));
+    expand_all_handler_id =
+        g_signal_connect((gpointer)style_expand_all, "activate",
+                         G_CALLBACK(on_expand_all_activate), gpointer(this));
   if (style_collapse_all)
-    collapse_all_handler_id = g_signal_connect((gpointer) style_collapse_all, "activate", G_CALLBACK(on_collapse_all_activate), gpointer(this));
+    collapse_all_handler_id =
+        g_signal_connect((gpointer)style_collapse_all, "activate",
+                         G_CALLBACK(on_collapse_all_activate), gpointer(this));
   if (style_new)
-    new_handler_id = g_signal_connect((gpointer) style_new, "activate", G_CALLBACK(on_style_new_activate), gpointer(this));
+    new_handler_id =
+        g_signal_connect((gpointer)style_new, "activate",
+                         G_CALLBACK(on_style_new_activate), gpointer(this));
   if (style_properties)
-    properties_handler_id = g_signal_connect((gpointer) style_properties, "activate", G_CALLBACK(on_style_properties_activate), gpointer(this));
+    properties_handler_id = g_signal_connect(
+        (gpointer)style_properties, "activate",
+        G_CALLBACK(on_style_properties_activate), gpointer(this));
   if (style_delete)
-    delete_handler_id = g_signal_connect((gpointer) style_delete, "activate", G_CALLBACK(on_style_delete_activate), gpointer(this));
+    delete_handler_id =
+        g_signal_connect((gpointer)style_delete, "activate",
+                         G_CALLBACK(on_style_delete_activate), gpointer(this));
   if (style_insert)
-    insert_handler_id = g_signal_connect((gpointer) style_insert, "activate", G_CALLBACK(on_style_insert_activate), gpointer(this));
+    insert_handler_id =
+        g_signal_connect((gpointer)style_insert, "activate",
+                         G_CALLBACK(on_style_insert_activate), gpointer(this));
   if (stylesheet_switch)
-    switch_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_switch, "activate", G_CALLBACK(on_stylesheet_switch_activate), gpointer(this));
+    switch_stylesheet_handler_id = g_signal_connect(
+        (gpointer)stylesheet_switch, "activate",
+        G_CALLBACK(on_stylesheet_switch_activate), gpointer(this));
   if (stylesheet_new)
-    new_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_new, "activate", G_CALLBACK(on_stylesheet_new_activate), gpointer(this));
+    new_stylesheet_handler_id = g_signal_connect(
+        (gpointer)stylesheet_new, "activate",
+        G_CALLBACK(on_stylesheet_new_activate), gpointer(this));
   if (stylesheet_remove)
-    delete_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_remove, "activate", G_CALLBACK(on_stylesheet_delete_activate), gpointer(this));
+    delete_stylesheet_handler_id = g_signal_connect(
+        (gpointer)stylesheet_remove, "activate",
+        G_CALLBACK(on_stylesheet_delete_activate), gpointer(this));
   if (stylesheet_rename)
-    rename_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_rename, "activate", G_CALLBACK(on_stylesheet_rename_activate), gpointer(this));
+    rename_stylesheet_handler_id = g_signal_connect(
+        (gpointer)stylesheet_rename, "activate",
+        G_CALLBACK(on_stylesheet_rename_activate), gpointer(this));
 
-  g_signal_connect((gpointer) treeview, "key_press_event", G_CALLBACK(on_key_press_event), gpointer(this));
-  g_signal_connect((gpointer) treeview, "button_press_event", G_CALLBACK(on_button_press_event), gpointer(this));
-  g_signal_connect((gpointer) treeview, "popup_menu", G_CALLBACK(on_popup_menu), gpointer(this));
-  g_signal_connect((gpointer) treeview, "row_collapsed", G_CALLBACK(on_treeview_styles_row_collapsed), gpointer(this));
-  g_signal_connect((gpointer) treeview, "row_expanded", G_CALLBACK(on_treeview_styles_row_expanded), gpointer(this));
-  g_signal_connect((gpointer) treeview, "row_activated", G_CALLBACK(on_row_activated), gpointer(this));
+  g_signal_connect((gpointer)treeview, "key_press_event",
+                   G_CALLBACK(on_key_press_event), gpointer(this));
+  g_signal_connect((gpointer)treeview, "button_press_event",
+                   G_CALLBACK(on_button_press_event), gpointer(this));
+  g_signal_connect((gpointer)treeview, "popup_menu", G_CALLBACK(on_popup_menu),
+                   gpointer(this));
+  g_signal_connect((gpointer)treeview, "row_collapsed",
+                   G_CALLBACK(on_treeview_styles_row_collapsed),
+                   gpointer(this));
+  g_signal_connect((gpointer)treeview, "row_expanded",
+                   G_CALLBACK(on_treeview_styles_row_expanded), gpointer(this));
+  g_signal_connect((gpointer)treeview, "row_activated",
+                   G_CALLBACK(on_row_activated), gpointer(this));
 
   // Load the expanded states from genconfig. Cater for 20 states.
   // Keep them in memory for higher speed.
@@ -142,15 +179,13 @@ FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
     for (unsigned int i = 0; i < add; i++)
       expanded_states.push_back(false);
   }
-  
+
   // Main focused widget.
   last_focused_widget = treeview;
-  gtk_widget_grab_focus (last_focused_widget);
+  gtk_widget_grab_focus(last_focused_widget);
 }
 
-
-WindowStyles::~WindowStyles()
-{
+WindowStyles::~WindowStyles() {
   // Save the expanded states to the configuration.
   extern Settings *settings;
   settings->genconfig.styles_category_expanded_set(expanded_states);
@@ -160,34 +195,40 @@ WindowStyles::~WindowStyles()
   gtk_widget_destroy(apply_signal);
   gtk_widget_destroy(open_signal);
   gtk_widget_destroy(edited_signal);
-  // Disconnect signals manually as the widgets they are now connected to are not destroyed at this stage.
+  // Disconnect signals manually as the widgets they are now connected to are
+  // not destroyed at this stage.
   if (styles_menu_handler_id)
-    g_signal_handler_disconnect((gpointer) style, styles_menu_handler_id);
+    g_signal_handler_disconnect((gpointer)style, styles_menu_handler_id);
   if (expand_all_handler_id)
-    g_signal_handler_disconnect((gpointer) style_expand_all, expand_all_handler_id);
+    g_signal_handler_disconnect((gpointer)style_expand_all,
+                                expand_all_handler_id);
   if (collapse_all_handler_id)
-    g_signal_handler_disconnect((gpointer) style_collapse_all, collapse_all_handler_id);
+    g_signal_handler_disconnect((gpointer)style_collapse_all,
+                                collapse_all_handler_id);
   if (new_handler_id)
-    g_signal_handler_disconnect((gpointer) style_new, new_handler_id);
+    g_signal_handler_disconnect((gpointer)style_new, new_handler_id);
   if (properties_handler_id)
-    g_signal_handler_disconnect((gpointer) style_properties, properties_handler_id);
+    g_signal_handler_disconnect((gpointer)style_properties,
+                                properties_handler_id);
   if (delete_handler_id)
-    g_signal_handler_disconnect((gpointer) style_delete, delete_handler_id);
+    g_signal_handler_disconnect((gpointer)style_delete, delete_handler_id);
   if (insert_handler_id)
-    g_signal_handler_disconnect((gpointer) style_insert, insert_handler_id);
+    g_signal_handler_disconnect((gpointer)style_insert, insert_handler_id);
   if (switch_stylesheet_handler_id)
-    g_signal_handler_disconnect((gpointer) stylesheet_switch, switch_stylesheet_handler_id);
+    g_signal_handler_disconnect((gpointer)stylesheet_switch,
+                                switch_stylesheet_handler_id);
   if (new_stylesheet_handler_id)
-    g_signal_handler_disconnect((gpointer) stylesheet_new, new_stylesheet_handler_id);
+    g_signal_handler_disconnect((gpointer)stylesheet_new,
+                                new_stylesheet_handler_id);
   if (delete_stylesheet_handler_id)
-    g_signal_handler_disconnect((gpointer) stylesheet_remove, delete_stylesheet_handler_id);
+    g_signal_handler_disconnect((gpointer)stylesheet_remove,
+                                delete_stylesheet_handler_id);
   if (rename_stylesheet_handler_id)
-    g_signal_handler_disconnect((gpointer) stylesheet_rename, rename_stylesheet_handler_id);
+    g_signal_handler_disconnect((gpointer)stylesheet_rename,
+                                rename_stylesheet_handler_id);
 }
 
-
-void WindowStyles::load(const ustring & stylesheet)
-{
+void WindowStyles::load(const ustring &stylesheet) {
   // Only load a new sheet if there's a change.
   if (stylesheet == mystylesheet)
     return;
@@ -199,19 +240,15 @@ void WindowStyles::load(const ustring & stylesheet)
   // The actual loading is done with a delay, to make it easier for Gtk.
   g_timeout_add(500, GSourceFunc(on_load_timeout), gpointer(this));
   // Set the name of the sheet.
-  status1 (mystylesheet);
+  status1(mystylesheet);
 }
 
-
-bool WindowStyles::on_load_timeout(gpointer data)
-{
-  ((WindowStyles *) data)->reload();
+bool WindowStyles::on_load_timeout(gpointer data) {
+  ((WindowStyles *)data)->reload();
   return false;
 }
 
-
-void WindowStyles::reload()
-{
+void WindowStyles::reload() {
   // If no sheet, bail out.
   if (mystylesheet.empty())
     return;
@@ -234,39 +271,38 @@ void WindowStyles::reload()
   load_stylesheet();
 }
 
-
-gboolean WindowStyles::on_key_press_event(GtkWidget * widget, GdkEventKey * event, gpointer user_data)
-{
+gboolean WindowStyles::on_key_press_event(GtkWidget *widget, GdkEventKey *event,
+                                          gpointer user_data) {
   // Pressing Delete deletes the selected style(s).
   if (keyboard_delete_pressed(event)) {
-    ((WindowStyles *) user_data)->on_style_delete();
+    ((WindowStyles *)user_data)->on_style_delete();
   }
   // Pressing Insert creates a new style.
   if (keyboard_insert_pressed(event)) {
-    ((WindowStyles *) user_data)->on_style_new();
+    ((WindowStyles *)user_data)->on_style_new();
   }
   // Collapse or expand a category.
   if (keyboard_left_arrow_pressed(event)) {
-    return ((WindowStyles *) user_data)->styletree_expand_collapse(false);
+    return ((WindowStyles *)user_data)->styletree_expand_collapse(false);
   }
   if (keyboard_right_arrow_pressed(event)) {
-    return ((WindowStyles *) user_data)->styletree_expand_collapse(true);
+    return ((WindowStyles *)user_data)->styletree_expand_collapse(true);
   }
   return FALSE;
 }
 
-
-gboolean WindowStyles::on_button_press_event(GtkWidget * widget, GdkEventButton * event, gpointer user_data)
-{
-  return ((WindowStyles *) user_data)->on_button_press(widget, event);
+gboolean WindowStyles::on_button_press_event(GtkWidget *widget,
+                                             GdkEventButton *event,
+                                             gpointer user_data) {
+  return ((WindowStyles *)user_data)->on_button_press(widget, event);
 }
 
-
-bool WindowStyles::on_button_press(GtkWidget * widget, GdkEventButton * event)
-{
+bool WindowStyles::on_button_press(GtkWidget *widget, GdkEventButton *event) {
   // Double-clicking a style if edit mode is on, edits it.
   if (event->type == GDK_2BUTTON_PRESS) {
-    bool edit_mode = style_edit_mode && gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(style_edit_mode));
+    bool edit_mode =
+        style_edit_mode &&
+        gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(style_edit_mode));
     if (edit_mode) {
       on_style_properties();
       return true;
@@ -280,36 +316,37 @@ bool WindowStyles::on_button_press(GtkWidget * widget, GdkEventButton * event)
   return false;
 }
 
-
-gboolean WindowStyles::on_popup_menu(GtkWidget * widget, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->popup_menu(widget);
+gboolean WindowStyles::on_popup_menu(GtkWidget *widget, gpointer user_data) {
+  ((WindowStyles *)user_data)->popup_menu(widget);
   // Do not call the original handler.
   return true;
 }
 
-
-void WindowStyles::popup_menu(GtkWidget * widget)
+void WindowStyles::popup_menu(GtkWidget *widget)
 // Keyboard popup menu handler.
 {
   show_styles_popup_menu(treeview, NULL);
 }
 
-
-void WindowStyles::on_treeview_styles_row_collapsed(GtkTreeView * treeview, GtkTreeIter * iter, GtkTreePath * path, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_treeview_styles_collapsed_expanded(iter, path, false);
+void WindowStyles::on_treeview_styles_row_collapsed(GtkTreeView *treeview,
+                                                    GtkTreeIter *iter,
+                                                    GtkTreePath *path,
+                                                    gpointer user_data) {
+  ((WindowStyles *)user_data)
+      ->on_treeview_styles_collapsed_expanded(iter, path, false);
 }
 
-
-void WindowStyles::on_treeview_styles_row_expanded(GtkTreeView * treeview, GtkTreeIter * iter, GtkTreePath * path, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_treeview_styles_collapsed_expanded(iter, path, true);
+void WindowStyles::on_treeview_styles_row_expanded(GtkTreeView *treeview,
+                                                   GtkTreeIter *iter,
+                                                   GtkTreePath *path,
+                                                   gpointer user_data) {
+  ((WindowStyles *)user_data)
+      ->on_treeview_styles_collapsed_expanded(iter, path, true);
 }
 
-
-void WindowStyles::on_treeview_styles_collapsed_expanded(GtkTreeIter * iter, GtkTreePath * path, bool expand)
-{
+void WindowStyles::on_treeview_styles_collapsed_expanded(GtkTreeIter *iter,
+                                                         GtkTreePath *path,
+                                                         bool expand) {
   // Get the name of the row that has been affected.
   gchar *str_data;
   gtk_tree_model_get(GTK_TREE_MODEL(treestore), iter, 0, &str_data, -1);
@@ -319,37 +356,31 @@ void WindowStyles::on_treeview_styles_collapsed_expanded(GtkTreeIter * iter, Gtk
   size_t offset = get_expanded_state_offset(row);
   try {
     expanded_states[offset] = expand;
-  }
-  catch(exception & ex) {
+  } catch (exception &ex) {
     gw_critical(ex.what());
   }
 }
 
-
-void WindowStyles::expand_all()
-{
+void WindowStyles::expand_all() {
   gtk_tree_view_expand_all(GTK_TREE_VIEW(treeview));
   // Work around a bug in Gtk2.
   // When this function is called from the menu, the widget does not redraw.
   gtk_widget_queue_draw(treeview);
 }
 
-
-void WindowStyles::collapse_all()
-{
+void WindowStyles::collapse_all() {
   gtk_tree_view_collapse_all(GTK_TREE_VIEW(treeview));
 }
 
-
-void WindowStyles::on_row_activated(GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * column, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->row_activated();
+void WindowStyles::on_row_activated(GtkTreeView *treeview, GtkTreePath *path,
+                                    GtkTreeViewColumn *column,
+                                    gpointer user_data) {
+  ((WindowStyles *)user_data)->row_activated();
 }
 
-
-void WindowStyles::row_activated()
-{
-  bool editmode = style_edit_mode && gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(style_edit_mode));
+void WindowStyles::row_activated() {
+  bool editmode = style_edit_mode && gtk_check_menu_item_get_active(
+                                         GTK_CHECK_MENU_ITEM(style_edit_mode));
   if (editmode) {
     on_style_properties();
   } else {
@@ -357,13 +388,11 @@ void WindowStyles::row_activated()
   }
 }
 
-
 void WindowStyles::insert()
 // Insert a style in the editor.
 {
   gtk_button_clicked(GTK_BUTTON(apply_signal));
 }
-
 
 ustring WindowStyles::get_focus()
 // Return the focused style.
@@ -371,8 +400,7 @@ ustring WindowStyles::get_focus()
   return get_focused_style();
 }
 
-
-void WindowStyles::use(const ustring & marker)
+void WindowStyles::use(const ustring &marker)
 // Adapt GUI to using this style.
 {
   // Update recently used styles.
@@ -385,15 +413,13 @@ void WindowStyles::use(const ustring & marker)
   settings->session.selected_style = complete_style;
 }
 
-
 #define RECENTLY_USED _("Recently Used")
-
 
 void WindowStyles::load_recently_used_styles()
 // Sets the recently used styles in the treeview.
 {
   // Make them complete styles, including their name.
-  vector < ustring > styles;
+  vector<ustring> styles;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     styles.push_back(allrecentmarkers[i] + " " + get_name(allrecentmarkers[i]));
   }
@@ -430,17 +456,15 @@ void WindowStyles::load_recently_used_styles()
     gtk_main_iteration();
 }
 
-
-vector < ustring > WindowStyles::get_focused_regular_styles()
-{
+vector<ustring> WindowStyles::get_focused_regular_styles() {
   // Containers.
-  vector < ustring > focused_strings;
-  vector < bool > recently_used;
-  vector < bool > categories;
+  vector<ustring> focused_strings;
+  vector<bool> recently_used;
+  vector<bool> categories;
   // Get all focused strings.
   get_focused_strings(focused_strings, recently_used, categories);
   // Focused styles.
-  vector < ustring > focused_styles;
+  vector<ustring> focused_styles;
   for (unsigned int i = 0; i < focused_strings.size(); i++) {
     if (!categories[i]) {
       if (!recently_used[i]) {
@@ -452,17 +476,15 @@ vector < ustring > WindowStyles::get_focused_regular_styles()
   return focused_styles;
 }
 
-
-vector < ustring > WindowStyles::get_focused_recently_used_styles()
-{
+vector<ustring> WindowStyles::get_focused_recently_used_styles() {
   // Containers.
-  vector < ustring > focused_strings;
-  vector < bool > recently_used;
-  vector < bool > categories;
+  vector<ustring> focused_strings;
+  vector<bool> recently_used;
+  vector<bool> categories;
   // Get all focused strings.
   get_focused_strings(focused_strings, recently_used, categories);
   // Focused styles.
-  vector < ustring > focused_styles;
+  vector<ustring> focused_styles;
   for (unsigned int i = 0; i < focused_strings.size(); i++) {
     if (!categories[i]) {
       if (recently_used[i]) {
@@ -474,17 +496,15 @@ vector < ustring > WindowStyles::get_focused_recently_used_styles()
   return focused_styles;
 }
 
-
-vector < ustring > WindowStyles::get_focused_categories()
-{
+vector<ustring> WindowStyles::get_focused_categories() {
   // Containers.
-  vector < ustring > focused_strings;
-  vector < bool > recently_used;
-  vector < bool > categories;
+  vector<ustring> focused_strings;
+  vector<bool> recently_used;
+  vector<bool> categories;
   // Get all focused strings.
   get_focused_strings(focused_strings, recently_used, categories);
   // Focused styles.
-  vector < ustring > focused_categories;
+  vector<ustring> focused_categories;
   for (unsigned int i = 0; i < focused_strings.size(); i++) {
     if (categories[i]) {
       focused_categories.push_back(focused_strings[i]);
@@ -493,30 +513,30 @@ vector < ustring > WindowStyles::get_focused_categories()
   return focused_categories;
 }
 
-
 ustring WindowStyles::get_sheet()
 // Returns the object's stylesheet.
 {
   return mystylesheet;
 }
 
-
-void WindowStyles::on_style_menu_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_style_menu();
+void WindowStyles::on_style_menu_activate(GtkMenuItem *menuitem,
+                                          gpointer user_data) {
+  ((WindowStyles *)user_data)->on_style_menu();
 }
 
-
-void WindowStyles::on_style_menu()
-{
+void WindowStyles::on_style_menu() {
   // Some variables to be used to (dis/en)able menu items.
-  vector < ustring > selected_recently_used_styles = get_focused_recently_used_styles();
-  vector < ustring > selected_regular_styles = get_focused_regular_styles();
-  vector < ustring > selected_categories = get_focused_categories();
-  bool editmode = style_edit_mode && gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(style_edit_mode));
+  vector<ustring> selected_recently_used_styles =
+      get_focused_recently_used_styles();
+  vector<ustring> selected_regular_styles = get_focused_regular_styles();
+  vector<ustring> selected_categories = get_focused_categories();
+  bool editmode = style_edit_mode && gtk_check_menu_item_get_active(
+                                         GTK_CHECK_MENU_ITEM(style_edit_mode));
   // Set sensitivity of menu items.
   if (style_insert)
-    gtk_widget_set_sensitive(style_insert, ((selected_recently_used_styles.size() + selected_regular_styles.size()) == 1));
+    gtk_widget_set_sensitive(style_insert,
+                             ((selected_recently_used_styles.size() +
+                               selected_regular_styles.size()) == 1));
   if (style_expand_all)
     gtk_widget_set_sensitive(style_expand_all, !mystylesheet.empty());
   if (style_collapse_all)
@@ -524,30 +544,32 @@ void WindowStyles::on_style_menu()
   if (style_new)
     gtk_widget_set_sensitive(style_new, editmode && !mystylesheet.empty());
   if (style_properties)
-    gtk_widget_set_sensitive(style_properties, editmode && ((selected_recently_used_styles.size() + selected_regular_styles.size()) == 1));
+    gtk_widget_set_sensitive(
+        style_properties, editmode && ((selected_recently_used_styles.size() +
+                                        selected_regular_styles.size()) == 1));
   if (style_delete)
-    gtk_widget_set_sensitive(style_delete, editmode && ((selected_recently_used_styles.size() + selected_regular_styles.size() + selected_categories.size()) > 0));
+    gtk_widget_set_sensitive(
+        style_delete, editmode && ((selected_recently_used_styles.size() +
+                                    selected_regular_styles.size() +
+                                    selected_categories.size()) > 0));
   if (stylesheet_remove)
     gtk_widget_set_sensitive(stylesheet_remove, !mystylesheet.empty());
   if (stylesheet_rename)
     gtk_widget_set_sensitive(stylesheet_rename, !mystylesheet.empty());
 }
 
-
-void WindowStyles::on_expand_all_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->expand_all();
+void WindowStyles::on_expand_all_activate(GtkMenuItem *menuitem,
+                                          gpointer user_data) {
+  ((WindowStyles *)user_data)->expand_all();
 }
 
-
-void WindowStyles::on_collapse_all_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->collapse_all();
+void WindowStyles::on_collapse_all_activate(GtkMenuItem *menuitem,
+                                            gpointer user_data) {
+  ((WindowStyles *)user_data)->collapse_all();
 }
 
-
-void WindowStyles::show_styles_popup_menu(GtkWidget * my_widget, GdkEventButton * event)
-{
+void WindowStyles::show_styles_popup_menu(GtkWidget *my_widget,
+                                          GdkEventButton *event) {
   int button, event_time;
   if (event) {
     button = event->button;
@@ -557,18 +579,16 @@ void WindowStyles::show_styles_popup_menu(GtkWidget * my_widget, GdkEventButton 
     event_time = gtk_get_current_event_time();
   }
   on_style_menu();
-  gtk_menu_popup(GTK_MENU(style_menu), NULL, NULL, NULL, NULL, button, event_time);
+  gtk_menu_popup(GTK_MENU(style_menu), NULL, NULL, NULL, NULL, button,
+                 event_time);
 }
 
-
-void WindowStyles::on_style_new_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_style_new();
+void WindowStyles::on_style_new_activate(GtkMenuItem *menuitem,
+                                         gpointer user_data) {
+  ((WindowStyles *)user_data)->on_style_new();
 }
 
-
-void WindowStyles::on_style_new()
-{
+void WindowStyles::on_style_new() {
   // Do nothing if this widget does not display.
   if (!style_new)
     return;
@@ -591,12 +611,12 @@ void WindowStyles::on_style_new()
   if (input.empty())
     return;
   // Check that the marker does not already exist.
-  vector < ustring > markers = stylesheet_get_markers(mystylesheet, NULL);
+  vector<ustring> markers = stylesheet_get_markers(mystylesheet, NULL);
   for (unsigned int i = 0; i < markers.size(); i++) {
     if (input == markers[i]) {
-      gtkw_dialog_error(NULL, _("This marker already exists in the stylesheet")); {
-      return;
-      }
+      gtkw_dialog_error(NULL,
+                        _("This marker already exists in the stylesheet"));
+      { return; }
     }
   }
   // Create style.
@@ -608,15 +628,12 @@ void WindowStyles::on_style_new()
   focus_string(focus);
 }
 
-
-void WindowStyles::on_style_properties_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_style_properties();
+void WindowStyles::on_style_properties_activate(GtkMenuItem *menuitem,
+                                                gpointer user_data) {
+  ((WindowStyles *)user_data)->on_style_properties();
 }
 
-
-void WindowStyles::on_style_properties()
-{
+void WindowStyles::on_style_properties() {
   // If inactive, bail out.
   if (!style_properties)
     return;
@@ -635,15 +652,12 @@ void WindowStyles::on_style_properties()
   }
 }
 
-
-void WindowStyles::on_style_delete_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_style_delete();
+void WindowStyles::on_style_delete_activate(GtkMenuItem *menuitem,
+                                            gpointer user_data) {
+  ((WindowStyles *)user_data)->on_style_delete();
 }
 
-
-void WindowStyles::on_style_delete()
-{
+void WindowStyles::on_style_delete() {
   // If inactive, bail out.
   if (!style_delete)
     return;
@@ -651,15 +665,16 @@ void WindowStyles::on_style_delete()
   if (!gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(style_edit_mode)))
     return;
   // Get focused items.
-  vector < ustring > focused_recently_used_styles;
-  vector < ustring > focused_regular_styles;
-  vector < ustring > focused_categories;
+  vector<ustring> focused_recently_used_styles;
+  vector<ustring> focused_regular_styles;
+  vector<ustring> focused_categories;
   focused_recently_used_styles = get_focused_recently_used_styles();
   focused_regular_styles = get_focused_regular_styles();
   focused_categories = get_focused_categories();
   // How many items have been selected?
   int selected_count;
-  selected_count = focused_recently_used_styles.size() + focused_regular_styles.size() + focused_categories.size();
+  selected_count = focused_recently_used_styles.size() +
+                   focused_regular_styles.size() + focused_categories.size();
   if (selected_count == 0)
     return;
   // Find the text of the item just before the first focused item.
@@ -677,29 +692,24 @@ void WindowStyles::on_style_delete()
   focus_string(string_before_focus);
 }
 
-
-void WindowStyles::on_style_insert_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->insert();
+void WindowStyles::on_style_insert_activate(GtkMenuItem *menuitem,
+                                            gpointer user_data) {
+  ((WindowStyles *)user_data)->insert();
 }
 
-
-void WindowStyles::stylesheet_open(const ustring & stylesheet)
+void WindowStyles::stylesheet_open(const ustring &stylesheet)
 // Open a stylesheet, initiated by this object.
 {
   load(stylesheet);
   gtk_button_clicked(GTK_BUTTON(open_signal));
 }
 
-
-void WindowStyles::on_stylesheet_new_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_stylesheet_new();
+void WindowStyles::on_stylesheet_new_activate(GtkMenuItem *menuitem,
+                                              gpointer user_data) {
+  ((WindowStyles *)user_data)->on_stylesheet_new();
 }
 
-
-void WindowStyles::on_stylesheet_new()
-{
+void WindowStyles::on_stylesheet_new() {
   // Show dialog. Bail out on Cancel.
   NewStylesheetDialog dialog("");
   if (dialog.run() != GTK_RESPONSE_OK)
@@ -710,34 +720,31 @@ void WindowStyles::on_stylesheet_new()
   stylesheet_open(dialog.name);
 }
 
-
-void WindowStyles::on_stylesheet_delete_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_stylesheet_delete();
+void WindowStyles::on_stylesheet_delete_activate(GtkMenuItem *menuitem,
+                                                 gpointer user_data) {
+  ((WindowStyles *)user_data)->on_stylesheet_delete();
 }
 
-
-void WindowStyles::on_stylesheet_delete()
-{
+void WindowStyles::on_stylesheet_delete() {
   OpenStylesheetDialog dialog(osdtDelete, mystylesheet);
   if (dialog.run() == GTK_RESPONSE_OK) {
-    if (gtkw_dialog_question(NULL, _("Do you really want to delete stylesheet ") + dialog.stylesheet + "?") == GTK_RESPONSE_YES) {
+    if (gtkw_dialog_question(NULL,
+                             _("Do you really want to delete stylesheet ") +
+                                 dialog.stylesheet + "?") == GTK_RESPONSE_YES) {
       stylesheet_delete(dialog.stylesheet);
     }
   }
 }
 
-
-void WindowStyles::on_stylesheet_rename_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_stylesheet_rename();
+void WindowStyles::on_stylesheet_rename_activate(GtkMenuItem *menuitem,
+                                                 gpointer user_data) {
+  ((WindowStyles *)user_data)->on_stylesheet_rename();
 }
 
-
-void WindowStyles::on_stylesheet_rename()
-{
+void WindowStyles::on_stylesheet_rename() {
   // Ask for a new name.
-  EntryDialog dialog(_("Rename stylesheet"), _("Give a new name for this stylesheet"), mystylesheet);
+  EntryDialog dialog(_("Rename stylesheet"),
+                     _("Give a new name for this stylesheet"), mystylesheet);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Check whether the new name does not already exist.
     if (!stylesheet_exists(dialog.entered_value)) {
@@ -753,9 +760,7 @@ void WindowStyles::on_stylesheet_rename()
   }
 }
 
-
-void WindowStyles::on_stylesheet_import()
-{
+void WindowStyles::on_stylesheet_import() {
   ustring filename = gtkw_file_chooser_open(NULL, _("Open stylesheet"), "");
   if (filename.empty())
     return;
@@ -765,41 +770,34 @@ void WindowStyles::on_stylesheet_import()
   }
 }
 
-
-void WindowStyles::export_sheet(const ustring& filename, StylesheetExportFormatType format)
-{
+void WindowStyles::export_sheet(const ustring &filename,
+                                StylesheetExportFormatType format) {
   if (filename.empty())
     return;
   switch (format) {
-    case seftBibledit: 
-    {
-      stylesheet_export_bibledit(mystylesheet, filename);
-      break;
-    }
-    case seftParatext:
-    {
-      stylesheet_export_paratext(mystylesheet, filename);
-      break;
-    }
+  case seftBibledit: {
+    stylesheet_export_bibledit(mystylesheet, filename);
+    break;
+  }
+  case seftParatext: {
+    stylesheet_export_paratext(mystylesheet, filename);
+    break;
+  }
   }
 }
 
-
-void WindowStyles::on_stylesheet_switch_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-  ((WindowStyles *) user_data)->on_stylesheet_switch();
+void WindowStyles::on_stylesheet_switch_activate(GtkMenuItem *menuitem,
+                                                 gpointer user_data) {
+  ((WindowStyles *)user_data)->on_stylesheet_switch();
 }
 
-
-void WindowStyles::on_stylesheet_switch()
-{
+void WindowStyles::on_stylesheet_switch() {
   OpenStylesheetDialog dialog(osdtSwitch, mystylesheet);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Open the sheet.
     stylesheet_open(dialog.stylesheet);
   }
 }
-
 
 bool WindowStyles::styletree_expand_collapse(bool expand)
 // Expands (or collapses) the selected item(s) in the treeview.
@@ -832,21 +830,19 @@ bool WindowStyles::styletree_expand_collapse(bool expand)
   return expanded_collapsed;
 }
 
-
-void WindowStyles::delete_categories(vector < ustring > categories)
-{
+void WindowStyles::delete_categories(vector<ustring> categories) {
   // Get a list of all the markers in our stylesheet.
-  vector < ustring > markers;
+  vector<ustring> markers;
   markers = stylesheet_get_markers(mystylesheet, NULL);
   // Categorize them all.
-  vector < UsfmCategory > usfmcategories;
+  vector<UsfmCategory> usfmcategories;
   usfm_categorize_markers(markers, usfmcategories);
   // Get the human readable form of the category for them all.
-  vector < ustring > ucategories;
+  vector<ustring> ucategories;
   for (unsigned int i = 0; i < usfmcategories.size(); i++) {
     ucategories.push_back(usfm_get_category_name(usfmcategories[i]));
   }
-  // Go through all categories we wish to delete.  
+  // Go through all categories we wish to delete.
   for (unsigned int i = 0; i < categories.size(); i++) {
     if (categories[i] == RECENTLY_USED) {
       // If it's the recently used category, clear it.
@@ -862,15 +858,14 @@ void WindowStyles::delete_categories(vector < ustring > categories)
   }
 }
 
-
 ustring WindowStyles::get_string_before_focus()
 // This returns the visible text just before the first focused item.
 {
   // Variable.
   ustring returnvalue;
   // Get all focused strings. If none, do nothing.
-  vector < ustring > focused_strings;
-  vector < bool > dummy1, dummy2;
+  vector<ustring> focused_strings;
+  vector<bool> dummy1, dummy2;
   get_focused_strings(focused_strings, dummy1, dummy2);
   if (!focused_strings.empty()) {
     // Get the model
@@ -896,7 +891,8 @@ ustring WindowStyles::get_string_before_focus()
       // See whether the row is expanded.
       GtkTreePath *path;
       path = gtk_tree_model_get_path(model, &iter);
-      bool row_expanded = gtk_tree_view_row_expanded(GTK_TREE_VIEW(treeview), path);
+      bool row_expanded =
+          gtk_tree_view_row_expanded(GTK_TREE_VIEW(treeview), path);
       gtk_tree_path_free(path);
       // If row expanded, walk through the children.
       if (row_expanded) {
@@ -920,17 +916,15 @@ ustring WindowStyles::get_string_before_focus()
   return returnvalue;
 }
 
-
-ustring WindowStyles::get_focused_style()
-{
+ustring WindowStyles::get_focused_style() {
   // Containers.
-  vector < ustring > focused_strings;
-  vector < bool > recently_used;
-  vector < bool > categories;
+  vector<ustring> focused_strings;
+  vector<bool> recently_used;
+  vector<bool> categories;
   // Get all focused strings.
   get_focused_strings(focused_strings, recently_used, categories);
   // Focused styles.
-  vector < ustring > focused_styles;
+  vector<ustring> focused_styles;
   for (unsigned int i = 0; i < focused_strings.size(); i++) {
     if (!categories[i])
       focused_styles.push_back(focused_strings[i]);
@@ -945,8 +939,7 @@ ustring WindowStyles::get_focused_style()
   return focused_style;
 }
 
-
-void WindowStyles::focus_string(const ustring & string)
+void WindowStyles::focus_string(const ustring &string)
 // Focuses "string" in the treeview.
 {
   // Get the model
@@ -993,9 +986,7 @@ void WindowStyles::focus_string(const ustring & string)
     gtk_main_iteration();
 }
 
-
-void WindowStyles::focus_iter(GtkTreeIter * iter, bool expand)
-{
+void WindowStyles::focus_iter(GtkTreeIter *iter, bool expand) {
   GtkTreeModel *model = GTK_TREE_MODEL(treestore);
   gtk_tree_selection_select_iter(treeselect, iter);
   GtkTreePath *path = gtk_tree_model_get_path(model, iter);
@@ -1008,84 +999,62 @@ void WindowStyles::focus_iter(GtkTreeIter * iter, bool expand)
     gtk_main_iteration();
 }
 
-
-size_t WindowStyles::get_expanded_state_offset(const ustring & row)
-{
+size_t WindowStyles::get_expanded_state_offset(const ustring &row) {
   // MAP: changed from if..if..if  to  if..else if..else if...
   // Next improvement: make O(1) lookup.
-  size_t offset = 0;            // Default: recently used.
+  size_t offset = 0; // Default: recently used.
   if (row == usfm_get_category_name(ucIdentificationInformation)) {
     offset = 1;
-  }
-  else if (row == usfm_get_category_name(ucIntroductionTitlesHeadings)) {
+  } else if (row == usfm_get_category_name(ucIntroductionTitlesHeadings)) {
     offset = 2;
-  }
-  else if (row == usfm_get_category_name(ucIntroductionParagraphsPoetry)) {
+  } else if (row == usfm_get_category_name(ucIntroductionParagraphsPoetry)) {
     offset = 3;
-  }
-  else if (row == usfm_get_category_name(ucIntroductionOtherElements)) {
+  } else if (row == usfm_get_category_name(ucIntroductionOtherElements)) {
     offset = 4;
-  }
-  else if (row == usfm_get_category_name(ucTitles)) {
+  } else if (row == usfm_get_category_name(ucTitles)) {
     offset = 5;
-  }
-  else if (row == usfm_get_category_name(ucHeadings)) {
+  } else if (row == usfm_get_category_name(ucHeadings)) {
     offset = 6;
-  }
-  else if (row == usfm_get_category_name(ucChaptersAndVerses)) {
+  } else if (row == usfm_get_category_name(ucChaptersAndVerses)) {
     offset = 7;
-  }
-  else if (row == usfm_get_category_name(ucParagraphs)) {
+  } else if (row == usfm_get_category_name(ucParagraphs)) {
     offset = 8;
-  }
-  else if (row == usfm_get_category_name(ucLists)) {
+  } else if (row == usfm_get_category_name(ucLists)) {
     offset = 9;
-  }
-  else if (row == usfm_get_category_name(ucPoetryElements)) {
+  } else if (row == usfm_get_category_name(ucPoetryElements)) {
     offset = 10;
-  }
-  else if (row == usfm_get_category_name(ucTableElements)) {
+  } else if (row == usfm_get_category_name(ucTableElements)) {
     offset = 11;
-  }
-  else if (row == usfm_get_category_name(ucFootnotes)) {
+  } else if (row == usfm_get_category_name(ucFootnotes)) {
     offset = 12;
-  }
-  else if (row == usfm_get_category_name(ucCrossReferences)) {
+  } else if (row == usfm_get_category_name(ucCrossReferences)) {
     offset = 13;
-  }
-  else if (row == usfm_get_category_name(ucExtendedStudyNotes)) {
+  } else if (row == usfm_get_category_name(ucExtendedStudyNotes)) {
     offset = 14;
-  }
-  else if (row == usfm_get_category_name(ucSpecialText)) {
+  } else if (row == usfm_get_category_name(ucSpecialText)) {
     offset = 15;
-  }
-  else if (row == usfm_get_category_name(ucCharacterStyles)) {
+  } else if (row == usfm_get_category_name(ucCharacterStyles)) {
     offset = 16;
-  }
-  else if (row == usfm_get_category_name(ucSpacingsAndBreaks)) {
+  } else if (row == usfm_get_category_name(ucSpacingsAndBreaks)) {
     offset = 17;
-  }
-  else if (row == usfm_get_category_name(ucSpecialFeatures)) {
+  } else if (row == usfm_get_category_name(ucSpecialFeatures)) {
     offset = 18;
-  }
-  else if (row == usfm_get_category_name(ucPeripheralMaterials)) {
+  } else if (row == usfm_get_category_name(ucPeripheralMaterials)) {
     offset = 19;
-  }
-  else if (row == usfm_get_category_name(ucNonstandardStyles)) {
+  } else if (row == usfm_get_category_name(ucNonstandardStyles)) {
     offset = 20;
   }
 
   return offset;
 }
 
-
-void WindowStyles::use_style(const ustring & style)
+void WindowStyles::use_style(const ustring &style)
 // "Uses" a style, and so ranks it at the top of the recently used styles,
 // and updates both the store and the configuration.
 {
-  // Increase the usage count of this style. 
+  // Increase the usage count of this style.
   // Add it to list of styles used if it is not yet in.
-  set < ustring > styles_in(allrecentmarkers.begin(), allrecentmarkers.end());
+  set<ustring> styles_in(allrecentmarkers.begin(), allrecentmarkers.end());
   if (styles_in.find(style) == styles_in.end()) {
     usagecounters[style] = 0;
     allrecentmarkers.push_back(style);
@@ -1097,7 +1066,7 @@ void WindowStyles::use_style(const ustring & style)
   while (allrecentmarkers.size() > 30)
     allrecentmarkers.erase(allrecentmarkers.end());
   // Make them complete styles.
-  vector < ustring > styles;
+  vector<ustring> styles;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     styles.push_back(allrecentmarkers[i] + " " + get_name(allrecentmarkers[i]));
   }
@@ -1132,19 +1101,15 @@ void WindowStyles::use_style(const ustring & style)
   }
 }
 
-
-void WindowStyles::clear_recently_used_styles()
-{
-  vector < ustring > styles;
-  vector < unsigned int >count;
+void WindowStyles::clear_recently_used_styles() {
+  vector<ustring> styles;
+  vector<unsigned int> count;
   stylesheet_set_recently_used(mystylesheet, styles, count);
 }
 
-
-void WindowStyles::clear_recently_used_style(const ustring & style)
-{
+void WindowStyles::clear_recently_used_style(const ustring &style) {
   // Remove the style.
-  vector < ustring > styles;
+  vector<ustring> styles;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     if (allrecentmarkers[i] != style) {
       styles.push_back(allrecentmarkers[i]);
@@ -1155,18 +1120,17 @@ void WindowStyles::clear_recently_used_style(const ustring & style)
   store_recently_used_data();
 }
 
-
 void WindowStyles::load_stylesheet()
 // Load a whole stylesheet.
 {
-  vector < ustring > markers;
-  vector < ustring > names0;
+  vector<ustring> markers;
+  vector<ustring> names0;
   markers = stylesheet_get_markers(mystylesheet, &names0);
-  map < ustring, ustring > names;
+  map<ustring, ustring> names;
   for (unsigned int i = 0; i < markers.size(); i++) {
     names[markers[i]] = names0[i];
   }
-  vector < UsfmCategory > categories;
+  vector<UsfmCategory> categories;
   usfm_categorize_markers(markers, categories);
   UsfmCategory category = ucIdentificationInformation;
   bool insert_category = true;
@@ -1209,9 +1173,9 @@ void WindowStyles::load_stylesheet()
   }
 }
 
-
-void WindowStyles::get_focused_strings(vector < ustring > &focused_strings, vector < bool > &recently_used, vector < bool > &categories)
-{
+void WindowStyles::get_focused_strings(vector<ustring> &focused_strings,
+                                       vector<bool> &recently_used,
+                                       vector<bool> &categories) {
   // Get the model
   GtkTreeModel *model = GTK_TREE_MODEL(treestore);
   // Get the selected paths.
@@ -1220,7 +1184,7 @@ void WindowStyles::get_focused_strings(vector < ustring > &focused_strings, vect
   // Walk through all selected ones.
   while (sellist) {
     // Get the path.
-    GtkTreePath *path = (GtkTreePath *) sellist->data;
+    GtkTreePath *path = (GtkTreePath *)sellist->data;
     // Get iterator to the style.
     GtkTreeIter iter;
     gtk_tree_model_get_iter(model, &iter, path);
@@ -1230,7 +1194,7 @@ void WindowStyles::get_focused_strings(vector < ustring > &focused_strings, vect
     ustring data = str_data;
     // Store the style.
     focused_strings.push_back(data);
-    // Free memory.    
+    // Free memory.
     g_free(str_data);
     // See whether we're in the recently used styles or elsewhere.
     bool recently_used_style = false;
@@ -1255,8 +1219,7 @@ void WindowStyles::get_focused_strings(vector < ustring > &focused_strings, vect
   g_list_free(sellist);
 }
 
-
-bool WindowStyles::get_expanded_state(const ustring & row)
+bool WindowStyles::get_expanded_state(const ustring &row)
 // Taking the string in "row", this returns the expanded state.
 {
   // Look for the categorised rows, and if found return the state.
@@ -1267,8 +1230,7 @@ bool WindowStyles::get_expanded_state(const ustring & row)
   return state;
 }
 
-
-ustring WindowStyles::get_name(const ustring & marker)
+ustring WindowStyles::get_name(const ustring &marker)
 // Returns the name of the marker.
 {
   extern Styles *styles;
@@ -1279,11 +1241,10 @@ ustring WindowStyles::get_name(const ustring & marker)
   return _("Unknown");
 }
 
-
 void WindowStyles::retrieve_recently_used_data()
 // Retrieves the recently used styles and usage counts from disk.
 {
-  vector < unsigned int >count;
+  vector<unsigned int> count;
   stylesheet_get_recently_used(mystylesheet, allrecentmarkers, count);
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     usagecounters[allrecentmarkers[i]] = count[i];
@@ -1291,24 +1252,23 @@ void WindowStyles::retrieve_recently_used_data()
   process_recently_used_data();
 }
 
-
 void WindowStyles::process_recently_used_data()
 // Do some processing on the data of the recently used styles.
 {
   // Sort them on usage count. Most used first.
-  vector < unsigned int >count;
+  vector<unsigned int> count;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     count.push_back(G_MAXINT - usagecounters[allrecentmarkers[i]]);
   }
   quick_sort(count, allrecentmarkers, 0, allrecentmarkers.size());
   // Take out the ones that are not in the stylesheet.
-  set < ustring > styles2;
+  set<ustring> styles2;
   extern Styles *styles;
   Usfm *usfm = styles->usfm(mystylesheet);
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
     styles2.insert(usfm->styles[i].marker);
   }
-  vector < ustring > existing_ones;
+  vector<ustring> existing_ones;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     if (styles2.find(allrecentmarkers[i]) != styles2.end())
       existing_ones.push_back(allrecentmarkers[i]);
@@ -1316,11 +1276,10 @@ void WindowStyles::process_recently_used_data()
   allrecentmarkers = existing_ones;
 }
 
-
 void WindowStyles::store_recently_used_data()
 // Stores the recently used styles and usage count to disk.
 {
-  vector < unsigned int >count;
+  vector<unsigned int> count;
   for (unsigned int i = 0; i < allrecentmarkers.size(); i++) {
     count.push_back(usagecounters[allrecentmarkers[i]]);
   }

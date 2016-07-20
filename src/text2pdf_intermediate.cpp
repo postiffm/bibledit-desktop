@@ -1,27 +1,29 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
 #include "text2pdf_intermediate.h"
 #include "tiny_utilities.h"
 #include "ustring.h"
 
-bool text2pdf_intermediary_1_double(vector < ustring > *lines, const ustring & command, double parameter)
+bool text2pdf_intermediary_1_double(vector<ustring> *lines,
+                                    const ustring &command, double parameter)
 // Write intermediary text.
 {
   if (!lines)
@@ -31,7 +33,8 @@ bool text2pdf_intermediary_1_double(vector < ustring > *lines, const ustring & c
   return true;
 }
 
-void text2pdf_intermediary_1_double_get(const vector < ustring > &input, double &parameter)
+void text2pdf_intermediary_1_double_get(const vector<ustring> &input,
+                                        double &parameter)
 // Retrieve intermediary text
 {
   parameter = 0;
@@ -39,17 +42,21 @@ void text2pdf_intermediary_1_double_get(const vector < ustring > &input, double 
     parameter = convert_to_double(input[0]);
 }
 
-bool text2pdf_intermediary_2_double(vector < ustring > *lines, const ustring & command, double parameter1, double parameter2)
+bool text2pdf_intermediary_2_double(vector<ustring> *lines,
+                                    const ustring &command, double parameter1,
+                                    double parameter2)
 // Write intermediary text.
 {
   if (!lines)
     return false;
-  ustring text = command + "|" + convert_to_string(parameter1) + "|" + convert_to_string(parameter2);
+  ustring text = command + "|" + convert_to_string(parameter1) + "|" +
+                 convert_to_string(parameter2);
   lines->push_back(text);
   return true;
 }
 
-void text2pdf_intermediary_2_double_get(const vector < ustring > &input, double &parameter1, double &parameter2)
+void text2pdf_intermediary_2_double_get(const vector<ustring> &input,
+                                        double &parameter1, double &parameter2)
 // Retrieve intermediary text
 {
   parameter1 = 0;
@@ -60,17 +67,25 @@ void text2pdf_intermediary_2_double_get(const vector < ustring > &input, double 
     parameter2 = convert_to_double(input[1]);
 }
 
-bool text2pdf_intermediary_4_double(vector < ustring > *lines, const ustring & command, double parameter1, double parameter2, double parameter3, double parameter4)
+bool text2pdf_intermediary_4_double(vector<ustring> *lines,
+                                    const ustring &command, double parameter1,
+                                    double parameter2, double parameter3,
+                                    double parameter4)
 // Write intermediary text.
 {
   if (!lines)
     return false;
-  ustring text = command + "|" + convert_to_string(parameter1) + "|" + convert_to_string(parameter2) + "|" + convert_to_string(parameter3) + "|" + convert_to_string(parameter4);
+  ustring text = command + "|" + convert_to_string(parameter1) + "|" +
+                 convert_to_string(parameter2) + "|" +
+                 convert_to_string(parameter3) + "|" +
+                 convert_to_string(parameter4);
   lines->push_back(text);
   return true;
 }
 
-void text2pdf_intermediary_4_double_get(const vector < ustring > &input, double &parameter1, double &parameter2, double &parameter3, double &parameter4)
+void text2pdf_intermediary_4_double_get(const vector<ustring> &input,
+                                        double &parameter1, double &parameter2,
+                                        double &parameter3, double &parameter4)
 // Retrieve intermediary text
 {
   parameter1 = 0;
@@ -87,7 +102,7 @@ void text2pdf_intermediary_4_double_get(const vector < ustring > &input, double 
     parameter4 = convert_to_double(input[3]);
 }
 
-bool text2pdf_intermediary_void(vector < ustring > *lines, const ustring & command)
+bool text2pdf_intermediary_void(vector<ustring> *lines, const ustring &command)
 // Write intermediary text.
 {
   if (!lines)
@@ -96,7 +111,8 @@ bool text2pdf_intermediary_void(vector < ustring > *lines, const ustring & comma
   return true;
 }
 
-bool text2pdf_intermediary_1_bool(vector < ustring > *lines, const ustring & command, bool parameter)
+bool text2pdf_intermediary_1_bool(vector<ustring> *lines,
+                                  const ustring &command, bool parameter)
 // Write intermediary text.
 {
   if (!lines)
@@ -106,7 +122,8 @@ bool text2pdf_intermediary_1_bool(vector < ustring > *lines, const ustring & com
   return true;
 }
 
-void text2pdf_intermediary_1_bool_get(const vector < ustring > &input, bool & parameter)
+void text2pdf_intermediary_1_bool_get(const vector<ustring> &input,
+                                      bool &parameter)
 // Retrieve intermediary text
 {
   parameter = false;
@@ -114,7 +131,8 @@ void text2pdf_intermediary_1_bool_get(const vector < ustring > &input, bool & pa
     parameter = convert_to_bool(input[0]);
 }
 
-bool text2pdf_intermediary_1_int(vector < ustring > *lines, const ustring & command, int parameter)
+bool text2pdf_intermediary_1_int(vector<ustring> *lines, const ustring &command,
+                                 int parameter)
 // Write intermediary text.
 {
   if (!lines)
@@ -124,7 +142,8 @@ bool text2pdf_intermediary_1_int(vector < ustring > *lines, const ustring & comm
   return true;
 }
 
-void text2pdf_intermediary_1_int_get(const vector < ustring > &input, int &parameter)
+void text2pdf_intermediary_1_int_get(const vector<ustring> &input,
+                                     int &parameter)
 // Retrieve intermediary text
 {
   parameter = 0;
@@ -132,17 +151,20 @@ void text2pdf_intermediary_1_int_get(const vector < ustring > &input, int &param
     parameter = convert_to_int(input[0]);
 }
 
-bool text2pdf_intermediary_2_int(vector < ustring > *lines, const ustring & command, int parameter1, int parameter2)
+bool text2pdf_intermediary_2_int(vector<ustring> *lines, const ustring &command,
+                                 int parameter1, int parameter2)
 // Write intermediary text.
 {
   if (!lines)
     return false;
-  ustring text = command + "|" + convert_to_string(parameter1) + "|" + convert_to_string(parameter2);
+  ustring text = command + "|" + convert_to_string(parameter1) + "|" +
+                 convert_to_string(parameter2);
   lines->push_back(text);
   return true;
 }
 
-void text2pdf_intermediary_2_int_get(const vector < ustring > &input, int &parameter1, int &parameter2)
+void text2pdf_intermediary_2_int_get(const vector<ustring> &input,
+                                     int &parameter1, int &parameter2)
 // Retrieve intermediary text
 {
   parameter1 = 0;
@@ -153,7 +175,9 @@ void text2pdf_intermediary_2_int_get(const vector < ustring > &input, int &param
     parameter2 = convert_to_int(input[1]);
 }
 
-bool text2pdf_intermediary_1_ustring(vector < ustring > *lines, const ustring & command, const ustring & parameter)
+bool text2pdf_intermediary_1_ustring(vector<ustring> *lines,
+                                     const ustring &command,
+                                     const ustring &parameter)
 // Write intermediary text.
 {
   if (!lines)
@@ -163,7 +187,8 @@ bool text2pdf_intermediary_1_ustring(vector < ustring > *lines, const ustring & 
   return true;
 }
 
-void text2pdf_intermediary_1_ustring_get(const vector < ustring > &input, ustring & parameter)
+void text2pdf_intermediary_1_ustring_get(const vector<ustring> &input,
+                                         ustring &parameter)
 // Retrieve intermediary text
 {
   parameter.clear();

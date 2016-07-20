@@ -1,40 +1,40 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "mappings.h"
-#include "utilities.h"
-#include "directories.h"
-#include "gwrappers.h"
-#include <libxml/xmlreader.h>
 #include "bookdata.h"
 #include "books.h"
+#include "directories.h"
+#include "gwrappers.h"
 #include "tiny_utilities.h"
+#include "utilities.h"
+#include <libxml/xmlreader.h>
 
-MappingStore::MappingStore(const ustring & system_in, const ustring & filename)
-{
+MappingStore::MappingStore(const ustring &system_in, const ustring &filename) {
   system = system_in;
 
   if (g_file_test(filename.c_str(), G_FILE_TEST_IS_REGULAR)) {
     gchar *contents;
     g_file_get_contents(filename.c_str(), &contents, NULL, NULL);
     xmlParserInputBufferPtr inputbuffer;
-    inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents), XML_CHAR_ENCODING_NONE);
+    inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents),
+                                                XML_CHAR_ENCODING_NONE);
     xmlTextReaderPtr reader = xmlNewTextReader(inputbuffer, NULL);
     if (reader) {
       char *opening_element = NULL;
@@ -47,67 +47,65 @@ MappingStore::MappingStore(const ustring & system_in, const ustring & filename)
 
       while ((xmlTextReaderRead(reader) == 1)) {
         switch (xmlTextReaderNodeType(reader)) {
-        case XML_READER_TYPE_ELEMENT:
-          {
-            opening_element = (char *)xmlTextReaderName(reader); // memory leak here
-            if (!strcmp(opening_element, "map")) {
-              myid = 0;
-              mychapter = 0;
-              myverse = 0;
-              myoriginalid = 0;
-              myoriginalchapter = 0;
-              myoriginalverse = 0;
-            }
-            break;
+        case XML_READER_TYPE_ELEMENT: {
+          opening_element =
+              (char *)xmlTextReaderName(reader); // memory leak here
+          if (!strcmp(opening_element, "map")) {
+            myid = 0;
+            mychapter = 0;
+            myverse = 0;
+            myoriginalid = 0;
+            myoriginalchapter = 0;
+            myoriginalverse = 0;
           }
-        case XML_READER_TYPE_TEXT:
-          {
-            char *text = (char *)xmlTextReaderValue(reader);
-            if (text) {
-              if (!strcmp(opening_element, "book")) {
-                myid = books_english_to_id(text);
-              }
-              if (!strcmp(opening_element, "chapter")) {
-                mychapter = convert_to_int(text);
-              }
-              if (!strcmp(opening_element, "verse")) {
-                myverse = convert_to_int(text);
-              }
-              if (!strcmp(opening_element, "original-book")) {
-                myoriginalid = books_english_to_id(text);
-              }
-              if (!strcmp(opening_element, "original-chapter")) {
-                myoriginalchapter = convert_to_int(text);
-              }
-              if (!strcmp(opening_element, "original-verse")) {
-                myoriginalverse = convert_to_int(text);
-              }
-              free(text);
+          break;
+        }
+        case XML_READER_TYPE_TEXT: {
+          char *text = (char *)xmlTextReaderValue(reader);
+          if (text) {
+            if (!strcmp(opening_element, "book")) {
+              myid = books_english_to_id(text);
             }
-            break;
-          }
-        case XML_READER_TYPE_END_ELEMENT:
-          {
-            char *closing_element = (char *)xmlTextReaderName(reader);
-            if (!strcmp(closing_element, "map")) {
-              if (myid == 0)
-                break;
-              if (mychapter == 0)
-                break;
-              if (myoriginalid == 0)
-                break;
-              if (myoriginalchapter == 0)
-                break;
-              // Verse == 0 occurs, so is allowed.
-              id.push_back(myid);
-              chapter.push_back(mychapter);
-              verse.push_back(myverse);
-              original_id.push_back(myoriginalid);
-              original_chapter.push_back(myoriginalchapter);
-              original_verse.push_back(myoriginalverse);
+            if (!strcmp(opening_element, "chapter")) {
+              mychapter = convert_to_int(text);
             }
-            break;
+            if (!strcmp(opening_element, "verse")) {
+              myverse = convert_to_int(text);
+            }
+            if (!strcmp(opening_element, "original-book")) {
+              myoriginalid = books_english_to_id(text);
+            }
+            if (!strcmp(opening_element, "original-chapter")) {
+              myoriginalchapter = convert_to_int(text);
+            }
+            if (!strcmp(opening_element, "original-verse")) {
+              myoriginalverse = convert_to_int(text);
+            }
+            free(text);
           }
+          break;
+        }
+        case XML_READER_TYPE_END_ELEMENT: {
+          char *closing_element = (char *)xmlTextReaderName(reader);
+          if (!strcmp(closing_element, "map")) {
+            if (myid == 0)
+              break;
+            if (mychapter == 0)
+              break;
+            if (myoriginalid == 0)
+              break;
+            if (myoriginalchapter == 0)
+              break;
+            // Verse == 0 occurs, so is allowed.
+            id.push_back(myid);
+            chapter.push_back(mychapter);
+            verse.push_back(myverse);
+            original_id.push_back(myoriginalid);
+            original_chapter.push_back(myoriginalchapter);
+            original_verse.push_back(myoriginalverse);
+          }
+          break;
+        }
         }
       }
     }
@@ -120,28 +118,29 @@ MappingStore::MappingStore(const ustring & system_in, const ustring & filename)
   }
 }
 
-Mappings::Mappings(int dummy)
-{
-}
+Mappings::Mappings(int dummy) {}
 
-vector < ustring > Mappings::systems_get()
+vector<ustring> Mappings::systems_get()
 // Gets all available mapping systems and store them in the object.
 {
   if (available_systems.empty()) {
     // Get the system from the templates that come with Bibledit.
     ReadFiles rf1(Directories->get_package_data(), "mapping", ".xml");
     for (unsigned int i = 0; i < rf1.files.size(); i++) {
-      available_filenames.push_back(gw_build_filename(Directories->get_package_data(), rf1.files[i]));
+      available_filenames.push_back(
+          gw_build_filename(Directories->get_package_data(), rf1.files[i]));
       available_systems.push_back(filename_get_system(rf1.files[i]));
     }
     // Get the system from the templates provided by the user.
     ReadFiles rf2(Directories->get_templates_user(), "mapping", ".xml");
     for (unsigned int i = 0; i < rf2.files.size(); i++) {
-      available_filenames.push_back(gw_build_filename(Directories->get_templates_user(), rf2.files[i]));
+      available_filenames.push_back(
+          gw_build_filename(Directories->get_templates_user(), rf2.files[i]));
       available_systems.push_back(filename_get_system(rf2.files[i]));
     }
     // Sort everything on name.
-    quick_sort(available_systems, available_filenames, 0, available_systems.size());
+    quick_sort(available_systems, available_filenames, 0,
+               available_systems.size());
   }
   return available_systems;
 }
@@ -202,8 +201,10 @@ If "system" is not yet loaded, it first loads it, then gives the pointer.
   return loaded_systems.size() - 1;
 }
 
-void Mappings::me2original(const ustring & system, int mybook, int mychapter, int myverse, vector < int >&originalchapter, vector < int >&originalverse)
-// Takes mybook, mychapter and myverse in the mapping system, and produces 
+void Mappings::me2original(const ustring &system, int mybook, int mychapter,
+                           int myverse, vector<int> &originalchapter,
+                           vector<int> &originalverse)
+// Takes mybook, mychapter and myverse in the mapping system, and produces
 // the chapters:verses in the original versification system that correspond
 // to it.
 {
@@ -214,7 +215,8 @@ void Mappings::me2original(const ustring & system, int mybook, int mychapter, in
     if ((unsigned int)mybook == loaded_systems[pointer].id[i]) {
       if ((unsigned int)mychapter == loaded_systems[pointer].chapter[i]) {
         if ((unsigned int)myverse == loaded_systems[pointer].verse[i]) {
-          originalchapter.push_back(loaded_systems[pointer].original_chapter[i]);
+          originalchapter.push_back(
+              loaded_systems[pointer].original_chapter[i]);
           originalverse.push_back(loaded_systems[pointer].original_verse[i]);
         }
       }
@@ -222,8 +224,10 @@ void Mappings::me2original(const ustring & system, int mybook, int mychapter, in
   }
 }
 
-void Mappings::original2me(const ustring & system, int originalbook, int originalchapter, int originalverse, vector < int >&mychapter, vector < int >&myverse)
-// Takes originalbook, originalchapter and originalverse, and produces 
+void Mappings::original2me(const ustring &system, int originalbook,
+                           int originalchapter, int originalverse,
+                           vector<int> &mychapter, vector<int> &myverse)
+// Takes originalbook, originalchapter and originalverse, and produces
 // the chapters:verses in the versification system given, that correspond to it.
 {
   mychapter.clear();
@@ -231,8 +235,10 @@ void Mappings::original2me(const ustring & system, int originalbook, int origina
   unsigned int pointer = system_pointer_get(system);
   for (unsigned int i = 0; i < loaded_systems[pointer].id.size(); i++) {
     if ((unsigned int)originalbook == loaded_systems[pointer].id[i]) {
-      if ((unsigned int)originalchapter == loaded_systems[pointer].original_chapter[i]) {
-        if ((unsigned int)originalverse == loaded_systems[pointer].original_verse[i]) {
+      if ((unsigned int)originalchapter ==
+          loaded_systems[pointer].original_chapter[i]) {
+        if ((unsigned int)originalverse ==
+            loaded_systems[pointer].original_verse[i]) {
           mychapter.push_back(loaded_systems[pointer].chapter[i]);
           myverse.push_back(loaded_systems[pointer].verse[i]);
         }

@@ -1,55 +1,58 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogprintreferences.h"
-#include "utilities.h"
-#include "projectutils.h"
-#include "directories.h"
+#include "books.h"
 #include "combobox.h"
 #include "dialogselectchapters.h"
-#include "portion_utils.h"
-#include "settings.h"
+#include "directories.h"
 #include "help.h"
-#include "books.h"
+#include "libraries.h"
+#include "portion_utils.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "tiny_utilities.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-PrintReferencesDialog::PrintReferencesDialog(int dummy)
-{
+PrintReferencesDialog::PrintReferencesDialog(int dummy) {
   extern Settings *settings;
 
   printreferencesdialog = gtk_dialog_new();
-  gtk_window_set_title(GTK_WINDOW(printreferencesdialog), _("Print References"));
-  gtk_window_set_position(GTK_WINDOW(printreferencesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_title(GTK_WINDOW(printreferencesdialog),
+                       _("Print References"));
+  gtk_window_set_position(GTK_WINDOW(printreferencesdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(printreferencesdialog), TRUE);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(printreferencesdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(printreferencesdialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 2);
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, FALSE, FALSE, 0);
 
-  label12 = gtk_label_new(_("This prints worksheets with the text of all the references on it.\nThe text is taken from the project that is open. Other projects can be added."));
+  label12 =
+      gtk_label_new(_("This prints worksheets with the text of all the "
+                      "references on it.\nThe text is taken from the project "
+                      "that is open. Other projects can be added."));
   gtk_widget_show(label12);
   gtk_box_pack_start(GTK_BOX(vbox1), label12, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label12), 0, 0.5);
@@ -103,73 +106,72 @@ PrintReferencesDialog::PrintReferencesDialog(int dummy)
   gtk_widget_show(label18);
   gtk_box_pack_start(GTK_BOX(hbox8), label18, FALSE, FALSE, 0);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(printreferencesdialog));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(printreferencesdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(printreferencesdialog, NULL, NULL, NULL);
 
   cancelbutton = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(printreferencesdialog), cancelbutton, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(printreferencesdialog), cancelbutton,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton), true);
 
   okbutton = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(printreferencesdialog), okbutton, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(printreferencesdialog), okbutton,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton), true);
 
-  g_signal_connect((gpointer) button_add, "clicked", G_CALLBACK(on_button_add_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(on_okbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_add, "clicked",
+                   G_CALLBACK(on_button_add_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton, "clicked",
+                   G_CALLBACK(on_okbutton_clicked), gpointer(this));
 
   gtk_widget_grab_default(okbutton);
   gtk_widget_grab_focus(okbutton);
 
   // Set the gui.
-  gtk_label_set_text(GTK_LABEL(label_main_project), settings->genconfig.project_get().c_str());
-  vector < ustring > versions = settings->genconfig.print_references_projects_get();
+  gtk_label_set_text(GTK_LABEL(label_main_project),
+                     settings->genconfig.project_get().c_str());
+  vector<ustring> versions =
+      settings->genconfig.print_references_projects_get();
   for (unsigned int i = 0; i < versions.size(); i++) {
     on_button_add(versions[i]);
   }
 }
 
-
-PrintReferencesDialog::~PrintReferencesDialog()
-{
+PrintReferencesDialog::~PrintReferencesDialog() {
   gtk_widget_destroy(printreferencesdialog);
 }
 
-
-int PrintReferencesDialog::run()
-{
+int PrintReferencesDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(printreferencesdialog));
 }
 
-
-void PrintReferencesDialog::on_okbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((PrintReferencesDialog *) user_data)->on_okbutton();
+void PrintReferencesDialog::on_okbutton_clicked(GtkButton *button,
+                                                gpointer user_data) {
+  ((PrintReferencesDialog *)user_data)->on_okbutton();
 }
 
-
-void PrintReferencesDialog::on_okbutton()
-{
+void PrintReferencesDialog::on_okbutton() {
   // Save values.
   extern Settings *settings;
-  vector < ustring > projects;
+  vector<ustring> projects;
   for (unsigned int i = 0; i < selectprojectguis.size(); i++)
     projects.push_back(selectprojectguis[i]->project);
   settings->genconfig.print_references_projects_set(projects);
 }
 
-
-void PrintReferencesDialog::on_button_additional_project_clicked(GtkButton * button, gpointer user_data)
-{
-  ((PrintReferencesDialog *) user_data)->on_button_additional_project(button);
+void PrintReferencesDialog::on_button_additional_project_clicked(
+    GtkButton *button, gpointer user_data) {
+  ((PrintReferencesDialog *)user_data)->on_button_additional_project(button);
 }
 
-
-void PrintReferencesDialog::on_button_additional_project(GtkButton * button)
+void PrintReferencesDialog::on_button_additional_project(GtkButton *button)
 // Removes an "additional" project.
 {
   // Get the offset of the widget to remove.
@@ -191,18 +193,16 @@ void PrintReferencesDialog::on_button_additional_project(GtkButton * button)
   rewrite_button_labels();
 }
 
-
-void PrintReferencesDialog::on_button_add_clicked(GtkButton * button, gpointer user_data)
-{
-  ((PrintReferencesDialog *) user_data)->on_button_add("");
+void PrintReferencesDialog::on_button_add_clicked(GtkButton *button,
+                                                  gpointer user_data) {
+  ((PrintReferencesDialog *)user_data)->on_button_add("");
 }
 
-
-void PrintReferencesDialog::on_button_add(const ustring & project)
+void PrintReferencesDialog::on_button_add(const ustring &project)
 // Adds a new project to the gui.
 {
   // Get list of all projects.
-  vector < ustring > projects = projects_get_all();
+  vector<ustring> projects = projects_get_all();
 
   // Only add the project if it exists.
   if (!project.empty()) {
@@ -210,7 +210,7 @@ void PrintReferencesDialog::on_button_add(const ustring & project)
       return;
     }
   }
-  // All the widgets we're going to insert.  
+  // All the widgets we're going to insert.
   GtkWidget *hbox5;
   SelectProjectGui *selectprojectgui;
   GtkWidget *button_additional_project;
@@ -229,7 +229,8 @@ void PrintReferencesDialog::on_button_add(const ustring & project)
 
   button_additional_project = gtk_button_new();
   gtk_widget_show(button_additional_project);
-  gtk_box_pack_start(GTK_BOX(hbox5), button_additional_project, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox5), button_additional_project, FALSE, FALSE,
+                     0);
 
   alignment1 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment1);
@@ -247,7 +248,9 @@ void PrintReferencesDialog::on_button_add(const ustring & project)
   gtk_widget_show(label17);
   gtk_box_pack_start(GTK_BOX(hbox6), label17, FALSE, FALSE, 0);
 
-  g_signal_connect((gpointer) button_additional_project, "clicked", G_CALLBACK(on_button_additional_project_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_additional_project, "clicked",
+                   G_CALLBACK(on_button_additional_project_clicked),
+                   gpointer(this));
 
   gtk_box_reorder_child(GTK_BOX(vbox1), hbox5, hboxes.size() + 7);
 
@@ -260,27 +263,24 @@ void PrintReferencesDialog::on_button_add(const ustring & project)
   rewrite_button_labels();
 }
 
-
-void PrintReferencesDialog::vector_remove_content(vector < GtkWidget * >&container, int offset)
-{
-  vector < GtkWidget * >::iterator iter;
+void PrintReferencesDialog::vector_remove_content(
+    vector<GtkWidget *> &container, int offset) {
+  vector<GtkWidget *>::iterator iter;
   iter = container.begin();
   for (int i = 0; i < offset; i++)
     iter++;
   container.erase(iter);
 }
 
-
-void PrintReferencesDialog::vector_remove_content(vector < SelectProjectGui * >&container, int offset)
-{
+void PrintReferencesDialog::vector_remove_content(
+    vector<SelectProjectGui *> &container, int offset) {
   delete container[offset];
-  vector < SelectProjectGui * >::iterator iter;
+  vector<SelectProjectGui *>::iterator iter;
   iter = container.begin();
   for (int i = 0; i < offset; i++)
     iter++;
   container.erase(iter);
 }
-
 
 void PrintReferencesDialog::rewrite_button_labels()
 // Rewrites the accelerators on the buttons, , so that it goes from 1 till x.
@@ -290,5 +290,3 @@ void PrintReferencesDialog::rewrite_button_labels()
     selectprojectguis[i]->set_label(label);
   }
 }
-
-
