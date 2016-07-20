@@ -162,8 +162,8 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   window_styles = NULL;
   window_notes = NULL;
   window_references = NULL;
+  window_bibles = NULL;
   window_info = NULL;
-  //window_bibles = NULL;
   import_keyterms_assistant = NULL;
   delete_keyterms_assistant = NULL;
   changes_assistant = NULL;
@@ -922,6 +922,10 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   gtk_widget_show(view_related_verses);
   gtk_container_add(GTK_CONTAINER(menuitem_view_menu), view_related_verses);
 
+  view_bibles = gtk_check_menu_item_new_with_mnemonic(_("_Bibles"));
+  gtk_widget_show(view_bibles);
+  gtk_container_add(GTK_CONTAINER(menuitem_view_menu), view_bibles);
+
   view_concordance = gtk_check_menu_item_new_with_mnemonic(_("_Concordance"));
   gtk_widget_show(view_concordance);
   gtk_container_add(GTK_CONTAINER(menuitem_view_menu), view_concordance);
@@ -1675,6 +1679,9 @@ MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, 
   if (view_related_verses)
     g_signal_connect((gpointer)view_related_verses, "activate", G_CALLBACK(on_view_related_verses_activate), gpointer(this));
   g_signal_connect((gpointer)view_references, "activate", G_CALLBACK(on_view_references_activate), gpointer(this));
+  if (view_bibles) {
+    g_signal_connect((gpointer)view_bibles, "activate", G_CALLBACK(on_view_bibles_activate), gpointer(this));
+  }
   if (view_concordance) {
     g_signal_connect((gpointer)view_concordance, "activate", G_CALLBACK(on_view_concordance_activate), gpointer(this));
   }
@@ -2654,6 +2661,23 @@ void MainWindow::on_view_references() {
   }
 }
 
+void MainWindow::on_view_bibles_activate(GtkMenuItem *menuitem, gpointer user_data) {
+  ((MainWindow *)user_data)->on_view_bibles();
+}
+
+void MainWindow::on_view_bibles() {
+  if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_bibles))) {
+    // This tabbed window may already be created, so it need not be created again
+    if (!window_bibles) {
+      window_bibles = new TabbedWindow("Bibles", layout, accelerator_group, windows_startup_pointer != G_MAXINT);
+    }
+    //window_bibles->addTab();
+    g_signal_connect((gpointer)window_bibles->delete_signal_button, "clicked", G_CALLBACK(on_window_bibles_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer)window_bibles->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer)window_bibles->signal_button, "clicked", G_CALLBACK(on_window_bibles_signal_button_clicked), gpointer(this));
+  }
+}
+
 void MainWindow::on_view_concordance_activate(GtkMenuItem *menuitem, gpointer user_data) {
   ((MainWindow *)user_data)->on_view_concordance();
 }
@@ -2662,9 +2686,10 @@ void MainWindow::on_view_concordance() {
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_concordance))) {
     // This tabbed window may already be created, so it need not be created again
     if (!window_info) {
-      window_info = new WindowTabbed(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
+      window_info = new TabbedWindow("Information", layout, accelerator_group, windows_startup_pointer != G_MAXINT);
     }
     window_info->Concordance();
+    //window_info->addTab(concordance);
     g_signal_connect((gpointer)window_info->delete_signal_button, "clicked", G_CALLBACK(on_window_info_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer)window_info->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer)window_info->signal_button, "clicked", G_CALLBACK(on_window_info_signal_button_clicked), gpointer(this));
@@ -2688,6 +2713,18 @@ void MainWindow::on_window_references_delete_button() {
     delete window_references;
     window_references = NULL;
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_references), FALSE);
+  }
+}
+
+void MainWindow::on_window_bibles_delete_button_clicked(GtkButton *button, gpointer user_data) {
+  ((MainWindow *)user_data)->on_window_bibles_delete_button();
+}
+
+void MainWindow::on_window_bibles_delete_button() {
+  if (window_bibles) {
+    delete window_bibles;
+    window_bibles = NULL;
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_bibles), FALSE);
   }
 }
 
@@ -2728,6 +2765,34 @@ void MainWindow::on_window_references_signal_button()
   // Jump to the reference.
   navigation.display(window_references->reference);
   editor_window->go_to_new_reference_highlight_set();
+}
+
+void MainWindow::on_window_bibles_signal_button_clicked(GtkButton *button, gpointer user_data)
+// This routine is called when the info window fires a signal that something has happened.
+{
+  ((MainWindow *)user_data)->on_window_bibles_signal_button();
+}
+
+void MainWindow::on_window_bibles_signal_button()
+// Handler for when the user clicks something in the window we will do the right thing
+{
+  // Get the editor window. If none, bail out.
+  WindowEditor *editor_window = last_focused_editor_window();
+  if (!editor_window) {
+    return;
+  }
+
+  // Bail out if there's no info window (how is this possible?)
+  if (!window_info) {
+    return;
+  }
+
+  // Focus the editor.
+  //editor_window->focus_set ();
+
+  // Jump to the reference.
+  //navigation.display(window_info->reference);
+  //editor_window->go_to_new_reference_highlight_set();
 }
 
 void MainWindow::on_window_info_signal_button_clicked(GtkButton *button, gpointer user_data)
