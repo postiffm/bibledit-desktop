@@ -1,32 +1,31 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include "libraries.h"
-#include "utilities.h"
 #include "usfm.h"
-#include "usfmtools.h"
-#include "gtkwrappers.h"
-#include "tiny_utilities.h"
 #include "categorize.h"
+#include "gtkwrappers.h"
+#include "libraries.h"
+#include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 
-
-ustring usfm_extract(ustring & line)
+ustring usfm_extract(ustring &line)
 // This returns the usfm from the line, e.g. \id.
 // The usfm is removed from the line.
 {
@@ -53,26 +52,28 @@ ustring usfm_extract(ustring & line)
   return returnvalue;
 }
 
-ustring usfm_extract_marker(ustring & line)
+ustring usfm_extract_marker(ustring &line)
 // Returns the usfm marker from the line, but without
 // the first backslash, so e.g. id.
 // The backslash and the usfm marker are removed from the line.
 {
   ustring returnvalue = usfm_extract(line);
   if (returnvalue.length() > 0)
-    returnvalue.erase(0, 1);    // Remove backslash.
+    returnvalue.erase(0, 1); // Remove backslash.
   return returnvalue;
 }
 
-int usfm_search_marker_from(const ustring & line, unsigned int from)
+int usfm_search_marker_from(const ustring &line, unsigned int from)
 // Searches for any usfm (whether it exists or not).
 // It starts searching at position "from".
-// It returns the position where it found the usfm, or string::npos is not found.
+// It returns the position where it found the usfm, or string::npos is not
+// found.
 {
   return line.find("\\", from);
 }
 
-unsigned int usfm_search_marker_from_length(const ustring & line, unsigned int from)
+unsigned int usfm_search_marker_from_length(const ustring &line,
+                                            unsigned int from)
 // Returns the length of the usfm that is found at position "from".
 {
   ustring s;
@@ -80,9 +81,10 @@ unsigned int usfm_search_marker_from_length(const ustring & line, unsigned int f
   return usfm_extract(s).length();
 }
 
-bool usfm_search_marker(const ustring & line, ustring & marker, size_t & position, size_t & length, bool & opening_marker)
+bool usfm_search_marker(const ustring &line, ustring &marker, size_t &position,
+                        size_t &length, bool &opening_marker)
 /*
-Searches for any marker in "line". 
+Searches for any marker in "line".
 Returns true when found or else it returns false.
 Puts the marker itself, without backslashes and all, into "marker".
 If it is an opening marker, sets "opening_marker" true.
@@ -123,10 +125,10 @@ opening_marker = true;
   return true;
 }
 
-vector < ustring > usfm_get_all_markers(const ustring & line)
+vector<ustring> usfm_get_all_markers(const ustring &line)
 // Returns all markers that are found in the line.
 {
-  vector < ustring > markers;
+  vector<ustring> markers;
   ustring marker;
   ustring line2(line);
   marker = usfm_extract_marker_within_line(line2);
@@ -137,7 +139,7 @@ vector < ustring > usfm_get_all_markers(const ustring & line)
   return markers;
 }
 
-ustring usfm_extract_marker_within_line(ustring & line)
+ustring usfm_extract_marker_within_line(ustring &line)
 /*
 Returns the usfm marker from the line, but without the first backslash, e.g. id.
 The backslash and the usfm marker are removed from the line.
@@ -146,11 +148,11 @@ It searches within the line too.
 {
   ustring returnvalue = trim(usfm_extract_within_line(line));
   if (returnvalue.length() > 0)
-    returnvalue.erase(0, 1);    // Remove backslash.
+    returnvalue.erase(0, 1); // Remove backslash.
   return returnvalue;
 }
 
-ustring usfm_extract_within_line(ustring & line)
+ustring usfm_extract_within_line(ustring &line)
 /*
 This returns the usfm from the line, e.g. \id.
 The usfm is removed from the line.
@@ -175,7 +177,7 @@ The usfm is removed from the line.
   return returnvalue;
 }
 
-void split_line_on_marker(ustring marker, ustring & line)
+void split_line_on_marker(ustring marker, ustring &line)
 // Inserts newlines just before amy place where "marker" occurs.
 {
   marker.insert(0, "\\");
@@ -190,9 +192,10 @@ void split_line_on_marker(ustring marker, ustring & line)
   }
 }
 
-ustring get_usfm_id_from_file(const ustring & filename)
+ustring get_usfm_id_from_file(const ustring &filename)
 // Gets the Paratext ID from a file.
-// Deals with an awkward Windows habit to put \xEF\xBB\xBF at the start of some textfiles.
+// Deals with an awkward Windows habit to put \xEF\xBB\xBF at the start of some
+// textfiles.
 {
   // If the file is too short, probably no USfM file.
   if (file_get_size(filename) < 20)
@@ -216,8 +219,7 @@ ustring get_usfm_id_from_file(const ustring & filename)
     if (usfm_is_id(marker)) {
       try {
         return line.substr(0, 3);
-      }
-      catch(exception & ex) {
+      } catch (exception &ex) {
         cerr << ex.what() << endl;
       }
     }
@@ -225,11 +227,12 @@ ustring get_usfm_id_from_file(const ustring & filename)
   return "";
 }
 
-void split_line_into_usfm_and_text(const ustring & line, ustring & marker, ustring & text)
+void split_line_into_usfm_and_text(const ustring &line, ustring &marker,
+                                   ustring &text)
 /*
-Splits all text into marker and text. 
+Splits all text into marker and text.
 E.g. "\v 1 In the beginning ..." is split into:
-- \v 1 
+- \v 1
 - In the beginning ...
 */
 {
@@ -252,7 +255,10 @@ E.g. "\v 1 In the beginning ..." is split into:
   marker.insert(0, "\\");
 }
 
-void usfm_handle_inline_text(ustring & line, UsfmInlineMarkers * inline_markers, XmlFoBlock * block, InlineMarkersType inlinemarkerstype, set < ustring > *used_styles)
+void usfm_handle_inline_text(ustring &line, UsfmInlineMarkers *inline_markers,
+                             XmlFoBlock *block,
+                             InlineMarkersType inlinemarkerstype,
+                             set<ustring> *used_styles)
 /*
 1. Usfm text that has the opening marker, but not the closing marker, may result
    in malformed xslfo output. To ensure this does not occur, the opening tag
@@ -260,7 +266,7 @@ void usfm_handle_inline_text(ustring & line, UsfmInlineMarkers * inline_markers,
 2. For inline text markers, the space following the opening marker is
    part of the marker, and not part of the word.
 3. In rare cases, while comparing, it occurred that the closing marker comes
-   before the opening marker. Though both markers are in, they are not in the 
+   before the opening marker. Though both markers are in, they are not in the
    right order, and so should not be transformed else an error occurs in the
    xslfo formatter.
 
@@ -281,15 +287,17 @@ used_styles - the styles actually converted - not always used.
     while (still_working) {
       still_working = false;
       // Search for a opener after the position of the previous closer.
-      begin_position = line.find(inline_markers->opening_markers[i], end_position);
+      begin_position =
+          line.find(inline_markers->opening_markers[i], end_position);
       if (begin_position != string::npos) {
         // Search for a closer after the position of the previous opener.
-        end_position = line.find(inline_markers->closing_markers[i], begin_position);
+        end_position =
+            line.find(inline_markers->closing_markers[i], begin_position);
         if (end_position != string::npos) {
           // Check that the closer comes after the opener.
           if (end_position > begin_position) {
-            // At this stage we have both the opening and closing marker, 
-            // and the closer comes after the opener, 
+            // At this stage we have both the opening and closing marker,
+            // and the closer comes after the opener,
             // so we're safe to replace the markers with the xslfo tags.
             size_t position = begin_position;
             size_t length = inline_markers->opening_markers[i].length();
@@ -311,10 +319,12 @@ used_styles - the styles actually converted - not always used.
             case imXslFo:
               break;
             case imSword:
-              line.replace(position, length, inline_markers->closing_sword_markup);
+              line.replace(position, length,
+                           inline_markers->closing_sword_markup);
               break;
             case imOpenDocument:
-              line.replace(position, length, inline_markers->closing_odt_markup);
+              line.replace(position, length,
+                           inline_markers->closing_odt_markup);
             }
             // Store marker used.
             if (used_styles)
@@ -328,7 +338,8 @@ used_styles - the styles actually converted - not always used.
   }
 }
 
-void usfm_remove_inline_text_markers(ustring & line, UsfmInlineMarkers * inline_markers)
+void usfm_remove_inline_text_markers(ustring &line,
+                                     UsfmInlineMarkers *inline_markers)
 // Removes inline text markers.
 {
   // Go through all markers, and remove them from the line.
@@ -341,309 +352,143 @@ void usfm_remove_inline_text_markers(ustring & line, UsfmInlineMarkers * inline_
 }
 
 #define NUMBER_OF_MARKERS_IdentificationInformation 10
-char *USFM_MARKERS_IdentificationInformation[NUMBER_OF_MARKERS_IdentificationInformation] = {
-  (char *)"id",
-  (char *)"ide",
-  (char *)"rem",
-  (char *)"h",
-  (char *)"h1",
-  (char *)"h2",
-  (char *)"h3",
-  (char *)"toc1",
-  (char *)"toc2",
-  (char *)"toc3"
-};
+char *USFM_MARKERS_IdentificationInformation
+    [NUMBER_OF_MARKERS_IdentificationInformation] = {
+        (char *)"id",   (char *)"ide", (char *)"rem", (char *)"h",
+        (char *)"h1",   (char *)"h2",  (char *)"h3",  (char *)"toc1",
+        (char *)"toc2", (char *)"toc3"};
 
 #define NUMBER_OF_MARKERS_IntroductionTitlesHeadings 11
-char *USFM_MARKERS_IntroductionTitlesHeadings[NUMBER_OF_MARKERS_IntroductionTitlesHeadings] = {
-  (char *)"imt",
-  (char *)"imt1",
-  (char *)"imt2",
-  (char *)"imt3",
-  (char *)"imt4",
-  (char *)"is",
-  (char *)"is1",
-  (char *)"is2",
-  (char *)"is3",
-  (char *)"is4",
-  (char *)"imte"
-};
+char *USFM_MARKERS_IntroductionTitlesHeadings
+    [NUMBER_OF_MARKERS_IntroductionTitlesHeadings] = {
+        (char *)"imt",  (char *)"imt1", (char *)"imt2", (char *)"imt3",
+        (char *)"imt4", (char *)"is",   (char *)"is1",  (char *)"is2",
+        (char *)"is3",  (char *)"is4",  (char *)"imte"};
 
 #define NUMBER_OF_MARKERS_IntroductionParagraphsPoetry 14
-char *USFM_MARKERS_IntroductionParagraphsPoetry[NUMBER_OF_MARKERS_IntroductionParagraphsPoetry] = {
-  (char *)"ip",
-  (char *)"ipi",
-  (char *)"im",
-  (char *)"imi",
-  (char *)"imq",
-  (char *)"ipr",
-  (char *)"ipq",
-  (char *)"ib",
-  (char *)"iex",
-  (char *)"iq",
-  (char *)"iq1",
-  (char *)"iq2",
-  (char *)"iq3",
-  (char *)"iq4"
-};
+char *USFM_MARKERS_IntroductionParagraphsPoetry
+    [NUMBER_OF_MARKERS_IntroductionParagraphsPoetry] = {
+        (char *)"ip",  (char *)"ipi", (char *)"im",  (char *)"imi",
+        (char *)"imq", (char *)"ipr", (char *)"ipq", (char *)"ib",
+        (char *)"iex", (char *)"iq",  (char *)"iq1", (char *)"iq2",
+        (char *)"iq3", (char *)"iq4"};
 
 #define NUMBER_OF_MARKERS_IntroductionOtherElements 8
-char *USFM_MARKERS_IntroductionOtherElements[NUMBER_OF_MARKERS_IntroductionOtherElements] = {
-  (char *)"iot",
-  (char *)"io",
-  (char *)"io1",
-  (char *)"io2",
-  (char *)"io3",
-  (char *)"io4",
-  (char *)"ior",
-  (char *)"ie"
-};
+char *USFM_MARKERS_IntroductionOtherElements
+    [NUMBER_OF_MARKERS_IntroductionOtherElements] = {
+        (char *)"iot", (char *)"io",  (char *)"io1", (char *)"io2",
+        (char *)"io3", (char *)"io4", (char *)"ior", (char *)"ie"};
 
 #define NUMBER_OF_MARKERS_Titles 11
 char *USFM_MARKERS_Titles[NUMBER_OF_MARKERS_Titles] = {
-  (char *)"mt",
-  (char *)"mt1",
-  (char *)"mt2",
-  (char *)"mt3",
-  (char *)"mt4",
-  (char *)"mte",
-  (char *)"mte1",
-  (char *)"mte2",
-  (char *)"mte3",
-  (char *)"mte4",
-  (char *)"d"
-};
+    (char *)"mt",   (char *)"mt1",  (char *)"mt2",  (char *)"mt3",
+    (char *)"mt4",  (char *)"mte",  (char *)"mte1", (char *)"mte2",
+    (char *)"mte3", (char *)"mte4", (char *)"d"};
 
 #define NUMBER_OF_MARKERS_Headings 15
 char *USFM_MARKERS_Headings[NUMBER_OF_MARKERS_Headings] = {
-  (char *)"ms",
-  (char *)"ms1",
-  (char *)"ms2",
-  (char *)"ms3",
-  (char *)"ms4",
-  (char *)"mr",
-  (char *)"s",
-  (char *)"s1",
-  (char *)"s2",
-  (char *)"s3",
-  (char *)"s4",
-  (char *)"sr",
-  (char *)"r",
-  (char *)"rq",
-  (char *)"sp"
-};
+    (char *)"ms", (char *)"ms1", (char *)"ms2", (char *)"ms3", (char *)"ms4",
+    (char *)"mr", (char *)"s",   (char *)"s1",  (char *)"s2",  (char *)"s3",
+    (char *)"s4", (char *)"sr",  (char *)"r",   (char *)"rq",  (char *)"sp"};
 
 #define NUMBER_OF_MARKERS_ChaptersAndVerses 8
 char *USFM_MARKERS_ChaptersAndVerses[NUMBER_OF_MARKERS_ChaptersAndVerses] = {
-  (char *)"c",
-  (char *)"ca",
-  (char *)"cl",
-  (char *)"cp",
-  (char *)"cd",
-  (char *)"v",
-  (char *)"va",
-  (char *)"vp"
-};
+    (char *)"c",  (char *)"ca", (char *)"cl", (char *)"cp",
+    (char *)"cd", (char *)"v",  (char *)"va", (char *)"vp"};
 
 #define NUMBER_OF_MARKERS_Paragraphs 22
 char *USFM_MARKERS_Paragraphs[NUMBER_OF_MARKERS_Paragraphs] = {
-  (char *)"p",
-  (char *)"m",
-  (char *)"pmo",
-  (char *)"pm",
-  (char *)"pmc",
-  (char *)"pmr",
-  (char *)"pi",
-  (char *)"pi1",
-  (char *)"pi2",
-  (char *)"pi3",
-  (char *)"pi4",
-  (char *)"mi",
-  (char *)"nb",
-  (char *)"cls",
-  (char *)"b",
-  (char *)"pc",
-  (char *)"pr",
-  (char *)"ph",
-  (char *)"ph1",
-  (char *)"ph2",
-  (char *)"ph3",
-  (char *)"ph4"
-};
+    (char *)"p",   (char *)"m",  (char *)"pmo", (char *)"pm",  (char *)"pmc",
+    (char *)"pmr", (char *)"pi", (char *)"pi1", (char *)"pi2", (char *)"pi3",
+    (char *)"pi4", (char *)"mi", (char *)"nb",  (char *)"cls", (char *)"b",
+    (char *)"pc",  (char *)"pr", (char *)"ph",  (char *)"ph1", (char *)"ph2",
+    (char *)"ph3", (char *)"ph4"};
 
 #define NUMBER_OF_MARKERS_Lists 5
 char *USFM_MARKERS_Lists[NUMBER_OF_MARKERS_Lists] = {
-  (char *)"li",
-  (char *)"li1",
-  (char *)"li2",
-  (char *)"li3",
-  (char *)"li4"
-};
+    (char *)"li", (char *)"li1", (char *)"li2", (char *)"li3", (char *)"li4"};
 
 #define NUMBER_OF_MARKERS_PoetryElements 16
 char *USFM_MARKERS_PoetryElements[NUMBER_OF_MARKERS_PoetryElements] = {
-  (char *)"q",
-  (char *)"q1",
-  (char *)"q2",
-  (char *)"q3",
-  (char *)"q4",
-  (char *)"qr",
-  (char *)"qc",
-  (char *)"qs",
-  (char *)"qa",
-  (char *)"qac",
-  (char *)"qm",
-  (char *)"qm1",
-  (char *)"qm2",
-  (char *)"qm3",
-  (char *)"qm4",
-  (char *)"b"
-};
+    (char *)"q",   (char *)"q1",  (char *)"q2",  (char *)"q3",
+    (char *)"q4",  (char *)"qr",  (char *)"qc",  (char *)"qs",
+    (char *)"qa",  (char *)"qac", (char *)"qm",  (char *)"qm1",
+    (char *)"qm2", (char *)"qm3", (char *)"qm4", (char *)"b"};
 
 #define NUMBER_OF_MARKERS_TableElements 25
 char *USFM_MARKERS_TableElements[NUMBER_OF_MARKERS_TableElements] = {
-  (char *)"tr",
-  (char *)"th",
-  (char *)"th1",
-  (char *)"th2",
-  (char *)"th3",
-  (char *)"th4",
-  (char *)"th5",
-  (char *)"thr",
-  (char *)"thr1",
-  (char *)"thr2",
-  (char *)"thr3",
-  (char *)"thr4",
-  (char *)"thr5",
-  (char *)"tc",
-  (char *)"tc1",
-  (char *)"tc2",
-  (char *)"tc3",
-  (char *)"tc4",
-  (char *)"tc5",
-  (char *)"tcr",
-  (char *)"tcr1",
-  (char *)"tcr2",
-  (char *)"tcr3",
-  (char *)"tcr4",
-  (char *)"tcr5"
-};
+    (char *)"tr",   (char *)"th",   (char *)"th1",  (char *)"th2",
+    (char *)"th3",  (char *)"th4",  (char *)"th5",  (char *)"thr",
+    (char *)"thr1", (char *)"thr2", (char *)"thr3", (char *)"thr4",
+    (char *)"thr5", (char *)"tc",   (char *)"tc1",  (char *)"tc2",
+    (char *)"tc3",  (char *)"tc4",  (char *)"tc5",  (char *)"tcr",
+    (char *)"tcr1", (char *)"tcr2", (char *)"tcr3", (char *)"tcr4",
+    (char *)"tcr5"};
 
 #define NUMBER_OF_MARKERS_Footnotes 12
 char *USFM_MARKERS_Footnotes[NUMBER_OF_MARKERS_Footnotes] = {
-  (char *)"f",
-  (char *)"fe",
-  (char *)"fr",
-  (char *)"fk",
-  (char *)"fq",
-  (char *)"fqa",
-  (char *)"fl",
-  (char *)"fp",
-  (char *)"fv",
-  (char *)"ft",
-  (char *)"fdc",
-  (char *)"fm"
-};
+    (char *)"f",  (char *)"fe",  (char *)"fr",  (char *)"fk",
+    (char *)"fq", (char *)"fqa", (char *)"fl",  (char *)"fp",
+    (char *)"fv", (char *)"ft",  (char *)"fdc", (char *)"fm"};
 
 #define NUMBER_OF_MARKERS_CrossReferences 6
 char *USFM_MARKERS_CrossReferences[NUMBER_OF_MARKERS_CrossReferences] = {
-  (char *)"x",
-  (char *)"xo",
-  (char *)"xk",
-  (char *)"xq",
-  (char *)"xt",
-  (char *)"xdc"
-};
+    (char *)"x",  (char *)"xo", (char *)"xk",
+    (char *)"xq", (char *)"xt", (char *)"xdc"};
 
 #define NUMBER_OF_MARKERS_ExtendedStudyNotes 9
 char *USFM_MARKERS_ExtendedStudyNotes[NUMBER_OF_MARKERS_ExtendedStudyNotes] = {
-  (char *)"env",
-  (char *)"enw",
-  (char *)"enk",
-  (char *)"enc",
-  (char *)"cat1",
-  (char *)"cat2",
-  (char *)"cat3",
-  (char *)"cat4",
-  (char *)"cat5"
-};
+    (char *)"env",  (char *)"enw",  (char *)"enk",
+    (char *)"enc",  (char *)"cat1", (char *)"cat2",
+    (char *)"cat3", (char *)"cat4", (char *)"cat5"};
 
 #define NUMBER_OF_MARKERS_SpecialText 13
 char *USFM_MARKERS_SpecialText[NUMBER_OF_MARKERS_SpecialText] = {
-  (char *)"qt",
-  (char *)"nd",
-  (char *)"tl",
-  (char *)"dc",
-  (char *)"bk",
-  (char *)"sig",
-  (char *)"pn",
-  (char *)"wj",
-  (char *)"k",
-  (char *)"sls",
-  (char *)"ord",
-  (char *)"add",
-  (char *)"lit"
-};
+    (char *)"qt",  (char *)"nd",  (char *)"tl", (char *)"dc", (char *)"bk",
+    (char *)"sig", (char *)"pn",  (char *)"wj", (char *)"k",  (char *)"sls",
+    (char *)"ord", (char *)"add", (char *)"lit"};
 
 #define NUMBER_OF_MARKERS_CharacterStyles 6
 char *USFM_MARKERS_CharacterStyles[NUMBER_OF_MARKERS_CharacterStyles] = {
-  (char *)"no",
-  (char *)"bd",
-  (char *)"it",
-  (char *)"bdit",
-  (char *)"em",
-  (char *)"sc"
-};
+    (char *)"no",   (char *)"bd", (char *)"it",
+    (char *)"bdit", (char *)"em", (char *)"sc"};
 
 #define NUMBER_OF_MARKERS_SpacingsAndBreaks 1
 char *USFM_MARKERS_SpacingsAndBreaks[NUMBER_OF_MARKERS_SpacingsAndBreaks] = {
-  (char *)"pb"
-};
+    (char *)"pb"};
 
 #define NUMBER_OF_MARKERS_SpecialFeatures 6
 char *USFM_MARKERS_SpecialFeatures[NUMBER_OF_MARKERS_SpecialFeatures] = {
-  (char *)"fig",
-  (char *)"pro",
-  (char *)"w",
-  (char *)"wh",
-  (char *)"wg",
-  (char *)"ndx"
-};
+    (char *)"fig", (char *)"pro", (char *)"w",
+    (char *)"wh",  (char *)"wg",  (char *)"ndx"};
 
 #define NUMBER_OF_MARKERS_PeripheralMaterials 15
-char *USFM_MARKERS_PeripheralMaterials[NUMBER_OF_MARKERS_PeripheralMaterials] = {
-  (char *)"pub",
-  (char *)"toc",
-  (char *)"pref",
-  (char *)"intro",
-  (char *)"conc",
-  (char *)"glo",
-  (char *)"idx",
-  (char *)"maps",
-  (char *)"cov",
-  (char *)"spine",
-  (char *)"k1",
-  (char *)"k2",
-  (char *)"p1",
-  (char *)"p2",
-  (char *)"pubinfo"
-};
+char *USFM_MARKERS_PeripheralMaterials[NUMBER_OF_MARKERS_PeripheralMaterials] =
+    {(char *)"pub",  (char *)"toc",   (char *)"pref",   (char *)"intro",
+     (char *)"conc", (char *)"glo",   (char *)"idx",    (char *)"maps",
+     (char *)"cov",  (char *)"spine", (char *)"k1",     (char *)"k2",
+     (char *)"p1",   (char *)"p2",    (char *)"pubinfo"};
 
 /*
 Other markers that may occur in the text.
 /restore
   This is a marker inserted by Paratext when restoring a Paratext project backup
   file, if the switch "Append this description to every retored file" is checked
-  in the Restore dialogue. And so, it needs to be present in the stylesheet 
-  (so that checking tools do not report a false error), but it is not really 
+  in the Restore dialogue. And so, it needs to be present in the stylesheet
+  (so that checking tools do not report a false error), but it is not really
   part of USFM.
 */
 
-void usfm_categorize_markers_internal(unsigned int marker_count, set < ustring > &marker_set, char *marker_definitions[], UsfmCategory category, vector < ustring > &markers, vector < UsfmCategory > &categories)
+void usfm_categorize_markers_internal(unsigned int marker_count,
+                                      set<ustring> &marker_set,
+                                      char *marker_definitions[],
+                                      UsfmCategory category,
+                                      vector<ustring> &markers,
+                                      vector<UsfmCategory> &categories)
 // Internal repetitive function used by usfm_categorize_markers.
 {
   for (unsigned int i = 0; i < marker_count; i++) {
-    set < ustring >::const_iterator found_position;
+    set<ustring>::const_iterator found_position;
     found_position = marker_set.find(marker_definitions[i]);
     if (found_position != marker_set.end()) {
       markers.push_back(marker_definitions[i]);
@@ -653,170 +498,193 @@ void usfm_categorize_markers_internal(unsigned int marker_count, set < ustring >
   }
 }
 
-void usfm_categorize_markers(vector < ustring > &markers, vector < UsfmCategory > &categories)
+void usfm_categorize_markers(vector<ustring> &markers,
+                             vector<UsfmCategory> &categories)
 // Reorders markers and puts them in the right category.
 {
   // Put all markers into a set, from where they will be ordered.
-  // After ordering known markers, any remaining markers will be put in 
+  // After ordering known markers, any remaining markers will be put in
   // category Other.
-  set < ustring > set_of_markers(markers.begin(), markers.end());
+  set<ustring> set_of_markers(markers.begin(), markers.end());
   // Clear markers and categories. Here we'll put the result of ordering them.
   markers.clear();
   categories.clear();
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_IdentificationInformation, set_of_markers, USFM_MARKERS_IdentificationInformation, ucIdentificationInformation, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_IntroductionTitlesHeadings, set_of_markers, USFM_MARKERS_IntroductionTitlesHeadings, ucIntroductionTitlesHeadings, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_IntroductionParagraphsPoetry, set_of_markers, USFM_MARKERS_IntroductionParagraphsPoetry, ucIntroductionParagraphsPoetry, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_IntroductionOtherElements, set_of_markers, USFM_MARKERS_IntroductionOtherElements, ucIntroductionOtherElements, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Titles, set_of_markers, USFM_MARKERS_Titles, ucTitles, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Headings, set_of_markers, USFM_MARKERS_Headings, ucHeadings, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_ChaptersAndVerses, set_of_markers, USFM_MARKERS_ChaptersAndVerses, ucChaptersAndVerses, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Paragraphs, set_of_markers, USFM_MARKERS_Paragraphs, ucParagraphs, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Lists, set_of_markers, USFM_MARKERS_Lists, ucLists, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_PoetryElements, set_of_markers, USFM_MARKERS_PoetryElements, ucPoetryElements, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_TableElements, set_of_markers, USFM_MARKERS_TableElements, ucTableElements, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Footnotes, set_of_markers, USFM_MARKERS_Footnotes, ucFootnotes, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_CrossReferences, set_of_markers, USFM_MARKERS_CrossReferences, ucCrossReferences, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_ExtendedStudyNotes, set_of_markers, USFM_MARKERS_ExtendedStudyNotes, ucExtendedStudyNotes, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_SpecialText, set_of_markers, USFM_MARKERS_SpecialText, ucSpecialText, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_CharacterStyles, set_of_markers, USFM_MARKERS_CharacterStyles, ucCharacterStyles, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_SpacingsAndBreaks, set_of_markers, USFM_MARKERS_SpacingsAndBreaks, ucSpacingsAndBreaks, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_SpecialFeatures, set_of_markers, USFM_MARKERS_SpecialFeatures, ucSpecialFeatures, markers, categories);
-  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_PeripheralMaterials, set_of_markers, USFM_MARKERS_PeripheralMaterials, ucPeripheralMaterials, markers, categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_IdentificationInformation, set_of_markers,
+      USFM_MARKERS_IdentificationInformation, ucIdentificationInformation,
+      markers, categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_IntroductionTitlesHeadings, set_of_markers,
+      USFM_MARKERS_IntroductionTitlesHeadings, ucIntroductionTitlesHeadings,
+      markers, categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_IntroductionParagraphsPoetry, set_of_markers,
+      USFM_MARKERS_IntroductionParagraphsPoetry, ucIntroductionParagraphsPoetry,
+      markers, categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_IntroductionOtherElements, set_of_markers,
+      USFM_MARKERS_IntroductionOtherElements, ucIntroductionOtherElements,
+      markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Titles, set_of_markers,
+                                   USFM_MARKERS_Titles, ucTitles, markers,
+                                   categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Headings, set_of_markers,
+                                   USFM_MARKERS_Headings, ucHeadings, markers,
+                                   categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_ChaptersAndVerses, set_of_markers,
+      USFM_MARKERS_ChaptersAndVerses, ucChaptersAndVerses, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Paragraphs, set_of_markers,
+                                   USFM_MARKERS_Paragraphs, ucParagraphs,
+                                   markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Lists, set_of_markers,
+                                   USFM_MARKERS_Lists, ucLists, markers,
+                                   categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_PoetryElements,
+                                   set_of_markers, USFM_MARKERS_PoetryElements,
+                                   ucPoetryElements, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_TableElements,
+                                   set_of_markers, USFM_MARKERS_TableElements,
+                                   ucTableElements, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_Footnotes, set_of_markers,
+                                   USFM_MARKERS_Footnotes, ucFootnotes, markers,
+                                   categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_CrossReferences,
+                                   set_of_markers, USFM_MARKERS_CrossReferences,
+                                   ucCrossReferences, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_ExtendedStudyNotes,
+                                   set_of_markers,
+                                   USFM_MARKERS_ExtendedStudyNotes,
+                                   ucExtendedStudyNotes, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_SpecialText,
+                                   set_of_markers, USFM_MARKERS_SpecialText,
+                                   ucSpecialText, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_CharacterStyles,
+                                   set_of_markers, USFM_MARKERS_CharacterStyles,
+                                   ucCharacterStyles, markers, categories);
+  usfm_categorize_markers_internal(
+      NUMBER_OF_MARKERS_SpacingsAndBreaks, set_of_markers,
+      USFM_MARKERS_SpacingsAndBreaks, ucSpacingsAndBreaks, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_SpecialFeatures,
+                                   set_of_markers, USFM_MARKERS_SpecialFeatures,
+                                   ucSpecialFeatures, markers, categories);
+  usfm_categorize_markers_internal(NUMBER_OF_MARKERS_PeripheralMaterials,
+                                   set_of_markers,
+                                   USFM_MARKERS_PeripheralMaterials,
+                                   ucPeripheralMaterials, markers, categories);
   // Dump any remaining markers in the "Other" category.
-  vector < ustring > other_markers(set_of_markers.begin(), set_of_markers.end());
+  vector<ustring> other_markers(set_of_markers.begin(), set_of_markers.end());
   for (unsigned int i = 0; i < other_markers.size(); i++) {
     markers.push_back(other_markers[i]);
     categories.push_back(ucNonstandardStyles);
   }
 }
 
-ustring usfm_get_category_name(UsfmCategory category)
-{
+ustring usfm_get_category_name(UsfmCategory category) {
   ustring name;
   switch (category) {
-  case ucIdentificationInformation:
-    {
-      name = "Identification Information";
-      break;
-    }
-  case ucIntroductionTitlesHeadings:
-    {
-      name = "Introduction Titles and Headings";
-      break;
-    }
-  case ucIntroductionParagraphsPoetry:
-    {
-      name = "Introduction Paragraphs and Poetry";
-      break;
-    }
-  case ucIntroductionOtherElements:
-    {
-      name = "Introduction Other Elements";
-      break;
-    }
-  case ucTitles:
-    {
-      name = "Titles";
-      break;
-    }
-  case ucHeadings:
-    {
-      name = "Headings";
-      break;
-    }
-  case ucChaptersAndVerses:
-    {
-      name = "Chapters and Verses";
-      break;
-    }
-  case ucParagraphs:
-    {
-      name = "Paragraphs";
-      break;
-    }
-  case ucLists:
-    {
-      name = "Lists";
-      break;
-    }
-  case ucPoetryElements:
-    {
-      name = "Poetry Elements";
-      break;
-    }
-  case ucTableElements:
-    {
-      name = "Table Elements";
-      break;
-    }
-  case ucFootnotes:
-    {
-      name = "Footnotes";
-      break;
-    }
-  case ucCrossReferences:
-    {
-      name = "Cross References";
-      break;
-    }
-  case ucExtendedStudyNotes:
-    {
-      name = "Extended Study Notes";
-      break;
-    }
-  case ucSpecialText:
-    {
-      name = "Special Text";
-      break;
-    }
-  case ucCharacterStyles:
-    {
-      name = "Character Styles";
-      break;
-    }
-  case ucSpacingsAndBreaks:
-    {
-      name = "Spacings and Breaks";
-      break;
-    }
-  case ucSpecialFeatures:
-    {
-      name = "Special Features";
-      break;
-    }
-  case ucPeripheralMaterials:
-    {
-      name = "Peripheral Materials";
-      break;
-    }
-  case ucNonstandardStyles:
-    {
-      name = "Non-standard Styles";
-      break;
-    }
+  case ucIdentificationInformation: {
+    name = "Identification Information";
+    break;
+  }
+  case ucIntroductionTitlesHeadings: {
+    name = "Introduction Titles and Headings";
+    break;
+  }
+  case ucIntroductionParagraphsPoetry: {
+    name = "Introduction Paragraphs and Poetry";
+    break;
+  }
+  case ucIntroductionOtherElements: {
+    name = "Introduction Other Elements";
+    break;
+  }
+  case ucTitles: {
+    name = "Titles";
+    break;
+  }
+  case ucHeadings: {
+    name = "Headings";
+    break;
+  }
+  case ucChaptersAndVerses: {
+    name = "Chapters and Verses";
+    break;
+  }
+  case ucParagraphs: {
+    name = "Paragraphs";
+    break;
+  }
+  case ucLists: {
+    name = "Lists";
+    break;
+  }
+  case ucPoetryElements: {
+    name = "Poetry Elements";
+    break;
+  }
+  case ucTableElements: {
+    name = "Table Elements";
+    break;
+  }
+  case ucFootnotes: {
+    name = "Footnotes";
+    break;
+  }
+  case ucCrossReferences: {
+    name = "Cross References";
+    break;
+  }
+  case ucExtendedStudyNotes: {
+    name = "Extended Study Notes";
+    break;
+  }
+  case ucSpecialText: {
+    name = "Special Text";
+    break;
+  }
+  case ucCharacterStyles: {
+    name = "Character Styles";
+    break;
+  }
+  case ucSpacingsAndBreaks: {
+    name = "Spacings and Breaks";
+    break;
+  }
+  case ucSpecialFeatures: {
+    name = "Special Features";
+    break;
+  }
+  case ucPeripheralMaterials: {
+    name = "Peripheral Materials";
+    break;
+  }
+  case ucNonstandardStyles: {
+    name = "Non-standard Styles";
+    break;
+  }
   }
   return name;
 }
 
-ustring usfm_get_full_opening_marker(const ustring & marker)
-{
+ustring usfm_get_full_opening_marker(const ustring &marker) {
   return "\\" + marker + " ";
 }
 
-ustring usfm_get_full_closing_marker(const ustring & marker)
-{
+ustring usfm_get_full_closing_marker(const ustring &marker) {
   return "\\" + marker + "*";
 }
 
-bool usfm_basic_markers_present(Usfm & usfm, bool gui)
+bool usfm_basic_markers_present(Usfm &usfm, bool gui)
 // Returns true if the basic markers are present in usfm: id, c, v.
 // Gives message if one is missing.
 {
-  vector < ustring > missing_styles;
+  vector<ustring> missing_styles;
   ustring style;
   bool idok;
   style = "id";
-  idok = usfm.is_identifier(style) && usfm.identifier_get_subtype(style) == itBook;
+  idok =
+      usfm.is_identifier(style) && usfm.identifier_get_subtype(style) == itBook;
   if (!idok)
     missing_styles.push_back(style + " - a book identifier");
   style = "c";
@@ -828,7 +696,9 @@ bool usfm_basic_markers_present(Usfm & usfm, bool gui)
   if (missing_styles.empty())
     return true;
   ustring message;
-  message = "Not all basic styles are in the stylesheet.\n" "Printing cannot continue.\n" "Please add the following styles to the stylesheet:";
+  message = "Not all basic styles are in the stylesheet.\n"
+            "Printing cannot continue.\n"
+            "Please add the following styles to the stylesheet:";
   for (unsigned int i = 0; i < missing_styles.size(); i++)
     message.append("\n" + missing_styles[i]);
   if (gui)
@@ -838,18 +708,21 @@ bool usfm_basic_markers_present(Usfm & usfm, bool gui)
   return false;
 }
 
-ustring usfm_notes_handle_nesting(const ustring & line, const ustring & standardparagraph_opener, const ustring & standardparagraph_closer, const set < ustring > &notemarkers)
+ustring usfm_notes_handle_nesting(const ustring &line,
+                                  const ustring &standardparagraph_opener,
+                                  const ustring &standardparagraph_closer,
+                                  const set<ustring> &notemarkers)
 /*
 Handle compliance with the following bit extracted from Usfm 2:
 
-  By default footnote codes are not nested (i.e. they are not embedded within 
-  each other). The use of each new code cancels out the 'environment' of the 
-  previous. However, an alternative markup may be used requiring each internal 
-  marker to be explicitly closed (e.g. \f + \fk...\fk*...\f*.). The examples 
-  below include variants which use the "nested", and "non-nested" approach. The 
-  \ft code is used in the non-nested markup to indicate a return to normal 
-  explanatory footnote text. If the nested approach is used, each code must be 
-  explicitly closed, and the unmarked text within \f ..\f* is assumed to be 
+  By default footnote codes are not nested (i.e. they are not embedded within
+  each other). The use of each new code cancels out the 'environment' of the
+  previous. However, an alternative markup may be used requiring each internal
+  marker to be explicitly closed (e.g. \f + \fk...\fk*...\f*.). The examples
+  below include variants which use the "nested", and "non-nested" approach. The
+  \ft code is used in the non-nested markup to indicate a return to normal
+  explanatory footnote text. If the nested approach is used, each code must be
+  explicitly closed, and the unmarked text within \f ..\f* is assumed to be
   normal footnote text.
 
   \f + \fk Issac:\ft In Hebrew means "laughter"\f*
@@ -857,15 +730,15 @@ Handle compliance with the following bit extracted from Usfm 2:
 
   \f + \fr 1.14 \fq religious festivals;\ft or \fq seasons.\f*
   \f + \fr 1.14\fr* \fq religious festivals;\fq* or \fq seasons.\fq*\f*
- 
+
   \f + \fr 2.4 \fk The \nd Lord\nd*: \ft See \nd Lord\nd* in Word List.\f*
   \f + \fr 2.4\fr* \fk The \nd Lord\nd*:\fk* See \nd Lord\nd* in Word List.\f*
- 
+
   \f + \fr 3.20 \fk Adam: \ft This name in Hebrew means "humanity".\f*
   \f + \fr 3.20\fr* \fk Adam:\fk* This name in Hebrew means "humanity".\f*
-  
+
 The strategy to handle this is:
-* As the \ft is now being used for the formatting of the standard parargraph, 
+* As the \ft is now being used for the formatting of the standard parargraph,
   this marker can be disregarded here and hence removed.
 * Make everything to behave as inline text. This implies everything is closed
   with an endmarker.
@@ -879,7 +752,7 @@ The strategy to handle this is:
   // Work on a copy.
   ustring note(line);
 
-  // If the note starts with the normal text marker, take it out, as this is 
+  // If the note starts with the normal text marker, take it out, as this is
   // the default format already set in the fo-block.
   if (note.find(standardparagraph_opener) == 0) {
     note.erase(0, standardparagraph_opener.length());
@@ -892,9 +765,9 @@ The strategy to handle this is:
   }
 
   /*
-     Deal with the markers. 
-     USFM allows two ways of positioning the styles. 
-     One where the markers have no endmarker, and one where they have. 
+     Deal with the markers.
+     USFM allows two ways of positioning the styles.
+     One where the markers have no endmarker, and one where they have.
      A mixture can occur too.
 
      For example, this code ...:
@@ -902,17 +775,19 @@ The strategy to handle this is:
      ... becomes:
      \fr 1.7 \fr*\fq untie his sandals: \fq*This was the duty of a slave.
 
-     Another example, this code ...: 
+     Another example, this code ...:
      \fr 1.7 \fq untie \nd Jesus'\nd* sandals: \ft This was the duty of a slave.
      ... becomes:
-     \fr 1.7 \fr*\fq untie \fq*\nd Jesus'\nd*\fq sandals: \fq*This was the duty of a slave.
+     \fr 1.7 \fr*\fq untie \fq*\nd Jesus'\nd*\fq sandals: \fq*This was the duty
+     of a slave.
 
      Steps:
      - Look for the next marker.
-     - If it is an opening marker, 
+     - If it is an opening marker,
      see if anything needs to be closed, close it, and move all to the output.
-     - If it is a closing marker, 
-     just copy it to the output, with the text. If anything needs to be reopened, do that too.
+     - If it is a closing marker,
+     just copy it to the output, with the text. If anything needs to be
+     reopened, do that too.
    */
 
   // Variables.
@@ -967,7 +842,7 @@ The strategy to handle this is:
     }
   }
 
-  // Take out all opening and closing markers for the standard note text. 
+  // Take out all opening and closing markers for the standard note text.
   // They are not needed because the paragraph already defaults to this style.
   replace_text(result, standardparagraph_opener, "");
   replace_text(result, standardparagraph_closer, "");
@@ -976,7 +851,8 @@ The strategy to handle this is:
   return result;
 }
 
-ustring get_erase_code_till_next_marker(ustring & line, size_t marker_position, size_t marker_length, bool trimcode)
+ustring get_erase_code_till_next_marker(ustring &line, size_t marker_position,
+                                        size_t marker_length, bool trimcode)
 // Get and erase the usfm code between this marker and the next one.
 {
   line.erase(0, marker_position + marker_length);
@@ -987,7 +863,8 @@ ustring get_erase_code_till_next_marker(ustring & line, size_t marker_position, 
   size_t marker2_position;
   size_t marker2_length;
   bool is_opener;
-  bool marker_found = usfm_search_marker(line, marker, marker2_position, marker2_length, is_opener);
+  bool marker_found = usfm_search_marker(line, marker, marker2_position,
+                                         marker2_length, is_opener);
   if (marker_found) {
     code = line.substr(0, marker2_position);
   } else {
@@ -1002,33 +879,34 @@ ustring get_erase_code_till_next_marker(ustring & line, size_t marker_position, 
   return code;
 }
 
-
-ustring usfm_get_verse_number (ustring& usfmcode, bool clean, bool remove)
+ustring usfm_get_verse_number(ustring &usfmcode, bool clean, bool remove)
 // Gets the verse number from usfm code.
 // clean: cleanup the verse number.
 // remove: remove the verse code from the usfm code.
 {
   ustring verse;
-  
-  size_t position = usfmcode.find (" ");
+
+  size_t position = usfmcode.find(" ");
   if (position == string::npos) {
     verse = usfmcode;
     if (remove)
       usfmcode.clear();
   } else {
-    verse = usfmcode.substr (0, position);
+    verse = usfmcode.substr(0, position);
     if (remove)
-      usfmcode.erase (0, position);
+      usfmcode.erase(0, position);
   }
 
-  if (clean) 
-    verse = trim (verse);
-  
-  return verse;  
+  if (clean)
+    verse = trim(verse);
+
+  return verse;
 }
 
-
-void usfm_dissect_figure (ustring& usfmcode, const ustring& marker_text, size_t marker_length, ustring& desc, ustring& file, ustring& size, ustring& loc, ustring& copy, ustring& cap, ustring& ref)
+void usfm_dissect_figure(ustring &usfmcode, const ustring &marker_text,
+                         size_t marker_length, ustring &desc, ustring &file,
+                         ustring &size, ustring &loc, ustring &copy,
+                         ustring &cap, ustring &ref)
 // Gets the various bits that make up a figure.
 // desc    Picture description in English. Does not get printed.
 // file    Illustration filename. Does not get printed.
@@ -1036,12 +914,15 @@ void usfm_dissect_figure (ustring& usfmcode, const ustring& marker_text, size_t 
 //         col:  insert picture inline within current text column.
 //         span: insert picture spanning text columns, at top or bottom of page.
 // loc     Picture location/range. Does not get printed.
-// copy    Picture copyright info. Will be used to give the appropriate picture credits.
+// copy    Picture copyright info. Will be used to give the appropriate picture
+// credits.
 // cap     Picture caption. This will be printed with the illustration.
-// ref     Picture reference (e.g. Luke 19.5). This will be printed with the illustration.
+// ref     Picture reference (e.g. Luke 19.5). This will be printed with the
+// illustration.
 {
   // The picture comes in the form of, e.g. "|biblesociety.gif|col||||"
-  ustring rawpicture = get_erase_code_till_next_marker(usfmcode, 0, marker_length, true);
+  ustring rawpicture =
+      get_erase_code_till_next_marker(usfmcode, 0, marker_length, true);
 
   // Remove the ending marker too, normally "fig*".
   ustring endingmarker = usfm_get_full_closing_marker(marker_text);
@@ -1076,37 +957,36 @@ void usfm_dissect_figure (ustring& usfmcode, const ustring& marker_text, size_t 
   }
 }
 
-
-bool usfm_code_available (ustring& small_store, ustring& big_store, size_t store_size)
+bool usfm_code_available(ustring &small_store, ustring &big_store,
+                         size_t store_size)
 /*
 When working with large chunks of USFM code, manipulating this code is slow.
 This function aims to reduce the number operations on the big string,
 so that most operations are done on the small string. And these are fast.
-If the size of the small store falls below the store size, 
+If the size of the small store falls below the store size,
 it transfers text from the big store to the small store.
 The function returns true if there's text left in the small store.
 */
 {
   if (small_store.length() < store_size) {
     if (!big_store.empty()) {
-      ustring transfer = big_store.substr (0, store_size);
-      big_store.erase (0, store_size);
-      small_store.append (transfer);
+      ustring transfer = big_store.substr(0, store_size);
+      big_store.erase(0, store_size);
+      small_store.append(transfer);
     }
   }
   return !small_store.empty();
 }
 
-
-ustring usfm_get_verse_text_only (const ustring& line)
+ustring usfm_get_verse_text_only(const ustring &line)
 // Takes a line of USFM code, and returns the text of the verse only,
 // that is, without notes or what.
 {
-  ustring text (line);
-  size_t pos = line.find ("\\v ");
+  ustring text(line);
+  size_t pos = line.find("\\v ");
   if (pos == 0) {
-    text.erase (0, 3);
-    usfm_get_verse_number (text, false, true);
+    text.erase(0, 3);
+    usfm_get_verse_number(text, false, true);
   }
   if (text.empty()) {
     text = "<empty>";

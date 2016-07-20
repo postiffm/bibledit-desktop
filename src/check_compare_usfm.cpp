@@ -1,35 +1,40 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_compare_usfm.h"
+#include "books.h"
+#include "checks.h"
 #include "projectutils.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
-#include "usfmtools.h"
-#include "books.h"
-#include "checks.h"
-#include "versification.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include "versification.h"
 #include <glib/gi18n.h>
 
-CheckCompareUsfms::CheckCompareUsfms(const ustring & project, const ustring & project2, const vector < unsigned int >&books, bool gui, bool allmarkers, const ustring & includeonly, const ustring & ignore, bool ignoreverse0)
+CheckCompareUsfms::CheckCompareUsfms(const ustring &project,
+                                     const ustring &project2,
+                                     const vector<unsigned int> &books,
+                                     bool gui, bool allmarkers,
+                                     const ustring &includeonly,
+                                     const ustring &ignore, bool ignoreverse0)
 /*
 It compares the USFMs of one project with the USFMs of the other project.
 project: project to check.
@@ -54,20 +59,20 @@ gui: show graphical progressbar.
   }
   myignoreverse0 = ignoreverse0;
   // Get the books of the two projects.
-  vector < unsigned int >scripture_books = project_get_books(project);
-  vector < unsigned int >scripture2_books = project_get_books(project2);
+  vector<unsigned int> scripture_books = project_get_books(project);
+  vector<unsigned int> scripture2_books = project_get_books(project2);
   // Container with flags to verify all books in scripture2 have been processed.
-  vector < bool > scripture2_checked;
+  vector<bool> scripture2_checked;
   for (unsigned int i = 0; i < scripture2_books.size(); i++)
     scripture2_checked.push_back(false);
-  // Progress information.  
+  // Progress information.
   progresswindow = NULL;
   if (gui) {
     progresswindow = new ProgressWindow(_("Comparing USFMs"), true);
     progresswindow->set_iterate(0, 1, scripture_books.size());
   }
   // Book selecton: If no books given, take them all.
-  set < unsigned int >selected_books;
+  set<unsigned int> selected_books;
   if (books.empty()) {
     for (unsigned int i = 0; i < scripture_books.size(); i++)
       selected_books.insert(scripture_books[i]);
@@ -120,25 +125,24 @@ gui: show graphical progressbar.
   }
 }
 
-CheckCompareUsfms::~CheckCompareUsfms()
-{
+CheckCompareUsfms::~CheckCompareUsfms() {
   if (progresswindow)
     delete progresswindow;
 }
 
-void CheckCompareUsfms::message(unsigned int book, unsigned int chapter, const ustring & verse, const ustring & message)
-{
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+void CheckCompareUsfms::message(unsigned int book, unsigned int chapter,
+                                const ustring &verse, const ustring &message) {
+  references.push_back(books_id_to_english(book) + " " +
+                       convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }
 
-void CheckCompareUsfms::comparebook(unsigned int book)
-{
-  vector < unsigned int >chapters = project_get_chapters(myproject, book);
-  set < unsigned int >chapterset(chapters.begin(), chapters.end());
-  vector < unsigned int >chapters2 = project_get_chapters(myproject2, book);
-  set < unsigned int >chapter2set(chapters2.begin(), chapters2.end());
-  // Check all chapters in this book, give message if chapter isn't there in 
+void CheckCompareUsfms::comparebook(unsigned int book) {
+  vector<unsigned int> chapters = project_get_chapters(myproject, book);
+  set<unsigned int> chapterset(chapters.begin(), chapters.end());
+  vector<unsigned int> chapters2 = project_get_chapters(myproject2, book);
+  set<unsigned int> chapter2set(chapters2.begin(), chapters2.end());
+  // Check all chapters in this book, give message if chapter isn't there in
   // the second project.
   for (unsigned int i = 0; i < chapters.size(); i++) {
     if (chapter2set.find(chapters[i]) != chapter2set.end()) {
@@ -147,7 +151,7 @@ void CheckCompareUsfms::comparebook(unsigned int book)
       message(book, chapters[i], "0", _("Extra chapter"));
     }
   }
-  // See if there are any chapters in the second project, which are not 
+  // See if there are any chapters in the second project, which are not
   // there in the first.
   for (unsigned int i = 0; i < chapters2.size(); i++) {
     if (chapterset.find(chapters2[i]) == chapterset.end())
@@ -155,13 +159,13 @@ void CheckCompareUsfms::comparebook(unsigned int book)
   }
 }
 
-void CheckCompareUsfms::comparechapter(unsigned int book, unsigned int chapter)
-{
-  vector < ustring > verses = project_get_verses(myproject, book, chapter);
-  set < ustring > verseset(verses.begin(), verses.end());
-  vector < ustring > verses2 = project_get_verses(myproject2, book, chapter);
-  set < ustring > verse2set(verses2.begin(), verses2.end());
-  // Check all verses in this chapter, give message if a verse isn't there in 
+void CheckCompareUsfms::comparechapter(unsigned int book,
+                                       unsigned int chapter) {
+  vector<ustring> verses = project_get_verses(myproject, book, chapter);
+  set<ustring> verseset(verses.begin(), verses.end());
+  vector<ustring> verses2 = project_get_verses(myproject2, book, chapter);
+  set<ustring> verse2set(verses2.begin(), verses2.end());
+  // Check all verses in this chapter, give message if a verse isn't there in
   // the second project.
   for (unsigned int i = 0; i < verses.size(); i++) {
     if (verse2set.find(verses[i]) != verse2set.end()) {
@@ -170,7 +174,7 @@ void CheckCompareUsfms::comparechapter(unsigned int book, unsigned int chapter)
       message(book, chapter, verses[i], _("Extra verse"));
     }
   }
-  // See if there are any verses in the second project, which are not 
+  // See if there are any verses in the second project, which are not
   // there in the first.
   for (unsigned int i = 0; i < verses.size(); i++) {
     if (verseset.find(verses2[i]) == verseset.end())
@@ -178,8 +182,8 @@ void CheckCompareUsfms::comparechapter(unsigned int book, unsigned int chapter)
   }
 }
 
-void CheckCompareUsfms::compareverse(unsigned int book, unsigned int chapter, const ustring & verse)
-{
+void CheckCompareUsfms::compareverse(unsigned int book, unsigned int chapter,
+                                     const ustring &verse) {
   // Get markers for the (first) project.
   ustring markers;
   {
@@ -202,12 +206,13 @@ void CheckCompareUsfms::compareverse(unsigned int book, unsigned int chapter, co
   }
   // Compare the two lots of markers.
   if (markers != markers2) {
-    message(book, chapter, verse, _("Markers differ: ") + markers + " (" + markers2 + ")");
+    message(book, chapter, verse,
+            _("Markers differ: ") + markers + " (" + markers2 + ")");
   }
 }
 
-void CheckCompareUsfms::storemarker(const ustring & marker, ustring & markers, const ustring & verse)
-{
+void CheckCompareUsfms::storemarker(const ustring &marker, ustring &markers,
+                                    const ustring &verse) {
   // Ignore verse zero?
   if (myignoreverse0) {
     if (verse == "0")

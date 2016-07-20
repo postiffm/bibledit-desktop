@@ -1,33 +1,31 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "utilities.h"
 #include "shortcuts.h"
-
+#include "utilities.h"
 
 Shortcuts::Shortcuts(int dummy)
 /*
 In many dialogs there are various texts which need to have their underscore
 character to get a shortcut.
 Shortcuts need to be unique within one dialog for quick operation.
-This objects adds shortcuts to the texts given to them, and ensures they 
+This objects adds shortcuts to the texts given to them, and ensures they
 are unique within the set given.
 */
 {
@@ -35,17 +33,13 @@ are unique within the set given.
   unavailables.insert(" ");
 }
 
-
-Shortcuts::~Shortcuts()
-{
+Shortcuts::~Shortcuts() {
   for (unsigned int i = 0; i < created_widgets.size(); i++) {
-    gtk_widget_destroy (created_widgets[i]);
+    gtk_widget_destroy(created_widgets[i]);
   }
 }
 
-
-void Shortcuts::stockbutton(GtkWidget * widget)
-{
+void Shortcuts::stockbutton(GtkWidget *widget) {
   if (widget == NULL)
     return;
   GtkStockItem stockitem;
@@ -59,9 +53,7 @@ void Shortcuts::stockbutton(GtkWidget * widget)
   lastwidget = widget;
 }
 
-
-void Shortcuts::button(GtkWidget * widget)
-{
+void Shortcuts::button(GtkWidget *widget) {
   if (widget == NULL)
     return;
   widgets.push_back(widget);
@@ -69,9 +61,7 @@ void Shortcuts::button(GtkWidget * widget)
   lastwidget = widget;
 }
 
-
-void Shortcuts::label(GtkWidget * widget)
-{
+void Shortcuts::label(GtkWidget *widget) {
   if (widget == NULL)
     return;
   widgets.push_back(widget);
@@ -79,15 +69,15 @@ void Shortcuts::label(GtkWidget * widget)
   lastwidget = widget;
 }
 
-
 void Shortcuts::process()
 // Removes any existing shortcuts, and insert new ones.
 {
-  // First pass: Go through the widgets and the ones that have the first 
-  // character of their label not yet used as a shortcut, set it as the shortcut.
+  // First pass: Go through the widgets and the ones that have the first
+  // character of their label not yet used as a shortcut, set it as the
+  // shortcut.
   // Store the other ones for the next pass.
-  vector < GtkWidget * >widgets2;
-  vector < bool > is_button2;
+  vector<GtkWidget *> widgets2;
+  vector<bool> is_button2;
   for (unsigned int i = 0; i < widgets.size(); i++) {
     ustring label;
     if (is_button[i])
@@ -102,7 +92,8 @@ void Shortcuts::process()
         if (is_button[i])
           gtk_button_set_label(GTK_BUTTON(widgets[i]), label.c_str());
         else
-          gtk_label_set_text_with_mnemonic(GTK_LABEL(widgets[i]), label.c_str());
+          gtk_label_set_text_with_mnemonic(GTK_LABEL(widgets[i]),
+                                           label.c_str());
         unavailables.insert(start);
       } else {
         widgets2.push_back(widgets[i]);
@@ -110,7 +101,7 @@ void Shortcuts::process()
       }
     }
   }
-  // Second pass: use the next available character of a widget's label as a 
+  // Second pass: use the next available character of a widget's label as a
   // shortcut.
   for (unsigned int i = 0; i < widgets2.size(); i++) {
     ustring label;
@@ -126,7 +117,8 @@ void Shortcuts::process()
         if (is_button2[i])
           gtk_button_set_label(GTK_BUTTON(widgets2[i]), label.c_str());
         else
-          gtk_label_set_text_with_mnemonic(GTK_LABEL(widgets2[i]), label.c_str());
+          gtk_label_set_text_with_mnemonic(GTK_LABEL(widgets2[i]),
+                                           label.c_str());
         unavailables.insert(character);
         break;
       }
@@ -134,23 +126,20 @@ void Shortcuts::process()
   }
 }
 
-
-void Shortcuts::consider_assistant ()
-// Considers the shortcuts normally used in an assistant in addition to the content of the page.
+void Shortcuts::consider_assistant()
+// Considers the shortcuts normally used in an assistant in addition to the
+// content of the page.
 {
-  create_widget (GTK_STOCK_HELP);
-  create_widget (GTK_STOCK_CANCEL);
-  create_widget (GTK_STOCK_GO_BACK);
-  create_widget (GTK_STOCK_GO_FORWARD);
-  create_widget (GTK_STOCK_GOTO_LAST);
+  create_widget(GTK_STOCK_HELP);
+  create_widget(GTK_STOCK_CANCEL);
+  create_widget(GTK_STOCK_GO_BACK);
+  create_widget(GTK_STOCK_GO_FORWARD);
+  create_widget(GTK_STOCK_GOTO_LAST);
 }
 
-
-void Shortcuts::create_widget (const gchar * stock)
-{
-  GtkWidget * widget;
-  widget = gtk_button_new_from_stock (stock);
-  stockbutton (widget);
-  created_widgets.push_back (widget);
+void Shortcuts::create_widget(const gchar *stock) {
+  GtkWidget *widget;
+  widget = gtk_button_new_from_stock(stock);
+  stockbutton(widget);
+  created_widgets.push_back(widget);
 }
-

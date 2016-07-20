@@ -1,54 +1,53 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogimportnotes.h"
 #include "bible.h"
-#include "utilities.h"
-#include "dialogwait.h"
-#include "utilities.h"
-#include "notes_utils.h"
+#include "books.h"
 #include "date_time_utils.h"
-#include <sqlite3.h>
+#include "dialogwait.h"
 #include "gtkwrappers.h"
 #include "gwrappers.h"
-#include "shell.h"
-#include "books.h"
 #include "help.h"
-#include "unixwrappers.h"
+#include "libraries.h"
+#include "notes_utils.h"
+#include "shell.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "utilities.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
+#include <sqlite3.h>
 
 #define TEMP_FILE "bibledit.import.notes"
 
-
-ImportNotesDialog::ImportNotesDialog(int dummy)
-{
+ImportNotesDialog::ImportNotesDialog(int dummy) {
   importnotesdialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(importnotesdialog), "Import Notes");
-  gtk_window_set_position(GTK_WINDOW(importnotesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_position(GTK_WINDOW(importnotesdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(importnotesdialog), TRUE);
-  gtk_window_set_type_hint(GTK_WINDOW(importnotesdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_type_hint(GTK_WINDOW(importnotesdialog),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(importnotesdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(importnotesdialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
@@ -65,14 +64,17 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
   gtk_widget_show(vbox4);
   gtk_container_add(GTK_CONTAINER(notebook), vbox4);
 
-  label13 = gtk_label_new(_("You are going to import notes into your notes editor.\n\nClick Forward to continue."));
+  label13 = gtk_label_new(_("You are going to import notes into your notes "
+                            "editor.\n\nClick Forward to continue."));
   gtk_widget_show(label13);
   gtk_box_pack_start(GTK_BOX(vbox4), label13, FALSE, FALSE, 5);
   gtk_misc_set_alignment(GTK_MISC(label13), 0, 0.5);
 
   label24 = gtk_label_new("");
   gtk_widget_show(label24);
-  gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 0), label24);
+  gtk_notebook_set_tab_label(
+      GTK_NOTEBOOK(notebook),
+      gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 0), label24);
 
   vbox2 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox2);
@@ -108,20 +110,28 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
 
   label26 = gtk_label_new("");
   gtk_widget_show(label26);
-  gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 1), label26);
+  gtk_notebook_set_tab_label(
+      GTK_NOTEBOOK(notebook),
+      gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 1), label26);
 
   vbox5 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox5);
   gtk_container_add(GTK_CONTAINER(notebook), vbox5);
 
-  label18 = gtk_label_new(_("We now know which file to import.\nThe next thing is to check if the file is in Unicode format.\n\nIf it is not in Unicode format, you will be asked to convert it.\n\nNote: The conversion may take time, depending on the size of the file."));
+  label18 = gtk_label_new(
+      _("We now know which file to import.\nThe next thing is to check if the "
+        "file is in Unicode format.\n\nIf it is not in Unicode format, you "
+        "will be asked to convert it.\n\nNote: The conversion may take time, "
+        "depending on the size of the file."));
   gtk_widget_show(label18);
   gtk_box_pack_start(GTK_BOX(vbox5), label18, FALSE, FALSE, 10);
   gtk_misc_set_alignment(GTK_MISC(label18), 0, 0.5);
 
   label28 = gtk_label_new("");
   gtk_widget_show(label28);
-  gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 2), label28);
+  gtk_notebook_set_tab_label(
+      GTK_NOTEBOOK(notebook),
+      gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 2), label28);
 
   vbox6 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox6);
@@ -134,20 +144,25 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
 
   label30 = gtk_label_new("");
   gtk_widget_show(label30);
-  gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 3), label30);
+  gtk_notebook_set_tab_label(
+      GTK_NOTEBOOK(notebook),
+      gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 3), label30);
 
   vbox8 = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox8);
   gtk_container_add(GTK_CONTAINER(notebook), vbox8);
 
-  label23 = gtk_label_new(_("All preparation is now ready.\n\nPress Apply to actually import the notes."));
+  label23 = gtk_label_new(_("All preparation is now ready.\n\nPress Apply to "
+                            "actually import the notes."));
   gtk_widget_show(label23);
   gtk_box_pack_start(GTK_BOX(vbox8), label23, FALSE, FALSE, 10);
   gtk_misc_set_alignment(GTK_MISC(label23), 0, 0.5);
 
   label32 = gtk_label_new("");
   gtk_widget_show(label32);
-  gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 4), label32);
+  gtk_notebook_set_tab_label(
+      GTK_NOTEBOOK(notebook),
+      gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 4), label32);
 
   hbox1 = gtk_hbox_new(FALSE, 4);
   gtk_widget_show(hbox1);
@@ -161,29 +176,37 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
   forwardbutton = gtk_button_new_from_stock("gtk-go-forward");
   gtk_widget_show(forwardbutton);
   gtk_box_pack_start(GTK_BOX(hbox1), forwardbutton, FALSE, FALSE, 0);
-  gtk_widget_set_can_default (GTK_WIDGET (forwardbutton), true);
+  gtk_widget_set_can_default(GTK_WIDGET(forwardbutton), true);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(importnotesdialog));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(importnotesdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(importnotesdialog, NULL, NULL, NULL);
 
   cancelbutton = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(importnotesdialog), cancelbutton, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(importnotesdialog), cancelbutton,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton), true);
 
   applybutton = gtk_button_new_from_stock("gtk-apply");
   gtk_widget_show(applybutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(importnotesdialog), applybutton, GTK_RESPONSE_APPLY);
+  gtk_dialog_add_action_widget(GTK_DIALOG(importnotesdialog), applybutton,
+                               GTK_RESPONSE_APPLY);
   gtk_widget_set_sensitive(applybutton, FALSE);
-  gtk_widget_set_can_default (GTK_WIDGET (applybutton), true);
+  gtk_widget_set_can_default(GTK_WIDGET(applybutton), true);
 
-  g_signal_connect((gpointer) select_directory_button, "clicked", G_CALLBACK(on_select_file_button_clicked), gpointer(this));
-  g_signal_connect((gpointer) backbutton, "clicked", G_CALLBACK(on_backbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) forwardbutton, "clicked", G_CALLBACK(on_forwardbutton_clicked), gpointer(this));
-  g_signal_connect((gpointer) applybutton, "clicked", G_CALLBACK(on_applybutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)select_directory_button, "clicked",
+                   G_CALLBACK(on_select_file_button_clicked), gpointer(this));
+  g_signal_connect((gpointer)backbutton, "clicked",
+                   G_CALLBACK(on_backbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)forwardbutton, "clicked",
+                   G_CALLBACK(on_forwardbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)applybutton, "clicked",
+                   G_CALLBACK(on_applybutton_clicked), gpointer(this));
 
   gtk_widget_grab_focus(forwardbutton);
   gtk_widget_grab_default(forwardbutton);
@@ -191,108 +214,87 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
   set_gui();
 }
 
-
-ImportNotesDialog::~ImportNotesDialog()
-{
+ImportNotesDialog::~ImportNotesDialog() {
   // Clean up temporary file.
   unix_unlink(temporary_file(TEMP_FILE).c_str());
   gtk_widget_destroy(importnotesdialog);
 }
 
-
-int ImportNotesDialog::run()
-{
+int ImportNotesDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(importnotesdialog));
 }
 
-
-void ImportNotesDialog::on_backbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ImportNotesDialog *) user_data)->on_backbutton();
+void ImportNotesDialog::on_backbutton_clicked(GtkButton *button,
+                                              gpointer user_data) {
+  ((ImportNotesDialog *)user_data)->on_backbutton();
 }
 
-
-void ImportNotesDialog::on_backbutton()
-{
+void ImportNotesDialog::on_backbutton() {
   gtk_notebook_prev_page(GTK_NOTEBOOK(notebook));
   set_gui();
 }
 
-
-void ImportNotesDialog::on_forwardbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ImportNotesDialog *) user_data)->on_forwardbutton();
+void ImportNotesDialog::on_forwardbutton_clicked(GtkButton *button,
+                                                 gpointer user_data) {
+  ((ImportNotesDialog *)user_data)->on_forwardbutton();
 }
 
-
-void ImportNotesDialog::on_forwardbutton()
-{
+void ImportNotesDialog::on_forwardbutton() {
   gtk_notebook_next_page(GTK_NOTEBOOK(notebook));
   set_gui();
 }
 
-
-void ImportNotesDialog::on_select_file_button_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ImportNotesDialog *) user_data)->on_select_file_button();
+void ImportNotesDialog::on_select_file_button_clicked(GtkButton *button,
+                                                      gpointer user_data) {
+  ((ImportNotesDialog *)user_data)->on_select_file_button();
 }
 
-
-void ImportNotesDialog::on_select_file_button()
-{
-  ustring filename = gtkw_file_chooser_open(importnotesdialog, _("Open a file"), "");
+void ImportNotesDialog::on_select_file_button() {
+  ustring filename =
+      gtkw_file_chooser_open(importnotesdialog, _("Open a file"), "");
   if (filename.empty())
     return;
   file_to_import = filename;
   select_file_page();
 }
 
-
-void ImportNotesDialog::set_gui()
-{
+void ImportNotesDialog::set_gui() {
   gtk_widget_set_sensitive(backbutton, TRUE);
   gtk_widget_set_sensitive(forwardbutton, TRUE);
   gtk_widget_set_sensitive(applybutton, FALSE);
   gint currentpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
   switch (currentpage) {
-  case 0:
-    {
-      gtk_widget_set_sensitive(backbutton, FALSE);
-      break;
-    }
-  case 1:
-    {
-      select_file_page();
-      break;
-    }
-  case 2:
-    {
-      // Nothing to do, text is already in the notebook.
-      break;
-    }
-  case 3:
-    {
-      unicode_page();
-      break;
-    }
-  case 4:
-    {
-      // Some eye candy, because the process might take time.
-      WaitDialog wd(500, 450, 300);
-      wd.run();
-      // Make known corrections to the xml file.
-      make_known_corrections_to_xml_file();
-      // Activate apply button.
-      gtk_widget_set_sensitive(forwardbutton, FALSE);
-      gtk_widget_set_sensitive(applybutton, TRUE);
-      break;
-    }
+  case 0: {
+    gtk_widget_set_sensitive(backbutton, FALSE);
+    break;
+  }
+  case 1: {
+    select_file_page();
+    break;
+  }
+  case 2: {
+    // Nothing to do, text is already in the notebook.
+    break;
+  }
+  case 3: {
+    unicode_page();
+    break;
+  }
+  case 4: {
+    // Some eye candy, because the process might take time.
+    WaitDialog wd(500, 450, 300);
+    wd.run();
+    // Make known corrections to the xml file.
+    make_known_corrections_to_xml_file();
+    // Activate apply button.
+    gtk_widget_set_sensitive(forwardbutton, FALSE);
+    gtk_widget_set_sensitive(applybutton, TRUE);
+    break;
+  }
   }
 }
 
-
-void ImportNotesDialog::select_file_page()
-{
+void ImportNotesDialog::select_file_page() {
   // Show filename.
   gtk_label_set_text(GTK_LABEL(label8), file_to_import.c_str());
   // See whether the file is of a known type.
@@ -303,45 +305,45 @@ void ImportNotesDialog::select_file_page()
     spawn.read();
     spawn.run();
     for (unsigned int i = 0; i < spawn.standardout.size(); i++) {
-      if (spawn.standardout[i].find("<bibledit-notes version=\"3\">") != string::npos)
+      if (spawn.standardout[i].find("<bibledit-notes version=\"3\">") !=
+          string::npos)
         import_format = ifBibleditNotesVersion3;
-      if (spawn.standardout[i].find("<ScriptureNotes Version=\"2.0\">") != string::npos)
+      if (spawn.standardout[i].find("<ScriptureNotes Version=\"2.0\">") !=
+          string::npos)
         import_format = ifScriptureNotesVersion20;
     }
     // Info for user.
     ustring info_for_user;
     switch (import_format) {
-    case ifUnknown:
-      {
-        info_for_user = _("Bibledit-Gtk does not recognize the format of this file");
-        break;
-      }
-    case ifBibleditNotesVersion3:
-      {
-        note_element = "note";
-        reference_element = "references";
-        notetext_element = "text";
-        category_element = "category";
-        project_element = "project";
-        datemodified_element = "date-modified";
-        datecreated_element = "date-created";
-        createdby_element = "created-by";
-        info_for_user = "Found: Bibledit-Gtk Notes Version 3";
-        break;
-      }
-    case ifScriptureNotesVersion20:
-      {
-        note_element = "Note";
-        reference_element = "References";
-        notetext_element = "Contents";
-        category_element = "Status";
-        project_element = "Project";
-        datemodified_element = "ModificationDate";
-        datecreated_element = "CreationDate";
-        createdby_element = "CreatedBy";
-        info_for_user = "Found: TNE Scripture Notes Version 2.0";
-        break;
-      }
+    case ifUnknown: {
+      info_for_user =
+          _("Bibledit-Gtk does not recognize the format of this file");
+      break;
+    }
+    case ifBibleditNotesVersion3: {
+      note_element = "note";
+      reference_element = "references";
+      notetext_element = "text";
+      category_element = "category";
+      project_element = "project";
+      datemodified_element = "date-modified";
+      datecreated_element = "date-created";
+      createdby_element = "created-by";
+      info_for_user = "Found: Bibledit-Gtk Notes Version 3";
+      break;
+    }
+    case ifScriptureNotesVersion20: {
+      note_element = "Note";
+      reference_element = "References";
+      notetext_element = "Contents";
+      category_element = "Status";
+      project_element = "Project";
+      datemodified_element = "ModificationDate";
+      datecreated_element = "CreationDate";
+      createdby_element = "CreatedBy";
+      info_for_user = "Found: TNE Scripture Notes Version 2.0";
+      break;
+    }
     }
     gtk_label_set_text(GTK_LABEL(xml_file_label), info_for_user.c_str());
   }
@@ -353,9 +355,7 @@ void ImportNotesDialog::select_file_page()
   }
 }
 
-
-void ImportNotesDialog::unicode_page()
-{
+void ImportNotesDialog::unicode_page() {
   // Filename of the file to import.
   ustring path = temporary_file(TEMP_FILE);
   // See whether the file contents is proper Unicode
@@ -366,9 +366,7 @@ void ImportNotesDialog::unicode_page()
   g_free(s);
 }
 
-
-void ImportNotesDialog::make_known_corrections_to_xml_file()
-{
+void ImportNotesDialog::make_known_corrections_to_xml_file() {
   // Make a number of corrections to the xml file.
   ustring filename = temporary_file(TEMP_FILE);
   ReadText rt(filename, true);
@@ -387,12 +385,10 @@ void ImportNotesDialog::make_known_corrections_to_xml_file()
   write_lines(filename, rt.lines);
 }
 
-
-void ImportNotesDialog::on_applybutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ImportNotesDialog *) user_data)->on_apply();
+void ImportNotesDialog::on_applybutton_clicked(GtkButton *button,
+                                               gpointer user_data) {
+  ((ImportNotesDialog *)user_data)->on_apply();
 }
-
 
 void ImportNotesDialog::on_apply()
 /*
@@ -421,16 +417,12 @@ The various handlers will then store the data in the database.
   }
   // Set up parser.
   GMarkupParseContext *context;
-  GMarkupParser parser = {
-    start_element_handler,
-    end_element_handler,
-    text_handler,
-    passthrough_handler,
-    error_handler
-  };
+  GMarkupParser parser = {start_element_handler, end_element_handler,
+                          text_handler, passthrough_handler, error_handler};
   // Parse xml file.
   if (!was_error) {
-    context = g_markup_parse_context_new(&parser, GMarkupParseFlags(0), gpointer(this), NULL);
+    context = g_markup_parse_context_new(&parser, GMarkupParseFlags(0),
+                                         gpointer(this), NULL);
     if (!g_markup_parse_context_parse(context, contents, length, NULL)) {
       g_markup_parse_context_free(context);
       was_error = true;
@@ -456,43 +448,45 @@ The various handlers will then store the data in the database.
   write_lines(notes_categories_filename(), rt.lines);
 }
 
-
-void ImportNotesDialog::start_element_handler(GMarkupParseContext * context, const gchar * element_name, const gchar ** attribute_names, const gchar ** attribute_values, gpointer user_data, GError ** error)
-{
+void ImportNotesDialog::start_element_handler(GMarkupParseContext *context,
+                                              const gchar *element_name,
+                                              const gchar **attribute_names,
+                                              const gchar **attribute_values,
+                                              gpointer user_data,
+                                              GError **error) {
   ustring element;
   element = element_name;
-  ((ImportNotesDialog *) user_data)->start_element_handler(element);
+  ((ImportNotesDialog *)user_data)->start_element_handler(element);
 }
 
-
-void ImportNotesDialog::end_element_handler(GMarkupParseContext * context, const gchar * element_name, gpointer user_data, GError ** error)
-{
+void ImportNotesDialog::end_element_handler(GMarkupParseContext *context,
+                                            const gchar *element_name,
+                                            gpointer user_data,
+                                            GError **error) {
   ustring element;
   element = element_name;
-  ((ImportNotesDialog *) user_data)->end_element_handler(element);
+  ((ImportNotesDialog *)user_data)->end_element_handler(element);
 }
 
-
-void ImportNotesDialog::text_handler(GMarkupParseContext * context, const gchar * text, gsize text_len, gpointer user_data, GError ** error)
-{
+void ImportNotesDialog::text_handler(GMarkupParseContext *context,
+                                     const gchar *text, gsize text_len,
+                                     gpointer user_data, GError **error) {
   ustring utext;
   utext = text;
-  ((ImportNotesDialog *) user_data)->text_handler(utext);
+  ((ImportNotesDialog *)user_data)->text_handler(utext);
 }
 
+void ImportNotesDialog::passthrough_handler(GMarkupParseContext *context,
+                                            const gchar *passthrough_text,
+                                            gsize text_len, gpointer user_data,
+                                            GError **error) {}
 
-void ImportNotesDialog::passthrough_handler(GMarkupParseContext * context, const gchar * passthrough_text, gsize text_len, gpointer user_data, GError ** error)
-{
-}
-
-
-void ImportNotesDialog::error_handler(GMarkupParseContext * context, GError * error, gpointer user_data)
-{
+void ImportNotesDialog::error_handler(GMarkupParseContext *context,
+                                      GError *error, gpointer user_data) {
   cerr << error->message << endl;
 }
 
-
-void ImportNotesDialog::start_element_handler(const ustring & element_name)
+void ImportNotesDialog::start_element_handler(const ustring &element_name)
 /*
 When we encounter a new element that starts data, this handler deals with that.
 */
@@ -518,8 +512,7 @@ When we encounter a new element that starts data, this handler deals with that.
   current_element = element_name;
 }
 
-
-void ImportNotesDialog::end_element_handler(const ustring & element_name)
+void ImportNotesDialog::end_element_handler(const ustring &element_name)
 /*
 When we encounter an element that ends data, this handler deals with that.
 */
@@ -528,7 +521,7 @@ When we encounter an element that ends data, this handler deals with that.
   if (current_element == "P")
     notetext_content.append("\n");
   if (element_name == note_element) {
-    // We are at the end of a note. Go through the data, and fill up 
+    // We are at the end of a note. Go through the data, and fill up
     // missing bits and pieces, and then store a new note in the database.
 
     // Right, let's get started. First the reference.
@@ -539,18 +532,23 @@ When we encounter an element that ends data, this handler deals with that.
       reference_content.clear();
       for (unsigned int i = 0; i < parse.lines.size(); i++) {
         // Get the reference.
-	Reference oldRef(0);
+        Reference oldRef(0);
         Reference newRef(0);
         if (reference_discover(oldRef, trim(parse.lines[i]), newRef)) {
-          vector < int >verses = verses_encode(newRef.verse_get());
-          int book_chapter = reference_to_numerical_equivalent(books_id_to_english(newRef.book_get()), convert_to_string(newRef.chapter_get()), "0");
+          vector<int> verses = verses_encode(newRef.verse_get());
+          int book_chapter = reference_to_numerical_equivalent(
+              books_id_to_english(newRef.book_get()),
+              convert_to_string(newRef.chapter_get()), "0");
           for (unsigned int i2 = 0; i2 < verses.size(); i2++) {
             reference_content.append(" ");
-            reference_content.append(convert_to_string(int (book_chapter + verses[i2])));
+            reference_content.append(
+                convert_to_string(int(book_chapter + verses[i2])));
           }
           // Store the reference in OSIS format too.
           ustring osis_book = books_id_to_osis(newRef.book_get());
-          ustring osis_ref = osis_book + "." + convert_to_string(newRef.chapter_get()) + "." + newRef.verse_get();
+          ustring osis_ref = osis_book + "." +
+                             convert_to_string(newRef.chapter_get()) + "." +
+                             newRef.verse_get();
           if (!osis_reference.empty())
             osis_reference.append(" ");
           osis_reference.append(osis_ref);
@@ -602,15 +600,15 @@ When we encounter an element that ends data, this handler deals with that.
     // Logbook.
     ustring logbook;
     // Store the note to file.
-    notes_store_one_in_file(unique_id, notetext_content, project_content, osis_reference, category_content, julian_created, createdby_content, julian_modified, logbook);
-
+    notes_store_one_in_file(unique_id, notetext_content, project_content,
+                            osis_reference, category_content, julian_created,
+                            createdby_content, julian_modified, logbook);
   }
   // Deal with depth of the elements.
   depth--;
 }
 
-
-void ImportNotesDialog::text_handler(const ustring & text)
+void ImportNotesDialog::text_handler(const ustring &text)
 /*
 When we encounter the text inside an element, this handler deals with that.
 */

@@ -1,41 +1,39 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
-
 
 #ifndef INCLUDED_DIALOGSTYLESHEET_H
 #define INCLUDED_DIALOGSTYLESHEET_H
 
-
-#include <gtk/gtk.h>
 #include "style.h"
+#include <gtk/gtk.h>
 
-
-class StylesheetDialog
-{
+class StylesheetDialog {
 public:
-  StylesheetDialog (const ustring& stylesheet, const ustring& style);
-  ~ StylesheetDialog ();
-  int run ();
+  StylesheetDialog(const ustring &stylesheet, const ustring &style);
+  ~StylesheetDialog();
+  int run();
   ustring name;
+
 protected:
   ustring mystylesheet;
   ustring mystyle;
+
 private:
   GtkWidget *stylesheetdialog;
   GtkWidget *dialog_vbox1;
@@ -108,7 +106,7 @@ private:
   GtkWidget *radiobutton_peripheral_cov;
   GtkWidget *radiobutton_peripheral_spine;
   GtkWidget *label56;
-  
+
   GtkWidget *vbox15;
   GtkWidget *label_id_58;
   GtkWidget *radiobutton_id_book;
@@ -149,28 +147,28 @@ private:
   GtkObject *spinbuttonfontsize_adj;
   GtkWidget *spinbuttonfontsize;
   GtkWidget *label9;
-  void fontsize_points_create ();
+  void fontsize_points_create();
   double fontsize_points;
 
   // Italic
   ustring italic;
   GtkWidget *checkbutton_italic;
-  void italic_simple_create ();
-  
+  void italic_simple_create();
+
   // Bold
   ustring bold;
   GtkWidget *checkbutton_bold;
-  void bold_simple_create ();
-  
+  void bold_simple_create();
+
   // Underline
   ustring underline;
   GtkWidget *checkbutton_underline;
-  void underline_simple_create ();
-  
+  void underline_simple_create();
+
   // Small caps
   ustring smallcaps;
   GtkWidget *checkbutton_small_caps;
-  void smallcaps_simple_create ();
+  void smallcaps_simple_create();
 
   // Italic, bold, underline, small caps - extended.
   GtkWidget *table2;
@@ -194,12 +192,12 @@ private:
   GtkWidget *radiobutton_small_caps_on;
   GtkWidget *radiobutton_small_caps_inherit;
   GtkWidget *radiobutton_small_caps_toggle;
-  void italic_bold_underline_smallcaps_extended_create ();
+  void italic_bold_underline_smallcaps_extended_create();
 
   // Superscript
   GtkWidget *checkbutton_superscript;
   bool superscript;
-  void superscript_create ();
+  void superscript_create();
 
   // Paragraph
   GtkWidget *vbox4;
@@ -236,16 +234,16 @@ private:
   double leftmargin;
   double rightmargin;
   double firstlineindent;
-  void paragraph_create (const gchar * label, bool grey_out_justify);
+  void paragraph_create(const gchar *label, bool grey_out_justify);
 
   // Span columns.
   GtkWidget *checkbutton_span;
   bool spancolumns;
-  void span_columns_create ();
-  
+  void span_columns_create();
+
   // Apocrypha
   GtkWidget *checkbutton_apocrypha;
-  void apocrypha_create ();
+  void apocrypha_create();
 
   // Note numbering type.
   GtkWidget *vbox10;
@@ -256,8 +254,8 @@ private:
   GtkWidget *radiobutton_note_numbering_a;
   GtkWidget *radiobutton_note_numbering_user;
   GtkWidget *entry_note_numbering;
-  void note_numbering_type_create ();
-  
+  void note_numbering_type_create();
+
   // Note numbering restart.
   GtkWidget *hbox10;
   GtkWidget *label53;
@@ -265,30 +263,31 @@ private:
   GtkWidget *radiobutton_note_numbering_restart_never;
   GtkWidget *radiobutton_note_numbering_restart_book;
   GtkWidget *radiobutton_note_numbering_restart_chapter;
-  void note_numering_restart_create ();
-  
+  void note_numering_restart_create();
+
   // Print chapternumber at first verse.
   GtkWidget *print_chapter_at_first_verse;
-  void print_chapter_at_first_verse_create ();
-  static void on_radiobutton_print_chapter_at_first_verse_create_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_print_chapter_at_first_verse_create ();
+  void print_chapter_at_first_verse_create();
+  static void on_radiobutton_print_chapter_at_first_verse_create_toggled(
+      GtkToggleButton *togglebutton, gpointer user_data);
+  void on_radiobutton_print_chapter_at_first_verse_create();
 
   // \id : Book starting new page.
   GtkWidget *hbox_id;
   GtkWidget *checkbutton_id_newpage;
   GtkWidget *checkbutton_id_oddpage;
-  void book_id_new_page_create ();
-  
+  void book_id_new_page_create();
+
   // Colour
   GtkWidget *hbox_colour;
   GtkWidget *button_colour;
   unsigned int color;
-  void colour_create ();  
+  void colour_create();
 
   // Print
   GtkWidget *checkbutton_print;
   bool print;
-  void print_create ();
+  void print_create();
 
   // Endnotes placement.
   GtkWidget *hbox13;
@@ -299,88 +298,105 @@ private:
   GtkWidget *hbox14;
   GtkWidget *radiobutton_print_endnotes_at_marker;
   GtkWidget *entry_print_endnotes_marker;
-  void end_note_placement_create ();
-  static void on_radiobutton_print_endnotes_at_marker_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_print_endnotes_at_marker ();
+  void end_note_placement_create();
+  static void
+  on_radiobutton_print_endnotes_at_marker_toggled(GtkToggleButton *togglebutton,
+                                                  gpointer user_data);
+  void on_radiobutton_print_endnotes_at_marker();
 
   // Column number.
   GtkWidget *hbox15;
   GtkWidget *label62;
   GtkObject *spinbutton_column_number_adj;
   GtkWidget *spinbutton_column_number;
-  void column_number_create ();
+  void column_number_create();
 
   // Chapter number (and other text) in running headers
   GtkWidget *checkbutton_print_in_running_header_left;
   GtkWidget *checkbutton_print_in_running_header_right;
-  void print_in_running_header_create ();
-  
+  void print_in_running_header_create();
+
   // Text to add after wordlist entries.
   GtkWidget *hbox16;
   GtkWidget *label64;
   GtkWidget *entry_wordlist_addition;
   GtkWidget *label65;
-  void wordlist_add_text_create ();
+  void wordlist_add_text_create();
 
   // Restart paragraph.
   GtkWidget *checkbutton_restarts_paragraph;
-  void restarts_paragraph_create ();
+  void restarts_paragraph_create();
 
   // Action area.
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton1;
   GtkWidget *okbutton;
-  
+
   // User variables.
   bool userbool1, userbool2, userbool3;
   int userint1, userint2, userint3;
   ustring userstring1, userstring2, userstring3;
-  
-  static void on_okbutton_clicked (GtkButton *button, gpointer user_data);
-  void on_ok();
-  static void on_style_type_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_style_type (GtkToggleButton *togglebutton);
-  static void on_alignment_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_alignment (GtkToggleButton *togglebutton);
-  void set_gui ();
-  void save_style ();
-  void set_justification (const ustring& justification);
-  ustring get_justification ();
-  void set_italic ();
-  ustring get_italic ();
-  void set_bold ();
-  ustring get_bold ();
-  void set_underline ();
-  ustring get_underline ();
-  void set_small_caps ();
-  ustring get_small_caps ();
-  StyleType get_styletype ();
-  static void on_radiobutton_italic_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_italic (GtkWidget *togglebutton);
-  static void on_radiobutton_bold_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_bold (GtkWidget *togglebutton);
-  static void on_radiobutton_underline_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_underline (GtkWidget *togglebutton);
-  static void on_radiobutton_small_caps_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_small_caps (GtkWidget *togglebutton);
-  void set_subtype (StyleType maintype, int subtype);
-  int get_subtype ();
-  static void on_radiobutton_note_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_note ();
-  static void on_radiobutton_xref_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_xref ();
-  void destroy_optional_widgets ();
-  static void on_radiobutton_note_numbering_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_note_numbering ();
-  static void on_radiobutton_identifier_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_identifier ();
-  static void on_checkbutton_id_newpage_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_checkbutton_id_newpage ();
-  static void on_checkbutton_table_element_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_checkbutton_table_element ();
-  static void on_radiobutton_subtype_wordlist_toggled (GtkToggleButton *togglebutton, gpointer user_data);
-  void on_radiobutton_subtype_wordlist ();
-};
 
+  static void on_okbutton_clicked(GtkButton *button, gpointer user_data);
+  void on_ok();
+  static void on_style_type_toggled(GtkToggleButton *togglebutton,
+                                    gpointer user_data);
+  void on_style_type(GtkToggleButton *togglebutton);
+  static void on_alignment_toggled(GtkToggleButton *togglebutton,
+                                   gpointer user_data);
+  void on_alignment(GtkToggleButton *togglebutton);
+  void set_gui();
+  void save_style();
+  void set_justification(const ustring &justification);
+  ustring get_justification();
+  void set_italic();
+  ustring get_italic();
+  void set_bold();
+  ustring get_bold();
+  void set_underline();
+  ustring get_underline();
+  void set_small_caps();
+  ustring get_small_caps();
+  StyleType get_styletype();
+  static void on_radiobutton_italic_toggled(GtkToggleButton *togglebutton,
+                                            gpointer user_data);
+  void on_radiobutton_italic(GtkWidget *togglebutton);
+  static void on_radiobutton_bold_toggled(GtkToggleButton *togglebutton,
+                                          gpointer user_data);
+  void on_radiobutton_bold(GtkWidget *togglebutton);
+  static void on_radiobutton_underline_toggled(GtkToggleButton *togglebutton,
+                                               gpointer user_data);
+  void on_radiobutton_underline(GtkWidget *togglebutton);
+  static void on_radiobutton_small_caps_toggled(GtkToggleButton *togglebutton,
+                                                gpointer user_data);
+  void on_radiobutton_small_caps(GtkWidget *togglebutton);
+  void set_subtype(StyleType maintype, int subtype);
+  int get_subtype();
+  static void on_radiobutton_note_toggled(GtkToggleButton *togglebutton,
+                                          gpointer user_data);
+  void on_radiobutton_note();
+  static void on_radiobutton_xref_toggled(GtkToggleButton *togglebutton,
+                                          gpointer user_data);
+  void on_radiobutton_xref();
+  void destroy_optional_widgets();
+  static void
+  on_radiobutton_note_numbering_toggled(GtkToggleButton *togglebutton,
+                                        gpointer user_data);
+  void on_radiobutton_note_numbering();
+  static void on_radiobutton_identifier_toggled(GtkToggleButton *togglebutton,
+                                                gpointer user_data);
+  void on_radiobutton_identifier();
+  static void on_checkbutton_id_newpage_toggled(GtkToggleButton *togglebutton,
+                                                gpointer user_data);
+  void on_checkbutton_id_newpage();
+  static void
+  on_checkbutton_table_element_toggled(GtkToggleButton *togglebutton,
+                                       gpointer user_data);
+  void on_checkbutton_table_element();
+  static void
+  on_radiobutton_subtype_wordlist_toggled(GtkToggleButton *togglebutton,
+                                          gpointer user_data);
+  void on_radiobutton_subtype_wordlist();
+};
 
 #endif

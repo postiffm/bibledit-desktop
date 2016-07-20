@@ -1,34 +1,37 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_repetition.h"
+#include "books.h"
 #include "projectutils.h"
+#include "scripturechecks.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
-#include "usfmtools.h"
-#include "books.h"
-#include "scripturechecks.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-CheckRepetition::CheckRepetition(const ustring & project, const vector < unsigned int >&books, bool ignorecase, const ustring & only_these, const ustring & ignore_these, bool gui)
+CheckRepetition::CheckRepetition(const ustring &project,
+                                 const vector<unsigned int> &books,
+                                 bool ignorecase, const ustring &only_these,
+                                 const ustring &ignore_these, bool gui)
 /*
 It checks repeating whole words in the text.
 project: project to check.
@@ -42,11 +45,11 @@ gui: whether to show graphical progressbar.
   // Variables.
   cancelled = false;
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
   // Read possible words to only include, or to exclude.
-  set < ustring > onlythese;
+  set<ustring> onlythese;
   if (!only_these.empty()) {
     ReadText rt(only_these, true, false);
     for (unsigned int i = 0; i < rt.lines.size(); i++) {
@@ -55,8 +58,8 @@ gui: whether to show graphical progressbar.
       onlythese.insert(rt.lines[i]);
     }
   }
-  set < ustring > ignorethese_set;
-  vector < ustring > ignorethese_list;
+  set<ustring> ignorethese_set;
+  vector<ustring> ignorethese_list;
   if (!ignore_these.empty()) {
     ReadText rt(ignore_these, true, false);
     for (unsigned int i = 0; i < rt.lines.size(); i++) {
@@ -83,12 +86,14 @@ gui: whether to show graphical progressbar.
       }
     }
     // Check each chapter in the book.
-    vector < unsigned int >chapters = project_get_chapters(project, mybooks[bk]);
+    vector<unsigned int> chapters = project_get_chapters(project, mybooks[bk]);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
-      vector < ustring > verses = project_get_verses(project, mybooks[bk], chapters[ch]);
+      vector<ustring> verses =
+          project_get_verses(project, mybooks[bk], chapters[ch]);
       // Check each verse in the chapter.
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
-        ustring line = project_retrieve_verse(project, mybooks[bk], chapters[ch], verses[vs]);
+        ustring line = project_retrieve_verse(project, mybooks[bk],
+                                              chapters[ch], verses[vs]);
         // Check the verse.
         CategorizeLine categorize(line);
         ustring text(categorize.id);
@@ -116,7 +121,8 @@ gui: whether to show graphical progressbar.
                 if (ignorethese_set.find(word) != ignorethese_set.end())
                   print = false;
             }
-            // Deal with certain texts between repeating words, so that if these texts
+            // Deal with certain texts between repeating words, so that if these
+            // texts
             // are found in between, this repetition is ignored.
             if (print) {
               if (ignorecase)
@@ -132,7 +138,9 @@ gui: whether to show graphical progressbar.
             if (print) {
               ustring message = _("Repeated: ");
               message.append(word);
-              references.push_back(books_id_to_english(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
+              references.push_back(books_id_to_english(mybooks[bk]) + " " +
+                                   convert_to_string(chapters[ch]) + ":" +
+                                   verses[vs]);
               comments.push_back(message);
             }
           }
@@ -143,8 +151,7 @@ gui: whether to show graphical progressbar.
   }
 }
 
-CheckRepetition::~CheckRepetition()
-{
+CheckRepetition::~CheckRepetition() {
   if (progresswindow)
     delete progresswindow;
 }

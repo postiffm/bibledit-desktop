@@ -1,43 +1,42 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
 #include "usfm2text.h"
-#include "gwrappers.h"
-#include <glib.h>
-#include "utilities.h"
-#include "tiny_utilities.h"
-#include "date_time_utils.h"
-#include "usfmtools.h"
-#include "constants.h"
 #include "books.h"
 #include "color.h"
+#include "constants.h"
+#include "date_time_utils.h"
 #include "directories.h"
 #include "gtkwrappers.h"
+#include "gwrappers.h"
 #include "pdfviewer.h"
-#include "settings.h"
-#include "referenceutils.h"
 #include "projectutils.h"
+#include "referenceutils.h"
+#include "settings.h"
+#include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-Usfm2Text::Usfm2Text(Text2Pdf * text2pdf_in, bool show_progress)
-{
+Usfm2Text::Usfm2Text(Text2Pdf *text2pdf_in, bool show_progress) {
   // Initialize variables.
   text2pdf = text2pdf_in;
   font_size = 12;
@@ -53,7 +52,9 @@ Usfm2Text::Usfm2Text(Text2Pdf * text2pdf_in, bool show_progress)
   progress_event_id = 0;
   if (show_progress) {
     progresswindow = new ProgressWindow(_("Processing"), true);
-    progress_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 500, GSourceFunc(signal_progress_timeout), gpointer(this), NULL);
+    progress_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 500,
+                                           GSourceFunc(signal_progress_timeout),
+                                           gpointer(this), NULL);
   }
   cancel = false;
   printversenumber = true;
@@ -74,8 +75,7 @@ Usfm2Text::Usfm2Text(Text2Pdf * text2pdf_in, bool show_progress)
   add_style(font_family_size_line_height_style(), u2xtFontFamilySizeLineHeight);
 }
 
-Usfm2Text::~Usfm2Text()
-{
+Usfm2Text::~Usfm2Text() {
   gw_destroy_source(progress_event_id);
   if (progresswindow)
     delete progresswindow;
@@ -83,7 +83,7 @@ Usfm2Text::~Usfm2Text()
     delete (numeral_localization);
 }
 
-void Usfm2Text::add_usfm_code(const vector < ustring > &lines)
+void Usfm2Text::add_usfm_code(const vector<ustring> &lines)
 // Add some usfm code to the object's usfm input buffer.
 {
   for (unsigned int i = 0; i < lines.size(); i++) {
@@ -91,14 +91,14 @@ void Usfm2Text::add_usfm_code(const vector < ustring > &lines)
   }
 }
 
-void Usfm2Text::add_usfm_code(const ustring & line)
+void Usfm2Text::add_usfm_code(const ustring &line)
 // Add some usfm code to the object's usfm input buffer.
 {
   usfm_code.push_back(line);
 }
 
 void Usfm2Text::preprocess()
-// Does the preprocessing of the usfm data, 
+// Does the preprocessing of the usfm data,
 // extracting all sorts of information from it.
 {
   // Variable for dumping endnotes.
@@ -123,88 +123,87 @@ void Usfm2Text::preprocess()
       gtk_main_iteration();
     while (!usfm_line.empty()) {
       bool processed = false;
-      marker_found = usfm_search_marker(usfm_line, marker, marker_position, marker_length, is_opener);
+      marker_found = usfm_search_marker(usfm_line, marker, marker_position,
+                                        marker_length, is_opener);
       if (marker_found) {
         if (marker_position == 0) {
           if (is_opener) {
             Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
             if (stylepointer) {
               switch (stylepointer->type) {
-              case u2xtIdentifierBook:
-                {
-                  // Extract the book from the id string.
-                  ustring id_line = get_erase_code_till_next_marker(usfm_line, 0, marker_length, true);
-                  if (id_line.length() >= 3) {
-                    id_line = id_line.substr(0, 3);
-                    book = books_paratext_to_id(id_line);
-                    // Initialize the highest chapter to 0.
-                    highest_chapter_number[book] = 0;
-                    // Store the book in a list for later use.
-                    if (book)
-                      books.push_back(book);
-                    // Reset chapter.  
-                    chapter = 0;
-                  }
-                  // Data was processed.
-                  processed = true;
-                  break;
+              case u2xtIdentifierBook: {
+                // Extract the book from the id string.
+                ustring id_line = get_erase_code_till_next_marker(
+                    usfm_line, 0, marker_length, true);
+                if (id_line.length() >= 3) {
+                  id_line = id_line.substr(0, 3);
+                  book = books_paratext_to_id(id_line);
+                  // Initialize the highest chapter to 0.
+                  highest_chapter_number[book] = 0;
+                  // Store the book in a list for later use.
+                  if (book)
+                    books.push_back(book);
+                  // Reset chapter.
+                  chapter = 0;
                 }
-              case u2xtIdentifierComment:
-                {
-                  break;
-                }
-              case u2xtIdentifierRunningHeader:
-                {
-                  break;
-                }
-              case u2xtIdentifierLongTOC:
-                {
-                  toc_collect_text(usfm_line, marker_length, true, book);
-                  processed = true;
-                  break;
-                }
-              case u2xtIdentifierShortTOC:
-                {
-                  toc_collect_text(usfm_line, marker_length, false, book);
-                  processed = true;
-                  break;
-                }
+                // Data was processed.
+                processed = true;
+                break;
+              }
+              case u2xtIdentifierComment: {
+                break;
+              }
+              case u2xtIdentifierRunningHeader: {
+                break;
+              }
+              case u2xtIdentifierLongTOC: {
+                toc_collect_text(usfm_line, marker_length, true, book);
+                processed = true;
+                break;
+              }
+              case u2xtIdentifierShortTOC: {
+                toc_collect_text(usfm_line, marker_length, false, book);
+                processed = true;
+                break;
+              }
               case u2xtIdentifierBookAbbreviation:
               case u2xtParagraphMainTitle:
               case u2xtParagraphSubTitle:
               case u2xtParagraphSectionHeading:
               case u2xtParagraphNormalParagraph:
-              case u2xtInlineText:
-                {
-                  break;
-                }
-              case u2xtChapterNumber:
-                {
-                  // Get the highest chapter number in the current book.
-                  ustring chaptertext = get_erase_code_till_next_marker(usfm_line, 0, marker_length, true);
-                  chapter = convert_to_int(chaptertext);
-                  highest_chapter_number[book] = chapter;
-                  // Whether to print the chapter number in the left/right headers.
-                  chapter_number_in_running_header_at_left_pages = stylepointer->print_in_left_running_header;
-                  chapter_number_in_running_header_at_right_pages = stylepointer->print_in_right_running_header;
-                  // Data was processed.
-                  processed = true;
-                  break;
-                }
+              case u2xtInlineText: {
+                break;
+              }
+              case u2xtChapterNumber: {
+                // Get the highest chapter number in the current book.
+                ustring chaptertext = get_erase_code_till_next_marker(
+                    usfm_line, 0, marker_length, true);
+                chapter = convert_to_int(chaptertext);
+                highest_chapter_number[book] = chapter;
+                // Whether to print the chapter number in the left/right
+                // headers.
+                chapter_number_in_running_header_at_left_pages =
+                    stylepointer->print_in_left_running_header;
+                chapter_number_in_running_header_at_right_pages =
+                    stylepointer->print_in_right_running_header;
+                // Data was processed.
+                processed = true;
+                break;
+              }
               case u2xtVerseNumber:
-              case u2xtFootNoteStart:
-                {
-                  break;
+              case u2xtFootNoteStart: {
+                break;
+              }
+              case u2xtEndNoteStart: {
+                if (!endnote_dump_marker_encountered) {
+                  add_style(
+                      stylepointer->dump_endnotes_upon_encountering_this_marker,
+                      u2xtDumpEndnotes);
+                  endnote_position = stylepointer->endnote_position_type;
+                  endnote_dump_marker_encountered = true;
                 }
-              case u2xtEndNoteStart:
-                {
-                  if (!endnote_dump_marker_encountered) {
-                    add_style(stylepointer->dump_endnotes_upon_encountering_this_marker, u2xtDumpEndnotes);
-                    endnote_position = stylepointer->endnote_position_type;
-                    endnote_dump_marker_encountered = true;
-                  }
-                  break;
-                }
+                break;
+              }
               case u2xtFootEndNoteStandardContent:
               case u2xtFootEndNoteContent:
               case u2xtFootEndNoteContentWithEndmarker:
@@ -232,40 +231,36 @@ void Usfm2Text::preprocess()
               case u2xtDumpEndnotes:
               case u2xtLineSpacing:
               case u2xtKeepOnPage:
-              case u2xtFontFamilySizeLineHeight:
-                {
-                  break;
-                }
-              case u2xtChapterLabel:
-                {
-                  // Get / store the chapter label.
-                  ustring label = get_erase_code_till_next_marker(usfm_line,
-                                                                  0, marker_length, true);
-                  ChapterLabel chapterlabel(book, chapter, label);
-                  chapter_labels.push_back(chapterlabel);
-                  // Data was processed.
-                  processed = true;
-                  break;
-                }
-              case u2xtPublishedChapterMarker:
-                {
-                  // Get / store the chapter label.
-                  ustring label = get_erase_code_till_next_marker(usfm_line,
-                                                                  0, marker_length, true);
-                  ChapterLabel publishedchaptermarker(book, chapter, label);
-                  published_chapter_markers.push_back(publishedchaptermarker);
-                  // Data was processed.
-                  processed = true;
-                  break;
-                }
+              case u2xtFontFamilySizeLineHeight: {
+                break;
+              }
+              case u2xtChapterLabel: {
+                // Get / store the chapter label.
+                ustring label = get_erase_code_till_next_marker(
+                    usfm_line, 0, marker_length, true);
+                ChapterLabel chapterlabel(book, chapter, label);
+                chapter_labels.push_back(chapterlabel);
+                // Data was processed.
+                processed = true;
+                break;
+              }
+              case u2xtPublishedChapterMarker: {
+                // Get / store the chapter label.
+                ustring label = get_erase_code_till_next_marker(
+                    usfm_line, 0, marker_length, true);
+                ChapterLabel publishedchaptermarker(book, chapter, label);
+                published_chapter_markers.push_back(publishedchaptermarker);
+                // Data was processed.
+                processed = true;
+                break;
+              }
               case u2xtIdentifierCommentWithEndmarker:
               case u2xtGeneralWordlistEntry:
               case u2xtHebrewWordlistEntry:
               case u2xtGreekWordlistEntry:
-              case u2xtSubjectIndexEntry:
-                {
-                  break;
-                }
+              case u2xtSubjectIndexEntry: {
+                break;
+              }
               }
             }
           }
@@ -273,14 +268,14 @@ void Usfm2Text::preprocess()
       }
       // Default for unprocessed text.
       if (!processed) {
-        get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, false);
+        get_erase_code_till_next_marker(usfm_line, marker_position,
+                                        marker_length, false);
       }
     }
   }
 }
 
-void Usfm2Text::convert_from_usfm_to_text()
-{
+void Usfm2Text::convert_from_usfm_to_text() {
   // Cancel?
   if (cancel)
     return;
@@ -303,263 +298,266 @@ void Usfm2Text::convert_from_usfm_to_text()
     usfm_line = get_next_chapter();
     while (!usfm_line.empty()) {
       bool processed = false;
-      marker_found = usfm_search_marker(usfm_line, marker, marker_position, marker_length, is_opener);
+      marker_found = usfm_search_marker(usfm_line, marker, marker_position,
+                                        marker_length, is_opener);
       if (marker_found) {
         if (marker_position == 0) {
           Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
           if (stylepointer) {
             switch (stylepointer->type) {
-            case u2xtIdentifierBook:
-              {
-                ustring id_line = get_erase_code_till_next_marker(usfm_line, 0, marker_length, true);
-                if (id_line.length() >= 3) {
-                  id_line = id_line.substr(0, 3);
-                  set_new_book(books_paratext_to_id(id_line));
+            case u2xtIdentifierBook: {
+              ustring id_line = get_erase_code_till_next_marker(
+                  usfm_line, 0, marker_length, true);
+              if (id_line.length() >= 3) {
+                id_line = id_line.substr(0, 3);
+                set_new_book(books_paratext_to_id(id_line));
+              }
+              note_callers_new_book();
+              // Before writing data of the new book, see whether to dump
+              // the endnotes here, and the end of the previous book.
+              if (endnote_position == eptAfterBook)
+                dump_endnotes(fo_block_style, fo_inline_style);
+              output_id_page_break(stylepointer, fo_block_style,
+                                   fo_inline_style);
+              book_spans_columns =
+                  (books_id_to_type(book) == btFrontBackMatter);
+              break;
+            }
+            case u2xtIdentifierComment: {
+              get_erase_code_till_next_marker(usfm_line, marker_position,
+                                              marker_length, true);
+              break;
+            }
+            case u2xtIdentifierRunningHeader: {
+              output_running_header(usfm_line, stylepointer, marker_length,
+                                    book);
+              break;
+            }
+            case u2xtIdentifierLongTOC: {
+              toc_insert_referent(usfm_line, fo_block_style, fo_inline_style,
+                                  marker_length);
+              break;
+            }
+            case u2xtIdentifierShortTOC: {
+              toc_insert_referent(usfm_line, fo_block_style, fo_inline_style,
+                                  marker_length);
+              break;
+            }
+            case u2xtIdentifierBookAbbreviation: {
+              get_erase_code_till_next_marker(usfm_line, marker_position,
+                                              marker_length, true);
+              break;
+            }
+            case u2xtParagraphMainTitle: {
+              output_text_starting_new_paragraph(
+                  usfm_line, stylepointer, fo_block_style, fo_inline_style,
+                  marker_length, true);
+              break;
+            }
+            case u2xtParagraphSubTitle: {
+              output_text_starting_new_paragraph(
+                  usfm_line, stylepointer, fo_block_style, fo_inline_style,
+                  marker_length, true);
+              break;
+            }
+            case u2xtParagraphSectionHeading: {
+              output_text_starting_new_paragraph(
+                  usfm_line, stylepointer, fo_block_style, fo_inline_style,
+                  marker_length, true);
+              break;
+            }
+            case u2xtParagraphNormalParagraph: {
+              output_text_starting_new_paragraph(
+                  usfm_line, stylepointer, fo_block_style, fo_inline_style,
+                  marker_length, false);
+              output_chapter_number_try_at_first_verse(usfm_line,
+                                                       fo_block_style);
+              verses_in_paragraph_count = 0;
+              break;
+            }
+            case u2xtInlineText: {
+              output_text_character_style(usfm_line, stylepointer,
+                                          fo_block_style, fo_inline_style,
+                                          marker_length, is_opener);
+              break;
+            }
+            case u2xtChapterNumber: {
+              set_new_chapter(convert_to_int(get_erase_code_till_next_marker(
+                  usfm_line, 0, marker_length, true)));
+              note_callers_new_chapter();
+              output_chapter_number_try_normal(usfm_line, stylepointer,
+                                               fo_block_style, fo_inline_style,
+                                               marker_length, book);
+              break;
+            }
+            case u2xtVerseNumber: {
+              verses_in_paragraph_count++;
+              usfm_line.erase(0, marker_length);
+              size_t position = usfm_line.find(" ");
+              position = CLAMP(position, 0, usfm_line.length());
+              set_new_verse(usfm_line.substr(0, position));
+              usfm_line.erase(0, position);
+              bool verse_was_written = output_verse_number(
+                  stylepointer, fo_block_style, fo_inline_style, marker_length);
+              // Erase any spaces following the verse if the verse was not
+              // written.
+              if (!verse_was_written) {
+                while (!usfm_line.empty() && (usfm_line.substr(0, 1) == " ")) {
+                  usfm_line.erase(0, 1);
                 }
-                note_callers_new_book();
-                // Before writing data of the new book, see whether to dump 
-                // the endnotes here, and the end of the previous book.
-                if (endnote_position == eptAfterBook)
-                  dump_endnotes(fo_block_style, fo_inline_style);
-                output_id_page_break(stylepointer, fo_block_style, fo_inline_style);
-                book_spans_columns = (books_id_to_type(book) == btFrontBackMatter);
-                break;
               }
-            case u2xtIdentifierComment:
-              {
-                get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, true);
-                break;
-              }
-            case u2xtIdentifierRunningHeader:
-              {
-                output_running_header(usfm_line, stylepointer, marker_length, book);
-                break;
-              }
-            case u2xtIdentifierLongTOC:
-              {
-                toc_insert_referent(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtIdentifierShortTOC:
-              {
-                toc_insert_referent(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtIdentifierBookAbbreviation:
-              {
-                get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, true);
-                break;
-              }
-            case u2xtParagraphMainTitle:
-              {
-                output_text_starting_new_paragraph(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, true);
-                break;
-              }
-            case u2xtParagraphSubTitle:
-              {
-                output_text_starting_new_paragraph(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, true);
-                break;
-              }
-            case u2xtParagraphSectionHeading:
-              {
-                output_text_starting_new_paragraph(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, true);
-                break;
-              }
-            case u2xtParagraphNormalParagraph:
-              {
-                output_text_starting_new_paragraph(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, false);
-                output_chapter_number_try_at_first_verse(usfm_line, fo_block_style);
-                verses_in_paragraph_count = 0;
-                break;
-              }
-            case u2xtInlineText:
-              {
-                output_text_character_style(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, is_opener);
-                break;
-              }
-            case u2xtChapterNumber:
-              {
-                set_new_chapter(convert_to_int(get_erase_code_till_next_marker(usfm_line, 0, marker_length, true)));
-                note_callers_new_chapter();
-                output_chapter_number_try_normal(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length, book);
-                break;
-              }
-            case u2xtVerseNumber:
-              {
-                verses_in_paragraph_count++;
-                usfm_line.erase(0, marker_length);
-                size_t position = usfm_line.find(" ");
-                position = CLAMP(position, 0, usfm_line.length());
-                set_new_verse(usfm_line.substr(0, position));
-                usfm_line.erase(0, position);
-                bool verse_was_written = output_verse_number(stylepointer, fo_block_style, fo_inline_style, marker_length);
-                // Erase any spaces following the verse if the verse was not written.
-                if (!verse_was_written) {
-                  while (!usfm_line.empty() && (usfm_line.substr(0, 1) == " ")) {
-                    usfm_line.erase(0, 1);
-                  }
-                }
-                break;
-              }
+              break;
+            }
             case u2xtFootNoteStart:
-            case u2xtCrossreferenceStart:
-              {
-                output_text_note(usfm_line, stylepointer, fo_block_style, marker_length, is_opener);
-                break;
-              }
-            case u2xtEndNoteStart:
-              {
-                buffer_endnote(usfm_line, stylepointer, marker_length, is_opener);
-                break;
-              }
+            case u2xtCrossreferenceStart: {
+              output_text_note(usfm_line, stylepointer, fo_block_style,
+                               marker_length, is_opener);
+              break;
+            }
+            case u2xtEndNoteStart: {
+              buffer_endnote(usfm_line, stylepointer, marker_length, is_opener);
+              break;
+            }
             case u2xtFootEndNoteStandardContent:
             case u2xtFootEndNoteContent:
             case u2xtFootEndNoteContentWithEndmarker:
             case u2xtFootEndNoteParagraph:
             case u2xtCrossreferenceStandardContent:
             case u2xtCrossreferenceContent:
-            case u2xtCrossreferenceContentWithEndmarker:
-              {
-                output_text_fallback(usfm_line);
-                break;
+            case u2xtCrossreferenceContentWithEndmarker: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtPublication: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtTableOfContents: {
+              toc_insert_body(usfm_line, fo_block_style, fo_inline_style,
+                              marker_length);
+              break;
+            }
+            case u2xtPreface: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtIntroduction: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtGlossary: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtConcordance: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtIndex: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtMapIndex: {
+              output_text_fallback(usfm_line);
+              break;
+            }
+            case u2xtCover: {
+              output_other_page_break(usfm_line, stylepointer, fo_block_style,
+                                      fo_inline_style, marker_length);
+              break;
+            }
+            case u2xtSpine: {
+              output_other_page_break(usfm_line, stylepointer, fo_block_style,
+                                      fo_inline_style, marker_length);
+              break;
+            }
+            case u2xtPicture: {
+              output_picture(usfm_line, stylepointer, fo_block_style,
+                             fo_inline_style, marker_length);
+              break;
+            }
+            case u2xtPageBreak: {
+              output_other_page_break(usfm_line, stylepointer, fo_block_style,
+                                      fo_inline_style, marker_length);
+              break;
+            }
+            case u2xtTableElementRow: {
+              output_text_table(usfm_line, fo_block_style, fo_inline_style,
+                                marker_length);
+              break;
+            }
+            case u2xtTableElementHeading: {
+              output_text_table(usfm_line, fo_block_style, fo_inline_style,
+                                marker_length);
+              break;
+            }
+            case u2xtTableElementCell: {
+              output_text_table(usfm_line, fo_block_style, fo_inline_style,
+                                marker_length);
+              break;
+            }
+            case u2xtElastic: {
+              output_elastic(usfm_line, fo_block_style, fo_inline_style,
+                             marker_length);
+              break;
+            }
+            case u2xtDumpEndnotes: {
+              get_erase_code_till_next_marker(usfm_line, 0, marker_length,
+                                              false);
+              if (endnote_position == eptAtMarker)
+                dump_endnotes(fo_block_style, fo_inline_style);
+              break;
+            }
+            case u2xtLineSpacing: {
+              output_spacing_paragraph(usfm_line, fo_block_style,
+                                       fo_inline_style, marker_length,
+                                       is_opener);
+              break;
+            }
+            case u2xtKeepOnPage: {
+              output_keep_on_page(usfm_line, fo_block_style, fo_inline_style,
+                                  marker_length, is_opener);
+              break;
+            }
+            case u2xtFontFamilySizeLineHeight: {
+              output_font_family_size_line_height(usfm_line, fo_block_style,
+                                                  fo_inline_style,
+                                                  marker_length, is_opener);
+              break;
+            }
+            case u2xtChapterLabel: {
+              get_erase_code_till_next_marker(usfm_line, marker_position,
+                                              marker_length, true);
+              break;
+            }
+            case u2xtPublishedChapterMarker: {
+              get_erase_code_till_next_marker(usfm_line, marker_position,
+                                              marker_length, true);
+              break;
+            }
+            case u2xtIdentifierCommentWithEndmarker: {
+              if (is_opener) {
+                get_erase_code_till_next_marker(usfm_line, marker_position,
+                                                marker_length, true);
+              } else {
+                usfm_line.erase(marker_position, marker_length);
               }
-            case u2xtPublication:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtTableOfContents:
-              {
-                toc_insert_body(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtPreface:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtIntroduction:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtGlossary:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtConcordance:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtIndex:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtMapIndex:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
-            case u2xtCover:
-              {
-                output_other_page_break(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtSpine:
-              {
-                output_other_page_break(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtPicture:
-              {
-                output_picture(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtPageBreak:
-              {
-                output_other_page_break(usfm_line, stylepointer, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtTableElementRow:
-              {
-                output_text_table(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtTableElementHeading:
-              {
-                output_text_table(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtTableElementCell:
-              {
-                output_text_table(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtElastic:
-              {
-                output_elastic(usfm_line, fo_block_style, fo_inline_style, marker_length);
-                break;
-              }
-            case u2xtDumpEndnotes:
-              {
-                get_erase_code_till_next_marker(usfm_line, 0, marker_length, false);
-                if (endnote_position == eptAtMarker)
-                  dump_endnotes(fo_block_style, fo_inline_style);
-                break;
-              }
-            case u2xtLineSpacing:
-              {
-                output_spacing_paragraph(usfm_line, fo_block_style, fo_inline_style, marker_length, is_opener);
-                break;
-              }
-            case u2xtKeepOnPage:
-              {
-                output_keep_on_page(usfm_line, fo_block_style, fo_inline_style, marker_length, is_opener);
-                break;
-              }
-            case u2xtFontFamilySizeLineHeight:
-              {
-                output_font_family_size_line_height(usfm_line, fo_block_style, fo_inline_style, marker_length, is_opener);
-                break;
-              }
-            case u2xtChapterLabel:
-              {
-                get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, true);
-                break;
-              }
-            case u2xtPublishedChapterMarker:
-              {
-                get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, true);
-                break;
-              }
-            case u2xtIdentifierCommentWithEndmarker:
-              {
-                if (is_opener) {
-                  get_erase_code_till_next_marker(usfm_line, marker_position, marker_length, true);
-                } else {
-                  usfm_line.erase(marker_position, marker_length);
-                }
-                break;
-              }
+              break;
+            }
             case u2xtGeneralWordlistEntry:
             case u2xtHebrewWordlistEntry:
             case u2xtGreekWordlistEntry:
-            case u2xtSubjectIndexEntry:
-              {
-                usfm_line.erase(marker_position, marker_length);
-                if (!is_opener) {
-                  usfm_line.insert(0, stylepointer->wordlist_entry_addition);
-                }
-                break;
+            case u2xtSubjectIndexEntry: {
+              usfm_line.erase(marker_position, marker_length);
+              if (!is_opener) {
+                usfm_line.insert(0, stylepointer->wordlist_entry_addition);
               }
-            default:
-              {
-                output_text_fallback(usfm_line);
-                break;
-              }
+              break;
+            }
+            default: {
+              output_text_fallback(usfm_line);
+              break;
+            }
             }
             // This text was processed.
             processed = true;
@@ -572,12 +570,12 @@ void Usfm2Text::convert_from_usfm_to_text()
       }
     }
   }
-  // Dump any unprocessed endnotes here. This also dumps them after the last book.
+  // Dump any unprocessed endnotes here. This also dumps them after the last
+  // book.
   dump_endnotes(fo_block_style, fo_inline_style);
 }
 
-void Usfm2Text::process()
-{
+void Usfm2Text::process() {
   // Preprocess the usfm code.
   preprocess();
 
@@ -594,32 +592,25 @@ void Usfm2Text::process()
     return;
 
   // Calculate the length of elastics.
-  //XepElastics xep_elastics(""/*xepfile()*/);
+  // XepElastics xep_elastics(""/*xepfile()*/);
 
   // Delete the note caller objects.
   destroy_note_callers();
 }
 
-void Usfm2Text::set_fonts(const vector < ustring > &fonts_in, double font_size_in)
-{
+void Usfm2Text::set_fonts(const vector<ustring> &fonts_in,
+                          double font_size_in) {
   fonts = fonts_in;
   font_size = font_size_in;
 }
 
-void Usfm2Text::set_line_height(unsigned int line_height_in)
-{
+void Usfm2Text::set_line_height(unsigned int line_height_in) {
   line_height = line_height_in;
 }
 
-void Usfm2Text::set_right_to_left()
-{
-  right_to_left = true;
-}
+void Usfm2Text::set_right_to_left() { right_to_left = true; }
 
-void Usfm2Text::set_two_columns()
-{
-  two_columns = true;
-}
+void Usfm2Text::set_two_columns() { two_columns = true; }
 
 void Usfm2Text::set_even_page_count()
 // This forces an even page count in the page sequence.
@@ -627,20 +618,16 @@ void Usfm2Text::set_even_page_count()
   even_page_count = true;
 }
 
-void Usfm2Text::set_print_date()
-{
-  print_date = true;
-}
+void Usfm2Text::set_print_date() { print_date = true; }
 
-void Usfm2Text::add_styles(const vector < Usfm2XslFoStyle > &styles_in)
-{
+void Usfm2Text::add_styles(const vector<Usfm2XslFoStyle> &styles_in) {
   for (unsigned int i = 0; i < styles_in.size(); i++) {
     styles.push_back(styles_in[i]);
   }
 }
 
-void Usfm2Text::add_style(const ustring & marker_in, Usfm2XslFoStyleType type_in)
-{
+void Usfm2Text::add_style(const ustring &marker_in,
+                          Usfm2XslFoStyleType type_in) {
   Usfm2XslFoStyle style(marker_in);
   style.type = type_in;
   styles.push_back(style);
@@ -680,7 +667,10 @@ ustring Usfm2Text::get_next_chapter()
   return chapter;
 }
 
-void Usfm2Text::output_text_starting_new_paragraph(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, bool keep_with_next_paragraph)
+void Usfm2Text::output_text_starting_new_paragraph(
+    ustring &line, Usfm2XslFoStyle *stylepointer,
+    Usfm2XslFoStyle *&fo_block_style, Usfm2XslFoStyle *&fo_inline_style,
+    size_t marker_length, bool keep_with_next_paragraph)
 /*
  This function deals with a marker that starts a paragraph.
  It does the administration that starting the paragraph requires.
@@ -701,7 +691,7 @@ void Usfm2Text::output_text_starting_new_paragraph(ustring & line, Usfm2XslFoSty
   open_paragraph(fo_block_style, keep_with_next_paragraph);
 }
 
-Usfm2XslFoStyle *Usfm2Text::marker_get_pointer_to_style(const ustring & marker)
+Usfm2XslFoStyle *Usfm2Text::marker_get_pointer_to_style(const ustring &marker)
 // Returns the type of the marker.
 {
   for (unsigned int i = 0; i < styles.size(); i++) {
@@ -711,7 +701,7 @@ Usfm2XslFoStyle *Usfm2Text::marker_get_pointer_to_style(const ustring & marker)
   return NULL;
 }
 
-void Usfm2Text::output_text_fallback(ustring & line)
+void Usfm2Text::output_text_fallback(ustring &line)
 /*
  This function outputs text that was not handled by any other method.
  It outputs the text till it finds the next marker, if there's one.
@@ -732,7 +722,8 @@ void Usfm2Text::output_text_fallback(ustring & line)
   if (marker_found) {
     text = line.substr(0, marker_position);
     line.erase(0, marker_position);
-    // Handle special case that the marker is at the start, which is an error case anyway.
+    // Handle special case that the marker is at the start, which is an error
+    // case anyway.
     if (marker_position == 0) {
       text = line.substr(0, 1);
       line.erase(0, 1);
@@ -742,22 +733,22 @@ void Usfm2Text::output_text_fallback(ustring & line)
     line.clear();
   }
 
-  // Write that text. 
+  // Write that text.
   if (inrange.in_range()) {
     text2pdf->add_text(text);
   }
 }
 
-void Usfm2Text::open_paragraph(Usfm2XslFoStyle * style, bool keep_with_next_paragraph)
-{
+void Usfm2Text::open_paragraph(Usfm2XslFoStyle *style,
+                               bool keep_with_next_paragraph) {
   // Open the paragraph.
   text2pdf->open_paragraph();
   // Set the properties.
   set_paragraph(style, keep_with_next_paragraph);
 }
 
-void Usfm2Text::set_paragraph(Usfm2XslFoStyle * style, bool keep_with_next_paragraph)
-{
+void Usfm2Text::set_paragraph(Usfm2XslFoStyle *style,
+                              bool keep_with_next_paragraph) {
   // Fontsize
   text2pdf->paragraph_set_font_size(style->fontsize);
 
@@ -814,11 +805,10 @@ void Usfm2Text::set_paragraph(Usfm2XslFoStyle * style, bool keep_with_next_parag
 gchar *Usfm2Text::default_style()
 // The name of the default style.
 {
-  return (gchar *) "usfm2xslfo_default_style";
+  return (gchar *)"usfm2xslfo_default_style";
 }
 
-void Usfm2Text::open_inline(Usfm2XslFoStyle * style, Usfm2XslFoStyle * block)
-{
+void Usfm2Text::open_inline(Usfm2XslFoStyle *style, Usfm2XslFoStyle *block) {
   // Variable for general use.
   ustring s;
 
@@ -876,7 +866,10 @@ void Usfm2Text::open_inline(Usfm2XslFoStyle * style, Usfm2XslFoStyle * block)
   }
 }
 
-void Usfm2Text::output_chapter_number_try_normal(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, unsigned int book)
+void Usfm2Text::output_chapter_number_try_normal(
+    ustring &line, Usfm2XslFoStyle *stylepointer,
+    Usfm2XslFoStyle *&fo_block_style, Usfm2XslFoStyle *&fo_inline_style,
+    size_t marker_length, unsigned int book)
 // This function tries to output the chapter number at the normal position.
 // Else it stores the data needed for outputting it later on at the first verse.
 {
@@ -884,7 +877,7 @@ void Usfm2Text::output_chapter_number_try_normal(ustring & line, Usfm2XslFoStyle
   if (!inrange.in_range())
     return;
 
-  // Close possible inline and block styles.  
+  // Close possible inline and block styles.
   close_possible_inline(fo_inline_style);
   text2pdf->close_paragraph();
   fo_block_style = NULL;
@@ -904,7 +897,7 @@ void Usfm2Text::output_chapter_number_try_normal(ustring & line, Usfm2XslFoStyle
     return;
 
   // Write the chapter number.
-  // Normally this is the number as it is, 
+  // Normally this is the number as it is,
   // but it can be modified if a published chapter marker is given.
   // Insert a possible chapter label too.
   // Localization is done too.
@@ -913,7 +906,8 @@ void Usfm2Text::output_chapter_number_try_normal(ustring & line, Usfm2XslFoStyle
   ustring chapterlabel;
   for (unsigned int i = 0; i < chapter_labels.size(); i++) {
     if (chapter_labels[i].book == book) {
-      if ((chapter_labels[i].chapter == 0) || (chapter_labels[i].chapter == chapter)) {
+      if ((chapter_labels[i].chapter == 0) ||
+          (chapter_labels[i].chapter == chapter)) {
         chapterlabel = chapter_labels[i].label;
       }
     }
@@ -930,29 +924,30 @@ void Usfm2Text::output_chapter_number_try_normal(ustring & line, Usfm2XslFoStyle
       }
     }
   }
-  ustring localization (chapternumber);
+  ustring localization(chapternumber);
   if (numeral_localization) {
-    localization = numeral_localization->latin2localization (chapternumber);
+    localization = numeral_localization->latin2localization(chapternumber);
   }
   text2pdf->add_text(localization);
   text2pdf->close_paragraph();
   fo_block_style = NULL;
 }
 
-void Usfm2Text::output_chapter_number_try_at_first_verse(ustring line, Usfm2XslFoStyle * &fo_block_style)
-{
+void Usfm2Text::output_chapter_number_try_at_first_verse(
+    ustring line, Usfm2XslFoStyle *&fo_block_style) {
   // Bail out if there is no chapter to write.
   if (chapter_number_to_output_at_first_verse.empty())
     return;
 
-  // This function is called at the marker of a normal paragraph. 
+  // This function is called at the marker of a normal paragraph.
   // See if the next marker that comes after is a verse marker.
   // If so, write the chapter number there.
   ustring marker;
   size_t position;
   size_t length;
   bool is_opener;
-  bool marker_found = usfm_search_marker(line, marker, position, length, is_opener);
+  bool marker_found =
+      usfm_search_marker(line, marker, position, length, is_opener);
   if (marker_found) {
     Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
     if (stylepointer) {
@@ -970,12 +965,13 @@ void Usfm2Text::output_chapter_number_try_at_first_verse(ustring line, Usfm2XslF
         }
 
         // Assemble chapter number.
-        // Normally this is the number as it is, 
+        // Normally this is the number as it is,
         // but it can be modified if a published chapter marker is given.
         ustring chapternumber = chapter_number_to_output_at_first_verse;
         for (unsigned int i = 0; i < published_chapter_markers.size(); i++) {
           if (book == published_chapter_markers[i].book) {
-            if (convert_to_int(chapter_number_to_output_at_first_verse) == published_chapter_markers[i].chapter) {
+            if (convert_to_int(chapter_number_to_output_at_first_verse) ==
+                published_chapter_markers[i].chapter) {
               chapternumber = published_chapter_markers[i].label;
             }
           }
@@ -985,9 +981,10 @@ void Usfm2Text::output_chapter_number_try_at_first_verse(ustring line, Usfm2XslF
         if (chapter_style) {
           text2pdf->open_intrusion();
           set_paragraph(chapter_style, true);
-          ustring localization (chapternumber);
+          ustring localization(chapternumber);
           if (numeral_localization) {
-            localization = numeral_localization->latin2localization (chapternumber);
+            localization =
+                numeral_localization->latin2localization(chapternumber);
           }
           text2pdf->add_text(localization);
           text2pdf->close_intrusion();
@@ -1002,7 +999,7 @@ void Usfm2Text::output_chapter_number_try_at_first_verse(ustring line, Usfm2XslF
   }
 }
 
-void Usfm2Text::close_possible_inline(Usfm2XslFoStyle * &style)
+void Usfm2Text::close_possible_inline(Usfm2XslFoStyle *&style)
 // Close possible inline style.
 {
   if (style) {
@@ -1017,12 +1014,14 @@ void Usfm2Text::close_possible_inline(Usfm2XslFoStyle * &style)
   }
 }
 
-void Usfm2Text::output_running_header(ustring & line, Usfm2XslFoStyle * stylepointer, size_t marker_length, unsigned int book)
+void Usfm2Text::output_running_header(ustring &line,
+                                      Usfm2XslFoStyle *stylepointer,
+                                      size_t marker_length, unsigned int book)
 // This function outputs a running header.
 {
   // Extract running header.
-  ustring runningheader = get_erase_code_till_next_marker(line, 0,
-                                                          marker_length, true);
+  ustring runningheader =
+      get_erase_code_till_next_marker(line, 0, marker_length, true);
 
   // Store left and/or right header.
   if (stylepointer->print_in_left_running_header) {
@@ -1033,14 +1032,12 @@ void Usfm2Text::output_running_header(ustring & line, Usfm2XslFoStyle * stylepoi
   }
 }
 
-bool Usfm2Text::signal_progress_timeout(gpointer user_data)
-{
-  ((Usfm2Text *) user_data)->signal_progress();
+bool Usfm2Text::signal_progress_timeout(gpointer user_data) {
+  ((Usfm2Text *)user_data)->signal_progress();
   return true;
 }
 
-void Usfm2Text::signal_progress()
-{
+void Usfm2Text::signal_progress() {
   if (progresswindow) {
     progresswindow->pulse();
     if (progresswindow->cancel)
@@ -1048,7 +1045,10 @@ void Usfm2Text::signal_progress()
   }
 }
 
-bool Usfm2Text::output_verse_number(Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+bool Usfm2Text::output_verse_number(Usfm2XslFoStyle *stylepointer,
+                                    Usfm2XslFoStyle *&fo_block_style,
+                                    Usfm2XslFoStyle *&fo_inline_style,
+                                    size_t marker_length)
 // Writes the verse number.
 // Returns true if the verse was written.
 {
@@ -1077,9 +1077,9 @@ bool Usfm2Text::output_verse_number(Usfm2XslFoStyle * stylepointer, Usfm2XslFoSt
   if (printversenumber && stylepointer->print) {
     fo_inline_style = stylepointer;
     open_inline(fo_inline_style, fo_block_style);
-    ustring localization (verse);
+    ustring localization(verse);
     if (numeral_localization) {
-      localization = numeral_localization->latin2localization (verse);
+      localization = numeral_localization->latin2localization(verse);
     }
     text2pdf->add_text(localization);
     close_possible_inline(fo_inline_style);
@@ -1091,7 +1091,12 @@ bool Usfm2Text::output_verse_number(Usfm2XslFoStyle * stylepointer, Usfm2XslFoSt
   return verse_number_written;
 }
 
-void Usfm2Text::output_text_character_style(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, bool is_opener)
+void Usfm2Text::output_text_character_style(ustring &line,
+                                            Usfm2XslFoStyle *stylepointer,
+                                            Usfm2XslFoStyle *&fo_block_style,
+                                            Usfm2XslFoStyle *&fo_inline_style,
+                                            size_t marker_length,
+                                            bool is_opener)
 /*
  This function deals with a marker that starts or ends a character style.
  It does the administration that it requires.
@@ -1114,7 +1119,10 @@ void Usfm2Text::output_text_character_style(ustring & line, Usfm2XslFoStyle * st
   }
 }
 
-void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+void Usfm2Text::output_text_table(ustring &line,
+                                  Usfm2XslFoStyle *&fo_block_style,
+                                  Usfm2XslFoStyle *&fo_inline_style,
+                                  size_t marker_length)
 // This function collects all table related data that is available in a row,
 // and then processes that to output the complete table.
 {
@@ -1122,8 +1130,8 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
   // Pass 1: Collecting the raw usfm code bits.
 
   // Containers for all table related styles, and the texts belonging to them.
-  vector < Usfm2XslFoStyle * >table_styles;
-  vector < ustring > table_texts;
+  vector<Usfm2XslFoStyle *> table_styles;
+  vector<ustring> table_texts;
 
   // Go through the data collecting bits,
   // till we reach a marker that does not belong to the table,
@@ -1136,23 +1144,25 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
       size_t marker_position;
       size_t marker_length;
       bool is_opener;
-      bool marker_found = usfm_search_marker(line, marker,
-                                             marker_position, marker_length, is_opener);
+      bool marker_found = usfm_search_marker(line, marker, marker_position,
+                                             marker_length, is_opener);
       if (marker_found) {
         if (marker_position == 0) {
           Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
           if (stylepointer) {
-            if ((stylepointer->type == u2xtTableElementRow) || (stylepointer->type == u2xtTableElementHeading) || (stylepointer->type == u2xtTableElementCell)) {
+            if ((stylepointer->type == u2xtTableElementRow) ||
+                (stylepointer->type == u2xtTableElementHeading) ||
+                (stylepointer->type == u2xtTableElementCell)) {
               in_table = true;
-              ustring text = get_erase_code_till_next_marker(line, marker_position, marker_length, true);
+              ustring text = get_erase_code_till_next_marker(
+                  line, marker_position, marker_length, true);
               table_styles.push_back(stylepointer);
               table_texts.push_back(text);
             }
           }
         }
       }
-    }
-    while (in_table && (!line.empty()));
+    } while (in_table && (!line.empty()));
   }
 
   // Bail out if there is nothing to do.
@@ -1166,7 +1176,7 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
   // Pass 2: Assemble the table rows and cells.
 
   // Raw table data storage.
-  vector < XslFoTableRow > rows_raw;
+  vector<XslFoTableRow> rows_raw;
 
   {
     // Storage for one row.
@@ -1179,7 +1189,8 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
           rows_raw.push_back(row);
         row.cells.clear();
       }
-      if ((table_styles[i]->type == u2xtTableElementHeading) || (table_styles[i]->type == u2xtTableElementCell)) {
+      if ((table_styles[i]->type == u2xtTableElementHeading) ||
+          (table_styles[i]->type == u2xtTableElementCell)) {
         XslFoTableCell cell(table_styles[i], table_texts[i]);
         row.cells.push_back(cell);
       }
@@ -1205,7 +1216,7 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
 
   // This tidied table has the same amount of columns in each row.
   // It may have empty cells in cases there was no data for it.
-  vector < XslFoTableRow > rows_tidy;
+  vector<XslFoTableRow> rows_tidy;
   for (unsigned int r = 0; r < rows_raw.size(); r++) {
     XslFoTableRow row(0);
     for (unsigned int c = 0; c < highest_column; c++) {
@@ -1219,7 +1230,8 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
         column = 1;
       column--;
       row.cells[column].style = rows_raw[r].cells[c].style;
-      // Append text to any already existing tetxt in the cell. Very unlikely to happen...
+      // Append text to any already existing tetxt in the cell. Very unlikely to
+      // happen...
       ustring text = row.cells[column].text;
       if (!text.empty())
         text.append(" ");
@@ -1236,7 +1248,7 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
   text2pdf->close_paragraph();
 
   // Open the xml table.
-  //xmlTextWriterStartElement(writer, BAD_CAST "fo:table");
+  // xmlTextWriterStartElement(writer, BAD_CAST "fo:table");
 
   // Go through each row.
   for (unsigned int r = 0; r < rows_tidy.size(); r++) {
@@ -1256,24 +1268,24 @@ void Usfm2Text::output_text_table(ustring & line, Usfm2XslFoStyle * &fo_block_st
       header_or_body.append("header");
     else
       header_or_body.append("body");
-    //xmlTextWriterStartElement(writer, BAD_CAST header_or_body.c_str());
+    // xmlTextWriterStartElement(writer, BAD_CAST header_or_body.c_str());
 
     // Handle each cell.
     for (unsigned int c = 0; c < row.cells.size(); c++) {
-      //xmlTextWriterStartElement(writer, BAD_CAST "fo:table-cell");
-      vector < ustring > lines;
+      // xmlTextWriterStartElement(writer, BAD_CAST "fo:table-cell");
+      vector<ustring> lines;
       Usfm2XslFoStyle *style = row.cells[c].style;
       if (style == NULL)
         style = marker_get_pointer_to_style(default_style());
       open_paragraph(style, false);
       lines.push_back(row.cells[c].text);
       for (unsigned int i = 0; i < lines.size(); i++) {
-        //xmlTextWriterWriteString(writer, BAD_CAST lines[i].c_str());
+        // xmlTextWriterWriteString(writer, BAD_CAST lines[i].c_str());
       }
       text2pdf->close_paragraph();
     }
 
-    // Close row.  
+    // Close row.
   }
 
   // Close the xml table.
@@ -1284,9 +1296,13 @@ void Usfm2Text::create_note_callers()
 // the note caller objects from them.
 {
   for (unsigned int i = 0; i < styles.size(); i++) {
-    if ((styles[i].type == u2xtFootNoteStart) || (styles[i].type == u2xtEndNoteStart) || (styles[i].type == u2xtCrossreferenceStart)) {
+    if ((styles[i].type == u2xtFootNoteStart) ||
+        (styles[i].type == u2xtEndNoteStart) ||
+        (styles[i].type == u2xtCrossreferenceStart)) {
       // Create the note caller.
-      NoteCaller *notecaller = new NoteCaller(styles[i].note_numbering_type, styles[i].note_numbering_user_sequence);
+      NoteCaller *notecaller =
+          new NoteCaller(styles[i].note_numbering_type,
+                         styles[i].note_numbering_user_sequence);
       // Store it in the main map.
       notecallers[&styles[i]] = notecaller;
     }
@@ -1299,13 +1315,17 @@ void Usfm2Text::destroy_note_callers()
 // Or it destroys them.
 {
   for (unsigned int i = 0; i < styles.size(); i++) {
-    if ((styles[i].type == u2xtFootNoteStart) || (styles[i].type == u2xtEndNoteStart) || (styles[i].type == u2xtCrossreferenceStart)) {
+    if ((styles[i].type == u2xtFootNoteStart) ||
+        (styles[i].type == u2xtEndNoteStart) ||
+        (styles[i].type == u2xtCrossreferenceStart)) {
       delete notecallers[&styles[i]];
     }
   }
 }
 
-void Usfm2Text::output_text_note(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, size_t marker_length, bool is_opener)
+void Usfm2Text::output_text_note(ustring &line, Usfm2XslFoStyle *stylepointer,
+                                 Usfm2XslFoStyle *&fo_block_style,
+                                 size_t marker_length, bool is_opener)
 // Outputs a footnote or crossreference.
 {
   // Erase the marker from the text.
@@ -1345,8 +1365,9 @@ void Usfm2Text::output_text_note(ustring & line, Usfm2XslFoStyle * stylepointer,
   rawnote.erase(0, 1);
   rawnote = trim(rawnote);
 
-  // Write the footnote caller in the text. 
-  // The stylesheet is not consulted, it is just put in superscript, as is common for notes.
+  // Write the footnote caller in the text.
+  // The stylesheet is not consulted, it is just put in superscript, as is
+  // common for notes.
   text2pdf->inline_set_superscript();
   text2pdf->add_text(caller_in_text);
   text2pdf->inline_clear_superscript();
@@ -1355,7 +1376,8 @@ void Usfm2Text::output_text_note(ustring & line, Usfm2XslFoStyle * stylepointer,
   text2pdf->open_note();
 
   // Set the paragraph to the default paragraph style for this note.
-  Usfm2XslFoStyle *default_paragraph_style = get_default_paragraph_style_for_note(stylepointer);
+  Usfm2XslFoStyle *default_paragraph_style =
+      get_default_paragraph_style_for_note(stylepointer);
   set_paragraph(default_paragraph_style, false);
   Usfm2XslFoStyle *blockstyle = default_paragraph_style;
 
@@ -1382,15 +1404,21 @@ void Usfm2Text::output_text_note(ustring & line, Usfm2XslFoStyle * stylepointer,
     size_t marker_length;
     bool is_opener;
     bool processed = false;
-    bool marker_found = usfm_search_marker(rawnote, marker,
-                                           marker_position, marker_length, is_opener);
+    bool marker_found = usfm_search_marker(rawnote, marker, marker_position,
+                                           marker_length, is_opener);
     if (marker_found) {
       if (marker_position == 0) {
         Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
         if (stylepointer) {
-          if ((stylepointer->type == u2xtFootEndNoteStandardContent) || (stylepointer->type == u2xtCrossreferenceStandardContent)) {
+          if ((stylepointer->type == u2xtFootEndNoteStandardContent) ||
+              (stylepointer->type == u2xtCrossreferenceStandardContent)) {
             close_possible_inline(inlinestyle);
-          } else if ((stylepointer->type == u2xtFootEndNoteContent) || (stylepointer->type == u2xtFootEndNoteContentWithEndmarker) || (stylepointer->type == u2xtCrossreferenceContent) || (stylepointer->type == u2xtCrossreferenceContentWithEndmarker)) {
+          } else if ((stylepointer->type == u2xtFootEndNoteContent) ||
+                     (stylepointer->type ==
+                      u2xtFootEndNoteContentWithEndmarker) ||
+                     (stylepointer->type == u2xtCrossreferenceContent) ||
+                     (stylepointer->type ==
+                      u2xtCrossreferenceContentWithEndmarker)) {
             close_possible_inline(inlinestyle);
             if (is_opener) {
               inlinestyle = stylepointer;
@@ -1417,13 +1445,16 @@ void Usfm2Text::output_text_note(ustring & line, Usfm2XslFoStyle * stylepointer,
   text2pdf->close_note();
 }
 
-Usfm2XslFoStyle *Usfm2Text::get_default_paragraph_style_for_note(Usfm2XslFoStyle * notestyle)
+Usfm2XslFoStyle *
+Usfm2Text::get_default_paragraph_style_for_note(Usfm2XslFoStyle *notestyle)
 // Given a "notestyle", that is, the style of a note opener such as e.g. "f"
 // for a footnote, it returns the default paragraph style for this note.
 {
-  // Go through all the styles looking for the appropriate default style to return.
+  // Go through all the styles looking for the appropriate default style to
+  // return.
   for (unsigned int i = 0; i < styles.size(); i++) {
-    if ((notestyle->type == u2xtFootNoteStart) || (notestyle->type == u2xtEndNoteStart)) {
+    if ((notestyle->type == u2xtFootNoteStart) ||
+        (notestyle->type == u2xtEndNoteStart)) {
       if (styles[i].type == u2xtFootEndNoteStandardContent) {
         return &styles[i];
       }
@@ -1442,7 +1473,8 @@ void Usfm2Text::note_callers_new_book()
 // Signals a new book to the appropriate notes objects.
 {
   for (unsigned int i = 0; i < styles.size(); i++) {
-    if ((styles[i].type == u2xtFootNoteStart) || (styles[i].type == u2xtCrossreferenceStart)) {
+    if ((styles[i].type == u2xtFootNoteStart) ||
+        (styles[i].type == u2xtCrossreferenceStart)) {
       if (styles[i].note_numbering_restart_type == nnrtBook) {
         notecallers[&styles[i]]->reset();
       }
@@ -1455,7 +1487,8 @@ void Usfm2Text::note_callers_new_chapter()
 // Signal a new chapter to the appropriate notes objects.
 {
   for (unsigned int i = 0; i < styles.size(); i++) {
-    if ((styles[i].type == u2xtFootNoteStart) || (styles[i].type == u2xtCrossreferenceStart)) {
+    if ((styles[i].type == u2xtFootNoteStart) ||
+        (styles[i].type == u2xtCrossreferenceStart)) {
       if (styles[i].note_numbering_restart_type == nnrtChapter) {
         notecallers[&styles[i]]->reset();
       }
@@ -1463,24 +1496,26 @@ void Usfm2Text::note_callers_new_chapter()
   }
 }
 
-void Usfm2Text::add_print_portion(unsigned int book_in, vector < unsigned int >chapters_from_in, const vector < ustring > &verses_from_in, vector < unsigned int >chapters_to_in, const vector < ustring > &verses_to_in)
+void Usfm2Text::add_print_portion(unsigned int book_in,
+                                  vector<unsigned int> chapters_from_in,
+                                  const vector<ustring> &verses_from_in,
+                                  vector<unsigned int> chapters_to_in,
+                                  const vector<ustring> &verses_to_in)
 // Adds a portion to be printed.
 // If no portions was set, everything will be printed.
 {
-  inrange.add_portion(book_in, chapters_from_in, verses_from_in, chapters_to_in, verses_to_in);
+  inrange.add_portion(book_in, chapters_from_in, verses_from_in, chapters_to_in,
+                      verses_to_in);
 }
 
-void Usfm2Text::set_new_book(unsigned int book_in)
-{
+void Usfm2Text::set_new_book(unsigned int book_in) {
   book = book_in;
   set_new_chapter(0);
   inrange.set_book(book);
   text2pdf->suppress_header_this_page();
 }
 
-
-void Usfm2Text::set_new_chapter(unsigned int chapter_in)
-{
+void Usfm2Text::set_new_chapter(unsigned int chapter_in) {
   chapter = chapter_in;
   unsigned int left = 0;
   unsigned int right = 0;
@@ -1495,14 +1530,14 @@ void Usfm2Text::set_new_chapter(unsigned int chapter_in)
     text2pdf->set_running_chapter_number(left, right);
 }
 
-
-void Usfm2Text::set_new_verse(const ustring & verse_in)
-{
+void Usfm2Text::set_new_verse(const ustring &verse_in) {
   verse = verse_in;
   inrange.set_verse(verse);
 }
 
-void Usfm2Text::output_id_page_break(Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style)
+void Usfm2Text::output_id_page_break(Usfm2XslFoStyle *stylepointer,
+                                     Usfm2XslFoStyle *&fo_block_style,
+                                     Usfm2XslFoStyle *&fo_inline_style)
 // Looks in the style whether the book id should cause a page break.
 {
   // Bail out if no page break to be given.
@@ -1511,13 +1546,18 @@ void Usfm2Text::output_id_page_break(Usfm2XslFoStyle * stylepointer, Usfm2XslFoS
 
   // The first id in a project should not cause a page break.
   if (id_page_break_count > 0) {
-    output_page_break(fo_block_style, fo_inline_style, stylepointer->book_starts_odd_page);
+    output_page_break(fo_block_style, fo_inline_style,
+                      stylepointer->book_starts_odd_page);
   }
   // Increase break count.
   id_page_break_count++;
 }
 
-void Usfm2Text::output_other_page_break(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+void Usfm2Text::output_other_page_break(ustring &line,
+                                        Usfm2XslFoStyle *stylepointer,
+                                        Usfm2XslFoStyle *&fo_block_style,
+                                        Usfm2XslFoStyle *&fo_inline_style,
+                                        size_t marker_length)
 // Outputs a page break.
 {
   // Erase the marker.
@@ -1527,7 +1567,9 @@ void Usfm2Text::output_other_page_break(ustring & line, Usfm2XslFoStyle * stylep
   output_page_break(fo_block_style, fo_inline_style, false);
 }
 
-void Usfm2Text::output_page_break(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, bool oddpage)
+void Usfm2Text::output_page_break(Usfm2XslFoStyle *&fo_block_style,
+                                  Usfm2XslFoStyle *&fo_inline_style,
+                                  bool oddpage)
 // Outputs a page break.
 {
   // Bail out if we're not to write new pages.
@@ -1542,22 +1584,28 @@ void Usfm2Text::output_page_break(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoS
   text2pdf->new_page(oddpage);
 }
 
-void Usfm2Text::output_picture(ustring & line, Usfm2XslFoStyle * stylepointer, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+void Usfm2Text::output_picture(ustring &line, Usfm2XslFoStyle *stylepointer,
+                               Usfm2XslFoStyle *&fo_block_style,
+                               Usfm2XslFoStyle *&fo_inline_style,
+                               size_t marker_length)
 // Prints a picture.
 {
   // Get the actual bit that describes the picture; erase it from the line.
   // The picture comes in the form of, e.g. "|biblesociety.gif|col||||"
-  ustring desc;                 // Picture description in English. Does not get printed.
-  ustring file;                 // Illustration filename. Does not get printed.
-  ustring size;                 // Picture size. Does not get printed. Valid options:
+  ustring desc; // Picture description in English. Does not get printed.
+  ustring file; // Illustration filename. Does not get printed.
+  ustring size; // Picture size. Does not get printed. Valid options:
   // col:  insert picture inline within current text column.
   // span: insert picture spanning text columns, at top or bottom of page.
   // Note: Bibledit puts it at the top due to constraints in xslfo.
-  ustring loc;                  // Picture location/range. Does not get printed.
-  ustring copy;                 // Picture copyright info. Will be used to give the appropriate picture credits.
-  ustring cap;                  // Picture caption. This will be printed with the illustration.
-  ustring ref;                  // Picture reference (e.g. Luke 19.5). This will be printed with the illustration.
-  usfm_dissect_figure (line, stylepointer->marker, marker_length, desc, file, size, loc, copy, cap, ref);
+  ustring loc;  // Picture location/range. Does not get printed.
+  ustring copy; // Picture copyright info. Will be used to give the appropriate
+                // picture credits.
+  ustring cap;  // Picture caption. This will be printed with the illustration.
+  ustring ref;  // Picture reference (e.g. Luke 19.5). This will be printed with
+                // the illustration.
+  usfm_dissect_figure(line, stylepointer->marker, marker_length, desc, file,
+                      size, loc, copy, cap, ref);
 
   // Make an existing path to the picture.
   // If a relative path is given, it looks in the pictures data directory, then
@@ -1593,7 +1641,7 @@ void Usfm2Text::output_picture(ustring & line, Usfm2XslFoStyle * stylepointer, U
   style->spaceafter = default_style_space_after;
 
   // Insert graphic, either in the column or spanning the columns at the top
-  // of the page.  
+  // of the page.
   // Write caption and reference.
   if (size == "span") {
   }
@@ -1610,7 +1658,9 @@ void Usfm2Text::output_picture(ustring & line, Usfm2XslFoStyle * stylepointer, U
   text2pdf->close_paragraph();
 }
 
-void Usfm2Text::output_elastic(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+void Usfm2Text::output_elastic(ustring &line, Usfm2XslFoStyle *&fo_block_style,
+                               Usfm2XslFoStyle *&fo_inline_style,
+                               size_t marker_length)
 // Output the elastic command.
 {
   // Erase the marker from the line.
@@ -1622,15 +1672,15 @@ void Usfm2Text::output_elastic(ustring & line, Usfm2XslFoStyle * &fo_block_style
 
   // Write new default block with the elastic.
   text2pdf->open_paragraph();
-  //xmlTextWriterWriteFormatString(writer, ELASTIC_XEP);
+  // xmlTextWriterWriteFormatString(writer, ELASTIC_XEP);
   text2pdf->close_paragraph();
 }
 
-void Usfm2Text::toc_collect_text(ustring & line, size_t marker_length, bool longtext, unsigned int book)
+void Usfm2Text::toc_collect_text(ustring &line, size_t marker_length,
+                                 bool longtext, unsigned int book)
 // Collects the texts for the table of contents.
 {
-  ustring label = get_erase_code_till_next_marker(line, 0, marker_length,
-                                                  true);
+  ustring label = get_erase_code_till_next_marker(line, 0, marker_length, true);
   if (longtext) {
     toc_texts_long[book] = label;
   } else {
@@ -1638,8 +1688,12 @@ void Usfm2Text::toc_collect_text(ustring & line, size_t marker_length, bool long
   }
 }
 
-void Usfm2Text::toc_insert_referent(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
-// Inserts a referent in the text so the table of contents can refer to it to retrieve the page number.
+void Usfm2Text::toc_insert_referent(ustring &line,
+                                    Usfm2XslFoStyle *&fo_block_style,
+                                    Usfm2XslFoStyle *&fo_inline_style,
+                                    size_t marker_length)
+// Inserts a referent in the text so the table of contents can refer to it to
+// retrieve the page number.
 {
   // Erase code and data from the line.
   get_erase_code_till_next_marker(line, 0, marker_length, false);
@@ -1648,7 +1702,9 @@ void Usfm2Text::toc_insert_referent(ustring & line, Usfm2XslFoStyle * &fo_block_
   text2pdf->set_referent(books_id_to_english(book));
 }
 
-void Usfm2Text::toc_insert_body(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
+void Usfm2Text::toc_insert_body(ustring &line, Usfm2XslFoStyle *&fo_block_style,
+                                Usfm2XslFoStyle *&fo_inline_style,
+                                size_t marker_length)
 // Generate the table of contents.
 {
   // Erase code and data from the line.
@@ -1680,7 +1736,8 @@ void Usfm2Text::toc_insert_body(ustring & line, Usfm2XslFoStyle * &fo_block_styl
   }
 }
 
-void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style)
+void Usfm2Text::dump_endnotes(Usfm2XslFoStyle *&fo_block_style,
+                              Usfm2XslFoStyle *&fo_inline_style)
 // Dumps the buffered endnotes, if there are any.
 {
   // If there are no endnotes, bail out.
@@ -1706,14 +1763,16 @@ void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle
     text2pdf->close_paragraph();
     text2pdf->open_paragraph();
 
-    // Open the list block for outlining the caller nicely with the footnote body.
+    // Open the list block for outlining the caller nicely with the footnote
+    // body.
 
     // Open the list item.
 
     // Open the list item label: for the note caller.
 
     // Get the default paragraph style.
-    Usfm2XslFoStyle *default_paragraph_style = get_default_paragraph_style_for_note(endnote_style);
+    Usfm2XslFoStyle *default_paragraph_style =
+        get_default_paragraph_style_for_note(endnote_style);
 
     // Extract the note caller and erase it from the raw note.
     ustring caller = trim(rawnote.substr(0, 1));
@@ -1741,7 +1800,7 @@ void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle
       blockstyle->firstlineindent = firstlineindent;
       Usfm2XslFoStyle *inlinestyle = endnote_style;
       open_inline(inlinestyle, blockstyle);
-      //xmlTextWriterWriteFormatString(writer, caller.c_str());
+      // xmlTextWriterWriteFormatString(writer, caller.c_str());
       close_possible_inline(inlinestyle);
       text2pdf->close_paragraph();
     }
@@ -1750,7 +1809,8 @@ void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle
     // Open the list item body: for the note body.
 
     // Open the default paragraph style for this note.
-    default_paragraph_style = get_default_paragraph_style_for_note(endnote_style);
+    default_paragraph_style =
+        get_default_paragraph_style_for_note(endnote_style);
     Usfm2XslFoStyle *blockstyle = default_paragraph_style;
     open_paragraph(blockstyle, false);
 
@@ -1766,15 +1826,17 @@ void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle
       size_t marker_length;
       bool is_opener;
       bool processed = false;
-      bool marker_found = usfm_search_marker(rawnote, marker,
-                                             marker_position, marker_length, is_opener);
+      bool marker_found = usfm_search_marker(rawnote, marker, marker_position,
+                                             marker_length, is_opener);
       if (marker_found) {
         if (marker_position == 0) {
           Usfm2XslFoStyle *stylepointer = marker_get_pointer_to_style(marker);
           if (stylepointer) {
             if (stylepointer->type == u2xtFootEndNoteStandardContent) {
               close_possible_inline(inlinestyle);
-            } else if ((stylepointer->type == u2xtFootEndNoteContent) || (stylepointer->type == u2xtFootEndNoteContentWithEndmarker)) {
+            } else if ((stylepointer->type == u2xtFootEndNoteContent) ||
+                       (stylepointer->type ==
+                        u2xtFootEndNoteContentWithEndmarker)) {
               close_possible_inline(inlinestyle);
               if (is_opener) {
                 inlinestyle = stylepointer;
@@ -1813,7 +1875,8 @@ void Usfm2Text::dump_endnotes(Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle
   buffered_endnote_styles.clear();
 }
 
-void Usfm2Text::buffer_endnote(ustring & line, Usfm2XslFoStyle * stylepointer, size_t marker_length, bool is_opener)
+void Usfm2Text::buffer_endnote(ustring &line, Usfm2XslFoStyle *stylepointer,
+                               size_t marker_length, bool is_opener)
 // Buffers the text of an endnote.
 {
   // Erase the marker from the text.
@@ -1865,8 +1928,10 @@ void Usfm2Text::no_space_before_or_after()
   }
 }
 
-void Usfm2Text::output_spacing_paragraph(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, bool is_opener)
-{
+void Usfm2Text::output_spacing_paragraph(ustring &line,
+                                         Usfm2XslFoStyle *&fo_block_style,
+                                         Usfm2XslFoStyle *&fo_inline_style,
+                                         size_t marker_length, bool is_opener) {
   // Erase the marker from the line.
   line.erase(0, marker_length);
 
@@ -1881,8 +1946,10 @@ void Usfm2Text::output_spacing_paragraph(ustring & line, Usfm2XslFoStyle * &fo_b
   }
 }
 
-void Usfm2Text::output_keep_on_page(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, bool is_opener)
-{
+void Usfm2Text::output_keep_on_page(ustring &line,
+                                    Usfm2XslFoStyle *&fo_block_style,
+                                    Usfm2XslFoStyle *&fo_inline_style,
+                                    size_t marker_length, bool is_opener) {
   // Erase the marker from the line.
   line.erase(0, marker_length);
 
@@ -1893,7 +1960,7 @@ void Usfm2Text::output_keep_on_page(ustring & line, Usfm2XslFoStyle * &fo_block_
   if (is_opener) {
     // Insert the block keepings things on one page.
     // We use keep-together.within-page="always", rather than
-    // keep-together="always", as the latter one causes things to be 
+    // keep-together="always", as the latter one causes things to be
     // kept together, in in a line, which causes the line to overflow
     // the right margin.
   } else {
@@ -1901,13 +1968,15 @@ void Usfm2Text::output_keep_on_page(ustring & line, Usfm2XslFoStyle * &fo_block_
   }
 }
 
-gchar *Usfm2Text::font_family_size_line_height_style()
-{
-  return (gchar *) "_font_family_size_line_height_";
+gchar *Usfm2Text::font_family_size_line_height_style() {
+  return (gchar *)"_font_family_size_line_height_";
 }
 
-void Usfm2Text::output_font_family_size_line_height(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length, bool is_opener)
-// This function adds the font family, the font size, and the line height to the xslfo file.
+void Usfm2Text::output_font_family_size_line_height(
+    ustring &line, Usfm2XslFoStyle *&fo_block_style,
+    Usfm2XslFoStyle *&fo_inline_style, size_t marker_length, bool is_opener)
+// This function adds the font family, the font size, and the line height to the
+// xslfo file.
 {
   // Erase the marker from the line.
   ustring code = get_erase_code_till_next_marker(line, 0, marker_length, true);
@@ -1926,30 +1995,30 @@ void Usfm2Text::output_font_family_size_line_height(ustring & line, Usfm2XslFoSt
           fontfamily.append(" ");
         fontfamily.append(parse.words[i]);
       }
-      //xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "font-family", fontfamily.c_str());
+      // xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "font-family",
+      // fontfamily.c_str());
       ustring fontsize = parse.words[parse.words.size() - 2];
-      //xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "font-size", "%spt", fontsize.c_str());
+      // xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "font-size", "%spt",
+      // fontsize.c_str());
       ustring lineheight = parse.words[parse.words.size() - 1];
-      if (lineheight != "100") ;
-      //xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "line-height", "%s%%", lineheight.c_str());
+      if (lineheight != "100")
+        ;
+      // xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "line-height",
+      // "%s%%", lineheight.c_str());
     }
   } else {
     // Close spacing paragraph.
   }
 }
 
-void Usfm2Text::no_new_page()
-{
-  do_not_allow_new_page = true;
-}
+void Usfm2Text::no_new_page() { do_not_allow_new_page = true; }
 
-void Usfm2Text::set_include_full_references_with_notes()
-{
+void Usfm2Text::set_include_full_references_with_notes() {
   include_full_references_with_notes = true;
 }
 
-void Usfm2Text::optionally_add_full_references(ustring & line, Usfm2XslFoStyle * stylepointer)
-{
+void Usfm2Text::optionally_add_full_references(ustring &line,
+                                               Usfm2XslFoStyle *stylepointer) {
   // Bail out if the full references are not to be added.
   if (!include_full_references_with_notes)
     return;
@@ -1977,11 +2046,10 @@ void Usfm2Text::optionally_add_full_references(ustring & line, Usfm2XslFoStyle *
   }
 }
 
-void Usfm2Text::set_language (const ustring& language)
+void Usfm2Text::set_language(const ustring &language)
 // Sets the language. Used for localization operations.
 {
-  if (numeral_localization) 
+  if (numeral_localization)
     delete numeral_localization;
-  numeral_localization = new NumeralLocalization (language);
+  numeral_localization = new NumeralLocalization(language);
 }
-

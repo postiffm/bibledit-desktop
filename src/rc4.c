@@ -1,24 +1,25 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-// The code was copied from software copyrighted (©) 2006 Olivier Gay <olivier.gay@a3.epfl.ch>
-
+// The code was copied from software copyrighted (©) 2006 Olivier Gay
+// <olivier.gay@a3.epfl.ch>
 
 #include <assert.h>
 #include <string.h>
@@ -49,90 +50,87 @@ static const uint8 rc4_table[256] = {
     0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb,
     0xfc, 0xfd, 0xfe, 0xff};
 
-#define SWAP(x, y) \
-{                  \
-    tmp = x;       \
-    x = y;         \
-    y = tmp;       \
+#define SWAP(x, y)                                                             \
+  {                                                                            \
+    tmp = x;                                                                   \
+    x = y;                                                                     \
+    y = tmp;                                                                   \
+  }
+
+#define RC4_CRYPT()                                                            \
+  {                                                                            \
+    t += s[(uint8)i];                                                          \
+    SWAP(s[(uint8)i], s[t]);                                                   \
+    new_dst[i] = new_src[i] ^ s[(uint8)(s[(uint8)i] + s[t])];                  \
+  }
+
+void rc4_ks(rc4_ctx *ctx, const uint8 *key, uint32 key_len) {
+  uint32 i;
+  uint8 *s;
+  uint8 t, tmp;
+
+  t = 0;
+  s = ctx->se;
+
+  assert(key_len > 0 && key_len <= 256);
+
+  ctx->pose = 1;
+  ctx->posd = 1;
+  ctx->te = 0;
+  ctx->td = 0;
+
+  memcpy(s, rc4_table, 256);
+
+  for (i = 0; i < 256; i++) {
+    t += s[i] + key[i % key_len];
+    SWAP(s[i], s[t]);
+  }
+
+  memcpy(ctx->sd, s, 256);
 }
 
-#define RC4_CRYPT()                                             \
-{                                                               \
-    t += s[(uint8) i];                                          \
-    SWAP(s[(uint8) i], s[t]);                                   \
-    new_dst[i] = new_src[i] ^ s[(uint8) (s[(uint8) i] + s[t])]; \
+void rc4_encrypt(rc4_ctx *ctx, const uint8 *src, uint8 *dst, uint32 len) {
+  uint32 i;
+  uint32 pos;
+  const uint8 *new_src;
+  uint8 *s, *new_dst;
+  uint8 t, tmp;
+
+  pos = ctx->pose;
+  s = ctx->se;
+  t = ctx->te;
+
+  new_src = src - pos;
+  new_dst = dst - pos;
+
+  for (i = pos; i < len + pos; i++) {
+    RC4_CRYPT();
+  }
+
+  ctx->pose = i;
+  ctx->te = t;
 }
 
-void rc4_ks(rc4_ctx *ctx, const uint8 *key, uint32 key_len)
-{
-    uint32 i;
-    uint8 *s;
-    uint8 t, tmp;
+void rc4_decrypt(rc4_ctx *ctx, const uint8 *src, uint8 *dst, uint32 len) {
+  uint32 i;
+  uint32 pos;
+  const uint8 *new_src;
+  uint8 *s, *new_dst;
+  uint8 t, tmp;
 
-    t = 0;
-    s = ctx->se;
+  pos = ctx->posd;
+  s = ctx->sd;
+  t = ctx->td;
 
-    assert(key_len > 0 && key_len <= 256);
+  new_src = src - pos;
+  new_dst = dst - pos;
 
-    ctx->pose = 1;
-    ctx->posd = 1;
-    ctx->te = 0;
-    ctx->td = 0;
+  for (i = pos; i < len + pos; i++) {
+    RC4_CRYPT();
+  }
 
-    memcpy(s, rc4_table, 256);
-
-    for (i = 0; i < 256; i++) {
-        t += s[i] + key[i % key_len];
-        SWAP(s[i], s[t]);
-    }
-
-    memcpy(ctx->sd, s, 256);
-}
-
-void rc4_encrypt(rc4_ctx *ctx, const uint8 *src, uint8 *dst, uint32 len)
-{
-    uint32 i;
-    uint32 pos;
-    const uint8 *new_src;
-    uint8 *s, *new_dst;
-    uint8 t, tmp;
-
-    pos = ctx->pose;
-    s = ctx->se;
-    t = ctx->te;
-
-    new_src = src - pos;
-    new_dst = dst - pos;
-
-    for (i = pos; i < len + pos; i++) {
-        RC4_CRYPT();
-    }
-
-    ctx->pose = i;
-    ctx->te = t;
-}
-
-void rc4_decrypt(rc4_ctx *ctx, const uint8 *src, uint8 *dst, uint32 len)
-{
-    uint32 i;
-    uint32 pos;
-    const uint8 *new_src;
-    uint8 *s, *new_dst;
-    uint8 t, tmp;
-
-    pos = ctx->posd;
-    s = ctx->sd;
-    t = ctx->td;
-
-    new_src = src - pos;
-    new_dst = dst - pos;
-
-    for (i = pos; i < len + pos; i++) {
-        RC4_CRYPT();
-    }
-
-    ctx->posd = i;
-    ctx->td = t;
+  ctx->posd = i;
+  ctx->td = t;
 }
 
 #ifdef TEST_VECTORS
@@ -143,19 +141,19 @@ void rc4_decrypt(rc4_ctx *ctx, const uint8 *src, uint8 *dst, uint32 len)
 
 /* Test vectors from [CRYPTLIB] */
 
-static const uint8  pt1[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+static const uint8 pt1[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 static const uint8 key1[8] = {0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef};
-static const uint8  ct1[8] = {0x74, 0x94, 0xc2, 0xe7, 0x10, 0x4b, 0x08, 0x79};
+static const uint8 ct1[8] = {0x74, 0x94, 0xc2, 0xe7, 0x10, 0x4b, 0x08, 0x79};
 
 /* Test vectors from [COMMERCE] */
 
-static const uint8  pt2[5] =  {0xdc, 0xee, 0x4c, 0xf9, 0x2c};
-static const uint8 key2[5] =  {0x61, 0x8a, 0x63, 0xd2, 0xfb};
-static const uint8  ct2[5] =  {0xf1, 0x38, 0x29, 0xc9, 0xde};
+static const uint8 pt2[5] = {0xdc, 0xee, 0x4c, 0xf9, 0x2c};
+static const uint8 key2[5] = {0x61, 0x8a, 0x63, 0xd2, 0xfb};
+static const uint8 ct2[5] = {0xf1, 0x38, 0x29, 0xc9, 0xde};
 
 /* Test vectors from [SSH ARCFOUR] */
 
-static const uint8 pt3[309] ={
+static const uint8 pt3[309] = {
     0x52, 0x75, 0x69, 0x73, 0x6c, 0x69, 0x6e, 0x6e, 0x75, 0x6e, 0x20, 0x6c,
     0x61, 0x75, 0x6c, 0x75, 0x20, 0x6b, 0x6f, 0x72, 0x76, 0x69, 0x73, 0x73,
     0x73, 0x61, 0x6e, 0x69, 0x2c, 0x20, 0x74, 0xe4, 0x68, 0x6b, 0xe4, 0x70,
@@ -183,9 +181,8 @@ static const uint8 pt3[309] ={
     0x75, 0x6e, 0x20, 0x74, 0x65, 0x65, 0x6e, 0x2e, 0x20, 0x2d, 0x20, 0x45,
     0x69, 0x6e, 0x6f, 0x20, 0x4c, 0x65, 0x69, 0x6e, 0x6f};
 
-static const uint8 key3[16] = {
-    0x29, 0x04, 0x19, 0x72, 0xfb, 0x42, 0xba, 0x5f,
-    0xc7, 0x12, 0x77, 0x12, 0xf1, 0x38, 0x29, 0xc9};
+static const uint8 key3[16] = {0x29, 0x04, 0x19, 0x72, 0xfb, 0x42, 0xba, 0x5f,
+                               0xc7, 0x12, 0x77, 0x12, 0xf1, 0x38, 0x29, 0xc9};
 
 static const uint8 ct3[309] = {
     0x35, 0x81, 0x86, 0x99, 0x90, 0x01, 0xe6, 0xb5, 0xda, 0xf0, 0x5e, 0xce,

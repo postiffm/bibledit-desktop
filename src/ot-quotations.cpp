@@ -1,50 +1,41 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
 #include "ot-quotations.h"
-#include "utilities.h"
+#include "bible.h"
+#include "books.h"
 #include "directories.h"
 #include "gwrappers.h"
-#include <libxml/xmlreader.h>
-#include "books.h"
 #include "settings.h"
 #include "tiny_utilities.h"
-#include "bible.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
+#include <libxml/xmlreader.h>
 
-OTQuotation::OTQuotation(int dummy)
-:reference(0)
-{
-  lxx = false;
-}
+OTQuotation::OTQuotation(int dummy) : reference(0) { lxx = false; }
 
+OTQuotations::OTQuotations(int dummy) {}
 
-OTQuotations::OTQuotations(int dummy)
-{
-}
-
-
-void OTQuotations::read()
-{
+void OTQuotations::read() {
   // Get contents of the data file. Bail out if not there.
-  ustring xmlfilename = gw_build_filename(Directories->get_package_data(), "ot-quotations-in-nt.xml");
+  ustring xmlfilename = gw_build_filename(Directories->get_package_data(),
+                                          "ot-quotations-in-nt.xml");
   if (!g_file_test(xmlfilename.c_str(), G_FILE_TEST_IS_REGULAR))
     return;
   gchar *contents;
@@ -60,71 +51,75 @@ void OTQuotations::read()
      </set>
    */
   xmlParserInputBufferPtr inputbuffer;
-  inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents), XML_CHAR_ENCODING_NONE);
+  inputbuffer = xmlParserInputBufferCreateMem(contents, strlen(contents),
+                                              XML_CHAR_ENCODING_NONE);
   xmlTextReaderPtr reader = xmlNewTextReader(inputbuffer, NULL);
   if (reader) {
     char *opening_element = NULL;
     OTQuotation quotation(0);
     while ((xmlTextReaderRead(reader) == 1)) {
       switch (xmlTextReaderNodeType(reader)) {
-      case XML_READER_TYPE_ELEMENT:
-        {
-          opening_element = (char *)xmlTextReaderName(reader);
-          if (!strcmp(opening_element, "set")) {
-            quotation.reference.clear();
-            quotation.referents.clear();
-            quotation.lxx = false;
-	    free(opening_element); opening_element = NULL; // not used next loop iteration
+      case XML_READER_TYPE_ELEMENT: {
+        opening_element = (char *)xmlTextReaderName(reader);
+        if (!strcmp(opening_element, "set")) {
+          quotation.reference.clear();
+          quotation.referents.clear();
+          quotation.lxx = false;
+          free(opening_element);
+          opening_element = NULL; // not used next loop iteration
+        } else if (!strcmp(opening_element, "nt") ||
+                   !strcmp(opening_element, "ot")) {
+          Reference ref(0);
+          char *attribute;
+          attribute =
+              (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "book");
+          if (attribute) {
+            ref.book_set(books_english_to_id(attribute));
+            free(attribute);
           }
-          else if (!strcmp(opening_element, "nt") || !strcmp(opening_element, "ot")) {
-            Reference ref(0);
-            char *attribute;
-            attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "book");
-            if (attribute) {
-              ref.book_set(books_english_to_id(attribute));
-              free(attribute);
-            }
-            attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "chapter");
-            if (attribute) {
-              ref.chapter_set(convert_to_int(attribute));
-              free(attribute);
-            }
-            attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "verse");
-            if (attribute) {
-              ref.verse_set(attribute);
-              free(attribute);
-            }
-            if (!strcmp(opening_element, "nt")) {
-              quotation.reference.assign(ref);
-            }
-            if (!strcmp(opening_element, "ot")) {
-              quotation.referents.push_back(ref);
-            }
-			// cannot free(opening_element) because it will be used next loop iter in following switch case
+          attribute =
+              (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "chapter");
+          if (attribute) {
+            ref.chapter_set(convert_to_int(attribute));
+            free(attribute);
           }
-		  break;
+          attribute =
+              (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "verse");
+          if (attribute) {
+            ref.verse_set(attribute);
+            free(attribute);
+          }
+          if (!strcmp(opening_element, "nt")) {
+            quotation.reference.assign(ref);
+          }
+          if (!strcmp(opening_element, "ot")) {
+            quotation.referents.push_back(ref);
+          }
+          // cannot free(opening_element) because it will be used next loop iter
+          // in following switch case
         }
-      case XML_READER_TYPE_TEXT:
-        {
-          char *text = (char *)xmlTextReaderValue(reader);
-          if (opening_element && text) {
-            if (!strcmp(opening_element, "lxx")) {
-              quotation.lxx = convert_to_bool(text);
-            }
-            free(text);
-			free(opening_element); opening_element = NULL;
+        break;
+      }
+      case XML_READER_TYPE_TEXT: {
+        char *text = (char *)xmlTextReaderValue(reader);
+        if (opening_element && text) {
+          if (!strcmp(opening_element, "lxx")) {
+            quotation.lxx = convert_to_bool(text);
           }
-          break;
+          free(text);
+          free(opening_element);
+          opening_element = NULL;
         }
-      case XML_READER_TYPE_END_ELEMENT:
-        {
-          char *closing_element = (char *)xmlTextReaderName(reader);
-          if (!strcmp(closing_element, "set")) {
-            quotations_nt_order.push_back(quotation);
-          }
-		  free(closing_element);
-          break;
+        break;
+      }
+      case XML_READER_TYPE_END_ELEMENT: {
+        char *closing_element = (char *)xmlTextReaderName(reader);
+        if (!strcmp(closing_element, "set")) {
+          quotations_nt_order.push_back(quotation);
         }
+        free(closing_element);
+        break;
+      }
       }
     }
   }
@@ -137,11 +132,11 @@ void OTQuotations::read()
     g_free(contents);
 }
 
-
-void OTQuotations::get(Reference & reference, vector < Reference > &references, vector < ustring > &comments)
+void OTQuotations::get(Reference &reference, vector<Reference> &references,
+                       vector<ustring> &comments)
 /*
 Retrieves an Old Testament quotation of a New Testament reference.
-This function does a bit more too. If an OT reference is passed, it also looks 
+This function does a bit more too. If an OT reference is passed, it also looks
 up the place in the NT where this is quoted.
 reference: The input reference.
 references: The output reference: contains the related references.
@@ -163,7 +158,8 @@ references: The output reference: contains the related references.
   for (unsigned int i = 0; i < quotations_nt_order.size(); i++) {
     mapping.book_change(quotations_nt_order[i].reference.book_get());
     mapping.original_to_me(quotations_nt_order[i].reference);
-    for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size(); i2++) {
+    for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size();
+         i2++) {
       mapping.book_change(quotations_nt_order[i].referents[i2].book_get());
       mapping.original_to_me(quotations_nt_order[i].referents[i2]);
     }
@@ -174,17 +170,21 @@ references: The output reference: contains the related references.
   for (unsigned int i = 0; i < quotations_nt_order.size(); i++) {
     // If this is a NT reference, look for the corresponding OT quotations.
     if (reference.equals(quotations_nt_order[i].reference)) {
-      for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size(); i2++) {
+      for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size();
+           i2++) {
         references.push_back(quotations_nt_order[i].referents[i2]);
         comments.push_back(comment(_("Quotation"), lxx));
       }
     }
-    // If this is an OT reference, look for possible other ones in the OT, and the NT place that quotes it.
-    for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size(); i2++) {
+    // If this is an OT reference, look for possible other ones in the OT, and
+    // the NT place that quotes it.
+    for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size();
+         i2++) {
       if (reference.equals(quotations_nt_order[i].referents[i2])) {
         references.push_back(quotations_nt_order[i].reference);
         comments.push_back(_("Quoted here"));
-        for (unsigned int i3 = 0; i3 < quotations_nt_order[i].referents.size(); i3++) {
+        for (unsigned int i3 = 0; i3 < quotations_nt_order[i].referents.size();
+             i3++) {
           if (i3 != i2) {
             references.push_back(quotations_nt_order[i].referents[i3]);
             comments.push_back(comment(_("Parallel passage"), lxx));
@@ -203,49 +203,50 @@ references: The output reference: contains the related references.
   }
 }
 
-
-ustring OTQuotations::comment(const gchar * text, bool lxx)
-{
+ustring OTQuotations::comment(const gchar *text, bool lxx) {
   ustring s(text);
   if (lxx)
     s.append(_(" from Septuagint"));
   return s;
 }
 
-
 void OTQuotations::produce_in_ot_order()
 // This produces the quotations in the Old Testament order.
 {
-  // Produce a sorted list of all references that point to something in the Old Testament.
-  vector <Reference> old_testament_refs;
+  // Produce a sorted list of all references that point to something in the Old
+  // Testament.
+  vector<Reference> old_testament_refs;
   {
     for (unsigned int i = 0; i < quotations_nt_order.size(); i++) {
-      for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size(); i2++) {
-        old_testament_refs.push_back (quotations_nt_order[i].referents[i2]);
+      for (unsigned int i2 = 0; i2 < quotations_nt_order[i].referents.size();
+           i2++) {
+        old_testament_refs.push_back(quotations_nt_order[i].referents[i2]);
       }
     }
-    sort_references (old_testament_refs);
+    sort_references(old_testament_refs);
   }
-  
+
   // Go through the OT places, and attach their NT referents.
-  Reference previous_reference (0);
+  Reference previous_reference(0);
   for (unsigned int i = 0; i < old_testament_refs.size(); i++) {
     // Skip double references.
-    if (previous_reference.equals (old_testament_refs[i])) {
+    if (previous_reference.equals(old_testament_refs[i])) {
       continue;
     }
-    previous_reference.assign (old_testament_refs[i]);
+    previous_reference.assign(old_testament_refs[i]);
     // Assemble new quotation.
-    OTQuotation quotation (0);
-    quotation.reference.assign (old_testament_refs[i]);
+    OTQuotation quotation(0);
+    quotation.reference.assign(old_testament_refs[i]);
     // Harvest the NT referents that belong to that OT quotation.
     for (unsigned int i2 = 0; i2 < quotations_nt_order.size(); i2++) {
-      for (unsigned int i3 = 0; i3 < quotations_nt_order[i2].referents.size(); i3++) {
-        if (old_testament_refs[i].equals (quotations_nt_order[i2].referents[i3])) {
-          quotation.referents.push_back (quotations_nt_order[i2].reference);
+      for (unsigned int i3 = 0; i3 < quotations_nt_order[i2].referents.size();
+           i3++) {
+        if (old_testament_refs[i].equals(
+                quotations_nt_order[i2].referents[i3])) {
+          quotation.referents.push_back(quotations_nt_order[i2].reference);
         }
       }
     }
-    quotations_ot_order.push_back (quotation);
+    quotations_ot_order.push_back(quotation);
   }
 }

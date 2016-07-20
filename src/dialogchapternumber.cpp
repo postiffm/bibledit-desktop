@@ -1,44 +1,44 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <gtk/gtk.h>
 #include "dialogchapternumber.h"
-#include "settings.h"
-#include "projectutils.h"
-#include "versification.h"
+#include "books.h"
 #include "combobox.h"
 #include "help.h"
-#include "books.h"
+#include "libraries.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "tiny_utilities.h"
+#include "versification.h"
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 
-ChapterNumberDialog::ChapterNumberDialog(int dummy)
-{
-  // Build gui.  
+ChapterNumberDialog::ChapterNumberDialog(int dummy) {
+  // Build gui.
   dialogchapternumber = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(dialogchapternumber), _("Insert Chapter"));
-  gtk_window_set_position(GTK_WINDOW(dialogchapternumber), GTK_WIN_POS_CENTER_ON_PARENT);
-  gtk_window_set_type_hint(GTK_WINDOW(dialogchapternumber), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_position(GTK_WINDOW(dialogchapternumber),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_type_hint(GTK_WINDOW(dialogchapternumber),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(dialogchapternumber));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(dialogchapternumber));
   gtk_widget_show(dialog_vbox1);
 
   label_purpose = gtk_label_new(_("Insert a new chapter"));
@@ -66,24 +66,30 @@ ChapterNumberDialog::ChapterNumberDialog(int dummy)
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), label_info, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_info), 0, 0.5);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(dialogchapternumber));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(dialogchapternumber));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(dialogchapternumber, NULL, NULL, NULL);
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(dialogchapternumber), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(dialogchapternumber), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(dialogchapternumber), okbutton1, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(dialogchapternumber), okbutton1,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
-  g_signal_connect((gpointer) entry1, "changed", G_CALLBACK(on_entry1_changed), gpointer(this));
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(on_okbutton1_clicked), gpointer(this));
+  g_signal_connect((gpointer)entry1, "changed", G_CALLBACK(on_entry1_changed),
+                   gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(on_okbutton1_clicked), gpointer(this));
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label1), entry1);
 
@@ -94,46 +100,43 @@ ChapterNumberDialog::ChapterNumberDialog(int dummy)
   set_gui();
 }
 
-
-ChapterNumberDialog::~ChapterNumberDialog()
-{
+ChapterNumberDialog::~ChapterNumberDialog() {
   gtk_widget_destroy(dialogchapternumber);
 }
 
-
-int ChapterNumberDialog::run()
-{
+int ChapterNumberDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(dialogchapternumber));
 }
 
-
-void ChapterNumberDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ChapterNumberDialog *) user_data)->on_ok();
+void ChapterNumberDialog::on_okbutton1_clicked(GtkButton *button,
+                                               gpointer user_data) {
+  ((ChapterNumberDialog *)user_data)->on_ok();
 }
-
 
 void ChapterNumberDialog::on_ok()
 // Insert a chapter
 {
   extern Settings *settings;
-  ProjectConfiguration *projectconfig = settings->projectconfig(settings->genconfig.project_get());
+  ProjectConfiguration *projectconfig =
+      settings->projectconfig(settings->genconfig.project_get());
   unsigned int newchapter = get_chapter();
-  vector < ustring > lines;
-  versification_create_chapter_template(projectconfig->versification_get(), settings->genconfig.book_get(), newchapter, lines);
+  vector<ustring> lines;
+  versification_create_chapter_template(projectconfig->versification_get(),
+                                        settings->genconfig.book_get(),
+                                        newchapter, lines);
   CategorizeChapterVerse ccv(lines);
-  project_store_chapter(settings->genconfig.project_get(), settings->genconfig.book_get(), ccv);
+  project_store_chapter(settings->genconfig.project_get(),
+                        settings->genconfig.book_get(), ccv);
   settings->genconfig.chapter_set(convert_to_string(newchapter));
 }
 
-
-void ChapterNumberDialog::set_gui()
-{
+void ChapterNumberDialog::set_gui() {
   extern Settings *settings;
 
-  set < unsigned int >current_chapters;
+  set<unsigned int> current_chapters;
   {
-    vector < unsigned int >chapters = project_get_chapters(settings->genconfig.project_get(), settings->genconfig.book_get());
+    vector<unsigned int> chapters = project_get_chapters(
+        settings->genconfig.project_get(), settings->genconfig.book_get());
     for (unsigned int i = 0; i < chapters.size(); i++)
       current_chapters.insert(chapters[i]);
   }
@@ -155,16 +158,11 @@ void ChapterNumberDialog::set_gui()
   gtk_label_set_text(GTK_LABEL(label_info), message.c_str());
 }
 
-
-void ChapterNumberDialog::on_entry1_changed(GtkEditable * editable, gpointer user_data)
-{
-  ((ChapterNumberDialog *) user_data)->set_gui();
+void ChapterNumberDialog::on_entry1_changed(GtkEditable *editable,
+                                            gpointer user_data) {
+  ((ChapterNumberDialog *)user_data)->set_gui();
 }
 
-
-unsigned int ChapterNumberDialog::get_chapter()
-{
+unsigned int ChapterNumberDialog::get_chapter() {
   return convert_to_int(gtk_entry_get_text(GTK_ENTRY(entry1)));
 }
-
-

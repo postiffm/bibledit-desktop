@@ -1,106 +1,106 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include <config.h>
-#include "libraries.h"
 #include "gwrappers.h"
-#include <glib.h>
-#include "utilities.h"
+#include "libraries.h"
 #include "progresswindow.h"
 #include "unixwrappers.h"
+#include "utilities.h"
+#include <config.h>
+#include <glib.h>
 #ifdef WIN32
 #include <windows.h>
 #else
 #include <sys/wait.h>
 #endif
+#include "debug.h"
 #include "directories.h"
 #include "shell.h"
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
-#include "debug.h"
 
-ustring gw_build_filename(const ustring & part1, const ustring & part2)
+ustring gw_build_filename(const ustring &part1, const ustring &part2)
 // Wrapper for g_build_filename, to make programming easier.
 {
   return tiny_gw_build_filename(part1, part2);
 }
 
-ustring gw_build_filename(const ustring & part1, const ustring & part2, const ustring & part3)
-{
+ustring gw_build_filename(const ustring &part1, const ustring &part2,
+                          const ustring &part3) {
   return tiny_gw_build_filename(part1, part2, part3);
 }
 
-ustring gw_build_filename(const ustring & part1, const ustring & part2, const ustring & part3, const ustring & part4)
-{
+ustring gw_build_filename(const ustring &part1, const ustring &part2,
+                          const ustring &part3, const ustring &part4) {
   ustring filename;
   gchar *name;
-  name = g_build_filename(part1.c_str(), part2.c_str(), part3.c_str(), part4.c_str(), NULL);
+  name = g_build_filename(part1.c_str(), part2.c_str(), part3.c_str(),
+                          part4.c_str(), NULL);
   filename = name;
   g_free(name);
   return filename;
 }
 
-ustring gw_build_filename(const ustring & part1, const ustring & part2, const ustring & part3, const ustring & part4, const ustring & part5)
-{
+ustring gw_build_filename(const ustring &part1, const ustring &part2,
+                          const ustring &part3, const ustring &part4,
+                          const ustring &part5) {
   ustring filename;
   gchar *name;
-  name = g_build_filename(part1.c_str(), part2.c_str(), part3.c_str(), part4.c_str(), part5.c_str(), NULL);
+  name = g_build_filename(part1.c_str(), part2.c_str(), part3.c_str(),
+                          part4.c_str(), part5.c_str(), NULL);
   filename = name;
   g_free(name);
   return filename;
 }
 
 // This writes to the temp\bibledit.log and is available in Help|System Log
-void gw_message(const ustring & message)
-{
+void gw_message(const ustring &message) {
   // tid = thread id, tmsg = thread id message
   pthread_t tid = pthread_self();
   ustring tmsg = ustring("T") + std::to_string(int(tid)) + " " + message + "\n";
   write(1, tmsg.c_str(), strlen(tmsg.c_str()));
 }
 
-void gw_debug(int msgno, const ustring & message, const char *file, int lineno, const char *func)
-{
+void gw_debug(int msgno, const ustring &message, const char *file, int lineno,
+              const char *func) {
   gint64 milliseconds = (g_get_monotonic_time() / 1000);
-  gw_message("DEBUG:"+std::to_string(msgno)+":"+std::to_string(milliseconds)+"ms: " + message + " " + func + ":" + file + ":" + std::to_string(lineno));
+  gw_message("DEBUG:" + std::to_string(msgno) + ":" +
+             std::to_string(milliseconds) + "ms: " + message + " " + func +
+             ":" + file + ":" + std::to_string(lineno));
 }
 
-void gw_warning(const ustring & warning)
-{
+void gw_warning(const ustring &warning) {
   gw_message("WARNING:  " + warning);
   g_warning("%s", warning.c_str());
 }
 
-void gw_critical(const ustring & critical)
-{
+void gw_critical(const ustring &critical) {
   gw_message("CRITICAL: " + critical);
   g_critical("%s", critical.c_str());
 }
 
-void gw_error(const ustring & error)
-{
+void gw_error(const ustring &error) {
   gw_message("ERROR:    " + error);
   g_error("%s", error.c_str());
 }
 
-ustring gw_path_get_basename(const ustring & filename)
-{
+ustring gw_path_get_basename(const ustring &filename) {
   ustring returnvalue;
   gchar *basename;
   basename = g_path_get_basename(filename.c_str());
@@ -109,8 +109,7 @@ ustring gw_path_get_basename(const ustring & filename)
   return returnvalue;
 }
 
-ustring gw_path_get_dirname(const ustring & filename)
-{
+ustring gw_path_get_dirname(const ustring &filename) {
   ustring returnvalue;
   gchar *dirname;
   dirname = g_path_get_dirname(filename.c_str());
@@ -119,10 +118,9 @@ ustring gw_path_get_dirname(const ustring & filename)
   return returnvalue;
 }
 
-
-bool gw_find_program_in_path(const ustring & program)
+bool gw_find_program_in_path(const ustring &program)
 /*
-Before we used the exit code of the unix which command, but as this does 
+Before we used the exit code of the unix which command, but as this does
 not properly work on BSD systems, like Mac OS X, and the OLPC doesn't
 include the which command, we make our own wrapper for glib's version.
 It returns true if "program" is an executable program.
@@ -137,8 +135,7 @@ It returns true if "program" is an executable program.
   return false;
 }
 
-
-void gw_destroy_source(guint & event_id)
+void gw_destroy_source(guint &event_id)
 // This is a combined wrapper for convenience.
 {
   if (event_id) {
@@ -150,21 +147,21 @@ void gw_destroy_source(guint & event_id)
 }
 
 // Append an error message to the startup log file
-void mkdir_info(const ustring & msg) 
-{
-	ustring errfilename = gw_build_filename(g_get_tmp_dir(), "bibledit.startup.txt");
-	FILE *errfile = fopen(errfilename.c_str(), "a"); // always append to end
-	fprintf(errfile, "%s\n", msg.c_str());
-	fclose(errfile);
-	DEBUG(msg)
+void mkdir_info(const ustring &msg) {
+  ustring errfilename =
+      gw_build_filename(g_get_tmp_dir(), "bibledit.startup.txt");
+  FILE *errfile = fopen(errfilename.c_str(), "a"); // always append to end
+  fprintf(errfile, "%s\n", msg.c_str());
+  fclose(errfile);
+  DEBUG(msg)
 }
 
-void gw_mkdir_with_parents(const ustring & directory)
+void gw_mkdir_with_parents(const ustring &directory)
 // Creates directory, with the parents, if need be.
-// Function mkdir could be used (see man 2 mkdir), but this does not allow for 
+// Function mkdir could be used (see man 2 mkdir), but this does not allow for
 // the creation of the parent directories. The core utility mkdir provides
 // this functionality, so is preferred, and used here.
-// Later one g_mkdir_with_parents () was used, but this did not create 
+// Later one g_mkdir_with_parents () was used, but this did not create
 // directories properly. Hence we are stuck with mkdir.
 {
 #if 0
@@ -181,52 +178,51 @@ void gw_mkdir_with_parents(const ustring & directory)
   spawn.devnull();
 #endif
  */  spawn.run();
- #endif
- 
+#endif
+
 #ifdef WIN32
-	// Use Windows system call to do this "right"
-	bool retval = CreateDirectory(directory.c_str(), NULL);
-	// Returns 0 if OK
-	// Returns non-zero if error, and GetLastError will tell us:
-	// ERROR_ALREADY_EXISTS The specified directory already exists.
-	// ERROR_PATH_NOT_FOUND One or more intermediate directories do not exist; this function will only create the final directory in the path.
-	if (retval == 0) {
-		int lasterr = GetLastError();
-		if (lasterr == ERROR_ALREADY_EXISTS) { 
-			// Not really an error, just informative
-			mkdir_info("Already exists " + directory);
-		}
-		else if (lasterr == ERROR_PATH_NOT_FOUND) {
-			mkdir_info("Cannot create " + directory + " because intermediate directories don't exist.");
-			// Strip off last part of directory and try again recursively
-			Glib::ustring::size_type idx = directory.find_last_of("\\");
-			ustring newdir = directory.substr(0, idx);
-			gw_mkdir_with_parents(newdir);
-			// Now try the full path again
-			gw_mkdir_with_parents(directory);
-		}
-	}
-	else {
-		// Not really an error, just informative
-		mkdir_info("Created " + directory);
-	}
+  // Use Windows system call to do this "right"
+  bool retval = CreateDirectory(directory.c_str(), NULL);
+  // Returns 0 if OK
+  // Returns non-zero if error, and GetLastError will tell us:
+  // ERROR_ALREADY_EXISTS The specified directory already exists.
+  // ERROR_PATH_NOT_FOUND One or more intermediate directories do not exist;
+  // this function will only create the final directory in the path.
+  if (retval == 0) {
+    int lasterr = GetLastError();
+    if (lasterr == ERROR_ALREADY_EXISTS) {
+      // Not really an error, just informative
+      mkdir_info("Already exists " + directory);
+    } else if (lasterr == ERROR_PATH_NOT_FOUND) {
+      mkdir_info("Cannot create " + directory +
+                 " because intermediate directories don't exist.");
+      // Strip off last part of directory and try again recursively
+      Glib::ustring::size_type idx = directory.find_last_of("\\");
+      ustring newdir = directory.substr(0, idx);
+      gw_mkdir_with_parents(newdir);
+      // Now try the full path again
+      gw_mkdir_with_parents(directory);
+    }
+  } else {
+    // Not really an error, just informative
+    mkdir_info("Created " + directory);
+  }
 #else
-  GwSpawn spawn (Directories->get_mkdir());
-  spawn.arg (Directories->get_mkdir_args());
-  spawn.arg (directory);
+  GwSpawn spawn(Directories->get_mkdir());
+  spawn.arg(Directories->get_mkdir_args());
+  spawn.arg(directory);
   spawn.run();
 #endif
 }
 
 // Same as above, but takes ustring
-GwSpawn::GwSpawn(const ustring &program)
-{
+GwSpawn::GwSpawn(const ustring &program) {
 #ifdef WIN32
-  // Quote the command in case it has path like 
+  // Quote the command in case it has path like
   // C:\Program Files\... with a space in it.
   myprogram = shell_quote_space(program);
-#else 
-	myprogram = program;
+#else
+  myprogram = program;
 #endif
   myasync = false;
   mydevnull = false;
@@ -239,9 +235,7 @@ GwSpawn::GwSpawn(const ustring &program)
   pid = 0;
 }
 
-GwSpawn::~GwSpawn()
-{
-}
+GwSpawn::~GwSpawn() {}
 
 void GwSpawn::workingdirectory(ustring directory)
 // The process' working directory.
@@ -259,9 +253,9 @@ void GwSpawn::arg(ustring value)
 #else
   // Escape any '.
   replace_text(value, "'", "\\'");
-  // We do not shell_quote_space this argument because 
-  // we are not executing this through a shell. GwSpawnpawn::run
-  // passes arguments directly through argv[].
+// We do not shell_quote_space this argument because
+// we are not executing this through a shell. GwSpawnpawn::run
+// passes arguments directly through argv[].
 #endif
   // Save argument.
   myarguments.push_back(value);
@@ -294,7 +288,7 @@ void GwSpawn::read()
 }
 
 void GwSpawn::progress(ustring text, bool allow_cancel)
-// Show progress of the program that runs. A pulsing bar remains visible as 
+// Show progress of the program that runs. A pulsing bar remains visible as
 // long as the program runs. The user can cancel the program.
 {
   myprogress = true;
@@ -304,29 +298,26 @@ void GwSpawn::progress(ustring text, bool allow_cancel)
   myasync = true;
 }
 
-
-void GwSpawn::describe ()
+void GwSpawn::describe()
 // Describes the command if it would run from a shell.
 {
   ustring description;
   if (!myworkingdirectory.empty()) {
-    description.append ("cd ");
-    description.append (myworkingdirectory);
-    description.append ("; ");
+    description.append("cd ");
+    description.append(myworkingdirectory);
+    description.append("; ");
   }
-  description.append (myprogram);
-  
+  description.append(myprogram);
+
   for (unsigned int i = 0; i < myarguments.size(); i++) {
-    description.append (" ");
-    description.append (myarguments[i]);
+    description.append(" ");
+    description.append(myarguments[i]);
   }
-  gw_message ("Shell command: " + description);
+  gw_message("Shell command: " + description);
 }
 
-
 #ifndef WIN32
-void GwSpawn::run()
-{
+void GwSpawn::run() {
   describe();
   // Working directory.
   const gchar *workingdirectory = NULL;
@@ -368,14 +359,20 @@ void GwSpawn::run()
   }
   // Spawn process.
   if (myasync) {
-    result = g_spawn_async_with_pipes(workingdirectory, argv, NULL, (GSpawnFlags) flags, NULL, NULL, &pid, standard_input_filedescriptor_pointer, standard_output_filedescriptor_pointer, standard_error_filedescriptor_pointer, NULL);
+    result = g_spawn_async_with_pipes(
+        workingdirectory, argv, NULL, (GSpawnFlags)flags, NULL, NULL, &pid,
+        standard_input_filedescriptor_pointer,
+        standard_output_filedescriptor_pointer,
+        standard_error_filedescriptor_pointer, NULL);
     // Handle writing to stdin.
     if (standard_input_filedescriptor) {
       tiny_spawn_write(standard_input_filedescriptor, mywrite);
       close(standard_input_filedescriptor);
     }
   } else {
-    result = g_spawn_sync(workingdirectory, argv, NULL, (GSpawnFlags) flags, NULL, NULL, standard_output_pointer, standard_error_pointer, &exitstatus, NULL);
+    result = g_spawn_sync(workingdirectory, argv, NULL, (GSpawnFlags)flags,
+                          NULL, NULL, standard_output_pointer,
+                          standard_error_pointer, &exitstatus, NULL);
   }
   // Handle case we didn't spawn the process.
   if (!result) {
@@ -403,18 +400,22 @@ void GwSpawn::run()
     }
     // Close pid.
     g_spawn_close_pid(pid);
-    if (progresswindow) { delete progresswindow; }
+    if (progresswindow) {
+      delete progresswindow;
+    }
   }
   // Handle reading the output.
   if (myread) {
-    // In async mode we've got file descriptors, and in sync mode we have 
+    // In async mode we've got file descriptors, and in sync mode we have
     // gchar * output.
     // If async mode, read the output and close the descriptors.
     if (myasync) {
-      GIOChannel *channel_out = g_io_channel_unix_new(standard_output_filedescriptor);
+      GIOChannel *channel_out =
+          g_io_channel_unix_new(standard_output_filedescriptor);
       g_io_channel_read_to_end(channel_out, &standard_output, NULL, NULL);
       g_io_channel_shutdown(channel_out, false, NULL);
-      GIOChannel *channel_err = g_io_channel_unix_new(standard_error_filedescriptor);
+      GIOChannel *channel_err =
+          g_io_channel_unix_new(standard_error_filedescriptor);
       g_io_channel_read_to_end(channel_err, &standard_error, NULL, NULL);
       g_io_channel_shutdown(channel_err, false, NULL);
     }
@@ -446,10 +447,10 @@ These calls allow one to hide the console window.
   if (!myworkingdirectory.empty())
     workingdirectory = myworkingdirectory.c_str();
   /*
-     The trick to running a console window silent is in the STARTUPINFO 
-     structure that we pass into the CreateProcess function. 
-     STARTUPINFO specifies the main window properties. 
-     There are many items in the STARTUPINFO structure that we don't care about. 
+     The trick to running a console window silent is in the STARTUPINFO
+     structure that we pass into the CreateProcess function.
+     STARTUPINFO specifies the main window properties.
+     There are many items in the STARTUPINFO structure that we don't care about.
      The ones that are of interest are:
      * DWORD cb
      * DWORD dwFlags
@@ -460,7 +461,7 @@ These calls allow one to hide the console window.
   PROCESS_INFORMATION ProcessInfo;
   // The memory is cleared for the length of the structure.
   memset(&StartupInfo, 0, sizeof(StartupInfo));
-  // Fill the structure with the relevant code 
+  // Fill the structure with the relevant code
   // that will tell the console window to start up without showing itself.
   StartupInfo.cb = sizeof(STARTUPINFO);
   StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
@@ -474,7 +475,8 @@ These calls allow one to hide the console window.
   char *pEnvCMD = NULL;
   char const *pDefaultCMD = "CMD.EXE";
   // gwrappers.cpp: In member function 'void GwSpawn::run()':
-  // gwrappers.cpp:420:23: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  // gwrappers.cpp:420:23: warning: ISO C++ forbids converting a string constant
+  // to 'char*' [-Wwrite-strings]
   pEnvCMD = getenv("COMSPEC");
 
   if (pEnvCMD) {
@@ -493,18 +495,20 @@ These calls allow one to hide the console window.
     strcat(Args, myarguments[i].c_str());
   }
 
-  // Get the suffix for the files to be piped. It has the seconds and 
+  // Get the suffix for the files to be piped. It has the seconds and
   // microseconds in them, to allow for parallel usage of these pipes.
   ustring pipe_suffix;
   if ((!mydevnull) || (!mywrite.empty())) {
     GTimeVal gtimeval;
     g_get_current_time(&gtimeval);
-    pipe_suffix = convert_to_string((long unsigned int)gtimeval.tv_sec) + convert_to_string((long unsigned int)gtimeval.tv_usec);
+    pipe_suffix = convert_to_string((long unsigned int)gtimeval.tv_sec) +
+                  convert_to_string((long unsigned int)gtimeval.tv_usec);
   }
   // If there is standard input, create the file to be piped.
   // Write the text into that file. Add the file to the arguments.
   if (!mywrite.empty()) {
-    ustring pipe_in = gw_build_filename(Directories->get_temp(), "stdin" + pipe_suffix);
+    ustring pipe_in =
+        gw_build_filename(Directories->get_temp(), "stdin" + pipe_suffix);
     WriteText wt(pipe_in);
     wt.text(mywrite);
     strcat(Args, " <");
@@ -514,8 +518,10 @@ These calls allow one to hide the console window.
   ustring pipe_out;
   ustring pipe_err;
   if (!mydevnull) {
-    pipe_out = gw_build_filename(Directories->get_temp(), "stdout" + pipe_suffix);
-    pipe_err = gw_build_filename(Directories->get_temp(), "stderr" + pipe_suffix);
+    pipe_out =
+        gw_build_filename(Directories->get_temp(), "stdout" + pipe_suffix);
+    pipe_err =
+        gw_build_filename(Directories->get_temp(), "stderr" + pipe_suffix);
     ustring pout = shell_quote_space(pipe_out);
     ustring perr = shell_quote_space(pipe_err);
     strcat(Args, " >");
@@ -524,7 +530,8 @@ These calls allow one to hide the console window.
     strcat(Args, perr.c_str());
   }
   // Start the process.
-  result = CreateProcess(NULL, Args, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, workingdirectory, &StartupInfo, &ProcessInfo);
+  result = CreateProcess(NULL, Args, NULL, NULL, FALSE, CREATE_NEW_CONSOLE,
+                         NULL, workingdirectory, &StartupInfo, &ProcessInfo);
   if (!result) {
     exitstatus = GetLastError();
     ustring message = myprogram;
@@ -536,11 +543,11 @@ These calls allow one to hide the console window.
   if (myprogress) {
     ProgressWindow progresswindow(mytext, myallowcancel);
     // Time passed to WaitForSingleObject is in milliseconds.
-    while ((WaitForSingleObject(ProcessInfo.hProcess, 500) >= 500)
-           || (WaitForSingleObject(ProcessInfo.hThread, 500) >= 500)) {
+    while ((WaitForSingleObject(ProcessInfo.hProcess, 500) >= 500) ||
+           (WaitForSingleObject(ProcessInfo.hThread, 500) >= 500)) {
       progresswindow.pulse();
       if (progresswindow.cancel) {
-// todo        unix_kill (pid);
+        // todo        unix_kill (pid);
         cancelled = true;
       }
     }
@@ -591,4 +598,3 @@ These calls allow one to hide the console window.
   }
 }
 #endif
-

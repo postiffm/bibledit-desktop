@@ -1,31 +1,31 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include "libraries.h"
-#include "utilities.h"
 #include "usfm.h"
-#include "usfmtools.h"
-#include "constants.h"
 #include "color.h"
+#include "constants.h"
+#include "libraries.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 
-UsfmInlineMarkers::UsfmInlineMarkers(const Usfm & usfm)
+UsfmInlineMarkers::UsfmInlineMarkers(const Usfm &usfm)
 // Creates a list of all inline markers, with their properties.
 {
   // Go through all the styles and look for inline ones.
@@ -51,7 +51,7 @@ UsfmInlineMarkers::UsfmInlineMarkers(const Usfm & usfm)
       string s;
       s = usfm_get_full_opening_marker(usfm.styles[i].marker);
       opening_markers.push_back(s);
-      // Store closing marker.      
+      // Store closing marker.
       s = usfm_get_full_closing_marker(usfm.styles[i].marker);
       closing_markers.push_back(s);
       // Store the relevant properties of this style.
@@ -67,27 +67,26 @@ UsfmInlineMarkers::UsfmInlineMarkers(const Usfm & usfm)
   closing_odt_markup = "</text:span>";
 }
 
-UsfmInlineMarkers::~UsfmInlineMarkers()
-{
-}
+UsfmInlineMarkers::~UsfmInlineMarkers() {}
 
 string UsfmInlineMarkers::opening_sword_markup(int index)
 // This one generates the opening sword markup.
-// It uses 'index' for the index in the opening and closing markers, as there 
+// It uses 'index' for the index in the opening and closing markers, as there
 // can be many.
 /*
 From OSIS User Manual 2006:
-The hi element provides a simple text highlighting mechanism. Here are the types:
+The hi element provides a simple text highlighting mechanism. Here are the
+types:
  acrostic
- bold 
- emphasis 
- illuminated 
- italic 
- line-through 
+ bold
+ emphasis
+ illuminated
+ italic
+ line-through
  normal
- small-caps 
- sub 
- super 
+ small-caps
+ sub
+ super
  underline
 Example: <hi type="italic">the child with his mother Mary</hi>
 */
@@ -99,26 +98,34 @@ Example: <hi type="italic">the child with his mother Mary</hi>
   if ((italic[index] == ON) || (italic[index] == TOGGLE)) {
     opening_sword_markup.append("<hi type=\"italic\">");
     opener_count++;
-  } else if (italic[index] == OFF) ;
-  else if (italic[index] == INHERIT) ;
+  } else if (italic[index] == OFF)
+    ;
+  else if (italic[index] == INHERIT)
+    ;
   // Deal with bold.
   if ((bold[index] == ON) || (bold[index] == TOGGLE)) {
     opening_sword_markup.append("<hi type=\"bold\">");
     opener_count++;
-  } else if (bold[index] == OFF) ;
-  else if (bold[index] == INHERIT) ;
+  } else if (bold[index] == OFF)
+    ;
+  else if (bold[index] == INHERIT)
+    ;
   // Deal with underline.
   if ((underline[index] == ON) || (underline[index] == TOGGLE)) {
     opening_sword_markup.append("<hi type=\"underline\">");
     opener_count++;
-  } else if (underline[index] == OFF) ;
-  else if (underline[index] == INHERIT) ;
+  } else if (underline[index] == OFF)
+    ;
+  else if (underline[index] == INHERIT)
+    ;
   // Deal with smallcaps.
   if ((smallcaps[index] == ON) || (smallcaps[index] == TOGGLE)) {
     opening_sword_markup.append("<hi type=\"small-caps\">");
     opener_count++;
-  } else if (smallcaps[index] == OFF) ;
-  else if (smallcaps[index] == INHERIT) ;
+  } else if (smallcaps[index] == OFF)
+    ;
+  else if (smallcaps[index] == INHERIT)
+    ;
   // Deal with superscript.
   if (superscript[index]) {
     opening_sword_markup.append("<hi type=\"super\">");

@@ -1,36 +1,34 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
 #include "wordlist.h"
-#include "settings.h"
-#include "projectutils.h"
-#include "utilities.h"
 #include "books.h"
-#include "usfmtools.h"
-#include "tiny_utilities.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "styles.h"
 #include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-Wordlist::Wordlist(WordlistType wordlist)
-{
+Wordlist::Wordlist(WordlistType wordlist) {
   extern Settings *settings;
 
   project = settings->genconfig.project_get();
@@ -40,52 +38,49 @@ Wordlist::Wordlist(WordlistType wordlist)
   entry_closer = usfm_get_full_closing_marker(marker);
 
   switch (wordlist) {
-  case wltGeneral:
-    {
-      list_opener = "\\zopenwordlist";
-      list_closer = "\\zclosewordlist";
-      use_asterisk = settings->genconfig.wordlist_general_asterisk_get();
-      first_in_chapter = settings->genconfig.wordlist_general_asterisk_first_get();
-      wordlistname = _("General word list");
-      break;
-    }
-  case wltHebrew:
-    {
-      list_opener = "\\zopenhebrewwordlist";
-      list_closer = "\\zclosehebrewwordlist";
-      use_asterisk = settings->genconfig.wordlist_hebrew_asterisk_get();
-      first_in_chapter = settings->genconfig.wordlist_hebrew_asterisk_first_get();
-      wordlistname = _("Hebrew word list");
-      break;
-    }
-  case wltGreek:
-    {
-      list_opener = "\\zopengreekwordlist";
-      list_closer = "\\zclosegreekwordlist";
-      use_asterisk = settings->genconfig.wordlist_greek_asterisk_get();
-      first_in_chapter = settings->genconfig.wordlist_greek_asterisk_first_get();
-      wordlistname = _("Greek word list");
-      break;
-    }
-  case wltIndex:
-    {
-      list_opener = "\\zopenindex";
-      list_closer = "\\zcloseindex";
-      use_asterisk = settings->genconfig.wordlist_index_asterisk_get();
-      first_in_chapter = settings->genconfig.wordlist_index_asterisk_first_get();
-      wordlistname = _("Index");
-      break;
-    }
+  case wltGeneral: {
+    list_opener = "\\zopenwordlist";
+    list_closer = "\\zclosewordlist";
+    use_asterisk = settings->genconfig.wordlist_general_asterisk_get();
+    first_in_chapter =
+        settings->genconfig.wordlist_general_asterisk_first_get();
+    wordlistname = _("General word list");
+    break;
+  }
+  case wltHebrew: {
+    list_opener = "\\zopenhebrewwordlist";
+    list_closer = "\\zclosehebrewwordlist";
+    use_asterisk = settings->genconfig.wordlist_hebrew_asterisk_get();
+    first_in_chapter = settings->genconfig.wordlist_hebrew_asterisk_first_get();
+    wordlistname = _("Hebrew word list");
+    break;
+  }
+  case wltGreek: {
+    list_opener = "\\zopengreekwordlist";
+    list_closer = "\\zclosegreekwordlist";
+    use_asterisk = settings->genconfig.wordlist_greek_asterisk_get();
+    first_in_chapter = settings->genconfig.wordlist_greek_asterisk_first_get();
+    wordlistname = _("Greek word list");
+    break;
+  }
+  case wltIndex: {
+    list_opener = "\\zopenindex";
+    list_closer = "\\zcloseindex";
+    use_asterisk = settings->genconfig.wordlist_index_asterisk_get();
+    first_in_chapter = settings->genconfig.wordlist_index_asterisk_first_get();
+    wordlistname = _("Index");
+    break;
+  }
   }
 
   // Get markers that indicate a section.
-  extern Styles * styles;
-  Stylesheet * stylesheet = styles->stylesheet (stylesheet_get_actual ());
+  extern Styles *styles;
+  Stylesheet *stylesheet = styles->stylesheet(stylesheet_get_actual());
   for (unsigned int i = 0; i < stylesheet->styles.size(); i++) {
-    StyleV2 * style = stylesheet->styles[i];
+    StyleV2 *style = stylesheet->styles[i];
     if (style->type == stStartsParagraph) {
       if (style->subtype != ptNormalParagraph) {
-        section_markers.insert (style->marker);
+        section_markers.insert(style->marker);
       }
     }
   }
@@ -95,13 +90,9 @@ Wordlist::Wordlist(WordlistType wordlist)
   wordcount = 0;
 }
 
-Wordlist::~Wordlist()
-{
-  delete progresswindow;
-}
+Wordlist::~Wordlist() { delete progresswindow; }
 
-void Wordlist::run(vector < ustring > &allmessages)
-{
+void Wordlist::run(vector<ustring> &allmessages) {
   // No project given: bail out.
   if (project.empty()) {
     message(_("No project"));
@@ -110,18 +101,19 @@ void Wordlist::run(vector < ustring > &allmessages)
   // Pass 1: Collect words and handle asterisks.
 
   // Go through the books.
-  vector < unsigned int >books = project_get_books(project);
+  vector<unsigned int> books = project_get_books(project);
   progresswindow->set_iterate(0, 1, books.size());
   for (unsigned int bk = 0; bk < books.size(); bk++) {
     progresswindow->iterate();
 
     // Go through the chapters.
-    vector < unsigned int >chapters = project_get_chapters(project, books[bk]);
+    vector<unsigned int> chapters = project_get_chapters(project, books[bk]);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
 
       // Go through the lines of the chapter, and process them.
-      vector <ustring> lines = project_retrieve_chapter(project, books[bk], chapters[ch]);
-      set <ustring> section_entries;
+      vector<ustring> lines =
+          project_retrieve_chapter(project, books[bk], chapters[ch]);
+      set<ustring> section_entries;
       bool chapter_content_was_changed = false;
       for (unsigned int i = 0; i < lines.size(); i++) {
         ustring line(lines[i]);
@@ -139,7 +131,8 @@ void Wordlist::run(vector < ustring > &allmessages)
   }
   // Informative messages.
   message(_("Total entries: ") + convert_to_string(wordcount));
-  message(_("Unique entries: ") + convert_to_string((unsigned int)words.size()));
+  message(_("Unique entries: ") +
+          convert_to_string((unsigned int)words.size()));
 
   // Pass 2: Insert word lists.
 
@@ -155,13 +148,15 @@ void Wordlist::run(vector < ustring > &allmessages)
       progresswindow->iterate();
 
       // Go through the chapters.
-      vector < unsigned int >chapters = project_get_chapters(project, books[bk]);
+      vector<unsigned int> chapters = project_get_chapters(project, books[bk]);
       for (unsigned int ch = 0; ch < chapters.size(); ch++) {
 
-        // Go through the lines of the chapter to look for the position to insert the list.
+        // Go through the lines of the chapter to look for the position to
+        // insert the list.
         unsigned int opener_offset = 0;
         unsigned int closer_offset = 0;
-        vector < ustring > lines = project_retrieve_chapter(project, books[bk], chapters[ch]);
+        vector<ustring> lines =
+            project_retrieve_chapter(project, books[bk], chapters[ch]);
         for (unsigned int ln = 0; ln < lines.size(); ln++) {
           if (lines[ln].find(list_opener) == 0) {
             opener_offset = ln;
@@ -173,14 +168,19 @@ void Wordlist::run(vector < ustring > &allmessages)
 
         // If something like a position was found, process that.
         if (opener_offset || closer_offset) {
-          if (opener_offset && closer_offset && (opener_offset < closer_offset)) {
+          if (opener_offset && closer_offset &&
+              (opener_offset < closer_offset)) {
             insert_list(lines, opener_offset, closer_offset);
             CategorizeChapterVerse ccv(lines);
             project_store_chapter(project, books[bk], ccv);
-            message(_("Word list inserted in ") + books_id_to_english(books[bk]) + " " + convert_to_string(chapters[ch]));
+            message(_("Word list inserted in ") +
+                    books_id_to_english(books[bk]) + " " +
+                    convert_to_string(chapters[ch]));
             inserted = true;
           } else {
-            message(_("Invalid word list location in ") + books_id_to_english(books[bk]) + " " + convert_to_string(chapters[ch]));
+            message(_("Invalid word list location in ") +
+                    books_id_to_english(books[bk]) + " " +
+                    convert_to_string(chapters[ch]));
           }
         }
       }
@@ -196,8 +196,7 @@ void Wordlist::run(vector < ustring > &allmessages)
   }
 }
 
-
-void Wordlist::process_line(ustring & line, set <ustring> &section_entries)
+void Wordlist::process_line(ustring &line, set<ustring> &section_entries)
 // Processes one line of text:
 // - deals with entries.
 // - deals with asterisks.
@@ -205,9 +204,9 @@ void Wordlist::process_line(ustring & line, set <ustring> &section_entries)
 {
   // Handle section restart.
   {
-    ustring s (line);
-    ustring marker = usfm_extract_marker (s);
-    if (section_markers.find (marker) != section_markers.end()) {
+    ustring s(line);
+    ustring marker = usfm_extract_marker(s);
+    if (section_markers.find(marker) != section_markers.end()) {
       section_entries.clear();
     }
   }
@@ -224,9 +223,10 @@ void Wordlist::process_line(ustring & line, set <ustring> &section_entries)
     if (endpos == string::npos)
       break;
     // Get the word.
-    ustring word = line.substr(startpos + entry_opener.length(), endpos - startpos - entry_closer.length());
+    ustring word = line.substr(startpos + entry_opener.length(),
+                               endpos - startpos - entry_closer.length());
     if (!word.empty()) {
-      // Store the word.      
+      // Store the word.
       words.insert(word);
       wordcount++;
       // Handle asterisks.
@@ -245,16 +245,15 @@ void Wordlist::process_line(ustring & line, set <ustring> &section_entries)
   }
 }
 
-
-void Wordlist::insert_list(vector < ustring > &lines, unsigned int startlist, unsigned int endlist)
-{
+void Wordlist::insert_list(vector<ustring> &lines, unsigned int startlist,
+                           unsigned int endlist) {
   // Split the available lines into three parts:
   // - the part before the insertion point,
   // - the already existing entries,
   // - and the part after the insertion point.
-  vector < ustring > linesbefore;
-  vector < ustring > entries;
-  vector < ustring > linesafter;
+  vector<ustring> linesbefore;
+  vector<ustring> entries;
+  vector<ustring> linesafter;
   for (unsigned int i = 0; i < lines.size(); i++) {
     if (i <= startlist) {
       linesbefore.push_back(lines[i]);
@@ -267,17 +266,18 @@ void Wordlist::insert_list(vector < ustring > &lines, unsigned int startlist, un
     }
   }
 
-  // Any existing entry, put it in the \rem remark. 
-  // This is done so that in case it is no longer referenced, it will get commented out.
+  // Any existing entry, put it in the \rem remark.
+  // This is done so that in case it is no longer referenced, it will get
+  // commented out.
   for (unsigned int i = 0; i < entries.size(); i++) {
     ustring marker = usfm_extract_marker(entries[i]);
     entries[i].insert(0, usfm_get_full_opening_marker("rem"));
   }
 
   // Get a list of entries.
-  vector < ustring > mywords(words.begin(), words.end());
+  vector<ustring> mywords(words.begin(), words.end());
 
-  // Go through all the entries, insert them in the list, 
+  // Go through all the entries, insert them in the list,
   // preserving existing ones.
   for (unsigned int i = 0; i < mywords.size(); i++) {
     bool entry_exists = false;
@@ -300,7 +300,7 @@ void Wordlist::insert_list(vector < ustring > &lines, unsigned int startlist, un
     }
   }
 
-  // Sort the entries.  
+  // Sort the entries.
   sort(entries.begin(), entries.end());
 
   // Join everything together.
@@ -313,18 +313,14 @@ void Wordlist::insert_list(vector < ustring > &lines, unsigned int startlist, un
     lines.push_back(linesafter[i]);
 }
 
-
-void Wordlist::message(const ustring & message)
-{
+void Wordlist::message(const ustring &message) {
   if (messages.empty())
     messages.push_back(wordlistname + ":");
   messages.push_back("- " + message);
 }
 
-
-ustring wordlist_get_entry_style(const ustring & project, WordlistType type)
-{
-  ustring stylesheet = stylesheet_get_actual ();
+ustring wordlist_get_entry_style(const ustring &project, WordlistType type) {
+  ustring stylesheet = stylesheet_get_actual();
   extern Styles *styles;
   Usfm *usfm = styles->usfm(stylesheet);
   ustring style;
@@ -366,5 +362,3 @@ ustring wordlist_get_entry_style(const ustring & project, WordlistType type)
   }
   return style;
 }
-
-

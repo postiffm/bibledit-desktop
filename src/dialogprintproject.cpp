@@ -1,53 +1,53 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogprintproject.h"
-#include "utilities.h"
 #include "bible.h"
+#include "dialogselectbooks.h"
+#include "help.h"
+#include "libraries.h"
+#include "scriptureportions.h"
+#include "settings.h"
+#include "shortcuts.h"
 #include "usfm.h"
 #include "usfmtools.h"
+#include "utilities.h"
 #include "xmlutils.h"
-#include <time.h>
-#include "settings.h"
-#include "scriptureportions.h"
-#include "help.h"
-#include "dialogselectbooks.h"
-#include "shortcuts.h"
+#include <glib.h>
 #include <glib/gi18n.h>
+#include <time.h>
 
-PrintProjectDialog::PrintProjectDialog(int dummy)
-{
+PrintProjectDialog::PrintProjectDialog(int dummy) {
   extern Settings *settings;
 
   Shortcuts shortcuts(0);
 
   printprojectdialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(printprojectdialog), _("Print project"));
-  gtk_window_set_position(GTK_WINDOW(printprojectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_position(GTK_WINDOW(printprojectdialog),
+                          GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(printprojectdialog), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(printprojectdialog), TRUE);
-  gtk_window_set_type_hint(GTK_WINDOW(printprojectdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_type_hint(GTK_WINDOW(printprojectdialog),
+                           GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(printprojectdialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(printprojectdialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 2);
@@ -102,15 +102,19 @@ PrintProjectDialog::PrintProjectDialog(int dummy)
   gtk_widget_show(vbox_expander);
   gtk_container_add(GTK_CONTAINER(expander1), vbox_expander);
 
-  checkbutton_full_references = gtk_check_button_new_with_mnemonic(_("Write the references in the notes in full"));
+  checkbutton_full_references = gtk_check_button_new_with_mnemonic(
+      _("Write the references in the notes in full"));
   gtk_widget_show(checkbutton_full_references);
-  gtk_box_pack_start(GTK_BOX(vbox_expander), checkbutton_full_references, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox_expander), checkbutton_full_references, FALSE,
+                     FALSE, 0);
 
   // TO DO: Add options for 1 column, double spaced here
-  
+
   shortcuts.button(checkbutton_full_references);
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_full_references), settings->session.print_references_in_notes_in_full);
+  gtk_toggle_button_set_active(
+      GTK_TOGGLE_BUTTON(checkbutton_full_references),
+      settings->session.print_references_in_notes_in_full);
 
   label_expander = gtk_label_new(_("Options"));
   gtk_widget_show(label_expander);
@@ -118,28 +122,34 @@ PrintProjectDialog::PrintProjectDialog(int dummy)
 
   shortcuts.label(label_expander);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(printprojectdialog));
+  dialog_action_area1 =
+      gtk_dialog_get_action_area(GTK_DIALOG(printprojectdialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(printprojectdialog, NULL, &shortcuts, "file/print/project");
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(printprojectdialog), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(printprojectdialog), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(printprojectdialog), okbutton1, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(printprojectdialog), okbutton1,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
   shortcuts.stockbutton(cancelbutton1);
   shortcuts.stockbutton(okbutton1);
   shortcuts.process();
 
-  g_signal_connect((gpointer) button_portion, "clicked", G_CALLBACK(on_button_portion_clicked), gpointer(this));
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(on_okbutton1_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_portion, "clicked",
+                   G_CALLBACK(on_button_portion_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(on_okbutton1_clicked), gpointer(this));
 
   gtk_widget_grab_focus(okbutton1);
   gtk_widget_grab_default(okbutton1);
@@ -148,49 +158,41 @@ PrintProjectDialog::PrintProjectDialog(int dummy)
   gui_reorder_include();
 }
 
-
-PrintProjectDialog::~PrintProjectDialog()
-{
+PrintProjectDialog::~PrintProjectDialog() {
   gtk_widget_destroy(printprojectdialog);
 }
 
-
-int PrintProjectDialog::run()
-{
+int PrintProjectDialog::run() {
   return gtk_dialog_run(GTK_DIALOG(printprojectdialog));
 }
 
-
-void PrintProjectDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((PrintProjectDialog *) user_data)->on_okbutton();
+void PrintProjectDialog::on_okbutton1_clicked(GtkButton *button,
+                                              gpointer user_data) {
+  ((PrintProjectDialog *)user_data)->on_okbutton();
 }
 
-
-void PrintProjectDialog::on_okbutton()
-{
+void PrintProjectDialog::on_okbutton() {
   extern Settings *settings;
-  settings->session.print_references_in_notes_in_full = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_full_references));
+  settings->session.print_references_in_notes_in_full =
+      gtk_toggle_button_get_active(
+          GTK_TOGGLE_BUTTON(checkbutton_full_references));
 }
 
-
-void PrintProjectDialog::on_button_portion_clicked(GtkButton * button, gpointer user_data)
-{
-  ((PrintProjectDialog *) user_data)->on_button_portion();
+void PrintProjectDialog::on_button_portion_clicked(GtkButton *button,
+                                                   gpointer user_data) {
+  ((PrintProjectDialog *)user_data)->on_button_portion();
 }
 
-
-void PrintProjectDialog::on_button_portion()
-{
+void PrintProjectDialog::on_button_portion() {
   SelectBooksDialog dialog(true);
   if (dialog.run() == GTK_RESPONSE_OK) {
     gui_reorder_include();
   }
 }
 
-
 void PrintProjectDialog::gui_reorder_include()
-// Set labels whether the order of the books is standard and everything is included.
+// Set labels whether the order of the books is standard and everything is
+// included.
 {
   extern Settings *settings;
   ScripturePortions scriptureportions(settings->genconfig.project_get());

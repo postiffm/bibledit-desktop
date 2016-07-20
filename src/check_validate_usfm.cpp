@@ -1,34 +1,35 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
 #include "check_validate_usfm.h"
+#include "books.h"
 #include "projectutils.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
-#include "usfmtools.h"
-#include "books.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-CheckValidateUsfm::CheckValidateUsfm(const ustring & project, const vector < unsigned int >&books, bool gui, bool checksheet)
+CheckValidateUsfm::CheckValidateUsfm(const ustring &project,
+                                     const vector<unsigned int> &books,
+                                     bool gui, bool checksheet)
 /*
 It performs checks related to the USFM standard.
 project: project to check.
@@ -41,11 +42,12 @@ checksheet: check whether markers are in the stylesheet of the project.
   cancelled = false;
   mychecksheet = checksheet;
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
   // Get all styles in the attached stylesheet.
-  vector <ustring> styless = stylesheet_get_markers(stylesheet_get_actual (), NULL);
+  vector<ustring> styless =
+      stylesheet_get_markers(stylesheet_get_actual(), NULL);
   for (unsigned int i = 0; i < styless.size(); i++)
     styles.insert(styless[i]);
   // GUI.
@@ -66,10 +68,10 @@ checksheet: check whether markers are in the stylesheet of the project.
     }
     book = mybooks[bk];
     // Check each chapter.
-    vector <unsigned int> chapters = project_get_chapters(project, book);
+    vector<unsigned int> chapters = project_get_chapters(project, book);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
       chapter = chapters[ch];
-      vector <ustring> verses = project_get_verses(project, book, chapter);
+      vector<ustring> verses = project_get_verses(project, book, chapter);
       // Check each verse.
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
         verse = verses[vs];
@@ -84,15 +86,12 @@ checksheet: check whether markers are in the stylesheet of the project.
   }
 }
 
-
-CheckValidateUsfm::~CheckValidateUsfm()
-{
+CheckValidateUsfm::~CheckValidateUsfm() {
   if (progresswindow)
     delete progresswindow;
 }
 
-
-void CheckValidateUsfm::check(const ustring & text)
+void CheckValidateUsfm::check(const ustring &text)
 // Do the actual check of one verse.
 {
   // Extract the marker, and deal with it.
@@ -122,16 +121,18 @@ void CheckValidateUsfm::check(const ustring & text)
     } else if (marker == "c") {
     } else if (marker == "v") {
       // Is there a space after the verse number?
-      // Check it by extracting the text will the first space, and see if any unusual characters are in it.
+      // Check it by extracting the text will the first space, and see if any
+      // unusual characters are in it.
       // It should cover things like \v 10a-11b or \v 10,11
       size_t position = line.find(" ");
       position = CLAMP(position, 0, line.length());
-      ustring verse_number = line.substr (0, position);
+      ustring verse_number = line.substr(0, position);
       for (unsigned int i = 0; i < verse_number.length(); i++) {
-        ustring character = verse_number.substr (i, 1);
-        if (number_in_string (character) != character) {
-          if ((character != "a") || (character != "b") || (character != "-") || (character != ",")) {
-            message (_("Unusual character in verse number ") + verse_number);
+        ustring character = verse_number.substr(i, 1);
+        if (number_in_string(character) != character) {
+          if ((character != "a") || (character != "b") || (character != "-") ||
+              (character != ",")) {
+            message(_("Unusual character in verse number ") + verse_number);
             break;
           }
         }
@@ -185,12 +186,14 @@ void CheckValidateUsfm::check(const ustring & text)
       check_on_endmarker(line, marker, true);
     } else if (marker == "f") {
       check_on_endmarker(line, marker, false);
-    } else if (marker == "fb") { 
-      // todo rogue fix - this check needs to be based on stylesheet, not hard coded.
+    } else if (marker == "fb") {
+      // todo rogue fix - this check needs to be based on stylesheet, not hard
+      // coded.
       // A task was opened for this to be done.
       check_on_endmarker(line, marker, false);
-    } else if (marker == "fx") { 
-      // todo rogue fix - this check needs to be based on stylesheet, not hard coded.
+    } else if (marker == "fx") {
+      // todo rogue fix - this check needs to be based on stylesheet, not hard
+      // coded.
       // A task was opened for this to be done.
       check_on_endmarker(line, marker, false);
     } else if (marker == "glo") {
@@ -384,7 +387,7 @@ void CheckValidateUsfm::check(const ustring & text)
         message(_("Marker ") + marker + _(" not in stylesheet"));
       }
     }
-    // Extract any next marker in this line.    
+    // Extract any next marker in this line.
     marker = usfm_extract_marker_within_line(line);
   }
 
@@ -397,190 +400,69 @@ void CheckValidateUsfm::check(const ustring & text)
     if (pos != string::npos) {
       marker.erase(pos, 1);
     }
-    if ((marker == "id")
-        || (marker == "c")
-        || (marker == "v")
-        || (marker == "add")
-        || (marker == "bdit")
-        || (marker == "bd")
-        || (marker == "bk")
-        || (marker == "b")
-        || (marker == "ca")
-        || (marker == "cd")
-        || (marker == "cls")
-        || (marker == "cl")
-        || (marker == "conc")
-        || (marker == "cov")
-        || (marker == "cp")
-        || (marker == "dc")
-        || (marker == "d")
-        || (marker == "em")
-        || (marker == "fdc")
-        || (marker == "fe")
-        || (marker == "fig")
-        || (marker == "fk")
-        || (marker == "fl")
-        || (marker == "fm")
-        || (marker == "fp")
-        || (marker == "fqa")
-        || (marker == "fq")
-        || (marker == "fr")
-        || (marker == "ft")
-        || (marker == "fv")
-        || (marker == "f")
-        || (marker == "glo")
-        || (marker == "h1")
-        || (marker == "h2")
-        || (marker == "h3")
-        || (marker == "h")
-        || (marker == "ib")
-        || (marker == "ide")
-        || (marker == "idx")
-        || (marker == "ie")
-        || (marker == "iex")
-        || (marker == "imi")
-        || (marker == "imq")
-        || (marker == "imt1")
-        || (marker == "imt2")
-        || (marker == "imt3")
-        || (marker == "imt4")
-        || (marker == "imte")
-        || (marker == "imt")
-        || (marker == "im")
-        || (marker == "intro")
-        || (marker == "io1")
-        || (marker == "io2")
-        || (marker == "io3")
-        || (marker == "io4")
-        || (marker == "ior")
-        || (marker == "iot")
-        || (marker == "io")
-        || (marker == "ipi")
-        || (marker == "ipq")
-        || (marker == "ipr")
-        || (marker == "ip")
-        || (marker == "iq1")
-        || (marker == "iq2")
-        || (marker == "iq3")
-        || (marker == "iq")
-        || (marker == "is1")
-        || (marker == "is2")
-        || (marker == "is")
-        || (marker == "it")
-        || (marker == "k1")
-        || (marker == "k2")
-        || (marker == "k")
-        || (marker == "li1")
-        || (marker == "li2")
-        || (marker == "li3")
-        || (marker == "li4")
-        || (marker == "lit")
-        || (marker == "li")
-        || (marker == "maps")
-        || (marker == "mi")
-        || (marker == "mr")
-        || (marker == "ms1")
-        || (marker == "ms2")
-        || (marker == "ms")
-        || (marker == "mt1")
-        || (marker == "mt2")
-        || (marker == "mt3")
-        || (marker == "mt4")
-        || (marker == "mte1")
-        || (marker == "mte2")
-        || (marker == "mte")
-        || (marker == "mt")
-        || (marker == "m")
-        || (marker == "nb")
-        || (marker == "nd")
-        || (marker == "ndx")
-        || (marker == "no")
-        || (marker == "ord")
-        || (marker == "p1")
-        || (marker == "p2")
-        || (marker == "pb")
-        || (marker == "pc")
-        || (marker == "pi1")
-        || (marker == "pi2")
-        || (marker == "pi3")
-        || (marker == "pi")
-        || (marker == "pmc")
-        || (marker == "pmo")
-        || (marker == "pmr")
-        || (marker == "pm")
-        || (marker == "pn")
-        || (marker == "pref")
-        || (marker == "pro")
-        || (marker == "pubinfo")
-        || (marker == "pub")
-        || (marker == "p")
-        || (marker == "q1")
-        || (marker == "q2")
-        || (marker == "q3")
-        || (marker == "qac")
-        || (marker == "qa")
-        || (marker == "qc")
-        || (marker == "qm1")
-        || (marker == "qm2")
-        || (marker == "qm3")
-        || (marker == "qm")
-        || (marker == "qr")
-        || (marker == "qs")
-        || (marker == "qt")
-        || (marker == "q")
-        || (marker == "rem")
-        || (marker == "restore")
-        || (marker == "r")
-        || (marker == "rq")
-        || (marker == "s1")
-        || (marker == "s2")
-        || (marker == "s3")
-        || (marker == "s4")
-        || (marker == "sc")
-        || (marker == "sig")
-        || (marker == "sls")
-        || (marker == "spine")
-        || (marker == "sp")
-        || (marker == "sr")
-        || (marker == "s")
-        || (marker == "tc1")
-        || (marker == "tc2")
-        || (marker == "tc3")
-        || (marker == "tc4")
-        || (marker == "tcr1")
-        || (marker == "tcr2")
-        || (marker == "tcr3")
-        || (marker == "tcr4")
-        || (marker == "th1")
-        || (marker == "th2")
-        || (marker == "th3")
-        || (marker == "th4")
-        || (marker == "thr1")
-        || (marker == "thr2")
-        || (marker == "thr3")
-        || (marker == "thr4")
-        || (marker == "tl")
-        || (marker == "toc1")
-        || (marker == "toc2")
-        || (marker == "toc3")
-        || (marker == "toc")
-        || (marker == "tr")
-        || (marker == "va")
-        || (marker == "vp")
-        || (marker == "wg")
-        || (marker == "wh")
-        || (marker == "wj")
-        || (marker == "w")
-        || (marker == "xdc")
-        || (marker == "xk")
-        || (marker == "xo")
-        || (marker == "xq")
-        || (marker == "xt")
-        || (marker == "x")
-        ) {
+    if ((marker == "id") || (marker == "c") || (marker == "v") ||
+        (marker == "add") || (marker == "bdit") || (marker == "bd") ||
+        (marker == "bk") || (marker == "b") || (marker == "ca") ||
+        (marker == "cd") || (marker == "cls") || (marker == "cl") ||
+        (marker == "conc") || (marker == "cov") || (marker == "cp") ||
+        (marker == "dc") || (marker == "d") || (marker == "em") ||
+        (marker == "fdc") || (marker == "fe") || (marker == "fig") ||
+        (marker == "fk") || (marker == "fl") || (marker == "fm") ||
+        (marker == "fp") || (marker == "fqa") || (marker == "fq") ||
+        (marker == "fr") || (marker == "ft") || (marker == "fv") ||
+        (marker == "f") || (marker == "glo") || (marker == "h1") ||
+        (marker == "h2") || (marker == "h3") || (marker == "h") ||
+        (marker == "ib") || (marker == "ide") || (marker == "idx") ||
+        (marker == "ie") || (marker == "iex") || (marker == "imi") ||
+        (marker == "imq") || (marker == "imt1") || (marker == "imt2") ||
+        (marker == "imt3") || (marker == "imt4") || (marker == "imte") ||
+        (marker == "imt") || (marker == "im") || (marker == "intro") ||
+        (marker == "io1") || (marker == "io2") || (marker == "io3") ||
+        (marker == "io4") || (marker == "ior") || (marker == "iot") ||
+        (marker == "io") || (marker == "ipi") || (marker == "ipq") ||
+        (marker == "ipr") || (marker == "ip") || (marker == "iq1") ||
+        (marker == "iq2") || (marker == "iq3") || (marker == "iq") ||
+        (marker == "is1") || (marker == "is2") || (marker == "is") ||
+        (marker == "it") || (marker == "k1") || (marker == "k2") ||
+        (marker == "k") || (marker == "li1") || (marker == "li2") ||
+        (marker == "li3") || (marker == "li4") || (marker == "lit") ||
+        (marker == "li") || (marker == "maps") || (marker == "mi") ||
+        (marker == "mr") || (marker == "ms1") || (marker == "ms2") ||
+        (marker == "ms") || (marker == "mt1") || (marker == "mt2") ||
+        (marker == "mt3") || (marker == "mt4") || (marker == "mte1") ||
+        (marker == "mte2") || (marker == "mte") || (marker == "mt") ||
+        (marker == "m") || (marker == "nb") || (marker == "nd") ||
+        (marker == "ndx") || (marker == "no") || (marker == "ord") ||
+        (marker == "p1") || (marker == "p2") || (marker == "pb") ||
+        (marker == "pc") || (marker == "pi1") || (marker == "pi2") ||
+        (marker == "pi3") || (marker == "pi") || (marker == "pmc") ||
+        (marker == "pmo") || (marker == "pmr") || (marker == "pm") ||
+        (marker == "pn") || (marker == "pref") || (marker == "pro") ||
+        (marker == "pubinfo") || (marker == "pub") || (marker == "p") ||
+        (marker == "q1") || (marker == "q2") || (marker == "q3") ||
+        (marker == "qac") || (marker == "qa") || (marker == "qc") ||
+        (marker == "qm1") || (marker == "qm2") || (marker == "qm3") ||
+        (marker == "qm") || (marker == "qr") || (marker == "qs") ||
+        (marker == "qt") || (marker == "q") || (marker == "rem") ||
+        (marker == "restore") || (marker == "r") || (marker == "rq") ||
+        (marker == "s1") || (marker == "s2") || (marker == "s3") ||
+        (marker == "s4") || (marker == "sc") || (marker == "sig") ||
+        (marker == "sls") || (marker == "spine") || (marker == "sp") ||
+        (marker == "sr") || (marker == "s") || (marker == "tc1") ||
+        (marker == "tc2") || (marker == "tc3") || (marker == "tc4") ||
+        (marker == "tcr1") || (marker == "tcr2") || (marker == "tcr3") ||
+        (marker == "tcr4") || (marker == "th1") || (marker == "th2") ||
+        (marker == "th3") || (marker == "th4") || (marker == "thr1") ||
+        (marker == "thr2") || (marker == "thr3") || (marker == "thr4") ||
+        (marker == "tl") || (marker == "toc1") || (marker == "toc2") ||
+        (marker == "toc3") || (marker == "toc") || (marker == "tr") ||
+        (marker == "va") || (marker == "vp") || (marker == "wg") ||
+        (marker == "wh") || (marker == "wj") || (marker == "w") ||
+        (marker == "xdc") || (marker == "xk") || (marker == "xo") ||
+        (marker == "xq") || (marker == "xt") || (marker == "x")) {
       message(_("Normal slash for /") + originalmarker);
     }
-    // Extract any next marker in this line.    
+    // Extract any next marker in this line.
     marker = usfm_extract_marker_with_forwardslash(line);
   }
 
@@ -591,8 +473,8 @@ void CheckValidateUsfm::check(const ustring & text)
   }
 }
 
-
-void CheckValidateUsfm::check_on_endmarker(ustring & line, const ustring & marker, bool optional)
+void CheckValidateUsfm::check_on_endmarker(ustring &line, const ustring &marker,
+                                           bool optional)
 // This test is ran by any marker that needs an endmarker.
 // It checks on that, and if found, removes it from the line,
 // and if not found, gives a message.
@@ -615,15 +497,13 @@ void CheckValidateUsfm::check_on_endmarker(ustring & line, const ustring & marke
   }
 }
 
-
-void CheckValidateUsfm::deprecated_marker(const ustring & marker)
-{
+void CheckValidateUsfm::deprecated_marker(const ustring &marker) {
   message(_("Deprecated marker ") + marker);
 }
 
-
-ustring CheckValidateUsfm::usfm_extract_marker_with_forwardslash(ustring & line)
-// Returns the usfm marker from the line, but only if it starts with a forward slash
+ustring CheckValidateUsfm::usfm_extract_marker_with_forwardslash(ustring &line)
+// Returns the usfm marker from the line, but only if it starts with a forward
+// slash
 {
   ustring returnvalue;
   line = trim(line);
@@ -642,14 +522,12 @@ ustring CheckValidateUsfm::usfm_extract_marker_with_forwardslash(ustring & line)
     }
   }
   if (returnvalue.length() > 0)
-    returnvalue.erase(0, 1);    // Remove slash.
+    returnvalue.erase(0, 1); // Remove slash.
   return trim(returnvalue);
 }
 
-
-void CheckValidateUsfm::message(const ustring & message)
-{
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+void CheckValidateUsfm::message(const ustring &message) {
+  references.push_back(books_id_to_english(book) + " " +
+                       convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }
-

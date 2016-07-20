@@ -1,54 +1,60 @@
 /*
  ** Copyright (©) 2016 Matt Postiff.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
 #ifndef INCLUDED_WINDOW_TABBED_H
 #define INCLUDED_WINDOW_TABBED_H
 
-#include <gtk/gtk.h>
-#include "ustring.h"
-#include "reference.h"
+#include "editor.h"
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
-#include "editor.h"
+#include "reference.h"
+#include "ustring.h"
+#include <gtk/gtk.h>
 #include <webkit/webkit.h>
 
 //----------------------------------------------------------------------------------
-// The tabbed window is a GTK notebook that can display information about the text
-// or various built-in Bible versions. The first tab I created for this type window 
-// was the concordance function, specifically the word frequency list. Eventually
+// The tabbed window is a GTK notebook that can display information about the
+// text
+// or various built-in Bible versions. The first tab I created for this type
+// window
+// was the concordance function, specifically the word frequency list.
+// Eventually
 // I would like to move the references, related verses, keyterms, and perhaps
-// others into this structure to consolidate the view of things. The ultimate intent
+// others into this structure to consolidate the view of things. The ultimate
+// intent
 // is to have multiple tabbed windows open at once.
 //----------------------------------------------------------------------------------
 
-class WindowTabbed : public FloatingWindow
-{
+class WindowTabbed : public FloatingWindow {
 public:
-  WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  WindowTabbed(GtkWidget *parent_layout, GtkAccelGroup *accelerator_group,
+               bool startup);
   virtual ~WindowTabbed();
   void Concordance(void);
-  GtkWidget * signal_button;
- private:
-	GtkWidget *vbox;
-	GtkWidget *notebook;
-	GtkWidget *scrolledwindow;
-	GtkWidget *webview;
+  GtkWidget *signal_button;
+
+private:
+  GtkWidget *vbox;
+  GtkWidget *notebook;
+  GtkWidget *scrolledwindow;
+  GtkWidget *webview;
 
 #if 0
 public:
@@ -119,8 +125,6 @@ private:
   static gboolean on_text_changed_timeout (gpointer user_data);
   void on_text_changed ();
 #endif
-
 };
-
 
 #endif

@@ -1,45 +1,43 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "dialogarea.h"
-#include "utilities.h"
-#include <sqlite3.h>
-#include "sqlite_reader.h"
-#include "notes_utils.h"
 #include "completion.h"
 #include "gwrappers.h"
-#include "settings.h"
 #include "help.h"
+#include "libraries.h"
+#include "notes_utils.h"
+#include "settings.h"
+#include "sqlite_reader.h"
 #include "tiny_utilities.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
+#include <sqlite3.h>
 
-AreaDialog::AreaDialog(int dummy)
-{
+AreaDialog::AreaDialog(int dummy) {
   areadialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(areadialog), _("Area selection"));
   gtk_window_set_position(GTK_WINDOW(areadialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(areadialog), TRUE);
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(areadialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(areadialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 2);
@@ -54,23 +52,32 @@ AreaDialog::AreaDialog(int dummy)
 
   GSList *radiobutton_raw_group = NULL;
 
-  radiobutton_raw = gtk_radio_button_new_with_mnemonic(NULL, _("The raw _USFM text"));
+  radiobutton_raw =
+      gtk_radio_button_new_with_mnemonic(NULL, _("The raw _USFM text"));
   gtk_widget_show(radiobutton_raw);
   gtk_box_pack_start(GTK_BOX(vbox1), radiobutton_raw, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_raw), radiobutton_raw_group);
-  radiobutton_raw_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_raw));
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_raw),
+                             radiobutton_raw_group);
+  radiobutton_raw_group =
+      gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_raw));
 
-  radiobutton_all = gtk_radio_button_new_with_mnemonic(NULL, _("_All the text except the USFM codes"));
+  radiobutton_all = gtk_radio_button_new_with_mnemonic(
+      NULL, _("_All the text except the USFM codes"));
   gtk_widget_show(radiobutton_all);
   gtk_box_pack_start(GTK_BOX(vbox1), radiobutton_all, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_all), radiobutton_raw_group);
-  radiobutton_raw_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_all));
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_all),
+                             radiobutton_raw_group);
+  radiobutton_raw_group =
+      gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_all));
 
-  radiobutton_categories = gtk_radio_button_new_with_mnemonic(NULL, _("C_ertain categories specified below"));
+  radiobutton_categories = gtk_radio_button_new_with_mnemonic(
+      NULL, _("C_ertain categories specified below"));
   gtk_widget_show(radiobutton_categories);
   gtk_box_pack_start(GTK_BOX(vbox1), radiobutton_categories, FALSE, FALSE, 0);
-  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_categories), radiobutton_raw_group);
-  radiobutton_raw_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_categories));
+  gtk_radio_button_set_group(GTK_RADIO_BUTTON(radiobutton_categories),
+                             radiobutton_raw_group);
+  radiobutton_raw_group =
+      gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_categories));
 
   checkbutton_id = gtk_check_button_new_with_mnemonic(_("_Identifiers"));
   gtk_widget_show(checkbutton_id);
@@ -80,7 +87,8 @@ AreaDialog::AreaDialog(int dummy)
   gtk_widget_show(checkbutton_intro);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_intro, FALSE, FALSE, 0);
 
-  checkbutton_heading = gtk_check_button_new_with_mnemonic(_("_Titles and headings"));
+  checkbutton_heading =
+      gtk_check_button_new_with_mnemonic(_("_Titles and headings"));
   gtk_widget_show(checkbutton_heading);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_heading, FALSE, FALSE, 0);
 
@@ -92,7 +100,8 @@ AreaDialog::AreaDialog(int dummy)
   gtk_widget_show(checkbutton_study);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_study, FALSE, FALSE, 0);
 
-  checkbutton_notes = gtk_check_button_new_with_mnemonic(_("_Foot- and endnotes"));
+  checkbutton_notes =
+      gtk_check_button_new_with_mnemonic(_("_Foot- and endnotes"));
   gtk_widget_show(checkbutton_notes);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_notes, FALSE, FALSE, 0);
 
@@ -104,26 +113,34 @@ AreaDialog::AreaDialog(int dummy)
   gtk_widget_show(checkbutton_verse);
   gtk_box_pack_start(GTK_BOX(vbox1), checkbutton_verse, FALSE, FALSE, 0);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(areadialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(areadialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(areadialog, NULL, NULL, NULL);
 
   cancelbutton = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(areadialog), cancelbutton, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(areadialog), cancelbutton,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton), true);
 
   okbutton = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton);
-  gtk_dialog_add_action_widget(GTK_DIALOG(areadialog), okbutton, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(areadialog), okbutton,
+                               GTK_RESPONSE_OK);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton), true);
 
-  g_signal_connect((gpointer) radiobutton_raw, "toggled", G_CALLBACK(on_radiobutton_toggled), gpointer(this));
-  g_signal_connect((gpointer) radiobutton_all, "toggled", G_CALLBACK(on_radiobutton_toggled), gpointer(this));
-  g_signal_connect((gpointer) radiobutton_categories, "toggled", G_CALLBACK(on_radiobutton_toggled), gpointer(this));
-  g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(companiondialog_on_okbutton_clicked), gpointer(this));
+  g_signal_connect((gpointer)radiobutton_raw, "toggled",
+                   G_CALLBACK(on_radiobutton_toggled), gpointer(this));
+  g_signal_connect((gpointer)radiobutton_all, "toggled",
+                   G_CALLBACK(on_radiobutton_toggled), gpointer(this));
+  g_signal_connect((gpointer)radiobutton_categories, "toggled",
+                   G_CALLBACK(on_radiobutton_toggled), gpointer(this));
+  g_signal_connect((gpointer)okbutton, "clicked",
+                   G_CALLBACK(companiondialog_on_okbutton_clicked),
+                   gpointer(this));
 
   gtk_widget_grab_default(okbutton);
 
@@ -137,63 +154,66 @@ AreaDialog::AreaDialog(int dummy)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_all), true);
     break;
   case atSelection:
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_categories), true);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton_categories),
+                                 true);
     break;
   }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_id), settings->session.area_id);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_intro), settings->session.area_intro);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_heading), settings->session.area_heading);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_chapter), settings->session.area_chapter);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_study), settings->session.area_study);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_notes), settings->session.area_notes);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_xref), settings->session.area_xref);
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_verse), settings->session.area_verse);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_id),
+                               settings->session.area_id);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_intro),
+                               settings->session.area_intro);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_heading),
+                               settings->session.area_heading);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_chapter),
+                               settings->session.area_chapter);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_study),
+                               settings->session.area_study);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_notes),
+                               settings->session.area_notes);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_xref),
+                               settings->session.area_xref);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_verse),
+                               settings->session.area_verse);
 
   set_gui();
 }
 
+AreaDialog::~AreaDialog() { gtk_widget_destroy(areadialog); }
 
-AreaDialog::~AreaDialog()
-{
-  gtk_widget_destroy(areadialog);
+int AreaDialog::run() { return gtk_dialog_run(GTK_DIALOG(areadialog)); }
+
+void AreaDialog::companiondialog_on_okbutton_clicked(GtkButton *button,
+                                                     gpointer user_data) {
+  ((AreaDialog *)user_data)->on_ok();
 }
 
-
-int AreaDialog::run()
-{
-  return gtk_dialog_run(GTK_DIALOG(areadialog));
+void AreaDialog::on_radiobutton_toggled(GtkToggleButton *togglebutton,
+                                        gpointer user_data) {
+  ((AreaDialog *)user_data)->set_gui();
 }
 
-
-void AreaDialog::companiondialog_on_okbutton_clicked(GtkButton * button, gpointer user_data)
-{
-  ((AreaDialog *) user_data)->on_ok();
-}
-
-
-void AreaDialog::on_radiobutton_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-  ((AreaDialog *) user_data)->set_gui();
-}
-
-
-void AreaDialog::on_ok()
-{
+void AreaDialog::on_ok() {
   extern Settings *settings;
   settings->session.area_type = get_area_type();
-  settings->session.area_id = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_id));
-  settings->session.area_intro = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_intro));
-  settings->session.area_heading = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_heading));
-  settings->session.area_chapter = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
-  settings->session.area_study = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_study));
-  settings->session.area_notes = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_notes));
-  settings->session.area_xref = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_xref));
-  settings->session.area_verse = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
+  settings->session.area_id =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_id));
+  settings->session.area_intro =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_intro));
+  settings->session.area_heading =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_heading));
+  settings->session.area_chapter =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_chapter));
+  settings->session.area_study =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_study));
+  settings->session.area_notes =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_notes));
+  settings->session.area_xref =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_xref));
+  settings->session.area_verse =
+      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_verse));
 }
 
-
-void AreaDialog::set_gui()
-{
+void AreaDialog::set_gui() {
   AreaType areatype = get_area_type();
   switch (areatype) {
   case atRaw:
@@ -206,9 +226,7 @@ void AreaDialog::set_gui()
   }
 }
 
-
-AreaType AreaDialog::get_area_type()
-{
+AreaType AreaDialog::get_area_type() {
   AreaType returnvalue = atRaw;
   if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton_all)))
     returnvalue = atAll;
@@ -217,9 +235,7 @@ AreaType AreaDialog::get_area_type()
   return returnvalue;
 }
 
-
-void AreaDialog::set_selectors_sensitive(bool sensitive)
-{
+void AreaDialog::set_selectors_sensitive(bool sensitive) {
   gtk_widget_set_sensitive(checkbutton_id, sensitive);
   gtk_widget_set_sensitive(checkbutton_intro, sensitive);
   gtk_widget_set_sensitive(checkbutton_heading, sensitive);
@@ -230,11 +246,11 @@ void AreaDialog::set_selectors_sensitive(bool sensitive)
   gtk_widget_set_sensitive(checkbutton_verse, sensitive);
 }
 
-
 ustring area_information()
-// Returns certain text that indicates the currently selected area to work on in the text.
+// Returns certain text that indicates the currently selected area to work on in
+// the text.
 {
-  vector < ustring > areas;
+  vector<ustring> areas;
   ustring text;
   extern Settings *settings;
   switch (settings->session.area_type) {
@@ -264,7 +280,7 @@ ustring area_information()
     break;
   }
   if (areas.size() > 3) {
-    text = convert_to_string(int (areas.size())) + _(" Areas");
+    text = convert_to_string(int(areas.size())) + _(" Areas");
   } else {
     for (unsigned int i = 0; i < areas.size(); i++) {
       if (!text.empty())
@@ -276,4 +292,3 @@ ustring area_information()
     text = _("No areas selected");
   return text;
 }
-

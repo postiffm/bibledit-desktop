@@ -1,35 +1,36 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-#include "libraries.h"
-#include "utilities.h"
-#include <glib.h>
 #include "style.h"
-#include "xmlutils.h"
-#include "gwrappers.h"
-#include "directories.h"
-#include "stylesheetutils.h"
 #include "constants.h"
+#include "directories.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "stylesheetutils.h"
+#include "utilities.h"
+#include "xmlutils.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-Style::Style(const ustring & stylesheet, const ustring & style, bool write)
-// Reads a style from the database. Deprecated, use StyleV2 instead for new code.
+Style::Style(const ustring &stylesheet, const ustring &style, bool write)
+// Reads a style from the database. Deprecated, use StyleV2 instead for new
+// code.
 {
   // Save variables.
   mystylesheet = stylesheet;
@@ -65,14 +66,12 @@ Style::Style(const ustring & stylesheet, const ustring & style, bool write)
   stylesheet_load_style(mystylesheet, *this);
 }
 
-Style::~Style()
-{
+Style::~Style() {
   // Save style in database.
   if (mywrite) {
     stylesheet_save_style(mystylesheet, *this);
   }
 }
-
 
 StyleV2::StyleV2(int dummy)
 // Contains the values for the style of one marker.
@@ -105,9 +104,4 @@ StyleV2::StyleV2(int dummy)
   userint3 = 0;
 }
 
-
-StyleV2::~StyleV2()
-{
-}
-
-
+StyleV2::~StyleV2() {}

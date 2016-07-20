@@ -1,55 +1,59 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
 #include "outline.h"
-#include "settings.h"
-#include "projectutils.h"
-#include "usfmtools.h"
-#include "utilities.h"
-#include "usfm.h"
 #include "bible.h"
 #include "keyboard.h"
-#include "tiny_utilities.h"
+#include "projectutils.h"
+#include "settings.h"
 #include "stylesheetutils.h"
+#include "tiny_utilities.h"
+#include "usfm.h"
+#include "usfmtools.h"
+#include "utilities.h"
 
-
-enum { COLUMN_HEADING,
-  COLUMN_CHAPTER_START, COLUMN_VERSE_START,
-  COLUMN_CHAPTER_END, COLUMN_VERSE_END,
+enum {
+  COLUMN_HEADING,
+  COLUMN_CHAPTER_START,
+  COLUMN_VERSE_START,
+  COLUMN_CHAPTER_END,
+  COLUMN_VERSE_END,
   NUM_COLUMNS
 };
 
-Outline::Outline(GtkWidget * vbox)
-{
+Outline::Outline(GtkWidget *vbox) {
   // Initialize / save variables.
 
   // Build GUI.
   reference_changed_signal = gtk_button_new_with_mnemonic("");
   gtk_box_pack_start(GTK_BOX(vbox), reference_changed_signal, FALSE, FALSE, 0);
-  gtk_widget_set_can_focus (reference_changed_signal, false);
+  gtk_widget_set_can_focus(reference_changed_signal, false);
   gtk_button_set_focus_on_click(GTK_BUTTON(reference_changed_signal), FALSE);
 
   scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow);
   gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow),
+                                      GTK_SHADOW_IN);
 
   treeview = gtk_tree_view_new();
   gtk_widget_show(treeview);
@@ -57,37 +61,35 @@ Outline::Outline(GtkWidget * vbox)
   gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), FALSE);
 
   // Build underlying structure.
-  store = gtk_tree_store_new(NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT, G_TYPE_INT, G_TYPE_INT, G_TYPE_INT);
+  store = gtk_tree_store_new(NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT, G_TYPE_INT,
+                             G_TYPE_INT, G_TYPE_INT);
   gtk_tree_view_set_model(GTK_TREE_VIEW(treeview), GTK_TREE_MODEL(store));
   g_object_unref(store);
   GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
   GtkTreeViewColumn *column;
-  column = gtk_tree_view_column_new_with_attributes("", renderer, "text", COLUMN_HEADING, NULL);
+  column = gtk_tree_view_column_new_with_attributes("", renderer, "text",
+                                                    COLUMN_HEADING, NULL);
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
-  GtkTreeSelection *select = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+  GtkTreeSelection *select =
+      gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
   gtk_tree_selection_set_mode(select, GTK_SELECTION_SINGLE);
-  g_signal_connect((gpointer) treeview, "button_press_event", G_CALLBACK(on_view_button_press_event), gpointer(this));
-  g_signal_connect((gpointer) treeview, "key_press_event", G_CALLBACK(on_view_key_press_event), gpointer(this));
-  g_signal_connect((gpointer) treeview, "row_activated", G_CALLBACK(on_view_row_activated), gpointer(this));
-  g_signal_connect((gpointer) treeview, "popup_menu", G_CALLBACK(on_view_popup_menu), gpointer(this));
+  g_signal_connect((gpointer)treeview, "button_press_event",
+                   G_CALLBACK(on_view_button_press_event), gpointer(this));
+  g_signal_connect((gpointer)treeview, "key_press_event",
+                   G_CALLBACK(on_view_key_press_event), gpointer(this));
+  g_signal_connect((gpointer)treeview, "row_activated",
+                   G_CALLBACK(on_view_row_activated), gpointer(this));
+  g_signal_connect((gpointer)treeview, "popup_menu",
+                   G_CALLBACK(on_view_popup_menu), gpointer(this));
 }
 
-Outline::~Outline()
-{
-}
+Outline::~Outline() {}
 
-void Outline::focus()
-{
-  gtk_widget_grab_focus(treeview);
-}
+void Outline::focus() { gtk_widget_grab_focus(treeview); }
 
-bool Outline::focused()
-{
-  return gtk_widget_has_focus (treeview);
-}
+bool Outline::focused() { return gtk_widget_has_focus(treeview); }
 
-void Outline::goto_reference(const ustring & project, Reference & reference)
-{
+void Outline::goto_reference(const ustring &project, Reference &reference) {
   // See what changed.
   bool changed = false;
 
@@ -97,7 +99,7 @@ void Outline::goto_reference(const ustring & project, Reference & reference)
     myproject = project;
     new_project_handling();
   }
-  // Handle change of book.  
+  // Handle change of book.
   if (reference.book_get() != mybook) {
     changed = true;
     mybook = reference.book_get();
@@ -121,7 +123,7 @@ void Outline::goto_reference(const ustring & project, Reference & reference)
   verses_to.clear();
   verses_last.clear();
   chapter_last = 0;
-  vector < unsigned int >chapt = project_get_chapters(myproject, mybook);
+  vector<unsigned int> chapt = project_get_chapters(myproject, mybook);
   for (unsigned int ch = 0; ch < chapt.size(); ch++) {
     retrieve_headers(chapt[ch]);
   }
@@ -172,7 +174,11 @@ void Outline::load()
         }
         if (i2 < current_level) {
           ustring ch = "Chapter " + convert_to_string(chapters_from[i]);
-          gtk_tree_store_set(store, &iter, COLUMN_HEADING, ch.c_str(), COLUMN_CHAPTER_START, chapters_from[i], COLUMN_VERSE_START, verses_from[i], COLUMN_CHAPTER_END, chapters_from[i], COLUMN_VERSE_END, verses_from[i], -1);
+          gtk_tree_store_set(store, &iter, COLUMN_HEADING, ch.c_str(),
+                             COLUMN_CHAPTER_START, chapters_from[i],
+                             COLUMN_VERSE_START, verses_from[i],
+                             COLUMN_CHAPTER_END, chapters_from[i],
+                             COLUMN_VERSE_END, verses_from[i], -1);
         }
       }
     }
@@ -185,16 +191,18 @@ void Outline::load()
       gtk_tree_store_append(store, &iter, &iter);
     }
     // We now have the right iterator where to store the data. Store it.
-    gtk_tree_store_set(store, &iter, COLUMN_HEADING, headers[i].c_str(), COLUMN_CHAPTER_START, chapters_from[i], COLUMN_VERSE_START, verses_from[i], COLUMN_CHAPTER_END, chapters_to[i], COLUMN_VERSE_END, verses_to[i], -1);
+    gtk_tree_store_set(store, &iter, COLUMN_HEADING, headers[i].c_str(),
+                       COLUMN_CHAPTER_START, chapters_from[i],
+                       COLUMN_VERSE_START, verses_from[i], COLUMN_CHAPTER_END,
+                       chapters_to[i], COLUMN_VERSE_END, verses_to[i], -1);
     // Save level.
     last_level = current_level;
   }
 }
 
-void Outline::retrieve_headers(unsigned int chapter)
-{
+void Outline::retrieve_headers(unsigned int chapter) {
   unsigned int verse = 0;
-  vector < ustring > lines = project_retrieve_chapter(myproject, mybook, chapter);
+  vector<ustring> lines = project_retrieve_chapter(myproject, mybook, chapter);
   for (unsigned int i = 0; i < lines.size(); i++) {
     ustring marker = usfm_extract_marker(lines[i]);
     unsigned int level = 0;
@@ -216,7 +224,7 @@ void Outline::retrieve_headers(unsigned int chapter)
       size_t position = lines[i].find(" ");
       position = CLAMP(position, 0, lines[i].length());
       ustring vs = lines[i].substr(0, position);
-      vector < unsigned int >verses = verse_range_sequence(vs);
+      vector<unsigned int> verses = verse_range_sequence(vs);
       if (verses.empty())
         verse = 0;
       else
@@ -235,11 +243,11 @@ void Outline::chapters_verses()
  This is done using a certain algorithm to get it right.
  The header starts at the chapter:verse given, that is a simple issue.
  The more difficult thing is to find out where it ends.
- If the next header starts at verse 1 of a certain chapter, 
+ If the next header starts at verse 1 of a certain chapter,
  it means that this header starts at the last verse of the previous chapter.
  But if the next header starts at any verse, not 1, of a certain chapter,
  that means that this header starts at that verse minus one.
- If the ending chapter is the same as the starting chapter, 
+ If the ending chapter is the same as the starting chapter,
  it should not be named, e.g. 10:1-5.
  But if the ending chapters differs, it should be named, e,g. 10:1-11:6.
  For the last header, take the last chapter's last verse.
@@ -254,9 +262,10 @@ void Outline::chapters_verses()
       verses_to.push_back(0);
       continue;
     }
-    // Add starting chapter:verse      
-    headers[i].append(" (" + convert_to_string(chapters_from[i]) + ":" + convert_to_string(verses_from[i]));
-    // To start off calculating the final chapter:verse, set it to the 
+    // Add starting chapter:verse
+    headers[i].append(" (" + convert_to_string(chapters_from[i]) + ":" +
+                      convert_to_string(verses_from[i]));
+    // To start off calculating the final chapter:verse, set it to the
     // last chapter and the last verse.
     unsigned int ending_chapter = chapter_last;
     unsigned int ending_verse = verses_last[ending_chapter];
@@ -269,8 +278,10 @@ void Outline::chapters_verses()
       unsigned int next_chapter = chapters_from[i2];
       unsigned int next_verse = verses_from[i2];
       // Find out whether the chapters:verses differ, the beginning and end.
-      chapter_verse_differ = ((next_chapter != chapters_from[i]) || (next_verse != verses_from[i]));
-      // If the verse is 1 then this heading ends at the previous chapter's last verse.
+      chapter_verse_differ = ((next_chapter != chapters_from[i]) ||
+                              (next_verse != verses_from[i]));
+      // If the verse is 1 then this heading ends at the previous chapter's last
+      // verse.
       if (next_verse == 1) {
         ending_chapter = next_chapter - 1;
         ending_verse = verses_last[ending_chapter];
@@ -317,7 +328,7 @@ void Outline::new_project_handling()
 // Does some operations when there is another project.
 {
   // Create an USFM object of the relevant stylesheet.
-  Usfm usfm(stylesheet_get_actual ());
+  Usfm usfm(stylesheet_get_actual());
   // Clear markers of the various levels of the paragraphs.
   paragraphmarkers.clear();
   paragraphlevels.clear();
@@ -350,19 +361,20 @@ void Outline::new_project_handling()
   }
 }
 
-gboolean Outline::on_view_button_press_event(GtkWidget * widget, GdkEventButton * event, gpointer user_data)
-{
+gboolean Outline::on_view_button_press_event(GtkWidget *widget,
+                                             GdkEventButton *event,
+                                             gpointer user_data) {
   return false;
 }
 
-gboolean Outline::on_view_key_press_event(GtkWidget * widget, GdkEventKey * event, gpointer user_data)
-{
+gboolean Outline::on_view_key_press_event(GtkWidget *widget, GdkEventKey *event,
+                                          gpointer user_data) {
   // Collapse or expand an item.
   if (keyboard_left_arrow_pressed(event)) {
-    return ((Outline *) user_data)->expand_collapse(false);
+    return ((Outline *)user_data)->expand_collapse(false);
   }
   if (keyboard_right_arrow_pressed(event)) {
-    return ((Outline *) user_data)->expand_collapse(true);
+    return ((Outline *)user_data)->expand_collapse(true);
   }
   return false;
 }
@@ -372,7 +384,8 @@ bool Outline::expand_collapse(bool expand)
 {
   bool expanded_collapsed = false;
   GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
-  GtkTreeSelection *selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+  GtkTreeSelection *selection =
+      gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
   GtkTreeIter iter;
   if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
     GtkTreePath *path = gtk_tree_model_get_path(model, &iter);
@@ -385,21 +398,23 @@ bool Outline::expand_collapse(bool expand)
     }
     gtk_tree_path_free(path);
   }
-  // Return whether we did something. 
+  // Return whether we did something.
   // This is helpful to let the keys do their natural function in case nothing
   // was expanded or collapsed.
   return expanded_collapsed;
 }
 
-void Outline::focus(Reference & reference)
+void Outline::focus(Reference &reference)
 // Focus the entry that has the reference.
 {
   GtkTreeModel *model = GTK_TREE_MODEL(store);
-  GtkTreeSelection *selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+  GtkTreeSelection *selection =
+      gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
   GtkTreeIter iter;
   gboolean valid;
   bool focused = false;
-  unsigned int ref_number = reference_number(reference.chapter_get(), convert_to_int(reference.verse_get()));
+  unsigned int ref_number = reference_number(
+      reference.chapter_get(), convert_to_int(reference.verse_get()));
   // Get the first iter in the store.
   valid = gtk_tree_model_get_iter_first(model, &iter);
   while (valid) {
@@ -409,7 +424,10 @@ void Outline::focus(Reference & reference)
   }
 }
 
-void Outline::focus_internal_children(unsigned int reference, GtkTreeIter & parent, GtkTreeSelection * selection, bool & focused)
+void Outline::focus_internal_children(unsigned int reference,
+                                      GtkTreeIter &parent,
+                                      GtkTreeSelection *selection,
+                                      bool &focused)
 // Iterates through possible children. Re-entrant function.
 {
   GtkTreeModel *model = GTK_TREE_MODEL(store);
@@ -423,14 +441,17 @@ void Outline::focus_internal_children(unsigned int reference, GtkTreeIter & pare
   }
 }
 
-void Outline::focus_internal_select(unsigned int reference, GtkTreeIter & iter, GtkTreeSelection * selection, bool & focused)
+void Outline::focus_internal_select(unsigned int reference, GtkTreeIter &iter,
+                                    GtkTreeSelection *selection, bool &focused)
 // Selects and focuses the entry that corresponds to the reference.
 {
   if (focused)
     return;
   GtkTreeModel *model = GTK_TREE_MODEL(store);
   guint chapter_start, verse_start, chapter_end, verse_end;
-  gtk_tree_model_get(model, &iter, COLUMN_CHAPTER_START, &chapter_start, COLUMN_VERSE_START, &verse_start, COLUMN_CHAPTER_END, &chapter_end, COLUMN_VERSE_END, &verse_end, -1);
+  gtk_tree_model_get(model, &iter, COLUMN_CHAPTER_START, &chapter_start,
+                     COLUMN_VERSE_START, &verse_start, COLUMN_CHAPTER_END,
+                     &chapter_end, COLUMN_VERSE_END, &verse_end, -1);
   unsigned int heading_start = reference_number(chapter_start, verse_start);
   unsigned int heading_end = reference_number(chapter_end, verse_end);
   if (reference >= heading_start) {
@@ -441,36 +462,37 @@ void Outline::focus_internal_select(unsigned int reference, GtkTreeIter & iter, 
       GtkTreePath *path = gtk_tree_model_get_path(GTK_TREE_MODEL(store), &iter);
       gtk_tree_view_expand_row(GTK_TREE_VIEW(treeview), path, false);
       gtk_tree_view_set_cursor(GTK_TREE_VIEW(treeview), path, NULL, false);
-      gtk_tree_view_scroll_to_cell(GTK_TREE_VIEW(treeview), path, NULL, true, 0.5, 0.5);
+      gtk_tree_view_scroll_to_cell(GTK_TREE_VIEW(treeview), path, NULL, true,
+                                   0.5, 0.5);
       gtk_tree_path_free(path);
       focused = true;
     }
   }
 }
 
-void Outline::on_view_row_activated(GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * column, gpointer user_data)
-{
-  ((Outline *) user_data)->on_view_row(path);
+void Outline::on_view_row_activated(GtkTreeView *treeview, GtkTreePath *path,
+                                    GtkTreeViewColumn *column,
+                                    gpointer user_data) {
+  ((Outline *)user_data)->on_view_row(path);
 }
 
-void Outline::on_view_row(GtkTreePath * path)
-{
+void Outline::on_view_row(GtkTreePath *path) {
   // Get the chapter and verse Bibledit ought to go to.
   GtkTreeModel *model = GTK_TREE_MODEL(store);
   GtkTreeIter iter;
   if (!gtk_tree_model_get_iter(model, &iter, path))
     return;
-  gtk_tree_model_get(model, &iter, COLUMN_CHAPTER_START, &newchapter, COLUMN_VERSE_START, &newverse, -1);
+  gtk_tree_model_get(model, &iter, COLUMN_CHAPTER_START, &newchapter,
+                     COLUMN_VERSE_START, &newverse, -1);
   // Signal that a new reference is available.
   gtk_button_clicked(GTK_BUTTON(reference_changed_signal));
 }
 
-gboolean Outline::on_view_popup_menu(GtkWidget * widget, gpointer user_data)
-{
+gboolean Outline::on_view_popup_menu(GtkWidget *widget, gpointer user_data) {
   return false;
 }
 
-unsigned int Outline::reference_number(unsigned int chapter, unsigned int verse)
-{
+unsigned int Outline::reference_number(unsigned int chapter,
+                                       unsigned int verse) {
   return (200 * chapter) + verse;
 }

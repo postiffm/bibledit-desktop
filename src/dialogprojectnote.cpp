@@ -1,38 +1,44 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
+#include "dialogprojectnote.h"
+#include "combobox.h"
+#include "help.h"
 #include "libraries.h"
 #include <glib.h>
-#include "dialogprojectnote.h"
-#include "help.h"
-#include "combobox.h"
 #include <glib/gi18n.h>
 
-ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring > &projects_in, const ustring & project_in, const ustring & created_on, const ustring & created_by, const ustring & edited_on, const ustring & logbook)
-{
+ProjectNoteDialog::ProjectNoteDialog(GtkWidget *parent,
+                                     const vector<ustring> &projects_in,
+                                     const ustring &project_in,
+                                     const ustring &created_on,
+                                     const ustring &created_by,
+                                     const ustring &edited_on,
+                                     const ustring &logbook) {
   dialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(dialog), _("Project note"));
   gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(parent));
 
-  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(dialog));
+  dialog_vbox1 = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
   gtk_widget_show(dialog_vbox1);
 
   vbox1 = gtk_vbox_new(FALSE, 0);
@@ -73,28 +79,33 @@ ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring 
   gtk_box_pack_start(GTK_BOX(vbox1), textview_note_logbook, TRUE, TRUE, 0);
   gtk_text_view_set_editable(GTK_TEXT_VIEW(textview_note_logbook), FALSE);
   gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview_note_logbook), FALSE);
-  gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview_note_logbook), GTK_WRAP_WORD);
+  gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview_note_logbook),
+                              GTK_WRAP_WORD);
   gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview_note_logbook), FALSE);
 
-  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(dialog));
+  dialog_action_area1 = gtk_dialog_get_action_area(GTK_DIALOG(dialog));
   gtk_widget_show(dialog_action_area1);
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
+                            GTK_BUTTONBOX_END);
 
   new InDialogHelp(dialog, NULL, NULL, NULL);
 
   cancelbutton1 = gtk_button_new_from_stock("gtk-cancel");
   gtk_widget_show(cancelbutton1);
-  gtk_dialog_add_action_widget(GTK_DIALOG(dialog), cancelbutton1, GTK_RESPONSE_CANCEL);
-  gtk_widget_set_can_default (GTK_WIDGET (cancelbutton1), true);
+  gtk_dialog_add_action_widget(GTK_DIALOG(dialog), cancelbutton1,
+                               GTK_RESPONSE_CANCEL);
+  gtk_widget_set_can_default(GTK_WIDGET(cancelbutton1), true);
 
   okbutton1 = gtk_button_new_from_stock("gtk-ok");
   gtk_widget_show(okbutton1);
   gtk_dialog_add_action_widget(GTK_DIALOG(dialog), okbutton1, GTK_RESPONSE_OK);
-  gtk_widget_set_can_default (GTK_WIDGET (okbutton1), true);
+  gtk_widget_set_can_default(GTK_WIDGET(okbutton1), true);
 
-  gtk_label_set_mnemonic_widget(GTK_LABEL(label_note_project), combobox_note_project);
+  gtk_label_set_mnemonic_widget(GTK_LABEL(label_note_project),
+                                combobox_note_project);
 
-  g_signal_connect((gpointer) okbutton1, "clicked", G_CALLBACK(on_okbutton1_clicked), gpointer(this));
+  g_signal_connect((gpointer)okbutton1, "clicked",
+                   G_CALLBACK(on_okbutton1_clicked), gpointer(this));
 
   gtk_widget_grab_default(okbutton1);
 
@@ -103,29 +114,20 @@ ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring 
   gtk_label_set_text(GTK_LABEL(label_note_created_by), created_by.c_str());
   gtk_label_set_text(GTK_LABEL(label_note_created_on), created_on.c_str());
   gtk_label_set_text(GTK_LABEL(label_note_edited_on), edited_on.c_str());
-  GtkTextBuffer *textbuffer_logbook = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_note_logbook));
+  GtkTextBuffer *textbuffer_logbook =
+      gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_note_logbook));
   gtk_text_buffer_set_text(textbuffer_logbook, logbook.c_str(), -1);
-
 }
 
-ProjectNoteDialog::~ProjectNoteDialog()
-{
-  gtk_widget_destroy(dialog);
+ProjectNoteDialog::~ProjectNoteDialog() { gtk_widget_destroy(dialog); }
+
+int ProjectNoteDialog::run() { return gtk_dialog_run(GTK_DIALOG(dialog)); }
+
+void ProjectNoteDialog::on_okbutton1_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((ProjectNoteDialog *)user_data)->on_okbutton1();
 }
 
-int ProjectNoteDialog::run()
-{
-  return gtk_dialog_run(GTK_DIALOG(dialog));
-}
-
-void ProjectNoteDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data)
-{
-  ((ProjectNoteDialog *) user_data)->on_okbutton1();
-}
-
-void ProjectNoteDialog::on_okbutton1()
-{
+void ProjectNoteDialog::on_okbutton1() {
   project = combobox_get_active_string(combobox_note_project);
 }
-
-

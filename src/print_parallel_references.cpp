@@ -1,51 +1,56 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
  **
  */
 
-#include "libraries.h"
-#include <glib.h>
 #include "print_parallel_references.h"
-#include "utilities.h"
 #include "bible.h"
-#include "usfm.h"
-#include "usfmtools.h"
-#include "pdfviewer.h"
-#include "xmlutils.h"
-#include "paper.h"
-#include "constants.h"
-#include "gwrappers.h"
-#include "gtkwrappers.h"
-#include "directories.h"
-#include "notecaller.h"
-#include "mapping.h"
-#include "portion_utils.h"
-#include "projectutils.h"
-#include "progresswindow.h"
 #include "books.h"
-#include "unixwrappers.h"
+#include "constants.h"
+#include "directories.h"
+#include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "mapping.h"
+#include "notecaller.h"
+#include "paper.h"
+#include "pdfviewer.h"
+#include "portion_utils.h"
+#include "progresswindow.h"
+#include "projectutils.h"
 #include "settings.h"
+#include "stylesheetutils.h"
 #include "textreplacement.h"
 #include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "usfm.h"
 #include "usfm2text.h"
-#include "stylesheetutils.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include "xmlutils.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring > *extra_projects, vector < Reference > references, bool keep_verses_together_within_page, vector < ustring > *remarks, bool highlight)
+void view_parallel_references_pdf(ProjectMemory &main_project,
+                                  vector<ustring> *extra_projects,
+                                  vector<Reference> references,
+                                  bool keep_verses_together_within_page,
+                                  vector<ustring> *remarks, bool highlight)
 /*
  Formats the references in "references", and highlights all words in
  "session->highlights*" and shows them in a pdf viewer.
@@ -61,11 +66,12 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
 
   // Configuration
   extern Settings *settings;
-  ProjectConfiguration *projectconfig = settings->projectconfig(main_project.name);
-  ustring stylesheet = stylesheet_get_actual ();
+  ProjectConfiguration *projectconfig =
+      settings->projectconfig(main_project.name);
+  ustring stylesheet = stylesheet_get_actual();
 
   // Store the additional projects to print.
-  vector < ustring > additional_projects;
+  vector<ustring> additional_projects;
   if (extra_projects)
     additional_projects = *extra_projects;
   settings->session.additional_printing_projects = additional_projects;
@@ -74,11 +80,17 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
   Mapping mapping(projectconfig->versification_get(), 0);
 
   // The converter.
-  Text2Pdf text2pdf(gw_build_filename(Directories->get_temp(), "document.pdf"), settings->genconfig.print_engine_use_intermediate_text_get());
+  Text2Pdf text2pdf(
+      gw_build_filename(Directories->get_temp(), "document.pdf"),
+      settings->genconfig.print_engine_use_intermediate_text_get());
 
   // Page.
-  text2pdf.page_size_set(settings->genconfig.paper_width_get(), settings->genconfig.paper_height_get());
-  text2pdf.page_margins_set(settings->genconfig.paper_inside_margin_get(), settings->genconfig.paper_outside_margin_get(), settings->genconfig.paper_top_margin_get(), settings->genconfig.paper_bottom_margin_get());
+  text2pdf.page_size_set(settings->genconfig.paper_width_get(),
+                         settings->genconfig.paper_height_get());
+  text2pdf.page_margins_set(settings->genconfig.paper_inside_margin_get(),
+                            settings->genconfig.paper_outside_margin_get(),
+                            settings->genconfig.paper_top_margin_get(),
+                            settings->genconfig.paper_bottom_margin_get());
   text2pdf.page_one_column_only();
 
   // Headers.
@@ -107,28 +119,30 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
     }
   }
   // Some variables to avoid excessive session access during highlighting.
-  vector < bool > highlight_casesensitives;
-  vector < ustring > highlight_words;
+  vector<bool> highlight_casesensitives;
+  vector<ustring> highlight_words;
   if (highlight) {
     for (unsigned int hl = 0; hl < settings->session.highlights.size(); hl++) {
-      highlight_casesensitives.push_back(settings->session.highlights[hl].casesensitive);
+      highlight_casesensitives.push_back(
+          settings->session.highlights[hl].casesensitive);
       highlight_words.push_back(settings->session.highlights[hl].word);
     }
   }
   // All the projects to be put in this parallel Bible, together with
   // their related information, like mapping, fonts.
-  vector < ustring > project_names;
-  vector < ProjectMemory > project_memories;
-  vector < Mapping > mapping_s;
-  vector < ustring > fonts;
-  vector < unsigned int >line_spacings;
-  vector < bool > right_to_lefts;
+  vector<ustring> project_names;
+  vector<ProjectMemory> project_memories;
+  vector<Mapping> mapping_s;
+  vector<ustring> fonts;
+  vector<unsigned int> line_spacings;
+  vector<bool> right_to_lefts;
   if (extra_projects) {
-    vector < ustring > project_s_raw = *extra_projects;
+    vector<ustring> project_s_raw = *extra_projects;
     for (unsigned int i = 0; i < project_s_raw.size(); i++) {
       ProjectMemory projectmemory(project_s_raw[i], true);
       project_memories.push_back(projectmemory);
-      ProjectConfiguration *projectconfig = settings->projectconfig(project_s_raw[i]);
+      ProjectConfiguration *projectconfig =
+          settings->projectconfig(project_s_raw[i]);
       project_names.push_back(project_s_raw[i]);
       Mapping mapping(projectconfig->versification_get(), 0);
       mapping_s.push_back(mapping);
@@ -149,7 +163,7 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
     // Update progress bar.
     progresswindow.iterate();
 
-    // Whether to keep things on one page.    
+    // Whether to keep things on one page.
     if (keep_verses_together_within_page) {
       text2pdf.open_keep_together();
     }
@@ -162,10 +176,12 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
     text2pdf.add_text(references[rf].human_readable(""));
 
     // Map this verse to the original, that is, to Hebrew or Greek.
-    vector <int> hebrew_greek_chapters;
-    vector <int> hebrew_greek_verses;
+    vector<int> hebrew_greek_chapters;
+    vector<int> hebrew_greek_verses;
     mapping.book_change(references[rf].book_get());
-    mapping.me_to_original(references[rf].chapter_get(), references[rf].verse_get(), hebrew_greek_chapters, hebrew_greek_verses);
+    mapping.me_to_original(references[rf].chapter_get(),
+                           references[rf].verse_get(), hebrew_greek_chapters,
+                           hebrew_greek_verses);
     // Get verse text for each version.
     for (unsigned int vsn = 0; vsn <= project_names.size(); vsn++) {
 
@@ -186,36 +202,43 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
       ustring line;
       if (vsn == 0) {
         // First version.
-        ProjectBook *projectbook = main_project.get_book_pointer(references[rf].book_get());
+        ProjectBook *projectbook =
+            main_project.get_book_pointer(references[rf].book_get());
         if (projectbook) {
-          ProjectChapter *projectchapter = projectbook->get_chapter_pointer(references[rf].chapter_get());
+          ProjectChapter *projectchapter =
+              projectbook->get_chapter_pointer(references[rf].chapter_get());
           if (projectchapter) {
-            ProjectVerse *projectverse = projectchapter->get_verse_pointer(references[rf].verse_get());
+            ProjectVerse *projectverse =
+                projectchapter->get_verse_pointer(references[rf].verse_get());
             if (projectverse) {
               line = projectverse->data;
             }
           }
         }
       } else {
-        // Other versions. 
+        // Other versions.
         // Get mapped chapters / verses.
         line.clear();
-        vector <int> mychapters;
-        vector <int> myverses;
+        vector<int> mychapters;
+        vector<int> myverses;
         mapping_s[vsn - 1].book_change(references[rf].book_get());
-        mapping_s[vsn - 1].original_to_me(hebrew_greek_chapters, hebrew_greek_verses, mychapters, myverses);
+        mapping_s[vsn - 1].original_to_me(
+            hebrew_greek_chapters, hebrew_greek_verses, mychapters, myverses);
         // Get text of any of the mapped verses.
         for (unsigned int mp = 0; mp < mychapters.size(); mp++) {
           // Get the verse and add it to the usfm code.
-          ProjectBook *projectbook = project_memories[vsn - 1].get_book_pointer(references[rf].book_get());
+          ProjectBook *projectbook = project_memories[vsn - 1].get_book_pointer(
+              references[rf].book_get());
           if (projectbook) {
-            ProjectChapter *projectchapter = projectbook->get_chapter_pointer(mychapters[mp]);
+            ProjectChapter *projectchapter =
+                projectbook->get_chapter_pointer(mychapters[mp]);
             if (projectchapter) {
-              ProjectVerse *projectverse = projectchapter->get_verse_pointer(convert_to_string(myverses[mp]));
+              ProjectVerse *projectverse = projectchapter->get_verse_pointer(
+                  convert_to_string(myverses[mp]));
               if (projectverse) {
-                if (!line.empty()) 
-                  line.append (" ");
-                line.append (projectverse->data);
+                if (!line.empty())
+                  line.append(" ");
+                line.append(projectverse->data);
               }
             }
           }
@@ -242,8 +265,8 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
       text_replacement(line);
 
       // Positions in the line, and lengths to highlight.
-      vector < size_t > highlight_positions;
-      vector < size_t > highlight_lengths;
+      vector<size_t> highlight_positions;
+      vector<size_t> highlight_lengths;
 
       // Go through all the words to highlight.
       for (unsigned int i2 = 0; i2 < highlight_casesensitives.size(); i2++) {
@@ -282,9 +305,9 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
       xml_combine_overlaps(highlight_positions, highlight_lengths);
 
       // Insert the code for highlighting.
-      for (int i = highlight_positions.size () - 1; i >= 0; i--) {
+      for (int i = highlight_positions.size() - 1; i >= 0; i--) {
         for (int i2 = highlight_lengths.size() - 1; i2 >= 0; i2--) {
-          line.insert (highlight_positions[i] + i2, INSERTION_FLAG);
+          line.insert(highlight_positions[i] + i2, INSERTION_FLAG);
         }
       }
 
@@ -304,7 +327,7 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
     text2pdf.add_text(" ");
     text2pdf.close_paragraph();
 
-    // Whether to close code keeping things on one page.    
+    // Whether to close code keeping things on one page.
     if (keep_verses_together_within_page) {
       text2pdf.close_keep_together();
     }

@@ -1,34 +1,36 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_markers_spacing.h"
-#include "projectutils.h"
+#include "books.h"
 #include "progresswindow.h"
+#include "projectutils.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
-#include "usfmtools.h"
-#include "books.h"
 #include "tiny_utilities.h"
+#include "usfmtools.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-CheckMarkersSpacing::CheckMarkersSpacing(const ustring & project, const vector < unsigned int >&books, bool gui)
+CheckMarkersSpacing::CheckMarkersSpacing(const ustring &project,
+                                         const vector<unsigned int> &books,
+                                         bool gui)
 /*
 It performs checks related to the USFM standard.
 project: project to check.
@@ -39,7 +41,7 @@ gui: whether to show graphical progressbar.
   // Init variables.
   cancelled = false;
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
   // Get the markers to check the spacing for.
@@ -65,10 +67,10 @@ gui: whether to show graphical progressbar.
     }
     book = mybooks[bk];
     // Check each chapter.
-    vector < unsigned int >chapters = project_get_chapters(project, book);
+    vector<unsigned int> chapters = project_get_chapters(project, book);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
       chapter = chapters[ch];
-      vector < ustring > verses = project_get_verses(project, book, chapter);
+      vector<ustring> verses = project_get_verses(project, book, chapter);
       // Check each verse.
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
         verse = verses[vs];
@@ -82,9 +84,7 @@ gui: whether to show graphical progressbar.
     delete progresswindow;
 }
 
-CheckMarkersSpacing::~CheckMarkersSpacing()
-{
-}
+CheckMarkersSpacing::~CheckMarkersSpacing() {}
 
 void CheckMarkersSpacing::check(ustring text)
 // Do the actual check of one verse.
@@ -101,11 +101,13 @@ void CheckMarkersSpacing::check(ustring text)
         if (text.substr(--pos, 1) == " ") {
           if (pos > 1) {
             if (text.substr(--pos, 1) == " ") {
-              message(_("Text of marker ") + marker + _(" ends with more than one space"));
+              message(_("Text of marker ") + marker +
+                      _(" ends with more than one space"));
             }
           }
         } else {
-          message(_("Text of marker ") + marker + _(" doesn't end with a space"));
+          message(_("Text of marker ") + marker +
+                  _(" doesn't end with a space"));
         }
       }
     }
@@ -114,8 +116,8 @@ void CheckMarkersSpacing::check(ustring text)
   }
 }
 
-void CheckMarkersSpacing::message(const ustring & message)
-{
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+void CheckMarkersSpacing::message(const ustring &message) {
+  references.push_back(books_id_to_english(book) + " " +
+                       convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }

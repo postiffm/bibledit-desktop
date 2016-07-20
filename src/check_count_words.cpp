@@ -1,33 +1,37 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
 #include "check_count_words.h"
+#include "books.h"
+#include "checks.h"
 #include "projectutils.h"
 #include "settings.h"
 #include "stylesheetutils.h"
-#include "utilities.h"
 #include "usfmtools.h"
-#include "books.h"
-#include "checks.h"
+#include "utilities.h"
 #include <glib/gi18n.h>
 
-CheckCountWords::CheckCountWords(const ustring & project, const vector < unsigned int >&books, const ustring & extrachars, bool sortword, bool sortcount, unsigned int excludecount, bool gui)
+CheckCountWords::CheckCountWords(const ustring &project,
+                                 const vector<unsigned int> &books,
+                                 const ustring &extrachars, bool sortword,
+                                 bool sortcount, unsigned int excludecount,
+                                 bool gui)
 /*
 It counts the words in the project.
 project: project to check.
@@ -42,7 +46,7 @@ gui: show graphical progressbar.
   // Init variables.
   cancelled = false;
   // Get a list of the books to check. If no books were given, take them all.
-  vector < unsigned int >mybooks(books.begin(), books.end());
+  vector<unsigned int> mybooks(books.begin(), books.end());
   if (mybooks.empty())
     mybooks = project_get_books(project);
   // GUI.
@@ -70,7 +74,7 @@ gui: show graphical progressbar.
       }
     }
     // Get text of the book and go through each line.
-    vector < ustring > lines = project_retrieve_book(project, mybooks[bk]);
+    vector<ustring> lines = project_retrieve_book(project, mybooks[bk]);
     for (unsigned int ln = 0; ln < lines.size(); ln++) {
       // Handle extra characters.
       for (unsigned int i = 0; i < extra_character.size(); i++) {
@@ -126,8 +130,8 @@ gui: show graphical progressbar.
   if (gui)
     progresswindow->set_fraction(0.8);
   if (excludecount > 0) {
-    vector < ustring > mywords;
-    vector < unsigned int >mycounts;
+    vector<ustring> mywords;
+    vector<unsigned int> mycounts;
     for (unsigned int i = 0; i < words.size(); i++) {
       if (counts[i] < excludecount) {
         mywords.push_back(words[i]);
@@ -156,14 +160,12 @@ gui: show graphical progressbar.
   }
 }
 
-CheckCountWords::~CheckCountWords()
-{
+CheckCountWords::~CheckCountWords() {
   if (progresswindow)
     delete progresswindow;
 }
 
-void CheckCountWords::count(vector < ustring > &words)
-{
+void CheckCountWords::count(vector<ustring> &words) {
   // Count each word.
   for (unsigned int i = 0; i < words.size(); i++) {
     wordset.insert(words[i]);

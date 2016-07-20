@@ -1,81 +1,73 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
-
 
 #ifndef INCLUDED_OT_NT_PARALLELS_H
 #define INCLUDED_OT_NT_PARALLELS_H
 
-
 #include "libraries.h"
 #include "reference.h"
 
-
-class OtNtParallelSet
-{
+class OtNtParallelSet {
 public:
-  OtNtParallelSet (int dummy);
-  vector <Reference> references;
+  OtNtParallelSet(int dummy);
+  vector<Reference> references;
+
 private:
 };
 
-
-class OtNtParallelSection
-{
+class OtNtParallelSection {
 public:
-  OtNtParallelSection (int dummy);
+  OtNtParallelSection(int dummy);
   ustring title;
-  vector <OtNtParallelSet> sets;
+  vector<OtNtParallelSet> sets;
+
 private:
 };
 
-
-class OtNtParallels
-{
+class OtNtParallels {
 public:
-  OtNtParallels (int dummy);
-  void get (Reference& reference, vector <Reference>& references, vector <ustring>& comments);
-  void readot ();
-  void readnt ();
-  vector <OtNtParallelSection> sections;
+  OtNtParallels(int dummy);
+  void get(Reference &reference, vector<Reference> &references,
+           vector<ustring> &comments);
+  void readot();
+  void readnt();
+  vector<OtNtParallelSection> sections;
+
 private:
-  void read (const gchar * filename);
+  void read(const gchar *filename);
 };
 
-
-class OtNtParallelDataSet
-{
+class OtNtParallelDataSet {
 public:
-  OtNtParallelDataSet (int dummy);
-  vector <ustring> data;
+  OtNtParallelDataSet(int dummy);
+  vector<ustring> data;
+
 private:
 };
 
-
-class OtNtParallelDataSection
-{
+class OtNtParallelDataSection {
 public:
-  OtNtParallelDataSection (int dummy);
+  OtNtParallelDataSection(int dummy);
   ustring title;
-  vector <OtNtParallelDataSet> sets;
+  vector<OtNtParallelDataSet> sets;
+
 private:
 };
-
-
 
 #endif

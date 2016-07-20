@@ -1,54 +1,55 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
-#include "libraries.h"
-#include <glib.h>
 #include "windowmerge.h"
-#include "help.h"
-#include "floatingwindow.h"
-#include "keyterms.h"
-#include "tiny_utilities.h"
-#include "projectutils.h"
-#include "settings.h"
-#include "utilities.h"
-#include "gwrappers.h"
-#include "directories.h"
 #include "books.h"
-#include "resource_utils.h"
-#include "dialogradiobutton.h"
 #include "combobox.h"
 #include "compareutils.h"
-#include "gtkwrappers.h"
-#include "git.h"
 #include "date_time_utils.h"
-#include "unixwrappers.h"
-#include "usfmtools.h"
 #include "dialogmerge.h"
+#include "dialogradiobutton.h"
+#include "directories.h"
+#include "floatingwindow.h"
+#include "git.h"
+#include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "help.h"
+#include "keyterms.h"
+#include "libraries.h"
 #include "merge_utils.h"
+#include "projectutils.h"
+#include "resource_utils.h"
+#include "settings.h"
 #include "shell.h"
 #include "snapshots.h"
+#include "tiny_utilities.h"
+#include "unixwrappers.h"
+#include "usfmtools.h"
+#include "utilities.h"
+#include <glib.h>
 #include <glib/gi18n.h>
 
-WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widMerge, _("Merge"), startup)
-// Window for merging changes.  
+WindowMerge::WindowMerge(GtkWidget *parent_layout,
+                         GtkAccelGroup *accelerator_group, bool startup)
+    : FloatingWindow(parent_layout, widMerge, _("Merge"), startup)
+// Window for merging changes.
 {
   // Save and initialize variables.
   load_gui_event_id = 0;
@@ -74,8 +75,8 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_widget_show(combobox_master);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_master, FALSE, FALSE, 0);
 
-  connect_focus_signals (combobox_master);
-  
+  connect_focus_signals(combobox_master);
+
   label7 = gtk_label_new_with_mnemonic(_("E_dited project"));
   gtk_widget_show(label7);
   gtk_box_pack_start(GTK_BOX(vbox1), label7, FALSE, FALSE, 0);
@@ -85,16 +86,16 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_widget_show(combobox_edited);
   gtk_box_pack_start(GTK_BOX(vbox1), combobox_edited, FALSE, FALSE, 0);
 
-  connect_focus_signals (combobox_edited);
+  connect_focus_signals(combobox_edited);
 
   label_info = gtk_label_new("");
   gtk_widget_show(label_info);
   gtk_box_pack_start(GTK_BOX(vbox1), label_info, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label_info), 0, 0.5);
 
-  display_changes_gui = new DisplayChangesGui (vbox1);
+  display_changes_gui = new DisplayChangesGui(vbox1);
 
-  connect_focus_signals (display_changes_gui->textview);
+  connect_focus_signals(display_changes_gui->textview);
 
   hbox1 = gtk_hbox_new(FALSE, 0);
   gtk_widget_show(hbox1);
@@ -104,8 +105,8 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_widget_show(button_previous);
   gtk_box_pack_start(GTK_BOX(hbox1), button_previous, FALSE, FALSE, 0);
 
-  connect_focus_signals (button_previous);
-  
+  connect_focus_signals(button_previous);
+
   alignment2 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment2);
   gtk_container_add(GTK_CONTAINER(button_previous), alignment2);
@@ -126,8 +127,8 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_widget_show(button_merge);
   gtk_box_pack_start(GTK_BOX(hbox1), button_merge, TRUE, TRUE, 0);
 
-  connect_focus_signals (button_merge);
-  
+  connect_focus_signals(button_merge);
+
   alignment1 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment1);
   gtk_container_add(GTK_CONTAINER(button_merge), alignment1);
@@ -148,8 +149,8 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_widget_show(button_next);
   gtk_box_pack_start(GTK_BOX(hbox1), button_next, FALSE, FALSE, 0);
 
-  connect_focus_signals (button_next);
-  
+  connect_focus_signals(button_next);
+
   alignment3 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment3);
   gtk_container_add(GTK_CONTAINER(button_next), alignment3);
@@ -179,8 +180,10 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow2);
   gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindow2, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow2), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow2), GTK_SHADOW_IN);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow2),
+                                 GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow2),
+                                      GTK_SHADOW_IN);
 
   textview_approval = gtk_text_view_new();
   gtk_widget_show(textview_approval);
@@ -190,16 +193,16 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview_approval), FALSE);
   gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview_approval), FALSE);
 
-  connect_focus_signals (textview_approval);
-  
+  connect_focus_signals(textview_approval);
+
   approve_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview_approval));
 
   button_ready = gtk_button_new();
   gtk_widget_show(button_ready);
   gtk_box_pack_start(GTK_BOX(vbox2), button_ready, FALSE, FALSE, 0);
 
-  connect_focus_signals (button_ready);
-  
+  connect_focus_signals(button_ready);
+
   alignment6 = gtk_alignment_new(0.5, 0.5, 0, 0);
   gtk_widget_show(alignment6);
   gtk_container_add(GTK_CONTAINER(button_ready), alignment6);
@@ -219,12 +222,18 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   gtk_label_set_mnemonic_widget(GTK_LABEL(label6), combobox_master);
   gtk_label_set_mnemonic_widget(GTK_LABEL(label7), combobox_edited);
 
-  g_signal_connect((gpointer) combobox_master, "changed", G_CALLBACK(on_combobox_master_changed), gpointer(this));
-  g_signal_connect((gpointer) combobox_edited, "changed", G_CALLBACK(on_combobox_edited_changed), gpointer(this));
-  g_signal_connect((gpointer) button_previous, "clicked", G_CALLBACK(on_button_previous_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_merge, "clicked", G_CALLBACK(on_button_merge_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_next, "clicked", G_CALLBACK(on_button_next_clicked), gpointer(this));
-  g_signal_connect((gpointer) button_ready, "clicked", G_CALLBACK(on_button_ready_clicked), gpointer(this));
+  g_signal_connect((gpointer)combobox_master, "changed",
+                   G_CALLBACK(on_combobox_master_changed), gpointer(this));
+  g_signal_connect((gpointer)combobox_edited, "changed",
+                   G_CALLBACK(on_combobox_edited_changed), gpointer(this));
+  g_signal_connect((gpointer)button_previous, "clicked",
+                   G_CALLBACK(on_button_previous_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_merge, "clicked",
+                   G_CALLBACK(on_button_merge_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_next, "clicked",
+                   G_CALLBACK(on_button_next_clicked), gpointer(this));
+  g_signal_connect((gpointer)button_ready, "clicked",
+                   G_CALLBACK(on_button_ready_clicked), gpointer(this));
 
   // Create signalling buttons.
   editors_get_text_button = gtk_button_new();
@@ -239,12 +248,10 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
 
   // Main focused widget.
   last_focused_widget = combobox_master;
-  gtk_widget_grab_focus (last_focused_widget);
+  gtk_widget_grab_focus(last_focused_widget);
 }
 
-
-WindowMerge::~WindowMerge()
-{
+WindowMerge::~WindowMerge() {
   // Destroy changes GUI.
   delete display_changes_gui;
   // Destroy signalling buttons.
@@ -254,9 +261,7 @@ WindowMerge::~WindowMerge()
   gtk_widget_destroy(reload_editors_button);
 }
 
-
-void WindowMerge::set_master_project()
-{
+void WindowMerge::set_master_project() {
   // If there is no focused editor, clear project.
   if (!editor_was_focused) {
     current_master_project.clear();
@@ -279,15 +284,12 @@ void WindowMerge::set_master_project()
   editors_changed();
 }
 
-
-void WindowMerge::on_combobox_master_changed(GtkComboBox * combobox, gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_combobox_master();
+void WindowMerge::on_combobox_master_changed(GtkComboBox *combobox,
+                                             gpointer user_data) {
+  ((WindowMerge *)user_data)->on_combobox_master();
 }
 
-
-void WindowMerge::on_combobox_master()
-{
+void WindowMerge::on_combobox_master() {
   // Get the new master project.
   current_master_project = combobox_get_active_string(combobox_master);
   if (!current_master_project.empty()) {
@@ -300,9 +302,7 @@ void WindowMerge::on_combobox_master()
   editors_changed();
 }
 
-
-void WindowMerge::set_edited_project()
-{
+void WindowMerge::set_edited_project() {
   // If there is no focused editor, clear project.
   if (!editor_was_focused) {
     current_edited_project.clear();
@@ -325,15 +325,12 @@ void WindowMerge::set_edited_project()
   editors_changed();
 }
 
-
-void WindowMerge::on_combobox_edited_changed(GtkComboBox * combobox, gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_combobox_edited();
+void WindowMerge::on_combobox_edited_changed(GtkComboBox *combobox,
+                                             gpointer user_data) {
+  ((WindowMerge *)user_data)->on_combobox_edited();
 }
 
-
-void WindowMerge::on_combobox_edited()
-{
+void WindowMerge::on_combobox_edited() {
   current_edited_project = combobox_get_active_string(combobox_edited);
   if (!current_edited_project.empty()) {
     previous_edited_project = current_edited_project;
@@ -345,37 +342,29 @@ void WindowMerge::on_combobox_edited()
   editors_changed();
 }
 
-
-void WindowMerge::set_focused_editor()
-{
+void WindowMerge::set_focused_editor() {
   editor_was_focused = true;
   load_gui_delayer();
 }
 
-
-void WindowMerge::set_open_projects(const vector < ustring>& projects)
-{
+void WindowMerge::set_open_projects(const vector<ustring> &projects) {
   open_projects = projects;
   load_gui_delayer();
 }
 
-
-void WindowMerge::load_gui_delayer()
-{
+void WindowMerge::load_gui_delayer() {
   gw_destroy_source(load_gui_event_id);
-  load_gui_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 10, GSourceFunc(on_load_gui_timeout), gpointer(this), NULL);
+  load_gui_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 10,
+                                         GSourceFunc(on_load_gui_timeout),
+                                         gpointer(this), NULL);
 }
 
-
-bool WindowMerge::on_load_gui_timeout(gpointer user_data)
-{
-  ((WindowMerge *) user_data)->load_gui();
+bool WindowMerge::on_load_gui_timeout(gpointer user_data) {
+  ((WindowMerge *)user_data)->load_gui();
   return false;
 }
 
-
-void WindowMerge::load_gui()
-{
+void WindowMerge::load_gui() {
   // Set master and edited projects.
   set_master_project();
   set_edited_project();
@@ -392,21 +381,19 @@ void WindowMerge::load_gui()
   editors_changed();
 }
 
-
 void WindowMerge::editors_changed()
 // This function is called if any of the Editors changed.
 {
   gw_destroy_source(editors_changed_event_id);
-  editors_changed_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 500, GSourceFunc(on_editors_changed_timeout), gpointer(this), NULL);
+  editors_changed_event_id = g_timeout_add_full(
+      G_PRIORITY_DEFAULT, 500, GSourceFunc(on_editors_changed_timeout),
+      gpointer(this), NULL);
 }
 
-
-bool WindowMerge::on_editors_changed_timeout(gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_editors_changed();
+bool WindowMerge::on_editors_changed_timeout(gpointer user_data) {
+  ((WindowMerge *)user_data)->on_editors_changed();
   return false;
 }
-
 
 void WindowMerge::on_editors_changed()
 // This function is called shortly after any of the Editors changed.
@@ -414,9 +401,11 @@ void WindowMerge::on_editors_changed()
   // See whether to load new text.
   bool loadtext = true;
   if (current_master_project.empty())
-    loadtext = false;;
+    loadtext = false;
+  ;
   if (current_edited_project.empty())
-    loadtext = false;;
+    loadtext = false;
+  ;
 
   // Set buttons' sensitivity.
   gtk_widget_set_sensitive(button_previous, loadtext);
@@ -425,7 +414,7 @@ void WindowMerge::on_editors_changed()
 
   // If no loading, clear text and bail out.
   if (!loadtext) {
-    display_changes_gui->clear ();
+    display_changes_gui->clear();
     return;
   }
   // Signal to get the text from the editors.
@@ -435,18 +424,15 @@ void WindowMerge::on_editors_changed()
   show_comparison();
 }
 
-
-void WindowMerge::on_button_previous_clicked(GtkButton * button, gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_button_next_previous(false);
+void WindowMerge::on_button_previous_clicked(GtkButton *button,
+                                             gpointer user_data) {
+  ((WindowMerge *)user_data)->on_button_next_previous(false);
 }
 
-
-void WindowMerge::on_button_next_clicked(GtkButton * button, gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_button_next_previous(true);
+void WindowMerge::on_button_next_clicked(GtkButton *button,
+                                         gpointer user_data) {
+  ((WindowMerge *)user_data)->on_button_next_previous(true);
 }
-
 
 void WindowMerge::on_button_next_previous(bool next)
 // This function looks for the next (or previous) chapter that differs
@@ -459,7 +445,8 @@ void WindowMerge::on_button_next_previous(bool next)
   unsigned int new_book = book;
   do {
     // Look for next (or previous) chapter.
-    vector < unsigned int >chapters = project_get_chapters(current_edited_project, new_book);
+    vector<unsigned int> chapters =
+        project_get_chapters(current_edited_project, new_book);
     if (chapters.empty())
       break;
     unsigned int index = 0;
@@ -485,8 +472,10 @@ void WindowMerge::on_button_next_previous(bool next)
       }
     }
     // See whether this chapter differs.
-    vector < ustring > master_chapter_data = project_retrieve_chapter(current_master_project, new_book, new_chapter);
-    vector < ustring > edited_chapter_data = project_retrieve_chapter(current_edited_project, new_book, new_chapter);
+    vector<ustring> master_chapter_data =
+        project_retrieve_chapter(current_master_project, new_book, new_chapter);
+    vector<ustring> edited_chapter_data =
+        project_retrieve_chapter(current_edited_project, new_book, new_chapter);
     if (master_chapter_data.size() != edited_chapter_data.size())
       change_found = true;
     for (unsigned int i = 0; i < master_chapter_data.size(); i++) {
@@ -506,15 +495,15 @@ void WindowMerge::on_button_next_previous(bool next)
   }
 }
 
-
-bool WindowMerge::cross_book_boundaries(bool next, unsigned int &cross_book, unsigned int &cross_chapter)
+bool WindowMerge::cross_book_boundaries(bool next, unsigned int &cross_book,
+                                        unsigned int &cross_chapter)
 // This function looks for the next (or previous) chapter,
 // crossing the book boundary.
 // It returns true if it found another chapter in another book.
 {
   // Index of the current book.
   int bookindex = -1;
-  vector < unsigned int >allbooks = project_get_books(current_master_project);
+  vector<unsigned int> allbooks = project_get_books(current_master_project);
   for (unsigned int i = 0; i < allbooks.size(); i++) {
     if (cross_book == allbooks[i])
       bookindex = i;
@@ -531,11 +520,12 @@ bool WindowMerge::cross_book_boundaries(bool next, unsigned int &cross_book, uns
   nextbookindex = CLAMP(nextbookindex, 0, allbooks.size() - 1);
 
   // Get a list of all references in these three books.
-  vector < unsigned int >books;
-  vector < unsigned int >chapters;
+  vector<unsigned int> books;
+  vector<unsigned int> chapters;
   for (unsigned int i = previousbookindex; i <= nextbookindex; i++) {
     // Get the book metrics.
-    vector < unsigned int >bookchapters = project_get_chapters(current_master_project, allbooks[i]);
+    vector<unsigned int> bookchapters =
+        project_get_chapters(current_master_project, allbooks[i]);
     for (unsigned int i2 = 0; i2 < bookchapters.size(); i2++) {
       books.push_back(allbooks[i]);
       chapters.push_back(bookchapters[i2]);
@@ -570,61 +560,65 @@ bool WindowMerge::cross_book_boundaries(bool next, unsigned int &cross_book, uns
   return true;
 }
 
-
-void WindowMerge::on_button_merge_clicked(GtkButton * button, gpointer user_data)
-{
-  ((WindowMerge *) user_data)->on_button_merge();
+void WindowMerge::on_button_merge_clicked(GtkButton *button,
+                                          gpointer user_data) {
+  ((WindowMerge *)user_data)->on_button_merge();
 }
 
-
-void WindowMerge::on_button_merge()
-{
+void WindowMerge::on_button_merge() {
   // Settings.
-  extern Settings * settings;
-  
+  extern Settings *settings;
+
   // Save all editors.
   gtk_button_clicked(GTK_BUTTON(save_editors_button));
 
   // Ask what to do.
-  ustring book_chapter = books_id_to_english(book) + " " + convert_to_string(chapter);
-  vector < ustring > labels;
-  labels.push_back(_("Merge ") + book_chapter + _(" of project ") + current_edited_project + _(" and ") + current_master_project);
-  labels.push_back(_("Merge ") + book_chapter + _(" of project ") + current_edited_project + _(" and ") + current_master_project + ",\n" + _("and approve of each change as compared to project ") + current_master_project);
-  labels.push_back(_("Copy ") + book_chapter + _(" of project ") + current_master_project + _(" to project ") + current_edited_project);
-  labels.push_back(_("Copy everything of project ") + current_master_project + _(" to project ") + current_edited_project);
-  RadiobuttonDialog dialog(_("Select action"), _("Select the type of merge or copy to be done"), labels, settings->session.merge_action, false);
+  ustring book_chapter =
+      books_id_to_english(book) + " " + convert_to_string(chapter);
+  vector<ustring> labels;
+  labels.push_back(_("Merge ") + book_chapter + _(" of project ") +
+                   current_edited_project + _(" and ") +
+                   current_master_project);
+  labels.push_back(_("Merge ") + book_chapter + _(" of project ") +
+                   current_edited_project + _(" and ") +
+                   current_master_project + ",\n" +
+                   _("and approve of each change as compared to project ") +
+                   current_master_project);
+  labels.push_back(_("Copy ") + book_chapter + _(" of project ") +
+                   current_master_project + _(" to project ") +
+                   current_edited_project);
+  labels.push_back(_("Copy everything of project ") + current_master_project +
+                   _(" to project ") + current_edited_project);
+  RadiobuttonDialog dialog(_("Select action"),
+                           _("Select the type of merge or copy to be done"),
+                           labels, settings->session.merge_action, false);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   // Store action taken.
   settings->session.merge_action = dialog.selection;
   // Take the selected action.
   switch (dialog.selection) {
-  case 0:
-    {
-      merge_edited_into_master(false);
-      break;
-    }
-  case 1:
-    {
-      merge_edited_into_master(true);
-      break;
-    }
-  case 2:
-    {
-      copy_master_to_edited_chapter(book, chapter, true);
-      break;
-    }
-  case 3:
-    {
-      copy_master_to_edited_all();
-      break;
-    }
+  case 0: {
+    merge_edited_into_master(false);
+    break;
+  }
+  case 1: {
+    merge_edited_into_master(true);
+    break;
+  }
+  case 2: {
+    copy_master_to_edited_chapter(book, chapter, true);
+    break;
+  }
+  case 3: {
+    copy_master_to_edited_all();
+    break;
+  }
   }
 
   // Reload the editors.
   gtk_button_clicked(GTK_BUTTON(reload_editors_button));
 }
-
 
 void WindowMerge::merge_edited_into_master(bool approve)
 // This merges the edited data into the master data, and does error checking.
@@ -636,48 +630,53 @@ void WindowMerge::merge_edited_into_master(bool approve)
   }
 
   // Get the available snapshots of the master and edited projects.
-  vector <unsigned int> masterseconds = snapshots_get_seconds (current_master_project, book, chapter);
-  vector <unsigned int> editedseconds = snapshots_get_seconds (current_edited_project, book, chapter);
+  vector<unsigned int> masterseconds =
+      snapshots_get_seconds(current_master_project, book, chapter);
+  vector<unsigned int> editedseconds =
+      snapshots_get_seconds(current_edited_project, book, chapter);
 
   // We need to look for the common ancestor.
-  // It needs a fast routine that goes through the history as little as possible.
+  // It needs a fast routine that goes through the history as little as
+  // possible.
 
   // Make a combined set of the times and flags.
-  vector <bool> combinedflags;
-  vector <unsigned int> combinedseconds;
+  vector<bool> combinedflags;
+  vector<unsigned int> combinedseconds;
   for (unsigned int i = 0; i < masterseconds.size(); i++) {
-    combinedflags.push_back (true);
-    combinedseconds.push_back (masterseconds[i]);    
+    combinedflags.push_back(true);
+    combinedseconds.push_back(masterseconds[i]);
   }
   for (unsigned int i = 0; i < editedseconds.size(); i++) {
-    combinedflags.push_back (false);
-    combinedseconds.push_back (editedseconds[i]);    
+    combinedflags.push_back(false);
+    combinedseconds.push_back(editedseconds[i]);
   }
   // Sort the combined set on the time, most recent ones first.
-  quick_sort (combinedseconds, combinedflags, 0, combinedseconds.size());
+  quick_sort(combinedseconds, combinedflags, 0, combinedseconds.size());
   {
-    vector <bool> flags = combinedflags;
-    vector <unsigned int> seconds = combinedseconds;
+    vector<bool> flags = combinedflags;
+    vector<unsigned int> seconds = combinedseconds;
     combinedflags.clear();
     combinedseconds.clear();
     for (int i = flags.size() - 1; i >= 0; i--) {
-      combinedflags.push_back (flags[i]);
-      combinedseconds.push_back (seconds[i]);
+      combinedflags.push_back(flags[i]);
+      combinedseconds.push_back(seconds[i]);
     }
   }
 
   // Go through the history of both projects, extract the state in history,
   // and compare them in order to find the common ancestor.
-  vector <ustring> mastertexts;
-  vector <ustring> editedtexts;
+  vector<ustring> mastertexts;
+  vector<ustring> editedtexts;
   ustring common_ancestor;
   for (unsigned int i = 0; i < combinedseconds.size(); i++) {
     unsigned int second = combinedseconds[i];
     bool master = combinedflags[i];
     if (master) {
-      mastertexts.push_back(snapshots_get_chapter(current_master_project, book, chapter, second));
+      mastertexts.push_back(
+          snapshots_get_chapter(current_master_project, book, chapter, second));
     } else {
-      editedtexts.push_back(snapshots_get_chapter(current_edited_project, book, chapter, second));
+      editedtexts.push_back(
+          snapshots_get_chapter(current_edited_project, book, chapter, second));
     }
     for (unsigned int m = 0; m < mastertexts.size(); m++) {
       for (unsigned int e = 0; e < editedtexts.size(); e++) {
@@ -691,11 +690,12 @@ void WindowMerge::merge_edited_into_master(bool approve)
     if (!common_ancestor.empty()) {
       break;
     }
-  }  
+  }
 
   // If no common ancestor was found, give message and bail out.
   if (common_ancestor.empty()) {
-    gtkw_dialog_error(NULL, _("Can't merge because a common ancestor was not found"));
+    gtkw_dialog_error(NULL,
+                      _("Can't merge because a common ancestor was not found"));
     return;
   }
   // Do the merge in a temporal directory.
@@ -710,8 +710,9 @@ void WindowMerge::merge_edited_into_master(bool approve)
 
      merge incorporates all changes that lead from file2 to file3 into file1.
      The result ordinarily goes into file1.
-     merge is useful for combining separate changes to an original. 
-     Suppose file2 is the original, and both file1 and file3 are modifications of file2. 
+     merge is useful for combining separate changes to an original.
+     Suppose file2 is the original, and both file1 and file3 are modifications
+     of file2.
      Then merge combines both changes.
    */
   ustring file1 = gw_build_filename(workingdirectory, "file1");
@@ -719,22 +720,27 @@ void WindowMerge::merge_edited_into_master(bool approve)
   ustring file3 = gw_build_filename(workingdirectory, "file3");
 
   /*
-     merge has problems when two consecutive lines are changed, 
-     one line in one file and the other line in the other file. 
-     Therefore data is going to be cut on the spaces, 
-     so that there is one word per line. 
-     Each new line is indicated too so as to facilitate joining the loose bits again.
-     Another advantage of this is that the merge operation becomes finer grained.
+     merge has problems when two consecutive lines are changed,
+     one line in one file and the other line in the other file.
+     Therefore data is going to be cut on the spaces,
+     so that there is one word per line.
+     Each new line is indicated too so as to facilitate joining the loose bits
+     again.
+     Another advantage of this is that the merge operation becomes finer
+     grained.
    */
 
   // Write the data for the common ancestor.
-  g_file_set_contents(file2.c_str(), merge_split_data(common_ancestor).c_str(), -1, NULL);
+  g_file_set_contents(file2.c_str(), merge_split_data(common_ancestor).c_str(),
+                      -1, NULL);
 
   // Write the data for the main project.
-  g_file_set_contents(file1.c_str(), merge_split_data(main_project_data).c_str(), -1, NULL);
+  g_file_set_contents(file1.c_str(),
+                      merge_split_data(main_project_data).c_str(), -1, NULL);
 
   // Write the data for the edited project.
-  g_file_set_contents(file3.c_str(), merge_split_data(edited_project_data).c_str(), -1, NULL);
+  g_file_set_contents(file3.c_str(),
+                      merge_split_data(edited_project_data).c_str(), -1, NULL);
 
   // Do the three-way merge.
   {
@@ -783,27 +789,29 @@ void WindowMerge::merge_edited_into_master(bool approve)
 
   } else {
 
-    // Store the merge result in both chapters.  
+    // Store the merge result in both chapters.
     ParseLine parseline(merge_result);
     CategorizeChapterVerse ccv(parseline.lines);
     project_store_chapter(current_master_project, book, ccv);
     project_store_chapter(current_edited_project, book, ccv);
-    // A normal snapshot may be removed over time, so we need a persistent one to enable future merges.
-    snapshots_shoot_chapter (current_master_project, book, chapter, 0, true);
-    snapshots_shoot_chapter (current_edited_project, book, chapter, 0, true);
+    // A normal snapshot may be removed over time, so we need a persistent one
+    // to enable future merges.
+    snapshots_shoot_chapter(current_master_project, book, chapter, 0, true);
+    snapshots_shoot_chapter(current_edited_project, book, chapter, 0, true);
 
     // Message ok.
     gtkw_dialog_info(NULL, _("The chapters were successfully merged"));
-
   }
 }
 
-
-void WindowMerge::copy_master_to_edited_chapter(unsigned int bk, unsigned int ch, bool gui)
-{
-  // Only copy if the master and edited version differ. This saves a lot of git operations.
-  vector <ustring> master_lines = project_retrieve_chapter(current_master_project, bk, ch);
-  vector <ustring> edited_lines = project_retrieve_chapter(current_edited_project, bk, ch);
+void WindowMerge::copy_master_to_edited_chapter(unsigned int bk,
+                                                unsigned int ch, bool gui) {
+  // Only copy if the master and edited version differ. This saves a lot of git
+  // operations.
+  vector<ustring> master_lines =
+      project_retrieve_chapter(current_master_project, bk, ch);
+  vector<ustring> edited_lines =
+      project_retrieve_chapter(current_edited_project, bk, ch);
   bool master_is_edited = false;
   if (master_lines.size() == edited_lines.size()) {
     master_is_edited = true;
@@ -815,41 +823,44 @@ void WindowMerge::copy_master_to_edited_chapter(unsigned int bk, unsigned int ch
   }
   CategorizeChapterVerse ccv(master_lines);
   if (master_is_edited) {
-    if (gui) 
+    if (gui)
       gtkw_dialog_info(NULL, _("Both chapters are already the same"));
   } else {
     project_store_chapter(current_edited_project, bk, ccv);
-    // A normal snapshot may be removed over time, so we need a persistent one to enable future merges.
-    snapshots_shoot_chapter (current_master_project, bk, ch, 0, true);
-    snapshots_shoot_chapter (current_edited_project, bk, ch, 0, true);
+    // A normal snapshot may be removed over time, so we need a persistent one
+    // to enable future merges.
+    snapshots_shoot_chapter(current_master_project, bk, ch, 0, true);
+    snapshots_shoot_chapter(current_edited_project, bk, ch, 0, true);
     if (gui) {
-      ustring message = books_id_to_english(bk) + " " + convert_to_string(ch) + _(" was copied from project ") + current_master_project + _(" to project ") + current_edited_project;
+      ustring message = books_id_to_english(bk) + " " + convert_to_string(ch) +
+                        _(" was copied from project ") +
+                        current_master_project + _(" to project ") +
+                        current_edited_project;
       gtkw_dialog_info(NULL, message.c_str());
     }
   }
 }
 
-
-void WindowMerge::copy_master_to_edited_all()
-{
+void WindowMerge::copy_master_to_edited_all() {
   {
-    vector <unsigned int> books = project_get_books(current_master_project);
+    vector<unsigned int> books = project_get_books(current_master_project);
     ProgressWindow progresswindow(_("Copying..."), false);
     progresswindow.set_iterate(0, 1, books.size());
     for (unsigned int bk = 0; bk < books.size(); bk++) {
       progresswindow.iterate();
-      vector < unsigned int >chapters = project_get_chapters(current_master_project, books[bk]);
+      vector<unsigned int> chapters =
+          project_get_chapters(current_master_project, books[bk]);
       for (unsigned int ch = 0; ch < chapters.size(); ch++) {
         copy_master_to_edited_chapter(books[bk], chapters[ch], false);
       }
     }
   }
-  ustring message = _("All chapters of project ") + current_master_project + _(" were copied to project ") + current_edited_project;
+  ustring message = _("All chapters of project ") + current_master_project +
+                    _(" were copied to project ") + current_edited_project;
   gtkw_dialog_info(NULL, message.c_str());
 }
 
-
-ustring WindowMerge::merge_conflicts_2_human_readable_text(const ustring & data)
+ustring WindowMerge::merge_conflicts_2_human_readable_text(const ustring &data)
 /*
  This takes a merge conflict as produced by the merge program,
  and converts it to human readable text.
@@ -887,57 +898,63 @@ ustring WindowMerge::merge_conflicts_2_human_readable_text(const ustring & data)
   return text;
 }
 
-
 void WindowMerge::show_comparison()
 // Shows the comparison.
 {
   ParseLine parseline_main(main_project_data);
   ParseLine parseline_edited(edited_project_data);
-  vector < ustring > comparison;
-  compare_usfm_text(parseline_main.lines, parseline_edited.lines, comparison, true);
-  display_changes_gui->display (comparison);
+  vector<ustring> comparison;
+  compare_usfm_text(parseline_main.lines, parseline_edited.lines, comparison,
+                    true);
+  display_changes_gui->display(comparison);
 }
 
-
-void WindowMerge::approval_setup(const ustring & maindata, const ustring & mergedata)
-{
+void WindowMerge::approval_setup(const ustring &maindata,
+                                 const ustring &mergedata) {
   // Initialize the approval system's variables and gui.
   approve_master_project = current_master_project;
   approve_edited_project = current_edited_project;
   approve_book = book;
   approve_chapter = chapter;
-  ustring label = _("Changes approval, ") + books_id_to_english(approve_book) + " " + convert_to_string(approve_chapter);
+  ustring label = _("Changes approval, ") + books_id_to_english(approve_book) +
+                  " " + convert_to_string(approve_chapter);
   gtk_label_set_text(GTK_LABEL(label_approve), label.c_str());
   gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 1);
   approve_master_file = gw_build_filename(workingdirectory, "master");
   approve_merge_file = gw_build_filename(workingdirectory, "merged");
 
   // Save both sets of data to file.
-  g_file_set_contents(approve_master_file.c_str(), merge_split_data(trim(maindata)).c_str(), -1, NULL);
-  g_file_set_contents(approve_merge_file.c_str(), merge_split_data(trim(mergedata)).c_str(), -1, NULL);
+  g_file_set_contents(approve_master_file.c_str(),
+                      merge_split_data(trim(maindata)).c_str(), -1, NULL);
+  g_file_set_contents(approve_merge_file.c_str(),
+                      merge_split_data(trim(mergedata)).c_str(), -1, NULL);
 
   // Show differences in the GUI.
   approval_show_diff();
 
   // Info for user.
-  gtkw_dialog_info(NULL, _("The chapters are ready for approving the individual changes"));
+  gtkw_dialog_info(
+      NULL, _("The chapters are ready for approving the individual changes"));
 }
-
 
 void WindowMerge::approval_show_diff()
 // Looks for the differences and shows them in the GUI.
 {
   // Create a patch file by running a diff.
   approve_patch_file = gw_build_filename(workingdirectory, "patch");
-  ustring command = shell_quote_space(Directories->get_diff()) + shell_quote_space(approve_master_file) + shell_quote_space(approve_merge_file) + ">" + shell_quote_space(approve_patch_file);
-  if (system(command.c_str())) ; // This one does not work with GwSpawn because of the pipes used.
+  ustring command = shell_quote_space(Directories->get_diff()) +
+                    shell_quote_space(approve_master_file) +
+                    shell_quote_space(approve_merge_file) + ">" +
+                    shell_quote_space(approve_patch_file);
+  if (system(command.c_str()))
+    ; // This one does not work with GwSpawn because of the pipes used.
 
   // Clear items.
   gtk_text_buffer_set_text(approve_buffer, "", 0);
   approve_buttons.clear();
 
   // Read the patch.
-  vector < Patch > patches = merge_read_patch(approve_patch_file);
+  vector<Patch> patches = merge_read_patch(approve_patch_file);
 
   // Show the master file in the textview, with buttons for approval of patches.
   ReadText rt(approve_master_file, true, false);
@@ -963,7 +980,9 @@ void WindowMerge::approval_show_diff()
 
     // If there's a patch here, show it.
     for (unsigned int i2 = 0; i2 < patches.size(); i2++) {
-      if (i + 1 == patches[i2].linenumber) {    // (diff starts at line 1, but we start at line 0).
+      if (i + 1 ==
+          patches[i2]
+              .linenumber) { // (diff starts at line 1, but we start at line 0).
 
         // Add a space before the button.
         gtk_text_buffer_get_end_iter(approve_buffer, &iter);
@@ -971,7 +990,8 @@ void WindowMerge::approval_show_diff()
 
         // Insert a button with the patch.
         gtk_text_buffer_get_end_iter(approve_buffer, &iter);
-        GtkTextChildAnchor *childanchor = gtk_text_buffer_create_child_anchor(approve_buffer, &iter);
+        GtkTextChildAnchor *childanchor =
+            gtk_text_buffer_create_child_anchor(approve_buffer, &iter);
         GtkWidget *button = gtk_button_new();
 
         GtkWidget *alignment;
@@ -997,35 +1017,34 @@ void WindowMerge::approval_show_diff()
         gtk_widget_show(label);
         gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-        gtk_text_view_add_child_at_anchor(GTK_TEXT_VIEW(textview_approval), button, childanchor);
+        gtk_text_view_add_child_at_anchor(GTK_TEXT_VIEW(textview_approval),
+                                          button, childanchor);
         gtk_widget_show_all(button);
-        g_signal_connect((gpointer) button, "clicked", G_CALLBACK(on_button_approve_clicked), gpointer(this));
+        g_signal_connect((gpointer)button, "clicked",
+                         G_CALLBACK(on_button_approve_clicked), gpointer(this));
 
         // Store button and patch.
         ApproveButton approvebutton(0);
         approvebutton.button = GTK_BUTTON(button);
         approvebutton.patch = patches[i2];
         approve_buttons.push_back(approvebutton);
-
       }
     }
 
     // Add space after the text.
     gtk_text_buffer_get_end_iter(approve_buffer, &iter);
     gtk_text_buffer_insert(approve_buffer, &iter, " ", 1);
-
   }
 }
 
-
-void WindowMerge::on_button_approve_clicked(GtkButton * button, gpointer user_data)
+void WindowMerge::on_button_approve_clicked(GtkButton *button,
+                                            gpointer user_data)
 // Called when the user clicks one of the approval button.
 {
-  ((WindowMerge *) user_data)->approval_approve(button);
+  ((WindowMerge *)user_data)->approval_approve(button);
 }
 
-
-void WindowMerge::approval_approve(GtkButton * button)
+void WindowMerge::approval_approve(GtkButton *button)
 // Handles the user's approval of a change.
 {
   // Go through the approval buttons to find the one clicked.
@@ -1033,7 +1052,7 @@ void WindowMerge::approval_approve(GtkButton * button)
     if (button == approve_buttons[i].button) {
 
       // Write a new patch file to disk.
-      vector < ustring > lines;
+      vector<ustring> lines;
       ustring s;
       s = convert_to_string(approve_buttons[i].patch.linenumber);
       if (approve_buttons[i].patch.addition)
@@ -1050,23 +1069,22 @@ void WindowMerge::approval_approve(GtkButton * button)
       write_lines(approve_patch_file, lines);
 
       // Apply the patch to master.
-      ustring command = "patch" + shell_quote_space(approve_master_file) + shell_quote_space(approve_patch_file);
-      if (system(command.c_str())) ; // This one could use GwSpawn, but it was not tested.
+      ustring command = "patch" + shell_quote_space(approve_master_file) +
+                        shell_quote_space(approve_patch_file);
+      if (system(command.c_str()))
+        ; // This one could use GwSpawn, but it was not tested.
 
       // Show the new differences after the change has been accepted.
       approval_show_diff();
-
     }
   }
 }
 
-
-void WindowMerge::on_button_ready_clicked(GtkButton * button, gpointer user_data)
+void WindowMerge::on_button_ready_clicked(GtkButton *button, gpointer user_data)
 // Called when ready approving.
 {
-  ((WindowMerge *) user_data)->button_ready_clicked();
+  ((WindowMerge *)user_data)->button_ready_clicked();
 }
-
 
 void WindowMerge::button_ready_clicked()
 // Called when ready approving.
@@ -1082,8 +1100,10 @@ void WindowMerge::button_ready_clicked()
   project_store_chapter(approve_master_project, approve_book, ccv);
 
   // Store persistent snapshots to enable future merges.
-  snapshots_shoot_chapter (approve_master_project, approve_book, approve_chapter, 0, true);
-  snapshots_shoot_chapter (approve_edited_project, approve_book, approve_chapter, 0, true);
+  snapshots_shoot_chapter(approve_master_project, approve_book, approve_chapter,
+                          0, true);
+  snapshots_shoot_chapter(approve_edited_project, approve_book, approve_chapter,
+                          0, true);
 
   // GUI.
   gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 0);
@@ -1091,5 +1111,3 @@ void WindowMerge::button_ready_clicked()
   // Reload the editors.
   gtk_button_clicked(GTK_BUTTON(reload_editors_button));
 }
-
-

@@ -1,32 +1,30 @@
 /*
 ** Copyright (©) 2003-2013 Teus Benschop.
-**  
+**
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
 ** the Free Software Foundation; either version 3 of the License, or
 ** (at your option) any later version.
-**  
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-**  
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-**  
+**
 */
 
-
 #include "htmlwriter.h"
-#include "tiny_utilities.h"
 #include "directories.h"
-#include "gwrappers.h"
 #include "gtkwrappers.h"
+#include "gwrappers.h"
+#include "tiny_utilities.h"
 
-
-HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool include_bibledit_css, bool include_bar_graph_css)
-{
+HtmlWriter::HtmlWriter(const ustring &title, bool include_java_scripts,
+                       bool include_bibledit_css, bool include_bar_graph_css) {
   buffer = xmlBufferCreate();
   writer = xmlNewTextWriterMemory(buffer, 0);
   xmlTextWriterSetIndent(writer, 1);
@@ -37,8 +35,10 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
   xmlTextWriterStartElement(writer, BAD_CAST "head");
 
   xmlTextWriterStartElement(writer, BAD_CAST "meta");
-  xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "content", "text/html; charset=UTF-8");
-  xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "http-equiv", "content-type");
+  xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "content",
+                                    "text/html; charset=UTF-8");
+  xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "http-equiv",
+                                    "content-type");
   xmlTextWriterEndElement(writer);
 
   xmlTextWriterStartElement(writer, BAD_CAST "title");
@@ -47,7 +47,8 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
 
   if (include_bibledit_css) {
     xmlTextWriterStartElement(writer, BAD_CAST "link");
-    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "href", "http://localhost:51516/bibledit.css");
+    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "href",
+                                      "http://localhost:51516/bibledit.css");
     xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "rel", "stylesheet");
     xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "type", "text/css");
     xmlTextWriterEndElement(writer);
@@ -55,19 +56,24 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
 
   if (include_java_scripts) {
     xmlTextWriterStartElement(writer, BAD_CAST "SCRIPT");
-    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "TYPE", "text/javascript");
+    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "TYPE",
+                                      "text/javascript");
     xmlTextWriterStartComment(writer);
     xmlTextWriterWriteFormatString(writer, "\n");
-    xmlTextWriterWriteFormatString(writer, "function popup(mylink, windowname)\n");
+    xmlTextWriterWriteFormatString(writer,
+                                   "function popup(mylink, windowname)\n");
     xmlTextWriterWriteFormatString(writer, "{\n");
     xmlTextWriterWriteFormatString(writer, "  if (! window.focus)\n");
     xmlTextWriterWriteFormatString(writer, "    return true;\n");
     xmlTextWriterWriteFormatString(writer, "  var href;\n");
-    xmlTextWriterWriteFormatString(writer, "  if (typeof(mylink) == 'string')\n");
+    xmlTextWriterWriteFormatString(writer,
+                                   "  if (typeof(mylink) == 'string')\n");
     xmlTextWriterWriteFormatString(writer, "    href=mylink;\n");
     xmlTextWriterWriteFormatString(writer, "  else\n");
     xmlTextWriterWriteFormatString(writer, "    href=mylink.href;\n");
-    xmlTextWriterWriteFormatString(writer, "  window.open(href, windowname, 'width=300,height=80,scrollbars=no');\n");
+    xmlTextWriterWriteFormatString(writer, "  window.open(href, windowname, "
+                                           "'width=300,height=80,scrollbars=no'"
+                                           ");\n");
     xmlTextWriterWriteFormatString(writer, "  return false;\n");
     xmlTextWriterWriteFormatString(writer, "}\n");
     xmlTextWriterEndComment(writer);
@@ -83,12 +89,14 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
     xmlTextWriterWriteFormatString(writer, "}\n");
     xmlTextWriterWriteFormatString(writer, "\n");
     xmlTextWriterWriteFormatString(writer, ".graph thead th {\n");
-    xmlTextWriterWriteFormatString(writer, "  border-bottom: double 3px black;\n");
+    xmlTextWriterWriteFormatString(writer,
+                                   "  border-bottom: double 3px black;\n");
     xmlTextWriterWriteFormatString(writer, "  padding: 1em;\n");
     xmlTextWriterWriteFormatString(writer, "}\n");
     xmlTextWriterWriteFormatString(writer, "\n");
     xmlTextWriterWriteFormatString(writer, ".graph tfoot td {\n");
-    xmlTextWriterWriteFormatString(writer, "  border-top: solid 1px #999999;\n");
+    xmlTextWriterWriteFormatString(writer,
+                                   "  border-top: solid 1px #999999;\n");
     xmlTextWriterWriteFormatString(writer, "  font-size: x-small;\n");
     xmlTextWriterWriteFormatString(writer, "  text-align: center;\n");
     xmlTextWriterWriteFormatString(writer, "  padding: 0.5em;\n");
@@ -96,7 +104,8 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
     xmlTextWriterWriteFormatString(writer, "}\n");
     xmlTextWriterWriteFormatString(writer, "\n");
     xmlTextWriterWriteFormatString(writer, ".bar div { \n");
-    xmlTextWriterWriteFormatString(writer, "  border-top: solid 15px #0077DD;\n");
+    xmlTextWriterWriteFormatString(writer,
+                                   "  border-top: solid 15px #0077DD;\n");
     xmlTextWriterWriteFormatString(writer, "  background-color: #004080;\n");
     xmlTextWriterWriteFormatString(writer, "  text-align: right;\n");
     xmlTextWriterWriteFormatString(writer, "  color: white;\n");
@@ -112,23 +121,21 @@ HtmlWriter::HtmlWriter(const ustring & title, bool include_java_scripts, bool in
   xmlTextWriterStartElement(writer, BAD_CAST "body");
 }
 
-
-HtmlWriter::~HtmlWriter()
-{
+HtmlWriter::~HtmlWriter() {
   xmlTextWriterEndDocument(writer);
   xmlTextWriterFlush(writer);
-  ustring filename = gw_build_filename(Directories->get_temp(), "document.html");
-  g_file_set_contents(filename.c_str(), (const gchar *)buffer->content, -1, NULL);
-  gtkw_show_uri (filename, false);
+  ustring filename =
+      gw_build_filename(Directories->get_temp(), "document.html");
+  g_file_set_contents(filename.c_str(), (const gchar *)buffer->content, -1,
+                      NULL);
+  gtkw_show_uri(filename, false);
   if (writer)
     xmlFreeTextWriter(writer);
   if (buffer)
     xmlBufferFree(buffer);
 }
 
-
-void HtmlWriter::heading(unsigned int level, const ustring & text)
-{
+void HtmlWriter::heading(unsigned int level, const ustring &text) {
   ustring element("h");
   element.append(convert_to_string(level));
   xmlTextWriterStartElement(writer, BAD_CAST element.c_str());
@@ -136,17 +143,15 @@ void HtmlWriter::heading(unsigned int level, const ustring & text)
   xmlTextWriterEndElement(writer);
 }
 
-
-void HtmlWriter::paragraph(const ustring & text)
-{
+void HtmlWriter::paragraph(const ustring &text) {
   xmlTextWriterStartElement(writer, BAD_CAST "p");
   xmlTextWriterWriteFormatString(writer, "%s", text.c_str());
   xmlTextWriterEndElement(writer);
 }
 
-
-void HtmlWriter::bargraph(const ustring & header, const vector < ustring > &texts, const vector < unsigned int >&percentages, const ustring & footer)
-{
+void HtmlWriter::bargraph(const ustring &header, const vector<ustring> &texts,
+                          const vector<unsigned int> &percentages,
+                          const ustring &footer) {
   xmlTextWriterStartElement(writer, BAD_CAST "table");
   xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "class", "graph");
 
@@ -169,7 +174,8 @@ void HtmlWriter::bargraph(const ustring & header, const vector < ustring > &text
     xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "width", "400px");
     xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "class", "bar");
     xmlTextWriterStartElement(writer, BAD_CAST "div");
-    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style", "width: %i%%", percentages[i]);
+    xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style", "width: %i%%",
+                                      percentages[i]);
     xmlTextWriterEndElement(writer);
     xmlTextWriterEndElement(writer);
     xmlTextWriterStartElement(writer, BAD_CAST "td");
@@ -182,14 +188,17 @@ void HtmlWriter::bargraph(const ustring & header, const vector < ustring > &text
   xmlTextWriterEndElement(writer);
 }
 
-
-void HtmlWriter::table(const ustring & main_header, const vector < ustring > &column_headers, const vector < VectorUstring > &cell_texts, const ustring & footer, vector < bool > *centers, int header_font_size)
+void HtmlWriter::table(const ustring &main_header,
+                       const vector<ustring> &column_headers,
+                       const vector<VectorUstring> &cell_texts,
+                       const ustring &footer, vector<bool> *centers,
+                       int header_font_size)
 /*
 Writes a table.
 main_header: The main header on the table.
 column_headers: The headers for each column.
 cell_texts: A double vector of texts for in the cells.
-centers: A list of booleans whether the text in the cells needs to be centered.  
+centers: A list of booleans whether the text in the cells needs to be centered.
 header_font_size: 0: Normal, negative: smaller, positive: bigger.
 */
 {
@@ -210,10 +219,12 @@ header_font_size: 0: Normal, negative: smaller, positive: bigger.
     for (unsigned int i = 0; i < column_headers.size(); i++) {
       xmlTextWriterStartElement(writer, BAD_CAST "th");
       if (header_font_size > 0) {
-        xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style", "font-size: larger;");
+        xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style",
+                                          "font-size: larger;");
       }
       if (header_font_size < 0) {
-        xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style", "font-size: smaller;");
+        xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style",
+                                          "font-size: smaller;");
       }
       xmlTextWriterWriteString(writer, BAD_CAST column_headers[i].c_str());
       xmlTextWriterEndElement(writer);
@@ -231,7 +242,8 @@ header_font_size: 0: Normal, negative: smaller, positive: bigger.
       if (centers) {
         if (i2 < centers->size()) {
           if (centers->at(i2)) {
-            xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style", "text-align: center;");
+            xmlTextWriterWriteFormatAttribute(writer, BAD_CAST "style",
+                                              "text-align: center;");
           }
         }
       }
@@ -245,15 +257,15 @@ header_font_size: 0: Normal, negative: smaller, positive: bigger.
   xmlTextWriterEndElement(writer);
 }
 
-
-void HtmlWriter::hyperlinkedparagraph(const ustring & text, const ustring & hyperlink)
+void HtmlWriter::hyperlinkedparagraph(const ustring &text,
+                                      const ustring &hyperlink)
 // <p><a href="filename.html">Text</a></p>
 {
   xmlTextWriterStartElement(writer, BAD_CAST "p");
   xmlTextWriterStartElement(writer, BAD_CAST "a");
-  xmlTextWriterWriteAttribute(writer, BAD_CAST "href", BAD_CAST hyperlink.c_str());
+  xmlTextWriterWriteAttribute(writer, BAD_CAST "href",
+                              BAD_CAST hyperlink.c_str());
   xmlTextWriterWriteFormatString(writer, "%s", text.c_str());
   xmlTextWriterEndElement(writer);
   xmlTextWriterEndElement(writer);
 }
-

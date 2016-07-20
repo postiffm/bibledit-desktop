@@ -1,40 +1,40 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
- ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+ *USA.
+ **
  */
 
-
-#include "libraries.h"
-#include "utilities.h"
 #include "windowsoutpost.h"
-#include <glib.h>
 #include "bible.h"
-#include "gwrappers.h"
-#include "shell.h"
-#include "unixwrappers.h"
-#include "uname.h"
-#include "books.h"
-#include "settings.h"
-#include "tiny_utilities.h"
 #include "bibleworks.h"
-#include "directories.h"
-#include "onlinebible.h"
-#include <glib/gi18n.h>
+#include "books.h"
 #include "debug.h"
+#include "directories.h"
+#include "gwrappers.h"
+#include "libraries.h"
+#include "onlinebible.h"
+#include "settings.h"
+#include "shell.h"
+#include "tiny_utilities.h"
+#include "uname.h"
+#include "unixwrappers.h"
+#include "utilities.h"
+#include <glib.h>
+#include <glib/gi18n.h>
 
 #define STAGE_ZERO 0
 #define STAGE_START 1
@@ -43,11 +43,10 @@
 #define STAGE_WAIT_RETRY 1000
 #define STAGE_RETRY 1600
 
-
 WindowsOutpost::WindowsOutpost(bool dummy)
 /*
  This controls a Bibledit Windows Outpost program.
- This is done through connecting to a port on that program, 
+ This is done through connecting to a port on that program,
  and communicating with it.
  */
 {
@@ -59,10 +58,8 @@ WindowsOutpost::WindowsOutpost(bool dummy)
   OnlineBibleDirectMode = false;
 }
 
-
-WindowsOutpost::~WindowsOutpost()
-{
-  online_bible_server_connect (false);
+WindowsOutpost::~WindowsOutpost() {
+  online_bible_server_connect(false);
   // Disconnect.
   disconnect();
   // Indicate to the thread we want to stop.
@@ -72,15 +69,14 @@ WindowsOutpost::~WindowsOutpost()
     g_usleep(10000);
 }
 
-
 void WindowsOutpost::Start()
 // This effectually starts the whole system.
 {
   thread_run = true;
-  // New g_thread_new ("windowsoutpost", GThreadFunc(thread_start), gpointer(this));
-  g_thread_create (GThreadFunc(thread_start), gpointer(this), false, NULL);
+  // New g_thread_new ("windowsoutpost", GThreadFunc(thread_start),
+  // gpointer(this));
+  g_thread_create(GThreadFunc(thread_start), gpointer(this), false, NULL);
 }
-
 
 ustring WindowsOutpost::BibleWorksReferenceGet()
 // Gets the reference from BibleWorks.
@@ -91,13 +87,13 @@ ustring WindowsOutpost::BibleWorksReferenceGet()
   return get_reference_reply;
 }
 
-
-void WindowsOutpost::BibleWorksReferenceSet(const Reference & reference)
+void WindowsOutpost::BibleWorksReferenceSet(const Reference &reference)
 // Schedules a reference to be sent to BibleWorks.
 {
   if (!reference.book_get())
     return;
-  // As it does not respond properly to chapter/verses that are 0, care for that.
+  // As it does not respond properly to chapter/verses that are 0, care for
+  // that.
   unsigned int goto_ch = reference.chapter_get();
   if (goto_ch == 0)
     goto_ch = 1;
@@ -107,12 +103,13 @@ void WindowsOutpost::BibleWorksReferenceSet(const Reference & reference)
   ustring bw_book = books_id_to_bibleworks(reference.book_get());
   if (bw_book.empty())
     return;
-  bibleworks_reference_set_value = "BibleWorksReferenceSet " + bw_book + " " + convert_to_string(goto_ch) + ":" + goto_vs;
+  bibleworks_reference_set_value = "BibleWorksReferenceSet " + bw_book + " " +
+                                   convert_to_string(goto_ch) + ":" + goto_vs;
 }
 
-
 ustring WindowsOutpost::SantaFeFocusReferenceGet()
-// Gets the reference from the SantaFe focus sharing system as used by Paratext and others.
+// Gets the reference from the SantaFe focus sharing system as used by Paratext
+// and others.
 {
   // Store command for retrieving the reference.
   get_reference_command = "SantaFeFocusReferenceGet";
@@ -120,8 +117,7 @@ ustring WindowsOutpost::SantaFeFocusReferenceGet()
   return get_reference_reply;
 }
 
-
-void WindowsOutpost::SantaFeFocusReferenceSet(const Reference & reference)
+void WindowsOutpost::SantaFeFocusReferenceSet(const Reference &reference)
 // Schedules a reference to be sent to the santa fe focus system.
 {
   if (!reference.book_get())
@@ -129,23 +125,24 @@ void WindowsOutpost::SantaFeFocusReferenceSet(const Reference & reference)
   ustring bk = books_id_to_paratext(reference.book_get());
   if (bk.empty())
     return;
-  santafefocus_reference_set_value = "SantaFeFocusReferenceSet " + bk + " " + convert_to_string(reference.chapter_get()) + ":" + reference.verse_get();
+  santafefocus_reference_set_value =
+      "SantaFeFocusReferenceSet " + bk + " " +
+      convert_to_string(reference.chapter_get()) + ":" + reference.verse_get();
 }
 
-void WindowsOutpost::SantaFeFocusWordSet(const ustring & word)
+void WindowsOutpost::SantaFeFocusWordSet(const ustring &word)
 // Schedules a word to be sent to the santa fe focus system.
 {
   santafefocus_word_set_value = "SantaFeFocusWordSet " + word;
 }
 
-
-void WindowsOutpost::OnlineBibleReferenceSet(const Reference & reference)
+void WindowsOutpost::OnlineBibleReferenceSet(const Reference &reference)
 // Schedules a reference to be sent to the Online Bible.
-// Sample: 
+// Sample:
 // OLB ShowPassage AV "Mt 10:5"
 {
   // Ensure that the Online Bible server is connected.
-  online_bible_server_connect (true);
+  online_bible_server_connect(true);
 
   // Send the references.
   if (!reference.book_get())
@@ -154,185 +151,174 @@ void WindowsOutpost::OnlineBibleReferenceSet(const Reference & reference)
     return;
   if (reference.verse_get().empty())
     return;
-  onlinebible_reference_set_value = "OLB ShowPassage AV \"" + books_id_to_online_bible (reference.book_get()) + " " + convert_to_string(reference.chapter_get()) + ":" + reference.verse_get() + "\"";
+  onlinebible_reference_set_value =
+      "OLB ShowPassage AV \"" + books_id_to_online_bible(reference.book_get()) +
+      " " + convert_to_string(reference.chapter_get()) + ":" +
+      reference.verse_get() + "\"";
 }
-
 
 ustring WindowsOutpost::OnlineBibleReferenceGet()
 // Gets the reference from the Online Bible.
 {
   // Ensure that the Online Bible server is connected.
-  online_bible_server_connect (true);
+  online_bible_server_connect(true);
   // Store command for retrieving the reference.
   get_reference_command = "OLB GetPassage";
   // Return the reply that was given previously.
   return get_reference_reply;
 }
 
-
-ustring WindowsOutpost::OnlineBibleDirectCommandResponseGet(const ustring& command)
+ustring
+WindowsOutpost::OnlineBibleDirectCommandResponseGet(const ustring &command)
 // Sends a command to the Online Bible and immediately receive its reply.
 {
-  send_line ("OLB " + command);
-  return Readln ();
+  send_line("OLB " + command);
+  return Readln();
 }
 
-
-void WindowsOutpost::clear()
-{
+void WindowsOutpost::clear() {
   disconnect();
   stage = STAGE_ZERO;
   connected = false;
 }
 
-
-void WindowsOutpost::thread_start(gpointer data)
-{
-  ((WindowsOutpost *) data)->thread_main();
+void WindowsOutpost::thread_start(gpointer data) {
+  ((WindowsOutpost *)data)->thread_main();
 }
 
-
-void WindowsOutpost::thread_main()
-{
+void WindowsOutpost::thread_main() {
   thread_running = true;
   while (thread_run) {
     switch (stage) {
-    case STAGE_ZERO:
-      {
-        // Next stage.
-        stage = STAGE_START;
+    case STAGE_ZERO: {
+      // Next stage.
+      stage = STAGE_START;
+      break;
+    }
+    case STAGE_START: {
+      // Start Outpost if it does not already run.
+      if (!program_is_running(Directories->get_bwoutpost_exeonly())) {
+        // Start Outpost and wait a few seconds till it settles.
+        GwSpawn spawn(Directories->get_bwoutpost());
+        spawn.async();
+        spawn.run();
+        g_usleep(3000000);
+      }
+      // Decide on next stage.
+      // TO DO: Don't poll in such an inefficient manner.
+      if (program_is_running(Directories->get_bwoutpost_exeonly())) {
+        stage = STAGE_CONNECT;
+      } else {
+        stage = STAGE_WAIT_RETRY;
+      }
+      break;
+    }
+    case STAGE_CONNECT: {
+      ustring hostname = "localhost";
+      telnet(hostname);
+      if (connected) {
+        stage = STAGE_COMMUNICATE;
+      } else {
+        stage = STAGE_WAIT_RETRY;
+      }
+      break;
+    }
+    case STAGE_COMMUNICATE: {
+      // Break if it communicates directly.
+      if (OnlineBibleDirectMode) {
         break;
       }
-    case STAGE_START:
-      {
-        // Start Outpost if it does not already run.
-        if (!program_is_running(Directories->get_bwoutpost_exeonly())) {
-          // Start Outpost and wait a few seconds till it settles. 
-          GwSpawn spawn(Directories->get_bwoutpost());
-          spawn.async();
-          spawn.run();
-          g_usleep(3000000);
-        }
-        // Decide on next stage.
-	// TO DO: Don't poll in such an inefficient manner.
-        if (program_is_running(Directories->get_bwoutpost_exeonly())) {
-          stage = STAGE_CONNECT;
-        } else {
-          stage = STAGE_WAIT_RETRY;
-        }
-        break;
-      }
-    case STAGE_CONNECT:
-      {
-        ustring hostname = "localhost";
-        telnet(hostname);
-        if (connected) {
-          stage = STAGE_COMMUNICATE;
-        } else {
-          stage = STAGE_WAIT_RETRY;
-        }
-        break;
-      }
-    case STAGE_COMMUNICATE:
-      {
-        // Break if it communicates directly.
-        if (OnlineBibleDirectMode) {
-          break;
-        }
-        // Carry out the scheduled tasks.
-        // Whether the Online Bible server should be connected to.
-        if (online_bible_server_requested_action != 0) {
-          if (online_bible_server_requested_action) {
-            // There is a request to connect to the Online Bible server.
-            if (!online_bible_server_connected) {
-              if (online_bible_is_running ()) {
-                send_line("OLB Connect");
-                log (Readln ());
-                online_bible_server_connected = true;
-              }
+      // Carry out the scheduled tasks.
+      // Whether the Online Bible server should be connected to.
+      if (online_bible_server_requested_action != 0) {
+        if (online_bible_server_requested_action) {
+          // There is a request to connect to the Online Bible server.
+          if (!online_bible_server_connected) {
+            if (online_bible_is_running()) {
+              send_line("OLB Connect");
+              log(Readln());
+              online_bible_server_connected = true;
             }
-          } else {
-            // There is a request to disconnect from the Online Bible server.
-            if (online_bible_server_connected) {
-              if (online_bible_is_running ()) {
-                send_line("OLB Disconnect");
-              }
-            }
-            // Since the Online Bible may have been shutdown, it will always be disconnected.
-            online_bible_server_connected = false;
           }
-          // Requested action handled.
-          online_bible_server_requested_action = 0;
-          break;
+        } else {
+          // There is a request to disconnect from the Online Bible server.
+          if (online_bible_server_connected) {
+            if (online_bible_is_running()) {
+              send_line("OLB Disconnect");
+            }
+          }
+          // Since the Online Bible may have been shutdown, it will always be
+          // disconnected.
+          online_bible_server_connected = false;
         }
-        if (!bibleworks_reference_set_value.empty()) {
-          // Make a quick copy of the value, so that if the value is set again during the time
-          // it takes to send this to BibleWorks, the new value will be kept for next time.
-          ustring value (bibleworks_reference_set_value);
-          bibleworks_reference_set_value.clear();
-          // If BibleWorks does not run, and Outpost tries to contact it, it 
-          // crashes in Wine and becomes unusable. Therefore check whether BibleWorks runs.
-          if (bibleworks_is_running ()) {
+        // Requested action handled.
+        online_bible_server_requested_action = 0;
+        break;
+      }
+      if (!bibleworks_reference_set_value.empty()) {
+        // Make a quick copy of the value, so that if the value is set again
+        // during the time
+        // it takes to send this to BibleWorks, the new value will be kept for
+        // next time.
+        ustring value(bibleworks_reference_set_value);
+        bibleworks_reference_set_value.clear();
+        // If BibleWorks does not run, and Outpost tries to contact it, it
+        // crashes in Wine and becomes unusable. Therefore check whether
+        // BibleWorks runs.
+        if (bibleworks_is_running()) {
+          send_line(value);
+        }
+        break;
+      }
+      if (!santafefocus_reference_set_value.empty()) {
+        ustring value(santafefocus_reference_set_value);
+        santafefocus_reference_set_value.clear();
+        send_line(value);
+        break;
+      }
+      if (!santafefocus_word_set_value.empty()) {
+        ustring value(santafefocus_word_set_value);
+        santafefocus_word_set_value.clear();
+        send_line(value);
+        break;
+      }
+      if (!onlinebible_reference_set_value.empty()) {
+        ustring value(onlinebible_reference_set_value);
+        onlinebible_reference_set_value.clear();
+        bool online_bible_runs = online_bible_is_running();
+        if (online_bible_runs) {
+          if (online_bible_server_connected) {
             send_line(value);
           }
-          break;
-        }
-        if (!santafefocus_reference_set_value.empty()) {
-          ustring value (santafefocus_reference_set_value);
-          santafefocus_reference_set_value.clear();
-          send_line(value);
-          break;
-        }
-        if (!santafefocus_word_set_value.empty()) {
-          ustring value (santafefocus_word_set_value);
-          santafefocus_word_set_value.clear();
-          send_line(value);
-          break;
-        }
-        if (!onlinebible_reference_set_value.empty()) {
-          ustring value (onlinebible_reference_set_value);
-          onlinebible_reference_set_value.clear();
-          bool online_bible_runs = online_bible_is_running ();
-          if (online_bible_runs) {
-            if (online_bible_server_connected) {
-              send_line (value);
-            }
-          } else {
-            online_bible_server_connected = false;
-          }
-          break;
-        }
-        if (!get_reference_command.empty()) {
-          send_line (get_reference_command);
-          get_reference_command.clear();
-          get_reference_reply = Readln ();
-          break;
+        } else {
+          online_bible_server_connected = false;
         }
         break;
       }
-    case STAGE_WAIT_RETRY:
-      {
-        stage++;
+      if (!get_reference_command.empty()) {
+        send_line(get_reference_command);
+        get_reference_command.clear();
+        get_reference_reply = Readln();
         break;
       }
-    case STAGE_RETRY:
-      {
-        clear();
-        break;
-      }
-    default:
-      {
-        stage++;
-      }
+      break;
+    }
+    case STAGE_WAIT_RETRY: {
+      stage++;
+      break;
+    }
+    case STAGE_RETRY: {
+      clear();
+      break;
+    }
+    default: { stage++; }
     }
     g_usleep(300000);
   }
   thread_running = false;
 }
 
-
-void WindowsOutpost::disconnect()
-{
+void WindowsOutpost::disconnect() {
   if (sock) {
     // Send 'exit' command. This closes the socket and quits the program.
     send_line("exit");
@@ -345,14 +331,12 @@ void WindowsOutpost::disconnect()
   sock = 0;
 }
 
-
-void WindowsOutpost::telnet(const ustring & hostname)
-{
-  // If the computer address can be converted to an IP, do so. 
+void WindowsOutpost::telnet(const ustring &hostname) {
+  // If the computer address can be converted to an IP, do so.
   // If not, try to look it up in DNS.
   host = gethostbyname(hostname.c_str());
   if (host) {
-    // We got the host, now get a socket.
+// We got the host, now get a socket.
 #ifdef WIN32
     if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) != INVALID_SOCKET)
 #else
@@ -363,10 +347,11 @@ void WindowsOutpost::telnet(const ustring & hostname)
       address.sin_family = AF_INET;
       // Take the first IP address associated with this hostname.
       memcpy(&address.sin_addr, host->h_addr_list[0], sizeof(address.sin_addr));
-      // Now connect.
+// Now connect.
 #ifdef WIN32
       WSAHtons(sock, 51515, &address.sin_port);
-      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) == SOCKET_ERROR)
+      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) ==
+          SOCKET_ERROR)
 #else
       address.sin_port = htons(51515);
       if (connect(sock, (struct sockaddr *)&address, sizeof(address)))
@@ -374,12 +359,12 @@ void WindowsOutpost::telnet(const ustring & hostname)
       {
         log(_("No connection possible"));
 #ifdef WIN32
-      	closesocket(sock);
+        closesocket(sock);
 #else
         close(sock);
 #endif
       } else {
-        // We've a connection. Set the socket to non-blocking mode.
+// We've a connection. Set the socket to non-blocking mode.
 #ifdef WIN32
         u_long socketmode = 1; // Set non-blocking
         ioctlsocket(sock, FIONBIO, &socketmode);
@@ -398,9 +383,8 @@ void WindowsOutpost::telnet(const ustring & hostname)
   }
 }
 
-
-void WindowsOutpost::log(const ustring & message)
-// Logs messages. 
+void WindowsOutpost::log(const ustring &message)
+// Logs messages.
 // It does not output the same message repeatedly.
 {
   if (message != last_message) {
@@ -409,8 +393,7 @@ void WindowsOutpost::log(const ustring & message)
   }
 }
 
-
-void WindowsOutpost::send_line(const ustring & command)
+void WindowsOutpost::send_line(const ustring &command)
 // Sends "command" to the windows outpost.
 {
   int result = 0;
@@ -418,12 +401,16 @@ void WindowsOutpost::send_line(const ustring & command)
     // Discard any previous reply.
     char buf[1024];
 #ifdef WIN32
-    if (recv(sock, buf, sizeof(buf), 0)) ;
-    if (send(sock, command.c_str(), command.length(), 0)) ;
+    if (recv(sock, buf, sizeof(buf), 0))
+      ;
+    if (send(sock, command.c_str(), command.length(), 0))
+      ;
     result = send(sock, "\n", 1, 0);
 #else
-    if (read(sock, buf, sizeof(buf))) ;
-    if (write(sock, command.c_str(), command.length())) ;
+    if (read(sock, buf, sizeof(buf)))
+      ;
+    if (write(sock, command.c_str(), command.length()))
+      ;
     result = write(sock, "\n", 1);
 #endif
     // Give some time to allow the reply to come back.
@@ -439,11 +426,10 @@ void WindowsOutpost::send_line(const ustring & command)
   }
 }
 
-
 ustring WindowsOutpost::Readln()
 /*
 Receives a line from the windows outpost.
-If no data is available, or no complete line is available yet, it returns 
+If no data is available, or no complete line is available yet, it returns
 immediately with a null string.
  */
 {
@@ -475,9 +461,7 @@ immediately with a null string.
   return "";
 }
 
-
-void WindowsOutpost::online_bible_server_connect (bool connect)
-{
+void WindowsOutpost::online_bible_server_connect(bool connect) {
   if (connect == online_bible_server_connected)
     return;
   if (connect) {
@@ -487,8 +471,7 @@ void WindowsOutpost::online_bible_server_connect (bool connect)
   }
 }
 
-
-void windowsoutpost_open_url(const ustring & url)
+void windowsoutpost_open_url(const ustring &url)
 // This function supposes that the Bibledit Windows Outpost already runs.
 // It commands the outpost to open "url", a .pdf file or .html, etc.
 {
@@ -509,7 +492,8 @@ void windowsoutpost_open_url(const ustring & url)
       memcpy(&address.sin_addr, host->h_addr_list[0], sizeof(address.sin_addr));
 #ifdef WIN32
       WSAHtons(sock, 51515, &address.sin_port);
-      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) == SOCKET_ERROR)
+      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) ==
+          SOCKET_ERROR)
 #else
       address.sin_port = htons(51515);
       if (connect(sock, (struct sockaddr *)&address, sizeof(address)))
@@ -523,14 +507,16 @@ void windowsoutpost_open_url(const ustring & url)
 #endif
       } else {
         ustring command = "open " + url + "\n";
-		DEBUG(command)
+        DEBUG(command)
 #ifdef WIN32
         u_long socketmode = 1; // Set non-blocking
         ioctlsocket(sock, FIONBIO, &socketmode);
-        if (send(sock, command.c_str(), command.length(), 0)) ;
+        if (send(sock, command.c_str(), command.length(), 0))
+          ;
 #else
         fcntl(sock, F_SETFL, fcntl(sock, F_GETFL, 0) | O_NONBLOCK);
-        if (write(sock, command.c_str(), command.length())) ;
+        if (write(sock, command.c_str(), command.length()))
+          ;
 #endif
         cout << _("Outpost opens ") << url << endl;
       }
@@ -542,9 +528,9 @@ void windowsoutpost_open_url(const ustring & url)
   }
 }
 
-
-bool windowsoutpost_telnet(const ustring & hostname)
-// This makes a connection with the Outpost on "host" and then disconnects again.
+bool windowsoutpost_telnet(const ustring &hostname)
+// This makes a connection with the Outpost on "host" and then disconnects
+// again.
 // It returns true if this worked out.
 {
   bool success = false;
@@ -563,7 +549,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
       memcpy(&address.sin_addr, host->h_addr_list[0], sizeof(address.sin_addr));
 #ifdef WIN32
       WSAHtons(sock, 51515, &address.sin_port);
-      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) == SOCKET_ERROR)
+      if (connect(sock, (struct sockaddr *)&address, sizeof(address)) ==
+          SOCKET_ERROR)
 #else
       address.sin_port = htons(51515);
       if (connect(sock, (struct sockaddr *)&address, sizeof(address)))
@@ -583,13 +570,13 @@ bool windowsoutpost_telnet(const ustring & hostname)
   return success;
 }
 
-// Below are some files that show how the SantaFeFocus system works. 
+// Below are some files that show how the SantaFeFocus system works.
 // They were kindly provided by Nathan Miles, Paratext programmer.
 
 // File SFFocus.ctl
 /*
  VERSION 5.00
- Begin VB.UserControl SFFocus 
+ Begin VB.UserControl SFFocus
  ClientHeight    =   1092
  ClientLeft      =   0
  ClientTop       =   0
@@ -599,7 +586,7 @@ bool windowsoutpost_telnet(const ustring & hostname)
  ScaleWidth      =   1320
  Tag             =   "Test"
  ToolboxBitmap   =   "SFFocus.ctx":0000
- Begin VB.Image Image1 
+ Begin VB.Image Image1
  Height          =   384
  Left            =   0
  Picture         =   "SFFocus.ctx":0312
@@ -620,12 +607,15 @@ bool windowsoutpost_telnet(const ustring & hostname)
  ' Feb 26, 2002 - Created control - Ron Rother
 
  Public Enum FocusTypes
- ScriptureReferenceFocus = 1      ' A specific scripture reference, optionally including a phrase
+ ScriptureReferenceFocus = 1      ' A specific scripture reference, optionally
+ including a phrase
  ScriptureReferenceListFocus = 2  ' A list of scripture references
  TopicFocus = 3                   ' A topic category
  WordFocus = 4                    ' A word from a scripture text
- DesktopFocus = 5                 ' A named configuration of windows setup for accomplishing a specific task
- CreateNoteFocus = 6              ' A command to TNE to create a new note for "text, reference"
+ DesktopFocus = 5                 ' A named configuration of windows setup for
+ accomplishing a specific task
+ CreateNoteFocus = 6              ' A command to TNE to create a new note for
+ "text, reference"
  DebugFocus = 7
  ShowAnalusisFocus = 8
  ShowVocabulaFocus = 9
@@ -633,13 +623,14 @@ bool windowsoutpost_telnet(const ustring & hostname)
  CombinedRefListAndRefFocus = 11
  End Enum
 
- Public Event FocusReceived(ByVal FocusType As FocusTypes, ByVal FocusData As String)
+ Public Event FocusReceived(ByVal FocusType As FocusTypes, ByVal FocusData As
+ String)
  Public Event F1Pressed()
 
  'hwnd = 0 terminates and hwnd <> 0 initializes receive focus
  Public Sub InitReceiveFocus(ByVal hWnd As Long)
  Dim OwnerHwnd As Long
- 
+
  If hWnd = 0 Then
  'terminate receive focus
  Call UserControl_Terminate
@@ -656,7 +647,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
  End If
  End Sub
 
- 'Private Function shiftAndMask(cc As Long, flag As Integer, shift As Integer) As String
+ 'Private Function shiftAndMask(cc As Long, flag As Integer, shift As Integer)
+ As String
  '    Dim result As Long
  '
  '    result = Fix(cc / 2 ^ shift)
@@ -664,7 +656,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
  '    result = result + flag
  '
  '    ' nlm
- '    ' The following is a kludge which will not work correctly on Chineese system.
+ '    ' The following is a kludge which will not work correctly on Chineese
+ system.
  '    ' It convert and 8 bit value to a unicode value under the assumption
  '    ' that the reverse conversion will be done when VB does RegSetValue.
  '    ' For chinese the reverse conversion will not work.
@@ -684,9 +677,11 @@ bool windowsoutpost_telnet(const ustring & hostname)
  '        If cc <= 127 Then
  '            outp = outp + ChrW(cc)
  '        ElseIf cc <= 2047 Then
- '            outp = outp + shiftAndMask(cc, &HC0, 6) + shiftAndMask(cc, &H80, 0)
+ '            outp = outp + shiftAndMask(cc, &HC0, 6) + shiftAndMask(cc, &H80,
+ 0)
  '        Else
- '            outp = outp + shiftAndMask(cc, &HE0, 12) + shiftAndMask(cc, &H80, 6) + shiftAndMask(cc, &H80, 0)
+ '            outp = outp + shiftAndMask(cc, &HE0, 12) + shiftAndMask(cc, &H80,
+ 6) + shiftAndMask(cc, &H80, 0)
  '        End If
  '    Next
  '
@@ -695,7 +690,7 @@ bool windowsoutpost_telnet(const ustring & hostname)
 
  Public Sub SendFocus(ByVal fType As FocusTypes, ByVal FocusData As String)
  Dim obj As New SCTextFile
- 
+
  If fType = WordFocus Then
  ' This is a KLUDGE but I am out of time NLM
  obj.WordInFocus = FocusData
@@ -706,7 +701,7 @@ bool windowsoutpost_telnet(const ustring & hostname)
  Call SetLibronixFocus(FocusData$)
  End If
  End If
- 
+
  Call SFSignalFocusChange(fType)
  End Sub
 
@@ -717,7 +712,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
  End Function
 
  'Invoke WndProc event (called from BAS-module WndProc)
- Friend Function RaiseWndProc(ByVal fType As Long, ByVal FocusData As String) As Long
+ Friend Function RaiseWndProc(ByVal fType As Long, ByVal FocusData As String) As
+ Long
  RaiseEvent FocusReceived(fType, FocusData)
  End Function
 
@@ -745,14 +741,14 @@ bool windowsoutpost_telnet(const ustring & hostname)
  Dim LibRefString As String
  Dim windnum As Long
  Dim dolibronix As Long
- 
+
  'convert to Libronix format "bible.mat.1.1"
  LibRefString = FormatLibronixRef(FocusData$)
  If LibRefString = "" Then Exit Sub
- 
+
  'libronix may not be running or even installed
  On Error GoTo LibronixError
- 
+
  Set lbx = GetObject(, "LibronixDLS.LbxApplication")
  Set lbxwndw = lbx.Application.windows
  windnum = lbxwndw.count
@@ -777,12 +773,12 @@ bool windowsoutpost_telnet(const ustring & hostname)
  Private Function FormatLibronixRef(FocusData As String) As String
  Dim ref As New SCReference
  Dim booknum As Integer
- 
+
  FormatLibronixRef = ""
  ref.Versification = scEnglish
  ref.Parse FocusData
  If Not ref.Valid Then Exit Function
- 
+
  If ref.Book > 87 Then
  Exit Function
  ElseIf ref.Book < 40 Then
@@ -830,9 +826,10 @@ bool windowsoutpost_telnet(const ustring & hostname)
  ElseIf ref.Book = 86 Then
  booknum = 59 ' Psalms of Solomon
  End If
- 
- 
- FormatLibronixRef = "bible." & CStr(booknum) & "." + CStr(ref.chapter) & "." + CStr(ref.Verse)
+
+
+ FormatLibronixRef = "bible." & CStr(booknum) & "." + CStr(ref.chapter) & "." +
+ CStr(ref.Verse)
  End Function
  */
 
@@ -840,7 +837,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
 /*
  Attribute VB_Name = "modSFFocus"
  Option Explicit
- ' The format of the focus reference varies depending on the focus type as follows:
+ ' The format of the focus reference varies depending on the focus type as
+ follows:
  '
  '     ScriptureReference [this is the format currently used by ESCES]
  '          * A scripture reference may optionally have a scrolling group.
@@ -851,14 +849,16 @@ bool windowsoutpost_telnet(const ustring & hostname)
  '            specification with the following form.  Value is case insensitive.
  '                         original (Greek/Hebrew)
  '                         vulgate
- '                         english (e.g. RSV -- this is default if no versification entry present)
+ '                         english (e.g. RSV -- this is default if no
+ versification entry present)
  '                         lxx     (septuagint)
  '                         custom  locally defined custom versification
  '
  '          * book chapter:verse [n]phrase
  '                  book = GEN, EXO
  '                  chapter, verse = 1..
- '                     --- from [ on is optional and only present if a specific phrase is specified
+ '                     --- from [ on is optional and only present if a specific
+ phrase is specified
  '                         n = 1.. occurence of phrase in verse
  '                         The phrase is terminated by a new line.
  '              "GEN 5:11"
@@ -890,18 +890,21 @@ bool windowsoutpost_telnet(const ustring & hostname)
  dwPlatformId As Long
  szCSDVersion As String * 128      '  Maintenance string for PSS usage
  End Type
- Public Declare Function GetVersionEx Lib "kernel32" Alias "GetVersionExA" (lpVersionInformation As OSVERSIONINFO) As Long
+ Public Declare Function GetVersionEx Lib "kernel32" Alias "GetVersionExA"
+ (lpVersionInformation As OSVERSIONINFO) As Long
 
  Declare Function SetWindowLong Lib "USER32" Alias "SetWindowLongA" _
  (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
- 
+
  Declare Function GetWindowLong Lib "USER32" Alias "GetWindowLongA" _
  (ByVal hWnd As Long, ByVal nIndex As Long) As Long
- 
+
  Declare Function CallWindowProc Lib "USER32" Alias "CallWindowProcA" _
- (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal Msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
- 
- Declare Function RegisterWindowMessage& Lib "USER32" Alias "RegisterWindowMessageA" ( _
+ (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, ByVal Msg As Long, ByVal
+ wParam As Long, ByVal lParam As Long) As Long
+
+ Declare Function RegisterWindowMessage& Lib "USER32" Alias
+ "RegisterWindowMessageA" ( _
  ByVal lpstring As String)
 
  Public Declare Function PostMessage& Lib "USER32" Alias "PostMessageA" ( _
@@ -910,8 +913,11 @@ bool windowsoutpost_telnet(const ustring & hostname)
  ByVal wParam As Long, _
  ByVal lParam As Long)
 
- Public Declare Function RegSetValueA Lib "advapi32.dll" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal dwType As Long, ByVal lpData As String, ByVal cbData As Long) As Long
- Public Declare Function RegQueryValueA Lib "advapi32.dll" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal lpValue As String, lpcbValue As Long) As Long
+ Public Declare Function RegSetValueA Lib "advapi32.dll" (ByVal hKey As Long,
+ ByVal lpSubKey As String, ByVal dwType As Long, ByVal lpData As String, ByVal
+ cbData As Long) As Long
+ Public Declare Function RegQueryValueA Lib "advapi32.dll" (ByVal hKey As Long,
+ ByVal lpSubKey As String, ByVal lpValue As String, lpcbValue As Long) As Long
  Declare Function RegQueryValueW Lib "advapi32.dll" ( _
  ByVal hKey As Long, ByVal lpSubKey As Long, _
  ByVal lpValue As Long, pcbData As Long) As Long
@@ -924,7 +930,7 @@ bool windowsoutpost_telnet(const ustring & hostname)
  Declare Function FindWindow Lib "USER32" Alias "FindWindowA" ( _
  ByVal classname As String, _
  ByVal winname As String) As Long
- 
+
  Private Const HKEY_CURRENT_USER = &H80000001
  Private Const HWND_BROADCAST = -1
  Private Const GWL_WNDPROC = (-4)
@@ -963,21 +969,24 @@ bool windowsoutpost_telnet(const ustring & hostname)
  End Sub
 
  'Call the original window procedure
- Public Function CallWndProc(hWnd As Long, Msg As Long, wParam As Long, lParam As Long) As Long
+ Public Function CallWndProc(hWnd As Long, Msg As Long, wParam As Long, lParam
+ As Long) As Long
  CallWndProc = CallWindowProc(m_OldWndProc, hWnd, Msg, wParam, lParam)
  End Function
 
  ' Set the current focus information of the specified type as specified by
  ' focus argument.
  Public Sub SFSetFocus(ByVal fType As Integer, ByVal focus As String)
- Call RegSetValue(HKEY_CURRENT_USER, SFRegistryKeyName(fType), 1, focus$, Len(focus$))
+ Call RegSetValue(HKEY_CURRENT_USER, SFRegistryKeyName(fType), 1, focus$,
+ Len(focus$))
  End Sub
 
  ' Signal that the specified focus type has been changed.
  '    Use PostMessage(HWND_BROADCAST, iRegisteredMessage, fType, 0)
  '    to notify all windows (including the hidden window created by this
  '    object) that a focus change of the specified type has occured.
- '    The RegisterWindowMessage(SFFocusMessage) system call will be used to create
+ '    The RegisterWindowMessage(SFFocusMessage) system call will be used to
+ create
  '    a publicly unique but sharable message number to be broadcast when a focus
  '    change occurs.
  Public Sub SFSignalFocusChange(ByVal fType As Integer)
@@ -992,16 +1001,18 @@ bool windowsoutpost_telnet(const ustring & hostname)
  Public Function SFGetFocus(ByVal fType As Integer) As String
  Dim focus As String
  Dim focuslen As Long
- 
- If fType = ScriptureReferenceListFocus Or fType = CreateNoteFocus Or fType = CombinedRefListAndRefFocus Then
+
+ If fType = ScriptureReferenceListFocus Or fType = CreateNoteFocus Or fType =
+ CombinedRefListAndRefFocus Then
  focuslen = 16000
  Else
  focuslen = 512
  End If
- 
+
  focus$ = String(focuslen, " ") 'VBLM SKIP=1
- 
- Call RegQueryValue(HKEY_CURRENT_USER, SFRegistryKeyName(fType), focus$, focuslen)
+
+ Call RegQueryValue(HKEY_CURRENT_USER, SFRegistryKeyName(fType), focus$,
+ focuslen)
  SFGetFocus = Left$(focus$, focuslen)
  If InStr(SFGetFocus, Chr(0)) Then
  SFGetFocus = Left(SFGetFocus, InStr(SFGetFocus, Chr(0)) - 1)
@@ -1009,7 +1020,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
  End Function
 
  'Replacement window procedure--Invokes control handler
- Private Function WndProc(ByVal hWnd As Long, ByVal Msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+ Private Function WndProc(ByVal hWnd As Long, ByVal Msg As Long, ByVal wParam As
+ Long, ByVal lParam As Long) As Long
  If Msg = WM_HELP Then
  m_ctrl.RaiseF1
  ElseIf m_FocusMessage = Msg Then
@@ -1068,9 +1080,10 @@ bool windowsoutpost_telnet(const ustring & hostname)
  End Sub
  Public Function RegQueryValue(hKey As Long, SubKey As String, _
  Value As String, ValueLength As Long) As Long
- 
+
  If IsW2KorNewer() Then
- RegQueryValue = RegQueryValueW(hKey, StrPtr(SubKey), StrPtr(Value), ValueLength)
+ RegQueryValue = RegQueryValueW(hKey, StrPtr(SubKey), StrPtr(Value),
+ ValueLength)
  If ValueLength > 1 Then
  ValueLength = ValueLength / 2
  End If
@@ -1084,7 +1097,8 @@ bool windowsoutpost_telnet(const ustring & hostname)
  DataLength As Long) As Long
 
  If IsW2KorNewer() Then
- RegSetValue = RegSetValueW(hKey, StrPtr(SubKey), dataType, StrPtr(data), DataLength)
+ RegSetValue = RegSetValueW(hKey, StrPtr(SubKey), dataType, StrPtr(data),
+ DataLength)
  If DataLength > 1 Then
  DataLength = DataLength / 2
  End If
@@ -1096,7 +1110,7 @@ bool windowsoutpost_telnet(const ustring & hostname)
  ' Determine if this is Win95 or Win97
  Function IsW2KorNewer() As Boolean
  Dim OS As OSVERSIONINFO
- 
+
  OS.dwOSVersionInfoSize = Len(OS)
  Call GetVersionEx(OS)
  IsW2KorNewer = OS.dwMajorVersion > 4
@@ -1105,6 +1119,6 @@ bool windowsoutpost_telnet(const ustring & hostname)
 
 // todo start bwoutpost.exe from current directory in windows.
 // Make the dialog smaller: no outpost selection, no wine selection, in win32
-// Default is off, and on Windows don't use the outpost to start pdf and html, but use the "start" 
+// Default is off, and on Windows don't use the outpost to start pdf and html,
+// but use the "start"
 // function from mingw.
-
