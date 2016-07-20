@@ -1911,11 +1911,9 @@ OSIS: <note osisRef="Gen.3.20" osisID="Gen.3.20!footnote.2" n="2"><catchWord>Ê-
   }
 
   // Derive the caller as to be put in the OSIS note.
-  if (caller == "+")
+  if ((caller == "+") || (caller == "-")) {
     caller.clear();
-  if (caller == "-")
-    ;
-  caller.clear();
+  }
 
   // Write the osisID.
   ustring note_osis_id = verse_osis_id + "!";
