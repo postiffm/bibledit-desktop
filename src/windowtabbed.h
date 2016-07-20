@@ -22,27 +22,11 @@
 
 #include <gtk/gtk.h>
 #include "ustring.h"
-#include <vector>
 #include "reference.h"
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
 #include "editor.h"
 #include <webkit/webkit.h>
-
-//----------------------------------------------------------------------------------
-// The tab represents a single tab that goes into a TabbedWindow. It is a base class
-// to all the other classes that can fill such a role.
-//----------------------------------------------------------------------------------
-
-class Tab
-{
-  private:
-	ustring title;
-  public:
-    Tab(ustring title_in) { title = title_in; }
-    const ustring title_get() { return title; }
-	GtkWidget *window_get() = 0;
-};
 
 //----------------------------------------------------------------------------------
 // The tabbed window is a GTK notebook that can display information about the text
@@ -53,11 +37,11 @@ class Tab
 // is to have multiple tabbed windows open at once.
 //----------------------------------------------------------------------------------
 
-class TabbedWindow : public FloatingWindow
+class WindowTabbed : public FloatingWindow
 {
 public:
-  TabbedWindow(ustring title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
-  virtual ~TabbedWindow();
+  WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  virtual ~WindowTabbed();
   void Concordance(void);
   GtkWidget * signal_button;
  private:
@@ -65,7 +49,6 @@ public:
 	GtkWidget *notebook;
 	GtkWidget *scrolledwindow;
 	GtkWidget *webview;
-    vector<Tab> tabs;
 
 #if 0
 public:

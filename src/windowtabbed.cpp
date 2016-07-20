@@ -19,7 +19,7 @@
 
 #include "libraries.h"
 #include <glib.h>
-#include "WindowTabbed.h"
+#include "windowtabbed.h"
 #include "help.h"
 #include "floatingwindow.h"
 #include "keyterms.h"
@@ -37,8 +37,8 @@
 #include "gwrappers.h"
 #include <glib/gi18n.h>
 
-TabbedWindow::TabbedWindow(ustring title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widTabbed, title, startup)
+WindowTabbed::WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
+  FloatingWindow(parent_layout, widTabbed, _("Information"), startup)
   // widTabbed above may not be specific enough for what windowdata wants to do (storing window positions, etc.)
   // May pass that in; also have to pass in title info since it will vary; this is a generic container class
 {
@@ -149,7 +149,7 @@ TabbedWindow::TabbedWindow(ustring title, GtkWidget * parent_layout, GtkAccelGro
 #endif
 }
 
-TabbedWindow::~TabbedWindow()
+WindowTabbed::~WindowTabbed()
 {
   // Close all tabs
 //  my_editor = NULL;
@@ -158,14 +158,7 @@ TabbedWindow::~TabbedWindow()
   gtk_widget_destroy(signal_button);
 }
 
-TabbedWindow::AddTab(Tab &newtab)
-{
-	tabs.push_back(newtab);
-	GtkWidget *tab_label = gtk_label_new_with_mnemonic (newtab.title_get().c_str());
-	gtk_notebook_append_page((GtkNotebook *)notebook, newtab.window_get(), tab_label);
-}
-
-void TabbedWindow::Concordance(void)
+void WindowTabbed::Concordance(void)
 {
 	// Create a new concordance tab
 
@@ -202,14 +195,14 @@ void TabbedWindow::Concordance(void)
 }
 
 #if 0
-void TabbedWindow::go_to_term(unsigned int id)
+void WindowTabbed::go_to_term(unsigned int id)
 {
   ustring url = _("keyterm ") + convert_to_string (id);
   html_link_clicked (url.c_str());
 }
 
 
-void TabbedWindow::copy_clipboard()
+void WindowTabbed::copy_clipboard()
 {
   if (gtk_widget_has_focus (webview_terms)) {
     // Copy text to the clipboard.
@@ -226,37 +219,37 @@ void TabbedWindow::copy_clipboard()
 }
 
 
-void TabbedWindow::on_combobox_keyterm_collection_changed(GtkComboBox * combobox, gpointer user_data)
+void WindowTabbed::on_combobox_keyterm_collection_changed(GtkComboBox * combobox, gpointer user_data)
 {
-  ((TabbedWindow *) user_data)->on_combobox_keyterm_collection();
+  ((WindowTabbed *) user_data)->on_combobox_keyterm_collection();
 }
 
 
-void TabbedWindow::keyterm_whole_word_toggled(GtkCellRendererToggle * cell, gchar * path_str, gpointer data)
+void WindowTabbed::keyterm_whole_word_toggled(GtkCellRendererToggle * cell, gchar * path_str, gpointer data)
 {
-  ((TabbedWindow *) data)->on_rendering_toggle(cell, path_str, true);
+  ((WindowTabbed *) data)->on_rendering_toggle(cell, path_str, true);
 }
 
 
-void TabbedWindow::keyterm_case_sensitive_toggled(GtkCellRendererToggle * cell, gchar * path_str, gpointer data)
+void WindowTabbed::keyterm_case_sensitive_toggled(GtkCellRendererToggle * cell, gchar * path_str, gpointer data)
 {
-  ((TabbedWindow *) data)->on_rendering_toggle(cell, path_str, false);
+  ((WindowTabbed *) data)->on_rendering_toggle(cell, path_str, false);
 }
 
 
-void TabbedWindow::cell_edited(GtkCellRendererText * cell, const gchar * path_string, const gchar * new_text, gpointer data)
+void WindowTabbed::cell_edited(GtkCellRendererText * cell, const gchar * path_string, const gchar * new_text, gpointer data)
 {
-  ((TabbedWindow *) data)->on_cell_edited(cell, path_string, new_text);
+  ((WindowTabbed *) data)->on_cell_edited(cell, path_string, new_text);
 }
 
 
-void TabbedWindow::on_combobox_keyterm_collection()
+void WindowTabbed::on_combobox_keyterm_collection()
 {
   html_link_clicked("");
 }
 
 
-void TabbedWindow::load_renderings()
+void WindowTabbed::load_renderings()
 {
   extern Settings *settings;
   ustring project = settings->genconfig.project_get();
@@ -287,7 +280,7 @@ void TabbedWindow::load_renderings()
 }
 
 
-void TabbedWindow::save_renderings()
+void WindowTabbed::save_renderings()
 {
   vector <ustring> renderings;
   vector <bool> wholewords;
@@ -309,13 +302,13 @@ void TabbedWindow::save_renderings()
 }
 
 
-void TabbedWindow::clear_renderings()
+void WindowTabbed::clear_renderings()
 {
   gtk_tree_store_clear(treestore_renderings);
 }
 
 
-void TabbedWindow::on_rendering_toggle(GtkCellRendererToggle * cell, gchar * path_str, bool first_toggle)
+void WindowTabbed::on_rendering_toggle(GtkCellRendererToggle * cell, gchar * path_str, bool first_toggle)
 {
   unsigned int column = 1;
   if (first_toggle)
@@ -333,7 +326,7 @@ void TabbedWindow::on_rendering_toggle(GtkCellRendererToggle * cell, gchar * pat
 }
 
 
-void TabbedWindow::on_cell_edited(GtkCellRendererText * cell, const gchar * path_string, const gchar * new_text)
+void WindowTabbed::on_cell_edited(GtkCellRendererText * cell, const gchar * path_string, const gchar * new_text)
 {
   GtkTreeModel *model = (GtkTreeModel *) treestore_renderings;
   GtkTreePath *path = gtk_tree_path_new_from_string(path_string);
@@ -348,7 +341,7 @@ void TabbedWindow::on_cell_edited(GtkCellRendererText * cell, const gchar * path
 }
 
 
-void TabbedWindow::add_to_renderings(const ustring & rendering, bool wholeword)
+void WindowTabbed::add_to_renderings(const ustring & rendering, bool wholeword)
 // Adds "rendering" to renderings. If it contains any capitals, the 
 // casesensitive is set too.
 {
@@ -362,7 +355,7 @@ void TabbedWindow::add_to_renderings(const ustring & rendering, bool wholeword)
 }
 
 
-bool TabbedWindow::find_renderings (const ustring& text, const vector <ustring>& renderings, const vector <bool>& wholewords, const vector <bool>& casesensitives, vector <size_t> * startpositions, vector <size_t> * lengths)
+bool WindowTabbed::find_renderings (const ustring& text, const vector <ustring>& renderings, const vector <bool>& wholewords, const vector <bool>& casesensitives, vector <size_t> * startpositions, vector <size_t> * lengths)
 // Finds renderings in the text.
 // text: Text to be looked into.
 // renderings: Renderings to look for.
@@ -429,13 +422,13 @@ bool TabbedWindow::find_renderings (const ustring& text, const vector <ustring>&
 }
 
 
-ustring TabbedWindow::enter_new_rendering_here()
+ustring WindowTabbed::enter_new_rendering_here()
 {
   return _("<Enter new rendering here>");
 }
 
 
-void TabbedWindow::get_renderings(vector <ustring> &renderings, vector <bool> &wholewords, vector <bool> &casesensitives)
+void WindowTabbed::get_renderings(vector <ustring> &renderings, vector <bool> &wholewords, vector <bool> &casesensitives)
 {
   GtkTreeModel *model = (GtkTreeModel *) treestore_renderings;
   GtkTreeIter iter;
@@ -459,20 +452,20 @@ void TabbedWindow::get_renderings(vector <ustring> &renderings, vector <bool> &w
 }
 
 
-ustring TabbedWindow::collection ()
+ustring WindowTabbed::collection ()
 {
   return combobox_get_active_string(combobox_collection);
 }
 
 
-gboolean TabbedWindow::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean WindowTabbed::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
 {
-  ((TabbedWindow *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((WindowTabbed *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
   return true;
 }
 
 
-void TabbedWindow::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
+void WindowTabbed::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
 // Callback for clicking a link.
 {
   // Store scrolling position for the now active url.
@@ -496,7 +489,7 @@ void TabbedWindow::navigation_policy_decision_requested (WebKitNetworkRequest *r
 }
 
 
-void TabbedWindow::html_link_clicked (const gchar * url)
+void WindowTabbed::html_link_clicked (const gchar * url)
 {
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
@@ -588,7 +581,7 @@ void TabbedWindow::html_link_clicked (const gchar * url)
 }
 
 
-void TabbedWindow::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned int keyword_id)
+void WindowTabbed::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned int keyword_id)
 {
   // Get data about the project.
   extern Settings *settings;
@@ -708,7 +701,7 @@ void TabbedWindow::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned int ke
 }
 
 
-Reference TabbedWindow::get_reference (const ustring& text)
+Reference WindowTabbed::get_reference (const ustring& text)
 // Generates a reference out of the text.
 {
   Reference ref (0);
@@ -721,7 +714,7 @@ Reference TabbedWindow::get_reference (const ustring& text)
 }
 
 
-void TabbedWindow::reload_collections ()
+void WindowTabbed::reload_collections ()
 {
   vector <ustring> categories = keyterms_get_categories();
   combobox_set_strings(combobox_collection, categories);
@@ -731,7 +724,7 @@ void TabbedWindow::reload_collections ()
 }
 
 
-void TabbedWindow::text_changed (Editor2 * editor)
+void WindowTabbed::text_changed (Editor2 * editor)
 // To be called when the text in any of the USFM editors changed.
 {
   gw_destroy_source (text_changed_event_id);
@@ -740,14 +733,14 @@ void TabbedWindow::text_changed (Editor2 * editor)
 }
 
 
-gboolean TabbedWindow::on_text_changed_timeout (gpointer user_data)
+gboolean WindowTabbed::on_text_changed_timeout (gpointer user_data)
 {
-  ((TabbedWindow *) user_data)->on_text_changed();
+  ((WindowTabbed *) user_data)->on_text_changed();
   return false;
 }
 
 
-void TabbedWindow::on_text_changed ()
+void WindowTabbed::on_text_changed ()
 
 {
   if (active_url == last_keyword_url) {
@@ -760,7 +753,7 @@ void TabbedWindow::on_text_changed ()
 }
 
 
-void TabbedWindow::set_fonts()
+void WindowTabbed::set_fonts()
 {
   extern Settings *settings;
   if (!settings->genconfig.text_editor_font_default_get()) {
