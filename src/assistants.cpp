@@ -28,8 +28,11 @@
 #include "htmlbrowser.h"
 #include <glib/gi18n.h>
 
-AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic)
-// Base class for each assistant.
+AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic, bool showintro)
+// Base class for each assistant. This base is designed by default to show an introduction
+// to the Assistant (think "wizard" in old Windows terms). This introduction can be turned
+// off to avoid the extra click. If you do, just make the first page of your assistant 
+// of type GTK_ASSISTANT_PAGE_INTRO.
 {
   // Variables.
   process_id = 0;
@@ -53,15 +56,17 @@ AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic)
   gdk_window_set_keep_above (gtk_widget_get_root_window (assistant), true);
   
   // Introduction.
-  label_intro = gtk_label_new (title.c_str());
-  gtk_widget_show (label_intro);
-  gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_intro);
-  gtk_label_set_line_wrap (GTK_LABEL (label_intro), TRUE);
+  label_intro = NULL;
+  if (showintro) {
+	label_intro = gtk_label_new (title.c_str());
+	gtk_widget_show (label_intro);
+	gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_intro);
+	gtk_label_set_line_wrap (GTK_LABEL (label_intro), TRUE);
 
-  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_intro, _("Introduction"));
-  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), label_intro, GTK_ASSISTANT_PAGE_INTRO);
-  gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), label_intro, true);
-
+	gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_intro, _("Introduction"));
+	gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), label_intro, GTK_ASSISTANT_PAGE_INTRO);
+	gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), label_intro, true);
+  }
   // Help button.
   //button_help = gtk_button_new();
   //gtk_widget_show(button_help);
@@ -104,7 +109,8 @@ AssistantBase::~AssistantBase()
 void AssistantBase::introduction (const ustring& text)
 // Sets the introduction text.
 {
-  gtk_label_set_text (GTK_LABEL (label_intro), text.c_str());
+  if (label_intro) { gtk_label_set_text (GTK_LABEL (label_intro), text.c_str()); }
+  else { gw_warning("We should not be setting introductory text on assistant after asking for it not to show introduction!"); }
 }
 
 

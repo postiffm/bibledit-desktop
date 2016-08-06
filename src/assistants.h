@@ -29,7 +29,7 @@
 class AssistantBase
 {
 public:
-  AssistantBase(const ustring& title, const gchar * helptopic);
+  AssistantBase(const ustring& title, const gchar * helptopic, bool showintro=true);
   virtual ~AssistantBase();
   GtkWidget * signal_button;
   GtkWidget * assistant;

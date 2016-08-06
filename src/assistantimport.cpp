@@ -43,7 +43,7 @@
 #include <glib/gi18n.h>
 
 ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost) :
-  AssistantBase(_("Import"), _("import"))
+  AssistantBase(_("Import"), _("import"), /*showintro*/false)
 // Import assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);
@@ -51,7 +51,7 @@ ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowSty
   g_signal_connect (G_OBJECT (assistant), "apply", G_CALLBACK (on_assistant_apply_signal), gpointer(this));
   g_signal_connect (G_OBJECT (assistant), "prepare", G_CALLBACK (on_assistant_prepare_signal), gpointer(this));
 
-  introduction (_("This helps you importing data"));
+  //introduction (_("This helps you importing data")); // This adds nothing to the user experience. Deleted by MAP 8/5/2016.
 
   // Configuration and initialization.
   extern Settings *settings;
@@ -70,7 +70,7 @@ ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowSty
   gtk_container_set_border_width (GTK_CONTAINER (vbox_select_type), 10);
 
   gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), vbox_select_type, _("What would you like to import?"));
-  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_select_type, GTK_ASSISTANT_PAGE_CONTENT);
+  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_select_type, GTK_ASSISTANT_PAGE_INTRO);
   gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_select_type, true);
 
   GSList *radiobutton_select_type_group = NULL;
@@ -385,8 +385,7 @@ void ImportAssistant::on_assistant_prepare (GtkWidget *page)
   if (page == label_summary) {
     ustring label;
     for (unsigned int i = 0; i < summary_messages.size(); i++) {
-      if (i)
-        label.append ("\n");
+      if (i) { label.append ("\n"); }
       label.append (summary_messages[i]);
     }
     if (!label.empty()) {
@@ -532,6 +531,9 @@ gint ImportAssistant::assistant_forward (gint current_page)
   }
 
   // Always end up going to the confirmation and summary pages.
+  // The problem with this is if we bial out early, like is done
+  // currently for notes import and keyterms import, then we have
+  // to go through to extra useless dialogs.
   forward_sequence.insert (page_number_confirm);
   forward_sequence.insert (summary_page_number);
   
