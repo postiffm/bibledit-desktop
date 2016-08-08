@@ -224,7 +224,6 @@ bibledit_gtk_SOURCES = \
   windoweditor.cpp \
   compress.cpp \
   localizednumerals.cpp \
-  assistantimportkeyterms.cpp \
   assistants.cpp \
   assistantdeletekeyterms.cpp \
   assistantchanges.cpp \

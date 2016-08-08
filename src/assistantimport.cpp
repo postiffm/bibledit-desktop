@@ -41,6 +41,7 @@
 #include "onlinebible.h"
 #include "combobox.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost) :
   AssistantBase(_("Import"), _("import"), /*showintro*/false)
@@ -61,7 +62,6 @@ ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowSty
   my_check_keyterms_window = check_keyterms_window;
   my_windows_outpost = windows_outpost;
   import_notes = false;
-  import_keyterms = false;
 
   // Build the GUI for the task selector.
   vbox_select_type = gtk_vbox_new (FALSE, 0);
@@ -279,28 +279,24 @@ ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowSty
   gtk_widget_show (label_files);
   gtk_box_pack_start (GTK_BOX (vbox_files), label_files, FALSE, FALSE, 0);
 
+  // Important to call this setup routine here so that the pages it creates do not have 
+  // gtk_assistant_append_page page numbers greater than the page_number_import_done
+  KeytermsHelper();
+  
   // Build the confirmation stuff.
-  label_confirm = gtk_label_new (_("Import about to be done"));
+  label_confirm = gtk_label_new (_("Please confirm you want to do this import."));
   gtk_widget_show (label_confirm);
   page_number_confirm = gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_confirm);
 
   gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_confirm, _("The import is about to be done"));
   gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), label_confirm, GTK_ASSISTANT_PAGE_CONFIRM);
   gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), label_confirm, true);
-  
-  label_progress = gtk_label_new ("");
-  gtk_widget_show (label_progress);
-  gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_progress);
 
-  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_progress, "");
-  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), label_progress, GTK_ASSISTANT_PAGE_PROGRESS);
-  gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), label_progress, true);
-  
-  label_summary = gtk_label_new (_("Import is done"));
+  label_summary = gtk_label_new (_("The import is done"));
   gtk_widget_show (label_summary);
-  summary_page_number = gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_summary);
+  page_number_import_done = gtk_assistant_append_page (GTK_ASSISTANT (assistant), label_summary);
 
-  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_summary, _("Ready"));
+  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), label_summary, _("Finished"));
   gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), label_summary, GTK_ASSISTANT_PAGE_SUMMARY);
   gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), label_summary, true);
   
@@ -411,7 +407,7 @@ void ImportAssistant::on_assistant_apply ()
       switch (get_bible_type()) {
         case ibtUsfm:
         {
-	  ProgressWindow progresswindow(_("Importing files"), false);
+			ProgressWindow progresswindow(_("Importing files"), false);
         	progresswindow.set_iterate(0, 1, files_names.size());
         	for (unsigned int i = 0; i < files_names.size(); i++) {
         	  	progresswindow.iterate();
@@ -458,8 +454,20 @@ void ImportAssistant::on_assistant_apply ()
     }
     case itKeyterms:
     {
-      summary_messages.push_back (_("After this window closes an opportunity will be offered to import keyterms."));
-      import_keyterms = true;
+		ustring filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (button_open));
+		ustring category = gtk_entry_get_text (GTK_ENTRY (entry_category));
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radiobutton_type_standard))) {
+			keyterms_import_textfile (filename, category);
+		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radiobutton_type_otkey_db))) {
+			keyterms_import_otkey_db (filename, category);
+		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radiobutton_type_ktref_db))) {
+			keyterms_import_ktref_db (filename, category);
+		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radiobutton_type_ktbh))) {
+			keyterms_import_ktbh_txt (filename, category);
+		}
       break;
     }
   }
@@ -474,6 +482,7 @@ gint ImportAssistant::assistant_forward_function (gint current_page, gpointer us
 
 gint ImportAssistant::assistant_forward (gint current_page)
 {
+  DEBUG("Setting assistant page sequence current_page=" + std::to_string(current_page))
   // Create forward sequence.
   forward_sequence.clear();
   forward_sequence.insert (page_number_select_type);
@@ -526,19 +535,19 @@ gint ImportAssistant::assistant_forward (gint current_page)
     }
     case itKeyterms:
     {
+	  forward_sequence.insert (page_number_keyterms_file);
+      forward_sequence.insert (page_number_keyterms_type);
+	  forward_sequence.insert (page_number_keyterms_collection);  
       break;
     }
   }
 
   // Always end up going to the confirmation and summary pages.
-  // The problem with this is if we bial out early, like is done
-  // currently for notes import and keyterms import, then we have
-  // to go through to extra useless dialogs.
   forward_sequence.insert (page_number_confirm);
-  forward_sequence.insert (summary_page_number);
+  forward_sequence.insert (page_number_import_done);
   
   // Take the next page in the forward sequence.
-  if (current_page < summary_page_number) {
+  if (current_page < page_number_import_done) {
     do {
       current_page++;
     } while (forward_sequence.find (current_page) == forward_sequence.end());
@@ -748,3 +757,134 @@ void ImportAssistant::on_combobox_online_bible_bible ()
 {
 }
 
+
+//---------------------------------------------------------------------------------------
+// Key terms import portion of the assistant
+//---------------------------------------------------------------------------------------
+void ImportAssistant::KeytermsHelper()
+{
+  // Reduce unnecessary keystrokes by eliminating informational window
+  //introduction (_("Text files that contain keyterms can be imported into the keyterms database."));
+
+  // File to import.
+
+  vbox_select_file = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (vbox_select_file);
+  page_number_keyterms_file = gtk_assistant_append_page (GTK_ASSISTANT (assistant), vbox_select_file);
+
+  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), vbox_select_file, _("Select keyterms file to import"));
+  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_select_file, GTK_ASSISTANT_PAGE_CONTENT);
+
+  label5 = gtk_label_new (_("The file should satisfy certain conditions. The online help provides more information."));
+  gtk_widget_show (label5);
+  gtk_box_pack_start (GTK_BOX (vbox_select_file), label5, FALSE, FALSE, 0);
+  gtk_label_set_line_wrap (GTK_LABEL (label5), TRUE);
+
+  button_open =  gtk_file_chooser_button_new ("", GTK_FILE_CHOOSER_ACTION_OPEN);
+  gtk_widget_show (button_open);
+  gtk_box_pack_start (GTK_BOX (vbox_select_file), button_open, FALSE, FALSE, 0);
+  
+  g_signal_connect ((gpointer) button_open, "selection-changed", G_CALLBACK (on_file_chooser_open_file_activated), gpointer (this));
+
+  // Type to import.
+
+  vbox_type = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (vbox_type);
+  page_number_keyterms_type = gtk_assistant_append_page (GTK_ASSISTANT (assistant), vbox_type);
+
+  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), vbox_type, _("What type of file are you importing?"));
+  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_type, GTK_ASSISTANT_PAGE_CONTENT);
+  gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_type, true);
+
+  GSList *radiobutton_type_standard_group = NULL;
+
+  radiobutton_type_standard = gtk_radio_button_new_with_mnemonic (NULL, _("Standard textfile"));
+  gtk_widget_show (radiobutton_type_standard);
+  gtk_box_pack_start (GTK_BOX (vbox_type), radiobutton_type_standard, FALSE, FALSE, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (radiobutton_type_standard), radiobutton_type_standard_group);
+  radiobutton_type_standard_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radiobutton_type_standard));
+
+  radiobutton_type_otkey_db = gtk_radio_button_new_with_mnemonic (NULL, "OTKEY.DB");
+  gtk_widget_show (radiobutton_type_otkey_db);
+  gtk_box_pack_start (GTK_BOX (vbox_type), radiobutton_type_otkey_db, FALSE, FALSE, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (radiobutton_type_otkey_db), radiobutton_type_standard_group);
+  radiobutton_type_standard_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radiobutton_type_otkey_db));
+
+  radiobutton_type_ktref_db = gtk_radio_button_new_with_mnemonic (NULL, "KTREF.DB");
+  gtk_widget_show (radiobutton_type_ktref_db);
+  gtk_box_pack_start (GTK_BOX (vbox_type), radiobutton_type_ktref_db, FALSE, FALSE, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (radiobutton_type_ktref_db), radiobutton_type_standard_group);
+  radiobutton_type_standard_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radiobutton_type_ktref_db));
+
+  radiobutton_type_ktbh = gtk_radio_button_new_with_mnemonic (NULL, _("Key Terms in Biblical Hebrew Project"));
+  gtk_widget_show (radiobutton_type_ktbh);
+  gtk_box_pack_start (GTK_BOX (vbox_type), radiobutton_type_ktbh, FALSE, FALSE, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (radiobutton_type_ktbh), radiobutton_type_standard_group);
+  radiobutton_type_standard_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radiobutton_type_ktbh));
+
+  // Collection.
+  
+  vbox_category = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (vbox_category);
+
+  page_number_keyterms_collection = gtk_assistant_append_page (GTK_ASSISTANT (assistant), vbox_category);
+  gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), vbox_category, _("Into which collection will you import?"));
+  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_category, GTK_ASSISTANT_PAGE_CONTENT);
+
+  entry_category = gtk_entry_new ();
+  gtk_widget_show (entry_category);
+  gtk_box_pack_start (GTK_BOX (vbox_category), entry_category, FALSE, FALSE, 0);
+
+  g_signal_connect ((gpointer) entry_category, "changed", G_CALLBACK (on_entry_category_changed), gpointer (this));
+
+  label_category = gtk_label_new ("");
+  gtk_widget_show (label_category);
+  gtk_box_pack_start (GTK_BOX (vbox_category), label_category, FALSE, FALSE, 0);
+  gtk_label_set_line_wrap (GTK_LABEL (label_category), TRUE);
+  
+  on_entry_category();
+}
+
+void ImportAssistant::on_file_chooser_open_file_activated (GtkFileChooser *chooser, gpointer user_data)
+{
+  ((ImportAssistant *) user_data)->on_file_chooser_open ();
+}
+
+
+void ImportAssistant::on_file_chooser_open ()
+{
+  ustring filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (button_open));
+  gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_select_file, !filename.empty ());
+}
+
+
+void ImportAssistant::on_entry_category_changed (GtkEditable *editable, gpointer user_data)
+{
+  ((ImportAssistant *) user_data)->on_entry_category ();
+}
+
+
+void ImportAssistant::on_entry_category ()
+// Give appropriate information about entering the category.
+{
+  ustring category = gtk_entry_get_text (GTK_ENTRY (entry_category));
+  
+  ustring information;
+  bool exists = false;
+  if (category.empty ()) {
+    information = _("Please enter a collection.");  
+  } else {
+    vector <ustring> categories = keyterms_get_categories();
+    for (unsigned int i = 0; i < categories.size(); i++) {
+      if (category == categories[i]) {
+        exists = true;
+      }
+    }
+    if (exists) {
+      information = _("This collection already exists.");
+    }
+  }
+  gtk_label_set_text (GTK_LABEL (label_category), information.c_str());
+  
+  gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_category, (!category.empty()) && (!exists)); 
+}

@@ -41,7 +41,6 @@ public:
   ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost);
   virtual ~ImportAssistant();
   bool import_notes;
-  bool import_keyterms;
 private:
   // Local variables.
   WindowReferences * my_references_window;
@@ -112,13 +111,42 @@ private:
   GtkWidget *label_confirm;
   GtkWidget *label_progress;
   GtkWidget *label_summary;
-  int summary_page_number;
+  int page_number_import_done;
   vector <ustring> summary_messages;
   static void on_assistant_apply_signal (GtkAssistant *assistant, gpointer user_data);
   void on_assistant_apply ();
   static gint assistant_forward_function (gint current_page, gpointer user_data);
   gint assistant_forward (gint current_page);
   set <int> forward_sequence;
+  
+  //---------------------------------------------------------------------------------------
+  // Key terms import portion of the assistant
+  //---------------------------------------------------------------------------------------
+  void KeytermsHelper(); // to set up dialog boxes in the key term part of this assistant
+  int page_number_keyterms_file;
+  int page_number_keyterms_type;
+  int page_number_keyterms_collection;
+  
+  // File to import.
+  GtkWidget *vbox_select_file;
+  GtkWidget *label5;
+  GtkWidget *button_open;
+  static void on_file_chooser_open_file_activated (GtkFileChooser *chooser, gpointer user_data);
+  void on_file_chooser_open ();
+
+  // Type to import.
+  GtkWidget *vbox_type;
+  GtkWidget *radiobutton_type_standard;
+  GtkWidget *radiobutton_type_otkey_db;
+  GtkWidget *radiobutton_type_ktref_db;
+  GtkWidget *radiobutton_type_ktbh;
+  
+  // Category.
+  GtkWidget *vbox_category;
+  GtkWidget *entry_category;
+  GtkWidget *label_category;
+  static void on_entry_category_changed (GtkEditable *editable, gpointer user_data);
+  void on_entry_category ();
 };
 
 

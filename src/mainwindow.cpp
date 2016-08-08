@@ -6118,15 +6118,16 @@ void MainWindow::on_assistant_ready ()
   if (import_assistant) {
     reload_all_editors(false);
     bool import_notes = import_assistant->import_notes;
-    bool import_keyterms = import_assistant->import_keyterms;
+    //bool import_keyterms = import_assistant->import_keyterms;
     delete import_assistant;
     import_assistant = NULL;
     if (import_notes) {
       on_import_notes ();
     }
-    if (import_keyterms) {
-      on_keyterms_import();
-    }
+	// Now built into the main import assistant MAP 8/7/2016
+    //if (import_keyterms) {
+    //  on_keyterms_import();
+    //}
   }
 }
 
