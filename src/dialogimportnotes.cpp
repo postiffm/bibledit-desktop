@@ -78,7 +78,7 @@ ImportNotesDialog::ImportNotesDialog(int dummy)
   gtk_widget_show(vbox2);
   gtk_container_add(GTK_CONTAINER(notebook), vbox2);
 
-  label6 = gtk_label_new(_("Select the file to import"));
+  label6 = gtk_label_new(_("Select the notes file to import"));
   gtk_widget_show(label6);
   gtk_box_pack_start(GTK_BOX(vbox2), label6, FALSE, FALSE, 10);
 
@@ -313,7 +313,7 @@ void ImportNotesDialog::select_file_page()
     switch (import_format) {
     case ifUnknown:
       {
-        info_for_user = _("Bibledit-Gtk does not recognize the format of this file");
+        info_for_user = _("Bibledit does not recognize the format of this file");
         break;
       }
     case ifBibleditNotesVersion3:
