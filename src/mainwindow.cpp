@@ -168,7 +168,6 @@ navigation(0), httpd(0)
   window_references = NULL;
   window_info = NULL;
   //window_bibles = NULL;
-  import_keyterms_assistant = NULL;
   delete_keyterms_assistant = NULL;
   changes_assistant = NULL;
   window_check_usfm = NULL;
@@ -4287,14 +4286,6 @@ void MainWindow::on_window_show_related_verses_item_button()
   }
 }
 
-
-void MainWindow::on_keyterms_import()
-{
-  import_keyterms_assistant = new ImportKeytermsAssistant (0);
-  g_signal_connect ((gpointer) import_keyterms_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
-}
-
-
 void MainWindow::on_keyterms_delete_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
   ((MainWindow *) user_data)->on_keyterms_delete();
@@ -4305,7 +4296,6 @@ void MainWindow::on_keyterms_delete()
   delete_keyterms_assistant = new DeleteKeytermsAssistant (0);
   g_signal_connect ((gpointer) delete_keyterms_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
-
 
 
 /*
@@ -6046,16 +6036,6 @@ void MainWindow::on_assistant_ready_signal (GtkButton *button, gpointer user_dat
 void MainWindow::on_assistant_ready ()
 // This handles the situation that any assistant is ready.
 {
-  // Importing keyterms.
-  if (import_keyterms_assistant) {
-    delete import_keyterms_assistant;
-    import_keyterms_assistant = NULL;
-    // Refresh window for checking keyterms.
-    if (window_check_keyterms) {
-      window_check_keyterms->reload_collections();
-    }
-  }
-
   // Deleting keyterms.
   if (delete_keyterms_assistant) {
     delete delete_keyterms_assistant;
@@ -6118,16 +6098,18 @@ void MainWindow::on_assistant_ready ()
   if (import_assistant) {
     reload_all_editors(false);
     bool import_notes = import_assistant->import_notes;
-    //bool import_keyterms = import_assistant->import_keyterms;
     delete import_assistant;
     import_assistant = NULL;
     if (import_notes) {
       on_import_notes ();
     }
-	// Now built into the main import assistant MAP 8/7/2016
-    //if (import_keyterms) {
-    //  on_keyterms_import();
-    //}
+	// This is doing extra work because it should only run
+	// if we imported new key terms. We'll see how it slows
+	// things down. MAP 8/9/2016.
+    if (window_check_keyterms) {
+      window_check_keyterms->reload_collections();
+    }
+
   }
 }
 

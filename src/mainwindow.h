@@ -608,8 +608,6 @@ protected:
   void on_window_show_related_verses_delete_button();
   static void on_window_show_related_verses_item_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_show_related_verses_item_button();
-  void on_keyterms_import ();
-  ImportKeytermsAssistant * import_keyterms_assistant;
   static void on_keyterms_delete_activate (GtkMenuItem *menuitem, gpointer user_data);
   void on_keyterms_delete ();
   DeleteKeytermsAssistant * delete_keyterms_assistant;
