@@ -45,7 +45,6 @@
 #include "windownotes.h"
 #include "windowreferences.h"
 #include "windoweditor.h"
-#include "assistantimportkeyterms.h"
 #include "assistantdeletekeyterms.h"
 #include "assistantchanges.h"
 #include "windowcheckusfm.h"
