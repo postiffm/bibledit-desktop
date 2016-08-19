@@ -11,7 +11,7 @@ General Debugging
    cd C:\Program Files\Bibledit-4.9.4\
    \msys64\mingw64\bin\gdb editor\bin\bibledit-gtk.exe
 		or
-   cd C:\Program Files (x86)\Bibledit-4.9.4\ or 
+   cd C:\Program Files (x86)\Bibledit-4.9.4\
    \msys64\mingw32\bin\gdb editor\bin\bibledit-gtk.exe   
    
 2. I sometimes prefer to use gdb from emacs.
