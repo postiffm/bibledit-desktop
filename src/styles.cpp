@@ -53,7 +53,8 @@ Usfm *Styles::usfm(const ustring & stylesheet)
   // The styles were not loaded yet: create a new object and return a pointer to it.
   Usfm *usfm = new Usfm(stylesheet);
   usfms.push_back(usfm);
-  return usfms[usfms.size() - 1];
+  //return usfms[usfms.size() - 1];
+  return usfm;
 }
 
 
@@ -83,7 +84,8 @@ Stylesheet * Styles::stylesheet (const ustring& name)
   // The stylesheet was not loaded yet. Return a pointer to a new one.
   Stylesheet *stylesheet = new Stylesheet(name);
   stylesheets.push_back(stylesheet);
-  return stylesheets[stylesheets.size() - 1];
+  //return stylesheets[stylesheets.size() - 1];
+  return stylesheet;
 }
 
 

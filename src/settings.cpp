@@ -66,7 +66,8 @@ ProjectConfiguration * Settings::projectconfig(ustring project, bool save_on_des
   // Configuraton was not loaded yet, create a new object and return a pointer to it.
   ProjectConfiguration *projectconfiguration = new ProjectConfiguration(project, save_on_destroy);
   projectconfigurations.push_back(projectconfiguration);
-  return projectconfigurations[projectconfigurations.size() - 1];
+  //return projectconfigurations[projectconfigurations.size() - 1];
+  return projectconfiguration;
 }
 
 // A good example of a repetitively-called routine that saves

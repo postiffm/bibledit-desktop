@@ -1,15 +1,38 @@
-This is a description of how to debug bibledit-gtk on Windows.
+This is a description of how to debug bibledit-gtk on Linux.
 It assumes you have already gone through the BUILDING process
 and the INSTALLING process.
-Written by Matt Postiff, postiffm@umich.edu, 3/29/2016
+Written by Matt Postiff, postiffm@umich.edu, 8/25/2016
 
 General Debugging
 ----------------------------------------------------------------
 <not written>
 
+Call Tree Debugging
+----------------------------------------------------------------
+You can link against ptrace.c and use etrace.pl, both available
+at https://github.com/elcritch/etrace or at http://ndevilla.free.fr/etrace/
+
+You also have to add -finstrument-functions to the g++ flags
+in the Makefile.
+
+This will print out a hierarchical list of the functions that
+are called by the program. It is a huge amount of data.
+
 Memory Debugging
 ----------------------------------------------------------------
-I use 
+1. To use AddressSanitizer, 
+add to your Makefile g++ command -fsanitize=address -fno-omit-frame-pointer
+
+This tool runs fairly fast, about 2x slowdown.
+
+Run-time behavior is controlled by the ASAN_OPTIONS environment variable.
+
+Details are at
+https://github.com/google/sanitizers/wiki/AddressSanitizerFlags#run-time-flags
+
+It has to link with -lasan (libasan) and this is apparently not available on Windows?
+
+2. To use Valgrind
 valgrind --leak-check=full -v --track-origins=yes /usr/bin/bibledit-gtk >& memory.txt
 
 It runs very slowly, but it gives good information on memory leaks
@@ -18,5 +41,9 @@ These are often in library code (several happen in
 /usr/lib/i386-linux-gnu/libjavascriptcoregtk-1.0.so.0.16.18
 and I can't do anything about that...)
 
-
+3. For memory debugging in Glib, it may be helpful to set the environment variables
+G_DEBUG=gc-friendly
+and 
+G_SLICE=always-malloc
+as these affect how glib allocates memory.
 
