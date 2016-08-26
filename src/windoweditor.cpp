@@ -27,16 +27,19 @@
 #include "tiny_utilities.h"
 #include "settings.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 WindowEditor::WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
 FloatingWindow(parent_layout, widEditor, project_name, startup)
 // Text editor.
 {
   // Initialize variables.
+  projectname = project_name;
   current_view = vtFormatted; // formatted view is default
   currView = NULL;
   editor2 = NULL;
   usfmview = NULL;
+  IAmDead = false;
   
   // Signalling buttons.
   new_verse_signal = gtk_button_new();
@@ -53,7 +56,7 @@ FloatingWindow(parent_layout, widEditor, project_name, startup)
   gtk_container_add(GTK_CONTAINER(vbox_client), vbox);
 
   // Switch to default view.
-  switch_to_view (current_view, project_name);
+  switch_to_view (current_view);
 }
 
 
@@ -66,15 +69,19 @@ WindowEditor::~WindowEditor()
   gtk_widget_destroy (reload_signal);
   gtk_widget_destroy (changed_signal);
   gtk_widget_destroy (spelling_checked_signal);
+  // Parent class FloatingWindow destroys vbox_client, which should also destroy vbox
   if (editor2)  { delete editor2;  editor2 = NULL; }
   if (usfmview) { delete usfmview; usfmview = NULL; }
   currView = NULL;
+  IAmDead = true;
 }
 
 
 void WindowEditor::go_to(const Reference & reference)
 // Let the editor go to a reference.
 {
+  if (IAmDead) { DEBUG("Zombie...") }
+  DEBUG("1 ref="+reference.human_readable(""))
   if (editor2 || usfmview) { // we know currView is set in this case
 
     // Find out what needs to be changed: book, chapter and/or verse.
@@ -88,7 +95,7 @@ void WindowEditor::go_to(const Reference & reference)
       new_verse = (reference.verse_get() != currRef.verse_get());
       currView->current_reference_set(reference);
     }
-
+    DEBUG("2 ref="+reference.human_readable(""))
     // Save the editor if need be.
     if (new_book || new_chapter) {
       currView->chapter_save();
@@ -99,7 +106,7 @@ void WindowEditor::go_to(const Reference & reference)
       new_chapter = true;
       currView->book_set(reference.book_get());
     }
-
+    DEBUG("3 ref="+reference.human_readable(""))
     // Deal with a new chapter.
     if (new_chapter) {
       // Load chapter, if need be.
@@ -107,12 +114,12 @@ void WindowEditor::go_to(const Reference & reference)
       // When loading a new chapter, there is also a new verse.
       new_verse = true;
     }
-
+    DEBUG("4 ref="+reference.human_readable(""))
     // New reference handling.  
     if (new_book || new_chapter || new_verse) {
       currView->go_to_verse(reference.verse_get(), false);
     }
-
+    DEBUG("5 ref="+reference.human_readable(""))
     // Highlighting of searchwords.
     if (editor2) {
       if (editor2->go_to_new_reference_highlight) {
@@ -121,6 +128,7 @@ void WindowEditor::go_to(const Reference & reference)
       }
     }
   }
+  DEBUG("6 ref="+reference.human_readable(""))
 }
 
 void WindowEditor::load_dictionaries()
@@ -448,22 +456,25 @@ void WindowEditor::vt_set (viewType vt)
   if (current_view == vt) { return; }
 
   // Take action.
-  current_view = vt;
-  switch_to_view (vt, "");
+  current_view = vt; // should really be called current_view_type to distinguish from currView
+  switch_to_view (current_view/*then was passed ""*/);
 }
 
 
-void WindowEditor::switch_to_view (viewType vt, ustring project)
+void WindowEditor::switch_to_view (viewType vt)
 // Switch to a new view vt; vtFormatted is default. vtUSFM is the 
 // "reveal codes" view.
 {
+  DEBUG("Called with vt="+std::to_string(int(vt))+" and saved projectname="+projectname)
+#if 0
   // If no project was given, then we have switched.
   bool switched = project.empty();
+#endif
   Reference reference (0);
   
   // Get state of and destroy any previous view, if there was one.
   if (currView) {
-    project = currView->project_get();
+    //project = currView->project_get();
     reference = currView->current_reference_get();
     delete currView; // this will delete the derived class object, then ChapterView base "object"
     currView = NULL;
@@ -476,7 +487,7 @@ void WindowEditor::switch_to_view (viewType vt, ustring project)
   case vtNone: break;
 
   case vtFormatted:
-    editor2 = new Editor2 (vbox, project);
+    editor2 = new Editor2 (vbox, projectname);
     currView = editor2;
     g_signal_connect ((gpointer) editor2->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
     g_signal_connect ((gpointer) editor2->new_styles_signal, "clicked", G_CALLBACK(on_new_styles_signalled), gpointer(this));
@@ -490,7 +501,7 @@ void WindowEditor::switch_to_view (viewType vt, ustring project)
     break;
     
   case vtUSFM:
-    usfmview = new USFMView (vbox, project);
+    usfmview = new USFMView (vbox, projectname);
     currView = usfmview;
     connect_focus_signals (usfmview->sourceview);
     g_signal_connect ((gpointer) usfmview->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
@@ -506,10 +517,14 @@ void WindowEditor::switch_to_view (viewType vt, ustring project)
   // Main widget grabs focus.
   gtk_widget_grab_focus (last_focused_widget);
 
+#if 0
   // If we switched, set the editor to the right place.
   if (switched) {
-    go_to (reference);
+#endif
+    go_to (reference); // adding back this call causes a hang in Warao Ps 139
+#if 0
   }
+#endif
 }
 
 

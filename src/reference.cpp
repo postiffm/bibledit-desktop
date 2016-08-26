@@ -45,7 +45,7 @@ Reference::Reference(unsigned int book_in, unsigned int chapter_in, const ustrin
   verse = verse_in;
 }
 
-ustring Reference::human_readable(const ustring & language)
+ustring Reference::human_readable(const ustring & language) const
 // Gives a reference in a human readable format. If no language is given,
 // it takes the English names of the books.
 {

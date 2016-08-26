@@ -2432,7 +2432,7 @@ void MainWindow::on_navigation_new_reference()
   settings->genconfig.chapter_set(convert_to_string(navigation.reference.chapter_get()));
   settings->genconfig.verse_set(navigation.reference.verse_get());
 
-  // Let the editor(s) show the reference.
+  // Tell the editor(s) to show the new reference.
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
     editor_windows[i]->go_to(navigation.reference);
   }
@@ -5261,7 +5261,7 @@ void MainWindow::handle_editor_focus()
   // g_signal_handlers_unblock_by_func(view_usfm_code, G_CALLBACK(on_view_chapteras_activate), gpointer(this));
   // g_signal_handlers_unblock_by_func(view_experimental, G_CALLBACK(on_view_chapteras_activate), gpointer(this));
 
-  //debug_view("4", 0x0, vt);
+  debug_view("4", 0x0, vt);
 
   // Inform the check USFM window about the focused editor.
   check_usfm_window_ping ();
@@ -5419,15 +5419,15 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
   else if (menuitem == (GtkRadioMenuItem *)view_experimental) {
     vt = vtExperimental;
   }
-  //debug_view("1", menuitem, vt);
+  debug_view("1", menuitem, vt);
   WindowEditor *editor_window = last_focused_editor_window();
   if (radioButtonIsOn && editor_window) {
     editor_window->vt_set(vt);
-    //debug_view("2", menuitem, vt);
+    debug_view("2", menuitem, vt);
     // There are objects that act on USFM view or formatted view only.
     // Inform these about a possible change.
     handle_editor_focus();
-    //debug_view("3", menuitem, vt);
+    debug_view("3", menuitem, vt);
   }
 }
 

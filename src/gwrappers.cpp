@@ -66,7 +66,9 @@ ustring gw_build_filename(const ustring & part1, const ustring & part2, const us
   return filename;
 }
 
-// This writes to the temp\bibledit.log and is available in Help|System Log
+// This writes to the /usr/tmp/bibledit.log (or the corresponding file
+// in Windows, something like C:\users\username\AppData\Temp\bibledit)
+// and is available in Help|System Log
 void gw_message(const ustring & message)
 {
   // tid = thread id, tmsg = thread id message
@@ -79,6 +81,7 @@ void gw_debug(int msgno, const ustring & message, const char *file, int lineno, 
 {
   gint64 milliseconds = (g_get_monotonic_time() / 1000);
   gw_message("DEBUG:"+std::to_string(msgno)+":"+std::to_string(milliseconds)+"ms: " + message + " " + func + ":" + file + ":" + std::to_string(lineno));
+  fsync(1); // flush data to disk
 }
 
 void gw_warning(const ustring & warning)

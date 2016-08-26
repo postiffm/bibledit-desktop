@@ -42,7 +42,7 @@ class Reference
   inline void verse_set(const ustring &v) { verse = v; }
   inline void verse_append(ustring ap) { verse.append(ap); }
 
-  ustring human_readable (const ustring& language);
+  ustring human_readable (const ustring& language) const;
   bool equals(const Reference& reference);
   void assign(const Reference& reference);
   void assign(unsigned int book_in, unsigned int chapter_in, const ustring& verse_in);

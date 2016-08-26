@@ -107,6 +107,8 @@ FloatingWindow::~FloatingWindow()
   gw_destroy_source (resize_event_id);
   on_titlebar_leave_notify (NULL);
   gtk_widget_destroy(vbox_window);
+  // Added MAP 8/19/2016
+  gtk_widget_destroy(vbox_client);
   undisplay();
   gtk_widget_destroy(focus_in_signal_button);
   gtk_widget_destroy(delete_signal_button);

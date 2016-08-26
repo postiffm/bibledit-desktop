@@ -81,6 +81,7 @@ The following things need to be tested after a change was made to the Editor obj
 
 Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 {
+  IAmDead = false;
   Reference dummyRef(0, 1000, "");
   current_reference_set(dummyRef);
   // Save and initialize variables.
@@ -192,6 +193,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 
 Editor2::~Editor2()
 {
+  IAmDead = true;
   // Verse tracking off.
   switch_verse_tracking_off ();
 
@@ -220,8 +222,8 @@ Editor2::~Editor2()
   gtk_widget_destroy(reload_signal);
   gtk_widget_destroy(changed_signal);
   gtk_widget_destroy(quick_references_button);
-  gtk_widget_destroy (spelling_checked_signal);
-  gtk_widget_destroy (new_widget_signal);
+  gtk_widget_destroy(spelling_checked_signal);
+  gtk_widget_destroy(new_widget_signal);
 
   // Destroy the texttag tables.
   g_object_unref(texttagtable);
@@ -238,7 +240,7 @@ Editor2::~Editor2()
   clear_and_destroy_editor_actions (actions_undone);
 
   // Destroy remainder of text area.
-  gtk_widget_destroy(scrolledwindow);
+  gtk_widget_destroy(scrolledwindow); // does this destroy the viewport and its children also?
 }
 
 
@@ -283,7 +285,7 @@ void Editor2::chapter_load(unsigned int chapter_in)
   // Get rid of possible previous widgets with their data.
   gtk_container_foreach(GTK_CONTAINER(vbox_paragraphs), on_container_tree_callback_destroy, gpointer(this));
   focused_paragraph = NULL;
-
+  DEBUG("W1 Destroyed supposedly all prior widgets")
   // Make one long line containing the whole chapter.
   // This is done so as to exclude any possibility that the editor does not
   // properly load a possible chapter that has line-breaks at unexpected places.
@@ -296,10 +298,10 @@ void Editor2::chapter_load(unsigned int chapter_in)
     line.append(loaded_chapter_lines[i]);
   }
   line.append(" ");
-
+  DEBUG("W2 Created one line for entire chapter: " + line)
   // Load in editor.
   text_load (line, "", false);
-
+  DEBUG("W3 just did text_load") 
   // Clean up extra spaces before the insertion points in all the
   // newly created textbuffers.
   for (unsigned int i = 0; i < actions_done.size(); i++) {
@@ -313,10 +315,10 @@ void Editor2::chapter_load(unsigned int chapter_in)
       }
     }
   }
-
+  DEBUG("W4 Cleaned up extra spaces")
   // Insert the chapter load boundary.
   apply_editor_action (new EditorAction (eatLoadChapterBoundary));
-
+  DEBUG("W5 Inserted chapter load boundary")
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = "1";
   currHighlightedVerse = "1";
@@ -328,7 +330,7 @@ void Editor2::chapter_load(unsigned int chapter_in)
     gtk_text_buffer_place_cursor(focused_paragraph->textbuffer, &iter);
     scroll_to_insertion_point_on_screen(/*highlight?*/true);
   }
-  
+  DEBUG("W6 Scrolled to 1:1")  
   // Store size of actions buffer so we know whether the chapter changed.
   editor_actions_size_at_no_save = actions_done.size();
 }
@@ -342,7 +344,7 @@ void Editor2::text_load (ustring text, ustring character_style, bool note_mode)
 {
   // Clean away possible new lines.
   replace_text (text, "\n", " ");
-  //DEBUG("text="+text)
+  DEBUG("text="+text)
   // Load the text into the editor by creating and applying editor actions.
   ustring marker_text;
   size_t marker_pos;
@@ -1903,7 +1905,7 @@ void Editor2::highlight_searchwords()
   // New g_thread_new ("highlight", GThreadFunc (highlight_thread_start), gpointer(this));
   g_thread_create(GThreadFunc(highlight_thread_start), gpointer(this), false, NULL);
 */
-  
+  DEBUG("W9.1 about to highlight search words");  
   // MAP: Here's how I think it should be done, more synchronously instead of threaded.
   highlight = new Highlight(focused_paragraph->textbuffer, focused_paragraph->textview, project, reference_tag, current_verse_number);
   // The time-consuming part of highlighting is to determine what bits
@@ -1915,9 +1917,13 @@ void Editor2::highlight_searchwords()
   // instead of typing in the location where the cursor is. TODO: I am
   // planning eventually to FIX the TIME CONSUMING PART so that the
   // whole thing will be more efficient.
+  DEBUG("W9.2 about to determine locations");  
   highlight->determine_locations();
+  DEBUG("W9.3 about to assert");  
   assert(highlight->locations_ready);
+  DEBUG("W9.4 about to highlight->highlight");  
   highlight->highlight();
+  DEBUG("W9.5 about delete highlight");
   // Delete and NULL the object making it ready for next use.
   delete highlight;
   highlight = NULL;
@@ -2120,6 +2126,7 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
 
 void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 {
+    if (IAmDead) { DEBUG("Zombie...")} 
 	//DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
 	//ustring debug_verse_number = verse_number_get();
 	//DEBUG("debug_verse_number "+debug_verse_number)
@@ -2127,7 +2134,12 @@ void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 	if (!focused_paragraph->textbuffer) { return; }
 
 	// Ensure that the screen has been fully displayed.
-	while (gtk_events_pending()) { gtk_main_iteration(); }
+	//while (gtk_events_pending()) { gtk_main_iteration(); }
+	// MAP 8/19/2016 commented out above line: I suspect that
+	// sometimes we are here processing an event, but if we wait
+	// until there are no events, we will be stuck in an infinite
+	// loop. This change did not solve the Warao Psalms lockup
+	// when changing from USFM view back to formatted view.
 
 	// Adjustment.
 	GtkAdjustment * adjustment = gtk_viewport_get_vadjustment (GTK_VIEWPORT (viewport));
@@ -2773,7 +2785,11 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
   EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, insertion);
   //DEBUG("about to apply_editor_action (insert_action) insertion="+insertion)
-  // BUG occurs in the next call: footnote is somehow magically changed from text=insertion to text=that of the first footnote in chapter?
+
+  // BUG occurs in the next call: footnote is somehow magically
+  // changed from text=insertion to text=that of the first footnote in
+  // chapter? The issue was a static variable in editor_aids.cpp that
+  // has been now removed and method moved into this file.
   apply_editor_action (insert_action);
   // I may have jumped to a conclusion. The bug may occur in the next call, actually.
   //ustring chaptertext = chapter_get_ustring();
@@ -3194,10 +3210,11 @@ void Editor2::switch_verse_tracking_on ()
 void Editor2::go_to_verse(const ustring& number, bool focus)
 // Moves the insertion point of the editor to the verse number.
 {
+  if (IAmDead) { DEBUG("Zombie...") }
   //DEBUG("go_to_verse "+number+" current_verse_number was "+current_verse_number)
   // Ensure verse tracking is on.
   switch_verse_tracking_on ();
-  
+  DEBUG("W7 switched verse tracking on");
   // Save the current verse. This prevents a race-condition.
   current_verse_number = number;
 
@@ -3217,12 +3234,14 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
     }
   
   }
-
+  DEBUG("W8 about to scroll to insertion point");
   // Scroll the insertion point onto the screen
   scroll_to_insertion_point_on_screen(/*highlight?*/true);
-
+  DEBUG("W9 scrolled to insertion point");
+  
   // Highlight search words.
   highlight_searchwords();
+  DEBUG("W10 highlighted search words");
 }
 
 

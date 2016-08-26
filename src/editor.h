@@ -43,6 +43,7 @@ public:
   GtkWidget * new_widget_signal;
   GtkWidget * new_widget_pointer;
 private:
+  bool IAmDead;
   GtkWidget *scrolledwindow;
   GtkWidget *viewport;
   GtkWidget *vbox_viewport;

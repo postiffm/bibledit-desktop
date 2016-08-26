@@ -29,7 +29,7 @@
 #include "settings.h"
 #include "date_time_utils.h"
 #include "xmlutils.h"
-
+#include "debug.h"
 
 Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
 {
@@ -42,7 +42,7 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
 
   // Remove any previous highlights.  
   remove_previous_highlights(maintextbuffer);
-
+  DEBUG("W9.1.1 removed previous highlights");  
   // Determine the boundaries between which to highlight,
   // in order to highlight only the words that are within the right verse.
   {
@@ -55,11 +55,17 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
     bool ended = false;
     bool start = true;
     ustring verse_style = style_get_verse_marker(project);
+    DEBUG("W9.1.2 starting loop");  
     while (!gtk_text_iter_is_end(&iter)) {
       ustring paragraph_style, character_style;
       get_styles_at_iterator(iter, paragraph_style, character_style);
       if (start || (character_style == verse_style)) {
+        DEBUG("W9.1.3 in if inside loop");
         ustring verse_at_iter = get_verse_number_at_iterator(iter, verse_style, "", NULL);
+	// Above results in two errors:
+	// Gtk-CRITICAL **: IA__gtk_container_foreach: assertion 'GTK_IS_CONTAINER (container)' failed
+	// Need to fix these.
+	DEBUG("W9.1.4 in if inside loop");  
         if (verse == verse_at_iter) {
           if (!started) {
             started = true;
@@ -77,6 +83,7 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
       start = false;
       gtk_text_iter_forward_char(&iter);
     }
+    DEBUG("W9.1.5 finished loop");  
     main_start_offset = gtk_text_iter_get_offset(&startiter);
     main_end_offset = gtk_text_iter_get_offset(&enditer);
   }
