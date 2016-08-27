@@ -36,10 +36,10 @@ public:
   virtual ~WindowEditor();
  private:
   ustring projectname;
-  viewType current_view;
+  viewType currvt;
  public:
-  inline viewType vt_get() { return current_view; }
-  void vt_set(viewType vt);
+  inline viewType vt_get() { return currvt; }
+  void vt_set(viewType newvt);
 
   void go_to(const Reference& reference);
   Reference current_reference();
@@ -98,13 +98,11 @@ public:
 
 protected:
   GtkWidget *vbox;
-  void switch_to_view (viewType vt);
+  void switch_view ();
   ChapterView * currView; // this is either NULL or equal to one of the following editor/view pointers
   Editor2 * editor2;
   USFMView * usfmview;
   // eventually, experimental editor goes here for no-paragraph-division view
-
-  bool IAmDead; // flag for memory debugging
 
   static void on_new_verse_signalled(GtkButton *button, gpointer user_data);
   void on_new_verse();

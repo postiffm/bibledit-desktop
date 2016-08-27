@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
   }
-
+  
 #ifdef WIN32
   gw_message("WIN32 WAS defined in this build");
 #else

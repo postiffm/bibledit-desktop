@@ -35,11 +35,10 @@ FloatingWindow(parent_layout, widEditor, project_name, startup)
 {
   // Initialize variables.
   projectname = project_name;
-  current_view = vtFormatted; // formatted view is default
+  currvt = vtFormatted; // formatted view is default
   currView = NULL;
   editor2 = NULL;
   usfmview = NULL;
-  IAmDead = false;
   
   // Signalling buttons.
   new_verse_signal = gtk_button_new();
@@ -56,7 +55,7 @@ FloatingWindow(parent_layout, widEditor, project_name, startup)
   gtk_container_add(GTK_CONTAINER(vbox_client), vbox);
 
   // Switch to default view.
-  switch_to_view (current_view);
+  switch_view ();
 }
 
 
@@ -73,14 +72,12 @@ WindowEditor::~WindowEditor()
   if (editor2)  { delete editor2;  editor2 = NULL; }
   if (usfmview) { delete usfmview; usfmview = NULL; }
   currView = NULL;
-  IAmDead = true;
 }
 
 
 void WindowEditor::go_to(const Reference & reference)
 // Let the editor go to a reference.
 {
-  if (IAmDead) { DEBUG("Zombie...") }
   DEBUG("1 ref="+reference.human_readable(""))
   if (editor2 || usfmview) { // we know currView is set in this case
 
@@ -450,22 +447,21 @@ void WindowEditor::on_changed()
   gtk_button_clicked (GTK_BUTTON (changed_signal));
 }
 
-void WindowEditor::vt_set (viewType vt)
+void WindowEditor::vt_set (viewType newvt)
 {
   // Bail out if the setting does not change.
-  if (current_view == vt) { return; }
+  if (currvt == newvt) { return; }
 
   // Take action.
-  current_view = vt; // should really be called current_view_type to distinguish from currView
-  switch_to_view (current_view/*then was passed ""*/);
+  currvt = newvt;
+  switch_view ();
 }
 
-
-void WindowEditor::switch_to_view (viewType vt)
-// Switch to a new view vt; vtFormatted is default. vtUSFM is the 
-// "reveal codes" view.
+void WindowEditor::switch_view ()
+// Switch to the currvt view type; vtFormatted is default. vtUSFM is the 
+// "reveal codes" view. Assumes currvt has been set by the caller.
 {
-  DEBUG("Called with vt="+std::to_string(int(vt))+" and saved projectname="+projectname)
+  DEBUG("Called with currvt="+std::to_string(int(currvt))+" and saved projectname="+projectname)
 #if 0
   // If no project was given, then we have switched.
   bool switched = project.empty();
@@ -483,7 +479,7 @@ void WindowEditor::switch_to_view (viewType vt)
   }
 
   // Create new view.
-  switch (vt) {
+  switch (currvt) {
   case vtNone: break;
 
   case vtFormatted:

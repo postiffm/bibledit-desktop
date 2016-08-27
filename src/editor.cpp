@@ -81,7 +81,6 @@ The following things need to be tested after a change was made to the Editor obj
 
 Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 {
-  IAmDead = false;
   Reference dummyRef(0, 1000, "");
   current_reference_set(dummyRef);
   // Save and initialize variables.
@@ -193,7 +192,6 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 
 Editor2::~Editor2()
 {
-  IAmDead = true;
   // Verse tracking off.
   switch_verse_tracking_off ();
 
@@ -2126,7 +2124,6 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
 
 void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 {
-    if (IAmDead) { DEBUG("Zombie...")} 
 	//DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
 	//ustring debug_verse_number = verse_number_get();
 	//DEBUG("debug_verse_number "+debug_verse_number)
@@ -3210,7 +3207,6 @@ void Editor2::switch_verse_tracking_on ()
 void Editor2::go_to_verse(const ustring& number, bool focus)
 // Moves the insertion point of the editor to the verse number.
 {
-  if (IAmDead) { DEBUG("Zombie...") }
   //DEBUG("go_to_verse "+number+" current_verse_number was "+current_verse_number)
   // Ensure verse tracking is on.
   switch_verse_tracking_on ();

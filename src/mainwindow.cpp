@@ -5198,7 +5198,6 @@ void MainWindow::handle_editor_focus()
 {
   // Get the focused editor and the project.
   WindowEditor *editor_window = last_focused_editor_window();
-
   ustring project;
   if (editor_window) {
     project = editor_window->project();
@@ -5408,25 +5407,26 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
   // and once for the new view to be turned on.
 
   bool radioButtonIsOn = gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(menuitem));
+  if (radioButtonIsOn == false) { return; } // Do nothing if we are "turning off" a view
 
+  // Only do something if we are "turning on" a view
   viewType vt = vtNone;
-  if (menuitem == (GtkRadioMenuItem *)view_formatted) {
-    vt = vtFormatted;
-  }
-  else if (menuitem == (GtkRadioMenuItem *)view_usfm_code) {
-    vt = vtUSFM;
-  }
-  else if (menuitem == (GtkRadioMenuItem *)view_experimental) {
-    vt = vtExperimental;
-  }
+  if      (menuitem == (GtkRadioMenuItem *)view_formatted)    { vt = vtFormatted;  }
+  else if (menuitem == (GtkRadioMenuItem *)view_usfm_code)    { vt = vtUSFM; }
+  else if (menuitem == (GtkRadioMenuItem *)view_experimental) { vt = vtExperimental; }
+
   debug_view("1", menuitem, vt);
   WindowEditor *editor_window = last_focused_editor_window();
-  if (radioButtonIsOn && editor_window) {
+  if (editor_window) {
     editor_window->vt_set(vt);
     debug_view("2", menuitem, vt);
     // There are objects that act on USFM view or formatted view only.
     // Inform these about a possible change.
-    handle_editor_focus();
+    // handle_editor_focus() is really for changing the window that is focused, not
+    // for switching the view within that window, with same project.
+    //handle_editor_focus();
+    // I don't think I have to do almost anything from the above method call. It is all
+    // redundant. Maybe reset the navigation...
     debug_view("3", menuitem, vt);
   }
 }

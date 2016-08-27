@@ -81,7 +81,7 @@ void gw_debug(int msgno, const ustring & message, const char *file, int lineno, 
 {
   gint64 milliseconds = (g_get_monotonic_time() / 1000);
   gw_message("DEBUG:"+std::to_string(msgno)+":"+std::to_string(milliseconds)+"ms: " + message + " " + func + ":" + file + ":" + std::to_string(lineno));
-  fsync(1); // flush data to disk
+  //fsync(1); // flush data to disk
 }
 
 void gw_warning(const ustring & warning)

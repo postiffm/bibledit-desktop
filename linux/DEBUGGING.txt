@@ -30,7 +30,16 @@ Run-time behavior is controlled by the ASAN_OPTIONS environment variable.
 Details are at
 https://github.com/google/sanitizers/wiki/AddressSanitizerFlags#run-time-flags
 
-It has to link with -lasan (libasan) and this is apparently not available on Windows?
+It has to link with -lasan (libasan) and this is apparently not available on Windows.
+
+Then run the program like this:
+
+ASAN_OPTIONS="symbolize=1 log_path=/tmp/bibledit/asan.log" ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer-3.8) /usr/bin/bibledit-gtk
+
+Use ASAN_OPTIONS=help=1 to get a list of current options.
+
+This does run noticeably slower. The confusing thing is that the output does not show up as it does
+for the given test case. I think that is because we redirect stdout...
 
 2. To use Valgrind
 valgrind --leak-check=full -v --track-origins=yes /usr/bin/bibledit-gtk >& memory.txt
