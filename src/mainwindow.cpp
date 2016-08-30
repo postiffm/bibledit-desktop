@@ -5427,8 +5427,8 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
     //handle_editor_focus();
     // I don't think I have to do almost anything from the above method call. It is all
     // redundant. Maybe reset the navigation...
-    debug_view("3", menuitem, vt);
   }
+  DEBUG("Chapter should now be in desired view")
 }
 
 void MainWindow::reload_all_editors(bool take_chapter_from_focused_editor)

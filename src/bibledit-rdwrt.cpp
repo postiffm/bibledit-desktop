@@ -31,7 +31,9 @@
 #include "readwrite.h"
 #include "books.h" // TEMP - MAP
 #include <glib/gi18n.h>
+#include "options.h"
 
+Options *options;
 directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;

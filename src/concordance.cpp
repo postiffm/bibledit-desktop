@@ -20,6 +20,7 @@
 #include "usfmtools.h"
 #include "usfm-inline-markers.h"
 #include "bookdata.h"
+#include "options.h"
 
 using namespace std;
 using namespace Glib;
@@ -223,6 +224,7 @@ void readExcludedWords(const ustring &filename)
 	}
 }
 
+Options *options;
 directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;

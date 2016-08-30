@@ -2,6 +2,7 @@ bin_PROGRAMS = bibledit-gtk bibledit-rdwrt concordance
 
 bibledit_gtk_SOURCES = \
   bibledit.cpp \
+  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \
@@ -282,6 +283,7 @@ bibledit_gtk_SOURCES = \
 
 bibledit_rdwrt_SOURCES = \
   bibledit-rdwrt.cpp \
+  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \
@@ -490,6 +492,7 @@ bibledit_rdwrt_SOURCES = \
 
 concordance_SOURCES = \
   concordance.cpp \
+  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \

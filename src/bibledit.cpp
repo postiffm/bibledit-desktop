@@ -48,11 +48,13 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <errno.h>
+#include "options.h"
 //#ifdef WIN32
 //#include <Windows.h>
 //#endif
 //#include "debug.h"
 
+Options *options;
 directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;
@@ -81,6 +83,8 @@ int main(int argc, char *argv[])
   // g_type_init();
   // Initialize GTK
   gtk_init(&argc, &argv);
+
+  options = new Options(argc, argv);
 
   // Create a new directories 'factory' and initialize it with argv[0]
   Directories = new directories(argv[0]);
@@ -144,8 +148,10 @@ int main(int argc, char *argv[])
 #else
   gw_message("WIN32 was NOT defined in this build");
 #endif
-    
-  Directories->print(); // called after the stdout/stderr redirects above
+
+  // Call after the stdout/stderr redirects above
+  options->print();
+  Directories->print();
   
   // Check on runtime requirements.
   runtime_initialize ();
