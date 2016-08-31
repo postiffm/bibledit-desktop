@@ -30,7 +30,6 @@ class Reference
   ustring verse;  // this is not just a verse integer, but could be 16-18, for example
  public:
   Reference ();
-  Reference (int dummy); // not sure why this was pre-existent, but I kept it for now
   Reference (unsigned int book_in, unsigned int chapter_in, const ustring& verse_in);
 
   inline unsigned int book_get() const { return book; }

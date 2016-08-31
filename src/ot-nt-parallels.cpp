@@ -143,7 +143,7 @@ void OtNtParallels::read(const gchar * filename)
             parallelset.references.clear();
           }
           if (!strcmp(opening_element, "reference")) {
-            Reference ref(0);
+            Reference ref;
             char *attribute;
             attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "book");
             if (attribute) {

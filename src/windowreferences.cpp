@@ -263,8 +263,8 @@ void WindowReferences::load (const ustring & filename)
     // Pick out the references and leave the rest.
     for (unsigned int i = 0; i < rt.lines.size(); i++) {
       ustring verse;
-      Reference oldRef(0);
-      Reference newRef(0);
+      Reference oldRef;
+      Reference newRef;
       if (reference_discover(oldRef, rt.lines[i], newRef)) {
         references.push_back(newRef);
         comments.push_back ("");

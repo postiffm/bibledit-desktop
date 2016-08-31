@@ -30,7 +30,6 @@
 #include <glib/gi18n.h>
 
 OTQuotation::OTQuotation(int dummy)
-:reference(0)
 {
   lxx = false;
 }
@@ -77,7 +76,7 @@ void OTQuotations::read()
 	    free(opening_element); opening_element = NULL; // not used next loop iteration
           }
           else if (!strcmp(opening_element, "nt") || !strcmp(opening_element, "ot")) {
-            Reference ref(0);
+            Reference ref;
             char *attribute;
             attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "book");
             if (attribute) {
@@ -228,7 +227,7 @@ void OTQuotations::produce_in_ot_order()
   }
   
   // Go through the OT places, and attach their NT referents.
-  Reference previous_reference (0);
+  Reference previous_reference;
   for (unsigned int i = 0; i < old_testament_refs.size(); i++) {
     // Skip double references.
     if (previous_reference.equals (old_testament_refs[i])) {

@@ -679,6 +679,7 @@ protected:
   void on_window_editor_delete_button(GtkButton *button);
   WindowEditor * last_focused_editor_window();
   void on_file_project_open(const ustring& project, bool startup);
+  void add_new_editor_window(const ustring & project, bool startup, viewType vt);
   void handle_editor_focus();
   ustring previously_focused_project_name;
   void save_editors();

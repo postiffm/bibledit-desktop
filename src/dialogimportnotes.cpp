@@ -539,8 +539,8 @@ When we encounter an element that ends data, this handler deals with that.
       reference_content.clear();
       for (unsigned int i = 0; i < parse.lines.size(); i++) {
         // Get the reference.
-	Reference oldRef(0);
-        Reference newRef(0);
+	Reference oldRef;
+        Reference newRef;
         if (reference_discover(oldRef, trim(parse.lines[i]), newRef)) {
           vector < int >verses = verses_encode(newRef.verse_get());
           int book_chapter = reference_to_numerical_equivalent(books_id_to_english(newRef.book_get()), convert_to_string(newRef.chapter_get()), "0");

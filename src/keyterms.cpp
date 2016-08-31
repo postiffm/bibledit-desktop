@@ -245,7 +245,7 @@ void keyterms_import_textfile(const ustring & textfile, ustring category)
           keyterms_clean_reference_line (line);
           // Store the reference.
 	  Reference oldRef(previousbook, previouschapter, "0");
-          Reference newRef(0);
+          Reference newRef;
           if (reference_discover(oldRef, line, newRef)) {
             references.push_back(newRef);
             comments.push_back (keyterms_reference_start_markup () + newRef.human_readable ("") + keyterms_reference_end_markup ());
@@ -349,7 +349,7 @@ void keyterms_import_otkey_db(const ustring& textfile, ustring category)
           ustring ref = line.substr(4, 1000);
           keyterms_clean_reference_line (ref);
 	  Reference oldRef(previousbook, previouschapter, "0");
-          Reference newRef(0);
+          Reference newRef;
           if (reference_discover(oldRef, ref, newRef)) {
             newRef.verse_set(number_in_string(newRef.verse_get()));
             references.push_back(newRef);
@@ -500,7 +500,7 @@ void keyterms_import_ktref_db(const ustring& textfile, ustring category)
           }
           for (unsigned int i2 = 0; i2 < refs.size(); i2++) {
 	    Reference oldRef(previousbook, previouschapter, "0");
-            Reference newRef(0);
+            Reference newRef;
             if (reference_discover(oldRef, refs[i2], newRef)) {
               newRef.verse_set(number_in_string(newRef.verse_get()));
               references.push_back(newRef);

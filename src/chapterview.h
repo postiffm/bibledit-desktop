@@ -35,7 +35,7 @@ enum viewType { vtNone, vtFormatted, vtUSFM, vtExperimental };
 
 class ChapterView
 {
- private:
+ protected: // for the sake of Editor2 and USFMView child classes
   Reference current_reference;
  public: 
   ChapterView();
@@ -45,13 +45,9 @@ class ChapterView
   // MUST be overridden in the derived class(es). We cannot instantiate a 
   // ChapterView object by itself.
   virtual void spelling_trigger() = 0;
-  virtual unsigned int chapter_num_get() = 0;
   virtual ustring chapter_get_ustring() = 0; // TO DO: rename _get at end
   virtual ustring project_get() = 0;
   virtual ustring word_double_clicked_text_get() = 0;
-  virtual ustring current_verse_get() = 0;
-  virtual unsigned int book_get() = 0;
-  virtual void book_set(unsigned int book) = 0;
   virtual unsigned int reload_chapter_num_get() = 0;
   virtual void create_or_update_formatting_data() = 0;
   virtual void apply_style(const ustring &marker) = 0;
@@ -59,7 +55,7 @@ class ChapterView
   void current_reference_set(const Reference &ref) { current_reference.assign(ref); }
   virtual bool editable_get() = 0;
   virtual void chapter_save() = 0;
-  virtual void chapter_load(unsigned int chapter) = 0;
+  virtual void chapter_load(const Reference &ref) = 0;
   virtual void cut() = 0;
   virtual void copy() = 0;
   virtual void paste() = 0;

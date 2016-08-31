@@ -39,7 +39,7 @@
 #include <glib/gi18n.h>
 
 WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widCheckKeyterms, _("Check keyterms"), startup), myreference(0)
+  FloatingWindow(parent_layout, widCheckKeyterms, _("Check keyterms"), startup)
 // Window for checking keyterms.
 {
   // Save / initialize variables.
@@ -649,7 +649,7 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
 Reference WindowCheckKeyterms::get_reference (const ustring& text)
 // Generates a reference out of the text.
 {
-  Reference ref (0);
+  Reference ref;
   ustring book, chapter, verse = ref.verse_get();
   decode_reference(text, book, chapter, verse);
   ref.book_set(books_english_to_id (book));

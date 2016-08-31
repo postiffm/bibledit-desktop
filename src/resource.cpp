@@ -29,8 +29,7 @@
 #include "resource_utils.h"
 
 
-Resource::Resource(GtkWidget * window) :
-myreference (0)
+Resource::Resource(GtkWidget * window)
 {
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox);

@@ -32,12 +32,16 @@
 class WindowEditor : public FloatingWindow
 {
 public:
-  WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt);
   virtual ~WindowEditor();
  private:
+  void init(void);
+  void cleanup(void);
+  
   ustring projectname;
   viewType currvt;
  public:
+  inline ustring projectname_get(void) { return projectname; }
   inline viewType vt_get() { return currvt; }
   void vt_set(viewType newvt);
 
@@ -49,7 +53,6 @@ public:
   
   void load_dictionaries();
   bool move_cursor_to_spelling_error (bool next, bool extremity);
-  GtkWidget * spelling_checked_signal;
   vector <ustring> spelling_get_misspelled ();
   void spelling_approve (const vector <ustring>& words);
   
@@ -63,7 +66,7 @@ public:
   void insert_note(const ustring& marker, const ustring& rawtext);
   ustring get_chapter();
   void insert_table(const ustring& rawtext);
-  void chapter_load(unsigned int chapter_in);
+  void chapter_load(const Reference &ref);
   void chapter_save();
   unsigned int reload_chapter_number();
   
@@ -81,13 +84,18 @@ public:
 
   Editor2 * editor_get();
 
-  GtkWidget * new_verse_signal;
-  GtkWidget * new_styles_signal;
-  GtkWidget * quick_references_button;
-  GtkWidget * word_double_clicked_signal;
-  GtkWidget * reload_signal;
-  GtkWidget * changed_signal;
+  // The signalling instance                The handler_id
+  GtkWidget * new_verse_signal;             gulong hID1;
+  GtkWidget * new_styles_signal;            gulong hID2;
+  GtkWidget * quick_references_button;      gulong hID3;
+  GtkWidget * word_double_clicked_signal;   gulong hID4;
+  GtkWidget * reload_signal;                gulong hID5;
+  GtkWidget * changed_signal;               gulong hID6;
+  GtkWidget * spelling_checked_signal;      gulong hID7;
 
+  // stray?
+  gulong hID8;
+  
   GtkTextBuffer * edit_usfm_textbuffer ();
 
   void spelling_trigger ();

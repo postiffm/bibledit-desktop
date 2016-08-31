@@ -169,7 +169,7 @@ void compare_get_changes(ProjectMemory & project, vector < Reference > &changed_
     for (unsigned int chapter = 1; chapter < chapters.size(); chapter++) {
       vector < ustring > lines = project.data[i].data[chapter].get_data();
       ustring currentverse = "1";
-      Reference last_reference_stored(0);
+      Reference last_reference_stored;
       for (unsigned int i2 = 0; i2 < lines.size(); i2++) {
         ustring line(lines[i2]);
         // Extract the verse number.

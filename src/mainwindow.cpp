@@ -2885,12 +2885,13 @@ void MainWindow::on_window_info_signal_button()
   // Bail out if there's no info window (how is this possible?)
   if (!window_info) { return; }
 
+  // WHY DID I HAVE NEXT 3 locs commented?
   // Focus the editor.
-  //editor_window->focus_set ();
+  editor_window->focus_set ();
 
   // Jump to the reference.
   //navigation.display(window_info->reference);
-  //editor_window->go_to_new_reference_highlight_set();
+  editor_window->go_to_new_reference_highlight_set();
 }
 
 void MainWindow::on_next_reference()
@@ -5143,8 +5144,13 @@ void MainWindow::on_file_project_open(const ustring & project, bool startup)
     }
   }
 
+  add_new_editor_window(project, startup, vtFormatted);
+}
+
+void MainWindow::add_new_editor_window(const ustring & project, bool startup, viewType vt)
+{
   // Display a new editor.
-  WindowEditor *editor_window = new WindowEditor(project, layout, accelerator_group, startup);
+  WindowEditor *editor_window = new WindowEditor(project, layout, accelerator_group, startup, vt);
   g_signal_connect((gpointer) editor_window->delete_signal_button,    "clicked", G_CALLBACK(on_window_editor_delete_button_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->new_verse_signal,        "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
@@ -5417,16 +5423,24 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
 
   debug_view("1", menuitem, vt);
   WindowEditor *editor_window = last_focused_editor_window();
-  if (editor_window) {
-    editor_window->vt_set(vt);
+  if (editor_window && (editor_window->vt_get() != vt)) {
+    // Used to be we just called vt_set and let it do what it wanted.
+    // However, the "Warao Psalms" bug exposed some problem in how
+    // this worked...a fresh vtFormatted window would display correctly,
+    // but switching to vtUSFM and then back to vtFormatted would hang
+    // Bibledit. Have not figured out why. So, I destroyed the entire
+    // editor_window, and created a new one from scratch whenever the view
+    // is changed. It is fast enough to not be noticeable. MAP 8/30/2016.
+    ustring project = editor_window->projectname_get();
+    on_window_editor_delete_button(GTK_BUTTON(editor_window->delete_signal_button));
+    //editor_window->vt_set(vt);
+    add_new_editor_window(project, /*startup*/false, vt);
     debug_view("2", menuitem, vt);
     // There are objects that act on USFM view or formatted view only.
     // Inform these about a possible change.
-    // handle_editor_focus() is really for changing the window that is focused, not
-    // for switching the view within that window, with same project.
-    //handle_editor_focus();
-    // I don't think I have to do almost anything from the above method call. It is all
-    // redundant. Maybe reset the navigation...
+    handle_editor_focus();
+    // When we are in a single project and switch view from USFM to Formatted,
+    // the above method basically does nothing.
   }
   DEBUG("Chapter should now be in desired view")
 }
@@ -5435,8 +5449,7 @@ void MainWindow::reload_all_editors(bool take_chapter_from_focused_editor)
 {
   // Get the focused editor, if none, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window)
-    return;
+  if (!editor_window) { return; }
 
   // Store the reference where to go to after the project has been reloaded.
   Reference reference(navigation.reference);
@@ -5457,7 +5470,7 @@ void MainWindow::reload_all_editors(bool take_chapter_from_focused_editor)
 
   // Reload all editors.
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
-    editor_windows[i]->chapter_load(reference.chapter_get());
+    editor_windows[i]->chapter_load(reference);
   }
   
   // Go to the right reference.

@@ -688,8 +688,9 @@ void FloatingWindow::on_widget_grab_focus(GtkWidget * widget, gpointer user_data
 
 void FloatingWindow::widget_grab_focus(GtkWidget * widget)
 {
-  if (widget != last_focused_widget) 
+  if (widget != last_focused_widget) {
     focus_set ();
+  }
   last_focused_widget = widget;
 }
 

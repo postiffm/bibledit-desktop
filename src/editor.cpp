@@ -81,8 +81,7 @@ The following things need to be tested after a change was made to the Editor obj
 
 Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
 {
-  Reference dummyRef(0, 1000, "");
-  current_reference_set(dummyRef);
+  // current_reference_set initializes itself via its constructor
   // Save and initialize variables.
   project = project_in;
   do_not_process_child_anchors_being_deleted = false;
@@ -91,8 +90,6 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   highlight = NULL;
   editable = false;
   event_id_show_quick_references = 0;
-  book = 0;
-  chapter = 0;
   signal_if_verse_changed_event_id = 0;
   keystrokeNum = 0;
   keyStrokeNum_paragraph_crossing_processed = 0;
@@ -217,19 +214,25 @@ Editor2::~Editor2()
   gtk_widget_destroy(new_styles_signal);
   new_styles_signal = NULL;
   gtk_widget_destroy(word_double_clicked_signal);
+  word_double_clicked_signal = NULL;
   gtk_widget_destroy(reload_signal);
+  reload_signal = NULL;
   gtk_widget_destroy(changed_signal);
+  changed_signal = NULL;
   gtk_widget_destroy(quick_references_button);
+  quick_references_button = NULL;
   gtk_widget_destroy(spelling_checked_signal);
+  spelling_checked_signal = NULL;
   gtk_widget_destroy(new_widget_signal);
+  new_widget_signal = NULL;
 
   // Destroy the texttag tables.
   g_object_unref(texttagtable);
 
   // Destroy possible highlight object.
   if (highlight) { 
-	delete highlight;
-	highlight = NULL;
+    delete highlight;
+    highlight = NULL;
   }
     
   // Destroy the editor actions.
@@ -241,16 +244,10 @@ Editor2::~Editor2()
   gtk_widget_destroy(scrolledwindow); // does this destroy the viewport and its children also?
 }
 
-
-void Editor2::book_set(unsigned int book_in)
+void Editor2::chapter_load(const Reference &ref)
+// Loads a chapter with the number ref.chapter_get()
 {
-  book = book_in;
-}
-
-
-void Editor2::chapter_load(unsigned int chapter_in) 
-// Loads a chapter with the number "chapter_in".
-{
+  DEBUG("book="+std::to_string(ref.book_get())+" ch="+std::to_string(ref.chapter_get())+" v="+ref.verse_get())
   // Clear the stacks of actions done and redoable.
   clear_and_destroy_editor_actions (actions_done);
   clear_and_destroy_editor_actions (actions_undone);
@@ -258,8 +255,8 @@ void Editor2::chapter_load(unsigned int chapter_in)
   // Switch verse tracking off.
   switch_verse_tracking_off ();
 
-  // Save chapter number.
-  chapter = chapter_in;
+  // Save reference
+  current_reference = ref;
 
   // Settings.
   extern Settings *settings;
@@ -269,7 +266,7 @@ void Editor2::chapter_load(unsigned int chapter_in)
   note_style_num = 0;
   
   // Load text in memory and cache it for later use.
-  loaded_chapter_lines = project_retrieve_chapter(project, book, chapter);
+  loaded_chapter_lines = project_retrieve_chapter(project, current_reference.book_get(), current_reference.chapter_get());
 
   // Whether chapter is editable.
   editable = true;
@@ -318,8 +315,8 @@ void Editor2::chapter_load(unsigned int chapter_in)
   apply_editor_action (new EditorAction (eatLoadChapterBoundary));
   DEBUG("W5 Inserted chapter load boundary")
   // Place cursor at the start and scroll it onto the screen.
-  current_verse_number = "1";
-  currHighlightedVerse = "1";
+  current_verse_number = current_reference.verse_get();
+  currHighlightedVerse = "0";
   vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
   if (textviews.empty()) {
     give_focus (textviews[0]);
@@ -406,7 +403,7 @@ void Editor2::chapter_save()
 // Handles saving the chapter.
 {
   // Set variables.
-  reload_chapter_number = chapter;
+  reload_chapter_number = current_reference.chapter_get();
 
   // If the text is not editable, bail out.
   if (!editable) { return; }
@@ -431,14 +428,14 @@ void Editor2::chapter_save()
   // After asking for confirmation, delete the chapter.
   if (chaptertext.empty()) {
     if (gtkw_dialog_question(NULL, _("The chapter is empty.\nDo you wish to delete this chapter?"), GTK_RESPONSE_YES) == GTK_RESPONSE_YES) {
-      project_remove_chapter(project, book, chapter);
+      project_remove_chapter(project, current_reference.book_get(), current_reference.chapter_get());
       save_action_is_over = true;
       reload = true;
-      if (chapter > 0) reload_chapter_number = chapter - 1;
+      if (current_reference.chapter_get() > 0) { reload_chapter_number = current_reference.chapter_get() - 1; }
     }
   }
 
-	//DEBUG("Saving chapter")
+  DEBUG("Saving chapter")
   
   // If the text has not yet been dealt with, save it.  
   if (!save_action_is_over) {
@@ -455,6 +452,7 @@ void Editor2::chapter_save()
        In addition to this, the user could have edited the chapter number.
        If a change in the chapter number is detected, ask the user what to do.
      */
+    unsigned int chapter = current_reference.chapter_get();
     unsigned int chapter_in_text = chapter;
     for (unsigned int i = 0; i < ccv.chapter.size(); i++) {
       if (ccv.chapter[i] != chapter) {
@@ -480,7 +478,7 @@ void Editor2::chapter_save()
       }
       // Check whether the new chapter number already exists.
       if (confirmed_chapter_number != chapter) {
-        vector < unsigned int >chapters = project_get_chapters(project, book);
+        vector < unsigned int >chapters = project_get_chapters(project, current_reference.book_get());
         set < unsigned int >chapter_set(chapters.begin(), chapters.end());
         if (chapter_set.find(confirmed_chapter_number) != chapter_set.end()) {
           message = _("The new chapter number already exists\nDo you wish to overwrite it?");
@@ -509,7 +507,7 @@ void Editor2::chapter_save()
 
     // Store chapter.
     if (!save_action_is_over) {
-      project_store_chapter(project, book, ccv);
+      project_store_chapter(project, current_reference.book_get(), ccv);
       save_action_is_over = true;
     }
   }
@@ -604,7 +602,7 @@ void Editor2::show_quick_references_execute()
   ustring language = projectconfig->language_get();
 
   // Extract references.
-  ReferencesScanner refscanner(language, book, note_text);
+  ReferencesScanner refscanner(language, current_reference.book_get(), note_text);
 
   // If there are no references, bail out.
   if (refscanner.references.empty()) {
@@ -662,18 +660,18 @@ void Editor2::textview_move_cursor_delayed()
 ustring Editor2::verse_number_get()
 // Returns the verse number of the insertion point.
 {
-	// Default verse number.
-	ustring number = "0";
-	// Proceed if there's a focused paragraph.
-	if (focused_paragraph) {
-		// Get an iterator at the cursor location of the focused textview.
-		GtkTextIter iter;
-		gtk_text_buffer_get_iter_at_mark(focused_paragraph->textbuffer, &iter, gtk_text_buffer_get_insert(focused_paragraph->textbuffer));
-		// Get verse number.
-		number = get_verse_number_at_iterator(iter, style_get_verse_marker(project), project, vbox_paragraphs);
-		//DEBUG("current_verse_number="+current_verse_number+" and returning number="+number)
-	}
-	return number;
+  // Default verse number.
+  ustring number = "1"; // was "0"
+  // Proceed if there's a focused paragraph.
+  if (focused_paragraph) {
+    // Get an iterator at the cursor location of the focused textview.
+    GtkTextIter iter;
+    gtk_text_buffer_get_iter_at_mark(focused_paragraph->textbuffer, &iter, gtk_text_buffer_get_insert(focused_paragraph->textbuffer));
+    // Get verse number.
+    number = get_verse_number_at_iterator(iter, style_get_verse_marker(project), project, vbox_paragraphs);
+    //DEBUG("current_verse_number="+current_verse_number+" and returning number="+number)
+  }
+  return number;
 }
 
 bool Editor2::get_verse_number_at_iterator_internal (GtkTextIter iter, const ustring & verse_marker, ustring& verse_number)
@@ -1085,6 +1083,7 @@ void Editor2::create_or_update_formatting_data()
 // Create and fill the text tag table for all the formatted views.
 // If already there, update it.
 {
+  DEBUG("Called")
   // If there is no text tag table, create a new one.
   if (!texttagtable) {
     texttagtable = gtk_text_tag_table_new();
@@ -1147,6 +1146,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 // This creates or updates a GtkTextTag with the data stored in "style".
 // The fontsize of the style is calculated by the value as stored in "style", and multiplied by "font_multiplier".
 {
+  DEBUG("Called")
   // Take the existing tag, or create a new one and add it to the tagtable.
   GtkTextTag *tag = gtk_text_tag_table_lookup(texttagtable, style->marker.c_str());
   if (!tag) {
@@ -3213,6 +3213,7 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
   DEBUG("W7 switched verse tracking on");
   // Save the current verse. This prevents a race-condition.
   current_verse_number = number;
+  current_reference.verse_set(number);
 
   // Only move the insertion point if it goes to another verse.
   ustring computedVerse = verse_number_get();
@@ -3267,8 +3268,11 @@ void Editor2::signal_if_verse_changed_timeout()
         // Emit a signal if the verse number at the insertion point changed.
         ustring verse_number = verse_number_get();
         if (verse_number != current_verse_number) {
-		  //DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
+	  DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
           current_verse_number = verse_number;
+	  current_reference.verse_set(verse_number);
+	  scroll_to_insertion_point_on_screen(/*highlight?*/true); // ??
+	  // Need I highligh search words now?
           if (new_verse_signal) {
             gtk_button_clicked(GTK_BUTTON(new_verse_signal));
           }

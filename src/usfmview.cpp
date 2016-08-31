@@ -48,12 +48,9 @@
 
 USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
 {
-  Reference dummyRef(0, 1000, "");
-  current_reference_set(dummyRef);
+  // current_reference_set initializes itself via its constructor
   // Save and initialize variables.
   project = project_in;
-  book = 0;
-  chapter = 0;
   verse_tracker_event_id = 0;
   editable = false;
   spelling_timeout_event_id = 0;
@@ -123,11 +120,15 @@ USFMView::~USFMView()
 
   // Destroy the signalling buttons.
   gtk_widget_destroy(reload_signal);
+  reload_signal = NULL;
   gtk_widget_destroy(changed_signal);
+  changed_signal = NULL;
   gtk_widget_destroy(new_verse_signal);
   new_verse_signal = NULL;
   gtk_widget_destroy(word_double_clicked_signal);
+  word_double_clicked_signal = NULL;
   gtk_widget_destroy (spelling_checked_signal);
+  spelling_checked_signal = NULL;
   
   // Delete speller.
   delete spellingchecker;
@@ -136,8 +137,8 @@ USFMView::~USFMView()
   gtk_widget_destroy(scrolledwindow);
 }
 
-void USFMView::chapter_load(unsigned int chapter_in)
-// Loads a chapter with the number "chapter_in".
+void USFMView::chapter_load(const Reference &ref)
+// Loads a chapter specified in ref.chapter_get().
 {
   // Clear the undo buffer.
   gtk_source_buffer_set_max_undo_levels (sourcebuffer, 0);
@@ -149,11 +150,11 @@ void USFMView::chapter_load(unsigned int chapter_in)
   // Get rid of possible previous text.
   gtk_text_buffer_set_text(GTK_TEXT_BUFFER (sourcebuffer), "", -1);
 
-  // Save chapter number.
-  chapter = chapter_in;
+  // Save reference
+  current_reference = ref;
 
   // Load text in memory.
-  vector <ustring> lines = project_retrieve_chapter(project, book, chapter);
+  vector <ustring> lines = project_retrieve_chapter(project, current_reference.book_get(), current_reference.chapter_get());
 
   // Settings.
   extern Settings *settings;
@@ -161,10 +162,12 @@ void USFMView::chapter_load(unsigned int chapter_in)
 
   // Deal with (non-)editable.
   editable = true;
-  if (lines.empty())
+  if (lines.empty()) {
     editable = false;
-  if (!projectconfig->editable_get())
+  }
+  if (!projectconfig->editable_get()) {
     editable = false;
+  }
   gtk_text_view_set_editable(GTK_TEXT_VIEW(sourceview), editable);
 
   // Make one string containing the whole chapter.
@@ -197,7 +200,7 @@ void USFMView::chapter_save()
 // Handles saving the chapters.
 {
   // Set variables.
-  reload_chapter_number = chapter;
+  reload_chapter_number = current_reference.chapter_get();
 
   // If the text is not editable, bail out.
   if (!editable) { return; }
@@ -219,12 +222,12 @@ void USFMView::chapter_save()
   bool save_action_is_over = false;
   if (chaptertext.empty()) {
     if (gtkw_dialog_question(NULL, _("The chapter is empty.\nDo you wish to delete this chapter?"), GTK_RESPONSE_YES) == GTK_RESPONSE_YES) {
-      project_remove_chapter(project, book, chapter);
+      project_remove_chapter(project, current_reference.book_get(), current_reference.chapter_get());
       save_action_is_over = true;
       reload = true;
-      if (chapter > 0) {
-        reload_chapter_number = chapter - 1;
-	  }
+      if (current_reference.chapter_get() > 0) {
+        reload_chapter_number = current_reference.chapter_get() - 1;
+      }
     }
   }
 
@@ -244,6 +247,7 @@ void USFMView::chapter_save()
        If a change in the chapter number is detected, ask the user what to do.
        But if chapter 0 is detected, do nothing, no questions asked.
      */
+    unsigned int chapter = current_reference.chapter_get();
     unsigned int chapter_in_text = chapter;
     for (unsigned int i = 0; i < ccv.chapter.size(); i++) {
       if (ccv.chapter[i] != chapter) {
@@ -274,7 +278,7 @@ void USFMView::chapter_save()
       }
       // Check whether the new chapter number already exists.
       if (confirmed_chapter_number != chapter) {
-        vector < unsigned int >chapters = project_get_chapters(project, book);
+        vector < unsigned int >chapters = project_get_chapters(project, current_reference.book_get());
         set < unsigned int >chapter_set(chapters.begin(), chapters.end());
         if (chapter_set.find(confirmed_chapter_number) != chapter_set.end()) {
           message = _("The new chapter number already exists\nDo you wish to overwrite it?");
@@ -288,7 +292,7 @@ void USFMView::chapter_save()
     }
     // Store chapter in database.
     if (!save_action_is_over) {
-      project_store_chapter(project, book, ccv);
+      project_store_chapter(project, current_reference.book_get(), ccv);
 	}
     save_action_is_over = true;
   }
@@ -492,6 +496,7 @@ bool USFMView::on_verse_tracker()
   }
   bool new_verse = (current_verse_number != verse);
   current_verse_number = verse;
+  current_reference.verse_set(verse); // this is important for others watching status of this view window
   if (new_verse) {
     gtk_button_clicked (GTK_BUTTON (new_verse_signal));
   }
@@ -507,6 +512,7 @@ void USFMView::go_to_verse (const ustring & verse, bool focus)
 
   // Save the current verse.
   current_verse_number = verse;
+  current_reference.verse_set(verse); // this is important for others watching status of this view window
 
   while (gtk_events_pending()) gtk_main_iteration();
   if (!sourcebuffer) { return; }

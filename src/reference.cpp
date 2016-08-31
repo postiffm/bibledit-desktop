@@ -31,13 +31,6 @@ Reference::Reference()
   verse.clear();
 }
 
-Reference::Reference(int dummy)
-{
-  book = 0;
-  chapter = 0;
-  verse.clear();
-}
-
 Reference::Reference(unsigned int book_in, unsigned int chapter_in, const ustring & verse_in)
 {
   book = book_in;

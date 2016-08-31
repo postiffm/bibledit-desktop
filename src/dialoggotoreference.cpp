@@ -36,7 +36,7 @@
 #include "keyboard.h"
 #include <glib/gi18n.h>
 
-GotoReferenceDialog::GotoReferenceDialog(unsigned int currentbook, unsigned int currentchapter, const ustring & currentverse):reference(0)
+GotoReferenceDialog::GotoReferenceDialog(unsigned int currentbook, unsigned int currentchapter, const ustring & currentverse)
 {
   // Init variables
   extern Settings *settings;

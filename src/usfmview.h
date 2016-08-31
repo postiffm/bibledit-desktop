@@ -43,7 +43,7 @@ public:
   viewType vt_get() { return vtUSFM; }
   GtkWidget * sourceview;
   ustring project_get() { return project; }
-  void chapter_load(unsigned int chapter_in);
+  void chapter_load(const Reference &ref);
   void chapter_save();
  private:
   unsigned int reload_chapter_number;
@@ -76,14 +76,7 @@ public:
   ustring word_double_clicked_text_get() { return word_double_clicked_text; }
   void insert_note(const ustring& marker, const ustring& rawtext);
   ustring chapter_get_ustring();
-  // I don't think following should be here...duplicates current_reference
- private:
-  unsigned int book;
-  unsigned int chapter;
  public:
-  unsigned int book_get() { return book; }
-  void book_set(unsigned int book_in) { book = book_in; }
-  unsigned int chapter_num_get() { return chapter; }
   void cut ();
   void copy ();
   void paste ();

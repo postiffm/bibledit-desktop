@@ -421,11 +421,12 @@ void notes_display_internal(const ustring& language, bool show_reference_text, b
   // Go through each reference.
   for (unsigned int i2 = 0; i2 < parse.words.size(); i2++) {
     // Make it human readable.
-    Reference oldRef(0);
-    Reference newRef(0);
+    Reference oldRef;
+    Reference newRef;
     reference_discover(oldRef, parse.words[i2], newRef);
-    if (!reference.empty())
+    if (!reference.empty()) {
       reference.append(", ");
+    }
     reference.append(newRef.human_readable(language));
     references.push_back(newRef);
   }
@@ -571,11 +572,11 @@ void notes_get_references_from_editor(GtkTextBuffer * textbuffer, vector < Refer
   // so that it becomes quicker for a user to enter new references.
   // If Leviticus 10:11 is already there, and the user wishes to add verse
   // 12 also, he just enters 12 on a line, and that' it.
-  Reference previousreference(0);
+  Reference previousreference;
   for (unsigned int i = 0; i < lines.size(); i++) {
     if (!lines[i].empty()) {
       // Normalize reference.
-      Reference reference(0);
+      Reference reference;
       if (reference_discover(previousreference, lines[i], reference)) {
         ustring ch1, vs1, ch2, vs2;
         if (chapter_span_discover(lines[i], ch1, vs1, ch2, vs2)) {
@@ -1043,8 +1044,8 @@ void notes_store_index_entry (sqlite3 *db, gint32 id)
   Parse parse(references, false);
   ustring encoded_references;
   for (unsigned int i = 0; i < parse.words.size(); i++) {
-    Reference oldRef(0);
-    Reference newRef(0);
+    Reference oldRef;
+    Reference newRef;
     reference_discover(oldRef, parse.words[i], newRef);
     ustring book = books_id_to_english(newRef.book_get());
     ustring chapter = convert_to_string(newRef.chapter_get());

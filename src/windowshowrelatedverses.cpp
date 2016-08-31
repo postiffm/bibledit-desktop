@@ -33,7 +33,7 @@
 #include <glib/gi18n.h>
 
 WindowShowRelatedVerses::WindowShowRelatedVerses(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
-  FloatingWindow(parent_layout, widShowRelatedVerses, _("Related verses"), startup), myreference(0)
+  FloatingWindow(parent_layout, widShowRelatedVerses, _("Related verses"), startup)
 // Window showing related verses.
 {
   item_type = ritNone;

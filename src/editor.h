@@ -42,8 +42,8 @@ public:
   viewType vt_get() { return vtFormatted; }
   GtkWidget * new_widget_signal;
   GtkWidget * new_widget_pointer;
-private:
   GtkWidget *scrolledwindow;
+private:
   GtkWidget *viewport;
   GtkWidget *vbox_viewport;
   GtkWidget *vbox_paragraphs;
@@ -119,10 +119,8 @@ public:
 
   ustring character_style_on_start_typing;
 
-  void book_set(unsigned int book_in);
-
   // Chapter loading / saving.
-  void chapter_load(unsigned int chapter_in);
+  void chapter_load(const Reference &ref);
   vector <ustring> loaded_chapter_lines;
   void chapter_save();
   GtkWidget * reload_signal;
@@ -155,14 +153,6 @@ public:
   ustring project;
  public:
   ustring project_get() { return project; }
-  // Following should not be duplicated...should be in "current reference"
- private:
-  unsigned int book;
-  unsigned int chapter;
- public:
-  unsigned int book_get() { return book; }
-  unsigned int chapter_num_get() { return chapter; }
-
   set <ustring> get_styles_at_cursor();
 
   // Automatic save.

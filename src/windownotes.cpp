@@ -312,8 +312,8 @@ void WindowNotes::notes_fill_edit_screen (int id, bool newnote)
     // Read the reference(s) and show them.
     Parse parse(references, false);
     for (unsigned int i = 0; i < parse.words.size(); i++) {
-      Reference newRef(0);
-      Reference oldRef(0);
+      Reference newRef;
+      Reference oldRef;
       reference_discover(oldRef, parse.words[i], newRef);
       ustring ref = newRef.human_readable(language);
       gtk_text_buffer_insert_at_cursor(note_editor->textbuffer_references, ref.c_str(), -1);
@@ -728,8 +728,8 @@ void WindowNotes::get_references_from_id(gint id)
   // Read the reference(s).
   Parse parse(references, false);
   for (unsigned int i = 0; i < parse.words.size(); i++) {
-    Reference newRef(0);
-    Reference oldRef(0);
+    Reference newRef;
+    Reference oldRef;
     reference_discover(oldRef, parse.words[i], newRef);
     available_references.push_back(newRef);
   }

@@ -45,8 +45,8 @@ void checks_display_references_comments(vector < ustring > &references, vector <
 {
   vector < Reference > refs;
   for (unsigned int i = 0; i < references.size(); i++) {
-    Reference newRef(0);
-    Reference oldRef(0);
+    Reference newRef;
+    Reference oldRef;
     reference_discover(oldRef, references[i], newRef);
     refs.push_back(newRef);
   }

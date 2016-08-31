@@ -29,17 +29,23 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-WindowEditor::WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
+WindowEditor::WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt):
 FloatingWindow(parent_layout, widEditor, project_name, startup)
 // Text editor.
 {
   // Initialize variables.
   projectname = project_name;
-  currvt = vtFormatted; // formatted view is default
+  currvt = vt;
+  init();
+  switch_view();
+}
+
+void WindowEditor::init(void)
+{
   currView = NULL;
   editor2 = NULL;
   usfmview = NULL;
-  
+
   // Signalling buttons.
   new_verse_signal = gtk_button_new();
   new_styles_signal = gtk_button_new();
@@ -49,18 +55,46 @@ FloatingWindow(parent_layout, widEditor, project_name, startup)
   changed_signal = gtk_button_new();
   spelling_checked_signal = gtk_button_new ();
 
-  // Gui.  
+  hID1 = 0;  hID2 = 0;  hID3 = 0;  hID4 = 0;
+  hID5 = 0;  hID6 = 0;  hID7 = 0;  hID8 = 0;
+
+  // Gui.
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox);
   gtk_container_add(GTK_CONTAINER(vbox_client), vbox);
-
-  // Switch to default view.
-  switch_view ();
 }
-
 
 WindowEditor::~WindowEditor()
 {
+  cleanup();
+}
+
+void WindowEditor::cleanup(void)
+{
+  // Disconnect signals. Next two if stmts attempt to fix Warao Psalms bug on switch to USFM view
+  // Did not work. Apparently our "cleanup" of the WindowEditor object was not good enough to
+  // clear out the source of the bug. See MainWindow::on_view_chapteras for explanation of
+  // another approach that I ended up taking.
+  if (editor2) {
+    g_signal_handler_disconnect ((gpointer) editor2->new_verse_signal, hID1);
+    g_signal_handler_disconnect ((gpointer) editor2->new_styles_signal, hID2);
+    g_signal_handler_disconnect ((gpointer) editor2->quick_references_button, hID3);
+    g_signal_handler_disconnect ((gpointer) editor2->word_double_clicked_signal, hID4);
+    g_signal_handler_disconnect ((gpointer) editor2->reload_signal, hID5);
+    g_signal_handler_disconnect ((gpointer) editor2->changed_signal, hID6);
+    g_signal_handler_disconnect ((gpointer) editor2->spelling_checked_signal, hID7);
+    g_signal_handler_disconnect ((gpointer) editor2->new_widget_signal, hID8);
+  }
+  else if (usfmview) {
+    g_signal_handler_disconnect ((gpointer) usfmview->new_verse_signal, hID1);
+    g_signal_handler_disconnect ((gpointer) usfmview->word_double_clicked_signal, hID4);
+    g_signal_handler_disconnect ((gpointer) usfmview->reload_signal, hID5);
+    g_signal_handler_disconnect ((gpointer) usfmview->changed_signal, hID6);
+  }
+
+  hID1 = 0;  hID2 = 0;  hID3 = 0;  hID4 = 0;
+  hID5 = 0;  hID6 = 0;  hID7 = 0;  hID8 = 0;
+
   gtk_widget_destroy (new_verse_signal);
   gtk_widget_destroy (new_styles_signal);
   gtk_widget_destroy (quick_references_button);
@@ -68,13 +102,24 @@ WindowEditor::~WindowEditor()
   gtk_widget_destroy (reload_signal);
   gtk_widget_destroy (changed_signal);
   gtk_widget_destroy (spelling_checked_signal);
-  // Parent class FloatingWindow destroys vbox_client, which should also destroy vbox
+
   if (editor2)  { delete editor2;  editor2 = NULL; }
   if (usfmview) { delete usfmview; usfmview = NULL; }
+  // Parent class FloatingWindow destroys vbox_client, which should also destroy vbox,
+  // but if we are in the middle of switching views, I want to clean up everything and
+  // start over as much as possible.
+  gtk_widget_destroy (vbox); vbox = NULL;
   currView = NULL;
 }
 
-
+// Every time one editor window has a verse change, this routine is called for
+// all editor window objects. That's fine, but the problem is that for the one
+// that was currently focused, it has already changed its current_reference
+// so this function thinks there is no more work to do for it--including
+// highlighting. Therefore in Editor2::signal_if_verse_changed_timeout()
+// I have added a line to highlight the current verse. This solution
+// seems to work but it is not as clean as I would like it. I could
+// add some more logic here, which may be cleaner...
 void WindowEditor::go_to(const Reference & reference)
 // Let the editor go to a reference.
 {
@@ -85,29 +130,27 @@ void WindowEditor::go_to(const Reference & reference)
     bool new_book = false;
     bool new_chapter = false;
     bool new_verse = false;
-    if (currView) {
-      Reference currRef = currView->current_reference_get();
-      new_book = (reference.book_get() != currRef.book_get());
-      new_chapter = (reference.chapter_get() != currRef.chapter_get());
-      new_verse = (reference.verse_get() != currRef.verse_get());
-      currView->current_reference_set(reference);
-    }
+
+    Reference currRef = currView->current_reference_get();
+    new_book = (reference.book_get() != currRef.book_get());
+    new_chapter = (reference.chapter_get() != currRef.chapter_get());
+    new_verse = (reference.verse_get() != currRef.verse_get());
+    if (new_book) { new_chapter = true; }
+    if (new_chapter) { new_verse = true; }
+    
     DEBUG("2 ref="+reference.human_readable(""))
     // Save the editor if need be.
     if (new_book || new_chapter) {
       currView->chapter_save();
     }
-    
-    // With a new book, also load a new chapter.
-    if (new_book) {
-      new_chapter = true;
-      currView->book_set(reference.book_get());
-    }
+
+    currView->current_reference_set(reference);
+
     DEBUG("3 ref="+reference.human_readable(""))
     // Deal with a new chapter.
     if (new_chapter) {
       // Load chapter, if need be.
-      currView->chapter_load(reference.chapter_get());
+      currView->chapter_load(reference);
       // When loading a new chapter, there is also a new verse.
       new_verse = true;
     }
@@ -197,7 +240,7 @@ Reference WindowEditor::current_reference()
     return currView->current_reference_get();
   }
   gw_warning("Returning empty Reference from WindowEditor::current_reference");
-  Reference reference (0);
+  Reference reference;
   return reference;
 }
 
@@ -205,7 +248,9 @@ Reference WindowEditor::current_reference()
 ustring WindowEditor::current_verse_number()
 {
   if (currView) {
-    return currView->current_verse_get();
+    ustring verse = currView->current_reference_get().verse_get();
+    DEBUG("Returning v="+verse) 
+    return verse;
   }
   gw_warning("Returning blank from WindowEditor::current_verse_number");
   return "0";
@@ -289,9 +334,9 @@ void WindowEditor::insert_table(const ustring& rawtext)
 }
 
 
-void WindowEditor::chapter_load(unsigned int chapter_in)
+void WindowEditor::chapter_load(const Reference &ref)
 {
-  currView->chapter_load (chapter_in);
+  currView->chapter_load (ref);
 }
 
 
@@ -351,7 +396,7 @@ Editor2 * WindowEditor::editor_get()
 
 unsigned int WindowEditor::book()
 {
-  if (currView) { return currView->book_get(); }
+  if (currView) { return currView->current_reference_get().book_get(); }
   gw_warning("Returning 1 from WindowEditor::book");
   return 1;
 }
@@ -359,7 +404,7 @@ unsigned int WindowEditor::book()
 
 unsigned int WindowEditor::chapter()
 {
-  if (currView) { return currView->chapter_num_get(); } 
+  if (currView) { return currView->current_reference_get().chapter_get(); } 
   gw_warning("Returning 1 from WindowEditor::chapter");
   return 1;
 }
@@ -390,8 +435,7 @@ void WindowEditor::on_new_styles()
   vector <ustring> styles2 (styles.begin(), styles.end());
   ustring text = _("Style ");
   for (unsigned int i = 0; i < styles2.size(); i++) {
-    if (i)
-      text.append(", ");
+    if (i) { text.append(", "); }
     text.append(styles2[i]);
   }
   status1 (text);
@@ -458,24 +502,23 @@ void WindowEditor::vt_set (viewType newvt)
 }
 
 void WindowEditor::switch_view ()
-// Switch to the currvt view type; vtFormatted is default. vtUSFM is the 
-// "reveal codes" view. Assumes currvt has been set by the caller.
+// Switch to the currvt view type; vtFormatted is default. vtUSFM is
+// the "reveal codes" view. Assumes currvt has been set by the
+// caller. Assumes a change in view will happen (that we are not
+// switching from one view to the same view).
 {
   DEBUG("Called with currvt="+std::to_string(int(currvt))+" and saved projectname="+projectname)
-#if 0
-  // If no project was given, then we have switched.
-  bool switched = project.empty();
-#endif
-  Reference reference (0);
+  Reference reference;
   
   // Get state of and destroy any previous view, if there was one.
   if (currView) {
     //project = currView->project_get();
     reference = currView->current_reference_get();
-    delete currView; // this will delete the derived class object, then ChapterView base "object"
-    currView = NULL;
-    editor2 = NULL;
-    usfmview = NULL;
+    // If I comment out above, program doesn't show right verse, but it also doesn't crash in Warao!
+    DEBUG("reference="+reference.human_readable(""))
+    DEBUG("book="+std::to_string(reference.book_get())+" ch="+std::to_string(reference.chapter_get())+" v="+reference.verse_get())
+      cleanup();  // something does not get cleaned up sufficiently to make this work...see MainWindow::on_view_chapteras for details
+    init(); // trying to put *this object back into the same state it was at startup...since for Warao, the first editor window works properly
   }
 
   // Create new view.
@@ -485,25 +528,28 @@ void WindowEditor::switch_view ()
   case vtFormatted:
     editor2 = new Editor2 (vbox, projectname);
     currView = editor2;
-    g_signal_connect ((gpointer) editor2->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->new_styles_signal, "clicked", G_CALLBACK(on_new_styles_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->quick_references_button, "clicked", G_CALLBACK(on_quick_references_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
-    g_signal_connect ((gpointer) editor2->new_widget_signal, "clicked", G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
-    last_focused_widget = editor2->last_focused_widget;
-    break;
-    
+    connect_focus_signals (editor2->scrolledwindow);
+    hID1 = g_signal_connect ((gpointer) editor2->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
+    hID2 = g_signal_connect ((gpointer) editor2->new_styles_signal, "clicked", G_CALLBACK(on_new_styles_signalled), gpointer(this));
+    hID3 = g_signal_connect ((gpointer) editor2->quick_references_button, "clicked", G_CALLBACK(on_quick_references_signalled), gpointer(this));
+    hID4 = g_signal_connect ((gpointer) editor2->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
+    hID5 = g_signal_connect ((gpointer) editor2->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
+    hID6 = g_signal_connect ((gpointer) editor2->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
+    hID7 = g_signal_connect ((gpointer) editor2->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
+    hID8 = g_signal_connect ((gpointer) editor2->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
+    last_focused_widget = editor2->last_focused_widget;			      	
+    break;								      	
+    									      	
   case vtUSFM:
     usfmview = new USFMView (vbox, projectname);
     currView = usfmview;
     connect_focus_signals (usfmview->sourceview);
-    g_signal_connect ((gpointer) usfmview->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
-    g_signal_connect ((gpointer) usfmview->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
-    g_signal_connect ((gpointer) usfmview->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
-    g_signal_connect ((gpointer) usfmview->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
+    hID1 = g_signal_connect ((gpointer) usfmview->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
+    hID4 = g_signal_connect ((gpointer) usfmview->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
+    hID5 = g_signal_connect ((gpointer) usfmview->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
+    hID6 = g_signal_connect ((gpointer) usfmview->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
+    // See usfmview.cpp for spelling_checked_signal as well...not sure why it is not connected here.
+    hID2 = 0; hID3 = 0; hID7 = 0; hID8 = 0;
     last_focused_widget = usfmview->sourceview;
     break;
 
@@ -513,14 +559,15 @@ void WindowEditor::switch_view ()
   // Main widget grabs focus.
   gtk_widget_grab_focus (last_focused_widget);
 
-#if 0
-  // If we switched, set the editor to the right place.
-  if (switched) {
-#endif
-    go_to (reference); // adding back this call causes a hang in Warao Ps 139
-#if 0
-  }
-#endif
+  // This call causes a hang in Warao Ps 139, but I do not find a
+  // particular call in this routine that messes up.  It is
+  // something about just displaying the data that does it, as if
+  // the problem is in another library. Far more likely, it is our
+  // input to that library through some stale state. The reality is
+  // that the chapter displays fine the first time, so it seems that
+  // something between the first time and the second time (with USFM
+  // displayed in between) has changed.
+  go_to (reference);
 }
 
 

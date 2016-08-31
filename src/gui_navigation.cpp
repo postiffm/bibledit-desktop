@@ -34,8 +34,7 @@
 #include <glib/gi18n.h>
 #include "completion.h"
 
-GuiNavigation::GuiNavigation(int dummy):
-reference(0), track(0)
+GuiNavigation::GuiNavigation(int dummy): track(0)
 {
   // Initialize variables.
   parentToolbar = NULL;
