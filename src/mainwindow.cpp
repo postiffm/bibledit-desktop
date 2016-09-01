@@ -248,6 +248,7 @@ navigation(0), httpd(0)
   // the accelerator key for viewing USFM code was changed to Ctrl-\.
   // The backslash is the first character of the USFM code.
   gtk_accel_group_connect(accelerator_group, GDK_KEY_backslash, GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_view_usfm_code), gpointer(this), NULL));
+  gtk_accel_group_connect(accelerator_group, GDK_KEY_T, GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_activate_tile_windows), gpointer(this), NULL));
 
   // GUI build.
 
@@ -4853,7 +4854,7 @@ void MainWindow::on_view_tile_windows()
 {
   guint width, height, x=0, y = 0;
   gtk_layout_get_size (GTK_LAYOUT (layout), &width, &height);
-
+  DEBUG("Request to tile windows through menu or Ctrl-T hotkey")
   // Resize each editor window
    for (unsigned int i=0;i<editor_windows.size();i++) {
      FloatingWindow *floating_window = (FloatingWindow *) editor_windows[i];
@@ -4883,6 +4884,7 @@ void MainWindow::on_view_tile_windows()
       floating_window->rectangle_set(rectangle);
    }
  }
+  DEBUG("Done tiling windows")
 }
 
 #ifdef WIN32
@@ -5434,7 +5436,7 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
     ustring project = editor_window->projectname_get();
     on_window_editor_delete_button(GTK_BUTTON(editor_window->delete_signal_button));
     //editor_window->vt_set(vt);
-    add_new_editor_window(project, /*startup*/false, vt);
+    add_new_editor_window(project, /*startup*/true, vt); // trying the startup=true switch to see if window positioning is better
     debug_view("2", menuitem, vt);
     // There are objects that act on USFM view or formatted view only.
     // Inform these about a possible change.
@@ -5967,7 +5969,7 @@ void MainWindow::accelerator_main_jumpto_callback(gpointer user_data)
   ((MainWindow *) user_data)->on_jumpto_main();
 }
 
-
+// For Ctrl-\ accelerator
 void MainWindow::accelerator_view_usfm_code(gpointer user_data)
 {
   ((MainWindow *) user_data)->accelerator_view_usfm_code_toggle();
@@ -5986,6 +5988,17 @@ void MainWindow::accelerator_view_usfm_code_toggle()
   }
 }
 
+// For Ctrl-T accelerator
+void MainWindow::accelerator_activate_tile_windows(gpointer user_data)
+{
+  ((MainWindow *) user_data)->accelerator_tile_windows();
+}
+
+void MainWindow::accelerator_tile_windows()
+{
+  DEBUG("Saw Ctrl-T to tile windows")
+  on_view_tile_windows();
+}
 
 /*
  |

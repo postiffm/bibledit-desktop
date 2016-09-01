@@ -770,6 +770,8 @@ protected:
   static void accelerator_main_jumpto_callback(gpointer user_data);
   static void accelerator_view_usfm_code(gpointer user_data);
   void accelerator_view_usfm_code_toggle();
+  static void accelerator_activate_tile_windows(gpointer user_data);
+  void accelerator_tile_windows();
   
   // Shutdown.
   bool shutting_down;
