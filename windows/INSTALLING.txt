@@ -1,4 +1,4 @@
-This is a description of how to install bibledit-gtk on Windows.
+This is a description of how to install bibledit-desktop on Windows.
 It assumes you have already gone through the BUILDING process.
 Written by Matt Postiff, postiffm@umich.edu, 3/21/2016
 
@@ -24,7 +24,7 @@ Inside of that directory, you will see
 	editor\lib
 	editor\share
 	
-You can execute bibledit-gtk from editor\bin\bibledit-gtk.exe
+You can execute bibledit-desktop from editor\bin\bibledit-desktop.exe
 
 Create an icon on your desktop or in your Start Menu and you are good
 to go!
@@ -44,7 +44,7 @@ Download the texlive-xetex package from
 http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe
 
 1. Install it in the default directory. It will add an entry to your Windows 
-PATH environment variable which is important for Bibledit-gtk. 
+PATH environment variable which is important for Bibledit-desktop. 
 
 2. Depending on the options you select, this will install up to 4 GB (that's 
 right, gigabytes) of packages to use in tex.
@@ -56,7 +56,7 @@ Download the php-cli package and install it.
 1. It is probably best to get it directly from
 	http://windows.php.net/downloads/releases/php-5.6.19-Win32-VC11-x86.zip
 	I chose php 5.6.19, latest in the 5 series, not to go to version 7.0.
-	I chose the thread-safe version since we have threading going on in bibledit-gtk.
+	I chose the thread-safe version since we have threading going on in bibledit-desktop.
 	So I chose VC11 x86 Thread Safe (2016-Mar-03 05:51:49)
 	I did NOT choose x64 builds because they were listed as experimental.
 

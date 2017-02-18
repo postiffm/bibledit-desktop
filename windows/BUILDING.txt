@@ -1,4 +1,4 @@
-This is a description of how to build bibledit-gtk on Windows from scratch.
+This is a description of how to build bibledit-desktop on Windows from scratch.
 Written by Matt Postiff, postiffm@umich.edu, 3/21/2016
 
 Revised: 3/24/2016
@@ -27,7 +27,7 @@ Bibledit Build Environment Instructions
 		c. Modify your /home/username/.bash_profile so that the path doesn't have a bunch of Windows cruft in it. This will avoid a multitude of problems. For instance, if gcc points to some other gcc on your system (on mine, strawberry/gcc), then you will have problems. You can use the sample in bibledit/gtk/windows/bash_profile. It has a section where it looks at $MSYSTEM to determine what path to set, and it does NOT add the old ${PATH} back to the end of the new PATH.
 		d. Verify that "gcc --version" says 5.3.0 or newer. If not, exit the Mingw 64 shell and restart it. Check again. If you have no gcc in the path, then you forgot to install the toolchain. Do step 7 again. I have done this several times when I install the x86_64 (64-bit) tools and then later add on the i686 (32-bit) tools using buildenvWin.sh. I forget that I need to install the 32-bit toolchain.
 		e. Don't go to the next step until gcc --version reports the right thing.
-	10. cd 32bit/bibledit/gtk   --or--   cd 64bit/bibledit/gtk
+	10. cd 32bit/bibledit-desktop   --or--   cd 64bit/bibledit/desktop
 		a. Note that the buildenvWin64 script automatically does a git clone of the bibledit sources from github, and places it into either 32bit/bibledit or 64bit/bibledit, depending on the environment that it sees when you run it.
 	11. ./autogen.sh
 		a. The output should look like this, with no fatal errors popping up:
@@ -65,7 +65,7 @@ Bibledit Build Environment Instructions
 		system where I will also remove duplication of -I directives in the 
 		compiler command line.
 		b. Wait a while for the build to complete. No more coffee. Do something else!
-	14. If you run src/bibledit-gtk.exe, it will start up, but most likely will
+	14. If you run src/bibledit-desktop.exe, it will start up, but most likely will
 		not run correctly because it is not installed in an environment where all its
 		libraries and tools reside. See the next step.
-	15. Read bibledit-gtk/windows/INSTALLING.txt.
+	15. Read bibledit-desktop/windows/INSTALLING.txt.
