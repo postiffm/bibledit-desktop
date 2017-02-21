@@ -37,7 +37,7 @@
 #include <glib/gi18n.h>
 
 BackupAssistant::BackupAssistant(int dummy) :
-  AssistantBase(_("Backup"), _("backup"))
+  AssistantBase(_("Backup"), _("backup"), /*showintro*/false)
 // Backup assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);
@@ -45,7 +45,7 @@ BackupAssistant::BackupAssistant(int dummy) :
   g_signal_connect (G_OBJECT (assistant), "apply", G_CALLBACK (on_assistant_apply_signal), gpointer(this));
   g_signal_connect (G_OBJECT (assistant), "prepare", G_CALLBACK (on_assistant_prepare_signal), gpointer(this));
 
-  introduction (_("A backup helps keep your data safe"));
+  //introduction (_("A backup helps keep your data safe"));
 
   // Configuration and initialization.
   extern Settings *settings;
@@ -58,7 +58,7 @@ BackupAssistant::BackupAssistant(int dummy) :
   gtk_container_set_border_width (GTK_CONTAINER (vbox_select_type), 10);
 
   gtk_assistant_set_page_title (GTK_ASSISTANT (assistant), vbox_select_type, _("What would you like to backup?"));
-  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_select_type, GTK_ASSISTANT_PAGE_CONTENT);
+  gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_select_type, GTK_ASSISTANT_PAGE_INTRO); // PAGE_CONTENT will have a Back button
   gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_select_type, true);
 
   GSList *radiobutton_select_type_group = NULL;
@@ -284,6 +284,13 @@ void BackupAssistant::on_assistant_prepare (GtkWidget *page)
   }
 
   if (page == vbox_file) {
+	time_t t = time(NULL);
+	struct tm nowtime = *localtime(&t);
+	gchar currtime[80];
+	g_snprintf(currtime, 80, "%d%02d%02d_%02d_%02d_%02d", 
+		nowtime.tm_year + 1900, nowtime.tm_mon + 1, nowtime.tm_mday, 
+		nowtime.tm_hour, nowtime.tm_min, nowtime.tm_sec);
+	filename = currtime; filename += ".tar.gz";
     gtk_label_set_text (GTK_LABEL (label_file), filename.c_str());
     if (filename.empty()) {
       gtk_label_set_text (GTK_LABEL (label_file), _("(None)"));

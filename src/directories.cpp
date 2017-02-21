@@ -323,7 +323,11 @@ void directories::find_utilities(void)
   }
   
   //---------------------------------------------
-  // Zip
+  // Gzip. Had a strange error 2/17/2017 that we had not had before, on Windows. The command works in an msys2-64 shell
+  // as long as you specify the path right (like /c/Users/postiffm/backupTest6.tar.gz) but it doesn't work in a cmd shell.
+  // T1 Shell command: cd C:\Users\postiffm\.bibledit;  tar   --force-local   -czf   C:\Users\postiffm\backupTest5.tar.gz   . 
+  // tar (child): gzip: Cannot exec: No such file or directory
+  // Found that the problem was that msys2 now requires /usr/bin/sh.exe to be placed in Program Files\Bibledit-version\usr\bin\sh.exe
   //---------------------------------------------
   {
   // Check for gzip (Unix)

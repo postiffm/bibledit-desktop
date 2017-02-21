@@ -90,6 +90,8 @@ BIN="/c/$PROGRAMFILES/Bibledit-$VERSION/editor/bin"
 SHARE="/c/$PROGRAMFILES/Bibledit-$VERSION/editor/share"
 LIB="/c/$PROGRAMFILES/Bibledit-$VERSION/editor/lib"
 ETC="/c/$PROGRAMFILES/Bibledit-$VERSION/editor/etc"
+DEST_TMP="/c/$PROGRAMFILES/Bibledit-$VERSION/tmp"
+DEST_USRBIN="/c/$PROGRAMFILES/Bibledit-$VERSION/usr/bin"
 # Take note: this is the 64-bit version of stuff
 DLLS="/$MINGWDIR/bin"
 THEMES="/$MINGWDIR/share/themes"
@@ -370,6 +372,12 @@ cp -R doc/menus.pl "$SHARE/bibledit"
 cp -R doc/retrieval.pl "$SHARE/bibledit"
 cp -R doc/style.css "$SHARE/bibledit"
 cp -R doc/site.xml "$SHARE/bibledit"
+
+# Added 2/21/2017
+echo "Setting up usr/bin and tmp"
+mkdir -v -p "$DEST_TMP"
+mkdir -v -p "$DEST_USRBIN"
+cp $USRBIN/sh.exe "$DEST_USRBIN"
 
 echo "Fetching bwoutpost.exe and installing to $BIN"
 # Remove old version if there is one in this directory
