@@ -138,8 +138,6 @@ bool uncompress(const ustring & archive, const ustring & directory)
         spawn.workingdirectory(directory);
       }
       spawn.arg(archive);
-	  //spawn.arg("-C"); // -C = directory to unpack into (change there first)
-	  //spawn.arg(directory);
       spawn.progress(_("Unpacking"), false);
       spawn.run();
       result = spawn.exitstatus;
