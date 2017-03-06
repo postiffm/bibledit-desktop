@@ -167,7 +167,7 @@ void OpenDocument::unpack_template()
   command.append(" -d ");
   command.append(shell_quote_space(workingdirectory));
 #else
-  ustring command = "cd";
+  ustring command = "cd ";
   command.append(shell_quote_space(workingdirectory));
   command.append("; cp ");
   command.append(gw_build_filename(Directories->get_package_data(), "template.odt"));
