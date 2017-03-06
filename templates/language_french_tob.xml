@@ -396,4 +396,139 @@
 <localization>Apocalypse</localization>
 <abbreviation>Ap</abbreviation>
 </book>
+<book>
+<id>67</id>
+<english>Front Matter</english>
+<localization>Introduction</localization>
+<abbreviation>Intro.</abbreviation>
+</book>
+<book>
+<id>68</id>
+<english>Back Matter</english>
+<localization>Annexes</localization>
+<abbreviation>Ann.</abbreviation>
+</book>
+<book>
+<id>69</id>
+<english>Other Material</english>
+<localization>Autres matériaux</localization>
+<abbreviation>Divers</abbreviation>
+</book>
+<book>
+<book>
+<id>70</id>
+<english>Tobit</english>
+<localization>Tobie</localization>
+<abbreviation>Tb</abbreviation>
+</book>
+<book>
+<id>71</id>
+<english>Judith</english>
+<localization>Judith</localization>
+<abbreviation>Jdt</abbreviation>
+</book>
+<book>
+<id>72</id>
+<english>Esther (Greek)</english>
+<localization>Esther (Grec)</localization>
+<abbreviation>EsG</abbreviation>
+</book>
+<book>
+<id>73</id>
+<english>Book of Wisdom</english>
+<localization>Sagesse</localization>
+<abbreviation>Sg</abbreviation>
+</book>
+<book>
+<id>74</id>
+<english>Sirach</english>
+<localization>Siracide</localization>
+<abbreviation>Si</abbreviation>
+</book>
+<book>
+<id>75</id>
+<english>Baruch</english>
+<localization>Baruch</localization>
+<abbreviation>Ba</abbreviation>
+</book>
+<book>
+<id>76</id>
+<english>Letter of Jeremiah</english>
+<localization>Lettre de Jérémie</localization>
+<abbreviation>LJe</abbreviation>
+</book>
+<book>
+<id>77</id>
+<english>Song of the Three Children</english>
+<localization>Cantique des trois enfants</localization>
+<abbreviation>PrAzar</abbreviation>
+</book>
+<book>
+<id>78</id>
+<english>Susanna</english>
+<localization>Suzanne</localization>
+<abbreviation>Suz</abbreviation>
+</book>
+<book>
+<id>79</id>
+<english>Bel and the Dragon</english>
+<localization>Bel et le Dragon</localization>
+<abbreviation>Bel</abbreviation>
+</book>
+<book>
+<id>80</id>
+<english>1 Maccabees</english>
+<localization>1 Maccabées</localization>
+<abbreviation>1 M</abbreviation>
+</book>
+<book>
+<id>81</id>
+<english>2 Maccabees</english>
+<localization>2 Maccabées</localization>
+<abbreviation>2 M</abbreviation>
+</book>
+<book>
+<id>83</id>
+<english>Prayer of Manasses</english>
+<localization>Prière de Manassé</localization>
+<abbreviation>PrMan</abbreviation>
+</book>
+<book>
+<id>84</id>
+<english>Psalm 151</english>
+<localization>Psaume 151</localization>
+<abbreviation>Ps151</abbreviation>
+</book>
+<book>
+<id>85</id>
+<english>3 Maccabees</english>
+<localization>3 Maccabées</localization>
+<abbreviation>3 M</abbreviation>
+</book>
+<book>
+<id>86</id>
+<english>2 Esdras</english>
+<localization>2 Esdras</localization>
+<abbreviation>2 Esd</abbreviation>
+</book>
+<book>
+<id>87</id>
+<english>4 Maccabees</english>
+<localization>4 Maccabées</localization>
+<abbreviation>4 M</abbreviation>
+</book>
+<book>
+<id>88</id>
+<english>Daniel (Greek)</english>
+<localization>Daniel (Grec)</localization>
+<abbreviation>AddDan</abbreviation>
+</book>
+<english></english>
+<localization></localization>
+<abbreviation></abbreviation>
+<book>
+<english></english>
+<localization></localization>
+<abbreviation></abbreviation>
+</book>
 </bibledit-localized-books>
