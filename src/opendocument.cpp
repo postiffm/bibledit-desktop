@@ -39,6 +39,7 @@
 #include "tiny_utilities.h"
 #include "stylesheetutils.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 /*
  Some properties of the stylesheet are not implemented for certain reasons.
@@ -173,6 +174,7 @@ void OpenDocument::unpack_template()
   command.append(gw_build_filename(Directories->get_package_data(), "template.odt"));
   command.append(" .; unzip *; rm *.odt");
 #endif
+  DEBUG(command);
   if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
 }
 
@@ -430,6 +432,7 @@ void OpenDocument::zip(const ustring filename)
 #endif
   command.append(shell_quote_space(filename));
   command.append(" *");
+  DEBUG(command);
   if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
 }
 
