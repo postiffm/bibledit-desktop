@@ -189,8 +189,8 @@ void gw_mkdir_with_parents(const ustring & directory)
 #ifdef WIN32
 	// Use Windows system call to do this "right"
 	bool retval = CreateDirectory(directory.c_str(), NULL);
-	// Returns 0 if OK
-	// Returns non-zero if error, and GetLastError will tell us:
+	// Returns nonzero if OK
+	// Returns zero if error, and GetLastError will tell us:
 	// ERROR_ALREADY_EXISTS The specified directory already exists.
 	// ERROR_PATH_NOT_FOUND One or more intermediate directories do not exist; this function will only create the final directory in the path.
 	if (retval == 0) {
@@ -303,8 +303,6 @@ void GwSpawn::progress(ustring text, bool allow_cancel)
   myprogress = true;
   mytext = text;
   myallowcancel = allow_cancel;
-  // Progress display requires async mode, so set that flag too.
-  myasync = true;
 }
 
 
@@ -313,9 +311,18 @@ void GwSpawn::describe ()
 {
   ustring description;
   if (!myworkingdirectory.empty()) {
-    description.append ("cd ");
+    description.append ("[Workdir=");
     description.append (myworkingdirectory);
+	description.append ("] ");
+/*
+#ifdef WIN32
+    // commands like cd workdir ; tar ... do not work in DOS 
+	// because of semicolon. Need to use an & symbol between commands
+	description.append (" & ");
+#else
     description.append ("; ");
+#endif
+*/
   }
   description.append (myprogram);
   
@@ -323,7 +330,7 @@ void GwSpawn::describe ()
     description.append (" ");
     description.append (myarguments[i]);
   }
-  gw_message ("Shell command: " + description);
+  gw_message ("Command: " + description);
 }
 
 
@@ -331,6 +338,8 @@ void GwSpawn::describe ()
 void GwSpawn::run()
 {
   describe();
+  // (In Unix???) Progress display requires async mode, so set that flag too.
+  if (myprogress) { myasync = true; }
   // Working directory.
   const gchar *workingdirectory = NULL;
   if (!myworkingdirectory.empty())
@@ -446,8 +455,10 @@ These calls allow one to hide the console window.
   describe();
   // Working directory.
   const gchar *workingdirectory = NULL;
-  if (!myworkingdirectory.empty())
+  if (!myworkingdirectory.empty()) {
     workingdirectory = myworkingdirectory.c_str();
+	DEBUG("[WIN] Working directory is "+myworkingdirectory)
+  }
   /*
      The trick to running a console window silent is in the STARTUPINFO 
      structure that we pass into the CreateProcess function. 
@@ -467,7 +478,7 @@ These calls allow one to hide the console window.
   // that will tell the console window to start up without showing itself.
   StartupInfo.cb = sizeof(STARTUPINFO);
   StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
-  StartupInfo.wShowWindow = SW_HIDE;
+  StartupInfo.wShowWindow = SW_HIDE; //SW_SHOW;
 
   // Arguments to the program.
   char Args[4096];
@@ -535,62 +546,81 @@ These calls allow one to hide the console window.
     gw_critical(message);
     return;
   }
-  // Handle progress function.
+  // Handle progress and async functions.
+  // There are four possibilities:
+  // myprogress  myasync   what to do?
+  // true        false     run thread, show progress, wait for it to finish
+  // true        true      run thread, show progress, wait for it to finish (same as above; async is contradictory)
+  // false       false     run thread, wait for it to finish
+  // false       true      let thread run on its own...then how do you get return code? so I run it like above case
   if (myprogress) {
+	DEBUG("Handling progress window")
     ProgressWindow progresswindow(mytext, myallowcancel);
     // Time passed to WaitForSingleObject is in milliseconds.
     while ((WaitForSingleObject(ProcessInfo.hProcess, 500) >= 500)
            || (WaitForSingleObject(ProcessInfo.hThread, 500) >= 500)) {
       progresswindow.pulse();
-      if (progresswindow.cancel) {
+      if (myallowcancel && progresswindow.cancel) {
 // todo        unix_kill (pid);
         cancelled = true;
       }
     }
+	// By here, the thread/process should be done if "progress mode" was enabled
+	DEBUG("Spawned thread should be done now")
   }
-  // Handle sync mode.
+  // Handle async mode. First, if we are NOT in async mode, we can finish 
+  // the program and get the return code, handle output, etc.
   if (!myasync) {
     // Wait for it to finish.
     WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
     WaitForSingleObject(ProcessInfo.hThread, INFINITE);
+
+	// Get the exit code.
+	ULONG rc;
+	if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc)) {  // this function returns immediately.
+		// Return val of above is zero if fails; so we set rc = 0--why? doesn't that allow silent fails?
+		rc = 0;
+	}
+	exitstatus = rc;
+
+	// Close handles.
+	CloseHandle(ProcessInfo.hThread);
+	CloseHandle(ProcessInfo.hProcess);
+
+	  // Read the pipe files if we don't sent the output to "nul".
+	  if (!mydevnull) {
+		gchar *standard_output;
+		g_file_get_contents(pipe_out.c_str(), &standard_output, NULL, NULL);
+		gchar *standard_error;
+		g_file_get_contents(pipe_err.c_str(), &standard_error, NULL, NULL);
+		// Handle case we read the output. Else dump it to stdout/err.
+		if (myread) {
+		  if (standard_output) {
+			ParseLine parse_out(standard_output);
+			standardout = parse_out.lines;
+		  }
+		  if (standard_error) {
+			ParseLine parse_err(standard_error);
+			standarderr = parse_err.lines;
+		  }
+		} else {
+		  if (standard_output)
+			tiny_spawn_write(1, standard_output);
+		  if (standard_error)
+			tiny_spawn_write(2, standard_error);
+		}
+		// Free data.
+		if (standard_output)
+		  g_free(standard_output);
+		if (standard_error)
+		  g_free(standard_error);
+	  }
   }
-  // Get the exit code.
-  ULONG rc;
-  if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
-    rc = 0;
-  exitstatus = rc;
-
-  // Close handles.
-  CloseHandle(ProcessInfo.hThread);
-  CloseHandle(ProcessInfo.hProcess);
-
-  // Read the pipe files if we don't sent the output to "nul".
-  if (!mydevnull) {
-    gchar *standard_output;
-    g_file_get_contents(pipe_out.c_str(), &standard_output, NULL, NULL);
-    gchar *standard_error;
-    g_file_get_contents(pipe_err.c_str(), &standard_error, NULL, NULL);
-    // Handle case we read the output. Else dump it to stdout/err.
-    if (myread) {
-      if (standard_output) {
-        ParseLine parse_out(standard_output);
-        standardout = parse_out.lines;
-      }
-      if (standard_error) {
-        ParseLine parse_err(standard_error);
-        standarderr = parse_err.lines;
-      }
-    } else {
-      if (standard_output)
-        tiny_spawn_write(1, standard_output);
-      if (standard_error)
-        tiny_spawn_write(2, standard_error);
-    }
-    // Free data.
-    if (standard_output)
-      g_free(standard_output);
-    if (standard_error)
-      g_free(standard_error);
+  else if (myasync) {
+	  // We don't do anything if the program is running asynchronously 
+	  // to this thread. I assume that the caller will NOT
+	  // look at the return code and output, since we don't know
+	  // when that information is ready. MAP 3/6/2017
   }
 }
 #endif
