@@ -337,6 +337,13 @@ cp $USRBIN/msys-icudata56.dll "$BIN"
 cp $USRBIN/msys-icui18n56.dll "$BIN"
 # Above added 3/25/2016
 
+# Below added 3/6/2017
+echo "Copying zip and unzip..."
+cp $USRBIN/zip.exe "$BIN"
+cp $USRBIN/unzip.exe "$BIN"
+cp $USRBIN/msys-bz2-1.dll "$BIN"
+# Above added 3/6/2017
+
 # Below added 3/29/2016. This is critical for crash-free operation,
 # for example, when opening Related Verses or References windows that
 # use libwebkit.

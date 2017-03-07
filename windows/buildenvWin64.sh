@@ -48,6 +48,8 @@ pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-glib2
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-python2-pygtk
 pacman -S --noconfirm msys/gtk-doc
 pacman -S --noconfirm msys/git
+pacman -S --noconfirm msys/zip
+pacman -S --noconfirm msys/unzip
 #pacman -S --noconfirm msys/glib2-devel
 pacman -S --noconfirm autoconf-archive
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-sqlite3 msys/libsqlite-devel msys/sqlite msys/sqlite-doc
