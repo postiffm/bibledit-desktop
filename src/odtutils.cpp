@@ -26,6 +26,7 @@
 #include "gwrappers.h"
 #include "settings.h"
 #include "color.h"
+#include "debug.h"
 
 OdtTextParagraph::OdtTextParagraph(vector < ustring > *lines, const ustring & stylename)
 // OpenDocument Text Text Paragraph.
@@ -102,14 +103,16 @@ void odt_set_font(const ustring & directory, const ustring & fontname)
 void odt_insert_content(const ustring & directory, const vector < ustring > &text)
 {
   vector < ustring > odtlines;
+  //DEBUG_VECTOR(text)
   ReadText rt(odt_content_xml_filename(directory), true, false);
   for (unsigned int i = 0; i < rt.lines.size(); i++) {
     if (rt.lines[i].find("</office:text>") == 0) {
       for (unsigned int i2 = 0; i2 < text.size(); i2++) {
-        odtlines.push_back(text[i2]);
+			odtlines.push_back(text[i2]);
       }
     }
     odtlines.push_back(rt.lines[i]);
+	//DEBUG("[ODT] "+rt.lines[i])
   }
   write_lines(odt_content_xml_filename(directory), odtlines);
 }
