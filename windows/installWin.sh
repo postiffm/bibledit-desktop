@@ -121,6 +121,13 @@ cp ./git/.libs/bibledit-git.exe "$BIN"
 cp ./shutdown/.libs/bibledit-shutdown.exe "$BIN"
 cp -R ./windows/bibledit.ico "$BIN"
 
+# Added 3/7/2017
+echo "Copying language / i18n packages to $SHARE/locale and scripts..."
+mkdir -v -p "$SHARE/locale/fr/LC_MESSAGES"
+cp ./po/fr.gmo "$SHARE/locale/fr/LC_MESSAGES/bibledit.mo"
+cp ./windows/bibledit-fr.cmd "$BIN"
+# Above added 3/7/2017
+
 # If we are in --strip mode, then shrink the executables in the dest directory
 # I opt to leave them as-is in the source directory in case debug info is needed
 if [ "$do_strip" = "1" ]; then
