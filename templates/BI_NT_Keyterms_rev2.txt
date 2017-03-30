@@ -1,5 +1,4 @@
-﻿BI NT Keyterms﻿
-
+﻿BI NT Keyterms﻿ v. 2
 [keyterm]
 3956*   ALL, ALL (KINDS OF), ALL (THINGS)
 [references]
