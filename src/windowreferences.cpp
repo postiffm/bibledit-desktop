@@ -333,6 +333,7 @@ void WindowReferences::save ()
       // WAS sql = g_strdup_printf("insert into refs values (%d, %d, '%s', '%s')", references[i].book_get(), references[i].chapter_get(), references[i].verse_get().c_str(), double_apostrophy(comments[i]).c_str());
       // WAS rc = sqlite3_exec(db, sql, NULL, NULL, &error);
       // WAS g_free(sql);
+	  // I think below is redundant now
       if (rc) {
         throw runtime_error(sqlite3_errmsg(db));
       }

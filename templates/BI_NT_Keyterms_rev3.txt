@@ -1,6 +1,6 @@
 ﻿BI NT Keyterms﻿ v. 3
 [keyterm]
- 3956*   ALL, ALL (KINDS OF), ALL (THINGS)
+BI10000 3956*   ALL, ALL (KINDS OF), ALL (THINGS)
 [references]
 MAT 1:17 
 MAT 2:3 
