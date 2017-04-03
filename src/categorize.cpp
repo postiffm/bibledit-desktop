@@ -224,8 +224,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
 
 void CategorizeLine::append_text(ustring & container, const ustring & text)
 {
-  if (!container.empty())
-    container.append(" ");
+  if (!container.empty()) { container.append(" "); }
   container.append(text);
 }
 
