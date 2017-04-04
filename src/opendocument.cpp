@@ -431,12 +431,13 @@ void OpenDocument::zip(const ustring filename)
     command.append(" -r ");
   }
 #else
-  command.append("; zip -r");
+  command.append("; zip -r ");
 #endif
   command.append(shell_quote_space(filename));
   command.append(" *");
-  //DEBUG(command);
-  if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
+  DEBUG(command);
+  // This command does not work with GwSpawn because of the wildcards.
+  if (system(command.c_str()));
 }
 
 
