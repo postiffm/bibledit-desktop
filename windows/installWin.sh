@@ -7,7 +7,7 @@
 
 # To change the version number, change the following line and
 # the version in ../configure.ac, as well as any shortcuts.
-VERSION="4.9.9"
+VERSION="4.10"
 
 full=1
 docs=0
