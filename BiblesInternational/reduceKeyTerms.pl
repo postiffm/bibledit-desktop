@@ -16,7 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Take the BI_OT_Keyterms_rev3.txt and remove all books but those listed on the command line.
+# Take the given Keyterm file and remove all books but those listed on
+# the command line.
 # Example usage:
 # reduceKeyTerms.pl BI_OT_Keyterms_rev3.txt Psa Pro
 
