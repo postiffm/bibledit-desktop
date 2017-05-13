@@ -170,6 +170,7 @@ then
 fi
 if [ -e "$DLLS/libgcc_s_dw2-1.dll" ]
 then
+  # Is this called msys-gcc_s-1.dll in future editions of msys2?
   echo "  32-bit: Copying libgcc_s_dw2-1"
   cp $DLLS/libgcc_s_dw2-1.dll "$BIN"
 fi
@@ -225,6 +226,7 @@ cp $DLLS/libpangoft2-1.0-0.dll "$BIN"
 cp $DLLS/libpangowin32-1.0-0.dll "$BIN"
 cp $DLLS/libpixman-1-0.dll "$BIN"
 cp $DLLS/libpng16-16.dll "$BIN"
+# Below will soon have to change to libwebp-7.dll
 cp $DLLS/libwebp-6.dll "$BIN"
 cp $DLLS/libxslt-1.dll "$BIN"
 cp $DLLS/libdbus-glib-1-2.dll "$BIN"
