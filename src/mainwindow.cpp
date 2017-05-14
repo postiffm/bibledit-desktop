@@ -466,7 +466,7 @@ navigation(0), httpd(0)
   style_new = NULL;
   if (guifeatures.styles_management()) {
 
-    style_new = gtk_image_menu_item_new_with_mnemonic("_New");
+    style_new = gtk_image_menu_item_new_with_mnemonic(_("_New"));
     //gtk_widget_show(style_new);
     gtk_container_add(GTK_CONTAINER(style_menu), style_new);
 
