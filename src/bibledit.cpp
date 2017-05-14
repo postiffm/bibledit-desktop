@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
   upgrade();
   gw_message("Finished upgrade");
   // Window icon fallback.
-  gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit.xpm").c_str(), NULL);
+  gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit-desktop.xpm").c_str(), NULL);
   gw_message("Set up window icon fallback");
   // Start the gui.
   MainWindow *mainwindow = new MainWindow(xembed, accelerator_group, settings, urltransport, vcs);
