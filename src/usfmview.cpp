@@ -65,7 +65,7 @@ USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
   sourcebuffer = gtk_source_buffer_new (NULL);
   
   // Tag for highlighting markup.
-  markup_tag = gtk_text_buffer_create_tag(GTK_TEXT_BUFFER (sourcebuffer), NULL, "foreground", "red", NULL);
+  markup_tag = gtk_text_buffer_create_tag(GTK_TEXT_BUFFER (sourcebuffer), NULL, _("foreground"), _("red"), NULL);
 
   // A sourceview to display the buffer.
   sourceview = gtk_source_view_new_with_buffer(sourcebuffer);
@@ -78,13 +78,13 @@ USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (sourceview), true);
 
   // The buffer's signal handlers.
-  g_signal_connect(G_OBJECT(sourcebuffer), "changed", G_CALLBACK(on_textbuffer_changed), gpointer(this));
+  g_signal_connect(G_OBJECT(sourcebuffer), _("changed"), G_CALLBACK(on_textbuffer_changed), gpointer(this));
   
   // The view's signal handlers.
-  g_signal_connect_after((gpointer) sourceview, "move_cursor", G_CALLBACK(on_textview_move_cursor), gpointer(this));
-  g_signal_connect_after((gpointer) sourceview, "grab_focus", G_CALLBACK(on_textview_grab_focus), gpointer(this));
-  g_signal_connect((gpointer) sourceview, "button_press_event", G_CALLBACK(on_textview_button_press_event), gpointer(this));
-  g_signal_connect((gpointer) sourceview, "key-press-event", G_CALLBACK(on_textview_key_press_event), gpointer(this));
+  g_signal_connect_after((gpointer) sourceview, _("move_cursor"), G_CALLBACK(on_textview_move_cursor), gpointer(this));
+  g_signal_connect_after((gpointer) sourceview, _("grab_focus"), G_CALLBACK(on_textview_grab_focus), gpointer(this));
+  g_signal_connect((gpointer) sourceview, _("button_press_event"), G_CALLBACK(on_textview_button_press_event), gpointer(this));
+  g_signal_connect((gpointer) sourceview, _("key-press-event"), G_CALLBACK(on_textview_key_press_event), gpointer(this));
 
   // Buttons to give signals.
   reload_signal = gtk_button_new();
@@ -102,7 +102,7 @@ USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
   // Spelling checker.
   GtkTextTagTable * texttagtable = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (sourcebuffer));
   spellingchecker = new SpellingChecker(texttagtable);
-  g_signal_connect((gpointer) spellingchecker->check_signal, "clicked", G_CALLBACK(on_button_spelling_recheck_clicked), gpointer(this));
+  g_signal_connect((gpointer) spellingchecker->check_signal, _("clicked"), G_CALLBACK(on_button_spelling_recheck_clicked), gpointer(this));
   load_dictionaries();
   spellingchecker->attach(sourceview);
 }
@@ -265,7 +265,7 @@ void USFMView::chapter_save()
     if (chapter_in_text != chapter) {
       unsigned int confirmed_chapter_number;
       ustring message;
-      message = _("Chapter ") + convert_to_string(chapter) + _(" was loaded, but it appears that the chapter number has been changed to ") + convert_to_string(chapter_in_text) + _(".\nDo you wish to save the text as a different chapter, that is, as chapter ") + convert_to_string(chapter_in_text) + "?";
+      message = _("Chapter ") + convert_to_string(chapter) + _(" was loaded, but it appears that the chapter number has been changed to ") + convert_to_string(chapter_in_text) + _(".\nDo you wish to save the text as a different chapter, that is, as chapter ") + convert_to_string(chapter_in_text) + _("?");
       if (gtkw_dialog_question(NULL, message.c_str()) == GTK_RESPONSE_YES) {
         confirmed_chapter_number = chapter_in_text;
         reload = true;
