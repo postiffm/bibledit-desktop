@@ -203,7 +203,7 @@ void Httpd::handle_request(int fd)
         filename = "index.html";
       ustring command;
       size_t question_pos;
-      question_pos = filename.find("?");
+      question_pos = filename.find(_("?"));
       if (question_pos != string::npos) {
         command = filename.substr(question_pos + 1, 1000);
         filename.erase(question_pos, filename.length() - question_pos);
@@ -216,9 +216,9 @@ void Httpd::handle_request(int fd)
         // No intrusions: take filename, strip path off, Bibledit's data path.
         filename = gw_build_filename(Directories->get_package_data(), gw_path_get_basename(filename));
         // Decide what action to take.
-        if ((gw_path_get_basename(filename) == "search.html") && (!command.empty())) {
+        if ((gw_path_get_basename(filename) == _("search.html")) && (!command.empty())) {
           send_search(fd, filename, command);
-        } else if ((gw_path_get_basename(filename) == "bibledit_loads_references.html") && (!command.empty())) {
+        } else if ((gw_path_get_basename(filename) == _("bibledit_loads_references.html")) && (!command.empty())) {
           // E.g.: http://localhost:51516/bibledit_loads_references.html?search-whole-word=word
           if (command.length() >= 18) {
             command.erase(0, 18);
@@ -240,7 +240,7 @@ void Httpd::handle_request(int fd)
 
 void Httpd::log(const ustring & message)
 {
-  gw_message("Webserver: " + message);
+  gw_message(_("Webserver: ") + message);
 }
 
 void Httpd::sendline(int fd, const ustring & line)
@@ -401,7 +401,7 @@ const char *Httpd::getmimetype(char *name)
     if (strcasecmp(name + (namelen - extlen), mime_table[i].ext) == 0)
       return mime_table[i].type;
   }
-  return "text/plain";
+  return _("text/plain");
 }
 
 void Httpd::send_content_type(int fd, const ustring & filename)
@@ -409,7 +409,7 @@ void Httpd::send_content_type(int fd, const ustring & filename)
   gchar *fn = g_strdup(filename.c_str());
   ustring content_type = getmimetype(fn);
   g_free(fn);
-  content_type.insert(0, "Content-Type: ");
+  content_type.insert(0, _("Content-Type: "));
   sendline(fd, content_type);
 }
 
@@ -427,7 +427,7 @@ void Httpd::send_file(int fd, const ustring & filename)
     if (g_str_has_prefix(basename.c_str(), "olh_")) {
       ustring s(contents);
       size_t pos = s.find("</body>");
-      s.insert(pos, "<p>See also the <a href=\"index.html\">general online help.</a></p>\n");
+      s.insert(pos, _("<p>See also the <a href=\"index.html\">general online help.</a></p>\n"));
 #ifdef WIN32
       if (send(fd, s.c_str(), strlen(s.c_str()), 0)) ;
     } else {
@@ -529,11 +529,11 @@ void Httpd::send_search_results(int fd, ustring searchword)
         }
       }
       if (title.empty())
-        title = "Untitled";
+        title = _("Untitled");
       // Get basename for html linking.
       filename = gw_path_get_basename(filename);
       // Output html code.
-      if (filename != "allpages.html") {
+      if (filename != _("allpages.html")) {
         sendline(fd, "<h3><a href=\"" + filename + "\">" + title + "</a></h3>");
         succesful = true;
       }
@@ -541,7 +541,7 @@ void Httpd::send_search_results(int fd, ustring searchword)
   }
   // Indicate if nothing was found.
   if (!succesful) {
-    sendline(fd, "<p>No search results.</p>");
+    sendline(fd, _("<p>No search results.</p>"));
   }
 }
 
