@@ -5444,7 +5444,7 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
     // When we are in a single project and switch view from USFM to Formatted,
     // the above method basically does nothing.
   }
-  DEBUG("Chapter should now be in desired view")
+  DEBUG(_("Chapter should now be in desired view"))
 }
 
 void MainWindow::reload_all_editors(bool take_chapter_from_focused_editor)
@@ -5505,12 +5505,12 @@ void MainWindow::on_file_projects_merge()
   on_window_merge_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(file_projects_merge))) {
     window_merge = new WindowMerge(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
-    g_signal_connect((gpointer) window_merge->delete_signal_button,    "clicked", G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->editors_get_text_button, "clicked", G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->new_reference_button,    "clicked", G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->save_editors_button,     "clicked", G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->reload_editors_button,   "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->delete_signal_button,    _("clicked"), G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->focus_in_signal_button,  _("clicked"), G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->editors_get_text_button, _("clicked"), G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->new_reference_button,    _("clicked"), G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->save_editors_button,     _("clicked"), G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->reload_editors_button,   _("clicked"), G_CALLBACK(on_editor_reload_clicked), gpointer(this));
     vector < ustring> open_projects;
     for (unsigned int i = 0; i < editor_windows.size(); i++) {
       open_projects.push_back(editor_windows[i]->project());
@@ -5996,7 +5996,7 @@ void MainWindow::accelerator_activate_tile_windows(gpointer user_data)
 
 void MainWindow::accelerator_tile_windows()
 {
-  DEBUG("Saw Ctrl-T to tile windows")
+  DEBUG(_("Saw Ctrl-T to tile windows"))
   on_view_tile_windows();
 }
 
@@ -6165,8 +6165,8 @@ void MainWindow::on_check_usfm()
   on_window_check_usfm_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(check_usfm))) {
     window_check_usfm = new WindowCheckUSFM(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
-    g_signal_connect((gpointer) window_check_usfm->delete_signal_button, "clicked", G_CALLBACK(on_window_check_usfm_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_check_usfm->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_check_usfm->delete_signal_button, _("clicked"), G_CALLBACK(on_window_check_usfm_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_check_usfm->focus_in_signal_button, _("clicked"), G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     handle_editor_focus();
     on_editor_changed();
   }
@@ -6601,7 +6601,7 @@ void MainWindow::interprocess_communications_initiate_listener ()
   url.append (convert_to_string (interprocess_communications_initiate_listener_message_id));
   GtkWidget * button;
   button = urltransport->send_message_expect_reply (url);
-  g_signal_connect((gpointer) button, "clicked", G_CALLBACK(on_interprocess_communications_listener_button_clicked), gpointer(this));
+  g_signal_connect((gpointer) button, _("clicked"), G_CALLBACK(on_interprocess_communications_listener_button_clicked), gpointer(this));
 }
 
 
