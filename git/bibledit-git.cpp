@@ -43,7 +43,7 @@ int main (int argc, char *argv[])
   gtk_window_set_title (GTK_WINDOW (window), "Bibledit-Git");
   gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
-  g_signal_connect ((gpointer) window, _("delete_event"), G_CALLBACK (gtk_main_quit), NULL);
+  g_signal_connect ((gpointer) window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
 
   GtkWidget * scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
