@@ -81,10 +81,10 @@ USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
   g_signal_connect(G_OBJECT(sourcebuffer), _("changed"), G_CALLBACK(on_textbuffer_changed), gpointer(this));
   
   // The view's signal handlers.
-  g_signal_connect_after((gpointer) sourceview, _("move_cursor"), G_CALLBACK(on_textview_move_cursor), gpointer(this));
-  g_signal_connect_after((gpointer) sourceview, _("grab_focus"), G_CALLBACK(on_textview_grab_focus), gpointer(this));
-  g_signal_connect((gpointer) sourceview, _("button_press_event"), G_CALLBACK(on_textview_button_press_event), gpointer(this));
-  g_signal_connect((gpointer) sourceview, _("key-press-event"), G_CALLBACK(on_textview_key_press_event), gpointer(this));
+  g_signal_connect_after((gpointer) sourceview, "move_cursor", G_CALLBACK(on_textview_move_cursor), gpointer(this));
+  g_signal_connect_after((gpointer) sourceview, "grab_focus", G_CALLBACK(on_textview_grab_focus), gpointer(this));
+  g_signal_connect((gpointer) sourceview, "button_press_event", G_CALLBACK(on_textview_button_press_event), gpointer(this));
+  g_signal_connect((gpointer) sourceview, "key-press-event", G_CALLBACK(on_textview_key_press_event), gpointer(this));
 
   // Buttons to give signals.
   reload_signal = gtk_button_new();
