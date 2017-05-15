@@ -2064,7 +2064,7 @@ void MainWindow::deleteproject ()
   ListviewDialog dialog(_("Delete project"), projects, "", true, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     int result;
-    result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + "?");
+    result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + _("?"));
     if (result == GTK_RESPONSE_YES) {
       result = gtkw_dialog_question(window_main, _("Are you really sure to delete project ") + dialog.focus + _(", something worth perhaps years of work?"));
     }
@@ -4808,7 +4808,7 @@ void MainWindow::on_file_resources_delete()
   vector < ustring > resources = resource_get_resources(filenames, false);
   ListviewDialog dialog(_("Delete resource"), resources, "", false, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
-    int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + "?");
+    int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + _("?"));
     if (result == GTK_RESPONSE_YES) {
       ustring filename;
       for (unsigned int i = 0; i < resources.size(); i++) {
