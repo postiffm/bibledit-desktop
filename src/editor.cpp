@@ -2399,19 +2399,19 @@ void Editor2::apply_editor_action (EditorAction * action, EditorActionApplicatio
 void Editor2::paragraph_create_actions (EditorActionCreateParagraph * paragraph_action)
 {
   // Connect text buffer signals.
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), _("insert-text"),  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "_(delete-range"), G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), _("delete-range"), G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), _("changed"),      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
+  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "insert-text",  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
+  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
+  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
+  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "changed",      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
   // Connect spelling checker.
   spellingchecker->attach(paragraph_action->textview);
   // Connect text view signals.
-  g_signal_connect_after((gpointer) paragraph_action->textview, _("move_cursor"),         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, _("motion-notify-event"), G_CALLBACK(on_motion_notify_event),      gpointer(this));
-  g_signal_connect_after((gpointer) paragraph_action->textview, _("grab-focus"),          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, _("key-press-event"),     G_CALLBACK(on_textview_key_press_event), gpointer(this));
+  g_signal_connect_after((gpointer) paragraph_action->textview, "move_cursor",         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, "motion-notify-event", G_CALLBACK(on_motion_notify_event),      gpointer(this));
+  g_signal_connect_after((gpointer) paragraph_action->textview, "grab-focus",          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, "key-press-event",     G_CALLBACK(on_textview_key_press_event), gpointer(this));
   //EXPERIMENTALg_signal_connect((gpointer) paragraph_action->textview, "key-release-event", G_CALLBACK(on_textview_key_release_event), gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, _("button_press_event"),  G_CALLBACK(on_textview_button_press_event), gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, "button_press_event",  G_CALLBACK(on_textview_button_press_event), gpointer(this));
   // Set font
   set_font_textview (paragraph_action->textview);
   // Signal the parent window to connect to the signals of the text view.
@@ -2422,7 +2422,7 @@ void Editor2::paragraph_create_actions (EditorActionCreateParagraph * paragraph_
     // Cast the object to the right type.
     EditorActionCreateNoteParagraph * note_action = static_cast <EditorActionCreateNoteParagraph *> (paragraph_action);
     // Connect signal for note caller in note.
-    g_signal_connect ((gpointer) note_action->eventbox, _("button_press_event"), G_CALLBACK (on_caller_button_press_event), gpointer (this));
+    g_signal_connect ((gpointer) note_action->eventbox, "button_press_event", G_CALLBACK (on_caller_button_press_event), gpointer (this));
   }
 }
 
