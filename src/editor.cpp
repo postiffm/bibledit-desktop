@@ -175,8 +175,8 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   // to any other text buffer that uses the same text tag table.
   {
     GtkTextBuffer * textbuffer = gtk_text_buffer_new (texttagtable);
-    reference_tag = gtk_text_buffer_create_tag(textbuffer, NULL, "background", "khaki", NULL);
-    verse_highlight_tag = gtk_text_buffer_create_tag(textbuffer, NULL, "background", "yellow", NULL);
+    reference_tag = gtk_text_buffer_create_tag(textbuffer, NULL, _("background"), "_(khaki"), NULL);
+    verse_highlight_tag = gtk_text_buffer_create_tag(textbuffer, NULL, _("background"), _("yellow"), NULL);
     g_object_unref (textbuffer);
   }
 
@@ -280,7 +280,7 @@ void Editor2::chapter_load(const Reference &ref)
   // Get rid of possible previous widgets with their data.
   gtk_container_foreach(GTK_CONTAINER(vbox_paragraphs), on_container_tree_callback_destroy, gpointer(this));
   focused_paragraph = NULL;
-  DEBUG("W1 Destroyed supposedly all prior widgets")
+  DEBUG(_("W1 Destroyed supposedly all prior widgets"))
   // Make one long line containing the whole chapter.
   // This is done so as to exclude any possibility that the editor does not
   // properly load a possible chapter that has line-breaks at unexpected places.
@@ -293,10 +293,10 @@ void Editor2::chapter_load(const Reference &ref)
     line.append(loaded_chapter_lines[i]);
   }
   line.append(" ");
-  DEBUG("W2 Created one line for entire chapter: " + line)
+  DEBUG(_("W2 Created one line for entire chapter: ") + line)
   // Load in editor.
   text_load (line, "", false);
-  DEBUG("W3 just did text_load") 
+  DEBUG(_("W3 just did text_load")) 
   // Clean up extra spaces before the insertion points in all the
   // newly created textbuffers.
   for (unsigned int i = 0; i < actions_done.size(); i++) {
@@ -310,10 +310,10 @@ void Editor2::chapter_load(const Reference &ref)
       }
     }
   }
-  DEBUG("W4 Cleaned up extra spaces")
+  DEBUG(_("W4 Cleaned up extra spaces"))
   // Insert the chapter load boundary.
   apply_editor_action (new EditorAction (eatLoadChapterBoundary));
-  DEBUG("W5 Inserted chapter load boundary")
+  DEBUG(_("W5 Inserted chapter load boundary"))
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
   currHighlightedVerse = "0";
@@ -325,7 +325,7 @@ void Editor2::chapter_load(const Reference &ref)
     gtk_text_buffer_place_cursor(focused_paragraph->textbuffer, &iter);
     scroll_to_insertion_point_on_screen(/*highlight?*/true);
   }
-  DEBUG("W6 Scrolled to 1:1")  
+  DEBUG(_("W6 Scrolled to 1:1"))  
   // Store size of actions buffer so we know whether the chapter changed.
   editor_actions_size_at_no_save = actions_done.size();
 }
@@ -339,7 +339,7 @@ void Editor2::text_load (ustring text, ustring character_style, bool note_mode)
 {
   // Clean away possible new lines.
   replace_text (text, "\n", " ");
-  DEBUG("text="+text)
+  DEBUG(_("text=")+text)
   // Load the text into the editor by creating and applying editor actions.
   ustring marker_text;
   size_t marker_pos;
@@ -435,7 +435,7 @@ void Editor2::chapter_save()
     }
   }
 
-  DEBUG("Saving chapter")
+  DEBUG(_("Saving chapter"))
   
   // If the text has not yet been dealt with, save it.  
   if (!save_action_is_over) {
@@ -464,7 +464,7 @@ void Editor2::chapter_save()
     if (chapter_in_text != chapter) {
       unsigned int confirmed_chapter_number;
       ustring message;
-      message = _("Chapter ") + convert_to_string(chapter) + _(" was loaded, but it appears that the chapter number has been changed to ") + convert_to_string(chapter_in_text) + _(".\nDo you wish to save the text as a different chapter, that is, as chapter ") + convert_to_string(chapter_in_text) + "?";
+      message = _("Chapter ") + convert_to_string(chapter) + _(" was loaded, but it appears that the chapter number has been changed to ") + convert_to_string(chapter_in_text) + _(".\nDo you wish to save the text as a different chapter, that is, as chapter ") + convert_to_string(chapter_in_text) + _("?");
       if (gtkw_dialog_question(NULL, message.c_str()) == GTK_RESPONSE_YES) {
         confirmed_chapter_number = chapter_in_text;
         reload = true;
@@ -1083,7 +1083,7 @@ void Editor2::create_or_update_formatting_data()
 // Create and fill the text tag table for all the formatted views.
 // If already there, update it.
 {
-  DEBUG("Called")
+  DEBUG(_("Called"))
   // If there is no text tag table, create a new one.
   if (!texttagtable) {
     texttagtable = gtk_text_tag_table_new();
@@ -1146,7 +1146,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 // This creates or updates a GtkTextTag with the data stored in "style".
 // The fontsize of the style is calculated by the value as stored in "style", and multiplied by "font_multiplier".
 {
-  DEBUG("Called")
+  DEBUG(_("Called"))
   // Take the existing tag, or create a new one and add it to the tagtable.
   GtkTextTag *tag = gtk_text_tag_table_lookup(texttagtable, style->marker.c_str());
   if (!tag) {
@@ -1161,7 +1161,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     int fontsize = (int)(12 * font_multiplier);
     ustring font = "Courier " + convert_to_string(fontsize);
     g_value_set_string(&gvalue, font.c_str());
-    g_object_set_property(G_OBJECT(tag), "font", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("font"), &gvalue);
     g_value_unset(&gvalue);
     return;
   }
@@ -1171,7 +1171,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     g_value_init(&gvalue, G_TYPE_DOUBLE);
     double fontsize = style->fontsize * font_multiplier;
     g_value_set_double(&gvalue, fontsize);
-    g_object_set_property(G_OBJECT(tag), "size-points", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("size-points"), &gvalue);
     g_value_unset(&gvalue);
   }
   // Italic, bold, underline, smallcaps can be ON, OFF, INHERIT, or TOGGLE.
@@ -1184,7 +1184,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_STYLE);
     g_value_set_enum(&gvalue, pangostyle);
-    g_object_set_property(G_OBJECT(tag), "style", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("style"), &gvalue);
     g_value_unset(&gvalue);
   }
   {
@@ -1194,7 +1194,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_WEIGHT);
     g_value_set_enum(&gvalue, pangoweight);
-    g_object_set_property(G_OBJECT(tag), "weight", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("weight"), &gvalue);
     g_value_unset(&gvalue);
   }
   {
@@ -1204,7 +1204,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, PANGO_TYPE_UNDERLINE);
     g_value_set_enum(&gvalue, pangounderline);
-    g_object_set_property(G_OBJECT(tag), "underline", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("underline"), &gvalue);
     g_value_unset(&gvalue);
   }
   {
@@ -1224,7 +1224,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_DOUBLE);
       g_value_set_double(&gvalue, percentage);
-      g_object_set_property(G_OBJECT(tag), "scale", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("scale"), &gvalue);
       g_value_unset(&gvalue);
     }
   }
@@ -1241,7 +1241,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, rise);
-      g_object_set_property(G_OBJECT(tag), "rise", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("rise"), &gvalue);
       g_value_unset(&gvalue);
     }
     // Smaller size.
@@ -1250,7 +1250,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_DOUBLE);
       g_value_set_double(&gvalue, percentage);
-      g_object_set_property(G_OBJECT(tag), "scale", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("scale"), &gvalue);
       g_value_unset(&gvalue);
     }
   }
@@ -1275,7 +1275,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, GTK_TYPE_JUSTIFICATION);
       g_value_set_enum(&gvalue, gtkjustification);
-      g_object_set_property(G_OBJECT(tag), "justification", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("justification"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1285,7 +1285,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, spacebefore);
-      g_object_set_property(G_OBJECT(tag), "pixels-above-lines", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("pixels-above-lines"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1294,7 +1294,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, spaceafter);
-      g_object_set_property(G_OBJECT(tag), "pixels-below-lines", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("pixels-below-lines"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1305,7 +1305,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, leftmargin);
-      g_object_set_property(G_OBJECT(tag), "left-margin", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("left-margin"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1314,7 +1314,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, rightmargin);
-      g_object_set_property(G_OBJECT(tag), "right-margin", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("right-margin"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1323,7 +1323,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
       GValue gvalue = G_VALUE_INIT;
       g_value_init(&gvalue, G_TYPE_INT);
       g_value_set_int(&gvalue, firstlineindent);
-      g_object_set_property(G_OBJECT(tag), "indent", &gvalue);
+      g_object_set_property(G_OBJECT(tag), _("indent"), &gvalue);
       g_value_unset(&gvalue);
     }
 
@@ -1335,7 +1335,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
     GValue gvalue = G_VALUE_INIT;
     g_value_init(&gvalue, GDK_TYPE_COLOR);
     g_value_set_boxed(&gvalue, &color);
-    g_object_set_property(G_OBJECT(tag), "foreground-gdk", &gvalue);
+    g_object_set_property(G_OBJECT(tag), _("foreground-gdk"), &gvalue);
     g_value_unset(&gvalue);
   }
 }
@@ -1915,13 +1915,13 @@ void Editor2::highlight_searchwords()
   // instead of typing in the location where the cursor is. TODO: I am
   // planning eventually to FIX the TIME CONSUMING PART so that the
   // whole thing will be more efficient.
-  DEBUG("W9.2 about to determine locations");  
+  DEBUG(_("W9.2 about to determine locations"));  
   highlight->determine_locations();
-  DEBUG("W9.3 about to assert");  
+  DEBUG(_("W9.3 about to assert"));  
   assert(highlight->locations_ready);
-  DEBUG("W9.4 about to highlight->highlight");  
+  DEBUG(_("W9.4 about to highlight->highlight"));  
   highlight->highlight();
-  DEBUG("W9.5 about delete highlight");
+  DEBUG(_("W9.5 about delete highlight"));
   // Delete and NULL the object making it ready for next use.
   delete highlight;
   highlight = NULL;
@@ -2313,7 +2313,7 @@ void Editor2::apply_editor_action (EditorAction * action, EditorActionApplicatio
 
     case eatDeleteText:
     {
-	  DEBUG("action DeleteText")
+	  DEBUG(_("action DeleteText"))
       EditorActionDeleteText * delete_action = static_cast <EditorActionDeleteText *> (action);
       switch (application) {
         case eaaInitial: delete_action->apply(widget_that_should_grab_focus); break;
@@ -2343,7 +2343,7 @@ void Editor2::apply_editor_action (EditorAction * action, EditorActionApplicatio
 
     case eatDeleteParagraph:
     {
-	  DEBUG("action DeleteParagraph")
+	  DEBUG(_("action DeleteParagraph"))
       EditorActionDeleteParagraph * delete_action = static_cast <EditorActionDeleteParagraph *> (action);
       switch (application) {
         case eaaInitial: delete_action->apply(vbox_parking_lot, widget_that_should_grab_focus); break;
@@ -2399,19 +2399,19 @@ void Editor2::apply_editor_action (EditorAction * action, EditorActionApplicatio
 void Editor2::paragraph_create_actions (EditorActionCreateParagraph * paragraph_action)
 {
   // Connect text buffer signals.
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "insert-text",  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "changed",      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
+  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), _("insert-text"),  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
+  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "_(delete-range"), G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
+  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), _("delete-range"), G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
+  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), _("changed"),      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
   // Connect spelling checker.
   spellingchecker->attach(paragraph_action->textview);
   // Connect text view signals.
-  g_signal_connect_after((gpointer) paragraph_action->textview, "move_cursor",         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "motion-notify-event", G_CALLBACK(on_motion_notify_event),      gpointer(this));
-  g_signal_connect_after((gpointer) paragraph_action->textview, "grab-focus",          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "key-press-event",     G_CALLBACK(on_textview_key_press_event), gpointer(this));
+  g_signal_connect_after((gpointer) paragraph_action->textview, _("move_cursor"),         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, _("motion-notify-event"), G_CALLBACK(on_motion_notify_event),      gpointer(this));
+  g_signal_connect_after((gpointer) paragraph_action->textview, _("grab-focus"),          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, _("key-press-event"),     G_CALLBACK(on_textview_key_press_event), gpointer(this));
   //EXPERIMENTALg_signal_connect((gpointer) paragraph_action->textview, "key-release-event", G_CALLBACK(on_textview_key_release_event), gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "button_press_event",  G_CALLBACK(on_textview_button_press_event), gpointer(this));
+  g_signal_connect      ((gpointer) paragraph_action->textview, _("button_press_event"),  G_CALLBACK(on_textview_button_press_event), gpointer(this));
   // Set font
   set_font_textview (paragraph_action->textview);
   // Signal the parent window to connect to the signals of the text view.
@@ -2422,7 +2422,7 @@ void Editor2::paragraph_create_actions (EditorActionCreateParagraph * paragraph_
     // Cast the object to the right type.
     EditorActionCreateNoteParagraph * note_action = static_cast <EditorActionCreateNoteParagraph *> (paragraph_action);
     // Connect signal for note caller in note.
-    g_signal_connect ((gpointer) note_action->eventbox, "button_press_event", G_CALLBACK (on_caller_button_press_event), gpointer (this));
+    g_signal_connect ((gpointer) note_action->eventbox, _("button_press_event"), G_CALLBACK (on_caller_button_press_event), gpointer (this));
   }
 }
 
@@ -3210,7 +3210,7 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
   //DEBUG("go_to_verse "+number+" current_verse_number was "+current_verse_number)
   // Ensure verse tracking is on.
   switch_verse_tracking_on ();
-  DEBUG("W7 switched verse tracking on");
+  DEBUG(_("W7 switched verse tracking on"));
   // Save the current verse. This prevents a race-condition.
   current_verse_number = number;
   current_reference.verse_set(number);
@@ -3231,14 +3231,14 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
     }
   
   }
-  DEBUG("W8 about to scroll to insertion point");
+  DEBUG(_("W8 about to scroll to insertion point"));
   // Scroll the insertion point onto the screen
   scroll_to_insertion_point_on_screen(/*highlight?*/true);
-  DEBUG("W9 scrolled to insertion point");
+  DEBUG(_("W9 scrolled to insertion point"));
   
   // Highlight search words.
   highlight_searchwords();
-  DEBUG("W10 highlighted search words");
+  DEBUG(_("W10 highlighted search words"));
 }
 
 
@@ -3268,7 +3268,7 @@ void Editor2::signal_if_verse_changed_timeout()
         // Emit a signal if the verse number at the insertion point changed.
         ustring verse_number = verse_number_get();
         if (verse_number != current_verse_number) {
-	  DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
+	  DEBUG(_("Changing from v")+current_verse_number+_(" to v")+verse_number+_(" as new current_verse_number"))
           current_verse_number = verse_number;
 	  current_reference.verse_set(verse_number);
 	  scroll_to_insertion_point_on_screen(/*highlight?*/true); // ??
