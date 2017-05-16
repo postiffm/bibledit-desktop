@@ -28,7 +28,7 @@
 
 ustring scripts_straight_through()
 {
-  return "straight through";
+  return _("straight through");
 }
 
 ustring script_prefix(ScriptType scripttype)

@@ -24,7 +24,7 @@
 #include "gtkwrappers.h"
 #include "tiny_utilities.h"
 #include "categorize.h"
-
+#include <glib/gi18n.h>
 
 ustring usfm_extract(ustring & line)
 // This returns the usfm from the line, e.g. \id.
@@ -696,102 +696,102 @@ ustring usfm_get_category_name(UsfmCategory category)
   switch (category) {
   case ucIdentificationInformation:
     {
-      name = "Identification Information";
+      name = _("Identification Information");
       break;
     }
   case ucIntroductionTitlesHeadings:
     {
-      name = "Introduction Titles and Headings";
+      name = _("Introduction Titles and Headings");
       break;
     }
   case ucIntroductionParagraphsPoetry:
     {
-      name = "Introduction Paragraphs and Poetry";
+      name = _("Introduction Paragraphs and Poetry");
       break;
     }
   case ucIntroductionOtherElements:
     {
-      name = "Introduction Other Elements";
+      name = _("Introduction Other Elements");
       break;
     }
   case ucTitles:
     {
-      name = "Titles";
+      name = _("Titles");
       break;
     }
   case ucHeadings:
     {
-      name = "Headings";
+      name = _("Headings");
       break;
     }
   case ucChaptersAndVerses:
     {
-      name = "Chapters and Verses";
+      name = _("Chapters and Verses");
       break;
     }
   case ucParagraphs:
     {
-      name = "Paragraphs";
+      name = _("Paragraphs");
       break;
     }
   case ucLists:
     {
-      name = "Lists";
+      name = _("Lists");
       break;
     }
   case ucPoetryElements:
     {
-      name = "Poetry Elements";
+      name = _("Poetry Elements");
       break;
     }
   case ucTableElements:
     {
-      name = "Table Elements";
+      name = _("Table Elements");
       break;
     }
   case ucFootnotes:
     {
-      name = "Footnotes";
+      name = _("Footnotes");
       break;
     }
   case ucCrossReferences:
     {
-      name = "Cross References";
+      name = _("Cross References");
       break;
     }
   case ucExtendedStudyNotes:
     {
-      name = "Extended Study Notes";
+      name = _("Extended Study Notes");
       break;
     }
   case ucSpecialText:
     {
-      name = "Special Text";
+      name = _("Special Text");
       break;
     }
   case ucCharacterStyles:
     {
-      name = "Character Styles";
+      name = _("Character Styles");
       break;
     }
   case ucSpacingsAndBreaks:
     {
-      name = "Spacings and Breaks";
+      name = _("Spacings and Breaks");
       break;
     }
   case ucSpecialFeatures:
     {
-      name = "Special Features";
+      name = _("Special Features");
       break;
     }
   case ucPeripheralMaterials:
     {
-      name = "Peripheral Materials";
+      name = _("Peripheral Materials");
       break;
     }
   case ucNonstandardStyles:
     {
-      name = "Non-standard Styles";
+      name = _("Non-standard Styles");
       break;
     }
   }
@@ -818,17 +818,17 @@ bool usfm_basic_markers_present(Usfm & usfm, bool gui)
   style = "id";
   idok = usfm.is_identifier(style) && usfm.identifier_get_subtype(style) == itBook;
   if (!idok)
-    missing_styles.push_back(style + " - a book identifier");
+    missing_styles.push_back(style + _(" - a book identifier"));
   style = "c";
   if (!usfm.is_chapter_number(style))
-    missing_styles.push_back(style + " - a chapter number");
+    missing_styles.push_back(style + _(" - a chapter number"));
   style = "v";
   if (!usfm.is_verse_number(style))
-    missing_styles.push_back(style + " - a verse number");
+    missing_styles.push_back(style + _(" - a verse number"));
   if (missing_styles.empty())
     return true;
   ustring message;
-  message = "Not all basic styles are in the stylesheet.\n" "Printing cannot continue.\n" "Please add the following styles to the stylesheet:";
+  message = _("Not all basic styles are in the stylesheet.\n" "Printing cannot continue.\n" "Please add the following styles to the stylesheet:");
   for (unsigned int i = 0; i < missing_styles.size(); i++)
     message.append("\n" + missing_styles[i]);
   if (gui)

@@ -547,7 +547,7 @@ void CheckDialog::characters_unwanted_patterns_setup()
   gtk_widget_show(image11);
   gtk_box_pack_start(GTK_BOX(hbox20), image11, FALSE, FALSE, 0);
 
-  label47 = gtk_label_new_with_mnemonic("_Patterns");
+  label47 = gtk_label_new_with_mnemonic(_("_Patterns"));
   gtk_widget_show(label47);
   gtk_box_pack_start(GTK_BOX(hbox20), label47, FALSE, FALSE, 0);
 

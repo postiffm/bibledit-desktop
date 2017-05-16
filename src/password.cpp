@@ -51,10 +51,10 @@ void password_edit(GtkWidget * window)
   }
   message.append("\n\n");
   if (currentpassword.empty()) {
-    message.append("Would you like to set an administrator's password?");
+    message.append(_("Would you like to set an administrator's password?"));
   }
   else {
-    message.append("Would you like to set another administrator's password?");
+    message.append(_("Would you like to set another administrator's password?"));
   }
 
   if (gtkw_dialog_question(window, message, GTK_RESPONSE_YES) != GTK_RESPONSE_YES)
@@ -88,10 +88,10 @@ void password_edit(GtkWidget * window)
 
   // Give feedback.
   if (password1.empty()) {
-    message.append("The password has been erased");
+    message.append(_("The password has been erased"));
   }
   else {
-    message.append("The password has been set");
+    message.append(_("The password has been set"));
   }
   gtkw_dialog_info(window, message);
 }

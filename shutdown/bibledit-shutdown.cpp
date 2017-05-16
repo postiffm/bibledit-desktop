@@ -19,7 +19,7 @@
 
 
 #include "bibledit-shutdown.h"
-
+#include <glib/gi18n.h>
 
 SqliteReader::SqliteReader(int dummy)
 {
@@ -96,7 +96,7 @@ int main (int argc, char *argv[])
   gtk_container_add (GTK_CONTAINER (window), vbox);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 30);
 
-  label = gtk_label_new ("Tidying up");
+  label = gtk_label_new (_("Tidying up"));
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 

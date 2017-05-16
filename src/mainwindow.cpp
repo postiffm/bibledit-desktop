@@ -5444,7 +5444,7 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
     // When we are in a single project and switch view from USFM to Formatted,
     // the above method basically does nothing.
   }
-  DEBUG("Chapter should now be in desired view")
+  DEBUG(_("Chapter should now be in desired view"))
 }
 
 void MainWindow::reload_all_editors(bool take_chapter_from_focused_editor)

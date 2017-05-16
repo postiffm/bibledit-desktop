@@ -111,12 +111,12 @@ TextReplacementDialog::TextReplacementDialog(int dummy)
   GtkCellRenderer *renderer1 = gtk_cell_renderer_text_new();
   g_signal_connect(renderer1, "edited", G_CALLBACK(cell_text_edited), gpointer(this));
 
-  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, "Texts", renderer1, "text", COLUMN_ORIGINALS, "editable", COLUMN_EDITABLE1, NULL);
+  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, _("Texts"), renderer1, "text", COLUMN_ORIGINALS, _("editable"), COLUMN_EDITABLE1, NULL);
 
   GtkCellRenderer *renderer2 = gtk_cell_renderer_text_new();
   g_signal_connect(renderer2, "edited", G_CALLBACK(cell_replacement_edited), gpointer(this));
 
-  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, "Replacements", renderer2, "text", COLUMN_REPLACEMENTS, "editable", COLUMN_EDITABLE2, NULL);
+  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, _("Replacements"), renderer2, "text", COLUMN_REPLACEMENTS, _("editable"), COLUMN_EDITABLE2, NULL);
 
   gtk_tree_selection_set_mode(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1)), GTK_SELECTION_SINGLE);
 

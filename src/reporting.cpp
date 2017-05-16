@@ -32,7 +32,7 @@
 #include "directories.h"
 #include "utilities.h"
 #include "planning.h"
-
+#include <glib/gi18n.h>
 
 const gchar *reporting_status_filename()
 // Gives the base filename of the status file.
@@ -450,7 +450,7 @@ const gchar *ProjectStatusChapter::chapter_key()
 
 void ProjectStatusChapter::print()
 {
-  cout << "Status for chapter " << chapter << endl;
+  cout << _("Status for chapter ") << chapter << endl;
   for (unsigned int i = 0; i < status.size(); i++) {
     status[i].print();
   }
@@ -762,11 +762,11 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
   progresswindow.set_fraction(0.1);
 
   // Title and heading.
-  HtmlWriter htmlwriter("Status Report", false, false, true);
-  htmlwriter.heading(1, "Status Report " + project);
+  HtmlWriter htmlwriter(_("Status Report"), false, false, true);
+  htmlwriter.heading(1, _("Status Report ") + project);
 
   // Current date.
-  htmlwriter.paragraph("Produced on " + date_time_julian_human_readable(date_time_julian_day_get_current(), true) + ".");
+  htmlwriter.paragraph(_("Produced on ") + date_time_julian_human_readable(date_time_julian_day_get_current(), true) + ".");
 
   // Planning.
   if (planning) {
@@ -788,7 +788,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
     texts.push_back(project);
     unsigned int percentage = reporting_get_percentage_ready_project(&projectstatus);
     percentages.push_back(percentage);
-    htmlwriter.bargraph("Project Percentage Complete", texts, percentages, "");
+    htmlwriter.bargraph(_("Project Percentage Complete"), texts, percentages, "");
     htmlwriter.paragraph("");
 
     // CSV export.
@@ -797,7 +797,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
       csv.push_back("\"project\"," + convert_to_string(percentage));
       ustring filename = gw_build_filename(Directories->get_temp(), "project_complete.csv");
       write_lines(filename, csv);
-      htmlwriter.hyperlinkedparagraph("The above data in csv format", filename);
+      htmlwriter.hyperlinkedparagraph(_("The above data in csv format"), filename);
       htmlwriter.paragraph("");
     }
   }
@@ -811,7 +811,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
       texts.push_back(books_id_to_english(projectstatusbook->book));
       percentages.push_back(reporting_get_percentage_ready_book(projectstatusbook));
     }
-    htmlwriter.bargraph("Books Percentage Complete", texts, percentages, "");
+    htmlwriter.bargraph(_("Books Percentage Complete"), texts, percentages, "");
     htmlwriter.paragraph("");
 
     // CSV export.
@@ -822,7 +822,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
       }
       ustring filename = gw_build_filename(Directories->get_temp(), "books_complete.csv");
       write_lines(filename, csv);
-      htmlwriter.hyperlinkedparagraph("The above data in csv format", filename);
+      htmlwriter.hyperlinkedparagraph(_("The above data in csv format"), filename);
       htmlwriter.paragraph("");
     }
   }
@@ -854,9 +854,9 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
       legend.push_back(s);
     }
     column_headers.clear();
-    htmlwriter.table("Tasks per book - Legend", column_headers, legend, "", NULL, -1);
+    htmlwriter.table(_("Tasks per book - Legend"), column_headers, legend, "", NULL, -1);
     htmlwriter.paragraph("");
-    htmlwriter.table("Tasks per book - Data", shortened_column_headers, cell_texts, "", &centers, -1);
+    htmlwriter.table(_("Tasks per book - Data"), shortened_column_headers, cell_texts, "", &centers, -1);
     htmlwriter.paragraph("");
   }
   // Show tasks per chapter.
@@ -874,7 +874,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
         else
           centers.push_back(true);
       }
-      htmlwriter.table("Tasks per chapter for " + books_id_to_english(projectstatus.books[i]->book), column_headers, cell_texts, "", &centers, -1);
+      htmlwriter.table(_("Tasks per chapter for ") + books_id_to_english(projectstatus.books[i]->book), column_headers, cell_texts, "", &centers, -1);
       htmlwriter.paragraph("");
     }
   }

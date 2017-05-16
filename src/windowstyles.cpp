@@ -42,7 +42,7 @@
 #include <glib/gi18n.h>
 
 WindowStyles::WindowStyles(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, GtkWidget *stl, GtkWidget *stl_menu, GtkWidget *stl_expand_all, GtkWidget *stl_collapse_all, GtkWidget *stl_insert, GtkWidget *stl_edit_mode, GtkWidget *stl_new, GtkWidget *stl_properties, GtkWidget *stl_delete, GtkWidget *stlsheet_switch, GtkWidget *stlsheet_new, GtkWidget *stlsheet_delete, GtkWidget *stlsheet_rename):
-FloatingWindow(parent_layout, widStyles, "Stylesheet", startup)
+FloatingWindow(parent_layout, widStyles, _("Stylesheet"), startup)
 // Styles window.
 {
   // Variables.
