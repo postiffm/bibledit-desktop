@@ -86,7 +86,7 @@ FloatingWindow(parent_layout, widStyles, _("Stylesheet"), startup)
 
   GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
 
-  treecolumn = gtk_tree_view_column_new_with_attributes("", renderer, "text", 0, NULL);
+  treecolumn = gtk_tree_view_column_new_with_attributes("", renderer, _("text"), 0, NULL);
   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), treecolumn);
 
   treeselect = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
@@ -104,27 +104,27 @@ FloatingWindow(parent_layout, widStyles, _("Stylesheet"), startup)
   delete_stylesheet_handler_id = 0;
   rename_stylesheet_handler_id = 0;
   if (style)
-    styles_menu_handler_id = g_signal_connect((gpointer) style, "activate", G_CALLBACK(on_style_menu_activate), gpointer(this));
+    styles_menu_handler_id = g_signal_connect((gpointer) style, -("activate"), G_CALLBACK(on_style_menu_activate), gpointer(this));
   if (style_expand_all)
-    expand_all_handler_id = g_signal_connect((gpointer) style_expand_all, "activate", G_CALLBACK(on_expand_all_activate), gpointer(this));
+    expand_all_handler_id = g_signal_connect((gpointer) style_expand_all, _("activate"), G_CALLBACK(on_expand_all_activate), gpointer(this));
   if (style_collapse_all)
-    collapse_all_handler_id = g_signal_connect((gpointer) style_collapse_all, "activate", G_CALLBACK(on_collapse_all_activate), gpointer(this));
+    collapse_all_handler_id = g_signal_connect((gpointer) style_collapse_all, _("activate"), G_CALLBACK(on_collapse_all_activate), gpointer(this));
   if (style_new)
-    new_handler_id = g_signal_connect((gpointer) style_new, "activate", G_CALLBACK(on_style_new_activate), gpointer(this));
+    new_handler_id = g_signal_connect((gpointer) style_new, _("activate"), G_CALLBACK(on_style_new_activate), gpointer(this));
   if (style_properties)
-    properties_handler_id = g_signal_connect((gpointer) style_properties, "activate", G_CALLBACK(on_style_properties_activate), gpointer(this));
+    properties_handler_id = g_signal_connect((gpointer) style_properties, _("activate"), G_CALLBACK(on_style_properties_activate), gpointer(this));
   if (style_delete)
-    delete_handler_id = g_signal_connect((gpointer) style_delete, "activate", G_CALLBACK(on_style_delete_activate), gpointer(this));
+    delete_handler_id = g_signal_connect((gpointer) style_delete, _("activate"), G_CALLBACK(on_style_delete_activate), gpointer(this));
   if (style_insert)
-    insert_handler_id = g_signal_connect((gpointer) style_insert, "activate", G_CALLBACK(on_style_insert_activate), gpointer(this));
+    insert_handler_id = g_signal_connect((gpointer) style_insert, _("activate"), G_CALLBACK(on_style_insert_activate), gpointer(this));
   if (stylesheet_switch)
-    switch_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_switch, "activate", G_CALLBACK(on_stylesheet_switch_activate), gpointer(this));
+    switch_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_switch, _("activate"), G_CALLBACK(on_stylesheet_switch_activate), gpointer(this));
   if (stylesheet_new)
-    new_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_new, "activate", G_CALLBACK(on_stylesheet_new_activate), gpointer(this));
+    new_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_new, _("activate"), G_CALLBACK(on_stylesheet_new_activate), gpointer(this));
   if (stylesheet_remove)
-    delete_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_remove, "activate", G_CALLBACK(on_stylesheet_delete_activate), gpointer(this));
+    delete_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_remove, _("activate"), G_CALLBACK(on_stylesheet_delete_activate), gpointer(this));
   if (stylesheet_rename)
-    rename_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_rename, "activate", G_CALLBACK(on_stylesheet_rename_activate), gpointer(this));
+    rename_stylesheet_handler_id = g_signal_connect((gpointer) stylesheet_rename, _("activate"), G_CALLBACK(on_stylesheet_rename_activate), gpointer(this));
 
   g_signal_connect((gpointer) treeview, "key_press_event", G_CALLBACK(on_key_press_event), gpointer(this));
   g_signal_connect((gpointer) treeview, "button_press_event", G_CALLBACK(on_button_press_event), gpointer(this));

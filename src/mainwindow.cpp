@@ -2064,7 +2064,7 @@ void MainWindow::deleteproject ()
   ListviewDialog dialog(_("Delete project"), projects, "", true, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
     int result;
-    result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + "?");
+    result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + _("?"));
     if (result == GTK_RESPONSE_YES) {
       result = gtkw_dialog_question(window_main, _("Are you really sure to delete project ") + dialog.focus + _(", something worth perhaps years of work?"));
     }
@@ -4808,7 +4808,7 @@ void MainWindow::on_file_resources_delete()
   vector < ustring > resources = resource_get_resources(filenames, false);
   ListviewDialog dialog(_("Delete resource"), resources, "", false, NULL);
   if (dialog.run() == GTK_RESPONSE_OK) {
-    int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + "?");
+    int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + _("?"));
     if (result == GTK_RESPONSE_YES) {
       ustring filename;
       for (unsigned int i = 0; i < resources.size(); i++) {
@@ -5505,12 +5505,12 @@ void MainWindow::on_file_projects_merge()
   on_window_merge_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(file_projects_merge))) {
     window_merge = new WindowMerge(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
-    g_signal_connect((gpointer) window_merge->delete_signal_button,    "clicked", G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->editors_get_text_button, "clicked", G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->new_reference_button,    "clicked", G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->save_editors_button,     "clicked", G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_merge->reload_editors_button,   "clicked", G_CALLBACK(on_editor_reload_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->delete_signal_button,    _("clicked"), G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->focus_in_signal_button,  _("clicked"), G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->editors_get_text_button, _("clicked"), G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->new_reference_button,    _("clicked"), G_CALLBACK(on_merge_window_new_reference_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->save_editors_button,     _("clicked"), G_CALLBACK(on_merge_window_save_editors_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_merge->reload_editors_button,   _("clicked"), G_CALLBACK(on_editor_reload_clicked), gpointer(this));
     vector < ustring> open_projects;
     for (unsigned int i = 0; i < editor_windows.size(); i++) {
       open_projects.push_back(editor_windows[i]->project());
@@ -5996,7 +5996,7 @@ void MainWindow::accelerator_activate_tile_windows(gpointer user_data)
 
 void MainWindow::accelerator_tile_windows()
 {
-  DEBUG("Saw Ctrl-T to tile windows")
+  DEBUG(_("Saw Ctrl-T to tile windows"))
   on_view_tile_windows();
 }
 
@@ -6165,8 +6165,8 @@ void MainWindow::on_check_usfm()
   on_window_check_usfm_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(check_usfm))) {
     window_check_usfm = new WindowCheckUSFM(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
-    g_signal_connect((gpointer) window_check_usfm->delete_signal_button, "clicked", G_CALLBACK(on_window_check_usfm_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_check_usfm->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_check_usfm->delete_signal_button, _("clicked"), G_CALLBACK(on_window_check_usfm_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_check_usfm->focus_in_signal_button, _("clicked"), G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     handle_editor_focus();
     on_editor_changed();
   }
@@ -6601,7 +6601,7 @@ void MainWindow::interprocess_communications_initiate_listener ()
   url.append (convert_to_string (interprocess_communications_initiate_listener_message_id));
   GtkWidget * button;
   button = urltransport->send_message_expect_reply (url);
-  g_signal_connect((gpointer) button, "clicked", G_CALLBACK(on_interprocess_communications_listener_button_clicked), gpointer(this));
+  g_signal_connect((gpointer) button, _("clicked"), G_CALLBACK(on_interprocess_communications_listener_button_clicked), gpointer(this));
 }
 
 
