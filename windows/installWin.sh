@@ -178,6 +178,9 @@ fi
 echo "Copying DLLs from $DLLS to $BIN..."
 cp $DLLS/libcairo-2.dll "$BIN"
 cp $DLLS/libenchant.dll "$BIN"
+# I think I also need, but not sure
+#libenchant_myspell.dll libenchant_ispell.dll
+# which reside in /$MINGWDIR/lib/enchant/...
 cp $DLLS/libgdk-win32-2.0-0.dll "$BIN"
 cp $DLLS/libglib-2.0-0.dll "$BIN"
 cp $DLLS/libgobject-2.0-0.dll "$BIN"
