@@ -88,6 +88,10 @@ directories::directories(char *argv0)
 #endif
   package_data = fix_slashes(package_data);
 
+  // User home directory
+  home = g_get_home_dir();
+  home = fix_slashes(home);
+  
   // The root directory of all data.
   root = tiny_directories_get_root();
   root = fix_slashes(root);
@@ -546,6 +550,7 @@ void directories::print()
   gw_message("Run directory: \t" + rundir);
   gw_message("Executable name: \t" + exename);
   gw_message("Package data: \t" + package_data);
+  gw_message("Home: \t" + home);
   gw_message("Root: \t" + root);
   gw_message("Projects: \t" + projects);
   gw_message("Notes: \t" + notes);
@@ -607,6 +612,7 @@ void directories::check_structure()
 }
 
 // Important directories in the user's home/.bibledit or temp
+ustring directories::get_home()               { return home; }
 ustring directories::get_root()               { return root; }
 ustring directories::get_projects()           { return projects; }
 ustring directories::get_notes()              { return notes; }

@@ -662,7 +662,7 @@ directory: Where to put the module.
     GwSpawn spawn("osis2mod");
     spawn.arg(absolute_text_directory);
     spawn.arg(osisfile);
-    spawn.progress("Compiling", false);
+    spawn.progress(_("Compiling"), false);
     spawn.describe ();
     spawn.run();
   }

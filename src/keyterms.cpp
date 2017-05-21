@@ -119,8 +119,9 @@ void keyterms_import_textfile_flush(sqlite3 * db, unsigned int category_id, ustr
     // Clean comment.
     ustring comment;
     for (unsigned int i = 0; i < comments.size(); i++) {
-      if (!comment.empty())
+      if (!comment.empty()) {
         comment.append("\n");
+	  }
       comment.append(comments[i]);
     }
     comment = double_apostrophy(comment);
@@ -133,13 +134,34 @@ void keyterms_import_textfile_flush(sqlite3 * db, unsigned int category_id, ustr
       throw runtime_error(sqlite3_errmsg(db));
 
     // Store the references belonging to the keyword.
+	
+	// Do some SQL stuff to greatly speed this up. Use sqlite prepared statement.
+	sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &error);
+	char buffer[] = "insert into reference values (?1, ?2, ?3, ?4)";
+	sqlite3_stmt *stmt;
+	sqlite3_prepare_v2(db, buffer, strlen(buffer), &stmt, NULL);
+	
     for (unsigned int i = 0; i < references.size(); i++) {
-      sql = g_strdup_printf("insert into reference values (%d, %d, %d, %d);", keyterm_id, references[i].book_get(), references[i].chapter_get(), convert_to_int (references[i].verse_get()));
-      rc = sqlite3_exec(db, sql, NULL, NULL, &error);
-      g_free(sql);
+	  sqlite3_bind_int(stmt, 1, keyterm_id);
+	  sqlite3_bind_int(stmt, 2, references[i].book_get());
+	  sqlite3_bind_int(stmt, 3, references[i].chapter_get());
+	  sqlite3_bind_int(stmt, 4, convert_to_int (references[i].verse_get()));
+	  if (sqlite3_step(stmt) != SQLITE_DONE) {
+        throw runtime_error(sqlite3_errmsg(db));
+	  }
+      sqlite3_reset(stmt);
+	  
+      // WAS sql = g_strdup_printf("insert into reference values (%d, %d, %d, %d);", keyterm_id, references[i].book_get(), references[i].chapter_get(), convert_to_int (references[i].verse_get()));
+      // WAS rc = sqlite3_exec(db, sql, NULL, NULL, &error);
+      // WAS g_free(sql);
+	  // I think below is redundant now
       if (rc)
         throw runtime_error(sqlite3_errmsg(db));
     }
+	
+	// Finish the SQL prepared statement
+	sqlite3_exec(db, "COMMIT TRANSACTION", NULL, NULL, &error);
+    sqlite3_finalize(stmt);
 
   }
   keyterm.clear();

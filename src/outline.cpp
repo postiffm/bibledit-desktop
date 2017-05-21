@@ -27,7 +27,7 @@
 #include "keyboard.h"
 #include "tiny_utilities.h"
 #include "stylesheetutils.h"
-
+#include <glib/gi18n.h>
 
 enum { COLUMN_HEADING,
   COLUMN_CHAPTER_START, COLUMN_VERSE_START,
@@ -171,7 +171,7 @@ void Outline::load()
           gtk_tree_store_append(store, &iter, &iter);
         }
         if (i2 < current_level) {
-          ustring ch = "Chapter " + convert_to_string(chapters_from[i]);
+          ustring ch = _("Chapter ") + convert_to_string(chapters_from[i]);
           gtk_tree_store_set(store, &iter, COLUMN_HEADING, ch.c_str(), COLUMN_CHAPTER_START, chapters_from[i], COLUMN_VERSE_START, verses_from[i], COLUMN_CHAPTER_END, chapters_from[i], COLUMN_VERSE_END, verses_from[i], -1);
         }
       }

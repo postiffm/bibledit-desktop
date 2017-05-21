@@ -5,7 +5,9 @@
 # Also can create a self-extracting installer (see -g option) to distribute
 # the package to other computers.
 
-VERSION="4.9.8"
+# To change the version number, change the following line and
+# the version in ../configure.ac, as well as any shortcuts.
+VERSION="4.10"
 
 full=1
 docs=0
@@ -62,12 +64,14 @@ then
 	  PROGRAMFILES="Program Files (x86)"
 	  # Source directory for binaries and such
 	  MINGWDIR="mingw32"
+	  WINBITS="win32"
     ;;
     MINGW64)
 	  # Program Files for 64-bit programs
       PROGRAMFILES="Program Files"
 	  # Source directory for binaries and such
 	  MINGWDIR="mingw64"
+	  WINBITS="win64"
     ;;
     MSYS)
       echo "I am not set up to install from an msys shell. Please use"
@@ -121,6 +125,13 @@ cp ./git/.libs/bibledit-git.exe "$BIN"
 cp ./shutdown/.libs/bibledit-shutdown.exe "$BIN"
 cp -R ./windows/bibledit.ico "$BIN"
 
+# Added 3/7/2017
+echo "Copying language / i18n packages to $SHARE/locale and scripts..."
+mkdir -v -p "$SHARE/locale/fr/LC_MESSAGES"
+cp ./po/fr.gmo "$SHARE/locale/fr/LC_MESSAGES/bibledit.mo"
+cp ./windows/bibledit-fr.cmd "$BIN"
+# Above added 3/7/2017
+
 # If we are in --strip mode, then shrink the executables in the dest directory
 # I opt to leave them as-is in the source directory in case debug info is needed
 if [ "$do_strip" = "1" ]; then
@@ -145,9 +156,7 @@ fi
 #which: no rcsclean.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no rcsdiff.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no rcsmerge.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
-#which: no unzip.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no unzipsfx.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
-#which: no zip.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no zipcloak.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no zipinfo.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
 #which: no zipnote.exe in (/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client:/c/Program Files/Intel/iCLS Client:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static:/c/Program Files/Lame3.99.5-64:/c/Program Files (x86)/GNU/GnuPG/pub:/c/Strawberry/c/bin:/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Program Files (x86)/AMD/ATI.ACE/Core-Static:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Program Files (x86)/Skype/Phone:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl)
@@ -161,6 +170,7 @@ then
 fi
 if [ -e "$DLLS/libgcc_s_dw2-1.dll" ]
 then
+  # Is this called msys-gcc_s-1.dll in future editions of msys2?
   echo "  32-bit: Copying libgcc_s_dw2-1"
   cp $DLLS/libgcc_s_dw2-1.dll "$BIN"
 fi
@@ -168,6 +178,9 @@ fi
 echo "Copying DLLs from $DLLS to $BIN..."
 cp $DLLS/libcairo-2.dll "$BIN"
 cp $DLLS/libenchant.dll "$BIN"
+# I think I also need, but not sure
+#libenchant_myspell.dll libenchant_ispell.dll
+# which reside in /$MINGWDIR/lib/enchant/...
 cp $DLLS/libgdk-win32-2.0-0.dll "$BIN"
 cp $DLLS/libglib-2.0-0.dll "$BIN"
 cp $DLLS/libgobject-2.0-0.dll "$BIN"
@@ -216,6 +229,7 @@ cp $DLLS/libpangoft2-1.0-0.dll "$BIN"
 cp $DLLS/libpangowin32-1.0-0.dll "$BIN"
 cp $DLLS/libpixman-1-0.dll "$BIN"
 cp $DLLS/libpng16-16.dll "$BIN"
+# Below will soon have to change to libwebp-7.dll
 cp $DLLS/libwebp-6.dll "$BIN"
 cp $DLLS/libxslt-1.dll "$BIN"
 cp $DLLS/libdbus-glib-1-2.dll "$BIN"
@@ -337,6 +351,18 @@ cp $USRBIN/msys-icudata56.dll "$BIN"
 cp $USRBIN/msys-icui18n56.dll "$BIN"
 # Above added 3/25/2016
 
+# Below added 3/6/2017
+echo "Copying zip and unzip..."
+cp $USRBIN/zip.exe "$BIN"
+cp $USRBIN/unzip.exe "$BIN"
+cp $USRBIN/msys-bz2-1.dll "$BIN"
+# Above added 3/6/2017
+
+# Below added 3/20/2017
+cp $MINGWBIN/gspawn-$WINBITS-helper "$BIN"
+# This should have created the .exe version of the above-named file
+# Above added 3/20/2017
+
 # Below added 3/29/2016. This is critical for crash-free operation,
 # for example, when opening Related Verses or References windows that
 # use libwebkit.
@@ -362,6 +388,7 @@ cp -R $ENGINES/* "$LIB/gtk-2.0/"
 echo "Copying templates, etc. to $SHARE/bibledit..."
 mkdir -v -p "$SHARE/bibledit"
 cp -R templates/* "$SHARE/bibledit"
+cp -R BiblesInternational/* "$SHARE/bibledit"
 # Added next line 4/4/2016
 cp -R kjv/kjv.sql "$SHARE/bibledit"
 cp -R pix/* "$SHARE/bibledit"

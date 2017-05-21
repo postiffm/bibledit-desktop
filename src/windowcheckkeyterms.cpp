@@ -603,6 +603,12 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
         if (verse.empty()) {
           verse.append(_("<empty>"));
         } else {
+	  // Sometimes, a verse (like KJV Psalm 64:5) has \n in the middle of a footnote.
+	  // CategorizeLine splits that into two pieces, thus splitting a footnote in half.
+	  // This does not parse properly, and the parsing code gets into an infinite loop.
+	  // Since this is a single verse, we know that we can eliminate any \n in it and
+	  // it should be fine. MAP 4/3/2017
+	  replace_text(verse, "\n", " ");
           CategorizeLine cl(verse);
           cl.remove_verse_number(reference.verse_get());
           verse = cl.verse;

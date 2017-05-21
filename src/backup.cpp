@@ -17,6 +17,7 @@
 **  
 */
 
+/* See assistantbackup.cpp for caller to these utilities. */
 
 #include "backup.h"
 #include "unixwrappers.h"

@@ -4,6 +4,10 @@
 # Figure out if we are in a 32-bit or 64-bit environment and setup Windows build 
 # environment accordingly. I am assuming this is built on a 64-bit machine, i.e. that
 # you have installed msys2-x86_64...exe.
+# 
+# Because of problems I've had with the 32-bit env on a 64-bit machine, inter-operability
+# of libraries and such, I am not too keen on supporting such a configuration. I want to 
+# go all 64-bit. MAP 3/7/2017.
 #------------------------------------------------------------------------------------------
 if [ -n "$MSYSTEM" ]
 then
@@ -48,6 +52,8 @@ pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-glib2
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-python2-pygtk
 pacman -S --noconfirm msys/gtk-doc
 pacman -S --noconfirm msys/git
+pacman -S --noconfirm msys/zip
+pacman -S --noconfirm msys/unzip
 #pacman -S --noconfirm msys/glib2-devel
 pacman -S --noconfirm autoconf-archive
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-sqlite3 msys/libsqlite-devel msys/sqlite msys/sqlite-doc
@@ -55,6 +61,8 @@ pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-gtksourceview2 $MINGWDIR/min
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-webkitgtk2 $MINGWDIR/mingw-w64-$PLATFORM-webkitgtk3
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-emacs
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-icu-debug-libs
+pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-aspell-en
+
 # For user interface development
 pacman -S --noconfirm $MINGWDIR/mingw-w64-$PLATFORM-glade
 

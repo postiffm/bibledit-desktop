@@ -284,17 +284,19 @@ void BackupAssistant::on_assistant_prepare (GtkWidget *page)
   }
 
   if (page == vbox_file) {
-	time_t t = time(NULL);
-	struct tm nowtime = *localtime(&t);
-	gchar currtime[80];
-	g_snprintf(currtime, 80, "%d%02d%02d_%02d_%02d_%02d", 
-		nowtime.tm_year + 1900, nowtime.tm_mon + 1, nowtime.tm_mday, 
-		nowtime.tm_hour, nowtime.tm_min, nowtime.tm_sec);
-	filename = currtime; filename += ".tar.gz";
-    gtk_label_set_text (GTK_LABEL (label_file), filename.c_str());
     if (filename.empty()) {
-      gtk_label_set_text (GTK_LABEL (label_file), _("(None)"));
-    }
+		//gtk_label_set_text (GTK_LABEL (label_file), _("(None)"));
+		time_t t = time(NULL);
+		struct tm nowtime = *localtime(&t);
+		gchar currtime[80];
+		g_snprintf(currtime, 80, "%d%02d%02d_%02d_%02d_%02d", 
+			nowtime.tm_year + 1900, nowtime.tm_mon + 1, nowtime.tm_mday, 
+			nowtime.tm_hour, nowtime.tm_min, nowtime.tm_sec);
+		filename = currtime;
+		filename = Directories->get_home() + "/" + filename + ".tar.gz";
+		filename = Directories->fix_slashes(filename); // turn / into \ for benefit of Windows
+	}
+	gtk_label_set_text (GTK_LABEL (label_file), filename.c_str());
     gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_file, !filename.empty());
   }
   

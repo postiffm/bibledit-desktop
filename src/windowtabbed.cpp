@@ -182,7 +182,7 @@ void WindowTabbed::Concordance(void)
 	
 	// Show it in the view
 	HtmlWriter2 htmlwriter ("");
-	htmlwriter.text_add ("Concordance features are almost ready...");
+	htmlwriter.text_add (_("Concordance features are almost ready..."));
 	
   htmlwriter.finish();
 //  if (display_another_page) {

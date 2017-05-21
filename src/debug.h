@@ -29,9 +29,11 @@ extern int debug_msg_no;
 #define DEBUG_CODE_INCLUDED
 
 #ifdef DEBUG_CODE_INCLUDED
-        #define DEBUG(MSG)   if (global_debug_level) { gw_debug(debug_msg_no++, MSG, __FILE__, __LINE__, __func__); }
+    #define DEBUG(MSG)   if (global_debug_level) { gw_debug(debug_msg_no++, MSG, __FILE__, __LINE__, __func__); }
+	#define DEBUG_VECTOR(vec) { for(auto it = vec.begin(); it != vec.end(); ++it) {DEBUG(*it) } }
 #else
 	#define DEBUG(MSG)
+    #define DEBUG_VECTOR(vec)
 #endif	
 
 #endif

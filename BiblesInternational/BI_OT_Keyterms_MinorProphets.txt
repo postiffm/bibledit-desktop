@@ -1,0 +1,8613 @@
+﻿BI OLD TESTAMENT KEYTERM CHECKS v.3
+[keyterm]
+BI00000 <03068> LORD  יְהֹוָה Yehovah 	 
+[references]
+Hos 01:01
+Hos 01:02
+Hos 01:04
+Hos 01:07
+Hos 02:13
+Hos 02:16
+Hos 02:20
+Hos 02:21
+Hos 03:01
+Hos 03:05
+Hos 04:01
+Hos 04:10
+Hos 04:15
+Hos 04:16
+Hos 05:04
+Hos 05:06
+Hos 05:07
+Hos 06:01
+Hos 06:03
+Hos 07:10
+Hos 08:01
+Hos 08:13
+Hos 09:03
+Hos 09:04
+Hos 09:05
+Hos 09:14
+Hos 10:03
+Hos 10:12
+Hos 11:10
+Hos 11:11
+Hos 12:02
+Hos 12:05
+Hos 12:09
+Hos 12:13
+Hos 13:04
+Hos 13:15
+Hos 14:01
+Hos 14:02
+Hos 14:09
+Joe 01:01
+Joe 01:09
+Joe 01:14
+Joe 01:15
+Joe 01:19
+Joe 02:01
+Joe 02:11
+Joe 02:12
+Joe 02:13
+Joe 02:14
+Joe 02:17
+Joe 02:18
+Joe 02:19
+Joe 02:21
+Joe 02:23
+Joe 02:26
+Joe 02:27
+Joe 02:31
+Joe 02:32
+Joe 03:08
+Joe 03:11
+Joe 03:14
+Joe 03:16
+Joe 03:17
+Joe 03:18
+Joe 03:21
+Amo 01:02
+Amo 01:03
+Amo 01:05
+Amo 01:06
+Amo 01:09
+Amo 01:11
+Amo 01:13
+Amo 01:15
+Amo 02:01
+Amo 02:03
+Amo 02:04
+Amo 02:06
+Amo 02:11
+Amo 02:16
+Amo 03:01
+Amo 03:06
+Amo 03:10
+Amo 03:12
+Amo 03:15
+Amo 04:03
+Amo 04:06
+Amo 04:08
+Amo 04:09
+Amo 04:10
+Amo 04:11
+Amo 04:13
+Amo 05:04
+Amo 05:06
+Amo 05:08
+Amo 05:14
+Amo 05:15
+Amo 05:16
+Amo 05:17
+Amo 05:18
+Amo 05:20
+Amo 05:27
+Amo 06:08
+Amo 06:10
+Amo 06:11
+Amo 06:14
+Amo 07:03
+Amo 07:06
+Amo 07:08
+Amo 07:15
+Amo 07:16
+Amo 07:17
+Amo 08:02
+Amo 08:07
+Amo 08:11
+Amo 08:12
+Amo 09:06
+Amo 09:07
+Amo 09:08
+Amo 09:12
+Amo 09:13
+Amo 09:15
+oba 01:01
+oba 01:04
+oba 01:08
+oba 01:15
+oba 01:18
+oba 01:21
+Jon 01:01
+Jon 01:03
+Jon 01:04
+Jon 01:09
+Jon 01:10
+Jon 01:14
+Jon 01:16
+Jon 01:17
+Jon 02:01
+Jon 02:02
+Jon 02:06
+Jon 02:07
+Jon 02:09
+Jon 02:10
+Jon 03:01
+Jon 03:03
+Jon 04:02
+Jon 04:03
+Jon 04:04
+Jon 04:06
+Jon 04:10
+Mic 01:01
+Mic 01:03
+Mic 01:12
+Mic 02:03
+Mic 02:05
+Mic 02:07
+Mic 02:13
+Mic 03:04
+Mic 03:05
+Mic 03:08
+Mic 03:11
+Mic 04:01
+Mic 04:02
+Mic 04:04
+Mic 04:05
+Mic 04:06
+Mic 04:07
+Mic 04:10
+Mic 04:12
+Mic 04:13
+Mic 05:04
+Mic 05:07
+Mic 05:10
+Mic 06:01
+Mic 06:02
+Mic 06:05
+Mic 06:06
+Mic 06:07
+Mic 06:08
+Mic 06:09
+Mic 07:07
+Mic 07:08
+Mic 07:09
+Mic 07:10
+Mic 07:17
+Nah 01:02
+Nah 01:03
+Nah 01:07
+Nah 01:09
+Nah 01:11
+Nah 01:12
+Nah 01:14
+Nah 02:02
+Nah 02:13
+Nah 03:05
+Hab 01:02
+Hab 01:12
+Hab 02:02
+Hab 02:13
+Hab 02:14
+Hab 02:16
+Hab 02:20
+Hab 03:02
+Hab 03:08
+Hab 03:18
+Zep 01:01
+Zep 01:02
+Zep 01:03
+Zep 01:05
+Zep 01:06
+Zep 01:07
+Zep 01:08
+Zep 01:10
+Zep 01:12
+Zep 01:14
+Zep 01:17
+Zep 01:18
+Zep 02:02
+Zep 02:03
+Zep 02:05
+Zep 02:07
+Zep 02:09
+Zep 02:10
+Zep 02:11
+Zep 03:02
+Zep 03:05
+Zep 03:08
+Zep 03:09
+Zep 03:12
+Zep 03:15
+Zep 03:17
+Zep 03:20
+hag 01:01
+hag 01:02
+hag 01:03
+hag 01:05
+hag 01:07
+hag 01:08
+hag 01:09
+hag 01:12
+hag 01:13
+hag 01:14
+hag 02:01
+hag 02:04
+hag 02:06
+hag 02:07
+hag 02:08
+hag 02:09
+hag 02:10
+hag 02:11
+hag 02:14
+hag 02:15
+hag 02:17
+hag 02:18
+hag 02:20
+hag 02:23
+zec 01:01
+zec 01:02
+zec 01:03
+zec 01:04
+zec 01:06
+zec 01:07
+zec 01:10
+zec 01:11
+zec 01:12
+zec 01:13
+zec 01:14
+zec 01:16
+zec 01:17
+zec 01:20
+zec 02:05
+zec 02:06
+zec 02:08
+zec 02:09
+zec 02:10
+zec 02:11
+zec 02:12
+zec 02:13
+zec 03:01
+zec 03:02
+zec 03:05
+zec 03:06
+zec 03:07
+zec 03:09
+zec 03:10
+zec 04:06
+zec 04:08
+zec 04:09
+zec 04:10
+zec 05:04
+zec 06:09
+zec 06:12
+zec 06:13
+zec 06:14
+zec 06:15
+zec 07:01
+zec 07:02
+zec 07:03
+zec 07:04
+zec 07:07
+zec 07:08
+zec 07:09
+zec 07:12
+zec 07:13
+zec 08:01
+zec 08:02
+zec 08:03
+zec 08:04
+zec 08:06
+zec 08:07
+zec 08:09
+zec 08:11
+zec 08:14
+zec 08:17
+zec 08:18
+zec 08:19
+zec 08:20
+zec 08:21
+zec 08:22
+zec 08:23
+zec 09:01
+zec 09:14
+zec 09:15
+zec 09:16
+zec 10:01
+zec 10:03
+zec 10:05
+zec 10:06
+zec 10:07
+zec 10:12
+zec 11:04
+zec 11:05
+zec 11:06
+zec 11:11
+zec 11:13
+zec 11:15
+zec 12:01
+zec 12:04
+zec 12:05
+zec 12:07
+zec 12:08
+zec 13:02
+zec 13:03
+zec 13:07
+zec 13:08
+zec 13:09
+zec 14:01
+zec 14:03
+zec 14:05
+zec 14:07
+zec 14:09
+zec 14:12
+zec 14:13
+zec 14:16
+zec 14:17
+zec 14:18
+zec 14:20
+zec 14:21
+Mal 01:01
+Mal 01:02
+Mal 01:04
+Mal 01:05
+Mal 01:06
+Mal 01:07
+Mal 01:08
+Mal 01:09
+Mal 01:10
+Mal 01:11
+Mal 01:12
+Mal 01:13
+Mal 01:14
+Mal 02:02
+Mal 02:04
+Mal 02:07
+Mal 02:08
+Mal 02:11
+Mal 02:12
+Mal 02:13
+Mal 02:14
+Mal 02:16
+Mal 02:17
+Mal 03:01
+Mal 03:03
+Mal 03:04
+Mal 03:05
+Mal 03:06
+Mal 03:07
+Mal 03:10
+Mal 03:11
+Mal 03:12
+Mal 03:13
+Mal 03:14
+Mal 03:16
+Mal 03:17
+Mal 04:01
+Mal 04:03
+Mal 04:05
+[keyterm]
+ BI00001 son   <נבֵ בֵּן  <01121>
+[references]
+Hos 01:01
+Hos 01:03
+Hos 01:08
+Hos 01:10
+Hos 01:11
+Hos 02:04
+Hos 03:01
+Hos 03:04
+Hos 03:05
+Hos 04:01
+Hos 04:06
+Hos 05:07
+Hos 09:12
+Hos 09:13
+Hos 10:09
+Hos 10:14
+Hos 11:01
+Hos 11:10
+Hos 13:13
+Joe 01:01
+Joe 01:03
+Joe 01:12
+Joe 02:23
+Joe 02:28
+Joe 03:06
+Joe 03:08
+Joe 03:16
+Joe 03:19
+Amo 01:01
+Amo 01:13
+Amo 02:11
+Amo 03:01
+Amo 03:12
+Amo 04:05
+Amo 07:14
+Amo 07:17
+Amo 09:07
+oba 01:12
+oba 01:20
+Jon 01:01
+Jon 04:10
+Mic 01:16
+Mic 05:03
+Mic 05:07
+Mic 06:05
+Mic 06:06
+Mic 07:06
+Zep 01:01
+Zep 01:08
+Zep 02:08
+Zep 02:09
+hag 01:01
+hag 01:12
+hag 01:14
+hag 02:02
+hag 02:04
+hag 02:23
+zec 01:01
+zec 01:07
+zec 04:14
+zec 06:10
+zec 06:11
+zec 06:14
+zec 09:09
+zec 09:13
+zec 10:07
+zec 10:09
+Mal 01:06
+Mal 03:03
+Mal 03:06
+Mal 03:17
+Mal 04:06
+[keyterm]
+ BI00002 <0776>	land  ֵָ אֶרֶץ
+[references]
+Hos 01:02
+Hos 01:11
+Hos 02:03
+Hos 02:15
+Hos 02:18
+Hos 02:21
+Hos 02:22
+Hos 02:23
+Hos 04:01
+Hos 04:03
+Hos 06:03
+Hos 07:16
+Hos 09:03
+Hos 10:01
+Hos 11:05
+Hos 11:11
+Hos 12:09
+Hos 13:04
+Hos 13:05
+Joe 01:02
+Joe 01:06
+Joe 01:14
+Joe 02:01
+Joe 02:03
+Joe 02:10
+Joe 02:18
+Joe 02:20
+Joe 02:30
+Joe 03:02
+Joe 03:16
+Joe 03:19
+Amo 02:07
+Amo 02:10
+Amo 03:01
+Amo 03:05
+Amo 03:09
+Amo 03:11
+Amo 03:14
+Amo 04:13
+Amo 05:07
+Amo 05:08
+Amo 07:02
+Amo 07:10
+Amo 07:12
+Amo 08:04
+Amo 08:08
+Amo 08:09
+Amo 08:11
+Amo 09:05
+Amo 09:06
+Amo 09:07
+Amo 09:09
+oba 01:03
+Jon 01:08
+Jon 02:06
+Mic 01:02
+Mic 01:03
+Mic 04:13
+Mic 05:04
+Mic 05:05
+Mic 05:06
+Mic 05:11
+Mic 06:02
+Mic 06:04
+Mic 07:02
+Mic 07:13
+Mic 07:15
+Mic 07:17
+Nah 01:05
+Nah 02:13
+Nah 03:13
+Hab 01:06
+Hab 02:08
+Hab 02:14
+Hab 02:17
+Hab 02:20
+Hab 03:03
+Hab 03:06
+Hab 03:07
+Hab 03:09
+Hab 03:12
+Zep 01:18
+Zep 02:03
+Zep 02:05
+Zep 02:11
+Zep 03:08
+Zep 03:19
+Zep 03:20
+hag 01:10
+hag 01:11
+hag 02:04
+hag 02:06
+hag 02:21
+zec 01:10
+zec 01:11
+zec 01:21
+zec 02:06
+zec 03:09
+zec 04:10
+zec 04:14
+zec 05:03
+zec 05:06
+zec 05:09
+zec 05:11
+zec 06:05
+zec 06:06
+zec 06:07
+zec 06:08
+zec 07:05
+zec 07:14
+zec 08:07
+zec 08:12
+zec 09:01
+zec 09:10
+zec 10:10
+zec 11:06
+zec 11:16
+zec 12:01
+zec 12:03
+zec 12:12
+zec 13:02
+zec 13:08
+zec 14:09
+zec 14:10
+zec 14:17
+Mal 03:12
+Mal 04:06
+[keyterm]
+ BI00003 God אֱלֹהִים 'elohiym <0430>
+[references]
+Hos 01:07
+Hos 02:23
+Hos 03:01
+Hos 03:05
+Hos 04:01
+Hos 04:06
+Hos 04:12
+Hos 05:04
+Hos 06:06
+Hos 07:10
+Hos 08:02
+Hos 08:06
+Hos 09:01
+Hos 09:08
+Hos 09:17
+Hos 12:03
+Hos 12:05
+Hos 12:06
+Hos 12:09
+Hos 13:04
+Hos 13:16
+Hos 14:01
+Hos 14:03
+Joe 01:13
+Joe 01:14
+Joe 01:16
+Joe 02:13
+Joe 02:14
+Joe 02:17
+Joe 02:23
+Joe 02:26
+Joe 02:27
+Joe 03:17
+Amo 02:08
+Amo 03:13
+Amo 04:11
+Amo 04:12
+Amo 04:13
+Amo 05:14
+Amo 05:15
+Amo 05:16
+Amo 05:26
+Amo 05:27
+Amo 06:08
+Amo 06:14
+Amo 08:14
+Amo 09:15
+Jon 01:05
+Jon 01:06
+Jon 01:09
+Jon 02:01
+Jon 02:06
+Jon 03:03
+Jon 03:05
+Jon 03:08
+Jon 03:09
+Jon 03:10
+Jon 04:06
+Jon 04:07
+Jon 04:08
+Jon 04:09
+Mic 03:07
+Mic 04:02
+Mic 04:05
+Mic 05:04
+Mic 06:06
+Mic 06:08
+Mic 07:07
+Mic 07:10
+Mic 07:17
+Nah 01:14
+Hab 01:12
+Hab 03:18
+Zep 02:07
+Zep 02:09
+Zep 02:11
+Zep 03:02
+Zep 03:17
+hag 01:12
+hag 01:14
+zec 06:15
+zec 08:08
+zec 08:23
+zec 09:07
+zec 09:16
+zec 10:06
+zec 11:04
+zec 12:05
+zec 12:08
+zec 13:09
+zec 14:05
+Mal 02:15
+Mal 02:16
+Mal 02:17
+Mal 03:08
+Mal 03:14
+Mal 03:15
+Mal 03:18
+[keyterm]
+ BI00004 <0410>	God, god   אֵל'el
+[references]
+Hos 01:10
+Hos 11:09
+Hos 11:12
+Jon 04:02
+Mic 02:01
+Mic 07:18
+Nah 01:02
+zec 07:02
+Mal 01:09
+Mal 02:10
+Mal 02:11
+[keyterm]
+ BI00005 <03117>	day   יוֹם yowm    
+[references]
+Hos 01:01
+Hos 01:05
+Hos 01:11
+Hos 02:03
+Hos 02:13
+Hos 02:15
+Hos 02:16
+Hos 02:18
+Hos 02:21
+Hos 03:03
+Hos 03:04
+Hos 03:05
+Hos 04:05
+Hos 05:09
+Hos 06:02
+Hos 07:05
+Hos 09:05
+Hos 09:07
+Hos 09:09
+Hos 10:09
+Hos 10:14
+Hos 12:01
+Hos 12:09
+Joe 01:02
+Joe 01:15
+Joe 02:01
+Joe 02:02
+Joe 02:11
+Joe 02:29
+Joe 02:31
+Joe 03:01
+Joe 03:14
+Joe 03:18
+Amo 01:01
+Amo 01:14
+Amo 02:16
+Amo 03:14
+Amo 04:02
+Amo 04:04
+Amo 05:08
+Amo 05:18
+Amo 05:20
+Amo 06:03
+Amo 08:03
+Amo 08:09
+Amo 08:10
+Amo 08:11
+Amo 08:13
+Amo 09:11
+Amo 09:13
+oba 01:08
+oba 01:11
+oba 01:12
+oba 01:13
+oba 01:14
+oba 01:15
+Jon 01:17
+Jon 03:03
+Jon 03:04
+Mic 01:01
+Mic 02:04
+Mic 03:06
+Mic 04:01
+Mic 04:06
+Mic 05:02
+Mic 05:10
+Mic 07:04
+Mic 07:11
+Mic 07:12
+Mic 07:14
+Mic 07:15
+Mic 07:20
+Nah 01:07
+Nah 02:03
+Nah 02:08
+Nah 03:17
+Hab 01:05
+Hab 03:16
+Zep 01:01
+Zep 01:07
+Zep 01:08
+Zep 01:09
+Zep 01:10
+Zep 01:14
+Zep 01:15
+Zep 01:16
+Zep 01:18
+Zep 02:02
+Zep 02:03
+Zep 03:08
+Zep 03:11
+Zep 03:16
+hag 01:01
+hag 01:15
+hag 02:15
+hag 02:18
+hag 02:19
+hag 02:23
+zec 01:07
+zec 02:11
+zec 03:09
+zec 03:10
+zec 04:10
+zec 06:10
+zec 08:04
+zec 08:06
+zec 08:09
+zec 08:10
+zec 08:11
+zec 08:15
+zec 08:23
+zec 09:12
+zec 09:16
+zec 11:11
+zec 12:03
+zec 12:04
+zec 12:06
+zec 12:08
+zec 12:09
+zec 12:11
+zec 13:01
+zec 13:02
+zec 13:04
+zec 14:01
+zec 14:03
+zec 14:04
+zec 14:05
+zec 14:06
+zec 14:07
+zec 14:08
+zec 14:09
+zec 14:13
+zec 14:20
+zec 14:21
+Mal 03:02
+Mal 03:04
+Mal 03:07
+Mal 03:17
+Mal 04:01
+Mal 04:03
+Mal 04:05
+[keyterm]
+ BI00006 <0935>	come, go in   בּוֹא bo'	
+[references]
+Hos 04:15
+Hos 06:03
+Hos 07:01
+Hos 09:04
+Hos 09:07
+Hos 09:10
+Hos 10:12
+Hos 11:09
+Hos 13:13
+Hos 13:15
+Joe 01:13
+Joe 01:15
+Joe 02:01
+Joe 02:09
+Joe 02:31
+Joe 03:05
+Joe 03:11
+Joe 03:13
+Amo 04:01
+Amo 04:02
+Amo 04:04
+Amo 05:05
+Amo 05:09
+Amo 05:19
+Amo 06:01
+Amo 06:14
+Amo 08:02
+Amo 08:09
+Amo 08:11
+Amo 09:13
+oba 01:05
+oba 01:11
+oba 01:13
+Jon 01:03
+Jon 01:08
+Jon 02:07
+Jon 03:04
+Mic 01:09
+Mic 01:15
+Mic 03:06
+Mic 03:11
+Mic 04:08
+Mic 04:10
+Mic 05:05
+Mic 05:06
+Mic 07:04
+Mic 07:12
+Nah 03:14
+Hab 01:08
+Hab 01:09
+Hab 02:03
+Hab 03:03
+Hab 03:16
+Zep 02:02
+Zep 03:20
+hag 01:02
+hag 01:06
+hag 01:08
+hag 01:09
+hag 01:14
+hag 02:07
+hag 02:16
+zec 01:21
+zec 02:10
+zec 03:08
+zec 05:04
+zec 06:10
+zec 06:15
+zec 08:08
+zec 08:10
+zec 08:20
+zec 08:22
+zec 09:09
+zec 10:10
+zec 12:09
+zec 13:09
+zec 14:01
+zec 14:05
+zec 14:16
+zec 14:18
+zec 14:21
+Mal 01:13
+Mal 03:01
+Mal 03:02
+Mal 03:10
+Mal 04:01
+Mal 04:05
+Mal 04:06
+[keyterm]
+ BI00007 <05971>	people  ׃ עַםam
+[references]
+Hos 01:09
+Hos 01:10
+Hos 02:01
+Hos 02:23
+Hos 04:04
+Hos 04:06
+Hos 04:08
+Hos 04:09
+Hos 04:12
+Hos 04:14
+Hos 06:11
+Hos 07:08
+Hos 09:01
+Hos 10:05
+Hos 10:10
+Hos 10:14
+Hos 11:07
+Joe 02:02
+Joe 02:05
+Joe 02:06
+Joe 02:16
+Joe 02:17
+Joe 02:18
+Joe 02:19
+Joe 02:26
+Joe 02:27
+Joe 03:02
+Joe 03:03
+Joe 03:16
+Amo 01:05
+Amo 03:06
+Amo 07:08
+Amo 07:15
+Amo 08:02
+Amo 09:10
+Amo 09:14
+oba 01:13
+Jon 01:08
+Mic 01:02
+Mic 01:09
+Mic 02:04
+Mic 02:08
+Mic 02:09
+Mic 02:11
+Mic 03:03
+Mic 03:05
+Mic 04:01
+Mic 04:03
+Mic 04:05
+Mic 04:13
+Mic 05:07
+Mic 05:08
+Mic 06:02
+Mic 06:03
+Mic 06:05
+Mic 06:16
+Mic 07:14
+Nah 03:13
+Nah 03:18
+Hab 02:05
+Hab 02:08
+Hab 02:10
+Hab 02:13
+Hab 03:13
+Hab 03:16
+Zep 01:11
+Zep 02:08
+Zep 02:09
+Zep 02:10
+Zep 03:09
+Zep 03:12
+Zep 03:20
+hag 01:02
+hag 01:12
+hag 01:13
+hag 01:14
+hag 02:02
+hag 02:04
+hag 02:14
+zec 02:11
+zec 07:05
+zec 08:06
+zec 08:07
+zec 08:08
+zec 08:11
+zec 08:12
+zec 08:20
+zec 08:22
+zec 09:16
+zec 10:09
+zec 11:10
+zec 12:02
+zec 12:03
+zec 12:04
+zec 12:06
+zec 13:09
+zec 14:02
+zec 14:12
+Mal 01:04
+Mal 02:09
+[keyterm]
+ BI00008 <0376>	man   אִישׁ 'iysh
+[references]
+Hos 02:02
+Hos 02:07
+Hos 02:10
+Hos 02:16
+Hos 03:03
+Hos 04:04
+Hos 06:09
+Hos 09:07
+Hos 11:09
+Joe 02:07
+Joe 02:08
+Amo 02:07
+Amo 05:19
+oba 01:09
+Jon 01:05
+Jon 01:07
+Jon 01:14
+Jon 03:08
+Mic 02:02
+Mic 02:11
+Mic 04:04
+Mic 04:05
+Mic 05:07
+Mic 06:10
+Mic 07:02
+Mic 07:06
+Zep 02:11
+Zep 03:06
+hag 01:09
+hag 02:12
+hag 02:22
+zec 01:08
+zec 01:10
+zec 01:21
+zec 02:01
+zec 03:10
+zec 04:01
+zec 06:12
+zec 07:09
+zec 07:10
+zec 08:04
+zec 08:10
+zec 08:16
+zec 08:17
+zec 08:23
+zec 10:01
+zec 11:06
+zec 13:03
+zec 13:04
+zec 13:05
+zec 14:13
+Mal 02:10
+Mal 02:12
+Mal 03:16
+Mal 03:17
+[keyterm]
+ BI00009 <0582>	man, person  אֱנוֹשׁ 'enowsh	
+[references]
+Joe 02:07
+Joe 03:09
+Amo 06:09
+oba 01:07
+Jon 01:10
+Jon 01:13
+Jon 01:16
+Jon 03:05
+Mic 07:06
+Nah 02:03
+Zep 01:12
+Zep 03:04
+zec 03:08
+zec 07:02
+zec 08:23
+[keyterm]
+ BI00010 <0120>	man אָדָם 'adam
+[references]
+Hos 06:07
+Hos 09:12
+Hos 11:04
+Hos 13:02
+Joe 01:12
+Amo 04:13
+Jon 03:07
+Jon 03:08
+Jon 04:11
+Mic 02:12
+Mic 05:05
+Mic 05:07
+Mic 06:08
+Mic 07:02
+Hab 01:14
+Hab 02:08
+Hab 02:17
+Zep 01:03
+Zep 01:17
+hag 01:11
+zec 02:04
+zec 08:10
+zec 09:01
+zec 11:06
+zec 12:01
+zec 13:05
+Mal 03:08
+[keyterm]
+ BI00012 <02145c>	male זָכָר zakar
+[references]
+Mal 01:14
+[keyterm]
+ BI00013 <01>	father  אָב 'ab  
+[references]
+Hos 09:10
+Joe 01:02
+Amo 02:04
+Amo 02:07
+Mic 07:06
+Mic 07:20
+zec 01:02
+zec 01:04
+zec 01:05
+zec 01:06
+zec 08:14
+zec 13:03
+Mal 01:06
+Mal 02:10
+Mal 03:07
+Mal 04:06
+[keyterm]
+ BI00014 <04191>	die   מָוֹת muwth
+[references]
+Hos 02:03
+Hos 09:16
+Hos 13:01
+Amo 02:02
+Amo 06:09
+Amo 07:11
+Amo 07:17
+Amo 09:10
+Jon 04:08
+Hab 01:12
+zec 11:09
+[keyterm]
+ BI00015 <01478>	to die, expire  גָּוַע gava`	
+[references]
+zec 13:08
+[keyterm]
+ BI00016 <04194>	death (noun)  מָוֶת maveth	
+[references]
+Hos 13:14
+Jon 04:03
+Jon 04:08
+Jon 04:09
+Hab 02:05
+[keyterm]
+ BI00017 <03548>	priest  כֹּהֵן kohen  
+[references]
+Hos 04:04
+Hos 04:09
+Hos 05:01
+Hos 06:09
+Joe 01:09
+Joe 01:13
+Joe 02:17
+Amo 07:10
+Mic 03:11
+Zep 01:04
+Zep 03:04
+hag 01:01
+hag 01:12
+hag 01:14
+hag 02:02
+hag 02:04
+hag 02:11
+hag 02:12
+hag 02:13
+zec 03:01
+zec 03:08
+zec 06:11
+zec 06:13
+zec 07:03
+zec 07:05
+Mal 01:06
+Mal 02:01
+Mal 02:07
+[keyterm]
+ BI00018 <0251>	brother  אָח 'ach
+[references]
+Hos 02:01
+Hos 12:03
+Hos 13:15
+Joe 02:08
+Amo 01:09
+Amo 01:11
+oba 01:10
+oba 01:12
+Mic 05:03
+Mic 07:02
+hag 02:22
+zec 07:09
+zec 07:10
+Mal 01:02
+Mal 02:10
+[keyterm]
+ BI00019 <06680>	command צוּה tsavah	
+[references]
+Amo 02:12
+Amo 06:11
+Amo 09:03
+Amo 09:04
+Amo 09:09
+Nah 01:14
+zec 01:06
+Mal 04:04
+[keyterm]
+ BI00020 <04687>	commandment מִצְוָה mitsvah
+[references]
+Mal 02:01
+Mal 02:04
+[keyterm]
+ BI00021 <01697>	word, speech דָּבָר dabar
+[references]
+Hos 01:01
+Hos 04:01
+Hos 10:04
+Hos 14:02
+Joe 01:01
+Joe 02:11
+Amo 01:01
+Amo 03:01
+Amo 03:07
+Amo 04:01
+Amo 05:01
+Amo 06:13
+Amo 07:10
+Amo 07:16
+Amo 08:11
+Amo 08:12
+Jon 01:01
+Jon 03:01
+Jon 03:03
+Jon 03:06
+Jon 04:02
+Mic 01:01
+Mic 02:07
+Mic 04:02
+Zep 01:01
+Zep 02:05
+hag 01:01
+hag 01:03
+hag 01:12
+hag 02:01
+hag 02:05
+hag 02:10
+hag 02:20
+zec 01:01
+zec 01:06
+zec 01:07
+zec 01:13
+zec 04:06
+zec 04:08
+zec 06:09
+zec 07:01
+zec 07:04
+zec 07:07
+zec 07:08
+zec 07:12
+zec 08:01
+zec 08:09
+zec 08:16
+zec 08:18
+zec 09:01
+zec 11:11
+zec 12:01
+Mal 01:01
+Mal 02:17
+Mal 03:13
+[keyterm]
+ BI00022 <0561>	utterance, speech, words  אֵמֶר 'emer
+[references]
+Hos 06:05
+[keyterm]
+ BI00023 <08034>	name שֵׁם shem
+[references]
+Hos 01:04
+Hos 01:06
+Hos 01:09
+Hos 02:17
+Joe 02:26
+Joe 02:32
+Amo 02:07
+Amo 04:13
+Amo 05:08
+Amo 05:27
+Amo 06:10
+Amo 09:06
+Amo 09:12
+Mic 04:05
+Mic 05:04
+Mic 06:09
+Nah 01:14
+Zep 01:04
+Zep 03:09
+Zep 03:12
+Zep 03:19
+Zep 03:20
+zec 05:04
+zec 06:12
+zec 10:12
+zec 13:02
+zec 13:03
+zec 13:09
+zec 14:09
+Mal 01:06
+Mal 01:11
+Mal 01:14
+Mal 02:02
+Mal 02:05
+Mal 03:16
+Mal 04:02
+[keyterm]
+ BI00024 <08085>	hear   שָׁמַע shama
+[references]
+Hos 04:01
+Hos 05:01
+Hos 09:17
+Joe 01:02
+Amo 03:01
+Amo 03:09
+Amo 03:13
+Amo 04:01
+Amo 04:05
+Amo 05:01
+Amo 05:23
+Amo 07:16
+Amo 08:04
+Amo 08:11
+oba 01:01
+Jon 02:02
+Mic 01:02
+Mic 03:01
+Mic 03:09
+Mic 05:15
+Mic 06:01
+Mic 06:02
+Mic 06:09
+Mic 07:07
+Nah 01:15
+Nah 02:13
+Nah 03:19
+Hab 01:02
+Hab 03:02
+Hab 03:16
+Zep 02:08
+Zep 03:02
+hag 01:12
+zec 01:04
+zec 03:08
+zec 06:15
+zec 07:11
+zec 07:12
+zec 07:13
+zec 08:09
+zec 08:23
+Mal 02:02
+Mal 03:16
+[keyterm]
+ BI00025 <0238>	to hear, listen אָזַן 'azan	
+[references]
+Hos 05:01
+Joe 01:02
+[keyterm]
+ BI00026 <06944>	holy קֹדֶשׁ qodesh
+[references]
+Joe 02:01
+Joe 03:17
+Amo 02:07
+Amo 04:02
+oba 01:16
+oba 01:17
+Jon 02:04
+Jon 02:07
+Mic 01:02
+Hab 02:20
+Zep 03:04
+Zep 03:11
+hag 02:12
+zec 02:12
+zec 02:13
+zec 08:03
+zec 14:20
+zec 14:21
+Mal 02:11
+[keyterm]
+ BI00027 <06942>	be holy, sanctify, be separate  קָדַשׁ qadash
+[references]
+Joe 01:14
+Joe 02:15
+Joe 02:16
+Joe 03:09
+Mic 03:05
+Zep 01:07
+Hag 02:12	
+[keyterm]
+BI00028 <06918> holy  קָדוֹשׁ qadowsh (adjective) 
+[references]
+Hos 11:09
+Hos 11:12
+Hab 01:12
+Hab 03:03
+zec 14:05
+[keyterm]
+ BI00029 <05869> eye, fountain  עַיִן `ayin
+[references]
+Hos 02:10
+Hos 10:10
+Hos 13:14
+Joe 01:16
+Amo 09:03
+Amo 09:04
+Amo 09:08
+Jon 02:04
+Mic 04:11
+Mic 07:10
+Hab 01:13
+Zep 03:20
+hag 02:03
+zec 01:18
+zec 02:01
+zec 02:08
+zec 03:09
+zec 04:10
+zec 05:01
+zec 05:05
+zec 05:06
+zec 05:09
+zec 06:01
+zec 08:06
+zec 09:01
+zec 09:08
+zec 11:12
+zec 11:17
+zec 12:04
+zec 14:12
+Mal 01:05
+Mal 02:17
+[keyterm]
+ BI00030 <0168> tent אֹהֶל 'ohel
+[references]
+Hos 09:06
+Hos 12:09
+Hab 03:07
+zec 12:07
+Mal 02:12
+[keyterm]
+ BI00031 <07971> send שָׁלַח shalach
+[references]
+Hos 05:13
+Hos 08:14
+Joe 02:19
+Joe 02:25
+Joe 03:13
+Amo 01:04
+Amo 01:07
+Amo 01:10
+Amo 01:12
+Amo 02:02
+Amo 02:05
+Amo 04:10
+Amo 07:10
+Amo 08:11
+oba 01:01
+oba 01:07
+oba 01:13
+Mic 06:04
+hag 01:12
+zec 01:10
+zec 02:08
+zec 02:09
+zec 02:11
+zec 04:09
+zec 06:15
+zec 07:02
+zec 07:12
+zec 08:10
+zec 09:11
+Mal 02:02
+Mal 02:04
+Mal 02:16
+Mal 03:01
+Mal 04:05
+[keyterm]
+ BI00032 <03427> dwell  יָשַׁב  yashab
+[references]
+Hos 03:03
+Hos 03:04
+Hos 04:01
+Hos 04:03
+Hos 09:03
+Hos 11:11
+Hos 12:09
+Hos 14:07
+Joe 01:02
+Joe 01:14
+Joe 02:01
+Joe 03:12
+Joe 03:20
+Amo 01:05
+Amo 01:08
+Amo 03:12
+Amo 05:11
+Amo 08:08
+Amo 09:05
+Amo 09:14
+oba 01:03
+Jon 03:06
+Jon 04:05
+Mic 01:11
+Mic 01:12
+Mic 01:13
+Mic 01:15
+Mic 04:04
+Mic 05:04
+Mic 06:12
+Mic 06:16
+Mic 07:08
+Mic 07:13
+Nah 01:05
+Nah 03:08
+Hab 02:08
+Hab 02:17
+Zep 01:04
+Zep 01:11
+Zep 01:13
+Zep 01:18
+Zep 02:05
+Zep 02:15
+Zep 03:06
+hag 01:04
+zec 01:11
+zec 02:04
+zec 02:07
+zec 03:08
+zec 05:07
+zec 06:13
+zec 07:07
+zec 08:04
+zec 08:20
+zec 08:21
+zec 09:05
+zec 09:06
+zec 10:06
+zec 11:06
+zec 12:05
+zec 12:06
+zec 12:07
+zec 12:08
+zec 12:10
+zec 13:01
+zec 14:10
+zec 14:11
+Mal 03:03
+[keyterm]
+ BI00033 <07931> to settle down, abide, dwell  שָׁכַן shakan
+[references]
+Joe 03:17
+Joe 03:21
+oba 01:03
+Mic 04:10
+Mic 07:14
+Nah 03:18
+zec 02:10
+zec 02:11
+zec 08:03
+zec 08:08
+[keyterm]
+ BI00036 <05315> soul   נֶפֶשׁ nephesh
+[references]
+Hos 04:08
+Hos 09:04
+Amo 02:14
+Amo 02:15
+Amo 06:08
+Jon 01:14
+Jon 02:05
+Jon 02:07
+Jon 04:03
+Jon 04:08
+Mic 06:07
+Mic 07:01
+Mic 07:03
+Hab 02:04
+Hab 02:05
+Hab 02:10
+hag 02:13
+zec 11:08
+[keyterm]
+ BI00037 <04196> altar מִזְבֵּחַ mizbeach
+[references]
+Hos 08:11
+Hos 10:01
+Hos 10:02
+Hos 10:08
+Hos 12:11
+Joe 01:13
+Joe 02:17
+Amo 02:08
+Amo 03:14
+Amo 09:01
+zec 09:15
+zec 14:20
+Mal 01:07
+Mal 01:10
+Mal 02:13
+[keyterm]
+ BI00038 <07725> return  שׁוּב shuwb
+[references]
+Hos 02:07
+Hos 02:09
+Hos 03:05
+Hos 04:09
+Hos 05:04
+Hos 05:15
+Hos 06:01
+Hos 06:11
+Hos 07:10
+Hos 07:16
+Hos 08:13
+Hos 09:03
+Hos 11:05
+Hos 11:09
+Hos 12:02
+Hos 12:06
+Hos 12:14
+Hos 14:01
+Hos 14:02
+Hos 14:04
+Hos 14:07
+Joe 02:12
+Joe 02:13
+Joe 02:14
+Joe 03:01
+Joe 03:04
+Joe 03:07
+Amo 01:03
+Amo 01:06
+Amo 01:08
+Amo 01:09
+Amo 01:11
+Amo 01:13
+Amo 02:01
+Amo 02:04
+Amo 02:06
+Amo 04:06
+Amo 04:08
+Amo 04:09
+Amo 04:10
+Amo 04:11
+Amo 09:14
+oba 01:15
+Jon 01:13
+Jon 03:08
+Jon 03:09
+Jon 03:10
+Mic 01:07
+Mic 02:04
+Mic 02:08
+Mic 05:03
+Mic 07:19
+Nah 02:02
+Hab 02:01
+Zep 02:07
+Zep 03:20
+zec 01:03
+zec 01:04
+zec 01:06
+zec 01:16
+zec 04:01
+zec 05:01
+zec 06:01
+zec 07:14
+zec 08:03
+zec 08:15
+zec 09:08
+zec 09:12
+zec 10:09
+zec 10:10
+zec 13:07
+Mal 01:04
+Mal 02:06
+Mal 03:07
+Mal 03:18
+Mal 04:06
+[keyterm]
+ BI00039 <07126> come near, enter into  קָרַב qarab
+[references]
+Hos 07:06
+Jon 01:06
+Zep 03:02
+hag 02:14
+Mal 01:08
+Mal 03:05
+[keyterm]
+ BI00040 <05066> draw near, come near  נגשׁ  nagash
+[references]
+Joe 03:09
+Amo 05:25
+Amo 06:03
+Amo 09:10
+Amo 09:13
+Mal 01:07
+Mal 01:08
+Mal 01:11
+Mal 02:12
+Mal 03:03
+[keyterm]
+ BI00041 <07121> call  קָרָא qara'  
+[references]
+Hos 01:04
+Hos 01:06
+Hos 01:09
+Hos 02:16
+Hos 07:07
+Hos 07:11
+Hos 11:01
+Hos 11:02
+Hos 11:07
+Joe 01:14
+Joe 01:19
+Joe 02:15
+Joe 02:32
+Joe 03:09
+Amo 04:05
+Amo 05:08
+Amo 05:16
+Amo 07:04
+Amo 09:06
+Amo 09:12
+Jon 01:02
+Jon 01:06
+Jon 01:14
+Jon 02:02
+Jon 03:02
+Jon 03:04
+Jon 03:05
+Jon 03:08
+Mic 03:05
+Mic 06:09
+Hab 02:02
+Zep 01:07
+Zep 03:09
+hag 01:11
+zec 01:04
+zec 01:14
+zec 01:17
+zec 03:10
+zec 07:07
+zec 07:13
+zec 08:03
+zec 11:07
+zec 13:09
+Mal 01:04
+[keyterm]
+ BI00042 <04940> family, kind  מִשְׁפָּחָה mishpachah  
+[references]
+Amo 03:01
+Amo 03:02
+Mic 02:03
+Nah 03:04
+zec 12:12
+zec 12:13
+zec 12:14
+zec 14:17
+zec 14:18
+[keyterm]
+ BI00043 <05650> servant  עֶבֶד `ebed
+[references]
+Joe 02:29
+Amo 03:07
+Mic 06:04
+hag 02:23
+zec 01:06
+zec 03:08
+Mal 01:06
+Mal 04:04
+[keyterm]
+ BI00044 <05288> young man, youth, servant  נַעַר na`ar
+[references]
+Hos 11:01
+zec 02:04
+[keyterm]
+ BI00045 <05291> young girl, damsel, female servant  נַעֲרָה na`arah
+[references]
+Amo 02:07
+[keyterm]
+ BI00046 <0519> maidservant, female slave, concubine  אָמָה 'amah
+[references]
+Nah 02:07
+[keyterm]
+ BI00047 <08198> maidservant שִׁפְחָה shiphchah 
+[references]
+Joe 02:29
+[keyterm]
+ BI00048 <05892> city  עִיר `iyr
+[references]
+Hos 08:14
+Hos 11:06
+Hos 11:09
+Hos 13:10
+Joe 02:09
+Amo 03:06
+Amo 04:06
+Amo 04:07
+Amo 04:08
+Amo 05:03
+Amo 06:08
+Amo 07:17
+Amo 09:14
+oba 01:20
+Jon 01:02
+Jon 03:02
+Jon 03:03
+Jon 03:04
+Jon 04:05
+Jon 04:11
+Mic 05:11
+Mic 05:14
+Mic 06:09
+Mic 07:12
+Nah 03:01
+Hab 02:12
+Zep 01:16
+Zep 02:15
+Zep 03:01
+Zep 03:06
+zec 01:12
+zec 01:17
+zec 07:07
+zec 08:03
+zec 08:05
+zec 08:20
+zec 14:02
+[keyterm]
+ BI00049 <03045> know  ידע yada`
+[references]
+Hos 02:08
+Hos 02:20
+Hos 05:03
+Hos 05:04
+Hos 05:09
+Hos 06:03
+Hos 07:09
+Hos 08:02
+Hos 08:04
+Hos 09:07
+Hos 11:03
+Hos 13:04
+Hos 13:05
+Hos 14:09
+Joe 02:14
+Joe 02:27
+Joe 03:17
+Amo 03:02
+Amo 03:10
+Amo 05:12
+Amo 05:16
+Jon 01:07
+Jon 01:10
+Jon 01:12
+Jon 03:09
+Jon 04:02
+Jon 04:11
+Mic 03:01
+Mic 04:12
+Mic 06:05
+Nah 01:07
+Nah 03:17
+Hab 02:14
+Hab 03:02
+Zep 03:05
+zec 02:09
+zec 02:11
+zec 04:05
+zec 04:09
+zec 04:13
+zec 06:15
+zec 07:14
+zec 11:11
+zec 14:07
+Mal 02:04
+[keyterm]
+ BI00050 <05375> bear, lift, carry נָשָׂא nasa'   
+[references]
+Hos 01:06
+Hos 04:08
+Hos 05:14
+Hos 13:01
+Hos 14:02
+Joe 02:22
+Amo 04:02
+Amo 05:01
+Amo 05:26
+Amo 06:10
+Jon 01:12
+Jon 01:15
+Mic 02:02
+Mic 02:04
+Mic 04:01
+Mic 04:03
+Mic 06:16
+Mic 07:09
+Mic 07:18
+Nah 01:05
+Hab 01:03
+Hab 02:06
+Hab 03:10
+hag 02:12
+hag 02:19
+zec 01:18
+zec 01:21
+zec 02:01
+zec 05:01
+zec 05:05
+zec 05:07
+zec 05:09
+zec 06:01
+zec 06:13
+Mal 01:08
+Mal 01:09
+Mal 02:03
+Mal 02:09
+[keyterm]
+ BI00051 <01818> blood דָּם dam
+[references]
+Hos 01:04
+Hos 04:02
+Hos 06:08
+Hos 12:14
+Joe 02:30
+Joe 02:31
+Joe 03:19
+Joe 03:21
+Jon 01:14
+Mic 03:10
+Mic 07:02
+Nah 03:01
+Hab 02:08
+Hab 02:12
+Hab 02:17
+Zep 01:17
+zec 09:07
+zec 09:11
+[keyterm]
+ BI00052 <05930> burnt offering  עֹלָה `olah 
+[references]
+Hos 06:06
+Amo 05:22
+Mic 06:06
+[keyterm]
+ BI00053 <02022> mountain הַר har
+[references]
+Hos 04:13
+Hos 10:08
+Joe 02:01
+Joe 02:02
+Joe 02:05
+Joe 02:32
+Joe 03:17
+Joe 03:18
+Amo 03:09
+Amo 04:01
+Amo 04:13
+Amo 06:01
+Amo 09:13
+oba 01:08
+oba 01:09
+oba 01:16
+oba 01:17
+oba 01:19
+oba 01:21
+Jon 02:06
+Mic 01:04
+Mic 03:12
+Mic 04:01
+Mic 04:02
+Mic 04:07
+Mic 06:01
+Mic 06:02
+Mic 07:12
+Nah 01:05
+Nah 01:15
+Nah 03:18
+Hab 03:03
+Hab 03:10
+Zep 03:11
+hag 01:08
+hag 01:11
+zec 04:07
+zec 06:01
+zec 08:03
+zec 14:04
+zec 14:05
+Mal 01:03
+[keyterm]
+ BI00054 <03701> money, silver כֶּסֶף  keceph 
+[references]
+Hos 02:08
+Hos 03:02
+Hos 08:04
+Hos 09:06
+Hos 13:02
+Joe 03:05
+Amo 02:06
+Amo 08:06
+Mic 03:11
+Nah 02:09
+Hab 02:19
+Zep 01:11
+Zep 01:18
+hag 02:08
+zec 06:11
+zec 09:03
+zec 11:12
+zec 11:13
+zec 13:09
+zec 14:14
+Mal 03:03
+[keyterm]
+ BI00055 <06965> stood up קוּם  quwm
+[references]
+Hos 06:02
+Hos 10:14
+Amo 02:11
+Amo 05:02
+Amo 06:14
+Amo 07:02
+Amo 07:05
+Amo 07:09
+Amo 08:14
+Amo 09:11
+oba 01:01
+Jon 01:02
+Jon 01:03
+Jon 01:06
+Jon 03:02
+Jon 03:03
+Jon 03:06
+Mic 02:08
+Mic 02:10
+Mic 04:13
+Mic 05:05
+Mic 06:01
+Mic 07:06
+Mic 07:08
+Nah 01:06
+Nah 01:09
+Hab 01:06
+Hab 02:07
+Zep 03:08
+zec 11:16
+[keyterm]
+ BI00056 <07218> head   רֹאשׁ ro'sh
+[references]
+Hos 01:11
+Hos 04:13
+Joe 02:05
+Joe 03:04
+Joe 03:07
+Amo 01:02
+Amo 02:07
+Amo 06:07
+Amo 08:10
+Amo 09:01
+Amo 09:03
+oba 01:15
+Jon 02:05
+Jon 04:06
+Jon 04:08
+Mic 02:13
+Mic 03:01
+Mic 03:09
+Mic 03:11
+Mic 04:01
+Nah 03:10
+Hab 03:13
+Hab 03:14
+zec 01:21
+zec 03:05
+zec 04:02
+zec 06:11
+[keyterm]
+ BI00057 <02091> gold  זָהָב  zahab
+[references]
+Hos 02:08
+Hos 08:04
+Joe 03:05
+Nah 02:09
+Hab 02:19
+Zep 01:18
+hag 02:08
+zec 04:02
+zec 04:12
+zec 06:11
+zec 13:09
+zec 14:14
+Mal 03:03
+[keyterm]
+ BI00058 <02403> sin  חַטָּאָה chatta'ah 
+[references]
+Hos 04:08
+Hos 08:13
+Hos 09:09
+Hos 10:08
+Hos 13:12
+Amo 05:12
+Amo 09:08
+Mic 01:05
+Mic 01:13
+Mic 03:08
+Mic 06:07
+Mic 06:13
+Mic 07:19
+zec 13:01
+zec 14:19
+[keyterm]
+ BI00059 <02398> to sin  חטא chata'
+[references]
+Hos 04:07
+Hos 08:11
+Hos 10:09
+Hos 13:02
+Mic 07:09
+Hab 02:10
+Zep 01:17
+[keyterm]
+ BI00060 <02399> sin חֵטְא chet'
+[references]
+Hos 12:08
+[keyterm]
+ BI00062 <02400> sinners (noun) חַטָּא chatta' 
+[references]
+Amo 09:10
+[keyterm]
+ BI00064 <01288> bless  בּרךְ barak
+[references]
+hag 02:19
+zec 11:05
+[keyterm]
+ BI00065 <01293> blessing (noun) בּרָכָה. Berakah
+[references]
+Joe 02:14
+zec 08:13
+Mal 02:02
+Mal 03:10
+[keyterm]
+ BI00066 <02416> life  בּרךְ barak
+[references]
+Hos 01:10
+Hos 02:12
+Hos 02:18
+Hos 04:03
+Hos 04:15
+Hos 13:08
+Amo 08:14
+Jon 02:06
+Jon 04:03
+Jon 04:08
+Zep 02:09
+Zep 02:14
+Zep 02:15
+zec 14:08
+Mal 02:05
+[keyterm]
+ BI00067 <06485> attend to, visit, number  פָּקַד paqad 
+[references]
+Hos 01:04
+Hos 02:13
+Hos 04:09
+Hos 04:14
+Hos 08:13
+Hos 09:09
+Hos 12:02
+Amo 03:02
+Amo 03:14
+Zep 01:08
+Zep 01:09
+Zep 01:12
+Zep 02:07
+Zep 03:07
+zec 10:03
+zec 11:16
+[keyterm]
+ BI00068 <04557> number  מִסְפָּ micpar 
+[references]
+Hos 01:10
+Joe 01:06
+[keyterm]
+ BI00069 <04487> to count, reckon, number  מָנַה manah
+[references]
+Jon 01:17
+Jon 04:06
+Jon 04:07
+Jon 04:08
+[keyterm]
+ BI00070 <01320> flesh   בָּשָׂר basar
+[references]
+Hos 08:13
+Joe 02:28
+Mic 03:03
+hag 02:12
+zec 02:13
+zec 11:09
+zec 11:16
+zec 14:12
+[keyterm]
+ BI00071 <07607> flesh (both meat and human flesh, relatives) שְׁאֵר she'er 
+[references]
+Mic 03:02
+Mic 03:03
+[keyterm]
+ BI00072 <05674>  pass  over עָבַר `abar 
+[references]
+Hos 06:07
+Hos 08:01
+Hos 10:11
+Joe 03:17
+Amo 05:05
+Amo 05:17
+Amo 06:02
+Amo 07:08
+Amo 08:02
+Amo 08:05
+Jon 02:03
+Jon 03:06
+Mic 01:11
+Mic 02:08
+Mic 02:13
+Mic 05:08
+Mic 07:18
+Nah 01:08
+Nah 01:12
+Nah 01:15
+Nah 03:19
+Hab 01:11
+Hab 03:10
+Zep 02:02
+Zep 02:15
+Zep 03:06
+zec 03:04
+zec 07:14
+zec 09:08
+zec 10:11
+zec 13:02
+[keyterm]
+ BI00073 <04672> found  מָצָא matsa'
+[references]
+Hos 02:06
+Hos 02:07
+Hos 05:06
+Hos 09:10
+Hos 12:04
+Hos 12:08
+Hos 14:08
+Amo 08:12
+Jon 01:03
+Mic 01:13
+Zep 03:13
+zec 10:10
+zec 11:06
+Mal 02:06
+[keyterm]
+ BI00074 <07704> field שָׂדֶה sadeh
+[references]
+Hos 02:12
+Hos 02:18
+Hos 04:03
+Hos 10:04
+Hos 12:11
+Hos 12:12
+Hos 13:08
+Joe 01:10
+Joe 01:11
+Joe 01:12
+Joe 01:19
+Joe 01:20
+Joe 02:22
+oba 01:19
+Mic 01:06
+Mic 02:02
+Mic 02:04
+Mic 03:12
+Mic 04:10
+zec 10:01
+Mal 03:11
+[keyterm]
+ BI00076 <0352> ram אַיִל 'ayil
+[references]
+Mic 06:07
+[keyterm]
+ BI00077 <01870> way  דֶּרֶךְ derek  
+[references]
+Hos 02:06
+Hos 04:09
+Hos 06:09
+Hos 09:08
+Hos 10:13
+Hos 12:02
+Hos 13:07
+Hos 14:09
+Joe 02:07
+Amo 02:07
+Amo 04:10
+Amo 08:14
+Jon 03:08
+Jon 03:10
+Mic 04:02
+Nah 01:03
+Nah 02:01
+hag 01:05
+hag 01:07
+zec 01:04
+zec 01:06
+zec 03:07
+Mal 02:08
+Mal 02:09
+Mal 03:01
+[keyterm]
+ BI00078 <05647> serve עָבַד `abad
+[references]
+Hos 12:12
+Zep 03:09
+zec 02:09
+zec 13:05
+Mal 03:14
+Mal 03:17
+Mal 03:18
+[keyterm]
+ BI00079 <08334> to serve, minister  שָׁרַת sharath
+[references]
+Joe 01:09
+Joe 01:13
+Joe 02:17
+[keyterm]
+ BI00081 <0899> garment  בֶּגֶד beged
+[references]
+Joe 02:13
+Amo 02:08
+hag 02:12
+zec 03:03
+zec 03:04
+zec 03:05
+zec 14:14
+[keyterm]
+ BI00084 <08008> garment, outer garment, mantle  שַׂלְמָה salmah
+[references]
+Mic 02:08
+[keyterm]
+ BI00085 <04503> present, offering מִנְחָה minchah
+[references]
+Hos 10:06
+Joe 01:09
+Joe 01:13
+Joe 02:14
+Amo 05:22
+Amo 05:25
+Zep 03:10
+Mal 01:10
+Mal 01:11
+Mal 01:13
+Mal 02:12
+Mal 02:13
+Mal 03:03
+Mal 03:04
+[keyterm]
+ BI00086 <02930> be unclean  טָמֵא tame'
+[references]
+Hos 05:03
+Hos 06:10
+Hos 09:04
+Mic 02:10
+hag 02:13
+[keyterm]
+ BI00087 <02931> unclean, impure  טָמֵא tame'
+[references]
+Hos 09:03
+Amo 07:17
+hag 02:13
+hag 02:14
+[keyterm]
+ BI00088 <02932> uncleanness, sexual  טֻמְאָ tum'ah
+[references]
+zec 13:02
+[keyterm]
+ BI00089 <02233> seed  זֶרַע zera`
+[references]
+Amo 09:13
+hag 02:19
+zec 08:12
+Mal 02:03
+Mal 02:15
+[keyterm]
+ BI00090 <05712> congregation  עֵדָה `edah
+[references]
+Hos 07:12
+[keyterm]
+ BI00091 <06951> assembly, convocation  קָהָל qahal
+[references]
+Joe 02:16
+Mic 02:05
+[keyterm]
+ BI00092 <06116> solemn assembly עֲצָרָה `atsarah
+[references]
+Joe 01:14
+Joe 02:15
+Amo 05:21
+[keyterm]
+ BI00093 <0622> to gather, receive, remover אסף 'acaph
+[references]
+Hos 04:03
+Hos 10:10
+Joe 01:14
+Joe 02:10
+Joe 02:16
+Joe 03:15
+Amo 03:09
+Mic 02:12
+Mic 04:06
+Mic 04:11
+Hab 01:09
+Hab 01:15
+Hab 02:05
+Zep 01:02
+Zep 03:08
+Zep 03:18
+zec 12:03
+zec 14:02
+zec 14:14
+[keyterm]
+ BI00095 <06908>  to gather, assemble, collect קָבַץ qabats
+[references]
+Hos 01:11
+Hos 08:10
+Hos 09:06
+Joe 02:06
+Joe 02:16
+Joe 03:02
+Joe 03:11
+Mic 01:07
+Mic 02:12
+Mic 04:06
+Mic 04:12
+Nah 02:10
+Nah 03:18
+Hab 02:05
+Zep 03:08
+Zep 03:19
+Zep 03:20
+zec 10:08
+zec 10:10
+[keyterm]
+ BI00096 <07197> to gather, assemble, collect  קָשַׁשׁ qashash
+[references]
+Zep 02:01
+[keyterm]
+ BI00099 <01219> to gather, to restrain, to fence בָּצַר batsar
+[references]
+Hos 08:14
+oba 01:05
+Zep 01:16
+zec 11:02
+[keyterm]
+ BI00101 <06086> tree  עֵץ `ets
+[references]
+Hos 04:12
+Joe 01:12
+Joe 01:19
+Joe 02:22
+Hab 02:11
+Hab 02:19
+hag 01:08
+hag 02:19
+zec 05:04
+zec 12:06
+[keyterm]
+ BI00102 <08081> oil  שֶׁמֶן shemen
+[references]
+Hos 02:05
+Hos 12:01
+Amo 06:06
+Mic 06:07
+Mic 06:15
+hag 02:12
+[keyterm]
+ BI00103 <03323> fresh oil יִצְהָר  yitshar
+[references]
+Hos 02:08
+Hos 02:22
+Joe 01:10
+Joe 02:19
+Joe 02:24
+hag 01:11
+zec 04:14
+[keyterm]
+ BI00104 <04057> desert  מִדְבָּר midbar
+[references]
+Hos 02:03
+Hos 02:14
+Hos 09:10
+Hos 13:05
+Hos 13:15
+Joe 01:19
+Joe 01:20
+Joe 02:03
+Joe 02:22
+Joe 03:19
+Amo 02:10
+Amo 05:25
+Zep 02:13
+Mal 01:03
+[keyterm]
+ BI00105 <04908> tabernacle  מִשְׁכָּן mishkan
+[references]
+Hab 01:06
+[keyterm]
+ BI00106 <04264> camp  מַחֲנֶה machaneh
+[references]
+Joe 02:11
+Amo 04:10
+zec 14:15
+[keyterm]
+ BI00107 <0784> fire  אֵשׁ 'esh
+[references]
+Hos 07:06
+Hos 08:14
+Joe 01:19
+Joe 01:20
+Joe 02:03
+Joe 02:05
+Joe 02:30
+Amo 01:04
+Amo 01:07
+Amo 01:10
+Amo 01:12
+Amo 01:14
+Amo 02:02
+Amo 02:05
+Amo 05:06
+Amo 07:04
+oba 01:18
+Mic 01:04
+Mic 01:07
+Nah 01:06
+Nah 02:03
+Nah 03:13
+Nah 03:15
+Hab 02:13
+Zep 01:18
+Zep 03:08
+zec 02:05
+zec 03:02
+zec 09:04
+zec 11:01
+zec 12:06
+zec 13:09
+Mal 03:02
+[keyterm]
+ BI00109 <06963> voice,noise,sound קוֹל qowl
+[references]
+Joe 02:05
+Joe 02:11
+Joe 03:16
+Amo 01:02
+Amo 02:02
+Amo 03:04
+Jon 02:02
+Jon 02:09
+Mic 06:01
+Mic 06:09
+Nah 02:07
+Nah 02:13
+Nah 03:02
+Hab 03:10
+Hab 03:16
+Zep 01:10
+Zep 01:14
+Zep 02:14
+Zep 03:02
+hag 01:12
+zec 06:15
+zec 11:03
+[keyterm]
+ BI00110 <0929> beast בְּהֵמָה behemah
+[references]
+Joe 01:18
+Joe 01:20
+Joe 02:22
+Jon 03:07
+Jon 03:08
+Jon 04:11
+Mic 05:08
+Hab 02:17
+Zep 01:03
+hag 01:11
+zec 02:04
+zec 08:10
+zec 14:15
+[keyterm]
+ BI00111 <04900> to draw, drag, seize, drag out  משׁךְ mashak
+[references]
+Hos 07:05
+Hos 11:04
+Amo 09:13
+[keyterm]
+ BI00112 <03423> seize, take possession of, inherit  יָרַשׁ yarash
+[references]
+Hos 09:06
+Amo 02:10
+Amo 09:12
+oba 01:17
+oba 01:19
+oba 01:20
+Mic 01:15
+Hab 01:06
+zec 09:04
+[keyterm]
+ BI00113 <05157> to (noun) בְּרָכָה Berakah
+[references]
+Zep 02:09
+zec 02:12
+zec 08:12
+[keyterm]
+ BI00114 <05159> inheritance, possession  נַחֲלָה nachalah
+[references]
+Joe 02:17
+Joe 03:02
+Mic 02:02
+Mic 07:14
+Mic 07:18
+Mal 01:03
+[keyterm]
+ BI00116 <07069> to get, acquire, possess, buy  קָנָה qanah
+[references]
+Amo 08:06
+zec 11:05
+zec 13:05
+[keyterm]
+ BI00121 <05459> peculiar treasure, possession, property  סְגֻלָּה cegullah
+[references]
+Mal 03:17
+[keyterm]
+ BI00122 <05221> strike, hit, kill, smite נָכָה  nakah  
+[references]
+Hos 06:01
+Hos 09:16
+Hos 14:05
+Amo 03:15
+Amo 04:09
+Amo 06:11
+Amo 09:01
+Jon 04:07
+Jon 04:08
+Mic 05:01
+Mic 06:13
+hag 02:17
+zec 09:04
+zec 10:11
+zec 12:04
+zec 13:06
+zec 13:07
+Mal 04:06
+[keyterm]
+ BI00123 <05060> touch,reach,strike  נגע naga`
+[references]
+Hos 04:02
+Amo 09:05
+Jon 03:06
+Mic 01:09
+hag 02:12
+hag 02:13
+zec 02:08
+zec 14:05
+[keyterm]
+ BI00124 <05062> to strike נגף nagaph
+[references]
+zec 14:12
+zec 14:18
+[keyterm]
+ BI00125 <04272> to smite through, wound severely, pierce  מחץ machats
+[references]
+Hab 03:13
+[keyterm]
+ BI00126 <07819> to kill, beat שָׁחַט ל shachat
+[references]
+Hos 05:02
+[keyterm]
+ BI00127 <02026> to kill, murder, destroy  הָרַג  harag
+[references]
+Hos 06:05
+Hos 09:13
+Amo 02:03
+Amo 04:10
+Amo 09:01
+Amo 09:04
+Hab 01:17
+zec 11:05
+[keyterm]
+ BI00128 <07523> to kill, murder  רָצַח  ratsach
+[references]
+Hos 04:02
+Hos 06:09
+[keyterm]
+ BI00130 <03627> utensils, things, vessels כְּלִי  keliy  
+[references]
+Hos 08:08
+Hos 13:15
+Amo 06:05
+Jon 01:05
+Nah 02:09
+zec 11:15
+[keyterm]
+ BI00131 <08064> heaven שָׁמַיִם  shamayim
+[references]
+Hos 02:18
+Hos 02:21
+Hos 04:03
+Hos 07:12
+Joe 02:10
+Joe 02:30
+Joe 03:16
+Amo 09:02
+Amo 09:06
+Jon 01:09
+Nah 03:16
+Hab 03:03
+Zep 01:03
+Zep 01:05
+hag 01:10
+hag 02:06
+hag 02:21
+zec 02:06
+zec 05:09
+zec 06:05
+zec 08:12
+zec 12:01
+Mal 03:10
+[keyterm]
+ BI00132 <07451> evil, bad רַע  ra`
+[references]
+Hos 07:01
+Hos 07:02
+Hos 07:03
+Hos 07:15
+Hos 09:15
+Hos 10:15
+Joe 02:13
+Joe 03:13
+Amo 03:06
+Amo 05:13
+Amo 05:14
+Amo 05:15
+Amo 06:03
+Amo 09:04
+Amo 09:10
+oba 01:13
+Jon 01:02
+Jon 01:07
+Jon 01:08
+Jon 03:08
+Jon 03:10
+Jon 04:01
+Jon 04:02
+Jon 04:06
+Mic 01:12
+Mic 02:01
+Mic 02:03
+Mic 03:02
+Mic 03:11
+Mic 07:03
+Nah 01:11
+Nah 03:19
+Hab 01:13
+Hab 02:09
+Zep 03:15
+zec 01:04
+zec 01:15
+zec 07:10
+zec 08:17
+Mal 01:08
+Mal 02:17
+[keyterm]
+ BI00133 <07489> to be bad, evil רָעַע  raa
+[references]
+Mic 03:04
+Mic 04:06
+Zep 01:12
+zec 08:14
+[keyterm]
+ BI00134 <0127> earth, ground אֲדָמָה  'adamah
+[references]
+Hos 02:18
+Joe 01:10
+Joe 02:21
+Amo 03:02
+Amo 03:05
+Amo 05:02
+Amo 07:11
+Amo 07:17
+Amo 09:08
+Amo 09:15
+Jon 04:02
+Zep 01:02
+Zep 01:03
+hag 01:11
+zec 02:12
+zec 09:16
+zec 13:05
+Mal 03:11
+[keyterm]
+ BI00135 <06083> dust, earth, powder עָפָר  `aphar
+[references]
+Amo 02:07
+Mic 01:10
+Mic 07:17
+Hab 01:10
+Zep 01:17
+zec 09:03
+[keyterm]
+ BI00136 <06499> young bull פַּר par
+[references]
+Hos 14:02
+[keyterm]
+BI00136 <0113> lord, Lord  אָדוֹן 'adown
+[references]
+Hos 12:14
+Amo 04:01
+Mic 04:13
+Zep 01:09
+zec 01:09
+zec 04:04
+zec 04:05
+zec 04:13
+zec 04:14
+zec 06:04
+zec 06:05
+Mal 01:06
+Mal 03:01
+[keyterm]
+ BI00137 <01167> owner, lord, husband  בַּעַל ba`al
+[references]
+Joe 01:08
+Nah 01:02
+[keyterm]
+ BI00138 <0136> Lord אֲדֹנָי Adonay
+[references]
+Amo 01:08
+Amo 03:07
+Amo 03:08
+Amo 03:11
+Amo 03:13
+Amo 04:02
+Amo 04:05
+Amo 05:03
+Amo 05:16
+Amo 06:08
+Amo 07:01
+Amo 07:02
+Amo 07:04
+Amo 07:05
+Amo 07:06
+Amo 07:07
+Amo 07:08
+Amo 08:01
+Amo 08:03
+Amo 08:09
+Amo 08:11
+Amo 09:01
+Amo 09:05
+Amo 09:08
+oba 01:01
+Mic 01:02
+Hab 03:19
+Zep 01:07
+zec 09:04
+zec 09:14
+Mal 01:14
+[keyterm]
+ BI00139 <01471> nation גּוֹי gowy
+[references]
+Hos 08:08
+Hos 08:10
+Hos 09:17
+Joe 01:06
+Joe 02:17
+Joe 02:19
+Joe 03:02
+Joe 03:08
+Joe 03:09
+Joe 03:11
+Joe 03:12
+Amo 06:01
+Amo 06:14
+Amo 09:09
+Amo 09:12
+oba 01:01
+oba 01:02
+oba 01:15
+oba 01:16
+Mic 04:02
+Mic 04:03
+Mic 04:07
+Mic 04:11
+Mic 05:08
+Mic 05:15
+Mic 07:16
+Nah 03:04
+Nah 03:05
+Hab 01:05
+Hab 01:06
+Hab 01:17
+Hab 02:05
+Hab 02:08
+Hab 03:06
+Hab 03:12
+Zep 02:01
+Zep 02:05
+Zep 02:09
+Zep 02:11
+Zep 02:14
+Zep 03:06
+Zep 03:08
+hag 02:07
+hag 02:14
+hag 02:22
+zec 01:15
+zec 01:21
+zec 02:08
+zec 02:11
+zec 07:14
+zec 08:13
+zec 08:22
+zec 08:23
+zec 09:10
+zec 12:03
+zec 12:09
+zec 14:02
+zec 14:03
+zec 14:14
+zec 14:16
+zec 14:18
+zec 14:19
+Mal 01:11
+Mal 01:14
+Mal 03:09
+Mal 03:12
+[keyterm]
+ BI00140 <03816> a people, nation  לְאֹם leom
+[references]
+Hab 02:13
+[keyterm]
+ BI00141 <01241> cattle,herd,oxen בָּקָר baqar
+[references]
+Hos 05:06
+Joe 01:18
+Amo 06:12
+Jon 03:07
+Hab 03:17
+[keyterm]
+ BI00145 <07794> ox  שׁוֹר showr  
+[references]
+Hos 12:11
+[keyterm]
+ BI00146 <06635> host, army צָבָא tsaba'
+[references]
+Hos 12:05
+Amo 03:13
+Amo 04:13
+Amo 05:14
+Amo 05:15
+Amo 05:16
+Amo 05:27
+Amo 06:08
+Amo 06:14
+Amo 09:05
+Mic 04:04
+Nah 02:13
+Nah 03:05
+Hab 02:13
+Zep 01:05
+Zep 02:09
+Zep 02:10
+hag 01:02
+hag 01:05
+hag 01:07
+hag 01:09
+hag 01:14
+hag 02:04
+hag 02:06
+hag 02:07
+hag 02:08
+hag 02:09
+hag 02:11
+hag 02:23
+zec 01:03
+zec 01:04
+zec 01:06
+zec 01:12
+zec 01:14
+zec 01:16
+zec 01:17
+zec 02:08
+zec 02:09
+zec 02:11
+zec 03:07
+zec 03:09
+zec 03:10
+zec 04:06
+zec 04:09
+zec 05:04
+zec 06:12
+zec 06:15
+zec 07:03
+zec 07:04
+zec 07:09
+zec 07:12
+zec 07:13
+zec 08:01
+zec 08:02
+zec 08:03
+zec 08:04
+zec 08:06
+zec 08:07
+zec 08:09
+zec 08:11
+zec 08:14
+zec 08:18
+zec 08:19
+zec 08:20
+zec 08:21
+zec 08:22
+zec 08:23
+zec 09:15
+zec 10:03
+zec 12:05
+zec 13:02
+zec 13:07
+zec 14:16
+zec 14:17
+zec 14:21
+Mal 01:04
+Mal 01:06
+Mal 01:08
+Mal 01:09
+Mal 01:10
+Mal 01:11
+Mal 01:13
+Mal 01:14
+Mal 02:02
+Mal 02:04
+Mal 02:07
+Mal 02:08
+Mal 02:12
+Mal 02:16
+Mal 03:01
+Mal 03:05
+Mal 03:07
+Mal 03:10
+Mal 03:11
+Mal 03:12
+Mal 03:14
+Mal 03:17
+Mal 04:01
+Mal 04:03
+[keyterm]
+ BI00147 <06629> sheep  צֹאן tso'n
+[references]
+Hos 05:06
+Joe 01:18
+Amo 06:04
+Amo 07:15
+Jon 03:07
+Mic 02:12
+Mic 05:08
+Mic 07:14
+Hab 03:17
+Zep 02:06
+zec 09:16
+zec 10:02
+zec 11:04
+zec 11:07
+zec 11:11
+zec 11:17
+zec 13:07
+[keyterm]
+ BI00148 <03532> lamb  כֶּבֶשׂ kebes
+[references]
+Hos 04:16
+[keyterm]
+ BI00152 <05739> flock, herd עֵדֶר `eder
+[references]
+Joe 01:18
+Mic 02:12
+Mic 04:08
+Mic 05:08
+Zep 02:14
+zec 10:03
+Mal 01:14
+[keyterm]
+ BI00154 <03220> sea  יָם  yam
+[references]
+Hos 01:10
+Hos 04:03
+Hos 11:10
+Joe 02:20
+Amo 05:08
+Amo 08:12
+Amo 09:03
+Amo 09:06
+Jon 01:04
+Jon 01:05
+Jon 01:09
+Jon 01:11
+Jon 01:12
+Jon 01:13
+Jon 01:15
+Jon 02:03
+Mic 07:12
+Mic 07:19
+Nah 01:04
+Nah 03:08
+Hab 01:14
+Hab 02:14
+Hab 03:08
+Hab 03:15
+Zep 01:03
+Zep 02:05
+Zep 02:06
+hag 02:06
+zec 09:04
+zec 09:10
+zec 10:11
+zec 14:04
+zec 14:08
+[keyterm]
+ BI00155 <068> stone אֶבֶן 'eben
+[references]
+Mic 01:06
+Mic 06:11
+Hab 02:11
+Hab 02:19
+hag 02:15
+zec 03:09
+zec 04:07
+zec 04:10
+zec 05:04
+zec 05:08
+zec 09:15
+zec 09:16
+zec 12:03
+[keyterm]
+ BI00156 <02583> encamp, pitch (tent) חָנָה chanah
+[references]
+Nah 03:17
+zec 09:08
+[keyterm]
+ BI00157 <04941> Jdggment מִשְׁפָּט mishpat
+[references]
+Hos 02:19
+Hos 05:01
+Hos 05:11
+Hos 06:05
+Hos 10:04
+Hos 12:06
+Amo 05:07
+Amo 05:15
+Amo 05:24
+Amo 06:12
+Mic 03:01
+Mic 03:08
+Mic 03:09
+Mic 06:08
+Mic 07:09
+Hab 01:04
+Hab 01:07
+Hab 01:12
+Zep 02:03
+Zep 03:05
+Zep 03:08
+Zep 03:15
+zec 07:09
+zec 08:16
+Mal 02:17
+Mal 03:05
+Mal 04:04
+[keyterm]
+ BI00158 <08199> to Judge, govern, punish   שָׁפַט shaphat
+[references]
+Hos 07:07
+Hos 13:10
+Joe 03:02
+Joe 03:12
+Amo 02:03
+oba 01:21
+Mic 03:11
+Mic 04:03
+Mic 05:01
+Mic 07:03
+Zep 03:03
+zec 07:09
+zec 08:16
+[keyterm]
+ BI00159 <03198> to argue, be found right*, to rebuke, make a Jdggment (this needs a word study) יכח yakach
+[references]
+Hos 04:04
+Amo 05:10
+Mic 04:03
+Mic 06:02
+Hab 01:12
+[keyterm]
+ BI00160 <01777> to judge דִּין diyn
+[references]
+zec 03:07
+[keyterm]
+ BI00162 <02940> taste, behavior, Jdggment טַעַם  ta`am
+[references]
+Jon 03:07
+[keyterm]
+ BI00163 <02421> live, חָיַה chayah
+[references]
+Hos 06:02
+Hos 14:07
+Amo 05:04
+Amo 05:06
+Amo 05:14
+Hab 02:04
+Hab 03:02
+zec 01:05
+zec 10:09
+zec 13:03
+[keyterm]
+ BI00165 <03899> bread  לֶחֶם lechem
+[references]
+Hos 02:05
+Hos 09:04
+Amo 04:06
+Amo 07:12
+Amo 08:11
+oba 01:07
+hag 02:12
+Mal 01:07
+[keyterm]
+ BI00166 <01285> covenant  בּרִית. beriyth
+[references]
+Hos 02:18
+Hos 06:07
+Hos 08:01
+Hos 10:04
+Hos 12:01
+Amo 01:09
+oba 01:07
+zec 09:11
+zec 11:10
+Mal 02:04
+Mal 02:05
+Mal 02:08
+Mal 02:10
+Mal 02:14
+Mal 03:01
+[keyterm]
+ BI00167 <05785> skin  עוֹר`owr
+[references]
+Mic 03:02
+Mic 03:03
+[keyterm]
+ BI00168 <02320> month חֹדֶשׁ chodesh
+[references]
+Hos 02:11
+Hos 05:07
+Amo 04:07
+Amo 08:05
+hag 01:01
+hag 01:15
+hag 02:01
+hag 02:20
+zec 01:01
+zec 01:07
+zec 07:01
+zec 07:03
+[keyterm]
+ BI00169 <03372> fear יָרֵא yare'
+[references]
+Hos 10:03
+Joe 02:11
+Joe 02:21
+Joe 02:22
+Joe 02:31
+Amo 03:08
+Jon 01:05
+Jon 01:10
+Jon 01:16
+Mic 07:17
+Hab 01:07
+Hab 03:02
+Zep 02:11
+Zep 03:07
+Zep 03:16
+hag 01:12
+hag 02:05
+zec 08:13
+zec 08:15
+zec 09:05
+Mal 01:14
+Mal 02:05
+Mal 03:05
+Mal 04:05
+[keyterm]
+ BI00170 <03373>  fearing, reverent (adj.) יָרֵא yare'
+[references]
+Jon 01:09
+Mal 03:16
+Mal 04:02
+[keyterm]
+ BI00171 <04172> fear (n) מוֹרָא mowra' 05
+[references]
+Mal 01:06
+Mal 02:05
+[keyterm]
+ BI00174 <03374> fear, terror  יִרְאָה yir'ah 03
+[references]
+Jon 01:10
+Jon 01:16
+[keyterm]
+ BI00176 <03680> to cover, conceal, hide  כָּסָה kacah 47
+[references]
+Hos 02:09
+Hos 10:08
+oba 01:10
+Jon 03:06
+Jon 03:08
+Mic 07:10
+Hab 02:14
+Hab 02:17
+Hab 03:03
+Mal 02:13
+Mal 02:16
+[keyterm]
+ BI00177 <05956> to hide עָלַם `alam 10
+[references]
+Nah 03:11
+[keyterm]
+ BI00178 <05641> to hide סָתַר cathar 10
+[references]
+Hos 13:14
+Amo 09:03
+Mic 03:04
+Zep 02:03
+[keyterm]
+ BI00179 <02244> to hide, withdraw  חָבָא chaba' 03
+[references]
+Amo 09:03
+[keyterm]
+ BI00181 <03582> to hide, conceal, cut off  כָּחַד kachad 03
+[references]
+Hos 05:03
+zec 11:08
+zec 11:09
+zec 11:16
+[keyterm]
+ BI00183 <05526> covering סָכַךְ cakak, שָׂכַךְ sakak 05  
+[references]
+Nah 02:05
+[keyterm]
+ BI00187 <01242> morning בֹּקֶר boqer 76
+[references]
+Hos 06:04
+Hos 07:06
+Hos 13:03
+Amo 04:04
+Amo 05:08
+Mic 02:01
+Zep 03:03
+Zep 03:05
+[keyterm]
+ BI00188 <06153> evening, night עֶרֶב `ereb 75
+[references]
+Hab 01:08
+Zep 02:07
+Zep 03:03
+zec 14:07
+[keyterm]
+ BI00189 <06607> door, opening פֶּתַח  pethach 74
+[references]
+Hos 02:15
+Mic 05:06
+Mic 07:05
+[keyterm]
+ BI00190 <05769> for ever  עוֹלָם `owlam 73
+[references]
+Hos 02:19
+Joe 02:02
+Joe 02:26
+Joe 02:27
+Joe 03:20
+Amo 09:11
+oba 01:10
+Jon 02:06
+Mic 02:09
+Mic 04:05
+Mic 04:07
+Mic 05:02
+Mic 07:14
+Hab 03:06
+Zep 02:09
+zec 01:05
+Mal 01:04
+Mal 03:04
+[keyterm]
+ BI00191 <05439> round about סָבִיב cabiyb 73
+[references]
+Joe 03:11
+Joe 03:12
+Amo 03:11
+Nah 03:08
+zec 02:05
+zec 07:07
+zec 12:02
+zec 12:06
+zec 14:14
+[keyterm]
+ BI00192 <02077> sacrifice זֶבַח zebach (noun) 72
+[references]
+Hos 03:04
+Hos 04:19
+Hos 06:06
+Hos 08:13
+Hos 09:04
+Amo 04:04
+Amo 05:25
+Jon 01:16
+Zep 01:07
+Zep 01:08
+[keyterm]
+ BI00193 <02076> to offer, sacrifice, slaughter זָבַח  zabach (verb) 41
+[references]
+Hos 04:13
+Hos 04:14
+Hos 08:13
+Hos 11:02
+Hos 12:11
+Hos 13:02
+Jon 01:16
+Jon 02:09
+Hab 01:16
+zec 14:21
+Mal 01:08
+Mal 01:14
+[keyterm]
+ BI00194 <06999> to burn sacrifices, burn incense מֻקְטָר  qatar 44
+[references]
+Hos 02:13
+Hos 04:13
+Hos 11:02
+Amo 04:05
+Hab 01:16
+Mal 01:11
+[keyterm]
+ BI00195 <0520> cubit אַמָּה  'ammah 71
+[references]
+zec 05:02
+[keyterm]
+ BI00196 <07650> swear, take an oath שָׁבַע  shaba` 70
+[references]
+Hos 04:15
+Amo 04:02
+Amo 06:08
+Amo 08:07
+Amo 08:14
+Mic 07:20
+Zep 01:05
+zec 05:03
+zec 05:04
+Mal 03:05
+[keyterm]
+ BI00197 <0423> oath אָלָה  'alah 14
+[references]
+zec 05:03
+[keyterm]
+ BI00198 <07621>  oath שְׁבוּעָה shebuw`ah 10
+[references]
+Hab 03:09
+zec 08:17
+[keyterm]
+ BI00200 <03772> cut off כָּרַת  karath 69
+[references]
+Hos 02:18
+Hos 08:04
+Hos 10:04
+Hos 12:01
+Joe 01:05
+Joe 01:09
+Joe 01:16
+Amo 01:05
+Amo 01:08
+Amo 02:03
+oba 01:09
+oba 01:10
+oba 01:14
+Mic 05:09
+Mic 05:10
+Mic 05:11
+Mic 05:12
+Mic 05:13
+Nah 01:14
+Nah 01:15
+Nah 02:13
+Nah 03:15
+Zep 01:03
+Zep 01:04
+Zep 01:11
+Zep 03:06
+Zep 03:07
+hag 02:05
+zec 09:06
+zec 09:10
+zec 11:10
+zec 13:02
+zec 13:08
+zec 14:02
+Mal 02:12
+[keyterm]
+ BI00201 <01494> to shear, cut off גּזז  gazaz 04
+[references]
+Mic 01:16
+Nah 01:12
+[keyterm]
+ BI00202 <01060> firstborn בְּכוֹר bekowr 69
+[references]
+Mic 06:07
+zec 12:10
+[keyterm]
+ BI00203 <02889> pure, clean טָהֹר tahor 69
+[references]
+Hab 01:13
+zec 03:05
+Mal 01:11
+[keyterm]
+ BI00204 <02891> be clean, be pure טָהֵר  taher 54
+[references]
+Mal 03:03
+[keyterm]
+ BI00207 <03966> very, many, much מְאֹד me`od 68
+[references]
+Joe 02:11
+oba 01:02
+Nah 02:01
+Zep 01:14
+zec 09:02
+zec 09:05
+zec 09:09
+zec 14:04
+zec 14:14
+[keyterm]
+ BI00208 <07235> be numerous, multiply  (verb) רָבָה rabah 67
+[references]
+Hos 02:08
+Hos 08:11
+Hos 08:14
+Hos 10:01
+Hos 12:01
+Hos 12:10
+Amo 04:04
+Amo 04:09
+Jon 04:11
+Nah 03:16
+Hab 02:06
+hag 01:06
+hag 01:09
+zec 10:08
+[keyterm]
+ BI00209 <07227> much, many  (adj)רַב  rab 64
+[references]
+Hos 03:03
+Hos 03:04
+Hos 09:07
+Joe 02:02
+Joe 02:11
+Joe 02:13
+Joe 03:13
+Amo 03:09
+Amo 03:15
+Amo 05:12
+Amo 06:02
+Amo 07:04
+Amo 08:03
+Jon 01:06
+Jon 04:02
+Jon 04:11
+Mic 04:02
+Mic 04:03
+Mic 04:11
+Mic 04:13
+Mic 05:07
+Mic 05:08
+Nah 01:12
+Hab 02:08
+Hab 02:10
+Hab 03:15
+zec 02:11
+zec 08:20
+zec 08:22
+zec 14:13
+Mal 02:06
+Mal 02:08
+[keyterm]
+ BI00212 <04046> plague מַגֵּפָה maggephah 10
+[references]
+zec 14:12
+zec 14:15
+zec 14:18
+[keyterm]
+ BI00213 <04347> blow, wound, plague מַכָּה makkah 08
+[references]
+Mic 01:09
+Nah 03:19
+zec 13:06
+[keyterm]
+ BI00215 <03820> heart לֵב  leb 66
+[references]
+Hos 02:14
+Hos 04:11
+Hos 07:06
+Hos 07:11
+Hos 07:14
+Hos 10:02
+Hos 11:08
+Hos 13:06
+Hos 13:08
+Amo 02:16
+oba 01:03
+Nah 02:10
+Zep 03:14
+zec 07:12
+zec 10:07
+zec 12:05
+Mal 02:02
+Mal 04:06
+[keyterm]
+ BI00216 <03824> heart, inner man, mind לֵבָב  lebab 54
+[references]
+Hos 07:02
+Joe 02:12
+Joe 02:13
+Jon 02:03
+Nah 02:07
+Zep 01:12
+Zep 02:15
+hag 01:05
+hag 01:07
+hag 02:15
+hag 02:18
+zec 07:10
+zec 08:17
+[keyterm]
+ BI00217 <04399> occupation, work, business מְלָאכָה  mela'kah 65
+[references]
+Jon 01:08
+hag 01:14
+[keyterm]
+ BI00218 <04639> work,deed, מַעֲשֶׂה  ma`aseh 59
+[references]
+Hos 13:02
+Hos 14:03
+Amo 08:07
+Jon 03:10
+Mic 05:13
+Mic 06:16
+Hab 03:17
+hag 02:14
+hag 02:17
+[keyterm]
+ BI00219 <06466> to do, make, work פָּעַל  pa`al   03
+[references]
+Hos 06:08
+Hos 07:01
+Mic 02:01
+Hab 01:05
+Zep 02:03
+[keyterm]
+ BI00221 <07901> lie down שָׁכַב  shakab 63
+[references]
+Hos 02:18
+Amo 06:04
+Jon 01:05
+Mic 07:05
+zec 14:02
+[keyterm]
+ BI00222 <08255> shekels שֶׁקֶל  sheqel 62
+[references]
+Amo 08:05
+[keyterm]
+ BI00223 <0517> mother אֵם 'em 62
+[references]
+Hos 02:02
+Hos 02:05
+Hos 04:05
+Hos 10:14
+Mic 07:06
+zec 13:03
+[keyterm]
+ BI00224 <03915> night לַיִל  layil 62
+[references]
+Hos 04:05
+Hos 07:06
+Amo 05:08
+oba 01:05
+Jon 01:17
+Jon 04:10
+Mic 03:06
+zec 01:08
+zec 14:07
+[keyterm]
+ BI00225 <01755> generation דּוֹר dowr 61
+[references]
+Joe 01:03
+Joe 02:02
+Joe 03:20
+[keyterm]
+ BI00227 <03254> again יָסַף yacaph 59
+[references]
+Hos 01:06
+Hos 09:15
+Hos 13:02
+Joe 02:02
+Amo 05:02
+Amo 07:08
+Amo 07:13
+Amo 08:02
+Jon 02:04
+Nah 01:15
+Zep 03:11
+[keyterm]
+ BI00229 <05307> fall, fall down נָפַל naphal 59
+[references]
+Hos 07:07
+Hos 07:16
+Hos 10:08
+Hos 13:16
+Joe 02:08
+Amo 03:05
+Amo 03:14
+Amo 05:02
+Amo 07:17
+Amo 08:14
+Amo 09:09
+Amo 09:11
+Jon 01:07
+Mic 07:08
+Nah 03:12
+zec 11:02
+[keyterm]
+ BI00230 <05493> depart, turn aside סוּר  cuwr 58
+[references]
+Hos 02:02
+Hos 02:17
+Hos 04:18
+Hos 07:14
+Hos 09:12
+Amo 05:23
+Amo 06:07
+Zep 03:11
+Zep 03:15
+zec 03:04
+zec 09:07
+zec 10:11
+Mal 02:08
+Mal 03:07
+[keyterm]
+ BI00231 <04185> to depart, remove מוּשׁ  muwsh 03 
+[references]
+Mic 02:03
+Mic 02:04
+Nah 03:01
+zec 03:09
+zec 14:04
+[keyterm]
+ BI00232 <01540> to uncover, remove, discover גָּלָה  galah 33
+[references]
+Hos 02:10
+Hos 07:01
+Hos 10:05
+Amo 01:05
+Amo 01:06
+Amo 03:07
+Amo 05:05
+Amo 05:27
+Amo 06:07
+Amo 07:11
+Amo 07:17
+Mic 01:06
+Mic 01:16
+Nah 02:07
+Nah 03:05
+[keyterm]
+ BI00233 <02502> to remove חָלַץ  chalats 14  
+[references]
+Hos 05:06
+[keyterm]
+ BI00234 <04390> consecrate, fill, fulfill מָלֵא male' 57
+[references]
+Joe 02:24
+Joe 03:13
+Mic 03:08
+Mic 06:12
+Nah 02:12
+Hab 02:14
+Hab 03:03
+Zep 01:09
+hag 02:07
+zec 08:05
+zec 09:13
+zec 09:15
+[keyterm]
+ BI00236 <05144>  to dedicate, consecrate נָזַר  nazar 07
+[references]
+Hos 09:10
+zec 07:03
+[keyterm]
+ BI00237 <03709> hand, palm כַּף  kaph 56
+[references]
+Jon 03:08
+Mic 04:10
+Mic 07:03
+Nah 03:19
+Hab 02:09
+hag 01:11
+Mal 04:03
+[keyterm]
+ BI00238 <08179> gate שַׁעַר sha`ar 56
+[references]
+Amo 05:10
+Amo 05:12
+Amo 05:15
+oba 01:11
+oba 01:13
+Mic 01:09
+Mic 01:12
+Mic 02:13
+Nah 02:06
+Nah 03:13
+Zep 01:10
+zec 08:16
+zec 14:10
+[keyterm]
+ BI00239 <08451> law תּוֹרָה  towrah 56 
+[references]
+Hos 04:06
+Hos 08:01
+Hos 08:12
+Amo 02:04
+Mic 04:02
+Hab 01:04
+Zep 03:04
+hag 02:11
+zec 07:12
+Mal 02:06
+Mal 02:07
+Mal 02:08
+Mal 02:09
+Mal 04:04
+[keyterm]
+ BI00240 <02708> statute חֻקָּה chuqqah 56
+[references]
+Mic 06:16
+[keyterm]
+ BI00241 <02706> statute חֹק   choq 47
+[references]
+Amo 02:04
+Mic 07:11
+Zep 02:02
+zec 01:06
+Mal 03:07
+Mal 04:04
+[keyterm]
+ BI00242 <08269> captain שַׂר  sar 56
+[references]
+Hos 03:04
+Hos 05:10
+Hos 07:03
+Hos 07:05
+Hos 07:16
+Hos 08:10
+Hos 09:15
+Hos 13:10
+Amo 01:15
+Amo 02:03
+Mic 07:03
+Zep 01:08
+Zep 03:03
+[keyterm]
+ BI00243 <05046> tell, declare, make נָגַד nagad 55
+[references]
+Hos 04:12
+Amo 04:13
+Jon 01:08
+Jon 01:10
+Mic 01:10
+Mic 03:08
+Mic 06:08
+zec 09:12
+[keyterm]
+ BI00245 <08002> peace offerings שֶׁלֶם shelem 54
+[references]
+Amo 05:22
+Hos 14:02
+Joe 02:25
+Joe 03:04
+Jon 02:09
+Nah 01:15
+[keyterm]
+ BI00246 <07965> peace שָׁלוֹם  shalowm 26
+[references]
+oba 01:07
+Mic 03:05
+Mic 05:05
+Nah 01:15
+hag 02:09
+zec 06:13
+zec 08:10
+zec 08:12
+zec 08:16
+zec 08:19
+zec 09:10
+Mal 02:05
+Mal 02:06
+[keyterm]
+ BI00247 <02205> elders, old זָקֵן  zaqen 54
+[references]
+Joe 01:02
+Joe 01:14
+Joe 02:16
+Joe 02:28
+zec 08:04
+[keyterm]
+ BI00248 <0341> enemy אֹיֵב 'oyeb 53
+[references]
+Hos 08:03
+Amo 09:04
+Mic 02:08
+Mic 04:10
+Mic 05:09
+Mic 07:06
+Mic 07:08
+Mic 07:10
+Nah 01:02
+Nah 01:08
+Nah 03:11
+Nah 03:13
+Zep 03:15
+[keyterm]
+ BI00249 <01366> borders, territory גְּבוּל gebuwl 53
+[references]
+Hos 05:10
+Joe 03:06
+Amo 01:13
+Amo 06:02
+oba 01:07
+Mic 05:06
+Zep 02:08
+Mal 01:04
+Mal 01:05
+[keyterm]
+ BI00252 <01379> to border, set bounds  גָּבַל gabal 03
+[references]
+zec 09:02
+[keyterm]
+ BI00253 <02256> region, territory, rope, cord חֶבֶל  chebel 04
+[references]
+Hos 11:04
+Hos 13:13
+Amo 07:17
+Mic 02:05
+Mic 02:10
+Zep 02:05
+Zep 02:06
+Zep 02:07
+zec 02:01
+[keyterm]
+ BI00254 <0312> other, another אַחֵר 'acher 53
+[references]
+Hos 03:01
+Joe 01:03
+zec 02:03
+[keyterm]
+ BI00255 <07453> friend, companion רֵעַ  rea` 52
+[references]
+Hos 03:01
+Jon 01:07
+Mic 07:05
+Hab 02:15
+zec 03:08
+zec 03:10
+zec 08:10
+zec 08:16
+zec 08:17
+zec 11:06
+zec 14:13
+Mal 03:16
+[keyterm]
+ BI00257 <06260> male goat עַתּוּד attud 16
+[references]
+zec 10:03
+[keyterm]
+ BI00261 <06051> cloud עֲנָן `anan 51Gen 09:13
+[references]
+Hos 06:04
+Hos 13:03
+Joe 02:02
+Nah 01:03
+Zep 01:15
+[keyterm]
+ BI00263 <03871> tables, boards לוּחַ  luwach 33
+[references]
+Hab 02:02
+[keyterm]
+ BI00264 <05186> stretch out, pitch, bend נָטָה  natah 50
+[references]
+Hos 11:04
+Amo 02:07
+Amo 02:08
+Amo 05:12
+Zep 01:04
+Zep 02:13
+zec 01:16
+zec 12:01
+Mal 03:05
+[keyterm]
+ BI00266 <08354> drink שָׁתָה shathah 50
+[references]
+Joe 01:05
+Joe 03:03
+Amo 02:08
+Amo 04:01
+Amo 04:08
+Amo 05:11
+Amo 06:06
+Amo 09:14
+oba 01:16
+Jon 03:07
+Mic 06:15
+Hab 02:16
+Zep 01:13
+hag 01:06
+zec 07:06
+zec 09:15
+[keyterm]
+ BI00267 <08248> to give drink, water, irrigate שָׁקָה  shaqah 46
+[references]
+Joe 03:18
+Amo 02:12
+Amo 08:08
+Hab 02:15
+[keyterm]
+ BI00268 <05262> drink offering נֶסֶךְ necek 41
+[references]
+Joe 01:09
+Joe 01:13
+Joe 02:14
+[keyterm]
+ BI00270 <0639> anger, nostril, nose אַף  'aph 49
+[references]
+Hos 08:05
+Hos 11:09
+Hos 13:11
+Hos 14:04
+Joe 02:13
+Amo 01:11
+Amo 04:10
+Jon 03:09
+Jon 04:02
+Mic 05:15
+Mic 07:18
+Nah 01:03
+Nah 01:06
+Hab 03:08
+Hab 03:12
+Zep 02:02
+Zep 02:03
+Zep 03:08
+zec 10:03
+[keyterm]
+ BI00271 <03707> to be angry, provoke to anger כָּעַס kaas 06
+[references]
+Hos 12:14
+[keyterm]
+ BI00272 <02734> to be hot, jurious, become angry חָרָה  charah 33
+[references]
+Hos 08:05
+Jon 04:01
+Jon 04:04
+Jon 04:09
+Hab 03:08
+zec 10:03
+[keyterm]
+ BI00274 <05178> bronze, copper  נְחֹשֶׁת nechosheth 48
+[references]
+zec 06:01
+[keyterm]
+ BI00276 <03526> to  wash clothes כָּבַס kabac 42
+[references]
+Mal 03:02
+[keyterm]
+ BI00278 <07311> lift up, rise up, be exhaulted רוּם  ruwm 47
+[references]
+Hos 11:04
+Hos 11:07
+Hos 13:06
+Mic 05:09
+[keyterm]
+ BI00279 <03615> to accomplish, finish, consume כָּלָה  kalah 46
+[references]
+Hos 11:06
+Amo 07:02
+zec 05:04
+Mal 03:06
+[keyterm]
+ BI00281 <08549> complete, whole, perfect, without blemish תָּמִים  tamiym 46
+[references]
+Amo 05:10
+[keyterm]
+ BI00282 <08003> to be complete, whole שָׁלֵם  shalem 05
+[references]
+Amo 01:06
+Amo 01:09
+Nah 01:12
+[keyterm]
+ BI00284 <0269> sister אָחוֹת  'achowth 46
+[references]
+Hos 02:01
+[keyterm]
+ BI00286 <07812> to bow down שָׁחָה  shachah 45
+[references]
+Mic 05:13
+Zep 01:05
+Zep 02:11
+zec 14:16
+zec 14:17
+[keyterm]
+ BI00288 <07676> sabbath שַׁבָּת shabbath 45
+[references]
+Hos 02:11
+Amo 08:05
+[keyterm]
+ BI00289 <03407> curtain  יְרִיעָה yeriy`ah 45
+[references]
+Hab 03:07
+[keyterm]
+ BI00294 <0441> dukes, chief  אַלּוּף 'alluwph 44
+[references]
+Mic 07:05
+zec 09:07
+zec 12:05
+zec 12:06
+[keyterm]
+ BI00296 <08641> offering, heave offering, contribution תְּרוּמָה  teruwmah 44
+[references]
+Mal 03:08
+[keyterm]
+ BI00297 <07381> fragrance, odour, aroma רֵיחַ  reyach  43
+[references]
+Hos 14:06
+[keyterm]
+ BI00298 <02142> remember זָכַר  zakar 42
+[references]
+Hos 02:17
+Hos 07:02
+Hos 08:13
+Hos 09:09
+Amo 01:09
+Amo 06:10
+Jon 02:07
+Mic 06:05
+Nah 02:05
+Hab 03:02
+zec 10:09
+zec 13:02
+Mal 04:04
+[keyterm]
+ BI00299 <05771> iniquity  עָוֹן  `avon 42
+[references]
+Hos 04:08
+Hos 05:05
+Hos 07:01
+Hos 08:13
+Hos 09:07
+Hos 09:09
+Hos 12:08
+Hos 13:12
+Hos 14:01
+Hos 14:02
+Amo 03:02
+Mic 07:18
+Mic 07:19
+zec 03:04
+zec 03:09
+Mal 02:06
+[keyterm]
+ BI00302 <06529> fruit פְּרִי  periy 42
+[references]
+Hos 09:16
+Hos 10:01
+Hos 10:13
+Hos 14:08
+Joe 02:22
+Amo 02:09
+Amo 06:12
+Amo 09:14
+Mic 06:07
+Mic 07:13
+zec 08:12
+Mal 03:11
+[keyterm]
+ BI00303 <01129> to build (things or family) בָּנָה  banah 41
+[references]
+Hos 08:14
+Amo 05:11
+Amo 09:06
+Amo 09:11
+Amo 09:14
+Mic 03:10
+Mic 07:11
+Hab 02:12
+Zep 01:13
+hag 01:02
+hag 01:08
+zec 01:16
+zec 05:11
+zec 06:12
+zec 06:13
+zec 06:15
+zec 08:09
+zec 09:03
+Mal 01:04
+Mal 03:15
+[keyterm]
+ BI00304 <02543> asses חֲמוֹר  chamowr 41
+[references]
+zec 09:09
+zec 14:15
+[keyterm]
+ BI00305 <02490> to defile,pollute, begin חָלַל   chalal 41
+[references]
+Hos 08:10
+Amo 02:07
+Jon 03:04
+Zep 03:04
+Mal 01:12
+Mal 02:10
+Mal 02:11
+[keyterm]
+ BI00306 <0779> to curse אָרַר  'arar 41
+[references]
+Mal 01:14
+Mal 02:02
+Mal 03:09
+[keyterm]
+ BI00307 <07045> curse קְלָלָה  qelalah 13
+[references]
+zec 08:13
+[keyterm]
+ BI00309 <05344> to curse, to pierce נָקַב naqab 07
+[references]
+Amo 06:01
+Hab 03:14
+hag 01:06
+[keyterm]
+ BI00311 <0157> love אָהַב 'ahab 40
+[references]
+Hos 02:05
+Hos 02:07
+Hos 02:10
+Hos 02:12
+Hos 02:13
+Hos 03:01
+Hos 04:18
+Hos 09:01
+Hos 09:10
+Hos 10:11
+Hos 11:01
+Hos 12:07
+Hos 14:04
+Amo 04:05
+Amo 05:15
+Mic 03:02
+zec 08:17
+zec 08:19
+zec 13:06
+Mal 01:02
+Mal 02:11
+[keyterm]
+ BI00312 <01101> to mix, confuse, confound בּלל  balal 40
+[references]
+Hos 07:08
+[keyterm]
+ BI00313 <04931> guard, charge מִשְׁמֶרֶת mishmereth 39
+[references]
+Hab 02:01
+zec 03:07
+Mal 03:14
+[keyterm]
+ BI00316 <05341> to keep, guard, preserve נָצַר  natsar 03
+[references]
+Nah 02:01  
+[keyterm]
+ BI00317 <08104> keep שָׁמַר shamar 148     
+[references]
+Hos 04:10
+Hos 12:06
+Hos 12:12
+Hos 12:13
+Amo 01:11
+Amo 02:04
+Jon 02:08
+Mic 06:16
+Mic 07:05
+zec 03:07
+zec 11:11
+Mal 02:07
+Mal 02:09
+Mal 02:15
+Mal 02:16
+Mal 03:07
+Mal 03:14.
+[keyterm]
+ BI00319 <04397> angel, messenger l  מַלְאָךְ mal'ak 39
+[references]
+Hos 12:04
+Nah 02:13
+hag 01:13
+zec 01:09
+zec 01:11
+zec 01:12
+zec 01:13
+zec 01:14
+zec 01:19
+zec 02:03
+zec 03:01
+zec 03:03
+zec 03:05
+zec 03:06
+zec 04:01
+zec 04:04
+zec 04:05
+zec 05:05
+zec 05:10
+zec 06:04
+zec 06:05
+zec 12:08
+Mal 02:07
+Mal 03:01
+[keyterm]
+ BI00320 <0977> to choose בָּחַר   bachar 39
+[references]
+hag 02:23
+zec 01:17
+zec 02:12
+zec 03:02
+[keyterm]
+ BI00322 <02691> court, enclosure חָצֵר chatser 39
+[references]
+zec 03:07
+[keyterm]
+ BI00323 <04376> to sell מָכַר  makar 39
+[references]
+Joe 03:03
+Joe 03:06
+Joe 03:07
+Joe 03:08
+Amo 02:06
+Nah 03:04
+zec 11:05
+[keyterm]
+ BI00325 <08313> to burn שָׂרַף  saraph 38
+[references]
+Amo 02:01
+Mic 01:07
+[keyterm]
+ BI00326 <02719> sword חֶרֶב   chereb 38
+[references]
+Hos 01:07
+Hos 02:18
+Hos 07:16
+Hos 11:06
+Hos 13:16
+Joe 03:10
+Amo 01:11
+Amo 04:10
+Amo 07:09
+Amo 07:11
+Amo 07:17
+Amo 09:01
+Amo 09:04
+Amo 09:10
+Mic 04:03
+Mic 05:06
+Mic 06:14
+Nah 02:13
+Nah 03:03
+Nah 03:15
+Zep 02:12
+hag 02:22
+zec 09:13
+zec 11:17
+zec 13:07
+[keyterm]
+ BI00327 <03789> to write כָּתַב  kathab 38
+[references]
+Hos 08:12
+Hab 02:02
+Mal 03:16
+[keyterm]
+ BI00328 <07307> spirit, wind, breath רוּחַ  ruwach 37
+[references]
+Hos 04:12
+Hos 04:19
+Hos 05:04
+Hos 08:07
+Hos 09:07
+Hos 12:01
+Hos 13:15
+Joe 02:28
+Joe 02:29
+Amo 04:13
+Jon 01:04
+Jon 04:08
+Mic 02:07
+Mic 02:11
+Mic 03:08
+Hab 01:11
+Hab 02:19
+hag 01:14
+hag 02:05
+zec 02:06
+zec 04:06
+zec 05:09
+zec 06:05
+zec 06:08
+zec 07:12
+zec 12:01
+zec 12:10
+zec 13:02
+Mal 02:15
+Mal 02:16
+[keyterm]
+ BI00329 <02472> dream חֲלוֹם  chalowm 37
+[references]
+Joe 02:28
+zec 10:02
+[keyterm]
+ BI00330 <04421> war מִלְחָמָה  milchamah 37
+[references]
+Hos 01:07
+Hos 02:18
+Hos 10:09
+Hos 10:14
+Joe 02:05
+Joe 02:07
+Joe 03:09
+Amo 01:14
+oba 01:01
+Mic 02:08
+Mic 03:05
+Mic 04:03
+zec 09:10
+zec 10:03
+zec 10:04
+zec 10:05
+zec 14:02
+[keyterm]
+ BI00331 <06256> time עֵת  `eth 36
+[references]
+Hos 02:09
+Hos 10:12
+Hos 13:13
+Joe 03:01
+Amo 05:13
+Mic 02:03
+Mic 03:04
+Mic 05:03
+Zep 01:12
+Zep 03:19
+Zep 03:20
+hag 01:02
+hag 01:04
+zec 10:01
+zec 14:07
+[keyterm]
+ BI00332 <06912> to bury קָבַר  qabar 35
+[references]
+Hos 09:06
+[keyterm]
+ BI00333 <05775> flying creatures, birds עוֹף  `owph 35
+[references]
+Hos 02:18
+Hos 04:03
+Hos 07:12
+Hos 09:11
+Zep 01:03
+[keyterm]
+ BI00334 <08548> continually, perpetually תָּמִיד  tamiyd 35
+[references]
+Hos 12:06
+oba 01:16
+Nah 03:19
+Hab 01:17
+[keyterm]
+ BI00336 <01350> to redeem, act as kinsman  redeemer גָּאַל  ga'al 35
+[references]
+Hos 13:14
+Mic 04:10
+[keyterm]
+ BI00337 <05158> valley, brook נַחַל  nachal 34
+[references]
+Joe 03:18
+Amo 05:24
+Amo 06:14
+Mic 06:07
+[keyterm]
+ BI00340 <06593> flax, linen פִּשְׁתֶּה pishteh 05
+[references]
+Hos 02:05
+Hos 02:09
+[keyterm]
+ BI00342 <08130> to hate, be hateful שָׂנֵא  sane' 34
+[references]
+Hos 09:15
+Amo 05:10
+Amo 05:15
+Amo 05:21
+Amo 06:08
+Mic 03:02
+zec 08:17
+Mal 01:03
+Mal 02:16
+[keyterm]
+ BI00346 <01197> to burn, consume, kindle   בָּעַר ba`ar 32
+[references]
+Hos 07:04
+Hos 07:06
+Nah 02:13
+Mal 04:01
+[keyterm]
+ BI00347 <08045> to destroy, exterminate שָׁמַד  shamad 32
+[references]
+Hos 10:08
+Amo 02:09
+Amo 09:08
+Mic 05:14
+hag 02:22
+zec 12:09
+[keyterm]
+ BI00348 <02763> to destroy, devote to the ban חָרָם  charam 14
+[references]
+Mic 04:13
+[keyterm]
+ BI00351 <07843> to destroy, corrupt, decay שָׁחַת  shachath 34
+[references]
+Hos 09:09
+Hos 11:09
+Hos 13:09
+Amo 01:11
+Nah 02:02
+Zep 03:07
+Mal 01:14
+Mal 02:08
+Mal 03:11
+[keyterm]
+ BI00352 <06> perish, be destroyed,go astray אָבַד  'abad 35
+[references]
+Joe 01:11
+Amo 01:08
+Amo 02:14
+Amo 03:15
+oba 01:08
+oba 01:12
+Jon 01:06
+Jon 01:14
+Jon 03:09
+Jon 04:10
+Mic 04:09
+Mic 05:10
+Mic 07:02
+Zep 02:05
+Zep 02:13
+zec 09:05
+[keyterm]
+ BI00353 <05127> to flee, escape נוּס  nuwc 32
+[references]
+Amo 02:16
+Amo 05:19
+Amo 09:01
+Nah 02:08
+zec 02:06
+zec 14:05
+[keyterm]
+ BI00354 <01272> to flee בָּרַח  barach 14
+[references]
+Hos 12:12
+Amo 07:12
+Jon 01:03
+Jon 01:10
+Jon 04:02
+[keyterm]
+ BI00355 <07097> end, extremity, edge קָצֶה  qatseh 31
+[references]
+Nah 02:09
+Nah 03:03
+Nah 03:09
+[keyterm]
+ BI00356 <07125> to meet, encounter  קִרָא qir'ah 31
+[references]
+Amo 04:12
+zec 02:03
+[keyterm]
+ BI00357 <03259>  to set, appoint, meet  יָעַד ya`ad  13
+[references]
+Amo 03:03
+Mic 06:09
+[keyterm]
+ BI00360 <06293>  to meet, to reach, to attack פָּגַע paga` 08
+[references]
+Amo 05:19
+[keyterm]
+ BI00361 <06298> to meet, join, encounter  פָּגַשׁ pagash 04
+[references]
+Hos 13:08
+[keyterm]
+ BI00362 <02677> half, middle, midst  חֲצִי chetsiy 31
+[references]
+zec 14:02
+zec 14:04
+zec 14:08
+[keyterm]
+ BI00365 <0646> ephod  אֵפוֹד 31
+[references]
+Hos 03:04
+[keyterm]
+ BI00366 <07626> rod, staff, scepter, tribe or clan  שֵׁבֶט shebet 31
+[references]
+Hos 05:09
+Amo 01:05
+Amo 01:08
+Mic 05:01
+Mic 07:14
+zec 09:01
+zec 10:11
+[keyterm]
+ BI00367 <02975> river   יְאוֹר ye`or 31
+[references]
+Amo 08:08
+Amo 09:05
+Nah 03:08
+zec 10:11
+[keyterm]
+ BI00368 <05104> river נָהָר nahar 18
+[references]
+Jon 02:03
+Mic 07:12
+Nah 01:04
+Nah 02:06
+Hab 03:08
+Hab 03:09
+Zep 03:10
+zec 09:10
+[keyterm]
+ BI00369 <03206> child, boy, youth  יֶלֶד yeled 31
+[references]
+Hos 01:02
+Joe 03:03
+zec 08:05
+[keyterm]
+ BI00372 <04758> sight, appearance   מַרְאֶה mar'eh 30
+[references]
+Joe 02:04
+Nah 02:04
+[keyterm]
+ BI00373 <03885> to pass the night, lodge,  לוּן luwn 29
+[references]
+Joe 01:13
+Zep 02:14
+zec 05:04
+[keyterm]
+ BI00376 <0953> pit  בּוֹר bowr 14
+[references]
+zec 09:11
+[keyterm]
+ BI00377 <01058> to weep, cry בָּכָה  bakah 29
+[references]
+Hos 12:04
+Joe 01:05
+Joe 02:17
+Mic 01:10
+zec 07:03
+[keyterm]
+ BI00378 <06818> cry צְעָקָה tsa`aqah 08
+[references]
+Zep 01:10
+[keyterm]
+ BI00379 <05800> to leave, fosake, loose עָזַב  `azab 29
+[references]
+Hos 04:10
+Jon 02:08
+Zep 02:04
+zec 11:17
+Mal 04:01
+[keyterm]
+ BI00380 <03240> to rest, leave יָנַח yanach 20
+[references]
+Hos 04:17
+Amo 05:07
+zec 05:11
+[keyterm]
+ BI00381 <03498> to be left over, remain, leave  יָתַר yathar 33
+[references]
+Amo 06:09
+zec 13:08
+zec 14:16
+[keyterm]
+ BI00382 <05203> to leave, forsake, spread abroad  נָטַשׁ  natash 04
+[references]
+Hos 12:14
+Amo 05:02
+[keyterm]
+ BI00383 <07604> to remain, be left over, left alive שָׁאַר  sha'ar 29
+[references]
+Joe 02:14
+Amo 05:03
+oba 01:05
+Zep 03:12
+hag 02:03
+zec 09:07
+zec 11:09
+zec 12:14
+[keyterm]
+ BI00384 <07592> to ask, enquire שָׁאַל  sha'al 29
+[references]
+Hos 04:12
+Jon 04:08
+Mic 07:03
+hag 02:11
+zec 10:01
+[keyterm]
+ BI00385 <01875> to enquire, seek, require דּרשׁ  darash  22
+[references]
+Hos 10:12
+Amo 05:04
+Amo 05:05
+Amo 05:06
+Amo 05:14
+Mic 06:08
+Zep 01:06
+[keyterm]
+ BI00386 <01245> to seek  בָּקַשׁ baqash 15
+[references]
+Hos 02:07
+Hos 03:05
+Hos 05:06
+Hos 05:15
+Hos 07:10
+Amo 08:12
+Nah 03:07
+Nah 03:11
+Zep 01:06
+Zep 02:03
+zec 06:07
+zec 08:21
+zec 08:22
+zec 11:16
+zec 12:09
+Mal 02:07
+Mal 02:15
+Mal 03:01
+[keyterm]
+ BI00387 <04886> to anoint, smear משׁח  mashach  29
+[references]
+Amo 06:06
+[keyterm]
+ BI00388 <04899> anointed, anointed one, Messiah מָשִׁיחַ  mashiyach 04
+[references]
+Hab 03:13
+[keyterm]
+ BI00390 <05324> to stand, to establish נָצַב  natsab 28
+[references]
+Amo 07:07
+Amo 09:01
+Nah 02:07
+zec 11:16
+[keyterm]
+ BI00393 <04592> littleness, few, a little  מְעַט me`at 28
+[references]
+Hos 01:04
+Hos 08:10
+hag 01:06
+hag 01:09
+hag 02:06
+zec 01:15
+[keyterm]
+ BI00394 <06031> oppress, humble, afflict עָנָה  `anah 28
+[references]
+Nah 01:12
+Zep 03:19
+zec 10:02
+[keyterm]
+ BI00395 <05065> to press, oppress, exact נגשׂ nagas 07
+[references]
+zec 09:08
+zec 10:04
+[keyterm]
+ BI00396 <06231>  to oppress, defraud  עָשַׁק `ashaq 06
+[references]
+Hos 05:11
+Hos 12:07
+Amo 04:01
+Mic 02:02
+zec 07:10
+Mal 03:05
+[keyterm]
+ BI00397 <03238> to oppress, mistreat יָנָה yanah 05
+[references]
+Zep 03:01
+[keyterm]
+ BI00398 <03905> to oppress לָחַץ lachats 05
+[references]
+Amo 06:14
+[keyterm]
+ BI00399 <0753> length  אֹרֶךְ 'orek 28
+[references]
+zec 02:02
+zec 05:02
+[keyterm]
+ BI00400 <01581> camel  גָּמָל  gamal 28
+[references]
+zec 14:15
+[keyterm]
+ BI00401 <06924> east, before, ancient time קֶדֶם  qedem 28
+[references]
+Jon 04:05
+Mic 05:02
+Mic 07:20
+Hab 01:12
+zec 14:04
+[keyterm]
+ BI00403 <02580> grace   חֵן chen 27
+[references]
+Nah 03:04
+zec 04:07
+zec 12:10
+[keyterm]
+ BI00404 <06285> corner, edge,extremity  פֵּאָה pe'ah 27
+[references]
+Amo 03:12
+[keyterm]
+ BI00405 <03847> to dress, put on clothing  לָבַשׁ labash 27
+[references]
+Jon 03:05
+Zep 01:08
+hag 01:06
+zec 03:03
+zec 03:04
+zec 03:05
+zec 13:04
+[keyterm]
+ BI00408 <03225> right, right hand, right side  יָמִין yamiyn 27
+[references]
+Jon 04:11
+Hab 02:16
+zec 03:01
+zec 04:03
+zec 04:11
+zec 11:17
+zec 12:06
+[keyterm]
+ BI00410 <04501> candlestick  מְנוֹרָ menowrah 27
+[references]
+zec 04:02
+zec 04:11
+[keyterm]
+ BI00411 <07462> to feed, to pasture, tend   רָעָה ra`ah 27
+[references]
+Hos 04:16
+Hos 09:02
+Hos 12:01
+Amo 01:02
+Amo 03:12
+Jon 03:07
+Mic 05:04
+Mic 05:05
+Mic 05:06
+Mic 07:14
+Nah 03:18
+Zep 02:06
+Zep 02:07
+Zep 03:13
+zec 10:02
+zec 10:03
+zec 11:03
+zec 11:04
+zec 11:05
+zec 11:07
+zec 11:08
+zec 11:09
+zec 11:15
+zec 11:16
+zec 13:07
+[keyterm]
+ BI00412 <07458> famine, hunger רָעָב  ra`ab 27
+[references]
+Amo 08:11
+[keyterm]
+ BI00413 <08441> abomination, a disgusting thing, a detestable thing  תּוֹעֵבָה tow`ebah 27
+[references]
+Mal 02:11
+[keyterm]
+ BI00415 <06996> small, youngest, insignificant, unimportant  קָטָן qatan 26
+[references]
+Amo 06:11
+Amo 07:02
+Amo 07:05
+oba 01:02
+Jon 03:05
+zec 04:10
+[keyterm]
+ BI00416 <07043>  to be small, light, to curse קָלַל qalal 16
+[references]
+Jon 01:05
+Nah 01:14
+Hab 01:08
+[keyterm]
+ BI00419 <06810> small, young(er) צָעִיר tsa`iyr, צָעוֹר tsa`owr 08
+[references]
+Mic 05:02
+[keyterm]
+ BI00420 <03196> wine   יַיִן yayin 26
+[references]
+Hos 04:11
+Hos 07:05
+Hos 09:04
+Hos 14:07
+Joe 01:05
+Joe 03:03
+Amo 02:08
+Amo 02:12
+Amo 05:11
+Amo 06:06
+Amo 09:14
+Mic 02:11
+Mic 06:15
+Hab 02:05
+Zep 01:13
+hag 02:12
+zec 09:15
+zec 10:07
+[keyterm]
+ BI00421 <0400> eatable things אֹכֶל 'okel 25
+[references]
+Joe 01:16
+Hab 03:17
+Mal 01:12
+[keyterm]
+ BI00422 <03836> white  לָבָן laban 25
+[references]
+zec 01:08
+zec 06:03
+zec 06:06
+[keyterm]
+ BI00423 <05337> to snatch away, deliver, rescue   נָצַ natsal 25
+[references]
+Hos 02:09
+Hos 02:10
+Hos 05:14
+Amo 03:12
+Amo 04:11
+Jon 04:06
+Mic 04:10
+Mic 05:06
+Mic 05:08
+Hab 02:09
+Zep 01:18
+zec 03:02
+zec 11:06
+[keyterm]
+ BI00424 <06413> help, escape, deliverance (noun) פְּלֵיטָה peleytah 03
+[references]
+Joe 02:03
+Joe 02:32
+oba 01:17
+[keyterm]
+ BI00425 <04422> to escape, deliver מָלַט malat 05
+[references]
+Joe 02:32
+Amo 02:14
+Amo 02:15
+Amo 09:01
+zec 02:07
+Mal 03:15
+[keyterm]
+ BI00426 <05608> to count, recount, relate  סָפַר caphar 25
+[references]
+Hos 01:10
+Joe 01:03
+Hab 01:05
+[keyterm]
+ BI00427 <06605> to open, loose, grave   פָּתַח pathach 25
+[references]
+Amo 08:05
+Nah 02:06
+Nah 03:13
+zec 03:09
+zec 11:01
+zec 13:01
+Mal 03:10
+[keyterm]
+ BI00428 <07341> breadth. Width   רֹחַב rochab 25
+[references]
+zec 02:02
+zec 05:02
+[keyterm]
+ BI00429 <07291> to follow after, pursue, persecute   רָדַף radaph 25
+[references]
+Hos 02:07
+Hos 06:03
+Hos 08:03
+Hos 12:01
+Amo 01:11
+Nah 01:08
+[keyterm]
+ BI00430 <01644> to drive out, expel, thrust away  גּרשׁ garash 22
+[references]
+Hos 09:15
+Amo 08:08
+Jon 02:04
+Mic 02:09
+Zep 02:04
+[keyterm]
+ BI00431 <05707> witness  עֵד `ed 25
+[references]
+Mic 01:02
+Mal 03:05
+[keyterm]
+ BI00432 <02282> feast, festival,  חַג chag 25
+[references]
+Hos 02:11
+Hos 09:05
+Amo 05:21
+Amo 08:10
+Nah 01:15
+zec 14:16
+zec 14:18
+zec 14:19
+Mal 02:03
+[keyterm]
+ BI00433 <03513> be honored, honorable, heavy, grievous  כָּבַד kabad 25
+[references]
+Nah 03:10
+Nah 03:15
+Hab 02:06
+hag 01:08
+zec 07:11
+Mal 01:06
+[keyterm]
+ BI00434 <03519> glory, honor   כָּבוֹד kabowd 24
+[references]
+Hos 04:07
+Hos 09:11
+Hos 10:05
+Mic 01:15
+Nah 02:09
+Hab 02:14
+Hab 02:16
+hag 02:03
+hag 02:07
+hag 02:09
+zec 02:05
+zec 02:08
+Mal 01:06
+Mal 02:02
+[keyterm]
+ BI00437 <06106> bone, same (essence), substance  עֶצֶם `etsem 24
+[references]
+Amo 02:01
+Amo 06:10
+Mic 03:02
+Mic 03:03
+Hab 03:16
+[keyterm]
+ BI00438 <06299> escape, redeem  פָּדָה padah 24
+[references]
+Hos 07:13
+Hos 13:14
+Mic 06:04
+zec 10:08
+[keyterm]
+ BI00439 <05045> south, Negeb  נֶגֶב negeb 24
+[references]
+oba 01:19
+oba 01:20
+zec 07:07
+zec 14:04
+zec 14:10
+[keyterm]
+ BI00440 <05130> move to and fro, wave  נוּף nuwph 24
+[references]
+zec 02:09
+[keyterm]
+ BI00441 <01530> heap, wave גַּל gal 07
+[references]
+Hos 12:11
+Jon 02:03
+zec 10:11
+[keyterm]
+ BI00444 <02232> to sow, scatter seed   זָרַע zara` 23
+[references]
+Hos 02:23
+Hos 08:07
+Hos 10:12
+Mic 06:15
+Nah 01:14
+hag 01:06
+zec 10:09
+[keyterm]
+ BI00447 <02029> to conceive, become pregnant  הָרָה harah 23
+[references]
+Hos 01:03
+Hos 01:06
+Hos 01:08
+Hos 02:05
+[keyterm]
+ BI00448 <05564> to rest, support, lean, uphold  סָמַךְ camak 23
+[references]
+Amo 05:19
+[keyterm]
+ BI00449 <07993> to cast, throw,  שָׁלַךְ shalak 22
+[references]
+Joe 01:07
+Amo 04:03
+Amo 08:03
+Jon 02:03
+Mic 02:05
+Mic 07:19
+Nah 03:06
+zec 05:08
+zec 11:13
+[keyterm]
+ BI00450 <02236> to sprinkle, scatter,throw  זָרַק zaraq 21
+[references]
+Hos 07:09
+[keyterm]
+ BI00451 <03384> to throw, shoot, cast, pour יָרָה yarah  17
+[references]
+Hos 06:03
+Hos 10:12
+Mic 03:11
+Mic 04:02
+Hab 02:18
+Hab 02:19
+[keyterm]
+ BI00452 <02040> to throw down, break down, overthrow הָרַס haras 05
+[references]
+Joe 01:17
+Mic 05:11
+Mal 01:04
+[keyterm]
+ BI00456 <02505> to divide חָלַק chalaq 09
+[references]
+Hos 10:02
+Joe 03:02
+Amo 07:17
+Mic 02:04
+zec 14:01
+[keyterm]
+ BI00458 <01234> to split, divide בּקע baqa` 05
+[references]
+Hos 13:08
+Hos 13:16
+Amo 01:13
+Mic 01:04
+Hab 03:09
+zec 14:04
+[keyterm]
+ BI00463 <02617> faithful, kind, mercy  חֶסֶד checed 21
+[references]
+Hos 02:19
+Hos 04:01
+Hos 06:04
+Hos 06:06
+Hos 10:12
+Hos 12:06
+Joe 02:13
+Jon 02:08
+Jon 04:02
+Mic 06:08
+Mic 07:18
+Mic 07:20
+zec 07:09
+[keyterm]
+ BI00464 <0539> to support, confirm, be faithful  אָמַן 'aman 21
+[references]
+Hos 05:09
+Hos 11:12
+Jon 03:05
+Mic 07:05
+Hab 01:05
+[keyterm]
+ BI00465 <07355> to pity, show mercy, compassion רָחַם racham 04
+[references]
+Hos 01:06
+Hos 01:07
+Hos 02:01
+Hos 02:04
+Hos 02:23
+Hos 14:03
+Mic 07:19
+Hab 03:02
+zec 01:12
+zec 10:06
+[keyterm]
+ BI00466 <07356> compassion, mercy; womb רַחַם racham 04
+[references]
+Hos 02:19
+Amo 01:11
+zec 01:16
+zec 07:09
+[keyterm]
+ BI00468 <02461> milk  חָלָב chalab 21
+[references]
+Joe 03:18
+[keyterm]
+ BI00469 <02181> to commit fornication, be a harlot זָנָה  zanah 21
+[references]
+Hos 01:02
+Hos 02:05
+Hos 03:03
+Hos 04:10
+Hos 04:12
+Hos 04:13
+Hos 04:14
+Hos 04:15
+Hos 04:18
+Hos 05:03
+Hos 09:01
+Joe 03:03
+Amo 07:17
+Mic 01:07
+Nah 03:04
+[keyterm]
+ BI00472 <07161> horn   קֶרֶן qeren 21
+[references]
+Amo 03:14
+Amo 06:13
+Mic 04:13
+Hab 03:04
+zec 01:18
+zec 01:19
+zec 01:21
+[keyterm]
+ BI00473 <07782> ram’s horn שׁוֹפָר showphar 05
+[references]
+Hos 05:08
+Hos 08:01
+Joe 02:01
+Joe 02:15
+Amo 02:02
+Amo 03:06
+Zep 01:16
+zec 09:14
+[keyterm]
+ BI00474 <02689> trumpet חֲצוֹצְרָה chatsotserah 05
+[references]
+Hos 05:08
+[keyterm]
+ BI00476 <08121> sun שֶׁמֶשׁ shemesh 21
+[references]
+Joe 02:10
+Joe 02:31
+Joe 03:15
+Amo 08:09
+Jon 04:08
+Mic 03:06
+Nah 03:17
+Hab 03:11
+zec 08:07
+Mal 01:11
+Mal 04:02
+[keyterm]
+ BI00477 <07979> table שֻׁלְחָן shulchan 21
+[references]
+Mal 01:07
+Mal 01:12
+[keyterm]
+ BI00478 <02063> this (fem.) זֹאת zo'th 20
+[references]
+Mal 03:10
+[keyterm]
+ BI00481 <01431> grow, become great גָּדַל gadal   20
+[references]
+Hos 09:12
+Joe 02:20
+Joe 02:21
+Amo 08:05
+oba 01:12
+Jon 04:10
+Mic 05:04
+Zep 02:08
+Zep 02:10
+zec 12:07
+zec 12:11
+Mal 01:05
+[keyterm]
+ BI00483 <01419> great גָּדוֹל gadowl 102
+[references]
+Hos 01:11
+Joe 02:11
+Joe 02:25
+Joe 02:31
+Amo 06:11
+Jon 01:02
+Jon 01:04
+Jon 01:10
+Jon 01:12
+Jon 01:16
+Jon 01:17
+Jon 03:02
+Jon 03:03
+Jon 03:05
+Jon 03:07
+Jon 04:01
+Jon 04:06
+Jon 04:11
+Mic 07:03
+Nah 01:03
+Nah 03:10
+Zep 01:10
+Zep 01:14
+hag 01:01
+hag 01:12
+hag 01:14
+hag 02:02
+hag 02:04
+hag 02:09
+zec 01:14
+zec 01:15
+zec 03:01
+zec 03:08
+zec 04:07
+zec 06:11
+zec 07:12
+zec 08:02
+zec 14:04
+Mal 01:11
+Mal 01:14
+Mal 04:05
+[keyterm]
+ BI00486 <06186> to set in order עָרַךְ `arak 20
+[references]
+Joe 02:05
+[keyterm]
+ BI00487 <05462> to shut סָגַר cagar 20
+[references]
+Amo 01:06
+Amo 01:09
+Amo 06:08
+oba 01:14
+Mal 01:10
+[keyterm]
+ BI00488 <05545> to forgive סָלַח salach 20
+[references]
+Amo 07:02
+[keyterm]
+ BI00489 <02015> to turn הָפַךְ haphak 20
+[references]
+Hos 07:08
+Hos 11:08
+Joe 02:31
+Amo 04:11
+Amo 05:07
+Amo 05:08
+Amo 06:12
+Amo 08:10
+Jon 03:04
+Zep 03:09
+hag 02:22
+[keyterm]
+ BI00490 <03754> vineyard כֶּרֶם kerem 20
+[references]
+Hos 02:15
+Amo 04:09
+Amo 05:11
+Amo 05:17
+Amo 09:14
+Mic 01:06
+Zep 01:13
+[keyterm]
+ BI00492 <0631> to bind אָסַר 'acar 20
+[references]
+Hos 10:10
+[keyterm]
+ BI00494 <05258> to pour out נָסַךְ nasak 05
+[references]
+Hos 09:04
+[keyterm]
+ BI00495 <07324> to make empty, pour out, draw out  רוּק ruwq 04
+[references]
+Hab 01:17
+zec 04:12
+Mal 03:10
+[keyterm]
+ BI00496 <08210> to pour, pour out, spill  שָׁפַךְ shaphak 21
+[references]
+Hos 05:10
+Joe 02:28
+Joe 02:29
+Joe 03:19
+Amo 05:08
+Amo 09:06
+Zep 01:17
+Zep 03:08
+zec 12:10
+Hos 06:03
+Hos 10:12
+Mic 03:11
+Mic 04:02
+Hab 02:18
+Hab 02:19
+[keyterm]
+ BI00499 <06160> plain עֲרָבָה `arabah 19
+[references]
+Amo 06:14
+zec 14:10
+[keyterm]
+ BI00501 <01589> to steal גָּנַב ganab
+[references]
+Hos 04:02
+oba 01:05
+zec 05:03
+[keyterm]
+ BI00502 <07138> near קֶָרוֹב קָרֹב qarob
+[references]
+Joe 01:15
+Joe 02:01
+Joe 03:14
+oba 01:15
+Zep 01:07
+Zep 01:14
+[keyterm]
+ BI00503 <05079> separation נִדָּה niddah
+[references]
+zec 13:01
+[keyterm]
+ BI00504 <05612> book סֵפֶר cepher
+[references]
+Nah 01:01
+Mal 03:16
+[keyterm]
+ BI00506 <01280> bar בְּרִיחַ beriyach
+[references]
+Amo 01:05
+Jon 02:06
+Nah 03:13
+[keyterm]
+ BI00507 <03898> to fight לָחַם lacham
+[references]
+zec 10:05
+zec 14:03
+zec 14:14
+[keyterm]
+ BI00508 <0860> donkey אָתוֹן athon
+[references]
+zec 09:09
+[keyterm]
+ BI00509 <05381> to overtake נָשַׂג nasag
+[references]
+Hos 02:07
+Hos 10:09
+zec 01:06
+[keyterm]
+ BI00511 <08181> hair שֵׂעָר se`ar
+[references]
+zec 13:04
+[keyterm]
+ BI00512 <06833> bird צִפּוֹר tsippowr
+[references]
+Hos 11:11
+Amo 03:05
+[keyterm]
+ BI00513 <07673> to rest שָׁבַת shabath
+[references]
+Hos 01:04
+Hos 02:11
+Hos 07:04
+Amo 08:04
+[keyterm]
+ BI00514 <07225> beginning רֵאשִׁית re'shiyth
+[references]
+Hos 09:10
+Amo 06:01
+Amo 06:06
+Mic 01:13
+[keyterm]
+ BI00515 <02492> to dream חָלַם chalam
+[references]
+Joe 02:28
+[keyterm]
+ BI00516 <03547> to serve as priest כּהן kahan
+[references]
+Hos 04:06
+[keyterm]
+ BI00517 <04219> bowl  מִזְרָק mizraq
+[references]
+Amo 06:06
+zec 09:15
+zec 14:20
+[keyterm]
+ BI00521 <03603>  round thing (talent, valley, bread) כִּכָּר kikkar
+[references]
+zec 05:07
+[keyterm]
+ BI00522 <06662> righteous צַדִּיק tsaddiyq
+[references]
+Hos 14:09
+Amo 02:06
+Amo 05:12
+Hab 01:04
+Hab 01:13
+Hab 02:04
+Zep 03:05
+zec 09:09
+Mal 03:18
+[keyterm]
+ BI00523 <04643> tenth מַעֲשֵׂר maaser
+[references]
+Amo 04:04
+Mal 03:08
+Mal 03:10
+[keyterm]
+ BI00524 <03162> together יַחַד yachad
+[references]
+Hos 01:11
+Hos 11:07
+Hos 11:08
+Amo 01:15
+Amo 03:03
+Mic 02:12
+zec 10:04
+[keyterm]
+ BI00526 <06510> cow פָּרָה parah
+[references]
+Hos 04:16
+Amo 04:01
+[keyterm]
+ BI00528 <03559>  to establish, be established כּוּן kuwn    
+[references]
+Hos 06:03
+Amo 04:12
+Mic 04:01
+Nah 02:03
+Nah 02:05
+Hab 02:12
+Zep 01:07
+zec 05:11
+[keyterm]
+ BI00529 <01259> hail בָּרָד barad
+[references]
+hag 02:17
+[keyterm]
+ BI00530 <0490> widow אַלְמָנָה 'almanah
+[references]
+zec 07:10
+Mal 03:05
+[keyterm]
+ BI00531 <07911> to forget שָׁכַח shakach
+[references]
+Hos 02:13
+Hos 04:06
+Hos 08:14
+Hos 13:06
+Amo 08:07
+[keyterm]
+ BI00533 <05216> lamp נִיר niyr
+[references]
+Zep 01:12
+zec 04:02
+[keyterm]
+ BI00534 <03925> to teach, learn  לָמַד lamad
+[references]
+Hos 10:11
+Mic 04:03
+[keyterm]
+ BI00535 <05145> crown  נֵזֶר ֶֶנזֶר nezer
+[references]
+zec 09:16
+[keyterm]
+ BI00536 <02266> to unite, join חָבַר chabar
+[references]
+Hos 04:17
+[keyterm]
+ BI00537 <04116> to hurry מָהַר mahar
+[references]
+Nah 02:05
+Hab 01:06
+Mal 03:05
+[keyterm]
+ BI00538 <06828> north צָפוֹן tsaphown
+[references]
+Amo 08:12
+Zep 02:13
+zec 02:06
+zec 06:06
+zec 06:08
+zec 14:04
+[keyterm]
+ BI00539 <07666> to sell grain שָׁבַר shabar
+[references]
+Amo 08:05
+Amo 08:06
+[keyterm]
+ BI00540 <03730> knobs, bulbs כַּפְתֹּר kaphtor
+[references]
+Amo 09:01
+Zep 02:14
+[keyterm]
+ BI00541 <0644> to bake אָפַה 'aphah
+[references]
+Hos 07:04
+Hos 07:06
+[keyterm]
+ BI00542 <04676> pillar מַצֵּבָה matstsebah 
+[references]
+Hos 03:04
+Hos 10:01
+Hos 10:02
+Mic 05:13
+[keyterm]
+ BI00544 <03802> shoulder כָּתֵף katheph
+[references]
+zec 07:11
+[keyterm]
+ BI00545 <02450> wise חָכָם chakam
+[references]
+Hos 13:13
+Hos 14:09
+oba 01:08
+[keyterm]
+ BI00547 <07919> to understand, be wise שָׂכַל sakal
+[references]
+Amo 05:13
+[keyterm]
+ BI00548 <03605> all  כּוֹל kol
+[references]
+Zep 03:07
+[keyterm]
+ BI00549 <05437>  to go around סָבַב cabab
+[references]
+Hos 07:02
+Hos 11:12
+Jon 02:03
+Jon 02:05
+Hab 02:16
+zec 14:10
+[keyterm]
+ BI00551 <04720> sanctuary מִקְדָּשׁ miqdash
+[references]
+Amo 07:09
+Amo 07:13
+[keyterm]
+ BI00554 <07050> hanging קֶלַע qela
+[references]
+zec 09:15
+[keyterm]
+ BI00556 <08040> left  שְׂמאֹל semol
+[references]
+Jon 04:11
+zec 04:03
+zec 04:11
+zec 12:06
+[keyterm]
+ BI00557 <03123> dove, pigeon יוֹנָה yownah
+[references]
+Hos 07:11
+Hos 11:11
+Nah 02:07
+[keyterm]
+ BI00558 <03320> to stand, take one’s stand  יָצַב yatsab
+[references]
+Hab 02:01
+zec 06:05
+[keyterm]
+ BI00559 <01588> garden  גָּן gan
+[references]
+Joe 02:03
+[keyterm]
+ BI00560 <07925> to rise early  שָׁכַם shakam
+[references]
+Hos 06:04
+Hos 13:03
+Zep 03:07
+[keyterm]
+ BI00562 <06212> vegetation  עֵשֶׂב eseb
+[references]
+Amo 07:02
+Mic 05:07
+zec 10:01
+[keyterm]
+ BI00567 <0215> to light אוֹר 'owr
+[references]
+Mal 01:10
+[keyterm]
+ BI00568 <0216> light (n) אוֹר 'owr
+[references]
+Hos 06:05
+Amo 05:18
+Amo 05:20
+Amo 08:08
+Amo 08:09
+Mic 02:01
+Mic 07:08
+Mic 07:09
+Hab 03:04
+Hab 03:11
+Zep 03:05
+zec 14:06
+zec 14:07
+[keyterm]
+ BI00569 <03671> wing כָּנָף kanaph
+[references]
+Hos 04:19
+hag 02:12
+zec 05:09
+zec 08:23
+Mal 04:02
+[keyterm]
+ BI00571 <05087> to vow  נָדָר nadar
+[references]
+Jon 01:16
+Jon 02:09
+Mal 01:14
+[keyterm]
+ BI00572 <05088> vow, vow offering  נֶדֶר neder
+[references]
+Jon 01:16
+Nah 01:15
+[keyterm]
+ BI00573 <04283>  the next day  מָחֳרָת mochorath 
+[references]
+Jon 04:07
+[keyterm]
+ BI00574 <04159> wonder, miracle  מוֹפֶת mowpheth
+[references]
+Joe 02:30
+zec 03:08
+[keyterm]
+ BI00576 <03581> power, strength  כֹּחַ koach
+[references]
+Hos 07:09
+Amo 02:14
+Mic 03:08
+Nah 01:03
+Nah 02:01
+Hab 01:11
+zec 04:06
+[keyterm]
+ BI00577 <0386> strength, might, perpetual, everflowing  אֵיתָן 'eythan
+[references]
+Amo 05:24
+Mic 06:02
+[keyterm]
+ BI00578 <02392> strength  חֹזֶק chozeq
+[references]
+Amo 06:13
+hag 02:22
+[keyterm]
+ BI00579 <05797> strength, might, power  עֹז `oz
+[references]
+Amo 03:11
+Mic 05:04
+Hab 03:04
+[keyterm]
+ BI00580 <02388> lay hold of, to strengthen, be courageous  חָזַק chazaq
+[references]
+Hos 07:15
+Mic 04:09
+Mic 07:18
+Nah 02:01
+Nah 03:14
+hag 02:04
+zec 08:09
+zec 08:13
+zec 08:23
+zec 14:13
+Mal 03:13
+[keyterm]
+ BI00581 <02428> strength, wealth, force  חַיִל chayil
+[references]
+Joe 02:11
+Joe 02:22
+Joe 02:25
+oba 01:11
+oba 01:13
+Mic 04:13
+Nah 02:03
+Hab 03:19
+Zep 01:13
+zec 04:06
+zec 09:04
+zec 14:14
+[keyterm]
+ BI00582 <06099> strong, mighty  עָצוּם `atsuwm 
+[references]
+Joe 01:06
+Joe 02:02
+Joe 02:05
+Joe 02:11
+Amo 05:12
+Mic 04:03
+Mic 04:07
+zec 08:22
+[keyterm]
+ BI00583 <0553> to be strong, brave אָמַץ 'amats
+[references]
+Amo 02:14
+Nah 02:01
+[keyterm]
+ BI00584 <01396> to prevail, be strong גָּבַר gabar
+[references]
+zec 10:06
+zec 10:12
+[keyterm]
+ BI00585 <01397> (strong) man גֶּבֶר geber
+[references]
+Joe 02:08
+Mic 02:02
+Hab 02:05
+zec 13:07
+[keyterm]
+ BI00586 <05794> strong עַז `az
+[references]
+Amo 05:09
+[keyterm]
+ BI00587 <02389> strong חָזָק chazaq
+[references]
+Amo 02:14
+[keyterm]
+ BI00589 <07393> chariot  רֶכֶב rekeb
+[references]
+Nah 02:03
+Nah 02:04
+Nah 02:13
+zec 09:10
+[keyterm]
+ BI00591 <07105> harvest  קָצִיר qatsiyr
+[references]
+Hos 06:11
+Joe 01:11
+Joe 03:13
+Amo 04:07
+[keyterm]
+ BI00592 <05030> prophet  נָבִיא nabiy'
+[references]
+Hos 04:05
+Hos 06:05
+Hos 09:07
+Hos 09:08
+Hos 12:10
+Hos 12:13
+Amo 02:11
+Amo 02:12
+Amo 03:07
+Amo 07:14
+Mic 03:05
+Mic 03:06
+Mic 03:11
+Hab 01:01
+Hab 03:01
+Zep 03:04
+hag 01:01
+hag 01:03
+hag 01:12
+hag 02:01
+hag 02:10
+zec 01:01
+zec 01:04
+zec 01:05
+zec 01:06
+zec 01:07
+zec 07:03
+zec 07:07
+zec 07:12
+zec 08:09
+zec 13:02
+zec 13:04
+zec 13:05
+Mal 04:05
+[keyterm]
+ BI00593 <05175> snake  נָחָשׁ nachash
+[references]
+Amo 05:19
+Amo 09:03
+Mic 07:17
+[keyterm]
+ BI00594 <04904> bed  מִשְׁכָּב mishkab
+[references]
+Hos 07:14
+Mic 02:01
+[keyterm]
+ BI00596 <02114> to be strange, estranged  זוּר zuwr
+[references]
+Hos 05:07
+Hos 07:09
+Hos 08:07
+Hos 08:12
+Joe 03:17
+oba 01:11
+[keyterm]
+ BI00597 <05237> strange, foreign נָכְרִי nokri
+[references]
+oba 01:11
+Zep 01:08
+[keyterm]
+ BI00598 <01481> to sojourn, abide, be a stranger  גּוּר guwr
+[references]
+Hos 07:14
+Hos 10:05
+[keyterm]
+ BI00599 <01616> alien  גֵּר ger 
+[references]
+zec 07:10
+Mal 03:05
+[keyterm]
+ BI00600 <06697> rock  צוּר tsuwr
+[references]
+Nah 01:06
+Hab 01:12
+[keyterm]
+ BI00602 <05488> reed  סוּף cuwph
+[references]
+Jon 02:5Exo 02:03
+Jon 02:05
+[keyterm]
+ BI00603 <01254> to create  בּרא bara'
+[references]
+Amo 04:13
+Mal 02:10
+[keyterm]
+ BI00606 <07495> to heal רָפָא rapha'
+[references]
+Hos 05:13
+Hos 06:01
+Hos 07:01
+Hos 11:03
+Hos 14:04
+zec 11:16
+[keyterm]
+ BI00608 <07521> to be pleased, accept  רָצָה ratsah
+[references]
+Hos 08:13
+Amo 05:22
+Mic 06:07
+hag 01:08
+Mal 01:08
+Mal 01:10
+Mal 01:13
+[keyterm]
+ BI00610 <02146> memorial  זִכָּרוֹן zikrown
+[references]
+zec 06:14
+Mal 03:16
+[keyterm]
+ BI00611 <05162> to comfort, to regret  נָחַם nacham
+[references]
+Joe 02:13
+Joe 02:14
+Amo 07:03
+Amo 07:06
+Jon 03:09
+Jon 03:10
+Jon 04:02
+Nah 03:07
+zec 01:17
+zec 08:14
+zec 10:02
+[keyterm]
+ BI00612 <06524> to sprout, break out  פָּרַח parach
+[references]
+Hos 10:04
+Hos 14:05
+Hos 14:07
+Hab 03:17
+[keyterm]
+ BI00613 <06779> to sprout צָמַח tsamach
+[references]
+zec 06:12
+[keyterm]
+ BI00614 <01310> to cook, to ripen (to become ready to eat)  בָּשַׁל bashal
+[references]
+Joe 03:13
+zec 14:21
+[keyterm]
+ BI00615 <05749> to testify, bear witness  עוּד `uwd
+[references]
+Amo 03:13
+zec 03:06
+Mal 02:14
+[keyterm]
+ BI00616 <02220> arm זְרוֹעַ zeroa`
+[references]
+Hos 07:15
+Hos 11:03
+zec 11:17
+[keyterm]
+ BI00618 <04853> burden  מַשָּׂא massa'
+[references]
+Hos 08:10
+Nah 01:01
+Hab 01:01
+zec 09:01
+zec 12:01
+Mal 01:01
+[keyterm]
+ BI00624 <06566> to spread out  פָּרַשׂ paras
+[references]
+Hos 05:01
+Hos 07:12
+Joe 02:02
+Mic 03:03
+zec 02:06
+[keyterm]
+ BI00627 <04427> to reign, become king  מָלַךְ malak
+[references]
+Hos 08:04
+Mic 04:07
+[keyterm]
+ BI00628 <04467>  kingdom  מַמְלָכָה mamlakah
+[references]
+Amo 06:02
+Amo 07:13
+Amo 09:08
+Mic 04:08
+Nah 03:05
+Zep 03:08
+hag 02:22
+[keyterm]
+ BI00629 <04428> king מֶּלֶךְ melek
+[references]
+Hos 01:01
+Hos 03:04
+Hos 03:05
+Hos 05:01
+Hos 05:13
+Hos 07:03
+Hos 07:05
+Hos 07:07
+Hos 08:10
+Hos 10:03
+Hos 10:06
+Hos 10:07
+Hos 10:15
+Hos 11:05
+Hos 13:10
+Hos 13:11
+Amo 01:01
+Amo 01:15
+Amo 02:01
+Amo 05:26
+Amo 07:01
+Amo 07:10
+Amo 07:13
+Jon 03:06
+Jon 03:07
+Mic 01:01
+Mic 01:14
+Mic 02:13
+Mic 04:09
+Mic 06:05
+Nah 03:18
+Hab 01:10
+Zep 01:01
+Zep 01:05
+Zep 01:08
+Zep 03:15
+hag 01:01
+hag 01:15
+zec 07:01
+zec 09:05
+zec 09:09
+zec 11:06
+zec 14:05
+zec 14:09
+zec 14:10
+zec 14:16
+zec 14:17
+Mal 01:14
+[keyterm]
+ BI00630 <03985> to refuse מָאֵן ma'en
+[references]
+Hos 11:05
+zec 07:11
+[keyterm]
+ BI00631 <06565> to break פָּרַר parar
+[references]
+zec 11:10
+zec 11:11
+zec 11:14
+[keyterm]
+ BI00632 <06555> to break forth, through; to increase פָּרַץ parats
+[references]
+Hos 04:02
+Hos 04:10
+Mic 02:13
+[keyterm]
+ BI00633 <05422> to pull down, break down נָתַץ nathats 05
+[references]
+Nah 01:06
+[keyterm]
+ BI00634 <03807> to crush, beat, break in pieces  כְּתַת kathath
+[references]
+Joe 03:10
+Mic 01:07
+Mic 04:03
+zec 11:06
+[keyterm]
+ BI00635 <06202> to break the neck (of an animal) עָרַף `araph
+[references]
+Hos 10:02
+[keyterm]
+ BI00636 <06561> to tear apart, tear off break away  פָּרַק paraq  
+[references]
+zec 11:16
+[keyterm]
+ BI00637 <07665> to break, break in pieces  שָׁבַר shabar
+[references]
+Hos 01:05
+Hos 02:18
+Amo 01:05
+Jon 01:04
+Nah 01:13
+zec 11:16
+[keyterm]
+ BI00638 <02506> portion  חֵלֶק cheleq
+[references]
+Hos 05:07
+Amo 07:04
+Mic 02:04
+Hab 01:16
+zec 02:12
+[keyterm]
+ BI00639 <02513> smooth part, portion, slippery place  חֶלְקָה chelqah
+[references]
+Amo 04:07 
+[keyterm]
+ BI00641 <02491> slain, profaned  חָלָל chalal
+[references]
+Nah 03:03
+Zep 02:12
+[keyterm]
+ BI00643 <05692> disc or cake (of bread)  עוּגָה `uggah
+[references]
+Hos 07:08
+[keyterm]
+ BI00645 <03490> orphan  יָתוֹם yathowm
+[references]
+Hos 14:03
+zec 07:10
+Mal 03:05
+[keyterm]
+ BI00646 <05071> freewill offering, voluntary  נְדָבָה nedabah
+[references]
+Hos 14:04
+Amo 04:05
+[keyterm]
+ BI00647 <07107> to be angry  קָצַף qatsaph
+[references]
+zec 01:02
+zec 01:15
+zec 08:14
+[keyterm]
+ BI00650 <06541> hoof  פַּרְסָה parcah
+[references]
+Mic 04:13
+zec 11:16
+[keyterm]
+ BI00651 <0816> to trespass, be guilty אָשַׁם  'asham
+[references]
+Hos 04:15
+Hos 05:15
+Hos 10:02
+Hos 13:01
+Hos 13:16
+Joe 01:18
+Hab 01:11
+zec 11:05
+[keyterm]
+ BI00653 <05117> to rest נוּחַ nuwach
+[references]
+Hab 03:16
+zec 06:08
+[keyterm]
+ BI00654 <05401> kiss  נָשַׁק nashaq
+[references]
+Hos 13:02
+[keyterm]
+ BI00655 <06381> to be wonderful, extraordinary  פָּלָא pala'
+[references]
+Joe 02:26
+Mic 07:15
+zec 08:06
+[keyterm]
+ BI00657 <07939> wages  שָׂכָר sakar
+[references]
+Jon 01:03
+zec 08:10
+zec 11:12
+Mal 03:05
+[keyterm]
+ BI00659 <07230> multitude, abundance  רֹב rob
+[references]
+Hos 04:07
+Hos 08:12
+Hos 09:07
+Hos 10:01
+Hos 10:13
+Nah 03:03
+Nah 03:04
+zec 02:04
+zec 08:04
+zec 14:14
+[keyterm]
+ BI00660 <07065> to envy, be jealous, be zealous קָנָא qana'
+[references]
+Joe 02:18
+zec 01:14
+zec 08:02
+[keyterm]
+ BI00661 <01270> iron  בַּרְזֶל barzel
+[references]
+Amo 01:03
+Mic 04:13
+[keyterm]
+ BI00664 <0990> womb, belly  בֶּטֶן beten
+[references]
+Hos 09:11
+Hos 09:16
+Hos 12:03
+Jon 02:02
+Mic 06:07
+Hab 03:16
+[keyterm]
+ BI00665 <08127> tooth  שֵׁן shen
+[references]
+Joe 01:06
+Amo 03:15
+Amo 04:06
+Amo 06:04
+Mic 03:05
+zec 09:07
+[keyterm]
+ BI00666 <08055> to rejoice, be glad  שָׂמַח samach
+[references]
+Hos 07:03
+Hos 09:01
+Joe 02:21
+Joe 02:23
+oba 01:12
+Jon 04:06
+Mic 07:08
+Hab 01:15
+Zep 03:14
+zec 02:10
+zec 04:10
+zec 10:07
+[keyterm]
+ BI00669 <07350> far away  רָחוֹק rachowq
+[references]
+Joe 03:08
+Mic 04:03
+Hab 01:08
+zec 06:15
+[keyterm]
+ BI00670 <05483> horse  סוּס sus
+[references]
+Hos 01:07
+Hos 14:03
+Joe 02:04
+Amo 02:15
+Amo 04:10
+Amo 06:12
+Mic 05:10
+Nah 03:02
+Hab 01:08
+Hab 03:08
+Hab 03:15
+hag 02:22
+zec 01:08
+zec 06:02
+zec 06:03
+zec 06:06
+zec 09:10
+zec 10:03
+zec 10:05
+zec 12:04
+zec 14:15
+zec 14:20
+[keyterm]
+ BI00672 <06025> grape  עֵנָב `enab
+[references]
+Hos 03:01
+Hos 09:10
+Amo 09:13
+[keyterm]
+ BI00674 <07323> to run  רוּץ ruwts
+[references]
+Joe 02:04
+Joe 02:07
+Joe 02:09
+Amo 06:12
+Nah 02:04
+Hab 02:02
+hag 01:09
+zec 02:04
+[keyterm]
+ BI00677 <01486> lot  גּוֹרָל gowral
+[references]
+Joe 03:03
+oba 01:11
+Jon 01:07
+Mic 02:05
+Nah 03:10
+[keyterm]
+ BI00678 <06664> righteousness  צֶדֶק tsedeq
+[references]
+Hos 02:19
+Hos 10:12
+Zep 02:03
+[keyterm]
+ BI00680 <05352> to be innocent  נָקַה naqah
+[references]
+Joe 03:21
+Nah 01:03
+zec 05:03
+[keyterm]
+ BI00682 <06327> to scatter, be scattered  פּוּץ puwts
+[references]
+Nah 02:01
+Hab 03:06
+Hab 03:14
+Zep 03:10
+zec 01:17
+zec 13:07
+[keyterm]
+ BI00689 <07563> wicked  רָשָׁע rasha`
+[references]
+Mic 06:10
+Hab 01:04
+Hab 01:13
+Hab 03:13
+Zep 01:03
+Mal 03:18
+Mal 04:03
+[keyterm]
+ BI00690 <07522> favor, pleasure  רָצוֹן ratsown
+[references]
+Mal 02:13
+[keyterm]
+ BI00692 <05695> calf  עֵגֶל `egel
+[references]
+Hos 08:05
+Hos 08:06
+Hos 13:02
+Amo 06:04
+Mic 06:06
+Mal 04:02
+[keyterm]
+ BI00693 <03051> to give  יָהַב yahab
+[references]
+Hos 04:18
+zec 11:12
+[keyterm]
+ BI00696 <05355> innocent  נָקִי naqiy
+[references]
+Joe 03:19
+Jon 01:14
+[keyterm]
+ BI00697 <03489> peg יָתֵד yathed
+[references]
+zec 10:04
+[keyterm]
+ BI00698 <03556> star כּוֹכָב kowkab
+[references]
+Joe 02:10
+Joe 03:15
+Amo 05:26
+oba 01:04
+Nah 03:16
+[keyterm]
+ BI00700 <02308> to stop, cease חָדַל chadal
+[references]
+Amo 07:05
+zec 11:12
+[keyterm]
+ BI00702 <07416> pomegranate רִמּוֹן rimmown
+[references]
+Joe 01:12
+hag 02:19
+[keyterm]
+ BI00703 <08628> to blow תָּקַע taqa`
+[references]
+Hos 05:08
+Joe 02:01
+Joe 02:15
+Amo 03:06
+Nah 03:19
+zec 09:14
+[keyterm]
+ BI00706 <04217> east מִזְרָח mizrach
+[references]
+Amo 08:12
+zec 08:07
+zec 14:04
+Mal 01:11
+[keyterm]
+ BI00707 <06913> grave קֶבֶר qeber, קִבְרָה qibrah
+[references]
+Nah 01:14
+[keyterm]
+ BI00709 <01715> grain דָּגָן dagan
+[references]
+Hos 02:08
+Hos 02:09
+Hos 02:22
+Hos 07:14
+Hos 09:01
+Hos 14:07
+Joe 01:10
+Joe 01:17
+Joe 02:19
+hag 01:11
+zec 09:17
+[keyterm]
+ BI00711 <05997> neighbor עָמִית `amiyth
+[references]
+zec 13:07
+[keyterm]
+ BI00712 <01061> firstfruits בִּכּוּר bikkuwr
+[references]
+Nah 03:12
+[keyterm]
+ BI00713 <07392>  to ride רָכַב rakab
+[references]
+Hos 10:11
+Hos 14:03
+Amo 02:15
+Hab 03:08
+hag 02:22
+zec 01:08
+zec 09:09
+zec 10:05
+zec 12:04
+[keyterm]
+ BI00713 <04784> to rebel מָרָה marah
+[references]
+Hos 13:16
+[keyterm]
+ BI00715 <05193> to plant נָטַע nata`
+[references]
+Amo 05:11
+Amo 09:14
+Amo 09:15
+Zep 01:13
+[keyterm]
+ BI00716 <04910> to rule מָשַׁל mashal
+[references]
+Joe 02:17
+Mic 05:02
+Hab 01:14
+zec 06:13
+[keyterm]
+ BI00717 <07358> womb רֶחֶם rechem
+[references]
+Hos 09:14
+[keyterm]
+ BI00718 <0571> truth אֱמֶת 'emeth
+[references]
+Hos 04:01
+Mic 07:20
+zec 07:09
+zec 08:03
+zec 08:08
+zec 08:16
+zec 08:19
+Mal 02:06
+[keyterm]
+ BI00720 <03243> to nurse (an infant)  ינק yanaq
+[references]
+Joe 02:16
+[keyterm]
+ BI00721 <06743> to succeed צָלַח tsalach 10
+[references]
+Amo 05:06
+[keyterm]
+ BI00724 <03595> laver כִּיֹּר רֶויֹכִ כִּיּוֹר kiyor 10
+[references]
+zec 12:06
+[keyterm]
+ BI00725 <05080> to drive, thrust, banish נָדַח nadach 10
+[references]
+Joe 02:20
+Mic 04:06
+Zep 03:19
+[keyterm]
+ BI00726 <07023> wall קִיר qiyr, קִירָה qiyrah 10
+[references]
+Amo 05:19
+Hab 02:11
+[keyterm]
+ BI00727 <05956> to hide עָלַם `alam 10
+[references]
+Nah 03:11
+[keyterm]
+ BI00728 <04046> plague מַגֵּפָה maggephah 10
+[references]
+zec 14:12
+zec 14:15
+zec 14:18
+[keyterm]
+ BI00729 <05139> Nazirite, set apart נָזִיר naziyr 10
+[references]
+Amo 02:11
+Amo 02:12
+[keyterm]
+ BI00730 <06525> flower פֶּרַח perach 10
+[references]
+Nah 01:04
+[keyterm]
+ BI00731 <0319> end, last אַחֲרִית 'achariyth 10
+[references]
+Hos 03:05
+Amo 04:02
+Amo 08:10
+Amo 09:01
+Mic 04:01
+[keyterm]
+ BI00732 <01104> to swallow בּלע bala` 10
+[references]
+Hos 08:07
+Hos 08:08
+Jon 01:17
+Hab 01:13
+[keyterm]
+ BI00735 <04417> salt מּלַח, melach 10
+[references]
+Zep 02:09
+[keyterm]
+ BI00738 <08492> wine תִּירוֹשׁ tiyrowsh 10
+[references]
+Hos 02:08
+Hos 02:09
+Hos 02:22
+Hos 04:11
+Hos 07:14
+Hos 09:02
+Joe 01:10
+Joe 02:19
+Joe 02:24
+Mic 06:15
+hag 01:11
+zec 09:17
+[keyterm]
+ BI00739 <02557> leaven, leavened thing חָמֵץ chametz 10
+[references]
+Amo 04:05
+[keyterm]
+ BI00740 <07998> plunder, spoil שָׁלָל shalal 10
+[references]
+zec 02:09
+zec 14:01
+[keyterm]
+ BI00743 <02790> to keep silent, to cut, plow חָרַשׁ charash 10
+[references]
+Hos 10:11
+Hos 10:13
+Amo 06:12
+Amo 09:13
+Mic 03:12
+Mic 07:16
+Hab 01:13
+Zep 03:17
+[keyterm]
+ BI00746 <07379> strife, controversy רִיב riyb 10
+[references]
+Hos 04:01
+Hos 12:02
+Mic 06:02
+Mic 07:09
+Hab 01:03
+[keyterm]
+ BI00747 <07431> creeping thing רֶמֶשׂ remes 10
+[references]
+Hos 02:18
+Hab 01:14
+[keyterm]
+ BI00748 <07378> to strive, contend רִיב riyb, רוּב ruwb 10
+[references]
+Hos 02:02
+Hos 04:04
+Hos 05:13
+Amo 07:04
+Mic 06:01
+Mic 07:09
+[keyterm]
+ BI00749 <02132> olive tree, olive זָיִת zayith 10
+[references]
+Hos 14:06
+Amo 04:09
+Mic 06:15
+Hab 03:17
+Hag 02:19
+zec 04:03
+zec 04:11
+zec 04:12
+zec 14:04
+[keyterm]
+ BI00751 <07916> hired שָׂכִיר sakiyr 10
+[references]
+Mal 03:05
+[keyterm]
+ BI00753 <02822> darkness חֹשֶׁךְ choshek 10
+[references]
+Joe 02:02
+Joe 02:31
+Amo 05:18
+Amo 05:20
+Mic 07:08
+Nah 01:08
+Zep 01:15
+[keyterm]
+ BI00754 <07257> to lie down רָבַץ rabats 10
+[references]
+Zep 02:07
+Zep 02:14
+Zep 03:13
+[keyterm]
+ BI00757 <02603> to be gracious חָנַן chanan 10
+[references]
+Hos 12:04
+Amo 05:15
+Mal 01:09
+[keyterm]
+ BI00758 <07621>  oath שְׁבוּעָה shebuw`ah 10
+[references]
+Hab 03:09
+zec 08:17
+[keyterm]
+ BI00759 <07646> to satisfy, be satisfied שָׂבַע saba` 10
+[references]
+Hos 04:10
+Hos 13:06
+Joe 02:19
+Joe 02:26
+Amo 04:08
+Mic 06:14
+Hab 02:05
+Hab 02:16
+[keyterm]
+ BI00760 <02436> bosom חֵיק cheyq, חוֹק chowq 10
+[references]
+Mic 07:05
+[keyterm]
+ BI00762 <07068> jealousy קִנְאָה qin'ah 10
+[references]
+Zep 01:18
+Zep 03:08
+zec 01:14
+zec 08:02
+[keyterm]
+ BI00763 <08074> to be desolate שָׁמֵם shamem 10
+[references]
+Hos 02:12
+Joe 01:17
+Amo 07:09
+Amo 09:14
+Mic 06:13
+Zep 03:06
+zec 07:14
+[keyterm]
+ BI00764 <07093>  end קֵץ qets 10
+[references]
+Amo 08:02
+Hab 02:03
+[keyterm]
+ BI00765 <07641> ear שִׁבֹּל shibbol, שִׁבֹּלֶת shibboleth 10
+[references]
+zec 04:12
+[keyterm]
+ BI00767 <04731> staff, stick מַקְּלָה לֶקֵקאמ מַקֵּל maqqelah 09
+[references]
+Hos 04:12
+zec 11:07
+zec 11:10
+zec 11:14
+[keyterm]
+ BI00768 <02254>  to take a pledge, to ruin, act corruptly חָבַל chabal 09
+[references]
+Amo 02:08
+Mic 02:10
+zec 11:07
+zec 11:14
+[keyterm]
+ BI00769 <05358> to avenge נָקַם naqam 09
+[references]
+Nah 01:02
+[keyterm]
+ BI00772 <03247> foundation, base יְסוֹד yecowd 09
+[references]
+Mic 01:06
+Hab 03:13
+[keyterm]
+ BI00773 <07613> elevation, dignity שְׂאֵת se'eth 09
+[references]
+Hab 01:07
+[keyterm]
+ BI00774 <06862> adversary, distress, narrowness צַר tsar 09
+[references]
+Hos 05:15
+Amo 03:11
+Mic 05:09
+Nah 01:02
+zec 08:10
+[keyterm]
+ BI00776 <04118> quickly מַהֵר maher 09
+[references]
+Zep 01:14
+[keyterm]
+ BI00777 <03499> willingness, abundance יֶתֶר yether 09
+[references]
+Joe 01:04
+Mic 05:03
+Hab 02:08
+Zep 02:09
+zec 14:02
+[keyterm]
+ BI00784 <06666>  righteousness צְדָקָה tsedaqah 09
+[references]
+Hos 10:12
+Joe 02:23
+Amo 05:07
+Amo 05:24
+Amo 06:12
+Mic 06:05
+Mic 07:09
+zec 08:08
+Mal 03:03
+Mal 04:02
+[keyterm]
+ BI00785 <03477> right יָשָׁר yashar 09
+[references]
+Hos 14:09
+Mic 02:07
+Mic 03:09
+Mic 07:02
+Mic 07:04
+[keyterm]
+ BI00786 <06677> neck צַוָּאר tsavva'r 09
+[references]
+Hos 10:11
+Mic 02:03
+Hab 03:13
+[keyterm]
+ BI00788 <01330> virgin בְּתוּלָה bethuwlah 09
+[references]
+Joe 01:08
+Amo 05:02
+Amo 08:13
+zec 09:17
+[keyterm]
+ BI00790 <02505> to divide חָלַק chalaq 09
+[references]
+Hos 10:02
+Joe 03:02
+Amo 07:17
+Mic 02:04
+zec 14:01
+[keyterm]
+ BI00792 <06588> transgression פֶּשַׁע pesha` 09
+[references]
+Amo 01:03
+Amo 01:06
+Amo 01:09
+Amo 01:11
+Amo 01:13
+Amo 02:01
+Amo 02:04
+Amo 02:06
+Amo 03:14
+Amo 05:12
+Mic 01:05
+Mic 01:13
+Mic 03:08
+Mic 06:07
+Mic 07:18
+[keyterm]
+ BI00793 <01219> to gather, to restrain, to fence בָּצַר batsar 09
+[references]
+Hos 08:14
+oba 01:05
+Zep 01:16
+zec 11:02
+[keyterm]
+ BI00796 <07706> Almighty שַׁדַּי Shadday 09
+[references]
+Joe 01:15
+[keyterm]
+ BI00797 <07579> to draw out (water) שָׁאַב sha'ab 09
+[references]
+Nah 03:14
+[keyterm]
+ BI00798 <034> poor, needy אֶבְיוֹן 'ebyown 09
+[references]
+Amo 02:06
+Amo 04:01
+Amo 05:12
+Amo 08:04
+Amo 08:06
+[keyterm]
+ BI00799 <06779> to sprout צָמַח tsamach 09
+[references]
+zec 06:12
+[keyterm]
+ BI00800 <02287> to celebrate, observe a feast חָגַג chagag 09
+[references]
+Nah 01:15
+zec 14:16
+zec 14:18
+zec 14:19
+[keyterm]
+ BI00802 <03863> Oh!, If only! or other exclamation לוּא luw',  לוּluw 09
+[references]
+Mic 02:11
+[keyterm]
+ BI00803 <0697> locust אַרְבֶּה 'arbeh 09
+[references]
+Joe 01:04
+Joe 02:25
+Nah 03:15
+Nah 03:17
+[keyterm]
+ BI00805 <06504> to separate פָּרַד parad 09
+[references]
+Hos 04:14
+[keyterm]
+ BI00807 <05699> cart עֲגָלָה `agalah 09
+[references]
+Amo 02:13
+[keyterm]
+ BI00809 <07114>  to reap, to shorten, to be short קָצַר qatsar 09
+[references]
+Hos 08:07
+Hos 10:12
+Hos 10:13
+Amo 09:13
+Mic 02:07
+Mic 06:15
+zec 11:08
+[keyterm]
+ BI00810 <08486> south, southward תֵּימָן teyman 09
+[references]
+zec 06:06
+zec 09:14
+[keyterm]
+ BI00811 <07892> this song שִׁירָה רֶיהִס שִׁיר shiyrah 09
+[references]
+Amo 05:23
+Amo 06:05
+Amo 08:03
+Amo 08:10
+[keyterm]
+ BI00812 <05688> rope, cord עֲבֹת `aboth 09
+[references]
+Hos 11:04
+[keyterm]
+ BI00813 <06887> to distress, show hostility, to bind צָרַר tsarar 09
+[references]
+Hos 04:19
+Hos 13:12
+Amo 05:12
+Zep 01:17
+[keyterm]
+ BI00814 <04393> fullness  מְלֹא melo', rarely מְלוֹא melow', מְלוֹ melow 09
+[references]
+Amo 06:08
+Mic 01:02
+[keyterm]
+ BI00817 <02919>  dew טַל tal 08
+[references]
+Hos 06:04
+Hos 13:03
+Hos 14:05
+Mic 05:07
+hag 01:10
+zec 08:12
+[keyterm]
+ BI00818 <02534> fury, heat, poison חֵמָה chemah 08
+[references]
+Hos 07:05
+Mic 05:15
+Nah 01:02
+Nah 01:06
+zec 08:02
+[keyterm]
+ BI00819 <03767> leg כָּרָע kara` 08
+[references]
+Amo 03:12
+[keyterm]
+ BI00821 <04912> proverb מָשָׁל mashal 08
+[references]
+Mic 02:04
+Hab 02:06
+[keyterm]
+ BI00823 <04751> bitter rm; mar, מָרָה marah 08
+[references]
+Amo 08:10
+Hab 01:06
+Zep 01:14
+[keyterm]
+ BI00824 <06571> horse, horsemen פָּרָשׁ parash 08
+[references]
+Hos 01:07
+Joe 02:04
+Nah 03:03
+Hab 01:08
+[keyterm]
+ BI00826 <04347> blow, wound, plague מַכָּה makkah 08
+[references]
+Mic 01:09
+Nah 03:19
+zec 13:06
+[keyterm]
+ BI00832 <07617> to take captive שָׁבָה shabah 08
+[references]
+oba 01:11
+[keyterm]
+ BI00833 <08643> a loud sound, either by human voice or trumpet, either for joy or warning  תְּרוּעָה teruw`ah 08
+[references]
+Amo 01:14
+Amo 02:02
+Zep 01:16
+[keyterm]
+ BI00837 <08415>  depths, deep (noun) תְּהוֹם tehowm 08
+[references]
+Amo 07:04
+Jon 02:05
+Hab 03:10
+[keyterm]
+ BI00838 <0374> ephah אֵיפָה 'eyphah 08
+[references]
+Amo 08:05
+Mic 06:10
+zec 05:06
+zec 05:07
+zec 05:08
+zec 05:09
+zec 05:10
+[keyterm]
+ BI00839 <0962> to plunder בָּזַז bazaz 08
+[references]
+Amo 03:11
+Nah 02:09
+Zep 02:09
+[keyterm]
+ BI00840 <03467> to save, be saved יָשַׁע yasha` 08
+[references]
+Hos 01:07
+Hos 13:04
+Hos 13:10
+Hos 14:03
+oba 01:21
+Hab 01:02
+Zep 03:17
+Zep 03:19
+zec 08:07
+zec 08:13
+zec 09:09
+zec 09:16
+zec 10:06
+zec 12:07
+[keyterm]
+ BI00841 <05002> declaration, utterance נְאֻם ne'um 08
+[references]
+Hos 02:13
+Hos 02:16
+Hos 02:21
+Hos 11:11
+Joe 02:12
+Amo 02:11
+Amo 02:16
+Amo 03:10
+Amo 03:13
+Amo 03:15
+Amo 04:03
+Amo 04:05
+Amo 04:06
+Amo 04:08
+Amo 04:09
+Amo 04:10
+Amo 04:11
+Amo 06:08
+Amo 06:14
+Amo 08:03
+Amo 08:09
+Amo 08:11
+Amo 09:07
+Amo 09:08
+Amo 09:12
+Amo 09:13
+oba 01:04
+oba 01:08
+Mic 04:06
+Mic 05:10
+Nah 02:13
+Nah 03:05
+Zep 01:02
+Zep 01:03
+Zep 01:10
+Zep 02:09
+Zep 03:08
+hag 01:09
+hag 01:13
+hag 02:04
+hag 02:08
+hag 02:09
+hag 02:14
+hag 02:17
+hag 02:23
+zec 01:03
+zec 01:04
+zec 01:16
+zec 02:05
+zec 02:06
+zec 02:10
+zec 03:09
+zec 03:10
+zec 05:04
+zec 08:06
+zec 08:11
+zec 08:17
+zec 10:12
+zec 11:06
+zec 12:01
+zec 12:04
+zec 13:02
+zec 13:07
+zec 13:08
+Mal 01:02
+[keyterm]
+ BI00842 <07503> to sink, relax, drop, let go רָפָה raphah 08
+[references]
+Zep 03:16
+[keyterm]
+ BI00843 <04306> rain מָטָר matar 08
+[references]
+zec 10:01
+[keyterm]
+ BI00844 <03867>  to join, be joined, join oneself; to lend, borrow  לָוָהlavah 08
+[references]
+zec 02:11
+[keyterm]
+ BI00846 <07628> captive(s), captivity שְׁבִי shebiy 08
+[references]
+Amo 04:10
+Amo 09:04
+Nah 03:10
+Hab 01:09
+[keyterm]
+ BI00848 <06810> small, young(er) צָעִיר tsa`iyr, צָעוֹר tsa`owr 08
+[references]
+Mic 05:02
+[keyterm]
+ BI00851 <06419> to pray, intervene, intercede פָּלַל palal 08
+[references]
+Jon 02:01
+Jon 04:02
+[keyterm]
+ BI00852 <06818> cry צְעָקָה tsa`aqah 08
+[references]
+Zep 01:10
+[keyterm]
+ BI00855 <08267> lie, deception, falsehood שֶׁקֶר sheqer 08
+[references]
+Hos 07:01
+Mic 02:11
+Mic 06:12
+Hab 02:18
+zec 05:04
+zec 08:17
+zec 10:02
+zec 13:03
+Mal 03:05
+[keyterm]
+ BI00856 <07921> to be bereaved, to lose a child/children, become childless שָׁכֹל shakol 08
+[references]
+Hos 09:12
+Hos 09:14
+Mal 03:11
+[keyterm]
+ BI00857 <05391> to bite, to charge/pay interest נָשַׁךְ nashak 08
+[references]
+Amo 05:19
+Amo 09:03
+Mic 03:05
+Hab 02:07
+[keyterm]
+ BI00861 <03303> beautiful יָפֶה yapheh 08
+[references]
+Amo 08:13
+[keyterm]
+ BI00866 <03256> to chasten, discipline יָסַר yasar 08
+[references]
+Hos 07:12
+Hos 07:15
+Hos 10:10
+[keyterm]
+ BI00867 <02764> thing devoted (to the ban) חֵרֶם cherem 08
+[references]
+Mic 07:02
+Hab 01:15
+Hab 01:16
+Hab 01:17
+zec 14:11
+Mal 04:06
+[keyterm]
+ BI00868 <06293>  to meet, to reach, to attack פָּגַע paga` 08
+[references]
+Amo 05:19
+[keyterm]
+ BI00870 <04541> cast metal מַסֵּכָה massekah 08
+[references]
+Hos 13:02
+Nah 01:14
+Hab 02:18
+[keyterm]
+ BI00871 <07368> to be or become far, distant רָחַק rachaq 08
+[references]
+Joe 02:20
+Joe 03:06
+Mic 07:11
+[keyterm]
+ BI00872 <01612> vine גֶּפֶן gephen 08
+[references]
+Hos 02:12
+Hos 10:01
+Hos 14:07
+Joe 01:07
+Joe 01:12
+Joe 02:22
+Mic 04:04
+Hab 03:17
+hag 02:19
+zec 03:10
+zec 08:12
+Mal 03:11
+[keyterm]
+ BI00874 <05027> to look נָבַט nabat 08
+[references]
+Amo 05:22
+Jon 02:04
+Hab 01:03
+Hab 01:05
+Hab 01:13
+Hab 02:15
+zec 12:10
+[keyterm]
+ BI00876 <05521> booth, temporary shelter סֻכָּה sukkah 08
+[references]
+Amo 09:11
+Jon 04:05
+zec 14:16
+zec 14:18
+zec 14:19
+[keyterm]
+ BI00878 <03373>  fearing, reverent (adj.) יָרֵא yare' 08
+[references]
+Jon 01:09
+Mal 03:16
+Mal 04:02
+[keyterm]
+ BI00879 <08610> to take, hold תָּפַשׂ taphas 08
+[references]
+Amo 02:15
+Hab 02:19
+[keyterm]
+ BI00884 <03563> cup כּוֹס kos 07
+[references]
+Hab 02:16
+[keyterm]
+ BI00888 <03978> food מַאֲכָל ma'akal 07
+[references]
+Hab 01:16
+hag 02:12
+[keyterm]
+ BI00890 <06459> idol, image פֶּסֶל pesel 07
+[references]
+Nah 01:14
+Hab 02:18
+[keyterm]
+ BI00891 <03920> to capture, take לָכַד lakad 07
+[references]
+Amo 03:04
+Amo 03:05
+Hab 01:10
+zec 14:02
+[keyterm]
+ BI00895 <06041> poor עָנִי `aniy 07
+[references]
+Amo 08:04
+Hab 03:14
+Zep 03:12
+zec 07:10
+zec 09:09
+zec 11:07
+zec 11:11
+[keyterm]
+ BI00898 <0995> to understand, discern בִּין biyn 07
+[references]
+Hos 04:14
+Hos 14:09
+Mic 04:12
+[keyterm]
+ BI00901 <0730> cedar אֶרֶז 'erez 07
+[references]
+Amo 02:09
+zec 11:01
+zec 11:02
+[keyterm]
+ BI00903 <03004> dry land יַבָּשָׁה yabbashah 07
+[references]
+Jon 01:09
+Jon 01:13
+Jon 02:10
+[keyterm]
+ BI00904 <0781> to betroth, be betrothed אָרַשׂ 'aras 07
+[references]
+Hos 02:19
+Hos 02:20
+[keyterm]
+ BI00909 <02296> to gird, put on a belt חָגַר chagar 07
+[references]
+Joe 01:08
+Joe 01:13
+[keyterm]
+ BI00913 <02963> to tear טָרַף taraph 07
+[references]
+Hos 05:14
+Hos 06:01
+Amo 01:11
+Mic 05:08
+Nah 02:12
+[keyterm]
+ BI00915 <07926> shoulder שְׁכֶם shekem 07
+[references]
+Hos 06:09
+Zep 03:09
+[keyterm]
+ BI00917 <07872> gray hair, old age שֵׂיבָה seybah 07
+[references]
+Hos 07:09
+[keyterm]
+ BI00919 <07167>  to tear קָרַע qara` 07
+[references]
+Hos 13:08
+Joe 02:13
+[keyterm]
+ BI00923 <02898> goodness, good thing(s) טוּב tuwb 07
+[references]
+Hos 03:05
+Hos 10:11
+zec 09:17
+[keyterm]
+ BI00925 <04932> double, second, copy מִשְׁנֶה mishneh 07
+[references]
+Zep 01:10
+zec 09:12
+[keyterm]
+ BI00926 <0983> security, safety, safely בֶּטַח betach 07
+[references]
+Hos 02:18
+Mic 02:08
+Zep 02:15
+zec 14:11
+[keyterm]
+ BI00927 <05553> rock סֶלַע sela 07
+[references]
+Amo 06:12
+oba 01:03
+[keyterm]
+ BI00928 <07585> Sheol, grave שְׁאוֹל she'owl 07
+[references]
+Hos 13:14
+Amo 09:02
+Jon 02:02
+Hab 02:05
+[keyterm]
+ BI00929 <02895> to do good, be good טוֹב towb 07
+[references]
+Hos 10:01
+[keyterm]
+ BI00933 <01637> threshing floor גֹּרֶן goren 07
+[references]
+Hos 09:01
+Hos 09:02
+Hos 13:03
+Joe 02:24
+Mic 04:12
+[keyterm]
+ BI00935 <02368> signet, signet ring, seal חוֹתָם chowtham 07
+[references]
+hag 02:23
+[keyterm]
+ BI00936 <02530> to desire, covet, to be desireable חמד chamad 07
+[references]
+Mic 02:02
+[keyterm]
+ BI00937 <03415> to be displeasing יָרַע  yara` 07
+[references]
+Jon 04:01
+[keyterm]
+ BI00938 <05090> to lead, drive, bring נָהַג nahag 07
+[references]
+Nah 02:07
+[keyterm]
+ BI00942 <08438> worm; scarlet (red)  תּוֹלָעtowla`,  תּוֹלֵעָהtowle`ah 07
+[references]
+Jon 04:07
+[keyterm]
+ BI00945 <07668> grain שֶׁבֶר sheber 07
+[references]
+Amo 08:05
+[keyterm]
+ BI00946 <03323> fresh oil יִצְהָר  yitshar 07
+[references]
+Hos 02:08
+Hos 02:22
+Joe 01:10
+Joe 02:19
+Joe 02:24
+hag 01:11
+zec 04:14
+[keyterm]
+ BI00947 <03411>  side  יַרְכָה yerekah 07
+[references]
+Amo 06:10
+Jon 01:05
+[keyterm]
+ BI00950 <05144>  to dedicate, consecrate  נָזַר nazar 07
+[references]
+Hos 09:10
+zec 07:03
+[keyterm]
+ BI00951 <05141> earrings, nosering נֶזֶם nezem 07
+[references]
+Hos 02:13
+[keyterm]
+ BI00953 <01767> sufficiency, enough  דַּי day 07
+[references]
+oba 01:05
+Nah 02:12
+Hab 02:13
+zec 14:16
+Mal 03:10
+[keyterm]
+ BI00954 <02346> wall  חוֹמָה chowmah 07
+[references]
+Joe 02:07
+Joe 02:09
+Amo 01:07
+Amo 01:10
+Amo 01:14
+Amo 07:07
+Nah 02:05
+Nah 03:08
+zec 02:05
+[keyterm]
+ BI00956 <02406> wheat  חִטָּה chittah 06
+[references]
+Joe 01:11
+[keyterm]
+ BI00957 <06297>  carcass, corpse פֶּגֶר peger 06
+[references]
+Amo 08:03
+Nah 03:03
+[keyterm]
+ BI00959 <07723> falsehood, vanity, emptiness שָׁוְא shav 06
+[references]
+Hos 10:04
+Hos 12:11
+Jon 02:08
+zec 10:02
+Mal 03:14
+[keyterm]
+ BI00962 <07810> gift, bribe  שַׁחַד shachad 06
+[references]
+Mic 03:11
+[keyterm]
+ BI00964 <07757> hem, skirt   שׁוּל shuwl 06
+[references]
+Nah 03:05
+[keyterm]
+ BI00965 <02347> to spare, pity   חוּס chus 06
+[references]
+Joe 02:17
+Jon 04:10
+Jon 04:11
+[keyterm]
+ BI00967 <08316> burning שְׂרֵפָה serephah 06
+[references]
+Amo 04:11
+[keyterm]
+ BI00968 <01710>  fish דָּגָה dagah 06
+[references]
+Jon 02:01
+[keyterm]
+ BI00969 <01698> pestilence  דֶּבֶר deber 06
+[references]
+Hos 13:14
+Amo 04:10
+Hab 03:05
+[keyterm]
+ BI00970 <08242> sack, sackcloth שַׂק saq 06
+[references]
+Joe 01:08
+Joe 01:13
+Amo 08:10
+Jon 03:05
+Jon 03:06
+Jon 03:08
+[keyterm]
+ BI00973 <04060> measure מִדָּה middah 06
+[references]
+zec 02:01
+[keyterm]
+ BI00974 <03956> tongue לָשׁוֹן  lashown 06
+[references]
+Hos 07:16
+Mic 06:12
+Zep 03:13
+zec 08:23
+zec 14:12
+[keyterm]
+ BI00976 <01580> to wean, to deal fully, recompense  גָּמַל gamal 06
+[references]
+Hos 01:08
+Joe 03:04
+[keyterm]
+ BI00979 <01497> to take by force, rob  גָּזַל gazal 06
+[references]
+Mic 02:02
+Mic 03:02
+Mal 01:13
+[keyterm]
+ BI00983 <07941> strong drink, intoxicating liquor  שֵׁכָר shekar 06
+[references]
+Mic 02:11
+[keyterm]
+ BI00984 <05275> sandal, shoe  נַעַל na`al, נַעַלָה na`alah 06
+[references]
+Amo 02:06
+Amo 08:06
+[keyterm]
+ BI00985 <01817> door  דֶּלֶת deleth 06
+[references]
+zec 11:01
+Mal 01:10
+[keyterm]
+ BI00988 <05003>  to commit adultery  נָאַף na'aph 06
+[references]
+Hos 03:01
+Hos 04:02
+Hos 04:13
+Hos 04:14
+Hos 07:04
+Mal 03:05
+[keyterm]
+ BI00989 <02966> torn thing (by animal) טְרֵפָה terephah 06
+[references]
+Nah 02:12
+[keyterm]
+ BI00991 <06754> image צֶלֶם tselem 06
+[references]
+Amo 05:26
+[keyterm]
+ BI00993 <04526> border, rim  מִסְגֶּרֶת micgereth 06
+[references]
+Mic 07:17
+[keyterm]
+ BI00995 <07194> to bind, to conspire; pual part. strong קָשַׁר qashar 06
+[references]
+Amo 07:10
+[keyterm]
+ BI00996 <06908>  to gather, assemble, collect קָבַץ qabats 06
+[references]
+Hos 01:11
+Hos 08:10
+Hos 09:06
+Joe 02:06
+Joe 02:16
+Joe 03:02
+Joe 03:11
+Mic 01:07
+Mic 02:12
+Mic 04:06
+Mic 04:12
+Nah 02:10
+Nah 03:18
+Hab 02:05
+Zep 03:08
+Zep 03:19
+Zep 03:20
+zec 10:08
+zec 10:10
+[keyterm]
+ BI00997 <0309>  to delay  אָחַר 'achar 06
+[references]
+Hab 02:03
+[keyterm]
+ BI00998 <06921> east, east wind קָדִים qadiym 06
+[references]
+Hos 12:01
+Hos 13:15
+Jon 04:08
+Hab 01:09
+[keyterm]
+ BI01000 <03322> to place, set  יָצַג yatsag 06
+[references]
+Hos 02:03
+Amo 05:15
+[keyterm]
+ BI01002 <01277> fat בָּרִיא bariy' 06
+[references]
+Hab 01:16
+zec 11:16
+[keyterm]
+ BI01006 <08574> furnace, oven תַּנּוּר tannuwr 06
+[references]
+Hos 07:04
+Hos 07:06
+Hos 07:07
+Mal 04:01
+[keyterm]
+ BI01008 <05787> blind עִוֵּר `ivver 06
+[references]
+Zep 01:17
+Mal 01:08
+[keyterm]
+ BI01009 <03034> to praise, thank; to confess  יָדָה yadah 06
+[references]
+zec 01:21
+[keyterm]
+ BI01011 <04171> to change   מוּרmuwr 06
+[references]
+Hos 04:07
+Mic 02:04
+[keyterm]
+ BI01014 <03707> to be angry, provoke to anger כָּעַס kaas 06
+[references]
+Hos 12:14
+[keyterm]
+ BI01015 <07198> bow (for hunting), rainbow  קֶשֶׁת qesheth 06
+[references]
+Hos 01:05
+Hos 01:07
+Hos 02:18
+Hos 07:16
+Amo 02:15
+Hab 03:09
+zec 09:10
+zec 09:13
+zec 10:04
+[keyterm]
+ BI01016 <06010> valley  עֵמֶק`emeq 06
+[references]
+Hos 01:05
+Hos 02:15
+Joe 03:02
+Joe 03:12
+Joe 03:14
+Mic 01:04
+[keyterm]
+ BI01017 <06603> engraving פִּתּוּחַ pittuwach 06
+[references]
+zec 03:09
+[keyterm]
+ BI01018 <04305> to rain  מטר matar 06
+[references]
+Amo 04:07
+[keyterm]
+ BI01021 <02555> violence  חָמָס chamas 06
+[references]
+Joe 03:19
+Amo 03:10
+Amo 06:03
+oba 01:10
+Jon 03:08
+Mic 06:12
+Hab 01:02
+Hab 01:03
+Hab 01:09
+Hab 02:08
+Hab 02:17
+Zep 01:09
+Mal 02:16
+[keyterm]
+ BI01022 <06633> to be on duty, to make war, fight צָבָא tsaba' 06
+[references]
+zec 14:12
+[keyterm]
+ BI01024 <07233> many, multitude רְבָבָה rebabah 06
+[references]
+Mic 06:07
+[keyterm]
+ BI01025  <06584> to take off, to make a raid פָּשַׁט pashat 06
+[references]
+Hos 02:03
+Hos 07:01
+Mic 02:08
+Mic 03:03
+Nah 03:16
+[keyterm]
+ BI01026 <0119> to be or make red אָדַם 'adam 06
+[references]
+Nah 02:03
+[keyterm]
+ BI01031 <02729> to tremble, quake חָרַד charad 06
+[references]
+Hos 11:10
+Hos 11:11
+Amo 03:06
+Mic 04:04
+Nah 02:11
+Zep 03:13
+zec 01:21
+[keyterm]
+ BI01032 <05828> one who helps, helper עֵזֶר `ezer 06
+[references]
+Hos 13:09
+[keyterm]
+ BI01036 <04284> thought, device מַחֲשָׁבָה machashabah 05
+[references]
+Mic 04:12
+[keyterm]
+ BI01039 <05923> yoke עֹל ol 05
+[references]
+Hos 11:04
+[keyterm]
+ BI01040 <01116> high place בָּמָה bamah 05
+[references]
+Hos 10:08
+Amo 04:13
+Amo 07:09
+Mic 01:03
+Mic 01:05
+Mic 03:12
+Hab 03:19
+[keyterm]
+ BI01043 <04161> going out (noun – act of or place of); that which goes out מוֹצָא mowtsa' 05
+[references]
+Hos 06:03
+[keyterm]
+ BI01044 <060> mourning (noun) אֵבֶל 'ebel 05
+[references]
+Amo 05:16
+Amo 08:10
+Mic 01:08
+[keyterm]
+ BI01048 <05404> eagle נֶשֶׁר nesher 05
+[references]
+Hos 08:01
+oba 01:04
+Mic 01:16
+Hab 01:08
+[keyterm]
+ BI01051 <05236> foreign נֵכָר nekar 05
+[references]
+Mal 02:11
+[keyterm]
+ BI01058 <05670> to lend, borrow   עָבַט`abat 05
+[references]
+Joe 02:07
+[keyterm]
+ BI01062 <05271> youth נָעוּר na`uwr 05
+[references]
+Hos 02:15
+Joe 01:08
+zec 13:05
+Mal 02:14
+Mal 02:15
+[keyterm]
+ BI01065 <02740> wrath, fierceness חָרוֹן charown 05
+[references]
+Hos 11:09
+Jon 03:09
+Nah 01:06
+Zep 02:02
+Zep 03:08
+[keyterm]
+ BI01066 <06785> wool, made of wool צֶמֶר tsemer 05
+[references]
+Hos 02:05
+Hos 02:09
+[keyterm]
+ BI01067 <03618> bride, daughter-in-law כּלָּה kalah 05
+[references]
+Hos 04:13
+Hos 04:14
+Joe 02:16
+Mic 07:06
+[keyterm]
+ BI01068 <03364> to awake יָקַץ yaqats 05
+[references]
+Hab 02:07
+[keyterm]
+ BI01069 <07306> to smell רוּחַ ruwach 05
+[references]
+Amo 05:21
+[keyterm]
+ BI01070 <08184> barley  שְׂעֹרָה se`orah 05
+[references]
+Hos 03:02
+Joe 01:11
+[keyterm]
+ BI01071 <01250> grain  בָּר bar 05
+[references]
+Joe 02:24
+Amo 05:11
+Amo 08:05
+Amo 08:06
+[keyterm]
+ BI01072 <03584> deceive כָּחַשׁ kachash 05
+[references]
+Hos 04:02
+Hos 09:02
+Hab 03:17
+zec 13:04
+[keyterm]
+ BI01079 <01869> to tread, to bend  דָּרַךְ darak 05
+[references]
+Amo 04:13
+Amo 09:13
+Mic 01:03
+Mic 05:05
+Mic 05:06
+Mic 06:15
+Hab 03:15
+Hab 03:19
+zec 09:13
+[keyterm]
+ BI01080 <02654> to delight, take pleasure in חָפֵץ chaphets 05
+[references]
+Hos 06:06
+Jon 01:14
+Mic 07:18
+Mal 02:17
+[keyterm]
+ BI01081 <0738> lion  אַרִי 'ariy 05
+[references]
+Hos 11:10
+Joe 01:06
+Amo 03:04
+Amo 03:08
+Amo 03:12
+Amo 05:19
+Mic 05:08
+Nah 02:11
+Nah 02:12
+Zep 03:03
+[keyterm]
+ BI01083 <07337> to enlarge, make wide רָחַב rachab 05
+[references]
+Amo 01:13
+Mic 01:16
+Hab 02:05
+[keyterm]
+ BI01086 <01730> uncle, beloved דּוֹד dowd 05
+[references]
+Amo 06:10
+[keyterm]
+ BI01093 <06486>  oversight, custody, visitation פּקֻדָּה. pequddah 05
+[references]
+Hos 09:07
+Mic 07:04
+[keyterm]
+ BI01094 <02860> son-in-law, bridegroom, husband חָתָן chathan 05
+[references]
+Joe 02:16
+[keyterm]
+ BI01095 <06569> dung פֶּרֶשׁ peresh 05
+[references]
+Mal 02:03
+[keyterm]
+ BI01097 <01368> mighty man גִּבּוֹר gibbowr 05
+[references]
+Hos 10:13
+Joe 02:07
+Joe 03:09
+Joe 03:10
+Joe 03:11
+Amo 02:14
+Amo 02:16
+oba 01:09
+Nah 02:03
+Zep 01:14
+Zep 03:17
+zec 09:13
+zec 10:05
+zec 10:07
+[keyterm]
+ BI01099 <01847> knowledge  דַּעַתda`ath 05
+[references]
+Hos 04:01
+Hos 04:06
+Hos 06:06
+Mal 02:07
+[keyterm]
+ BI01103 <06869> trouble, distress צָרָה tsarah 05
+[references]
+oba 01:12
+oba 01:14
+Jon 02:02
+Nah 01:07
+Nah 01:09
+Hab 03:16
+Zep 01:15
+zec 10:11
+[keyterm]
+ BI01105 <08577> a large animal* תַּנִּין tanniyn 05
+[references]
+Mic 01:08
+[keyterm]
+ BI01107 <02344> sand חוֹל chowl 05
+[references]
+Hos 01:10
+Hab 01:09
+[keyterm]
+ BI01113 <0183> to desire, lust  אָוַה 'avah 05
+[references]
+Amo 05:18
+Mic 07:01
+[keyterm]
+ BI01115 <03724> ransom (n); pitch/tar   כֹּפֶר kopher 05
+[references]
+Amo 05:12
+[keyterm]
+ BI01120 <08426> thanksgiving, praise, confession   תּוֹדָה towdah 05
+[references]
+Amo 04:05
+Jon 02:09
+[keyterm]
+ BI01121 <02563> mortar, clay; homer (a dry measure) חֹמֶר chomer 05
+[references]
+Hos 03:02
+Nah 03:14
+Hab 03:15
+[keyterm]
+ BI01122 <02498> to change, to pass on, to renew חָלַף chalaph 05
+[references]
+Hab 01:11
+[keyterm]
+ BI01123 <03988> to reject, to despise מָאַס ma'as 05
+[references]
+Hos 04:06
+Hos 09:17
+Amo 02:04
+Amo 05:21
+[keyterm]
+ BI01125 <06958> to vomit  קוֹא qow' 04
+[references]
+Jon 02:10
+[keyterm]
+ BI01126 <04975> hips, loins מָתֶן mothen 04
+[references]
+Amo 08:10
+Nah 02:01
+Nah 02:10
+[keyterm]
+ BI01127 <06948> temple prostitute (female) קְדֵשָׁה qedeshah 04
+[references]
+Hos 04:14
+[keyterm]
+ BI01129 <07110> wrath קֶצֶף qetseph 04
+[references]
+Hos 10:07
+zec 01:02
+zec 01:15
+zec 07:12
+[keyterm]
+ BI01130 <08088> report (something heard) שֵׁמַע shema` 04
+[references]
+Hos 07:12
+Nah 03:19
+Hab 03:02
+[keyterm]
+ BI01131 <07054> standing grain קָמָה qamah 04
+[references]
+Hos 08:07
+[keyterm]
+ BI01132 <07064> nest, compartment קֵן qen 04
+[references]
+oba 01:04
+Hab 02:09
+[keyterm]
+ BI01134 <0185> desire, lust (n) אַוָּה 'avvah 04
+[references]
+Hos 10:10
+[keyterm]
+ BI01136 <05697> heifer, young cow עֶגְלָה `eglah 04
+[references]
+Hos 10:05
+Hos 10:11
+[keyterm]
+ BI01138 <02981> produce (of soil = fruit & vegetables)  יְבוּל yebuwl 04
+[references]
+Hab 03:17
+hag 01:10
+zec 08:12
+[keyterm]
+ BI01140 <08581> to abhor, be abominable  תָּעַב ta`ab 04
+[references]
+Amo 05:10
+Mic 03:09
+[keyterm]
+ BI01141 <08582> to go astray, to wander, to stagger תָּעָה ta`ah 04
+[references]
+Hos 04:12
+Amo 02:04
+Mic 03:05
+[keyterm]
+ BI01149 <02556> to be leavened, be sour, be cruel   חָמַץ chamets 04
+[references]
+Hos 07:04
+[keyterm]
+ BI01150 <02042> mountain, hill, hill country הָרָר harar   04
+[references]
+Hab 03:06
+[keyterm]
+ BI01159 <02143> memorial, remembrance, memory  זֵכֶר zeker 04
+[references]
+Hos 12:05
+Hos 14:07
+[keyterm]
+ BI01160 <07667> broken, destruction, fracture שֶׁבֶר  sheber 04
+[references]
+Amo 06:06
+Nah 03:19
+Zep 01:10
+[keyterm]
+ BI01161 <02372> to see, look, behold, prophesy  חָזָה chazah 04
+[references]
+Amo 01:01
+Mic 01:01
+Mic 04:11
+Hab 01:01
+zec 10:02
+[keyterm]
+ BI01163 <04692> siege, entrenchment, besieged  מָצוֹר matsowr 04
+[references]
+Mic 05:01
+Nah 03:14
+Hab 02:01
+zec 09:03
+zec 12:02
+[keyterm]
+ BI01165 <08558> palm tree תָּמָר tamar 04
+[references]
+Joe 01:12
+[keyterm]
+ BI01169 <01290> knee   בֶּרֶךְ berek 04
+[references]
+Nah 02:10
+[keyterm]
+ BI01170 <02280> to tie, bind, saddle, restrain, bandage  חָבַשׁ chabash 04
+[references]
+Hos 06:01
+Jon 02:05
+[keyterm]
+ BI01174 <07891> to sing, singer   שִׁיר shiyr 04
+[references]
+Zep 02:14
+[keyterm]
+ BI01175 <02154> depravity, evil plan, mischievous purpose, wickedness זִמָּה  zimmah 04
+[references]
+Hos 06:09
+[keyterm]
+ BI01183 <02796> craftsman, engraver, artisan  חָרָשׁ charash 04
+[references]
+Hos 08:06
+Hos 13:02
+zec 01:20
+[keyterm]
+ BI01189 <01590> a thief  גַּנָּב gannab 04
+[references]
+Hos 07:01
+Joe 02:09
+oba 01:05
+zec 05:04
+[keyterm]
+ BI01192 <05128> to shake stagger, wander, move, vagabond נוּעַ  nuwa 04
+[references]
+Amo 04:08
+Amo 08:12
+Amo 09:09
+Nah 03:12
+Zep 02:15
+[keyterm]
+ BI01200 <03607> to restrict, restrain, shut up, keep back  כָּלָא kala' 04
+[references]
+hag 01:10
+[keyterm]
+ BI01201 <08300> survivor, remaining, remnant  שָׂרִיד sariyd 04
+[references]
+Joe 02:32
+oba 01:14
+oba 01:18
+[keyterm]
+ BI01203 <03678> throne, seat, stool כִּסֵּא  kicce' 04
+[references]
+Jon 03:06
+hag 02:22
+zec 06:13
+[keyterm]
+ BI01205 <08462> beginning, first time (noun) תְּחִלָּה techillah 04
+[references]
+Hos 01:02
+Amo 07:01
+[keyterm]
+ BI01206 <06458> to cut down, hew out  פָּסַל pacal 04
+[references]
+Hab 02:18
+[keyterm]
+ BI01207 <04170> a snare, trap   מוֹקֵשׁ mowqesh 04
+[references]
+Amo 03:05
+[keyterm]
+ BI01211 <01516> valley  גַּיְא gay' 04
+[references]
+Mic 01:06
+zec 14:04
+zec 14:05
+[keyterm]
+ BI01213 <08394> understanding, intelligence (noun)   תָּבוּן tabuwn 04
+[references]
+Hos 13:02
+oba 01:07
+oba 01:08
+[keyterm]
+ BI01214 <0842> grove, Asherah grove   אֲשֵׁרָה 'asherah 04
+[references]
+Mic 05:14
+[keyterm]
+ BI01218 <01166> to marry, husband, wife   בּעל ba`al 04
+[references]
+Mal 02:11
+[keyterm]
+ BI01219 <01556> to roll, roll away   גּלל galal 04
+[references]
+Amo 05:24
+[keyterm]
+ BI01223 <06049> observer of times, bring clouds  עָנָן `anan 04
+[references]
+Mic 05:12
+[keyterm]
+ BI01224 <03833> lion  לָבִיא labiy' 04
+[references]
+Hos 13:08
+Joe 01:06
+Nah 02:11
+Nah 02:12
+[keyterm]
+ BI01227 <08384> fig, fig tree  תְּאֵן te'en 04
+[references]
+Hos 02:12
+Hos 09:10
+Joe 01:07
+Joe 01:12
+Joe 02:22
+Amo 04:09
+Mic 04:04
+Nah 03:12
+Hab 03:17
+hag 02:19
+zec 03:10
+[keyterm]
+ BI01231 <05766> unrighteous  עֶוֶל `evel 04
+[references]
+Hos 10:13
+Mic 03:10
+Hab 02:12
+Zep 03:05
+Zep 03:13
+Mal 02:06
+[keyterm]
+ BI01237 <0819> guilt, guilt offering  אַשְׁמָה 'ashmah 04
+[references]
+Amo 08:14
+[keyterm]
+ BI01240 <03342> winepress  יֶקֶב yeqeb 04
+[references]
+Hos 09:02
+Joe 02:24
+Joe 03:13
+hag 02:16
+zec 14:10
+[keyterm]
+ BI01249 <01800> poor, needy   דַּל dal 04
+[references]
+Amo 02:07
+Amo 04:01
+Amo 05:11
+Amo 08:06
+Zep 03:12
+[keyterm]
+ BI01250 <07797> to rejoice   שׂושׂ suws 04
+[references]
+Zep 03:17
+[keyterm]
+ BI01252 <01237> valley, plain  בִּקְעָה biq`ah 04
+[references]
+Amo 01:05
+zec 12:11
+[keyterm]
+ BI01254 <0910> isolation, separation, alone  בָּדָד badad 04
+[references]
+Mic 07:14
+[keyterm]
+ BI01259 <04843> to be bitter, to be angry  מָרַר marar 04
+[references]
+zec 12:10
+[keyterm]
+ BI01266 <08217> low, lower, humble (adj)  שָׁפָל shaphal 04
+[references]
+Mal 02:09
+[keyterm]
+ BI01267 <05359> vengeance, quarrel  נָקָם naqam 04
+[references]
+Mic 05:15
+[keyterm]
+ BI01268 <06672> noon, midday צֹהַר tsohar 04
+[references]
+Amo 08:09
+Zep 02:04
+[keyterm]
+ BI01269 <06679> to hunt, chase צוּד tsuwd 04
+[references]
+Mic 07:02
+[keyterm]
+ BI01270 <04296> bed, couch  מִטָּה mittah 04
+[references]
+Amo 03:12
+Amo 06:04
+[keyterm]
+ BI01271 <04818> chariot מֶרְכָּבָה merkabah 04
+[references]
+Joe 02:05
+Mic 01:13
+Mic 05:10
+Nah 03:02
+Hab 03:08
+hag 02:22
+zec 06:01
+zec 06:02
+zec 06:03
+[keyterm]
+ BI01273 <03444> Salvation  יְשׁוּעָה yeshuw`ah 04
+[references]
+Jon 02:09
+Hab 03:08
+[keyterm]
+ BI01274 <02194> to denounce, be indignant, defiant   זָעַם za`am 03
+[references]
+Mic 06:10
+zec 01:12
+Mal 01:04
+[keyterm]
+ BI01280 <01854> to crush, pulverize, make dust of  דּקק daqaq 03
+[references]
+Mic 04:13
+[keyterm]
+ BI01282 <01406> roof, housetop  גָּג gag 03
+[references]
+Zep 01:05
+[keyterm]
+ BI01283 <01653> rain, shower  גֶּשֶׁם geshem 03
+[references]
+Hos 06:03
+Joe 02:23
+Amo 04:07
+zec 10:01
+zec 14:17
+[keyterm]
+ BI01285 <01448> wall, hedge, sheepfold  גְּדֵרָה gederah 03
+[references]
+Nah 03:17
+Zep 02:06
+[keyterm]
+ BI01286 <05034> to fade, wear away, to be foolish  נָבֵל nabel 03
+[references]
+Mic 07:06
+Nah 03:06
+[keyterm]
+ BI01288 <01364> high, exalted, proud  גָּבֹהַּ gaboahh 03
+[references]
+Zep 01:16
+[keyterm]
+ BI01289 <02030> pregnant  הָרֶה hareh 03
+[references]
+Hos 13:16
+Amo 01:13
+[keyterm]
+ BI01291 <05012> to prophesy  נָבָא naba' 03
+[references]
+Joe 02:28
+Amo 02:12
+Amo 03:08
+Amo 07:12
+Amo 07:13
+Amo 07:15
+Amo 07:16
+zec 13:03
+zec 13:04
+[keyterm]
+ BI01292 <0194> perhaps, suppose  אוּלַי 'uwlay 03
+[references]
+Hos 08:07
+Zep 02:03
+[keyterm]
+ BI01298 <03391> month  יֶרַח yerach 03
+[references]
+zec 11:08
+[keyterm]
+ BI01301 <03533> to subdue, subject, keep under   כָּבַשׁ kabash 03
+[references]
+Mic 07:19
+zec 09:15
+[keyterm]
+ BI01305 <03394> moon  יָרֵחַ yareach 03
+[references]
+Joe 02:10
+Joe 02:31
+Joe 03:15
+Hab 03:11
+[keyterm]
+ BI01306 <03557> to contain, measure, nourish  כּול kuwl 03
+[references]
+Joe 02:11
+Amo 07:10
+zec 11:16
+Mal 03:02
+[keyterm]
+ BI01308 <03336> imagination, shape, form (noun)  יֵצֶר yetser 03
+[references]
+Hab 02:18
+[keyterm]
+ BI01309 <03335> to form, shape, fashion, frame  יָצַר yatsar 03
+[references]
+Amo 04:13
+Amo 07:01
+Hab 02:18
+zec 11:13
+zec 12:01
+[keyterm]
+ BI01315 <03784> sorcerer  כָּשַׁף kashaph 03
+[references]
+Mal 03:05
+[keyterm]
+ BI01316 <04013> stronghold, fortress, fenced  מִבְצָר mibtsar 03
+[references]
+Hos 10:14
+Amo 05:09
+Mic 05:11
+Nah 03:12
+Nah 03:14
+Hab 01:10
+[keyterm]
+ BI01318 <04026> tower  מִגְדָּל migdal 03
+[references]
+Mic 04:08
+zec 14:10
+[keyterm]
+ BI01321 <04058> to measure, measure out   מָדַד madad 03
+[references]
+Hos 01:10
+zec 02:02
+[keyterm]
+ BI01322 <04102> to wait, delay, linger  מָהַהּ mahahh 03
+[references]
+Hab 02:03
+[keyterm]
+ BI01323 <03835> to be white, make white, to make bricks  לָבַן laban 03
+[references]
+Joe 01:07
+[keyterm]
+ BI01324 <04132> bar, pole (for carrying)  מוֹט mowt 03
+[references]
+Nah 01:13
+[keyterm]
+ BI01325 <0122> red, ruddy  אָדֹם 'adom 03
+[references]
+zec 01:08
+zec 06:02
+[keyterm]
+ BI01331 <03173> only, solitary, only one  יָחִיד yachiyd 03
+[references]
+Amo 08:10
+zec 12:10
+[keyterm]
+ BI01335 <02672> to  dig, hew, cut out, cut down  חָצַב chatsab 03
+[references]
+Hos 06:05
+[keyterm]
+ BI01336 <02671> arrow    חֵץ chets 03
+[references]
+Hab 03:11
+zec 09:14
+[keyterm]
+ BI01337 <02573> bottle made from skins  חֵמֶת chemeth 03
+[references]
+Hab 02:15
+[keyterm]
+ BI01340 <02483> sickness, disease חֳלִי choliy 03
+[references]
+Hos 05:13
+[keyterm]
+ BI01341 <04726> fountain (of blood), issue, well  מָקוֹר maqowr 03
+[references]
+Hos 13:15
+zec 13:01
+[keyterm]
+ BI01344 <02342> to twist, whirl, dance writhe, be in anguish, be made to bear  חוּל  chuwl 03
+[references]
+Hos 11:06
+Joe 02:06
+Mic 01:12
+Mic 04:10
+Hab 03:10
+zec 09:05
+[keyterm]
+ BI01346 <02315> inner room, chamber  חֶדֶר cheder 03
+[references]
+Joe 02:16
+[keyterm]
+ BI01352 <02224> to rise, arise, come forth  זָרַח zarach 03
+[references]
+Jon 04:08
+Nah 03:17
+Mal 04:02
+[keyterm]
+ BI01353 <02470> to be sick, weak, diseased  חָלָה chalah 03
+[references]
+Hos 07:05
+Amo 06:06
+Mic 06:13
+Nah 03:19
+zec 07:02
+zec 08:21
+zec 08:22
+Mal 01:08
+Mal 01:09
+Mal 01:13
+[keyterm]
+ BI01355 <02219> to scatter,disperse,spread  זָרַה zarah 03
+[references]
+zec 01:19
+zec 01:21
+Mal 02:03
+[keyterm]
+ BI01362 <04496> a place to rest, rest, quiet  מְנוּחָה menuwchah 03
+[references]
+Mic 02:10
+zec 09:01
+[keyterm]
+ BI01363 <04599> fountain (of water) מַעְיָן ma`yan 03
+[references]
+Hos 13:15
+Joe 03:18
+[keyterm]
+ BI01372 <04549> to dissolve, melt   מָסַס macac 03
+[references]
+Mic 01:04
+Nah 02:10
+[keyterm]
+ BI01374 <04578> bowels, internal organs  מֵעֶה me`eh 03
+[references]
+Jon 01:17
+Jon 02:01
+[keyterm]
+ BI01375 <04513> to withhold hold back, refrain  מָנַע mana` 03
+[references]
+Joe 01:13
+Amo 04:07
+[keyterm]
+ BI01388 <07151> city קִרְיָה qiryah   03
+[references]
+Hos 06:08
+Mic 04:10
+Hab 02:08
+Hab 02:12
+Hab 02:17
+[keyterm]
+ BI01390 <056> to mourn, lament  אָבַל 'abal 03
+[references]
+Hos 04:03
+Hos 10:05
+Joe 01:09
+Joe 01:10
+Amo 01:02
+Amo 08:08
+Amo 09:05
+[keyterm]
+ BI01391 <07564> wickedness (noun) רִשְׁעָה rish`ah   03
+[references]
+zec 05:08
+Mal 01:04
+Mal 03:15
+Mal 04:01
+[keyterm]
+ BI01395 <06601> be open, spacious, be wide, entice פָּתָה pathah 03
+[references]
+Hos 02:14
+Hos 07:11
+[keyterm]
+ BI01397 <07568> net, woven network   רֶשֶׁת resheth 03
+[references]
+Hos 05:01
+Hos 07:12
+[keyterm]
+ BI01400 <05999> toil, trouble, labour עָמָל `amal 03
+[references]
+Hab 01:03
+Hab 01:13
+[keyterm]
+ BI01401 <08416> praise תְּהִלָּה tehillah 03
+[references]
+Hab 03:03
+Zep 03:19
+Zep 03:20
+[keyterm]
+ BI01402 <07219> gall, venom  רֹאשׁ ro'sh 03
+[references]
+Hos 10:04
+Amo 06:12
+[keyterm]
+ BI01411 <08597> beauty, splendor, glory  תִּפְאָרָה tiph'arah 03
+[references]
+zec 12:07
+[keyterm]
+ BI01412 <08057> joy, mirth, gladness  שִׂמְחָה simchah 03
+[references]
+Joe 01:16
+Jon 04:06
+Zep 03:17
+zec 08:19
+[keyterm]
+ BI01413 <06456> graven image  פָּסִיל peciyl 03
+[references]
+Hos 11:02
+Mic 01:07
+Mic 05:13
+[keyterm]
+ BI01414 <05518> pots  סִיר ciyr 03
+[references]
+Hos 02:06
+Amo 04:02
+Mic 03:03
+Nah 01:10
+zec 14:20
+zec 14:21
+[keyterm]
+ BI01417 <07837> dawn, morning  שַׁחַר shachar 03
+[references]
+Hos 06:03
+Hos 10:15
+Joe 02:02
+Amo 04:13
+Jon 04:07
+[keyterm]
+ BI01423 <08655> image, teraphim, idol  תְּרָפִים teraphiym 03
+[references]
+Hos 03:04
+zec 10:02
+[keyterm]
+ BI01430 <06491> to  open פָּקַח paqach 03
+[references]
+zec 12:04
+[keyterm]
+ BI01431 <07934> neighbor, near to שָׁכֵן shaken 03
+[references]
+Hos 10:05
+[keyterm]
+ BI01437 <0665> ashes אֵפֶר 'epher 03
+[references]
+Jon 03:06
+Mal 04:03
+[keyterm]
+ BI01439 <06651> to heap up, pile up צָבַר tsabar  03
+[references]
+Hab 01:10
+zec 09:03
+[keyterm]
+ BI01441 <06168> to be bare, be nude, uncover, make empty עָרָה `arah 03
+[references]
+Hab 03:13
+Zep 02:14
+[keyterm]
+ BI01443 <06205> thick or heavy darkness  עֲרָפֶל `araphel 03
+[references]
+Joe 02:02
+Zep 01:15
+[keyterm]
+ BI01448 <07936> to hire  שָׂכַר sakar 03
+[references]
+hag 01:06
+[keyterm]
+ BI01459 <06064> to punish, condemn, impose a fine  עָנַשׁ `anash 03
+[references]
+Amo 02:08
+[keyterm]
+ BI01463 <05703> ever עַד `ad 03
+[references]
+Amo 01:11
+Mic 04:05
+Mic 07:18
+Hab 03:06
+[keyterm]
+ BI01465 <07937> to be drunk, to be intoxicated  שָׁכַר shakar 03
+[references]
+Nah 03:11
+Hab 02:15
+hag 01:06
+[keyterm]
+ BI01468 <06227> smoke עָשָׁן `ashan 03
+[references]
+Hos 13:03
+Joe 02:30
+Nah 02:13
+[keyterm]
+ BI01470 <07264> tremble, rage, be excited  רָגַז ragaz 03
+[references]
+Joe 02:01
+Joe 02:10
+Amo 08:08
+Mic 07:17
+Hab 03:07
+Hab 03:16

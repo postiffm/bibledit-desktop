@@ -23,6 +23,7 @@
 #include "directories.h"
 #include "gwrappers.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 /*
 
@@ -132,7 +133,7 @@ bool uncompress(const ustring & archive, const ustring & directory)
     {
       GwSpawn spawn(Directories->get_tar());
 	  spawn.arg ("--force-local"); // to permit : in filename (like C:\Users\...)
-      spawn.arg("-xzf"); // x=eXtract, z=gunZip, f=Filename to extract
+      spawn.arg("-xvzf"); // x=eXtract, z=gunZip, f=Filename to extract
       if (!directory.empty()) {
         spawn.workingdirectory(directory);
       }
@@ -140,6 +141,7 @@ bool uncompress(const ustring & archive, const ustring & directory)
       spawn.progress(_("Unpacking"), false);
       spawn.run();
       result = spawn.exitstatus;
+	  DEBUG("tar return code="+std::to_string(result));
       break;
     }
   }

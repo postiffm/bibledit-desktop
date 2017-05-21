@@ -39,6 +39,8 @@
 #include "tiny_utilities.h"
 #include "stylesheetutils.h"
 #include <glib/gi18n.h>
+#include <config.h>
+#include "debug.h"
 
 /*
  Some properties of the stylesheet are not implemented for certain reasons.
@@ -100,7 +102,7 @@ OpenDocument::OpenDocument(const ustring & project, const ustring & filename, se
 
   // Go through all the books.
   for (unsigned int i = 0; i < books.size(); i++) {
-
+	//DEBUG("Step1 Going through book "+std::to_string(i))
     // Progress.
     progresswindow->iterate();
     if (progresswindow->cancel) {      
@@ -108,14 +110,15 @@ OpenDocument::OpenDocument(const ustring & project, const ustring & filename, se
     }
 
     // Skip "Other Material".
-    if (books_id_to_type(books[i]) == btOtherMaterial)
-      continue;
+    if (books_id_to_type(books[i]) == btOtherMaterial) { continue; }
 
     // Signal new book to footnotes object.
     odtfootnote->new_book();
 
     // Set book for Resource Viewer.
     anchor_book = books[i];
+
+	//DEBUG("Step2 Going through book "+std::to_string(i))
 
     // Open the book. Do any replacements.
     vector <ustring> book_lines;
@@ -124,6 +127,7 @@ OpenDocument::OpenDocument(const ustring & project, const ustring & filename, se
 
     // Format the lines of the book.
     format_general(book_lines);
+	//DEBUG("Step3 Going through book "+std::to_string(i))
   }
 
   // Store content.xml.
@@ -163,16 +167,17 @@ void OpenDocument::unpack_template()
   // Note: To create the template use zip -r template.odt *
 #ifdef WIN32
   ustring command = "unzip -o ";
-  command.append(gw_build_filename(Directories->get_package_data(), "template.odt"));
+  command.append(shell_quote_space(gw_build_filename(Directories->get_package_data(), "template.odt")));
   command.append(" -d ");
   command.append(shell_quote_space(workingdirectory));
 #else
-  ustring command = "cd";
+  ustring command = "cd ";
   command.append(shell_quote_space(workingdirectory));
   command.append("; cp ");
   command.append(gw_build_filename(Directories->get_package_data(), "template.odt"));
   command.append(" .; unzip *; rm *.odt");
 #endif
+  //DEBUG(command);
   if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
 }
 
@@ -421,16 +426,18 @@ void OpenDocument::zip(const ustring filename)
   gchar *path;
   path = g_find_program_in_path("zip.exe");
   if (path) {
-    command.append(path);
+    command.append(shell_quote_space(path));
     g_free(path);
     command.append(" -r ");
   }
 #else
-  command.append("; zip -r");
+  command.append("; zip -r ");
 #endif
   command.append(shell_quote_space(filename));
   command.append(" *");
-  if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
+  DEBUG(command);
+  // This command does not work with GwSpawn because of the wildcards.
+  if (system(command.c_str()));
 }
 
 

@@ -333,6 +333,7 @@ void WindowReferences::save ()
       // WAS sql = g_strdup_printf("insert into refs values (%d, %d, '%s', '%s')", references[i].book_get(), references[i].chapter_get(), references[i].verse_get().c_str(), double_apostrophy(comments[i]).c_str());
       // WAS rc = sqlite3_exec(db, sql, NULL, NULL, &error);
       // WAS g_free(sql);
+	  // I think below is redundant now
       if (rc) {
         throw runtime_error(sqlite3_errmsg(db));
       }
@@ -635,23 +636,23 @@ void WindowReferences::html_write_action_bar (HtmlWriter2& htmlwriter, bool topb
   htmlwriter.paragraph_open ();
 
   if (references.empty()) {
-    htmlwriter.text_add ("no references");
+    htmlwriter.text_add (_("no references"));
   }
 
   if (!references.empty()) {
     if (lower_boundary) {
-      htmlwriter.hyperlink_add ("prev", "[prev]");
+      htmlwriter.hyperlink_add (_("prev"), _("[prev]"));
       htmlwriter.text_add (" ");
     }
-    htmlwriter.text_add ("Items " + convert_to_string ((unsigned int)(lower_boundary + 1)) + " - " + convert_to_string ((unsigned int)upper_boundary) + " of " + convert_to_string ((unsigned int)references.size()));
+    htmlwriter.text_add (_("Items ") + convert_to_string ((unsigned int)(lower_boundary + 1)) + " - " + convert_to_string ((unsigned int)upper_boundary) + " of " + convert_to_string ((unsigned int)references.size()));
     if (upper_boundary < references.size()) {
       htmlwriter.text_add (" ");
-      htmlwriter.hyperlink_add ("next", "[next]");
+      htmlwriter.hyperlink_add (_("next"), _("[next]"));
     }
   }
 
   htmlwriter.text_add (" ");
-  htmlwriter.hyperlink_add ("actions", "[actions]");
+  htmlwriter.hyperlink_add (_("actions"), _("[actions]"));
 
   htmlwriter.paragraph_close ();
 }
@@ -666,43 +667,43 @@ void WindowReferences::html_write_action_page (HtmlWriter2& htmlwriter)
   // If any references has been clicked, offer the option to dismiss it.
   if (active_entry >= 0) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("dismiss cursor", "Dismiss " + references[active_entry].human_readable (language));
+    htmlwriter.hyperlink_add (_("dismiss cursor"), _("Dismiss ") + references[active_entry].human_readable (language));
     htmlwriter.paragraph_close ();
   }
   // If the page has any references, offer the option to dismiss the whole page.
   if (upper_boundary > lower_boundary) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("dismiss page", "Dismiss the whole page of " + convert_to_string (upper_boundary - lower_boundary) + " references");
+    htmlwriter.hyperlink_add (_("dismiss page"), _("Dismiss the whole page of ") + convert_to_string (upper_boundary - lower_boundary) + _(" references"));
     htmlwriter.paragraph_close ();
   }  
   // If there are any references at all, offer the option to dismiss the whole lot.
   if (!references.empty()) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("dismiss all", "Dismiss the whole lot of " + convert_to_string ((unsigned int)references.size()) + " references");
+    htmlwriter.hyperlink_add (_("dismiss all"), _("Dismiss the whole lot of ") + convert_to_string ((unsigned int)references.size()) + _(" references"));
     htmlwriter.paragraph_close ();
   }  
   // If a reference has been clicked, offer the option to hide it from now on.
   if ((active_entry >= 0) && references_management_on) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("hide", "Hide \"" + hide_string (active_entry) + "\" from now on");
+    htmlwriter.hyperlink_add (_("hide"), _("Hide \"") + hide_string (active_entry) + _("\" from now on"));
     htmlwriter.paragraph_close ();
   }
   // Manage the hidden references.
   if (references_management_on) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("hidden", "Manage the hidden references");
+    htmlwriter.hyperlink_add (_("hidden"), _("Manage the hidden references"));
     htmlwriter.paragraph_close ();
   }
   // Offer to open a list of references.
   if (references_management_on) {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("open", "Import a list of references");
+    htmlwriter.hyperlink_add (_("open"), _("Import a list of references"));
     htmlwriter.paragraph_close ();
   }
   // Settings.
   {
     htmlwriter.paragraph_open ();
-    htmlwriter.hyperlink_add ("settings", "Settings");
+    htmlwriter.hyperlink_add (_("settings"), _("Settings"));
     htmlwriter.paragraph_close ();
   }
 }

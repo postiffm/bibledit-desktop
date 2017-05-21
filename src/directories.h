@@ -43,6 +43,7 @@ class directories {
   // Package data directory (e.g. /usr/share/bibledit-gtk or
   // C:\Program Files\Bibledit\editor\share\bibledit)
   ustring package_data;
+  ustring home;
   ustring root;
   ustring projects;
   ustring notes;
@@ -116,7 +117,8 @@ private:
   void check_structure ();
 	 
   // These should hold the correct platform path, with right style slashes
-  ustring get_root ();            // Returns the root directory of all data
+  ustring get_home ();            // Returns the user's home directory
+  ustring get_root ();            // Returns the root directory of all data (get_home()/.bibledit)
   ustring get_projects ();        // Returns the directory with all the projects
   ustring get_notes ();           // Returns the directory with the notes
   ustring get_stylesheets ();     // Returns the directory with the stylesheets
