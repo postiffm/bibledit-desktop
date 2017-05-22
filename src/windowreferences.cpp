@@ -644,7 +644,7 @@ void WindowReferences::html_write_action_bar (HtmlWriter2& htmlwriter, bool topb
       htmlwriter.hyperlink_add (_("prev"), _("[prev]"));
       htmlwriter.text_add (" ");
     }
-    htmlwriter.text_add (_("Items ") + convert_to_string ((unsigned int)(lower_boundary + 1)) + " - " + convert_to_string ((unsigned int)upper_boundary) + " of " + convert_to_string ((unsigned int)references.size()));
+    htmlwriter.text_add (_("Items ") + convert_to_string ((unsigned int)(lower_boundary + 1)) + " - " + convert_to_string ((unsigned int)upper_boundary) + _(" of ") + convert_to_string ((unsigned int)references.size()));
     if (upper_boundary < references.size()) {
       htmlwriter.text_add (" ");
       htmlwriter.hyperlink_add (_("next"), _("[next]"));
@@ -662,7 +662,7 @@ void WindowReferences::html_write_action_page (HtmlWriter2& htmlwriter)
 {
   // Write the link for going back to the references.
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add ("home", "[back]");
+  htmlwriter.hyperlink_add (_("home"), _("[back]"));
   htmlwriter.paragraph_close ();
   // If any references has been clicked, offer the option to dismiss it.
   if (active_entry >= 0) {

@@ -458,11 +458,11 @@ void notes_display_internal(const ustring& language, bool show_reference_text, b
     linkheading.append("</a>");
     // Append a [delete] link too, e.g.: <a href="d10">[delete]</a>
     linkheading.append(" <a href=\"d" + convert_to_string(id) + "\">");
-    linkheading.append("[delete]");
+    linkheading.append(_("[delete]"));
     linkheading.append("</a>");
     // Append a [references] link too, e.g.: <a href="r10">[references]</a>
     linkheading.append(" <a href=\"r" + convert_to_string(id) + "\">");
-    linkheading.append("[references]");
+    linkheading.append(_("[references]"));
     linkheading.append("</a>");
   }
   // Add the heading to the note data.
