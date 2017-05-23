@@ -34,3 +34,5 @@ shutdown/bibledit-shutdown
 src/bibledit-gtk
 src/bibledit-rdwrt
 src/concordance
+
+po/Makevars.template

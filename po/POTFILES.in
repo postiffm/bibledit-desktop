@@ -3,7 +3,6 @@ src/assistantchanges.cpp
 src/assistantdeletekeyterms.cpp
 src/assistantexport.cpp
 src/assistantimport.cpp
-src/assistantimportkeyterms.cpp
 src/assistantremoterepository.cpp
 src/assistantresource.cpp
 src/assistantrestore.cpp
@@ -171,3 +170,18 @@ src/windowsoutpost.cpp
 src/windowstyles.cpp
 src/wordlist.cpp
 src/xetex.cpp
+templates/gtkbuilder.bulkspellingdialog.xml
+templates/gtkbuilder.floatingwindow.xml
+templates/gtkbuilder.gotoreferencedialog.xml
+templates/gtkbuilder.guidialog.xml
+templates/gtkbuilder.parallelbibledialog.xml
+templates/gtkbuilder.planningeditdialog.xml
+templates/gtkbuilder.planningsetupdialog.xml
+templates/gtkbuilder.progressdialog.xml
+templates/gtkbuilder.referenceexchangedialog.xml
+templates/gtkbuilder.referencesettingsdialog.xml
+templates/gtkbuilder.showprojectnotesdialog.xml
+templates/gtkbuilder.systemlogdialog.xml
+templates/gtkbuilder.timednotifywindow.xml
+templates/gtkbuilder.xetexdialog.xml
+templates/gtkbuilder.yesnoalwaysdialog.xml
