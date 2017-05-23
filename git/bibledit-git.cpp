@@ -21,6 +21,7 @@
 
 #include "bibledit-git.h"
 #include <config.h>
+#include <glib/gi18n.h>
 
 
 
