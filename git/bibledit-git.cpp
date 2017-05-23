@@ -138,8 +138,8 @@ bool on_timeout (gpointer data)
     
       // Show status.
       {
-        TinySpawn spawn (_("git"));
-        spawn.arg (_("status"));
+        TinySpawn spawn ("git");
+        spawn.arg ("status");
         spawn.workingdirectory (folder);
         spawn.read ();
         spawn.run ();
@@ -154,7 +154,7 @@ bool on_timeout (gpointer data)
       // Commit changes locally.
       {
         TinySpawn spawn ("git");
-        spawn.arg (_("commit"));
+        spawn.arg ("commit");
         spawn.arg ("-a");
         spawn.arg ("-m");
         spawn.arg (_("Send and receive"));
@@ -172,7 +172,7 @@ bool on_timeout (gpointer data)
       // Pull changes from the remote repository.
       {
         TinySpawn spawn ("git");
-        spawn.arg (_("pull"));
+        spawn.arg ("pull");
         spawn.workingdirectory (folder);
         spawn.read ();
         spawn.run ();
@@ -215,7 +215,7 @@ bool on_timeout (gpointer data)
       // Push changes to the remote repository.
       {
         TinySpawn spawn ("git");
-        spawn.arg (_("push"));
+        spawn.arg ("push");
         spawn.workingdirectory (folder);
         spawn.read ();
         spawn.run ();
