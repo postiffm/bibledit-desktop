@@ -1,3 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-23 22:34-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../src/assistantbackup.cpp:40
 msgid "Backup"
 msgstr ""
@@ -18,6 +37,7 @@ msgstr ""
 
 #: ../src/assistantbackup.cpp:72 ../src/assistantexport.cpp:97
 #: ../src/assistantimport.cpp:102 ../src/assistantrestore.cpp:72
+#: ../templates/gtkbuilder.xetexdialog.xml:103
 msgid "Notes"
 msgstr ""
 
@@ -1314,6 +1334,7 @@ msgstr ""
 
 #: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
 #: ../src/dialogreviewanchors.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
 msgid "Verse"
 msgstr ""
 
@@ -2479,6 +2500,7 @@ msgid "A stylesheet with this name already exists"
 msgstr ""
 
 #: ../src/dialognotes.cpp:39 ../src/windownotes.cpp:44
+#: ../templates/gtkbuilder.guidialog.xml:142
 msgid "Project notes"
 msgstr ""
 
@@ -2634,11 +2656,13 @@ msgstr ""
 
 #: ../src/dialogoriginreferences.cpp:117 ../src/dialogrevert.cpp:83
 #: ../src/dialogreviewanchors.cpp:119 ../src/planning.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:77
 msgid "Book"
 msgstr ""
 
 #: ../src/dialogoriginreferences.cpp:124 ../src/dialogrevert.cpp:92
 #: ../src/dialogreviewanchors.cpp:121
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:86
 msgid "Chapter"
 msgstr ""
 
@@ -2688,6 +2712,8 @@ msgstr ""
 
 #. Run the dialog for editing the tasks.
 #: ../src/dialogplanningsetup.cpp:120
+#: ../templates/gtkbuilder.planningeditdialog.xml:32
+#: ../templates/gtkbuilder.planningsetupdialog.xml:44
 msgid "Tasks"
 msgstr ""
 
@@ -2755,7 +2781,7 @@ msgstr ""
 msgid "Print draft: 1 column, double-spaced"
 msgstr ""
 
-#: ../src/dialogprintprefs.cpp:228
+#: ../src/dialogprintprefs.cpp:228 ../templates/gtkbuilder.xetexdialog.xml:151
 msgid "Page"
 msgstr ""
 
@@ -2772,10 +2798,14 @@ msgid "Print project"
 msgstr ""
 
 #: ../src/dialogprintproject.cpp:61
+#: ../templates/gtkbuilder.parallelbibledialog.xml:114
+#: ../templates/gtkbuilder.xetexdialog.xml:29
 msgid "Portion:"
 msgstr ""
 
 #: ../src/dialogprintproject.cpp:85
+#: ../templates/gtkbuilder.parallelbibledialog.xml:161
+#: ../templates/gtkbuilder.xetexdialog.xml:48
 msgid "Change"
 msgstr ""
 
@@ -2784,6 +2814,7 @@ msgid "Write the references in the notes in full"
 msgstr ""
 
 #: ../src/dialogprintproject.cpp:115
+#: ../templates/gtkbuilder.xetexdialog.xml:281
 msgid "Options"
 msgstr ""
 
@@ -2802,6 +2833,7 @@ msgid "Main project:"
 msgstr ""
 
 #: ../src/dialogprintreferences.cpp:77
+#: ../templates/gtkbuilder.parallelbibledialog.xml:201
 msgid "Additional projects:"
 msgstr ""
 
@@ -2935,6 +2967,7 @@ msgid "Access okay"
 msgstr ""
 
 #: ../src/dialogreplace.cpp:43 ../src/dialogreplacing.cpp:47
+#: ../templates/gtkbuilder.guidialog.xml:181
 msgid "Replace"
 msgstr ""
 
@@ -4925,6 +4958,7 @@ msgstr ""
 
 #. Progress system.
 #: ../src/mainwindow.cpp:5637 ../src/print_parallel_bible.cpp:47
+#: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr ""
 
@@ -5246,7 +5280,7 @@ msgstr ""
 msgid "At this stage it is not yet possible to estimate when it will finish."
 msgstr ""
 
-#: ../src/planning.cpp:125
+#: ../src/planning.cpp:125 ../templates/gtkbuilder.planningsetupdialog.xml:90
 msgid "Start"
 msgstr ""
 
@@ -6461,6 +6495,7 @@ msgid "settings"
 msgstr ""
 
 #: ../src/windowreferences.cpp:706
+#: ../templates/gtkbuilder.systemlogdialog.xml:91
 msgid "Settings"
 msgstr ""
 
@@ -6797,4 +6832,417 @@ msgstr ""
 msgid ""
 "You can tune the files by hand, then run \"xetex document.tex\" in this "
 "folder to convert it into a PDF file."
+msgstr ""
+
+#: ../templates/gtkbuilder.bulkspellingdialog.xml:7
+msgid "Bulk Speller"
+msgstr ""
+
+#: ../templates/gtkbuilder.bulkspellingdialog.xml:17
+#: ../templates/gtkbuilder.progressdialog.xml:21
+msgid "label"
+msgstr ""
+
+#: ../templates/gtkbuilder.floatingwindow.xml:67
+msgid "x"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:7
+msgid "Goto reference"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:20
+msgid "Press Control-G to go to another view"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:38
+msgid "Go to"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:61
+msgid "Free"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:180
+msgid "Aided"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:226
+msgid "History"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:7
+msgid "User interface"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:18
+msgid "Features"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:28
+msgid "Only the basics are available"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:43
+msgid "Full features are available"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:59
+msgid "User defined features"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:75
+msgid "Printing"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:90
+msgid "Project management"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:103
+msgid "References management"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:116
+msgid "Styles"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:129
+msgid "Styles management"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:155
+msgid "Project notes management"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:168
+msgid "References and find"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:194
+msgid "Checks"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:207
+msgid "Tools"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:220
+msgid "Preferences"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:242
+msgid "Remember most recent verse per chapter"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:255
+msgid "Start program maximized"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:22
+msgid ""
+"Parallel Bible.\n"
+"This prints worksheets with parallel versions on it.\n"
+"Each verse of one book in your project gets the parallel verses of other "
+"projects printed below it."
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:48
+msgid "First project:"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:60
+msgid "<Project>"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:81
+msgid "Book: "
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:92
+msgid "<Book>"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:125
+msgid "<all>"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:254
+msgid "Keep all parallel verses together on the page"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:269
+msgid "Include verses 0"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:7
+msgid "Planning Edit"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:22
+msgid "Status"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:47
+msgid "The project status"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:57
+msgid "The project planned tasks"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:7
+msgid "Planning Setup"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:28
+msgid "Durations"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:62
+msgid "The time each task takes per chapter"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:77
+msgid "The tasks that the project consists of"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:106
+msgid "When the project was started"
+msgstr ""
+
+#: ../templates/gtkbuilder.progressdialog.xml:7
+msgid "Bibledit"
+msgstr ""
+
+#: ../templates/gtkbuilder.progressdialog.xml:37
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:7
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:7
+msgid "Reference settings"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:20
+msgid ""
+"Bibledit-Web local or remote website URL:\n"
+"(example: http://localhost/bibledit)"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:50
+msgid ""
+"Bibledit-Web username:\n"
+"(example: joe)"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:82
+msgid "Test"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:98
+msgid "url info"
+msgstr ""
+
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:19
+msgid "Show verse text"
+msgstr ""
+
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:33
+msgid "Only show the relevant bits"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:7
+msgid "Show Project Notes"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:20
+msgid "Selection"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:38
+msgid "Notes that refer to the"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:47
+msgid "current verse"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:62
+msgid "current chapter"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:77
+msgid "current book"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:92
+msgid "any verse"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:120
+msgid "Notes edited"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:129
+msgid "today"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:147
+msgid "between"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:162
+msgid "start"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:175
+msgid "and"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:183
+msgid "end"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:200
+msgid "at any time"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:228
+msgid "Notes of category"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:258
+msgid "Notes of project"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:267
+msgid "current"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:282
+msgid "any"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:305
+msgid "Display"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:321
+msgid "Title, including"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:336
+msgid "project"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:350
+msgid "category"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:364
+msgid "date created"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:378
+msgid "created by"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:404
+msgid "Text"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:413
+msgid "full"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:428
+msgid "summary"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:443
+msgid "add text of the references"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:464
+msgid "Result"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:8
+msgid "System log"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:44
+msgid "Show previous session"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:57
+msgid "Main"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:77
+msgid "Shutdown"
+msgstr ""
+
+#: ../templates/gtkbuilder.timednotifywindow.xml:6
+msgid "Notification"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:7
+msgid "Print settings"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:39
+msgid "portion"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:78
+msgid "Write the references in the notes in full (not yet implemented)"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:118
+msgid "Page format and margins are set under menu Preferences / Printing"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:126
+msgid "Crop marks"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:167
+msgid ""
+"XeTeX has a font mapping option that allows a Unicode->Unicode TECkit "
+"mapping table to be associated with a font. Such a mapping could be used to "
+"convert all numbers to their localized versions."
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:179
+msgid "Clear"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:215
+msgid "Mapping"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:229
+msgid "Use generic shaping engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:244
+msgid "Use arab shaping engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:269
+msgid "Engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:7
+msgid "Yes or no"
+msgstr ""
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:31
+msgid "question"
+msgstr ""
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:45
+msgid "_Remember my choice throughout this session"
 msgstr ""
