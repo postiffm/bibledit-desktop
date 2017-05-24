@@ -443,7 +443,7 @@ navigation(0), httpd(0)
   style_insert = NULL;
   if (guifeatures.styles()) {
 
-    style_insert = gtk_image_menu_item_new_with_mnemonic("_Insert");
+    style_insert = gtk_image_menu_item_new_with_mnemonic(_("_Insert"));
     //gtk_widget_show(style_insert);
     gtk_container_add(GTK_CONTAINER(style_menu), style_insert);
 

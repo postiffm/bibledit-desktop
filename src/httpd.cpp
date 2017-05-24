@@ -33,7 +33,7 @@
 #include "directories.h"
 #include "tiny_utilities.h"
 #include "html.h"
-
+#include <glib/g18n.h>
 
 Httpd::Httpd(bool dummy)
 // This is a basic webserver tailored to Bibledit's specific needs.
@@ -240,7 +240,7 @@ void Httpd::handle_request(int fd)
 
 void Httpd::log(const ustring & message)
 {
-  gw_message("Webserver: " + message);
+  gw_message(_("Webserver: ") + message);
 }
 
 void Httpd::sendline(int fd, const ustring & line)
@@ -427,7 +427,7 @@ void Httpd::send_file(int fd, const ustring & filename)
     if (g_str_has_prefix(basename.c_str(), "olh_")) {
       ustring s(contents);
       size_t pos = s.find("</body>");
-      s.insert(pos, "<p>See also the <a href=\"index.html\">general online help.</a></p>\n");
+      s.insert(pos, _("<p>See also the <a href=\"index.html\">general online help.</a></p>\n"));
 #ifdef WIN32
       if (send(fd, s.c_str(), strlen(s.c_str()), 0)) ;
     } else {
@@ -529,7 +529,7 @@ void Httpd::send_search_results(int fd, ustring searchword)
         }
       }
       if (title.empty())
-        title = "Untitled";
+        title = _("Untitled");
       // Get basename for html linking.
       filename = gw_path_get_basename(filename);
       // Output html code.
@@ -541,7 +541,7 @@ void Httpd::send_search_results(int fd, ustring searchword)
   }
   // Indicate if nothing was found.
   if (!succesful) {
-    sendline(fd, "<p>No search results.</p>");
+    sendline(fd, _("<p>No search results.</p>"));
   }
 }
 
