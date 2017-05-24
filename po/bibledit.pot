@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-24 15:48-0400\n"
+"POT-Creation-Date: 2017-05-24 16:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4058,7 +4058,7 @@ msgstr ""
 msgid "Missing spaces inserted: "
 msgstr ""
 
-#: ../src/floatingwindow.cpp:34
+#: ../src/floatingwindow.cpp:34 ../src/httpd.cpp:532
 msgid "Untitled"
 msgstr ""
 
@@ -4166,6 +4166,18 @@ msgstr ""
 
 #: ../src/htmlbrowser.cpp:142
 msgid "Install one of the following supported browsers:\n"
+msgstr ""
+
+#: ../src/httpd.cpp:243
+msgid "Webserver: "
+msgstr ""
+
+#: ../src/httpd.cpp:430
+msgid "<p>See also the <a href=\"index.html\">general online help.</a></p>\n"
+msgstr ""
+
+#: ../src/httpd.cpp:544
+msgid "<p>No search results.</p>"
 msgstr ""
 
 #: ../src/import.cpp:64
@@ -4357,6 +4369,10 @@ msgstr ""
 msgid "_Collapse all"
 msgstr ""
 
+#: ../src/mainwindow.cpp:446 ../src/mainwindow.cpp:1001
+msgid "_Insert"
+msgstr ""
+
 #: ../src/mainwindow.cpp:460
 msgid "Edit _mode"
 msgstr ""
@@ -4516,10 +4532,6 @@ msgstr ""
 
 #: ../src/mainwindow.cpp:994
 msgid "Bible._org (book)"
-msgstr ""
-
-#: ../src/mainwindow.cpp:1001
-msgid "_Insert"
 msgstr ""
 
 #: ../src/mainwindow.cpp:1008
@@ -4982,6 +4994,14 @@ msgstr ""
 
 #: ../src/nanohttp.cpp:38
 msgid "Local web server returned unusual code: "
+msgstr ""
+
+#: ../src/notes_utils.cpp:461
+msgid "[delete]"
+msgstr ""
+
+#: ../src/notes_utils.cpp:465
+msgid "[references]"
 msgstr ""
 
 #: ../src/notes_utils.cpp:540
@@ -6485,6 +6505,10 @@ msgstr ""
 msgid "Items "
 msgstr ""
 
+#: ../src/windowreferences.cpp:647
+msgid " of "
+msgstr ""
+
 #: ../src/windowreferences.cpp:650
 msgid "[next]"
 msgstr ""
@@ -6495,6 +6519,10 @@ msgstr ""
 
 #: ../src/windowreferences.cpp:655
 msgid "[actions]"
+msgstr ""
+
+#: ../src/windowreferences.cpp:665
+msgid "[back]"
 msgstr ""
 
 #: ../src/windowreferences.cpp:670
