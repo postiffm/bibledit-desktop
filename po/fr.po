@@ -37,6 +37,7 @@ msgstr "Bible"
 
 #: ../src/assistantbackup.cpp:72 ../src/assistantexport.cpp:97
 #: ../src/assistantimport.cpp:102 ../src/assistantrestore.cpp:72
+#: ../templates/gtkbuilder.xetexdialog.xml:103
 msgid "Notes"
 msgstr "Notes"
 
@@ -1366,6 +1367,7 @@ msgstr "Inventaire des références bibliques"
 
 #: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
 #: ../src/dialogreviewanchors.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
 msgid "Verse"
 msgstr "Verset"
 
@@ -2611,6 +2613,7 @@ msgid "A stylesheet with this name already exists"
 msgstr "Une feuille de style avec ce nom existe déjà"
 
 #: ../src/dialognotes.cpp:39 ../src/windownotes.cpp:44
+#: ../templates/gtkbuilder.guidialog.xml:142
 msgid "Project notes"
 msgstr "Notes du projet"
 
@@ -2781,11 +2784,13 @@ msgstr "Ajouter des annotations"
 
 #: ../src/dialogoriginreferences.cpp:117 ../src/dialogrevert.cpp:83
 #: ../src/dialogreviewanchors.cpp:119 ../src/planning.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:77
 msgid "Book"
 msgstr "Livre"
 
 #: ../src/dialogoriginreferences.cpp:124 ../src/dialogrevert.cpp:92
 #: ../src/dialogreviewanchors.cpp:121
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:86
 msgid "Chapter"
 msgstr "Chapitre"
 
@@ -2838,6 +2843,8 @@ msgstr "Arguments optionnels"
 
 #. Run the dialog for editing the tasks.
 #: ../src/dialogplanningsetup.cpp:120
+#: ../templates/gtkbuilder.planningeditdialog.xml:32
+#: ../templates/gtkbuilder.planningsetupdialog.xml:44
 msgid "Tasks"
 msgstr "Tâches"
 
@@ -2906,6 +2913,7 @@ msgid "Print draft: 1 column, double-spaced"
 msgstr "Impression brouillon : 1 colonne, double espace"
 
 #: ../src/dialogprintprefs.cpp:228
+#: ../src/dialogprintprefs.cpp:228 ../templates/gtkbuilder.xetexdialog.xml:151
 msgid "Page"
 msgstr "Page"
 
@@ -2922,10 +2930,14 @@ msgid "Print project"
 msgstr "Imprimer le projet"
 
 #: ../src/dialogprintproject.cpp:61
+#: ../templates/gtkbuilder.parallelbibledialog.xml:114
+#: ../templates/gtkbuilder.xetexdialog.xml:29
 msgid "Portion:"
 msgstr "Section :"
 
 #: ../src/dialogprintproject.cpp:85
+#: ../templates/gtkbuilder.parallelbibledialog.xml:161
+#: ../templates/gtkbuilder.xetexdialog.xml:48
 msgid "Change"
 msgstr "Modifier"
 
@@ -2934,6 +2946,7 @@ msgid "Write the references in the notes in full"
 msgstr "Écrire les annotations en entier dans les notes"
 
 #: ../src/dialogprintproject.cpp:115
+#: ../templates/gtkbuilder.xetexdialog.xml:281
 msgid "Options"
 msgstr "Options"
 
@@ -2955,6 +2968,7 @@ msgid "Main project:"
 msgstr "Projet principal :"
 
 #: ../src/dialogprintreferences.cpp:77
+#: ../templates/gtkbuilder.parallelbibledialog.xml:201
 msgid "Additional projects:"
 msgstr "Projet additionnel :"
 
@@ -3090,6 +3104,7 @@ msgid "Access okay"
 msgstr "Accès ok"
 
 #: ../src/dialogreplace.cpp:43 ../src/dialogreplacing.cpp:47
+#: ../templates/gtkbuilder.guidialog.xml:181
 msgid "Replace"
 msgstr "Remplacer"
 
@@ -5508,7 +5523,7 @@ msgid "At this stage it is not yet possible to estimate when it will finish."
 msgstr ""
 "À ce niveau il n'est pas encore possible d'estimer quand il sera terminé."
 
-#: ../src/planning.cpp:125
+#: ../src/planning.cpp:125 ../templates/gtkbuilder.planningsetupdialog.xml:90
 msgid "Start"
 msgstr "Début"
 
@@ -6763,6 +6778,7 @@ msgid "settings"
 msgstr "paramètres\n"
 
 #: ../src/windowreferences.cpp:706
+#: ../templates/gtkbuilder.systemlogdialog.xml:91
 #, fuzzy
 msgid "Settings"
 msgstr "paramètres\n"
@@ -7125,6 +7141,478 @@ msgid ""
 msgstr ""
 "Vous pouvez ajuster le fichier à la main, dans ce cas lancez « xetex "
 "document.tex » dans ce dossier pour le convertir en fichier PDF."
+
+#: ../templates/gtkbuilder.bulkspellingdialog.xml:7
+msgid "Bulk Speller"
+msgstr ""
+
+#: ../templates/gtkbuilder.bulkspellingdialog.xml:17
+#: ../templates/gtkbuilder.progressdialog.xml:21
+msgid "label"
+msgstr ""
+
+#: ../templates/gtkbuilder.floatingwindow.xml:67
+msgid "x"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:7
+#, fuzzy
+msgid "Goto reference"
+msgstr "pas d'annotations"
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:20
+#, fuzzy
+msgid "Press Control-G to go to another view"
+msgstr "Pressez Control-F pour une recherche avancée"
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:38
+msgid "Go to"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:61
+msgid "Free"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:180
+msgid "Aided"
+msgstr ""
+
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:226
+msgid "History"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:7
+#, fuzzy
+msgid "User interface"
+msgstr "In_terface utilisateur"
+
+#: ../templates/gtkbuilder.guidialog.xml:18
+msgid "Features"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:28
+msgid "Only the basics are available"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:43
+msgid "Full features are available"
+msgstr ""
+
+#: ../templates/gtkbuilder.guidialog.xml:59
+#, fuzzy
+msgid "User defined features"
+msgstr "Utilisateur défini"
+
+#: ../templates/gtkbuilder.guidialog.xml:75
+#, fuzzy
+msgid "Printing"
+msgstr "Im_pression"
+
+#: ../templates/gtkbuilder.guidialog.xml:90
+#, fuzzy
+msgid "Project management"
+msgstr "Notes de projet"
+
+#: ../templates/gtkbuilder.guidialog.xml:103
+#, fuzzy
+msgid "References management"
+msgstr "Inventaire des références bibliques"
+
+#: ../templates/gtkbuilder.guidialog.xml:116
+#, fuzzy
+msgid "Styles"
+msgstr "_Styles"
+
+#: ../templates/gtkbuilder.guidialog.xml:129
+#, fuzzy
+msgid "Styles management"
+msgstr "Feuille de style"
+
+#: ../templates/gtkbuilder.guidialog.xml:155
+#, fuzzy
+msgid "Project notes management"
+msgstr "M_ise à jour en masse des notes du projet"
+
+#: ../templates/gtkbuilder.guidialog.xml:168
+#, fuzzy
+msgid "References and find"
+msgstr "Annotations"
+
+#: ../templates/gtkbuilder.guidialog.xml:194
+#, fuzzy
+msgid "Checks"
+msgstr "_Vérifier"
+
+#: ../templates/gtkbuilder.guidialog.xml:207
+#, fuzzy
+msgid "Tools"
+msgstr "Ou_tils"
+
+#: ../templates/gtkbuilder.guidialog.xml:220
+#, fuzzy
+msgid "Preferences"
+msgstr "P_références"
+
+#: ../templates/gtkbuilder.guidialog.xml:242
+#, fuzzy
+msgid "Remember most recent verse per chapter"
+msgstr "Il n'y a pas suffisamment de verset dans le chapitre"
+
+#: ../templates/gtkbuilder.guidialog.xml:255
+msgid "Start program maximized"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:22
+msgid ""
+"Parallel Bible.\n"
+"This prints worksheets with parallel versions on it.\n"
+"Each verse of one book in your project gets the parallel verses of other "
+"projects printed below it."
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:48
+#, fuzzy
+msgid "First project:"
+msgstr "vers le projet"
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:60
+#, fuzzy
+msgid "<Project>"
+msgstr "Projet"
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:81
+#, fuzzy
+msgid "Book: "
+msgstr "Livre "
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:92
+#, fuzzy
+msgid "<Book>"
+msgstr "Livre"
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:125
+msgid "<all>"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:254
+msgid "Keep all parallel verses together on the page"
+msgstr ""
+
+#: ../templates/gtkbuilder.parallelbibledialog.xml:269
+#, fuzzy
+msgid "Include verses 0"
+msgstr "_Inclure le texte en verset"
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:7
+#, fuzzy
+msgid "Planning Edit"
+msgstr "Programme "
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:22
+#, fuzzy
+msgid "Status"
+msgstr "Éditer le statut"
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:47
+#, fuzzy
+msgid "The project status"
+msgstr "Le projet a débuté le "
+
+#: ../templates/gtkbuilder.planningeditdialog.xml:57
+#, fuzzy
+msgid "The project planned tasks"
+msgstr "Le projet a débuté le "
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:7
+#, fuzzy
+msgid "Planning Setup"
+msgstr "Programme "
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:28
+#, fuzzy
+msgid "Durations"
+msgstr "Durée (jours)"
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:62
+#, fuzzy
+msgid "The time each task takes per chapter"
+msgstr "Tâches par chapitre"
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:77
+msgid "The tasks that the project consists of"
+msgstr ""
+
+#: ../templates/gtkbuilder.planningsetupdialog.xml:106
+#, fuzzy
+msgid "When the project was started"
+msgstr "Le projet a débuté le "
+
+#: ../templates/gtkbuilder.progressdialog.xml:7
+#, fuzzy
+msgid "Bibledit"
+msgstr "Bible"
+
+#: ../templates/gtkbuilder.progressdialog.xml:37
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:7
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:7
+#, fuzzy
+msgid "Reference settings"
+msgstr "Annotation "
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:20
+msgid ""
+"Bibledit-Web local or remote website URL:\n"
+"(example: http://localhost/bibledit)"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:50
+msgid ""
+"Bibledit-Web username:\n"
+"(example: joe)"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:82
+msgid "Test"
+msgstr ""
+
+#: ../templates/gtkbuilder.referenceexchangedialog.xml:98
+msgid "url info"
+msgstr ""
+
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:19
+#, fuzzy
+msgid "Show verse text"
+msgstr "Texte de verset"
+
+#: ../templates/gtkbuilder.referencesettingsdialog.xml:33
+msgid "Only show the relevant bits"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:7
+#, fuzzy
+msgid "Show Project Notes"
+msgstr "Notes du projet"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:20
+#, fuzzy
+msgid "Selection"
+msgstr "Sélectionner une action"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:38
+#, fuzzy
+msgid "Notes that refer to the"
+msgstr "de motifs indésirables"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:47
+#, fuzzy
+msgid "current verse"
+msgstr "Voir la version actuelle"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:62
+#, fuzzy
+msgid "current chapter"
+msgstr "Le chapitre courant uniquement"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:77
+#, fuzzy
+msgid "current book"
+msgstr "Livre courant"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:92
+#, fuzzy
+msgid "any verse"
+msgstr "et verset "
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:120
+#, fuzzy
+msgid "Notes edited"
+msgstr "Les notes ont été restauré"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:129
+msgid "today"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:147
+msgid "between"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:162
+#, fuzzy
+msgid "start"
+msgstr "Redémmarrer"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:175
+#, fuzzy
+msgid "and"
+msgstr "et "
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:183
+#, fuzzy
+msgid "end"
+msgstr "envoyer"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:200
+msgid "at any time"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:228
+#, fuzzy
+msgid "Notes of category"
+msgstr "vers la catégorie"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:258
+#, fuzzy
+msgid "Notes of project"
+msgstr " du le projet "
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:267
+#, fuzzy
+msgid "current"
+msgstr "Celui en cours"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:282
+msgid "any"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:305
+msgid "Display"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:321
+#, fuzzy
+msgid "Title, including"
+msgstr "_Titres et en-têtes"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:336
+#, fuzzy
+msgid "project"
+msgstr "Projet"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:350
+#, fuzzy
+msgid "category"
+msgstr "Catégorie"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:364
+msgid "date created"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:378
+#, fuzzy
+msgid "created by"
+msgstr "Créé par"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:404
+#, fuzzy
+msgid "Text"
+msgstr "Textes"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:413
+msgid "full"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:428
+msgid "summary"
+msgstr ""
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:443
+#, fuzzy
+msgid "add text of the references"
+msgstr "Les charger dans la fenêtre des annotations"
+
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:464
+msgid "Result"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:8
+#, fuzzy
+msgid "System log"
+msgstr "_Registre système"
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:44
+#, fuzzy
+msgid "Show previous session"
+msgstr "Voir les révisions précédentes"
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:57
+msgid "Main"
+msgstr ""
+
+#: ../templates/gtkbuilder.systemlogdialog.xml:77
+msgid "Shutdown"
+msgstr ""
+
+#: ../templates/gtkbuilder.timednotifywindow.xml:6
+#, fuzzy
+msgid "Notification"
+msgstr "Versification"
+
+#: ../templates/gtkbuilder.xetexdialog.xml:7
+#, fuzzy
+msgid "Print settings"
+msgstr "Paramètres du projet"
+
+#: ../templates/gtkbuilder.xetexdialog.xml:39
+#, fuzzy
+msgid "portion"
+msgstr "Section"
+
+#: ../templates/gtkbuilder.xetexdialog.xml:78
+#, fuzzy
+msgid "Write the references in the notes in full (not yet implemented)"
+msgstr "Écrire les annotations en entier dans les notes"
+
+#: ../templates/gtkbuilder.xetexdialog.xml:118
+msgid "Page format and margins are set under menu Preferences / Printing"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:126
+#, fuzzy
+msgid "Crop marks"
+msgstr "% Crop marks"
+
+#: ../templates/gtkbuilder.xetexdialog.xml:167
+msgid ""
+"XeTeX has a font mapping option that allows a Unicode->Unicode TECkit "
+"mapping table to be associated with a font. Such a mapping could be used to "
+"convert all numbers to their localized versions."
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:179
+msgid "Clear"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:215
+msgid "Mapping"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:229
+msgid "Use generic shaping engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:244
+msgid "Use arab shaping engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.xetexdialog.xml:269
+msgid "Engine"
+msgstr ""
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:7
+msgid "Yes or no"
+msgstr ""
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:31
+#, fuzzy
+msgid "question"
+msgstr "Description"
+
+#: ../templates/gtkbuilder.yesnoalwaysdialog.xml:45
+msgid "_Remember my choice throughout this session"
+msgstr ""
 
 #~ msgid "A backup helps keep your data safe"
 #~ msgstr "Une sauvegarde vous permet de garder vos données en sécurité"
