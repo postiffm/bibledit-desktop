@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 22:34-0400\n"
+"POT-Creation-Date: 2017-05-24 15:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,6 @@ msgstr ""
 msgid "Where would you like to save it?"
 msgstr ""
 
-#. Build the confirmation stuff.
 #: ../src/assistantbackup.cpp:222 ../src/assistantbackup.cpp:226
 msgid "Backup is about to be made"
 msgstr ""
@@ -121,7 +120,6 @@ msgstr ""
 msgid "changes"
 msgstr ""
 
-#. Introduction.
 #: ../src/assistantchanges.cpp:52
 msgid "You can view the changes that have been made in the project."
 msgstr ""
@@ -143,6 +141,7 @@ msgid "The ones made between two dates I will give"
 msgstr ""
 
 #: ../src/assistantchanges.cpp:88 ../src/dialognotesupdate.cpp:58
+#: ../src/windowtabbed.cpp:41
 msgid "Information"
 msgstr ""
 
@@ -154,12 +153,10 @@ msgstr ""
 msgid "Changes till which date?"
 msgstr ""
 
-#. Confirm.
 #: ../src/assistantchanges.cpp:131 ../src/assistantchanges.cpp:134
 msgid "Ready for generating changes"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantchanges.cpp:139
 msgid "Generating changes..., please wait"
 msgstr ""
@@ -168,12 +165,10 @@ msgstr ""
 msgid "Generating changes"
 msgstr ""
 
-#. Summary.
 #: ../src/assistantchanges.cpp:147
 msgid "Done."
 msgstr ""
 
-#. Indicate ready in logbook.
 #: ../src/assistantchanges.cpp:150 ../src/assistantdeletekeyterms.cpp:75
 #: ../src/assistantremoterepository.cpp:238 ../src/assistantrestore.cpp:175
 #: ../src/git-exec.cpp:105
@@ -188,12 +183,10 @@ msgstr ""
 msgid "Changes from which date?"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantchanges.cpp:253
 msgid "Going back in history"
 msgstr ""
 
-#. Create a temporal history project.
 #: ../src/assistantchanges.cpp:256
 msgid " as it was on "
 msgstr ""
@@ -231,7 +224,6 @@ msgstr ""
 msgid "Delete done."
 msgstr ""
 
-#. Progress bar.
 #: ../src/assistantexport.cpp:42 ../src/export_utils.cpp:160
 msgid "Export"
 msgstr ""
@@ -363,7 +355,6 @@ msgstr ""
 msgid "Paratext format"
 msgstr ""
 
-#. Include keyterms without a rendering?
 #: ../src/assistantexport.cpp:419
 msgid "Include keyterms without a rendering"
 msgstr ""
@@ -392,7 +383,6 @@ msgstr ""
 msgid "Any comments on this export?"
 msgstr ""
 
-#. Build the confirmation stuff.
 #: ../src/assistantexport.cpp:568
 msgid "Export about to be done"
 msgstr ""
@@ -474,7 +464,6 @@ msgstr ""
 msgid "Select files"
 msgstr ""
 
-#. Build the confirmation stuff.
 #: ../src/assistantimport.cpp:287
 msgid "Please confirm you want to do this import."
 msgstr ""
@@ -629,7 +618,6 @@ msgstr ""
 msgid "What type of repository would you like to set?"
 msgstr ""
 
-#. Build the GUI for the setting whether to use a remote repository.
 #: ../src/assistantremoterepository.cpp:81
 msgid "_Use remote repository"
 msgstr ""
@@ -674,7 +662,6 @@ msgstr ""
 msgid "Would you like to push your data to the repository?"
 msgstr ""
 
-#. Build the confirmation stuff.
 #: ../src/assistantremoterepository.cpp:218
 #: ../src/assistantremoterepository.cpp:222 ../src/assistantresource.cpp:463
 #: ../src/assistantresource.cpp:467
@@ -685,7 +672,6 @@ msgstr ""
 msgid "Settings have been applied"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantremoterepository.cpp:418
 msgid "Trying the contents tracker"
 msgstr ""
@@ -798,7 +784,6 @@ msgstr ""
 msgid "git push to remote repository failed"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantremoterepository.cpp:773
 msgid "Testing read access"
 msgstr ""
@@ -811,7 +796,6 @@ msgstr ""
 msgid "Cannot access the repository:"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantremoterepository.cpp:820
 msgid "Cloning repository"
 msgstr ""
@@ -824,9 +808,6 @@ msgstr ""
 msgid "Cloning the data failed, please try again"
 msgstr ""
 
-#. GUI update.
-#. If a wrong host is entered as the git repository, the testing for the write access
-#. may "hang" for a long time. For that reason it can be cancelled by the user.
 #: ../src/assistantremoterepository.cpp:886
 msgid "Testing write access"
 msgstr ""
@@ -843,17 +824,14 @@ msgstr ""
 msgid "No write access. Please check the system log for more information"
 msgstr ""
 
-#. Progress.
 #: ../src/assistantremoterepository.cpp:983
 msgid "Pushing your data"
 msgstr ""
 
-#. Clone okay.
 #: ../src/assistantremoterepository.cpp:1053
 msgid "Your data has been pushed to the remote repository"
 msgstr ""
 
-#. Clone failed.
 #: ../src/assistantremoterepository.cpp:1056
 msgid ""
 "Your data could not be pushed to the remote repository,\n"
@@ -868,7 +846,6 @@ msgstr ""
 msgid "resource_editor"
 msgstr ""
 
-#. Introduction.
 #: ../src/assistantresource.cpp:78
 msgid "Step by step you will be "
 msgstr ""
@@ -1007,7 +984,6 @@ msgstr ""
 msgid "What is the file to restore?"
 msgstr ""
 
-#. Build the confirmation stuff.
 #: ../src/assistantrestore.cpp:155 ../src/assistantrestore.cpp:159
 msgid "Restore is about to be done"
 msgstr ""
@@ -1060,14 +1036,11 @@ msgstr ""
 msgid "Sorting references: "
 msgstr ""
 
-#. / Translators: please leave the '%s' as is.
 #: ../src/bibledit.cpp:202
 #, c-format
 msgid "Bad xembed value: %s\n"
 msgstr ""
 
-#. Nothing to do.
-#. Do nothing.
 #: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:227
 msgid "Nothing was done"
 msgstr ""
@@ -1148,7 +1121,6 @@ msgstr ""
 msgid "Comparing USFMs"
 msgstr ""
 
-#. Same book not found: give message about that.
 #: ../src/check_compare_usfm.cpp:107
 msgid "Extra book"
 msgstr ""
@@ -1213,7 +1185,6 @@ msgstr ""
 msgid "Matching pairs"
 msgstr ""
 
-#. Give message;
 #: ../src/check_matching_pairs.cpp:182
 msgid "Pair not opened: "
 msgstr ""
@@ -1222,7 +1193,6 @@ msgstr ""
 msgid "Pair not closed: "
 msgstr ""
 
-#. GUI.
 #: ../src/check_parallel_passages.cpp:54 ../src/check_parallel_passages.cpp:161
 msgid "Producing passages"
 msgstr ""
@@ -1253,7 +1223,6 @@ msgstr ""
 msgid "Repeated: "
 msgstr ""
 
-#. Heading and information.
 #: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
 msgid "Word Inventory"
 msgstr ""
@@ -1295,12 +1264,10 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#. Heading and information.
 #: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
 msgid "Marker Count"
 msgstr ""
 
-#. Set default values.
 #: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
 msgid "Marker"
 msgstr ""
@@ -1309,7 +1276,6 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#. Heading and information.
 #: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
 msgid "Character Count"
 msgstr ""
@@ -1327,7 +1293,6 @@ msgstr ""
 msgid "Hexadecimal"
 msgstr ""
 
-#. Heading and information.
 #: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
 msgid "References Inventory"
 msgstr ""
@@ -1407,7 +1372,6 @@ msgstr ""
 msgid "Validating markers"
 msgstr ""
 
-#. No marker found.
 #: ../src/check_validate_usfm.cpp:106
 msgid "Line without USFM"
 msgstr ""
@@ -1468,7 +1432,6 @@ msgstr ""
 msgid " compared with "
 msgstr ""
 
-#. Progress information.
 #: ../src/compareutils.cpp:84
 msgid "Comparing"
 msgstr ""
@@ -1483,7 +1446,6 @@ msgstr ""
 msgid "Deleted: "
 msgstr ""
 
-#. Progress information.
 #: ../src/compareutils.cpp:287
 msgid "Finding additions and deletions"
 msgstr ""
@@ -1564,7 +1526,7 @@ msgstr ""
 msgid "Introductions"
 msgstr ""
 
-#: ../src/dialogarea.cpp:253
+#: ../src/dialogarea.cpp:253 ../src/usfmtools.cpp:724
 msgid "Headings"
 msgstr ""
 
@@ -2012,7 +1974,6 @@ msgid ""
 "location."
 msgstr ""
 
-#. Display these.
 #: ../src/dialogdictionary.cpp:199 ../src/dialogeditdictionary.cpp:308
 #: ../src/dialogeditdictionary.cpp:352
 msgid "Select a dictionary"
@@ -2051,6 +2012,7 @@ msgid "Word count is "
 msgstr ""
 
 #: ../src/dialogeditlist.cpp:58 ../src/windowcheckkeyterms.cpp:74
+#: ../src/windowtabbed.cpp:90
 msgid "_List"
 msgstr ""
 
@@ -2078,7 +2040,6 @@ msgstr ""
 msgid "Enter a new value"
 msgstr ""
 
-#. Ask for a file.
 #: ../src/dialogeditlist.cpp:363 ../src/windowreferences.cpp:140
 msgid "Open File"
 msgstr ""
@@ -2112,7 +2073,6 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#. Type of the resource.
 #: ../src/dialogeditnote.cpp:101 ../src/dialogresourceconverter.cpp:142
 msgid "Type"
 msgstr ""
@@ -2157,7 +2117,6 @@ msgstr ""
 msgid "menu-preferences/filters"
 msgstr ""
 
-#. Enter the name of the new script.
 #: ../src/dialogfilters.cpp:276
 msgid "New script"
 msgstr ""
@@ -2192,7 +2151,6 @@ msgid "Case _sensitive"
 msgstr ""
 
 #: ../src/dialogfindnote.cpp:143
-#, c-format
 msgid "select id, casefolded from notes;"
 msgstr ""
 
@@ -2382,7 +2340,6 @@ msgid ""
 "and then press OK or Enter"
 msgstr ""
 
-#. Update GUI.
 #: ../src/dialoglistview.cpp:212
 msgid "Press "
 msgstr ""
@@ -2520,7 +2477,6 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
-#. Category is in database: Can't be deleted.
 #: ../src/dialognotes.cpp:191
 msgid ""
 "This category could not be deleted, because there are still notes\n"
@@ -2553,7 +2509,6 @@ msgstr ""
 msgid "The transfer cannot be undone."
 msgstr ""
 
-#. Progress.
 #: ../src/dialognotestransfer.cpp:127
 msgid "Transferring text to notes"
 msgstr ""
@@ -2630,7 +2585,7 @@ msgstr ""
 msgid "Types of note to consider:"
 msgstr ""
 
-#: ../src/dialogoriginreferences.cpp:60
+#: ../src/dialogoriginreferences.cpp:60 ../src/usfmtools.cpp:754
 msgid "Footnotes"
 msgstr ""
 
@@ -2710,7 +2665,6 @@ msgstr ""
 msgid "Optional arguments"
 msgstr ""
 
-#. Run the dialog for editing the tasks.
 #: ../src/dialogplanningsetup.cpp:120
 #: ../templates/gtkbuilder.planningeditdialog.xml:32
 #: ../templates/gtkbuilder.planningsetupdialog.xml:44
@@ -2917,7 +2871,6 @@ msgstr ""
 msgid "(this name is not allowed)"
 msgstr ""
 
-#. Progress information.
 #: ../src/dialogproject.cpp:438
 msgid "Updating project"
 msgstr ""
@@ -3066,7 +3019,6 @@ msgstr ""
 msgid "Write"
 msgstr ""
 
-#. Select a file.
 #: ../src/dialogresourceconverter.cpp:561
 msgid "Select file"
 msgstr ""
@@ -3115,7 +3067,6 @@ msgstr ""
 msgid "No changes were applied"
 msgstr ""
 
-#. Ask the user if he is sure to load the previous text. If not, bail out.
 #: ../src/dialogrevert.cpp:331
 msgid "Are you sure you wish to revert this chapter to the previous revision?"
 msgstr ""
@@ -3259,7 +3210,6 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#. Update GUI.
 #: ../src/dialogshownotes.cpp:473
 msgid "This selection would display "
 msgstr ""
@@ -3641,7 +3591,6 @@ msgstr ""
 msgid "with an odd number"
 msgstr ""
 
-#. labels.push_back("Test usfm2pdf");
 #: ../src/dialogstylesheet.cpp:2535 ../src/dialogstylesheet.cpp:2550
 #: ../src/mainwindow.cpp:5640
 msgid "Print"
@@ -3718,7 +3667,6 @@ msgid ""
 "."
 msgstr ""
 
-#. Add the settings info to the temp directory.
 #: ../src/dialogsystemlog.cpp:359
 msgid "settings.log"
 msgstr ""
@@ -3927,9 +3875,48 @@ msgid ""
 "the currently opened project"
 msgstr ""
 
-#. Progress.
 #: ../src/dialogxfernotes2text.cpp:118
 msgid "Transferring notes to text"
+msgstr ""
+
+#: ../src/directories.cpp:204
+msgid "Cannot find a suitable mkdir utility"
+msgstr ""
+
+#: ../src/directories.cpp:236
+msgid "Cannot find a suitable rmdir utility"
+msgstr ""
+
+#: ../src/directories.cpp:324
+msgid "Cannot find a suitable move utility"
+msgstr ""
+
+#: ../src/directories.cpp:350 ../src/directories.cpp:447
+msgid "Cannot find a suitable zip utility"
+msgstr ""
+
+#: ../src/directories.cpp:373
+msgid "Cannot find a suitable tar utility"
+msgstr ""
+
+#: ../src/directories.cpp:399
+msgid "Cannot find a suitable rm/del utility"
+msgstr ""
+
+#: ../src/directories.cpp:421
+msgid "Cannot find a suitable diff utility"
+msgstr ""
+
+#: ../src/directories.cpp:474
+msgid "Cannot find a suitable unzip utility"
+msgstr ""
+
+#: ../src/directories.cpp:496
+msgid "Cannot find a suitable gzip utility"
+msgstr ""
+
+#: ../src/directories.cpp:549
+msgid "List of directories and other paths we know about:"
 msgstr ""
 
 #: ../src/editor.cpp:430 ../src/usfmview.cpp:224
@@ -3938,7 +3925,8 @@ msgid ""
 "Do you wish to delete this chapter?"
 msgstr ""
 
-#: ../src/editor.cpp:467 ../src/readwrite.cpp:109 ../src/usfmview.cpp:268
+#: ../src/editor.cpp:467 ../src/outline.cpp:174 ../src/readwrite.cpp:109
+#: ../src/usfmview.cpp:268
 msgid "Chapter "
 msgstr ""
 
@@ -3995,13 +3983,10 @@ msgstr ""
 msgid "This style cannot be applied here."
 msgstr ""
 
-#. Approve all the words in the list.
-#. Since this may take time, a windows will show the progress.
 #: ../src/editor.cpp:2078 ../src/usfmview.cpp:735
 msgid "Adding words to dictionary"
 msgstr ""
 
-#. Progress information.
 #: ../src/export_utils.cpp:85 ../src/export_utils.cpp:236
 #: ../src/export_utils.cpp:270 ../src/export_utils.cpp:574
 msgid "Exporting project"
@@ -4011,7 +3996,6 @@ msgstr ""
 msgid "Compressing USFM export"
 msgstr ""
 
-#. Progress.
 #: ../src/export_utils.cpp:169 ../src/export_utils.cpp:456
 msgid "Exporting"
 msgstr ""
@@ -4050,7 +4034,6 @@ msgid ""
 "Should these be saved to a single file or to multiple files?"
 msgstr ""
 
-#. Give warning in case of unformatted markers.
 #: ../src/export_utils.cpp:736
 msgid ""
 "The export has completed,\n"
@@ -4067,12 +4050,10 @@ msgid ""
 "Please check the system log for more information."
 msgstr ""
 
-#. Progress.
 #: ../src/fixmarkers.cpp:51
 msgid "Inserting missing spaces after opening markers"
 msgstr ""
 
-#. Give statistics.
 #: ../src/fixmarkers.cpp:99
 msgid "Missing spaces inserted: "
 msgstr ""
@@ -4093,7 +4074,6 @@ msgstr ""
 msgid "Tidying up project "
 msgstr ""
 
-#. Log message
 #: ../src/git.cpp:106
 msgid "Resolving conflict for project "
 msgstr ""
@@ -4145,7 +4125,6 @@ msgstr ""
 msgid " books"
 msgstr ""
 
-#. Show modification count.
 #: ../src/gui_display_changes.cpp:115
 msgid "Number of modifications: "
 msgstr ""
@@ -4224,7 +4203,6 @@ msgstr ""
 msgid "Skipping: "
 msgstr ""
 
-#. Go through all the lines.
 #: ../src/keyterms.cpp:729
 msgid "Importing"
 msgstr ""
@@ -4318,7 +4296,6 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#. Show the progress. KJV has 31102 verses.
 #: ../src/kjv.cpp:153
 msgid "Importing King James Bible"
 msgstr ""
@@ -4477,8 +4454,6 @@ msgstr ""
 msgid "_Text"
 msgstr ""
 
-#. -----------------------------------------------------------------------------
-#. View | Chapter as =>  _Formatted, _USFM code, or _Experimental
 #: ../src/mainwindow.cpp:910
 msgid "Chapter as"
 msgstr ""
@@ -4487,7 +4462,6 @@ msgstr ""
 msgid "_Formatted"
 msgstr ""
 
-#. default
 #: ../src/mainwindow.cpp:925
 msgid "_USFM code"
 msgstr ""
@@ -4496,7 +4470,6 @@ msgstr ""
 msgid "_Experimental"
 msgstr ""
 
-#. -----------------------------------------------------------------------------
 #: ../src/mainwindow.cpp:938
 msgid "Pl_anning"
 msgstr ""
@@ -4509,7 +4482,7 @@ msgstr ""
 msgid "_Related verses"
 msgstr ""
 
-#: ../src/mainwindow.cpp:954
+#: ../src/mainwindow.cpp:954 ../src/windowtabbed.cpp:172
 msgid "_Concordance"
 msgstr ""
 
@@ -4521,9 +4494,6 @@ msgstr ""
 msgid "_Tile Windows"
 msgstr ""
 
-#. ----------------------------------------------------------------------
-#. View verse in external website or Bibleworks (Windows only, via OLE)
-#. ----------------------------------------------------------------------
 #: ../src/mainwindow.cpp:969
 msgid "_External Resource"
 msgstr ""
@@ -4548,9 +4518,6 @@ msgstr ""
 msgid "Bible._org (book)"
 msgstr ""
 
-#. ----------------------------------------------------------------------
-#. Insert menu
-#. ----------------------------------------------------------------------
 #: ../src/mainwindow.cpp:1001
 msgid "_Insert"
 msgstr ""
@@ -4780,7 +4747,6 @@ msgstr ""
 msgid "_System log"
 msgstr ""
 
-#. User interface.
 #: ../src/mainwindow.cpp:2064
 msgid "Delete project"
 msgstr ""
@@ -4848,7 +4814,6 @@ msgstr ""
 msgid "The project has been copied to a new project named\n"
 msgstr ""
 
-#. Ask whether the references should be made available.
 #: ../src/mainwindow.cpp:2928
 msgid ""
 "This note has references.\n"
@@ -4868,7 +4833,6 @@ msgstr ""
 msgid "To make this work, enable spelling checking in the project"
 msgstr ""
 
-#. No next (or previous) error in the current chapter. Ask whether the user wishes to go to other chapter.
 #: ../src/mainwindow.cpp:3556
 msgid ""
 "There are no more spelling errors in this chapter\n"
@@ -4891,7 +4855,6 @@ msgstr ""
 msgid "There is nothing to be checked"
 msgstr ""
 
-#. Ask whether the user wishes to insert a new chapter.
 #: ../src/mainwindow.cpp:3763
 msgid "Would you like to insert a new chapter?"
 msgstr ""
@@ -4956,7 +4919,6 @@ msgstr ""
 msgid "Project (through ptx2pdf typesetter)"
 msgstr ""
 
-#. Progress system.
 #: ../src/mainwindow.cpp:5637 ../src/print_parallel_bible.cpp:47
 #: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
@@ -5072,7 +5034,6 @@ msgstr ""
 msgid "For Bible society"
 msgstr ""
 
-#. Progress window.
 #: ../src/notes_utils.cpp:871
 msgid "Converting project notes"
 msgstr ""
@@ -5110,7 +5071,6 @@ msgstr ""
 msgid "Verse text could not be imported"
 msgstr ""
 
-#. Progress information.
 #: ../src/opendocument.cpp:68
 msgid "Exporting to OpenDocument"
 msgstr ""
@@ -5167,7 +5127,6 @@ msgstr ""
 msgid "# Exported from Bibledit-Gtk"
 msgstr ""
 
-#. Request the user to provide the password.
 #: ../src/password.cpp:35 ../src/password.cpp:66 ../src/password.cpp:75
 #: ../src/password.cpp:112
 msgid "Password"
@@ -5177,7 +5136,6 @@ msgstr ""
 msgid "Please provide the current password before proceeding"
 msgstr ""
 
-#. Give feedback if there is an error.
 #: ../src/password.cpp:40 ../src/password.cpp:122
 msgid "The password provided is incorrect"
 msgstr ""
@@ -5222,8 +5180,6 @@ msgstr ""
 msgid "Provide the administrator's password"
 msgstr ""
 
-#. If we're here, no suitable viewer was found on Linux/Macintosh.
-#. Inform the user about it, and what to do to solve it.
 #: ../src/pdfviewer.cpp:83
 msgid ""
 "The file cannot be displayed, because there is no suitable pdf viewer "
@@ -5244,13 +5200,11 @@ msgstr ""
 msgid "of planned tasks: add, remove or reorder them"
 msgstr ""
 
-#. Heading.
 #: ../src/planning.cpp:84
 msgid "Planning "
 msgstr ""
 
-#. Current date.
-#: ../src/planning.cpp:87
+#: ../src/planning.cpp:87 ../src/reporting.cpp:769
 msgid "Produced on "
 msgstr ""
 
@@ -5308,7 +5262,6 @@ msgstr ""
 msgid "Planned tasks"
 msgstr ""
 
-#. Log.
 #: ../src/print_parallel_bible.cpp:35
 msgid "Printing Parallel Bible"
 msgstr ""
@@ -5333,22 +5286,18 @@ msgstr ""
 msgid ". It was left out."
 msgstr ""
 
-#. Log: ready.
 #: ../src/print_parallel_bible.cpp:124
 msgid "Ready printing the Parallel Bible"
 msgstr ""
 
-#. Log.
 #: ../src/print_parallel_references.cpp:56
 msgid "Printing parallel references"
 msgstr ""
 
-#. Progress system.
 #: ../src/print_parallel_references.cpp:59
 msgid "Printing Parallel References"
 msgstr ""
 
-#. Log: ready.
 #: ../src/print_parallel_references.cpp:323
 msgid "Ready printing the parallel references"
 msgstr ""
@@ -5419,13 +5368,48 @@ msgstr ""
 msgid " does not exist in project "
 msgstr ""
 
+#: ../src/reporting.cpp:453
+msgid "Status for chapter "
+msgstr ""
+
+#: ../src/reporting.cpp:765
+msgid "Status Report"
+msgstr ""
+
+#: ../src/reporting.cpp:766
+msgid "Status Report "
+msgstr ""
+
+#: ../src/reporting.cpp:791
+msgid "Project Percentage Complete"
+msgstr ""
+
+#: ../src/reporting.cpp:800 ../src/reporting.cpp:825
+msgid "The above data in csv format"
+msgstr ""
+
+#: ../src/reporting.cpp:814
+msgid "Books Percentage Complete"
+msgstr ""
+
+#: ../src/reporting.cpp:857
+msgid "Tasks per book - Legend"
+msgstr ""
+
+#: ../src/reporting.cpp:859
+msgid "Tasks per book - Data"
+msgstr ""
+
+#: ../src/reporting.cpp:877
+msgid "Tasks per chapter for "
+msgstr ""
+
 #: ../src/resource_conversion_utils.cpp:31
 msgid ""
 "Chapter starts at a pattern, verse 1 starts at chapter, verse starts at a "
 "pattern"
 msgstr ""
 
-#. Go through all the lines, show progress.
 #: ../src/resource_conversion_utils.cpp:85
 msgid "Processing..."
 msgstr ""
@@ -5434,7 +5418,6 @@ msgstr ""
 msgid "Open resource"
 msgstr ""
 
-#. Feedback to user.
 #: ../src/restore.cpp:48
 msgid "The file was restored to Bible "
 msgstr ""
@@ -5459,7 +5442,6 @@ msgstr ""
 msgid "Restore was cancelled"
 msgstr ""
 
-#. Give feedback about what has happened.
 #: ../src/restore.cpp:80
 msgid "Notes were restored"
 msgstr ""
@@ -5472,12 +5454,10 @@ msgstr ""
 msgid "This resource already exists"
 msgstr ""
 
-#. Give feedback about what has happened.
 #: ../src/restore.cpp:120
 msgid "Resource was restored"
 msgstr ""
 
-#. Give feedback about what has transpired.
 #: ../src/restore.cpp:137
 msgid "Everything was restored"
 msgstr ""
@@ -5851,8 +5831,6 @@ msgstr ""
 msgid "Parallel passages of the Old Testament, project "
 msgstr ""
 
-#. Progress.
-#. Progress information.
 #: ../src/search_utils.cpp:65 ../src/search_utils.cpp:352
 msgid "Searching"
 msgstr ""
@@ -5894,7 +5872,6 @@ msgstr ""
 msgid "A_dd \"%s\" to Dictionary"
 msgstr ""
 
-#. - Ignore All
 #: ../src/spelling.cpp:471
 msgid "_Ignore All"
 msgstr ""
@@ -5924,7 +5901,6 @@ msgstr ""
 msgid "Removing Statistics Database for project "
 msgstr ""
 
-#. Progress.
 #: ../src/statistics.cpp:83
 msgid "Statistics database for "
 msgstr ""
@@ -5957,7 +5933,6 @@ msgstr ""
 msgid "Updating stylesheet: "
 msgstr ""
 
-#. Create progress window.
 #: ../src/text2pdf.cpp:198
 msgid "Formatting"
 msgstr ""
@@ -5986,8 +5961,6 @@ msgstr ""
 msgid "Interpreting"
 msgstr ""
 
-#. If we're here, it shows that no suitable viewer was found.
-#. Inform the user about it, and what to do to solve it.
 #: ../src/textviewer.cpp:61
 msgid ""
 "The file cannot be displayed, because there is no suitable text viewer "
@@ -6045,6 +6018,97 @@ msgstr ""
 msgid "Can't find USFM standard file"
 msgstr ""
 
+#: ../src/usfmtools.cpp:699
+msgid "Identification Information"
+msgstr ""
+
+#: ../src/usfmtools.cpp:704
+msgid "Introduction Titles and Headings"
+msgstr ""
+
+#: ../src/usfmtools.cpp:709
+msgid "Introduction Paragraphs and Poetry"
+msgstr ""
+
+#: ../src/usfmtools.cpp:714
+msgid "Introduction Other Elements"
+msgstr ""
+
+#: ../src/usfmtools.cpp:719
+msgid "Titles"
+msgstr ""
+
+#: ../src/usfmtools.cpp:729
+msgid "Chapters and Verses"
+msgstr ""
+
+#: ../src/usfmtools.cpp:734
+msgid "Paragraphs"
+msgstr ""
+
+#: ../src/usfmtools.cpp:739
+msgid "Lists"
+msgstr ""
+
+#: ../src/usfmtools.cpp:744
+msgid "Poetry Elements"
+msgstr ""
+
+#: ../src/usfmtools.cpp:749
+msgid "Table Elements"
+msgstr ""
+
+#: ../src/usfmtools.cpp:759
+msgid "Cross References"
+msgstr ""
+
+#: ../src/usfmtools.cpp:764
+msgid "Extended Study Notes"
+msgstr ""
+
+#: ../src/usfmtools.cpp:769
+msgid "Special Text"
+msgstr ""
+
+#: ../src/usfmtools.cpp:774
+msgid "Character Styles"
+msgstr ""
+
+#: ../src/usfmtools.cpp:779
+msgid "Spacings and Breaks"
+msgstr ""
+
+#: ../src/usfmtools.cpp:784
+msgid "Special Features"
+msgstr ""
+
+#: ../src/usfmtools.cpp:789
+msgid "Peripheral Materials"
+msgstr ""
+
+#: ../src/usfmtools.cpp:794
+msgid "Non-standard Styles"
+msgstr ""
+
+#: ../src/usfmtools.cpp:821
+msgid " - a book identifier"
+msgstr ""
+
+#: ../src/usfmtools.cpp:824
+msgid " - a chapter number"
+msgstr ""
+
+#: ../src/usfmtools.cpp:827
+msgid " - a verse number"
+msgstr ""
+
+#: ../src/usfmtools.cpp:831
+msgid ""
+"Not all basic styles are in the stylesheet.\n"
+"Printing cannot continue.\n"
+"Please add the following styles to the stylesheet:"
+msgstr ""
+
 #: ../src/utilities.cpp:794
 msgid "Error opening file "
 msgstr ""
@@ -6073,57 +6137,58 @@ msgstr ""
 msgid "Check keyterms"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:63
+#: ../src/windowcheckkeyterms.cpp:63 ../src/windowtabbed.cpp:79
 msgid "_Collection"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:107
+#: ../src/windowcheckkeyterms.cpp:107 ../src/windowtabbed.cpp:123
 msgid ""
 "Case\n"
 "sensitive"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:111
+#: ../src/windowcheckkeyterms.cpp:111 ../src/windowtabbed.cpp:127
 msgid "Rendering"
 msgstr ""
 
 #: ../src/windowcheckkeyterms.cpp:145 ../src/windowcheckkeyterms.cpp:454
-#: ../src/windowcheckkeyterms.cpp:501
+#: ../src/windowcheckkeyterms.cpp:501 ../src/windowtabbed.cpp:200
+#: ../src/windowtabbed.cpp:509 ../src/windowtabbed.cpp:556
 msgid "keyterm "
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:372
+#: ../src/windowcheckkeyterms.cpp:372 ../src/windowtabbed.cpp:427
 msgid "<Enter new rendering here>"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:470
+#: ../src/windowcheckkeyterms.cpp:470 ../src/windowtabbed.cpp:525
 msgid "goto "
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:479
+#: ../src/windowcheckkeyterms.cpp:479 ../src/windowtabbed.cpp:534
 msgid "send"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:489
+#: ../src/windowcheckkeyterms.cpp:489 ../src/windowtabbed.cpp:544
 msgid "Biblical"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:490
+#: ../src/windowcheckkeyterms.cpp:490 ../src/windowtabbed.cpp:545
 msgid "Hebrew"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:492
+#: ../src/windowcheckkeyterms.cpp:492 ../src/windowtabbed.cpp:547
 msgid ""
 "Key Terms in Biblical Hebrew: The entries are an experimental sample set, "
 "not yet fully reviewed and approved. The KTBH team would welcome feed-back "
 "to christopher_samuel@sil.org."
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:541
+#: ../src/windowcheckkeyterms.cpp:541 ../src/windowtabbed.cpp:596
 msgid "[Send to references window]"
 msgstr ""
 
-#: ../src/windowcheckkeyterms.cpp:604
+#: ../src/windowcheckkeyterms.cpp:604 ../src/windowtabbed.cpp:659
 msgid "<empty>"
 msgstr ""
 
@@ -6283,7 +6348,6 @@ msgstr ""
 msgid "The chapters were not merged"
 msgstr ""
 
-#. Message ok.
 #: ../src/windowmerge.cpp:796
 msgid "The chapters were successfully merged"
 msgstr ""
@@ -6312,7 +6376,6 @@ msgstr ""
 msgid "Changes approval, "
 msgstr ""
 
-#. Info for user.
 #: ../src/windowmerge.cpp:923
 msgid "The chapters are ready for approving the individual changes"
 msgstr ""
@@ -6531,7 +6594,6 @@ msgstr ""
 msgid "No socket available"
 msgstr ""
 
-#. We can't find an IP number
 #: ../src/windowsoutpost.cpp:397 ../src/windowsoutpost.cpp:541
 msgid "Error looking up hostname"
 msgstr ""
@@ -6564,7 +6626,6 @@ msgstr ""
 msgid "Do you really want to delete stylesheet "
 msgstr ""
 
-#. Ask for a new name.
 #: ../src/windowstyles.cpp:740
 msgid "Rename stylesheet"
 msgstr ""
@@ -6579,6 +6640,10 @@ msgstr ""
 
 #: ../src/windowstyles.cpp:1279
 msgid "Unknown"
+msgstr ""
+
+#: ../src/windowtabbed.cpp:185
+msgid "Concordance features are almost ready..."
 msgstr ""
 
 #: ../src/wordlist.cpp:49
@@ -6601,7 +6666,6 @@ msgstr ""
 msgid "No project"
 msgstr ""
 
-#. Informative messages.
 #: ../src/wordlist.cpp:141
 msgid "Total entries: "
 msgstr ""
@@ -6823,7 +6887,6 @@ msgstr ""
 msgid "% The gutter between double cols, relative to font size"
 msgstr ""
 
-#. Info for user in logfile.
 #: ../src/xetex.cpp:375
 msgid "All the data for this document is available in temporal folder "
 msgstr ""
