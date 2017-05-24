@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 4.8.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-17 16:11+0100\n"
-"PO-Revision-Date: 2017-05-21 17:01+0100\n"
+"PO-Revision-Date: 2017-05-23 17:04+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -4791,7 +4791,7 @@ msgstr "Dépôt b_iblique"
 
 #: src/assistantremoterepository.cpp:70
 msgid "Project _notes repository"
-msgstr "Dépôt  des _notes de projet"
+msgstr "Dépôt  de _notes de projet"
 
 #: src/assistantremoterepository.cpp:76
 msgid "What type of repository would you like to set?"
