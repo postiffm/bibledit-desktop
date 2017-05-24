@@ -104,7 +104,7 @@ FloatingWindow(parent_layout, widStyles, _("Stylesheet"), startup)
   delete_stylesheet_handler_id = 0;
   rename_stylesheet_handler_id = 0;
   if (style)
-    styles_menu_handler_id = g_signal_connect((gpointer) style, -("activate"), G_CALLBACK(on_style_menu_activate), gpointer(this));
+    styles_menu_handler_id = g_signal_connect((gpointer) style, _("activate"), G_CALLBACK(on_style_menu_activate), gpointer(this));
   if (style_expand_all)
     expand_all_handler_id = g_signal_connect((gpointer) style_expand_all, _("activate"), G_CALLBACK(on_expand_all_activate), gpointer(this));
   if (style_collapse_all)

@@ -105,7 +105,7 @@ bool on_timeout (gpointer data)
     if (folder.empty() ) {
       if (we_loop) {
         message (_("Will send and receive again after 5 minutes."));
-        message ("_(Or close the window to not send and receive again."));
+        message (_("Or close the window to not send and receive again."));
         g_timeout_add(300000, GSourceFunc(on_timeout), NULL);
       } else {
       	message (_("Finished"));

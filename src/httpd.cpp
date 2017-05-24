@@ -33,6 +33,8 @@
 #include "directories.h"
 #include "tiny_utilities.h"
 #include "html.h"
+#include <glib/gi18n.h>
+
 
 
 Httpd::Httpd(bool dummy)

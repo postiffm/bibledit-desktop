@@ -175,7 +175,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   // to any other text buffer that uses the same text tag table.
   {
     GtkTextBuffer * textbuffer = gtk_text_buffer_new (texttagtable);
-    reference_tag = gtk_text_buffer_create_tag(textbuffer, NULL, _("background"), "_(khaki"), NULL);
+    reference_tag = gtk_text_buffer_create_tag(textbuffer, NULL, _("background"), _("khaki"), NULL);
     verse_highlight_tag = gtk_text_buffer_create_tag(textbuffer, NULL, _("background"), _("yellow"), NULL);
     g_object_unref (textbuffer);
   }
