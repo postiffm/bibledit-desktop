@@ -44,7 +44,7 @@
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">The project's status</property>
+                <property name="label" translatable="yes">The project status</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -54,7 +54,7 @@
             <child>
               <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">The project's planned tasks</property>
+                <property name="label" translatable="yes">The project planned tasks</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>

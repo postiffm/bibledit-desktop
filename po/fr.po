@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.8.12\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 22:34-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/\n"
+"POT-Creation-Date: 2017-05-23 19:50-0400\n"
 "PO-Revision-Date: 2016-11-26 14:38+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
@@ -2912,6 +2912,7 @@ msgstr "points"
 msgid "Print draft: 1 column, double-spaced"
 msgstr "Impression brouillon : 1 colonne, double espace"
 
+#: ../src/dialogprintprefs.cpp:228
 #: ../src/dialogprintprefs.cpp:228 ../templates/gtkbuilder.xetexdialog.xml:151
 msgid "Page"
 msgstr "Page"
@@ -5187,7 +5188,6 @@ msgstr ""
 
 #. Progress system.
 #: ../src/mainwindow.cpp:5637 ../src/print_parallel_bible.cpp:47
-#: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr "Parallèle biblique"
 

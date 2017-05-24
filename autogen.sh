@@ -73,9 +73,13 @@ echo "Making m4/aclocal.m4 writable ..."
 echo "Making m4/aclocal.m4 writable--------------------" >> $LOG
 test -r m4/aclocal.m4 && chmod u+w m4/aclocal.m4
 
-echo "Running intltoolize..."
-echo "intltoolize--------------------------------------" >> $LOG
-intltoolize --force --copy --automake  >> $LOG 2>&1 || error_exit "intltoolize"
+# Removed 5/18/2017; now obsolete method of internationalizing
+# See https://wiki.gnome.org/MigratingFromIntltoolToGettext
+# See there for info on what to do if you need to translate
+# strings in .desktop or AppData files.
+#echo "Running intltoolize..."
+#echo "intltoolize--------------------------------------" >> $LOG
+#intltoolize --force --copy --automake  >> $LOG 2>&1 || error_exit "intltoolize"
 
 echo "Running aclocal..."
 echo "aclocal------------------------------------------" >> $LOG
