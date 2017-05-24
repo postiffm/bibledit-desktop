@@ -21,7 +21,7 @@
 
 #include "bibledit-git.h"
 #include <config.h>
-
+#include <glib/g18n.h>
 
 
 int main (int argc, char *argv[])
@@ -66,7 +66,7 @@ int main (int argc, char *argv[])
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(checkbutton), true);
   gtk_container_add(GTK_CONTAINER (vbox), checkbutton);
 
-  message ("Sending and receiving Bibles.");
+  message (_("Sending and receiving Bibles."));
   
   gtk_widget_show_all (window);
 
@@ -91,8 +91,8 @@ bool on_timeout (gpointer data)
 {
   if (folders.empty()) {
     message ("");
-    message ("Ready.");
-    message ("You can close the window, or it will close itself in 5 minutes.");
+    message (_("Ready."));
+    message (_("You can close the window, or it will close itself in 5 minutes."));
     g_timeout_add (300000, GSourceFunc(exit_timeout), NULL);
   } else {
     string folder = folders[0];
@@ -103,12 +103,12 @@ bool on_timeout (gpointer data)
 
     if (folder.empty() ) {
       if (we_loop) {
-        message ("Will send and receive again after 5 minutes.");
-        message ("Or close the window to not send and receive again.");
+        message (_("Will send and receive again after 5 minutes."));
+        message (_"Or close the window to not send and receive again."));
         g_timeout_add(300000, GSourceFunc(on_timeout), NULL);
       } else {
-      	message ("Finished");
-        message ("You can close the window, or it will close itself in 5 minutes.");
+      message (_("Finished"));
+      message (_("You can close the window, or it will close itself in 5 minutes."));
         g_timeout_add (300000, GSourceFunc(exit_timeout), NULL);
       }
 
@@ -190,7 +190,7 @@ bool on_timeout (gpointer data)
           message (spawn.standarderr[i]);
         }
         if (merge_conflict) {
-          message ("Bibledit will resolve conflicts between its own data and the data on the server.");
+          message (_("Bibledit will resolve conflicts between its own data and the data on the server."));
           // Resolve merge conflict.
           TinySpawn mergetool ("php");
           string script;
@@ -327,7 +327,7 @@ void TinySpawn::run()
   if (!result) {
     exitstatus = -1;
     string message = myprogram;
-    message.append(" didn't spawn");
+    message.append(_(" didn't spawn"));
     g_critical("%s", message.c_str());
     return;
   }
