@@ -18,3 +18,13 @@ this:
 
 mv test.pot bibledit.pot
 git commit -a -m "Updated bibledit.pot to new sources."
+
+Now, that is the "portable object template (.pot)." But you also have to
+update the language files, that is, the .po files. So, for French, do this:
+
+cp fr.po fr.po.bak
+msgmerge fr.po bibledit.pot
+compare fr.po.bak with the new fr.po and see if you like the changes.
+If so,
+git commit -a -m "Updated French translation file to match new sources. Now we need to update the translations."
+
