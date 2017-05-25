@@ -3,7 +3,7 @@
 
 
 AC_PREREQ(2.63)
-AC_INIT([bibledit-gtk],[4.10],[http://www.nongnu.org/bibledit])
+AC_INIT([bibledit-desktop],[4.11],[http://www.nongnu.org/bibledit])
 AC_CANONICAL_TARGET
 AC_CANONICAL_SYSTEM
 ac_default_prefix=/usr
@@ -223,13 +223,13 @@ AC_CHECK_HEADER(sqlite3.h, , AC_MSG_ERROR([Header file sqlite3.h was not found. 
 #-------------------------------------------------------------------------------
 # Internationalization
 #-------------------------------------------------------------------------------
-IT_PROG_INTLTOOL([0.35.0])
-
 GETTEXT_PACKAGE=bibledit
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"],
                    [The domain to use with gettext])
-AM_GLIB_GNU_GETTEXT
+
+AM_GNU_GETTEXT_VERSION([0.19.7])
+AM_GNU_GETTEXT([external])
 
 BIBLEDIT_LOCALEDIR=[${datadir}/locale]
 AC_SUBST(BIBLEDIT_LOCALEDIR)
@@ -349,7 +349,7 @@ AC_OUTPUT
 
 
 echo "
-Bibledit-Gtk $VERSION configuration summary:
+Bibledit-Desktop $VERSION configuration summary:
 
   Host operating system  : ${host_os}
   Version                : ${PACKAGE_VERSION}

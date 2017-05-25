@@ -7,7 +7,7 @@
 
 # To change the version number, change the following line and
 # the version in ../configure.ac, as well as any shortcuts.
-VERSION="4.10"
+VERSION="4.11"
 
 full=1
 docs=0
@@ -118,7 +118,7 @@ sleep 3
 
 echo "Copying Bibledit executables to $BIN..."
 mkdir -v -p "$BIN"
-cp ./src/.libs/bibledit-gtk.exe "$BIN"
+cp ./src/.libs/bibledit-desktop.exe "$BIN"
 cp ./src/.libs/bibledit-rdwrt.exe "$BIN"
 cp ./src/.libs/concordance.exe "$BIN"
 cp ./git/.libs/bibledit-git.exe "$BIN"
@@ -135,7 +135,7 @@ cp ./windows/bibledit-fr.cmd "$BIN"
 # If we are in --strip mode, then shrink the executables in the dest directory
 # I opt to leave them as-is in the source directory in case debug info is needed
 if [ "$do_strip" = "1" ]; then
-    strip "$BIN/bibledit-gtk.exe"
+    strip "$BIN/bibledit-desktop.exe"
 	strip "$BIN/bibledit-rdwrt.exe"
 	strip "$BIN/concordance.exe"
 	strip "$BIN/bibledit-git.exe"

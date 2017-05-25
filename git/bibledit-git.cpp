@@ -24,14 +24,17 @@
 #include <glib/gi18n.h>
 
 
-
 int main (int argc, char *argv[])
 {
+  // Internationalization: initialize gettext
+  bindtextdomain(GETTEXT_PACKAGE, BIBLEDIT_LOCALEDIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+  textdomain(GETTEXT_PACKAGE);
   
 #ifndef WIN32
   // Do not run as root.
   if (getuid () == 0) {
-    cout << _("Bibledit-Git has not been designed to run with root privileges.") << endl;
+    cout << "Bibledit-Git has not been designed to run with root privileges." << endl;
     return 1;
   }
 #endif
@@ -62,8 +65,8 @@ int main (int argc, char *argv[])
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
 
-  GtkWidget * checkbutton = gtk_check_button_new_with_mnemonic (_("_Repeat at end"));
-  g_signal_connect ((gpointer) checkbutton, _("toggled"), G_CALLBACK (on_checkbutton_loop_toggled), NULL);
+  GtkWidget * checkbutton = gtk_check_button_new_with_mnemonic ("_Repeat at end");
+  g_signal_connect ((gpointer) checkbutton, "toggled", G_CALLBACK (on_checkbutton_loop_toggled), NULL);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(checkbutton), true);
   gtk_container_add(GTK_CONTAINER (vbox), checkbutton);
 
@@ -108,8 +111,8 @@ bool on_timeout (gpointer data)
         message (_("Or close the window to not send and receive again."));
         g_timeout_add(300000, GSourceFunc(on_timeout), NULL);
       } else {
-      	message (_("Finished"));
-        message (_("You can close the window, or it will close itself in 5 minutes."));
+      message (_("Finished"));
+      message (_("You can close the window, or it will close itself in 5 minutes."));
         g_timeout_add (300000, GSourceFunc(exit_timeout), NULL);
       }
 
@@ -120,17 +123,17 @@ bool on_timeout (gpointer data)
       // Tell git about the default method for pushing.
       {
         TinySpawn spawn ("git");
-        spawn.arg (_("config"));
+        spawn.arg ("config");
         spawn.arg ("push.default");
-        spawn.arg (_("matching"));
+        spawn.arg ("matching");
         spawn.workingdirectory (folder);
         spawn.run ();
       }
     
       // Add everything because things could have been added or changed.
       {
-        TinySpawn spawn (_("git"));
-        spawn.arg (_("add"));
+        TinySpawn spawn ("git");
+        spawn.arg ("add");
         spawn.arg (".");
         spawn.workingdirectory (folder);
         spawn.run ();
@@ -157,7 +160,7 @@ bool on_timeout (gpointer data)
         spawn.arg ("commit");
         spawn.arg ("-a");
         spawn.arg ("-m");
-        spawn.arg (_("Send and receive"));
+        spawn.arg ("Send and receive");
         spawn.workingdirectory (folder);
         spawn.read ();
         spawn.run ();
@@ -191,7 +194,7 @@ bool on_timeout (gpointer data)
           message (spawn.standarderr[i]);
         }
         if (merge_conflict) {
-          message (_("Bibledit will resolve conflicts between its own data and the data on the server."));
+          message ("Bibledit will resolve conflicts between its own data and the data on the server.");
           // Resolve merge conflict.
           TinySpawn mergetool ("php");
           string script;

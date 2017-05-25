@@ -60,7 +60,7 @@ void restore_notes (const ustring& unpack_directory, vector <ustring>& feedback)
   unsigned int current_count = notes_count ();
   feedback.push_back (_("Notes available before restore: ") + convert_to_string (current_count));
   if (current_count > 0) {
-    ustring question = _("Currently Bibledit-Gtk has ") + convert_to_string (current_count) + _(" notes. Would you like to overwrite these?");
+    ustring question = _("Currently Bibledit-Desktop has ") + convert_to_string (current_count) + _(" notes. Would you like to overwrite these?");
     if (gtkw_dialog_question(NULL, question, GTK_RESPONSE_NO) == GTK_RESPONSE_YES) {
       feedback.push_back (_("Restore has overwritten the existing notes"));
     } else {

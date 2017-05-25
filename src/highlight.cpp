@@ -65,6 +65,7 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
 	// Above results in two errors:
 	// Gtk-CRITICAL **: IA__gtk_container_foreach: assertion 'GTK_IS_CONTAINER (container)' failed
 	// Need to fix these.
+	// Fixed 9/1/2016 MAP by passing vbox_paragraphs instead of NULL.
 	DEBUG("W9.1.4 in if inside loop");  
         if (verse == verse_at_iter) {
           if (!started) {

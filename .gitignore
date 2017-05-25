@@ -27,10 +27,16 @@ autom4te.cache
 *.o
 *.m4
 *.exe
+*.gmo
+*.mo
 
 # Binaries
 git/bibledit-git
 shutdown/bibledit-shutdown
+src/bibledit-desktop
+# Old name:
 src/bibledit-gtk
 src/bibledit-rdwrt
 src/concordance
+
+po/Makevars.template

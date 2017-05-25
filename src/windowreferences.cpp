@@ -662,7 +662,7 @@ void WindowReferences::html_write_action_page (HtmlWriter2& htmlwriter)
 {
   // Write the link for going back to the references.
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add (_("home"), _("[back]"));
+  htmlwriter.hyperlink_add ("home", _("[back]"));
   htmlwriter.paragraph_close ();
   // If any references has been clicked, offer the option to dismiss it.
   if (active_entry >= 0) {

@@ -1,6 +1,6 @@
-bin_PROGRAMS = bibledit-gtk bibledit-rdwrt concordance
+bin_PROGRAMS = bibledit-desktop bibledit-rdwrt concordance
 
-bibledit_gtk_SOURCES = \
+bibledit_desktop_SOURCES = \
   bibledit.cpp \
   options.cpp \
   chapterview.cpp \

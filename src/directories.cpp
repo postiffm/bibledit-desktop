@@ -76,11 +76,11 @@ directories::directories(char *argv0)
   // answer we have pre-computed.
 #ifdef WIN32
   // A clever way to take a path like C:\Program
-  // Files\Bibledit-Gtk\editor\bin\ and chop the
-  // last component to get back to <something>\Bibledit-Gtk\editor...
+  // Files\Bibledit-Desktop\editor\bin\ and chop the
+  // last component to get back to <something>\Bibledit-Desktop\editor...
   package_data = gw_path_get_dirname(rundir);
   // ... Then add two more dirs back on, resulting in
-  // <something>Bibledit-Gtk\editor\share\bibledit
+  // <something>Bibledit-Desktop\editor\share\bibledit
   package_data = gw_build_filename(package_data, "share", "bibledit");
 #else
   // For Linux, this is hard-coded to match the variable set in config.h

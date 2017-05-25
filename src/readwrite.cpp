@@ -39,10 +39,10 @@ Breaking the syntax down we have:
 
 First parameter: -r|-w 
 This can be either -r or -w which determines whether the remaining arguments are going to do a "read" operation 
-from the specified Bibledit-Gtk Bible / project, or do a "write" operation to that Bible / project.
+from the specified Bibledit-Desktop Bible / project, or do a "write" operation to that Bible / project.
 
 Second parameter: project 
-This gives the name of the Bibledit-Gtk Bible / project. 
+This gives the name of the Bibledit-Desktop Bible / project. 
 All we have to do is ensure that the project name we want to access is a valid/existing one.
 
 Third parameter: book
@@ -57,7 +57,7 @@ Fifth parameter: fileName
 This is a temporary file name that we assign for our use with bibledit-rdwrt. 
 For a read (-r) operation this fileName argument is the name of the file that will be created by bibledit-rdwrt
 containing a copy of the whole book (corresponding to the 3-letter code), 
-or that contains the individual chapter contents (of a designated chapter) of an existing Bibledit-Gtk book file
+or that contains the individual chapter contents (of a designated chapter) of an existing Bibledit-Desktop book file
 in the Bible / project. It should be prefixed with a path us. 
 Since bibledit-rdwrt is a console operation, after AdaptIt calls it using ::wxExecute, 
 it would need to read the resulting temporary file to grab the contents for its use. 
@@ -98,7 +98,7 @@ It may write to stdout or stderr, as it sees fit.
   }
   
   // Fourth parameter: chapter | 0.
-  // Bibledit-Gtk supports chapter 0.
+  // Bibledit-Desktop supports chapter 0.
   // But here it is different. Chapter 0 means to read/write the whole book, not chapter 0.
   // A chapter number other than 0 refers to that particular chapter.
   int chapter = ABS (convert_to_int (argv[4]));
