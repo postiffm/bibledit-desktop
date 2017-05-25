@@ -5907,12 +5907,12 @@ msgid ""
 msgstr ""
 
 #: ../src/startup.cpp:53
-msgid "bibledit-besktop is already running."
+msgid "Bibledit-Desktop is already running."
 msgstr ""
 
 #: ../src/startup.cpp:59
 msgid ""
-"The previous instance of bibledit-desktop is still optimizing its data while "
+"The previous instance of Bibledit-Desktop is still optimizing its data while "
 "shutting down.\n"
 "Please wait till that has been done, and try again."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.8.12\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-05-24 16:00-0400\n"
+"POT-Creation-Date: 2017-05-25 08:33-0400\n"
 "PO-Revision-Date: 2017-05-24 16:04+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
@@ -352,7 +352,8 @@ msgid "What type of export do you choose?"
 msgstr "Quel type d'exportation avez-vous choisi ?"
 
 #: ../src/assistantexport.cpp:400
-msgid "Standard Bibledit-Gtk format"
+#, fuzzy
+msgid "Standard Bibledit-Desktop format"
 msgstr "Format Bibledit-Gtk standard"
 
 #: ../src/assistantexport.cpp:406
@@ -1979,18 +1980,20 @@ msgid "and up"
 msgstr "et plus"
 
 #: ../src/dialogcheck.cpp:1141
+#, fuzzy
 msgid ""
-"Bibledit-Gtk normally knows the right word boundaries, but if this is not "
-"done satisfactorily, you can enter _extra characters that should be part of "
-"a word"
+"Bibledit-Desktop normally knows the right word boundaries, but if this is "
+"not done satisfactorily, you can enter _extra characters that should be part "
+"of a word"
 msgstr ""
 "Bibledit-Gtk reconnaît normalement les bonnes limites de mot, mais si cela "
 "n'est pas fait de manière satisfaisante, vous pouvez entrer des caractères "
 "_supplémentaires qui devraient faire partie d'un mot"
 
 #: ../src/dialogcheck.cpp:1189
+#, fuzzy
 msgid ""
-"Bibledit-Gtk already recognizes this character as part of a word.\n"
+"Bibledit-Desktop already recognizes this character as part of a word.\n"
 "It has been removed as superfluous.\n"
 "There is no need to enter your alphabet.\n"
 "Entering the special cases is enough."
@@ -2459,7 +2462,8 @@ msgid "Maintenance"
 msgstr "Maintenance"
 
 #: ../src/dialogmaintenance.cpp:157
-msgid "Some actions may have great impact on Bibledit-Gtk. Use with care."
+#, fuzzy
+msgid "Some actions may have great impact on Bibledit-Desktop. Use with care."
 msgstr ""
 "Certaines actions risquent d'avoir un gros impact sur Bibledit-Gtk. Utilisez "
 "cet outil avec précaution. "
@@ -4420,11 +4424,12 @@ msgid "Sword King James Bible with Strong's lemmata"
 msgstr "Bible Sword King James avec le lemmata Strong "
 
 #: ../src/kjv.cpp:54
+#, fuzzy
 msgid ""
 "The King James Bible from the Sword project is useful for its Strong's "
-"numbers tagged in the text. Bibledit-Gtk uses this to find related verses, "
-"among other things. Importing consists of two steps: exporting it from Sword "
-"and creating a database out of it."
+"numbers tagged in the text. Bibledit-Desktop uses this to find related "
+"verses, among other things. Importing consists of two steps: exporting it "
+"from Sword and creating a database out of it."
 msgstr ""
 "La  King James Bible du projet Sword est utile pour les numéros de Strong "
 "qui sont marqués dans le texte. Bibledit-Gtk utilise ceci pour trouver des "
@@ -4497,9 +4502,10 @@ msgid "Error!"
 msgstr "Erreur !"
 
 #: ../src/kjv.cpp:128
+#, fuzzy
 msgid ""
-"To use the database, copy the file kjv.sql into the Bibledit-Gtk package and "
-"re-install."
+"To use the database, copy the file kjv.sql into the Bibledit-Desktop package "
+"and re-install."
 msgstr ""
 "Pour utiliser la base de données, copiez le fichier kjv.sql dans le paquet "
 "Bibledit-Gtk et réinstallez-le."
@@ -5210,7 +5216,8 @@ msgid "Cannot find PHP."
 msgstr "Ne trouve pas PHP."
 
 #: ../src/merge_utils.cpp:237
-msgid "Bibledit-Gtk needs PHP for improved collaboration and merging."
+#, fuzzy
+msgid "Bibledit-Desktop needs PHP for improved collaboration and merging."
 msgstr ""
 "Bibledit-Gtk a besoin de PHP pour une collaboration et une fusion améliorées."
 
@@ -5382,7 +5389,8 @@ msgid " from Septuagint"
 msgstr "de Septuagint"
 
 #: ../src/paratext.cpp:37
-msgid "# Exported from Bibledit-Gtk"
+#, fuzzy
+msgid "# Exported from Bibledit-Desktop"
 msgstr "# Exporté depuis Bibledit-Gtk"
 
 #: ../src/password.cpp:35 ../src/password.cpp:66 ../src/password.cpp:75
@@ -5695,7 +5703,8 @@ msgid "Notes available before restore: "
 msgstr "Notes disponibles avant la restauration : "
 
 #: ../src/restore.cpp:63
-msgid "Currently Bibledit-Gtk has "
+#, fuzzy
+msgid "Currently Bibledit-Desktop has "
 msgstr "Actuellement Bible-Gtk a "
 
 #: ../src/restore.cpp:63
@@ -6151,20 +6160,23 @@ msgid "No personal wordlist to add the word to"
 msgstr "Pas de liste de mots personnelle où ajouter le mot"
 
 #: ../src/startup.cpp:38
+#, fuzzy
 msgid ""
-"Bibledit-Gtk has not been designed to run as user root.\n"
+"Bibledit-Desktop has not been designed to run as user root.\n"
 "Please run it as a standard user."
 msgstr ""
 "Bibledit-Gtk n'a pas été conçu pour s'exécuter en tant qu'utilisateur root.\n"
 "Veuillez l'exécuter en tant qu'utilisateur standard."
 
 #: ../src/startup.cpp:53
-msgid "Bibledit-Gtk is already running."
+#, fuzzy
+msgid "Bibledit-Desktop is already running."
 msgstr "Bibledit-Gtk est déjà en cours d'éxécution."
 
 #: ../src/startup.cpp:59
+#, fuzzy
 msgid ""
-"The previous instance of Bibledit-Gtk is still optimizing its data while "
+"The previous instance of Bibledit-Desktop is still optimizing its data while "
 "shutting down.\n"
 "Please wait till that has been done, and try again."
 msgstr ""
@@ -6934,6 +6946,10 @@ msgstr "Cette balise existe déjà dans la feuille de style"
 msgid "Do you really want to delete stylesheet "
 msgstr "Voulez-vous vraiment supprimer la feuille de style "
 
+#: ../src/windowstyles.cpp:724
+msgid "?"
+msgstr " ?"
+
 #: ../src/windowstyles.cpp:740
 msgid "Rename stylesheet"
 msgstr "Renommer la feuille de style"
@@ -6995,8 +7011,8 @@ msgid "No place found to insert the word list"
 msgstr "Pas d'emplacement trouvé pour insérer la liste de mots"
 
 #: ../src/xetex.cpp:89
-#, c-format
-msgid "% Configuration file created by Bibledit-Gtk"
+#, fuzzy, c-format
+msgid "% Configuration file created by Bibledit-Desktop"
 msgstr "% Configuration file created by Bibledit-Gtk"
 
 #: ../src/xetex.cpp:90
@@ -7756,9 +7772,6 @@ msgstr ""
 
 #~ msgid "Looking for file "
 #~ msgstr "Recherche du fichier "
-
-#~ msgid "?"
-#~ msgstr " ?"
 
 #~ msgid "."
 #~ msgstr "."

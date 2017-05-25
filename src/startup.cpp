@@ -50,13 +50,13 @@ bool check_bibledit_startup_okay (int argc, char *argv[])
 
   // See whether Bibledit itself is running already.
   if (programs_running_count("bibledit-desktop") > 1) {
-    gtkw_dialog_error(NULL, _("bibledit-besktop is already running."));
+    gtkw_dialog_error(NULL, _("Bibledit-Desktop is already running."));
     return false;
   }
   
   // See whether Bibledit is shutting down.
   if (program_is_running ("bibledit-shutdown")) {
-    gtkw_dialog_error(NULL, _("The previous instance of bibledit-desktop is still optimizing its data while shutting down.\nPlease wait till that has been done, and try again."));
+    gtkw_dialog_error(NULL, _("The previous instance of Bibledit-Desktop is still optimizing its data while shutting down.\nPlease wait till that has been done, and try again."));
     return false;
   }
 
