@@ -190,7 +190,7 @@ navigation(0), httpd(0)
   interprocess_communications_initiate_listener_message_id = 0;
   
   // Application name.
-  g_set_application_name("Bibledit-Gtk");
+  g_set_application_name("Bibledit-Desktop");
 
   // Gui Features object.
   GuiFeatures guifeatures(0);
@@ -5274,7 +5274,7 @@ void MainWindow::handle_editor_focus()
   check_usfm_window_ping ();
   
   // Set the title of the main window to include the project.
-  ustring title = "Bibledit-Gtk";
+  ustring title = "Bibledit-Desktop";
   if (!project.empty()) {
     title.append (" - ");
     title.append (project);

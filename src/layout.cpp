@@ -147,7 +147,7 @@ void ScreenLayoutDimensions::timeout()
         // gtk_window_resize (mywindow, width, height);
 #ifndef DARWIN
         // Function gtk_window_move crashes on some version of Mac OS X 
-        // when bibledit-gtk is installed through macports.
+        // when bibledit-desktop is installed through macports.
         gtk_window_move (mywindow, x, y);
 #endif
       }

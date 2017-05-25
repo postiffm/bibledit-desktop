@@ -234,7 +234,7 @@ void merge_editor_and_file (vector <ustring> merge_base,
   // If PHP is not available, skip running the filter to avoid complete data loss.
   if (!gw_find_program_in_path ("php")) {
     gw_message (_("Cannot find PHP."));
-    gw_message (_("Bibledit-Gtk needs PHP for improved collaboration and merging."));
+    gw_message (_("Bibledit-Desktop needs PHP for improved collaboration and merging."));
     gw_message (_("Some changes were lost."));
     gw_message (_("Install package php5-cli."));
     return;
