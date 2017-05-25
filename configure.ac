@@ -224,11 +224,12 @@ AC_CHECK_HEADER(sqlite3.h, , AC_MSG_ERROR([Header file sqlite3.h was not found. 
 # Internationalization
 #-------------------------------------------------------------------------------
 GETTEXT_PACKAGE=bibledit
-AM_GNU_GETTEXT_VERSION([0.19.7])
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"],
                    [The domain to use with gettext])
-AM_GNU_GETTEXT
+
+AM_GNU_GETTEXT_VERSION([0.19.7])
+AM_GNU_GETTEXT([external])
 
 BIBLEDIT_LOCALEDIR=[${datadir}/locale]
 AC_SUBST(BIBLEDIT_LOCALEDIR)

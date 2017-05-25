@@ -94,7 +94,7 @@ void ScreenLayoutDimensions::verify()
 void ScreenLayoutDimensions::apply()
 // Applies the stored dimensions to the main window.
 {
-  // The dimension are applies with a delay so as to give the window a change to settle.
+  // The dimensions are applied with a delay so as to give the window a chance to settle.
   g_timeout_add (300, GSourceFunc(on_timeout), gpointer(this));
 }
 
@@ -131,7 +131,7 @@ bool ScreenLayoutDimensions::on_timeout (gpointer data)
   return false;
 }
 
-// MAP: Why not apply the dimensions immediately?
+// MAP: Why not apply the dimensions immediately? For answer, see apply() above.
 void ScreenLayoutDimensions::timeout()
 // Apply the dimensions after a timeout.
 {

@@ -33,7 +33,7 @@
 #include "directories.h"
 #include "tiny_utilities.h"
 #include "html.h"
-#include <glib/g18n.h>
+#include <glib/gi18n.h>
 
 Httpd::Httpd(bool dummy)
 // This is a basic webserver tailored to Bibledit's specific needs.

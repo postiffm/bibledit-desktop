@@ -64,10 +64,10 @@ cp -f "$ACLOCAL/progtest.m4" m4/
 #cp -f "$AUTOCONFARCHIVE/ax_cxx_compile_stdcxx.m4" m4/
 # What to do about isc-posix.m4?
 
-echo "Running glib-gettextize..."
-echo "glib-gettextize----------------------------------" >> $LOG
-echo "Ignore non-fatal messages" >> $LOG
-echo "no" | glib-gettextize --force --copy >> $LOG 2>&1
+#echo "Running glib-gettextize..."
+#echo "glib-gettextize----------------------------------" >> $LOG
+#echo "Ignore non-fatal messages" >> $LOG
+#echo "no" | glib-gettextize --force --copy >> $LOG 2>&1
 
 echo "Making m4/aclocal.m4 writable ..."
 echo "Making m4/aclocal.m4 writable--------------------" >> $LOG

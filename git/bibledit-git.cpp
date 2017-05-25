@@ -21,11 +21,15 @@
 
 #include "bibledit-git.h"
 #include <config.h>
-#include <glib/g18n.h>
+#include <glib/gi18n.h>
 
 
 int main (int argc, char *argv[])
 {
+  // Internationalization: initialize gettext
+  bindtextdomain(GETTEXT_PACKAGE, BIBLEDIT_LOCALEDIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+  textdomain(GETTEXT_PACKAGE);
   
 #ifndef WIN32
   // Do not run as root.
@@ -104,7 +108,7 @@ bool on_timeout (gpointer data)
     if (folder.empty() ) {
       if (we_loop) {
         message (_("Will send and receive again after 5 minutes."));
-        message (_"Or close the window to not send and receive again."));
+        message (_("Or close the window to not send and receive again."));
         g_timeout_add(300000, GSourceFunc(on_timeout), NULL);
       } else {
       message (_("Finished"));

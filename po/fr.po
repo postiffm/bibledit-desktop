@@ -1,4 +1,4 @@
-# French translation strings for bibledit-gtk.
+# French translation strings for bibledit-desktop.
 # Copyright (C) 2015 Matt Postiff
 # This file is distributed under the same license as the bibledit package.
 # Matt Postiff <postiffm@umich.edu>, 2015.
