@@ -1,0 +1,20 @@
+To create a new version of bibledit.pot, do this:
+
+xgettext -k_ ../src/*.cpp -o test.pot
+xgettext -j --language=glade ../templates/gtkbuilder.*.xml -o test.pot
+
+and then, if you are creating a refreshed copy of an old bibledit.pot,
+check test.pot against the old bibledit.pot to see if everything looks
+right.
+
+The problem with the above approach is that it blasts the header of
+the bibledit.pot file, which includes copyright and other niceties.  I
+am not aware of switches to xgettext that will fill all this
+information for you. So, from your old bibledit.pot, copy the top
+lines of information from it to the new file.
+
+Once you are happy with the diff of test.pot and bibledit.pot, then do
+this:
+
+mv test.pot bibledit.pot
+git commit -a -m "Updated bibledit.pot to new sources."

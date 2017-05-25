@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.11\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-05-24 16:00-0400\n"
+"POT-Creation-Date: 2017-05-25 08:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -348,7 +348,7 @@ msgid "What type of export do you choose?"
 msgstr ""
 
 #: ../src/assistantexport.cpp:400
-msgid "Standard Bibledit-Gtk format"
+msgid "Standard Bibledit-Desktop format"
 msgstr ""
 
 #: ../src/assistantexport.cpp:406
@@ -1901,14 +1901,14 @@ msgstr ""
 
 #: ../src/dialogcheck.cpp:1141
 msgid ""
-"Bibledit-Gtk normally knows the right word boundaries, but if this is not "
-"done satisfactorily, you can enter _extra characters that should be part of "
-"a word"
+"Bibledit-Desktop normally knows the right word boundaries, but if this is "
+"not done satisfactorily, you can enter _extra characters that should be part "
+"of a word"
 msgstr ""
 
 #: ../src/dialogcheck.cpp:1189
 msgid ""
-"Bibledit-Gtk already recognizes this character as part of a word.\n"
+"Bibledit-Desktop already recognizes this character as part of a word.\n"
 "It has been removed as superfluous.\n"
 "There is no need to enter your alphabet.\n"
 "Entering the special cases is enough."
@@ -2353,7 +2353,7 @@ msgid "Maintenance"
 msgstr ""
 
 #: ../src/dialogmaintenance.cpp:157
-msgid "Some actions may have great impact on Bibledit-Gtk. Use with care."
+msgid "Some actions may have great impact on Bibledit-Desktop. Use with care."
 msgstr ""
 
 #: ../src/dialogmerge.cpp:38 ../src/windowmerge.cpp:50
@@ -4234,9 +4234,9 @@ msgstr ""
 #: ../src/kjv.cpp:54
 msgid ""
 "The King James Bible from the Sword project is useful for its Strong's "
-"numbers tagged in the text. Bibledit-Gtk uses this to find related verses, "
-"among other things. Importing consists of two steps: exporting it from Sword "
-"and creating a database out of it."
+"numbers tagged in the text. Bibledit-Desktop uses this to find related "
+"verses, among other things. Importing consists of two steps: exporting it "
+"from Sword and creating a database out of it."
 msgstr ""
 
 #: ../src/kjv.cpp:57
@@ -4296,8 +4296,8 @@ msgstr ""
 
 #: ../src/kjv.cpp:128
 msgid ""
-"To use the database, copy the file kjv.sql into the Bibledit-Gtk package and "
-"re-install."
+"To use the database, copy the file kjv.sql into the Bibledit-Desktop package "
+"and re-install."
 msgstr ""
 
 #: ../src/kjv.cpp:139
@@ -4977,7 +4977,7 @@ msgid "Cannot find PHP."
 msgstr ""
 
 #: ../src/merge_utils.cpp:237
-msgid "Bibledit-Gtk needs PHP for improved collaboration and merging."
+msgid "Bibledit-Desktop needs PHP for improved collaboration and merging."
 msgstr ""
 
 #: ../src/merge_utils.cpp:238
@@ -5144,7 +5144,7 @@ msgid " from Septuagint"
 msgstr ""
 
 #: ../src/paratext.cpp:37
-msgid "# Exported from Bibledit-Gtk"
+msgid "# Exported from Bibledit-Desktop"
 msgstr ""
 
 #: ../src/password.cpp:35 ../src/password.cpp:66 ../src/password.cpp:75
@@ -5447,7 +5447,7 @@ msgid "Notes available before restore: "
 msgstr ""
 
 #: ../src/restore.cpp:63
-msgid "Currently Bibledit-Gtk has "
+msgid "Currently Bibledit-Desktop has "
 msgstr ""
 
 #: ../src/restore.cpp:63
@@ -5902,17 +5902,17 @@ msgstr ""
 
 #: ../src/startup.cpp:38
 msgid ""
-"Bibledit-Gtk has not been designed to run as user root.\n"
+"Bibledit-Desktop has not been designed to run as user root.\n"
 "Please run it as a standard user."
 msgstr ""
 
 #: ../src/startup.cpp:53
-msgid "Bibledit-Gtk is already running."
+msgid "bibledit-besktop is already running."
 msgstr ""
 
 #: ../src/startup.cpp:59
 msgid ""
-"The previous instance of Bibledit-Gtk is still optimizing its data while "
+"The previous instance of bibledit-desktop is still optimizing its data while "
 "shutting down.\n"
 "Please wait till that has been done, and try again."
 msgstr ""
@@ -6654,6 +6654,10 @@ msgstr ""
 msgid "Do you really want to delete stylesheet "
 msgstr ""
 
+#: ../src/windowstyles.cpp:724
+msgid "?"
+msgstr ""
+
 #: ../src/windowstyles.cpp:740
 msgid "Rename stylesheet"
 msgstr ""
@@ -6716,7 +6720,7 @@ msgstr ""
 
 #: ../src/xetex.cpp:89
 #, c-format
-msgid "% Configuration file created by Bibledit-Gtk"
+msgid "% Configuration file created by Bibledit-Desktop"
 msgstr ""
 
 #: ../src/xetex.cpp:90
