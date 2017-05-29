@@ -75,7 +75,7 @@ BookLocalization::BookLocalization(const ustring & language_in, const ustring & 
                 myabbreviation = text;
               }
               free(text);
-			  free(opening_element); opening_element = NULL; // now we can free it, since we are done with it
+	      free(opening_element); opening_element = NULL; // now we can free it, since we are done with it
             }
             break;
           }
