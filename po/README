@@ -5,6 +5,8 @@ xgettext -j -k_ ../git/*.cpp -o test.pot
 xgettext -j -k_ ../shutdown/*.cpp -o test.pot
 xgettext -j --language=glade ../templates/gtkbuilder.*.xml -o test.pot
 
+(run these commands by doing sh ./getStrings.sh)
+
 and then, if you are creating a refreshed copy of an old
 bibledit-desktop.pot, check test.pot against the old one to see if
 everything looks right.

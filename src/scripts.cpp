@@ -323,13 +323,13 @@ ustring script_get_named_type(ScriptType scripttype)
   ustring name;
   switch (scripttype) {
   case stSed:
-    name = "Sed rules";
+    name = _("Sed rules");
     break;
   case stTECkit:
-    name = "TECkit mapping";
+    name = _("TECkit mapping");
     break;
   case stFree:
-    name = "Free script";
+    name = _("Free script");
     break;
   case stEnd:
     break;
