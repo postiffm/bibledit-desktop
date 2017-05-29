@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.11\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-05-25 08:33-0400\n"
+"POT-Creation-Date: 2017-05-28 22:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -476,7 +476,7 @@ msgstr ""
 msgid "The import is done"
 msgstr ""
 
-#: ../src/assistantimport.cpp:299
+#: ../src/assistantimport.cpp:299 ../git/bibledit-git.cpp:114
 msgid "Finished"
 msgstr ""
 
@@ -4154,7 +4154,7 @@ msgid "Enabled"
 msgstr ""
 
 #: ../src/gwrappers.cpp:396 ../src/gwrappers.cpp:545
-#: ../src/tiny_utilities.cpp:321
+#: ../src/tiny_utilities.cpp:321 ../git/bibledit-git.cpp:334
 msgid " didn't spawn"
 msgstr ""
 
@@ -6927,6 +6927,77 @@ msgstr ""
 msgid ""
 "You can tune the files by hand, then run \"xetex document.tex\" in this "
 "folder to convert it into a PDF file."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:37
+msgid "Bibledit-Git has not been designed to run with root privileges."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:47
+msgid "Bibledit-Git"
+msgstr ""
+
+#: ../git/bibledit-git.cpp:68
+msgid "_Repeat at end"
+msgstr ""
+
+#: ../git/bibledit-git.cpp:73
+msgid "Sending and receiving Bibles."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:98
+msgid "Ready."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:99 ../git/bibledit-git.cpp:115
+msgid "You can close the window, or it will close itself in 5 minutes."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:110
+msgid "Will send and receive again after 5 minutes."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:111
+msgid "Or close the window to not send and receive again."
+msgstr ""
+
+#: ../git/bibledit-git.cpp:197
+msgid ""
+"Bibledit will resolve conflicts between its own data and the data on the "
+"server."
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:94
+msgid "Bibledit-Desktop"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:104
+msgid "Tidying up"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:363
+#, c-format
+msgid "Run command %s\n"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:366
+#, c-format
+msgid "Exit code %d\n"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:421
+#, c-format
+msgid "Optimize git repository at %s\n"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:469
+#, c-format
+msgid "Optimize snapshot at %s\n"
+msgstr ""
+
+#: ../shutdown/bibledit-shutdown.cpp:502
+#, c-format
+msgid "Optimize database at %s\n"
 msgstr ""
 
 #: ../templates/gtkbuilder.bulkspellingdialog.xml:7
