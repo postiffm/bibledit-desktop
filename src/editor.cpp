@@ -1146,7 +1146,7 @@ void Editor2::create_or_update_text_style(Style * style, bool paragraph, bool pl
 // This creates or updates a GtkTextTag with the data stored in "style".
 // The fontsize of the style is calculated by the value as stored in "style", and multiplied by "font_multiplier".
 {
-  DEBUG("Called")
+  // DEBUG("Called")
   // Take the existing tag, or create a new one and add it to the tagtable.
   GtkTextTag *tag = gtk_text_tag_table_lookup(texttagtable, style->marker.c_str());
   if (!tag) {

@@ -27,7 +27,7 @@
 #include "gtkwrappers.h"
 #include "directories.h"
 #include "gwrappers.h"
-
+#include <glib/gi18n.h>
 
 GuiDialog::GuiDialog(int dummy)
 {

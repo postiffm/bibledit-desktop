@@ -25,7 +25,8 @@
 #include "bookdata.h"
 #include "books.h"
 #include "tiny_utilities.h"
-
+#include <glib/gi18n.h>
+#include "debug.h"
 
 extern book_record books_table[];
 
@@ -137,12 +138,14 @@ vector < ustring > BookLocalizations::localizations_get()
     // Get the localizations from the templates that come with Bibledit.
     ReadFiles rf1(Directories->get_package_data(), "language_", ".xml");
     for (unsigned int i = 0; i < rf1.files.size(); i++) {
+      DEBUG(_("Found language file ") + rf1.files[i])
       available_filenames.push_back(gw_build_filename(Directories->get_package_data(), rf1.files[i]));
       available_localizations.push_back(filename_get_localization(rf1.files[i]));
     }
     // Get the localizations from the templates provided by the user.
     ReadFiles rf2(Directories->get_templates_user(), "language_", ".xml");
     for (unsigned int i = 0; i < rf2.files.size(); i++) {
+      DEBUG(_("Found language file ") + rf2.files[i])
       available_filenames.push_back(gw_build_filename(Directories->get_templates_user(), rf2.files[i]));
       available_localizations.push_back(filename_get_localization(rf2.files[i]));
     }
