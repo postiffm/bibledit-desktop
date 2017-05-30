@@ -186,8 +186,9 @@ NotesUpdateDialog::NotesUpdateDialog(int dummy)
   ReadText categories(notes_categories_filename());
   notes_categories_add_from_database(categories.lines);
   combobox_set_strings(combobox_category_to, categories.lines);
-  if (!categories.lines.empty())
+  if (!categories.lines.empty()) {
     combobox_set_string(combobox_category_to, categories.lines[0]);
+  }
 }
 
 
