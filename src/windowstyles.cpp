@@ -721,7 +721,7 @@ void WindowStyles::on_stylesheet_delete()
 {
   OpenStylesheetDialog dialog(osdtDelete, mystylesheet);
   if (dialog.run() == GTK_RESPONSE_OK) {
-    if (gtkw_dialog_question(NULL, _("Do you really want to delete stylesheet ") + dialog.stylesheet + "?") == GTK_RESPONSE_YES) {
+    if (gtkw_dialog_question(NULL, _("Do you really want to delete stylesheet ") + dialog.stylesheet + _("?")) == GTK_RESPONSE_YES) {
       stylesheet_delete(dialog.stylesheet);
     }
   }

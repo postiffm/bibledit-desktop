@@ -1,0 +1,34 @@
+To create a new version of bibledit.pot, do this:
+
+xgettext -k_ ../src/*.cpp -o test.pot
+xgettext -j -k_ ../git/*.cpp -o test.pot
+xgettext -j -k_ ../shutdown/*.cpp -o test.pot
+xgettext -j --language=glade ../templates/gtkbuilder.*.xml -o test.pot
+
+(run these commands by doing sh ./getStrings.sh)
+
+and then, if you are creating a refreshed copy of an old
+bibledit-desktop.pot, check test.pot against the old one to see if
+everything looks right.
+
+The problem with the above approach is that it blasts the header of
+the bibledit.pot file, which includes copyright and other niceties.  I
+am not aware of switches to xgettext that will fill all this
+information for you. So, from your old bibledit.pot, copy the top
+lines of information from it to the new file.
+
+Once you are happy with the diff of test.pot and bibledit.pot, then do
+this:
+
+mv test.pot bibledit-desktop.pot
+git commit -a -m "Updated bibledit-desktop.pot to new sources."
+
+Now, that is the "portable object template (.pot)." But you also have to
+update the language files, that is, the .po files. So, for French, do this:
+
+msgmerge fr.po bibledit-desktop.pot > fr.po.new
+compare fr.po.new with the old fr.po and see if you like the changes.
+If so,
+mv fr.po.new fr.po
+git commit -a -m "Updated French translation file to match new sources. Now we need to update the translations."
+

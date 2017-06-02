@@ -34,7 +34,7 @@ int main (int argc, char *argv[])
 #ifndef WIN32
   // Do not run as root.
   if (getuid () == 0) {
-    cout << "Bibledit-Git has not been designed to run with root privileges." << endl;
+    cout << _("Bibledit-Git has not been designed to run with root privileges.") << endl;
     return 1;
   }
 #endif
@@ -44,7 +44,7 @@ int main (int argc, char *argv[])
 
   // Display the window.      
   GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window), "Bibledit-Git");
+  gtk_window_set_title (GTK_WINDOW (window), _("Bibledit-Git"));
   gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
   g_signal_connect ((gpointer) window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
@@ -65,7 +65,7 @@ int main (int argc, char *argv[])
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
 
-  GtkWidget * checkbutton = gtk_check_button_new_with_mnemonic ("_Repeat at end");
+  GtkWidget * checkbutton = gtk_check_button_new_with_mnemonic (_("_Repeat at end"));
   g_signal_connect ((gpointer) checkbutton, "toggled", G_CALLBACK (on_checkbutton_loop_toggled), NULL);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(checkbutton), true);
   gtk_container_add(GTK_CONTAINER (vbox), checkbutton);

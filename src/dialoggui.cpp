@@ -27,7 +27,7 @@
 #include "gtkwrappers.h"
 #include "directories.h"
 #include "gwrappers.h"
-
+#include <glib/gi18n.h>
 
 GuiDialog::GuiDialog(int dummy)
 {
@@ -143,7 +143,7 @@ void GuiDialog::on_okbutton()
 
   // Restart needed if there was a change in the features.
   if ((old_mode != new_mode) || (old_list != new_list)) {
-    gtkw_dialog_info(featuresdialog, "The changes will take effect after Bibledit-Desktop has been restarted");
+    gtkw_dialog_info(featuresdialog, _("The changes will take effect after Bibledit-Desktop has been restarted"));
   }
 }
 

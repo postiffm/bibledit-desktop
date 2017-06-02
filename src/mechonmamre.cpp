@@ -33,6 +33,7 @@
 #include "compress.h"
 #include "projectutils.h"
 #include "settings.h"
+#include <glib/gi18n.h>
 
 
 ustring mechon_mamre_html_entry_url ()
@@ -56,7 +57,7 @@ ustring mechon_mamre_import_url ()
 void mechon_mamre_home_entry (HtmlWriter2& htmlwriter)
 {
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add (mechon_mamre_html_entry_url (), "Hebrew Bible with cantillation marks from Mechon Mamre");
+  htmlwriter.hyperlink_add (mechon_mamre_html_entry_url (), _("Hebrew Bible with cantillation marks from Mechon Mamre"));
   htmlwriter.paragraph_close ();
 }
 
@@ -64,25 +65,25 @@ void mechon_mamre_home_entry (HtmlWriter2& htmlwriter)
 void mechon_mamre_detailed_page (HtmlWriter2& htmlwriter)
 {
   htmlwriter.heading_open (3);
-  htmlwriter.text_add ("Hebrew Bible with cantillation marks from Mechon Mamre");
+  htmlwriter.text_add (_("Hebrew Bible with cantillation marks from Mechon Mamre"));
   htmlwriter.heading_close ();
   htmlwriter.paragraph_open();
-  htmlwriter.text_add ("The Hebrew Bible from Mechon Mamre provides a Hebrew text that can be useful for translating the Bible. Bibledit-Desktop can import this text. This consists of two steps: downloading it and importing it.");
+  htmlwriter.text_add (_("The Hebrew Bible from Mechon Mamre provides a Hebrew text that can be useful for translating the Bible. Bibledit-Desktop can import this text. This consists of two steps: downloading it and importing it."));
   htmlwriter.paragraph_close();
   htmlwriter.heading_open (4);
-  htmlwriter.text_add ("1. Downloading the text");
+  htmlwriter.text_add (_("1. Downloading the text"));
   htmlwriter.heading_close ();
   htmlwriter.paragraph_open();
-  htmlwriter.text_add ("When you click on the link below, a web browser will open, which will download the Hebrew text. The file will be called ct005.zip. Please save this file in the home directory, on your Desktop, or in the Downloads folder.");
+  htmlwriter.text_add (_("When you click on the link below, a web browser will open, which will download the Hebrew text. The file will be called ct005.zip. Please save this file in the home directory, on your Desktop, or in the Downloads folder."));
   htmlwriter.paragraph_close();
   htmlwriter.paragraph_open();
-  htmlwriter.hyperlink_add (mechon_mamre_download_url (), "Download it");
+  htmlwriter.hyperlink_add (mechon_mamre_download_url (), _("Download it"));
   htmlwriter.paragraph_close();
   htmlwriter.heading_open (4);
-  htmlwriter.text_add ("2. Importing the text");
+  htmlwriter.text_add (_("2. Importing the text"));
   htmlwriter.heading_close ();
   htmlwriter.paragraph_open();
-  htmlwriter.text_add ("When you click on the link below, a new Bible will be created, and the file that you have downloaded will be imported into it.");
+  htmlwriter.text_add (_("When you click on the link below, a new Bible will be created, and the file that you have downloaded will be imported into it."));
   htmlwriter.paragraph_close();
   htmlwriter.paragraph_open();
   htmlwriter.hyperlink_add (mechon_mamre_import_url (), "Import it");
@@ -93,7 +94,7 @@ void mechon_mamre_detailed_page (HtmlWriter2& htmlwriter)
 void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
 {
   htmlwriter.heading_open (3);
-  htmlwriter.text_add ("Hebrew import from Mechon Mamre");
+  htmlwriter.text_add (_("Hebrew import from Mechon Mamre"));
   htmlwriter.heading_close ();
 
   vector <ustring> messages;
@@ -101,30 +102,30 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
 
   // Locate the downloaded file.
   ustring ct005zipfilename = gw_build_filename (g_get_home_dir (), "ct005.zip");
-  messages.push_back ("Looking for file " + ct005zipfilename);
+  messages.push_back (_("Looking for file ") + ct005zipfilename);
   if (!g_file_test (ct005zipfilename.c_str(), G_FILE_TEST_IS_REGULAR)) {
     ct005zipfilename.clear();
   }
   if (ct005zipfilename.empty()) {
     ct005zipfilename = gw_build_filename (g_get_home_dir (), "Desktop", "ct005.zip");
-    messages.push_back ("Looking for file " + ct005zipfilename);
+    messages.push_back (_("Looking for file ") + ct005zipfilename);
     if (!g_file_test (ct005zipfilename.c_str(), G_FILE_TEST_IS_REGULAR)) {
       ct005zipfilename.clear();
     }
   }
   if (ct005zipfilename.empty()) {
     ct005zipfilename = gw_build_filename (g_get_home_dir (), "Downloads", "ct005.zip");
-    messages.push_back ("Looking for file " + ct005zipfilename);
+    messages.push_back (_("Looking for file ") + ct005zipfilename);
     if (!g_file_test (ct005zipfilename.c_str(), G_FILE_TEST_IS_REGULAR)) {
       ct005zipfilename.clear();
     }
   }
   if (ct005zipfilename.empty()) {
-    messages.push_back ("Can't find Hebrew input file");
+    messages.push_back (_("Can't find Hebrew input file"));
     keep_going = false;
   }
   if (keep_going) {
-    messages.push_back ("Using file " + ct005zipfilename);
+    messages.push_back (_("Using file ") + ct005zipfilename);
   }
 
   // Unpack the zipped file.
@@ -134,10 +135,10 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
     unix_rmdir (directory);
     gw_mkdir_with_parents (directory);
     if (!uncompress (ct005zipfilename, directory)) {
-      messages.push_back ("Could not unpack the file");
+      messages.push_back (_("Could not unpack the file"));
       keep_going = false;
     }
-    messages.push_back ("Unpacking into folder " + directory);
+    messages.push_back (_("Unpacking into folder ") + directory);
   }
 
   // Show the readme file.
@@ -162,9 +163,9 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
   if (keep_going) {
     directory = gw_build_filename (directory, "c", "ct");
     if (!g_file_test (directory.c_str(), G_FILE_TEST_IS_DIR)) {
-      messages.push_back ("Can't find data in directory " + directory);
+      messages.push_back (_("Can't find data in directory ") + directory);
     }
-    messages.push_back ("Looking for data in directory " + directory);
+    messages.push_back (_("Looking for data in directory ") + directory);
   }
   
   // Get a list of the html files that have the data.
@@ -184,14 +185,14 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
   }
 
   // Create a new Bible into which to import the data.
-  ustring bible = "Hebrew Mechon Mamre";
+  ustring bible = _("Hebrew Mechon Mamre");
   if (keep_going) {
     if (project_exists (bible)) {
-      messages.push_back ("A Bible called \"" + bible + "\" already exists");
+      messages.push_back (_("A Bible already exists by this name: ") + bible);
       keep_going = false;      
     } else {
       project_create_restore (bible, "");
-      messages.push_back ("Creating a new Bible called \"" + bible + "\"");
+      messages.push_back (_("Creating a new Bible called \"") + bible + "\"");
       // Make a couple of settings.
       extern Settings * settings;
       ProjectConfiguration * projectconfig = settings->projectconfig (bible);
@@ -205,7 +206,7 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
   // Store all the chapters 0 in each book.
   if (keep_going) {
     vector <unsigned int> books = books_type_to_ids(btOldTestament);
-    ProgressWindow progresswindow ("Creating books", false);
+    ProgressWindow progresswindow (_("Creating books"), false);
     progresswindow.set_iterate (0, 1, books.size());
     for (unsigned int bk = 0; bk < books.size(); bk++) {
       progresswindow.iterate ();
@@ -218,7 +219,7 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
 
   // Store all the chapters.
   if (keep_going) {
-    ProgressWindow progresswindow ("Importing chapters", false);
+    ProgressWindow progresswindow (_("Importing chapters"), false);
     progresswindow.set_iterate (0, 1, files.size());
     for (unsigned int i = 0; i < files.size(); i++) {
       progresswindow.iterate ();
@@ -228,21 +229,21 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
       vector <ustring> contents = mechon_mamre_extract_contents (files[i], chapter);
       CategorizeChapterVerse ccv (contents);
       project_store_chapter (bible, book, ccv);
-      messages.push_back ("Importing " + books_id_to_english (book) + " " + convert_to_string (chapter) + " from file " + files[i]);
+      messages.push_back (_("Importing ") + books_id_to_english (book) + " " + convert_to_string (chapter) + _(" from file ") + files[i]);
     }
   }
 
   // Write accumulated messages.
   htmlwriter.heading_open (3);
   if (keep_going) {
-    htmlwriter.text_add ("Success! Bible \"" + bible + "\" was created");
+    htmlwriter.text_add (_("Success! Bible was created: ") + bible);
   } else {
-    htmlwriter.text_add ("Error!");
+    htmlwriter.text_add (_("Error!"));
   }
   htmlwriter.heading_close ();
   if (keep_going) {
     htmlwriter.paragraph_open ();
-    htmlwriter.text_add ("To view the Hebrew text, open the Bible in the editor. Optionally set the font for better display of the Hebrew text. A donation made to Mechon Mamre will support their work.");
+    htmlwriter.text_add (_("To view the Hebrew text, open the Bible in the editor. Optionally set the font for better display of the Hebrew text. A donation made to Mechon Mamre will support their work."));
     htmlwriter.paragraph_close ();
   }
   for (unsigned int i = 0; i < messages.size(); i++) {
@@ -253,7 +254,7 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
   
   // Write OK.
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add ("ok", "Ok");
+  htmlwriter.hyperlink_add ("ok", _("Ok"));
   htmlwriter.paragraph_close ();
 }
 
@@ -271,9 +272,9 @@ bool mechon_mamre_copyright(const ustring & inputfile)
     return false;
   }
   // Search for the signature.
-  char *mechonmamre = g_strstr_len(contents, 400, "Mechon Mamre");
+  char *mechonmamre = g_strstr_len(contents, 400, _("Mechon Mamre"));
   if (mechonmamre) {
-    mechonmamre = g_strstr_len(contents, 400, "Copyright");
+    mechonmamre = g_strstr_len(contents, 400, _("Copyright"));
   }
   // Free memory and return result.
   g_free(contents);
@@ -530,4 +531,3 @@ vector <ustring> mechon_mamre_extract_contents (const ustring& file, unsigned in
   // Return the data.
   return lines;  
 }
-

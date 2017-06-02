@@ -184,4 +184,6 @@
      ../templates/gtkbuilder.systemlogdialog.xml \
      ../templates/gtkbuilder.timednotifywindow.xml \
      ../templates/gtkbuilder.xetexdialog.xml \
-     ../templates/gtkbuilder.yesnoalwaysdialog.xml
+     ../templates/gtkbuilder.yesnoalwaysdialog.xml \
+     ../git/bibledit-git.cpp \
+     ../shutdown/bibledit-shutdown.cpp

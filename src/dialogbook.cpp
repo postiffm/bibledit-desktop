@@ -120,7 +120,7 @@ BookDialog::BookDialog(const ustring & project)
   gtk_tree_view_set_model(GTK_TREE_VIEW(treeview1), GTK_TREE_MODEL(model));
   g_object_unref(model);
   GtkCellRenderer *renderer = gtk_cell_renderer_text_new();
-  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, _("Name"), renderer, _("text"), COLUMN_BOOK, NULL);
+  gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(treeview1), -1, _("Name"), renderer, "text", COLUMN_BOOK, NULL);
   gtk_tree_selection_set_mode(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1)), GTK_SELECTION_SINGLE);
 
   // Load content.

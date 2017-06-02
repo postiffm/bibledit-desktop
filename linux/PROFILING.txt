@@ -1,0 +1,6 @@
+To measure cpu usage per function on Linux, use
+   valgrind --tool=callgrind bibledit-bin
+
+Graphical tools to display the information that was collected:
+-- alleyoop
+-- kcachegrind

@@ -151,7 +151,7 @@ void MaintenanceDialog::load_webview (const gchar * url)
   else {
     // The home page.
     htmlwriter.heading_open (3);
-    htmlwriter.text_add ("Maintenance");
+    htmlwriter.text_add (_("Maintenance"));
     htmlwriter.heading_close ();
     htmlwriter.paragraph_open();
     htmlwriter.text_add (_("Some actions may have great impact on Bibledit-Desktop. Use with care."));

@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
   settings = new Settings(true);
   // LocalizedBooks object.
   booklocalizations = new BookLocalizations(0);
-  gw_message("Finished booklocalizations");
+  gw_message(_("Finished booklocalizations"));
   // Versifications object.
   versifications = new Versifications(0);
   // Verse mappings object.
@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
   vcs = new VCS(0);
   // URLTransport object.
   urltransport = new URLTransport(0);
-  gw_message("Finished URLTransport");
+  gw_message(_("Finished URLTransport"));
   /*
   We used a trick to get Bibledit to operate as a true activity on OLPC. 
   The problem is that any regular X11 program that is started, 

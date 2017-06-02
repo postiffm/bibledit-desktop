@@ -51,6 +51,11 @@ int SqliteReader::callback(void *userdata, int argc, char **argv, char **column_
 
 int main (int argc, char *argv[])
 {
+  // Internationalization: initialize gettext
+  bindtextdomain(GETTEXT_PACKAGE, BIBLEDIT_LOCALEDIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+  textdomain(GETTEXT_PACKAGE);
+
   // Init variables.
   action_count = 0;
   
@@ -86,7 +91,7 @@ int main (int argc, char *argv[])
 
   // Display the window.      
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window), "Bibledit");
+  gtk_window_set_title (GTK_WINDOW (window), _("Bibledit-Desktop"));
   gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
   g_signal_connect ((gpointer) window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
@@ -355,10 +360,10 @@ bool handle_shell_command (sqlite3 *db)
 
   // Run and log the command.
   string command = "cd '" + workingdirectory + "' ; " + shellcommand;
-  printf ("Run command %s\n", command.c_str());
+  printf (_("Run command %s\n"), command.c_str());
   fflush (stdout);
   int exitcode = system (command.c_str());
-  printf ("Exit code %d\n", exitcode);
+  printf (_("Exit code %d\n"), exitcode);
   fflush (stdout);
 
   // Feedback.
@@ -413,7 +418,7 @@ bool handle_git_repositories (sqlite3 *db)
     
     // If the repository was committed, it should get optimized.
     // Store shell commands in the database for later execution.
-    printf ("Optimize git repository at %s\n", repositories_in_database[repo].c_str());
+    printf (_("Optimize git repository at %s\n"), repositories_in_database[repo].c_str());
     fflush (stdout);
     char *sql;
     // Prune all unreachable objects from the object database.
@@ -461,7 +466,7 @@ bool handle_snapshots (sqlite3 *db)
   for (unsigned int database = 0; database < databases_in_database.size(); database++) {
 
     // Optimize it.
-    printf ("Optimize snapshot at %s\n", databases_in_database[database].c_str());
+    printf (_("Optimize snapshot at %s\n"), databases_in_database[database].c_str());
     fflush (stdout);
     trim_snapshots (databases_in_database[database]);
     // Remove this database from the maintenance database.
@@ -494,7 +499,7 @@ bool handle_databases (sqlite3 *db)
   // Go through the databases.
   for (unsigned int database = 0; database < databases_in_database.size(); database++) {
     // If the database was edited, it should get optimized.
-    printf ("Optimize database at %s\n", databases_in_database[database].c_str());
+    printf (_("Optimize database at %s\n"), databases_in_database[database].c_str());
     fflush (stdout);
     if (!databases_in_database[database].empty()) {
       sqlite3 *db2;
