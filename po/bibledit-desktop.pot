@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.11\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-06-01 22:36-0400\n"
+"POT-Creation-Date: 2017-06-01 23:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7552,25 +7552,27 @@ msgid "% Configuration file created by Bibledit-Desktop"
 msgstr ""
 
 #: ../src/xetex.cpp:90
+#, no-c-format
 msgid "% You can modify it to suit your needs"
 msgstr ""
 
 #: ../src/xetex.cpp:91
-#, c-format
+#, no-c-format
 msgid "% After modification, run the following command in this directory:"
 msgstr ""
 
 #: ../src/xetex.cpp:92
-#, c-format
+#, no-c-format
 msgid "%   xetex document.tex"
 msgstr ""
 
 #: ../src/xetex.cpp:93
-#, c-format
+#, no-c-format
 msgid "% After that look carefully at the output"
 msgstr ""
 
 #: ../src/xetex.cpp:94
+#, no-c-format
 msgid "% If it says that a re-run is required, repeat this command"
 msgstr ""
 
@@ -7612,146 +7614,151 @@ msgstr ""
 msgid " should have the .tec suffix - ignoring this file"
 msgstr ""
 
-#: ../src/xetex.cpp:176
-#, c-format
+#: ../src/xetex.cpp:179
+#, no-c-format
 msgid ""
 "% Fonts to use for \"plain\", \"bold\", \"italic\", and \"bold italic\" from "
 "the stylesheet"
 msgstr ""
 
-#: ../src/xetex.cpp:177
+#: ../src/xetex.cpp:181
+#, no-c-format
 msgid "% (they need not really be italic, etc.)"
 msgstr ""
 
-#: ../src/xetex.cpp:178
-#, c-format
+#: ../src/xetex.cpp:183
+#, no-c-format
 msgid ""
 "% Add e.g. \":mapping=farsidigits\" to get digits in Farsi, provided the "
 "farsidigits.tec TECkit mapping is available"
 msgstr ""
 
-#: ../src/xetex.cpp:179
-#, c-format
+#: ../src/xetex.cpp:185
+#, no-c-format
 msgid ""
 "% Add e.g. \":script=arab\" to use the arab shaping engine instead of the "
 "generic one"
 msgstr ""
 
-#: ../src/xetex.cpp:190
+#: ../src/xetex.cpp:197
+#, no-c-format
 msgid "% Right-to-left layout mode"
 msgstr ""
 
-#: ../src/xetex.cpp:195
+#: ../src/xetex.cpp:203
+#, no-c-format
 msgid ""
 "% The unit for font sizes in the stylesheet; changing this will scale all "
 "text proportionately"
 msgstr ""
 
-#: ../src/xetex.cpp:199
-#, c-format
+#: ../src/xetex.cpp:208
+#, no-c-format
 msgid "% Scaling factor used to adjust line spacing, relative to font size"
 msgstr ""
 
-#: ../src/xetex.cpp:210
+#: ../src/xetex.cpp:219
 msgid ""
 "% Information to include in the running header (at top of pages, except "
 "first)"
 msgstr ""
 
-#: ../src/xetex.cpp:211
+#: ../src/xetex.cpp:220
 msgid ""
 "% We set the items to print at left/center/right of odd and even pages "
 "separately"
 msgstr ""
 
-#: ../src/xetex.cpp:212
+#: ../src/xetex.cpp:221
 msgid "% Possible contents:"
 msgstr ""
 
-#: ../src/xetex.cpp:213
+#: ../src/xetex.cpp:222
 msgid "%   \\rangeref = Scripture reference of the range of text on the page;"
 msgstr ""
 
-#: ../src/xetex.cpp:214
+#: ../src/xetex.cpp:223
 msgid "%   \\firstref = reference of the first verse on the page)"
 msgstr ""
 
-#: ../src/xetex.cpp:215
+#: ../src/xetex.cpp:224
 msgid "%   \\lastref = reference of the last verse on the page)"
 msgstr ""
 
-#: ../src/xetex.cpp:216
+#: ../src/xetex.cpp:225
 msgid "%   \\pagenumber = the page number"
 msgstr ""
 
-#: ../src/xetex.cpp:217
+#: ../src/xetex.cpp:226
 msgid "%   \\empty = print nothing in this position"
 msgstr ""
 
-#: ../src/xetex.cpp:235
+#: ../src/xetex.cpp:244
 msgid "% Whether to include verse number in running head, or only chapter"
 msgstr ""
 
-#: ../src/xetex.cpp:239
+#: ../src/xetex.cpp:248
 msgid "% Whether to skip printing verse number 1 at start of chapter"
 msgstr ""
 
-#: ../src/xetex.cpp:243
+#: ../src/xetex.cpp:252
 msgid "% Whether to use paragraph indent at drop-cap chapter numbers"
 msgstr ""
 
-#: ../src/xetex.cpp:244
+#: ../src/xetex.cpp:253
 msgid "% \\IndentAtChaptertrue"
 msgstr ""
 
-#: ../src/xetex.cpp:264
+#: ../src/xetex.cpp:273
 msgid "% Reformat \\"
 msgstr ""
 
-#: ../src/xetex.cpp:271
+#: ../src/xetex.cpp:280
 msgid "% Numerical callers for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:271 ../src/xetex.cpp:275 ../src/xetex.cpp:302
-#: ../src/xetex.cpp:306
+#: ../src/xetex.cpp:280 ../src/xetex.cpp:285 ../src/xetex.cpp:314
+#: ../src/xetex.cpp:319
 msgid " notes"
 msgstr ""
 
-#: ../src/xetex.cpp:275
-#, c-format
+#: ../src/xetex.cpp:285
+#, no-c-format
 msgid "% Alphabetical callers for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:286
-#, c-format
+#: ../src/xetex.cpp:297
+#, no-c-format
 msgid "% Special caller sequence for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:302
+#: ../src/xetex.cpp:314
+#, no-c-format
 msgid "% Reset callers every page for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:306
+#: ../src/xetex.cpp:319
+#, no-c-format
 msgid "% Omit callers in the note for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:307
+#: ../src/xetex.cpp:320
 msgid "% \\OmitCallerInNote{"
 msgstr ""
 
-#: ../src/xetex.cpp:313
+#: ../src/xetex.cpp:326
 msgid "% The number of columns"
 msgstr ""
 
-#: ../src/xetex.cpp:319
+#: ../src/xetex.cpp:332
 msgid "% The gutter between double cols, relative to font size"
 msgstr ""
 
-#: ../src/xetex.cpp:375
+#: ../src/xetex.cpp:388
 msgid "All the data for this document is available in temporal folder "
 msgstr ""
 
-#: ../src/xetex.cpp:376
+#: ../src/xetex.cpp:389
 msgid ""
 "You can tune the files by hand, then run \"xetex document.tex\" in this "
 "folder to convert it into a PDF file."

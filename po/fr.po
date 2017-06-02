@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.8.12\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-06-01 22:36-0400\n"
+"POT-Creation-Date: 2017-06-01 23:02-0400\n"
 "PO-Revision-Date: 2017-05-30 20:12+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
@@ -7876,25 +7876,27 @@ msgid "% Configuration file created by Bibledit-Desktop"
 msgstr "% Configuration file created by Bibledit-Desktop"
 
 #: ../src/xetex.cpp:90
+#, no-c-format
 msgid "% You can modify it to suit your needs"
 msgstr "% Vous pouvez le modifier en fonction de vos besoins"
 
 #: ../src/xetex.cpp:91
-#, c-format
+#, no-c-format
 msgid "% After modification, run the following command in this directory:"
 msgstr "% Après modification, exécutez la commande suivante dans ce dossier :"
 
 #: ../src/xetex.cpp:92
-#, c-format
+#, no-c-format
 msgid "%   xetex document.tex"
 msgstr "%  xetex document.tex"
 
 #: ../src/xetex.cpp:93
-#, c-format
+#, no-c-format
 msgid "% After that look carefully at the output"
 msgstr "% Après cela vérifier précautionneusement la sortie"
 
 #: ../src/xetex.cpp:94
+#, no-c-format
 msgid "% If it says that a re-run is required, repeat this command"
 msgstr ""
 "% S'il vous répond qu'une ré-exécution est requise, répétez cette commande"
@@ -7921,7 +7923,7 @@ msgid "% Relative sizes of margins, based on the unit above"
 msgstr "% Tailles relatives des marges, basées sur l'unité ci-dessus"
 
 #: ../src/xetex.cpp:123
-#, c-format
+#, fuzzy, c-format
 msgid "% Extra margin for the gutter on the binding side"
 msgstr "% Marge en trop pour la gouttière sur le côté à lier"
 
@@ -7937,8 +7939,8 @@ msgstr "Fichier de l'organisation des polices"
 msgid " should have the .tec suffix - ignoring this file"
 msgstr " doit avoir le suffixe .tec - ignorer ce fichier"
 
-#: ../src/xetex.cpp:176
-#, c-format
+#: ../src/xetex.cpp:179
+#, no-c-format
 msgid ""
 "% Fonts to use for \"plain\", \"bold\", \"italic\", and \"bold italic\" from "
 "the stylesheet"
@@ -7946,12 +7948,13 @@ msgstr ""
 "% Polices à utiliser pour \"simple\", \"gras\", \"italique\" et \"gras "
 "italique\" de la feuille de style"
 
-#: ../src/xetex.cpp:177
+#: ../src/xetex.cpp:181
+#, no-c-format
 msgid "% (they need not really be italic, etc.)"
 msgstr "% (ils n'ont pas besoin d'être en italique, etc.)"
 
-#: ../src/xetex.cpp:178
-#, c-format
+#: ../src/xetex.cpp:183
+#, no-c-format
 msgid ""
 "% Add e.g. \":mapping=farsidigits\" to get digits in Farsi, provided the "
 "farsidigits.tec TECkit mapping is available"
@@ -7959,8 +7962,8 @@ msgstr ""
 "% Ajouter par exemple \":Mapping=farsidigits\" pour obtenir des chiffres en "
 "farsi, à condition que le mappage farsidigits.tec TECkit soit disponible"
 
-#: ../src/xetex.cpp:179
-#, c-format
+#: ../src/xetex.cpp:185
+#, no-c-format
 msgid ""
 "% Add e.g. \":script=arab\" to use the arab shaping engine instead of the "
 "generic one"
@@ -7968,11 +7971,13 @@ msgstr ""
 "% Ajouter par exemple \":Mapping=arab\" pour utiliser le moteur de mise en "
 "forme arabe au lieu du générique"
 
-#: ../src/xetex.cpp:190
+#: ../src/xetex.cpp:197
+#, no-c-format
 msgid "% Right-to-left layout mode"
 msgstr "% Mode de mise en page aligné à droite"
 
-#: ../src/xetex.cpp:195
+#: ../src/xetex.cpp:203
+#, no-c-format
 msgid ""
 "% The unit for font sizes in the stylesheet; changing this will scale all "
 "text proportionately"
@@ -7980,14 +7985,14 @@ msgstr ""
 "% L'unité pour les tailles de police dans la feuille de style, changer cela "
 "va ajuster la taille de tous les textes proportionnellement"
 
-#: ../src/xetex.cpp:199
-#, c-format
+#: ../src/xetex.cpp:208
+#, no-c-format
 msgid "% Scaling factor used to adjust line spacing, relative to font size"
 msgstr ""
 "% Facteur d'échelle utilisé pour ajuster l'espacement des lignes par rapport "
 "à la taille de la police"
 
-#: ../src/xetex.cpp:210
+#: ../src/xetex.cpp:219
 msgid ""
 "% Information to include in the running header (at top of pages, except "
 "first)"
@@ -7995,7 +8000,7 @@ msgstr ""
 "Informations à inclure dans l'en-tête courant (en haut des pages, sauf la "
 "première)"
 
-#: ../src/xetex.cpp:211
+#: ../src/xetex.cpp:220
 msgid ""
 "% We set the items to print at left/center/right of odd and even pages "
 "separately"
@@ -8003,101 +8008,103 @@ msgstr ""
 "% Nous définissons les éléments à imprimer à gauche / au centre / à droite "
 "des pages impaires et paires séparément"
 
-#: ../src/xetex.cpp:212
+#: ../src/xetex.cpp:221
 msgid "% Possible contents:"
 msgstr "% Contenus possible :"
 
-#: ../src/xetex.cpp:213
+#: ../src/xetex.cpp:222
 msgid "%   \\rangeref = Scripture reference of the range of text on the page;"
 msgstr ""
 "%  \\rangeref =  Référence des Écritures du champ de texte sur la page ;"
 
-#: ../src/xetex.cpp:214
+#: ../src/xetex.cpp:223
 msgid "%   \\firstref = reference of the first verse on the page)"
 msgstr "%   \\firstref = référence du premier verset sur la page)"
 
-#: ../src/xetex.cpp:215
+#: ../src/xetex.cpp:224
 msgid "%   \\lastref = reference of the last verse on the page)"
 msgstr "%   \\lastref = référence du dernier verset sur la page)"
 
-#: ../src/xetex.cpp:216
+#: ../src/xetex.cpp:225
 msgid "%   \\pagenumber = the page number"
 msgstr "%   \\pagenumber = le numéro de la page"
 
-#: ../src/xetex.cpp:217
+#: ../src/xetex.cpp:226
 msgid "%   \\empty = print nothing in this position"
 msgstr "%   \\empty = n'imprime rien à cette position"
 
-#: ../src/xetex.cpp:235
+#: ../src/xetex.cpp:244
 msgid "% Whether to include verse number in running head, or only chapter"
 msgstr ""
 "% Inclure le nombre de versets dans l'en-tête courant, ou seulement le "
 "chapitre"
 
-#: ../src/xetex.cpp:239
+#: ../src/xetex.cpp:248
 msgid "% Whether to skip printing verse number 1 at start of chapter"
 msgstr "% Ignorer l'impression du verset numéro 1 au début du chapitre"
 
-#: ../src/xetex.cpp:243
+#: ../src/xetex.cpp:252
 msgid "% Whether to use paragraph indent at drop-cap chapter numbers"
 msgstr ""
 "% Utiliser un alinéa de paragraphe s'il y a des numéros de chapitre en "
 "lettrine"
 
-#: ../src/xetex.cpp:244
+#: ../src/xetex.cpp:253
 msgid "% \\IndentAtChaptertrue"
 msgstr "% \\IndentAtChaptertrue"
 
-#: ../src/xetex.cpp:264
+#: ../src/xetex.cpp:273
 msgid "% Reformat \\"
 msgstr "% Reformater \\"
 
-#: ../src/xetex.cpp:271
+#: ../src/xetex.cpp:280
 msgid "% Numerical callers for \\"
 msgstr "% Appelants numériques pour \\"
 
-#: ../src/xetex.cpp:271 ../src/xetex.cpp:275 ../src/xetex.cpp:302
-#: ../src/xetex.cpp:306
+#: ../src/xetex.cpp:280 ../src/xetex.cpp:285 ../src/xetex.cpp:314
+#: ../src/xetex.cpp:319
 msgid " notes"
 msgstr "notes"
 
-#: ../src/xetex.cpp:275
-#, c-format
+#: ../src/xetex.cpp:285
+#, no-c-format
 msgid "% Alphabetical callers for \\"
 msgstr "% Appelants alphabétiques pour \\"
 
-#: ../src/xetex.cpp:286
-#, c-format
+#: ../src/xetex.cpp:297
+#, no-c-format
 msgid "% Special caller sequence for \\"
 msgstr "% Séquence d'appellants spécifique pour \\"
 
-#: ../src/xetex.cpp:302
+#: ../src/xetex.cpp:314
+#, no-c-format
 msgid "% Reset callers every page for \\"
 msgstr "% Réinitialiser les appellants de chaque page pour \\"
 
-#: ../src/xetex.cpp:306
+#: ../src/xetex.cpp:319
+#, no-c-format
 msgid "% Omit callers in the note for \\"
 msgstr "% Omettre les appelants dans la note pour \\"
 
-#: ../src/xetex.cpp:307
+#: ../src/xetex.cpp:320
 msgid "% \\OmitCallerInNote{"
 msgstr "% \\OmitCallerInNote{"
 
-#: ../src/xetex.cpp:313
+#: ../src/xetex.cpp:326
 msgid "% The number of columns"
 msgstr "% Le nombre de colonnes"
 
-#: ../src/xetex.cpp:319
+#: ../src/xetex.cpp:332
 msgid "% The gutter between double cols, relative to font size"
 msgstr ""
 "% La gouttière entre les doubles cols, par rapport à la taille de la police"
 
-#: ../src/xetex.cpp:375
+#: ../src/xetex.cpp:388
 msgid "All the data for this document is available in temporal folder "
 msgstr ""
 "Toutes les données de ce document sont disponible dans un dossier temporaire"
 
-#: ../src/xetex.cpp:376
+#: ../src/xetex.cpp:389
 msgid ""
 "You can tune the files by hand, then run \"xetex document.tex\" in this "
 "folder to convert it into a PDF file."
