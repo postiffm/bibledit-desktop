@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.11\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-05-28 22:00-0400\n"
+"POT-Creation-Date: 2017-06-01 22:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,7 +242,7 @@ msgstr ""
 
 #: ../src/assistantexport.cpp:79 ../src/assistantimport.cpp:84
 #: ../src/checks.cpp:189 ../src/dialogmychecks.cpp:169
-#: ../src/mainwindow.cpp:5638 ../src/windowreferences.cpp:49
+#: ../src/mainwindow.cpp:5639 ../src/windowreferences.cpp:49
 msgid "References"
 msgstr ""
 
@@ -1036,13 +1036,709 @@ msgstr ""
 msgid "Sorting references: "
 msgstr ""
 
+#: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:228
+msgid "Nothing was done"
+msgstr ""
+
+#: ../src/bibledit.cpp:168
+msgid "Finished booklocalizations"
+msgstr ""
+
+#: ../src/bibledit.cpp:179
+msgid "Finished URLTransport"
+msgstr ""
+
 #: ../src/bibledit.cpp:202
 #, c-format
 msgid "Bad xembed value: %s\n"
 msgstr ""
 
-#: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:227
-msgid "Nothing was done"
+#: ../src/books.cpp:400
+msgid "Front Matter"
+msgstr ""
+
+#: ../src/books.cpp:401
+msgid "Genesis"
+msgstr ""
+
+#: ../src/books.cpp:401
+msgid "Gen"
+msgstr ""
+
+#: ../src/books.cpp:402
+msgid "Exodus"
+msgstr ""
+
+#: ../src/books.cpp:402
+msgid "Exo"
+msgstr ""
+
+#: ../src/books.cpp:403
+msgid "Leviticus"
+msgstr ""
+
+#: ../src/books.cpp:403
+msgid "Lev"
+msgstr ""
+
+#: ../src/books.cpp:404
+msgid "Numbers"
+msgstr ""
+
+#: ../src/books.cpp:404
+msgid "Num"
+msgstr ""
+
+#: ../src/books.cpp:405
+msgid "Deuteronomy"
+msgstr ""
+
+#: ../src/books.cpp:405
+msgid "Deu"
+msgstr ""
+
+#: ../src/books.cpp:406
+msgid "Joshua"
+msgstr ""
+
+#: ../src/books.cpp:406
+msgid "Jos"
+msgstr ""
+
+#: ../src/books.cpp:407
+msgid "Judges"
+msgstr ""
+
+#: ../src/books.cpp:407
+msgid "Jdg"
+msgstr ""
+
+#: ../src/books.cpp:408
+msgid "Ruth"
+msgstr ""
+
+#: ../src/books.cpp:408
+msgid "Rut"
+msgstr ""
+
+#: ../src/books.cpp:409
+msgid "1 Samuel"
+msgstr ""
+
+#: ../src/books.cpp:409
+msgid "1Sa"
+msgstr ""
+
+#: ../src/books.cpp:410
+msgid "2 Samuel"
+msgstr ""
+
+#: ../src/books.cpp:410
+msgid "2Sa"
+msgstr ""
+
+#: ../src/books.cpp:411
+msgid "1 Kings"
+msgstr ""
+
+#: ../src/books.cpp:411
+msgid "1Ki"
+msgstr ""
+
+#: ../src/books.cpp:412
+msgid "2 Kings"
+msgstr ""
+
+#: ../src/books.cpp:412
+msgid "2Ki"
+msgstr ""
+
+#: ../src/books.cpp:413
+msgid "1 Chronicles"
+msgstr ""
+
+#: ../src/books.cpp:413
+msgid "1Ch"
+msgstr ""
+
+#: ../src/books.cpp:414
+msgid "2 Chronicles"
+msgstr ""
+
+#: ../src/books.cpp:414
+msgid "2Ch"
+msgstr ""
+
+#: ../src/books.cpp:415
+msgid "Ezra"
+msgstr ""
+
+#: ../src/books.cpp:415
+msgid "Ezr"
+msgstr ""
+
+#: ../src/books.cpp:416
+msgid "Nehemiah"
+msgstr ""
+
+#: ../src/books.cpp:416
+msgid "Neh"
+msgstr ""
+
+#: ../src/books.cpp:417
+msgid "Esther"
+msgstr ""
+
+#: ../src/books.cpp:417
+msgid "Est"
+msgstr ""
+
+#: ../src/books.cpp:418
+msgid "Job"
+msgstr ""
+
+#: ../src/books.cpp:419
+msgid "Psalms"
+msgstr ""
+
+#: ../src/books.cpp:419
+msgid "Psa"
+msgstr ""
+
+#: ../src/books.cpp:420
+msgid "Proverbs"
+msgstr ""
+
+#: ../src/books.cpp:420
+msgid "Pro"
+msgstr ""
+
+#: ../src/books.cpp:421
+msgid "Ecclesiastes"
+msgstr ""
+
+#: ../src/books.cpp:421
+msgid "Ecc"
+msgstr ""
+
+#: ../src/books.cpp:422
+msgid "Song of Solomon"
+msgstr ""
+
+#: ../src/books.cpp:422
+msgid "Sol"
+msgstr ""
+
+#: ../src/books.cpp:423
+msgid "Isaiah"
+msgstr ""
+
+#: ../src/books.cpp:423
+msgid "Isa"
+msgstr ""
+
+#: ../src/books.cpp:424
+msgid "Jeremiah"
+msgstr ""
+
+#: ../src/books.cpp:424
+msgid "Jer"
+msgstr ""
+
+#: ../src/books.cpp:425
+msgid "Lamentations"
+msgstr ""
+
+#: ../src/books.cpp:425
+msgid "Lam"
+msgstr ""
+
+#: ../src/books.cpp:426
+msgid "Ezekiel"
+msgstr ""
+
+#: ../src/books.cpp:426
+msgid "Eze"
+msgstr ""
+
+#: ../src/books.cpp:427
+msgid "Daniel"
+msgstr ""
+
+#: ../src/books.cpp:427
+msgid "Dan"
+msgstr ""
+
+#: ../src/books.cpp:428
+msgid "Hosea"
+msgstr ""
+
+#: ../src/books.cpp:428
+msgid "Hos"
+msgstr ""
+
+#: ../src/books.cpp:429
+msgid "Joel"
+msgstr ""
+
+#: ../src/books.cpp:429
+msgid "Joe"
+msgstr ""
+
+#: ../src/books.cpp:430
+msgid "Amos"
+msgstr ""
+
+#: ../src/books.cpp:430
+msgid "Amo"
+msgstr ""
+
+#: ../src/books.cpp:431
+msgid "Obadiah"
+msgstr ""
+
+#: ../src/books.cpp:431
+msgid "Oba"
+msgstr ""
+
+#: ../src/books.cpp:432
+msgid "Jonah"
+msgstr ""
+
+#: ../src/books.cpp:432
+msgid "Jon"
+msgstr ""
+
+#: ../src/books.cpp:433
+msgid "Micah"
+msgstr ""
+
+#: ../src/books.cpp:433
+msgid "Mic"
+msgstr ""
+
+#: ../src/books.cpp:434
+msgid "Nahum"
+msgstr ""
+
+#: ../src/books.cpp:434
+msgid "Nah"
+msgstr ""
+
+#: ../src/books.cpp:435
+msgid "Habakkuk"
+msgstr ""
+
+#: ../src/books.cpp:435
+msgid "Hab"
+msgstr ""
+
+#: ../src/books.cpp:436
+msgid "Zephaniah"
+msgstr ""
+
+#: ../src/books.cpp:436
+msgid "Zep"
+msgstr ""
+
+#: ../src/books.cpp:437
+msgid "Haggai"
+msgstr ""
+
+#: ../src/books.cpp:437
+msgid "Hag"
+msgstr ""
+
+#: ../src/books.cpp:438
+msgid "Zechariah"
+msgstr ""
+
+#: ../src/books.cpp:438
+msgid "Zec"
+msgstr ""
+
+#: ../src/books.cpp:439
+msgid "Malachi"
+msgstr ""
+
+#: ../src/books.cpp:439
+msgid "Mal"
+msgstr ""
+
+#: ../src/books.cpp:440
+msgid "Matthew"
+msgstr ""
+
+#: ../src/books.cpp:440
+msgid "Mat"
+msgstr ""
+
+#: ../src/books.cpp:441
+msgid "Mark"
+msgstr ""
+
+#: ../src/books.cpp:441
+msgid "Mar"
+msgstr ""
+
+#: ../src/books.cpp:442
+msgid "Luke"
+msgstr ""
+
+#: ../src/books.cpp:442
+msgid "Luk"
+msgstr ""
+
+#: ../src/books.cpp:443
+msgid "John"
+msgstr ""
+
+#: ../src/books.cpp:443
+msgid "Joh"
+msgstr ""
+
+#: ../src/books.cpp:444
+msgid "Acts"
+msgstr ""
+
+#: ../src/books.cpp:444
+msgid "Act"
+msgstr ""
+
+#: ../src/books.cpp:445
+msgid "Romans"
+msgstr ""
+
+#: ../src/books.cpp:445
+msgid "Rom"
+msgstr ""
+
+#: ../src/books.cpp:446
+msgid "1 Corinthians"
+msgstr ""
+
+#: ../src/books.cpp:446
+msgid "1Co"
+msgstr ""
+
+#: ../src/books.cpp:447
+msgid "2 Corinthians"
+msgstr ""
+
+#: ../src/books.cpp:447
+msgid "2Co"
+msgstr ""
+
+#: ../src/books.cpp:448
+msgid "Galatians"
+msgstr ""
+
+#: ../src/books.cpp:448
+msgid "Gal"
+msgstr ""
+
+#: ../src/books.cpp:449
+msgid "Ephesians"
+msgstr ""
+
+#: ../src/books.cpp:449
+msgid "Eph"
+msgstr ""
+
+#: ../src/books.cpp:450
+msgid "Philippians"
+msgstr ""
+
+#: ../src/books.cpp:450
+msgid "Phi"
+msgstr ""
+
+#: ../src/books.cpp:451
+msgid "Colossians"
+msgstr ""
+
+#: ../src/books.cpp:451
+msgid "Col"
+msgstr ""
+
+#: ../src/books.cpp:452
+msgid "1 Thessalonians"
+msgstr ""
+
+#: ../src/books.cpp:452
+msgid "1Th"
+msgstr ""
+
+#: ../src/books.cpp:453
+msgid "2 Thessalonians"
+msgstr ""
+
+#: ../src/books.cpp:453
+msgid "2Th"
+msgstr ""
+
+#: ../src/books.cpp:454
+msgid "1 Timothy"
+msgstr ""
+
+#: ../src/books.cpp:454
+msgid "1Ti"
+msgstr ""
+
+#: ../src/books.cpp:455
+msgid "2 Timothy"
+msgstr ""
+
+#: ../src/books.cpp:455
+msgid "2Ti"
+msgstr ""
+
+#: ../src/books.cpp:456
+msgid "Titus"
+msgstr ""
+
+#: ../src/books.cpp:456
+msgid "Tit"
+msgstr ""
+
+#: ../src/books.cpp:457
+msgid "Philemon"
+msgstr ""
+
+#: ../src/books.cpp:457
+msgid "Phm"
+msgstr ""
+
+#: ../src/books.cpp:458
+msgid "Hebrews"
+msgstr ""
+
+#: ../src/books.cpp:458
+msgid "Heb"
+msgstr ""
+
+#: ../src/books.cpp:459
+msgid "James"
+msgstr ""
+
+#: ../src/books.cpp:459
+msgid "Jam"
+msgstr ""
+
+#: ../src/books.cpp:460
+msgid "1 Peter"
+msgstr ""
+
+#: ../src/books.cpp:460
+msgid "1Pe"
+msgstr ""
+
+#: ../src/books.cpp:461
+msgid "2 Peter"
+msgstr ""
+
+#: ../src/books.cpp:461
+msgid "2Pe"
+msgstr ""
+
+#: ../src/books.cpp:462
+msgid "1 John"
+msgstr ""
+
+#: ../src/books.cpp:462
+msgid "1Jo"
+msgstr ""
+
+#: ../src/books.cpp:463
+msgid "2 John"
+msgstr ""
+
+#: ../src/books.cpp:463
+msgid "2Jo"
+msgstr ""
+
+#: ../src/books.cpp:464
+msgid "3 John"
+msgstr ""
+
+#: ../src/books.cpp:464
+msgid "3Jo"
+msgstr ""
+
+#: ../src/books.cpp:465
+msgid "Jude"
+msgstr ""
+
+#: ../src/books.cpp:465
+msgid "Jud"
+msgstr ""
+
+#: ../src/books.cpp:466
+msgid "Revelation"
+msgstr ""
+
+#: ../src/books.cpp:466
+msgid "Rev"
+msgstr ""
+
+#: ../src/books.cpp:467
+msgid "Back Matter"
+msgstr ""
+
+#: ../src/books.cpp:468
+msgid "Other Material"
+msgstr ""
+
+#: ../src/books.cpp:469
+msgid "Tobit"
+msgstr ""
+
+#: ../src/books.cpp:469
+msgid "Tob"
+msgstr ""
+
+#: ../src/books.cpp:470
+msgid "Judith"
+msgstr ""
+
+#: ../src/books.cpp:470
+msgid "Jdt"
+msgstr ""
+
+#: ../src/books.cpp:471
+msgid "Esther (Greek)"
+msgstr ""
+
+#: ../src/books.cpp:471
+msgid "EsG"
+msgstr ""
+
+#: ../src/books.cpp:472
+msgid "Wisdom of Solomon"
+msgstr ""
+
+#: ../src/books.cpp:472
+msgid "Wis"
+msgstr ""
+
+#: ../src/books.cpp:473
+msgid "Sirach"
+msgstr ""
+
+#: ../src/books.cpp:473
+msgid "Sir"
+msgstr ""
+
+#: ../src/books.cpp:474
+msgid "Baruch"
+msgstr ""
+
+#: ../src/books.cpp:474
+msgid "Bar"
+msgstr ""
+
+#: ../src/books.cpp:475
+msgid "Letter of Jeremiah"
+msgstr ""
+
+#: ../src/books.cpp:475
+msgid "LJe"
+msgstr ""
+
+#: ../src/books.cpp:476
+msgid "Song of the Three Children"
+msgstr ""
+
+#: ../src/books.cpp:476
+msgid "S3Y"
+msgstr ""
+
+#: ../src/books.cpp:477
+msgid "Susanna"
+msgstr ""
+
+#: ../src/books.cpp:477
+msgid "Sus"
+msgstr ""
+
+#: ../src/books.cpp:478
+msgid "Bel and the Dragon"
+msgstr ""
+
+#: ../src/books.cpp:478
+msgid "Bel"
+msgstr ""
+
+#: ../src/books.cpp:479
+msgid "1 Maccabees"
+msgstr ""
+
+#: ../src/books.cpp:479
+msgid "1Ma"
+msgstr ""
+
+#: ../src/books.cpp:480
+msgid "2 Maccabees"
+msgstr ""
+
+#: ../src/books.cpp:480
+msgid "2Ma"
+msgstr ""
+
+#: ../src/books.cpp:481
+msgid "1 Esdras"
+msgstr ""
+
+#: ../src/books.cpp:481
+msgid "1Es"
+msgstr ""
+
+#: ../src/books.cpp:482
+msgid "Prayer of Manasses"
+msgstr ""
+
+#: ../src/books.cpp:482
+msgid "Man"
+msgstr ""
+
+#: ../src/books.cpp:483
+msgid "Psalm 151"
+msgstr ""
+
+#: ../src/books.cpp:483
+msgid "Ps2"
+msgstr ""
+
+#: ../src/books.cpp:484
+msgid "3 Maccabees"
+msgstr ""
+
+#: ../src/books.cpp:484
+msgid "3Ma"
+msgstr ""
+
+#: ../src/books.cpp:485
+msgid "2 Esdras"
+msgstr ""
+
+#: ../src/books.cpp:485
+msgid "2Es"
+msgstr ""
+
+#: ../src/books.cpp:486
+msgid "4 Maccabees"
+msgstr ""
+
+#: ../src/books.cpp:486
+msgid "4Ma"
+msgstr ""
+
+#: ../src/books.cpp:487
+msgid "Daniel (Greek)"
+msgstr ""
+
+#: ../src/books.cpp:487
+msgid "Dnt"
 msgstr ""
 
 #: ../src/check_capitalization.cpp:83 ../src/dialogmychecks.cpp:126
@@ -1223,94 +1919,6 @@ msgstr ""
 msgid "Repeated: "
 msgstr ""
 
-#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
-msgid "Word Inventory"
-msgstr ""
-
-#: ../src/checks.cpp:70
-msgid "Total word count: "
-msgstr ""
-
-#: ../src/checks.cpp:71
-msgid "Unique word count: "
-msgstr ""
-
-#: ../src/checks.cpp:73
-msgid "Words with a count of "
-msgstr ""
-
-#: ../src/checks.cpp:73
-msgid " and up were filtered out."
-msgstr ""
-
-#: ../src/checks.cpp:74
-msgid "Filtered total word count: "
-msgstr ""
-
-#: ../src/checks.cpp:75
-msgid "Filtered unique word count: "
-msgstr ""
-
-#: ../src/checks.cpp:77
-msgid "Click on a word to see the places where it occurs."
-msgstr ""
-
-#: ../src/checks.cpp:82
-msgid "Word"
-msgstr ""
-
-#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
-#: ../src/dialogmychecks.cpp:78
-msgid "Count"
-msgstr ""
-
-#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
-msgid "Marker Count"
-msgstr ""
-
-#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
-msgid "Marker"
-msgstr ""
-
-#: ../src/checks.cpp:117
-msgid "Description"
-msgstr ""
-
-#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
-msgid "Character Count"
-msgstr ""
-
-#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
-#: ../src/dialoginsertnote.cpp:99
-msgid "Character"
-msgstr ""
-
-#: ../src/checks.cpp:151
-msgid "Decimal"
-msgstr ""
-
-#: ../src/checks.cpp:152
-msgid "Hexadecimal"
-msgstr ""
-
-#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
-msgid "References Inventory"
-msgstr ""
-
-#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
-#: ../src/dialogreviewanchors.cpp:123
-#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
-msgid "Verse"
-msgstr ""
-
-#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:190 ../src/gui.cpp:130
-msgid "New Testament"
-msgstr ""
-
-#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:168 ../src/gui.cpp:115
-msgid "Old Testament"
-msgstr ""
-
 #: ../src/check_sentence_structure.cpp:50
 msgid "Checking sentence structure"
 msgstr ""
@@ -1426,6 +2034,94 @@ msgstr ""
 
 #: ../src/check_validate_usfm.cpp:621
 msgid "Deprecated marker "
+msgstr ""
+
+#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
+msgid "Word Inventory"
+msgstr ""
+
+#: ../src/checks.cpp:70
+msgid "Total word count: "
+msgstr ""
+
+#: ../src/checks.cpp:71
+msgid "Unique word count: "
+msgstr ""
+
+#: ../src/checks.cpp:73
+msgid "Words with a count of "
+msgstr ""
+
+#: ../src/checks.cpp:73
+msgid " and up were filtered out."
+msgstr ""
+
+#: ../src/checks.cpp:74
+msgid "Filtered total word count: "
+msgstr ""
+
+#: ../src/checks.cpp:75
+msgid "Filtered unique word count: "
+msgstr ""
+
+#: ../src/checks.cpp:77
+msgid "Click on a word to see the places where it occurs."
+msgstr ""
+
+#: ../src/checks.cpp:82
+msgid "Word"
+msgstr ""
+
+#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
+#: ../src/dialogmychecks.cpp:78
+msgid "Count"
+msgstr ""
+
+#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
+msgid "Marker Count"
+msgstr ""
+
+#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
+msgid "Marker"
+msgstr ""
+
+#: ../src/checks.cpp:117
+msgid "Description"
+msgstr ""
+
+#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
+msgid "Character Count"
+msgstr ""
+
+#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
+#: ../src/dialoginsertnote.cpp:99
+msgid "Character"
+msgstr ""
+
+#: ../src/checks.cpp:151
+msgid "Decimal"
+msgstr ""
+
+#: ../src/checks.cpp:152
+msgid "Hexadecimal"
+msgstr ""
+
+#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
+msgid "References Inventory"
+msgstr ""
+
+#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
+#: ../src/dialogreviewanchors.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
+msgid "Verse"
+msgstr ""
+
+#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:190 ../src/gui.cpp:130
+msgid "New Testament"
+msgstr ""
+
+#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:168 ../src/gui.cpp:115
+msgid "Old Testament"
 msgstr ""
 
 #: ../src/compareutils.cpp:51
@@ -1577,8 +2273,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../src/dialogbook.cpp:123
-msgid "text"
+#: ../src/dialogbooknames.cpp:107
+msgid "Book in Bibledit-Desktop"
 msgstr ""
 
 #: ../src/dialogbulkspelling.cpp:49
@@ -2198,6 +2894,10 @@ msgstr ""
 msgid "Selection color"
 msgstr ""
 
+#: ../src/dialoggui.cpp:146
+msgid "The changes will take effect after Bibledit-Desktop has been restarted"
+msgstr ""
+
 #: ../src/dialogimportnotes.cpp:68
 msgid ""
 "You are going to import notes into your notes editor.\n"
@@ -2348,7 +3048,7 @@ msgstr ""
 msgid "Select one or more items, and then press OK or Enter"
 msgstr ""
 
-#: ../src/dialogmaintenance.cpp:32
+#: ../src/dialogmaintenance.cpp:32 ../src/dialogmaintenance.cpp:154
 msgid "Maintenance"
 msgstr ""
 
@@ -2549,11 +3249,11 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: ../src/dialognotesupdate.cpp:234
+#: ../src/dialognotesupdate.cpp:235
 msgid "Notes were moved to the other project"
 msgstr ""
 
-#: ../src/dialognotesupdate.cpp:241
+#: ../src/dialognotesupdate.cpp:242
 msgid "Notes were moved to the other category"
 msgstr ""
 
@@ -3592,7 +4292,7 @@ msgid "with an odd number"
 msgstr ""
 
 #: ../src/dialogstylesheet.cpp:2535 ../src/dialogstylesheet.cpp:2550
-#: ../src/mainwindow.cpp:5640
+#: ../src/mainwindow.cpp:5641
 msgid "Print"
 msgstr ""
 
@@ -4062,6 +4762,10 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+#: ../src/git-exec.cpp:34
+msgid "Updating data in folder "
+msgstr ""
+
 #: ../src/git.cpp:56
 msgid "Cleaning out index lock "
 msgstr ""
@@ -4080,10 +4784,6 @@ msgstr ""
 
 #: ../src/git.cpp:106 ../src/readwrite.cpp:109
 msgid " book "
-msgstr ""
-
-#: ../src/git-exec.cpp:34
-msgid "Updating data in folder "
 msgstr ""
 
 #: ../src/gtkwrappers.cpp:86
@@ -4278,7 +4978,7 @@ msgstr ""
 msgid "Can't find the input file"
 msgstr ""
 
-#: ../src/kjv.cpp:106
+#: ../src/kjv.cpp:106 ../src/mechonmamre.cpp:128
 msgid "Using file "
 msgstr ""
 
@@ -4290,7 +4990,7 @@ msgstr ""
 msgid "Success! The database was created"
 msgstr ""
 
-#: ../src/kjv.cpp:123
+#: ../src/kjv.cpp:123 ../src/mechonmamre.cpp:241
 msgid "Error!"
 msgstr ""
 
@@ -4304,7 +5004,7 @@ msgstr ""
 msgid "ok"
 msgstr ""
 
-#: ../src/kjv.cpp:139
+#: ../src/kjv.cpp:139 ../src/mechonmamre.cpp:257
 msgid "Ok"
 msgstr ""
 
@@ -4314,6 +5014,10 @@ msgstr ""
 
 #: ../src/layout.cpp:71
 msgid "Recalculating windows positions and sizes"
+msgstr ""
+
+#: ../src/localizedbooks.cpp:141 ../src/localizedbooks.cpp:148
+msgid "Found language file "
 msgstr ""
 
 #: ../src/mainwindow.cpp:284
@@ -4776,7 +5480,7 @@ msgid ", something worth perhaps years of work?"
 msgstr ""
 
 #: ../src/mainwindow.cpp:2131
-msgid "Copyright (c) 2003-2013 Teus Benschop"
+msgid "Copyright (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
 msgstr ""
 
 #: ../src/mainwindow.cpp:2132
@@ -4836,112 +5540,224 @@ msgstr ""
 msgid "Sending to Toolbox: "
 msgstr ""
 
-#: ../src/mainwindow.cpp:3090
+#: ../src/mainwindow.cpp:3091
 msgid ""
 "A note can be deleted by clicking on the [delete] link in the notes view"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3547
+#: ../src/mainwindow.cpp:3548
 msgid "To make this work, enable spelling checking in the project"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3556
+#: ../src/mainwindow.cpp:3557
 msgid ""
 "There are no more spelling errors in this chapter\n"
 "Would you like to go to the"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3558 ../src/windowreferences.cpp:650
+#: ../src/mainwindow.cpp:3559 ../src/windowreferences.cpp:650
 msgid "next"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3560
+#: ../src/mainwindow.cpp:3561
 msgid "previous"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3561
+#: ../src/mainwindow.cpp:3562
 msgid " chapter or chapters?"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3605
+#: ../src/mainwindow.cpp:3606
 msgid "There is nothing to be checked"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3763
+#: ../src/mainwindow.cpp:3764
 msgid "Would you like to insert a new chapter?"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4104
+#: ../src/mainwindow.cpp:4105
 msgid "Soft hyphen"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4106
+#: ../src/mainwindow.cpp:4107
 msgid "No-break space"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4108
+#: ../src/mainwindow.cpp:4109
 msgid "Left double quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4110
+#: ../src/mainwindow.cpp:4111
 msgid "Right double quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4112
+#: ../src/mainwindow.cpp:4113
 msgid "Left single quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4114
+#: ../src/mainwindow.cpp:4115
 msgid "Right single quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4116
+#: ../src/mainwindow.cpp:4117
 msgid "Left-pointing double angle quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4118
+#: ../src/mainwindow.cpp:4119
 msgid "Right-pointing double angle quotation mark"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4119
+#: ../src/mainwindow.cpp:4120
 msgid "Insert character"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4119
+#: ../src/mainwindow.cpp:4120
 msgid "Insert special character"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4809
+#: ../src/mainwindow.cpp:4810
 msgid "Delete resource"
 msgstr ""
 
-#: ../src/mainwindow.cpp:4811
+#: ../src/mainwindow.cpp:4812
 msgid "Are you sure you want to delete resource "
 msgstr ""
 
-#: ../src/mainwindow.cpp:5447
+#: ../src/mainwindow.cpp:5448
 msgid "Chapter should now be in desired view"
 msgstr ""
 
-#: ../src/mainwindow.cpp:5635
+#: ../src/mainwindow.cpp:5636
 msgid "Project (through internal typesetter)"
 msgstr ""
 
-#: ../src/mainwindow.cpp:5636
+#: ../src/mainwindow.cpp:5637
 msgid "Project (through ptx2pdf typesetter)"
 msgstr ""
 
-#: ../src/mainwindow.cpp:5637 ../src/print_parallel_bible.cpp:47
+#: ../src/mainwindow.cpp:5638 ../src/print_parallel_bible.cpp:47
 #: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr ""
 
-#: ../src/mainwindow.cpp:5640
+#: ../src/mainwindow.cpp:5641
 msgid "Select what to print"
 msgstr ""
 
-#: ../src/mainwindow.cpp:5700
+#: ../src/mainwindow.cpp:5701
 msgid "There are no references to print"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:60 ../src/mechonmamre.cpp:68
+msgid "Hebrew Bible with cantillation marks from Mechon Mamre"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:71
+msgid ""
+"The Hebrew Bible from Mechon Mamre provides a Hebrew text that can be useful "
+"for translating the Bible. Bibledit-Desktop can import this text. This "
+"consists of two steps: downloading it and importing it."
+msgstr ""
+
+#: ../src/mechonmamre.cpp:74
+msgid "1. Downloading the text"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:77
+msgid ""
+"When you click on the link below, a web browser will open, which will "
+"download the Hebrew text. The file will be called ct005.zip. Please save "
+"this file in the home directory, on your Desktop, or in the Downloads folder."
+msgstr ""
+
+#: ../src/mechonmamre.cpp:80
+msgid "Download it"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:83
+msgid "2. Importing the text"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:86
+msgid ""
+"When you click on the link below, a new Bible will be created, and the file "
+"that you have downloaded will be imported into it."
+msgstr ""
+
+#: ../src/mechonmamre.cpp:97
+msgid "Hebrew import from Mechon Mamre"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:105 ../src/mechonmamre.cpp:111
+#: ../src/mechonmamre.cpp:118
+msgid "Looking for file "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:124
+msgid "Can't find Hebrew input file"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:138
+msgid "Could not unpack the file"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:141
+msgid "Unpacking into folder "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:166
+msgid "Can't find data in directory "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:168
+msgid "Looking for data in directory "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:188
+msgid "Hebrew Mechon Mamre"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:191
+msgid "A Bible already exists by this name: "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:195
+msgid "Creating a new Bible called \""
+msgstr ""
+
+#: ../src/mechonmamre.cpp:209
+msgid "Creating books"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:222
+msgid "Importing chapters"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:232
+msgid "Importing "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:232
+msgid " from file "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:239
+msgid "Success! Bible was created: "
+msgstr ""
+
+#: ../src/mechonmamre.cpp:246
+msgid ""
+"To view the Hebrew text, open the Bible in the editor. Optionally set the "
+"font for better display of the Hebrew text. A donation made to Mechon Mamre "
+"will support their work."
+msgstr ""
+
+#: ../src/mechonmamre.cpp:275
+msgid "Mechon Mamre"
+msgstr ""
+
+#: ../src/mechonmamre.cpp:277
+msgid "Copyright"
 msgstr ""
 
 #: ../src/merge_utils.cpp:37
@@ -5322,10 +6138,14 @@ msgstr ""
 msgid "Ready printing the parallel references"
 msgstr ""
 
-#: ../src/printproject2.cpp:89 ../src/printproject.cpp:91
+#: ../src/printproject.cpp:91 ../src/printproject2.cpp:89
 msgid ""
 "There were no books to print\n"
 "Select some books and try again"
+msgstr ""
+
+#: ../src/project_memory.cpp:115
+msgid "Loading "
 msgstr ""
 
 #: ../src/projectconfig.cpp:238 ../src/projectconfig.cpp:239
@@ -5342,10 +6162,6 @@ msgstr ""
 
 #: ../src/projectconfig.cpp:257
 msgid "Sans 14"
-msgstr ""
-
-#: ../src/project_memory.cpp:115
-msgid "Loading "
 msgstr ""
 
 #: ../src/projectutils.cpp:146
@@ -5837,6 +6653,18 @@ msgstr ""
 
 #: ../src/scripts.cpp:244
 msgid "UTF-8 validation failure"
+msgstr ""
+
+#: ../src/scripts.cpp:326
+msgid "Sed rules"
+msgstr ""
+
+#: ../src/scripts.cpp:329
+msgid "TECkit mapping"
+msgstr ""
+
+#: ../src/scripts.cpp:332
+msgid "Free script"
 msgstr ""
 
 #: ../src/scripturechecks.cpp:381
@@ -6408,51 +7236,51 @@ msgstr ""
 msgid "C_ategory"
 msgstr ""
 
-#: ../src/windownotes.cpp:364
+#: ../src/windownotes.cpp:365
 msgid "Created on "
 msgstr ""
 
-#: ../src/windownotes.cpp:374
+#: ../src/windownotes.cpp:375
 msgid "Edited on "
 msgstr ""
 
-#: ../src/windownotes.cpp:384
+#: ../src/windownotes.cpp:385
 msgid "Created by "
 msgstr ""
 
-#: ../src/windownotes.cpp:599
+#: ../src/windownotes.cpp:600
 msgid "No valid references. Note was not stored"
 msgstr ""
 
-#: ../src/windownotes.cpp:634
+#: ../src/windownotes.cpp:635
 msgid "created a new note, category \""
 msgstr ""
 
-#: ../src/windownotes.cpp:636
+#: ../src/windownotes.cpp:637
 msgid "\", project \""
 msgstr ""
 
-#: ../src/windownotes.cpp:642
+#: ../src/windownotes.cpp:643
 msgid "modified the references"
 msgstr ""
 
-#: ../src/windownotes.cpp:645
+#: ../src/windownotes.cpp:646
 msgid "modified the note"
 msgstr ""
 
-#: ../src/windownotes.cpp:648
+#: ../src/windownotes.cpp:649
 msgid "changed the category to \""
 msgstr ""
 
-#: ../src/windownotes.cpp:651
+#: ../src/windownotes.cpp:652
 msgid "changed the project to \""
 msgstr ""
 
-#: ../src/windownotes.cpp:799
+#: ../src/windownotes.cpp:800
 msgid "Are you sure you want to delete this note?"
 msgstr ""
 
-#: ../src/windownotes.cpp:802
+#: ../src/windownotes.cpp:803
 msgid "Are you sure you want to delete these notes?"
 msgstr ""
 

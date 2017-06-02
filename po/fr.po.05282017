@@ -2,13 +2,13 @@
 # Copyright (C) 2015 Matt Postiff
 # This file is distributed under the same license as the bibledit package.
 # Matt Postiff <postiffm@umich.edu>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.8.12\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-06-01 22:36-0400\n"
-"PO-Revision-Date: 2017-05-30 20:12+0100\n"
+"POT-Creation-Date: 2017-05-28 22:00-0400\n"
+"PO-Revision-Date: 2017-05-24 16:04+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -86,6 +86,7 @@ msgid "Backup is about to be made"
 msgstr "La sauvegarde est sur le point d'être exécutée"
 
 #: ../src/assistantbackup.cpp:238
+#, fuzzy
 msgid "Backup is done"
 msgstr "La sauvegarde est terminée"
 
@@ -245,7 +246,7 @@ msgstr "Que voulez-vous exporter ?"
 
 #: ../src/assistantexport.cpp:79 ../src/assistantimport.cpp:84
 #: ../src/checks.cpp:189 ../src/dialogmychecks.cpp:169
-#: ../src/mainwindow.cpp:5639 ../src/windowreferences.cpp:49
+#: ../src/mainwindow.cpp:5638 ../src/windowreferences.cpp:49
 msgid "References"
 msgstr "Références"
 
@@ -351,8 +352,9 @@ msgid "What type of export do you choose?"
 msgstr "Quel type d'exportation avez-vous choisi ?"
 
 #: ../src/assistantexport.cpp:400
+#, fuzzy
 msgid "Standard Bibledit-Desktop format"
-msgstr "Format Bibledit-Desktop standard"
+msgstr "Format Bibledit-Gtk standard"
 
 #: ../src/assistantexport.cpp:406
 msgid "Paratext format"
@@ -367,16 +369,18 @@ msgid "Include keyterms without a rendering?"
 msgstr "Inclure les mots-clés sans rendu ?"
 
 #: ../src/assistantexport.cpp:440
+#, fuzzy
 msgid "Export Options"
 msgstr "Options d'exportation"
 
 #: ../src/assistantexport.cpp:444
+#, fuzzy
 msgid "Compress the backup"
 msgstr "Le compresser"
 
 #: ../src/assistantexport.cpp:448
 msgid "For USFM, combine files into one"
-msgstr "Pour l'USFM, fusionner les fichiers en un"
+msgstr ""
 
 #: ../src/assistantexport.cpp:464
 msgid "Please enter the date and time?"
@@ -570,10 +574,12 @@ msgid "No files were selected"
 msgstr "Aucun fichier sélectionné"
 
 #: ../src/assistantimport.cpp:775
+#, fuzzy
 msgid "Select keyterms file to import"
 msgstr "Sélectionnez le fichier de mots clé à importer"
 
 #: ../src/assistantimport.cpp:778
+#, fuzzy
 msgid ""
 "The file should satisfy certain conditions. The online help provides more "
 "information."
@@ -685,7 +691,7 @@ msgstr "Voulez-vous expédier vos données sur le dépôt ?"
 #: ../src/assistantremoterepository.cpp:222 ../src/assistantresource.cpp:463
 #: ../src/assistantresource.cpp:467
 msgid "Settings are ready to be applied"
-msgstr "Les paramètres sont prêts à être appliqués"
+msgstr "Les paramètres sont prêt à être appliqués"
 
 #: ../src/assistantremoterepository.cpp:234 ../src/assistantresource.cpp:479
 msgid "Settings have been applied"
@@ -1064,734 +1070,14 @@ msgstr "Tous sauvegarder"
 msgid "Sorting references: "
 msgstr "Tri des références : "
 
-#: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:228
-msgid "Nothing was done"
-msgstr "Rien n'a été fait"
-
-#: ../src/bibledit.cpp:168
-#, fuzzy
-msgid "Finished booklocalizations"
-msgstr "est une abbréviation de livre"
-
-#: ../src/bibledit.cpp:179
-msgid "Finished URLTransport"
-msgstr ""
-
 #: ../src/bibledit.cpp:202
 #, c-format
 msgid "Bad xembed value: %s\n"
 msgstr "Mauvaise valeur de xembed: %s\n"
 
-#: ../src/books.cpp:400
-msgid "Front Matter"
-msgstr "Introduction principale"
-
-#: ../src/books.cpp:401
-#, fuzzy
-msgid "Genesis"
-msgstr "Paramètres généraux"
-
-#: ../src/books.cpp:401
-#, fuzzy
-msgid "Gen"
-msgstr "fr"
-
-#: ../src/books.cpp:402
-msgid "Exodus"
-msgstr ""
-
-#: ../src/books.cpp:402
-#, fuzzy
-msgid "Exo"
-msgstr "Exporter"
-
-#: ../src/books.cpp:403
-msgid "Leviticus"
-msgstr ""
-
-#: ../src/books.cpp:403
-msgid "Lev"
-msgstr ""
-
-#: ../src/books.cpp:404
-#, fuzzy
-msgid "Numbers"
-msgstr "Numéro"
-
-#: ../src/books.cpp:404
-#, fuzzy
-msgid "Num"
-msgstr "Numéro"
-
-#: ../src/books.cpp:405
-msgid "Deuteronomy"
-msgstr ""
-
-#: ../src/books.cpp:405
-msgid "Deu"
-msgstr ""
-
-#: ../src/books.cpp:406
-msgid "Joshua"
-msgstr ""
-
-#: ../src/books.cpp:406
-msgid "Jos"
-msgstr ""
-
-#: ../src/books.cpp:407
-msgid "Judges"
-msgstr ""
-
-#: ../src/books.cpp:407
-msgid "Jdg"
-msgstr ""
-
-#: ../src/books.cpp:408
-msgid "Ruth"
-msgstr ""
-
-#: ../src/books.cpp:408
-#, fuzzy
-msgid "Rut"
-msgstr "Éxécuter"
-
-#: ../src/books.cpp:409
-msgid "1 Samuel"
-msgstr ""
-
-#: ../src/books.cpp:409
-msgid "1Sa"
-msgstr ""
-
-#: ../src/books.cpp:410
-msgid "2 Samuel"
-msgstr ""
-
-#: ../src/books.cpp:410
-msgid "2Sa"
-msgstr ""
-
-#: ../src/books.cpp:411
-msgid "1 Kings"
-msgstr ""
-
-#: ../src/books.cpp:411
-msgid "1Ki"
-msgstr ""
-
-#: ../src/books.cpp:412
-msgid "2 Kings"
-msgstr ""
-
-#: ../src/books.cpp:412
-msgid "2Ki"
-msgstr ""
-
-#: ../src/books.cpp:413
-msgid "1 Chronicles"
-msgstr ""
-
-#: ../src/books.cpp:413
-msgid "1Ch"
-msgstr ""
-
-#: ../src/books.cpp:414
-msgid "2 Chronicles"
-msgstr ""
-
-#: ../src/books.cpp:414
-msgid "2Ch"
-msgstr ""
-
-#: ../src/books.cpp:415
-msgid "Ezra"
-msgstr ""
-
-#: ../src/books.cpp:415
-msgid "Ezr"
-msgstr ""
-
-#: ../src/books.cpp:416
-msgid "Nehemiah"
-msgstr ""
-
-#: ../src/books.cpp:416
-msgid "Neh"
-msgstr ""
-
-#: ../src/books.cpp:417
-msgid "Esther"
-msgstr ""
-
-#: ../src/books.cpp:417
-msgid "Est"
-msgstr ""
-
-#: ../src/books.cpp:418
-msgid "Job"
-msgstr ""
-
-#: ../src/books.cpp:419
-msgid "Psalms"
-msgstr ""
-
-#: ../src/books.cpp:419
-msgid "Psa"
-msgstr ""
-
-#: ../src/books.cpp:420
-#, fuzzy
-msgid "Proverbs"
-msgstr "verbe"
-
-#: ../src/books.cpp:420
-#, fuzzy
-msgid "Pro"
-msgstr "Section"
-
-#: ../src/books.cpp:421
-msgid "Ecclesiastes"
-msgstr ""
-
-#: ../src/books.cpp:421
-msgid "Ecc"
-msgstr ""
-
-#: ../src/books.cpp:422
-msgid "Song of Solomon"
-msgstr ""
-
-#: ../src/books.cpp:422
-msgid "Sol"
-msgstr ""
-
-#: ../src/books.cpp:423
-msgid "Isaiah"
-msgstr ""
-
-#: ../src/books.cpp:423
-msgid "Isa"
-msgstr ""
-
-#: ../src/books.cpp:424
-msgid "Jeremiah"
-msgstr ""
-
-#: ../src/books.cpp:424
-msgid "Jer"
-msgstr ""
-
-#: ../src/books.cpp:425
-#, fuzzy
-msgid "Lamentations"
-msgstr "actions"
-
-#: ../src/books.cpp:425
-msgid "Lam"
-msgstr ""
-
-#: ../src/books.cpp:426
-msgid "Ezekiel"
-msgstr ""
-
-#: ../src/books.cpp:426
-msgid "Eze"
-msgstr ""
-
-#: ../src/books.cpp:427
-msgid "Daniel"
-msgstr ""
-
-#: ../src/books.cpp:427
-#, fuzzy
-msgid "Dan"
-msgstr "et"
-
-#: ../src/books.cpp:428
-msgid "Hosea"
-msgstr ""
-
-#: ../src/books.cpp:428
-msgid "Hos"
-msgstr ""
-
-#: ../src/books.cpp:429
-msgid "Joel"
-msgstr ""
-
-#: ../src/books.cpp:429
-msgid "Joe"
-msgstr ""
-
-#: ../src/books.cpp:430
-msgid "Amos"
-msgstr ""
-
-#: ../src/books.cpp:430
-msgid "Amo"
-msgstr ""
-
-#: ../src/books.cpp:431
-msgid "Obadiah"
-msgstr ""
-
-#: ../src/books.cpp:431
-msgid "Oba"
-msgstr ""
-
-#: ../src/books.cpp:432
-msgid "Jonah"
-msgstr ""
-
-#: ../src/books.cpp:432
-msgid "Jon"
-msgstr ""
-
-#: ../src/books.cpp:433
-msgid "Micah"
-msgstr ""
-
-#: ../src/books.cpp:433
-msgid "Mic"
-msgstr ""
-
-#: ../src/books.cpp:434
-msgid "Nahum"
-msgstr ""
-
-#: ../src/books.cpp:434
-msgid "Nah"
-msgstr ""
-
-#: ../src/books.cpp:435
-msgid "Habakkuk"
-msgstr ""
-
-#: ../src/books.cpp:435
-msgid "Hab"
-msgstr ""
-
-#: ../src/books.cpp:436
-msgid "Zephaniah"
-msgstr ""
-
-#: ../src/books.cpp:436
-msgid "Zep"
-msgstr ""
-
-#: ../src/books.cpp:437
-msgid "Haggai"
-msgstr ""
-
-#: ../src/books.cpp:437
-msgid "Hag"
-msgstr ""
-
-#: ../src/books.cpp:438
-msgid "Zechariah"
-msgstr ""
-
-#: ../src/books.cpp:438
-msgid "Zec"
-msgstr ""
-
-#: ../src/books.cpp:439
-msgid "Malachi"
-msgstr ""
-
-#: ../src/books.cpp:439
-#, fuzzy
-msgid "Mal"
-msgstr "Manuel"
-
-#: ../src/books.cpp:440
-msgid "Matthew"
-msgstr ""
-
-#: ../src/books.cpp:440
-msgid "Mat"
-msgstr ""
-
-#: ../src/books.cpp:441
-#, fuzzy
-msgid "Mark"
-msgstr "Balise"
-
-#: ../src/books.cpp:441
-#, fuzzy
-msgid "Mar"
-msgstr "Balise"
-
-#: ../src/books.cpp:442
-msgid "Luke"
-msgstr ""
-
-#: ../src/books.cpp:442
-msgid "Luk"
-msgstr ""
-
-#: ../src/books.cpp:443
-msgid "John"
-msgstr ""
-
-#: ../src/books.cpp:443
-msgid "Joh"
-msgstr ""
-
-#: ../src/books.cpp:444
-msgid "Acts"
-msgstr ""
-
-#: ../src/books.cpp:444
-msgid "Act"
-msgstr ""
-
-#: ../src/books.cpp:445
-msgid "Romans"
-msgstr ""
-
-#: ../src/books.cpp:445
-msgid "Rom"
-msgstr ""
-
-#: ../src/books.cpp:446
-msgid "1 Corinthians"
-msgstr ""
-
-#: ../src/books.cpp:446
-msgid "1Co"
-msgstr ""
-
-#: ../src/books.cpp:447
-msgid "2 Corinthians"
-msgstr ""
-
-#: ../src/books.cpp:447
-msgid "2Co"
-msgstr ""
-
-#: ../src/books.cpp:448
-msgid "Galatians"
-msgstr ""
-
-#: ../src/books.cpp:448
-msgid "Gal"
-msgstr ""
-
-#: ../src/books.cpp:449
-msgid "Ephesians"
-msgstr ""
-
-#: ../src/books.cpp:449
-msgid "Eph"
-msgstr ""
-
-#: ../src/books.cpp:450
-msgid "Philippians"
-msgstr ""
-
-#: ../src/books.cpp:450
-msgid "Phi"
-msgstr ""
-
-#: ../src/books.cpp:451
-msgid "Colossians"
-msgstr ""
-
-#: ../src/books.cpp:451
-msgid "Col"
-msgstr ""
-
-#: ../src/books.cpp:452
-msgid "1 Thessalonians"
-msgstr ""
-
-#: ../src/books.cpp:452
-msgid "1Th"
-msgstr ""
-
-#: ../src/books.cpp:453
-msgid "2 Thessalonians"
-msgstr ""
-
-#: ../src/books.cpp:453
-msgid "2Th"
-msgstr ""
-
-#: ../src/books.cpp:454
-msgid "1 Timothy"
-msgstr ""
-
-#: ../src/books.cpp:454
-msgid "1Ti"
-msgstr ""
-
-#: ../src/books.cpp:455
-msgid "2 Timothy"
-msgstr ""
-
-#: ../src/books.cpp:455
-msgid "2Ti"
-msgstr ""
-
-#: ../src/books.cpp:456
-msgid "Titus"
-msgstr ""
-
-#: ../src/books.cpp:456
-#, fuzzy
-msgid "Tit"
-msgstr "Titre"
-
-#: ../src/books.cpp:457
-msgid "Philemon"
-msgstr ""
-
-#: ../src/books.cpp:457
-msgid "Phm"
-msgstr ""
-
-#: ../src/books.cpp:458
-#, fuzzy
-msgid "Hebrews"
-msgstr "Hébreux"
-
-#: ../src/books.cpp:458
-#, fuzzy
-msgid "Heb"
-msgstr "Hébreux"
-
-#: ../src/books.cpp:459
-msgid "James"
-msgstr ""
-
-#: ../src/books.cpp:459
-msgid "Jam"
-msgstr ""
-
-#: ../src/books.cpp:460
-msgid "1 Peter"
-msgstr ""
-
-#: ../src/books.cpp:460
-msgid "1Pe"
-msgstr ""
-
-#: ../src/books.cpp:461
-msgid "2 Peter"
-msgstr ""
-
-#: ../src/books.cpp:461
-msgid "2Pe"
-msgstr ""
-
-#: ../src/books.cpp:462
-msgid "1 John"
-msgstr ""
-
-#: ../src/books.cpp:462
-msgid "1Jo"
-msgstr ""
-
-#: ../src/books.cpp:463
-msgid "2 John"
-msgstr ""
-
-#: ../src/books.cpp:463
-msgid "2Jo"
-msgstr ""
-
-#: ../src/books.cpp:464
-msgid "3 John"
-msgstr ""
-
-#: ../src/books.cpp:464
-msgid "3Jo"
-msgstr ""
-
-#: ../src/books.cpp:465
-msgid "Jude"
-msgstr ""
-
-#: ../src/books.cpp:465
-msgid "Jud"
-msgstr ""
-
-#: ../src/books.cpp:466
-#, fuzzy
-msgid "Revelation"
-msgstr "Répétition"
-
-#: ../src/books.cpp:466
-#, fuzzy
-msgid "Rev"
-msgstr "Supprimer"
-
-#: ../src/books.cpp:467
-#, fuzzy
-msgid "Back Matter"
-msgstr "Introduction principale"
-
-#: ../src/books.cpp:468
-#, fuzzy
-msgid "Other Material"
-msgstr "Éléments externes"
-
-#: ../src/books.cpp:469
-msgid "Tobit"
-msgstr ""
-
-#: ../src/books.cpp:469
-#, fuzzy
-msgid "Tob"
-msgstr "Haut"
-
-#: ../src/books.cpp:470
-msgid "Judith"
-msgstr ""
-
-#: ../src/books.cpp:470
-msgid "Jdt"
-msgstr ""
-
-#: ../src/books.cpp:471
-msgid "Esther (Greek)"
-msgstr ""
-
-#: ../src/books.cpp:471
-msgid "EsG"
-msgstr ""
-
-#: ../src/books.cpp:472
-msgid "Wisdom of Solomon"
-msgstr ""
-
-#: ../src/books.cpp:472
-msgid "Wis"
-msgstr ""
-
-#: ../src/books.cpp:473
-msgid "Sirach"
-msgstr ""
-
-#: ../src/books.cpp:473
-msgid "Sir"
-msgstr ""
-
-#: ../src/books.cpp:474
-msgid "Baruch"
-msgstr ""
-
-#: ../src/books.cpp:474
-msgid "Bar"
-msgstr ""
-
-#: ../src/books.cpp:475
-msgid "Letter of Jeremiah"
-msgstr ""
-
-#: ../src/books.cpp:475
-msgid "LJe"
-msgstr ""
-
-#: ../src/books.cpp:476
-msgid "Song of the Three Children"
-msgstr ""
-
-#: ../src/books.cpp:476
-msgid "S3Y"
-msgstr ""
-
-#: ../src/books.cpp:477
-msgid "Susanna"
-msgstr ""
-
-#: ../src/books.cpp:477
-#, fuzzy
-msgid "Sus"
-msgstr "État"
-
-#: ../src/books.cpp:478
-msgid "Bel and the Dragon"
-msgstr "Bel et le dragon"
-
-#: ../src/books.cpp:478
-msgid "Bel"
-msgstr ""
-
-#: ../src/books.cpp:479
-msgid "1 Maccabees"
-msgstr ""
-
-#: ../src/books.cpp:479
-msgid "1Ma"
-msgstr ""
-
-#: ../src/books.cpp:480
-msgid "2 Maccabees"
-msgstr ""
-
-#: ../src/books.cpp:480
-msgid "2Ma"
-msgstr ""
-
-#: ../src/books.cpp:481
-msgid "1 Esdras"
-msgstr ""
-
-#: ../src/books.cpp:481
-msgid "1Es"
-msgstr ""
-
-#: ../src/books.cpp:482
-msgid "Prayer of Manasses"
-msgstr ""
-
-#: ../src/books.cpp:482
-#, fuzzy
-msgid "Man"
-msgstr "Principal"
-
-#: ../src/books.cpp:483
-msgid "Psalm 151"
-msgstr ""
-
-#: ../src/books.cpp:483
-msgid "Ps2"
-msgstr ""
-
-#: ../src/books.cpp:484
-msgid "3 Maccabees"
-msgstr ""
-
-#: ../src/books.cpp:484
-msgid "3Ma"
-msgstr ""
-
-#: ../src/books.cpp:485
-msgid "2 Esdras"
-msgstr ""
-
-#: ../src/books.cpp:485
-msgid "2Es"
-msgstr ""
-
-#: ../src/books.cpp:486
-msgid "4 Maccabees"
-msgstr ""
-
-#: ../src/books.cpp:486
-msgid "4Ma"
-msgstr ""
-
-#: ../src/books.cpp:487
-msgid "Daniel (Greek)"
-msgstr ""
-
-#: ../src/books.cpp:487
-msgid "Dnt"
-msgstr ""
+#: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:227
+msgid "Nothing was done"
+msgstr "Rien n'a été fait"
 
 #: ../src/check_capitalization.cpp:83 ../src/dialogmychecks.cpp:126
 msgid "Capitalization"
@@ -1823,11 +1109,11 @@ msgstr "Chapitre excédentaire ou mauvaise versification"
 
 #: ../src/check_chapters_verses.cpp:128
 msgid "Less than "
-msgstr "moins de  "
+msgstr "moins que "
 
 #: ../src/check_chapters_verses.cpp:128
 msgid " chapters or wrong versification"
-msgstr " chapitres ou mauvaise versification"
+msgstr "chapitres ou mauvaise versification"
 
 #: ../src/check_chapters_verses.cpp:139
 msgid "Chapter has no verses"
@@ -1859,7 +1145,7 @@ msgstr "Commencement"
 
 #: ../src/check_chapters_verses.cpp:229
 msgid "Verse out of sequence following "
-msgstr "Interruption dans la versification après le verset "
+msgstr "Verset hors de la série suivante"
 
 #: ../src/check_chapters_verses.cpp:238
 msgid "Not enough verses in chapter"
@@ -1970,6 +1256,94 @@ msgstr "Répétion de mots"
 #: ../src/check_repetition.cpp:133
 msgid "Repeated: "
 msgstr "Répétition : "
+
+#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
+msgid "Word Inventory"
+msgstr "Inventaire des mots"
+
+#: ../src/checks.cpp:70
+msgid "Total word count: "
+msgstr "Nombre total des mots : "
+
+#: ../src/checks.cpp:71
+msgid "Unique word count: "
+msgstr "Nombre de mot unique : "
+
+#: ../src/checks.cpp:73
+msgid "Words with a count of "
+msgstr "Les mots avec un nombre de "
+
+#: ../src/checks.cpp:73
+msgid " and up were filtered out."
+msgstr " et plus ont été filtré."
+
+#: ../src/checks.cpp:74
+msgid "Filtered total word count: "
+msgstr "Nombre total de mots filtrés : "
+
+#: ../src/checks.cpp:75
+msgid "Filtered unique word count: "
+msgstr "Nombre total d'un mot filtré : "
+
+#: ../src/checks.cpp:77
+msgid "Click on a word to see the places where it occurs."
+msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît. "
+
+#: ../src/checks.cpp:82
+msgid "Word"
+msgstr "Mot"
+
+#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
+#: ../src/dialogmychecks.cpp:78
+msgid "Count"
+msgstr "Nombre"
+
+#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
+msgid "Marker Count"
+msgstr "Comptage des balises"
+
+#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
+msgid "Marker"
+msgstr "Balise"
+
+#: ../src/checks.cpp:117
+msgid "Description"
+msgstr "Description"
+
+#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
+msgid "Character Count"
+msgstr "Comptage des caractères"
+
+#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
+#: ../src/dialoginsertnote.cpp:99
+msgid "Character"
+msgstr "Caractère"
+
+#: ../src/checks.cpp:151
+msgid "Decimal"
+msgstr "Décimal"
+
+#: ../src/checks.cpp:152
+msgid "Hexadecimal"
+msgstr "Hexadécimal "
+
+#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
+msgid "References Inventory"
+msgstr "Inventaire des références bibliques"
+
+#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
+#: ../src/dialogreviewanchors.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
+msgid "Verse"
+msgstr "Verset"
+
+#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:190 ../src/gui.cpp:130
+msgid "New Testament"
+msgstr "Nouveau Testament"
+
+#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:168 ../src/gui.cpp:115
+msgid "Old Testament"
+msgstr "Ancien Testament"
 
 #: ../src/check_sentence_structure.cpp:50
 msgid "Checking sentence structure"
@@ -2087,94 +1461,6 @@ msgstr " non trouvé"
 #: ../src/check_validate_usfm.cpp:621
 msgid "Deprecated marker "
 msgstr "Balise dépréciée "
-
-#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
-msgid "Word Inventory"
-msgstr "Inventaire des mots"
-
-#: ../src/checks.cpp:70
-msgid "Total word count: "
-msgstr "Nombre total des mots : "
-
-#: ../src/checks.cpp:71
-msgid "Unique word count: "
-msgstr "Nombre de mot unique : "
-
-#: ../src/checks.cpp:73
-msgid "Words with a count of "
-msgstr "Les mots avec un nombre de "
-
-#: ../src/checks.cpp:73
-msgid " and up were filtered out."
-msgstr " et plus ont été filtré."
-
-#: ../src/checks.cpp:74
-msgid "Filtered total word count: "
-msgstr "Nombre total de mots filtrés : "
-
-#: ../src/checks.cpp:75
-msgid "Filtered unique word count: "
-msgstr "Nombre total d'un mot filtré : "
-
-#: ../src/checks.cpp:77
-msgid "Click on a word to see the places where it occurs."
-msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît. "
-
-#: ../src/checks.cpp:82
-msgid "Word"
-msgstr "Mot"
-
-#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
-#: ../src/dialogmychecks.cpp:78
-msgid "Count"
-msgstr "Nombre"
-
-#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
-msgid "Marker Count"
-msgstr "Comptage des balises"
-
-#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
-msgid "Marker"
-msgstr "Balise"
-
-#: ../src/checks.cpp:117
-msgid "Description"
-msgstr "Description"
-
-#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
-msgid "Character Count"
-msgstr "Comptage des caractères"
-
-#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
-#: ../src/dialoginsertnote.cpp:99
-msgid "Character"
-msgstr "Caractère"
-
-#: ../src/checks.cpp:151
-msgid "Decimal"
-msgstr "Décimal"
-
-#: ../src/checks.cpp:152
-msgid "Hexadecimal"
-msgstr "Hexadécimal "
-
-#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
-msgid "References Inventory"
-msgstr "Inventaire des références bibliques"
-
-#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
-#: ../src/dialogreviewanchors.cpp:123
-#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
-msgid "Verse"
-msgstr "Verset"
-
-#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:190 ../src/gui.cpp:130
-msgid "New Testament"
-msgstr "Nouveau Testament"
-
-#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:168 ../src/gui.cpp:115
-msgid "Old Testament"
-msgstr "Ancien Testament"
 
 #: ../src/compareutils.cpp:51
 msgid " compared with "
@@ -2327,10 +1613,10 @@ msgstr "_Ordre par défaut"
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/dialogbooknames.cpp:107
+#: ../src/dialogbook.cpp:123
 #, fuzzy
-msgid "Book in Bibledit-Desktop"
-msgstr "Bibledit-Desktop"
+msgid "text"
+msgstr "texte"
 
 #: ../src/dialogbulkspelling.cpp:49
 msgid ""
@@ -2402,7 +1688,6 @@ msgid ""
 "Checks whether the text that belongs to selected markers has one space after "
 "it."
 msgstr ""
-"Vérifie la présence d'une espace entre le texte et les balises sélectionnées."
 
 #: ../src/dialogcheck.cpp:101
 msgid "Counts the number of characters."
@@ -2695,23 +1980,25 @@ msgid "and up"
 msgstr "et plus"
 
 #: ../src/dialogcheck.cpp:1141
+#, fuzzy
 msgid ""
 "Bibledit-Desktop normally knows the right word boundaries, but if this is "
 "not done satisfactorily, you can enter _extra characters that should be part "
 "of a word"
 msgstr ""
-"Bibledit-Desktop reconnaît normalement les bonnes limites de mot, mais si "
-"cela n'est pas fait de manière satisfaisante, vous pouvez entrer des "
-"caractères _supplémentaires qui devraient faire partie d'un mot"
+"Bibledit-Gtk reconnaît normalement les bonnes limites de mot, mais si cela "
+"n'est pas fait de manière satisfaisante, vous pouvez entrer des caractères "
+"_supplémentaires qui devraient faire partie d'un mot"
 
 #: ../src/dialogcheck.cpp:1189
+#, fuzzy
 msgid ""
 "Bibledit-Desktop already recognizes this character as part of a word.\n"
 "It has been removed as superfluous.\n"
 "There is no need to enter your alphabet.\n"
 "Entering the special cases is enough."
 msgstr ""
-"Bibledit-Desktop reconnaît déjà ce caractère comme faisant partie d'un mot.\n"
+"Bibledit-Gtk reconnaît déjà ce caractère comme faisant partie d'un mot.\n"
 "Il a été supprimé comme superflu.\n"
 "Il n'est pas nécessaire d'entrer votre alphabet.\n"
 "Entrer les cas spéciaux est suffisant."
@@ -2754,7 +2041,7 @@ msgstr "M_odifier"
 
 #: ../src/dialogcompare.cpp:212 ../src/dialogprintproject.cpp:200
 msgid "part"
-msgstr "partie"
+msgstr "tout"
 
 #: ../src/dialogcompareprefs.cpp:30
 msgid "Enter"
@@ -3004,11 +2291,6 @@ msgstr "Couleur du texte sélectionné"
 msgid "Selection color"
 msgstr "Couleur de la sélection"
 
-#: ../src/dialoggui.cpp:146
-#, fuzzy
-msgid "The changes will take effect after Bibledit-Desktop has been restarted"
-msgstr "Le modifications prendront effet, après un redémarrage"
-
 #: ../src/dialogimportnotes.cpp:68
 msgid ""
 "You are going to import notes into your notes editor.\n"
@@ -3020,6 +2302,7 @@ msgstr ""
 "Cliquer sur suivant pour continuer."
 
 #: ../src/dialogimportnotes.cpp:81
+#, fuzzy
 msgid "Select the notes file to import"
 msgstr "Sélectionnez le fichier de notes à importer"
 
@@ -3174,15 +2457,16 @@ msgstr "Appuyer sur "
 msgid "Select one or more items, and then press OK or Enter"
 msgstr "Selectionnez un ou plusieurs élements puis appuyer sur OK ou Entrée"
 
-#: ../src/dialogmaintenance.cpp:32 ../src/dialogmaintenance.cpp:154
+#: ../src/dialogmaintenance.cpp:32
 msgid "Maintenance"
 msgstr "Maintenance"
 
 #: ../src/dialogmaintenance.cpp:157
+#, fuzzy
 msgid "Some actions may have great impact on Bibledit-Desktop. Use with care."
 msgstr ""
-"Certaines actions risquent d'avoir un gros impact sur Bibledit-Desktop. "
-"Utilisez cet outil avec précaution. "
+"Certaines actions risquent d'avoir un gros impact sur Bibledit-Gtk. Utilisez "
+"cet outil avec précaution. "
 
 #: ../src/dialogmerge.cpp:38 ../src/windowmerge.cpp:50
 msgid "Merge"
@@ -3365,7 +2649,6 @@ msgstr ""
 "Cet outil propose un moyen pour mettre à jour plusieurs projet de notes en "
 "une seule fois. C'est un outil très puissant et les modifications réalisées "
 "ici ne peuvent pas être annulées facilement.\n"
-"\n"
 "À gauche, sélectionnez l'action que vous souhaitez effectuer."
 
 #: ../src/dialognotesupdate.cpp:70
@@ -3392,11 +2675,11 @@ msgstr "vers la catégorie"
 msgid "Category"
 msgstr "Catégorie"
 
-#: ../src/dialognotesupdate.cpp:235
+#: ../src/dialognotesupdate.cpp:234
 msgid "Notes were moved to the other project"
 msgstr "Les notes ont été déplacées vers l'autre projet"
 
-#: ../src/dialognotesupdate.cpp:242
+#: ../src/dialognotesupdate.cpp:241
 msgid "Notes were moved to the other category"
 msgstr "Les notes ont été déplacées vers l'autre catégorie"
 
@@ -3493,7 +2776,7 @@ msgstr ""
 
 #: ../src/dialogoutpost.cpp:46
 msgid "Windows Outpost Setup"
-msgstr "Configuration de la fenêtre d'avant-poste"
+msgstr "Configuration de la fenêtre d'avant-post"
 
 #: ../src/dialogoutpost.cpp:53
 msgid "_Use Windows Outpost"
@@ -3888,7 +3171,7 @@ msgstr "Ouvrir un fichier pour la conversion"
 
 #: ../src/dialogresourceconverter.cpp:611
 msgid "View the file"
-msgstr "Afficher le fichier"
+msgstr "Voir le fichier"
 
 #: ../src/dialogresourceconverter.cpp:720
 msgid "Write anchors"
@@ -3908,16 +3191,15 @@ msgstr "Révisions"
 
 #: ../src/dialogrevert.cpp:145
 msgid "View current version"
-msgstr "Afficher la version actuelle"
+msgstr "Voir la version actuelle"
 
 #: ../src/dialogrevert.cpp:153
 msgid "View previous revision"
-msgstr "Afficher les révisions précédentes"
+msgstr "Voir les révisions précédentes"
 
 #: ../src/dialogrevert.cpp:161
 msgid "View changes if reverting to previous revision"
-msgstr ""
-"Afficher les modifications s'il y a un retour à une révision précédente"
+msgstr "Voir les modifications s'il y a un retour à une révision précédente"
 
 #: ../src/dialogrevert.cpp:326
 msgid "No changes were applied"
@@ -3973,11 +3255,11 @@ msgstr "Chercher"
 
 #: ../src/dialogsearchspecial.cpp:68
 msgid "Press Control-F for Advanced search"
-msgstr "Pressez CTRL-F pour une recherche avancée"
+msgstr "Pressez Control-F pour une recherche avancée"
 
 #: ../src/dialogsearchspecial.cpp:77
 msgid "Press Control-F for Basic search"
-msgstr "Pressez CTRL-F pour une recherche simple"
+msgstr "Pressez Control-F pour une recherche simple"
 
 #: ../src/dialogsearchspecial.cpp:81
 msgid "Advanced"
@@ -4453,7 +3735,7 @@ msgid "with an odd number"
 msgstr "avec un nombre impair"
 
 #: ../src/dialogstylesheet.cpp:2535 ../src/dialogstylesheet.cpp:2550
-#: ../src/mainwindow.cpp:5641
+#: ../src/mainwindow.cpp:5640
 msgid "Print"
 msgstr "Imprimer"
 
@@ -4514,12 +3796,11 @@ msgstr ""
 "Paramètres généraux\n"
 
 #: ../src/dialogsystemlog.cpp:349
+#, fuzzy
 msgid ""
 "\n"
 "Project settings for "
-msgstr ""
-"\n"
-"Paramètres du projet pour "
+msgstr "Paramètres du projet"
 
 #: ../src/dialogsystemlog.cpp:349
 msgid "\n"
@@ -4531,9 +3812,6 @@ msgid ""
 "not the previous session\n"
 "."
 msgstr ""
-"Notez que les paramètres ci-dessus sont toujours de la version actuelle de "
-"Bibledit, pas de la session précédente\n"
-"."
 
 #: ../src/dialogsystemlog.cpp:359
 msgid "settings.log"
@@ -4573,10 +3851,12 @@ msgid "Texts"
 msgstr "Textes"
 
 #: ../src/dialogtextreplacement.cpp:114 ../src/dialogtextreplacement.cpp:119
+#, fuzzy
 msgid "editable"
 msgstr "éditable"
 
 #: ../src/dialogtextreplacement.cpp:119
+#, fuzzy
 msgid "Replacements"
 msgstr "Texte de substitution"
 
@@ -4648,7 +3928,7 @@ msgstr "Abréviation"
 
 #: ../src/dialogviewplanning.cpp:32
 msgid "View Planning"
-msgstr "Afficher le programme"
+msgstr "Voir le programme"
 
 #: ../src/dialogviewplanning.cpp:43
 msgid "Include the ticked items in the report"
@@ -4771,43 +4051,43 @@ msgstr "Transfert des notes dans le texte"
 
 #: ../src/directories.cpp:204
 msgid "Cannot find a suitable mkdir utility"
-msgstr "Ne peut trouver d'utilitaire mkdir approprié"
+msgstr ""
 
 #: ../src/directories.cpp:236
 msgid "Cannot find a suitable rmdir utility"
-msgstr "Ne peut trouver d'utilitaire rmdir approprié"
+msgstr ""
 
 #: ../src/directories.cpp:324
 msgid "Cannot find a suitable move utility"
-msgstr "Ne peut trouver d'utilitaire move approprié"
+msgstr ""
 
 #: ../src/directories.cpp:350 ../src/directories.cpp:447
 msgid "Cannot find a suitable zip utility"
-msgstr "Ne peut trouver d'utilitaire zip approprié"
+msgstr ""
 
 #: ../src/directories.cpp:373
 msgid "Cannot find a suitable tar utility"
-msgstr "Ne peut trouver d'utilitaire tar approprié"
+msgstr ""
 
 #: ../src/directories.cpp:399
 msgid "Cannot find a suitable rm/del utility"
-msgstr "Ne peut trouver d'utilitaire rm/del approprié"
+msgstr ""
 
 #: ../src/directories.cpp:421
 msgid "Cannot find a suitable diff utility"
-msgstr "Ne peut trouver d'utilitaire diff approprié"
+msgstr ""
 
 #: ../src/directories.cpp:474
 msgid "Cannot find a suitable unzip utility"
-msgstr "Ne peut trouver d'utilitaire unzip approprié"
+msgstr ""
 
 #: ../src/directories.cpp:496
 msgid "Cannot find a suitable gzip utility"
-msgstr "Ne peut trouver d'utilitaire gzip approprié"
+msgstr ""
 
 #: ../src/directories.cpp:549
 msgid "List of directories and other paths we know about:"
-msgstr "Liste des dossiers et autres chemins que nous connaissons :"
+msgstr ""
 
 #: ../src/editor.cpp:430 ../src/usfmview.cpp:224
 msgid ""
@@ -4888,8 +4168,9 @@ msgid "Exporting project"
 msgstr "Exportation du projet"
 
 #: ../src/export_utils.cpp:126
+#, fuzzy
 msgid "Compressing USFM export"
-msgstr "Compression de l'exportation en USFM"
+msgstr "Compression des exportations USFM"
 
 #: ../src/export_utils.cpp:169 ../src/export_utils.cpp:456
 msgid "Exporting"
@@ -4908,8 +4189,9 @@ msgid "The SWORD compiler osis2mod was not found."
 msgstr "Le compilateur SWORD osis2mod n'a pas été trouvé."
 
 #: ../src/export_utils.cpp:665
+#, fuzzy
 msgid "Compiling"
-msgstr "Compilation en cours"
+msgstr "Compilation"
 
 #: ../src/export_utils.cpp:711
 msgid "Single file"
@@ -4957,15 +4239,11 @@ msgstr "Insertion des espaces manquant après les balises ouvrantes"
 
 #: ../src/fixmarkers.cpp:99
 msgid "Missing spaces inserted: "
-msgstr "Espaces manquantes insérées : "
+msgstr "Espaces manquantes insérées :"
 
 #: ../src/floatingwindow.cpp:34 ../src/httpd.cpp:532
 msgid "Untitled"
 msgstr "Sans nom"
-
-#: ../src/git-exec.cpp:34
-msgid "Updating data in folder "
-msgstr "Mise à jour des données dans le dossier"
 
 #: ../src/git.cpp:56
 msgid "Cleaning out index lock "
@@ -4987,6 +4265,10 @@ msgstr "Résolution de conflits dans le projet"
 msgid " book "
 msgstr "livre"
 
+#: ../src/git-exec.cpp:34
+msgid "Updating data in folder "
+msgstr "Mise à jour des données dans le dossier"
+
 #: ../src/gtkwrappers.cpp:86
 msgid "Select a folder"
 msgstr "Sélectionner un dossier"
@@ -5000,6 +4282,7 @@ msgid "Save to file"
 msgstr "Enregistrer sous"
 
 #: ../src/gtkwrappers.cpp:229
+#, fuzzy
 msgid "Trying to open "
 msgstr "Tentative d'ouverture"
 
@@ -5075,8 +4358,9 @@ msgid "Install one of the following supported browsers:\n"
 msgstr "Installe un des navigateurs supportés suivant :\n"
 
 #: ../src/httpd.cpp:243
+#, fuzzy
 msgid "Webserver: "
-msgstr "Serveur web : "
+msgstr "Accès au serveur web :"
 
 #: ../src/httpd.cpp:430
 msgid "<p>See also the <a href=\"index.html\">general online help.</a></p>\n"
@@ -5140,6 +4424,7 @@ msgid "Sword King James Bible with Strong's lemmata"
 msgstr "Bible Sword King James avec le lemmata Strong "
 
 #: ../src/kjv.cpp:54
+#, fuzzy
 msgid ""
 "The King James Bible from the Sword project is useful for its Strong's "
 "numbers tagged in the text. Bibledit-Desktop uses this to find related "
@@ -5147,9 +4432,9 @@ msgid ""
 "from Sword and creating a database out of it."
 msgstr ""
 "La  King James Bible du projet Sword est utile pour les numéros de Strong "
-"qui sont marqués dans le texte. Bibledit-Desktop utilise ceci pour trouver "
-"des versets connexes, entre autres choses. L'importation consiste en deux "
-"étapes : l'exportation de Sword et la création d'une base de données."
+"qui sont marqués dans le texte. Bibledit-Gtk utilise ceci pour trouver des "
+"versets connexes, entre autres choses. L'importation consiste en deux "
+"étapes: l'exportation de Sword et la création d'une base de données."
 
 #: ../src/kjv.cpp:57
 msgid "1. Exporting the text from Sword"
@@ -5200,7 +4485,7 @@ msgstr ""
 msgid "Can't find the input file"
 msgstr "Ne trouve pas le fichier d'entrée"
 
-#: ../src/kjv.cpp:106 ../src/mechonmamre.cpp:128
+#: ../src/kjv.cpp:106
 msgid "Using file "
 msgstr "Utilisation du fichier"
 
@@ -5212,23 +4497,24 @@ msgstr "Importation des données dans la base de données à "
 msgid "Success! The database was created"
 msgstr "La base de données a été créée avec succès !"
 
-#: ../src/kjv.cpp:123 ../src/mechonmamre.cpp:241
+#: ../src/kjv.cpp:123
 msgid "Error!"
 msgstr "Erreur !"
 
 #: ../src/kjv.cpp:128
+#, fuzzy
 msgid ""
 "To use the database, copy the file kjv.sql into the Bibledit-Desktop package "
 "and re-install."
 msgstr ""
 "Pour utiliser la base de données, copiez le fichier kjv.sql dans le paquet "
-"Bibledit-Desktop et réinstallez-le."
+"Bibledit-Gtk et réinstallez-le."
 
 #: ../src/kjv.cpp:139
 msgid "ok"
 msgstr "ok"
 
-#: ../src/kjv.cpp:139 ../src/mechonmamre.cpp:257
+#: ../src/kjv.cpp:139
 msgid "Ok"
 msgstr "Ok"
 
@@ -5239,11 +4525,6 @@ msgstr "Importation de la King James Bible"
 #: ../src/layout.cpp:71
 msgid "Recalculating windows positions and sizes"
 msgstr "Recalcule la taille et la position des fenêtres"
-
-#: ../src/localizedbooks.cpp:141 ../src/localizedbooks.cpp:148
-#, fuzzy
-msgid "Found language file "
-msgstr "Fichier de l'organisation des polices"
 
 #: ../src/mainwindow.cpp:284
 msgid "_File"
@@ -5328,8 +4609,9 @@ msgid "_Send / Receive"
 msgstr "_Envoyer / Recevoir"
 
 #: ../src/mainwindow.cpp:613
+#, fuzzy
 msgid "R_esources"
-msgstr "R_essources"
+msgstr "R_esources"
 
 #: ../src/mainwindow.cpp:632
 msgid "_Close"
@@ -5425,7 +4707,7 @@ msgstr "R_éférences"
 
 #: ../src/mainwindow.cpp:950
 msgid "_Related verses"
-msgstr "Versets en _lien"
+msgstr "Ve_rsets en lien"
 
 #: ../src/mainwindow.cpp:954 ../src/windowtabbed.cpp:172
 msgid "_Concordance"
@@ -5444,6 +4726,7 @@ msgid "_External Resource"
 msgstr "Ressources _externes"
 
 #: ../src/mainwindow.cpp:977
+#, fuzzy
 msgid "_Bibleworks"
 msgstr "_Bibleworks"
 
@@ -5705,8 +4988,7 @@ msgid ", something worth perhaps years of work?"
 msgstr " , qui peut constituer des années de travail ?"
 
 #: ../src/mainwindow.cpp:2131
-#, fuzzy
-msgid "Copyright (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
+msgid "Copyright (c) 2003-2013 Teus Benschop"
 msgstr "Droit d'auteur (c) 2003-2013 Teus Benschop"
 
 #: ../src/mainwindow.cpp:2132
@@ -5745,6 +5027,7 @@ msgstr ""
 "licenses/>.\n"
 
 #: ../src/mainwindow.cpp:2255
+#, fuzzy
 msgid "There was nothing to replace"
 msgstr "Il n'y avait rien à remplacer"
 
@@ -5753,12 +5036,11 @@ msgid "New project name"
 msgstr "Nom du nouveau projet"
 
 #: ../src/mainwindow.cpp:2333
+#, fuzzy
 msgid ""
 "Enter a name of a non-existent project\n"
 "where this project will be copied to."
-msgstr ""
-"Entrez un nom de projet à créer\n"
-"où ce projet sera copié."
+msgstr "Entrez le nom du projet non existant\\"
 
 #: ../src/mainwindow.cpp:2340
 msgid ""
@@ -5779,262 +5061,127 @@ msgid ""
 "This note has references.\n"
 "Would you like to load these in the references list?"
 msgstr ""
-"Cette note a des références.\n"
-"Souhaitez-vous les charger dans la liste de références ?"
 
 #: ../src/mainwindow.cpp:2978
 msgid "Sending to Toolbox: "
-msgstr "Envoie à la boîte à outils : "
+msgstr ""
 
-#: ../src/mainwindow.cpp:3091
+#: ../src/mainwindow.cpp:3090
 msgid ""
 "A note can be deleted by clicking on the [delete] link in the notes view"
 msgstr ""
 "Une note peut être supprimée en cliquant sur le lien [supprimer] dans la "
 "fenêtre des notes"
 
-#: ../src/mainwindow.cpp:3548
+#: ../src/mainwindow.cpp:3547
 msgid "To make this work, enable spelling checking in the project"
 msgstr ""
 "Pour faire fonctionner cela, activer la vérification orthographique dans le "
 "projet"
 
-#: ../src/mainwindow.cpp:3557
+#: ../src/mainwindow.cpp:3556
 msgid ""
 "There are no more spelling errors in this chapter\n"
 "Would you like to go to the"
 msgstr ""
-"Il n'y a plus d'erreurs d'orthographe dans ce chapitre\n"
-"Voulez-vous aller à la"
 
-#: ../src/mainwindow.cpp:3559 ../src/windowreferences.cpp:650
+#: ../src/mainwindow.cpp:3558 ../src/windowreferences.cpp:650
 msgid "next"
 msgstr "suivant"
 
-#: ../src/mainwindow.cpp:3561
+#: ../src/mainwindow.cpp:3560
+#, fuzzy
 msgid "previous"
 msgstr "précédent"
 
-#: ../src/mainwindow.cpp:3562
+#: ../src/mainwindow.cpp:3561
+#, fuzzy
 msgid " chapter or chapters?"
-msgstr " chapitre ou chapitres ?"
+msgstr "chapitre ou chapitres ?"
 
-#: ../src/mainwindow.cpp:3606
+#: ../src/mainwindow.cpp:3605
 msgid "There is nothing to be checked"
 msgstr "Il n'y a rien à vérifier"
 
-#: ../src/mainwindow.cpp:3764
+#: ../src/mainwindow.cpp:3763
+#, fuzzy
 msgid "Would you like to insert a new chapter?"
 msgstr "Souhaitez-vous insérer un nouveau chapitre ?"
 
-#: ../src/mainwindow.cpp:4105
+#: ../src/mainwindow.cpp:4104
 msgid "Soft hyphen"
 msgstr "Trait d'union conditionnel"
 
-#: ../src/mainwindow.cpp:4107
+#: ../src/mainwindow.cpp:4106
 msgid "No-break space"
 msgstr "Espace insécable"
 
-#: ../src/mainwindow.cpp:4109
+#: ../src/mainwindow.cpp:4108
 msgid "Left double quotation mark"
 msgstr "Guillemet apostrophe double ouvrant"
 
-#: ../src/mainwindow.cpp:4111
+#: ../src/mainwindow.cpp:4110
 msgid "Right double quotation mark"
 msgstr "Guillemet apostrophe double fermant"
 
-#: ../src/mainwindow.cpp:4113
+#: ../src/mainwindow.cpp:4112
 msgid "Left single quotation mark"
 msgstr "Guillemet apostrophe simple ouvrant"
 
-#: ../src/mainwindow.cpp:4115
+#: ../src/mainwindow.cpp:4114
 msgid "Right single quotation mark"
 msgstr "Guillemet apostrophe simple fermant"
 
-#: ../src/mainwindow.cpp:4117
+#: ../src/mainwindow.cpp:4116
 msgid "Left-pointing double angle quotation mark"
 msgstr "Guillemet typographique ouvrant"
 
-#: ../src/mainwindow.cpp:4119
+#: ../src/mainwindow.cpp:4118
 msgid "Right-pointing double angle quotation mark"
 msgstr "Guillemet typographique fermant"
 
-#: ../src/mainwindow.cpp:4120
+#: ../src/mainwindow.cpp:4119
 msgid "Insert character"
 msgstr "Insérer un caractère"
 
-#: ../src/mainwindow.cpp:4120
+#: ../src/mainwindow.cpp:4119
 msgid "Insert special character"
 msgstr "Insérer un caractère spécial"
 
-#: ../src/mainwindow.cpp:4810
+#: ../src/mainwindow.cpp:4809
+#, fuzzy
 msgid "Delete resource"
 msgstr "Supprimer la ressource"
 
-#: ../src/mainwindow.cpp:4812
+#: ../src/mainwindow.cpp:4811
+#, fuzzy
 msgid "Are you sure you want to delete resource "
-msgstr "Êtes-vous certain de vouloir supprimer la ressource "
+msgstr "Êtes-vous certain de vouloir supprimer le projet "
 
-#: ../src/mainwindow.cpp:5448
+#: ../src/mainwindow.cpp:5447
 msgid "Chapter should now be in desired view"
-msgstr "Le chapitre devrait maintenant être dans l'aperçu souhaité"
+msgstr ""
 
-#: ../src/mainwindow.cpp:5636
+#: ../src/mainwindow.cpp:5635
 msgid "Project (through internal typesetter)"
 msgstr "Projet (par une composition interne)"
 
-#: ../src/mainwindow.cpp:5637
+#: ../src/mainwindow.cpp:5636
 msgid "Project (through ptx2pdf typesetter)"
 msgstr "Projet (par une composition ptx2pdf)"
 
-#: ../src/mainwindow.cpp:5638 ../src/print_parallel_bible.cpp:47
+#: ../src/mainwindow.cpp:5637 ../src/print_parallel_bible.cpp:47
 #: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr "Parallèle biblique"
 
-#: ../src/mainwindow.cpp:5641
+#: ../src/mainwindow.cpp:5640
 msgid "Select what to print"
 msgstr "Sélectionner quoi imprimer"
 
-#: ../src/mainwindow.cpp:5701
+#: ../src/mainwindow.cpp:5700
 msgid "There are no references to print"
-msgstr "Il n'y a pas de références à imprimer"
-
-#: ../src/mechonmamre.cpp:60 ../src/mechonmamre.cpp:68
-msgid "Hebrew Bible with cantillation marks from Mechon Mamre"
-msgstr "Bible hébraïque de Mechon Mamre avec les balises pour la cantillation"
-
-#: ../src/mechonmamre.cpp:71
-#, fuzzy
-msgid ""
-"The Hebrew Bible from Mechon Mamre provides a Hebrew text that can be useful "
-"for translating the Bible. Bibledit-Desktop can import this text. This "
-"consists of two steps: downloading it and importing it."
 msgstr ""
-"La Bible hébraïque de Mechon Mamre procure un texte hébreux qui peut très "
-"utile pour la traduction de la Bible. Bibledit-Desktop peut importer ce "
-"texte. Cela consiste en deux étapes : le télécharger et l'importer"
-
-#: ../src/mechonmamre.cpp:74
-msgid "1. Downloading the text"
-msgstr "1. Télécharger le texte"
-
-#: ../src/mechonmamre.cpp:77
-msgid ""
-"When you click on the link below, a web browser will open, which will "
-"download the Hebrew text. The file will be called ct005.zip. Please save "
-"this file in the home directory, on your Desktop, or in the Downloads folder."
-msgstr ""
-"Lorsque vous cliquez sur le lien plus bas, un navigateur web va s'ouvrir "
-"pour télécharger le texte hébreux. Le fichier s'appelle ct005.zip. Veuillez "
-"sauver ce fichier dans votre dossier personnel, sur votre Bureau ou dans le "
-"dossier Téléchargements."
-
-#: ../src/mechonmamre.cpp:80
-msgid "Download it"
-msgstr "Télécharger"
-
-#: ../src/mechonmamre.cpp:83
-msgid "2. Importing the text"
-msgstr "2. Importer le texte"
-
-#: ../src/mechonmamre.cpp:86
-msgid ""
-"When you click on the link below, a new Bible will be created, and the file "
-"that you have downloaded will be imported into it."
-msgstr ""
-"Lorsque vous cliquez sur le lien plus bas, une nouvelle Bible sera créée et "
-"le fichier que vous aurez téléchargé y sera importé."
-
-#: ../src/mechonmamre.cpp:97
-#, fuzzy
-msgid "Hebrew import from Mechon Mamre"
-msgstr "Bible hébraïque de Mechon Mamre avec les balises pour la cantillation"
-
-#: ../src/mechonmamre.cpp:105 ../src/mechonmamre.cpp:111
-#: ../src/mechonmamre.cpp:118
-msgid "Looking for file "
-msgstr "Recherche du fichier "
-
-#: ../src/mechonmamre.cpp:124
-#, fuzzy
-msgid "Can't find Hebrew input file"
-msgstr "Ne trouve pas le fichier d'entrée"
-
-#: ../src/mechonmamre.cpp:138
-#, fuzzy
-msgid "Could not unpack the file"
-msgstr "Échec de la décompression du fichier "
-
-#: ../src/mechonmamre.cpp:141
-#, fuzzy
-msgid "Unpacking into folder "
-msgstr "Mise à jour des données dans le dossier"
-
-#: ../src/mechonmamre.cpp:166
-#, fuzzy
-msgid "Can't find data in directory "
-msgstr "impossible de lire les données du dépôt"
-
-#: ../src/mechonmamre.cpp:168
-#, fuzzy
-msgid "Looking for data in directory "
-msgstr "Recherche du fichier "
-
-#: ../src/mechonmamre.cpp:188
-msgid "Hebrew Mechon Mamre"
-msgstr ""
-
-#: ../src/mechonmamre.cpp:191
-#, fuzzy
-msgid "A Bible already exists by this name: "
-msgstr "Cette Bible existe déjà"
-
-#: ../src/mechonmamre.cpp:195
-#, fuzzy
-msgid "Creating a new Bible called \""
-msgstr "création d'une nouvelle ressource"
-
-#: ../src/mechonmamre.cpp:209
-#, fuzzy
-msgid "Creating books"
-msgstr "Suppression de livres"
-
-#: ../src/mechonmamre.cpp:222
-#, fuzzy
-msgid "Importing chapters"
-msgstr "Importation de fichiers"
-
-#: ../src/mechonmamre.cpp:232
-#, fuzzy
-msgid "Importing "
-msgstr "Importation en cours"
-
-#: ../src/mechonmamre.cpp:232
-#, fuzzy
-msgid " from file "
-msgstr "Recherche du fichier "
-
-#: ../src/mechonmamre.cpp:239
-#, fuzzy
-msgid "Success! Bible was created: "
-msgstr "La base de données a été créée avec succès !"
-
-#: ../src/mechonmamre.cpp:246
-msgid ""
-"To view the Hebrew text, open the Bible in the editor. Optionally set the "
-"font for better display of the Hebrew text. A donation made to Mechon Mamre "
-"will support their work."
-msgstr ""
-
-#: ../src/mechonmamre.cpp:275
-msgid "Mechon Mamre"
-msgstr ""
-
-#: ../src/mechonmamre.cpp:277
-#, fuzzy
-msgid "Copyright"
-msgstr "droit d'auteur"
 
 #: ../src/merge_utils.cpp:37
 msgid "before"
@@ -6069,10 +5216,10 @@ msgid "Cannot find PHP."
 msgstr "Ne trouve pas PHP."
 
 #: ../src/merge_utils.cpp:237
+#, fuzzy
 msgid "Bibledit-Desktop needs PHP for improved collaboration and merging."
 msgstr ""
-"Bibledit-Desktop a besoin de PHP pour une collaboration et une fusion "
-"améliorées."
+"Bibledit-Gtk a besoin de PHP pour une collaboration et une fusion améliorées."
 
 #: ../src/merge_utils.cpp:238
 msgid "Some changes were lost."
@@ -6091,12 +5238,14 @@ msgid "Local web server returned unusual code: "
 msgstr "Le serveur web local a retourné un code inhabituel :"
 
 #: ../src/notes_utils.cpp:461
+#, fuzzy
 msgid "[delete]"
-msgstr "[supprimer]"
+msgstr "_Supprimer"
 
 #: ../src/notes_utils.cpp:465
+#, fuzzy
 msgid "[references]"
-msgstr "[références]"
+msgstr " références"
 
 #: ../src/notes_utils.cpp:540
 msgid ""
@@ -6240,8 +5389,9 @@ msgid " from Septuagint"
 msgstr "de Septuagint"
 
 #: ../src/paratext.cpp:37
+#, fuzzy
 msgid "# Exported from Bibledit-Desktop"
-msgstr "# Exporté depuis Bibledit-Desktop"
+msgstr "# Exporté depuis Bibledit-Gtk"
 
 #: ../src/password.cpp:35 ../src/password.cpp:66 ../src/password.cpp:75
 #: ../src/password.cpp:112
@@ -6305,12 +5455,13 @@ msgstr ""
 "approprié d'installé.\n"
 
 #: ../src/pdfviewer.cpp:84
+#, fuzzy
 msgid ""
 "Install a supported pdf viewer, or set up your own under Preferences | PDF "
 "Viewer"
 msgstr ""
 "Installez un  lecteur pdf approprié ou configurez le vôtre dans les "
-"Préférences → Visionneuse PDF "
+"Préférences"
 
 #: ../src/planning.cpp:51
 msgid "Planned Tasks"
@@ -6345,7 +5496,6 @@ msgid ""
 "If the work is carried on with the same pace it will be completed in the "
 "year "
 msgstr ""
-"Si le travail se poursuit au même rythme, il sera terminé durant l'année "
 
 #: ../src/planning.cpp:113
 msgid ", God willing."
@@ -6424,17 +5574,13 @@ msgstr "Imprimer les références parallèles"
 msgid "Ready printing the parallel references"
 msgstr "Prêt à mprimer les références parallèles"
 
-#: ../src/printproject.cpp:91 ../src/printproject2.cpp:89
+#: ../src/printproject2.cpp:89 ../src/printproject.cpp:91
 msgid ""
 "There were no books to print\n"
 "Select some books and try again"
 msgstr ""
 "Il n'y avait pas de livres à imprimer\n"
 "Sélectionnez des livres et essayez à nouveau"
-
-#: ../src/project_memory.cpp:115
-msgid "Loading "
-msgstr "Chargement de "
 
 #: ../src/projectconfig.cpp:238 ../src/projectconfig.cpp:239
 msgid " Bibledit project"
@@ -6451,6 +5597,10 @@ msgstr "fr"
 #: ../src/projectconfig.cpp:257
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: ../src/project_memory.cpp:115
+msgid "Loading "
+msgstr "Chargement de "
 
 #: ../src/projectutils.cpp:146
 msgid " does not exist"
@@ -6506,15 +5656,15 @@ msgstr "Rapport d'état"
 
 #: ../src/reporting.cpp:791
 msgid "Project Percentage Complete"
-msgstr "Pourcentage complété pour le projet"
+msgstr ""
 
 #: ../src/reporting.cpp:800 ../src/reporting.cpp:825
 msgid "The above data in csv format"
-msgstr "Les données ci-dessus au format csv"
+msgstr ""
 
 #: ../src/reporting.cpp:814
 msgid "Books Percentage Complete"
-msgstr "Pourcentage des livres réalisés"
+msgstr ""
 
 #: ../src/reporting.cpp:857
 msgid "Tasks per book - Legend"
@@ -6553,8 +5703,9 @@ msgid "Notes available before restore: "
 msgstr "Notes disponibles avant la restauration : "
 
 #: ../src/restore.cpp:63
+#, fuzzy
 msgid "Currently Bibledit-Desktop has "
-msgstr "Actuellement Bible-Desktop a "
+msgstr "Actuellement Bible-Gtk a "
 
 #: ../src/restore.cpp:63
 msgid " notes. Would you like to overwrite these?"
@@ -6704,7 +5855,7 @@ msgstr " lettre indéclinable"
 
 #: ../src/robinson.cpp:141
 msgid " proper indeclinable"
-msgstr "propre indéclinable"
+msgstr ""
 
 #: ../src/robinson.cpp:144
 msgid " other indeclinable"
@@ -6946,19 +6097,6 @@ msgstr "Impossible de trouver où placer le fichier de sortie"
 msgid "UTF-8 validation failure"
 msgstr "La validation de l'UTF-8 a échoué"
 
-#: ../src/scripts.cpp:326
-msgid "Sed rules"
-msgstr ""
-
-#: ../src/scripts.cpp:329
-msgid "TECkit mapping"
-msgstr ""
-
-#: ../src/scripts.cpp:332
-#, fuzzy
-msgid "Free script"
-msgstr "Nouveau script"
-
 #: ../src/scripturechecks.cpp:381
 msgid "Old Testament quotations in the New Testament, project "
 msgstr ""
@@ -7022,27 +6160,28 @@ msgid "No personal wordlist to add the word to"
 msgstr "Pas de liste de mots personnelle où ajouter le mot"
 
 #: ../src/startup.cpp:38
+#, fuzzy
 msgid ""
 "Bibledit-Desktop has not been designed to run as user root.\n"
 "Please run it as a standard user."
 msgstr ""
-"Bibledit-Desktop n'a pas été conçu pour s'exécuter en tant qu'utilisateur "
-"root.\n"
+"Bibledit-Gtk n'a pas été conçu pour s'exécuter en tant qu'utilisateur root.\n"
 "Veuillez l'exécuter en tant qu'utilisateur standard."
 
 #: ../src/startup.cpp:53
 #, fuzzy
 msgid "Bibledit-Desktop is already running."
-msgstr "Bibledit-Desktop est déjà en cours d'éxécution."
+msgstr "Bibledit-Gtk est déjà en cours d'éxécution."
 
 #: ../src/startup.cpp:59
+#, fuzzy
 msgid ""
 "The previous instance of Bibledit-Desktop is still optimizing its data while "
 "shutting down.\n"
 "Please wait till that has been done, and try again."
 msgstr ""
-"L'instance précédente de Bibledit-Desktop optimise toujours ses données tout "
-"en fermant.\n"
+"L'instance précédente de Bibledit-Gtk optimise toujours ses données tout en "
+"fermant.\n"
 "Veuillez patienter jusqu'à ce que cela soit fait, puis réessayer."
 
 #: ../src/statistics.cpp:73
@@ -7185,7 +6324,7 @@ msgstr "Introduction : Titres et en-têtes"
 
 #: ../src/usfmtools.cpp:709
 msgid "Introduction Paragraphs and Poetry"
-msgstr "Introduction : Paragraphes et poésie"
+msgstr "Introduction :  paragraphes et poésie"
 
 #: ../src/usfmtools.cpp:714
 msgid "Introduction Other Elements"
@@ -7221,7 +6360,7 @@ msgstr "Références croisées"
 
 #: ../src/usfmtools.cpp:764
 msgid "Extended Study Notes"
-msgstr "Notes d'étude étendues"
+msgstr ""
 
 #: ../src/usfmtools.cpp:769
 msgid "Special Text"
@@ -7265,9 +6404,6 @@ msgid ""
 "Printing cannot continue.\n"
 "Please add the following styles to the stylesheet:"
 msgstr ""
-"Tous les styles de base ne figurent pas dans la feuille de style.\n"
-"L'impression ne peut pas continuer.\n"
-"Ajoutez les styles suivants à la feuille de style :"
 
 #: ../src/utilities.cpp:794
 msgid "Error opening file "
@@ -7557,51 +6693,51 @@ msgstr "_Plus"
 msgid "C_ategory"
 msgstr "C_atégorie"
 
-#: ../src/windownotes.cpp:365
+#: ../src/windownotes.cpp:364
 msgid "Created on "
 msgstr "Créée le "
 
-#: ../src/windownotes.cpp:375
+#: ../src/windownotes.cpp:374
 msgid "Edited on "
 msgstr "Éditée le "
 
-#: ../src/windownotes.cpp:385
+#: ../src/windownotes.cpp:384
 msgid "Created by "
 msgstr "Créé par "
 
-#: ../src/windownotes.cpp:600
+#: ../src/windownotes.cpp:599
 msgid "No valid references. Note was not stored"
 msgstr "Aucune référence valide. La note n'a pas été enregistrée"
 
-#: ../src/windownotes.cpp:635
+#: ../src/windownotes.cpp:634
 msgid "created a new note, category \""
 msgstr "a créé une nouvelle note, dans la catégorie \""
 
-#: ../src/windownotes.cpp:637
+#: ../src/windownotes.cpp:636
 msgid "\", project \""
 msgstr "\", projet \""
 
-#: ../src/windownotes.cpp:643
+#: ../src/windownotes.cpp:642
 msgid "modified the references"
 msgstr "a modifié les références"
 
-#: ../src/windownotes.cpp:646
+#: ../src/windownotes.cpp:645
 msgid "modified the note"
 msgstr "a modifié la note"
 
-#: ../src/windownotes.cpp:649
+#: ../src/windownotes.cpp:648
 msgid "changed the category to \""
 msgstr "a modifié la catégorie en \""
 
-#: ../src/windownotes.cpp:652
+#: ../src/windownotes.cpp:651
 msgid "changed the project to \""
 msgstr "a modifier le projet en \""
 
-#: ../src/windownotes.cpp:800
+#: ../src/windownotes.cpp:799
 msgid "Are you sure you want to delete this note?"
 msgstr "Êtes-vous certain de vouloir supprimer cette note ?"
 
-#: ../src/windownotes.cpp:803
+#: ../src/windownotes.cpp:802
 msgid "Are you sure you want to delete these notes?"
 msgstr "Êtes-vous certain de vouloir supprimer ces notes ?"
 
@@ -7658,7 +6794,7 @@ msgstr "Éléments "
 
 #: ../src/windowreferences.cpp:647
 msgid " of "
-msgstr " de "
+msgstr ""
 
 #: ../src/windowreferences.cpp:650
 msgid "[next]"
@@ -7673,8 +6809,9 @@ msgid "[actions]"
 msgstr "[actions] "
 
 #: ../src/windowreferences.cpp:665
+#, fuzzy
 msgid "[back]"
-msgstr "[retour]"
+msgstr "sauvegarde"
 
 #: ../src/windowreferences.cpp:670
 msgid "dismiss cursor"
@@ -7722,6 +6859,7 @@ msgid "hidden"
 msgstr "masqué"
 
 #: ../src/windowreferences.cpp:694
+#, fuzzy
 msgid "Manage the hidden references"
 msgstr "Gérer les références masquées"
 
@@ -7734,11 +6872,13 @@ msgid "Import a list of references"
 msgstr "Importer une liste de références"
 
 #: ../src/windowreferences.cpp:706
+#, fuzzy
 msgid "settings"
 msgstr "paramètres"
 
 #: ../src/windowreferences.cpp:706
 #: ../templates/gtkbuilder.systemlogdialog.xml:91
+#, fuzzy
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -7871,9 +7011,9 @@ msgid "No place found to insert the word list"
 msgstr "Pas d'emplacement trouvé pour insérer la liste de mots"
 
 #: ../src/xetex.cpp:89
-#, c-format
+#, fuzzy, c-format
 msgid "% Configuration file created by Bibledit-Desktop"
-msgstr "% Configuration file created by Bibledit-Desktop"
+msgstr "% Configuration file created by Bibledit-Gtk"
 
 #: ../src/xetex.cpp:90
 msgid "% You can modify it to suit your needs"
@@ -7921,7 +7061,7 @@ msgid "% Relative sizes of margins, based on the unit above"
 msgstr "% Tailles relatives des marges, basées sur l'unité ci-dessus"
 
 #: ../src/xetex.cpp:123
-#, c-format
+#, fuzzy, c-format
 msgid "% Extra margin for the gutter on the binding side"
 msgstr "% Marge en trop pour la gouttière sur le côté à lier"
 
@@ -7943,7 +7083,7 @@ msgid ""
 "% Fonts to use for \"plain\", \"bold\", \"italic\", and \"bold italic\" from "
 "the stylesheet"
 msgstr ""
-"% Polices à utiliser pour \"simple\", \"gras\", \"italique\" et \"gras "
+"% F Polices à utiliser pour \"simple\", \"gras\", \"italique\" et \"gras "
 "italique\" de la feuille de style"
 
 #: ../src/xetex.cpp:177
@@ -7984,8 +7124,8 @@ msgstr ""
 #, c-format
 msgid "% Scaling factor used to adjust line spacing, relative to font size"
 msgstr ""
-"% Facteur d'échelle utilisé pour ajuster l'espacement des lignes par rapport "
-"à la taille de la police"
+"% S Facteur d'échelle utilisé pour ajuster l'espacement des lignes par "
+"rapport à la taille de la police"
 
 #: ../src/xetex.cpp:210
 msgid ""
@@ -8010,7 +7150,7 @@ msgstr "% Contenus possible :"
 #: ../src/xetex.cpp:213
 msgid "%   \\rangeref = Scripture reference of the range of text on the page;"
 msgstr ""
-"%  \\rangeref =  Référence des Écritures du champ de texte sur la page ;"
+"%   \\rangeref =  Référence des Écritures du champ de texte sur la page ;"
 
 #: ../src/xetex.cpp:214
 msgid "%   \\firstref = reference of the first verse on the page)"
@@ -8106,50 +7246,53 @@ msgstr ""
 "document.tex » dans ce dossier pour le convertir en fichier PDF."
 
 #: ../git/bibledit-git.cpp:37
+#, fuzzy
 msgid "Bibledit-Git has not been designed to run with root privileges."
 msgstr ""
-"Bibledit-Git n'a pas été conçu pour s'exécuter en tant qu'utilisateur root."
+"Bibledit-Gtk n'a pas été conçu pour s'exécuter en tant qu'utilisateur root.\n"
+"Veuillez l'exécuter en tant qu'utilisateur standard."
 
 #: ../git/bibledit-git.cpp:47
+#, fuzzy
 msgid "Bibledit-Git"
-msgstr "Bibledit-Git"
+msgstr "Bible"
 
 #: ../git/bibledit-git.cpp:68
+#, fuzzy
 msgid "_Repeat at end"
-msgstr "_Répéter à la fin"
+msgstr "Répétition : "
 
 #: ../git/bibledit-git.cpp:73
 msgid "Sending and receiving Bibles."
-msgstr "Envoi et réception de Bibles."
+msgstr ""
 
 #: ../git/bibledit-git.cpp:98
+#, fuzzy
 msgid "Ready."
-msgstr "Prêt."
+msgstr "Prêt"
 
 #: ../git/bibledit-git.cpp:99 ../git/bibledit-git.cpp:115
 msgid "You can close the window, or it will close itself in 5 minutes."
 msgstr ""
-"Vous pouvez fermer la fenêtre, ou elle se fermera elle-même dans 5 minutes."
 
 #: ../git/bibledit-git.cpp:110
 msgid "Will send and receive again after 5 minutes."
-msgstr "Enverra et recevra à nouveau après 5 minutes."
+msgstr ""
 
 #: ../git/bibledit-git.cpp:111
 msgid "Or close the window to not send and receive again."
-msgstr "Ou fermez la fenêtre pour ne pas envoyer recevoir à nouveau."
+msgstr ""
 
 #: ../git/bibledit-git.cpp:197
 msgid ""
 "Bibledit will resolve conflicts between its own data and the data on the "
 "server."
 msgstr ""
-"Bibledit résoudra les conflits entre ses propres données et les données sur "
-"le serveur."
 
 #: ../shutdown/bibledit-shutdown.cpp:94
+#, fuzzy
 msgid "Bibledit-Desktop"
-msgstr "Bibledit-Desktop"
+msgstr "Actuellement Bible-Gtk a "
 
 #: ../shutdown/bibledit-shutdown.cpp:104
 msgid "Tidying up"
@@ -8158,133 +7301,148 @@ msgstr "Organisation"
 #: ../shutdown/bibledit-shutdown.cpp:363
 #, c-format
 msgid "Run command %s\n"
-msgstr "Éxécuter la commande %s\n"
+msgstr ""
 
 #: ../shutdown/bibledit-shutdown.cpp:366
 #, c-format
 msgid "Exit code %d\n"
-msgstr "Code de sortie %d\n"
+msgstr ""
 
 #: ../shutdown/bibledit-shutdown.cpp:421
 #, c-format
 msgid "Optimize git repository at %s\n"
-msgstr "Optimiser le dépôt git à %s\n"
+msgstr ""
 
 #: ../shutdown/bibledit-shutdown.cpp:469
 #, c-format
 msgid "Optimize snapshot at %s\n"
-msgstr "Optimiser l'instantané à %s\n"
+msgstr ""
 
 #: ../shutdown/bibledit-shutdown.cpp:502
-#, c-format
+#, fuzzy, c-format
 msgid "Optimize database at %s\n"
-msgstr "Optimiser de la base de données à %s\n"
+msgstr "Importation des données dans la base de données à "
 
 #: ../templates/gtkbuilder.bulkspellingdialog.xml:7
 msgid "Bulk Speller"
-msgstr "Correction en groupe"
+msgstr ""
 
 #: ../templates/gtkbuilder.bulkspellingdialog.xml:17
 #: ../templates/gtkbuilder.progressdialog.xml:21
 msgid "label"
 msgstr "étiquette"
 
-# Cette ligne ne semble pas utile à la traduction
 #: ../templates/gtkbuilder.floatingwindow.xml:67
 msgid "x"
 msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:7
+#, fuzzy
 msgid "Goto reference"
-msgstr "Allez à la référence"
+msgstr "allez à la référence"
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:20
+#, fuzzy
 msgid "Press Control-G to go to another view"
-msgstr "Pressez CTRL-G pour aller à une autre vue"
+msgstr "Pressez Control-F pour une recherche avancée"
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:38
 msgid "Go to"
-msgstr "Aller à"
+msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:61
 msgid "Free"
-msgstr "Libre"
+msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:180
 msgid "Aided"
-msgstr "Assistant"
+msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:226
 msgid "History"
 msgstr "Historique"
 
 #: ../templates/gtkbuilder.guidialog.xml:7
+#, fuzzy
 msgid "User interface"
-msgstr "Interface utilisateur"
+msgstr "In_terface utilisateur"
 
 #: ../templates/gtkbuilder.guidialog.xml:18
+#, fuzzy
 msgid "Features"
-msgstr "Fonctionnalités"
+msgstr "Fonctionnalités particulières"
 
 #: ../templates/gtkbuilder.guidialog.xml:28
 msgid "Only the basics are available"
-msgstr "Seuls les éléments de base sont disponibles"
+msgstr ""
 
 #: ../templates/gtkbuilder.guidialog.xml:43
 msgid "Full features are available"
-msgstr "Toutes les fonctionnalités sont disponibles"
+msgstr ""
 
 #: ../templates/gtkbuilder.guidialog.xml:59
+#, fuzzy
 msgid "User defined features"
-msgstr "Fonctionnalités de l'utilisateur défini "
+msgstr "Utilisateur défini"
 
 #: ../templates/gtkbuilder.guidialog.xml:75
+#, fuzzy
 msgid "Printing"
-msgstr "Impression"
+msgstr "Im_pression"
 
 #: ../templates/gtkbuilder.guidialog.xml:90
+#, fuzzy
 msgid "Project management"
-msgstr "Gestion du projet"
+msgstr "Notes de projet"
 
 #: ../templates/gtkbuilder.guidialog.xml:103
+#, fuzzy
 msgid "References management"
-msgstr "Gestion des références bibliques"
+msgstr "Inventaire des références bibliques"
 
 #: ../templates/gtkbuilder.guidialog.xml:116
+#, fuzzy
 msgid "Styles"
-msgstr "Styles"
+msgstr "_Styles"
 
 #: ../templates/gtkbuilder.guidialog.xml:129
+#, fuzzy
 msgid "Styles management"
-msgstr "Gestion des styles"
+msgstr "Feuille de style"
 
 #: ../templates/gtkbuilder.guidialog.xml:155
+#, fuzzy
 msgid "Project notes management"
-msgstr "Gestion des notes de projet"
+msgstr "M_ise à jour en masse des notes du projet"
 
 #: ../templates/gtkbuilder.guidialog.xml:168
+#, fuzzy
 msgid "References and find"
 msgstr "Références et rechercher"
 
 #: ../templates/gtkbuilder.guidialog.xml:194
+#, fuzzy
 msgid "Checks"
-msgstr "Vérifications"
+msgstr "Vérifier"
 
 #: ../templates/gtkbuilder.guidialog.xml:207
+#, fuzzy
 msgid "Tools"
 msgstr "Outils"
 
 #: ../templates/gtkbuilder.guidialog.xml:220
+#, fuzzy
 msgid "Preferences"
-msgstr "Préférences"
+msgstr "P_références"
 
 #: ../templates/gtkbuilder.guidialog.xml:242
+#, fuzzy
 msgid "Remember most recent verse per chapter"
-msgstr "Se rappeler le verset le plus récent pour chaque chapitre"
+msgstr "Il n'y a pas suffisamment de verset dans le chapitre"
 
 #: ../templates/gtkbuilder.guidialog.xml:255
 msgid "Start program maximized"
-msgstr "Démarrer le programme maximisé"
+msgstr ""
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:22
 msgid ""
@@ -8293,24 +7451,24 @@ msgid ""
 "Each verse of one book in your project gets the parallel verses of other "
 "projects printed below it."
 msgstr ""
-"Bible parallèle.\n"
-"Cela imprime des feuilles de travail avec des versions parallèles.\n"
-"Chaque verset d'un livre dans votre projet obtient les versets parallèles "
-"d'autres projets imprimés en dessous."
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:48
+#, fuzzy
 msgid "First project:"
 msgstr "Premier projet :"
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:60
+#, fuzzy
 msgid "<Project>"
 msgstr "<Projet>"
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:81
+#, fuzzy
 msgid "Book: "
-msgstr "Livre  : "
+msgstr "Livre "
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:92
+#, fuzzy
 msgid "<Book>"
 msgstr "<Livre>"
 
@@ -8320,51 +7478,61 @@ msgstr "<tout>"
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:254
 msgid "Keep all parallel verses together on the page"
-msgstr "Garder ensemble tous les versets parallèles sur la page "
+msgstr ""
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:269
+#, fuzzy
 msgid "Include verses 0"
-msgstr "Inclure les versets 0"
+msgstr "_Inclure le texte en verset"
 
 #: ../templates/gtkbuilder.planningeditdialog.xml:7
+#, fuzzy
 msgid "Planning Edit"
-msgstr "Édition du programme"
+msgstr "Programme "
 
 #: ../templates/gtkbuilder.planningeditdialog.xml:22
+#, fuzzy
 msgid "Status"
-msgstr "État"
+msgstr "Éditer le statut"
 
 #: ../templates/gtkbuilder.planningeditdialog.xml:47
+#, fuzzy
 msgid "The project status"
-msgstr "État du projet"
+msgstr "Le projet a débuté le "
 
 #: ../templates/gtkbuilder.planningeditdialog.xml:57
+#, fuzzy
 msgid "The project planned tasks"
-msgstr "Tâches planifiées du projet"
+msgstr "Le projet a débuté le "
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:7
+#, fuzzy
 msgid "Planning Setup"
-msgstr "Paramètres du programme "
+msgstr "Programme "
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:28
+#, fuzzy
 msgid "Durations"
-msgstr "Durées"
+msgstr "Durée (jours)"
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:62
+#, fuzzy
 msgid "The time each task takes per chapter"
-msgstr "La durée que prend chaque tâche par chapitre"
+msgstr "Tâches par chapitre"
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:77
 msgid "The tasks that the project consists of"
 msgstr ""
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:106
+#, fuzzy
 msgid "When the project was started"
-msgstr "Quand le projet a été commencé"
+msgstr "Le projet a débuté le "
 
 #: ../templates/gtkbuilder.progressdialog.xml:7
+#, fuzzy
 msgid "Bibledit"
-msgstr "Bibledit"
+msgstr "Bible"
 
 #: ../templates/gtkbuilder.progressdialog.xml:37
 msgid "gtk-cancel"
@@ -8372,8 +7540,9 @@ msgstr ""
 
 #: ../templates/gtkbuilder.referenceexchangedialog.xml:7
 #: ../templates/gtkbuilder.referencesettingsdialog.xml:7
+#, fuzzy
 msgid "Reference settings"
-msgstr "Paramètres des références"
+msgstr "Paramètres des référence"
 
 #: ../templates/gtkbuilder.referenceexchangedialog.xml:20
 msgid ""
@@ -8401,7 +7570,7 @@ msgstr "Texte de verset"
 
 #: ../templates/gtkbuilder.referencesettingsdialog.xml:33
 msgid "Only show the relevant bits"
-msgstr "Montrer uniquement les morceaux pertinents"
+msgstr ""
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:7
 msgid "Show Project Notes"
@@ -8444,16 +7613,18 @@ msgid "between"
 msgstr "entre"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:162
+#, fuzzy
 msgid "start"
-msgstr "démmarrer"
+msgstr "Redémmarrer"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:175
 msgid "and"
 msgstr "et"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:183
+#, fuzzy
 msgid "end"
-msgstr "fin"
+msgstr "envoyer"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:200
 msgid "at any time"
@@ -8480,20 +7651,22 @@ msgid "Display"
 msgstr "Afficher"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:321
+#, fuzzy
 msgid "Title, including"
-msgstr "Titres, inclus"
+msgstr "_Titres et en-têtes"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:336
 msgid "project"
-msgstr "projet"
+msgstr "Projet"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:350
 msgid "category"
 msgstr "catégorie"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:364
+#, fuzzy
 msgid "date created"
-msgstr "date de création"
+msgstr "Créée par"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:378
 msgid "created by"
@@ -8509,7 +7682,7 @@ msgstr "tout"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:428
 msgid "summary"
-msgstr "resumé"
+msgstr ""
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:443
 msgid "add text of the references"
@@ -8517,15 +7690,17 @@ msgstr "ajouter le texte des références"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:464
 msgid "Result"
-msgstr "Résultat"
+msgstr ""
 
 #: ../templates/gtkbuilder.systemlogdialog.xml:8
+#, fuzzy
 msgid "System log"
-msgstr "Registre système"
+msgstr "_Registre système"
 
 #: ../templates/gtkbuilder.systemlogdialog.xml:44
+#, fuzzy
 msgid "Show previous session"
-msgstr "Montrer la session précédente"
+msgstr "Voir les révisions précédentes"
 
 #: ../templates/gtkbuilder.systemlogdialog.xml:57
 msgid "Main"
@@ -8533,33 +7708,36 @@ msgstr "Principal"
 
 #: ../templates/gtkbuilder.systemlogdialog.xml:77
 msgid "Shutdown"
-msgstr "Éteindre"
+msgstr ""
 
 #: ../templates/gtkbuilder.timednotifywindow.xml:6
+#, fuzzy
 msgid "Notification"
-msgstr "Notification"
+msgstr "Versification"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:7
+#, fuzzy
 msgid "Print settings"
-msgstr "Paramètres d'impression"
+msgstr "Paramètres du projet"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:39
+#, fuzzy
 msgid "portion"
-msgstr "section"
+msgstr "Section"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:78
+#, fuzzy
 msgid "Write the references in the notes in full (not yet implemented)"
-msgstr "Écrire les références en entier dans les notes (pas encore implémenté)"
+msgstr "Écrire les références en entier dans les notes"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:118
 msgid "Page format and margins are set under menu Preferences / Printing"
 msgstr ""
-"Le format et les marges de la page sont définis dans le menu Préférences / "
-"Impression"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:126
+#, fuzzy
 msgid "Crop marks"
-msgstr "Marques de coupure"
+msgstr "% Crop marks"
 
 #: ../templates/gtkbuilder.xetexdialog.xml:167
 msgid ""
@@ -8567,41 +7745,39 @@ msgid ""
 "mapping table to be associated with a font. Such a mapping could be used to "
 "convert all numbers to their localized versions."
 msgstr ""
-"XETeX dispose d'une option de mappage des polices qui permet d'associer une "
-"table de mappage à une police, Unicode-> Unicode TECkit. Un tel mappage "
-"pourrait être utilisé pour convertir tous les nombres en versions localisées."
 
 #: ../templates/gtkbuilder.xetexdialog.xml:179
 msgid "Clear"
-msgstr "Vider"
+msgstr ""
 
 #: ../templates/gtkbuilder.xetexdialog.xml:215
 msgid "Mapping"
-msgstr "Mappage"
+msgstr ""
 
 #: ../templates/gtkbuilder.xetexdialog.xml:229
 msgid "Use generic shaping engine"
-msgstr "Utiliser le moteur de développement générique"
+msgstr ""
 
 #: ../templates/gtkbuilder.xetexdialog.xml:244
 msgid "Use arab shaping engine"
-msgstr "Utiliser le moteur de développement arabe"
+msgstr ""
 
 #: ../templates/gtkbuilder.xetexdialog.xml:269
 msgid "Engine"
-msgstr "Moteur"
+msgstr ""
 
 #: ../templates/gtkbuilder.yesnoalwaysdialog.xml:7
 msgid "Yes or no"
-msgstr "Oui ou non"
+msgstr ""
 
 #: ../templates/gtkbuilder.yesnoalwaysdialog.xml:31
+#, fuzzy
 msgid "question"
-msgstr "question"
+msgstr "Description"
 
 #: ../templates/gtkbuilder.yesnoalwaysdialog.xml:45
 msgid "_Remember my choice throughout this session"
-msgstr "_Se souvenir de mon choix durant cette session"
+msgstr ""
 
 #~ msgid "A backup helps keep your data safe"
 #~ msgstr "Une sauvegarde vous permet de garder vos données en sécurité"
@@ -8644,6 +7820,15 @@ msgstr "_Se souvenir de mon choix durant cette session"
 #~ msgid "Import done."
 #~ msgstr "Importation terminée."
 
+#~ msgid "Front Matter"
+#~ msgstr "Introduction principale"
+
+#~ msgid "Bel and the Dragon"
+#~ msgstr "Bel et le dragon"
+
+#~ msgid "General settings"
+#~ msgstr "Paramètres généraux"
+
 #~ msgid "Diagnostics"
 #~ msgstr "Diagnostiques"
 
@@ -8660,14 +7845,60 @@ msgstr "_Se souvenir de mon choix durant cette session"
 #~ msgid "diagnostics"
 #~ msgstr "Diagnostiques"
 
+#~ msgid "Looking for file "
+#~ msgstr "Recherche du fichier "
+
 #~ msgid "."
 #~ msgstr "."
+
+#~ msgid "Hebrew Bible with cantillation marks from Mechon Mamre"
+#~ msgstr ""
+#~ "Bible hébraïque de Mechon Mamre avec les balises pour la cantillation"
+
+#~ msgid ""
+#~ "The Hebrew Bible from Mechon Mamre provides a Hebrew text that can be "
+#~ "useful for translating the Bible. Bibledit-Gtk can import this text. This "
+#~ "consists of two steps: downloading it and importing it."
+#~ msgstr ""
+#~ "La Bible hébraïque de Mechon Mamre procure un texte hébreux qui peut très "
+#~ "utile pour la traduction de la Bible. Bibledit-gtk peut importer ce "
+#~ "texte. Cela consiste en deux étapes : le télécharger et l'importer"
+
+#~ msgid "1. Downloading the text"
+#~ msgstr "1. Télécharger le texte"
+
+#~ msgid ""
+#~ "When you click on the link below, a web browser will open, which will "
+#~ "download the Hebrew text. The file will be called ct005.zip. Please save "
+#~ "this file in the home directory, on your Desktop, or in the Downloads "
+#~ "folder."
+#~ msgstr ""
+#~ "Lorsque vous cliquez sur le lien plus bas, un navigateur web va s'ouvrir "
+#~ "pour télécharger le texte hébreux. Le fichier s'appelle ct005.zip. "
+#~ "Veuillez sauver ce fichier dans votre dossier personnel, sur votre Bureau "
+#~ "ou dans le dossier Téléchargements."
+
+#~ msgid "Download it"
+#~ msgstr "Télécharger"
+
+#~ msgid "2. Importing the text"
+#~ msgstr "2. Importer le texte"
+
+#~ msgid ""
+#~ "When you click on the link below, a new Bible will be created, and the "
+#~ "file that you have downloaded will be imported into it."
+#~ msgstr ""
+#~ "Lorsque vous cliquez sur le lien plus bas, une nouvelle Bible sera créée "
+#~ "et le fichier que vous aurez téléchargé y sera importé."
 
 #~ msgid "settings\", \"Settings"
 #~ msgstr "paramètres\", \"Paramètres"
 
 #~ msgid "website"
 #~ msgstr "site Web"
+
+#~ msgid "copyright"
+#~ msgstr "droit d'auteur"
 
 #~ msgid "license"
 #~ msgstr "licence"
