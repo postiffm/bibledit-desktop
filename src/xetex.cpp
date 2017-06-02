@@ -86,34 +86,34 @@ void XeTeX::write_document_tex_file ()
   extern Styles * styles;
   Stylesheet * sheet = styles->stylesheet (stylesheet_get_actual ());
   
-  document_tex.push_back (_("% Configuration file created by Bibledit-Desktop"));
-  document_tex.push_back (_("% You can modify it to suit your needs"));
-  document_tex.push_back (_("% After modification, run the following command in this directory:"));
-  document_tex.push_back (_("%   xetex document.tex"));
-  document_tex.push_back (_("% After that look carefully at the output"));
-  document_tex.push_back (_("% If it says that a re-run is required, repeat this command"));
+  document_tex.push_back (_("% Configuration file created by Bibledit-Desktop")); // xgettext:no-c-format
+  document_tex.push_back (_("% You can modify it to suit your needs")); // xgettext:no-c-format
+  document_tex.push_back (_("% After modification, run the following command in this directory:")); // xgettext:no-c-format
+  document_tex.push_back (_("%   xetex document.tex")); // xgettext:no-c-format
+  document_tex.push_back (_("% After that look carefully at the output")); // xgettext:no-c-format
+  document_tex.push_back (_("% If it says that a re-run is required, repeat this command")); // xgettext:no-c-format
 
   document_tex.push_back ("");
-  document_tex.push_back (_("% Include the ptx2pdf macros"));
+  document_tex.push_back (_("% Include the ptx2pdf macros")); // xgettext:no-c-format
   document_tex.push_back ("\\input paratext2.tex");
 
   document_tex.push_back ("");
-  document_tex.push_back (_("% Paper size"));
+  document_tex.push_back (_("% Paper size")); // xgettext:no-c-format
   document_tex.push_back ("\\PaperWidth=" + convert_to_string (settings->genconfig.paper_width_get()) + "cm");
   document_tex.push_back ("\\PaperHeight=" + convert_to_string (settings->genconfig.paper_height_get()) + "cm");
 
   if (settings->session.print_crop_marks){
     document_tex.push_back ("");
-    document_tex.push_back (_("% Crop marks"));
+    document_tex.push_back (_("% Crop marks")); // xgettext:no-c-format
     document_tex.push_back ("\\CropMarkstrue");
   }
 
   document_tex.push_back ("");
-  document_tex.push_back (_("% The basic unit for the margins; changing this will alter them all"));
+  document_tex.push_back (_("% The basic unit for the margins; changing this will alter them all")); // xgettext:no-c-format
   document_tex.push_back ("\\MarginUnit=1cm");
 
   document_tex.push_back ("");
-  document_tex.push_back (_("% Relative sizes of margins, based on the unit above"));
+  document_tex.push_back (_("% Relative sizes of margins, based on the unit above")); // xgettext:no-c-format
   document_tex.push_back ("\\def\\TopMarginFactor{" + convert_to_string (settings->genconfig.paper_top_margin_get()) + "}");
   document_tex.push_back ("\\def\\BottomMarginFactor{" + convert_to_string (settings->genconfig.paper_bottom_margin_get()) + "}");
   document_tex.push_back ("\\def\\SideMarginFactor{" + convert_to_string (settings->genconfig.paper_outside_margin_get()) + "}");
@@ -164,18 +164,24 @@ void XeTeX::write_document_tex_file ()
         font_addition.append (font_mapping);
       }
       if (!shaping_engine.empty()) {
-        if (font_addition.empty())
+        if (font_addition.empty()) {
           font_addition.append (":");
-        else 
+	}
+        else {
           font_addition.append (";");
+	}
         font_addition.append (shaping_engine);
       }
 
       ustring font_family = pango_font_description_get_family (font_desc);
       document_tex.push_back ("");
+      // xgettext:no-c-format
       document_tex.push_back (_("% Fonts to use for \"plain\", \"bold\", \"italic\", and \"bold italic\" from the stylesheet"));
+      // xgettext:no-c-format
       document_tex.push_back (_("% (they need not really be italic, etc.)"));
+      // xgettext:no-c-format
       document_tex.push_back (_("% Add e.g. \":mapping=farsidigits\" to get digits in Farsi, provided the farsidigits.tec TECkit mapping is available"));
+      // xgettext:no-c-format
       document_tex.push_back (_("% Add e.g. \":script=arab\" to use the arab shaping engine instead of the generic one"));
       document_tex.push_back ("\\def\\regular{\"" + font_family + font_addition + "\"}");
       document_tex.push_back ("\\def\\bold{\"" + font_family + "/B" + font_addition + "\"}");
@@ -187,15 +193,18 @@ void XeTeX::write_document_tex_file ()
 
   if (projectconfig->right_to_left_get()) {
     document_tex.push_back ("");
+    // xgettext:no-c-format
     document_tex.push_back (_("% Right-to-left layout mode"));
     document_tex.push_back ("\\RTLtrue");
   }
 
   document_tex.push_back ("");
+  // xgettext:no-c-format
   document_tex.push_back (_("% The unit for font sizes in the stylesheet; changing this will scale all text proportionately"));
   document_tex.push_back ("\\FontSizeUnit=1pt");
 
   document_tex.push_back ("");
+  // xgettext:no-c-format
   document_tex.push_back (_("% Scaling factor used to adjust line spacing, relative to font size"));
   double line_spacing_factor = 1.0;
   double vertical_space_factor = 1.0;
@@ -272,6 +281,7 @@ void XeTeX::write_document_tex_file ()
           document_tex.push_back ("\\NumericCallers{" + marker + "}");
           break;
         case nntAlphabetical:
+	  // xgettext:no-c-format
           document_tex.push_back (_("% Alphabetical callers for \\") + marker + _(" notes"));
           document_tex.push_back ("\\AutoCallers{" + marker+ "}{a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}");
           break;
@@ -283,6 +293,7 @@ void XeTeX::write_document_tex_file ()
             autocallers.append (style->userstring1.substr (i, 1));
           }
           if (!autocallers.empty()) {
+	    // xgettext:no-c-format
             document_tex.push_back (_("% Special caller sequence for \\") + marker + " notes");
             document_tex.push_back ("\\AutoCallers{" + marker+ "}{" + autocallers + "}");
           }
@@ -299,10 +310,12 @@ void XeTeX::write_document_tex_file ()
         case nnrtChapter:
           break;
       }
+      // xgettext:no-c-format
       document_tex.push_back (_("% Reset callers every page for \\") + marker + _(" notes"));
       document_tex.push_back ("\\PageResetCallers{" + marker + "}");
 
       document_tex.push_back ("");
+      // xgettext:no-c-format
       document_tex.push_back (_("% Omit callers in the note for \\") + marker + _(" notes"));
       document_tex.push_back (_("% \\OmitCallerInNote{") + marker + "}");
 

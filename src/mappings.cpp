@@ -182,12 +182,14 @@ If "system" is not yet loaded, it first loads it, then gives the pointer.
     }
   }
   // If the system is not available, take "English".
-  if (!available)
+  if (!available) {
     system = "English";
+  }
   // Get a pointer to the requested system, if it is already loaded.
   for (unsigned int i = 0; i < loaded_systems.size(); i++) {
-    if (system == loaded_systems[i].system)
+    if (system == loaded_systems[i].system) {
       return i;
+    }
   }
   // Load the requested system from the filename, and return a pointer to it.
   ustring filename;

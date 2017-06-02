@@ -24,8 +24,10 @@
 #include "shell.h"
 #include "settings.h"
 #include "localizedbooks.h"
+#include <glib/gi18n.h>
+#include "debug.h"
 
-extern book_record books_table[];
+extern book_record books_table[]; // see bookdata.cpp
 
 void books_order(const ustring & project, vector < unsigned int >&books)
 // Books read from the database usually are out of order. 
@@ -200,9 +202,11 @@ ustring books_id_to_abbreviation(const ustring & language, unsigned int id)
 
 ustring books_id_to_paratext(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].paratext;
+    }
+  }
   return "";
 }
 
@@ -221,9 +225,11 @@ unsigned int books_paratext_to_id(const ustring & paratext)
 
 ustring books_id_to_bibleworks(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].bibleworks;
+    }
+  }
   return "";
 }
 
@@ -242,9 +248,11 @@ unsigned int books_bibleworks_to_id(const ustring & bibleworks)
 
 ustring books_id_to_osis(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].osis;
+    }
+  }
   return "";
 }
 
@@ -264,9 +272,24 @@ unsigned int books_osis_to_id(const ustring & osis)
 // Could be much more efficient if the id was the index into the books_table[]
 ustring books_id_to_english(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
+      DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].name)
       return books_table[i].name;
+    }
+  }
+  return "";
+}
+
+// Could be much more efficient if the id was the index into the books_table[]
+ustring books_id_to_localname(unsigned int id)
+{
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
+      DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].localname)
+      return books_table[i].localname;
+    }
+  }
   return "";
 }
 
@@ -281,6 +304,7 @@ std::unordered_map<std::string, int> bookmap;
 
 void books_init(void)
 {
+  // For lookup optimization
   bookmap["front matter"]=67;
   bookmap["genesis"]=1;
   bookmap["exodus"]=2;
@@ -292,83 +316,175 @@ void books_init(void)
   bookmap["ruth"]=8;
   bookmap["1 samuel"]=9;
   bookmap["2 samuel"]=10;
- bookmap["1 kings"]=11;
- bookmap["2 kings"]=12;
- bookmap["1 chronicles"]=13;
- bookmap["2 chronicles"]=14;
- bookmap["ezra"]=15;
- bookmap["nehemiah"]=16;
- bookmap["esther"]=17;
- bookmap["job"]=18;
- bookmap["psalms"]=19;
- bookmap["proverbs"]=20;
- bookmap["ecclesiastes"]=21;
- bookmap["song of solomon"]=22;
- bookmap["isaiah"]=23;
- bookmap["jeremiah"]=24;
- bookmap["lamentations"]=25;
- bookmap["ezekiel"]=26;
- bookmap["daniel"]=27;
- bookmap["hosea"]=28;
- bookmap["joel"]=29;
- bookmap["amos"]=30;
- bookmap["obadiah"]=31;
- bookmap["jonah"]=32;
- bookmap["micah"]=33;
- bookmap["nahum"]=34;
- bookmap["habakkuk"]=35;
- bookmap["zephaniah"]=36;
- bookmap["haggai"]=37;
- bookmap["zechariah"]=38;
- bookmap["malachi"]=39;
- bookmap["matthew"]=40;
- bookmap["mark"]=41;
- bookmap["luke"]=42;
- bookmap["john"]=43;
- bookmap["acts"]=44;
- bookmap["romans"]=45;
- bookmap["1 corinthians"]=46;
- bookmap["2 corinthians"]=47;
- bookmap["galatians"]=48;
- bookmap["ephesians"]=49;
- bookmap["philippians"]=50;
- bookmap["colossians"]=51;
- bookmap["1 thessalonians"]=  52;
- bookmap["2 thessalonians"]=  53;
- bookmap["1 timothy"]=  54;
- bookmap["2 timothy"]=  55;
- bookmap["titus"]=  56;
- bookmap["philemon"]=  57;
- bookmap["hebrews"]=  58;
- bookmap["james"]=  59;
- bookmap["1 peter"]=  60;
- bookmap["2 peter"]=  61;
- bookmap["1 john"]=  62;
- bookmap["2 john"]=  63;
- bookmap["3 john"]=  64;
- bookmap["jude"]=65;
- bookmap["revelation"]=  66;
- bookmap["back matter"]=  68;
- bookmap["other material"]=  69;
- bookmap["tobit"]=  70;
- bookmap["judith"]=  71;
- bookmap["esther (greek)"]=  72;
- bookmap["wisdom of solomon"]=  73;
- bookmap["sirach"]=  74;
- bookmap["baruch"]=  75;
- bookmap["letter of jeremiah"]=  76;
- bookmap["song of the three children"]=  77;
- bookmap["susanna"]=  78;
- bookmap["bel and the dragon"]=  79;
- bookmap["1 maccabees"]=  80;
- bookmap["2 maccabees"]=  81;
- bookmap["1 esdras"]=  82;
- bookmap["prayer of manasses"]=  83;
- bookmap["psalm 151"]=  84;
- bookmap["3 maccabees"]=  85;
- bookmap["2 esdras"]=  86;
- bookmap["4 maccabees"]=  87;
- bookmap["daniel (greek)"]=  88;
+  bookmap["1 kings"]=11;
+  bookmap["2 kings"]=12;
+  bookmap["1 chronicles"]=13;
+  bookmap["2 chronicles"]=14;
+  bookmap["ezra"]=15;
+  bookmap["nehemiah"]=16;
+  bookmap["esther"]=17;
+  bookmap["job"]=18;
+  bookmap["psalms"]=19;
+  bookmap["proverbs"]=20;
+  bookmap["ecclesiastes"]=21;
+  bookmap["song of solomon"]=22;
+  bookmap["isaiah"]=23;
+  bookmap["jeremiah"]=24;
+  bookmap["lamentations"]=25;
+  bookmap["ezekiel"]=26;
+  bookmap["daniel"]=27;
+  bookmap["hosea"]=28;
+  bookmap["joel"]=29;
+  bookmap["amos"]=30;
+  bookmap["obadiah"]=31;
+  bookmap["jonah"]=32;
+  bookmap["micah"]=33;
+  bookmap["nahum"]=34;
+  bookmap["habakkuk"]=35;
+  bookmap["zephaniah"]=36;
+  bookmap["haggai"]=37;
+  bookmap["zechariah"]=38;
+  bookmap["malachi"]=39;
+  bookmap["matthew"]=40;
+  bookmap["mark"]=41;
+  bookmap["luke"]=42;
+  bookmap["john"]=43;
+  bookmap["acts"]=44;
+  bookmap["romans"]=45;
+  bookmap["1 corinthians"]=46;
+  bookmap["2 corinthians"]=47;
+  bookmap["galatians"]=48;
+  bookmap["ephesians"]=49;
+  bookmap["philippians"]=50;
+  bookmap["colossians"]=51;
+  bookmap["1 thessalonians"]=  52;
+  bookmap["2 thessalonians"]=  53;
+  bookmap["1 timothy"]=  54;
+  bookmap["2 timothy"]=  55;
+  bookmap["titus"]=  56;
+  bookmap["philemon"]=  57;
+  bookmap["hebrews"]=  58;
+  bookmap["james"]=  59;
+  bookmap["1 peter"]=  60;
+  bookmap["2 peter"]=  61;
+  bookmap["1 john"]=  62;
+  bookmap["2 john"]=  63;
+  bookmap["3 john"]=  64;
+  bookmap["jude"]=65;
+  bookmap["revelation"]=  66;
+  bookmap["back matter"]=  68;
+  bookmap["other material"]=  69;
+  bookmap["tobit"]=  70;
+  bookmap["judith"]=  71;
+  bookmap["esther (greek)"]=  72;
+  bookmap["wisdom of solomon"]=  73;
+  bookmap["sirach"]=  74;
+  bookmap["baruch"]=  75;
+  bookmap["letter of jeremiah"]=  76;
+  bookmap["song of the three children"]=  77;
+  bookmap["susanna"]=  78;
+  bookmap["bel and the dragon"]=  79;
+  bookmap["1 maccabees"]=  80;
+  bookmap["2 maccabees"]=  81;
+  bookmap["1 esdras"]=  82;
+  bookmap["prayer of manasses"]=  83;
+  bookmap["psalm 151"]=  84;
+  bookmap["3 maccabees"]=  85;
+  bookmap["2 esdras"]=  86;
+  bookmap["4 maccabees"]=  87;
+  bookmap["daniel (greek)"]=  88;
+  
+  // To fill books_table with correct names using gettext (see language.po translation file, such as fr.po)
+  // The localname defaults to English; but if gettext rewrites it on the fly to say French, then it
+  // is always French.
+  books_table[0].localname = _("Front Matter");            // no abbreviation for this
+  books_table[1].localname = _("Genesis");		   books_table[1].localabbrev = _("Gen");
+  books_table[2].localname = _("Exodus");		   books_table[2].localabbrev = _("Exo");
+  books_table[3].localname = _("Leviticus");		   books_table[3].localabbrev = _("Lev");
+  books_table[4].localname = _("Numbers");		   books_table[4].localabbrev = _("Num");
+  books_table[5].localname = _("Deuteronomy");		   books_table[5].localabbrev = _("Deu");
+  books_table[6].localname = _("Joshua");		   books_table[6].localabbrev = _("Jos");
+  books_table[7].localname = _("Judges");		   books_table[7].localabbrev = _("Jdg");
+  books_table[8].localname = _("Ruth");			   books_table[8].localabbrev = _("Rut");
+  books_table[9].localname = _("1 Samuel");		   books_table[9].localabbrev = _("1Sa");
+  books_table[10].localname = _("2 Samuel");		   books_table[10].localabbrev = _("2Sa");
+  books_table[11].localname = _("1 Kings");		   books_table[11].localabbrev = _("1Ki");
+  books_table[12].localname = _("2 Kings");		   books_table[12].localabbrev = _("2Ki");
+  books_table[13].localname = _("1 Chronicles");	   books_table[13].localabbrev = _("1Ch");
+  books_table[14].localname = _("2 Chronicles");	   books_table[14].localabbrev = _("2Ch");
+  books_table[15].localname = _("Ezra");		   books_table[15].localabbrev = _("Ezr");
+  books_table[16].localname = _("Nehemiah");		   books_table[16].localabbrev = _("Neh");
+  books_table[17].localname = _("Esther");		   books_table[17].localabbrev = _("Est");
+  books_table[18].localname = _("Job");			   books_table[18].localabbrev = _("Job");
+  books_table[19].localname = _("Psalms");		   books_table[19].localabbrev = _("Psa");
+  books_table[20].localname = _("Proverbs");		   books_table[20].localabbrev = _("Pro");
+  books_table[21].localname = _("Ecclesiastes");	   books_table[21].localabbrev = _("Ecc");
+  books_table[22].localname = _("Song of Solomon");	   books_table[22].localabbrev = _("Sol");
+  books_table[23].localname = _("Isaiah");		   books_table[23].localabbrev = _("Isa");
+  books_table[24].localname = _("Jeremiah");		   books_table[24].localabbrev = _("Jer");
+  books_table[25].localname = _("Lamentations");	   books_table[25].localabbrev = _("Lam");
+  books_table[26].localname = _("Ezekiel");		   books_table[26].localabbrev = _("Eze");
+  books_table[27].localname = _("Daniel");		   books_table[27].localabbrev = _("Dan");
+  books_table[28].localname = _("Hosea");		   books_table[28].localabbrev = _("Hos");
+  books_table[29].localname = _("Joel");		   books_table[29].localabbrev = _("Joe");
+  books_table[30].localname = _("Amos");		   books_table[30].localabbrev = _("Amo");
+  books_table[31].localname = _("Obadiah");		   books_table[31].localabbrev = _("Oba");
+  books_table[32].localname = _("Jonah");		   books_table[32].localabbrev = _("Jon");
+  books_table[33].localname = _("Micah");		   books_table[33].localabbrev = _("Mic");
+  books_table[34].localname = _("Nahum");		   books_table[34].localabbrev = _("Nah");
+  books_table[35].localname = _("Habakkuk");		   books_table[35].localabbrev = _("Hab");
+  books_table[36].localname = _("Zephaniah");		   books_table[36].localabbrev = _("Zep");
+  books_table[37].localname = _("Haggai");		   books_table[37].localabbrev = _("Hag");
+  books_table[38].localname = _("Zechariah");		   books_table[38].localabbrev = _("Zec");
+  books_table[39].localname = _("Malachi");		   books_table[39].localabbrev = _("Mal");
+  books_table[40].localname = _("Matthew");		   books_table[40].localabbrev = _("Mat");
+  books_table[41].localname = _("Mark");		   books_table[41].localabbrev = _("Mar");
+  books_table[42].localname = _("Luke");		   books_table[42].localabbrev = _("Luk");
+  books_table[43].localname = _("John");		   books_table[43].localabbrev = _("Joh");
+  books_table[44].localname = _("Acts");		   books_table[44].localabbrev = _("Act");
+  books_table[45].localname = _("Romans");		   books_table[45].localabbrev = _("Rom");
+  books_table[46].localname = _("1 Corinthians");	   books_table[46].localabbrev = _("1Co");
+  books_table[47].localname = _("2 Corinthians");	   books_table[47].localabbrev = _("2Co");
+  books_table[48].localname = _("Galatians");		   books_table[48].localabbrev = _("Gal");
+  books_table[49].localname = _("Ephesians");		   books_table[49].localabbrev = _("Eph");
+  books_table[50].localname = _("Philippians");		   books_table[50].localabbrev = _("Phi");
+  books_table[51].localname = _("Colossians");		   books_table[51].localabbrev = _("Col");
+  books_table[52].localname = _("1 Thessalonians");	   books_table[52].localabbrev = _("1Th");
+  books_table[53].localname = _("2 Thessalonians");	   books_table[53].localabbrev = _("2Th");
+  books_table[54].localname = _("1 Timothy");		   books_table[54].localabbrev = _("1Ti");
+  books_table[55].localname = _("2 Timothy");		   books_table[55].localabbrev = _("2Ti");
+  books_table[56].localname = _("Titus");		   books_table[56].localabbrev = _("Tit");
+  books_table[57].localname = _("Philemon");		   books_table[57].localabbrev = _("Phm");
+  books_table[58].localname = _("Hebrews");		   books_table[58].localabbrev = _("Heb");
+  books_table[59].localname = _("James");		   books_table[59].localabbrev = _("Jam");
+  books_table[60].localname = _("1 Peter");		   books_table[60].localabbrev = _("1Pe");
+  books_table[61].localname = _("2 Peter");		   books_table[61].localabbrev = _("2Pe");
+  books_table[62].localname = _("1 John");		   books_table[62].localabbrev = _("1Jo");
+  books_table[63].localname = _("2 John");		   books_table[63].localabbrev = _("2Jo");
+  books_table[64].localname = _("3 John");		   books_table[64].localabbrev = _("3Jo");
+  books_table[65].localname = _("Jude");		   books_table[65].localabbrev = _("Jud");
+  books_table[66].localname = _("Revelation");		   books_table[66].localabbrev = _("Rev");
+  books_table[67].localname = _("Back Matter");		   // no abbreviation for this
+  books_table[68].localname = _("Other Material");	   // no abbreviation for this
+  books_table[69].localname = _("Tobit");		   books_table[69].localabbrev = _("Tob");
+  books_table[70].localname = _("Judith");		   books_table[70].localabbrev = _("Jdt");
+  books_table[71].localname = _("Esther (Greek)");	   books_table[71].localabbrev = _("EsG");
+  books_table[72].localname = _("Wisdom of Solomon");	   books_table[72].localabbrev = _("Wis");
+  books_table[73].localname = _("Sirach");		   books_table[73].localabbrev = _("Sir");
+  books_table[74].localname = _("Baruch");		   books_table[74].localabbrev = _("Bar");
+  books_table[75].localname = _("Letter of Jeremiah");	   books_table[75].localabbrev = _("LJe");
+  books_table[76].localname = _("Song of the Three Children"); books_table[76].localabbrev = _("S3Y");
+  books_table[77].localname = _("Susanna");		   books_table[77].localabbrev = _("Sus");
+  books_table[78].localname = _("Bel and the Dragon");	   books_table[78].localabbrev = _("Bel");
+  books_table[79].localname = _("1 Maccabees");		   books_table[79].localabbrev = _("1Ma");
+  books_table[80].localname = _("2 Maccabees");		   books_table[80].localabbrev = _("2Ma");
+  books_table[81].localname = _("1 Esdras");		   books_table[81].localabbrev = _("1Es");
+  books_table[82].localname = _("Prayer of Manasses");	   books_table[82].localabbrev = _("Man");
+  books_table[83].localname = _("Psalm 151");		   books_table[83].localabbrev = _("Ps2");
+  books_table[84].localname = _("3 Maccabees");		   books_table[84].localabbrev = _("3Ma");
+  books_table[85].localname = _("2 Esdras");		   books_table[85].localabbrev = _("2Es");
+  books_table[86].localname = _("4 Maccabees");		   books_table[86].localabbrev = _("4Ma");
+  books_table[87].localname = _("Daniel (Greek)");	   books_table[87].localabbrev = _("Dnt");
 }
 
 // Return 0 if no book found
@@ -405,9 +521,11 @@ unsigned int books_english_to_id(const ustring & english)
 
 ustring books_id_to_online_bible(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].onlinebible;
+    }
+  }
   return "";
 }
 
@@ -426,9 +544,11 @@ unsigned int books_online_bible_to_id(const ustring & onlinebible)
 
 BookType books_id_to_type(unsigned int id)
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].type;
+    }
+  }
   return btUnknown;
 }
 
@@ -448,9 +568,11 @@ vector < unsigned int >books_type_to_ids(BookType type)
 bool books_id_to_one_chapter(unsigned int id)
 // Gives whether this is a book with one chapter.
 {
-  for (unsigned int i = 0; i < bookdata_books_count(); i++)
-    if (id == books_table[i].id)
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    if (id == books_table[i].id) {
       return books_table[i].onechapter;
+    }
+  }
   return false;
 }
 

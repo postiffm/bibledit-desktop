@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2003-2013 Teus Benschop.
+ ** Copyright (©) 2003-2013 Teus Benschop, 2015-2017 Matt Postiff
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -21,12 +21,16 @@
 #ifndef INCLUDED_BOOKDATA_H
 #define INCLUDED_BOOKDATA_H
 
+#include "ustring.h"
 
 enum BookType {btOldTestament, btNewTestament, btFrontBackMatter, btOtherMaterial, btUnknown, btApocrypha};
 
 
 typedef struct
 {
+  //--------------------------------------------------------------
+  // Statically filled information
+  //--------------------------------------------------------------
   const char *name; // English name.
   const char *osis; // Osis name.
   const char *paratext; // Paratext ID.
@@ -37,6 +41,14 @@ typedef struct
   unsigned int id; // Bibledit's internal id.
   BookType type; // The type of the book.
   bool onechapter; // The book has one chapter.
+  //--------------------------------------------------------------
+  // Dynamically filled information (see books.cpp, books_init())
+  //--------------------------------------------------------------
+  ustring localname; // name of book in local (bridge) language (say French, if LANG=fr_FR.UTF-8 and LANGUAGE=fr_FR:fr)
+  ustring localabbrev; // book abbreviation in local (bridge) language
+  // The "bridge" language is also called the "majority language" by Bibles International translators. There are
+  // three such languages: English, French, and Spanish. But the internationalization feature of Bibledit-Desktop
+  // is not limited to those three languages. It can be internationalized so that the interface appears in any language.
 } book_record;
 
 

@@ -33,7 +33,7 @@ Therefore, ids are not supposed to be changed; new ones can be added though.
 */
 book_record books_table[] =
 {
-  //                            osis       paratxt bw      blue    onln      biblestudytools
+  //                            osis       paratxt bw      blue    onln      biblestudytools    id  type                onechapter
   {
   "Front Matter",               "",        "FRT",  "",     "",     "",       "",                67, btFrontBackMatter,  false}, {
   "Genesis",                    "Gen",     "GEN",  "Gen",  "Gen",  "Ge",     "genesis",          1, btOldTestament,     false}, {
