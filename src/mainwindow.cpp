@@ -3080,8 +3080,9 @@ void MainWindow::on_new_note()
   // Display notes.
   view_project_notes();
   // Create new note.
-  if (window_notes)
+  if (window_notes) {
     window_notes->new_note();
+  }
 }
 
 

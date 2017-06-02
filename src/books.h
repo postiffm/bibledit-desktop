@@ -44,6 +44,7 @@ ustring books_id_to_paratext (unsigned int id);
 ustring books_id_to_bibleworks (unsigned int id);
 ustring books_id_to_osis (unsigned int id);
 ustring books_id_to_english (unsigned int id);
+ustring books_id_to_localname(unsigned int id);
 ustring books_id_to_online_bible (unsigned int id);
 
 BookType books_id_to_type (unsigned int id);

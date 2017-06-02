@@ -257,8 +257,9 @@ void WindowNotes::new_note()
 // Create a new note.
 {
   // If we are currently editing a note, do nothing.
-  if (note_being_edited ())
+  if (note_being_edited ()) {
     return;
+  }
 
   // Get the unique id for the new note.
   int id = notes_database_get_unique_id ();
@@ -304,7 +305,7 @@ void WindowNotes::notes_fill_edit_screen (int id, bool newnote)
   gtk_text_buffer_set_text(note_editor->textbuffer_references, "", -1);
   if (newnote) {
     // New note: get the current reference from the editor.
-    references = books_id_to_english(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
+    references = books_id_to_localname(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
     gtk_text_buffer_insert_at_cursor(note_editor->textbuffer_references, references.c_str(), -1);
     gtk_text_buffer_insert_at_cursor(note_editor->textbuffer_references, "\n", -1);
   } else {
@@ -488,7 +489,7 @@ void WindowNotes::redisplay_timeout()
 {
   // Get actual verse from the settings.
   extern Settings *settings;
-  ustring reference = books_id_to_english(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
+  ustring reference = books_id_to_localname(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
   // Create displaying object.
   displayprojectnotes = new DisplayProjectNotes (reference, webview_notes, NULL, edited_note_id);
 }

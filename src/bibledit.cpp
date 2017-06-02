@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
   //}
 #endif
   
-  books_init(); // TEMP - MAP
+  books_init(); // MAP - should do this a better way, but this works well for now
 
   Directories->init(); // important step
 
