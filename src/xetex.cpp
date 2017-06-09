@@ -120,10 +120,12 @@ void XeTeX::write_document_tex_file ()
 
   if (settings->genconfig.paper_inside_margin_get() != settings->genconfig.paper_outside_margin_get()) {
     document_tex.push_back ("");
+    // xgettext:no-c-format
     document_tex.push_back (_("% Extra margin for the gutter on the binding side"));
     document_tex.push_back ("\\BindingGuttertrue");
     document_tex.push_back ("\\BindingGutter=" + convert_to_string (settings->genconfig.paper_inside_margin_get() - settings->genconfig.paper_outside_margin_get()) + "cm");
     document_tex.push_back ("");
+    // xgettext:no-c-format
     document_tex.push_back (_("% Double sided printing"));
     document_tex.push_back ("\\DoubleSidedtrue");
   }
