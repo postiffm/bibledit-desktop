@@ -553,7 +553,7 @@ void WindowTabbed::html_link_clicked (const gchar * url)
     keyterms_get_terms("", collection(), terms, ids);
     for (unsigned int i = 0; i < terms.size(); i++) {
       htmlwriter.paragraph_open();
-      htmlwriter.hyperlink_add (_("keyterm ") + convert_to_string (ids[i]), terms[i]);
+      htmlwriter.hyperlink_add ("keyterm " + convert_to_string (ids[i]), terms[i]);
       htmlwriter.paragraph_close();
     }
     display_another_page = true;

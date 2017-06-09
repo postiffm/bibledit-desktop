@@ -37,7 +37,7 @@
 const gchar *reporting_status_filename()
 // Gives the base filename of the status file.
 {
-  return "status";
+  return _("status");
 }
 
 ustring reporting_status_filename(const ustring & project, unsigned int book)
@@ -54,33 +54,37 @@ void reporting_check_tasks_and_durations(vector < ustring > &tasks, vector < dou
 // If the vector are empty, they get initialized with a defaults.
 // If the vectors are not of the same size, their sizes will be adjusted.
 {
-  struct {
-    const char *task;
+  typedef struct {
+    ustring task;
     double duration;
-  } default_values[] = { {
-  "First Draft", 2}, {
-  "Self Check", 0.4}, {
-  "Team Check", 0.4}, {
-  "Back Translation", 0.4}, {
-  "Advisor Check", 0.1}, {
-  "First Revision", 0.4}, {
-  "First Village Check", 0.5}, {
-  "Second Revision", 0.4}, {
-  "Second Village Check", 0.5}, {
-  "Third Revision", 0.4}, {
-  "Consultant Check", 0.1}, {
-  "Fourth Revision", 0.4}, {
-  "First Read Through", 0.2}, {
-  "Second Read Through", 0.2}, {
-  "Publish", 0}, {
-  "Post Publish Revision", 0}};
+  } default_value;
+
+  vector < default_value > default_values;
+  default_value x;
+  // This may look a bit verbose compared to before, but I'm trying to make these strings
+  // easily marked for i18n, and that can't be if they are static initializers...that I know of.
+  x.task = _("First Draft");           x.duration = 2;   default_values.push_back(x);
+  x.task = _("Self Check");            x.duration = 0.4; default_values.push_back(x);
+  x.task = _("Team Check");            x.duration = 0.4; default_values.push_back(x);
+  x.task = _("Back Translation");      x.duration = 0.4; default_values.push_back(x);
+  x.task = _("Advisor Check");         x.duration = 0.1; default_values.push_back(x);
+  x.task = _("First Revision");        x.duration = 0.4; default_values.push_back(x);
+  x.task = _("First Village Check");   x.duration = 0.5; default_values.push_back(x);
+  x.task = _("Second Revision");       x.duration = 0.4; default_values.push_back(x);
+  x.task = _("Second Village Check");  x.duration = 0.5; default_values.push_back(x);
+  x.task = _("Third Revision");        x.duration = 0.4; default_values.push_back(x);
+  x.task = _("Consultant Check");      x.duration = 0.1; default_values.push_back(x);
+  x.task = _("Fourth Revision");       x.duration = 0.4; default_values.push_back(x);
+  x.task = _("First Read Through");    x.duration = 0.2; default_values.push_back(x);
+  x.task = _("Second Read Through");   x.duration = 0.2; default_values.push_back(x);
+  x.task = _("Publish");               x.duration = 0;   default_values.push_back(x);
+  x.task = _("Post Publish Revision"); x.duration = 0;   default_values.push_back(x);
 
   if (tasks.empty()) {
     vector < ustring > values;
-    for (unsigned int i = 0; i < (sizeof(default_values) / sizeof(*default_values)); i++) {
-      values.push_back(default_values[i].task);
+    for (unsigned int i = 0; i < default_values.size(); i++) {
+      tasks.push_back(default_values[i].task);
     }
-    tasks = values;
   }
 
   if (durations) {
@@ -88,7 +92,7 @@ void reporting_check_tasks_and_durations(vector < ustring > &tasks, vector < dou
       durations->clear();
       for (unsigned int i = 0; i < tasks.size(); i++) {
         double duration = 0.5;
-        for (unsigned int i2 = 0; i2 < (sizeof(default_values) / sizeof(*default_values)); i2++) {
+        for (unsigned int i2 = 0; i2 < default_values.size(); i2++) {
           if (tasks[i] == default_values[i2].task) {
             duration = default_values[i2].duration;
           }
@@ -445,7 +449,7 @@ const gchar *ProjectStatusChapter::chapter_key()
  status.
  */
 {
-  return "chapter";
+  return _("chapter");
 }
 
 void ProjectStatusChapter::print()
@@ -547,7 +551,7 @@ void ProjectStatusBook::save()
 
 void ProjectStatusBook::print()
 {
-  cout << "Printing status for book " << book << endl;
+  cout << _("Printing status for book ") << book << endl;
   for (unsigned int i = 0; i < chapters.size(); i++) {
     chapters[i]->print();
   }
@@ -562,7 +566,7 @@ ProjectStatus::ProjectStatus(const ustring & project_in, const vector < ustring 
   // Progress window.
   ProgressWindow *progresswindow = NULL;
   if (gui) {
-    progresswindow = new ProgressWindow("Loading status", false);
+    progresswindow = new ProgressWindow(_("Loading status"), false);
   }
   // Load books in project.
   vector < unsigned int >bks = project_get_books(project);
@@ -630,7 +634,7 @@ void ProjectStatus::save()
 
 void ProjectStatus::print()
 {
-  cout << "Printing project status " << this << endl;
+  cout << _("Printing project status ") << this << endl;
   for (unsigned int i = 0; i < books.size(); i++) {
     books[i]->print();
   }
@@ -758,7 +762,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
     return;
 
   // Progress window.
-  ProgressWindow progresswindow("Creating report", false);
+  ProgressWindow progresswindow(_("Creating report"), false);
   progresswindow.set_fraction(0.1);
 
   // Title and heading.
@@ -794,8 +798,8 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
     // CSV export.
     if (csv_export) {
       vector < ustring > csv;
-      csv.push_back("\"project\"," + convert_to_string(percentage));
-      ustring filename = gw_build_filename(Directories->get_temp(), "project_complete.csv");
+      csv.push_back(ustring("\"") + ustring(_("project")) + ustring("\",") + convert_to_string(percentage));
+      ustring filename = gw_build_filename(Directories->get_temp(), _("project_complete.csv"));
       write_lines(filename, csv);
       htmlwriter.hyperlinkedparagraph(_("The above data in csv format"), filename);
       htmlwriter.paragraph("");
@@ -820,7 +824,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
       for (unsigned int i = 0; i < texts.size(); i++) {
         csv.push_back("\"" + texts[i] + "\"," + convert_to_string(percentages[i]));
       }
-      ustring filename = gw_build_filename(Directories->get_temp(), "books_complete.csv");
+      ustring filename = gw_build_filename(Directories->get_temp(), _("books_complete.csv"));
       write_lines(filename, csv);
       htmlwriter.hyperlinkedparagraph(_("The above data in csv format"), filename);
       htmlwriter.paragraph("");

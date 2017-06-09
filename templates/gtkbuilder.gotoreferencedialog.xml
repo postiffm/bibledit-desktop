@@ -4,7 +4,7 @@
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="dialog">
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Goto reference</property>
+    <property name="title" translatable="yes">Go to reference</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
