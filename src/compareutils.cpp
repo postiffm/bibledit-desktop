@@ -100,7 +100,7 @@ bool compare_projects(ProjectMemory & originalproject, ProjectMemory & secondpro
     progresswindow.iterate();
 
     // Skip book if it is not included in the portion.
-    if (!scriptureportions.included(books_id_to_english(originalscripture_books[ib]))) {
+    if (!scriptureportions.included(books_id_to_localname(originalscripture_books[ib]))) {
       continue;
     }
     // Get a pointer to the book in the second project.
@@ -112,7 +112,7 @@ bool compare_projects(ProjectMemory & originalproject, ProjectMemory & secondpro
     vector < unsigned int >originalchapters = originalproject.data[ib].get_chapters();
     for (unsigned int ic = 1; ic < originalchapters.size(); ic++) {
       // Progress info.
-      ustring info = books_id_to_english(originalscripture_books[ib]) + " " + convert_to_string(originalchapters[ic]);
+      ustring info = books_id_to_localname(originalscripture_books[ib]) + " " + convert_to_string(originalchapters[ic]);
       progresswindow.set_text(info);
       if (progresswindow.cancel) {
         return false;
@@ -222,14 +222,14 @@ void compare_get_additions_deletions_verses(ProjectMemory & originalproject, Pro
   // Go through the original verses to see which were added.
   for (unsigned int b = 0; b < originalverses.size(); b++) {
     if (secondverses_set.find(originalverses[b]) == secondverses_set.end()) {
-      results.push_back(_("Added: ") + books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + originalverses[b]);
+      results.push_back(_("Added: ") + books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + originalverses[b]);
     }
   }
 
   // Go through the second verses to see which were deleted.
   for (unsigned int b = 0; b < secondverses.size(); b++) {
     if (originalverses_set.find(secondverses[b]) == originalverses_set.end()) {
-      results.push_back(_("Deleted: ") + books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + secondverses[b]);
+      results.push_back(_("Deleted: ") + books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + secondverses[b]);
     }
   }
 }
@@ -255,7 +255,7 @@ void compare_get_additions_deletions_chapters(ProjectMemory & originalproject, P
     if (secondchapters_set.find(originalchapters[b]) != secondchapters_set.end()) {
       compare_get_additions_deletions_verses(originalproject, secondproject, book, originalchapters[b], results);
     } else {
-      results.push_back(_("Added: ") + books_id_to_english(book) + " " + convert_to_string(originalchapters[b]));
+      results.push_back(_("Added: ") + books_id_to_localname(book) + " " + convert_to_string(originalchapters[b]));
     }
   }
 
@@ -265,7 +265,7 @@ void compare_get_additions_deletions_chapters(ProjectMemory & originalproject, P
     if (originalchapters_set.find(secondchapters[b]) != originalchapters_set.end()) {
       compare_get_additions_deletions_verses(originalproject, secondproject, book, secondchapters[b], results);
     } else {
-      results.push_back(_("Deleted: ") + books_id_to_english(book) + " " + convert_to_string(secondchapters[b]));
+      results.push_back(_("Deleted: ") + books_id_to_localname(book) + " " + convert_to_string(secondchapters[b]));
     }
   }
 }
@@ -294,7 +294,7 @@ deleted. If anything was found, it puts human readable text in "results".
     if (secondbooks_set.find(originalbooks[b]) != secondbooks_set.end()) {
       compare_get_additions_deletions_chapters(originalproject, secondproject, originalbooks[b], results);
     } else {
-      results.push_back(_("Added: ") + books_id_to_english(originalbooks[b]));
+      results.push_back(_("Added: ") + books_id_to_localname(originalbooks[b]));
     }
   }
 
@@ -305,7 +305,7 @@ deleted. If anything was found, it puts human readable text in "results".
     if (originalbooks_set.find(secondbooks[b]) != originalbooks_set.end()) {
       compare_get_additions_deletions_chapters(originalproject, secondproject, secondbooks[b], results);
     } else {
-      results.push_back(_("Deleted: ") + books_id_to_english(secondbooks[b]));
+      results.push_back(_("Deleted: ") + books_id_to_localname(secondbooks[b]));
     }
   }
 

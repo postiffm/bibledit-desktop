@@ -543,7 +543,7 @@ When we encounter an element that ends data, this handler deals with that.
         Reference newRef;
         if (reference_discover(oldRef, trim(parse.lines[i]), newRef)) {
           vector < int >verses = verses_encode(newRef.verse_get());
-          int book_chapter = reference_to_numerical_equivalent(books_id_to_english(newRef.book_get()), convert_to_string(newRef.chapter_get()), "0");
+          int book_chapter = reference_to_numerical_equivalent(books_id_to_localname(newRef.book_get()), convert_to_string(newRef.chapter_get()), "0");
           for (unsigned int i2 = 0; i2 < verses.size(); i2++) {
             reference_content.append(" ");
             reference_content.append(convert_to_string(int (book_chapter + verses[i2])));

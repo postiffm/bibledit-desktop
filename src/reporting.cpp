@@ -719,7 +719,7 @@ void reporting_get_tasks_done_per_book(ProjectStatus * projectstatus, vector < u
     ProjectStatusRecord statusrecord(tasks.size());
     statusrecord = projectstatusbook->get();
     vector < ustring > cells;
-    cells.push_back(books_id_to_english(projectstatusbook->book));
+    cells.push_back(books_id_to_localname(projectstatusbook->book));
     for (unsigned int i = 0; i < tasks.size(); i++) {
       int state = statusrecord.tasks_done[i];
       cells.push_back(reporting_get_task_done_sign(state));
@@ -812,7 +812,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
     vector < unsigned int >percentages;
     for (unsigned int i = 0; i < projectstatus.books.size(); i++) {
       ProjectStatusBook *projectstatusbook = projectstatus.books[i];
-      texts.push_back(books_id_to_english(projectstatusbook->book));
+      texts.push_back(books_id_to_localname(projectstatusbook->book));
       percentages.push_back(reporting_get_percentage_ready_book(projectstatusbook));
     }
     htmlwriter.bargraph(_("Books Percentage Complete"), texts, percentages, "");
@@ -878,7 +878,7 @@ void reporting_produce_status_report(const ustring & project, bool planning, boo
         else
           centers.push_back(true);
       }
-      htmlwriter.table(_("Tasks per chapter for ") + books_id_to_english(projectstatus.books[i]->book), column_headers, cell_texts, "", &centers, -1);
+      htmlwriter.table(_("Tasks per chapter for ") + books_id_to_localname(projectstatus.books[i]->book), column_headers, cell_texts, "", &centers, -1);
       htmlwriter.paragraph("");
     }
   }

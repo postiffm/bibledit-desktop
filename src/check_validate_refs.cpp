@@ -161,6 +161,6 @@ void CheckValidateReferences::check(const ustring & text)
 
 void CheckValidateReferences::message(const ustring & message)
 {
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+  references.push_back(books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }

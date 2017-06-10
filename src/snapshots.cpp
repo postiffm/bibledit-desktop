@@ -49,7 +49,7 @@ ustring snapshots_database (const ustring& project, unsigned int book, unsigned 
 {
   ustring filename;
   if (book) {
-    filename = gw_build_filename (snapshots_directory (project), books_id_to_english (book) + "." + convert_to_string (chapter) + ".sql");
+    filename = gw_build_filename (snapshots_directory (project), books_id_to_localname (book) + "." + convert_to_string (chapter) + ".sql");
   }
   return filename;
 }

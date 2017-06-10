@@ -50,7 +50,7 @@ ParallelBibleDialog::ParallelBibleDialog(int dummy)
   gtk_label_set_text (GTK_LABEL (label_main_project), settings->genconfig.project_get().c_str());
 
   label_book = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_book"));
-  gtk_label_set_text (GTK_LABEL (label_book), books_id_to_english(settings->genconfig.book_get()).c_str());
+  gtk_label_set_text (GTK_LABEL (label_book), books_id_to_localname(settings->genconfig.book_get()).c_str());
 
   label_chapters = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_chapters"));
   vector <unsigned int> chapters_from, chapters_to;

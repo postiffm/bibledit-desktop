@@ -551,7 +551,7 @@ void ProjectDialog::on_book_add()
         progresswindow.iterate();
         vector <ustring> booktemplate;
         // If the book is found in the templates, take that, else create it.
-        ustring englishbook = books_id_to_english (ids[i]);
+        ustring englishbook = books_id_to_localname (ids[i]);
         ustring templatefile = englishbook.casefold() + ".usfm";
         replace_text(templatefile, " ", "_");
         templatefile = gw_build_filename(Directories->get_package_data(), templatefile);

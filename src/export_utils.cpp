@@ -100,7 +100,7 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
       char padded [3];
       sprintf (padded, "%02d", books[i]);
       ustring padded2 (padded);
-      filename = padded2  + " " + books_id_to_english(books[i]) + ".usfm";
+      filename = padded2  + " " + books_id_to_localname(books[i]) + ".usfm";
       replace_text (filename, " ", "_");
     }
     if (zip) {  filename = gw_build_filename(tempdir, filename);  }
@@ -300,7 +300,7 @@ void export_to_osis_old (const ustring& project, const ustring& filename)
       swordnote.new_book();
 
       // Open book in osis code.
-      OsisBook osisbook(&wt, books_id_to_english(scripture_books[bk]));
+      OsisBook osisbook(&wt, books_id_to_localname(scripture_books[bk]));
 
       // Go through the book and collect verses and other data.
       vector < unsigned int >chapters;
@@ -726,7 +726,7 @@ void export_to_opendocument(const ustring& project, const ustring& filename)
     for (unsigned int i = 0; i < books.size(); i++) {
       set < unsigned int >selectedbook;
       selectedbook.insert(books[i]);
-      ustring combinedfilename = filename + "-" + books_id_to_english(books[i]);
+      ustring combinedfilename = filename + "-" + books_id_to_localname(books[i]);
       OpenDocument odt(project, combinedfilename, &selectedbook);
       odt.note_unformatted_markers (unformatted_markers);
     }
@@ -819,7 +819,7 @@ void export_to_usfm_changes (const ustring& project, int time_from, ustring comm
     vector < unsigned int >all_books = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < all_books.size(); i++) {
       if (!lines[books[i]].empty()) {
-        ustring usfmfilename = gw_build_filename(workingdirectory, books_id_to_english(books[i]) + ".usfm");
+        ustring usfmfilename = gw_build_filename(workingdirectory, books_id_to_localname(books[i]) + ".usfm");
         write_lines(usfmfilename, lines[books[i]]);
       }
     }

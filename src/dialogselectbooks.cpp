@@ -564,7 +564,7 @@ void SelectBooksDialog::on_okbutton()
       vector < ustring > books = listview_get_strings(treeviewbooks);
       for (unsigned int i = 0; i < books.size(); i++) {
         unsigned int book = books_name_to_id(mylanguage, books[i]);
-        reordered_books.push_back(books_id_to_english(book));
+        reordered_books.push_back(books_id_to_localname(book));
         bool include = (selectionset.find(book) != selectionset.end());
         reordered_includes.push_back(include);
       }

@@ -57,7 +57,7 @@ void planning_edit(const ustring & project)
 
 ustring planning_assemble_task(unsigned int book, const ustring & task)
 {
-  return books_id_to_english(book) + " | " + task;
+  return books_id_to_localname(book) + " | " + task;
 }
 
 
@@ -155,7 +155,7 @@ void planning_produce_report(const ustring & project, HtmlWriter & htmlwriter)
         vector < unsigned int >chapters = versification_get_chapters(projectconfig->versification_get(), book);
         duration *= (chapters.size() + 1);
       }
-      row.push_back(books_id_to_english(book));
+      row.push_back(books_id_to_localname(book));
       row.push_back(task);
       day += 1;
       if (percentage_complete)

@@ -134,7 +134,7 @@ void NotesTransferDialog::on_okbutton()
   for (unsigned int bk = 0; bk < books.size(); bk++) {
 
     // Progress.
-    progresswindow.set_text(books_id_to_english(books[bk]));
+    progresswindow.set_text(books_id_to_localname(books[bk]));
 
     // Go through the chapters in this book. Progress.
     vector < unsigned int >chapters = project_get_chapters(project, books[bk]);

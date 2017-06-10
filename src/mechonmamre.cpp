@@ -229,7 +229,7 @@ void mechon_mamre_action_page (HtmlWriter2& htmlwriter)
       vector <ustring> contents = mechon_mamre_extract_contents (files[i], chapter);
       CategorizeChapterVerse ccv (contents);
       project_store_chapter (bible, book, ccv);
-      messages.push_back (_("Importing ") + books_id_to_english (book) + " " + convert_to_string (chapter) + _(" from file ") + files[i]);
+      messages.push_back (_("Importing ") + books_id_to_localname (book) + " " + convert_to_string (chapter) + _(" from file ") + files[i]);
     }
   }
 

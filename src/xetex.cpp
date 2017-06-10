@@ -339,7 +339,7 @@ void XeTeX::write_document_tex_file ()
 
   // Write the data and add their filenames.
   for (unsigned int i = 0; i < book_ids.size(); i++) {
-    ustring filename = convert_to_string (book_ids[i]) + " " + books_id_to_english(book_ids[i]) + ".usfm";
+    ustring filename = convert_to_string (book_ids[i]) + " " + books_id_to_localname(book_ids[i]) + ".usfm";
     replace_text (filename, " ", "_");
     write_lines (gw_build_filename (working_directory, filename), book_data[i]);
     document_tex.push_back ("\\ptxfile{" + filename + "}");

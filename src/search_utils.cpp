@@ -364,7 +364,7 @@ vector < Reference > search_in_bibledit()
 
   // Get our position in the text.
   ustring project = settings->genconfig.project_get();
-  ustring book = books_id_to_english(settings->genconfig.book_get());
+  ustring book = books_id_to_localname(settings->genconfig.book_get());
   unsigned int chapter = convert_to_int(settings->genconfig.chapter_get());
 
   // Go through each book in the project. Progress information.
@@ -377,7 +377,7 @@ vector < Reference > search_in_bibledit()
     }
     // If the book is not to be searched, skip it.
     if (search_current_book)
-      if (book != books_id_to_english(availablebooks[bk]))
+      if (book != books_id_to_localname(availablebooks[bk]))
         continue;
     if (selected_books.find(availablebooks[bk]) == selected_books.end())
       continue;

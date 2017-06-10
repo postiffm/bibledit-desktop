@@ -204,8 +204,8 @@ CheckParallelPassages::CheckParallelPassages(bool nt, const ustring & project, c
 	}
 
         dataset.data.push_back(verse);
-	//        references.push_back(books_id_to_english(mapped_reference.book_get()) + " " + convert_to_string(mapped_reference.chapter_get()) + ":" + mapped_reference.verse_get());
-        references.push_back(books_id_to_english(otntparallels.sections[i].sets[i2].references[i3].book_get()) + " "
+	//        references.push_back(books_id_to_localname(mapped_reference.book_get()) + " " + convert_to_string(mapped_reference.chapter_get()) + ":" + mapped_reference.verse_get());
+        references.push_back(books_id_to_localname(otntparallels.sections[i].sets[i2].references[i3].book_get()) + " "
 			     + convert_to_string(otntparallels.sections[i].sets[i2].references[i3].chapter_get()) + ":"
 			     + otntparallels.sections[i].sets[i2].references[i3].verse_get());
         comments.push_back(_("Parallel"));
@@ -238,7 +238,7 @@ CheckParallelPassages::CheckParallelPassages(bool nt, const ustring & project, c
     			  verse.append(usfm_get_verse_text_only(project_retrieve_verse(project2, mapped_reference.book_get(), mapped_reference.chapter_get(), mapped_reference.verse_get())));
     		  }
     		  dataset2.data.push_back(verse);
-    		  references.push_back(books_id_to_english(mapped_reference.book_get()) + " " + convert_to_string(mapped_reference.chapter_get()) + ":" + mapped_reference.verse_get());
+    		  references.push_back(books_id_to_localname(mapped_reference.book_get()) + " " + convert_to_string(mapped_reference.chapter_get()) + ":" + mapped_reference.verse_get());
     		  comments.push_back(_("Parallel"));
     	  }
       	  datasection.sets.push_back(dataset2);

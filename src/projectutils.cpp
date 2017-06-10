@@ -124,7 +124,7 @@ ustring project_data_directory_book(const ustring & project, unsigned int book)
 // Returns the data directory for the book, e.g.:
 // ~/.bibledit/projects/testproject/data/Genesis
 {
-  ustring directory = gw_build_filename(project_data_directory_project(project), books_id_to_english(book));
+  ustring directory = gw_build_filename(project_data_directory_project(project), books_id_to_localname(book));
   return directory;
 }
 
@@ -143,7 +143,7 @@ ustring project_data_filename_chapter(const ustring & project, unsigned int book
   ustring filename = gw_build_filename(project_data_directory_chapter(project, book, chapter), "data");
   if (checkexists) {
     if (!g_file_test(filename.c_str(), G_FILE_TEST_IS_REGULAR))
-      throw runtime_error(books_id_to_english(book) + " " + convert_to_string(chapter) + _(" does not exist"));
+      throw runtime_error(books_id_to_localname(book) + " " + convert_to_string(chapter) + _(" does not exist"));
   }
   return filename;
 }

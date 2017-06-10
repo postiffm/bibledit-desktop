@@ -132,7 +132,7 @@ gui: whether to show graphical progressbar.
             if (print) {
               ustring message = _("Repeated: ");
               message.append(word);
-              references.push_back(books_id_to_english(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
+              references.push_back(books_id_to_localname(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
               comments.push_back(message);
             }
           }

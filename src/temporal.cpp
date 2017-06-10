@@ -51,7 +51,7 @@ void temporal_convert_parallel_passages()
       rt.lines[i].erase(0, 5);
       ustring book, chapter, verse;
       decode_reference(rt.lines[i], book, chapter, verse);
-      book = books_id_to_english(books_paratext_to_id(book));
+      book = books_id_to_localname(books_paratext_to_id(book));
       xmlTextWriterWriteAttribute(writer, BAD_CAST "book", BAD_CAST book.c_str());
       xmlTextWriterWriteAttribute(writer, BAD_CAST "chapter", BAD_CAST chapter.c_str());
       xmlTextWriterWriteAttribute(writer, BAD_CAST "verse", BAD_CAST verse.c_str());

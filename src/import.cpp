@@ -109,7 +109,7 @@ void import_check_usfm_files (vector <ustring>& filenames, vector <unsigned int>
     set <unsigned int> books_in_project_set (books_in_project.begin(), books_in_project.end());
     for (unsigned int i = 0; i < bookids.size(); i++) {
       if (books_in_project_set.find (bookids[i]) != books_in_project_set.end()) {
-        messages.push_back (_("File ") + filenames[i] + _(" has book ") + books_id_to_english (bookids[i]) + _(", but this one is already in the project"));
+        messages.push_back (_("File ") + filenames[i] + _(" has book ") + books_id_to_localname (bookids[i]) + _(", but this one is already in the project"));
       }
     }
   }

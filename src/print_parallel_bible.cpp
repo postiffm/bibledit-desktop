@@ -40,7 +40,7 @@ void view_parallel_bible_pdf()
   // Get the chapters and check them.
   vector < unsigned int >chapters = project_get_chapters(settings->genconfig.project_get(), settings->genconfig.book_get());
   if (chapters.empty()) {
-    gtkw_dialog_info(NULL, books_id_to_english(settings->genconfig.book_get()) + _("does not exist in this project"));
+    gtkw_dialog_info(NULL, books_id_to_localname(settings->genconfig.book_get()) + _("does not exist in this project"));
     return;
   }
   // Progress system.
@@ -70,7 +70,7 @@ void view_parallel_bible_pdf()
     if (project_book_exists(project_s_raw[i], settings->genconfig.book_get())) {
       project_names.push_back(project_s_raw[i]);
     } else {
-      messages.push_back(_("Project ") + project_s_raw[i] + _(" was requested to be included, but it does not contain ") + books_id_to_english(settings->genconfig.book_get()) + _(". It was left out."));
+      messages.push_back(_("Project ") + project_s_raw[i] + _(" was requested to be included, but it does not contain ") + books_id_to_localname(settings->genconfig.book_get()) + _(". It was left out."));
     }
   }
 

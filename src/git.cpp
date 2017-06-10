@@ -103,7 +103,7 @@ void git_resolve_conflict_chapter(const ustring & project, unsigned int book, un
 // This solves a conflicting chapter.
 {
   // Log message
-  gw_message(_("Resolving conflict for project ") + project + _(" book ") + books_id_to_english(book) + " " + convert_to_string(chapter));
+  gw_message(_("Resolving conflict for project ") + project + _(" book ") + books_id_to_localname(book) + " " + convert_to_string(chapter));
 
   // Directory of the chapter in the data.
   ustring directory = project_data_directory_chapter(project, book, chapter);

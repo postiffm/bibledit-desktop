@@ -65,7 +65,7 @@ ustring resource_template_ini ()
 ustring resource_viewer_produce_anchor(unsigned int book, unsigned int chapter, unsigned int verse)
 // Produces the anchor, e.g.: Matthew_1_1 or Song_of_Solomon_2_2.
 {
-  ustring anchor(books_id_to_english(book) + "_" + convert_to_string(chapter) + "_" + convert_to_string(verse));
+  ustring anchor(books_id_to_localname(book) + "_" + convert_to_string(chapter) + "_" + convert_to_string(verse));
   replace_text(anchor, " ", "_");
   return anchor;
 }
@@ -250,7 +250,7 @@ map < unsigned int, ustring > resource_get_books(const ustring & templatefile)
   if (g_key_file_load_from_file(keyfile, templatefile.c_str(), G_KEY_FILE_NONE, NULL)) {
     vector < unsigned int >ids = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < ids.size(); i++) {
-      ustring english_name = books_id_to_english(ids[i]);
+      ustring english_name = books_id_to_localname(ids[i]);
       gchar *value;
       value = g_key_file_get_string(keyfile, resource_template_books_group(), english_name.c_str(), NULL);
       if (value) {
@@ -270,7 +270,7 @@ map < unsigned int, ustring > resource_get_books2(const ustring & templatefile)
   if (g_key_file_load_from_file(keyfile, templatefile.c_str(), G_KEY_FILE_NONE, NULL)) {
     vector < unsigned int >ids = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < ids.size(); i++) {
-      ustring english_name = books_id_to_english(ids[i]);
+      ustring english_name = books_id_to_localname(ids[i]);
       gchar *value;
       value = g_key_file_get_string(keyfile, resource_template_books2_group(), english_name.c_str(), NULL);
       if (value) {

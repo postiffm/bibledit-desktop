@@ -117,7 +117,7 @@ BookLocalization::BookLocalization(const ustring & language_in, const ustring & 
   set < unsigned int >ids_done(id.begin(), id.end());
   for (unsigned int i = 0; i < all_ids.size(); i++) {
     if (ids_done.find(all_ids[i]) == ids_done.end()) {
-      ustring book = books_id_to_english(all_ids[i]);
+      ustring book = books_id_to_localname(all_ids[i]);
       id.push_back(all_ids[i]);
       name.push_back(book);
       name_casefold.push_back(book.casefold());
@@ -315,7 +315,7 @@ map <ustring, unsigned int> general_adapted_booknames_fill_up (map <unsigned int
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     ustring book = mapping[i];
     if (book.empty()) {
-      book = books_id_to_english(i);
+      book = books_id_to_localname(i);
     }
     swapped_mapping [book] = i;
   }

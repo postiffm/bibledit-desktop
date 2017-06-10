@@ -89,7 +89,7 @@ gui: whether to show graphical progressbar.
             if (parsewords.words[i] == words[i2]) {
               ustring message = _("Unwanted word: ");
               message.append(words[i2]);
-              references.push_back(books_id_to_english(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
+              references.push_back(books_id_to_localname(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
               comments.push_back(message);
             }
           }
