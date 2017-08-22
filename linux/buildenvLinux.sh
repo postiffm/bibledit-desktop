@@ -5,12 +5,12 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-echo "This script works on ubuntu Linux 14.04 LTS and Arch Linux"
+echo "This script works on ubuntu Linux 17.04 LTS and Arch Linux"
 
 # I assume you have already done this:
 # sudo apt-get install git
 # cd ~
-# git clone https://github.com/teusbenschop/bibledit.git
+# git clone https://github.com/postiffm/bibledit-desktop.git
 
 if apt-get --version 2> /dev/null; then
   apt-get install gitk
@@ -24,9 +24,11 @@ if apt-get --version 2> /dev/null; then
   apt-get install libenchant-dev
   apt-get install libgtkhtml3.14-dev
   apt-get install libgtksourceview2.0-dev
-  apt-get install libwebkit-dev
+  #apt-get install libwebkit-dev
+  apt-get install libwebkitgtk-dev
   apt-get install texlive-xetex
-  apt-get install php5-cli
+  #apt-get install php5-cli <-- not available Ubuntu 17.04
+  apt-get install php7.0-cli
   apt-get install curl
   apt-get install intltool
   apt-get install libtool

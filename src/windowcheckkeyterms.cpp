@@ -536,7 +536,7 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
 
   // Add action links.
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add ("index", "[Index]");
+  htmlwriter.hyperlink_add ("index", _("[Index]"));
   htmlwriter.text_add (" ");
   htmlwriter.hyperlink_add ("send", _("[Send to references window]"));
   htmlwriter.paragraph_close ();

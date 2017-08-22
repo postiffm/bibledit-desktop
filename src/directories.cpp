@@ -455,7 +455,7 @@ void directories::find_utilities(void)
   {
   // Check for unzip (Unix)
   GwSpawn spawn("unzip");
-  spawn.arg("--version");  // unzip.exe on Windows and Linux (on my systems at least) returns 10 even though it is present and runs --version because it doesn't know the --version flag
+  spawn.arg("-h");  // unzip.exe on Windows and Linux (on my systems at least) returns 10 even though it is present and runs --version because it doesn't know the --version flag
   spawn.run();
   if (spawn.exitstatus == 0) {
 	// We have an unzip command. Use it.
