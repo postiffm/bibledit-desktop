@@ -37,6 +37,7 @@
 #include "xmlutils.h"
 #include "gwrappers.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
   FloatingWindow(parent_layout, widCheckKeyterms, _("Check keyterms"), startup)
@@ -143,7 +144,7 @@ WindowCheckKeyterms::~WindowCheckKeyterms()
 void WindowCheckKeyterms::go_to_term(unsigned int id)
 {
   ustring url = _("keyterm ") + convert_to_string (id);
-  html_link_clicked (url.c_str());
+  html_link_clicked (url);
 }
 
 
@@ -190,7 +191,7 @@ void WindowCheckKeyterms::cell_edited(GtkCellRendererText * cell, const gchar * 
 
 void WindowCheckKeyterms::on_combobox_keyterm_collection()
 {
-  html_link_clicked("");
+  html_link_clicked(collection(), /*newCollection*/true);
 }
 
 
@@ -243,7 +244,7 @@ void WindowCheckKeyterms::save_renderings()
   ustring project = settings->genconfig.project_get();
   keyterms_store_renderings(project, keyterm, category, renderings, wholewords, casesensitives);
   load_renderings();
-  html_link_clicked (last_keyword_url.c_str());
+  html_link_clicked (last_keyword_url);
 }
 
 
@@ -413,10 +414,13 @@ gboolean WindowCheckKeyterms::on_navigation_policy_decision_requested (WebKitWeb
 void WindowCheckKeyterms::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
 // Callback for clicking a link.
 {
+#if 0
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
-
+  
+  DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
+#endif
   // Get the reason for this navigation policy request.
   WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
   
@@ -433,25 +437,28 @@ void WindowCheckKeyterms::navigation_policy_decision_requested (WebKitNetworkReq
   html_link_clicked (webkit_network_request_get_uri (request));
 }
 
-
-void WindowCheckKeyterms::html_link_clicked (const gchar * url)
+// newCollection=true if we are loading the index of an entirely new set of keywords
+void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollection)
 {
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
 
+  DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
+  DEBUG("active_url="+active_url+" new url="+ustring(url))
+  
   // New url.
   active_url = url;
 
   // Whether to show some widgets.
   bool show_collections = false;
   bool show_renderings = false;
-    
+  
   // Start writing a html page.
   HtmlWriter2 htmlwriter ("");
   bool display_another_page = false;
 
-  if (active_url.find (_("keyterm ")) == 0) {
+  if (!newCollection && (active_url.find (_("keyterm ")) == 0)) {
     // Store url of this keyterm.
     last_keyword_url = active_url;
     // Get the keyterm identifier.
@@ -467,7 +474,7 @@ void WindowCheckKeyterms::html_link_clicked (const gchar * url)
     display_another_page = true;
   }
 
-  else if (active_url.find (_("goto ")) == 0) {
+  else if (!newCollection && (active_url.find (_("goto ")) == 0)) {
     // Signal the editors to go to a reference.
     ustring url = active_url;
     url.erase (0, 5);
@@ -476,15 +483,17 @@ void WindowCheckKeyterms::html_link_clicked (const gchar * url)
     gtk_button_clicked(GTK_BUTTON(signal));
   }
   
-  else if (active_url.find (_("send")) == 0) {
+  else if (!newCollection && (active_url.find (_("send")) == 0)) {
     // Send the references to the references window.
     ustring url = active_url;
     new_reference_showing = NULL;
     gtk_button_clicked(GTK_BUTTON(signal));
   }
   
-  else {
+  else if (newCollection || (collection() == active_url)) {
     // Give the starting page with all keyterms of the active selection.
+    // We are either coming here "fresh" (newCollection==true) or
+    // coming back after looking at a particular keyterm list.
     show_collections = true;
     if (collection().find (_("Biblical")) != string::npos) {
       if (collection().find (_("Hebrew")) != string::npos) {
@@ -505,23 +514,28 @@ void WindowCheckKeyterms::html_link_clicked (const gchar * url)
     // No renderings.
     clear_renderings ();
   }
+  else { 
+    gw_warning("Ran into a keyterm case I am not expecting...");
+  }
   
   htmlwriter.finish();
   if (display_another_page) {
     // Load the page.
     webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview_terms), htmlwriter.html.c_str(), NULL, NULL, NULL);
     // Scroll to the position that possibly was stored while this url was last active.
+    // In order to do this, we need to let the web_view window fully load, and after it
+    // is done, then we can instruct it to change the vertical adjustment. I found this
+    // work-around on a couple of programming sites. MAP 8/28/2017.
+    while (gtk_events_pending()) gtk_main_iteration();
     GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
     gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
+    gtk_adjustment_value_changed(adjustment);
+    DEBUG("set new scroll position="+std::to_string(scrolling_position[active_url])+" for new active_url="+active_url)
     // Whether to show collections.
-    if (show_collections)
-      gtk_widget_show (hbox_collection);
-    else
-      gtk_widget_hide (hbox_collection);
-    if (show_renderings)
-      gtk_widget_show (treeview_renderings);
-    else
-      gtk_widget_hide (treeview_renderings);
+    if (show_collections) { gtk_widget_show (hbox_collection); }
+    else                  { gtk_widget_hide (hbox_collection); }
+    if (show_renderings)  { gtk_widget_show (treeview_renderings); }
+    else                  { gtk_widget_hide (treeview_renderings); }
   }
 }
 
@@ -534,9 +548,10 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
   ustring versification = projectconfig->versification_get();
 
-  // Add action links.
+  // Add action links at the top of the page.
   htmlwriter.paragraph_open ();
-  htmlwriter.hyperlink_add ("index", _("[Index]"));
+  //htmlwriter.hyperlink_add ("index", _("[Index]"));
+  htmlwriter.hyperlink_add (collection(), _("[Index]"));
   htmlwriter.text_add (" ");
   htmlwriter.hyperlink_add ("send", _("[Send to references window]"));
   htmlwriter.paragraph_close ();
@@ -649,6 +664,13 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
     htmlwriter.text_add (information);
     htmlwriter.paragraph_close ();
   }
+  
+  // Add action links at the bottom of the page.
+  htmlwriter.paragraph_open ();
+  htmlwriter.hyperlink_add (collection(), _("[Index]"));
+  htmlwriter.text_add (" ");
+  htmlwriter.hyperlink_add ("send", _("[Send to references window]"));
+  htmlwriter.paragraph_close ();
 }
 
 
@@ -699,7 +721,7 @@ void WindowCheckKeyterms::on_text_changed ()
       my_editor->chapter_save ();
     }
     my_editor = NULL;
-    html_link_clicked (last_keyword_url.c_str());
+    html_link_clicked (last_keyword_url);
   }
 }
 

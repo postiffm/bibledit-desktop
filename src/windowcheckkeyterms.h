@@ -65,7 +65,7 @@ private:
   // Callbacks.
   static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
   void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
-  void html_link_clicked (const gchar * url);
+  void html_link_clicked (const ustring& url, bool newCollection=false);
   static void on_combobox_keyterm_collection_changed(GtkComboBox *combobox, gpointer user_data);
   static void keyterm_whole_word_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
   static void keyterm_case_sensitive_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
