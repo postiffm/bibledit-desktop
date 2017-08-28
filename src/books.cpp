@@ -269,9 +269,11 @@ unsigned int books_osis_to_id(const ustring & osis)
   return 0;
 }
 
-// Could be much more efficient if the id was the index into the books_table[]
 ustring books_id_to_english(unsigned int id)
 {
+  assert(books_table[id].id == id);
+  return books_table[id].name;
+#if 0
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     if (id == books_table[i].id) {
       DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].name)
@@ -279,11 +281,14 @@ ustring books_id_to_english(unsigned int id)
     }
   }
   return "";
+#endif
 }
 
-// Could be much more efficient if the id was the index into the books_table[]
 ustring books_id_to_localname(unsigned int id)
 {
+  assert(books_table[id].id == id);
+  return books_table[id].localname;
+#if 0
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     if (id == books_table[i].id) {
       DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].localname)
@@ -291,6 +296,7 @@ ustring books_id_to_localname(unsigned int id)
     }
   }
   return "";
+#endif
 }
 
 // This requires the compiler flag -std=c++11. This, in turn, requires
@@ -299,6 +305,7 @@ ustring books_id_to_localname(unsigned int id)
 // autoconf-archive package to get this macro. Then run 
 // aclocal; autoconf; ./configure
 // Matt Postiff 1/12/2015
+// Update 8/28/2017: g++ 6.3 and later default to the newer C++ standard
 #include <unordered_map>
 std::unordered_map<std::string, int> bookmap;
 

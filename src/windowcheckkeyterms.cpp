@@ -444,8 +444,8 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
 
-  DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
-  DEBUG("active_url="+active_url+" new url="+ustring(url))
+  //DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
+  //DEBUG("active_url="+active_url+" new url="+ustring(url))
   
   // New url.
   active_url = url;
@@ -526,11 +526,11 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
     // In order to do this, we need to let the web_view window fully load, and after it
     // is done, then we can instruct it to change the vertical adjustment. I found this
     // work-around on a couple of programming sites. MAP 8/28/2017.
-    while (gtk_events_pending()) gtk_main_iteration();
+    while (gtk_events_pending()) { gtk_main_iteration(); }
     GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
     gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
     gtk_adjustment_value_changed(adjustment);
-    DEBUG("set new scroll position="+std::to_string(scrolling_position[active_url])+" for new active_url="+active_url)
+    //DEBUG("set new scroll position="+std::to_string(scrolling_position[active_url])+" for new active_url="+active_url)
     // Whether to show collections.
     if (show_collections) { gtk_widget_show (hbox_collection); }
     else                  { gtk_widget_hide (hbox_collection); }
