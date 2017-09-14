@@ -334,7 +334,6 @@ AC_CONFIG_FILES([Makefile
 		  src/Makefile 
 		  scripts/Makefile
 		  templates/Makefile
-		  olpc/Makefile
 		  desktop/Makefile
 		  windows/Makefile
 		  tests/Makefile
