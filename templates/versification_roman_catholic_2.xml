@@ -2128,7 +2128,7 @@
   <triad>
     <book>Nehemiah</book>
     <chapter>13</chapter>
-    <verse>41</verse>
+    <verse>31</verse>
   </triad>
   <triad>
     <book>Tobit</book>
@@ -2638,7 +2638,7 @@
   <triad>
     <book>Job</book>
     <chapter>25</chapter>
-    <verse>14</verse>
+    <verse>6</verse>
   </triad>
   <triad>
     <book>Job</book>
@@ -2648,7 +2648,7 @@
   <triad>
     <book>Job</book>
     <chapter>27</chapter>
-    <verse>24</verse>
+    <verse>23</verse>
   </triad>
   <triad>
     <book>Job</book>
@@ -2973,7 +2973,7 @@
   <triad>
     <book>Psalms</book>
     <chapter>50</chapter>
-    <verse>24</verse>
+    <verse>23</verse>
   </triad>
   <triad>
     <book>Psalms</book>
@@ -2998,7 +2998,7 @@
   <triad>
     <book>Psalms</book>
     <chapter>55</chapter>
-    <verse>21</verse>
+    <verse>24</verse>
   </triad>
   <triad>
     <book>Psalms</book>
@@ -3228,7 +3228,7 @@
   <triad>
     <book>Psalms</book>
     <chapter>101</chapter>
-    <verse>9</verse>
+    <verse>8</verse>
   </triad>
   <triad>
     <book>Psalms</book>
@@ -3483,7 +3483,7 @@
   <triad>
     <book>Proverbs</book>
     <chapter>2</chapter>
-    <verse>32</verse>
+    <verse>22</verse>
   </triad>
   <triad>
     <book>Proverbs</book>
@@ -3708,7 +3708,7 @@
   <triad>
     <book>Song of Solomon</book>
     <chapter>4</chapter>
-    <verse>17</verse>
+    <verse>16</verse>
   </triad>
   <triad>
     <book>Song of Solomon</book>
@@ -3731,17 +3731,17 @@
     <verse>14</verse>
   </triad>
   <triad>
-    <book>Wisdom</book>
+    <book>Wisdom of Solomon</book>
     <chapter>1</chapter>
     <verse>16</verse>
   </triad>
   <triad>
-    <book>Book of Wisdom</book>
+    <book>Wisdom of Solomon</book>
     <chapter>2</chapter>
     <verse>24</verse>
   </triad>
   <triad>
-    <book>Book of Wisdom</book>
+    <book>Wisdom of Solomon</book>
     <chapter>3</chapter>
     <verse>19</verse>
   </triad>
@@ -3773,7 +3773,7 @@
   <triad>
     <book>Wisdom of Solomon</book>
     <chapter>9</chapter>
-    <verse>19</verse>
+    <verse>18</verse>
   </triad>
   <triad>
     <book>Wisdom of Solomon</book>
@@ -3848,7 +3848,7 @@
   <triad>
     <book>Sirach</book>
     <chapter>5</chapter>
-    <verse>17</verse>
+    <verse>15</verse>
   </triad>
   <triad>
     <book>Sirach</book>
@@ -4038,7 +4038,7 @@
   <triad>
     <book>Sirach</book>
     <chapter>43</chapter>
-    <verse>35</verse>
+    <verse>33</verse>
   </triad>
   <triad>
     <book>Sirach</book>
@@ -4115,7 +4115,6 @@
     <chapter>7</chapter>
     <verse>25</verse>
   </triad>
-  <triad>
     <book>Isaiah</book>
     <chapter>8</chapter>
     <verse>24</verse>
@@ -4123,7 +4122,7 @@
   <triad>
     <book>Isaiah</book>
     <chapter>9</chapter>
-    <verse>21</verse>
+    <verse>20</verse>
   </triad>
   <triad>
     <book>Isaiah</book>
@@ -5033,7 +5032,7 @@
   <triad>
     <book>Daniel</book>
     <chapter>14</chapter>
-    <verse>43</verse>
+    <verse>42</verse>
   </triad>
   <triad>
     <book>Hosea</book>
@@ -5303,7 +5302,7 @@
   <triad>
     <book>Zechariah</book>
     <chapter>4</chapter>
-    <verse>16</verse>
+    <verse>14</verse>
   </triad>
   <triad>
     <book>Zechariah</book>
@@ -5908,7 +5907,7 @@
   <triad>
     <book>Acts</book>
     <chapter>19</chapter>
-    <verse>41</verse>
+    <verse>40</verse>
   </triad>
   <triad>
     <book>Acts</book>
@@ -6178,7 +6177,7 @@
   <triad>
     <book>2 Corinthians</book>
     <chapter>13</chapter>
-    <verse>14</verse>
+    <verse>13</verse>
   </triad>
   <triad>
     <book>Galatians</book>
@@ -6553,7 +6552,7 @@
   <triad>
     <book>3 John</book>
     <chapter>1</chapter>
-    <verse>14</verse>
+    <verse>15</verse>
   </triad>
   <triad>
     <book>Jude</book>
@@ -6618,7 +6617,7 @@
   <triad>
     <book>Revelation</book>
     <chapter>12</chapter>
-    <verse>17</verse>
+    <verse>18</verse>
   </triad>
   <triad>
     <book>Revelation</book>
