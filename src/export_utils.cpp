@@ -170,19 +170,16 @@ Yes, this is a bit rough, I know...
       for (unsigned int bk = 0; bk < scripture_books.size(); bk++) {
         // Progress information.
         progresswindow.iterate();
-        if (progresswindow.cancel)
-          return;
+        if (progresswindow.cancel) { return; }
         // Get the abbreviation to be used.
         ustring abbreviation = books_id_to_bibleworks(scripture_books[bk]);
         // If the book does not exist in BibleWorks, skip it.
-        if (abbreviation.empty())
-          continue;
+        if (abbreviation.empty()) { continue; }
         // Handle each chapter in the book.
         vector < unsigned int >chapters = project_get_chapters(project, scripture_books[bk]);
         for (unsigned int ch = 0; ch < chapters.size(); ch++) {
           // Do not export chapter 0.
-          if (chapters[ch] == 0)
-            continue;
+          if (chapters[ch] == 0) { continue; }
           // Get the chapter and handle it.
           vector < ustring > lines;
           lines = project_retrieve_chapter(project, scripture_books[bk], chapters[ch]);
@@ -190,8 +187,7 @@ Yes, this is a bit rough, I know...
           CategorizeChapterVerse ccv(lines);
           for (unsigned int vs = 0; vs < ccv.verse.size(); vs++) {
             // Do not export verse 0.
-            if (ccv.verse[vs] == "0")
-              continue;
+            if (ccv.verse[vs] == "0") { continue; }
             // Bibledit does not handle combined verses like 1-4a., etc. So make
             // a simple verse.
             ustring verse = number_in_string(ccv.verse[vs]);
