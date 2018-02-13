@@ -101,8 +101,7 @@ book_record books_table[] =
   "2 John",                     "2John",   "2JN",  "2Jo",  "2Jo",  "2Jo",    "2-john",          63, btNewTestament,     false}, {
   "3 John",                     "3John",   "3JN",  "3Jo",  "3Jo",  "3Jo",    "3-john",          64, btNewTestament,     true},  {
   "Jude",                       "Jude",    "JUD",  "Jud",  "Jud",  "Jude",   "jude",            65, btNewTestament,     true},  {
-  "Revelation",                 "Rev",     "REV",  "Rev",  "Rev",  "Re",     "revelation",      66,
-  btNewTestament,     false}, {
+  "Revelation",                 "Rev",     "REV",  "Rev",  "Rev",  "Re",     "revelation",      66, btNewTestament,     false}, {
   "Front Matter",               "",        "FRT",  "",     "",     "",       "",                67, btFrontBackMatter,  false}, {
   "Back Matter",                "",        "BAK",  "",     "",     "",       "",                68, btFrontBackMatter,  false}, {
   "Other Material",             "",        "OTH",  "",     "",     "",       "",                69, btOtherMaterial,    false}, {
