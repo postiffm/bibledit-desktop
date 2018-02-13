@@ -2128,7 +2128,7 @@ void MainWindow::showabout()
   gtk_show_about_dialog(GTK_WINDOW(window_main),
                         "version", PACKAGE_VERSION,
                         "website", PACKAGE_BUGREPORT,
-                        "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"),
+                        "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"),
 			"translator-credits", _("translator-credits"),
                         "license",
 			_("This program is free software; you can redistribute it and/or modify\n"

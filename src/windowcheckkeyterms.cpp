@@ -556,13 +556,6 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
   htmlwriter.hyperlink_add ("send", _("[Send to references window]"));
   htmlwriter.paragraph_close ();
 
-  // Add the keyterm itself.
-  ustring keyterm;
-  keyterms_get_term(keyword_id, keyterm);
-  htmlwriter.heading_open (3);
-  htmlwriter.text_add (keyterm);
-  htmlwriter.heading_close();
-  
   // Retrieve the renderings.
   vector <ustring> renderings;
   vector <bool> wholewords;
@@ -576,6 +569,16 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
 
   // Divide the information into lines.
   ParseLine parseline (information);
+
+  // Add the keyterm itself.
+  ustring keyterm;
+  keyterms_get_term(keyword_id, keyterm);
+  htmlwriter.heading_open (3);
+  htmlwriter.text_add (keyterm);
+  htmlwriter.heading_close();
+  htmlwriter.heading_open(3);
+  htmlwriter.text_add (std::to_string(parseline.lines.size()) + " verses");
+  htmlwriter.heading_close();
   
   // Write the information.
   for (unsigned int i = 0; i < parseline.lines.size(); i++) {
