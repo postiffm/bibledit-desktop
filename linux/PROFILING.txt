@@ -22,6 +22,7 @@
 2/13/2018 valgrind memcheck
 0. Preparing
    sudo apt install valgrind
+   sudo apt install alleyoop
    Compile with -O1 at most, or -O0, because -O2 reports lots of false unitialized value errors
 1. Running
   valgrind --leak-check=full /usr/bin/bibledit-desktop --debug > memleak1.log 2>&1
@@ -29,6 +30,8 @@
 2. There are monitoring commands that can be used in gdb
 3. In the log, look for "Invalid write" for heap overrun, and "definitely lost" or
    "possibly lost" for leaks.
+4. Look at the entries in an easier format than just text log file:
+   alleyoop memleak2.org
   
 Old
 To measure cpu usage per function on Linux, use
