@@ -402,6 +402,8 @@ void books_init(void)
   bookmap["4 maccabees"]=  87;
   bookmap["daniel (greek)"]=  88;
   
+  bookmaplocal = bookmap; // start with English names; alternate language names will be created as discovered
+  
   // To fill books_table with correct names using gettext (see language.po translation file, such as fr.po)
   // The localname defaults to English; but if gettext rewrites it on the fly to say French, then it
   // is always French.
@@ -518,7 +520,7 @@ unsigned int books_english_to_id (const ustring & english)
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     ustring s2(books_table[i].name);
     s2 = s2.casefold();
-    cerr << "Comparing '" << s1 << "' to " << s2 << endl;
+    cerr << "BETI: Comparing '" << s1 << "' to " << s2 << endl;
     if (s1 == s2) {
       // ... and put it into the bookmap too to save time if we see it again later
       bookmap[s1] = books_table[i].id;
@@ -544,7 +546,7 @@ unsigned int books_localname_to_id(const ustring & lname)
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     ustring s2(books_table[i].localname);
     s2 = s2.casefold();
-    cerr << "Comparing '" << s1 << "' to " << s2 << endl;
+    cerr << "BLTI: Comparing '" << s1 << "' to " << s2 << endl;
     if (s1 == s2) {
       // ... and put it into the bookmap too to save time if we see it again later
       bookmaplocal[s1] = books_table[i].id;
