@@ -653,7 +653,7 @@ void SelectBooksDialog::loadportions()
   vector < ustring > portions;
   ScripturePortions scriptureportions(myproject);
   for (unsigned int i = 0; i < scriptureportions.reordered_books.size(); i++) {
-    unsigned int book = books_english_to_id(scriptureportions.reordered_books[i]);
+    unsigned int book = books_localname_to_id (scriptureportions.reordered_books[i]);
     myselectables.push_back(book);
     if (scriptureportions.reordered_includes[i])
       myselection.insert(book);

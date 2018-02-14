@@ -870,7 +870,7 @@ void ResourceAssistant::on_combobox_test_changed (GtkComboBox *combobox, gpointe
 void ResourceAssistant::on_url ()
 {
   ustring url = resource_url_get(url_constructor (), working_configuration_file ());
-  unsigned int book = books_english_to_id (combobox_get_active_string (combobox_test_book));
+  unsigned int book = books_localname_to_id (combobox_get_active_string (combobox_test_book));
   unsigned int chapter = convert_to_int (combobox_get_active_string (combobox_test_chapter));
   ustring verse = combobox_get_active_string (combobox_test_verse);
   Reference reference (book, chapter, verse);

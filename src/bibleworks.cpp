@@ -129,7 +129,7 @@ void import_check_bibleworks_file (vector <ustring>& filenames, vector <unsigned
   // Check that the BibleWorks file is a valid one.
   if (messages.empty()) {
     ustring english_name = bibleworks_exported_file_get_bookname(filenames[0]);
-    unsigned int id = books_english_to_id (english_name);
+    unsigned int id = books_localname_to_id (english_name);
     if (id == 0) {
       messages.push_back ("The file cannot be recognized as coming from BibleWorks");
     }

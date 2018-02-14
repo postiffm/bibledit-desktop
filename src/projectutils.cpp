@@ -435,7 +435,7 @@ vector < unsigned int >project_get_books(const ustring & project)
   vector < unsigned int >books;
   ReadDirectories rd(project_data_directory_project(project), "", "");
   for (unsigned int i = 0; i < rd.directories.size(); i++) {
-    unsigned int book = books_english_to_id(rd.directories[i]);
+    unsigned int book = books_localname_to_id (rd.directories[i]);
     if (book)
       books.push_back(book);
   }

@@ -67,7 +67,7 @@ void planning_disassemble_task(ustring assembled_task, unsigned int &book, ustri
   task.clear();
   Parse parse(assembled_task, false, "|");
   if (parse.words.size() == 2) {
-    book = books_english_to_id(trim(parse.words[0]));
+    book = books_localname_to_id (trim(parse.words[0]));
     task = trim(parse.words[1]);
   }
 }

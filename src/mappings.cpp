@@ -65,7 +65,7 @@ MappingStore::MappingStore(const ustring & system_in, const ustring & filename)
             char *text = (char *)xmlTextReaderValue(reader);
             if (text) {
               if (!strcmp(opening_element, "book")) {
-                myid = books_english_to_id(text);
+                myid = books_localname_to_id (text);
               }
               if (!strcmp(opening_element, "chapter")) {
                 mychapter = convert_to_int(text);
@@ -74,7 +74,7 @@ MappingStore::MappingStore(const ustring & system_in, const ustring & filename)
                 myverse = convert_to_int(text);
               }
               if (!strcmp(opening_element, "original-book")) {
-                myoriginalid = books_english_to_id(text);
+                myoriginalid = books_localname_to_id (text);
               }
               if (!strcmp(opening_element, "original-chapter")) {
                 myoriginalchapter = convert_to_int(text);

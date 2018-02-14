@@ -230,7 +230,7 @@ void git_resolve_conflicts(const ustring & project, const vector < ustring > &er
         line = trim(line);
         Parse parse(line, false, G_DIR_SEPARATOR_S);
         if (parse.words.size() >= 2) {
-          unsigned int book = books_english_to_id(parse.words[0]);
+          unsigned int book = books_localname_to_id (parse.words[0]);
           if (book) {
             unsigned int chapter = convert_to_int(parse.words[1]);
             Reference reference(book, chapter, "");
@@ -277,7 +277,7 @@ void git_process_feedback (const ustring& project, const vector <ustring>& feedb
     if (line.length() > 5) {
       Parse parse(line, false, G_DIR_SEPARATOR_S);
       if (parse.words.size() >= 2) {
-        unsigned int book = books_english_to_id(parse.words[0]);
+        unsigned int book = books_localname_to_id (parse.words[0]);
         if (book) {
           unsigned int chapter = convert_to_int(parse.words[1]);
           snapshots_shoot_chapter (project, book, chapter, 0, false);

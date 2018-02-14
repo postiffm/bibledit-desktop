@@ -100,7 +100,7 @@ void PrintProject2::print()
   for (unsigned int i = 0; i < scriptureportions->books.size(); i++) {
 
     // Book id.
-    unsigned int book_id = books_english_to_id(scriptureportions->books[i]);
+    unsigned int book_id = books_localname_to_id (scriptureportions->books[i]);
 
     // Ranges to include.
     WithinReferencesRange inrange;

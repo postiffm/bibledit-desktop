@@ -307,7 +307,8 @@ ustring books_id_to_localname(unsigned int id)
 // Matt Postiff 1/12/2015
 // Update 8/28/2017: g++ 6.3 and later default to the newer C++ standard
 #include <unordered_map>
-std::unordered_map<std::string, int> bookmap;
+std::unordered_map<std::string, int> bookmap; // for English
+std::unordered_map<std::string, int> bookmaplocal; // for the local (user or translation) language
 
 void books_init(void)
 {
@@ -496,7 +497,7 @@ void books_init(void)
 }
 
 // Return 0 if no book found
-unsigned int books_english_to_id(const ustring & english)
+unsigned int books_english_to_id (const ustring & english)
 {
   // According to gprof, this procedure took 10% of all execution time
   // of bibledit in a simple editing session. It used an O(n)
@@ -521,6 +522,32 @@ unsigned int books_english_to_id(const ustring & english)
     if (s1 == s2) {
       // ... and put it into the bookmap too to save time if we see it again later
       bookmap[s1] = books_table[i].id;
+      return books_table[i].id;
+    }
+  }
+  return 0;
+}
+
+// Return 0 if no book found
+unsigned int books_localname_to_id(const ustring & lname)
+{
+  ustring s1(lname.casefold());
+  int id = bookmaplocal[s1]; // the unordered_map provides O(1) time to lookup instead of O(n)
+  if (id != 0) { return id; }
+
+  // For some reason, there are many thousands of calls to this
+  // routine with a blank string argument in English. I don't get it,
+  // but we can return 0 if so.
+  if (lname.length() == 0) { return 0; }
+
+  // Otherwise, search for it the old fashion way...
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    ustring s2(books_table[i].localname);
+    s2 = s2.casefold();
+    cerr << "Comparing '" << s1 << "' to " << s2 << endl;
+    if (s1 == s2) {
+      // ... and put it into the bookmap too to save time if we see it again later
+      bookmaplocal[s1] = books_table[i].id;
       return books_table[i].id;
     }
   }
@@ -583,8 +610,3 @@ bool books_id_to_one_chapter(unsigned int id)
   }
   return false;
 }
-
-/*
-There are still many functions around that employ books_id_to_english or
-books_english_to_id. Check them all, and see if they can be modified.
-*/

@@ -80,7 +80,7 @@ void OTQuotations::read()
             char *attribute;
             attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "book");
             if (attribute) {
-              ref.book_set(books_english_to_id(attribute));
+              ref.book_set( books_localname_to_id (attribute));
               free(attribute);
             }
             attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "chapter");
