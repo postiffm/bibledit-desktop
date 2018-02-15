@@ -158,6 +158,8 @@ WindowTabbed::~WindowTabbed()
   gtk_widget_destroy(signal_button);
 }
 
+#include "concordance.h"
+
 void WindowTabbed::Concordance(void)
 {
 	// Create a new concordance tab
@@ -177,14 +179,14 @@ void WindowTabbed::Concordance(void)
 	gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
 	
 	connect_focus_signals (webview);
-	
-	// Create concordance information
-	
+
 	// Show it in the view
 	HtmlWriter2 htmlwriter ("");
-	htmlwriter.text_add (_("Concordance features are almost ready..."));
+
+	// Create concordance data
+    concordance conc(htmlwriter);
 	
-  htmlwriter.finish();
+    htmlwriter.finish();
 //  if (display_another_page) {
     // Load the page.
     webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);

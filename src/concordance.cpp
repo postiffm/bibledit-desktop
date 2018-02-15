@@ -1,112 +1,86 @@
-#include <glibmm/ustring.h>
-#include <glibmm/iochannel.h>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <unordered_set>
-#include <unordered_map>
-#include <map>
-#include "directories.h"
-#include "settings.h"
-#include "books.h"
-#include "localizedbooks.h"
-#include "versifications.h"
-#include "versification.h"
-#include "mappings.h"
-#include "styles.h"
-#include "urltransport.h"
-#include "vcs.h"
-#include "projectutils.h"
-#include "usfmtools.h"
-#include "usfm-inline-markers.h"
-#include "bookdata.h"
-#include "options.h"
+/*
+ ** Copyright (©) 2018- Matt Postiff.
+ **  
+ ** This program is free software; you can redistribute it and/or modify
+ ** it under the terms of the GNU General Public License as published by
+ ** the Free Software Foundation; either version 3 of the License, or
+ ** (at your option) any later version.
+ **  
+ ** This program is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ ** GNU General Public License for more details.
+ **  
+ ** You should have received a copy of the GNU General Public License
+ ** along with this program; if not, write to the Free Software
+ ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ **  
+ */
 
-using namespace std;
-using namespace Glib;
+#include "concordance.h"
+#include <glib/gi18n.h>
+#include "progresswindow.h"
 
-// Forward declarations
-class bible;
-class chapter;
-class verse;
-
-class book {
-  public:
-	bible *bbl;  // back pointer to the containing bible
-	ustring bookname;
-	vector<chapter> chapters;
-  public:
-	book(bible *_bbl, const ustring &_bknm);
-};
-
-book::book(bible *_bbl, const ustring &_bknm)
+book::book(bible *_bbl, const ustring &_bookname, int _booknum)
 {
 	bbl = _bbl;
-	bookname = _bknm;
+	bookname = _bookname;
+    booknum = _booknum;
 }
 
-class chapter {
-  public:
-	book *bk;    // back pointer to the containing book
-	int chapnum;     // the chapter number
-	vector<verse> verses;
-	// project, book, chapter (57 = Philemon, 1 = chapter 1)
-  public:
-    chapter(book *_bk, int _nm);
-	void load(int book, int chapter);
-};
-
-chapter::chapter(book *_bk, int _nm)
+chapter::chapter(book *_bk, int _num)
 {
 	bk = _bk;
-	chapnum = _nm;
+	chapnum = _num;
 }
-
-class verse {
-	chapter *ch; // back pointer to the containing chapter
-	int vs;
-	ustring text;
-  public:
-	verse(chapter *_ch, int _vs, ustring _txt);
-    void print(void);
-	void addToWordCount(void);
-};
 
 verse::verse(chapter *_ch, int _vs, ustring _txt)
 {
 	ch = _ch;
-	vs = _vs;
+	vsnum = _vs;
 	text = _txt;
 }
 
 void verse::print(void)
 {
-  cout << ch->bk->bookname << " " << ch->chapnum << ":" << vs << " " << text << endl;
+  cout << ch->bk->bookname << " " << ch->chapnum << ":" << vsnum << " " << text << endl;
   return;
 }
 
-std::unordered_map<std::string, int, std::hash<std::string>> wordCounts;
+#include "stylesheetutils.h"
 
-void verse::addToWordCount(void)
+void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
+                           std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
 {
 	vector<ustring> words;
-	// Split string into its components, deleting USFM codes along the way
+    ustring tmp = usfm_get_verse_text_only (text); // liable to be slow, but it will give me just what I want
+    cout << ch->chapnum << ":" << vsnum << " " << tmp << endl;
+//     Usfm usfm(stylesheet_get_actual ());
+//     UsfmInlineMarkers usfm_inline_markers(usfm);
+//     usfm_remove_inline_text_markers(tmp, &usfm_inline_markers);
+    
 	string::size_type s = 0, e = 0; // start and end markers
-    ustring delims(" \\,:;!?.\u0022()¶");
-	ustring nonUSFMdelims(" ,:;!?.\u0022()¶"); // same list as above except without '\'
+    ustring delims(" \\,:;!?.\u0022()¶\t");
+	ustring nonUSFMdelims(" ,:;!?.\u0022()¶\t"); // same list as above except without '\'
 	// u0022 is unicode double-quote mark
 	// TO DO : configuration file that has delimiters in it, and "’s" kinds of things to strip out
 	// for the target language.
-	for (string::size_type i = 0; i < text.size(); i++) {
-		// Walk forward until we run into a character that splits words
+	
+#define SKIP_DELIMS(idx) while(nonUSFMdelims.find_first_of(tmp[idx]) != ustring::npos) { idx++; /*cout << "Skipping " << idx-1 << " " << tmp[idx] << endl;*/ }
+#define SKIP_NONDELIMS while(nonUSFMdelims.find_first_of(tmp[i]) == ustring::npos) { i++; }
+
+    SKIP_DELIMS(s)
+
+	for (string::size_type i = s; i < tmp.size(); i++) {
+        // Walk forward until we run into a character that splits words
 		e = i; // move e along to track the iterator i
-		bool foundDelim = (delims.find_first_of(text[i]) != ustring::npos);
+		bool foundDelim = (delims.find_first_of(tmp[i]) != ustring::npos);
 		// If the last character is not already a delimiter, then we have to treat the next "null" as a delimiter
-		if (!foundDelim && (i == text.size()-1)) { foundDelim = true; e = i + 1; } // point e to one past end of string (at null terminator)
+		if (!foundDelim && (i == tmp.size()-1)) { foundDelim = true; e = i + 1; } // point e to one past end of string (at null terminator)
 		if (foundDelim) { // We found a delimiter
 			// For a zero-length word, we bail. e=i can fall behind s if multiple delims in a row
 			if (s >= e) { continue; }
-			ustring newWord = text.substr(s, e-s); // start pos, length
+			ustring newWord = tmp.substr(s, e-s); // start pos, length
 			//cout << "Found new word at s=" << s << " e=" << e << ":" << newWord << ":" << endl;
 			
 			/* --------------------------------------------------------------------------
@@ -142,12 +116,14 @@ void verse::addToWordCount(void)
 			 * End of KJV-specific modifications
 			   --------------------------------------------------------------------------*/
 			
-			if (newWord[0] != '\\') { words.push_back(newWord); } // only add non-usfm words
+			if ((newWord[0] != '\\') && (newWord != "+")) { // + is footnote caller
+                words.push_back(newWord); // only add non-usfm words
+            }
 			
 			// Advance past the splitting character unless it is the usfm delimiter '\'
-			if (text[e] != '\\') { e++; }
+			if (tmp[e] != '\\') { e++; }
 			// Now if s has landed on a non-USFM delimiter, move fwd one
-			while (nonUSFMdelims.find_first_of(text[e]) != ustring::npos) { e++; }
+			SKIP_DELIMS(e)
 			s=e; // ensure starting point is at last ending point
 		}
 	}
@@ -156,23 +132,24 @@ void verse::addToWordCount(void)
 	for (auto &word : words) {
 		//cout << "Word: " << word << ":" << endl;
 		// TODO: The problem with lowercase is words like Lord, proper names, etc. need to remain uppercase, sometimes.
-		wordCounts[word.lowercase()]++;
+        ustring canonicalWord = word.lowercase();
+		wordCounts[canonicalWord]++;
+       
+        // add word location to concordance
+        // The idea is to construct an int with three 8-bit fields, like this:
+        // |--------|   bk   |   ch   |   vs   |
+        int ref = ch->bk->booknum << 16 | ch->chapnum << 8 | vsnum;
+        wordLocations[canonicalWord].push_back(ref);
 	}
 }
-
-class bible {
-  public:
-	ustring projname;
-	vector<book> books; 
-	bible(ustring _proj);
-};
 
 bible::bible(ustring _proj)
 {
 	projname = _proj;
 }
 
-void chapter::load(int book, int chapter)
+void chapter::load(int book, int chapter, 
+                   std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,                  std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
 {
 	int vscnt = 0;
 	// With these, it will be interesting to leave them at first; then to optimize
@@ -196,16 +173,12 @@ void chapter::load(int book, int chapter)
 			verse newVerse(this, vscnt, s);
 			//newVerse.print();
 			verses.push_back(newVerse);
-			newVerse.addToWordCount();
+			newVerse.addToWordCount(wordCounts, wordLocations);
 		}
 	}
 }
 
-// The set of words that we are NOT interested
-// in having concordance data for.
-unordered_set<string> excludedWords;
-
-void readExcludedWords(const ustring &filename)
+void concordance::readExcludedWords(const ustring &filename)
 {
 	// The file is expected to have unicode-encoded strings, one per line
 	ifstream myfile;
@@ -224,39 +197,12 @@ void readExcludedWords(const ustring &filename)
 	}
 }
 
-Options *options;
-directories *Directories;
-Settings *settings;
-BookLocalizations *booklocalizations;
-Versifications *versifications;
-Mappings *mappings;
-Styles *styles;
-//GtkAccelGroup *accelerator_group;
-URLTransport * urltransport;
-VCS *vcs;
-
+// I should have a better way of accessing this
 extern book_record books_table[];
 
-int main(int argc, char *argv[])
+concordance::concordance(HtmlWriter2 &htmlwriter)
 {
 	readExcludedWords("strings.txt");
-	  // Create a new directories 'factory' and initialize it with argv[0]
-	Directories = new directories(argv[0]);
-
-    books_init(); // TEMP - MAP
-
-	Directories->init(); // important step
-	settings = new Settings(true);
-	booklocalizations = new BookLocalizations(0);
-	versifications = new Versifications(0);
-	// Verse mappings object.
-	mappings = new Mappings(0);
-	// Styles object.
-	styles = new Styles(0);
-	// Version control object.
-	vcs = new VCS(0);
-	// URLTransport object.
-	urltransport = new URLTransport(0);
 	
 	// The kinds of things we should be able to do include
 	// 1. Build a sorted list of words with frequency counts (DONE 5/27/2016)
@@ -264,28 +210,34 @@ int main(int argc, char *argv[])
 	// 3. Use exclude list to exclude common words in building an actual concordance
 	// 4. Use important verse list to only include those verses that are deemed important
 	// 5. Build actual concordance with verse portions
-	
-	// Now do the work of loading the chapters and verses, splitting into words, 
+
+    // Now do the work of loading the chapters and verses, splitting into words, 
 	// counting in our mapping structure, etc.
-	bible kjv("KJVBibleFromUSFM");
-	for (int b = 1; b <= 66; b++) {
+	bible kjv("KJV");
+
+    htmlwriter.heading_open (1);
+    htmlwriter.text_add (kjv.projname + " " + _("Concordance"));
+    htmlwriter.heading_close();
+
+    ProgressWindow progresswindow(_("Building Concordance"), false);
+    progresswindow.set_iterate(0, 1, 66);
+    
+    for (int b = 1; b <= 66; b++) {
 		ustring bookname = books_table[b].name;
-		book *newbk = new book(&kjv, bookname);
+		book *newbk = new book(&kjv, bookname, b);
 		kjv.books.push_back(*newbk);
 		vector <unsigned int> chapters = versification_get_chapters("English", b);
 		for (auto c : chapters) {
 			chapter *newchap = new chapter(newbk, c);
-			newchap->load(b, c);
+			newchap->load(b, c, wordCounts, wordLocations);
 		}
+		progresswindow.iterate();
 	}
 
 	unsigned int totalWords = 0;
 	unsigned int uniqueWords = 0;
-	std::map<std::string, int> sortedWordCounts;
-	// Not sure why addition of ", std::hash<std::string>" is not needed
 
 	for (const auto &pair : wordCounts) {
-		//cout << pair.first << " " << pair.second << endl;
 		uniqueWords++;
 		totalWords+=pair.second;
 		// Add the word/count to a map so I can print it sorted. The reason I 
@@ -295,11 +247,28 @@ int main(int argc, char *argv[])
 		sortedWordCounts[pair.first] = pair.second;
 	}
 	
-	for (const auto &pair : sortedWordCounts) {
-		cout << pair.first << " " << pair.second << endl;
+	htmlwriter.paragraph_open ();
+	htmlwriter.text_add(_("Unique words = ") + std::to_string(uniqueWords));
+    htmlwriter.paragraph_close ();
+    htmlwriter.paragraph_open ();
+    htmlwriter.text_add(_("Total words = ") + std::to_string(totalWords));
+    htmlwriter.paragraph_close ();
+
+    for (const auto &pair : sortedWordCounts) {
+        ustring verselist;
+        std::vector<int> &locations = wordLocations[pair.first];
+        int i = 0;
+        for (const auto &ref : locations) {
+            int bk = ref >> 16;
+            int ch = (ref >> 8) & 0xff;
+            int vs = ref & 0xff;
+            verselist += (" " + books_id_to_english(bk) + " " + std::to_string(ch) + ":" + std::to_string(vs));
+            i++;
+            if (i > 1) { break; } // just print the first two refs on this summary screen
+        }
+        if (locations.size() > 2) { verselist += "..."; }
+        htmlwriter.p(pair.first + " " + std::to_string(pair.second) + verselist);
 	}
-	
-	cout << "UniqueWords " << uniqueWords << endl;
-	cout << "TotalWords " << totalWords << endl;
-	return 0;
+
+	return;
 }

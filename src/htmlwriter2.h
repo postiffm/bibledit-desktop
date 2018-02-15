@@ -48,6 +48,7 @@ public:
   void italics_close ();
   void highlight_open();
   void highlight_close();
+  void p(const ustring& text); // write an entire p, with opening and closing
   void finish ();
   ustring html;
 private:
