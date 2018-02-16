@@ -69,7 +69,7 @@ OsisBook::OsisBook(WriteText * wt, const ustring & english_book)
   // Save variables.
   mywt = wt;
   // Get the abbreviation to be used.
-  unsigned int index = books_english_to_id(english_book);
+  unsigned int index = books_localname_to_id (english_book);
   book = books_id_to_osis(index);
   // Insert xml.  
   osis_insert_empty_lines(mywt);

@@ -122,7 +122,7 @@ void XferNotes2TextDialog::on_okbutton()
   for (unsigned int bk = 0; bk < books.size(); bk++) {
 
     // Progress.
-    progresswindow.set_text(books_id_to_english(books[bk]));
+    progresswindow.set_text(books_id_to_localname(books[bk]));
 
     // Go through the chapters in this book. Progress.
     vector < unsigned int >chapters = project_get_chapters(project, books[bk]);
@@ -146,7 +146,7 @@ void XferNotes2TextDialog::transfer_note(const ustring & project, unsigned int b
 // Transfer the note.
 {
   // Select the set of notes for the current reference.
-  ustring reference = books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse;
+  ustring reference = books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse;
   vector < unsigned int >ids;
   unsigned int id_cursor;
   notes_select(ids, id_cursor, reference);

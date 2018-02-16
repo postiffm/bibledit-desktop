@@ -7,7 +7,7 @@
 
 # To change the version number, change the following line and
 # the version in ../configure.ac, as well as any shortcuts.
-VERSION="4.11"
+VERSION="4.12"
 
 full=1
 docs=0
@@ -214,23 +214,27 @@ cp $DLLS/libharfbuzz-0.dll "$BIN"
 cp $DLLS/libharfbuzz-icu-0.dll "$BIN"
 cp $DLLS/libiconv-2.dll "$BIN"
 # The next file is a must have
-cp $DLLS/libicuin57.dll "$BIN"
-cp $DLLS/libicuuc57.dll "$BIN"
+cp $DLLS/libicuin58.dll "$BIN"
+cp $DLLS/libicuuc58.dll "$BIN"
+cp $DLLS/libicudt58.dll "$BIN"
+cp $DLLS/libicutu58.dll "$BIN"
+cp $DLLS/libicutest58.dll "$BIN"
+#cp $DLLS/libiculx58.dll "$BIN"
+#cp $DLLS/libicule58.dll "$BIN"
+cp $DLLS/libicuio58.dll "$BIN"
 cp $DLLS/libjavascriptcoregtk-1.0-0.dll "$BIN"
 cp $DLLS/libjpeg-8.dll "$BIN"
 cp $DLLS/libbz2-1.dll "$BIN"
 cp $DLLS/libexpat-1.dll "$BIN"
 cp $DLLS/libgeoclue-0.dll "$BIN"
 cp $DLLS/libgsttag-1.0-0.dll "$BIN"
-cp $DLLS/libicudt57.dll "$BIN"
 cp $DLLS/liblzma-5.dll "$BIN"
 cp $DLLS/liborc-0.4-0.dll "$BIN"
 cp $DLLS/libpangoft2-1.0-0.dll "$BIN"
 cp $DLLS/libpangowin32-1.0-0.dll "$BIN"
 cp $DLLS/libpixman-1-0.dll "$BIN"
 cp $DLLS/libpng16-16.dll "$BIN"
-# Below will soon have to change to libwebp-7.dll
-cp $DLLS/libwebp-6.dll "$BIN"
+cp $DLLS/libwebp-7.dll "$BIN"
 cp $DLLS/libxslt-1.dll "$BIN"
 cp $DLLS/libdbus-glib-1-2.dll "$BIN"
 cp $DLLS/libdbus-1-3.dll "$BIN"
@@ -255,19 +259,13 @@ cp $DLLS/libtasn1-6.dll "$BIN"
 # Below added 3/25/2016
 # Below was libhogweed-4-1.dll
 cp $DLLS/libhogweed-4.dll "$BIN"
-cp $DLLS/libjasper-1.dll "$BIN"
+cp $DLLS/libjasper-4.dll "$BIN"
 cp $DLLS/libgthread-2.0-0.dll "$BIN"
-# Below was libhunspell-1.3-0.dll
-cp $DLLS/libhunspell-1.4-0.dll "$BIN"
+cp $DLLS/libhunspell-1.6-0.dll "$BIN"
 cp $DLLS/libpng-config "$BIN"
-  # The next file is a must have
+# The next file is a must have
 cp $DLLS/libpng16-16.dll "$BIN"
 cp $DLLS/libpng16-config "$BIN"
-cp $DLLS/libicutu57.dll "$BIN"
-cp $DLLS/libicutest57.dll "$BIN"
-cp $DLLS/libiculx57.dll "$BIN"
-cp $DLLS/libicule57.dll "$BIN"
-cp $DLLS/libicuio57.dll "$BIN"
 cp $DLLS/icu-config "$BIN"
 # Above added 3/25/2016
 # Below added 6/9/2016
@@ -347,11 +345,12 @@ cp $MINGWBIN/xz.exe "$BIN"
 cp $MINGWBIN/xzcat.exe "$BIN"
 cp $MINGWBIN/xzdec.exe "$BIN"
 # Below added 3/25/2016
-cp $USRBIN/msys-icudata56.dll "$BIN"
-cp $USRBIN/msys-icui18n56.dll "$BIN"
+cp $USRBIN/msys-icudata59.dll "$BIN"
+cp $USRBIN/msys-icui18n59.dll "$BIN"
 # Above added 3/25/2016
 
-# Below added 3/6/2017
+# Below added 3/6/2017. This requires installation of msys2 packages msys/unzip and zip,
+# for which see windows\buildenvWin64.sh.
 echo "Copying zip and unzip..."
 cp $USRBIN/zip.exe "$BIN"
 cp $USRBIN/unzip.exe "$BIN"

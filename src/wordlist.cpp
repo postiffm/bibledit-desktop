@@ -177,10 +177,10 @@ void Wordlist::run(vector < ustring > &allmessages)
             insert_list(lines, opener_offset, closer_offset);
             CategorizeChapterVerse ccv(lines);
             project_store_chapter(project, books[bk], ccv);
-            message(_("Word list inserted in ") + books_id_to_english(books[bk]) + " " + convert_to_string(chapters[ch]));
+            message(_("Word list inserted in ") + books_id_to_localname(books[bk]) + " " + convert_to_string(chapters[ch]));
             inserted = true;
           } else {
-            message(_("Invalid word list location in ") + books_id_to_english(books[bk]) + " " + convert_to_string(chapters[ch]));
+            message(_("Invalid word list location in ") + books_id_to_localname(books[bk]) + " " + convert_to_string(chapters[ch]));
           }
         }
       }

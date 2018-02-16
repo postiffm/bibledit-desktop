@@ -59,7 +59,7 @@ Versification::Versification(const ustring & system_in, const ustring & filename
             char *text = (char *)xmlTextReaderValue(reader);
             if (text) {
               if (!strcmp(opening_element, "book")) {
-                myid = books_english_to_id(text);
+                myid = books_localname_to_id (text);
               }
               if (!strcmp(opening_element, "chapter")) {
                 mychapter = convert_to_int(text);

@@ -57,7 +57,7 @@ ustring bibleworks_exported_file_get_bookname(const ustring & filename)
       unsigned int id = books_bibleworks_to_id(bookabbreviation);
       if (id) {
         goodline++;
-        bookname = books_id_to_english(id);
+        bookname = books_id_to_localname(id);
       }
     }
   }
@@ -106,7 +106,7 @@ unsigned int bibleworks_clipboard_file_line_get_extract_book_id (ustring& line)
   // Get the name of the book.
   vector <unsigned int> ids = books_type_to_ids (btUnknown);
   for (unsigned int i = 0; i < ids.size(); i++) {
-    ustring english_name = books_id_to_english (ids[i]);
+    ustring english_name = books_id_to_localname (ids[i]);
     if (line.find (english_name) == 0) {
       line.erase (0, english_name.length());
       return ids[i];
@@ -129,7 +129,7 @@ void import_check_bibleworks_file (vector <ustring>& filenames, vector <unsigned
   // Check that the BibleWorks file is a valid one.
   if (messages.empty()) {
     ustring english_name = bibleworks_exported_file_get_bookname(filenames[0]);
-    unsigned int id = books_english_to_id (english_name);
+    unsigned int id = books_localname_to_id (english_name);
     if (id == 0) {
       messages.push_back ("The file cannot be recognized as coming from BibleWorks");
     }

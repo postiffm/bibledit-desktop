@@ -42,13 +42,16 @@ class WindowTabbed : public FloatingWindow
 public:
   WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
   virtual ~WindowTabbed();
-  void Concordance(void);
+  void Concordance(const ustring &projname);
   GtkWidget * signal_button;
  private:
 	GtkWidget *vbox;
 	GtkWidget *notebook;
 	GtkWidget *scrolledwindow;
 	GtkWidget *webview;
+	// temp
+	GtkWidget *scrolledwindow2;
+	GtkWidget *webview2;
 
 #if 0
 public:

@@ -456,7 +456,7 @@ void ShowNotesDialog::timeout()
 
   // Get the parameters from the dialog, not from the Settings object, since these have not yet been stored.
   extern Settings * settings;
-  ustring currentreference = books_id_to_english(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
+  ustring currentreference = books_id_to_localname(settings->genconfig.book_get()) + " " + settings->genconfig.chapter_get() + ":" + settings->genconfig.verse_get();
   NotesSelectionReferenceType refselection = get_reference_selection ();
   NotesSelectionEditedType editedselection = get_edited_selection ();
   ustring category = combobox_get_active_string(combobox_category);

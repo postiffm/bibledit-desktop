@@ -30,7 +30,7 @@ ScripturePortions::ScripturePortions(const ustring & project)
   vector < unsigned int >scripture_books = project_get_books(project);
   for (unsigned int i = 0; i < reordered_books.size(); i++) {
     for (unsigned int i2 = 0; i2 < scripture_books.size(); i2++) {
-      if (reordered_books[i] == books_id_to_english(scripture_books[i2])) {
+      if (reordered_books[i] == books_id_to_localname(scripture_books[i2])) {
         if (reordered_includes[i]) {
           books.push_back(reordered_books[i]);
           portions.push_back(reordered_portions[i]);
@@ -52,7 +52,7 @@ If the amount of settings on disk changes, it includes all bits.
   {
     vector < unsigned int >s = project_get_books(myproject);
     for (unsigned int i = 0; i < s.size(); i++)
-      scripture_books.push_back(books_id_to_english(s[i]));
+      scripture_books.push_back(books_id_to_localname(s[i]));
   }
 
   // Read the reordering information.

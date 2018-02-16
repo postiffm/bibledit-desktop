@@ -586,7 +586,7 @@ void WindowMerge::on_button_merge()
   gtk_button_clicked(GTK_BUTTON(save_editors_button));
 
   // Ask what to do.
-  ustring book_chapter = books_id_to_english(book) + " " + convert_to_string(chapter);
+  ustring book_chapter = books_id_to_localname(book) + " " + convert_to_string(chapter);
   vector < ustring > labels;
   labels.push_back(_("Merge ") + book_chapter + _(" of project ") + current_edited_project + _(" and ") + current_master_project);
   labels.push_back(_("Merge ") + book_chapter + _(" of project ") + current_edited_project + _(" and ") + current_master_project + ",\n" + _("and approve of each change as compared to project ") + current_master_project);
@@ -823,7 +823,7 @@ void WindowMerge::copy_master_to_edited_chapter(unsigned int bk, unsigned int ch
     snapshots_shoot_chapter (current_master_project, bk, ch, 0, true);
     snapshots_shoot_chapter (current_edited_project, bk, ch, 0, true);
     if (gui) {
-      ustring message = books_id_to_english(bk) + " " + convert_to_string(ch) + _(" was copied from project ") + current_master_project + _(" to project ") + current_edited_project;
+      ustring message = books_id_to_localname(bk) + " " + convert_to_string(ch) + _(" was copied from project ") + current_master_project + _(" to project ") + current_edited_project;
       gtkw_dialog_info(NULL, message.c_str());
     }
   }
@@ -906,7 +906,7 @@ void WindowMerge::approval_setup(const ustring & maindata, const ustring & merge
   approve_edited_project = current_edited_project;
   approve_book = book;
   approve_chapter = chapter;
-  ustring label = _("Changes approval, ") + books_id_to_english(approve_book) + " " + convert_to_string(approve_chapter);
+  ustring label = _("Changes approval, ") + books_id_to_localname(approve_book) + " " + convert_to_string(approve_chapter);
   gtk_label_set_text(GTK_LABEL(label_approve), label.c_str());
   gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 1);
   approve_master_file = gw_build_filename(workingdirectory, "master");

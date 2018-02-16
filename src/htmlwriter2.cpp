@@ -219,6 +219,14 @@ void HtmlWriter2::highlight_close()
     highlight_level--;
   }
 }
+
+void HtmlWriter2::p(const ustring& text)
+{
+    xmlTextWriterStartElement(writer, BAD_CAST "p");
+    xmlTextWriterWriteFormatString(writer, "%s", text.c_str());
+    xmlTextWriterEndElement(writer);
+}
+
 void HtmlWriter2::finish ()
 // Finish the html document, and make it available.
 {

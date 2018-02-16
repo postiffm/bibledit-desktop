@@ -3,7 +3,7 @@
 
 
 AC_PREREQ(2.63)
-AC_INIT([bibledit-desktop],[4.11],[http://www.nongnu.org/bibledit])
+AC_INIT([bibledit-desktop],[4.12],[http://www.nongnu.org/bibledit])
 AC_CANONICAL_TARGET
 AC_CANONICAL_SYSTEM
 ac_default_prefix=/usr
@@ -13,13 +13,14 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 
-CXXFLAGS="-g -O2 ${CXXFLAGS}"
+CXXFLAGS="-ggdb -O2 ${CXXFLAGS}"
 AC_PROG_CC
 AC_PROG_CC_STDC
 AC_PROG_CPP
 AC_LANG([C++])
 AC_PROG_CXX
-AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+#Guess: this is not needed for gcc 6.3, since default mode is -std=gnu++14
+#AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
 AC_HEADER_STDC
 PKG_CHECK_MODULES(GTK, gtk+-2.0 gdk-2.0,,AC_MSG_ERROR(Gtk2 development version is needed.))
@@ -333,7 +334,6 @@ AC_CONFIG_FILES([Makefile
 		  src/Makefile 
 		  scripts/Makefile
 		  templates/Makefile
-		  olpc/Makefile
 		  desktop/Makefile
 		  windows/Makefile
 		  tests/Makefile

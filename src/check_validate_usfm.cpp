@@ -58,7 +58,7 @@ checksheet: check whether markers are in the stylesheet of the project.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_english(book));
+      progresswindow->set_text(books_id_to_localname(book));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
@@ -649,7 +649,7 @@ ustring CheckValidateUsfm::usfm_extract_marker_with_forwardslash(ustring & line)
 
 void CheckValidateUsfm::message(const ustring & message)
 {
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+  references.push_back(books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }
 

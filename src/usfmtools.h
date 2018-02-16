@@ -75,5 +75,4 @@ void usfm_dissect_figure (ustring& usfmcode, const ustring& marker_text, size_t 
 bool usfm_code_available (ustring& small_store, ustring& big_store, size_t store_size);
 ustring usfm_get_verse_text_only (const ustring& line);
 
-
 #endif

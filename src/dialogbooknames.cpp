@@ -118,7 +118,7 @@ BooknamesDialog::BooknamesDialog(const map <unsigned int, ustring>& books, const
     gtk_list_store_append(model, &iter);
     unsigned int id = ids[i];
     ustring text = books_copy[id];
-    gtk_list_store_set(model, &iter, COLUMN_BIBLEDIT, books_id_to_english(ids[i]).c_str(), COLUMN_EDITABLE, 1, COLUMN_URL, text.c_str(), -1);
+    gtk_list_store_set(model, &iter, COLUMN_BIBLEDIT, books_id_to_localname(ids[i]).c_str(), COLUMN_EDITABLE, 1, COLUMN_URL, text.c_str(), -1);
   }
   
   new DialogAutoScaler (resourcebooksdialog, G_MAXINT);
@@ -157,7 +157,7 @@ void BooknamesDialog::on_okbutton()
     gchar *str_text;
     gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, COLUMN_BIBLEDIT, &str_abbrev, COLUMN_URL, &str_text, -1);
     if (strcmp(str_text, "") != 0) {
-      unsigned int id = books_english_to_id(str_abbrev);
+      unsigned int id = books_localname_to_id (str_abbrev);
       ustring text = str_text;
       if (!text.empty()) {
         newbooks[id] = text;

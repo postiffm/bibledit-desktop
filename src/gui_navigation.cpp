@@ -330,7 +330,7 @@ void GuiNavigation::display (const Reference & ref)
 {
   // Check whether the book is known to Bibledit. If not, bail out.
   {
-    ustring bookname = books_id_to_english(ref.book_get());
+    ustring bookname = books_id_to_localname(ref.book_get());
     if (bookname.empty())
       return;
   }

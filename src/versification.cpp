@@ -47,8 +47,8 @@ void versification_create_chapter_template(const ustring & versification, unsign
   // In case of chapter 0, add the id, and other relevant stuff.
   if (chapter == 0) {
     chaptertemplate.push_back("\\id " + books_id_to_paratext(book));
-    chaptertemplate.push_back("\\h " + books_id_to_english(book));
-    chaptertemplate.push_back("\\toc2 " + books_id_to_english(book));
+    chaptertemplate.push_back("\\h " + books_id_to_localname(book));
+    chaptertemplate.push_back("\\toc2 " + books_id_to_localname(book));
     return;
   }
   // Find the number of verses in a chapter.

@@ -49,6 +49,12 @@ typedef struct
   // The "bridge" language is also called the "majority language" by Bibles International translators. There are
   // three such languages: English, French, and Spanish. But the internationalization feature of Bibledit-Desktop
   // is not limited to those three languages. It can be internationalized so that the interface appears in any language.
+
+  // We use the terminology "source language" to refer to Greek,
+  // Aramaic, and Hebrew, the languages we are translating FROM. The
+  // "target language" refers to the language we are translating TO.
+  // The bridge or majority language references to the language of the
+  // Bibledit-Desktop interface.
 } book_record;
 
 

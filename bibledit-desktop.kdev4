@@ -1,0 +1,4 @@
+[Project]
+CreatedFrom=Makefile.am
+Manager=KDevCustomMakeManager
+Name=bibledit-desktop

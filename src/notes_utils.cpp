@@ -1047,7 +1047,7 @@ void notes_store_index_entry (sqlite3 *db, gint32 id)
     Reference oldRef;
     Reference newRef;
     reference_discover(oldRef, parse.words[i], newRef);
-    ustring book = books_id_to_english(newRef.book_get());
+    ustring book = books_id_to_localname(newRef.book_get());
     ustring chapter = convert_to_string(newRef.chapter_get());
     vector < int >verses = verses_encode(newRef.verse_get());
     int book_chapter = reference_to_numerical_equivalent(book, chapter, "0");

@@ -1645,7 +1645,7 @@ void Usfm2Text::toc_insert_referent(ustring & line, Usfm2XslFoStyle * &fo_block_
   get_erase_code_till_next_marker(line, 0, marker_length, false);
 
   // Write the referent.
-  text2pdf->set_referent(books_id_to_english(book));
+  text2pdf->set_referent(books_id_to_localname(book));
 }
 
 void Usfm2Text::toc_insert_body(ustring & line, Usfm2XslFoStyle * &fo_block_style, Usfm2XslFoStyle * &fo_inline_style, size_t marker_length)
@@ -1674,7 +1674,7 @@ void Usfm2Text::toc_insert_body(ustring & line, Usfm2XslFoStyle * &fo_block_styl
     Usfm2XslFoStyle *style = marker_get_pointer_to_style(default_style());
     fo_block_style = style;
     open_paragraph(style, false);
-    text2pdf->set_reference(books_id_to_english(books[bk]));
+    text2pdf->set_reference(books_id_to_localname(books[bk]));
     text2pdf->add_text(label);
     text2pdf->close_paragraph();
   }

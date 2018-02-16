@@ -43,7 +43,7 @@ ustring Reference::human_readable(const ustring & language) const
 // it takes the English names of the books.
 {
   ustring s;
-  if (language.empty()) { s.append(books_id_to_english(book)); }
+  if (language.empty()) { s.append(books_id_to_localname(book)); }
   else                  { s.append(books_id_to_name(language, book)); }
   s.append(" ");
   s.append(convert_to_string(chapter));

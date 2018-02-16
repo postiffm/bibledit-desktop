@@ -54,7 +54,7 @@ gui: whether to show graphical progressbar.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_english(mybooks[bk]));
+      progresswindow->set_text(books_id_to_localname(mybooks[bk]));
       if (progresswindow->cancel) {
         cancelled = true;
         break;
@@ -419,7 +419,7 @@ void CheckSentenceStructure::message(vector < ustring > &versenumbers, vector < 
   }
 
   // Assemble the reference.
-  ustring reference = books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse;
+  ustring reference = books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse;
 
   // Get the fragment of the text.
   GtkTextIter iter1 = *iter;

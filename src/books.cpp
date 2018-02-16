@@ -269,9 +269,11 @@ unsigned int books_osis_to_id(const ustring & osis)
   return 0;
 }
 
-// Could be much more efficient if the id was the index into the books_table[]
 ustring books_id_to_english(unsigned int id)
 {
+  assert(books_table[id].id == id);
+  return books_table[id].name;
+#if 0
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     if (id == books_table[i].id) {
       DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].name)
@@ -279,11 +281,14 @@ ustring books_id_to_english(unsigned int id)
     }
   }
   return "";
+#endif
 }
 
-// Could be much more efficient if the id was the index into the books_table[]
 ustring books_id_to_localname(unsigned int id)
 {
+  assert(books_table[id].id == id);
+  return books_table[id].localname;
+#if 0
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     if (id == books_table[i].id) {
       DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].localname)
@@ -291,6 +296,7 @@ ustring books_id_to_localname(unsigned int id)
     }
   }
   return "";
+#endif
 }
 
 // This requires the compiler flag -std=c++11. This, in turn, requires
@@ -299,13 +305,14 @@ ustring books_id_to_localname(unsigned int id)
 // autoconf-archive package to get this macro. Then run 
 // aclocal; autoconf; ./configure
 // Matt Postiff 1/12/2015
+// Update 8/28/2017: g++ 6.3 and later default to the newer C++ standard
 #include <unordered_map>
-std::unordered_map<std::string, int> bookmap;
+std::unordered_map<std::string, int> bookmap; // for English
+std::unordered_map<std::string, int> bookmaplocal; // for the local (user or translation) language
 
 void books_init(void)
 {
   // For lookup optimization
-  bookmap["front matter"]=67;
   bookmap["genesis"]=1;
   bookmap["exodus"]=2;
   bookmap["leviticus"]=3;
@@ -372,6 +379,7 @@ void books_init(void)
   bookmap["3 john"]=  64;
   bookmap["jude"]=65;
   bookmap["revelation"]=  66;
+  bookmap["front matter"]=67;
   bookmap["back matter"]=  68;
   bookmap["other material"]=  69;
   bookmap["tobit"]=  70;
@@ -394,10 +402,12 @@ void books_init(void)
   bookmap["4 maccabees"]=  87;
   bookmap["daniel (greek)"]=  88;
   
+  bookmaplocal = bookmap; // start with English names; alternate language names will be created as discovered
+  
   // To fill books_table with correct names using gettext (see language.po translation file, such as fr.po)
   // The localname defaults to English; but if gettext rewrites it on the fly to say French, then it
   // is always French.
-  books_table[0].localname = _("Front Matter");            // no abbreviation for this
+  books_table[0].localname = _("**EMPTY ID=0**");   // no abbreviation for this
   books_table[1].localname = _("Genesis");		   books_table[1].localabbrev = _("Gen");
   books_table[2].localname = _("Exodus");		   books_table[2].localabbrev = _("Exo");
   books_table[3].localname = _("Leviticus");		   books_table[3].localabbrev = _("Lev");
@@ -464,31 +474,32 @@ void books_init(void)
   books_table[64].localname = _("3 John");		   books_table[64].localabbrev = _("3Jo");
   books_table[65].localname = _("Jude");		   books_table[65].localabbrev = _("Jud");
   books_table[66].localname = _("Revelation");		   books_table[66].localabbrev = _("Rev");
-  books_table[67].localname = _("Back Matter");		   // no abbreviation for this
-  books_table[68].localname = _("Other Material");	   // no abbreviation for this
-  books_table[69].localname = _("Tobit");		   books_table[69].localabbrev = _("Tob");
-  books_table[70].localname = _("Judith");		   books_table[70].localabbrev = _("Jdt");
-  books_table[71].localname = _("Esther (Greek)");	   books_table[71].localabbrev = _("EsG");
-  books_table[72].localname = _("Wisdom of Solomon");	   books_table[72].localabbrev = _("Wis");
-  books_table[73].localname = _("Sirach");		   books_table[73].localabbrev = _("Sir");
-  books_table[74].localname = _("Baruch");		   books_table[74].localabbrev = _("Bar");
-  books_table[75].localname = _("Letter of Jeremiah");	   books_table[75].localabbrev = _("LJe");
-  books_table[76].localname = _("Song of the Three Children"); books_table[76].localabbrev = _("S3Y");
-  books_table[77].localname = _("Susanna");		   books_table[77].localabbrev = _("Sus");
-  books_table[78].localname = _("Bel and the Dragon");	   books_table[78].localabbrev = _("Bel");
-  books_table[79].localname = _("1 Maccabees");		   books_table[79].localabbrev = _("1Ma");
-  books_table[80].localname = _("2 Maccabees");		   books_table[80].localabbrev = _("2Ma");
-  books_table[81].localname = _("1 Esdras");		   books_table[81].localabbrev = _("1Es");
-  books_table[82].localname = _("Prayer of Manasses");	   books_table[82].localabbrev = _("Man");
-  books_table[83].localname = _("Psalm 151");		   books_table[83].localabbrev = _("Ps2");
-  books_table[84].localname = _("3 Maccabees");		   books_table[84].localabbrev = _("3Ma");
-  books_table[85].localname = _("2 Esdras");		   books_table[85].localabbrev = _("2Es");
-  books_table[86].localname = _("4 Maccabees");		   books_table[86].localabbrev = _("4Ma");
-  books_table[87].localname = _("Daniel (Greek)");	   books_table[87].localabbrev = _("Dnt");
+  books_table[67].localname = _("Front Matter");            // no abbreviation for this
+  books_table[68].localname = _("Back Matter");		   // no abbreviation for this
+  books_table[69].localname = _("Other Material");	   // no abbreviation for this
+  books_table[70].localname = _("Tobit");		   books_table[69].localabbrev = _("Tob");
+  books_table[71].localname = _("Judith");		   books_table[70].localabbrev = _("Jdt");
+  books_table[72].localname = _("Esther (Greek)");	   books_table[71].localabbrev = _("EsG");
+  books_table[73].localname = _("Wisdom of Solomon");	   books_table[72].localabbrev = _("Wis");
+  books_table[74].localname = _("Sirach");		   books_table[73].localabbrev = _("Sir");
+  books_table[75].localname = _("Baruch");		   books_table[74].localabbrev = _("Bar");
+  books_table[76].localname = _("Letter of Jeremiah");	   books_table[75].localabbrev = _("LJe");
+  books_table[77].localname = _("Song of the Three Children"); books_table[76].localabbrev = _("S3Y");
+  books_table[78].localname = _("Susanna");		   books_table[77].localabbrev = _("Sus");
+  books_table[79].localname = _("Bel and the Dragon");	   books_table[78].localabbrev = _("Bel");
+  books_table[80].localname = _("1 Maccabees");		   books_table[79].localabbrev = _("1Ma");
+  books_table[81].localname = _("2 Maccabees");		   books_table[80].localabbrev = _("2Ma");
+  books_table[82].localname = _("1 Esdras");		   books_table[81].localabbrev = _("1Es");
+  books_table[83].localname = _("Prayer of Manasses");	   books_table[82].localabbrev = _("Man");
+  books_table[84].localname = _("Psalm 151");		   books_table[83].localabbrev = _("Ps2");
+  books_table[85].localname = _("3 Maccabees");		   books_table[84].localabbrev = _("3Ma");
+  books_table[86].localname = _("2 Esdras");		   books_table[85].localabbrev = _("2Es");
+  books_table[87].localname = _("4 Maccabees");		   books_table[86].localabbrev = _("4Ma");
+  books_table[88].localname = _("Daniel (Greek)");	   books_table[87].localabbrev = _("Dnt");
 }
 
 // Return 0 if no book found
-unsigned int books_english_to_id(const ustring & english)
+unsigned int books_english_to_id (const ustring & english)
 {
   // According to gprof, this procedure took 10% of all execution time
   // of bibledit in a simple editing session. It used an O(n)
@@ -501,7 +512,7 @@ unsigned int books_english_to_id(const ustring & english)
   if (id != 0) { return id; }
 
   // For some reason, there are many thousands of calls to this
-  // routine with a blank string argument in english. I don't get it,
+  // routine with a blank string argument in English. I don't get it,
   // but we can return 0 if so.
   if (english.length() == 0) { return 0; }
 
@@ -509,10 +520,36 @@ unsigned int books_english_to_id(const ustring & english)
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     ustring s2(books_table[i].name);
     s2 = s2.casefold();
-    cerr << "Comparing '" << s1 << "' to " << s2 << endl;
+    cerr << "BETI: Comparing '" << s1 << "' to " << s2 << endl;
     if (s1 == s2) {
       // ... and put it into the bookmap too to save time if we see it again later
       bookmap[s1] = books_table[i].id;
+      return books_table[i].id;
+    }
+  }
+  return 0;
+}
+
+// Return 0 if no book found
+unsigned int books_localname_to_id(const ustring & lname)
+{
+  ustring s1(lname.casefold());
+  int id = bookmaplocal[s1]; // the unordered_map provides O(1) time to lookup instead of O(n)
+  if (id != 0) { return id; }
+
+  // For some reason, there are many thousands of calls to this
+  // routine with a blank string argument in English. I don't get it,
+  // but we can return 0 if so.
+  if (lname.length() == 0) { return 0; }
+
+  // Otherwise, search for it the old fashion way...
+  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
+    ustring s2(books_table[i].localname);
+    s2 = s2.casefold();
+    cerr << "BLTI: Comparing '" << s1 << "' to " << s2 << endl;
+    if (s1 == s2) {
+      // ... and put it into the bookmap too to save time if we see it again later
+      bookmaplocal[s1] = books_table[i].id;
       return books_table[i].id;
     }
   }
@@ -575,8 +612,3 @@ bool books_id_to_one_chapter(unsigned int id)
   }
   return false;
 }
-
-/*
-There are still many functions around that employ books_id_to_english or
-books_english_to_id. Check them all, and see if they can be modified.
-*/

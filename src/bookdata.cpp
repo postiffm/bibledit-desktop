@@ -35,7 +35,7 @@ book_record books_table[] =
 {
   //                            osis       paratxt bw      blue    onln      biblestudytools    id  type                onechapter
   {
-  "Front Matter",               "",        "FRT",  "",     "",     "",       "",                67, btFrontBackMatter,  false}, {
+  "**EMPTY ID=0**",             "",        "",     "",     "",     "",       "",                 0, btUnknown,  false}, {
   "Genesis",                    "Gen",     "GEN",  "Gen",  "Gen",  "Ge",     "genesis",          1, btOldTestament,     false}, {
   "Exodus",                     "Exod",    "EXO",  "Exo",  "Exo",  "Ex",     "exodus",           2, btOldTestament,     false}, {
   "Leviticus",                  "Lev",     "LEV",  "Lev",  "Lev",  "Le",     "leviticus",        3, btOldTestament,     false}, {
@@ -102,6 +102,7 @@ book_record books_table[] =
   "3 John",                     "3John",   "3JN",  "3Jo",  "3Jo",  "3Jo",    "3-john",          64, btNewTestament,     true},  {
   "Jude",                       "Jude",    "JUD",  "Jud",  "Jud",  "Jude",   "jude",            65, btNewTestament,     true},  {
   "Revelation",                 "Rev",     "REV",  "Rev",  "Rev",  "Re",     "revelation",      66, btNewTestament,     false}, {
+  "Front Matter",               "",        "FRT",  "",     "",     "",       "",                67, btFrontBackMatter,  false}, {
   "Back Matter",                "",        "BAK",  "",     "",     "",       "",                68, btFrontBackMatter,  false}, {
   "Other Material",             "",        "OTH",  "",     "",     "",       "",                69, btOtherMaterial,    false}, {
   "Tobit",                      "Tob",     "TOB",  "Tob",  "Tob",  "",       "",                70, btApocrypha,        false}, {

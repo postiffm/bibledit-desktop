@@ -131,7 +131,7 @@ ReviewAnchorsDialog::ReviewAnchorsDialog(vector < unsigned int >*books, vector <
   GtkTreeIter iter;
   for (unsigned int i = 0; i < books->size(); i++) {
     gtk_list_store_append(store, &iter);
-    gtk_list_store_set(store, &iter, 0, books_id_to_english(books->at(i)).c_str(), 1, chapters->at(i), 2, verses->at(i), 3, linenumbers->at(i), 4, books->at(i), -1);
+    gtk_list_store_set(store, &iter, 0, books_id_to_localname(books->at(i)).c_str(), 1, chapters->at(i), 2, verses->at(i), 3, linenumbers->at(i), 4, books->at(i), -1);
   }
 
   g_signal_connect((gpointer) treeview_anchors, "key_press_event", G_CALLBACK(on_treeview_key_press_event), gpointer(this));

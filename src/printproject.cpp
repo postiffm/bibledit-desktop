@@ -143,8 +143,8 @@ void PrintProject::print()
   for (unsigned int i = 0; i < scriptureportions->books.size(); i++) {
     vector <unsigned int> chapters_from, chapters_to;
     vector <ustring> verses_from, verses_to;
-    select_portion_get_values(portionproject, books_english_to_id(scriptureportions->books[i]), scriptureportions->portions[i], chapters_from, verses_from, chapters_to, verses_to);
-    usfm2text.add_print_portion(books_english_to_id(scriptureportions->books[i]), chapters_from, verses_from, chapters_to, verses_to);
+    select_portion_get_values(portionproject, books_localname_to_id (scriptureportions->books[i]), scriptureportions->portions[i], chapters_from, verses_from, chapters_to, verses_to);
+    usfm2text.add_print_portion( books_localname_to_id (scriptureportions->books[i]), chapters_from, verses_from, chapters_to, verses_to);
   }
 
   // Language.
@@ -166,7 +166,7 @@ void PrintProject::print()
   for (unsigned int i = 0; i < scriptureportions->books.size(); i++) {
     // Open the book.
     vector < ustring > book_lines;
-    unsigned int id = books_english_to_id(scriptureportions->books[i]);
+    unsigned int id = books_localname_to_id (scriptureportions->books[i]);
     for (unsigned int i2 = 0; i2 < myproject->data.size(); i2++) {
       if (myproject->data[i2].number == id) {
         book_lines = myproject->data[i2].get_data();

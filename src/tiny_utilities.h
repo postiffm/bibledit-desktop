@@ -35,6 +35,8 @@ bool convert_to_bool(const ustring & s);
 double convert_to_double(const ustring & s);
 ustring convert_bool_to_yes_no(bool b);
 ustring trim(const ustring & s);
+ustring trimStart(const ustring & s);
+ustring trimEnd(const ustring & s);
 string trim(const string & s);
 ustring tiny_gw_build_filename(const ustring& part1, const ustring& part2);
 ustring tiny_gw_build_filename(const ustring& part1, const ustring& part2, const ustring& part3);

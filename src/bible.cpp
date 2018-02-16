@@ -337,7 +337,7 @@ unsigned int book_find_valid_internal(const ustring & rawbook)
   // A bug was discovered so that "Judges" was interpreted as "Jude", because
   // of the three letters "JUD". Solved by checking on full English name first.
   // This also is faster, as most books come in with their normal English names.
-  index = books_english_to_id(rawbook);
+  index = books_localname_to_id (rawbook);
   if (index) {
     return index;
   }
@@ -422,7 +422,7 @@ unsigned int book_find_valid_internal(const ustring & rawbook)
     ustring s2 = rawbook;
     if (s == "1" || s == "2" || s == "3")
       s2.insert(1, " ");
-    index = books_english_to_id(s2);
+    index = books_localname_to_id (s2);
     if (index) {
       return index;
     }
@@ -496,7 +496,7 @@ unsigned int reference_to_numerical_equivalent(const ustring & book, const ustri
  */
 {
   unsigned int i;
-  i = books_english_to_id(book) * 1000000;
+  i = books_localname_to_id (book) * 1000000;
   i = i + (convert_to_int(chapter) * 1000);
   vector < int >verses = verses_encode(verse);
   i = i + verses[0];

@@ -422,11 +422,11 @@ ResourceAssistant::ResourceAssistant(const ustring& resource_template) :
   vector <unsigned int> bookids = books_type_to_ids(btUnknown);
   vector <ustring> booknames;
   for (unsigned int i = 0; i < bookids.size(); i++) {
-    booknames.push_back (books_id_to_english (bookids[bookids[i]]));
+    booknames.push_back (books_id_to_localname (bookids[bookids[i]]));
   }
   combobox_set_strings (combobox_test_book, booknames);
   vector <unsigned int> nt_ids = books_type_to_ids (btNewTestament);
-  combobox_set_string (combobox_test_book, books_id_to_english (nt_ids[0]));
+  combobox_set_string (combobox_test_book, books_id_to_localname (nt_ids[0]));
 
   combobox_test_chapter = gtk_combo_box_new_text ();
   gtk_widget_show (combobox_test_chapter);
@@ -533,7 +533,7 @@ void ResourceAssistant::on_assistant_apply ()
     for (unsigned int i = 0; i < ids.size(); i++) {
       ustring book = books[ids[i]];
       if (!book.empty()) {
-        g_key_file_set_string(keyfile, resource_template_books_group(), books_id_to_english(ids[i]).c_str(), book.c_str());
+        g_key_file_set_string(keyfile, resource_template_books_group(), books_id_to_localname(ids[i]).c_str(), book.c_str());
       }
     }
   }
@@ -544,7 +544,7 @@ void ResourceAssistant::on_assistant_apply ()
     for (unsigned int i = 0; i < ids.size(); i++) {
       ustring book = books2[ids[i]];
       if (!book.empty()) {
-        g_key_file_set_string(keyfile, resource_template_books2_group(), books_id_to_english(ids[i]).c_str(), book.c_str());
+        g_key_file_set_string(keyfile, resource_template_books2_group(), books_id_to_localname(ids[i]).c_str(), book.c_str());
       }
     }
   }
@@ -870,7 +870,7 @@ void ResourceAssistant::on_combobox_test_changed (GtkComboBox *combobox, gpointe
 void ResourceAssistant::on_url ()
 {
   ustring url = resource_url_get(url_constructor (), working_configuration_file ());
-  unsigned int book = books_english_to_id (combobox_get_active_string (combobox_test_book));
+  unsigned int book = books_localname_to_id (combobox_get_active_string (combobox_test_book));
   unsigned int chapter = convert_to_int (combobox_get_active_string (combobox_test_chapter));
   ustring verse = combobox_get_active_string (combobox_test_verse);
   Reference reference (book, chapter, verse);

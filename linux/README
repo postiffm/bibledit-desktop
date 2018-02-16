@@ -1,0 +1,16 @@
+Setting up the Build Environment on Linux
+-----------------------------------------
+Make sure you have git (on Ubuntu: sudo apt-get install git)
+cd ~
+git clone https://github.com/postiffm/bibledit-desktop.git
+bibledit-desktop/linux/buildenvLinux.sh
+
+Doing the Build on Linux
+------------------------
+cd bibledit-desktop
+./autogen.sh
+./configure
+make
+sudo make install
+Run the program from /usr/bin/bibledit-desktop (was bibledit-gtk)
+I recommend you lock the icon in Ubuntu launcher.

@@ -126,7 +126,14 @@ CategorizeLine::CategorizeLine(const ustring & data)
       ustring closing_marker = footnote_closer();
       beginposition = line.find(opening_marker);
       endposition = line.find(closing_marker);
-      while ((beginposition != string::npos) && (endposition != string::npos)) {
+      if (endposition == string::npos) {
+	// BUG: In main editor, the chapter lines are all combined into a single long ustring.
+	// This means that footnotes that are split across lines are "fixed." But that is not
+	// the case when just looking at a single verse \\v line that has a footnote started
+	// but not finished.
+	endposition = line.length() - 1;
+      }
+      while (beginposition != string::npos) {
         ustring notetext;
         notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
         line.erase(beginposition, endposition - beginposition + closing_marker.length());

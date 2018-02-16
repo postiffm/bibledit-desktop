@@ -37,6 +37,7 @@ unsigned int books_paratext_to_id (const ustring& paratext);
 unsigned int books_bibleworks_to_id (const ustring& bibleworks);
 unsigned int books_osis_to_id (const ustring& osis);
 unsigned int books_english_to_id (const ustring& english);
+unsigned int books_localname_to_id (const ustring& lname);
 unsigned int books_online_bible_to_id (const ustring& onlinebible);
 ustring books_id_to_name (const ustring& language, unsigned int id);
 ustring books_id_to_abbreviation (const ustring& language, unsigned int id);

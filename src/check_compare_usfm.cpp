@@ -80,7 +80,7 @@ gui: show graphical progressbar.
     // Progress.
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_english(scripture_books[i]));
+      progresswindow->set_text(books_id_to_localname(scripture_books[i]));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
@@ -128,7 +128,7 @@ CheckCompareUsfms::~CheckCompareUsfms()
 
 void CheckCompareUsfms::message(unsigned int book, unsigned int chapter, const ustring & verse, const ustring & message)
 {
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+  references.push_back(books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }
 

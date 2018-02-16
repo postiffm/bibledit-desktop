@@ -158,18 +158,18 @@ WindowTabbed::~WindowTabbed()
   gtk_widget_destroy(signal_button);
 }
 
-void WindowTabbed::Concordance(void)
-{
-	// Create a new concordance tab
+#include "concordance.h"
 
-	// Create the view for the notebook page
+void WindowTabbed::Concordance(const ustring &projname)
+{
+	// Create a new concordance tab (notebook page)
 	GtkWidget *scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_show (scrolledwindow);
 	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
  
-	GtkWidget *tab_label = gtk_label_new_with_mnemonic (_("_Concordance"));
+	GtkWidget *tab_label = gtk_label_new_with_mnemonic (_("_Concordance Sorted by Word"));
 	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, tab_label);
 	
 	webview = webkit_web_view_new();
@@ -177,14 +177,14 @@ void WindowTabbed::Concordance(void)
 	gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
 	
 	connect_focus_signals (webview);
-	
-	// Create concordance information
-	
+
 	// Show it in the view
 	HtmlWriter2 htmlwriter ("");
-	htmlwriter.text_add (_("Concordance features are almost ready..."));
+
+	// Create concordance data
+	concordance conc(projname, htmlwriter);
+	htmlwriter.finish();
 	
-  htmlwriter.finish();
 //  if (display_another_page) {
     // Load the page.
     webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);
@@ -192,6 +192,33 @@ void WindowTabbed::Concordance(void)
     //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
 //  }
+
+// Second tab, this one for a different sorting, created same way as above...need to abstract this out
+
+    // Create a new concordance tab (notebook page)
+	GtkWidget *scrolledwindow2 = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_show (scrolledwindow2);
+	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow2), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow2), GTK_SHADOW_IN);
+ 
+	GtkWidget *tab_label2 = gtk_label_new_with_mnemonic (_("_Concordance Sorted by Count"));
+	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow2, tab_label2);
+	
+	webview2 = webkit_web_view_new();
+	gtk_widget_show (webview2);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow2), webview2);
+	
+	connect_focus_signals (webview2);
+
+	// Show it in the view
+	HtmlWriter2 htmlwriter2 ("");
+
+	// Create concordance data
+	conc.sortedByWords(htmlwriter2);
+	htmlwriter2.finish();
+	
+	webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview2), htmlwriter2.html.c_str(), NULL, NULL, NULL);
 }
 
 #if 0
@@ -553,7 +580,7 @@ void WindowTabbed::html_link_clicked (const gchar * url)
     keyterms_get_terms("", collection(), terms, ids);
     for (unsigned int i = 0; i < terms.size(); i++) {
       htmlwriter.paragraph_open();
-      htmlwriter.hyperlink_add (_("keyterm ") + convert_to_string (ids[i]), terms[i]);
+      htmlwriter.hyperlink_add ("keyterm " + convert_to_string (ids[i]), terms[i]);
       htmlwriter.paragraph_close();
     }
     display_another_page = true;
@@ -707,7 +734,7 @@ Reference WindowTabbed::get_reference (const ustring& text)
   Reference ref (0);
   ustring book, chapter, verse = ref.verse_get();
   decode_reference(text, book, chapter, verse);
-  ref.book_set(books_english_to_id (book));
+  ref.book_set(books_localname_to_id (book));
   ref.chapter_set(convert_to_int (chapter));
   ref.verse_set(verse);
   return ref;

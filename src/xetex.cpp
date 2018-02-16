@@ -120,10 +120,12 @@ void XeTeX::write_document_tex_file ()
 
   if (settings->genconfig.paper_inside_margin_get() != settings->genconfig.paper_outside_margin_get()) {
     document_tex.push_back ("");
+    // xgettext:no-c-format
     document_tex.push_back (_("% Extra margin for the gutter on the binding side"));
     document_tex.push_back ("\\BindingGuttertrue");
     document_tex.push_back ("\\BindingGutter=" + convert_to_string (settings->genconfig.paper_inside_margin_get() - settings->genconfig.paper_outside_margin_get()) + "cm");
     document_tex.push_back ("");
+    // xgettext:no-c-format
     document_tex.push_back (_("% Double sided printing"));
     document_tex.push_back ("\\DoubleSidedtrue");
   }
@@ -337,7 +339,7 @@ void XeTeX::write_document_tex_file ()
 
   // Write the data and add their filenames.
   for (unsigned int i = 0; i < book_ids.size(); i++) {
-    ustring filename = convert_to_string (book_ids[i]) + " " + books_id_to_english(book_ids[i]) + ".usfm";
+    ustring filename = convert_to_string (book_ids[i]) + " " + books_id_to_localname(book_ids[i]) + ".usfm";
     replace_text (filename, " ", "_");
     write_lines (gw_build_filename (working_directory, filename), book_data[i]);
     document_tex.push_back ("\\ptxfile{" + filename + "}");

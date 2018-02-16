@@ -54,7 +54,7 @@ gui: show graphical progressbar.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_english(mybooks[bk]));
+      progresswindow->set_text(books_id_to_localname(mybooks[bk]));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
@@ -244,7 +244,7 @@ void CheckChaptersVerses::verses_check(unsigned int book, unsigned int chapter, 
 
 void CheckChaptersVerses::message(unsigned int book, unsigned int chapter, const ustring & verse, const ustring & message)
 {
-  references.push_back(books_id_to_english(book) + " " + convert_to_string(chapter) + ":" + verse);
+  references.push_back(books_id_to_localname(book) + " " + convert_to_string(chapter) + ":" + verse);
   comments.push_back(message);
 }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.11\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-06-01 23:02-0400\n"
+"POT-Creation-Date: 2017-06-09 16:40-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3899,6 +3899,7 @@ msgid "From:"
 msgstr ""
 
 #: ../src/dialogselectchapters.cpp:93 ../src/dialogstylesheet.cpp:807
+#: ../src/reporting.cpp:452
 msgid "chapter"
 msgstr ""
 
@@ -5000,10 +5001,6 @@ msgid ""
 "and re-install."
 msgstr ""
 
-#: ../src/kjv.cpp:139
-msgid "ok"
-msgstr ""
-
 #: ../src/kjv.cpp:139 ../src/mechonmamre.cpp:257
 msgid "Ok"
 msgstr ""
@@ -5555,7 +5552,7 @@ msgid ""
 "Would you like to go to the"
 msgstr ""
 
-#: ../src/mainwindow.cpp:3559 ../src/windowreferences.cpp:650
+#: ../src/mainwindow.cpp:3559
 msgid "next"
 msgstr ""
 
@@ -6040,7 +6037,7 @@ msgstr ""
 msgid "Planning "
 msgstr ""
 
-#: ../src/planning.cpp:87 ../src/reporting.cpp:769
+#: ../src/planning.cpp:87 ../src/reporting.cpp:773
 msgid "Produced on "
 msgstr ""
 
@@ -6204,39 +6201,136 @@ msgstr ""
 msgid " does not exist in project "
 msgstr ""
 
-#: ../src/reporting.cpp:453
+#: ../src/reporting.cpp:40
+msgid "status"
+msgstr ""
+
+#: ../src/reporting.cpp:66
+msgid "First Draft"
+msgstr ""
+
+#: ../src/reporting.cpp:67
+msgid "Self Check"
+msgstr ""
+
+#: ../src/reporting.cpp:68
+msgid "Team Check"
+msgstr ""
+
+#: ../src/reporting.cpp:69
+msgid "Back Translation"
+msgstr ""
+
+#: ../src/reporting.cpp:70
+msgid "Advisor Check"
+msgstr ""
+
+#: ../src/reporting.cpp:71
+msgid "First Revision"
+msgstr ""
+
+#: ../src/reporting.cpp:72
+msgid "First Village Check"
+msgstr ""
+
+#: ../src/reporting.cpp:73
+msgid "Second Revision"
+msgstr ""
+
+#: ../src/reporting.cpp:74
+msgid "Second Village Check"
+msgstr ""
+
+#: ../src/reporting.cpp:75
+msgid "Third Revision"
+msgstr ""
+
+#: ../src/reporting.cpp:76
+msgid "Consultant Check"
+msgstr ""
+
+#: ../src/reporting.cpp:77
+msgid "Fourth Revision"
+msgstr ""
+
+#: ../src/reporting.cpp:78
+msgid "First Read Through"
+msgstr ""
+
+#: ../src/reporting.cpp:79
+msgid "Second Read Through"
+msgstr ""
+
+#: ../src/reporting.cpp:80
+msgid "Publish"
+msgstr ""
+
+#: ../src/reporting.cpp:81
+msgid "Post Publish Revision"
+msgstr ""
+
+#: ../src/reporting.cpp:457
 msgid "Status for chapter "
 msgstr ""
 
+#: ../src/reporting.cpp:554
+msgid "Printing status for book "
+msgstr ""
+
+#: ../src/reporting.cpp:569
+msgid "Loading status"
+msgstr ""
+
+#: ../src/reporting.cpp:637
+msgid "Printing project status "
+msgstr ""
+
 #: ../src/reporting.cpp:765
+msgid "Creating report"
+msgstr ""
+
+#: ../src/reporting.cpp:769
 msgid "Status Report"
 msgstr ""
 
-#: ../src/reporting.cpp:766
+#: ../src/reporting.cpp:770
 msgid "Status Report "
 msgstr ""
 
-#: ../src/reporting.cpp:791
+#: ../src/reporting.cpp:795
 msgid "Project Percentage Complete"
 msgstr ""
 
-#: ../src/reporting.cpp:800 ../src/reporting.cpp:825
+#: ../src/reporting.cpp:801
+#: ../templates/gtkbuilder.showprojectnotesdialog.xml:336
+msgid "project"
+msgstr ""
+
+#: ../src/reporting.cpp:802
+msgid "project_complete.csv"
+msgstr ""
+
+#: ../src/reporting.cpp:804 ../src/reporting.cpp:829
 msgid "The above data in csv format"
 msgstr ""
 
-#: ../src/reporting.cpp:814
+#: ../src/reporting.cpp:818
 msgid "Books Percentage Complete"
 msgstr ""
 
-#: ../src/reporting.cpp:857
+#: ../src/reporting.cpp:827
+msgid "books_complete.csv"
+msgstr ""
+
+#: ../src/reporting.cpp:861
 msgid "Tasks per book - Legend"
 msgstr ""
 
-#: ../src/reporting.cpp:859
+#: ../src/reporting.cpp:863
 msgid "Tasks per book - Data"
 msgstr ""
 
-#: ../src/reporting.cpp:877
+#: ../src/reporting.cpp:881
 msgid "Tasks per chapter for "
 msgstr ""
 
@@ -7000,8 +7094,7 @@ msgid "Rendering"
 msgstr ""
 
 #: ../src/windowcheckkeyterms.cpp:145 ../src/windowcheckkeyterms.cpp:454
-#: ../src/windowcheckkeyterms.cpp:501 ../src/windowtabbed.cpp:200
-#: ../src/windowtabbed.cpp:509 ../src/windowtabbed.cpp:556
+#: ../src/windowtabbed.cpp:200 ../src/windowtabbed.cpp:509
 msgid "keyterm "
 msgstr ""
 
@@ -7322,10 +7415,6 @@ msgid "no references"
 msgstr ""
 
 #: ../src/windowreferences.cpp:644
-msgid "prev"
-msgstr ""
-
-#: ../src/windowreferences.cpp:644
 msgid "[prev]"
 msgstr ""
 
@@ -7342,10 +7431,6 @@ msgid "[next]"
 msgstr ""
 
 #: ../src/windowreferences.cpp:655
-msgid "actions"
-msgstr ""
-
-#: ../src/windowreferences.cpp:655
 msgid "[actions]"
 msgstr ""
 
@@ -7354,15 +7439,7 @@ msgid "[back]"
 msgstr ""
 
 #: ../src/windowreferences.cpp:670
-msgid "dismiss cursor"
-msgstr ""
-
-#: ../src/windowreferences.cpp:670
 msgid "Dismiss "
-msgstr ""
-
-#: ../src/windowreferences.cpp:676
-msgid "dismiss page"
 msgstr ""
 
 #: ../src/windowreferences.cpp:676
@@ -7374,15 +7451,7 @@ msgid " references"
 msgstr ""
 
 #: ../src/windowreferences.cpp:682
-msgid "dismiss all"
-msgstr ""
-
-#: ../src/windowreferences.cpp:682
 msgid "Dismiss the whole lot of "
-msgstr ""
-
-#: ../src/windowreferences.cpp:688
-msgid "hide"
 msgstr ""
 
 #: ../src/windowreferences.cpp:688
@@ -7394,23 +7463,11 @@ msgid "\" from now on"
 msgstr ""
 
 #: ../src/windowreferences.cpp:694
-msgid "hidden"
-msgstr ""
-
-#: ../src/windowreferences.cpp:694
 msgid "Manage the hidden references"
 msgstr ""
 
 #: ../src/windowreferences.cpp:700
-msgid "open"
-msgstr ""
-
-#: ../src/windowreferences.cpp:700
 msgid "Import a list of references"
-msgstr ""
-
-#: ../src/windowreferences.cpp:706
-msgid "settings"
 msgstr ""
 
 #: ../src/windowreferences.cpp:706
@@ -7597,168 +7654,169 @@ msgstr ""
 msgid "% Relative sizes of margins, based on the unit above"
 msgstr ""
 
-#: ../src/xetex.cpp:123
-#, c-format
+#: ../src/xetex.cpp:124
+#, no-c-format
 msgid "% Extra margin for the gutter on the binding side"
 msgstr ""
 
-#: ../src/xetex.cpp:127
+#: ../src/xetex.cpp:129
+#, no-c-format
 msgid "% Double sided printing"
 msgstr ""
 
-#: ../src/xetex.cpp:145
+#: ../src/xetex.cpp:147
 msgid "Font mapping file "
 msgstr ""
 
-#: ../src/xetex.cpp:145
+#: ../src/xetex.cpp:147
 msgid " should have the .tec suffix - ignoring this file"
 msgstr ""
 
-#: ../src/xetex.cpp:179
+#: ../src/xetex.cpp:181
 #, no-c-format
 msgid ""
 "% Fonts to use for \"plain\", \"bold\", \"italic\", and \"bold italic\" from "
 "the stylesheet"
 msgstr ""
 
-#: ../src/xetex.cpp:181
+#: ../src/xetex.cpp:183
 #, no-c-format
 msgid "% (they need not really be italic, etc.)"
 msgstr ""
 
-#: ../src/xetex.cpp:183
+#: ../src/xetex.cpp:185
 #, no-c-format
 msgid ""
 "% Add e.g. \":mapping=farsidigits\" to get digits in Farsi, provided the "
 "farsidigits.tec TECkit mapping is available"
 msgstr ""
 
-#: ../src/xetex.cpp:185
+#: ../src/xetex.cpp:187
 #, no-c-format
 msgid ""
 "% Add e.g. \":script=arab\" to use the arab shaping engine instead of the "
 "generic one"
 msgstr ""
 
-#: ../src/xetex.cpp:197
+#: ../src/xetex.cpp:199
 #, no-c-format
 msgid "% Right-to-left layout mode"
 msgstr ""
 
-#: ../src/xetex.cpp:203
+#: ../src/xetex.cpp:205
 #, no-c-format
 msgid ""
 "% The unit for font sizes in the stylesheet; changing this will scale all "
 "text proportionately"
 msgstr ""
 
-#: ../src/xetex.cpp:208
+#: ../src/xetex.cpp:210
 #, no-c-format
 msgid "% Scaling factor used to adjust line spacing, relative to font size"
 msgstr ""
 
-#: ../src/xetex.cpp:219
+#: ../src/xetex.cpp:221
 msgid ""
 "% Information to include in the running header (at top of pages, except "
 "first)"
 msgstr ""
 
-#: ../src/xetex.cpp:220
+#: ../src/xetex.cpp:222
 msgid ""
 "% We set the items to print at left/center/right of odd and even pages "
 "separately"
 msgstr ""
 
-#: ../src/xetex.cpp:221
+#: ../src/xetex.cpp:223
 msgid "% Possible contents:"
 msgstr ""
 
-#: ../src/xetex.cpp:222
+#: ../src/xetex.cpp:224
 msgid "%   \\rangeref = Scripture reference of the range of text on the page;"
 msgstr ""
 
-#: ../src/xetex.cpp:223
+#: ../src/xetex.cpp:225
 msgid "%   \\firstref = reference of the first verse on the page)"
 msgstr ""
 
-#: ../src/xetex.cpp:224
+#: ../src/xetex.cpp:226
 msgid "%   \\lastref = reference of the last verse on the page)"
 msgstr ""
 
-#: ../src/xetex.cpp:225
+#: ../src/xetex.cpp:227
 msgid "%   \\pagenumber = the page number"
 msgstr ""
 
-#: ../src/xetex.cpp:226
+#: ../src/xetex.cpp:228
 msgid "%   \\empty = print nothing in this position"
 msgstr ""
 
-#: ../src/xetex.cpp:244
+#: ../src/xetex.cpp:246
 msgid "% Whether to include verse number in running head, or only chapter"
 msgstr ""
 
-#: ../src/xetex.cpp:248
+#: ../src/xetex.cpp:250
 msgid "% Whether to skip printing verse number 1 at start of chapter"
 msgstr ""
 
-#: ../src/xetex.cpp:252
+#: ../src/xetex.cpp:254
 msgid "% Whether to use paragraph indent at drop-cap chapter numbers"
 msgstr ""
 
-#: ../src/xetex.cpp:253
+#: ../src/xetex.cpp:255
 msgid "% \\IndentAtChaptertrue"
 msgstr ""
 
-#: ../src/xetex.cpp:273
+#: ../src/xetex.cpp:275
 msgid "% Reformat \\"
 msgstr ""
 
-#: ../src/xetex.cpp:280
+#: ../src/xetex.cpp:282
 msgid "% Numerical callers for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:280 ../src/xetex.cpp:285 ../src/xetex.cpp:314
-#: ../src/xetex.cpp:319
+#: ../src/xetex.cpp:282 ../src/xetex.cpp:287 ../src/xetex.cpp:316
+#: ../src/xetex.cpp:321
 msgid " notes"
 msgstr ""
 
-#: ../src/xetex.cpp:285
+#: ../src/xetex.cpp:287
 #, no-c-format
 msgid "% Alphabetical callers for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:297
+#: ../src/xetex.cpp:299
 #, no-c-format
 msgid "% Special caller sequence for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:314
+#: ../src/xetex.cpp:316
 #, no-c-format
 msgid "% Reset callers every page for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:319
+#: ../src/xetex.cpp:321
 #, no-c-format
 msgid "% Omit callers in the note for \\"
 msgstr ""
 
-#: ../src/xetex.cpp:320
+#: ../src/xetex.cpp:322
 msgid "% \\OmitCallerInNote{"
 msgstr ""
 
-#: ../src/xetex.cpp:326
+#: ../src/xetex.cpp:328
 msgid "% The number of columns"
 msgstr ""
 
-#: ../src/xetex.cpp:332
+#: ../src/xetex.cpp:334
 msgid "% The gutter between double cols, relative to font size"
 msgstr ""
 
-#: ../src/xetex.cpp:388
+#: ../src/xetex.cpp:390
 msgid "All the data for this document is available in temporal folder "
 msgstr ""
 
-#: ../src/xetex.cpp:389
+#: ../src/xetex.cpp:391
 msgid ""
 "You can tune the files by hand, then run \"xetex document.tex\" in this "
 "folder to convert it into a PDF file."
@@ -7849,7 +7907,7 @@ msgid "x"
 msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:7
-msgid "Goto reference"
+msgid "Go to reference"
 msgstr ""
 
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:20
@@ -8131,10 +8189,6 @@ msgstr ""
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:321
 msgid "Title, including"
-msgstr ""
-
-#: ../templates/gtkbuilder.showprojectnotesdialog.xml:336
-msgid "project"
 msgstr ""
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:350

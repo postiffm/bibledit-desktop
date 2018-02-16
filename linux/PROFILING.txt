@@ -1,3 +1,39 @@
+2/12/2018 linux-perf
+
+0. Preparing
+   sudo apt install linux-tools-common
+   sudo apt install linux-tools-generic
+   sudo apt install linux-cloud-tools-generic
+   sudo nano /etc/sysctl.conf and set:
+    kernel.perf_event_paranoid = -1
+    sudo echo 0 > /proc/sys/kernel/kptr_restrict
+1. compile bibledit-desktop with -ggdb to get annotations with source code; sudo make install
+2. Run bibledit-desktop with perf. This records the callgraph (-g) and creates perf.data
+   The --call-graph dwarf option is important to capture symbol information correctly.
+   perf record -g --call-graph dwarf /usr/bin/bibledit-desktop --debug
+3. Analyze
+   perf report -g
+4. View graphically,see http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html
+   git clone https://github.com/brendangregg/FlameGraph
+   perf script | ./FlameGraph/stackcollapse-perf.pl > out.perf-folded
+   ./FlameGraph/flamegraph.pl out.perf-folded > perf-bibledit.svg
+   View with firefox perf-bibledit.svg
+   
+2/13/2018 valgrind memcheck
+0. Preparing
+   sudo apt install valgrind
+   sudo apt install alleyoop
+   Compile with -O1 at most, or -O0, because -O2 reports lots of false unitialized value errors
+1. Running
+  valgrind --leak-check=full /usr/bin/bibledit-desktop --debug > memleak1.log 2>&1
+  add --track-origins=yes to see where uninitialized values come from
+2. There are monitoring commands that can be used in gdb
+3. In the log, look for "Invalid write" for heap overrun, and "definitely lost" or
+   "possibly lost" for leaks.
+4. Look at the entries in an easier format than just text log file:
+   alleyoop memleak2.org
+  
+Old
 To measure cpu usage per function on Linux, use
    valgrind --tool=callgrind bibledit-bin
 

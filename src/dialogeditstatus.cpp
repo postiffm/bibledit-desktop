@@ -164,10 +164,10 @@ EditStatusDialog::EditStatusDialog(const ustring & project_in, unsigned int book
   vector < ustring > books;
   for (unsigned int i = 0; i < projectstatus->books.size(); i++) {
     ProjectStatusBook *project_status_book = projectstatus->books.at(i);
-    books.push_back(books_id_to_english(project_status_book->book));
+    books.push_back(books_id_to_localname(project_status_book->book));
   }
   listview_set_strings(treeview_books, liststore_books, books);
-  listview_focus_string(treeview_books, books_id_to_english(book), false);
+  listview_focus_string(treeview_books, books_id_to_localname(book), false);
   on_treeview_books_cursor();
 
   // Focus the chapter that is in the editor.

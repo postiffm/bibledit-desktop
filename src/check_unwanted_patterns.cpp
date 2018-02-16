@@ -87,7 +87,7 @@ gui: whether to show graphical progressbar.
           if (text.find(patterns[i]) != string::npos) {
             ustring message = _("Unwanted pattern ");
             message.append(patterns[i]);
-            references.push_back(books_id_to_english(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
+            references.push_back(books_id_to_localname(mybooks[bk]) + " " + convert_to_string(chapters[ch]) + ":" + verses[vs]);
             comments.push_back(message);
           }
         }

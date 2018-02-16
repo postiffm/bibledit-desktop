@@ -22,6 +22,7 @@
 #include "tiny_utilities.h"
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <glibmm/regex.h>
 
 // The tiny utilities as listed below are mainly intended to be linked with 
 // small executables
@@ -110,15 +111,31 @@ ustring convert_bool_to_yes_no(bool b)
 
 ustring trim(const ustring & s)
 {
-  if (s.length() == 0)
-    return s;
-  // Strip spaces, tabs, new lines, carriage returns.
+  if (s.length() == 0) { return s; }
+  // Strip spaces, tabs, new lines, carriage returns from entire string
   size_t beg = s.find_first_not_of(" \t\n\r");
   size_t end = s.find_last_not_of(" \t\n\r");
   // No non-spaces  
-  if (beg == string::npos)
-    return "";
+  if (beg == string::npos) { return ""; }
   return ustring(s, beg, end - beg + 1);
+}
+
+ustring trimStart(const ustring & s)
+{
+  if (s.length() == 0) { return s; }
+  // Strip spaces, tabs, new lines, carriage returns from beginning of string
+  size_t beg = s.find_first_not_of(" \t\n\r");
+  if (beg == string::npos) { return ""; }
+  return ustring(s, beg, string::npos);
+}
+
+ustring trimEnd(const ustring & s)
+{
+  if (s.length() == 0) { return s; }
+  // Strip spaces, tabs, new lines, carriage returns from end of string
+  size_t end = s.find_last_not_of(" \t\n\r");
+  // No non-spaces  
+  return ustring(s, 0, end + 1);
 }
 
 
@@ -337,25 +354,39 @@ void TinySpawn::run()
   }
 }
 
+#if 0
+ParseLine::ParseLine(const ustring & text)
+// Parses text into a vector of separate lines, each in a ustring
+{
+  ustring s = text;
+  size_t start = s.find_first_not_of(" \t\n\r");
+  size_t newlineposition = s.find("\n");
+  // Loop intial condition: start points to first non-whitespace and newlineposition points at
+  // following newline, if there is one, or end of string if not
+  while (newlineposition != string::npos) {
+    ustring line(s, start, newlineposition-start); // construct ustring as a copy of substring
+    lines.push_back(trimEnd(line)); // trim away any spaces or \r or \t that are just before the \n
+    start = newlineposition + 1;
+    start = s.find_first_not_of(" \t\n\r", start); // fast forward past any initial whitespace
+    newlineposition = s.find("\n", start);
+  }
+  if (start != string::npos) {
+    ustring line(s, start, string::npos); // construct ustring as a copy of substring
+    // very end was already trimmed at beginning of this routine
+    lines.push_back(line);
+  }
+}
+#endif
 
 ParseLine::ParseLine(const ustring & text)
-// Parses text in its separate lines.
+// Parses text into a vector of separate lines, each in a ustring
 {
-  ustring processed_line;
-  processed_line = trim(text);
-  size_t newlineposition;
-  newlineposition = processed_line.find("\n");
-  while (newlineposition != string::npos) {
-    ustring word = processed_line.substr(0, newlineposition);
-    lines.push_back(trim(word));
-    processed_line.erase(0, newlineposition + 1);
-    processed_line = trim(processed_line);
-    newlineposition = processed_line.find("\n");
-  }
-  if (!processed_line.empty())
-    lines.push_back(trim(processed_line));
+  std::vector<Glib::ustring> vLines = Glib::Regex::split_simple("\n", text);
+  for(unsigned int i=0; i < vLines.size(); i++) {
+      ustring temp = trim(vLines.at(i));
+      if (temp.length() != 0) { lines.push_back(temp); }
+  } 
 }
-
 
 ParseLine::~ParseLine()
 {

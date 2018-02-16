@@ -1692,7 +1692,7 @@ void Usfm2XeTex::toc_insert_referent(ustring & line, Usfm2XslFoStyle * &fo_block
   get_erase_code_till_next_marker(line, 0, marker_length, false);
 
   // Write the referent.
-  xetex2pdf->set_referent(books_id_to_english(book));
+  xetex2pdf->set_referent(books_id_to_localname(book));
 }
 
 
@@ -1722,7 +1722,7 @@ void Usfm2XeTex::toc_insert_body(ustring & line, Usfm2XslFoStyle * &fo_block_sty
     Usfm2XslFoStyle *style = marker_get_pointer_to_style(default_style());
     fo_block_style = style;
     open_paragraph(style, false);
-    xetex2pdf->set_reference(books_id_to_english(books[bk]));
+    xetex2pdf->set_reference(books_id_to_localname(books[bk]));
     xetex2pdf->add_text(label);
     xetex2pdf->close_paragraph();
   }

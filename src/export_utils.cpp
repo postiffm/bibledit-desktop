@@ -100,7 +100,7 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
       char padded [3];
       sprintf (padded, "%02d", books[i]);
       ustring padded2 (padded);
-      filename = padded2  + " " + books_id_to_english(books[i]) + ".usfm";
+      filename = padded2  + " " + books_id_to_localname(books[i]) + ".usfm";
       replace_text (filename, " ", "_");
     }
     if (zip) {  filename = gw_build_filename(tempdir, filename);  }
@@ -170,19 +170,16 @@ Yes, this is a bit rough, I know...
       for (unsigned int bk = 0; bk < scripture_books.size(); bk++) {
         // Progress information.
         progresswindow.iterate();
-        if (progresswindow.cancel)
-          return;
+        if (progresswindow.cancel) { return; }
         // Get the abbreviation to be used.
         ustring abbreviation = books_id_to_bibleworks(scripture_books[bk]);
         // If the book does not exist in BibleWorks, skip it.
-        if (abbreviation.empty())
-          continue;
+        if (abbreviation.empty()) { continue; }
         // Handle each chapter in the book.
         vector < unsigned int >chapters = project_get_chapters(project, scripture_books[bk]);
         for (unsigned int ch = 0; ch < chapters.size(); ch++) {
           // Do not export chapter 0.
-          if (chapters[ch] == 0)
-            continue;
+          if (chapters[ch] == 0) { continue; }
           // Get the chapter and handle it.
           vector < ustring > lines;
           lines = project_retrieve_chapter(project, scripture_books[bk], chapters[ch]);
@@ -190,8 +187,7 @@ Yes, this is a bit rough, I know...
           CategorizeChapterVerse ccv(lines);
           for (unsigned int vs = 0; vs < ccv.verse.size(); vs++) {
             // Do not export verse 0.
-            if (ccv.verse[vs] == "0")
-              continue;
+            if (ccv.verse[vs] == "0") { continue; }
             // Bibledit does not handle combined verses like 1-4a., etc. So make
             // a simple verse.
             ustring verse = number_in_string(ccv.verse[vs]);
@@ -300,7 +296,7 @@ void export_to_osis_old (const ustring& project, const ustring& filename)
       swordnote.new_book();
 
       // Open book in osis code.
-      OsisBook osisbook(&wt, books_id_to_english(scripture_books[bk]));
+      OsisBook osisbook(&wt, books_id_to_localname(scripture_books[bk]));
 
       // Go through the book and collect verses and other data.
       vector < unsigned int >chapters;
@@ -726,7 +722,7 @@ void export_to_opendocument(const ustring& project, const ustring& filename)
     for (unsigned int i = 0; i < books.size(); i++) {
       set < unsigned int >selectedbook;
       selectedbook.insert(books[i]);
-      ustring combinedfilename = filename + "-" + books_id_to_english(books[i]);
+      ustring combinedfilename = filename + "-" + books_id_to_localname(books[i]);
       OpenDocument odt(project, combinedfilename, &selectedbook);
       odt.note_unformatted_markers (unformatted_markers);
     }
@@ -819,7 +815,7 @@ void export_to_usfm_changes (const ustring& project, int time_from, ustring comm
     vector < unsigned int >all_books = books_type_to_ids(btUnknown);
     for (unsigned int i = 0; i < all_books.size(); i++) {
       if (!lines[books[i]].empty()) {
-        ustring usfmfilename = gw_build_filename(workingdirectory, books_id_to_english(books[i]) + ".usfm");
+        ustring usfmfilename = gw_build_filename(workingdirectory, books_id_to_localname(books[i]) + ".usfm");
         write_lines(usfmfilename, lines[books[i]]);
       }
     }
