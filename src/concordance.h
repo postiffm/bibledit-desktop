@@ -84,21 +84,26 @@ class verse {
 };
 
 class bible {
-  public:
-	ustring projname;
-	vector<book> books; 
-	bible(ustring _proj);
+ public:
+  ustring projname;
+  vector<book> books; 
+  bible(const ustring &_proj);
 };
 
 class concordance {
-  public:
-    concordance(HtmlWriter2 &htmlwriter);
-    void readExcludedWords(const ustring &filename);
+ public:
+  concordance(const ustring &_projname, HtmlWriter2 &htmlwriter);
+  void sortedByWords(HtmlWriter2 &htmlwriter);
+  void readExcludedWords(const ustring &filename);
 private:
-    // The set of words that we are NOT interested in showing
-    unordered_set<string> excludedWords;
-    std::unordered_map<std::string, int, std::hash<std::string>> wordCounts;
-    std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> wordLocations;
-    std::map<std::string, int> sortedWordCounts;
-    // Not sure why addition of ", std::hash<std::string>" is not needed
+  ustring projname;
+  // The set of words that we are NOT interested in showing
+  unordered_set<string> excludedWords;
+  // 1. Unique word ==> count of occurrences
+  std::unordered_map<std::string, int, std::hash<std::string>> wordCounts;
+  // 2. Unique word ==> vector of integers. These integers are coded to contain the
+  // book, chapter, and verse location in 24 bits.
+  std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> wordLocations;
+  // 3. Unique word ==> count of occurrences. Same info as #1, but sorted automatically.
+  std::map<std::string, int> sortedWordCounts;
 };

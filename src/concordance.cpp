@@ -143,9 +143,9 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 	}
 }
 
-bible::bible(ustring _proj)
+bible::bible(const ustring &_proj)
 {
-	projname = _proj;
+  projname = _proj;
 }
 
 void chapter::load(int book, int chapter, 
@@ -200,8 +200,9 @@ void concordance::readExcludedWords(const ustring &filename)
 // I should have a better way of accessing this
 extern book_record books_table[];
 
-concordance::concordance(HtmlWriter2 &htmlwriter)
+concordance::concordance(const ustring &_projname, HtmlWriter2 &htmlwriter)
 {
+  projname = _projname;
 	readExcludedWords("strings.txt");
 	
 	// The kinds of things we should be able to do include
@@ -213,19 +214,19 @@ concordance::concordance(HtmlWriter2 &htmlwriter)
 
     // Now do the work of loading the chapters and verses, splitting into words, 
 	// counting in our mapping structure, etc.
-	bible kjv("KJV");
+	bible bbl(projname);
 
     htmlwriter.heading_open (1);
-    htmlwriter.text_add (kjv.projname + " " + _("Concordance"));
+    htmlwriter.text_add (projname + " " + _("Concordance Sorted by Words"));
     htmlwriter.heading_close();
 
-    ProgressWindow progresswindow(_("Building Concordance"), false);
+    ProgressWindow progresswindow(_("Building Concordance Raw Data"), false);
     progresswindow.set_iterate(0, 1, 66);
     
     for (int b = 1; b <= 66; b++) {
 		ustring bookname = books_table[b].name;
-		book *newbk = new book(&kjv, bookname, b);
-		kjv.books.push_back(*newbk);
+		book *newbk = new book(&bbl, bookname, b);
+		bbl.books.push_back(*newbk);
 		vector <unsigned int> chapters = versification_get_chapters("English", b);
 		for (auto c : chapters) {
 			chapter *newchap = new chapter(newbk, c);
@@ -270,5 +271,28 @@ concordance::concordance(HtmlWriter2 &htmlwriter)
         htmlwriter.p(pair.first + " " + std::to_string(pair.second) + verselist);
 	}
 
-	return;
+    // Done generating word list with handful of verses for each
+    return;
+}
+
+void concordance::sortedByWords(HtmlWriter2 &htmlwriter)
+{
+  // Now I want to sort by count so that 1's appear at the top, etc.
+
+  htmlwriter.heading_open (1);
+  htmlwriter.text_add (projname + " " + _("Concordance Sorted by Frequency"));
+  htmlwriter.heading_close();
+  
+  // Got this idea from https://stackoverflow.com/questions/2699060/how-can-i-sort-an-stl-map-by-value
+  multimap<int, string> mm;
+  for (auto const &kv : sortedWordCounts) {
+    mm.insert(make_pair(kv.second, kv.first)); // flip the pairs so we key off of counts
+  }
+  
+  // Done reversing key<->count and sorting by word count
+  
+  for (auto const &kv : mm) {
+    htmlwriter.p(kv.second + " " + std::to_string(kv.first)); // print them in "normal" order
+  }
+  return;
 }

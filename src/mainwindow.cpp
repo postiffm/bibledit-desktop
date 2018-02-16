@@ -2791,9 +2791,10 @@ void MainWindow::on_view_concordance_activate (GtkMenuItem *menuitem, gpointer u
 void MainWindow::on_view_concordance ()
 {
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_concordance))) {
-	// This tabbed window may already be created, so it need not be created again
+    // This tabbed window may already be created, so it need not be created again
     if (!window_info) { window_info = new WindowTabbed(layout, accelerator_group, windows_startup_pointer != G_MAXINT); }
-	window_info->Concordance();
+    WindowEditor *editor_window = last_focused_editor_window();
+    window_info->Concordance(editor_window->projectname_get());
     g_signal_connect((gpointer) window_info->delete_signal_button, "clicked", G_CALLBACK(on_window_info_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_info->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_info->signal_button, "clicked", G_CALLBACK(on_window_info_signal_button_clicked), gpointer(this));
