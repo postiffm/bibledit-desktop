@@ -130,7 +130,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
 	// BUG: In main editor, the chapter lines are all combined into a single long ustring.
 	// This means that footnotes that are split across lines are "fixed." But that is not
 	// the case when just looking at a single verse \\v line that has a footnote started
-	// but not finished.
+	// but not finished. Fixed 2/15/2018
 	endposition = line.length() - 1;
       }
       while (beginposition != string::npos) {

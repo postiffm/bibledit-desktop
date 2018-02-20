@@ -54,7 +54,7 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 {
 	vector<ustring> words;
     ustring tmp = usfm_get_verse_text_only (text); // liable to be slow, but it will give me just what I want
-    cout << ch->chapnum << ":" << vsnum << " " << tmp << endl;
+    //cout << ch->chapnum << ":" << vsnum << " " << tmp << endl;
 //     Usfm usfm(stylesheet_get_actual ());
 //     UsfmInlineMarkers usfm_inline_markers(usfm);
 //     usfm_remove_inline_text_markers(tmp, &usfm_inline_markers);
@@ -178,7 +178,7 @@ void chapter::load(int book, int chapter,
 	}
 }
 
-void concordance::readExcludedWords(const ustring &filename)
+void Concordance::readExcludedWords(const ustring &filename)
 {
 	// The file is expected to have unicode-encoded strings, one per line
 	ifstream myfile;
@@ -200,22 +200,43 @@ void concordance::readExcludedWords(const ustring &filename)
 // I should have a better way of accessing this
 extern book_record books_table[];
 
-concordance::concordance(const ustring &_projname, HtmlWriter2 &htmlwriter)
+Concordance::Concordance(const ustring &_projname) : bbl(_projname)
 {
-  projname = _projname;
+    projname = _projname;
 	readExcludedWords("strings.txt");
 	
 	// The kinds of things we should be able to do include
 	// 1. Build a sorted list of words with frequency counts (DONE 5/27/2016)
-	// 2. Attach each verse ref to the words for quickly navigating to where they occur
-	// 3. Use exclude list to exclude common words in building an actual concordance
+	// 2. Attach each verse ref to the words for quickly navigating to where they occur (DONE 2/15/2018)
+	// 3. Use exclude list to exclude common words in building an actual concordance (sort of done 5/27/2016)
 	// 4. Use important verse list to only include those verses that are deemed important
 	// 5. Build actual concordance with verse portions
+}
 
+//  Given a list of encoded verses (a bitmap,  basically), write out html for the verses,  
+//  like this: " Genesis 1:6 Genesis 1:29... Only write the first num verses,  because
+//  there could be thousands.
+void Concordance::writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter)
+{
+    unsigned int i = 0;
+    for (const auto &ref : locations) {
+        int bk = ref >> 16;
+        int ch = (ref >> 8) & 0xff;
+        int vs = ref & 0xff;
+        ustring address = books_id_to_english(bk) + " " + std::to_string(ch) + ":" + std::to_string(vs);
+        htmlwriter.text_add (" ");
+        htmlwriter.hyperlink_add ("goto " + std::to_string(ref), address);
+        i++;
+        if (i >= num) { break; }                            // just print the first two refs on this summary screen
+    }
+    if (locations.size() > num) { htmlwriter.text_add("..."); }
+}
+
+void Concordance::writeWordSortedHtml(HtmlWriter2 &htmlwriter)
+{
     // Now do the work of loading the chapters and verses, splitting into words, 
-	// counting in our mapping structure, etc.
-	bible bbl(projname);
-
+    // counting in our mapping structure, etc.
+//  TO DO: FACTOR OUT THE WORK AND JUST KEEP THE WRITING IN THIS METHOD
     htmlwriter.heading_open (1);
     htmlwriter.text_add (projname + " " + _("Concordance Sorted by Words"));
     htmlwriter.heading_close();
@@ -256,26 +277,18 @@ concordance::concordance(const ustring &_projname, HtmlWriter2 &htmlwriter)
     htmlwriter.paragraph_close ();
 
     for (const auto &pair : sortedWordCounts) {
-        ustring verselist;
         std::vector<int> &locations = wordLocations[pair.first];
-        int i = 0;
-        for (const auto &ref : locations) {
-            int bk = ref >> 16;
-            int ch = (ref >> 8) & 0xff;
-            int vs = ref & 0xff;
-            verselist += (" " + books_id_to_english(bk) + " " + std::to_string(ch) + ":" + std::to_string(vs));
-            i++;
-            if (i > 1) { break; } // just print the first two refs on this summary screen
-        }
-        if (locations.size() > 2) { verselist += "..."; }
-        htmlwriter.p(pair.first + " " + std::to_string(pair.second) + verselist);
+        htmlwriter.paragraph_open();
+        htmlwriter.text_add(pair.first + " " + std::to_string(pair.second));
+        writeVerseLinks(2, locations, htmlwriter);
+        htmlwriter.paragraph_close();
 	}
 
     // Done generating word list with handful of verses for each
     return;
 }
 
-void concordance::sortedByWords(HtmlWriter2 &htmlwriter)
+void Concordance::writeFrequencySortedHtml(HtmlWriter2 &htmlwriter)
 {
   // Now I want to sort by count so that 1's appear at the top, etc.
 
@@ -292,7 +305,12 @@ void concordance::sortedByWords(HtmlWriter2 &htmlwriter)
   // Done reversing key<->count and sorting by word count
   
   for (auto const &kv : mm) {
-    htmlwriter.p(kv.second + " " + std::to_string(kv.first)); // print them in "normal" order
+      std::vector<int> &locations = wordLocations[kv.second];
+      htmlwriter.paragraph_open();
+      // print them in "normal" order
+      htmlwriter.text_add(kv.second + " " + std::to_string(kv.first));
+      writeVerseLinks(2, locations, htmlwriter);
+      htmlwriter.paragraph_close();
   }
   return;
 }
