@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2003-2013 Teus Benschop.
+ ** Copyright (©) 2003-2013 Teus Benschop, 2015-2018 Matt Postiff
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -132,6 +132,7 @@
 #ifdef WIN32
 #include <windows.h>
 #endif
+#include "htmlwriter2.h"
 
 /*
  |
@@ -166,7 +167,8 @@ navigation(0), httpd(0)
   window_styles = NULL;
   window_notes = NULL;
   window_references = NULL;
-  window_info = NULL;
+  window_concordance = NULL;
+  concordance = NULL;
   //window_bibles = NULL;
   delete_keyterms_assistant = NULL;
   changes_assistant = NULL;
@@ -2787,17 +2789,33 @@ void MainWindow::on_view_concordance_activate (GtkMenuItem *menuitem, gpointer u
   ((MainWindow *) user_data)->on_view_concordance();
 }
 
-
 void MainWindow::on_view_concordance ()
 {
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_concordance))) {
     // This tabbed window may already be created, so it need not be created again
-    if (!window_info) { window_info = new WindowTabbed(layout, accelerator_group, windows_startup_pointer != G_MAXINT); }
-    WindowEditor *editor_window = last_focused_editor_window();
-    window_info->Concordance(editor_window->projectname_get());
-    g_signal_connect((gpointer) window_info->delete_signal_button, "clicked", G_CALLBACK(on_window_info_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_info->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_info->signal_button, "clicked", G_CALLBACK(on_window_info_signal_button_clicked), gpointer(this));
+    if (!window_concordance) { window_concordance = new WindowTabbed(_("Concordance"), layout, accelerator_group, windows_startup_pointer != G_MAXINT); }
+    if (!concordance) {
+        WindowEditor *editor_window = last_focused_editor_window();
+        concordance = new Concordance(editor_window->projectname_get());
+    }
+    HtmlWriter2 html1("");
+    // Create concordance data and write it to html
+    concordance->writeWordSortedHtml(html1);
+    html1.finish();
+    window_concordance->newTab(_("Sorted by _Words"), html1);
+ 
+    // TO DO: Make an htmlwriter clear function so I can reuse the same object
+    HtmlWriter2 html2("");
+    concordance->writeFrequencySortedHtml(html2);
+    html2.finish();
+    window_concordance->newTab(_("Sorted by _Frequency"), html2);
+    
+    g_signal_connect((gpointer) window_concordance->delete_signal_button, "clicked", G_CALLBACK(on_window_concordance_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_concordance->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_concordance->signal_button, "clicked", G_CALLBACK(on_window_concordance_signal_button_clicked), gpointer(this));
+  }
+  else { // now the view_concordance is unchecked
+    //????delete window_concordance;
   }
 }
 
@@ -2826,17 +2844,17 @@ void MainWindow::on_window_references_delete_button()
   }
 }
 
-void MainWindow::on_window_info_delete_button_clicked(GtkButton * button, gpointer user_data)
+void MainWindow::on_window_concordance_delete_button_clicked(GtkButton * button, gpointer user_data)
 {
-  ((MainWindow *) user_data)->on_window_info_delete_button();
+  ((MainWindow *) user_data)->on_window_concordance_delete_button();
 }
 
 
-void MainWindow::on_window_info_delete_button()
+void MainWindow::on_window_concordance_delete_button()
 {
-  if (window_info) {
-	delete window_info;
-    window_info = NULL;
+  if (window_concordance) {
+	delete window_concordance;
+    window_concordance = NULL;
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_concordance), FALSE);
 	                                                    // ^^^ for now...need to change to view_info or so
   }
@@ -2870,29 +2888,29 @@ void MainWindow::on_window_references_signal_button()
   editor_window->go_to_new_reference_highlight_set();
 }
 
-void MainWindow::on_window_info_signal_button_clicked(GtkButton * button, gpointer user_data)
+void MainWindow::on_window_concordance_signal_button_clicked(GtkButton * button, gpointer user_data)
 // This routine is called when the info window fires a signal that something has happened.
 {
-  ((MainWindow *) user_data)->on_window_info_signal_button();
+  ((MainWindow *) user_data)->on_window_concordance_signal_button();
 }
 
 
-void MainWindow::on_window_info_signal_button()
+void MainWindow::on_window_concordance_signal_button()
 // Handler for when the user clicks something in the window we will do the right thing
 {
   // Get the editor window. If none, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
   if (!editor_window) { return; }
   
-  // Bail out if there's no info window (how is this possible?)
-  if (!window_info) { return; }
+  // Bail out if there's no concordance window (how is this possible?)
+  if (!window_concordance) { return; }
 
   // WHY DID I HAVE NEXT 3 locs commented?
   // Focus the editor.
   editor_window->focus_set ();
 
   // Jump to the reference.
-  //navigation.display(window_info->reference);
+  //navigation.display(window_concordance->reference);
   editor_window->go_to_new_reference_highlight_set();
 }
 
@@ -6513,8 +6531,8 @@ void MainWindow::on_window_focus_button(GtkButton * button)
     window_notes->focus_set (window_notes->focus_in_signal_button == widget);
   if (window_references)
     window_references->focus_set (window_references->focus_in_signal_button == widget);
-  if (window_info) {
-	  window_info->focus_set (window_info->focus_in_signal_button == widget);
+  if (window_concordance) {
+	  window_concordance->focus_set (window_concordance->focus_in_signal_button == widget);
   }
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
     editor_windows[i]->focus_set (editor_windows[i]->focus_in_signal_button == widget);

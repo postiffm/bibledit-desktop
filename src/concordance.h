@@ -90,13 +90,15 @@ class bible {
   bible(const ustring &_proj);
 };
 
-class concordance {
+class Concordance {
  public:
-  concordance(const ustring &_projname, HtmlWriter2 &htmlwriter);
-  void sortedByWords(HtmlWriter2 &htmlwriter);
+  Concordance(const ustring &_projname);
+  void writeWordSortedHtml(HtmlWriter2 &htmlwriter);
+  void writeFrequencySortedHtml(HtmlWriter2 &htmlwriter);
   void readExcludedWords(const ustring &filename);
 private:
   ustring projname;
+  bible bbl;
   // The set of words that we are NOT interested in showing
   unordered_set<string> excludedWords;
   // 1. Unique word ==> count of occurrences
@@ -106,4 +108,5 @@ private:
   std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> wordLocations;
   // 3. Unique word ==> count of occurrences. Same info as #1, but sorted automatically.
   std::map<std::string, int> sortedWordCounts;
+  void writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter);
 };

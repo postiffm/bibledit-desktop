@@ -37,21 +37,38 @@
 // is to have multiple tabbed windows open at once.
 //----------------------------------------------------------------------------------
 
+class WindowTabbed; // forward declaration
+
+// A tabbed (notebook) window can contain any number of SingleTab's. Each "thing" 
+// that is intended to go into a tab should inherit from this class. For instance,
+// a concordance tab "is" a SingleTab.
+class SingleTab
+{
+public:
+    SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);    
+    // I might not have to store any of these...
+    GtkWidget *scrolledwindow; // owned by the notebook, I think
+    GtkWidget *tab_label; // owned by the notebook, I think
+	GtkWidget *webview; // owned by scrolled window
+private:
+    ustring title;
+    WindowTabbed *parent;
+    friend class WindowTabbed;
+};
+
 class WindowTabbed : public FloatingWindow
 {
 public:
-  WindowTabbed(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
   virtual ~WindowTabbed();
   void Concordance(const ustring &projname);
+  void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);
   GtkWidget * signal_button;
  private:
-	GtkWidget *vbox;
-	GtkWidget *notebook;
-	GtkWidget *scrolledwindow;
-	GtkWidget *webview;
-	// temp
-	GtkWidget *scrolledwindow2;
-	GtkWidget *webview2;
+    ustring title;
+    GtkWidget *vbox;
+    GtkWidget *notebook;
+    vector<SingleTab> tabs;
 
 #if 0
 public:

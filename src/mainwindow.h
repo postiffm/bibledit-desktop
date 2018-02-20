@@ -58,7 +58,7 @@
 #include "floatingwindow.h"
 #include "urltransport.h"
 #include "dialogsystemlog.h"
-
+#include "concordance.h"
 
 class MainWindow
 {
@@ -443,7 +443,10 @@ protected:
   void on_view_concordance ();
   void show_references_window();
   WindowReferences * window_references;
-  WindowTabbed * window_info;
+  // Concordance
+  WindowTabbed * window_concordance;
+  Concordance *concordance;
+  
   // WindowTabbed *window_bibles;
   static void on_window_references_delete_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_references_delete_button();
@@ -451,10 +454,10 @@ protected:
   void on_window_references_signal_button();
 
   /* Information window: concordance, etc. */
-  static void on_window_info_delete_button_clicked(GtkButton *button, gpointer user_data);
-  void on_window_info_delete_button();
-  static void on_window_info_signal_button_clicked(GtkButton * button, gpointer user_data);
-  void on_window_info_signal_button();
+  static void on_window_concordance_delete_button_clicked(GtkButton *button, gpointer user_data);
+  void on_window_concordance_delete_button();
+  static void on_window_concordance_signal_button_clicked(GtkButton * button, gpointer user_data);
+  void on_window_concordance_signal_button();
 
   void on_next_reference();
   void on_previous_reference();
