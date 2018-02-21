@@ -474,7 +474,7 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
     display_another_page = true;
   }
 
-  else if (!newCollection && (active_url.find (_("goto ")) == 0)) {
+  else if (!newCollection && (active_url.find ("goto ") == 0)) {
     // Signal the editors to go to a reference.
     ustring url = active_url;
     url.erase (0, 5);
@@ -483,7 +483,7 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
     gtk_button_clicked(GTK_BUTTON(signal));
   }
   
-  else if (!newCollection && (active_url.find (_("send")) == 0)) {
+  else if (!newCollection && (active_url.find ("send") == 0)) {
     // Send the references to the references window.
     ustring url = active_url;
     new_reference_showing = NULL;

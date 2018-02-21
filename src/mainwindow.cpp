@@ -2812,7 +2812,7 @@ void MainWindow::on_view_concordance ()
     
     g_signal_connect((gpointer) window_concordance->delete_signal_button, "clicked", G_CALLBACK(on_window_concordance_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_concordance->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_concordance->signal_button, "clicked", G_CALLBACK(on_window_concordance_signal_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_concordance->signalVerseChange, "clicked", G_CALLBACK(on_window_concordance_signal_button_clicked), gpointer(this));
   }
   else { // now the view_concordance is unchecked
     //????delete window_concordance;
@@ -2848,7 +2848,6 @@ void MainWindow::on_window_concordance_delete_button_clicked(GtkButton * button,
 {
   ((MainWindow *) user_data)->on_window_concordance_delete_button();
 }
-
 
 void MainWindow::on_window_concordance_delete_button()
 {
@@ -2898,6 +2897,13 @@ void MainWindow::on_window_concordance_signal_button_clicked(GtkButton * button,
 void MainWindow::on_window_concordance_signal_button()
 // Handler for when the user clicks something in the window we will do the right thing
 {
+  if (window_concordance->newReference) {
+    Reference myref(*(window_concordance->newReference));
+    navigation.display(myref);
+    window_concordance->newReference = NULL;
+  }
+  // I'm not sure what of the below I need
+#if 0
   // Get the editor window. If none, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
   if (!editor_window) { return; }
@@ -2912,6 +2918,7 @@ void MainWindow::on_window_concordance_signal_button()
   // Jump to the reference.
   //navigation.display(window_concordance->reference);
   editor_window->go_to_new_reference_highlight_set();
+#endif    
 }
 
 void MainWindow::on_next_reference()
@@ -4212,7 +4219,7 @@ void MainWindow::keyterms_check_action()
 // This is called when the keyterms checking window requests action to be taken.
 {
   if (window_check_keyterms->new_reference_showing) {
-    // Go to another reference.
+    // Go to another reference. // TO DO: Why below so verbose?
     Reference reference(window_check_keyterms->new_reference_showing->book_get(),
 			window_check_keyterms->new_reference_showing->chapter_get(),
 			window_check_keyterms->new_reference_showing->verse_get());
@@ -4223,7 +4230,6 @@ void MainWindow::keyterms_check_action()
     window_references->set (window_check_keyterms->references, settings->genconfig.project_get(), NULL);
   }
 }
-
 
 void MainWindow::on_view_related_verses_activate(GtkMenuItem * menuitem, gpointer user_data)
 {

@@ -225,7 +225,9 @@ void Concordance::writeVerseLinks(unsigned int num, vector<int> &locations, Html
         int vs = ref & 0xff;
         ustring address = books_id_to_english(bk) + " " + std::to_string(ch) + ":" + std::to_string(vs);
         htmlwriter.text_add (" ");
-        htmlwriter.hyperlink_add ("goto " + std::to_string(ref), address);
+        htmlwriter.hyperlink_add ("goto " + address, address);
+        // I could also std::to_string(ref) instead of address,  above,  but then I'd have to decode it in other places
+        //  that aren't aware of this compressed bitmap datatype.
         i++;
         if (i >= num) { break; }                            // just print the first two refs on this summary screen
     }
