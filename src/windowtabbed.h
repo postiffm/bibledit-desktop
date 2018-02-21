@@ -54,22 +54,33 @@ private:
     ustring title;
     WindowTabbed *parent;
     friend class WindowTabbed;
+    
+    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
+    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
+    void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+    void html_link_clicked (const gchar * url);
+    Reference get_reference (const ustring& text);
 };
 
 class WindowTabbed : public FloatingWindow
 {
+    friend class SingleTab;
 public:
-  WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
-  virtual ~WindowTabbed();
-  void Concordance(const ustring &projname);
-  void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);
-  GtkWidget * signal_button;
- private:
+    WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+    virtual ~WindowTabbed();
+    void Concordance(const ustring &projname);
+    void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);
+    GtkWidget * signalVerseChange;
+    Reference *newReference;
+  protected:
+    ustring active_url;  
+    Reference myreference;
+  private:
     ustring title;
     GtkWidget *vbox;
     GtkWidget *notebook;
-    vector<SingleTab> tabs;
-
+    vector<SingleTab *> tabs;
+    
 #if 0
 public:
   void go_to_term(unsigned int id);
@@ -125,7 +136,6 @@ private:
   unsigned int keyword_id;
   
   // Html work.
-  ustring active_url;
   ustring last_keyword_url;
   map <ustring, unsigned int> scrolling_position;
   void html_write_keyterms (HtmlWriter2& htmlwriter, unsigned int keyword_id);

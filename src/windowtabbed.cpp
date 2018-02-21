@@ -43,6 +43,7 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   // May pass that in; also have to pass in title info since it will vary; this is a generic container class
 {
   title = _title;
+  newReference = NULL;
   // Build gui.
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox);
@@ -55,8 +56,8 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   gtk_container_add(GTK_CONTAINER(vbox), notebook);
 
   // Produce the signal to be given on a new reference.
-  signal_button = gtk_button_new();
-  gtk_box_pack_start(GTK_BOX(vbox), signal_button, FALSE, FALSE, 0);
+  signalVerseChange = gtk_button_new();
+  gtk_box_pack_start(GTK_BOX(vbox), signalVerseChange, FALSE, FALSE, 0);
   
 #if 0
   // Save / initialize variables.
@@ -68,10 +69,6 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_widget_show(vbox);
   gtk_container_add(GTK_CONTAINER(vbox_client), vbox);
-
-  // Produce the signal to be given on a new reference.
-  signal = gtk_button_new();
-  gtk_box_pack_start(GTK_BOX(vbox), signal, FALSE, FALSE, 0);
 
   hbox_collection = gtk_hbox_new (FALSE, 5);
   gtk_widget_show (hbox_collection);
@@ -152,18 +149,19 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
 
 WindowTabbed::~WindowTabbed()
 {
-  // Close all tabs
+  // TO DO
+    // Close all tabs, etc.
 //  my_editor = NULL;
 //  gw_destroy_source (text_changed_event_id);
   // Destroy signal button.
-  gtk_widget_destroy(signal_button);
+  gtk_widget_destroy(signalVerseChange);
 }
 
 SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent)
 {
     title = _title;
     parent = _parent;
-	GtkWidget *scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_show (scrolledwindow);
 	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -182,13 +180,94 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
     // Scroll to the position that possibly was stored while this url was last active.
     //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
+    
+    g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
 }
 
 void WindowTabbed::newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 {
 	// Create a new tab (notebook page)
-    tabs.push_back(SingleTab(tabTitle, tabHtml, notebook, this));
+    SingleTab *newTab = new SingleTab(tabTitle, tabHtml, notebook, this);
+    tabs.push_back(newTab);
 }
+
+gboolean SingleTab::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, 
+                                                             WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+{
+  ((SingleTab *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  return true;
+}
+
+
+void SingleTab::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, 
+                                                      WebKitWebPolicyDecision *policy_decision)
+// Callback for clicking a link.
+{
+#if 0
+  // Store scrolling position for the now active url.
+  GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
+  scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
+  
+  DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
+#endif
+  // Get the reason for this navigation policy request.
+  WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
+  
+  // If a new page is loaded, allow the navigation, and exit.
+  if (reason == WEBKIT_WEB_NAVIGATION_REASON_OTHER) {
+    webkit_web_policy_decision_use (policy_decision);
+    return;
+  }
+
+  // Don't follow pseudo-links clicked on this page.
+  webkit_web_policy_decision_ignore (policy_decision);
+  
+  // Load new page depending on the pseudo-link clicked.
+  html_link_clicked (webkit_network_request_get_uri (request));
+}
+
+// This is reproduced from windowcheckkeyterms.cpp, and should be 
+// factored out into the reference class.
+Reference SingleTab::get_reference (const ustring& text)
+// Generates a reference out of the text.
+{
+  Reference ref;
+  ustring book, chapter, verse = ref.verse_get(); // not sure why verse_get is called?
+  decode_reference(text, book, chapter, verse); // probably also factor this out
+  ref.book_set( books_localname_to_id (book));
+  ref.chapter_set(convert_to_int (chapter));
+  ref.verse_set(verse);
+  return ref;
+}
+
+void SingleTab::html_link_clicked (const gchar * url)
+{
+  // Store scrolling position for the now active url.
+  //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
+  //scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
+
+  //DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
+  //DEBUG("active_url="+active_url+" new url="+ustring(url))
+  
+  // New url.
+  parent->active_url = url;
+  ustring myurl = url;
+
+  // In the case that this link is a "goto [verse]" link, we can process it
+  // right here and now. Something more complicated will mean that we have to 
+  // send for help from the producer of the data that is presently in this tab.
+  // That could be a concordance, for example. We don't know other than by looking
+  // in SOME STORED INFO IN A VARIABLE IN HTIS OBJECT????.
+  if (myurl.find ("goto ") == 0) {
+    // Signal the editors to go to a reference.
+    myurl.erase (0, 5); // get rid of goto and space
+    parent->myreference.assign (get_reference (myurl));
+    parent->newReference = &parent->myreference;
+    gtk_button_clicked(GTK_BUTTON(parent->signalVerseChange)); // parent->signalVerseChange is in WindowTabbed, not in this single tab
+  }
+  // See similar method in windowcheckkeyterms for more possible stuff to do
+}
+
 
 #if 0
 void WindowTabbed::go_to_term(unsigned int id)
