@@ -31,6 +31,7 @@ class Reference
  public:
   Reference ();
   Reference (unsigned int book_in, unsigned int chapter_in, const ustring& verse_in);
+  Reference (unsigned int book_in, unsigned int chapter_in, unsigned int verse_in);
 
   inline unsigned int book_get() const { return book; }
   inline unsigned int chapter_get() const { return chapter; }

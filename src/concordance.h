@@ -93,8 +93,9 @@ class bible {
 class Concordance {
  public:
   Concordance(const ustring &_projname);
-  void writeWordSortedHtml(HtmlWriter2 &htmlwriter);
+  void writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter);
   void writeFrequencySortedHtml(HtmlWriter2 &htmlwriter);
+  void writeSingleWordListHtml(const ustring &word, HtmlWriter2 &htmlwriter);
   void readExcludedWords(const ustring &filename);
 private:
   ustring projname;
@@ -109,4 +110,6 @@ private:
   // 3. Unique word ==> count of occurrences. Same info as #1, but sorted automatically.
   std::map<std::string, int> sortedWordCounts;
   void writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter);
+  void writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter);
+
 };

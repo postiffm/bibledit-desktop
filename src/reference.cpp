@@ -38,9 +38,16 @@ Reference::Reference(unsigned int book_in, unsigned int chapter_in, const ustrin
   verse = verse_in;
 }
 
+Reference::Reference(unsigned int book_in, unsigned int chapter_in, unsigned int verse_in)
+{
+  book = book_in;
+  chapter = chapter_in;
+  verse = Glib::ustring::format(verse_in);
+}
+
 ustring Reference::human_readable(const ustring & language) const
 // Gives a reference in a human readable format. If no language is given,
-// it takes the English names of the books.
+// it uses the default local name of the books.
 {
   ustring s;
   if (language.empty()) { s.append(books_id_to_localname(book)); }

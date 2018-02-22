@@ -32,6 +32,7 @@
 #include "books.h" // TEMP - MAP
 #include <glib/gi18n.h>
 #include "options.h"
+#include "concordance.h"
 
 Options *options;
 directories *Directories;
@@ -43,6 +44,7 @@ Styles *styles;
 GtkAccelGroup *accelerator_group;
 URLTransport * urltransport;
 VCS *vcs;
+Concordance *concordance;
 
 
 int main(int argc, char *argv[])
