@@ -168,7 +168,6 @@ navigation(0), httpd(0)
   window_notes = NULL;
   window_references = NULL;
   window_concordance = NULL;
-  concordance = NULL;
   //window_bibles = NULL;
   delete_keyterms_assistant = NULL;
   changes_assistant = NULL;
@@ -2789,6 +2788,8 @@ void MainWindow::on_view_concordance_activate (GtkMenuItem *menuitem, gpointer u
   ((MainWindow *) user_data)->on_view_concordance();
 }
 
+extern Concordance *concordance;
+
 void MainWindow::on_view_concordance ()
 {
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_concordance))) {
@@ -2800,7 +2801,7 @@ void MainWindow::on_view_concordance ()
     }
     HtmlWriter2 html1("");
     // Create concordance data and write it to html
-    concordance->writeWordSortedHtml(html1);
+    concordance->writeAlphabeticSortedHtml(html1);
     html1.finish();
     window_concordance->newTab(_("Sorted by _Words"), html1);
  
@@ -2899,6 +2900,7 @@ void MainWindow::on_window_concordance_signal_button()
 {
   if (window_concordance->newReference) {
     Reference myref(*(window_concordance->newReference));
+    cout << "Navigating to verse >> " << myref.human_readable("") << endl;
     navigation.display(myref);
     window_concordance->newReference = NULL;
   }

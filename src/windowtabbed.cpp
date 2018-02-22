@@ -36,6 +36,7 @@
 #include "xmlutils.h"
 #include "gwrappers.h"
 #include <glib/gi18n.h>
+#include "concordance.h"
 
 WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
   FloatingWindow(parent_layout, widTabbed, _title, startup)
@@ -240,6 +241,8 @@ Reference SingleTab::get_reference (const ustring& text)
   return ref;
 }
 
+extern Concordance *concordance;
+
 void SingleTab::html_link_clicked (const gchar * url)
 {
   // Store scrolling position for the now active url.
@@ -254,16 +257,26 @@ void SingleTab::html_link_clicked (const gchar * url)
   ustring myurl = url;
 
   // In the case that this link is a "goto [verse]" link, we can process it
-  // right here and now. Something more complicated will mean that we have to 
-  // send for help from the producer of the data that is presently in this tab.
-  // That could be a concordance, for example. We don't know other than by looking
-  // in SOME STORED INFO IN A VARIABLE IN HTIS OBJECT????.
+  // right here and now.
   if (myurl.find ("goto ") == 0) {
     // Signal the editors to go to a reference.
-    myurl.erase (0, 5); // get rid of goto and space
+    myurl.erase (0, 5); // get rid of keyword "goto" and space
+    cout << "Visiting verse >> " << myurl << endl;
     parent->myreference.assign (get_reference (myurl));
     parent->newReference = &parent->myreference;
     gtk_button_clicked(GTK_BUTTON(parent->signalVerseChange)); // parent->signalVerseChange is in WindowTabbed, not in this single tab
+  }
+  // Something more complicated like "concordance [some concordance word]" will mean that we have to 
+  // send for help from the producer of the data that is presently in this tab.
+  // The link "keyword" tells us what to do.
+  else if (myurl.find ("concordance ") == 0) {
+    // Create a new concordance tab and fill it with the word list
+    myurl.erase (0, 12); // get rid of keyword "concordance" and space
+    // The remainder of myurl is the word we need to look up in the concordance
+    HtmlWriter2 html("");
+    concordance->writeSingleWordListHtml(myurl, html);
+    html.finish();
+    parent->newTab(myurl, html);
   }
   // See similar method in windowcheckkeyterms for more possible stuff to do
 }

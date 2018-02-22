@@ -444,9 +444,8 @@ protected:
   void show_references_window();
   WindowReferences * window_references;
   // Concordance
-  WindowTabbed * window_concordance;
-  Concordance *concordance;
-  
+  WindowTabbed * window_concordance; // the concordance data object itself is a global singleton; see bibledit.cpp
+
   // WindowTabbed *window_bibles;
   static void on_window_references_delete_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_references_delete_button();

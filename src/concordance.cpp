@@ -48,6 +48,7 @@ void verse::print(void)
 }
 
 #include "stylesheetutils.h"
+#include "utilities.h"
 
 void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
                            std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
@@ -234,7 +235,7 @@ void Concordance::writeVerseLinks(unsigned int num, vector<int> &locations, Html
     if (locations.size() > num) { htmlwriter.text_add("..."); }
 }
 
-void Concordance::writeWordSortedHtml(HtmlWriter2 &htmlwriter)
+void Concordance::writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter)
 {
     // Now do the work of loading the chapters and verses, splitting into words, 
     // counting in our mapping structure, etc.
@@ -281,10 +282,20 @@ void Concordance::writeWordSortedHtml(HtmlWriter2 &htmlwriter)
     for (const auto &pair : sortedWordCounts) {
         std::vector<int> &locations = wordLocations[pair.first];
         htmlwriter.paragraph_open();
-        htmlwriter.text_add(pair.first + " " + std::to_string(pair.second));
+        if (locations.size() > 2) {                         //  COMMON CODE BELOW....COULD COMBINE
+            //  Write the word as a hyperlink so that the user can click it
+            //  to look at the entire list of uses in a new tab.
+            htmlwriter.hyperlink_add ("concordance " + pair.first,  pair.first);
+            htmlwriter.text_add(" " + std::to_string(pair.second));
+          }
+        else { 
+            //  if the word only has one or two uses,  then it is unecessary
+            //  to provide a link,  since the uses will be printed right next to it.
+            htmlwriter.text_add(pair.first + " " + std::to_string(pair.second));
+          }
         writeVerseLinks(2, locations, htmlwriter);
         htmlwriter.paragraph_close();
-	}
+      }
 
     // Done generating word list with handful of verses for each
     return;
@@ -310,9 +321,63 @@ void Concordance::writeFrequencySortedHtml(HtmlWriter2 &htmlwriter)
       std::vector<int> &locations = wordLocations[kv.second];
       htmlwriter.paragraph_open();
       // print them in "normal" order
-      htmlwriter.text_add(kv.second + " " + std::to_string(kv.first));
+      if (locations.size() > 2) {
+        //  Write the word as a hyperlink so that the user can click it
+        //  to look at the entire list of uses in a new tab.
+        htmlwriter.hyperlink_add ("concordance " + kv.second,  kv.second);
+        htmlwriter.text_add(" " + std::to_string(kv.first));
+      }
+      else { 
+          //  if the word only has one or two uses,  then it is unecessary
+          //  to provide a link,  since the uses will be printed right next to it.
+          htmlwriter.text_add(kv.second + " " + std::to_string(kv.first));
+      }
       writeVerseLinks(2, locations, htmlwriter);
       htmlwriter.paragraph_close();
   }
   return;
+}
+
+void Concordance::writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter)
+{
+  // Get data about the project.
+  extern Settings *settings;
+  ustring project = settings->genconfig.project_get();
+  
+    for (const auto &ref : locations) {
+        unsigned int bk = ref >> 16;
+        unsigned int ch = (ref >> 8) & 0xff;
+        unsigned int vs = ref & 0xff;
+        ustring address = books_id_to_english(bk) + " " + std::to_string(ch) + ":" + std::to_string(vs);
+        cout << "Writing verse >> " <<  address <<  endl;
+        htmlwriter.paragraph_open();
+        htmlwriter.hyperlink_add ("goto " + address, address);
+        
+        //  Now,  the text of the verse...
+        Reference bibleref(bk,  ch,  vs);
+        ustring verse = project_retrieve_verse(project, bibleref);
+        if (verse.empty()) {
+          verse.append(_("<empty>"));
+        } else {
+          replace_text(verse, "\n", " ");
+          CategorizeLine cl(verse);
+          cl.remove_verse_number(bibleref.verse_get());
+          verse = cl.verse;
+          htmlwriter.text_add(" " + verse);
+        }
+        htmlwriter.paragraph_close();
+    }
+}
+
+//  This is not just going to write the word and list of verses.
+//  Ultimately I would like to write out the whole text of the
+//  verses.
+void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htmlwriter)
+{
+    htmlwriter.heading_open (1);
+    htmlwriter.text_add (projname + " " + _("Concordance Entry for ") + word);
+    htmlwriter.heading_close();
+
+    std::vector<int> &locations = wordLocations[word];
+    writeVerses(locations, htmlwriter);
 }

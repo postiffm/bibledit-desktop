@@ -64,7 +64,7 @@ Styles *styles;
 GtkAccelGroup *accelerator_group;
 URLTransport * urltransport;
 VCS *vcs;
-
+Concordance *concordance;
 
 int main(int argc, char *argv[])
 {
@@ -177,6 +177,7 @@ int main(int argc, char *argv[])
   // URLTransport object.
   urltransport = new URLTransport(0);
   gw_message(_("Finished URLTransport"));
+  concordance = NULL;
   /*
   We used a trick to get Bibledit to operate as a true activity on OLPC. 
   The problem is that any regular X11 program that is started, 
