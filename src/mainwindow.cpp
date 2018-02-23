@@ -2799,17 +2799,16 @@ void MainWindow::on_view_concordance ()
         WindowEditor *editor_window = last_focused_editor_window();
         concordance = new Concordance(editor_window->projectname_get());
     }
-    HtmlWriter2 html1("");
+    HtmlWriter2 html("");
     // Create concordance data and write it to html
-    concordance->writeAlphabeticSortedHtml(html1);
-    html1.finish();
-    window_concordance->newTab(_("Sorted by _Words"), html1);
+    concordance->writeAlphabeticSortedHtml(html);
+    html.finish();
+    window_concordance->newTab(_("Sorted by _Words"), html);
  
-    // TO DO: Make an htmlwriter clear function so I can reuse the same object
-    HtmlWriter2 html2("");
-    concordance->writeFrequencySortedHtml(html2);
-    html2.finish();
-    window_concordance->newTab(_("Sorted by _Frequency"), html2);
+    html.clear(); html.init("");
+    concordance->writeFrequencySortedHtml(html);
+    html.finish();
+    window_concordance->newTab(_("Sorted by _Frequency"), html);
     
     g_signal_connect((gpointer) window_concordance->delete_signal_button, "clicked", G_CALLBACK(on_window_concordance_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_concordance->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));

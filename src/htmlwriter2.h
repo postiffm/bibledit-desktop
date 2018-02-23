@@ -32,6 +32,7 @@ class HtmlWriter2
 public:
   HtmlWriter2 (const ustring& title);
   void clear(void);
+  void init(const ustring & title);
   ~HtmlWriter2 ();
   void heading_open (unsigned int level);
   void heading_close ();
