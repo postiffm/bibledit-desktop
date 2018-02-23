@@ -149,6 +149,12 @@ bible::bible(const ustring &_proj)
   projname = _proj;
 }
 
+void bible::clear(void)
+{
+  projname = "";
+  books.clear();
+}
+
 void chapter::load(int book, int chapter, 
                    std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,                  std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
 {
@@ -214,6 +220,20 @@ Concordance::Concordance(const ustring &_projname) : bbl(_projname)
 	// 5. Build actual concordance with verse portions
 }
 
+Concordance::~Concordance()
+{
+  clear();   
+}
+
+void Concordance::clear(void)
+{
+  projname = "";
+  bbl.clear();
+  wordCounts.clear();
+  wordLocations.clear();
+  sortedWordCounts.clear();
+}
+
 //  Given a list of encoded verses (a bitmap,  basically), write out html for the verses,  
 //  like this: " Genesis 1:6 Genesis 1:29... Only write the first num verses,  because
 //  there could be thousands.
@@ -244,7 +264,7 @@ void Concordance::writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter)
     htmlwriter.text_add (projname + " " + _("Concordance Sorted by Words"));
     htmlwriter.heading_close();
 
-    ProgressWindow progresswindow(_("Building Concordance Raw Data"), false);
+    ProgressWindow progresswindow(_("Building Concordance Data"), false);
     progresswindow.set_iterate(0, 1, 66);
     
     for (int b = 1; b <= 66; b++) {
