@@ -27,6 +27,11 @@
 
 HtmlWriter2::HtmlWriter2(const ustring & title)
 {
+  init(title);
+}
+
+void HtmlWriter2::init(const ustring & title)
+{
   heading_opened = false;
   paragraph_opened = false;
   bold_level = 0;
@@ -63,7 +68,6 @@ HtmlWriter2::HtmlWriter2(const ustring & title)
 
   xmlTextWriterStartElement(writer, BAD_CAST "body");
 }
-
 
 HtmlWriter2::~HtmlWriter2()
 {
