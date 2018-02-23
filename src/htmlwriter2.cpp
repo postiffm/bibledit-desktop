@@ -67,11 +67,20 @@ HtmlWriter2::HtmlWriter2(const ustring & title)
 
 HtmlWriter2::~HtmlWriter2()
 {
+  clear();
+}
+
+void HtmlWriter2::clear(void)
+{
   finish ();
-  if (writer)
-    xmlFreeTextWriter(writer);
-  if (buffer)
-    xmlBufferFree(buffer);
+  if (writer) { xmlFreeTextWriter(writer); writer = NULL; }
+  if (buffer) { xmlBufferFree(buffer);     buffer = NULL; }
+
+  heading_opened = false;
+  paragraph_opened = false;
+  bold_level = 0;
+  italics_level = 0;
+  highlight_level = 0;
 }
 
 void HtmlWriter2::heading_open(unsigned int level)

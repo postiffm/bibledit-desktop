@@ -2816,7 +2816,8 @@ void MainWindow::on_view_concordance ()
     g_signal_connect((gpointer) window_concordance->signalVerseChange, "clicked", G_CALLBACK(on_window_concordance_signal_button_clicked), gpointer(this));
   }
   else { // now the view_concordance is unchecked
-    //????delete window_concordance;
+    delete window_concordance; window_concordance = NULL;
+    delete concordance; concordance = NULL;
   }
 }
 

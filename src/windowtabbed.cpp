@@ -150,12 +150,17 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
 
 WindowTabbed::~WindowTabbed()
 {
-  // TO DO
-    // Close all tabs, etc.
-//  my_editor = NULL;
-//  gw_destroy_source (text_changed_event_id);
-  // Destroy signal button.
-  gtk_widget_destroy(signalVerseChange);
+    vector<SingleTab *> tabs;
+    for (auto t: tabs) {
+      delete t;   
+    }
+    newReference = NULL;
+    active_url = "";
+    myreference.assign(0, 0, "");
+    title = "";
+    gtk_widget_destroy(vbox);
+    // The above should also destroy the GtkWidget *notebook
+    gtk_widget_destroy(signalVerseChange);
 }
 
 SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent)
@@ -183,6 +188,16 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
     //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
     
     g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+}
+
+SingleTab::~SingleTab()
+{
+    title = "";
+    parent = NULL;
+    gtk_widget_destroy(scrolledwindow);
+    // I think the above should take care of all its kids (?) including webview,
+    // and I believe that notebook will be taken care of in the parent when it
+    // destroys its stuff.
 }
 
 void WindowTabbed::newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)

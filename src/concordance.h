@@ -52,7 +52,7 @@ class verse;
 
 class book {
   public:
-	bible *bbl;  // back pointer to the containing bible
+	bible *bbl;  // back pointer to the containing bible // book does NOT own bible for garbage collection purposes
 	ustring bookname;
     int booknum;
 	vector<chapter> chapters;
@@ -62,7 +62,7 @@ class book {
 
 class chapter {
   public:
-	book *bk;    // back pointer to the containing book
+	book *bk;    // back pointer to the containing book; chapter does NOT own book for garbage collection purposes
 	int chapnum;     // the chapter number
 	vector<verse> verses;
 	// project, book, chapter (57 = Philemon, 1 = chapter 1)
@@ -88,11 +88,14 @@ class bible {
   ustring projname;
   vector<book> books; 
   bible(const ustring &_proj);
+  void clear(void);
 };
 
 class Concordance {
  public:
   Concordance(const ustring &_projname);
+  ~Concordance();
+  void clear(void);
   void writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter);
   void writeFrequencySortedHtml(HtmlWriter2 &htmlwriter);
   void writeSingleWordListHtml(const ustring &word, HtmlWriter2 &htmlwriter);

@@ -45,7 +45,8 @@ class WindowTabbed; // forward declaration
 class SingleTab
 {
 public:
-    SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);    
+    SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
+    ~SingleTab();
     // I might not have to store any of these...
     GtkWidget *scrolledwindow; // owned by the notebook, I think
     GtkWidget *tab_label; // owned by the notebook, I think
