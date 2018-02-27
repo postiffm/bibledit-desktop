@@ -268,9 +268,11 @@ void GuiNavigation::set_project(const ustring & value, bool force)
 {
   // If the project is the same as the one already loaded, bail out.
   // Except when force is used.
-  if (!force)
-    if (value == project)
+  if (!force) {
+    if (value == project) {
       return;
+    }
+  }
 
   // Save project, language.
   project = value;

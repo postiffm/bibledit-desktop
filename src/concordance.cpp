@@ -61,8 +61,8 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 //     usfm_remove_inline_text_markers(tmp, &usfm_inline_markers);
     
 	string::size_type s = 0, e = 0; // start and end markers
-    ustring delims(" \\,:;!?.\u0022()¶\t");
-	ustring nonUSFMdelims(" ,:;!?.\u0022()¶\t"); // same list as above except without '\'
+    ustring delims(" \\,:;!?.\u0022()[]¶\t«»\u201c\u201d"); //  \u0022 is quotation mark; «» are Alt-0171 and 0187; \u201c\u201d are smart double quotes
+	ustring nonUSFMdelims(" ,:;!?.\u0022()[]¶\t«»\u201c\u201d");        // same list as above except without '\'
 	// u0022 is unicode double-quote mark
 	// TO DO : configuration file that has delimiters in it, and "’s" kinds of things to strip out
 	// for the target language.
@@ -156,7 +156,8 @@ void bible::clear(void)
 }
 
 void chapter::load(int book, int chapter, 
-                   std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,                  std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
+                   std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
+                   std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
 {
 	int vscnt = 0;
 	// With these, it will be interesting to leave them at first; then to optimize

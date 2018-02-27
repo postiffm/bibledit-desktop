@@ -157,8 +157,8 @@ vector < ustring > BookLocalizations::localizations_get()
 
 ustring BookLocalizations::filename_get_localization(ustring filename)
 {
-  filename.erase(0, 9);
-  filename.erase(filename.length() - 4, 4);
+  filename.erase(0, 9); // remove "language_" prefix
+  filename.erase(filename.length() - 4, 4); // remove ".xml" suffix
   replace_text(filename, "_", " ");
   size_t pos = 0;
   while (pos != string::npos) {
@@ -190,8 +190,9 @@ If "language" is not yet loaded, it first loads it, then gives the pointer.
     }
   }
   // If the language is not available, take "English".
-  if (!available)
+  if (!available) {
     language = "English";
+  }
   // Get a pointer to the requested language, if it is already loaded.
   for (unsigned int i = 0; i < loaded_localizations.size(); i++) {
     if (language == loaded_localizations[i].language)
