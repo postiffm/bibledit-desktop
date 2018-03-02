@@ -65,6 +65,7 @@ GtkAccelGroup *accelerator_group;
 URLTransport * urltransport;
 VCS *vcs;
 Concordance *concordance;
+ReferenceBibles *refbibles;
 
 int main(int argc, char *argv[])
 {
@@ -178,6 +179,7 @@ int main(int argc, char *argv[])
   urltransport = new URLTransport(0);
   gw_message(_("Finished URLTransport"));
   concordance = NULL;
+  refbibles = NULL;
   /*
   We used a trick to get Bibledit to operate as a true activity on OLPC. 
   The problem is that any regular X11 program that is started, 
@@ -238,6 +240,9 @@ int main(int argc, char *argv[])
   delete booklocalizations;
   delete settings;
   delete Directories; // must be last, because above rely on it
+  if (concordance) { delete concordance; }
+  if (refbibles) { delete refbibles; }
+
   // Quit.
   return 0;
 }
@@ -258,7 +263,7 @@ Use cairo for drawing: Done.
 
 Gtk3 is available on Windows.
 
-Switching to Gtk3 needs the webkitgtk for gtk3 also.
+Switching to Gtk3 needs the webkitgtk for gtk3 also, but we are going to move toward webkit2gtk (MAP 2/27/2018)
 
 pkg-config gtk+-3.0 --modversion
 

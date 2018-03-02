@@ -199,6 +199,7 @@ protected:
   GtkWidget *image26812;
   GtkWidget *view_references;
   GtkWidget *view_concordance;
+  GtkWidget *view_refbibles;
   GtkWidget *view_related_verses;
   GtkWidget *view_outline;
   GtkWidget *view_tile_windows;
@@ -439,25 +440,39 @@ protected:
   bool references_management_enabled;
   static void on_view_references_activate (GtkMenuItem *menuitem, gpointer user_data);
   void on_view_references ();
-  static void on_view_concordance_activate (GtkMenuItem *menuitem, gpointer user_data);
-  void on_view_concordance ();
-  void show_references_window();
-  WindowReferences * window_references;
-  // Concordance
-  WindowTabbed * window_concordance; // the concordance data object itself is a global singleton; see bibledit.cpp
 
-  // WindowTabbed *window_bibles;
+  void show_references_window();
+
+  // References Window
+  WindowReferences * window_references;
+
   static void on_window_references_delete_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_references_delete_button();
   static void on_window_references_signal_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_references_signal_button();
+  
+  // Concordance Window
+  WindowTabbed * window_concordance; // the concordance data object itself is a global singleton; see bibledit.cpp
 
-  /* Information window: concordance, etc. */
   static void on_window_concordance_delete_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_concordance_delete_button();
   static void on_window_concordance_signal_button_clicked(GtkButton * button, gpointer user_data);
   void on_window_concordance_signal_button();
+  
+  static void on_view_concordance_activate (GtkMenuItem *menuitem, gpointer user_data);
+  void on_view_concordance ();
 
+  // Reference Bibles Window
+  WindowTabbed * window_refbibles; // reference Bibles will be displayed here
+  
+  static void on_window_refbibles_delete_button_clicked(GtkButton *button, gpointer user_data);
+  void on_window_refbibles_delete_button();
+  static void on_window_refbibles_signal_button_clicked(GtkButton * button, gpointer user_data);
+  void on_window_refbibles_signal_button();
+
+  static void on_view_refbibles_activate (GtkMenuItem *menuitem, gpointer user_data);
+  void on_view_refbibles ();
+  
   void on_next_reference();
   void on_previous_reference();
   static void on_show_quick_references_signal_button_clicked(GtkButton * button, gpointer user_data);

@@ -21,6 +21,9 @@
 // formerly had a copy of the glibmm/ustring code here. We'd rather use 
 // the existing library and not have to maintain it, and also benefit from 
 // improvements they make in it.
+
+// Documentation links on the webi have been flaky. I am currently 
+// using https://developer.gnome.org/glibmm/2.53/classGlib_1_1ustring.html
  
 #ifndef INCLUDED_USTRING_H
 #define INCLUDED_USTRING_H

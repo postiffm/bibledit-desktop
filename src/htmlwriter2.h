@@ -48,6 +48,8 @@ public:
   void bold_close();
   void italics_open ();
   void italics_close ();
+  void font_open(const ustring &fontname);
+  void font_close();
   void highlight_open();
   void highlight_close();
   void p(const ustring& text); // write an entire p, with opening and closing

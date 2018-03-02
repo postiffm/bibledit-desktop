@@ -218,6 +218,20 @@ void HtmlWriter2::italics_close()
   }
 }
 
+void HtmlWriter2::font_open(const ustring &fontname)
+{
+  //ustring fontstring = "FONT style=\"font-family: " + fontname + "\"";
+  ustring fontstring = "font face=\"" + fontname + "\"";
+  xmlTextWriterStartElement(writer, BAD_CAST fontstring.c_str());
+  highlight_level++;
+}
+
+
+void HtmlWriter2::font_close()
+{
+  xmlTextWriterEndElement(writer);
+}
+
 void HtmlWriter2::highlight_open()
 {
   xmlTextWriterStartElement(writer, BAD_CAST "FONT style=\"BACKGROUND-COLOR: yellow\"");

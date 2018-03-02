@@ -55,21 +55,28 @@ class book {
 	bible *bbl;  // back pointer to the containing bible // book does NOT own bible for garbage collection purposes
 	ustring bookname;
     int booknum;
-	vector<chapter> chapters;
+	vector<chapter *> chapters;
   public:
 	book(bible *_bbl, const ustring &_bookname, int _booknum);
+    book();
+    ~book();
+    ustring retrieve_verse(const Reference &ref);
+    void byzasciiConvert(ustring &vs);
+    void load(void);
 };
 
 class chapter {
   public:
 	book *bk;    // back pointer to the containing book; chapter does NOT own book for garbage collection purposes
 	int chapnum;     // the chapter number
-	vector<verse> verses;
+	vector<verse *> verses;
 	// project, book, chapter (57 = Philemon, 1 = chapter 1)
   public:
     chapter(book *_bk, int _num);
+    ~chapter();
 	void load(int book, int chapter,
               std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,      std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
+    ustring retrieve_verse(const Reference &ref);
 };
 
 class verse {
@@ -81,14 +88,17 @@ class verse {
     void print(void);
 	void addToWordCount(std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
         std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
+    ustring retrieve_verse(const Reference &ref);
 };
 
 class bible {
  public:
   ustring projname;
-  vector<book> books; 
+  vector<book *> books; 
   bible(const ustring &_proj);
+  ~bible();
   void clear(void);
+  ustring retrieve_verse(const Reference &ref);
 };
 
 class Concordance {
@@ -115,4 +125,13 @@ private:
   void writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter);
   void writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter);
 
+};
+
+class ReferenceBibles {
+public:
+  ReferenceBibles();
+  ~ReferenceBibles();
+  void write(const Reference &ref, HtmlWriter2 &htmlwriter);
+private:
+  vector<bible *> bibles;
 };

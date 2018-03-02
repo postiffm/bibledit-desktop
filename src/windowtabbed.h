@@ -47,6 +47,7 @@ class SingleTab
 public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
     ~SingleTab();
+    void updateHtml(HtmlWriter2 &html);
     // I might not have to store any of these...
     GtkWidget *scrolledwindow; // owned by the notebook, I think
     GtkWidget *tab_label; // owned by the notebook, I think
@@ -70,9 +71,10 @@ public:
     WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
     virtual ~WindowTabbed();
     void Concordance(const ustring &projname);
-    void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);
+    void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);    // create a new tab, fill with given content
+    void updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml); // update existing tab, all new content
     GtkWidget * signalVerseChange;
-    Reference *newReference;
+    Reference *newReference; // for when a click in this window wants to navigate the program to a new Bible verse
   protected:
     ustring active_url;  
     Reference myreference;
