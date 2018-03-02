@@ -3,9 +3,11 @@ It assumes you have already gone through the BUILDING process
 and the INSTALLING process.
 Written by Matt Postiff, postiffm@umich.edu, 8/25/2016
 
-General Debugging
+Debugging with Nemiver, the Gnome+GDB Debugger
 ----------------------------------------------------------------
-<not written>
+1. Preparation
+   sudo apt install nemiver
+2. 
 
 Call Tree Debugging
 ----------------------------------------------------------------

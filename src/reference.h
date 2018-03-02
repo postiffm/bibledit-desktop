@@ -21,6 +21,7 @@
 #define INCLUDED_REFERENCE_H
 
 #include "libraries.h"
+#include "tiny_utilities.h"
 
 class Reference
 {
@@ -36,6 +37,7 @@ class Reference
   inline unsigned int book_get() const { return book; }
   inline unsigned int chapter_get() const { return chapter; }
   inline ustring verse_get() const { return verse; }
+  inline unsigned int verse_get_single() const { return convert_to_int(verse); }
 
   inline void book_set(unsigned int b) { book = b; }
   inline void chapter_set(unsigned int c) { chapter = c; }

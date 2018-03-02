@@ -21,17 +21,44 @@
 #include <glib/gi18n.h>
 #include "progresswindow.h"
 
-book::book(bible *_bbl, const ustring &_bookname, int _booknum)
+book::book(bible *_bbl, const ustring &_bookname, int _booknum) : chapters(1)
 {
+    // Note: chapters[0] is unused; simply here to avoid the "off by one" indexing error
 	bbl = _bbl;
 	bookname = _bookname;
     booknum = _booknum;
 }
 
-chapter::chapter(book *_bk, int _num)
+book::book() : chapters(0)
 {
+   bbl = NULL;
+   bookname = "Unset book name";
+   booknum = 0;
+}
+
+chapter::chapter(book *_bk, int _num) : verses(1)
+{
+    // Note: verses[0] is unused; simply here to avoid the "off by one" indexing error
 	bk = _bk;
 	chapnum = _num;
+}
+
+chapter::~chapter()
+{
+    for (auto it: verses) {
+        delete it;
+    }
+    verses.clear();
+}
+
+book::~book()
+{
+    bbl = NULL;
+    bookname = "";
+    booknum = 0;
+    for (auto it: chapters) {
+       delete it;   
+    }
 }
 
 verse::verse(chapter *_ch, int _vs, ustring _txt)
@@ -43,7 +70,7 @@ verse::verse(chapter *_ch, int _vs, ustring _txt)
 
 void verse::print(void)
 {
-  cout << ch->bk->bookname << " " << ch->chapnum << ":" << vsnum << " " << text << endl;
+  cerr << ch->bk->bookname << " " << ch->chapnum << ":" << vsnum << " " << text << endl;
   return;
 }
 
@@ -144,17 +171,28 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 	}
 }
 
-bible::bible(const ustring &_proj)
+bible::bible(const ustring &_proj) : books(1)
 {
-  projname = _proj;
+    // Note: books[0] is unused; simply here to avoid the "off by one" indexing error
+    projname = _proj;
 }
 
 void bible::clear(void)
 {
   projname = "";
+  for (auto it: books) {
+     delete it;
+     it = NULL;
+  }
   books.clear();
 }
 
+bible::~bible()
+{
+    clear();
+}
+
+//  This is for the concordance to load from an existing project
 void chapter::load(int book, int chapter, 
                    std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
                    std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
@@ -178,10 +216,10 @@ void chapter::load(int book, int chapter,
 				ustring versenum = s.substr(0, endposition);
 				s.erase(0, endposition+1); // +1 grabs the space after the verse number
 			}
-			verse newVerse(this, vscnt, s);
+			verse *newVerse = new verse(this, vscnt, s);
 			//newVerse.print();
 			verses.push_back(newVerse);
-			newVerse.addToWordCount(wordCounts, wordLocations);
+			newVerse->addToWordCount(wordCounts, wordLocations);
 		}
 	}
 }
@@ -271,10 +309,11 @@ void Concordance::writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter)
     for (int b = 1; b <= 66; b++) {
 		ustring bookname = books_table[b].name;
 		book *newbk = new book(&bbl, bookname, b);
-		bbl.books.push_back(*newbk);
+		bbl.books.push_back(newbk);
 		vector <unsigned int> chapters = versification_get_chapters("English", b);
 		for (auto c : chapters) {
 			chapter *newchap = new chapter(newbk, c);
+			newbk->chapters.push_back(newchap);
 			newchap->load(b, c, wordCounts, wordLocations);
 		}
 		progresswindow.iterate();
@@ -390,9 +429,7 @@ void Concordance::writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter)
     }
 }
 
-//  This is not just going to write the word and list of verses.
-//  Ultimately I would like to write out the whole text of the
-//  verses.
+//  This is writes the word list out, with verse text.
 void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htmlwriter)
 {
     htmlwriter.heading_open (1);
@@ -401,4 +438,193 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 
     std::vector<int> &locations = wordLocations[word];
     writeVerses(locations, htmlwriter);
+}
+
+//  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These 
+//  are shown in the Reference Bibles window as an aid to the translator.
+//  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV,  ?
+//  Second goal is to include another tab for translator notes from the NET or other
+//  resources.
+
+ReferenceBibles::ReferenceBibles() : bibles(10)
+{
+  bibles[0] = new bible("BYZ");
+  // I have room for 9 other Bibles at the moment; see above constructor line
+}
+
+ReferenceBibles::~ReferenceBibles()
+{
+    // Not much to do
+}
+
+ustring verse::retrieve_verse(const Reference &ref) 
+{
+    //  This is a single verse,  so ref.verse_get() should equal vsnum
+    //  Otherwise,  I don't use the ref parameter.
+    return text;
+}
+
+ustring chapter::retrieve_verse(const Reference &ref) 
+{
+    // I assume that the verse is not of the form 2:x-y,  but just 2:x
+    // 1. Check if the verse is in range
+    unsigned int vs = ref.verse_get_single();
+    if (vs >= verses.size()) { return "Verse out of range"; }
+    return verses[vs]->retrieve_verse(ref);
+}
+
+ustring book::retrieve_verse(const Reference &ref)
+{
+    // Assumes it is already loaded
+    // 1. Check if chapter is in range
+    unsigned int ch = ref.chapter_get();
+    if (ch >= chapters.size()) { return "Chapter out of range"; }
+    return chapters[ch]->retrieve_verse(ref);
+}
+
+void book::byzasciiConvert(ustring &vs)
+{
+  // From the README:
+  // The Greek is keyed to the Online Bible format, which differs from
+  // nearly all Greek fonts in the following respects: Theta = y; Psi = Q,
+  // final Sigma = v.
+  // I happen to know that these BYZ strings, though stored as ustring for convenience
+  // everywhere in Bibledit, are just ascii strings. So I will convert to c_str and then
+  // walk the entire string a single time, to make this operation faster.
+  char * c = new char[vs.length()+1];
+  strcpy(c, vs.c_str()); // I have to copy this out of the string before I clear the ustring...since c_str
+  // gives us an internal pointer.
+  vs.clear();
+  //ustring newc;
+  //printf("Char ptr=%08lX, *ptr=%c\n", (unsigned long)c, *c);
+  while (*c != 0) {
+     // cout << "Considering char " << *c << endl;
+     //if (*c == 'y') { newc = "&theta;"; }                  // theta transform 'q' in ASCII
+     //else if (*c == 'q') { newc = "&psi;"; }               // psi transform, 'y' in ASCII
+     //else if (*c == 'v') { newc = "&sigmaf;"; }            // final sigma transform, 'V' in ASCII
+     //else { newc = *c; }
+     gunichar newc;
+     //  Convert to unicode font. This is easy because the BYZ is unaccented and in lowercase.
+      switch (*c) {
+          case 'a' : newc = 945; break; 
+          case 'b' : newc = 946; break; 
+          case 'g' : newc = 947; break; 
+          case 'd' : newc = 948; break; 
+          case 'e' : newc = 949; break; 
+          case 'z' : newc = 950; break; 
+          case 'h' : newc = 951; break; 
+          case 'y' : newc = 952; break;                     // theta transform 'q' in ASCII
+          case 'i' : newc = 953; break; 
+          case 'k' : newc = 954; break; 
+          case 'l' : newc = 955; break; 
+          case 'm' : newc = 956; break; 
+          case 'n' : newc = 957; break; 
+          case 'x' : newc = 958; break; 
+          case 'o' : newc = 959; break; 
+          case 'p' : newc = 960; break; 
+          case 'r' : newc = 961; break; 
+          case 'v' : newc = 962; break;
+          case 's' : newc = 963; break; 
+          case 't' : newc = 964; break; 
+          case 'u' : newc = 965; break; 
+          case 'f' : newc = 966; break; 
+          case 'c' : newc = 967; break; 
+          case 'q' : newc = 968; break;                 // psi transform, 'y' in ASCII
+          case 'w' : newc = 969; break; 
+          case ' ' : newc = 32; break;                      //  space
+          default  : newc = 8855;                           //&otimes;,  just to mark as not done
+        }
+     vs.push_back(newc);
+     c++;
+  }
+}
+
+// load pre-stored reference Bible
+void book::load(void)
+{
+  ustring filenames[27] = { "MT_BYZ.txt",  "MR_BYZ.txt",  "LU_BYZ.txt", "JOH_BYZ.txt", "AC_BYZ.txt",
+            "RO_BYZ.txt",  "1CO_BYZ.txt", "2CO_BYZ.txt", "GA_BYZ.txt",  "EPH_BYZ.txt", "PHP_BYZ.txt", "COL_BYZ.txt",
+            "1TH_BYZ.txt", "2TH_BYZ.txt", "1TI_BYZ.txt", "2TI_BYZ.txt", "TIT_BYZ.txt", "PHM_BYZ.txt", 
+            "HEB_BYZ.txt", "JAS_BYZ.txt", "1PE_BYZ.txt", "2PE_BYZ.txt", "1JO_BYZ.txt", "2JO_BYZ.txt", "3JO_BYZ.txt", 
+            "JUDE_BYZ.txt", "RE_BYZ.txt" };
+    
+    // We know our book number and localized name already
+    int bookidx = booknum - 40;
+    if ((bookidx < 0) ||  (bookidx > 26)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+   
+    //  From utilities.cpp
+    ReadText rt("/home/postiffm/bibledit-desktop/bibles/byzascii/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    unsigned int currchapnum = 0;
+    chapter *currchap = NULL;
+    
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         //  Extract chapter and verse,  and leading space. The lines are always
+         //  well formed: 1:5<space>Verse text.
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         size_t spaceposition = it.find_first_of(" ");
+         ustring versestring = it.substr(colonposition+1, spaceposition);
+         unsigned int versenum = convert_to_int(versestring);
+         it.erase(0,  spaceposition+1);
+         if (chapnum != currchapnum) {
+             chapter *newchap = new chapter(this,  chapnum);
+             chapters.push_back(newchap);
+             currchap = newchap;
+             currchapnum = chapnum;
+             //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+         byzasciiConvert(it);
+         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         currchap->verses.push_back(newverse); //  append verse to current chapter
+         //newverse->print(); // debug
+    }
+}
+
+ustring bible::retrieve_verse(const Reference &ref)
+{
+    unsigned int booknum = ref.book_get();
+    // 1. Does this Bible support this book? BYZ, for instance, only has books 40-66.
+    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
+    
+    // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (booknum >= books.size()) {
+        // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
+        // books[0] exists, but is unused. So we resize books to 2 elements.
+      books.resize(booknum+1);
+    }
+    if (books[booknum] == NULL) {
+        books[booknum] = new book(this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref);
+}
+
+void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
+{
+    for (auto it : bibles) {
+        bible *b = it;
+        if (b == NULL) { break; }
+        ustring verse = b->retrieve_verse(ref);
+        //  I assume the following post-condition to the above statement:
+        //  the verse is loaded into the bible,  book,  chapter,  and the
+        //  the verse contains only the text of the verse,  no x:y prefix
+        if (verse.empty()) {
+            htmlwriter.paragraph_open();
+            verse.append(_("<empty>"));
+            htmlwriter.paragraph_close();
+        }
+        else {
+              replace_text(verse, "\n", " ");
+              htmlwriter.paragraph_open();
+              htmlwriter.text_add(b->projname + " " + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
+              htmlwriter.font_open("Symbol");
+              htmlwriter.text_add(verse);
+              htmlwriter.font_close();
+            }
+        htmlwriter.paragraph_close();
+      }
 }
