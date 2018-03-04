@@ -2,8 +2,8 @@
 <stylesheet>
  <style marker="imt2">
   <marker>imt2</marker>
-  <name>Major Title Level 2</name>
-  <info>Introduction major title, level 2</info>
+ <name translatable="yes">Major Title Level 2</name>
+  <info translatable="yes">Introduction major title, level 2</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>13.0</fontsize>
@@ -33,8 +33,8 @@
  </style>
  <style marker="m">
   <marker>m</marker>
-  <name>Margin, No First Line Indent</name>
-  <info>Paragraph text, with no first line indent (may occur after poetry)</info>
+ <name translatable="yes">Margin, No First Line Indent</name>
+  <info translatable="yes">Paragraph text, with no first line indent (may occur after poetry)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -64,8 +64,8 @@
  </style>
  <style marker="sls">
   <marker>sls</marker>
-  <name>* Secondary Language or Text Source</name>
-  <info>To represent where the original text is in a secondary language or from an alternate text source</info>
+ <name translatable="yes">* Secondary Language or Text Source</name>
+  <info translatable="yes">To represent where the original text is in a secondary language or from an alternate text source</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -95,8 +95,8 @@
  </style>
  <style marker="fe">
   <marker>fe</marker>
-  <name>* Endnote</name>
-  <info>An Endnote text item.</info>
+ <name translatable="yes">* Endnote</name>
+  <info translatable="yes">An Endnote text item.</info>
   <type>7</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -126,8 +126,8 @@
  </style>
  <style marker="toc">
   <marker>toc</marker>
-  <name>Table of Contents</name>
-  <info>Front matter table of contents.</info>
+ <name translatable="yes">Table of Contents</name>
+  <info translatable="yes">Front matter table of contents.</info>
   <type>9</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -157,8 +157,8 @@
  </style>
  <style marker="io2">
   <marker>io2</marker>
-  <name>Outline Level 2</name>
-  <info>Introduction outline text, level 2</info>
+ <name translatable="yes">Outline Level 2</name>
+  <info translatable="yes">Introduction outline text, level 2</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -188,8 +188,8 @@
  </style>
  <style marker="cls">
   <marker>cls</marker>
-  <name>Closure of an Epistle</name>
-  <info>Closure of an Epistle</info>
+ <name translatable="yes">Closure of an Epistle</name>
+  <info translatable="yes">Closure of an Epistle</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -219,8 +219,8 @@
  </style>
  <style marker="sc">
   <marker>sc</marker>
-  <name>* Small Caps</name>
-  <info>A character style, for small capitalization text</info>
+ <name translatable="yes">* Small Caps</name>
+  <info translatable="yes">A character style, for small capitalization text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -250,8 +250,8 @@
  </style>
  <style marker="fp">
   <marker>fp</marker>
-  <name>Paragraph Mark</name>
-  <info>(*) A Footnote additional paragraph marker.</info>
+ <name translatable="yes">Paragraph Mark</name>
+  <info translatable="yes">(*) A Footnote additional paragraph marker.</info>
   <type>7</type>
   <subtype>5</subtype>
   <fontsize>11.0</fontsize>
@@ -281,8 +281,8 @@
  </style>
  <style marker="em">
   <marker>em</marker>
-  <name>* Emphasized Text</name>
-  <info>A character style, use emphasized text style</info>
+ <name translatable="yes">* Emphasized Text</name>
+  <info translatable="yes">A character style, use emphasized text style</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -312,8 +312,8 @@
  </style>
  <style marker="fm">
   <marker>fm</marker>
-  <name>* Footnote Mark</name>
-  <info>An additional footnote marker location for a previous footnote.</info>
+ <name translatable="yes">* Footnote Mark</name>
+  <info translatable="yes">An additional footnote marker location for a previous footnote.</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -343,8 +343,8 @@
  </style>
  <style marker="iq">
   <marker>iq</marker>
-  <name>Poetry Level 1</name>
-  <info>Introduction poetry text, level 1 (if single level)</info>
+ <name translatable="yes">Poetry Level 1</name>
+  <info translatable="yes">Introduction poetry text, level 1 (if single level)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -374,8 +374,8 @@
  </style>
  <style marker="bd">
   <marker>bd</marker>
-  <name>* Bold Text</name>
-  <info>A character style, use bold text</info>
+ <name translatable="yes">* Bold Text</name>
+  <info translatable="yes">A character style, use bold text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -405,8 +405,8 @@
  </style>
  <style marker="b">
   <marker>b</marker>
-  <name>Blank Line</name>
-  <info>May be used to explicitely indicate additional white space between paragraphs.
+ <name translatable="yes">Blank Line</name>
+  <info translatable="yes">May be used to explicitely indicate additional white space between paragraphs.
 Poetry text stanza break (e.g. stanza break)</info>
   <type>3</type>
   <subtype>3</subtype>
@@ -437,8 +437,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="pub">
   <marker>pub</marker>
-  <name>Publication Data</name>
-  <info>Front matter publication data.</info>
+ <name translatable="yes">Publication Data</name>
+  <info translatable="yes">Front matter publication data.</info>
   <type>9</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -468,8 +468,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ip">
   <marker>ip</marker>
-  <name>Paragraph</name>
-  <info>Introduction prose paragraph</info>
+ <name translatable="yes">Paragraph</name>
+  <info translatable="yes">Introduction prose paragraph</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -499,8 +499,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="pi">
   <marker>pi</marker>
-  <name>Indented, Level 1, First Line Indent</name>
-  <info>Paragraph text, level 1 indent (if sinlge level), with first line indent; often used for discourse</info>
+ <name translatable="yes">Indented, Level 1, First Line Indent</name>
+  <info translatable="yes">Paragraph text, level 1 indent (if sinlge level), with first line indent; often used for discourse</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -530,8 +530,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="pref">
   <marker>pref</marker>
-  <name>Preface</name>
-  <info>Front matter preface.</info>
+ <name translatable="yes">Preface</name>
+  <info translatable="yes">Front matter preface.</info>
   <type>9</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -561,8 +561,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="spine">
   <marker>spine</marker>
-  <name>Spine</name>
-  <info>Other peripheral materials - spine.</info>
+ <name translatable="yes">Spine</name>
+  <info translatable="yes">Other peripheral materials - spine.</info>
   <type>9</type>
   <subtype>9</subtype>
   <fontsize>12.0</fontsize>
@@ -592,8 +592,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="is2">
   <marker>is2</marker>
-  <name>Section Heading Level 2</name>
-  <info>Introduction section heading, level 2</info>
+ <name translatable="yes">Section Heading Level 2</name>
+  <info translatable="yes">Introduction section heading, level 2</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -623,8 +623,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ipq">
   <marker>ipq</marker>
-  <name>Paragraph, quote from text</name>
-  <info>Introduction prose paragraph, quote from the body text</info>
+ <name translatable="yes">Paragraph, quote from text</name>
+  <info translatable="yes">Introduction prose paragraph, quote from the body text</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -654,8 +654,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="cov">
   <marker>cov</marker>
-  <name>Cover</name>
-  <info>Other peripheral materials - cover.</info>
+ <name translatable="yes">Cover</name>
+  <info translatable="yes">Other peripheral materials - cover.</info>
   <type>9</type>
   <subtype>6</subtype>
   <fontsize>12.0</fontsize>
@@ -685,8 +685,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="p2">
   <marker>p2</marker>
-  <name>Front/Back Matter Paragraph Level 2</name>
-  <info>Front or back matter text paragraph, level 2 (if multiple levels)</info>
+ <name translatable="yes">Front/Back Matter Paragraph Level 2</name>
+  <info translatable="yes">Front or back matter text paragraph, level 2 (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -716,8 +716,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ipi">
   <marker>ipi</marker>
-  <name>Indented Paragraph, first line indent</name>
-  <info>Introduction prose paragraph, indented, with first line indent</info>
+ <name translatable="yes">Indented Paragraph, first line indent</name>
+  <info translatable="yes">Introduction prose paragraph, indented, with first line indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -747,8 +747,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="pi3">
   <marker>pi3</marker>
-  <name>Indented, Level 3, First Line Indent</name>
-  <info>Paragraph text, level 3 indent, with first line indent; often used for discourse</info>
+ <name translatable="yes">Indented, Level 3, First Line Indent</name>
+  <info translatable="yes">Paragraph text, level 3 indent, with first line indent; often used for discourse</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -778,8 +778,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="s4">
   <marker>s4</marker>
-  <name>Section Heading Level 4</name>
-  <info>A section heading, level 4</info>
+ <name translatable="yes">Section Heading Level 4</name>
+  <info translatable="yes">A section heading, level 4</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -809,8 +809,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="mte2">
   <marker>mte2</marker>
-  <name>[Uncommon] Major Title Ending Level 2</name>
-  <info>A secondary title occurring before or after the 'ending' main title</info>
+ <name translatable="yes">[Uncommon] Major Title Ending Level 2</name>
+  <info translatable="yes">A secondary title occurring before or after the 'ending' main title</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>16.0</fontsize>
@@ -840,8 +840,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ms1">
   <marker>ms1</marker>
-  <name>Major Section Level 1</name>
-  <info>A major section division heading, level 1 (if multiple levels)</info>
+ <name translatable="yes">Major Section Level 1</name>
+  <info translatable="yes">A major section division heading, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>14.0</fontsize>
@@ -871,8 +871,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="h3">
   <marker>h3</marker>
-  <name>Right Running Header</name>
-  <info>Running header text, right side of page</info>
+ <name translatable="yes">Right Running Header</name>
+  <info translatable="yes">Running header text, right side of page</info>
   <type>0</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -902,8 +902,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="io">
   <marker>io</marker>
-  <name>Outline Level 1</name>
-  <info>Introduction outline text, level 1 (if single level)</info>
+ <name translatable="yes">Outline Level 1</name>
+  <info translatable="yes">Introduction outline text, level 1 (if single level)</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -933,8 +933,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ior">
   <marker>ior</marker>
-  <name>Outline References Range</name>
-  <info>Introduction references range for outline entry; for marking references separately</info>
+ <name translatable="yes">Outline References Range</name>
+  <info translatable="yes">Introduction references range for outline entry; for marking references separately</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -964,8 +964,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="ib">
   <marker>ib</marker>
-  <name>Blank Line</name>
-  <info>Introduction blank line</info>
+ <name translatable="yes">Blank Line</name>
+  <info translatable="yes">Introduction blank line</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>5.0</fontsize>
@@ -995,8 +995,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="xdc">
   <marker>xdc</marker>
-  <name>* DC Target Refs</name>
-  <info>Cross-reference target reference(s), Apocrypha only.</info>
+ <name translatable="yes">* DC Target Refs</name>
+  <info translatable="yes">Cross-reference target reference(s), Apocrypha only.</info>
   <type>8</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -1026,8 +1026,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="c">
   <marker>c</marker>
-  <name>Chapter Number</name>
-  <info>Chapter number</info>
+ <name translatable="yes">Chapter Number</name>
+  <info translatable="yes">Chapter number</info>
   <type>5</type>
   <subtype>0</subtype>
   <fontsize>30.0</fontsize>
@@ -1057,8 +1057,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="im">
   <marker>im</marker>
-  <name>Paragraph, no first line indent</name>
-  <info>Introduction prose paragraph, with no first line indent (may occur after poetry)</info>
+ <name translatable="yes">Paragraph, no first line indent</name>
+  <info translatable="yes">Introduction prose paragraph, with no first line indent (may occur after poetry)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1088,8 +1088,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="li2">
   <marker>li2</marker>
-  <name>List Entry Level 2</name>
-  <info>A list entry, level 2</info>
+ <name translatable="yes">List Entry Level 2</name>
+  <info translatable="yes">A list entry, level 2</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1119,8 +1119,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="li4">
   <marker>li4</marker>
-  <name>List Entry Level 4</name>
-  <info>A list entry, level 4</info>
+ <name translatable="yes">List Entry Level 4</name>
+  <info translatable="yes">A list entry, level 4</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1150,8 +1150,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="mt2">
   <marker>mt2</marker>
-  <name>Major Title Level 2</name>
-  <info>A secondary title with less important information than the main title.</info>
+ <name translatable="yes">Major Title Level 2</name>
+  <info translatable="yes">A secondary title with less important information than the main title.</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>16.0</fontsize>
@@ -1181,8 +1181,8 @@ Poetry text stanza break (e.g. stanza break)</info>
  </style>
  <style marker="pubinfo">
   <marker>pubinfo</marker>
-  <name>Publication Information</name>
-  <info>Publication information - Lang,Credit,Version,Copies,Publisher,Id,Logo
+ <name translatable="yes">Publication Information</name>
+  <info translatable="yes">Publication information - Lang,Credit,Version,Copies,Publisher,Id,Logo
 Not yet supported in Bibledit.</info>
   <type>0</type>
   <subtype>2</subtype>
@@ -1213,8 +1213,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="sr">
   <marker>sr</marker>
-  <name>Section Heading Range References</name>
-  <info>A section division references range heading</info>
+ <name translatable="yes">Section Heading Range References</name>
+  <info translatable="yes">A section division references range heading</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -1244,8 +1244,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="iot">
   <marker>iot</marker>
-  <name>Outline Title</name>
-  <info>Introduction outline title</info>
+ <name translatable="yes">Outline Title</name>
+  <info translatable="yes">Introduction outline title</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -1275,8 +1275,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="x">
   <marker>x</marker>
-  <name>* Cross Reference</name>
-  <info>A list of cross references.</info>
+ <name translatable="yes">* Cross Reference</name>
+  <info translatable="yes">A list of cross references.</info>
   <type>8</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1306,8 +1306,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qa">
   <marker>qa</marker>
-  <name>Acrostic Heading/Marker</name>
-  <info>Poetry text, Acrostic marker/heading</info>
+ <name translatable="yes">Acrostic Heading/Marker</name>
+  <info translatable="yes">Poetry text, Acrostic marker/heading</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1337,8 +1337,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="is">
   <marker>is</marker>
-  <name>Section Heading Level 1</name>
-  <info>Introduction section heading, level 1 (if single level)</info>
+ <name translatable="yes">Section Heading Level 1</name>
+  <info translatable="yes">Introduction section heading, level 1 (if single level)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -1368,8 +1368,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qr">
   <marker>qr</marker>
-  <name>Right Aligned</name>
-  <info>Poetry text, Right Aligned</info>
+ <name translatable="yes">Right Aligned</name>
+  <info translatable="yes">Poetry text, Right Aligned</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1399,8 +1399,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imt3">
   <marker>imt3</marker>
-  <name>Major Title Level 3</name>
-  <info>Introduction major title, level 3</info>
+ <name translatable="yes">Major Title Level 3</name>
+  <info translatable="yes">Introduction major title, level 3</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1430,8 +1430,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="add">
   <marker>add</marker>
-  <name>* Translational Addition</name>
-  <info>For a translational addition to the text</info>
+ <name translatable="yes">* Translational Addition</name>
+  <info translatable="yes">For a translational addition to the text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>60.0</fontsize>
@@ -1461,8 +1461,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="f">
   <marker>f</marker>
-  <name>* Footnote</name>
-  <info>A Footnote text item.</info>
+ <name translatable="yes">* Footnote</name>
+  <info translatable="yes">A Footnote text item.</info>
   <type>7</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1492,8 +1492,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="cd">
   <marker>cd</marker>
-  <name>Chapter Description</name>
-  <info>Chapter Description (Publishing option D, e.g. in Russian Bibles)</info>
+ <name translatable="yes">Chapter Description</name>
+  <info translatable="yes">Chapter Description (Publishing option D, e.g. in Russian Bibles)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -1523,8 +1523,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fv">
   <marker>fv</marker>
-  <name>Embedded Verse Number</name>
-  <info>(*) A verse number within the footnote text.</info>
+ <name translatable="yes">Embedded Verse Number</name>
+  <info translatable="yes">(*) A verse number within the footnote text.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -1554,8 +1554,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="io1">
   <marker>io1</marker>
-  <name>Outline Level 1</name>
-  <info>Introduction outline text, level 1 (if multiple levels)</info>
+ <name translatable="yes">Outline Level 1</name>
+  <info translatable="yes">Introduction outline text, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -1585,8 +1585,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qm2">
   <marker>qm2</marker>
-  <name>Embedded Text, Indent Level 2</name>
-  <info>Poetry text, embedded, level 2 indent</info>
+ <name translatable="yes">Embedded Text, Indent Level 2</name>
+  <info translatable="yes">Poetry text, embedded, level 2 indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1616,8 +1616,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ms2">
   <marker>ms2</marker>
-  <name>Major Section Level 2</name>
-  <info>A major section division heading, level 2</info>
+ <name translatable="yes">Major Section Level 2</name>
+  <info translatable="yes">A major section division heading, level 2</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>14.0</fontsize>
@@ -1647,8 +1647,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mi">
   <marker>mi</marker>
-  <name>Indented, No First Line Indent</name>
-  <info>Paragraph text, indented, with no first line indent; often used for discourse</info>
+ <name translatable="yes">Indented, No First Line Indent</name>
+  <info translatable="yes">Paragraph text, indented, with no first line indent; often used for discourse</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1678,8 +1678,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="io3">
   <marker>io3</marker>
-  <name>Outline Level 3</name>
-  <info>Introduction outline text, level 3</info>
+ <name translatable="yes">Outline Level 3</name>
+  <info translatable="yes">Introduction outline text, level 3</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -1709,8 +1709,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="k">
   <marker>k</marker>
-  <name>* Keyword</name>
-  <info>For a keyword</info>
+ <name translatable="yes">* Keyword</name>
+  <info translatable="yes">For a keyword</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1740,8 +1740,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="h">
   <marker>h</marker>
-  <name>Running Header</name>
-  <info>Running header text for a book</info>
+ <name translatable="yes">Running Header</name>
+  <info translatable="yes">Running header text for a book</info>
   <type>0</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1771,8 +1771,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qs">
   <marker>qs</marker>
-  <name>* Selah</name>
-  <info>Poetry text, Selah</info>
+ <name translatable="yes">* Selah</name>
+  <info translatable="yes">Poetry text, Selah</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1802,8 +1802,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qm">
   <marker>qm</marker>
-  <name>Embedded Text, Indent Level 1, Single Level Only</name>
-  <info>Poetry text, embedded, level 1 indent (if single level)</info>
+ <name translatable="yes">Embedded Text, Indent Level 1, Single Level Only</name>
+  <info translatable="yes">Poetry text, embedded, level 1 indent (if single level)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1833,8 +1833,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="dc">
   <marker>dc</marker>
-  <name>* Deuterocanonical/LXX Additions</name>
-  <info>Deuterocanonical/LXX additions or insertions in the Protocanonical text</info>
+ <name translatable="yes">* Deuterocanonical/LXX Additions</name>
+  <info translatable="yes">Deuterocanonical/LXX additions or insertions in the Protocanonical text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1864,8 +1864,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pi1">
   <marker>pi1</marker>
-  <name>Indented, Level 1, First Line Indent</name>
-  <info>Paragraph text, level 1 indent (if multiple levels), with first line indent; often used for discourse</info>
+ <name translatable="yes">Indented, Level 1, First Line Indent</name>
+  <info translatable="yes">Paragraph text, level 1 indent (if multiple levels), with first line indent; often used for discourse</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -1895,8 +1895,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ms">
   <marker>ms</marker>
-  <name>Major Section Level 1</name>
-  <info>A major section division heading, level 1 (if single level)</info>
+ <name translatable="yes">Major Section Level 1</name>
+  <info translatable="yes">A major section division heading, level 1 (if single level)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>14.0</fontsize>
@@ -1926,8 +1926,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fig">
   <marker>fig</marker>
-  <name>* Figure/Illustration/Map</name>
-  <info>Illustration [Columns to span, height, filename, caption text]</info>
+ <name translatable="yes">* Figure/Illustration/Map</name>
+  <info translatable="yes">Illustration [Columns to span, height, filename, caption text]</info>
   <type>10</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -1957,8 +1957,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="io4">
   <marker>io4</marker>
-  <name>Outline Level 4</name>
-  <info>Introduction outline text, level 4</info>
+ <name translatable="yes">Outline Level 4</name>
+  <info translatable="yes">Introduction outline text, level 4</info>
   <type>3</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -1988,8 +1988,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="p1">
   <marker>p1</marker>
-  <name>Front/Back Matter Paragraph Level 1</name>
-  <info>Front or back matter text paragraph, level 1 (if multiple levels)</info>
+ <name translatable="yes">Front/Back Matter Paragraph Level 1</name>
+  <info translatable="yes">Front or back matter text paragraph, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2019,8 +2019,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="it">
   <marker>it</marker>
-  <name>* Italic Text</name>
-  <info>A character style, use italic text</info>
+ <name translatable="yes">* Italic Text</name>
+  <info translatable="yes">A character style, use italic text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2050,8 +2050,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="xq">
   <marker>xq</marker>
-  <name>Quotation</name>
-  <info>(*) A cross-reference quotation from the scripture text.</info>
+ <name translatable="yes">Quotation</name>
+  <info translatable="yes">(*) A cross-reference quotation from the scripture text.</info>
   <type>8</type>
   <subtype>2</subtype>
   <fontsize>11.0</fontsize>
@@ -2081,8 +2081,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qac">
   <marker>qac</marker>
-  <name>* Acrostic Letter</name>
-  <info>Poetry text, Acrostic markup of the first character of a line of acrostic poetry</info>
+ <name translatable="yes">* Acrostic Letter</name>
+  <info translatable="yes">Poetry text, Acrostic markup of the first character of a line of acrostic poetry</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2112,8 +2112,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="iq1">
   <marker>iq1</marker>
-  <name>Poetry Level 1</name>
-  <info>Introduction poetry text, level 1 (if multiple levels)</info>
+ <name translatable="yes">Poetry Level 1</name>
+  <info translatable="yes">Introduction poetry text, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2143,8 +2143,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="xo">
   <marker>xo</marker>
-  <name>Origin Reference</name>
-  <info>(*) The cross reference origin reference.</info>
+ <name translatable="yes">Origin Reference</name>
+  <info translatable="yes">(*) The cross reference origin reference.</info>
   <type>8</type>
   <subtype>2</subtype>
   <fontsize>11.0</fontsize>
@@ -2174,8 +2174,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pn">
   <marker>pn</marker>
-  <name>* Proper Name</name>
-  <info>For a proper name</info>
+ <name translatable="yes">* Proper Name</name>
+  <info translatable="yes">For a proper name</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2205,8 +2205,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fr">
   <marker>fr</marker>
-  <name>Reference</name>
-  <info>(*) The origin reference for the footnote.</info>
+ <name translatable="yes">Reference</name>
+  <info translatable="yes">(*) The origin reference for the footnote.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -2236,8 +2236,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ord">
   <marker>ord</marker>
-  <name>* Ordinal number text portion</name>
-  <info>For the text portion of an ordinal number</info>
+ <name translatable="yes">* Ordinal number text portion</name>
+  <info translatable="yes">For the text portion of an ordinal number</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2267,8 +2267,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ft">
   <marker>ft</marker>
-  <name>Text</name>
-  <info>(*) Footnote text.</info>
+ <name translatable="yes">Text</name>
+  <info translatable="yes">(*) Footnote text.</info>
   <type>7</type>
   <subtype>2</subtype>
   <fontsize>11.0</fontsize>
@@ -2298,8 +2298,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fq">
   <marker>fq</marker>
-  <name>Quotation or Alternate Rendering</name>
-  <info>(*) A footnote scripture quote.</info>
+ <name translatable="yes">Quotation or Alternate Rendering</name>
+  <info translatable="yes">(*) A footnote scripture quote.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -2329,8 +2329,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imi">
   <marker>imi</marker>
-  <name>Indented Paragraph, no first line indent</name>
-  <info>Introduction prose paragraph text, indented, with no first line indent</info>
+ <name translatable="yes">Indented Paragraph, no first line indent</name>
+  <info translatable="yes">Introduction prose paragraph text, indented, with no first line indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2360,8 +2360,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mt4">
   <marker>mt4</marker>
-  <name>Major Title level 4</name>
-  <info>A small secondary title sometimes occuring within parentheses</info>
+ <name translatable="yes">Major Title level 4</name>
+  <info translatable="yes">A small secondary title sometimes occuring within parentheses</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2391,8 +2391,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mr">
   <marker>mr</marker>
-  <name>Major Section Range References</name>
-  <info>A major section division references range heading</info>
+ <name translatable="yes">Major Section Range References</name>
+  <info translatable="yes">A major section division references range heading</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2422,8 +2422,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mt3">
   <marker>mt3</marker>
-  <name>Major Title Level 3</name>
-  <info>A secondary title, less important than the main title</info>
+ <name translatable="yes">Major Title Level 3</name>
+  <info translatable="yes">A secondary title, less important than the main title</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>16.0</fontsize>
@@ -2453,8 +2453,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="no">
   <marker>no</marker>
-  <name>* Normal Text</name>
-  <info>A character style, use normal text</info>
+ <name translatable="yes">* Normal Text</name>
+  <info translatable="yes">A character style, use normal text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2484,8 +2484,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="is1">
   <marker>is1</marker>
-  <name>Section Heading Level 1</name>
-  <info>Introduction section heading, level 1 (if multiple levels)</info>
+ <name translatable="yes">Section Heading Level 1</name>
+  <info translatable="yes">Introduction section heading, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -2515,8 +2515,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qt">
   <marker>qt</marker>
-  <name>* Quoted Text, OT in NT</name>
-  <info>For Old Testament quoted text appearing in the New Testament</info>
+ <name translatable="yes">* Quoted Text, OT in NT</name>
+  <info translatable="yes">For Old Testament quoted text appearing in the New Testament</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2546,8 +2546,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="s2">
   <marker>s2</marker>
-  <name>Section Heading Level 2</name>
-  <info>A section heading, level 2 (e.g. Proverbs 22-24)</info>
+ <name translatable="yes">Section Heading Level 2</name>
+  <info translatable="yes">A section heading, level 2 (e.g. Proverbs 22-24)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -2577,8 +2577,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="li3">
   <marker>li3</marker>
-  <name>List Entry Level 3</name>
-  <info>A list entry, level 3</info>
+ <name translatable="yes">List Entry Level 3</name>
+  <info translatable="yes">A list entry, level 3</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2608,8 +2608,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="xt">
   <marker>xt</marker>
-  <name>Target References</name>
-  <info>(*) The cross reference target reference(s).</info>
+ <name translatable="yes">Target References</name>
+  <info translatable="yes">(*) The cross reference target reference(s).</info>
   <type>8</type>
   <subtype>1</subtype>
   <fontsize>11.0</fontsize>
@@ -2639,8 +2639,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qm1">
   <marker>qm1</marker>
-  <name>Embedded Text, Indent Level 1</name>
-  <info>Poetry text, embedded, level 1 indent (if multiple levels)</info>
+ <name translatable="yes">Embedded Text, Indent Level 1</name>
+  <info translatable="yes">Poetry text, embedded, level 1 indent (if multiple levels)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2670,8 +2670,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="h1">
   <marker>h1</marker>
-  <name>Running Header</name>
-  <info>Running header text</info>
+ <name translatable="yes">Running Header</name>
+  <info translatable="yes">Running header text</info>
   <type>0</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2701,8 +2701,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pmr">
   <marker>pmr</marker>
-  <name>Embedded Text Refrain</name>
-  <info>Embedded text refrain (e.g. Then all the people shall say, &quot;Amen!&quot;)</info>
+ <name translatable="yes">Embedded Text Refrain</name>
+  <info translatable="yes">Embedded text refrain (e.g. Then all the people shall say, &quot;Amen!&quot;)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2732,8 +2732,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pi2">
   <marker>pi2</marker>
-  <name>Indented, Level 2, First Line Indent</name>
-  <info>Paragraph text, level 2 indent, with first line indent; often used for discourse</info>
+ <name translatable="yes">Indented, Level 2, First Line Indent</name>
+  <info translatable="yes">Paragraph text, level 2 indent, with first line indent; often used for discourse</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2763,8 +2763,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="vp">
   <marker>vp</marker>
-  <name>* Publishing alternate verse</name>
-  <info>Published verse marker - this is a verse marking that would be used in the published text.</info>
+ <name translatable="yes">* Publishing alternate verse</name>
+  <info translatable="yes">Published verse marker - this is a verse marking that would be used in the published text.</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2794,8 +2794,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="li">
   <marker>li</marker>
-  <name>List Entry Level 1</name>
-  <info>A list entry, level 1 (if single level)</info>
+ <name translatable="yes">List Entry Level 1</name>
+  <info translatable="yes">A list entry, level 1 (if single level)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2825,8 +2825,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ipr">
   <marker>ipr</marker>
-  <name>Paragraph, right aligned</name>
-  <info>Introduction prose paragraph, right aligned</info>
+ <name translatable="yes">Paragraph, right aligned</name>
+  <info translatable="yes">Introduction prose paragraph, right aligned</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2856,8 +2856,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="rem">
   <marker>rem</marker>
-  <name>Remark</name>
-  <info>Comments and remarks</info>
+ <name translatable="yes">Remark</name>
+  <info translatable="yes">Comments and remarks</info>
   <type>0</type>
   <subtype>2</subtype>
   <fontsize>60.0</fontsize>
@@ -2887,8 +2887,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imt">
   <marker>imt</marker>
-  <name>Major Title Level 1</name>
-  <info>Introduction major title, level 1 (if single level)</info>
+ <name translatable="yes">Major Title Level 1</name>
+  <info translatable="yes">Introduction major title, level 1 (if single level)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>14.0</fontsize>
@@ -2918,8 +2918,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imt4">
   <marker>imt4</marker>
-  <name>Major Title Level 4</name>
-  <info>Introduction major title, level 4 (usually within parenthesis)</info>
+ <name translatable="yes">Major Title Level 4</name>
+  <info translatable="yes">Introduction major title, level 4 (usually within parenthesis)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -2949,8 +2949,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="q">
   <marker>q</marker>
-  <name>Indent Level 1, Single Level Only</name>
-  <info>Poetry text, level 1 indent (if single level)</info>
+ <name translatable="yes">Indent Level 1, Single Level Only</name>
+  <info translatable="yes">Poetry text, level 1 indent (if single level)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -2980,8 +2980,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="q2">
   <marker>q2</marker>
-  <name>Indent Level 2</name>
-  <info>Poetry text, level 2 indent</info>
+ <name translatable="yes">Indent Level 2</name>
+  <info translatable="yes">Poetry text, level 2 indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3011,8 +3011,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="iex">
   <marker>iex</marker>
-  <name>Explanatory or Bridge Text</name>
-  <info>Introduction explanatory or bridge text (e.g. explanation of missing book in Short Old Testament)</info>
+ <name translatable="yes">Explanatory or Bridge Text</name>
+  <info translatable="yes">Introduction explanatory or bridge text (e.g. explanation of missing book in Short Old Testament)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3042,8 +3042,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="iq3">
   <marker>iq3</marker>
-  <name>Poetry Level 3</name>
-  <info>Introduction poetry text, level 3</info>
+ <name translatable="yes">Poetry Level 3</name>
+  <info translatable="yes">Introduction poetry text, level 3</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3073,8 +3073,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qc">
   <marker>qc</marker>
-  <name>Centered</name>
-  <info>Poetry text, centered</info>
+ <name translatable="yes">Centered</name>
+  <info translatable="yes">Poetry text, centered</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3104,8 +3104,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="q3">
   <marker>q3</marker>
-  <name>Indent Level 3</name>
-  <info>Poetry text, level 3 indent</info>
+ <name translatable="yes">Indent Level 3</name>
+  <info translatable="yes">Poetry text, level 3 indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3135,8 +3135,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fl">
   <marker>fl</marker>
-  <name>Label Text</name>
-  <info>(*) A footnote label text item, for marking or &quot;labelling&quot; the type or alternate translation being provided in the note.</info>
+ <name translatable="yes">Label Text</name>
+  <info translatable="yes">(*) A footnote label text item, for marking or &quot;labelling&quot; the type or alternate translation being provided in the note.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -3166,8 +3166,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="conc">
   <marker>conc</marker>
-  <name>Concordance</name>
-  <info>Back matter concordance.</info>
+ <name translatable="yes">Concordance</name>
+  <info translatable="yes">Back matter concordance.</info>
   <type>9</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3197,8 +3197,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="bk">
   <marker>bk</marker>
-  <name>* Quoted book title</name>
-  <info>For the quoted name of a book</info>
+ <name translatable="yes">* Quoted book title</name>
+  <info translatable="yes">For the quoted name of a book</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3228,8 +3228,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pm">
   <marker>pm</marker>
-  <name>Embedded Text</name>
-  <info>Embedded text paragraph</info>
+ <name translatable="yes">Embedded Text</name>
+  <info translatable="yes">Embedded text paragraph</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3259,8 +3259,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="d">
   <marker>d</marker>
-  <name>Descriptive Title, Hebrew Subtitle</name>
-  <info>A Hebrew text heading, to provide description (e.g. Psalms)</info>
+ <name translatable="yes">Descriptive Title, Hebrew Subtitle</name>
+  <info translatable="yes">A Hebrew text heading, to provide description (e.g. Psalms)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3290,8 +3290,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="lit">
   <marker>lit</marker>
-  <name>* Liturgical note</name>
-  <info>For a comment or note inserted for liturgical use</info>
+ <name translatable="yes">* Liturgical note</name>
+  <info translatable="yes">For a comment or note inserted for liturgical use</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3321,8 +3321,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imq">
   <marker>imq</marker>
-  <name>Paragraph, quote from text, no first line indent</name>
-  <info>Introduction prose paragraph, quote from the body text, with no first line indent</info>
+ <name translatable="yes">Paragraph, quote from text, no first line indent</name>
+  <info translatable="yes">Introduction prose paragraph, quote from the body text, with no first line indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3352,8 +3352,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mte1">
   <marker>mte1</marker>
-  <name>[Uncommon] Major Title Ending Level 1</name>
-  <info>The main title of the book repeated at the end of the book (if multiple levels)</info>
+ <name translatable="yes">[Uncommon] Major Title Ending Level 1</name>
+  <info translatable="yes">The main title of the book repeated at the end of the book (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>20.0</fontsize>
@@ -3383,8 +3383,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ie">
   <marker>ie</marker>
-  <name>End Marker</name>
-  <info>Introduction ending marker</info>
+ <name translatable="yes">End Marker</name>
+  <info translatable="yes">Introduction ending marker</info>
   <type>0</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3414,8 +3414,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pb">
   <marker>pb</marker>
-  <name>Page Break</name>
-  <info>Page Break used for new reader portions and children's bibles where content is controlled by the page</info>
+ <name translatable="yes">Page Break</name>
+  <info translatable="yes">Page Break used for new reader portions and children's bibles where content is controlled by the page</info>
   <type>11</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3445,8 +3445,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fqa">
   <marker>fqa</marker>
-  <name>Alternate Rendering</name>
-  <info>(*) A footnote alternate rendering for a portion of scripture text.</info>
+ <name translatable="yes">Alternate Rendering</name>
+  <info translatable="yes">(*) A footnote alternate rendering for a portion of scripture text.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -3476,8 +3476,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="s3">
   <marker>s3</marker>
-  <name>Section Heading Level 3</name>
-  <info>A section heading, level 3 (e.g. Genesis &quot;The First Day&quot;)</info>
+ <name translatable="yes">Section Heading Level 3</name>
+  <info translatable="yes">A section heading, level 3 (e.g. Genesis &quot;The First Day&quot;)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -3507,8 +3507,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="toc2">
   <marker>toc2</marker>
-  <name>Short Table of Contents Text</name>
-  <info>Short table of contents text</info>
+ <name translatable="yes">Short Table of Contents Text</name>
+  <info translatable="yes">Short table of contents text</info>
   <type>0</type>
   <subtype>5</subtype>
   <fontsize>12.0</fontsize>
@@ -3538,8 +3538,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="qm3">
   <marker>qm3</marker>
-  <name>Embedded Text, Indent Level 3</name>
-  <info>Poetry text, embedded, level 3 indent</info>
+ <name translatable="yes">Embedded Text, Indent Level 3</name>
+  <info translatable="yes">Poetry text, embedded, level 3 indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3569,8 +3569,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="tl">
   <marker>tl</marker>
-  <name>* Transliterated Word</name>
-  <info>For transliterated words</info>
+ <name translatable="yes">* Transliterated Word</name>
+  <info translatable="yes">For transliterated words</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3600,8 +3600,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="imt1">
   <marker>imt1</marker>
-  <name>Major Title Level 1</name>
-  <info>Introduction major title, level 1 (if multiple levels)</info>
+ <name translatable="yes">Major Title Level 1</name>
+  <info translatable="yes">Introduction major title, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>14.0</fontsize>
@@ -3631,8 +3631,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pmc">
   <marker>pmc</marker>
-  <name>Embedded Text Closing</name>
-  <info>Embedded text closing</info>
+ <name translatable="yes">Embedded Text Closing</name>
+  <info translatable="yes">Embedded text closing</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3662,8 +3662,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="glo">
   <marker>glo</marker>
-  <name>Glossary</name>
-  <info>Back matter glossary.</info>
+ <name translatable="yes">Glossary</name>
+  <info translatable="yes">Back matter glossary.</info>
   <type>9</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3693,8 +3693,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="idx">
   <marker>idx</marker>
-  <name>Index</name>
-  <info>Back matter index.</info>
+ <name translatable="yes">Index</name>
+  <info translatable="yes">Back matter index.</info>
   <type>9</type>
   <subtype>4</subtype>
   <fontsize>12.0</fontsize>
@@ -3724,8 +3724,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="k2">
   <marker>k2</marker>
-  <name>Concordance Keyword Level 2</name>
-  <info>Concordance main entry text or keyword, level 2</info>
+ <name translatable="yes">Concordance Keyword Level 2</name>
+  <info translatable="yes">Concordance main entry text or keyword, level 2</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3755,8 +3755,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="toc1">
   <marker>toc1</marker>
-  <name>Long Table of Contents Text</name>
-  <info>Long table of contents text</info>
+ <name translatable="yes">Long Table of Contents Text</name>
+  <info translatable="yes">Long table of contents text</info>
   <type>0</type>
   <subtype>4</subtype>
   <fontsize>12.0</fontsize>
@@ -3786,8 +3786,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pmo">
   <marker>pmo</marker>
-  <name>Embedded Text Opening</name>
-  <info>Embedded text opening</info>
+ <name translatable="yes">Embedded Text Opening</name>
+  <info translatable="yes">Embedded text opening</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3817,8 +3817,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="p">
   <marker>p</marker>
-  <name>Normal, First Line Indent</name>
-  <info>Paragraph text, with first line indent</info>
+ <name translatable="yes">Normal, First Line Indent</name>
+  <info translatable="yes">Paragraph text, with first line indent</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3848,8 +3848,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="h2">
   <marker>h2</marker>
-  <name>Left Running Header</name>
-  <info>Running header text, left side of page</info>
+ <name translatable="yes">Left Running Header</name>
+  <info translatable="yes">Running header text, left side of page</info>
   <type>0</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -3879,8 +3879,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="nd">
   <marker>nd</marker>
-  <name>* Name of Deity</name>
-  <info>For name of diety</info>
+ <name translatable="yes">* Name of Deity</name>
+  <info translatable="yes">For name of diety</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -3910,8 +3910,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="sp">
   <marker>sp</marker>
-  <name>Speaker</name>
-  <info>A heading, to identify the speaker (e.g. Job)</info>
+ <name translatable="yes">Speaker</name>
+  <info translatable="yes">A heading, to identify the speaker (e.g. Job)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -3941,8 +3941,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="fdc">
   <marker>fdc</marker>
-  <name>* DC text</name>
-  <info>Footnote text, applies to Apocrypha only.</info>
+ <name translatable="yes">* DC text</name>
+  <info translatable="yes">Footnote text, applies to Apocrypha only.</info>
   <type>7</type>
   <subtype>4</subtype>
   <fontsize>11.0</fontsize>
@@ -3972,8 +3972,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="xk">
   <marker>xk</marker>
-  <name>Keyword</name>
-  <info>(*) A cross reference keyword.</info>
+ <name translatable="yes">Keyword</name>
+  <info translatable="yes">(*) A cross reference keyword.</info>
   <type>8</type>
   <subtype>2</subtype>
   <fontsize>11.0</fontsize>
@@ -4003,8 +4003,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="maps">
   <marker>maps</marker>
-  <name>Map Index</name>
-  <info>Back matter map index.</info>
+ <name translatable="yes">Map Index</name>
+  <info translatable="yes">Back matter map index.</info>
   <type>9</type>
   <subtype>5</subtype>
   <fontsize>12.0</fontsize>
@@ -4034,8 +4034,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="li1">
   <marker>li1</marker>
-  <name>List Entry Level 1</name>
-  <info>A list entry, level 1 (if multiple levels)</info>
+ <name translatable="yes">List Entry Level 1</name>
+  <info translatable="yes">A list entry, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4065,8 +4065,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="q1">
   <marker>q1</marker>
-  <name>Indent Level 1</name>
-  <info>Poetry text, level 1 indent (if multiple levels)</info>
+ <name translatable="yes">Indent Level 1</name>
+  <info translatable="yes">Poetry text, level 1 indent (if multiple levels)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4096,8 +4096,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="sig">
   <marker>sig</marker>
-  <name>* Author's Signature (Epistles)</name>
-  <info>For the signature of the author of an Epistle</info>
+ <name translatable="yes">* Author's Signature (Epistles)</name>
+  <info translatable="yes">For the signature of the author of an Epistle</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4127,8 +4127,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mt1">
   <marker>mt1</marker>
-  <name>Major Title Level 1</name>
-  <info>The main title of the book (if multiple levels)</info>
+ <name translatable="yes">Major Title Level 1</name>
+  <info translatable="yes">The main title of the book (if multiple levels)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>20.0</fontsize>
@@ -4158,8 +4158,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="va">
   <marker>va</marker>
-  <name>* Alternate verse number</name>
-  <info>Second (alternate) verse number (for coding dual numeration in Psalms; see also NRSV Exo 22.1-4)</info>
+ <name translatable="yes">* Alternate verse number</name>
+  <info translatable="yes">Second (alternate) verse number (for coding dual numeration in Psalms; see also NRSV Exo 22.1-4)</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4189,8 +4189,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="pc">
   <marker>pc</marker>
-  <name>Centered (for Inscription)</name>
-  <info>Paragraph text, centered (for Inscription)</info>
+ <name translatable="yes">Centered (for Inscription)</name>
+  <info translatable="yes">Paragraph text, centered (for Inscription)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4220,8 +4220,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="s1">
   <marker>s1</marker>
-  <name>Section Heading Level 1</name>
-  <info>A section heading, level 1 (if multiple levels)</info>
+ <name translatable="yes">Section Heading Level 1</name>
+  <info translatable="yes">A section heading, level 1 (if multiple levels)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -4251,8 +4251,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mte">
   <marker>mte</marker>
-  <name>[Uncommon] Major Title Ending Level 1</name>
-  <info>The main title of the book repeated at the end of the book (if single level)</info>
+ <name translatable="yes">[Uncommon] Major Title Ending Level 1</name>
+  <info translatable="yes">The main title of the book repeated at the end of the book (if single level)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>20.0</fontsize>
@@ -4282,8 +4282,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="mt">
   <marker>mt</marker>
-  <name>Major Title Level 1</name>
-  <info>The main title of the book (if single level)</info>
+ <name translatable="yes">Major Title Level 1</name>
+  <info translatable="yes">The main title of the book (if single level)</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>20.0</fontsize>
@@ -4313,8 +4313,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="s">
   <marker>s</marker>
-  <name>Section Heading Level 1</name>
-  <info>A section heading, level 1 (if single level)</info>
+ <name translatable="yes">Section Heading Level 1</name>
+  <info translatable="yes">A section heading, level 1 (if single level)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -4344,8 +4344,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="intro">
   <marker>intro</marker>
-  <name>Introduction</name>
-  <info>Front matter introduction.</info>
+ <name translatable="yes">Introduction</name>
+  <info translatable="yes">Front matter introduction.</info>
   <type>9</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4375,8 +4375,8 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="ide">
   <marker>ide</marker>
-  <name>Encoding</name>
-  <info>File encoding information
+ <name translatable="yes">Encoding</name>
+  <info translatable="yes">File encoding information
 Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.</info>
   <type>0</type>
   <subtype>1</subtype>
@@ -4407,8 +4407,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="fk">
   <marker>fk</marker>
-  <name>Keyword</name>
-  <info>(*) A footnote keyword.</info>
+ <name translatable="yes">Keyword</name>
+  <info translatable="yes">(*) A footnote keyword.</info>
   <type>7</type>
   <subtype>3</subtype>
   <fontsize>11.0</fontsize>
@@ -4438,8 +4438,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="bdit">
   <marker>bdit</marker>
-  <name>* BoldItalic Text</name>
-  <info>A character style, use bold + italic text</info>
+ <name translatable="yes">* BoldItalic Text</name>
+  <info translatable="yes">A character style, use bold + italic text</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4469,8 +4469,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="iq2">
   <marker>iq2</marker>
-  <name>Poetry Level 2</name>
-  <info>Introduction poetry text, level 2</info>
+ <name translatable="yes">Poetry Level 2</name>
+  <info translatable="yes">Introduction poetry text, level 2</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4500,8 +4500,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="nb">
   <marker>nb</marker>
-  <name>No Break with Previous Paragraph</name>
-  <info>Paragraph text, with no break from previous paragraph text (at chapter boundary)</info>
+ <name translatable="yes">No Break with Previous Paragraph</name>
+  <info translatable="yes">Paragraph text, with no break from previous paragraph text (at chapter boundary)</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4531,8 +4531,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="k1">
   <marker>k1</marker>
-  <name>Concordance Keyword Level 1</name>
-  <info>Concordance main entry text or keyword, level 1</info>
+ <name translatable="yes">Concordance Keyword Level 1</name>
+  <info translatable="yes">Concordance main entry text or keyword, level 1</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4562,8 +4562,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="imte">
   <marker>imte</marker>
-  <name>[Uncommon] Major Title at Introduction End</name>
-  <info>Introduction major title at introduction end</info>
+ <name translatable="yes">[Uncommon] Major Title at Introduction End</name>
+  <info translatable="yes">Introduction major title at introduction end</info>
   <type>3</type>
   <subtype>0</subtype>
   <fontsize>20.0</fontsize>
@@ -4593,8 +4593,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="id">
   <marker>id</marker>
-  <name>Identification</name>
-  <info>File identification information (BOOKID, FILENAME, EDITOR, MODIFICATION DATE)</info>
+ <name translatable="yes">Identification</name>
+  <info translatable="yes">File identification information (BOOKID, FILENAME, EDITOR, MODIFICATION DATE)</info>
   <type>0</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4624,8 +4624,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="v">
   <marker>v</marker>
-  <name>Verse Number</name>
-  <info>A verse number (Necessary for normal Bibledit operation)</info>
+ <name translatable="yes">Verse Number</name>
+  <info translatable="yes">A verse number (Necessary for normal Bibledit operation)</info>
   <type>6</type>
   <subtype>0</subtype>
   <fontsize>60.0</fontsize>
@@ -4655,8 +4655,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="wj">
   <marker>wj</marker>
-  <name>* Words of Jesus</name>
-  <info>For marking the words of Jesus</info>
+ <name translatable="yes">* Words of Jesus</name>
+  <info translatable="yes">For marking the words of Jesus</info>
   <type>4</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4686,8 +4686,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="toc3">
   <marker>toc3</marker>
-  <name>Book Abbreviation</name>
-  <info>Book Abbreviation (not yet supported by Bibledit).</info>
+ <name translatable="yes">Book Abbreviation</name>
+  <info translatable="yes">Book Abbreviation (not yet supported by Bibledit).</info>
   <type>0</type>
   <subtype>6</subtype>
   <fontsize>12.0</fontsize>
@@ -4717,8 +4717,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="rq">
   <marker>rq</marker>
-  <name>Inline Quotation References</name>
-  <info>A cross-reference indicating the source text for the preceding quotation.</info>
+ <name translatable="yes">Inline Quotation References</name>
+  <info translatable="yes">A cross-reference indicating the source text for the preceding quotation.</info>
   <type>3</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -4748,8 +4748,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tr">
   <marker>tr</marker>
-  <name>Row</name>
-  <info>A new table row.</info>
+ <name translatable="yes">Row</name>
+  <info translatable="yes">A new table row.</info>
   <type>12</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -4779,8 +4779,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="th1">
   <marker>th1</marker>
-  <name>Column 1 Heading</name>
-  <info>A table heading, column 1.</info>
+ <name translatable="yes">Column 1 Heading</name>
+  <info translatable="yes">A table heading, column 1.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4810,8 +4810,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="th2">
   <marker>th2</marker>
-  <name>Column 2 Heading</name>
-  <info>A table heading, column 2.</info>
+ <name translatable="yes">Column 2 Heading</name>
+  <info translatable="yes">A table heading, column 2.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4841,8 +4841,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="th3">
   <marker>th3</marker>
-  <name>Column 3 Heading</name>
-  <info>A table heading, column 3.</info>
+ <name translatable="yes">Column 3 Heading</name>
+  <info translatable="yes">A table heading, column 3.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4872,8 +4872,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="th4">
   <marker>th4</marker>
-  <name>Column 4 Heading</name>
-  <info>A table heading, column 4.</info>
+ <name translatable="yes">Column 4 Heading</name>
+  <info translatable="yes">A table heading, column 4.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4903,8 +4903,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="thr1">
   <marker>thr1</marker>
-  <name>Column 1 Heading, Right Aligned</name>
-  <info>A table heading, column 1, right aligned.</info>
+ <name translatable="yes">Column 1 Heading, Right Aligned</name>
+  <info translatable="yes">A table heading, column 1, right aligned.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4934,8 +4934,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="thr2">
   <marker>thr2</marker>
-  <name>Column 2 Heading, Right Aligned</name>
-  <info>A table heading, column 2, right aligned.</info>
+ <name translatable="yes">Column 2 Heading, Right Aligned</name>
+  <info translatable="yes">A table heading, column 2, right aligned.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4965,8 +4965,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="thr3">
   <marker>thr3</marker>
-  <name>Column 3 Heading, Right Aligned</name>
-  <info>A table heading, column 3, right aligned.</info>
+ <name translatable="yes">Column 3 Heading, Right Aligned</name>
+  <info translatable="yes">A table heading, column 3, right aligned.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -4996,8 +4996,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="thr4">
   <marker>thr4</marker>
-  <name>Column 4 Heading, Right Aligned</name>
-  <info>A table heading, column 4, right aligned.</info>
+ <name translatable="yes">Column 4 Heading, Right Aligned</name>
+  <info translatable="yes">A table heading, column 4, right aligned.</info>
   <type>12</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -5027,8 +5027,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tc1">
   <marker>tc1</marker>
-  <name>Column 1 Cell</name>
-  <info>A table cell item, column 1.</info>
+ <name translatable="yes">Column 1 Cell</name>
+  <info translatable="yes">A table cell item, column 1.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5058,8 +5058,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tc2">
   <marker>tc2</marker>
-  <name>Column 2 Cell</name>
-  <info>A table cell item, column 2.</info>
+ <name translatable="yes">Column 2 Cell</name>
+  <info translatable="yes">A table cell item, column 2.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5089,8 +5089,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tc3">
   <marker>tc3</marker>
-  <name>Column 3 Cell</name>
-  <info>A table cell item, column 3.</info>
+ <name translatable="yes">Column 3 Cell</name>
+  <info translatable="yes">A table cell item, column 3.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5120,8 +5120,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tc4">
   <marker>tc4</marker>
-  <name>Column 4 Cell</name>
-  <info>A table cell item, column 4.</info>
+ <name translatable="yes">Column 4 Cell</name>
+  <info translatable="yes">A table cell item, column 4.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5151,8 +5151,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tcr1">
   <marker>tcr1</marker>
-  <name>Column 1 Cell, Right Aligned</name>
-  <info>A table cell item, column 1, right aligned.</info>
+ <name translatable="yes">Column 1 Cell, Right Aligned</name>
+  <info translatable="yes">A table cell item, column 1, right aligned.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5182,8 +5182,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tcr2">
   <marker>tcr2</marker>
-  <name>Column 2 Cell, Right Aligned</name>
-  <info>A table cell item, column 2, right aligned.</info>
+ <name translatable="yes">Column 2 Cell, Right Aligned</name>
+  <info translatable="yes">A table cell item, column 2, right aligned.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5213,8 +5213,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tcr3">
   <marker>tcr3</marker>
-  <name>Column 3 Cell, Right Aligned</name>
-  <info>A table cell item, column 3, right aligned.</info>
+ <name translatable="yes">Column 3 Cell, Right Aligned</name>
+  <info translatable="yes">A table cell item, column 3, right aligned.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5244,8 +5244,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="tcr4">
   <marker>tcr4</marker>
-  <name>Column 4 Cell, Right Aligned</name>
-  <info>A table cell item, column 4, right aligned.</info>
+ <name translatable="yes">Column 4 Cell, Right Aligned</name>
+  <info translatable="yes">A table cell item, column 4, right aligned.</info>
   <type>12</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5275,8 +5275,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="ca">
   <marker>ca</marker>
-  <name>Alternate Chapter Number</name>
-  <info>Second (alternate) chapter number (for coding dual versification; useful for places where different traditions of chapter breaks need to be supported in the same translation). Bibledit does nothing with this marker yet.</info>
+ <name translatable="yes">Alternate Chapter Number</name>
+  <info translatable="yes">Second (alternate) chapter number (for coding dual versification; useful for places where different traditions of chapter breaks need to be supported in the same translation). Bibledit does nothing with this marker yet.</info>
   <type>0</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5306,8 +5306,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="cl">
   <marker>cl</marker>
-  <name>Chapter Publishing Label</name>
-  <info>Chapter label used for translations that add a word such as &quot;Chapter&quot; before chapter numbers (e.g. Psalms).</info>
+ <name translatable="yes">Chapter Publishing Label</name>
+  <info translatable="yes">Chapter label used for translations that add a word such as &quot;Chapter&quot; before chapter numbers (e.g. Psalms).</info>
   <type>0</type>
   <subtype>7</subtype>
   <fontsize>12.0</fontsize>
@@ -5337,8 +5337,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="cp">
   <marker>cp</marker>
-  <name>Publishing Alternate Chapter Number</name>
-  <info>Published chapter number (this is a chapter marking that would be used in the published text).</info>
+ <name translatable="yes">Publishing Alternate Chapter Number</name>
+  <info translatable="yes">Published chapter number (this is a chapter marking that would be used in the published text).</info>
   <type>0</type>
   <subtype>8</subtype>
   <fontsize>12.0</fontsize>
@@ -5368,8 +5368,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="pro">
   <marker>pro</marker>
-  <name>* CJK Prounciation</name>
-  <info>For indicating pronunciation in CJK texts</info>
+ <name translatable="yes">* CJK Prounciation</name>
+  <info translatable="yes">For indicating pronunciation in CJK texts</info>
   <type>0</type>
   <subtype>9</subtype>
   <fontsize>12.0</fontsize>
@@ -5399,8 +5399,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="wh">
   <marker>wh</marker>
-  <name>* Hebrew Wordlist Entry</name>
-  <info>A Hebrew wordlist text item.</info>
+ <name translatable="yes">* Hebrew Wordlist Entry</name>
+  <info translatable="yes">A Hebrew wordlist text item.</info>
   <type>13</type>
   <subtype>1</subtype>
   <fontsize>12.0</fontsize>
@@ -5430,8 +5430,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="wg">
   <marker>wg</marker>
-  <name>* Greek Wordlist Entry</name>
-  <info>A Greek Wordlist text item.</info>
+ <name translatable="yes">* Greek Wordlist Entry</name>
+  <info translatable="yes">A Greek Wordlist text item.</info>
   <type>13</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>
@@ -5461,8 +5461,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="ndx">
   <marker>ndx</marker>
-  <name>* Subject Index Entry</name>
-  <info>A subject index text item.</info>
+ <name translatable="yes">* Subject Index Entry</name>
+  <info translatable="yes">A subject index text item.</info>
   <type>13</type>
   <subtype>3</subtype>
   <fontsize>12.0</fontsize>
@@ -5492,8 +5492,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="w">
   <marker>w</marker>
-  <name>* Wordlist Entry</name>
-  <info>A wordlist text item.</info>
+ <name translatable="yes">* Wordlist Entry</name>
+  <info translatable="yes">A wordlist text item.</info>
   <type>13</type>
   <subtype>0</subtype>
   <fontsize>12.0</fontsize>
@@ -5523,8 +5523,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
  </style>
  <style marker="r">
   <marker>r</marker>
-  <name>Parallel References</name>
-  <info>Parallel reference(s)</info>
+ <name translatable="yes">Parallel References</name>
+  <info translatable="yes">Parallel reference(s)</info>
   <type>3</type>
   <subtype>2</subtype>
   <fontsize>12.0</fontsize>

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 4.8.12\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
 "POT-Creation-Date: 2017-06-09 16:40-0400\n"
-"PO-Revision-Date: 2017-05-30 20:12+0100\n"
+"PO-Revision-Date: 2018-03-01 20:09+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1239,7 +1239,7 @@ msgstr "Proverbes"
 
 #: ../src/books.cpp:420
 msgid "Pro"
-msgstr ""
+msgstr "Pro"
 
 #: ../src/books.cpp:421
 msgid "Ecclesiastes"
@@ -2807,7 +2807,7 @@ msgstr "_Exportater"
 
 #: ../src/dialogeditlist.cpp:197
 msgid "_Duplicates"
-msgstr "-Dupliquer"
+msgstr "_Dupliquer"
 
 #: ../src/dialogeditlist.cpp:321
 msgid "Select a task to add"
@@ -2980,7 +2980,6 @@ msgid "Selection color"
 msgstr "Couleur de la sélection"
 
 #: ../src/dialoggui.cpp:146
-#, fuzzy
 msgid "The changes will take effect after Bibledit-Desktop has been restarted"
 msgstr ""
 "Les modifications prendront effet après un redémarrage de Bibledit-Desktop"
@@ -5061,10 +5060,11 @@ msgstr "Serveur web : "
 #: ../src/httpd.cpp:430
 msgid "<p>See also the <a href=\"index.html\">general online help.</a></p>\n"
 msgstr ""
+"<p>Voir aussi <a href=\"index.html\">l'aide générale en ligne.</a></p>\n"
 
 #: ../src/httpd.cpp:544
 msgid "<p>No search results.</p>"
-msgstr ""
+msgstr "<p>Aucun résultat de la recherche.</p>"
 
 #: ../src/import.cpp:64
 msgid "Data from "
@@ -5677,7 +5677,7 @@ msgstr "Êtes-vous certain de vouloir supprimer le projet "
 
 #: ../src/mainwindow.cpp:2069
 msgid ", something worth perhaps years of work?"
-msgstr " , qui peut constituer des années de travail ?"
+msgstr ", qui peut constituer des années de travail ?"
 
 #: ../src/mainwindow.cpp:2131
 msgid "Copyright (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
@@ -5784,7 +5784,7 @@ msgstr ""
 
 #: ../src/mainwindow.cpp:3559
 msgid "next"
-msgstr ""
+msgstr "suivant"
 
 #: ../src/mainwindow.cpp:3561
 msgid "previous"
@@ -5921,7 +5921,6 @@ msgstr ""
 "le fichier que vous aurez téléchargé y sera importé."
 
 #: ../src/mechonmamre.cpp:97
-#, fuzzy
 msgid "Hebrew import from Mechon Mamre"
 msgstr "Hébreu importé depuis Mechon Mamre"
 
@@ -5975,14 +5974,12 @@ msgid "Importing "
 msgstr "Importation en cours"
 
 #: ../src/mechonmamre.cpp:232
-#, fuzzy
 msgid " from file "
-msgstr "depuis le fichier "
+msgstr " depuis le fichier "
 
 #: ../src/mechonmamre.cpp:239
-#, fuzzy
 msgid "Success! Bible was created: "
-msgstr "Réussi ! La Bible a été créée :"
+msgstr "Réussi ! La Bible a été créée : "
 
 #: ../src/mechonmamre.cpp:246
 msgid ""
@@ -5990,15 +5987,17 @@ msgid ""
 "font for better display of the Hebrew text. A donation made to Mechon Mamre "
 "will support their work."
 msgstr ""
+"Pour voir le texte en hébreu, ouvrez la Bible dans l'éditeur. En option, "
+"définissez la police pour un meilleur affichage du texte. Un don fait à "
+"Mechon Mamre soutiendra leur travail."
 
 #: ../src/mechonmamre.cpp:275
 msgid "Mechon Mamre"
 msgstr "Mechon Mamre"
 
 #: ../src/mechonmamre.cpp:277
-#, fuzzy
 msgid "Copyright"
-msgstr "droit d'auteur"
+msgstr "Droit d'auteur"
 
 #: ../src/merge_utils.cpp:37
 msgid "before"
@@ -6457,24 +6456,20 @@ msgid " does not exist in project "
 msgstr "n'existe pas dans le projet"
 
 #: ../src/reporting.cpp:40
-#, fuzzy
 msgid "status"
-msgstr "État"
+msgstr "état"
 
 #: ../src/reporting.cpp:66
-#, fuzzy
 msgid "First Draft"
-msgstr "Premier projet :"
+msgstr "Premier brouillon"
 
 #: ../src/reporting.cpp:67
-#, fuzzy
 msgid "Self Check"
-msgstr "Vérifications"
+msgstr "Vérification personnelle"
 
 #: ../src/reporting.cpp:68
-#, fuzzy
 msgid "Team Check"
-msgstr "Vérifications"
+msgstr "Vérifications de l'équipe"
 
 #: ../src/reporting.cpp:69
 msgid "Back Translation"
@@ -6485,37 +6480,32 @@ msgid "Advisor Check"
 msgstr ""
 
 #: ../src/reporting.cpp:71
-#, fuzzy
 msgid "First Revision"
-msgstr "Révisions"
+msgstr "Premimère révision"
 
 #: ../src/reporting.cpp:72
 msgid "First Village Check"
 msgstr ""
 
 #: ../src/reporting.cpp:73
-#, fuzzy
 msgid "Second Revision"
-msgstr "deuxième personne"
+msgstr "Deuxième révision"
 
 #: ../src/reporting.cpp:74
 msgid "Second Village Check"
 msgstr ""
 
 #: ../src/reporting.cpp:75
-#, fuzzy
 msgid "Third Revision"
-msgstr "Révisions"
+msgstr "Troisième révision"
 
 #: ../src/reporting.cpp:76
-#, fuzzy
 msgid "Consultant Check"
-msgstr "Pour le conseiller"
+msgstr "Vérification du consultant"
 
 #: ../src/reporting.cpp:77
-#, fuzzy
 msgid "Fourth Revision"
-msgstr "Révisions"
+msgstr "Quatrième révision"
 
 #: ../src/reporting.cpp:78
 msgid "First Read Through"
@@ -6527,11 +6517,11 @@ msgstr ""
 
 #: ../src/reporting.cpp:80
 msgid "Publish"
-msgstr ""
+msgstr "Publier"
 
 #: ../src/reporting.cpp:81
 msgid "Post Publish Revision"
-msgstr ""
+msgstr "Révision post-publication"
 
 #: ../src/reporting.cpp:457
 msgid "Status for chapter "
@@ -6539,22 +6529,19 @@ msgstr "État du chapitre"
 
 #: ../src/reporting.cpp:554
 msgid "Printing status for book "
-msgstr ""
+msgstr "Impression de l'état pour le livre"
 
 #: ../src/reporting.cpp:569
-#, fuzzy
 msgid "Loading status"
-msgstr "Chargement de "
+msgstr "Chargement de l'état"
 
 #: ../src/reporting.cpp:637
-#, fuzzy
 msgid "Printing project status "
-msgstr "État du projet"
+msgstr "Impression de l'état du projet "
 
 #: ../src/reporting.cpp:765
-#, fuzzy
 msgid "Creating report"
-msgstr "Création de livres"
+msgstr "Création de rapport"
 
 #: ../src/reporting.cpp:769
 msgid "Status Report"
@@ -6574,9 +6561,8 @@ msgid "project"
 msgstr "projet"
 
 #: ../src/reporting.cpp:802
-#, fuzzy
 msgid "project_complete.csv"
-msgstr "_Notes du projet"
+msgstr "projet_complet.csv"
 
 #: ../src/reporting.cpp:804 ../src/reporting.cpp:829
 msgid "The above data in csv format"
@@ -6588,7 +6574,7 @@ msgstr "Pourcentage des livres réalisés"
 
 #: ../src/reporting.cpp:827
 msgid "books_complete.csv"
-msgstr ""
+msgstr "livres_complet.csv"
 
 #: ../src/reporting.cpp:861
 msgid "Tasks per book - Legend"
@@ -8424,12 +8410,16 @@ msgid ""
 "Bibledit-Web local or remote website URL:\n"
 "(example: http://localhost/bibledit)"
 msgstr ""
+"Bibledit-Web URL locale ou  d'un site Web distant :\n"
+"(exemple : http:// ocalhost/bibledit)"
 
 #: ../templates/gtkbuilder.referenceexchangedialog.xml:50
 msgid ""
 "Bibledit-Web username:\n"
 "(example: joe)"
 msgstr ""
+"Nom d'utilisateur de Bibledit-Web :\n"
+"(exemple : pierre)"
 
 #: ../templates/gtkbuilder.referenceexchangedialog.xml:82
 msgid "Test"
