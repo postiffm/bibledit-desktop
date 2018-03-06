@@ -29,6 +29,17 @@ book::book(bible *_bbl, const ustring &_bookname, int _booknum) : chapters(1)
     booknum = _booknum;
 }
 
+book_byz::book_byz(bible *_bbl, const ustring &_bookname, int _booknum): book(bbl,  _bookname,  _booknum)
+{
+  // nothing special needs done       
+}
+
+book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, int _booknum): book(bbl,  _bookname,  _booknum)
+{
+  // nothing special needs done       
+}
+
+
 book::book() : chapters(0)
 {
    bbl = NULL;
@@ -176,6 +187,17 @@ bible::bible(const ustring &_proj) : books(1)
     // Note: books[0] is unused; simply here to avoid the "off by one" indexing error
     projname = _proj;
 }
+
+bible_byz::bible_byz(const ustring &_proj) : bible (_proj)
+{
+  // Nothing special to do here   
+}
+
+bible_sblgnt::bible_sblgnt(const ustring &_proj) : bible (_proj)
+{
+  // Nothing special to do here   
+}
+
 
 void bible::clear(void)
 {
@@ -448,8 +470,9 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 
 ReferenceBibles::ReferenceBibles() : bibles(10)
 {
-  bibles[0] = new bible("BYZ");
-  // I have room for 9 other Bibles at the moment; see above constructor line
+  bibles[0] = new bible_byz("BYZ");
+  bibles[1] = new bible_sblgnt("SBL");
+  // I have room for 8 other Bibles at the moment; see above constructor line
 }
 
 ReferenceBibles::~ReferenceBibles()
@@ -482,7 +505,7 @@ ustring book::retrieve_verse(const Reference &ref)
     return chapters[ch]->retrieve_verse(ref);
 }
 
-void book::byzasciiConvert(ustring &vs)
+void book_byz::byzasciiConvert(ustring &vs)
 {
   // From the README:
   // The Greek is keyed to the Online Bible format, which differs from
@@ -539,8 +562,8 @@ void book::byzasciiConvert(ustring &vs)
   }
 }
 
-// load pre-stored reference Bible
-void book::load(void)
+// Load Byzantine Text from shared resource directory
+void book_byz::load(void)
 {
   ustring filenames[27] = { "MT_BYZ.txt",  "MR_BYZ.txt",  "LU_BYZ.txt", "JOH_BYZ.txt", "AC_BYZ.txt",
             "RO_BYZ.txt",  "1CO_BYZ.txt", "2CO_BYZ.txt", "GA_BYZ.txt",  "EPH_BYZ.txt", "PHP_BYZ.txt", "COL_BYZ.txt",
@@ -584,23 +607,114 @@ void book::load(void)
     }
 }
 
-ustring bible::retrieve_verse(const Reference &ref)
+// Load SBL Greek NT Text from shared resource directory
+void book_sblgnt::load(void)
+{
+    ustring filenames[27] = { "61-Mt.txt", "62-Mk.txt", "63-Lk.txt", "64-Jn.txt", "65-Ac.txt", 
+                              "66-Ro.txt", "67-1Co.txt", "68-2Co.txt", "69-Ga.txt", "70-Eph.txt", "71-Php.txt", 
+                              "72-Col.txt", "73-1Th.txt", "74-2Th.txt", "75-1Ti.txt", "76-2Ti.txt", "77-Tit.txt", 
+                              "78-Phm.txt", "79-Heb.txt", "80-Jas.txt", "81-1Pe.txt", "82-2Pe.txt", "83-1Jn.txt", 
+                              "84-2Jn.txt", "85-3Jn.txt", "86-Jud.txt", "87-Re.txt" };
+    
+    // We know our book number and localized name already
+    int bookidx = booknum - 40;
+    if ((bookidx < 0) ||  (bookidx > 26)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+   
+    //  From utilities.cpp
+    ReadText rt("/home/postiffm/bibledit-desktop/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    unsigned int currchapnum = 0;
+    chapter *currchap = NULL;
+    int linecnt = 0;
+    
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         //  first line is title of book,  we don't need right now
+         if (linecnt == 0) { linecnt++; continue; }
+         //  Extract chapter and verse,  and leading space. The lines are always
+         //  well formed: Book<space>1:5<tab>Verse text.
+         //  1. Remove book name from the line
+         size_t spaceposition = it.find_first_of(" ");
+         it.erase(0,  spaceposition+1);
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         size_t tabposition = it.find_first_of("\t");
+         ustring versestring = it.substr(colonposition+1, tabposition);
+         unsigned int versenum = convert_to_int(versestring);
+         it.erase(0, tabposition+1);
+         if (chapnum != currchapnum) {
+             chapter *newchap = new chapter(this,  chapnum);
+             chapters.push_back(newchap);
+             currchap = newchap;
+             currchapnum = chapnum;
+             //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         currchap->verses.push_back(newverse); //  append verse to current chapter
+         //newverse->print(); // debug
+    }
+}
+
+void book::load(void)
+{
+  //  This stub can't do anything because it has to know exactly what kind of book it is loading
+  //  This would argue that the book base class be abstract only,  and not be able to have any
+  // instantiations of it.
+}
+
+
+ustring bible_byz::retrieve_verse(const Reference &ref)
 {
     unsigned int booknum = ref.book_get();
-    // 1. Does this Bible support this book? BYZ, for instance, only has books 40-66.
+    // 1. Does this Bible support this book? SBLGNT only has books 40-66.
     if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
+        
+    check_book_in_range(booknum);
+    
+    //  NOTICE SIMILARITY THIS METHOD TO NEXT,  same except new book_byz statement
     
     // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (books[booknum] == NULL) {
+        books[booknum] = new book_byz((bible*)this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref);
+}
+
+ustring bible_sblgnt::retrieve_verse(const Reference &ref)
+{
+    unsigned int booknum = ref.book_get();
+    // 1. Does this Bible support this book? SBLGNT only has books 40-66.
+    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
+        
+    check_book_in_range(booknum);
+
+    // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (books[booknum] == NULL) {
+        books[booknum] = new book_sblgnt(this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref);
+}
+
+//  There has to be a better name for this method
+void bible::check_book_in_range(unsigned int booknum)
+{
+    // Is this book number in the range that we have already created in our vector? If not, 
+    // resize the vector.
     if (booknum >= books.size()) {
         // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
         // books[0] exists, but is unused. So we resize books to 2 elements.
       books.resize(booknum+1);
     }
-    if (books[booknum] == NULL) {
-        books[booknum] = new book(this, books_id_to_localname(booknum),  booknum);
-        books[booknum]->load();
-    }
-    return books[booknum]->retrieve_verse(ref);
+}
+
+// This virtual method should probably be abstract,  making the class as a whole abstract...
+ustring bible::retrieve_verse(const Reference &ref)
+{
+   return "Unknown Bible type in retrieve_verse";
 }
 
 void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)

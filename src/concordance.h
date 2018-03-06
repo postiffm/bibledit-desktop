@@ -59,10 +59,24 @@ class book {
   public:
 	book(bible *_bbl, const ustring &_bookname, int _booknum);
     book();
-    ~book();
+    virtual ~book();
     ustring retrieve_verse(const Reference &ref);
     void byzasciiConvert(ustring &vs);
-    void load(void);
+    virtual void load(void);
+};
+
+class book_byz : public book {
+public:
+  book_byz(bible *_bbl, const ustring &_bookname, int _booknum);
+  void load(void);
+private:
+  void byzasciiConvert(ustring &vs);
+};
+
+class book_sblgnt : public book {
+public:
+  book_sblgnt(bible *_bbl, const ustring &_bookname, int _booknum);
+  void load(void);
 };
 
 class chapter {
@@ -94,12 +108,27 @@ class verse {
 class bible {
  public:
   ustring projname;
-  vector<book *> books; 
+  vector<book *> books;
   bible(const ustring &_proj);
-  ~bible();
+  virtual ~bible();
   void clear(void);
-  ustring retrieve_verse(const Reference &ref);
+  virtual ustring retrieve_verse(const Reference &ref);
+protected: // so derived bibles can access it
+  void check_book_in_range(unsigned int booknum);
 };
+
+class bible_byz : public bible {
+public:
+    bible_byz(const ustring &_proj);
+    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+};
+
+class bible_sblgnt : public bible {
+public:
+    bible_sblgnt(const ustring &_proj);
+    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+};
+
 
 class Concordance {
  public:
