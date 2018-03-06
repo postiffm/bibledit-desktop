@@ -2486,7 +2486,8 @@ void MainWindow::on_navigation_new_reference()
     HtmlWriter2 html("");
     refbibles->write(navigation.reference, html);
     html.finish();
-    window_refbibles->updateTab(_("English and Greek"), html);
+    window_refbibles->updateTab(_("Greek and English"), html);
+    // I plan to have text apparatus, or translator notes in another tab that we will update next.
   }
 }
 
@@ -2855,7 +2856,7 @@ void MainWindow::on_view_refbibles ()
     // Load reference Bible data
     refbibles->write(navigation.reference, html);
     html.finish();
-    window_refbibles->newTab(_("English and Greek"), html);
+    window_refbibles->newTab(_("Greek and English"), html);
     
     g_signal_connect((gpointer) window_refbibles->delete_signal_button, "clicked", G_CALLBACK(on_window_refbibles_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_refbibles->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));

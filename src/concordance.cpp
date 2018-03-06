@@ -469,7 +469,7 @@ ustring chapter::retrieve_verse(const Reference &ref)
     // I assume that the verse is not of the form 2:x-y,  but just 2:x
     // 1. Check if the verse is in range
     unsigned int vs = ref.verse_get_single();
-    if (vs >= verses.size()) { return "Verse out of range"; }
+    if ((vs == 0) ||  (vs >= verses.size())) { return "Verse out of range"; }
     return verses[vs]->retrieve_verse(ref);
 }
 
@@ -478,7 +478,7 @@ ustring book::retrieve_verse(const Reference &ref)
     // Assumes it is already loaded
     // 1. Check if chapter is in range
     unsigned int ch = ref.chapter_get();
-    if (ch >= chapters.size()) { return "Chapter out of range"; }
+    if ((ch ==  0) ||  (ch >= chapters.size())) { return "Chapter out of range"; }
     return chapters[ch]->retrieve_verse(ref);
 }
 
