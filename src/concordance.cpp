@@ -20,6 +20,7 @@
 #include "concordance.h"
 #include <glib/gi18n.h>
 #include "progresswindow.h"
+#include "directories.h"
 
 book::book(bible *_bbl, const ustring &_bookname, int _booknum) : chapters(1)
 {
@@ -578,7 +579,7 @@ void book_byz::load(void)
     }
    
     //  From utilities.cpp
-    ReadText rt("/home/postiffm/bibledit-desktop/bibles/byzascii/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    ReadText rt(Directories->get_package_data() + "/bibles/byzascii/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
     
@@ -623,7 +624,7 @@ void book_sblgnt::load(void)
     }
    
     //  From utilities.cpp
-    ReadText rt("/home/postiffm/bibledit-desktop/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    ReadText rt(Directories->get_package_data() + "/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
     int linecnt = 0;

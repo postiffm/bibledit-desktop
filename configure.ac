@@ -344,6 +344,7 @@ AC_CONFIG_FILES([Makefile
 		  git/Makefile
 		  php/Makefile
 		  po/Makefile.in
+		  bibles/Makefile
 		])
 AC_OUTPUT
 
