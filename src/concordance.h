@@ -96,6 +96,8 @@ class chapter {
     ~chapter();
 	void load(int book, int chapter,
               std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,      std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
+    void appendToLastVerse(const ustring &addlText);
+    void prependToLastVerse(const ustring &addlText);
     ustring retrieve_verse(const Reference &ref);
 };
 
@@ -108,6 +110,8 @@ class verse {
     void print(void);
 	void addToWordCount(std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
         std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
+    void append(const ustring &addlText);
+    void prepend(const ustring &addlText);
     ustring retrieve_verse(const Reference &ref);
 };
 

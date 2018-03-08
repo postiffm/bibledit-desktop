@@ -507,6 +507,31 @@ ustring chapter::retrieve_verse(const Reference &ref)
     return verses[vs]->retrieve_verse(ref);
 }
 
+void verse::append(const ustring &addlText)
+{
+    text = text + addlText;
+    cout << "Appended [[" << addlText << "]] to " "verse " << vsnum << endl;
+}
+
+void verse::prepend(const ustring &addlText)
+{
+    text = addlText + text;
+    cout << "Prepended [[" << addlText << "]] to " "verse " << vsnum << endl;
+}
+
+void chapter::appendToLastVerse(const ustring &addlText)
+{
+    verse *lastVerse = verses[verses.size()-1];
+    lastVerse->append(addlText);
+}
+
+void chapter::prependToLastVerse(const ustring &addlText)
+{
+    // This was "invented" to handle adding the title of a Psalm to the beginning of verse 1 of the Psalm, like in LEB
+    verse *lastVerse = verses[verses.size()-1];
+    lastVerse->prepend(addlText);
+}
+
 ustring book::retrieve_verse(const Reference &ref)
 {
     // Assumes it is already loaded
@@ -642,7 +667,7 @@ void book_sblgnt::load(void)
     
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
-         //  first line is title of book,  we don't need them
+         // First line is title of book, we don't need them
          if (linecnt == 0) { linecnt++; continue; }
          //  Extract chapter and verse,  and leading space. The lines are always
          //  well formed: Book<space>1:5<tab>Verse text.
@@ -692,14 +717,15 @@ void book_leb::load(void)
     }
     
     //  From utilities.cpp
-    ReadText rt(Directories->get_package_data() + "/bibles/engleb/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    ReadText rt(Directories->get_package_data() + "/bibles/engleb/" + filenames[bookidx], /*silent*/false, /*trimAll*/false, /*trimEnd*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
     int linecnt = 0;
+    ustring psalmTitle = "";
     
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
-         //  first 3 lines are title of book with dashed lines,  we don't need them
+         // First 3 lines are title of book with dashed lines above and below, we don't need them
          if (linecnt <= 3) { linecnt++; continue; }
          if (it.size() == 0) { continue; }                 //  ignore blank lines
          // ignore lines that are like CHAPTER 1
@@ -712,26 +738,38 @@ void book_leb::load(void)
          //  just as Isaiah...
          // So we have a quotation. This occurs about 300 times in the entire LEB. these lines
          // always start with a space.
-         //  Remove book name from the line
-         size_t spaceposition = it.find_first_of(" ");
-         it.erase(0,  spaceposition+1);
-         size_t colonposition = it.find_first_of(":");
-         ustring chapstring = it.substr(0,  colonposition);
-         unsigned int chapnum = convert_to_int(chapstring);
-         size_t tabposition = it.find_first_of("\t");
-         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
-         unsigned int versenum = convert_to_int(versestring);
-         it.erase(0, tabposition+1);
-         if (chapnum != currchapnum) {
-             chapter *newchap = new chapter(this,  chapnum);
-             chapters.push_back(newchap);
-             currchap = newchap;
-             currchapnum = chapnum;
-             cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         if ((it[0] == ' ') || (it[0] == '\t')) {
+             // This is a special case: attach it to the prior verse.
+             currchap->appendToLastVerse(it);
          }
-         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-         currchap->verses.push_back(newverse); //  append verse to current chapter
-         newverse->print(); // debug
+         else {
+             //  Remove book name from the line
+             size_t spaceposition = it.find_first_of(" ");
+             it.erase(0,  spaceposition+1);
+             size_t colonposition = it.find_first_of(":");
+             ustring chapstring = it.substr(0,  colonposition);
+             unsigned int chapnum = convert_to_int(chapstring);
+             size_t tabposition = it.find_first_of("\t");
+             ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
+             unsigned int versenum = convert_to_int(versestring);
+             it.erase(0, tabposition+1);
+             if (chapnum != currchapnum) {
+                 chapter *newchap = new chapter(this,  chapnum);
+                 chapters.push_back(newchap);
+                 currchap = newchap;
+                 currchapnum = chapnum;
+                 cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+             }
+             if (versestring == "title") {
+                  psalmTitle = it;
+             }
+             else {
+               verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+               currchap->verses.push_back(newverse); //  append verse to current chapter
+               if (!psalmTitle.empty()) { currchap->prependToLastVerse(psalmTitle+"\n"); psalmTitle.clear(); }
+               newverse->print(); // debug
+             }
+         }
     }
 }
 

@@ -783,7 +783,7 @@ ReadFiles::~ReadFiles()
 }
 
 
-ReadText::ReadText(const ustring & file, bool silent, bool trimming)
+ReadText::ReadText(const ustring & file, bool silent, bool trimAll, bool trimEnding)
 {
   // Reads the text and stores it line by line, trimmed, into "lines".
   // If "silent" is true, then no exception will be thrown in case of an error.
@@ -798,8 +798,11 @@ ReadText::ReadText(const ustring & file, bool silent, bool trimming)
   }
   string s;
   while (getline(in, s)) {
-    if (trimming) {
+    if (trimAll) {
       s = trim(s);
+    }
+    else if (trimEnding) {
+      s = trimEnd(s);
     }
     lines.push_back(s);
   }
