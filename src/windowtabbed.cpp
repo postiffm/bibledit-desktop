@@ -222,7 +222,7 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 
 void SingleTab::updateHtml(HtmlWriter2 &html)
 {
-    cerr << "HTML=" << html.html.c_str() << endl;
+   // cerr << "HTML=" << html.html.c_str() << endl;
    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL, NULL, NULL);
 }
 
