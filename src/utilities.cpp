@@ -798,8 +798,9 @@ ReadText::ReadText(const ustring & file, bool silent, bool trimming)
   }
   string s;
   while (getline(in, s)) {
-    if (trimming)
+    if (trimming) {
       s = trim(s);
+    }
     lines.push_back(s);
   }
 }

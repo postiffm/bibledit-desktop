@@ -54,10 +54,10 @@ class book {
   public:
 	bible *bbl;  // back pointer to the containing bible // book does NOT own bible for garbage collection purposes
 	ustring bookname;
-    int booknum;
+    unsigned int booknum;
 	vector<chapter *> chapters;
   public:
-	book(bible *_bbl, const ustring &_bookname, int _booknum);
+	book(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
     book();
     virtual ~book();
     ustring retrieve_verse(const Reference &ref);
@@ -67,7 +67,7 @@ class book {
 
 class book_byz : public book {
 public:
-  book_byz(bible *_bbl, const ustring &_bookname, int _booknum);
+  book_byz(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
   void load(void);
 private:
   void byzasciiConvert(ustring &vs);
@@ -75,7 +75,13 @@ private:
 
 class book_sblgnt : public book {
 public:
-  book_sblgnt(bible *_bbl, const ustring &_bookname, int _booknum);
+  book_sblgnt(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+  void load(void);
+};
+
+class book_leb : public book {
+public:
+  book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
   void load(void);
 };
 
@@ -129,6 +135,11 @@ public:
     ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
 };
 
+class bible_leb : public bible {
+public:
+    bible_leb(const ustring &_proj);
+    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+};
 
 class Concordance {
  public:

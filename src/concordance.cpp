@@ -22,7 +22,7 @@
 #include "progresswindow.h"
 #include "directories.h"
 
-book::book(bible *_bbl, const ustring &_bookname, int _booknum) : chapters(1)
+book::book(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : chapters(1)
 {
     // Note: chapters[0] is unused; simply here to avoid the "off by one" indexing error
 	bbl = _bbl;
@@ -30,19 +30,24 @@ book::book(bible *_bbl, const ustring &_bookname, int _booknum) : chapters(1)
     booknum = _booknum;
 }
 
-book_byz::book_byz(bible *_bbl, const ustring &_bookname, int _booknum): book(bbl,  _bookname,  _booknum)
+book_byz::book_byz(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
   // nothing special needs done       
 }
 
-book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, int _booknum): book(bbl,  _bookname,  _booknum)
+book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
   // nothing special needs done       
 }
 
-
-book::book() : chapters(0)
+book_leb::book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
+  // nothing special needs done       
+}
+
+book::book() : chapters(1)
+{
+  // Note: chapters[0] is unused; simply here to avoid the "off by one" indexing error
    bbl = NULL;
    bookname = "Unset book name";
    booknum = 0;
@@ -199,6 +204,10 @@ bible_sblgnt::bible_sblgnt(const ustring &_proj) : bible (_proj)
   // Nothing special to do here   
 }
 
+bible_leb::bible_leb(const ustring &_proj) : bible (_proj)
+{
+  // Nothing special to do here   
+}
 
 void bible::clear(void)
 {
@@ -471,9 +480,10 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 
 ReferenceBibles::ReferenceBibles() : bibles(10)
 {
-  bibles[0] = new bible_byz("BYZ");
-  bibles[1] = new bible_sblgnt("SBL");
-  // I have room for 8 other Bibles at the moment; see above constructor line
+  bibles[0] = new bible_byz("BYZ");                         //  Byzantine Majority Text,  Pierpont/Robinson
+  bibles[1] = new bible_sblgnt("SBL");                      //  SBL Greek NT
+  bibles[2] = new bible_leb("LEB");                         //  Lexham English Bible
+  // I have room for 7 other Bibles at the moment; see above constructor line
 }
 
 ReferenceBibles::~ReferenceBibles()
@@ -573,7 +583,7 @@ void book_byz::load(void)
             "JUDE_BYZ.txt", "RE_BYZ.txt" };
     
     // We know our book number and localized name already
-    int bookidx = booknum - 40;
+    unsigned int bookidx = booknum - 40;
     if ((bookidx < 0) ||  (bookidx > 26)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
@@ -588,10 +598,11 @@ void book_byz::load(void)
          //  Extract chapter and verse,  and leading space. The lines are always
          //  well formed: 1:5<space>Verse text.
          size_t colonposition = it.find_first_of(":");
+	 // substr takes start position and length
          ustring chapstring = it.substr(0,  colonposition);
          unsigned int chapnum = convert_to_int(chapstring);
          size_t spaceposition = it.find_first_of(" ");
-         ustring versestring = it.substr(colonposition+1, spaceposition);
+         ustring versestring = it.substr(colonposition+1, spaceposition-colonposition-1);
          unsigned int versenum = convert_to_int(versestring);
          it.erase(0,  spaceposition+1);
          if (chapnum != currchapnum) {
@@ -618,7 +629,7 @@ void book_sblgnt::load(void)
                               "84-2Jn.txt", "85-3Jn.txt", "86-Jud.txt", "87-Re.txt" };
     
     // We know our book number and localized name already
-    int bookidx = booknum - 40;
+    unsigned int bookidx = booknum - 40;
     if ((bookidx < 0) ||  (bookidx > 26)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
@@ -631,18 +642,18 @@ void book_sblgnt::load(void)
     
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
-         //  first line is title of book,  we don't need right now
+         //  first line is title of book,  we don't need them
          if (linecnt == 0) { linecnt++; continue; }
          //  Extract chapter and verse,  and leading space. The lines are always
          //  well formed: Book<space>1:5<tab>Verse text.
-         //  1. Remove book name from the line
+         //  Remove book name from the line
          size_t spaceposition = it.find_first_of(" ");
          it.erase(0,  spaceposition+1);
          size_t colonposition = it.find_first_of(":");
          ustring chapstring = it.substr(0,  colonposition);
          unsigned int chapnum = convert_to_int(chapstring);
          size_t tabposition = it.find_first_of("\t");
-         ustring versestring = it.substr(colonposition+1, tabposition);
+         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
          unsigned int versenum = convert_to_int(versestring);
          it.erase(0, tabposition+1);
          if (chapnum != currchapnum) {
@@ -655,6 +666,72 @@ void book_sblgnt::load(void)
          verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
          currchap->verses.push_back(newverse); //  append verse to current chapter
          //newverse->print(); // debug
+    }
+}
+
+// Load SBL Greek NT Text from shared resource directory
+void book_leb::load(void)
+{
+    ustring filenames[66] = {
+        "Gen.txt",  "Exo.txt",  "Lev.txt",  "Num.txt",   "Deut.txt", "Josh.txt", "Judg.txt",
+        "Ruth.txt", "1Sa.txt",  "2Sa.txt",  "1Ki.txt",   "2Ki.txt",  "1Ch.txt",  "2Ch.txt",
+        "Ezra.txt", "Neh.txt",  "Esth.txt", "Job.txt",   "Psal.txt", "Prov.txt", "Eccl.txt",
+        "Song.txt", "Isa.txt",  "Jer.txt",  "Lam.txt",   "Ezek.txt", "Dan.txt",  "Hos.txt",
+        "Joel.txt", "Amos.txt", "Obad.txt", "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt", 
+        "Zeph.txt", "Hag.txt",  "Zech.txt", "Mal.txt",   "Matt.txt", "Mark.txt", "Luke.txt",
+        "John.txt", "Acts.txt", "Rom.txt",  "1Co.txt",   "2Co.txt",  "Gal.txt",  "Eph.txt", 
+        "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt", 
+        "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt", 
+        "3Jn.txt", "Jude.txt", "Rev.txt" };
+    
+    //  bookidx points into the filenames[] array. It has to start at zero. booknum is from 1-66 (or more for apocrypha)
+    unsigned int bookidx = booknum - 1; 
+    // We know our book number and localized name already
+    if ((bookidx < 0) ||  (bookidx > 65)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+    
+    //  From utilities.cpp
+    ReadText rt(Directories->get_package_data() + "/bibles/engleb/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    unsigned int currchapnum = 0;
+    chapter *currchap = NULL;
+    int linecnt = 0;
+    
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         //  first 3 lines are title of book with dashed lines,  we don't need them
+         if (linecnt <= 3) { linecnt++; continue; }
+         if (it.size() == 0) { continue; }                 //  ignore blank lines
+         // ignore lines that are like CHAPTER 1
+         if (it.find("CHAPTER ") !=  ustring::npos) { continue; }
+             //  The above I could parameterize somehow and make these routines share code.
+         //  Extract chapter and verse,  and leading space. The lines are ALMOST always
+         //  well formed: Book<space>1:5<tab>Verse text. But look at John 1:23, for instance:
+         // Jn 1:23 He said,
+         //  "I am...
+         //  just as Isaiah...
+         // So we have a quotation. This occurs about 300 times in the entire LEB. these lines
+         // always start with a space.
+         //  Remove book name from the line
+         size_t spaceposition = it.find_first_of(" ");
+         it.erase(0,  spaceposition+1);
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         size_t tabposition = it.find_first_of("\t");
+         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
+         unsigned int versenum = convert_to_int(versestring);
+         it.erase(0, tabposition+1);
+         if (chapnum != currchapnum) {
+             chapter *newchap = new chapter(this,  chapnum);
+             chapters.push_back(newchap);
+             currchap = newchap;
+             currchapnum = chapnum;
+             cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         currchap->verses.push_back(newverse); //  append verse to current chapter
+         newverse->print(); // debug
     }
 }
 
@@ -695,6 +772,22 @@ ustring bible_sblgnt::retrieve_verse(const Reference &ref)
     // 2. Have we already loaded this book? If not, load it and save it for next time around
     if (books[booknum] == NULL) {
         books[booknum] = new book_sblgnt(this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref);
+}
+//  Remember,  books[0] is unused,  so books[1..66] are valid
+ustring bible_leb::retrieve_verse(const Reference &ref)
+{
+    unsigned int booknum = ref.book_get();
+    // 1. Does this Bible support this book? LEB has books 1-66.
+    if ((booknum < 1) || (booknum > 66)) { return "Book doesn't exist"; }
+        
+    check_book_in_range(booknum);
+
+    // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (books[booknum] == NULL) {
+        books[booknum] = new book_leb(this, books_id_to_localname(booknum),  booknum);
         books[booknum]->load();
     }
     return books[booknum]->retrieve_verse(ref);
