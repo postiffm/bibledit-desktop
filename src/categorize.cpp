@@ -134,6 +134,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
 	endposition = line.length() - 1;
       }
       while (beginposition != string::npos) {
+        assert(beginposition <= endposition); // this cannot be above while...beginposition == string::npos if no marker is found
         ustring notetext;
         notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
         line.erase(beginposition, endposition - beginposition + closing_marker.length());
