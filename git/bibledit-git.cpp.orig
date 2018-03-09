@@ -22,6 +22,10 @@
 #include "bibledit-git.h"
 #include <config.h>
 #include <glib/gi18n.h>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 10a4e2f42126e1d7559ef96d3820b1468c32f105
 
 
 int main (int argc, char *argv[])
@@ -44,7 +48,7 @@ int main (int argc, char *argv[])
 
   // Display the window.      
   GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window), _("Bibledit-Git"));
+  gtk_window_set_title (GTK_WINDOW (window), "Bibledit-Git");
   gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
   g_signal_connect ((gpointer) window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
@@ -66,7 +70,7 @@ int main (int argc, char *argv[])
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
 
   GtkWidget * checkbutton = gtk_check_button_new_with_mnemonic (_("_Repeat at end"));
-  g_signal_connect ((gpointer) checkbutton, "toggled", G_CALLBACK (on_checkbutton_loop_toggled), NULL);
+  g_signal_connect ((gpointer) checkbutton, _("toggled"), G_CALLBACK (on_checkbutton_loop_toggled), NULL);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(checkbutton), true);
   gtk_container_add(GTK_CONTAINER (vbox), checkbutton);
 
@@ -111,8 +115,13 @@ bool on_timeout (gpointer data)
         message (_("Or close the window to not send and receive again."));
         g_timeout_add(300000, GSourceFunc(on_timeout), NULL);
       } else {
+<<<<<<< HEAD
+      	message (_("Finished"));
+        message (_("You can close the window, or it will close itself in 5 minutes."));
+=======
       message (_("Finished"));
       message (_("You can close the window, or it will close itself in 5 minutes."));
+>>>>>>> 10a4e2f42126e1d7559ef96d3820b1468c32f105
         g_timeout_add (300000, GSourceFunc(exit_timeout), NULL);
       }
 
@@ -123,17 +132,17 @@ bool on_timeout (gpointer data)
       // Tell git about the default method for pushing.
       {
         TinySpawn spawn ("git");
-        spawn.arg ("config");
+        spawn.arg (_("config"));
         spawn.arg ("push.default");
-        spawn.arg ("matching");
+        spawn.arg (_("matching"));
         spawn.workingdirectory (folder);
         spawn.run ();
       }
     
       // Add everything because things could have been added or changed.
       {
-        TinySpawn spawn ("git");
-        spawn.arg ("add");
+        TinySpawn spawn (_("git"));
+        spawn.arg (_("add"));
         spawn.arg (".");
         spawn.workingdirectory (folder);
         spawn.run ();
@@ -160,7 +169,7 @@ bool on_timeout (gpointer data)
         spawn.arg ("commit");
         spawn.arg ("-a");
         spawn.arg ("-m");
-        spawn.arg ("Send and receive");
+        spawn.arg (_("Send and receive"));
         spawn.workingdirectory (folder);
         spawn.read ();
         spawn.run ();
@@ -194,7 +203,7 @@ bool on_timeout (gpointer data)
           message (spawn.standarderr[i]);
         }
         if (merge_conflict) {
-          message ("Bibledit will resolve conflicts between its own data and the data on the server.");
+          message (_("Bibledit will resolve conflicts between its own data and the data on the server."));
           // Resolve merge conflict.
           TinySpawn mergetool ("php");
           string script;
