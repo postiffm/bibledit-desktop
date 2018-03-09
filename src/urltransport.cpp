@@ -30,7 +30,8 @@
 URLTransport::URLTransport(int dummy)
 // URL transporter.
 {
-  // Init variables.
+  // Init members.
+  reply_is_ok = false;
   sequential_messages_in_transit = false;
   
   // Create a session.
