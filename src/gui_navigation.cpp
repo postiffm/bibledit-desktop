@@ -36,8 +36,27 @@
 
 GuiNavigation::GuiNavigation(int dummy): track(0)
 {
-  // Initialize variables.
+  // Initialize members.
   parentToolbar = NULL;
+  new_reference_signal = NULL;
+  button_list_back = NULL;
+  image_list_back = NULL;
+  button_back = NULL;
+  image1 = NULL;
+  button_forward = NULL;
+  image2 = NULL;
+  button_list_forward = NULL;
+  image_list_forward = NULL;
+  combo_book = NULL;
+  spinbutton_book_adj = NULL;
+  spinbutton_book = NULL;
+  combo_chapter = NULL;
+  spinbutton_chapter_adj = NULL;
+  spinbutton_chapter = NULL;
+  combo_verse = NULL;
+  spinbutton_verse_adj = NULL;
+  spinbutton_verse = NULL;
+  entry_free = NULL;
   settingcombos = false;
   spinbutton_book_previous_value = 0;
   spinbutton_chapter_previous_value = 0;

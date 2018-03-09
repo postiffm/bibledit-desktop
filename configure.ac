@@ -214,7 +214,7 @@ AC_SUBST(WEBKIT_CFLAGS)
 AC_SUBST(WEBKIT_LIBS)
 
 
-PKG_CHECK_MODULES(LIBSOUP, libsoup-2.4 >= 2.4,,AC_MSG_ERROR(libsoup-2.4 development version >= 2.4 is needed.))
+PKG_CHECK_MODULES(LIBSOUP, libsoup-2.4 >= 2.42,,AC_MSG_ERROR(libsoup-2.4 development version >= 2.42 is needed.))
 AC_SUBST(LIBSOUP_CFLAGS)
 AC_SUBST(LIBSOUP_LIBS)
 

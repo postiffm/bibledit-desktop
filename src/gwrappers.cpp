@@ -238,6 +238,7 @@ GwSpawn::GwSpawn(const ustring &program)
   myallowcancel = false;
   myhide = false;
   cancelled = false;
+  result = false;
   exitstatus = 0;
   pid = 0;
 }
