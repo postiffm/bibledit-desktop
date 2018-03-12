@@ -100,9 +100,11 @@ vector < unsigned int >ProjectBook::get_chapters()
 ProjectChapter *ProjectBook::get_chapter_pointer(unsigned int number)
 // Returns a pointer to the chapter, or NULL if it is not there.
 {
-  for (unsigned int i = 0; i < data.size(); i++)
-    if (number == data[i].number)
+  for (unsigned int i = 0; i < data.size(); i++) {
+    if (number == data[i].number) {
       return &data[i];
+    }
+  }
   return NULL;
 }
 
@@ -111,14 +113,17 @@ ProjectMemory::ProjectMemory(const ustring & name_in, bool gui)
   name = name_in;
   cancelled = false;
   ProgressWindow *progresswindow = NULL;
-  if (gui)
+  if (gui) {
     progresswindow = new ProgressWindow(_("Loading ") + name, true);
+  }
   vector < unsigned int >books = project_get_books(name);
-  if (progresswindow)
+  if (progresswindow) {
     progresswindow->set_iterate(0, 1, books.size());
+  }
   for (unsigned int bk = 0; bk < books.size(); bk++) {
-    if (progresswindow)
+    if (progresswindow) {
       progresswindow->iterate();
+    }
     if (progresswindow && progresswindow->cancel) {
       cancelled = true;
       delete progresswindow;

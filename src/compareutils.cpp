@@ -122,8 +122,9 @@ bool compare_projects(ProjectMemory & originalproject, ProjectMemory & secondpro
       // Get a pointer to the chapter in the second project.
       ProjectChapter *secondprojectchapter = secondprojectbook->get_chapter_pointer(originalchapters[ic]);
       // Skip if the chapter isn't there.
-      if (secondprojectchapter == NULL)
+      if (secondprojectchapter == NULL) {
         continue;
+      }
       // Get chapter text of the second.
       vector < ustring > secondlines = secondprojectchapter->get_data();
       // If both chapters are the same, continue to the next one.
@@ -133,8 +134,9 @@ bool compare_projects(ProjectMemory & originalproject, ProjectMemory & secondpro
       ustring secondbook_chapter_contents;
       for (unsigned int i = 0; i < secondlines.size(); i++)
         secondbook_chapter_contents.append(secondlines[i]);
-      if (originalbook_chapter_contents == secondbook_chapter_contents)
+      if (originalbook_chapter_contents == secondbook_chapter_contents) {
         continue;
+      }
       // At this stage the chapters are different. Compare them more thoroughly.
       ProjectChapter *outputprojectchapter = &outputproject.data[ib].data[ic];
       vector < ustring > outputlines = outputprojectchapter->get_data();
