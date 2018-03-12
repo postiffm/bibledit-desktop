@@ -5041,6 +5041,7 @@ HRESULT AutoWrap(int autoType, VARIANT *pvResult, IDispatch *pDisp, const LPOLES
     if(FAILED(hr)) {
         sprintf(buf, "IDispatch::GetIDsOfNames(\"%s\") failed w/err 0x%08lx", szName, hr);
         MessageBox(NULL, buf, "AutoWrap()", 0x10010);
+        va_end(marker);
         return hr;
     }
     
@@ -5066,7 +5067,7 @@ HRESULT AutoWrap(int autoType, VARIANT *pvResult, IDispatch *pDisp, const LPOLES
     if(FAILED(hr)) {
         sprintf(buf, "IDispatch::Invoke(\"%s\"=%08lx) failed w/err 0x%08lx", szName, dispID, hr);
         MessageBox(NULL, buf, "AutoWrap()", 0x10010);
-        return hr;
+        return hr; // I think I could remove this and it would be better...call to va_end would happen, pArgs would be "garbage collected", and then return hr
     }
     // End variable-argument section...
     va_end(marker);

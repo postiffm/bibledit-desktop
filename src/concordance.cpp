@@ -596,6 +596,7 @@ void book_byz::byzasciiConvert(ustring &vs)
      vs.push_back(newc);
      c++;
   }
+  delete[] c;
 }
 
 // Load Byzantine Text from shared resource directory
