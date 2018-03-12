@@ -36,7 +36,7 @@ private:
 class CategorizeLine
 {
 public:
-  CategorizeLine(const ustring& data);
+  CategorizeLine(const ustring& data, bool ignoreLineBreaks=false);
   ustring id;
   ustring intro;
   ustring head;
@@ -60,6 +60,7 @@ public:
   void remove_verse_number(const ustring& versenumber);
 private:
   ustring previous_marker;
+  void CategorizeOneLine(ustring &line);
   void append_text(ustring& container, const ustring& text);
   void clear_out_any_marker(ustring& line);
 };

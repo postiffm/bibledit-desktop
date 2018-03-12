@@ -87,15 +87,29 @@ void CategorizeChapterVerse::store(unsigned int chapternumber, const ustring & v
   line.push_back(text);
 }
 
-CategorizeLine::CategorizeLine(const ustring & data)
+CategorizeLine::CategorizeLine(const ustring & data, bool ignoreLineBreaks/*defaults false*/)
 {
-  // As the data may exist of several lines, handle those separately.
-  ParseLine parseline(data);
-  for (unsigned int ln = 0; ln < parseline.lines.size(); ln++) {
+  if (ignoreLineBreaks) {
+      // MAP Added 3/12/2018: when working on single verses that happen to have a \n in the middle
+      // of them (which occurs quite a few times in the USFM we see), if that \n splits a 
+      // footnote, for instance, then parseline splits that note in half and causes
+      // a parsing failure which is caught by the assertion in the CategorizeOneLine method.
+    ustring line = data;
+    CategorizeOneLine(line);
+  }
+  else {
+      // As the data may exist of several lines, handle those separately.
+      ParseLine parseline(data);
+      for (unsigned int ln = 0; ln < parseline.lines.size(); ln++) {
+          // Get the line to work on.
+          ustring line = parseline.lines[ln];
+          CategorizeOneLine(line);
+      } /* for */
+  } /* else */
+}
 
-    // Get the line to work on.
-    ustring line = parseline.lines[ln];
-
+void CategorizeLine::CategorizeOneLine(ustring &line)
+{
     // Extract the marker for this line.
     ustring marker = usfm_extract_marker(line);
 
@@ -134,7 +148,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
 	endposition = line.length() - 1;
       }
       while (beginposition != string::npos) {
-        assert(beginposition <= endposition); // this cannot be above while...beginposition == string::npos if no marker is found
+        assert(beginposition <= endposition); // this cannot be above the while stmt...beginposition == string::npos if no marker is found
         ustring notetext;
         notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
         line.erase(beginposition, endposition - beginposition + closing_marker.length());
@@ -226,8 +240,7 @@ CategorizeLine::CategorizeLine(const ustring & data)
     }
     // Store previous marker.
     previous_marker = marker;
-
-  }
+   
 }
 
 void CategorizeLine::append_text(ustring & container, const ustring & text)

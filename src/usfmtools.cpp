@@ -1111,7 +1111,7 @@ ustring usfm_get_verse_text_only (const ustring& line)
   if (text.empty()) {
     text = "<empty>";
   } else {
-    CategorizeLine cl(text);
+    CategorizeLine cl(text, /*ignoreLineBreaks*/true);
     text = cl.verse;
   }
   return text;
