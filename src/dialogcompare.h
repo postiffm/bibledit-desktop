@@ -36,8 +36,10 @@ protected:
   GtkWidget *comparedialog;
   GtkWidget *dialog_vbox1;
   GtkWidget *vbox1;
+  GtkWidget *label0;
   GtkWidget *label1;
-  SelectProjectGui * selectprojectgui;
+  SelectProjectGui * selectfirstprojectgui;
+  SelectProjectGui * selectsecondprojectgui;
   GtkWidget *checkbutton1;
   GtkWidget *hbox1;
   GtkWidget *label2;

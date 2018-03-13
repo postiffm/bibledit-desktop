@@ -53,13 +53,21 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, TRUE, TRUE, 0);
 
-  label1 = gtk_label_new(_("Select a project to compare the current project with\nand then press OK"));
+  label0 = gtk_label_new(_("Select base project and then press OK"));
+  gtk_widget_show(label0);
+  gtk_box_pack_start(GTK_BOX(vbox1), label0, FALSE, FALSE, 4);
+  gtk_misc_set_alignment(GTK_MISC(label0), 0, 0.5);
+
+  selectfirstprojectgui = new SelectProjectGui(0);
+  selectfirstprojectgui->build(vbox1, "", settings->genconfig.project_get());
+
+  label1 = gtk_label_new(_("Select a project to compare to the base project with\nand then press OK"));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(vbox1), label1, FALSE, FALSE, 4);
   gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
 
-  selectprojectgui = new SelectProjectGui(0);
-  selectprojectgui->build(vbox1, "", settings->genconfig.project_to_compare_with_get());
+  selectsecondprojectgui = new SelectProjectGui(0);
+  selectsecondprojectgui->build(vbox1, "", settings->genconfig.project_to_compare_with_get());
 
   checkbutton1 = gtk_check_button_new_with_mnemonic(_("Print changed verses only"));
   gtk_widget_show(checkbutton1);
@@ -130,7 +138,7 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
   g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(static_on_okbutton_clicked), gpointer(this));
   g_signal_connect((gpointer) button_change, "clicked", G_CALLBACK(on_button_portion_clicked), gpointer(this));
 
-  selectprojectgui->focus();
+  selectsecondprojectgui->focus();
   gtk_widget_grab_default(okbutton);
 
   // Set gui.
@@ -140,7 +148,8 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
 
 CompareDialog::~CompareDialog()
 {
-  delete selectprojectgui;
+  delete selectfirstprojectgui;
+  delete selectsecondprojectgui;
   gtk_widget_destroy(comparedialog);
 }
 
@@ -179,10 +188,10 @@ void CompareDialog::on_okbutton_clicked()
 {
   // Store user entered data.
   extern Settings *settings;
-  settings->genconfig.project_to_compare_with_set(selectprojectgui->project);
+  settings->genconfig.project_to_compare_with_set(selectsecondprojectgui->project);
   settings->genconfig.print_changes_only_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton1)));
   // Run comparison.
-  compare_with(my_references_window, settings->genconfig.project_to_compare_with_get(), settings->genconfig.project_get(), settings->genconfig.print_changes_only_get());
+  compare_with(my_references_window, settings->genconfig.project_to_compare_with_get(), selectfirstprojectgui->project, settings->genconfig.print_changes_only_get());
 }
 
 

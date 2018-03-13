@@ -1,3 +1,10 @@
+3/12/2018 heaptrack
+0. Preparing
+   sudo apt install heaptrack
+   sudo apt install heaptrack-gui
+1. heaptrack /usr/bin/bibledit-desktop
+2. heaptrack_gui
+
 2/12/2018 linux-perf
 
 0. Preparing
