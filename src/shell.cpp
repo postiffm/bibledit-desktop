@@ -112,9 +112,11 @@ ustring shell_quote_space(const ustring & filename)
   if (filename.find(" ") != string::npos) {
     quotedname = " '" + filename + "' ";
     // Question: why the space before and after? Not sure. I don't think we need it.
+    // Correction: some callers expect that we are providing a space around filenames
+    // so that the command will be well-formed.
   }
   else {
-  quotedname = filename;
+    quotedname = " " + filename + " ";
   }
 #endif
   return quotedname;

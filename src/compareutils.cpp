@@ -50,8 +50,9 @@ void compare_with(WindowReferences * references_window, const ustring & project,
   ProjectMemory comparedprojectmemory = projectmemory;
   comparedprojectmemory.name = project + _(" compared with ") + secondproject;
   // Do the actual comparison.
-  if (!compare_projects(projectmemory, secondprojectmemory, comparedprojectmemory))
+  if (!compare_projects(projectmemory, secondprojectmemory, comparedprojectmemory)) {
     return;
+  }
   // Look for added or deleted books / chapters / verses.
   vector <ustring> additions_deletions;
   compare_get_additions_deletions(projectmemory, secondprojectmemory, additions_deletions);
@@ -182,10 +183,12 @@ void compare_get_changes(ProjectMemory & project, vector < Reference > &changed_
         }
         // See if this line contains a change.
         bool add_this_line = false;
-        if (line.find(DELETION_FLAG) != string::npos)
+        if (line.find(DELETION_FLAG) != string::npos) {
           add_this_line = true;
-        if (line.find(INSERTION_FLAG) != string::npos)
+	}
+        if (line.find(INSERTION_FLAG) != string::npos) {
           add_this_line = true;
+	}
         if (add_this_line) {
           Reference ref(scripture_books[i], chapter, currentverse);
           if (!ref.equals(last_reference_stored)) {

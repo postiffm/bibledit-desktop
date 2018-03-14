@@ -90,12 +90,16 @@ If the amount of settings on disk changes, it includes all bits.
 bool ScripturePortions::reordering_portions_all()
 // Indicates whether all books have their portions set to "all"  and are included.
 {
-  for (unsigned int i = 0; i < reordered_includes.size(); i++)
-    if (!reordered_includes[i])
+  for (unsigned int i = 0; i < reordered_includes.size(); i++) {
+    if (!reordered_includes[i]) {
       return false;
-  for (unsigned int i = 0; i < reordered_portions.size(); i++)
-    if (reordered_portions[i] != CHAPTER_VERSE_SELECTION_ALL)
+    }
+  }
+  for (unsigned int i = 0; i < reordered_portions.size(); i++) {
+    if (reordered_portions[i] != CHAPTER_VERSE_SELECTION_ALL) {
       return false;
+    }
+  }
   return true;
 }
 

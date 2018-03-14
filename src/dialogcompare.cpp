@@ -53,7 +53,7 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
   gtk_widget_show(vbox1);
   gtk_box_pack_start(GTK_BOX(dialog_vbox1), vbox1, TRUE, TRUE, 0);
 
-  label0 = gtk_label_new(_("Select base project and then press OK"));
+  label0 = gtk_label_new(_("First, select the original (base) project"));
   gtk_widget_show(label0);
   gtk_box_pack_start(GTK_BOX(vbox1), label0, FALSE, FALSE, 4);
   gtk_misc_set_alignment(GTK_MISC(label0), 0, 0.5);
@@ -61,7 +61,7 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
   selectfirstprojectgui = new SelectProjectGui(0);
   selectfirstprojectgui->build(vbox1, "", settings->genconfig.project_get());
 
-  label1 = gtk_label_new(_("Select a project to compare to the base project with\nand then press OK"));
+  label1 = gtk_label_new(_("Next, select a project to compare to the original project with\nand then press OK"));
   gtk_widget_show(label1);
   gtk_box_pack_start(GTK_BOX(vbox1), label1, FALSE, FALSE, 4);
   gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
@@ -191,7 +191,7 @@ void CompareDialog::on_okbutton_clicked()
   settings->genconfig.project_to_compare_with_set(selectsecondprojectgui->project);
   settings->genconfig.print_changes_only_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton1)));
   // Run comparison.
-  compare_with(my_references_window, settings->genconfig.project_to_compare_with_get(), selectfirstprojectgui->project, settings->genconfig.print_changes_only_get());
+  compare_with(my_references_window, selectfirstprojectgui->project, selectsecondprojectgui->project, settings->genconfig.print_changes_only_get());
 }
 
 
@@ -215,10 +215,12 @@ void CompareDialog::gui_reorder_include()
 {
   extern Settings *settings;
   ScripturePortions scriptureportions(settings->genconfig.project_get());
-  if (scriptureportions.reordering_portions_all())
+  if (scriptureportions.reordering_portions_all()) {
     gtk_label_set_text(GTK_LABEL(label_portion), CHAPTER_VERSE_SELECTION_ALL);
-  else
+  }
+  else {
     gtk_label_set_text(GTK_LABEL(label_portion), _("part"));
+  }
 }
 
 
