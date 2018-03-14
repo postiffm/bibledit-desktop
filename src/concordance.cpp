@@ -855,7 +855,15 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
     for (auto it : bibles) {
         bible *b = it;
         if (b == NULL) { break; }
-        ustring verse = b->retrieve_verse(ref);
+        ustring verse;
+        try {
+          verse = b->retrieve_verse(ref);
+        }
+        catch (std::runtime_error &e) {
+          htmlwriter.paragraph_open();
+          verse.append(e.what());
+          htmlwriter.paragraph_close();
+        }
         //  I assume the following post-condition to the above statement:
         //  the verse is loaded into the bible,  book,  chapter,  and the
         //  the verse contains only the text of the verse,  no x:y prefix

@@ -792,7 +792,7 @@ ReadText::ReadText(const ustring & file, bool silent, bool trimAll, bool trimEnd
   if (!in) {
     if (!silent) {
       cerr << _("Error opening file ") << file << endl;
-      throw;
+      throw std::runtime_error(_("error opening file"));
     }
     return;
   }
