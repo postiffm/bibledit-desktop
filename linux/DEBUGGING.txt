@@ -3,6 +3,15 @@ It assumes you have already gone through the BUILDING process
 and the INSTALLING process.
 Written by Matt Postiff, postiffm@umich.edu, 8/25/2016
 
+Debugging with Emacs + GDB
+----------------------------------------------------------------
+M-x gud-gdb
+Run gdb like this: gdb --fullname /usr/bin/bibledit-desktop
+set args --debug
+run...
+(--fullname helps Emacs understand the file and line number
+information)
+
 Debugging with Nemiver, the Gnome+GDB Debugger
 ----------------------------------------------------------------
 1. Preparation

@@ -551,20 +551,16 @@ void book_byz::byzasciiConvert(ustring &vs)
   // everywhere in Bibledit, are just ascii strings. So I will convert to c_str and then
   // walk the entire string a single time, to make this operation faster.
   char * c = new char[vs.length()+1];
+  char *cptr = c;
   strcpy(c, vs.c_str()); // I have to copy this out of the string before I clear the ustring...since c_str
   // gives us an internal pointer.
   vs.clear();
   //ustring newc;
   //printf("Char ptr=%08lX, *ptr=%c\n", (unsigned long)c, *c);
-  while (*c != 0) {
-     // cout << "Considering char " << *c << endl;
-     //if (*c == 'y') { newc = "&theta;"; }                  // theta transform 'q' in ASCII
-     //else if (*c == 'q') { newc = "&psi;"; }               // psi transform, 'y' in ASCII
-     //else if (*c == 'v') { newc = "&sigmaf;"; }            // final sigma transform, 'V' in ASCII
-     //else { newc = *c; }
+  while (*cptr != 0) {
      gunichar newc;
      //  Convert to unicode font. This is easy because the BYZ is unaccented and in lowercase.
-      switch (*c) {
+      switch (*cptr) {
           case 'a' : newc = 945; break; 
           case 'b' : newc = 946; break; 
           case 'g' : newc = 947; break; 
@@ -594,9 +590,9 @@ void book_byz::byzasciiConvert(ustring &vs)
           default  : newc = 8855;                           //&otimes;,  just to mark as not done
         }
      vs.push_back(newc);
-     c++;
+     cptr++;
   }
-  delete[] c;
+  delete[] c; // make sure to delete the original pointer...not the "moving" target
 }
 
 // Load Byzantine Text from shared resource directory
