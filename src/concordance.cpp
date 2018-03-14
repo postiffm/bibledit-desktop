@@ -188,23 +188,34 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 	}
 }
 
-bible::bible(const ustring &_proj) : books(1)
+bible::bible(const ustring &_proj, const ustring &_font) : books(1)
 {
     // Note: books[0] is unused; simply here to avoid the "off by one" indexing error
     projname = _proj;
+    font = _font;
 }
 
-bible_byz::bible_byz(const ustring &_proj) : bible (_proj)
+void bible::font_set(const ustring &_font)
+{
+  font = font;   
+}
+
+ustring bible::font_get(void)
+{
+  return font;   
+}  
+
+bible_byz::bible_byz(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here   
 }
 
-bible_sblgnt::bible_sblgnt(const ustring &_proj) : bible (_proj)
+bible_sblgnt::bible_sblgnt(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here   
 }
 
-bible_leb::bible_leb(const ustring &_proj) : bible (_proj)
+bible_leb::bible_leb(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here   
 }
@@ -278,7 +289,7 @@ void Concordance::readExcludedWords(const ustring &filename)
 // I should have a better way of accessing this
 extern book_record books_table[];
 
-Concordance::Concordance(const ustring &_projname) : bbl(_projname)
+Concordance::Concordance(const ustring &_projname) : bbl(_projname, "DummyFont")
 {
     projname = _projname;
 	readExcludedWords("strings.txt");
@@ -480,9 +491,9 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 
 ReferenceBibles::ReferenceBibles() : bibles(10)
 {
-  bibles[0] = new bible_byz("BYZ");                         //  Byzantine Majority Text,  Pierpont/Robinson
-  bibles[1] = new bible_sblgnt("SBL");                      //  SBL Greek NT
-  bibles[2] = new bible_leb("LEB");                         //  Lexham English Bible
+  bibles[0] = new bible_byz("BYZ", "Symbol");    //  Byzantine Majority Text, Pierpont/Robinson
+  bibles[1] = new bible_sblgnt("SBL", "Symbol"); //  SBL Greek NT
+  bibles[2] = new bible_leb("LEB", "Times");     //  Lexham English Bible
   // I have room for 7 other Bibles at the moment; see above constructor line
 }
 
@@ -872,7 +883,7 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
               replace_text(verse, "\n", " ");
               htmlwriter.paragraph_open();
               htmlwriter.text_add(b->projname + " " + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
-              htmlwriter.font_open("Symbol");
+              htmlwriter.font_open(b->font_get().c_str());
               htmlwriter.text_add(verse);
               htmlwriter.font_close();
             }

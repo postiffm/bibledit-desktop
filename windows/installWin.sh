@@ -398,6 +398,15 @@ cp -R doc/menus.pl "$SHARE/bibledit"
 cp -R doc/retrieval.pl "$SHARE/bibledit"
 cp -R doc/style.css "$SHARE/bibledit"
 cp -R doc/site.xml "$SHARE/bibledit"
+# Added 3/14/2018
+mkdir -v -p "$SHARE/bibledit/bibles"
+BIBLES="$SHARE/bibledit/bibles"
+#mkdir -v -p "$BIBLES/sblgnt"
+#mkdir -v -p "$BIBLES/byzascii"
+#mkdir -v -p "$BIBLES/engleb"
+cp -R bibles/sblgnt "$BIBLES/"
+cp -R bibles/byzascii "$BIBLES/"
+cp -R bibles/engleb "$BIBLES/"
 
 # Added 2/21/2017
 echo "Setting up usr/bin and tmp"

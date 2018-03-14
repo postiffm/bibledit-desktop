@@ -119,29 +119,33 @@ class bible {
  public:
   ustring projname;
   vector<book *> books;
-  bible(const ustring &_proj);
+  bible(const ustring &_proj, const ustring &_font);
   virtual ~bible();
   void clear(void);
   virtual ustring retrieve_verse(const Reference &ref);
+  void font_set(const ustring &_font);
+  ustring font_get(void);
+  
 protected: // so derived bibles can access it
   void check_book_in_range(unsigned int booknum);
+  ustring font;
 };
 
 class bible_byz : public bible {
 public:
-    bible_byz(const ustring &_proj);
+    bible_byz(const ustring &_proj, const ustring &_font);
     ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
 };
 
 class bible_sblgnt : public bible {
 public:
-    bible_sblgnt(const ustring &_proj);
+    bible_sblgnt(const ustring &_proj, const ustring &_font);
     ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
 };
 
 class bible_leb : public bible {
 public:
-    bible_leb(const ustring &_proj);
+    bible_leb(const ustring &_proj, const ustring &_font);
     ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
 };
 
