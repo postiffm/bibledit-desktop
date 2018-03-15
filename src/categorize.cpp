@@ -112,135 +112,135 @@ void CategorizeLine::CategorizeOneLine(ustring &line)
 {
     // Extract the marker for this line.
     ustring marker = usfm_extract_marker(line);
-
+    
     // Marker to work with for this line.
     ustring actual_marker;
     if (marker.empty())
-      actual_marker = previous_marker;
+        actual_marker = previous_marker;
     else
-      actual_marker = marker;
-
+        actual_marker = marker;
+    
     // Re-insert bible note markers.
     if (marker == footnote_opener(false)) {
-      line.insert(0, footnote_opener(true));
+        line.insert(0, footnote_opener(true));
     }
     if (marker == endnote_opener(false)) {
-      line.insert(0, endnote_opener(true));
+        line.insert(0, endnote_opener(true));
     }
     if (marker == xref_opener(false)) {
-      line.insert(0, xref_opener(true));
+        line.insert(0, xref_opener(true));
     }
     // Subdivide the line into categories.
     // Each category removes something from this content, until it is empty.
-
+    
     // Footnotes, endnotes.
     if (!line.empty()) {
-      size_t beginposition, endposition;
-      ustring opening_marker = footnote_opener(true);
-      ustring closing_marker = footnote_closer();
-      beginposition = line.find(opening_marker);
-      endposition = line.find(closing_marker);
-      if (endposition == string::npos) {
-	// BUG: In main editor, the chapter lines are all combined into a single long ustring.
-	// This means that footnotes that are split across lines are "fixed." But that is not
-	// the case when just looking at a single verse \\v line that has a footnote started
-	// but not finished. Fixed 2/15/2018
-	endposition = line.length() - 1;
-      }
-      while (beginposition != string::npos) {
-        assert(beginposition <= endposition); // this cannot be above the while stmt...beginposition == string::npos if no marker is found
-        ustring notetext;
-        notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
-        clear_out_any_marker(notetext);
-        append_text(note, notetext);
+        size_t beginposition, endposition;
+        ustring opening_marker = footnote_opener(true);
+        ustring closing_marker = footnote_closer();
         beginposition = line.find(opening_marker);
         endposition = line.find(closing_marker);
-      }
-      opening_marker = endnote_opener(true);
-      closing_marker = endnote_closer();
-      beginposition = line.find(opening_marker);
-      endposition = line.find(closing_marker);
-      while ((beginposition != string::npos) && (endposition != string::npos)) {
-        ustring notetext;
-        notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
-        clear_out_any_marker(notetext);
-        append_text(note, notetext);
+        if (endposition == string::npos) {
+            // BUG: In main editor, the chapter lines are all combined into a single long ustring.
+            // This means that footnotes that are split across lines are "fixed." But that is not
+            // the case when just looking at a single verse \\v line that has a footnote started
+            // but not finished. Fixed 2/15/2018
+            endposition = line.length() - 1;
+        }
+        while (beginposition != string::npos) {
+            assert(beginposition <= endposition); // this cannot be above the while stmt...beginposition == string::npos if no marker is found
+            ustring notetext;
+            notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
+            line.erase(beginposition, endposition - beginposition + closing_marker.length());
+            clear_out_any_marker(notetext);
+            append_text(note, notetext);
+            beginposition = line.find(opening_marker);
+            endposition = line.find(closing_marker);
+        }
+        opening_marker = endnote_opener(true);
+        closing_marker = endnote_closer();
         beginposition = line.find(opening_marker);
         endposition = line.find(closing_marker);
-      }
+        while ((beginposition != string::npos) && (endposition != string::npos)) {
+            ustring notetext;
+            notetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
+            line.erase(beginposition, endposition - beginposition + closing_marker.length());
+            clear_out_any_marker(notetext);
+            append_text(note, notetext);
+            beginposition = line.find(opening_marker);
+            endposition = line.find(closing_marker);
+        }
     }
     // Crossreferences.
     if (!line.empty()) {
-      size_t beginposition, endposition;
-      ustring opening_marker = xref_opener(true);
-      ustring closing_marker = xref_closer();
-      beginposition = line.find(opening_marker);
-      endposition = line.find(closing_marker);
-      while ((beginposition != string::npos) && (endposition != string::npos)) {
-        ustring referencetext;
-        referencetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
-        line.erase(beginposition, endposition - beginposition + closing_marker.length());
-        clear_out_any_marker(referencetext);
-        append_text(ref, referencetext);
+        size_t beginposition, endposition;
+        ustring opening_marker = xref_opener(true);
+        ustring closing_marker = xref_closer();
         beginposition = line.find(opening_marker);
         endposition = line.find(closing_marker);
-      }
+        while ((beginposition != string::npos) && (endposition != string::npos)) {
+            ustring referencetext;
+            referencetext = line.substr(beginposition + opening_marker.length(), endposition - beginposition - closing_marker.length());
+            line.erase(beginposition, endposition - beginposition + closing_marker.length());
+            clear_out_any_marker(referencetext);
+            append_text(ref, referencetext);
+            beginposition = line.find(opening_marker);
+            endposition = line.find(closing_marker);
+        }
     }
     // Identifiers.
     if (!line.empty()) {
-      if (is_id_marker(actual_marker)) {
-        clear_out_any_marker(line);
-        append_text(id, line);
-        line.clear();
-      }
+        if (is_id_marker(actual_marker)) {
+            clear_out_any_marker(line);
+            append_text(id, line);
+            line.clear();
+        }
     }
     // Introduction elements.
     if (!line.empty()) {
-      if (is_intro_marker(actual_marker)) {
-        clear_out_any_marker(line);
-        append_text(intro, line);
-        line.clear();
-      }
+        if (is_intro_marker(actual_marker)) {
+            clear_out_any_marker(line);
+            append_text(intro, line);
+            line.clear();
+        }
     }
     // Headings, titles, labels.
     if (!line.empty()) {
-      if (is_head_marker(actual_marker)) {
-        clear_out_any_marker(line);
-        append_text(head, line);
-        line.clear();
-      }
+        if (is_head_marker(actual_marker)) {
+            clear_out_any_marker(line);
+            append_text(head, line);
+            line.clear();
+        }
     }
     // Chapter text.
     if (!line.empty()) {
-      if (is_chap_marker(actual_marker)) {
-        clear_out_any_marker(line);
-        append_text(chap, line);
-        line.clear();
-      }
+        if (is_chap_marker(actual_marker)) {
+            clear_out_any_marker(line);
+            append_text(chap, line);
+            line.clear();
+        }
     }
     // Extended study notes. As these use the existing footnote markers, 
     // deal with the study notes first.
     if (!line.empty()) {
-      if (is_study_marker(actual_marker)) {
-        clear_out_any_marker(line);
-        append_text(study, line);
-        line.clear();
-      }
+        if (is_study_marker(actual_marker)) {
+            clear_out_any_marker(line);
+            append_text(study, line);
+            line.clear();
+        }
     }
     // After everything else has been removed, output the rest as main text.
     // This includes the "Verses" group, the "Paragraph Elements", and the
     // "Poetry Elements", the "Table Elements", and the "Special Text and
     // Character Styles", which have been filtered out already above.
     if (!line.empty()) {
-      clear_out_any_marker(line);
-      append_text(verse, line);
-      line.clear();
+        clear_out_any_marker(line);
+        append_text(verse, line);
+        line.clear();
     }
     // Store previous marker.
     previous_marker = marker;
-   
+    
 }
 
 void CategorizeLine::append_text(ustring & container, const ustring & text)
