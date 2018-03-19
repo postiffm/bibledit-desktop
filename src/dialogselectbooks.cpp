@@ -36,10 +36,10 @@
 #include "screen.h"
 #include <glib/gi18n.h>
 
-SelectBooksDialog::SelectBooksDialog(bool showportions, GtkWindow *parent)
+SelectBooksDialog::SelectBooksDialog(bool showportions, GtkWindow *parent, ustring project)
 /*
 This dialog selects books.
-This function takes the book from the project that is now open, and
+This function takes the book from the project that is now open (or the specified project), and
 the language of that project.
 It then loads the books.
 bookset: Indicator for the caller's relevant books.
@@ -47,7 +47,11 @@ bookset: Indicator for the caller's relevant books.
 {
   // Initialize variables.
   extern Settings *settings;
-  myproject = settings->genconfig.project_get();
+  if (project == "") {
+    myproject = settings->genconfig.project_get();
+  } else { 
+    myproject = project;   
+  }
   ProjectConfiguration *projectconfig = settings->projectconfig(myproject);
   mylanguage = projectconfig->language_get();
   myselectables = project_get_books(myproject);
@@ -546,8 +550,9 @@ void SelectBooksDialog::on_okbutton()
   gtk_tree_selection_selected_foreach(selectbooks, selection_foreach_function, gpointer(&books));
   for (unsigned int i = 0; i < books.size(); i++) {
     unsigned int book = books_name_to_id(mylanguage, books[i]);
-    if (book)
+    if (book) { 
       selection.push_back(book);
+    }
   }
   // Also produce a set out of that list.
   selectionset.clear();

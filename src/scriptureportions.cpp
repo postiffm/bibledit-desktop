@@ -110,6 +110,7 @@ bool ScripturePortions::included(const ustring & book)
   for (unsigned int i = 0; i < reordered_books.size(); i++) {
     if (reordered_books[i] == book) {
       incl = reordered_includes[i];
+      break; // we can stop looking now
     }
   }
   return incl;

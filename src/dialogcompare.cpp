@@ -203,9 +203,19 @@ void CompareDialog::on_button_portion_clicked(GtkButton * button, gpointer user_
 
 void CompareDialog::on_button_portion()
 {
-  SelectBooksDialog dialog(true);
+  SelectBooksDialog dialog(true, /*GtkWindow *parent*/NULL, selectfirstprojectgui->project);
   if (dialog.run() == GTK_RESPONSE_OK) {
-    gui_reorder_include();
+      // The list of books/passages to work on is communicated through the 
+      // settings->projectconfig. The problem is that if there are multiple
+      // projects already opened, WHICH projectconfig has this information?
+      // The active project can easily be changed by a mouse click on a WindowReferences
+      // which will result in a change to which scripture portions list is active.
+      // We have to make it clear which project is which,
+      // because when it is unclear, then the comparison actually
+      // breaks sometimes because it looks at books which the user has 
+      // not selected! Therefore, I added the third argument to the SeletBooksDialog
+      // constructor to clarify this.
+      gui_reorder_include();
   }
 }
 

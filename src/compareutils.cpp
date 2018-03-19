@@ -41,11 +41,10 @@ void compare_with(WindowReferences * references_window, const ustring & project,
 {
   // Load the project, and the second project.
   ProjectMemory projectmemory(project, true);
-  if (projectmemory.cancelled)
-    return;
+  if (projectmemory.cancelled) { return; }
   ProjectMemory secondprojectmemory(secondproject, true);
-  if (secondprojectmemory.cancelled)
-    return;
+  if (secondprojectmemory.cancelled) { return; }
+
   // The project to store the comparison.
   ProjectMemory comparedprojectmemory = projectmemory;
   comparedprojectmemory.name = project + _(" compared with ") + secondproject;
@@ -107,8 +106,9 @@ bool compare_projects(ProjectMemory & originalproject, ProjectMemory & secondpro
     // Get a pointer to the book in the second project.
     ProjectBook *secondprojectbook = secondproject.get_book_pointer(originalscripture_books[ib]);
     // If that book does not exists in the second project, skip it.
-    if (secondprojectbook == NULL)
+    if (secondprojectbook == NULL) {
       continue;
+    }
     // Go through each chapter of the original book.
     vector < unsigned int >originalchapters = originalproject.data[ib].get_chapters();
     for (unsigned int ic = 1; ic < originalchapters.size(); ic++) {
