@@ -208,15 +208,17 @@ ReadText::~ReadText()
 // g++ testbed2.cpp -o testbed2 `pkg-config --cflags --libs glibmm-2.4`
 // If you use g++ `pkg-config --cflags --libs glibmm-2.4` testbed2.cpp -o testbed2
 // it will NOT work
-// ./testbed2
+// ./testbed2 or ./testbed2.exe if on Windows
 
 int main(void)
 {
 #ifdef TEST4
-// include utilities.o in the compile
-   //std::locale::global(std::locale(""));
+   std::locale::global(std::locale(""));
+   //setlocale(LC_ALL, "");
    ReadText rt("badHebrew.txt");
    for (auto &it: rt.lines) {
+       // The problem comes in printing the line when on Windows. On Linux, the std::locale... command
+       // fixes things up nicely, but not on Windows/msys2. Lesson: don't print these strings...
       cout << "Line::" << it << "::" << endl;   
    }
 

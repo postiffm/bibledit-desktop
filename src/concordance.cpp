@@ -21,6 +21,7 @@
 #include <glib/gi18n.h>
 #include "progresswindow.h"
 #include "directories.h"
+#include <locale>
 
 book::book(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : chapters(1)
 {
@@ -521,13 +522,13 @@ ustring chapter::retrieve_verse(const Reference &ref)
 void verse::append(const ustring &addlText)
 {
     text = text + addlText;
-    cout << "Appended [[" << addlText << "]] to " "verse " << vsnum << endl;
+    //cout << "Appended [[" << addlText << "]] to " "verse " << vsnum << endl;
 }
 
 void verse::prepend(const ustring &addlText)
 {
     text = addlText + text;
-    cout << "Prepended [[" << addlText << "]] to " "verse " << vsnum << endl;
+    //cout << "Prepended [[" << addlText << "]] to " "verse " << vsnum << endl;
 }
 
 void chapter::appendToLastVerse(const ustring &addlText)
@@ -716,7 +717,17 @@ void book_leb::load(void)
         "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt", 
         "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt", 
         "3Jn.txt", "Jude.txt", "Rev.txt" };
-    
+
+    // In Isaiah 22:5, LEB has a note that contains some transliterated Hebrew. This causes a Glib::ConvertError exception to 
+    // be thrown, but only in Windows. This was a known problem back several years ago. The recommended solution is to include <locale> 
+    // and to run the following line of code. Refer to https://mail.gnome.org/archives/gtkmm-list/2012-November/msg00021.html and 
+    // https://bugzilla.gnome.org/show_bug.cgi?id=661588
+    //std::locale::global(std::locale(""));
+    //setlocale(LC_ALL, "");
+    // Further notes: testing indicated that the line was read in correctly, but the problem came in printing it to cout/cerr.
+    // Therefore I am going to try to avoid the problem by stopping the print of debug info below (newverse->print())
+    // as well as in verse::append and verse::prepend. That will avoid exposing the bug.
+
     //  bookidx points into the filenames[] array. It has to start at zero. booknum is from 1-66 (or more for apocrypha)
     unsigned int bookidx = booknum - 1; 
     // We know our book number and localized name already
@@ -766,7 +777,7 @@ void book_leb::load(void)
                  chapters.push_back(newchap);
                  currchap = newchap;
                  currchapnum = chapnum;
-                 cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+                 //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
              }
              if (versestring == "title") {
                   psalmTitle = it;
@@ -775,7 +786,7 @@ void book_leb::load(void)
                verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
                currchap->verses.push_back(newverse); //  append verse to current chapter
                if (!psalmTitle.empty()) { currchap->prependToLastVerse(psalmTitle+"\n"); psalmTitle.clear(); }
-               newverse->print(); // debug
+               //newverse->print(); // debug
              }
          }
     }
