@@ -33,6 +33,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install intltool
   apt-get install libtool
   apt-get install autoconf-archive
+  apt-get install devhelp
 elif pacman --version 2> /dev/null; then
   # TODO: investigate if gtkhtml3 is necessary (it is in the AUR)
   pacman -S --needed --noconfirm base-devel gtk2 rcs sqlite \
