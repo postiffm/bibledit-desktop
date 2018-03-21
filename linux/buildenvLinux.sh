@@ -33,7 +33,6 @@ if apt-get --version 2> /dev/null; then
   apt-get install intltool
   apt-get install libtool
   apt-get install autoconf-archive
-  apt-get install devhelp
 elif pacman --version 2> /dev/null; then
   # TODO: investigate if gtkhtml3 is necessary (it is in the AUR)
   pacman -S --needed --noconfirm base-devel gtk2 rcs sqlite \
@@ -41,3 +40,11 @@ elif pacman --version 2> /dev/null; then
     texlive-core php curl intltool libtool autoconf-archive \
     webkitgtk2
 fi
+
+echo "You may also want to install development documentation if you are a developer."
+echo "apt-get install devhelp"
+echo "sudo add-apt-repository ppa:p12/ppa"
+echo "sudo apt-get update"
+echo "sudo apt-get install cppreference-doc-en-html"
+echo "sudo apt-get install libxml2-doc"
+echo "sudo apt-get install libgtk2.0-doc"

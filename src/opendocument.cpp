@@ -40,6 +40,7 @@
 #include "stylesheetutils.h"
 #include <glib/gi18n.h>
 #include <config.h>
+#include <locale.h>
 #include "debug.h"
 
 /*
@@ -530,6 +531,13 @@ void OpenDocument::generate_styles_xml(bool right_to_left)
 
 void OpenDocument::paragraph_style(xmlTextWriterPtr writer, const ustring & marker, const ustring & name, const ustring & fontname, double fontsize, int lineheight, const ustring & italic, const ustring & bold, const ustring & underline, const ustring & smallcaps, ustring justification, double spacebefore, double spaceafter, double leftmargin, double rightmargin, double firstlineindent, bool spancolumns, bool startpage)
 {
+  //const struct lconv* loc = localeconv();
+  //DEBUG("Decimal separator is currently >>" + ustring(loc->decimal_point));
+  char *oldLC_NUMERIC = setlocale(LC_NUMERIC, NULL);
+  setlocale(LC_NUMERIC, "C"); // we need the decimal separate to be a dot (full stop), not a comma, in any language (like French)
+  //loc = localeconv();
+  //DEBUG("Decimal separator is now >>" + ustring(loc->decimal_point));
+  
   // Style properties.
   xmlTextWriterStartElement(writer, BAD_CAST "style:style");
   {
@@ -611,11 +619,16 @@ void OpenDocument::paragraph_style(xmlTextWriterPtr writer, const ustring & mark
 
   // Close style  
   xmlTextWriterEndElement(writer);
+  
+  setlocale(LC_NUMERIC, oldLC_NUMERIC); // put things back the way we found them
 }
 
 
 void OpenDocument::span_style(xmlTextWriterPtr writer, const ustring & marker, const ustring & name, const ustring & fontname, double fontpercentage, ustring italic, ustring bold, ustring underline, ustring smallcaps, bool superscript, unsigned int color)
 {
+  char *oldLC_NUMERIC = setlocale(LC_NUMERIC, NULL);
+  setlocale(LC_NUMERIC, "C"); // we need the decimal separate to be a dot (full stop), not a comma, in any language (like French)
+  
   // Open the style.
   xmlTextWriterStartElement(writer, BAD_CAST "style:style");
   {
@@ -679,6 +692,8 @@ void OpenDocument::span_style(xmlTextWriterPtr writer, const ustring & marker, c
 
   // Close style.
   xmlTextWriterEndElement(writer);
+  
+  setlocale(LC_NUMERIC, oldLC_NUMERIC); // put things back the way we found them
 }
 
 
