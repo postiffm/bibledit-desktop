@@ -546,7 +546,7 @@ unsigned int books_localname_to_id(const ustring & lname)
   for (unsigned int i = 0; i < bookdata_books_count(); i++) {
     ustring s2(books_table[i].localname);
     s2 = s2.casefold();
-    cerr << "BLTI: Comparing '" << s1 << "' to " << s2 << endl;
+    //cerr << "BLTI: Comparing '" << s1 << "' to " << s2 << endl;
     if (s1 == s2) {
       // ... and put it into the bookmap too to save time if we see it again later
       bookmaplocal[s1] = books_table[i].id;

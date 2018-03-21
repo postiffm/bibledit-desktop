@@ -61,11 +61,12 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
       get_styles_at_iterator(iter, paragraph_style, character_style);
       if (start || (character_style == verse_style)) {
         DEBUG("W9.1.3 in if inside loop");
-        ustring verse_at_iter = get_verse_number_at_iterator(iter, verse_style, "", NULL);
+        ustring verse_at_iter = get_verse_number_at_iterator(iter, verse_style, "", gtk_widget_get_parent(textview));
 	// Above results in two errors:
 	// Gtk-CRITICAL **: IA__gtk_container_foreach: assertion 'GTK_IS_CONTAINER (container)' failed
 	// Need to fix these.
-	// Fixed 9/1/2016 MAP by passing vbox_paragraphs instead of NULL.
+	// Fixed 9/1/2016 MAP by passing vbox_paragraphs instead of NULL. <-- apparently I did not change last arg from NULL
+        // Attempted new fix 3/19/2018 HT: rluzynski.
 	DEBUG("W9.1.4 in if inside loop");  
         if (verse == verse_at_iter) {
           if (!started) {
