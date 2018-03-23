@@ -1247,7 +1247,8 @@ The user expects a heading to belong to the next verse.
       // If the "textview" is not yet set, look for the current one.
       if (textview == NULL) {
         GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        vector <GtkWidget *> widgets = editor_get_widgets (parent_box);
+        vector <GtkWidget *>
+        widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
         for (unsigned int i = 0; i < widgets.size(); i++) {
           if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
             textview = widgets[i];
@@ -1299,7 +1300,8 @@ bool get_iterator_at_verse_number (const ustring& verse_number, const ustring& v
 // Returns true if the verse was found, else false.
 {
   // Go through all textviews.
-  vector <GtkWidget *> textviews = editor_get_widgets (parent_box);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     // Handle this textview.
     textview = textviews[i];
@@ -1508,18 +1510,33 @@ bool text_starts_verse (const ustring& project, ustring& line, const ustring& ma
 }
 
 
+typedef pair<vector<GtkWidget *> *, GType> widget_search_t;
+
 void on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data)
 {
-  vector <GtkWidget *> * widgets = static_cast < vector <GtkWidget *> * > (user_data);
-  widgets->push_back (widget);
+  widget_search_t *search_data = static_cast<widget_search_t*> (user_data);
+  vector <GtkWidget*> *widgets = search_data->first;
+  GType type = search_data->second;
+
+  if (type == G_TYPE_NONE || G_TYPE_CHECK_INSTANCE_TYPE (widget, type))
+    widgets->push_back (widget);
 }
 
 
-vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox)
+/**
+ * Retrieves all widgets being children of the container vbox. Only the
+ * widgets of type of_type are returned. If of_type is G_TYPE_NONE (default
+ * value) then all widgets are returned.
+ */
+vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type)
 {
   vector <GtkWidget *> widgets;
-  gtk_container_foreach(GTK_CONTAINER(vbox), on_editor_get_widgets_callback, gpointer(&widgets));
-  return widgets;  
+  widget_search_t search_data = make_pair(&widgets, of_type);
+
+  gtk_container_foreach(GTK_CONTAINER (vbox),
+                        on_editor_get_widgets_callback, &search_data);
+
+  return widgets;
 }
 
 

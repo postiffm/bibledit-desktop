@@ -90,7 +90,8 @@ EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCr
 EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles);
 void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
 
-vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox);
+vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox,
+                                         GType of_type = G_TYPE_NONE);
 GtkWidget * editor_get_next_textview (GtkWidget * vbox, GtkWidget * textview);
 GtkWidget * editor_get_previous_textview (GtkWidget * vbox, GtkWidget * textview);
 void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);

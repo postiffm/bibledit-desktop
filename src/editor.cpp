@@ -741,7 +741,8 @@ The user expects a heading to belong to the next verse.
       // If the "textview" is not yet set, look for the current one.
       if (textview == NULL) {
         GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        vector <GtkWidget *> widgets = editor_get_widgets (parent_box);
+        vector <GtkWidget *>
+        widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
         for (unsigned int i = 0; i < widgets.size(); i++) {
           if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
             textview = widgets[i];
@@ -798,7 +799,8 @@ bool Editor2::get_iterator_at_verse_number (const ustring& verse_number, const u
 // Returns true if the verse was found, else false.
 {
   // Go through all textviews.
-  vector <GtkWidget *> textviews = editor_get_widgets (parent_box);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     // Handle this textview.
     textview = textviews[i];
@@ -1977,7 +1979,8 @@ void Editor2::highlight_thread_main()
 ustring Editor2::chapter_get_ustring()
 {
   ustring chaptertext;
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     GtkTextIter startiter, enditer;
@@ -2023,7 +2026,8 @@ void Editor2::spelling_timeout()
   spelling_timeout_event_id = 0;
 
   // Check spelling of all active textviews.
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     spellingchecker->check(textbuffer);
@@ -2054,7 +2058,8 @@ vector <ustring> Editor2::spelling_get_misspelled ()
 {
   // Collect the misspelled words.
   vector <ustring> words;
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     vector <ustring> words2 = spellingchecker->get_misspellings(textbuffer);
@@ -2148,7 +2153,8 @@ void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 	gdouble total_window_height = gtk_adjustment_get_upper (adjustment);
 
 	// Get all the textviews.
-	vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+	vector <GtkWidget *>
+	textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
 
 	// Offset of insertion point starting from top.
 	gint insertion_point_offset = 0;
@@ -3357,7 +3363,8 @@ gboolean Editor2::on_caller_button_press (GtkWidget *widget)
     // Get the note style.
     ustring note_style = note_paragraph->identifier;
     // Get the iterator and the textview of the note caller in the text.
-    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+    vector <GtkWidget *>
+    textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     for (unsigned int i = 0; i < textviews.size(); i++) {
       GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
       GtkTextIter iter;
