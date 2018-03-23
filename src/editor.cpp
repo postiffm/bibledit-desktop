@@ -733,6 +733,9 @@ The user expects a heading to belong to the next verse.
   bool verse_number_found = false;
   GtkWidget * textview = NULL;
 
+  vector <GtkWidget *>
+  widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
+
   do {
     // Try to find a verse number in the GtkTextBuffer the "iter" points to.
     verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
@@ -741,7 +744,6 @@ The user expects a heading to belong to the next verse.
       // If the "textview" is not yet set, look for the current one.
       if (textview == NULL) {
         GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        vector <GtkWidget *> widgets = editor_get_widgets (parent_box);
         for (unsigned int i = 0; i < widgets.size(); i++) {
           if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
             textview = widgets[i];
@@ -750,7 +752,7 @@ The user expects a heading to belong to the next verse.
         }
       }
       // Look for the previous GtkTextView.
-      textview = editor_get_previous_textview (parent_box, textview);
+      textview = editor_get_previous_textview (widgets, textview);
       // Start looking at the end of that textview.
       if (textview) {
         GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
@@ -798,7 +800,8 @@ bool Editor2::get_iterator_at_verse_number (const ustring& verse_number, const u
 // Returns true if the verse was found, else false.
 {
   // Go through all textviews.
-  vector <GtkWidget *> textviews = editor_get_widgets (parent_box);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     // Handle this textview.
     textview = textviews[i];
@@ -1977,7 +1980,8 @@ void Editor2::highlight_thread_main()
 ustring Editor2::chapter_get_ustring()
 {
   ustring chaptertext;
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     GtkTextIter startiter, enditer;
@@ -2023,7 +2027,8 @@ void Editor2::spelling_timeout()
   spelling_timeout_event_id = 0;
 
   // Check spelling of all active textviews.
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     spellingchecker->check(textbuffer);
@@ -2054,7 +2059,8 @@ vector <ustring> Editor2::spelling_get_misspelled ()
 {
   // Collect the misspelled words.
   vector <ustring> words;
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+  vector <GtkWidget *>
+  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   for (unsigned int i = 0; i < textviews.size(); i++) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
     vector <ustring> words2 = spellingchecker->get_misspellings(textbuffer);
@@ -2093,15 +2099,17 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
   bool moved = false;
   if (focused_paragraph) {
     GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
+    vector <GtkWidget *>
+    widgets = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     do {
       moved = spellingchecker->move_cursor_to_spelling_error (textbuffer, next, extremity);
       if (!moved) {
         GtkWidget * textview = focused_paragraph->textview;
         textbuffer = NULL;
         if (next) {
-          textview = editor_get_next_textview (vbox_paragraphs, textview);
+          textview = editor_get_next_textview (widgets, textview);
         } else {
-          textview = editor_get_previous_textview (vbox_paragraphs, textview);
+          textview = editor_get_previous_textview (widgets, textview);
         }
         if (textview) {
           give_focus (textview);
@@ -2148,7 +2156,8 @@ void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 	gdouble total_window_height = gtk_adjustment_get_upper (adjustment);
 
 	// Get all the textviews.
-	vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+	vector <GtkWidget *>
+	textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
 
 	// Offset of insertion point starting from top.
 	gint insertion_point_offset = 0;
@@ -3096,7 +3105,10 @@ gboolean Editor2::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
 			//DEBUG("It looks like backspace pressed at beginning of paragraph")
 			//DEBUG("Combining paragraphs after backspace")
 			EditorActionCreateParagraph * current_paragraph = widget2paragraph_action (widget);
-			EditorActionCreateParagraph * preceding_paragraph = widget2paragraph_action (editor_get_previous_textview (vbox_paragraphs, widget));
+			EditorActionCreateParagraph * preceding_paragraph = widget2paragraph_action (
+					editor_get_previous_textview (
+							editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW),
+							widget));
 			combine_paragraphs(preceding_paragraph, current_paragraph);
 			return TRUE; // processing is finished
 		}
@@ -3119,7 +3131,10 @@ gboolean Editor2::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
 			else {
 				//DEBUG("Combining paragraphs after delete")
 				EditorActionCreateParagraph * current_paragraph = widget2paragraph_action (widget);
-				EditorActionCreateParagraph * following_paragraph = widget2paragraph_action (editor_get_next_textview (vbox_paragraphs, widget));
+				EditorActionCreateParagraph * following_paragraph = widget2paragraph_action (
+						editor_get_next_textview (
+								editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW),
+								widget));
 				// Next line makes sure cursor insertion point is set to beginning of second paragraph; else 
 				// some or all of the paragraph will be deleted instead of copied to the first one (up to insertion point)
 				editor_paragraph_insertion_point_set_offset (following_paragraph, 0);
@@ -3315,11 +3330,13 @@ void Editor2::paragraph_crossing_act(GtkMovementStep step, gint count)
   }
   //DEBUG("After mvmt chk paragraph_crossing")
   // Focus the crossed widget and place its cursor.  
+  vector <GtkWidget *>
+  widgets = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   GtkWidget * crossed_widget;
   if (count > 0) {
-    crossed_widget = editor_get_next_textview (vbox_paragraphs, focused_paragraph->textview);
+    crossed_widget = editor_get_next_textview (widgets, focused_paragraph->textview);
   } else {
-    crossed_widget = editor_get_previous_textview (vbox_paragraphs, focused_paragraph->textview);
+    crossed_widget = editor_get_previous_textview (widgets, focused_paragraph->textview);
   }  
    //debug_verse_number = verse_number_get();
    //DEBUG("debug_verse_number "+debug_verse_number)
@@ -3357,7 +3374,8 @@ gboolean Editor2::on_caller_button_press (GtkWidget *widget)
     // Get the note style.
     ustring note_style = note_paragraph->identifier;
     // Get the iterator and the textview of the note caller in the text.
-    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
+    vector <GtkWidget *>
+    textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     for (unsigned int i = 0; i < textviews.size(); i++) {
       GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
       GtkTextIter iter;
