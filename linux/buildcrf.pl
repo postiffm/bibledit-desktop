@@ -403,7 +403,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+);?\s*$/) { # Example: 2Ki 19:15-17;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -412,7 +412,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+);?\s*$/) { # Example: 1Co 6:9,10;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -423,7 +423,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+),([0-9]+);?\s*$/) { # Example: 2Ki 19:8,11,20;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -437,7 +437,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+);?\s*$/) { # Example: 2Ki 19:8-11,20;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -449,7 +449,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+),([0-9]+);?\s*$/) { # Example: 2Ki 19:8-11,20,22;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -464,7 +464,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+)-([0-9]+);?\s*$/) { # Example: Gen 5:18,21-24;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -476,7 +476,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+);?\s*$/) { # Example: Eze 40:16,19,26,31,49
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -496,7 +496,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+),([0-9]+),([0-9]+);?\s*$/) { # Example: 2Ki 19:8,11,20,25;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -513,7 +513,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+),([0-9]+)-([0-9]+);?\s*$/) { # Example: Gen 6:3,5,13-14;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -528,7 +528,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+)-([0-9]+),([0-9]+);?\s*$/) { # Example: Eze 34:11-15,23-24,35;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -544,7 +544,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+),([0-9]+)-([0-9]+);?\s*$/) { # Example: Eze 20:5-6,28,41-44;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -560,7 +560,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+)-([0-9]+),([0-9]+)-([0-9]+);?\s*$/) { # Example: 2Ki 11:1-3,11-12,15-16;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -577,7 +577,7 @@ while ($ln = <>) {
 	print $out pack('L<', $enc);
     }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+)-([0-9]+),([0-9]+),([0-9]+);?\s*$/) { # Example: Rom 8:2,4-6,9,14;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -594,8 +594,21 @@ while ($ln = <>) {
 	$enc=($bkNum<<24)|($ch<<16)|($vs5<<8);
 	print $out pack('L<', $enc);
     }
+    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+),([0-9]+)-([0-9]+);?\s*$/) { # Example: Eze 16:4-22,35-39;
+	$bk = $1;$bkNum = $abbrevs{$bk};
+	$ch = $2;
+	$vs = $3;
+	$vs2 = $4;
+	$vs3 = $5;
+	$vs4 = $6;
+	#print "Found $bk $ch:$vs,$vs2-$vs3,$vs4\n";
+	$enc=($bkNum<<24)|($ch<<16)|($vs<<8)|$vs2;
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch<<16)|($vs3<<8)|$vs4;
+	print $out pack('L<', $enc);
+    }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+)-([0-9]+),([0-9]+);?\s*$/) { # Example: Rom 4:1,11-12,16;
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$vs = $3;
 	$vs2 = $4;
@@ -609,16 +622,74 @@ while ($ln = <>) {
 	$enc=($bkNum<<24)|($ch<<16)|($vs4<<8);
 	print $out pack('L<', $enc);
     }
+    # Following are tough cases because they cross chapter boundaries or contain ranges that cross chapter boundaries.
+    # I am going to use a special encoding
+    # book|ch|vs|0xff where the 0xff means "dash," like a range operator. vs=0 indicates an entire chapter
+    # is being cross-referenced.
+    elsif ($ln =~ /^([0-9]+):([0-9]+)-([0-9]+):([0-9]+);?\s*$/) { # Example: 5:14-6:7
+	$ch = $2;
+	$vs = $3;
+	$ch2 = $4;
+	$vs2 = $5;
+	$enc=($bkNum<<24)|($ch<<16)|($vs<<8)|0xff;
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16)|($vs2<<8);
+	print $out pack('L<', $enc);
+    }
     elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+)-([0-9]+);?\s*$/) { # Example: 1Ch 24-26 (2 chapters)
-	$bk = $1;
+	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$ch2 = $3;
 	#print "Found $bk $ch-$ch2\n";
-	# This is a tough case. I elect to print one ref per chapter, Book Ch:0 indicates this is an entire chapter reference
-	for ($i = $ch; $i <= $ch2; $i++) {
-	    $enc=($bkNum<<24)|($i<<16);
-	    print $out pack('L<', $enc);
-	}
+	$enc=($bkNum<<24)|($ch<<16)|0xff;
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16);
+	print $out pack('L<', $enc);
+    }
+    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+)-([0-9]+):([0-9]+);?\s*$/) { # Example: Eze 2:8-3:3;
+	$bk = $1; $bkNum = $abbrevs{$bk};
+	$ch = $2;
+	$vs = $3;
+	$ch2 = $4;
+	$vs2 = $5;
+	$enc=($bkNum<<24)|($ch<<16)|($vs<<8)|0xff;
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16)|($vs2<<8);
+	print $out pack('L<', $enc);
+    }
+    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+); ([0-9]+):([0-9]+),([0-9]+);?\s*$/) { # Example: Heb 2:17; 9:12,14;
+	$bk = $1; $bkNum = $abbrevs{$bk};
+	$ch = $2;
+	$vs = $3;
+	$ch2 = $4;
+	$vs2 = $5;
+	$vs3 = $6;
+	$enc=($bkNum<<24)|($ch<<16)|($vs<<8);
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16)|($vs2<<8);
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16)|($vs3<<8);
+	print $out pack('L<', $enc);
+    }
+    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+):([0-9]+),([0-9]+),([0-9]+),([0-9]+)-([0-9]+):([0-9]+);?\s*$/) { # Example: Hag 1:1,3,12,14-2:9;
+	$bk = $1; $bkNum = $abbrevs{$bk};
+	$ch = $2;
+	$vs = $3;
+	$vs2 = $4;
+	$vs3 = $5;
+	$vs4 = $6;
+	$ch2 = $7;
+	$vs5 = $8;
+	$enc=($bkNum<<24)|($ch<<16)|($vs<<8);
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch<<16)|($vs2<<8);
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch<<16)|($vs3<<8);
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch<<16)|($vs4<<8)|0xff;
+	print $out pack('L<', $enc);
+	$enc=($bkNum<<24)|($ch2<<16)|($vs5<<8);
+	print $out pack('L<', $enc);
     }
     else {
         print "UNKNOWN>>>$ln<<< \tat $currBk $currCh:$currVs\n";
