@@ -82,7 +82,8 @@ while (1) {
     my $ch = ($enc >> 16) & 0xff;
     my $bk = ($enc >> 24) & 0xff;
     print "$books{$bk} $ch:$vs";
-    if ($vs2 != 0) { print "-$vs2 "; }
+    if ($vs2 == 0xff) { print "-"; }       # special case: 0xff is a "complex" range marker
+    elsif ($vs2 != 0) { print "-$vs2 "; }  # otherwise, the second verse is end of a simple range
     else { print " "; }
     if ($startNewList == 1) {
 	print "==> ";

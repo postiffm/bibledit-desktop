@@ -624,7 +624,7 @@ while ($ln = <>) {
     }
     # Following are tough cases because they cross chapter boundaries or contain ranges that cross chapter boundaries.
     # I am going to use a special encoding
-    # book|ch|vs|0xff where the 0xff means "dash," like a range operator. vs=0 indicates an entire chapter
+    # book|ch|vs|0xff where the 0xff means "dash," meaning a "complex range operator." vs=0 indicates an entire chapter
     # is being cross-referenced.
     elsif ($ln =~ /^([0-9]+):([0-9]+)-([0-9]+):([0-9]+);?\s*$/) { # Example: 5:14-6:7
 	$ch = $2;
