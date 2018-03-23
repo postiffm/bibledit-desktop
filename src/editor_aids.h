@@ -92,8 +92,10 @@ void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter 
 
 vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox,
                                          GType of_type = G_TYPE_NONE);
-GtkWidget * editor_get_next_textview (GtkWidget * vbox, GtkWidget * textview);
-GtkWidget * editor_get_previous_textview (GtkWidget * vbox, GtkWidget * textview);
+GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
+                                      GtkWidget * textview);
+GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
+                                          GtkWidget * textview);
 void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
 
 bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);

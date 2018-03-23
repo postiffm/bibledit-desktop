@@ -1239,6 +1239,9 @@ The user expects a heading to belong to the next verse.
   bool verse_number_found = false;
   GtkWidget * textview = NULL;
 
+  vector <GtkWidget *>
+  widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
+
   do {
     // Try to find a verse number in the GtkTextBuffer the "iter" points to.
     verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
@@ -1247,8 +1250,6 @@ The user expects a heading to belong to the next verse.
       // If the "textview" is not yet set, look for the current one.
       if (textview == NULL) {
         GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        vector <GtkWidget *>
-        widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
         for (unsigned int i = 0; i < widgets.size(); i++) {
           if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
             textview = widgets[i];
@@ -1257,7 +1258,7 @@ The user expects a heading to belong to the next verse.
         }
       }
       // Look for the previous GtkTextView.
-      textview = editor_get_previous_textview (parent_box, textview);
+      textview = editor_get_previous_textview (widgets, textview);
       // Start looking at the end of that textview.
       if (textview) {
         GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
@@ -1540,9 +1541,9 @@ vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type)
 }
 
 
-GtkWidget * editor_get_next_textview (GtkWidget * vbox, GtkWidget * textview)
+GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
+                                      GtkWidget * textview)
 {
-  vector <GtkWidget *> widgets = editor_get_widgets (vbox);
   for (unsigned int i = 0; i < widgets.size(); i++) {
     if (textview == widgets[i])
       if (i < widgets.size() - 1)
@@ -1552,10 +1553,10 @@ GtkWidget * editor_get_next_textview (GtkWidget * vbox, GtkWidget * textview)
 }
 
 
-GtkWidget * editor_get_previous_textview (GtkWidget * vbox, GtkWidget * textview)
-// Gets the textview that precedes the "current" one in the Editor object.
+GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
+                                          GtkWidget * textview)
+// Gets the textview that precedes the "current" one in the vector.
 {
-  vector <GtkWidget *> widgets = editor_get_widgets (vbox);
   for (unsigned int i = 0; i < widgets.size(); i++) {
     if (textview == widgets[i])
       if (i)
