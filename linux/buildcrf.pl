@@ -173,6 +173,8 @@ $currVs = 0;
 $crfCnt = 0;
 $bookCnt = 0;
 $verseCnt = 0;
+$thisCrfCnt = 0;
+$lastLineEndsWithSemicolon = 0;
 
 while ($ln = <>) {
     chomp($ln);
@@ -185,6 +187,25 @@ while ($ln = <>) {
 	next;
     }
     if ($ln =~ /^([0-9]+):([0-9]+)$/) { # Example: 1:1, 1:2, 1:3, etc.
+	if ($lastLineEndsWithSemicolon == 1) {
+	    # 1:5           <-- refers to Genesis 1:5
+	    # Psa 65:8;     <-- first cross-ref to 1:5
+	    # 74:16         <-- second cross-ref to 1:5, but without special handling, this code thinks it is Gen 74:16
+	    # 1:6               which starts a new x-ref list. WRONG! 
+	    # Since the prior line ends with semicolon, we believe that the 74:16 goes with it instead of creating a new
+	    # x-ref list.
+	    $ch = $1;
+	    $vs = $2;
+	    $enc=($bkNum<<24)|($ch<<16)|($vs<<8);
+	    print $out pack('L<', $enc);
+	    $crfCnt++;
+	    $thisCrfCnt++;
+	    $lastLineEndsWithSemicolon = 0; # this should be it
+	    next;
+	}
+	if (($verseCnt != 0) && ($thisCrfCnt == 0)) {
+	    print "WARNING: Zero cross refs for $currBk $currCh:$currVs ???\n";
+	}
 	$currCh = $1;
 	$currVs = $2;
 	#print "Found $currBk $currCh:$currVs\n";
@@ -193,6 +214,7 @@ while ($ln = <>) {
 	if ($verseCnt > 0) {
 	    $enc = 0;
 	    print $out pack('L<', $enc);
+	    $thisCrfCnt = 0; # reset counter
 	}
 	$verseCnt++;
 	# $enc is the encoded verse reference, as shown above
@@ -695,10 +717,14 @@ while ($ln = <>) {
         print "UNKNOWN>>>$ln<<< \tat $currBk $currCh:$currVs\n";
     }
     $crfCnt++;
+    $thisCrfCnt++;
 
     if ($abbrevs{$bk} == 0) {
 	print "UNKNOWN Book abbreviation>>>$bk<<<\n";
     }
+
+    if ($ln =~ /;\s*$/) { $lastLineEndsWithSemicolon = 1; }
+    else { $lastLineEndsWithSemicolon = 0; }
 }
 
 print "Found $bookCnt books.\n";
