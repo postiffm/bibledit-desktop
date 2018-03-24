@@ -1,0 +1,25 @@
+What are all these files?
+
+Cross-Reference Data
+--------------------
+bi.txt        - cross reference data, text format, saved from MS Word
+bi.crf        - result of linux/buildcrf.pl bi.txt; binary file
+bilongcrf.txt - result of linux/readcrf.pl (which reads bi.crf)
+
+Key Terms Data
+--------------------
+BI_OT_Keyterms_X.txt - BI's OT key terms list, subset for the book(s) X
+BI_NT_Keyterms_X.txt - BI's NT key terms list, subset for the book(s) X
+BI_NT_Keyterms.txt   - all of BI's NT key terms, no subsetting
+BI_OT_Keyterms.txt   - all of BI's OT key terms, no subsetting
+fixKeyTerms.pl       - eventually will adjust key term versifications
+fixOTKeyterms1.txt   - eventually will tell how to adjust verse numbers of
+                       where versification is needing adjustment
+makeKeyTermSets.sh   - uses reduceKeyTerms.pl a number of times to generate
+                       various subsets of keyterms
+reduceKeyTerms.pl    - Take full key term list and pare it down to just those
+		       references in a given book or set of books spec'd on the
+		       command line.
+makeKeyTermSets.log  - log file of the above .sh script
+
+
