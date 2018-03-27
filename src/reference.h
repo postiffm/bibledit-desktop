@@ -25,14 +25,28 @@
 
 class Reference
 {
- private:
+public:
+  enum RefType { blankVerse, singleVerse, multiVerse, complexRange, wholeChapter };
+  // Examples of above:
+  // blankVerse is a newly intialized Reference
+  // singleVerse is like John 3:16
+  // multiVerse is like John 3:16-17
+  // complexRange is like John 3:36-4:1 (crosses chapters)
+  // wholeChapter is like John 3:0, where the zero indicates the entire chapter
+  inline RefType getRefType() { return reftype; }
+  inline void setRefType(RefType _rt) { reftype = _rt; }
+  
+private:
   unsigned int book;
   unsigned int chapter;
   ustring verse;  // this is not just a verse integer, but could be 16-18, for example
- public:
+  RefType reftype;
+  
+public:
   Reference ();
   Reference (unsigned int book_in, unsigned int chapter_in, const ustring& verse_in);
   Reference (unsigned int book_in, unsigned int chapter_in, unsigned int verse_in);
+  Reference (unsigned int encoded);
 
   inline unsigned int book_get() const { return book; }
   inline unsigned int chapter_get() const { return chapter; }

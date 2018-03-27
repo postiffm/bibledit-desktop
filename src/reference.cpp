@@ -29,6 +29,7 @@ Reference::Reference()
   book = 0;
   chapter = 0;
   verse.clear();
+  reftype = blankVerse;
 }
 
 Reference::Reference(unsigned int book_in, unsigned int chapter_in, const ustring & verse_in)
@@ -36,6 +37,15 @@ Reference::Reference(unsigned int book_in, unsigned int chapter_in, const ustrin
   book = book_in;
   chapter = chapter_in;
   verse = verse_in;
+  if (verse_in.find("-") != ustring::npos) {
+    reftype = multiVerse;  
+  }
+  else if (convert_to_int(verse_in) == 0) {
+    reftype = wholeChapter;   
+  }
+  else { 
+    reftype = singleVerse;
+  }
 }
 
 Reference::Reference(unsigned int book_in, unsigned int chapter_in, unsigned int verse_in)
@@ -43,6 +53,50 @@ Reference::Reference(unsigned int book_in, unsigned int chapter_in, unsigned int
   book = book_in;
   chapter = chapter_in;
   verse = Glib::ustring::format(verse_in);
+  reftype = singleVerse;
+}
+
+// The following method creates a reference from a bit-encoded
+// reference (found in the cross-reference file, or in the Concordance
+// internal storage). The layout of the unsigned 32-bit int is:
+// +--------+--------+--------+--------+
+// |booknum |chapnum | vrsnum | vrsnum2|
+// +--------+--------+--------+--------+
+// The vrsnum field accommodate range refs like Exo 10:21-23.
+// To specify larger ranges, I use a special encoding:
+// book|ch|vs|0xff where the 0xff means "dash," meaning a 
+// "complex range operator." vs=0 indicates an entire chapter
+// is being cross-referenced.
+// See linux/buildcrf.pl and readcrf.pl
+Reference::Reference (unsigned int encoded)
+{
+    book = encoded >> 24;
+    chapter = (encoded >> 16) & 0xff;
+    unsigned int vs1 = (encoded >> 8) & 0xff;
+    unsigned int vs2 = encoded & 0xff;
+    if (vs2 == 0) { 
+      verse = Glib::ustring::format(vs1);
+      reftype = singleVerse;
+    }
+    else if (vs2 == 0xff) {
+        // I don't know what to do...it would be easier if I didn't have
+        // a ustring for the verse...
+        verse = std::to_string(vs1);
+        reftype = complexRange;
+    }
+    else if (vs1 == 0x0) {
+      verse = std::to_string(vs1);
+      reftype = wholeChapter;
+      // It is possible for us to have a cross-reference like 1 Chronicles 24:0-1 Chronicles 26:0,
+      // which, for the first verse, is both a complexRange and a wholeChapter. The complexRange
+      // takes precedent, and the CrossReferences::write() routine does work OK that way, because
+      // 24:0 is a non-verse, so it displays no verse text, and the range is 1 Ch. 24:0.....1 Ch. 26:0
+      // which is acceptable for our purposes.
+    }
+    else {
+      verse = std::to_string(vs1) + "-" + std::to_string(vs2);
+      reftype = multiVerse;
+    }
 }
 
 ustring Reference::human_readable(const ustring & language) const

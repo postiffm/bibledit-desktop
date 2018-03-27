@@ -199,7 +199,7 @@ protected:
   GtkWidget *image26812;
   GtkWidget *view_references;
   GtkWidget *view_concordance;
-  GtkWidget *view_refbibles;
+  GtkWidget *view_analysis;
   GtkWidget *view_related_verses;
   GtkWidget *view_outline;
   GtkWidget *view_tile_windows;
@@ -463,15 +463,15 @@ protected:
   void on_view_concordance ();
 
   // Reference Bibles Window
-  WindowTabbed * window_refbibles; // reference Bibles will be displayed here
+  WindowTabbed * window_analysis; // reference Bibles will be displayed here
   
-  static void on_window_refbibles_delete_button_clicked(GtkButton *button, gpointer user_data);
-  void on_window_refbibles_delete_button();
-  static void on_window_refbibles_signal_button_clicked(GtkButton * button, gpointer user_data);
-  void on_window_refbibles_signal_button();
+  static void on_window_analysis_delete_button_clicked(GtkButton *button, gpointer user_data);
+  void on_window_analysis_delete_button();
+  static void on_window_analysis_signal_button_clicked(GtkButton * button, gpointer user_data);
+  void on_window_analysis_signal_button();
 
-  static void on_view_refbibles_activate (GtkMenuItem *menuitem, gpointer user_data);
-  void on_view_refbibles ();
+  static void on_view_analysis_activate (GtkMenuItem *menuitem, gpointer user_data);
+  void on_view_analysis ();
   
   void on_next_reference();
   void on_previous_reference();

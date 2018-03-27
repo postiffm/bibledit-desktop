@@ -60,6 +60,7 @@ class book {
 	book(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
     book();
     virtual ~book();
+    void check_chapter_in_range(unsigned int chapnum);
     ustring retrieve_verse(const Reference &ref);
     void byzasciiConvert(ustring &vs);
     virtual void load(void);
@@ -85,6 +86,11 @@ public:
   void load(void);
 };
 
+class book_bixref : public book {
+public:
+    book_bixref(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+};
+
 class chapter {
   public:
 	book *bk;    // back pointer to the containing book; chapter does NOT own book for garbage collection purposes
@@ -94,6 +100,7 @@ class chapter {
   public:
     chapter(book *_bk, int _num);
     ~chapter();
+    void check_verse_in_range(unsigned int vsnum);
 	void load(int book, int chapter,
               std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,      std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
     void appendToLastVerse(const ustring &addlText);
@@ -107,12 +114,20 @@ class verse {
 	ustring text;
   public:
 	verse(chapter *_ch, int _vsnum, ustring _txt);
+    virtual ~verse();
     void print(void);
 	void addToWordCount(std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
         std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
     void append(const ustring &addlText);
     void prepend(const ustring &addlText);
     ustring retrieve_verse(const Reference &ref);
+};
+
+class verse_xref : public verse {
+public:
+    verse_xref(chapter *_ch, int _vsnum, ustring _txt);
+    ~verse_xref();
+    vector <unsigned int> xrefs;
 };
 
 class bible {
@@ -134,19 +149,28 @@ protected: // so derived bibles can access it
 class bible_byz : public bible {
 public:
     bible_byz(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+    ustring retrieve_verse(const Reference &ref); // overrides base class
 };
 
 class bible_sblgnt : public bible {
 public:
     bible_sblgnt(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+    ustring retrieve_verse(const Reference &ref); // overrides base class
 };
 
 class bible_leb : public bible {
 public:
     bible_leb(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class, also uses base method
+    ustring retrieve_verse(const Reference &ref); // overrides base class
+};
+
+// To store Bibles International cross-references
+// At some point I may make this generic by removing "bi" prefix
+class bible_bixref : public bible {
+public:
+    bible_bixref(const ustring &_proj);
+    ~bible_bixref();
+    vector<unsigned int> *retrieve_xrefs(const Reference &ref);
 };
 
 class Concordance {
@@ -182,4 +206,13 @@ public:
   void write(const Reference &ref, HtmlWriter2 &htmlwriter);
 private:
   vector<bible *> bibles;
+};
+
+class CrossReferences {
+public:
+  CrossReferences();
+  ~CrossReferences();
+  void write(const Reference &ref, HtmlWriter2 &htmlwriter);   
+private:
+  bible_bixref *bbl;
 };

@@ -18,12 +18,18 @@
 
 # Based on a 32-bit word:
 #  +--------+--------+--------+--------+
-#  |booknum |chapnum | vrsnum | vrsnum |
+#  |booknum |chapnum | vrsnum | vrsnum2|
 #  +--------+--------+--------+--------+
 # The vrsnum field accommodate range refs like Exo 10:21-23.
 # If a reference is instead Exo 10:21, 23, then we have to
 # encode that as a separate reference.
-# The first listed verse is the verse that is the subject of the
+# To specify larger ranges, I use a special encoding:
+# book|ch|vs|0xff where the 0xff means "dash," meaning a 
+# "complex range operator." vs=0 indicates an entire chapter
+# is being cross-referenced.
+
+# In the cross-reference file format, the first listed 
+# verse is the verse that is the subject of the
 # cross references (Genesis 1:1). Following are 32-bits
 # per verse that are cross-references from Genesis 1:1.
 # This list is ended by a 0x00000000 32-bits, and then the
@@ -658,7 +664,7 @@ while ($ln = <>) {
 	$enc=($bkNum<<24)|($ch2<<16)|($vs2<<8);
 	print $out pack('L<', $enc);
     }
-    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+)-([0-9]+);?\s*$/) { # Example: 1Ch 24-26 (2 chapters)
+    elsif ($ln =~ /^([1-3a-zA-Z ]+) ([0-9]+)-([0-9]+);?\s*$/) { # Example: 1Ch 24-26 (3 chapters)
 	$bk = $1;$bkNum = $abbrevs{$bk};
 	$ch = $2;
 	$ch2 = $3;

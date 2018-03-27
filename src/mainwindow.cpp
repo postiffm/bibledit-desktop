@@ -168,7 +168,7 @@ navigation(0), httpd(0)
   window_notes = NULL;
   window_references = NULL;
   window_concordance = NULL;
-  window_refbibles = NULL;
+  window_analysis = NULL;
   //window_bibles = NULL;
   delete_keyterms_assistant = NULL;
   changes_assistant = NULL;
@@ -957,9 +957,9 @@ navigation(0), httpd(0)
   gtk_widget_show (view_concordance);
   gtk_container_add (GTK_CONTAINER (menuitem_view_menu), view_concordance);
   
-  view_refbibles = gtk_check_menu_item_new_with_mnemonic (_("_Reference Bibles"));
-  gtk_widget_show (view_refbibles);
-  gtk_container_add (GTK_CONTAINER (menuitem_view_menu), view_refbibles);
+  view_analysis = gtk_check_menu_item_new_with_mnemonic (_("_Analysis window"));
+  gtk_widget_show (view_analysis);
+  gtk_container_add (GTK_CONTAINER (menuitem_view_menu), view_analysis);
 
   view_outline = gtk_check_menu_item_new_with_mnemonic(_("_Outline"));
   gtk_widget_show(view_outline);
@@ -1717,8 +1717,8 @@ navigation(0), httpd(0)
   if (view_concordance) {
 	g_signal_connect ((gpointer) view_concordance, "activate", G_CALLBACK (on_view_concordance_activate), gpointer(this));
   }
-  if (view_refbibles) {
-	g_signal_connect ((gpointer) view_refbibles, "activate", G_CALLBACK (on_view_refbibles_activate), gpointer(this));
+  if (view_analysis) {
+	g_signal_connect ((gpointer) view_analysis, "activate", G_CALLBACK (on_view_analysis_activate), gpointer(this));
   }
 
   if (view_outline)
@@ -2435,6 +2435,7 @@ void MainWindow::on_navigation_new_reference_clicked(GtkButton * button, gpointe
 }
 
 extern ReferenceBibles *refbibles;
+extern CrossReferences *crossrefs;
 
 void MainWindow::on_navigation_new_reference()
 // This function is called when the navigation object goes to another reference.
@@ -2481,12 +2482,18 @@ void MainWindow::on_navigation_new_reference()
     window_show_related_verses->go_to(settings->genconfig.project_get(), navigation.reference);
   }
   
-  // Reference Bibles window
-  if (window_refbibles) {
+  // Analysis window...contains reference Bibles, cross references, and other stuff (later)
+  if (window_analysis) {
     HtmlWriter2 html("");
     refbibles->write(navigation.reference, html);
     html.finish();
-    window_refbibles->updateTab(_("Greek and English"), html);
+    window_analysis->updateTab(_("Greek and English"), html);
+    
+    html.clear(); html.init("");
+    crossrefs->write(navigation.reference, html);
+    html.finish();
+    window_analysis->updateTab(_("Cross References"), html);
+
     // I plan to have text apparatus, or translator notes in another tab that we will update next.
   }
 }
@@ -2838,16 +2845,18 @@ void MainWindow::on_view_concordance ()
   }
 }
 
-void MainWindow::on_view_refbibles_activate (GtkMenuItem *menuitem, gpointer user_data)
+void MainWindow::on_view_analysis_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
-  ((MainWindow *) user_data)->on_view_refbibles();
+  ((MainWindow *) user_data)->on_view_analysis();
 }
 
-void MainWindow::on_view_refbibles ()
+void MainWindow::on_view_analysis ()
 {
-  if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_refbibles))) {
+  if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_analysis))) {
     // This tabbed window may already be created, so it need not be created again
-    if (!window_refbibles) { window_refbibles = new WindowTabbed(_("Reference Bibles"), layout, accelerator_group, windows_startup_pointer != G_MAXINT); }
+    if (!window_analysis) { window_analysis = new WindowTabbed(_("Analysis"), layout, accelerator_group, windows_startup_pointer != G_MAXINT); }
+    
+    // Reference Bibles
     if (!refbibles) {
         refbibles = new ReferenceBibles();
     }
@@ -2856,15 +2865,26 @@ void MainWindow::on_view_refbibles ()
     // Load reference Bible data
     refbibles->write(navigation.reference, html);
     html.finish();
-    window_refbibles->newTab(_("Greek and English"), html);
+    window_analysis->newTab(_("Greek and English"), html);
     
-    g_signal_connect((gpointer) window_refbibles->delete_signal_button, "clicked", G_CALLBACK(on_window_refbibles_delete_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_refbibles->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
-    g_signal_connect((gpointer) window_refbibles->signalVerseChange, "clicked", G_CALLBACK(on_window_refbibles_signal_button_clicked), gpointer(this));
+    // Cross References
+    if (!crossrefs) {
+      crossrefs = new CrossReferences();   
+    }
+    
+    html.clear(); html.init("");
+    crossrefs->write(navigation.reference, html);
+    html.finish();
+    window_analysis->newTab(_("Cross References"), html);
+    
+    g_signal_connect((gpointer) window_analysis->delete_signal_button, "clicked", G_CALLBACK(on_window_analysis_delete_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_analysis->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
+    g_signal_connect((gpointer) window_analysis->signalVerseChange, "clicked", G_CALLBACK(on_window_analysis_signal_button_clicked), gpointer(this));
   }
-  else { // now the view_refbibles is unchecked
-    delete window_refbibles; window_refbibles = NULL;
+  else { // now the view_analysis is unchecked
+    delete window_analysis; window_analysis = NULL;
     delete refbibles; refbibles = NULL;
+    delete crossrefs; crossrefs = NULL;
   }
 }
 
@@ -2907,17 +2927,19 @@ void MainWindow::on_window_concordance_delete_button()
   }
 }
 
-void MainWindow::on_window_refbibles_delete_button_clicked(GtkButton * button, gpointer user_data)
+void MainWindow::on_window_analysis_delete_button_clicked(GtkButton * button, gpointer user_data)
 {
-  ((MainWindow *) user_data)->on_window_refbibles_delete_button();
+  ((MainWindow *) user_data)->on_window_analysis_delete_button();
 }
 
-void MainWindow::on_window_refbibles_delete_button()
+void MainWindow::on_window_analysis_delete_button()
 {
-  if (window_refbibles) {
-	delete window_refbibles;
-    window_refbibles = NULL;
-    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_refbibles), FALSE);
+  if (window_analysis) {
+	delete window_analysis;
+    window_analysis = NULL;
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_analysis), FALSE);
+    // TO DO : Delete refbibles, which has the data for the reference bibles in window_analysis
+    // TO DO : Delete crossrefs, which has the data for the crossreferences in window_analysis
   }
 }
 
@@ -2983,20 +3005,20 @@ void MainWindow::on_window_concordance_signal_button()
 #endif    
 }
 
-void MainWindow::on_window_refbibles_signal_button_clicked(GtkButton * button, gpointer user_data)
+void MainWindow::on_window_analysis_signal_button_clicked(GtkButton * button, gpointer user_data)
 // This routine is called when the info window fires a signal that something has happened.
 {
-  ((MainWindow *) user_data)->on_window_refbibles_signal_button();
+  ((MainWindow *) user_data)->on_window_analysis_signal_button();
 }
 
-void MainWindow::on_window_refbibles_signal_button()
+void MainWindow::on_window_analysis_signal_button()
 // Handler for when the user clicks something in the window we will do the right thing
 {
-  if (window_refbibles->newReference) {
-    Reference myref(*(window_refbibles->newReference));
+  if (window_analysis->newReference) {
+    Reference myref(*(window_analysis->newReference));
     cout << "Navigating to verse >> " << myref.human_readable("") << endl;
     navigation.display(myref);
-    window_refbibles->newReference = NULL;
+    window_analysis->newReference = NULL;
   }
 }
 

@@ -46,6 +46,11 @@ book_leb::book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
   // nothing special needs done       
 }
 
+book_bixref::book_bixref(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : book(_bbl, _bookname, _booknum)
+{
+   // nothing special needs done   
+}
+
 book::book() : chapters(1)
 {
   // Note: chapters[0] is unused; simply here to avoid the "off by one" indexing error
@@ -84,6 +89,21 @@ verse::verse(chapter *_ch, int _vs, ustring _txt)
 	ch = _ch;
 	vsnum = _vs;
 	text = _txt;
+}
+
+verse::~verse()
+{
+  // nothing to do here. just defining for "virtualness"   
+}
+
+verse_xref::verse_xref(chapter *_ch, int _vsnum, ustring _txt) : verse(_ch, _vsnum, _txt)
+{
+   // nothing else needed for now   
+}
+
+verse_xref::~verse_xref()
+{
+   // nothing to do here. vector destroys itself
 }
 
 void verse::print(void)
@@ -317,7 +337,7 @@ void Concordance::clear(void)
   sortedWordCounts.clear();
 }
 
-//  Given a list of encoded verses (a bitmap,  basically), write out html for the verses,  
+//  Given a list of encoded verses (each one a bitmap,  basically), write out html for the verses,  
 //  like this: " Genesis 1:6 Genesis 1:29... Only write the first num verses,  because
 //  there could be thousands.
 void Concordance::writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter)
@@ -485,7 +505,7 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 }
 
 //  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These 
-//  are shown in the Reference Bibles window as an aid to the translator.
+//  are shown in the Analysis window as an aid to the translator.
 //  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV,  ?
 //  Second goal is to include another tab for translator notes from the NET or other
 //  resources.
@@ -500,7 +520,9 @@ ReferenceBibles::ReferenceBibles() : bibles(10)
 
 ReferenceBibles::~ReferenceBibles()
 {
-    // Not much to do
+    delete bibles[0];
+    delete bibles[1];
+    delete bibles[2];
 }
 
 ustring verse::retrieve_verse(const Reference &ref) 
@@ -799,7 +821,6 @@ void book::load(void)
   // instantiations of it.
 }
 
-
 ustring bible_byz::retrieve_verse(const Reference &ref)
 {
     unsigned int booknum = ref.book_get();
@@ -862,6 +883,28 @@ void bible::check_book_in_range(unsigned int booknum)
     }
 }
 
+void book::check_chapter_in_range(unsigned int chapnum)
+{
+    // Is this chapter number in the range that we have already created in our vector? If not, 
+    // resize the vector.
+    if (chapnum >= chapters.size()) {
+        // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
+        // books[0] exists, but is unused. So we resize books to 2 elements.
+      chapters.resize(chapnum+1);
+    }
+}
+
+void chapter::check_verse_in_range(unsigned int vsnum)
+{
+    // Is this verse number in the range that we have already created in our vector? If not, 
+    // resize the vector.
+    if (vsnum >= verses.size()) {
+        // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
+        // books[0] exists, but is unused. So we resize books to 2 elements.
+      verses.resize(vsnum+1);
+    }
+}
+
 // This virtual method should probably be abstract,  making the class as a whole abstract...
 ustring bible::retrieve_verse(const Reference &ref)
 {
@@ -888,7 +931,6 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
         if (verse.empty()) {
             htmlwriter.paragraph_open();
             verse.append(_("<empty>"));
-            htmlwriter.paragraph_close();
         }
         else {
               replace_text(verse, "\n", " ");
@@ -900,4 +942,181 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
             }
         htmlwriter.paragraph_close();
       }
+}
+
+bible_bixref::bible_bixref(const ustring &_proj) : bible(_proj, "NO FONT")
+{
+  // Nothing else for now.
+}
+
+bible_bixref::~bible_bixref()
+{
+  // nothing to do more than what the base class destructor does
+}
+
+vector<unsigned int> *bible_bixref::retrieve_xrefs(const Reference &ref)
+{
+    // By construction I know that these casts are valid. I also know that
+  // every book of the Bible has been created, but not necessarily every
+  // chapter or verse has a cross-reference in it.
+    book_bixref *bk = static_cast<book_bixref *>(books[ref.book_get()]);
+    unsigned int chnum = ref.chapter_get();
+    if ((chnum < 1) || (chnum >= bk->chapters.size())) {
+	    return NULL;
+    }
+	
+    chapter *ch = bk->chapters[ref.chapter_get()];
+    unsigned int vsnum = ref.verse_get_single();
+    if ((vsnum < 1) || (vsnum >= ch->verses.size())) {
+	    return NULL;
+	}
+    verse_xref *vs = static_cast<verse_xref *>(ch->verses[vsnum]);
+    if (vs == NULL ) { return NULL; }
+	return &(vs->xrefs);
+}
+
+
+CrossReferences::CrossReferences()
+{
+    // Load the whole set of cross references. It is a lot of data--over half a megabyte
+    // of memory, but the way it is stored in binary format (see linux/buildcrf.pl and 
+    // linux/readcrf.pl) makes it fairly quick.
+    ReadBinary rb(Directories->get_package_data() + "/bibles/bi.crf");
+    uint32_t *dataptr = rb.get_data();
+    unsigned int num32BitWords = rb.get_num32BitWords();
+    
+    bbl = new bible_bixref("BI_XREF");
+    
+    // Create empty books right now, since we know we are going to need them
+    bbl->books.resize(67, 0x0);
+    unsigned int b;
+    for (b = 1; b <= 66; b++) {
+        ustring bookname = books_table[b].name;
+        bbl->books[b] = new book_bixref(bbl, bookname, b);
+    }
+    
+    unsigned int i;
+    bool startNewList = true;
+    book *bk = NULL;
+    chapter *ch = NULL;
+    verse_xref *vs = NULL;
+    for (i = 0; i < num32BitWords; i++) {
+        unsigned int encoded = *dataptr;
+        dataptr++; // should advance by 4 bytes for next time around
+        if (encoded == 0) { startNewList = true; continue; }
+        
+        if (startNewList) {
+            Reference ref(encoded);
+            bk = bbl->books[ref.book_get()];
+            bk->check_chapter_in_range(ref.chapter_get());
+            ch = bk->chapters[ref.chapter_get()];
+            if (ch == 0) {
+                // First time we are encountering this chapter. We need
+                // to create it. 
+                ch = new chapter(bk, ref.chapter_get());
+                bk->chapters[ref.chapter_get()] = ch;
+            }
+            // As designed, the "starter" verse only appears
+            // one time. Therefore, when we come to it, we know we need to create a
+            // new verse to contain the upcoming cross-references.
+            ch->check_verse_in_range(ref.verse_get_single());
+            vs = new verse_xref(ch, ref.verse_get_single(), "");
+            ch->verses[ref.verse_get_single()] = vs;
+            startNewList = false;
+        }
+        else { 
+            // Add to an existing list.
+            vs->xrefs.push_back(encoded);
+        }
+    }
+    
+    // When rb goes out of scope, destructor frees up the buffer that was read
+    
+}
+
+CrossReferences::~CrossReferences()
+{
+    delete bbl;
+}
+
+void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
+{
+    vector <unsigned int> *xrefs; // could transfer over to uint32_t here and elsewhere
+    htmlwriter.paragraph_open();
+    htmlwriter.text_add(_("Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
+    htmlwriter.paragraph_close();
+
+    if ((ref.book_get() == 0) || (ref.chapter_get() == 0) || (ref.verse_get_single() == 0)) {
+        htmlwriter.paragraph_open();
+        htmlwriter.text_add(_("Invalid reference; therefore not looking up cross references"));
+        htmlwriter.paragraph_close();
+        return;
+    }
+    
+    try {
+        xrefs = bbl->retrieve_xrefs(ref); // this copies xrefs from the returned vector<>&
+    }
+    catch (std::runtime_error &e) {
+        htmlwriter.paragraph_open();
+        htmlwriter.text_add(e.what());
+        htmlwriter.paragraph_close();
+    }
+    if ((xrefs == NULL) || (xrefs->empty())) {
+        htmlwriter.paragraph_open();
+        htmlwriter.text_add(_("No cross references"));
+        htmlwriter.paragraph_close();
+    }
+    else {
+        extern Settings *settings;
+        ustring project = settings->genconfig.project_get();
+        Reference firstRef;
+        bool finishComplexRange = false;
+        for (auto &it : *xrefs) {
+            Reference ref(it); // construct it directly from the bit-encoded reference
+            
+            if (ref.getRefType() == Reference::complexRange) {
+              firstRef = ref;
+              finishComplexRange = true;
+              continue;
+              // I am assuming that there is at least one more verse in xrefs...by 
+              // construction there has to be.
+            }
+            
+            ustring verse;
+            ustring address;
+            if (finishComplexRange == true) {
+                verse = project_retrieve_verse(project, firstRef);
+                address = books_id_to_localname(firstRef.book_get()) + " " + std::to_string(firstRef.chapter_get()) + ":" + firstRef.verse_get();
+                // In this iteration of the loop, "ref" is now actually "secondRef" but I don't bother calling it that
+            }
+            else { // the most common case, a regular-old singleVerse (John 3:16) or multiVerse (John 3:16-17)
+                verse = project_retrieve_verse(project, ref);
+                address = books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get();
+            }
+            // Get data about the project.
+            // This is exact same code as Concordance::writeVerses...should re-factor
+            
+            htmlwriter.paragraph_open();
+            htmlwriter.hyperlink_add ("goto " + address, address);
+                        
+            if (verse.empty()) {
+                verse.append(_("<empty>"));
+            } else {
+                replace_text(verse, "\n", " ");
+                CategorizeLine cl(verse);
+                cl.remove_verse_number(ref.verse_get());
+                verse = cl.verse;
+                htmlwriter.text_add(" " + verse);
+            }
+            
+            if (finishComplexRange == true) {
+               htmlwriter.text_add(".....");
+               address = books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get();
+               htmlwriter.hyperlink_add ("goto " + address, address);
+               finishComplexRange = false;
+            }
+            
+            htmlwriter.paragraph_close();
+        }
+    }
 }

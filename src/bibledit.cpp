@@ -66,6 +66,7 @@ URLTransport * urltransport;
 VCS *vcs;
 Concordance *concordance;
 ReferenceBibles *refbibles;
+CrossReferences *crossrefs;
 
 int main(int argc, char *argv[])
 {

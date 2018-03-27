@@ -95,6 +95,20 @@ public:
 private:
 };
 
+long GetFileSize(const ustring &filename);
+
+class ReadBinary
+{
+public:
+    ReadBinary (const ustring & file);
+    ~ReadBinary ();
+    uint32_t *get_data() { return datablock; }
+    unsigned int get_num32BitWords() { return num32BitWords; }
+private:
+    uint32_t *datablock;
+    unsigned int num32BitWords;
+};
+
 class WriteText
 {
 public:

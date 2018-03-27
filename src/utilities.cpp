@@ -813,6 +813,42 @@ ReadText::~ReadText()
 {
 }
 
+// Return size of file in bytes, -1 if error
+long GetFileSize(const ustring &filename)
+{
+    struct stat stat_buf;
+    int rc = stat(filename.c_str(), &stat_buf);
+    return rc == 0 ? stat_buf.st_size : -1;
+}
+
+ReadBinary::ReadBinary(const ustring & filename)
+{
+    datablock = 0x0;
+    long fsize = GetFileSize(filename);
+    if (fsize == -1) {
+        gw_critical(_("Could not open file ") + filename);
+        return;
+    }
+    num32BitWords = fsize/sizeof(uint32_t);
+    datablock = new uint32_t[num32BitWords];
+    FILE *pFile = fopen(filename.c_str(), "rb");
+    if (pFile == NULL) { 
+      cerr << _("Error opening file ") << filename << endl;
+      throw std::runtime_error(_("error opening file"));
+    }
+    size_t result = fread(datablock, 4, num32BitWords, pFile);
+    if (result != num32BitWords) {
+      cerr << _("Error reading all bytes in file ") << filename << endl;
+      throw std::runtime_error(_("error reading all bytes in file"));
+    }
+    fclose(pFile);
+}
+
+ReadBinary::~ReadBinary()
+{
+     delete[] datablock;
+     datablock = 0x0;
+}
 
 WriteText::WriteText(const ustring & file, bool append)
 {

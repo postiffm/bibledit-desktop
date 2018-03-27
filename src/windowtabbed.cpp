@@ -210,7 +210,7 @@ void WindowTabbed::newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 {
     SingleTab *existingTab = NULL;
-    // Find tab
+    // Find tab by its title, then update the html that it contains
     for (auto it : tabs) {
         if (it->title == tabTitle) {
             existingTab = it;
