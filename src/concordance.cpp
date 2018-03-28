@@ -22,6 +22,7 @@
 #include "progresswindow.h"
 #include "directories.h"
 #include <locale>
+#include "gtkwrappers.h"
 
 book::book(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : chapters(1)
 {
@@ -981,9 +982,17 @@ CrossReferences::CrossReferences()
     // Load the whole set of cross references. It is a lot of data--over half a megabyte
     // of memory, but the way it is stored in binary format (see linux/buildcrf.pl and 
     // linux/readcrf.pl) makes it fairly quick.
-    ReadBinary rb(Directories->get_package_data() + "/bibles/bi.crf");
+    crossref_file = Directories->get_package_data() + "/bibles/bi.crf";
+    ReadBinary rb(crossref_file);
     uint32_t *dataptr = rb.get_data();
     unsigned int num32BitWords = rb.get_num32BitWords();
+    
+    if ((dataptr == 0x0) || (num32BitWords == 0)) { 
+        // There was a problem opening the file
+        bbl = 0x0;
+        gtkw_dialog_error(NULL, _("Cannot open file ") + crossref_file);
+        return;
+    }
     
     bbl = new bible_bixref("BI_XREF");
     
@@ -1036,7 +1045,7 @@ CrossReferences::CrossReferences()
 
 CrossReferences::~CrossReferences()
 {
-    delete bbl;
+    if (bbl) { delete bbl; bbl = NULL; }
 }
 
 void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
@@ -1046,6 +1055,12 @@ void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
     htmlwriter.text_add(_("Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
     htmlwriter.paragraph_close();
 
+    if (bbl == 0x0) {
+        htmlwriter.paragraph_open();
+        htmlwriter.text_add(_("Could not open cross-reference file ") + crossref_file);
+        htmlwriter.paragraph_close();
+        return;
+    }
     if ((ref.book_get() == 0) || (ref.chapter_get() == 0) || (ref.verse_get_single() == 0)) {
         htmlwriter.paragraph_open();
         htmlwriter.text_add(_("Invalid reference; therefore not looking up cross references"));

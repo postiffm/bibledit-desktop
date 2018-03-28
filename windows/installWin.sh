@@ -398,7 +398,7 @@ cp -R doc/menus.pl "$SHARE/bibledit"
 cp -R doc/retrieval.pl "$SHARE/bibledit"
 cp -R doc/style.css "$SHARE/bibledit"
 cp -R doc/site.xml "$SHARE/bibledit"
-# Added 3/14/2018
+# Added 3/14/2018 to support new reference bibles in Analysis window
 mkdir -v -p "$SHARE/bibledit/bibles"
 BIBLES="$SHARE/bibledit/bibles"
 #mkdir -v -p "$BIBLES/sblgnt"
@@ -407,6 +407,8 @@ BIBLES="$SHARE/bibledit/bibles"
 cp -R bibles/sblgnt "$BIBLES/"
 cp -R bibles/byzascii "$BIBLES/"
 cp -R bibles/engleb "$BIBLES/"
+# Added 3/28/2018 to support new cross-reference database in Analysis window
+cp -R BiblesInternational/bi.crf "$BIBLES/"
 
 # Added 2/21/2017
 echo "Setting up usr/bin and tmp"

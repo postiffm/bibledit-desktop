@@ -1,4 +1,4 @@
-# Installing the pre-existing Bibles that are needed for Bibledit to work
+# Installing the pre-existing Bibles that are needed for the Bibledit Analysis window
 # Thanks to https://xaizek.github.io/2014-09-28/how-to-install-data-directory-with-automake/
 
 # Destination directory

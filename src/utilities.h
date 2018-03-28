@@ -102,6 +102,8 @@ class ReadBinary
 public:
     ReadBinary (const ustring & file);
     ~ReadBinary ();
+    // If either of these returns 0, then there is an error
+    // with the file. Don't use the data in that case.
     uint32_t *get_data() { return datablock; }
     unsigned int get_num32BitWords() { return num32BitWords; }
 private:

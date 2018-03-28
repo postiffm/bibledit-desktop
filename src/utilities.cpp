@@ -824,6 +824,7 @@ long GetFileSize(const ustring &filename)
 ReadBinary::ReadBinary(const ustring & filename)
 {
     datablock = 0x0;
+    num32BitWords = 0;
     long fsize = GetFileSize(filename);
     if (fsize == -1) {
         gw_critical(_("Could not open file ") + filename);

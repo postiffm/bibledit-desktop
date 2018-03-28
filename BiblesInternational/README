@@ -5,6 +5,10 @@ Cross-Reference Data
 bi.txt        - cross reference data, text format, saved from MS Word
 bi.crf        - result of linux/buildcrf.pl bi.txt; binary file
 bilongcrf.txt - result of linux/readcrf.pl (which reads bi.crf)
+Makefile.am   - Autotools Makefile template that tells how to install
+                the cross-reference data file (bi.crf is the only one at
+                the moment). If you change this, run autoconf, automake,
+                and then ./configure in the bibledit-desktop directory.
 
 Key Terms Data
 --------------------

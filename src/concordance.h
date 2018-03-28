@@ -215,4 +215,5 @@ public:
   void write(const Reference &ref, HtmlWriter2 &htmlwriter);   
 private:
   bible_bixref *bbl;
+  ustring crossref_file;
 };
