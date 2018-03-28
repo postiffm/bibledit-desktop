@@ -7,7 +7,7 @@
 
 # To change the version number, change the following line and
 # the version in ../configure.ac, as well as any shortcuts.
-VERSION="4.12"
+VERSION="4.13"
 
 full=1
 docs=0
@@ -18,7 +18,7 @@ function usage
 {
 	echo "Usage: installWin.sh [options]"
 	echo ""
-	echo "Copy files to C:\Program Files or C:\Program Files (x86) to make a full"
+	echo "Copy files to C:\Program Files to make a full"
 	echo "running environment for Bibledit. Options include:"
 	echo ""
 	echo "       --docs | -d   Install just docs and quit immediately."
@@ -28,6 +28,10 @@ function usage
 	echo "                     or other support files."
 	echo "       --strip | -s  Shrink binary size for faster copy/download."
 	echo "       --generateinstall | -g  Generate installer executable. Requires --full to also be specified."
+	echo ""
+	echo "NOTE: We do not support installing a 32-bit version of Bibledit-Desktop on a 64-bit"
+	echo "      computer [in Program Files (x86)]. It is possible to do, but it is buggy."
+	
 }
 
 # Process command-line arguments
@@ -60,8 +64,8 @@ if [ -n "$MSYSTEM" ]
 then
   case "$MSYSTEM" in
     MINGW32)
-      # Program Files (x86) for 32-bit programs
-	  PROGRAMFILES="Program Files (x86)"
+      # Program Files for 32-bit programs
+	  PROGRAMFILES="Program Files"
 	  # Source directory for binaries and such
 	  MINGWDIR="mingw32"
 	  WINBITS="win32"
