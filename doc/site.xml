@@ -1246,9 +1246,27 @@ is opened, then Bibledit will look for the largest available open space, and
 place the window there. It will also size the window so that it fills that open
 space. If there is no sufficient space available to place a window in, then
 Bibledit will look for the largest window, make it half the size, and place the
-new window in the open space so created.</p><h2><a name="TOC-Commandline-parameters"/>Commandline parameters</h2><p>--debug. For debugging in gdb.</p><p>--xembed &lt;window identifier&gt;. If that argument is present, it creates a plug for its main window instead of a normal top-level window.</p><p>-r|-w &lt;project&gt; &lt;book&gt; chapter|0 fileName. For reading from or writing to Bibledit USFM data. See source file readwrite.cpp for more information.</p></div></body></html><name>site/gtk/reference/internals.html</name></url><url><loc>./site/gtk/reference/keyboard-accelerators.html</loc><priority>0.5</priority><dir>site/gtk/reference</dir><html><head/><body><div id="menu"/><div id="content"><h1>Keyboard accelerators</h1><p>Accelerators are keystrokes that accelerate access to certain functions.</p>
+new window in the open space so created.</p>
 
+<h2><a name="TOC-Commandline-parameters"/>Commandline parameters</h2>
 
+<p>--debug. For debugging in gdb.</p>
+<p>-r|-w &lt;project&gt; &lt;book&gt; chapter|0 fileName. For reading from or writing
+to Bibledit USFM data. See source file readwrite.cpp for more information.</p>
+
+</div></body></html>
+
+<name>site/gtk/reference/internals.html</name></url>
+<url><loc>./site/gtk/reference/keyboard-accelerators.html</loc><priority>0.5</priority>
+<dir>site/gtk/reference</dir>
+
+<html><head/><body>
+
+<div id="menu"/><div id="content">
+
+<h1>Keyboard accelerators</h1>
+
+<p>Accelerators are keystrokes that accelerate access to certain functions.</p>
 
 <p>Ctrl-X: Cut to clipboard.</p>
 
