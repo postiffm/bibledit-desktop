@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.8.12\n"
+"Project-Id-Version: 4.13\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2017-06-09 16:40-0400\n"
+"POT-Creation-Date: 2018-03-29 16:14-0400\n"
 "PO-Revision-Date: 2018-03-01 20:09+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
@@ -143,7 +143,6 @@ msgid "The ones made between two dates I will give"
 msgstr "Celles faites entre deux dates à définir"
 
 #: ../src/assistantchanges.cpp:88 ../src/dialognotesupdate.cpp:58
-#: ../src/windowtabbed.cpp:41
 msgid "Information"
 msgstr "Informations"
 
@@ -245,7 +244,7 @@ msgstr "Que voulez-vous exporter ?"
 
 #: ../src/assistantexport.cpp:79 ../src/assistantimport.cpp:84
 #: ../src/checks.cpp:189 ../src/dialogmychecks.cpp:169
-#: ../src/mainwindow.cpp:5639 ../src/windowreferences.cpp:49
+#: ../src/mainwindow.cpp:5766 ../src/windowreferences.cpp:49
 msgid "References"
 msgstr "Références"
 
@@ -922,7 +921,7 @@ msgid "_Abbreviations"
 msgstr "_Abréviations"
 
 #: ../src/assistantresource.cpp:282 ../src/assistantresource.cpp:352
-#: ../src/dialogeditlist.cpp:147 ../src/mainwindow.cpp:689
+#: ../src/dialogeditlist.cpp:147 ../src/mainwindow.cpp:691
 msgid "_Import"
 msgstr "_Importer"
 
@@ -1040,7 +1039,7 @@ msgstr "Échec de la décompression du fichier "
 msgid "none"
 msgstr "aucun"
 
-#: ../src/assistants.cpp:66
+#: ../src/assistants.cpp:66 ../templates/stylesheet.xml:4347
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -1064,708 +1063,712 @@ msgstr "Tous sauvegarder"
 msgid "Sorting references: "
 msgstr "Tri des références : "
 
-#: ../src/bibledit-rdwrt.cpp:76 ../src/dialognotesupdate.cpp:228
-msgid "Nothing was done"
-msgstr "Rien n'a été fait"
-
-#: ../src/bibledit.cpp:168
+#: ../src/bibledit.cpp:170
 msgid "Finished booklocalizations"
 msgstr ""
 
-#: ../src/bibledit.cpp:179
+#: ../src/bibledit.cpp:181
 msgid "Finished URLTransport"
 msgstr ""
 
-#: ../src/bibledit.cpp:202
+#: ../src/bibledit.cpp:206
 #, c-format
 msgid "Bad xembed value: %s\n"
 msgstr "Mauvaise valeur de xembed: %s\n"
 
-#: ../src/books.cpp:400
-msgid "Front Matter"
-msgstr "Introduction principale"
+#: ../src/bibledit-rdwrt.cpp:78 ../src/dialognotesupdate.cpp:228
+msgid "Nothing was done"
+msgstr "Rien n'a été fait"
 
-#: ../src/books.cpp:401
+#: ../src/books.cpp:410
+msgid "**EMPTY ID=0**"
+msgstr ""
+
+#: ../src/books.cpp:411
 msgid "Genesis"
 msgstr "Genèse"
 
-#: ../src/books.cpp:401
+#: ../src/books.cpp:411
 msgid "Gen"
 msgstr "Gn"
 
-#: ../src/books.cpp:402
+#: ../src/books.cpp:412
 msgid "Exodus"
 msgstr "Exode"
 
-#: ../src/books.cpp:402
+#: ../src/books.cpp:412
 msgid "Exo"
 msgstr "Ex"
 
-#: ../src/books.cpp:403
+#: ../src/books.cpp:413
 msgid "Leviticus"
 msgstr "Lévitique"
 
-#: ../src/books.cpp:403
+#: ../src/books.cpp:413
 msgid "Lev"
 msgstr "Lv"
 
-#: ../src/books.cpp:404
+#: ../src/books.cpp:414
 msgid "Numbers"
 msgstr "Nombres"
 
-#: ../src/books.cpp:404
+#: ../src/books.cpp:414
 msgid "Num"
 msgstr "Nb"
 
-#: ../src/books.cpp:405
+#: ../src/books.cpp:415
 msgid "Deuteronomy"
 msgstr "Deutéronome"
 
-#: ../src/books.cpp:405
+#: ../src/books.cpp:415
 msgid "Deu"
 msgstr "Dt"
 
-#: ../src/books.cpp:406
+#: ../src/books.cpp:416
 msgid "Joshua"
 msgstr "Josué"
 
-#: ../src/books.cpp:406
+#: ../src/books.cpp:416
 msgid "Jos"
 msgstr "Js"
 
-#: ../src/books.cpp:407
+#: ../src/books.cpp:417
 msgid "Judges"
 msgstr "Juges"
 
-#: ../src/books.cpp:407
+#: ../src/books.cpp:417
 msgid "Jdg"
 msgstr "Jg"
 
-#: ../src/books.cpp:408
+#: ../src/books.cpp:418
 msgid "Ruth"
 msgstr "Ruth"
 
-#: ../src/books.cpp:408
+#: ../src/books.cpp:418
 msgid "Rut"
 msgstr "Rt"
 
-#: ../src/books.cpp:409
+#: ../src/books.cpp:419
 msgid "1 Samuel"
 msgstr "1 Samuel"
 
-#: ../src/books.cpp:409
+#: ../src/books.cpp:419
 msgid "1Sa"
 msgstr "1 S"
 
-#: ../src/books.cpp:410
+#: ../src/books.cpp:420
 msgid "2 Samuel"
 msgstr "2 Samuel"
 
-#: ../src/books.cpp:410
+#: ../src/books.cpp:420
 msgid "2Sa"
 msgstr "2 S"
 
-#: ../src/books.cpp:411
+#: ../src/books.cpp:421
 msgid "1 Kings"
 msgstr "1 Rois"
 
-#: ../src/books.cpp:411
+#: ../src/books.cpp:421
 msgid "1Ki"
 msgstr "1 R"
 
-#: ../src/books.cpp:412
+#: ../src/books.cpp:422
 msgid "2 Kings"
 msgstr "2 Rois"
 
-#: ../src/books.cpp:412
+#: ../src/books.cpp:422
 msgid "2Ki"
 msgstr "2 R"
 
-#: ../src/books.cpp:413
+#: ../src/books.cpp:423
 msgid "1 Chronicles"
 msgstr "1 Chroniques"
 
-#: ../src/books.cpp:413
+#: ../src/books.cpp:423
 msgid "1Ch"
 msgstr "1 Ch"
 
-#: ../src/books.cpp:414
+#: ../src/books.cpp:424
 msgid "2 Chronicles"
 msgstr "2 Chroniques"
 
-#: ../src/books.cpp:414
+#: ../src/books.cpp:424
 msgid "2Ch"
 msgstr "2 Ch"
 
-#: ../src/books.cpp:415
+#: ../src/books.cpp:425
 msgid "Ezra"
 msgstr "Esdras"
 
-#: ../src/books.cpp:415
+#: ../src/books.cpp:425
 msgid "Ezr"
 msgstr "Esd"
 
-#: ../src/books.cpp:416
+#: ../src/books.cpp:426
 msgid "Nehemiah"
 msgstr "Néhémie"
 
-#: ../src/books.cpp:416
+#: ../src/books.cpp:426
 msgid "Neh"
 msgstr "Ne"
 
-#: ../src/books.cpp:417
+#: ../src/books.cpp:427
 msgid "Esther"
 msgstr "Esther"
 
-#: ../src/books.cpp:417
+#: ../src/books.cpp:427
 msgid "Est"
 msgstr "Est"
 
-#: ../src/books.cpp:418
+#: ../src/books.cpp:428
 msgid "Job"
 msgstr "Job"
 
-#: ../src/books.cpp:419
+#: ../src/books.cpp:429
 msgid "Psalms"
 msgstr "Psaumes"
 
-#: ../src/books.cpp:419
+#: ../src/books.cpp:429
 msgid "Psa"
 msgstr "Ps"
 
-#: ../src/books.cpp:420
+#: ../src/books.cpp:430
 msgid "Proverbs"
 msgstr "Proverbes"
 
-#: ../src/books.cpp:420
+#: ../src/books.cpp:430
 msgid "Pro"
 msgstr "Pro"
 
-#: ../src/books.cpp:421
+#: ../src/books.cpp:431
 msgid "Ecclesiastes"
 msgstr "Ecclésiaste"
 
-#: ../src/books.cpp:421
+#: ../src/books.cpp:431
 msgid "Ecc"
 msgstr "Qo"
 
-#: ../src/books.cpp:422
+#: ../src/books.cpp:432
 msgid "Song of Solomon"
 msgstr "Cantique des Cantiques"
 
-#: ../src/books.cpp:422
+#: ../src/books.cpp:432
 msgid "Sol"
 msgstr "Ct"
 
-#: ../src/books.cpp:423
+#: ../src/books.cpp:433
 msgid "Isaiah"
 msgstr "Isaïe"
 
-#: ../src/books.cpp:423
+#: ../src/books.cpp:433
 msgid "Isa"
 msgstr "Is"
 
-#: ../src/books.cpp:424
+#: ../src/books.cpp:434
 msgid "Jeremiah"
 msgstr "Jérémie"
 
-#: ../src/books.cpp:424
+#: ../src/books.cpp:434
 msgid "Jer"
 msgstr "Jr"
 
-#: ../src/books.cpp:425
+#: ../src/books.cpp:435
 msgid "Lamentations"
 msgstr "Lamentations"
 
-#: ../src/books.cpp:425
+#: ../src/books.cpp:435
 msgid "Lam"
 msgstr "Lm"
 
-#: ../src/books.cpp:426
+#: ../src/books.cpp:436
 msgid "Ezekiel"
 msgstr "Ézéchiel"
 
-#: ../src/books.cpp:426
+#: ../src/books.cpp:436
 msgid "Eze"
 msgstr "Ez"
 
-#: ../src/books.cpp:427
+#: ../src/books.cpp:437
 msgid "Daniel"
 msgstr "Daniel"
 
-#: ../src/books.cpp:427
+#: ../src/books.cpp:437
 msgid "Dan"
 msgstr "Dn"
 
-#: ../src/books.cpp:428
+#: ../src/books.cpp:438
 msgid "Hosea"
 msgstr "Osée"
 
-#: ../src/books.cpp:428
+#: ../src/books.cpp:438
 msgid "Hos"
 msgstr "Os"
 
-#: ../src/books.cpp:429
+#: ../src/books.cpp:439
 msgid "Joel"
 msgstr "Joël"
 
-#: ../src/books.cpp:429
+#: ../src/books.cpp:439
 msgid "Joe"
 msgstr "Jl"
 
-#: ../src/books.cpp:430
+#: ../src/books.cpp:440
 msgid "Amos"
 msgstr "Amos"
 
-#: ../src/books.cpp:430
+#: ../src/books.cpp:440
 msgid "Amo"
 msgstr "Am"
 
-#: ../src/books.cpp:431
+#: ../src/books.cpp:441
 msgid "Obadiah"
 msgstr "Abdias"
 
-#: ../src/books.cpp:431
+#: ../src/books.cpp:441
 msgid "Oba"
 msgstr "Ab"
 
-#: ../src/books.cpp:432
+#: ../src/books.cpp:442
 msgid "Jonah"
 msgstr "Jonas"
 
-#: ../src/books.cpp:432
+#: ../src/books.cpp:442
 msgid "Jon"
 msgstr "Jon"
 
-#: ../src/books.cpp:433
+#: ../src/books.cpp:443
 msgid "Micah"
 msgstr "Michée"
 
-#: ../src/books.cpp:433
+#: ../src/books.cpp:443
 msgid "Mic"
 msgstr "Mi"
 
-#: ../src/books.cpp:434
+#: ../src/books.cpp:444
 msgid "Nahum"
 msgstr "Nahum"
 
-#: ../src/books.cpp:434
+#: ../src/books.cpp:444
 msgid "Nah"
 msgstr "Na"
 
-#: ../src/books.cpp:435
+#: ../src/books.cpp:445
 msgid "Habakkuk"
 msgstr "Habaquq"
 
-#: ../src/books.cpp:435
+#: ../src/books.cpp:445
 msgid "Hab"
 msgstr "Ha"
 
-#: ../src/books.cpp:436
+#: ../src/books.cpp:446
 msgid "Zephaniah"
 msgstr "Sophonie"
 
-#: ../src/books.cpp:436
+#: ../src/books.cpp:446
 msgid "Zep"
 msgstr "So"
 
-#: ../src/books.cpp:437
+#: ../src/books.cpp:447
 msgid "Haggai"
 msgstr "Aggée"
 
-#: ../src/books.cpp:437
+#: ../src/books.cpp:447
 msgid "Hag"
 msgstr "Ag"
 
-#: ../src/books.cpp:438
+#: ../src/books.cpp:448
 msgid "Zechariah"
 msgstr "Zacharie"
 
-#: ../src/books.cpp:438
+#: ../src/books.cpp:448
 msgid "Zec"
 msgstr "Za"
 
-#: ../src/books.cpp:439
+#: ../src/books.cpp:449
 msgid "Malachi"
 msgstr "Malachie"
 
-#: ../src/books.cpp:439
+#: ../src/books.cpp:449
 msgid "Mal"
 msgstr "Ml"
 
-#: ../src/books.cpp:440
+#: ../src/books.cpp:450
 msgid "Matthew"
 msgstr "Matthieu"
 
-#: ../src/books.cpp:440
+#: ../src/books.cpp:450
 msgid "Mat"
 msgstr "Mt"
 
-#: ../src/books.cpp:441
+#: ../src/books.cpp:451
 msgid "Mark"
 msgstr "Marc"
 
-#: ../src/books.cpp:441
+#: ../src/books.cpp:451
 msgid "Mar"
 msgstr "Mc"
 
-#: ../src/books.cpp:442
+#: ../src/books.cpp:452
 msgid "Luke"
 msgstr "Luc"
 
-#: ../src/books.cpp:442
+#: ../src/books.cpp:452
 msgid "Luk"
 msgstr "Lc"
 
-#: ../src/books.cpp:443
+#: ../src/books.cpp:453
 msgid "John"
 msgstr "Jean"
 
-#: ../src/books.cpp:443
+#: ../src/books.cpp:453
 msgid "Joh"
 msgstr "Jn"
 
-#: ../src/books.cpp:444
+#: ../src/books.cpp:454
 msgid "Acts"
 msgstr "Actes"
 
-#: ../src/books.cpp:444
+#: ../src/books.cpp:454
 msgid "Act"
 msgstr "Ac"
 
-#: ../src/books.cpp:445
+#: ../src/books.cpp:455
 msgid "Romans"
 msgstr "Romains"
 
-#: ../src/books.cpp:445
+#: ../src/books.cpp:455
 msgid "Rom"
 msgstr "Rm"
 
-#: ../src/books.cpp:446
+#: ../src/books.cpp:456
 msgid "1 Corinthians"
 msgstr "1 Corinthiens"
 
-#: ../src/books.cpp:446
+#: ../src/books.cpp:456
 msgid "1Co"
 msgstr "1 Co"
 
-#: ../src/books.cpp:447
+#: ../src/books.cpp:457
 msgid "2 Corinthians"
 msgstr "2 Corinthiens"
 
-#: ../src/books.cpp:447
+#: ../src/books.cpp:457
 msgid "2Co"
 msgstr "2 Co"
 
-#: ../src/books.cpp:448
+#: ../src/books.cpp:458
 msgid "Galatians"
 msgstr "Galates"
 
-#: ../src/books.cpp:448
+#: ../src/books.cpp:458
 msgid "Gal"
 msgstr "Ga"
 
-#: ../src/books.cpp:449
+#: ../src/books.cpp:459
 msgid "Ephesians"
 msgstr "Éphésiens"
 
-#: ../src/books.cpp:449
+#: ../src/books.cpp:459
 msgid "Eph"
 msgstr "Ep"
 
-#: ../src/books.cpp:450
+#: ../src/books.cpp:460
 msgid "Philippians"
 msgstr "Philippiens"
 
-#: ../src/books.cpp:450
+#: ../src/books.cpp:460
 msgid "Phi"
 msgstr "Ph"
 
-#: ../src/books.cpp:451
+#: ../src/books.cpp:461
 msgid "Colossians"
 msgstr "Colossiens"
 
-#: ../src/books.cpp:451
+#: ../src/books.cpp:461
 msgid "Col"
 msgstr "Col"
 
-#: ../src/books.cpp:452
+#: ../src/books.cpp:462
 msgid "1 Thessalonians"
 msgstr "1 Thessaloniens"
 
-#: ../src/books.cpp:452
+#: ../src/books.cpp:462
 msgid "1Th"
 msgstr "1 Th"
 
-#: ../src/books.cpp:453
+#: ../src/books.cpp:463
 msgid "2 Thessalonians"
 msgstr "2 Thessaloniens"
 
-#: ../src/books.cpp:453
+#: ../src/books.cpp:463
 msgid "2Th"
 msgstr "2 Th"
 
-#: ../src/books.cpp:454
+#: ../src/books.cpp:464
 msgid "1 Timothy"
 msgstr "1 Timothée"
 
-#: ../src/books.cpp:454
+#: ../src/books.cpp:464
 msgid "1Ti"
 msgstr "1 Tm"
 
-#: ../src/books.cpp:455
+#: ../src/books.cpp:465
 msgid "2 Timothy"
 msgstr "2 Timothée"
 
-#: ../src/books.cpp:455
+#: ../src/books.cpp:465
 msgid "2Ti"
 msgstr "2 Tm"
 
-#: ../src/books.cpp:456
+#: ../src/books.cpp:466
 msgid "Titus"
 msgstr "Tite"
 
-#: ../src/books.cpp:456
+#: ../src/books.cpp:466
 msgid "Tit"
 msgstr "Tt"
 
-#: ../src/books.cpp:457
+#: ../src/books.cpp:467
 msgid "Philemon"
 msgstr "Philémon"
 
-#: ../src/books.cpp:457
+#: ../src/books.cpp:467
 msgid "Phm"
 msgstr "Phm"
 
-#: ../src/books.cpp:458
+#: ../src/books.cpp:468
 msgid "Hebrews"
 msgstr "Hébreux"
 
-#: ../src/books.cpp:458
+#: ../src/books.cpp:468
 msgid "Heb"
 msgstr "He"
 
-#: ../src/books.cpp:459
+#: ../src/books.cpp:469
 msgid "James"
 msgstr "Jacques"
 
-#: ../src/books.cpp:459
+#: ../src/books.cpp:469
 msgid "Jam"
 msgstr "Jc"
 
-#: ../src/books.cpp:460
+#: ../src/books.cpp:470
 msgid "1 Peter"
 msgstr "1 Pierre"
 
-#: ../src/books.cpp:460
+#: ../src/books.cpp:470
 msgid "1Pe"
 msgstr "1 P"
 
-#: ../src/books.cpp:461
+#: ../src/books.cpp:471
 msgid "2 Peter"
 msgstr "2 Pierre"
 
-#: ../src/books.cpp:461
+#: ../src/books.cpp:471
 msgid "2Pe"
 msgstr "2 P"
 
-#: ../src/books.cpp:462
+#: ../src/books.cpp:472
 msgid "1 John"
 msgstr "1 Jean"
 
-#: ../src/books.cpp:462
+#: ../src/books.cpp:472
 msgid "1Jo"
 msgstr "1 Jn"
 
-#: ../src/books.cpp:463
+#: ../src/books.cpp:473
 msgid "2 John"
 msgstr "2 Jean"
 
-#: ../src/books.cpp:463
+#: ../src/books.cpp:473
 msgid "2Jo"
 msgstr "2 Jn"
 
-#: ../src/books.cpp:464
+#: ../src/books.cpp:474
 msgid "3 John"
 msgstr "3 Jean"
 
-#: ../src/books.cpp:464
+#: ../src/books.cpp:474
 msgid "3Jo"
 msgstr "3 Jn"
 
-#: ../src/books.cpp:465
+#: ../src/books.cpp:475
 msgid "Jude"
 msgstr "Jude"
 
-#: ../src/books.cpp:465
+#: ../src/books.cpp:475
 msgid "Jud"
 msgstr "Jude"
 
-#: ../src/books.cpp:466
+#: ../src/books.cpp:476
 msgid "Revelation"
 msgstr "Apocalypse"
 
-#: ../src/books.cpp:466
+#: ../src/books.cpp:476
 msgid "Rev"
 msgstr "Ap"
 
-#: ../src/books.cpp:467
+#: ../src/books.cpp:477
+msgid "Front Matter"
+msgstr "Introduction principale"
+
+#: ../src/books.cpp:478
 msgid "Back Matter"
 msgstr "Informations de fin de livre"
 
-#: ../src/books.cpp:468
+#: ../src/books.cpp:479
 msgid "Other Material"
 msgstr "Autres Éléments"
 
-#: ../src/books.cpp:469
+#: ../src/books.cpp:480
 msgid "Tobit"
 msgstr "Tobie"
 
-#: ../src/books.cpp:469
+#: ../src/books.cpp:480
 msgid "Tob"
 msgstr "Tb"
 
-#: ../src/books.cpp:470
+#: ../src/books.cpp:481
 msgid "Judith"
 msgstr "Judith"
 
-#: ../src/books.cpp:470
+#: ../src/books.cpp:481
 msgid "Jdt"
 msgstr "Jdt"
 
-#: ../src/books.cpp:471
+#: ../src/books.cpp:482
 msgid "Esther (Greek)"
 msgstr "Esther (Grec)"
 
-#: ../src/books.cpp:471
+#: ../src/books.cpp:482
 msgid "EsG"
 msgstr "EsG"
 
-#: ../src/books.cpp:472
+#: ../src/books.cpp:483
 msgid "Wisdom of Solomon"
 msgstr "Sagesse"
 
-#: ../src/books.cpp:472
+#: ../src/books.cpp:483
 msgid "Wis"
 msgstr "Sg"
 
-#: ../src/books.cpp:473
+#: ../src/books.cpp:484
 msgid "Sirach"
 msgstr "Siracide"
 
-#: ../src/books.cpp:473
+#: ../src/books.cpp:484
 msgid "Sir"
 msgstr "Si"
 
-#: ../src/books.cpp:474
+#: ../src/books.cpp:485
 msgid "Baruch"
 msgstr "Baruch"
 
-#: ../src/books.cpp:474
+#: ../src/books.cpp:485
 msgid "Bar"
 msgstr "Ba"
 
-#: ../src/books.cpp:475
+#: ../src/books.cpp:486
 msgid "Letter of Jeremiah"
 msgstr "Lettre de Jérémie"
 
-#: ../src/books.cpp:475
+#: ../src/books.cpp:486
 msgid "LJe"
 msgstr "LJe"
 
-#: ../src/books.cpp:476
+#: ../src/books.cpp:487
 msgid "Song of the Three Children"
 msgstr "Cantique des trois enfants"
 
-#: ../src/books.cpp:476
+#: ../src/books.cpp:487
 msgid "S3Y"
 msgstr "C3E"
 
-#: ../src/books.cpp:477
+#: ../src/books.cpp:488
 msgid "Susanna"
 msgstr "Suzanne"
 
-#: ../src/books.cpp:477
+#: ../src/books.cpp:488
 msgid "Sus"
 msgstr "Sus"
 
-#: ../src/books.cpp:478
+#: ../src/books.cpp:489
 msgid "Bel and the Dragon"
 msgstr "Bel et le dragon"
 
-#: ../src/books.cpp:478
+#: ../src/books.cpp:489
 msgid "Bel"
 msgstr "Bel"
 
-#: ../src/books.cpp:479
+#: ../src/books.cpp:490
 msgid "1 Maccabees"
 msgstr "1 Maccabées"
 
-#: ../src/books.cpp:479
+#: ../src/books.cpp:490
 msgid "1Ma"
 msgstr "1 M"
 
-#: ../src/books.cpp:480
+#: ../src/books.cpp:491
 msgid "2 Maccabees"
 msgstr "2 Maccabées"
 
-#: ../src/books.cpp:480
+#: ../src/books.cpp:491
 msgid "2Ma"
 msgstr "2 M"
 
-#: ../src/books.cpp:481
+#: ../src/books.cpp:492
 msgid "1 Esdras"
 msgstr "1 Esdras"
 
-#: ../src/books.cpp:481
+#: ../src/books.cpp:492
 msgid "1Es"
 msgstr "1 Esd"
 
-#: ../src/books.cpp:482
+#: ../src/books.cpp:493
 msgid "Prayer of Manasses"
 msgstr "Prière de Manassé"
 
-#: ../src/books.cpp:482
+#: ../src/books.cpp:493
 msgid "Man"
 msgstr "Man"
 
-#: ../src/books.cpp:483
+#: ../src/books.cpp:494
 msgid "Psalm 151"
 msgstr "Psaume 151"
 
-#: ../src/books.cpp:483
+#: ../src/books.cpp:494
 msgid "Ps2"
 msgstr "Ps2"
 
-#: ../src/books.cpp:484
+#: ../src/books.cpp:495
 msgid "3 Maccabees"
 msgstr "3 Maccabées"
 
-#: ../src/books.cpp:484
+#: ../src/books.cpp:495
 msgid "3Ma"
 msgstr "3 M"
 
-#: ../src/books.cpp:485
+#: ../src/books.cpp:496
 msgid "2 Esdras"
 msgstr "2 Esdras"
 
-#: ../src/books.cpp:485
+#: ../src/books.cpp:496
 msgid "2Es"
 msgstr "2 Esd"
 
-#: ../src/books.cpp:486
+#: ../src/books.cpp:497
 msgid "4 Maccabees"
 msgstr "4 Maccabées"
 
-#: ../src/books.cpp:486
+#: ../src/books.cpp:497
 msgid "4Ma"
 msgstr "4 M"
 
-#: ../src/books.cpp:487
+#: ../src/books.cpp:498
 msgid "Daniel (Greek)"
 msgstr "Daniel (Grec)"
 
-#: ../src/books.cpp:487
+#: ../src/books.cpp:498
 msgid "Dnt"
 msgstr "Dnt"
 
@@ -1947,6 +1950,94 @@ msgstr "Répétion de mots"
 msgid "Repeated: "
 msgstr "Répétition : "
 
+#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
+msgid "Word Inventory"
+msgstr "Inventaire des mots"
+
+#: ../src/checks.cpp:70
+msgid "Total word count: "
+msgstr "Nombre total des mots : "
+
+#: ../src/checks.cpp:71
+msgid "Unique word count: "
+msgstr "Nombre de mot unique : "
+
+#: ../src/checks.cpp:73
+msgid "Words with a count of "
+msgstr "Les mots avec un nombre de "
+
+#: ../src/checks.cpp:73
+msgid " and up were filtered out."
+msgstr " et plus ont été filtré."
+
+#: ../src/checks.cpp:74
+msgid "Filtered total word count: "
+msgstr "Nombre total de mots filtrés : "
+
+#: ../src/checks.cpp:75
+msgid "Filtered unique word count: "
+msgstr "Nombre total d'un mot filtré : "
+
+#: ../src/checks.cpp:77
+msgid "Click on a word to see the places where it occurs."
+msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît. "
+
+#: ../src/checks.cpp:82
+msgid "Word"
+msgstr "Mot"
+
+#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
+#: ../src/dialogmychecks.cpp:78
+msgid "Count"
+msgstr "Nombre"
+
+#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
+msgid "Marker Count"
+msgstr "Comptage des balises"
+
+#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
+msgid "Marker"
+msgstr "Balise"
+
+#: ../src/checks.cpp:117
+msgid "Description"
+msgstr "Description"
+
+#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
+msgid "Character Count"
+msgstr "Comptage des caractères"
+
+#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
+#: ../src/dialoginsertnote.cpp:99
+msgid "Character"
+msgstr "Caractère"
+
+#: ../src/checks.cpp:151
+msgid "Decimal"
+msgstr "Décimal"
+
+#: ../src/checks.cpp:152
+msgid "Hexadecimal"
+msgstr "Hexadécimal "
+
+#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
+msgid "References Inventory"
+msgstr "Inventaire des références bibliques"
+
+#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
+#: ../src/dialogreviewanchors.cpp:123
+#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
+msgid "Verse"
+msgstr "Verset"
+
+#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:194 ../src/gui.cpp:130
+msgid "New Testament"
+msgstr "Nouveau Testament"
+
+#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:172 ../src/gui.cpp:115
+msgid "Old Testament"
+msgstr "Ancien Testament"
+
 #: ../src/check_sentence_structure.cpp:50
 msgid "Checking sentence structure"
 msgstr "Vérification de la structure des phrases"
@@ -2064,95 +2155,7 @@ msgstr " non trouvé"
 msgid "Deprecated marker "
 msgstr "Balise dépréciée "
 
-#: ../src/checks.cpp:69 ../src/scripturechecks.cpp:276
-msgid "Word Inventory"
-msgstr "Inventaire des mots"
-
-#: ../src/checks.cpp:70
-msgid "Total word count: "
-msgstr "Nombre total des mots : "
-
-#: ../src/checks.cpp:71
-msgid "Unique word count: "
-msgstr "Nombre de mot unique : "
-
-#: ../src/checks.cpp:73
-msgid "Words with a count of "
-msgstr "Les mots avec un nombre de "
-
-#: ../src/checks.cpp:73
-msgid " and up were filtered out."
-msgstr " et plus ont été filtré."
-
-#: ../src/checks.cpp:74
-msgid "Filtered total word count: "
-msgstr "Nombre total de mots filtrés : "
-
-#: ../src/checks.cpp:75
-msgid "Filtered unique word count: "
-msgstr "Nombre total d'un mot filtré : "
-
-#: ../src/checks.cpp:77
-msgid "Click on a word to see the places where it occurs."
-msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît. "
-
-#: ../src/checks.cpp:82
-msgid "Word"
-msgstr "Mot"
-
-#: ../src/checks.cpp:83 ../src/checks.cpp:116 ../src/checks.cpp:153
-#: ../src/dialogmychecks.cpp:78
-msgid "Count"
-msgstr "Nombre"
-
-#: ../src/checks.cpp:110 ../src/scripturechecks.cpp:100
-msgid "Marker Count"
-msgstr "Comptage des balises"
-
-#: ../src/checks.cpp:115 ../src/style.cpp:39 ../src/style.cpp:81
-msgid "Marker"
-msgstr "Balise"
-
-#: ../src/checks.cpp:117
-msgid "Description"
-msgstr "Description"
-
-#: ../src/checks.cpp:145 ../src/scripturechecks.cpp:157
-msgid "Character Count"
-msgstr "Comptage des caractères"
-
-#: ../src/checks.cpp:150 ../src/dialogeditnote.cpp:79
-#: ../src/dialoginsertnote.cpp:99
-msgid "Character"
-msgstr "Caractère"
-
-#: ../src/checks.cpp:151
-msgid "Decimal"
-msgstr "Décimal"
-
-#: ../src/checks.cpp:152
-msgid "Hexadecimal"
-msgstr "Hexadécimal "
-
-#: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
-msgid "References Inventory"
-msgstr "Inventaire des références bibliques"
-
-#: ../src/checks.cpp:188 ../src/dialogoriginreferences.cpp:140
-#: ../src/dialogreviewanchors.cpp:123
-#: ../templates/gtkbuilder.gotoreferencedialog.xml:97
-msgid "Verse"
-msgstr "Verset"
-
-#: ../src/checks.cpp:216 ../src/dialogselectbooks.cpp:190 ../src/gui.cpp:130
-msgid "New Testament"
-msgstr "Nouveau Testament"
-
-#: ../src/checks.cpp:217 ../src/dialogselectbooks.cpp:168 ../src/gui.cpp:115
-msgid "Old Testament"
-msgstr "Ancien Testament"
-
-#: ../src/compareutils.cpp:51
+#: ../src/compareutils.cpp:50
 msgid " compared with "
 msgstr " comparé avec "
 
@@ -2160,17 +2163,17 @@ msgstr " comparé avec "
 msgid "Comparing"
 msgstr "Comparaison"
 
-#: ../src/compareutils.cpp:225 ../src/compareutils.cpp:258
-#: ../src/compareutils.cpp:297
+#: ../src/compareutils.cpp:230 ../src/compareutils.cpp:263
+#: ../src/compareutils.cpp:302
 msgid "Added: "
 msgstr "Ajouté : "
 
-#: ../src/compareutils.cpp:232 ../src/compareutils.cpp:268
-#: ../src/compareutils.cpp:308
+#: ../src/compareutils.cpp:237 ../src/compareutils.cpp:273
+#: ../src/compareutils.cpp:313
 msgid "Deleted: "
 msgstr "Supprimé : "
 
-#: ../src/compareutils.cpp:287
+#: ../src/compareutils.cpp:292
 msgid "Finding additions and deletions"
 msgstr "Recherche d'ajouts et de suppressions"
 
@@ -2181,6 +2184,62 @@ msgstr "impossible de décompresser cette archive inconnue"
 #: ../src/compress.cpp:127 ../src/compress.cpp:141
 msgid "Unpacking"
 msgstr "Décompression"
+
+#: ../src/concordance.cpp:368
+msgid "Concordance Sorted by Words"
+msgstr ""
+
+#: ../src/concordance.cpp:371
+msgid "Building Concordance Data"
+msgstr ""
+
+#: ../src/concordance.cpp:401
+#, fuzzy
+msgid "Unique words = "
+msgstr "Nombre de mot unique : "
+
+#: ../src/concordance.cpp:404
+#, fuzzy
+msgid "Total words = "
+msgstr "Nombre total des mots : "
+
+#: ../src/concordance.cpp:434
+msgid "Concordance Sorted by Frequency"
+msgstr ""
+
+#: ../src/concordance.cpp:485 ../src/concordance.cpp:934
+#: ../src/concordance.cpp:1118 ../src/windowcheckkeyterms.cpp:622
+#: ../src/windowtabbed.cpp:781
+msgid "<empty>"
+msgstr "<vide>"
+
+#: ../src/concordance.cpp:501
+#, fuzzy
+msgid "Concordance Entry for "
+msgstr "_Concordance"
+
+#: ../src/concordance.cpp:993
+#, fuzzy
+msgid "Cannot open file "
+msgstr "Erreur durant l'ouverture du fichier"
+
+#: ../src/concordance.cpp:1055
+#, fuzzy
+msgid "Cross references for "
+msgstr "Correspondances"
+
+#: ../src/concordance.cpp:1060
+msgid "Could not open cross-reference file "
+msgstr ""
+
+#: ../src/concordance.cpp:1066
+msgid "Invalid reference; therefore not looking up cross references"
+msgstr ""
+
+#: ../src/concordance.cpp:1081
+#, fuzzy
+msgid "No cross references"
+msgstr "une référence ou un renvoi"
 
 #: ../src/dialogarea.cpp:38
 msgid "Area selection"
@@ -2284,7 +2343,7 @@ msgstr "Aucunes aires de sélectionnées"
 
 #: ../src/dialogbook.cpp:44 ../src/dialogbooknames.cpp:42
 #: ../src/dialogeditstatus.cpp:72 ../src/dialogproject.cpp:178
-#: ../src/dialogselectbooks.cpp:84
+#: ../src/dialogselectbooks.cpp:88
 msgid "Books"
 msgstr "Livres"
 
@@ -2708,26 +2767,31 @@ msgid "Compare project"
 msgstr "Comparer le projet"
 
 #: ../src/dialogcompare.cpp:56
+msgid "First, select the original (base) project"
+msgstr ""
+
+#: ../src/dialogcompare.cpp:64
+#, fuzzy
 msgid ""
-"Select a project to compare the current project with\n"
+"Next, select a project to compare to the original project with\n"
 "and then press OK"
 msgstr ""
 "Sélectionnez un projet à comparer avec le projet en cours\n"
 "et appuyer sur OK"
 
-#: ../src/dialogcompare.cpp:64
+#: ../src/dialogcompare.cpp:72
 msgid "Print changed verses only"
 msgstr "Publier uniquement les versets modifiés"
 
-#: ../src/dialogcompare.cpp:76
+#: ../src/dialogcompare.cpp:84
 msgid "Portion"
 msgstr "Section"
 
-#: ../src/dialogcompare.cpp:104
+#: ../src/dialogcompare.cpp:112
 msgid "C_hange"
 msgstr "M_odifier"
 
-#: ../src/dialogcompare.cpp:212 ../src/dialogprintproject.cpp:200
+#: ../src/dialogcompare.cpp:232 ../src/dialogprintproject.cpp:200
 msgid "part"
 msgstr "partie"
 
@@ -2792,8 +2856,8 @@ msgstr "Compte de mot"
 msgid "Word count is "
 msgstr "Le compte de mot est "
 
-#: ../src/dialogeditlist.cpp:58 ../src/windowcheckkeyterms.cpp:74
-#: ../src/windowtabbed.cpp:90
+#: ../src/dialogeditlist.cpp:58 ../src/windowcheckkeyterms.cpp:75
+#: ../src/windowtabbed.cpp:89
 msgid "_List"
 msgstr "_Liste"
 
@@ -3061,7 +3125,7 @@ msgstr "une note de bas de page"
 msgid "endnote"
 msgstr "une note de fin"
 
-#: ../src/dialoginsertnote.cpp:59 ../src/editor.cpp:1711
+#: ../src/dialoginsertnote.cpp:59 ../src/editor.cpp:1714
 msgid "crossreference"
 msgstr "une référence ou un renvoi"
 
@@ -3277,8 +3341,8 @@ msgstr ""
 "attribuées à cette note.\n"
 "La liste des catégories peut être éditée ici."
 
-#: ../src/dialognotes.cpp:80 ../src/mainwindow.cpp:551
-#: ../src/mainwindow.cpp:600 ../src/mainwindow.cpp:656
+#: ../src/dialognotes.cpp:80 ../src/mainwindow.cpp:553
+#: ../src/mainwindow.cpp:602 ../src/mainwindow.cpp:658
 msgid "_Delete"
 msgstr "_Supprimer"
 
@@ -3770,7 +3834,7 @@ msgstr "Le livre courant uniquement"
 msgid "Current chapter only"
 msgstr "Le chapitre courant uniquement"
 
-#: ../src/dialogreplace.cpp:131 ../src/dialogselectbooks.cpp:60
+#: ../src/dialogreplace.cpp:131 ../src/dialogselectbooks.cpp:64
 msgid "Select books"
 msgstr "Sélectionner des livres"
 
@@ -3828,7 +3892,7 @@ msgstr "Entrez le type de texte pour détecter le chapitre"
 msgid "Prefix"
 msgstr "Préfixe"
 
-#: ../src/dialogresourceconverter.cpp:478
+#: ../src/dialogresourceconverter.cpp:478 ../templates/stylesheet.xml:1030
 msgid "Chapter number"
 msgstr "Numéro de chapitre"
 
@@ -3994,27 +4058,27 @@ msgstr "Sé_lectionner des parties de texte"
 msgid "What to do with the search _results"
 msgstr "Que faire des _résultats de recherche"
 
-#: ../src/dialogselectbooks.cpp:62
+#: ../src/dialogselectbooks.cpp:66
 msgid " and portions"
 msgstr " et des sections"
 
-#: ../src/dialogselectbooks.cpp:107
+#: ../src/dialogselectbooks.cpp:111
 msgid "Portions"
 msgstr "Parties"
 
-#: ../src/dialogselectbooks.cpp:146 ../src/gui.cpp:84
+#: ../src/dialogselectbooks.cpp:150 ../src/gui.cpp:84
 msgid "No books"
 msgstr "Aucun livre"
 
-#: ../src/dialogselectbooks.cpp:212
+#: ../src/dialogselectbooks.cpp:216
 msgid "Other books"
 msgstr "Autres livres"
 
-#: ../src/dialogselectbooks.cpp:234
+#: ../src/dialogselectbooks.cpp:238
 msgid "All books"
 msgstr "Tous les livres"
 
-#: ../src/dialogselectbooks.cpp:256
+#: ../src/dialogselectbooks.cpp:260
 msgid "Current book"
 msgstr "Livre courant"
 
@@ -4429,7 +4493,7 @@ msgid "with an odd number"
 msgstr "avec un nombre impair"
 
 #: ../src/dialogstylesheet.cpp:2535 ../src/dialogstylesheet.cpp:2550
-#: ../src/mainwindow.cpp:5641
+#: ../src/mainwindow.cpp:5768
 msgid "Print"
 msgstr "Imprimer"
 
@@ -4825,44 +4889,44 @@ msgstr ""
 msgid "The changes have been discarded"
 msgstr "Les changements ont été annulés"
 
-#: ../src/editor.cpp:1707
+#: ../src/editor.cpp:1710
 msgid "Trying to apply a "
 msgstr "Essaye de l'appliquer "
 
-#: ../src/editor.cpp:1709
+#: ../src/editor.cpp:1712
 msgid "foot- or endnote"
 msgstr "à la notes de bas de page ou de fin"
 
-#: ../src/editor.cpp:1713
+#: ../src/editor.cpp:1716
 msgid "table"
 msgstr "à la table"
 
-#: ../src/editor.cpp:1714
+#: ../src/editor.cpp:1717
 msgid " style"
 msgstr "au style"
 
-#: ../src/editor.cpp:1722
+#: ../src/editor.cpp:1725
 msgid "Only note related styles apply"
 msgstr "Seuls les styles liés aux notes s'appliquent"
 
-#: ../src/editor.cpp:1730
+#: ../src/editor.cpp:1733
 msgid "Only table styles apply"
 msgstr "Seuls les styles de table s'appliquent"
 
-#: ../src/editor.cpp:1755
+#: ../src/editor.cpp:1758
 msgid "Cannot find paragraph"
 msgstr "Ne peut trouver de paragraphe"
 
-#: ../src/editor.cpp:1759
+#: ../src/editor.cpp:1762
 msgid "This style cannot be applied here."
 msgstr "Ce style ne peut être appliqué ici."
 
-#: ../src/editor.cpp:2078 ../src/usfmview.cpp:735
+#: ../src/editor.cpp:2084 ../src/usfmview.cpp:735
 msgid "Adding words to dictionary"
 msgstr "Ajout de mots au dictionnaire"
 
-#: ../src/export_utils.cpp:85 ../src/export_utils.cpp:236
-#: ../src/export_utils.cpp:270 ../src/export_utils.cpp:574
+#: ../src/export_utils.cpp:85 ../src/export_utils.cpp:232
+#: ../src/export_utils.cpp:266 ../src/export_utils.cpp:570
 msgid "Exporting project"
 msgstr "Exportation du projet"
 
@@ -4870,39 +4934,39 @@ msgstr "Exportation du projet"
 msgid "Compressing USFM export"
 msgstr "Compression de l'exportation en USFM"
 
-#: ../src/export_utils.cpp:169 ../src/export_utils.cpp:456
+#: ../src/export_utils.cpp:169 ../src/export_utils.cpp:452
 msgid "Exporting"
 msgstr "Exportation"
 
-#: ../src/export_utils.cpp:223
+#: ../src/export_utils.cpp:219
 msgid "Converting to BibleWorks: "
 msgstr "Convertion en  BibleWorks :"
 
-#: ../src/export_utils.cpp:447
+#: ../src/export_utils.cpp:443
 msgid "Export: "
 msgstr "Exportation :"
 
-#: ../src/export_utils.cpp:561
+#: ../src/export_utils.cpp:557
 msgid "The SWORD compiler osis2mod was not found."
 msgstr "Le compilateur SWORD osis2mod n'a pas été trouvé."
 
-#: ../src/export_utils.cpp:665
+#: ../src/export_utils.cpp:661
 msgid "Compiling"
 msgstr "Compilation en cours"
 
-#: ../src/export_utils.cpp:711
+#: ../src/export_utils.cpp:707
 msgid "Single file"
 msgstr "Un seul fichier"
 
-#: ../src/export_utils.cpp:712
+#: ../src/export_utils.cpp:708
 msgid "Multiple files"
 msgstr "Plusieurs fichiers"
 
-#: ../src/export_utils.cpp:713
+#: ../src/export_utils.cpp:709
 msgid "Save method"
 msgstr "Méthode de sauvegarde"
 
-#: ../src/export_utils.cpp:713
+#: ../src/export_utils.cpp:709
 msgid ""
 "Multiple books have been selected.\n"
 "Should these be saved to a single file or to multiple files?"
@@ -4910,7 +4974,7 @@ msgstr ""
 "Plusieurs livres ont été sélectionnés.\n"
 "Doivent-ils être sauvés dans un seul fichier ou dans plusieurs ?"
 
-#: ../src/export_utils.cpp:736
+#: ../src/export_utils.cpp:732
 msgid ""
 "The export has completed,\n"
 "but the following markers could not be formatted properly:"
@@ -4918,11 +4982,11 @@ msgstr ""
 "L'exportation est terminée,\n"
 "Mais les balises suivantes ne peuvent pas être formatées proprement :"
 
-#: ../src/export_utils.cpp:791
+#: ../src/export_utils.cpp:787
 msgid "There was nothing to backup"
 msgstr "Il n'y avait rien à sauvegarder"
 
-#: ../src/export_utils.cpp:907
+#: ../src/export_utils.cpp:903
 msgid ""
 "There was an error producing the Go Bible.\n"
 "Please check the system log for more information."
@@ -4941,10 +5005,6 @@ msgstr "Espaces manquantes insérées : "
 #: ../src/floatingwindow.cpp:34 ../src/httpd.cpp:532
 msgid "Untitled"
 msgstr "Sans nom"
-
-#: ../src/git-exec.cpp:34
-msgid "Updating data in folder "
-msgstr "Mise à jour des données dans le dossier"
 
 #: ../src/git.cpp:56
 msgid "Cleaning out index lock "
@@ -4965,6 +5025,10 @@ msgstr "Résolution de conflits dans le projet"
 #: ../src/git.cpp:106 ../src/readwrite.cpp:109
 msgid " book "
 msgstr "livre"
+
+#: ../src/git-exec.cpp:34
+msgid "Updating data in folder "
+msgstr "Mise à jour des données dans le dossier"
 
 #: ../src/gtkwrappers.cpp:86
 msgid "Select a folder"
@@ -5012,23 +5076,23 @@ msgstr " livres"
 msgid "Number of modifications: "
 msgstr "Nombre de modifications : "
 
-#: ../src/gui_navigation.cpp:209
+#: ../src/gui_navigation.cpp:228
 msgid "Jump to: "
 msgstr "Aller directement à : "
 
-#: ../src/gui_navigation.cpp:1047
+#: ../src/gui_navigation.cpp:1068
 msgid "Go back"
 msgstr "Précédent"
 
-#: ../src/gui_navigation.cpp:1047
+#: ../src/gui_navigation.cpp:1068
 msgid "Where would you like to go back to?"
 msgstr "Où souhaitez-vous revenir en arrière ?"
 
-#: ../src/gui_navigation.cpp:1064
+#: ../src/gui_navigation.cpp:1085
 msgid "Go forward"
 msgstr "Suivant"
 
-#: ../src/gui_navigation.cpp:1064
+#: ../src/gui_navigation.cpp:1085
 msgid "Where would you like to go forward to?"
 msgstr "Où souhaitez-vous aller au suivant ?"
 
@@ -5036,8 +5100,8 @@ msgstr "Où souhaitez-vous aller au suivant ?"
 msgid "Enabled"
 msgstr "Activé"
 
-#: ../src/gwrappers.cpp:396 ../src/gwrappers.cpp:545
-#: ../src/tiny_utilities.cpp:321 ../git/bibledit-git.cpp:334
+#: ../src/gwrappers.cpp:397 ../src/gwrappers.cpp:546
+#: ../src/tiny_utilities.cpp:338 ../git/bibledit-git.cpp:334
 msgid " didn't spawn"
 msgstr " n'a pas pu démarrer"
 
@@ -5220,474 +5284,479 @@ msgstr "Recalcule la taille et la position des fenêtres"
 msgid "Found language file "
 msgstr "Fichier de langue trouvé "
 
-#: ../src/mainwindow.cpp:284
+#: ../src/mainwindow.cpp:286
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../src/mainwindow.cpp:291
+#: ../src/mainwindow.cpp:293
 msgid "Pr_oject"
 msgstr "Pr_ojet"
 
-#: ../src/mainwindow.cpp:307 ../src/mainwindow.cpp:469
-#: ../src/mainwindow.cpp:537 ../src/mainwindow.cpp:640
+#: ../src/mainwindow.cpp:309 ../src/mainwindow.cpp:471
+#: ../src/mainwindow.cpp:539 ../src/mainwindow.cpp:642
 msgid "_New"
 msgstr "_Nouveau"
 
-#: ../src/mainwindow.cpp:330
+#: ../src/mainwindow.cpp:332
 msgid "P_roperties"
 msgstr "P_ropriétés"
 
-#: ../src/mainwindow.cpp:338
+#: ../src/mainwindow.cpp:340
 msgid "Cop_y to"
 msgstr "Cop_ier vers"
 
-#: ../src/mainwindow.cpp:346
+#: ../src/mainwindow.cpp:348
 msgid "Co_mpare with"
 msgstr "Co_mparer avec"
 
-#: ../src/mainwindow.cpp:359
+#: ../src/mainwindow.cpp:361
 msgid "C_hanges"
 msgstr "Mo_difications"
 
-#: ../src/mainwindow.cpp:369
+#: ../src/mainwindow.cpp:371
 msgid "Mer_ge"
 msgstr "F_usionner"
 
-#: ../src/mainwindow.cpp:373
+#: ../src/mainwindow.cpp:375
 msgid "_Send / receive"
 msgstr "_Envoyer / Recevoir"
 
-#: ../src/mainwindow.cpp:384
+#: ../src/mainwindow.cpp:386
 msgid "_Styles"
 msgstr "_Styles"
 
-#: ../src/mainwindow.cpp:405 ../src/mainwindow.cpp:624
+#: ../src/mainwindow.cpp:407 ../src/mainwindow.cpp:626
 msgid "_Open"
 msgstr "_Ouvrir"
 
-#: ../src/mainwindow.cpp:418
+#: ../src/mainwindow.cpp:420
 msgid "_Expand all"
 msgstr "Tout _dérouler"
 
-#: ../src/mainwindow.cpp:432
+#: ../src/mainwindow.cpp:434
 msgid "_Collapse all"
 msgstr "Tout _enrouler"
 
-#: ../src/mainwindow.cpp:446 ../src/mainwindow.cpp:1001
+#: ../src/mainwindow.cpp:448 ../src/mainwindow.cpp:1007
 msgid "_Insert"
 msgstr "_Insérer"
 
-#: ../src/mainwindow.cpp:460
+#: ../src/mainwindow.cpp:462
 msgid "Edit _mode"
 msgstr "_Mode édition"
 
-#: ../src/mainwindow.cpp:501
+#: ../src/mainwindow.cpp:503
 msgid "_Stylesheet"
 msgstr "Feuille de _style"
 
-#: ../src/mainwindow.cpp:523
+#: ../src/mainwindow.cpp:525
 msgid "_Switch"
 msgstr "Ba_sculer"
 
-#: ../src/mainwindow.cpp:565
+#: ../src/mainwindow.cpp:567
 msgid "_Rename"
 msgstr "_Renommer"
 
-#: ../src/mainwindow.cpp:585 ../src/mainwindow.cpp:898
-#: ../src/mainwindow.cpp:1435
+#: ../src/mainwindow.cpp:587 ../src/mainwindow.cpp:900
+#: ../src/mainwindow.cpp:1441
 msgid "Project _notes"
 msgstr "_Notes du projet"
 
-#: ../src/mainwindow.cpp:608
+#: ../src/mainwindow.cpp:610
 msgid "_Send / Receive"
 msgstr "_Envoyer / Recevoir"
 
-#: ../src/mainwindow.cpp:613
+#: ../src/mainwindow.cpp:615
 msgid "R_esources"
 msgstr "R_essources"
 
-#: ../src/mainwindow.cpp:632
+#: ../src/mainwindow.cpp:634
 msgid "_Close"
 msgstr "_Fermer"
 
-#: ../src/mainwindow.cpp:648 ../src/mainwindow.cpp:729
+#: ../src/mainwindow.cpp:650 ../src/mainwindow.cpp:731
 msgid "_Edit"
 msgstr "_Édition"
 
-#: ../src/mainwindow.cpp:664
+#: ../src/mainwindow.cpp:666
 msgid "_Keyterms"
 msgstr "_Mots-clés"
 
-#: ../src/mainwindow.cpp:697
+#: ../src/mainwindow.cpp:699
 msgid "E_xport"
 msgstr "E_xporter"
 
-#: ../src/mainwindow.cpp:705
+#: ../src/mainwindow.cpp:707
 msgid "_Backup"
 msgstr "Sau_vegarder"
 
-#: ../src/mainwindow.cpp:713
+#: ../src/mainwindow.cpp:715
 msgid "Res_tore"
 msgstr "Res_taurer"
 
-#: ../src/mainwindow.cpp:744
+#: ../src/mainwindow.cpp:746
 msgid "Copy _with formatting"
 msgstr "Copier _avec le formatage"
 
-#: ../src/mainwindow.cpp:761
+#: ../src/mainwindow.cpp:763
 msgid "_Undo"
 msgstr "Annu_ler"
 
-#: ../src/mainwindow.cpp:769
+#: ../src/mainwindow.cpp:771
 msgid "_Redo"
 msgstr "_Rétablir"
 
-#: ../src/mainwindow.cpp:803
+#: ../src/mainwindow.cpp:805
 msgid "Find in Project _notes"
 msgstr "Rechercher dans les _notes du projet"
 
-#: ../src/mainwindow.cpp:820
+#: ../src/mainwindow.cpp:822
 msgid "_Get references from project note"
 msgstr "_Obtenir les références de la note du projet"
 
-#: ../src/mainwindow.cpp:835
+#: ../src/mainwindow.cpp:837
 msgid "Re_vert"
 msgstr "Re_venir"
 
-#: ../src/mainwindow.cpp:848
+#: ../src/mainwindow.cpp:850
 msgid "_Bible note"
 msgstr "Note _biblique"
 
-#: ../src/mainwindow.cpp:861 ../src/mainwindow.cpp:1534
+#: ../src/mainwindow.cpp:863 ../src/mainwindow.cpp:1540
 msgid "P_lanning"
 msgstr "Pro_gramme"
 
-#: ../src/mainwindow.cpp:869
+#: ../src/mainwindow.cpp:871
 msgid "_View"
 msgstr "Afficha_ge"
 
-#: ../src/mainwindow.cpp:876
+#: ../src/mainwindow.cpp:878
 msgid "_Font & Color"
 msgstr "Polices & Couleurs"
 
-#: ../src/mainwindow.cpp:887
+#: ../src/mainwindow.cpp:889
 msgid "_Text"
 msgstr "_Texte"
 
-#: ../src/mainwindow.cpp:910
+#: ../src/mainwindow.cpp:912
 msgid "Chapter as"
 msgstr "Chapitre en"
 
-#: ../src/mainwindow.cpp:918
+#: ../src/mainwindow.cpp:920
 msgid "_Formatted"
 msgstr "_Formaté"
 
-#: ../src/mainwindow.cpp:925
+#: ../src/mainwindow.cpp:927
 msgid "_USFM code"
 msgstr "Code _USFM"
 
-#: ../src/mainwindow.cpp:931
+#: ../src/mainwindow.cpp:933
 msgid "_Experimental"
 msgstr "_Expérimental"
 
-#: ../src/mainwindow.cpp:938
+#: ../src/mainwindow.cpp:940
 msgid "Pl_anning"
 msgstr "P_rogramme"
 
-#: ../src/mainwindow.cpp:946
+#: ../src/mainwindow.cpp:948
 msgid "R_eferences"
 msgstr "R_éférences"
 
-#: ../src/mainwindow.cpp:950
+#: ../src/mainwindow.cpp:952
 msgid "_Related verses"
 msgstr "Versets en _lien"
 
-#: ../src/mainwindow.cpp:954 ../src/windowtabbed.cpp:172
+#: ../src/mainwindow.cpp:956
 msgid "_Concordance"
 msgstr "_Concordance"
 
-#: ../src/mainwindow.cpp:958
+#: ../src/mainwindow.cpp:960
+msgid "_Analysis window"
+msgstr ""
+
+#: ../src/mainwindow.cpp:964
 msgid "_Outline"
 msgstr "_Plan"
 
-#: ../src/mainwindow.cpp:962
+#: ../src/mainwindow.cpp:968
 msgid "_Tile Windows"
 msgstr "Fenêtres en _tuiles"
 
-#: ../src/mainwindow.cpp:969
+#: ../src/mainwindow.cpp:975
 msgid "_External Resource"
 msgstr "Ressources _externes"
 
-#: ../src/mainwindow.cpp:977
+#: ../src/mainwindow.cpp:983
 msgid "_Bibleworks"
 msgstr "_Bibleworks"
 
-#: ../src/mainwindow.cpp:982
+#: ../src/mainwindow.cpp:988
 msgid "Bible _Gateway"
 msgstr "Bible _Gateway"
 
-#: ../src/mainwindow.cpp:986
+#: ../src/mainwindow.cpp:992
 msgid "Bible _Study Tools"
 msgstr "Outil_s d'étude biblique"
 
-#: ../src/mainwindow.cpp:990
+#: ../src/mainwindow.cpp:996
 msgid "Blue _Letter Bible"
 msgstr "Blue _Letter Bible"
 
-#: ../src/mainwindow.cpp:994
+#: ../src/mainwindow.cpp:1000
 msgid "Bible._org (book)"
 msgstr "Bible._org (livre)"
 
-#: ../src/mainwindow.cpp:1008
+#: ../src/mainwindow.cpp:1014
 msgid "_Special character"
 msgstr "_Caractères spéciaux"
 
-#: ../src/mainwindow.cpp:1017
+#: ../src/mainwindow.cpp:1023
 msgid "_Footnote"
 msgstr "_Note de bas de page"
 
-#: ../src/mainwindow.cpp:1025
+#: ../src/mainwindow.cpp:1031
 msgid "_Crossreference"
 msgstr "_Référence"
 
-#: ../src/mainwindow.cpp:1071
+#: ../src/mainwindow.cpp:1077
 msgid "Chec_k"
 msgstr "_Vérifier"
 
-#: ../src/mainwindow.cpp:1078
+#: ../src/mainwindow.cpp:1084
 msgid "_Chapters and verses"
 msgstr "_Chapitres et versets"
 
-#: ../src/mainwindow.cpp:1086
+#: ../src/mainwindow.cpp:1092
 msgid "_Markers"
 msgstr "_Balises"
 
-#: ../src/mainwindow.cpp:1097 ../src/mainwindow.cpp:1237
+#: ../src/mainwindow.cpp:1103 ../src/mainwindow.cpp:1243
 msgid "_Validate"
 msgstr "_Valider"
 
-#: ../src/mainwindow.cpp:1105
+#: ../src/mainwindow.cpp:1111
 msgid "_Count"
 msgstr "_Compter"
 
-#: ../src/mainwindow.cpp:1113
+#: ../src/mainwindow.cpp:1119
 msgid "C_ompare"
 msgstr "C_omparer"
 
-#: ../src/mainwindow.cpp:1121
+#: ../src/mainwindow.cpp:1127
 msgid "_Spacing"
 msgstr "E_space"
 
-#: ../src/mainwindow.cpp:1129
+#: ../src/mainwindow.cpp:1135
 msgid "C_haracters"
 msgstr "Ca_ractères"
 
-#: ../src/mainwindow.cpp:1140 ../src/mainwindow.cpp:1191
-#: ../src/mainwindow.cpp:1229
+#: ../src/mainwindow.cpp:1146 ../src/mainwindow.cpp:1197
+#: ../src/mainwindow.cpp:1235
 msgid "_Inventory"
 msgstr "I_nventaire"
 
-#: ../src/mainwindow.cpp:1148
+#: ../src/mainwindow.cpp:1154
 msgid "_Unwanted patterns"
 msgstr "_Motifs indésirables"
 
-#: ../src/mainwindow.cpp:1156
+#: ../src/mainwindow.cpp:1162
 msgid "_Words"
 msgstr "_Mots"
 
-#: ../src/mainwindow.cpp:1167
+#: ../src/mainwindow.cpp:1173
 msgid "_Capitalization"
 msgstr "_Majuscules"
 
-#: ../src/mainwindow.cpp:1175
+#: ../src/mainwindow.cpp:1181
 msgid "_Repetition"
 msgstr "_Répétition"
 
-#: ../src/mainwindow.cpp:1183
+#: ../src/mainwindow.cpp:1189
 msgid "_Unwanted"
 msgstr "_Indésirables"
 
-#: ../src/mainwindow.cpp:1199
+#: ../src/mainwindow.cpp:1205
 msgid "_Punctuation"
 msgstr "_Ponctuation"
 
-#: ../src/mainwindow.cpp:1210
+#: ../src/mainwindow.cpp:1216
 msgid "_Matching pairs"
 msgstr "_Vérification des paires"
 
-#: ../src/mainwindow.cpp:1218 ../src/windownotes.cpp:196
+#: ../src/mainwindow.cpp:1224 ../src/windownotes.cpp:196
 msgid "_References"
 msgstr "_Références"
 
-#: ../src/mainwindow.cpp:1245
+#: ../src/mainwindow.cpp:1251
 msgid "P_assages"
 msgstr "P_assages"
 
-#: ../src/mainwindow.cpp:1256
+#: ../src/mainwindow.cpp:1262
 msgid "_OT quotations in the NT"
 msgstr "_Citations de l'AT dans le NT"
 
-#: ../src/mainwindow.cpp:1264
+#: ../src/mainwindow.cpp:1270
 msgid "_Synoptic parallels in the NT"
 msgstr "_Passages synoptiques dans le NT"
 
-#: ../src/mainwindow.cpp:1272
+#: ../src/mainwindow.cpp:1278
 msgid "_Parallels in the OT"
 msgstr "P_arallèles dans l'AT"
 
-#: ../src/mainwindow.cpp:1280
+#: ../src/mainwindow.cpp:1286
 msgid "_Key terms"
 msgstr "Mots-_clés"
 
-#: ../src/mainwindow.cpp:1284
+#: ../src/mainwindow.cpp:1290
 msgid "M_y checks"
 msgstr "M_es vérifications"
 
-#: ../src/mainwindow.cpp:1292
+#: ../src/mainwindow.cpp:1298
 msgid "_USFM"
 msgstr "_USFM"
 
-#: ../src/mainwindow.cpp:1296
+#: ../src/mainwindow.cpp:1302
 msgid "_Spelling error"
 msgstr "_Correcteur orthographique"
 
-#: ../src/mainwindow.cpp:1307 ../src/windowmerge.cpp:161
+#: ../src/mainwindow.cpp:1313 ../src/windowmerge.cpp:161
 msgid "_Next"
 msgstr "_Suivant"
 
-#: ../src/mainwindow.cpp:1315 ../src/windowmerge.cpp:121
+#: ../src/mainwindow.cpp:1321 ../src/windowmerge.cpp:121
 msgid "_Previous"
 msgstr "_Précédent"
 
-#: ../src/mainwindow.cpp:1323
+#: ../src/mainwindow.cpp:1329
 msgid "_Bulk"
 msgstr "_Grouper"
 
-#: ../src/mainwindow.cpp:1333
+#: ../src/mainwindow.cpp:1339
 msgid "_Tools"
 msgstr "Ou_tils"
 
-#: ../src/mainwindow.cpp:1348
+#: ../src/mainwindow.cpp:1354
 msgid "_Transfer text to project notes"
 msgstr "T_ransférer le texte vers les notes du projet"
 
-#: ../src/mainwindow.cpp:1356
+#: ../src/mainwindow.cpp:1362
 msgid "_Bible notes mass update"
 msgstr "_Mise à jour en masse des notes bibliques"
 
-#: ../src/mainwindow.cpp:1364
+#: ../src/mainwindow.cpp:1370
 msgid "_Project notes mass update"
 msgstr "M_ise à jour en masse des notes du projet"
 
-#: ../src/mainwindow.cpp:1372
+#: ../src/mainwindow.cpp:1378
 msgid "_Generate word lists"
 msgstr "_Génerer des listes de mots"
 
-#: ../src/mainwindow.cpp:1380
+#: ../src/mainwindow.cpp:1386
 msgid "_Simple text corrections"
 msgstr "_Correction basique du texte"
 
-#: ../src/mainwindow.cpp:1388
+#: ../src/mainwindow.cpp:1394
 msgid "Tr_ansfer project notes to text"
 msgstr "_Transférer les notes du projet dans le texte"
 
-#: ../src/mainwindow.cpp:1398
+#: ../src/mainwindow.cpp:1404
 msgid "G_o to reference (Ctrl-G)"
 msgstr "_Allez à une référence (Ctrl-G)"
 
-#: ../src/mainwindow.cpp:1406
+#: ../src/mainwindow.cpp:1412
 msgid "_Maintenance"
 msgstr "_Maintenance"
 
-#: ../src/mainwindow.cpp:1414
+#: ../src/mainwindow.cpp:1420
 msgid "P_references"
 msgstr "P_références"
 
-#: ../src/mainwindow.cpp:1443
+#: ../src/mainwindow.cpp:1449
 msgid "_Printing"
 msgstr "Im_pression"
 
-#: ../src/mainwindow.cpp:1451
+#: ../src/mainwindow.cpp:1457
 msgid "_Reference exchange"
 msgstr "_Échange de référence"
 
-#: ../src/mainwindow.cpp:1459
+#: ../src/mainwindow.cpp:1465
 msgid "_Books"
 msgstr "_Livres"
 
-#: ../src/mainwindow.cpp:1467
+#: ../src/mainwindow.cpp:1473
 msgid "_Windows Outpost"
 msgstr "_Fenêtres d'avant-poste"
 
-#: ../src/mainwindow.cpp:1475
+#: ../src/mainwindow.cpp:1481
 msgid "_Tidy text"
 msgstr "_Organiser le texte"
 
-#: ../src/mainwindow.cpp:1483
+#: ../src/mainwindow.cpp:1489
 msgid "R_emote repository"
 msgstr "_Dépôt distant"
 
-#: ../src/mainwindow.cpp:1493
+#: ../src/mainwindow.cpp:1499
 msgid "_User interface"
 msgstr "In_terface utilisateur"
 
-#: ../src/mainwindow.cpp:1510
+#: ../src/mainwindow.cpp:1516
 msgid "P_assword"
 msgstr "_Mot de passe"
 
-#: ../src/mainwindow.cpp:1518
+#: ../src/mainwindow.cpp:1524
 msgid "Te_xt replacement"
 msgstr "Remplacer du te_xte"
 
-#: ../src/mainwindow.cpp:1526
+#: ../src/mainwindow.cpp:1532
 msgid "P_DF Viewer"
 msgstr "Visionneuse de P_DF"
 
-#: ../src/mainwindow.cpp:1542
+#: ../src/mainwindow.cpp:1548
 msgid "Filter_s"
 msgstr "Filtre_s"
 
-#: ../src/mainwindow.cpp:1550
+#: ../src/mainwindow.cpp:1556
 msgid "_Compare"
 msgstr "_Comparer"
 
-#: ../src/mainwindow.cpp:1560
+#: ../src/mainwindow.cpp:1566
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../src/mainwindow.cpp:1567
+#: ../src/mainwindow.cpp:1573
 msgid "_Contents"
 msgstr "_Table des matières"
 
-#: ../src/mainwindow.cpp:1576
+#: ../src/mainwindow.cpp:1582
 msgid "_System log"
 msgstr "_Registre système"
 
-#: ../src/mainwindow.cpp:2064
+#: ../src/mainwindow.cpp:2074
 msgid "Delete project"
 msgstr "Suppression de projet"
 
-#: ../src/mainwindow.cpp:2067
+#: ../src/mainwindow.cpp:2077
 msgid "Are you sure you want to delete project "
 msgstr "Êtes-vous certain de vouloir supprimer le projet "
 
-#: ../src/mainwindow.cpp:2069
+#: ../src/mainwindow.cpp:2079
 msgid "Are you really sure to delete project "
 msgstr "Êtes-vous certain de vouloir supprimer le projet "
 
-#: ../src/mainwindow.cpp:2069
+#: ../src/mainwindow.cpp:2079
 msgid ", something worth perhaps years of work?"
 msgstr ", qui peut constituer des années de travail ?"
 
-#: ../src/mainwindow.cpp:2131
-msgid "Copyright (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
+#: ../src/mainwindow.cpp:2141
+#, fuzzy
+msgid "Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"
 msgstr "Droit d'auteur (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
 
-#: ../src/mainwindow.cpp:2132
+#: ../src/mainwindow.cpp:2142
 msgid "translator-credits"
 msgstr "Crédits-traducteur : L'Africain"
 
-#: ../src/mainwindow.cpp:2134
+#: ../src/mainwindow.cpp:2144
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -5719,15 +5788,15 @@ msgstr ""
 "logiciel libre\n"
 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\n"
 
-#: ../src/mainwindow.cpp:2255
+#: ../src/mainwindow.cpp:2265
 msgid "There was nothing to replace"
 msgstr "Il n'y avait rien à remplacer"
 
-#: ../src/mainwindow.cpp:2333
+#: ../src/mainwindow.cpp:2343
 msgid "New project name"
 msgstr "Nom du nouveau projet"
 
-#: ../src/mainwindow.cpp:2333
+#: ../src/mainwindow.cpp:2343
 msgid ""
 "Enter a name of a non-existent project\n"
 "where this project will be copied to."
@@ -5735,7 +5804,7 @@ msgstr ""
 "Entrez un nom de projet à créer\n"
 "où ce projet sera copié."
 
-#: ../src/mainwindow.cpp:2340
+#: ../src/mainwindow.cpp:2350
 msgid ""
 ": This project already exists.\n"
 "If you still intend to copy the project,\n"
@@ -5745,11 +5814,39 @@ msgstr ""
 "Si vous avez l'intention de le copier,\n"
 "supprimez-le d'abord."
 
-#: ../src/mainwindow.cpp:2347
+#: ../src/mainwindow.cpp:2357
 msgid "The project has been copied to a new project named\n"
 msgstr "Le projet a été copié vers un nouveau projet appelé\n"
 
-#: ../src/mainwindow.cpp:2928
+#: ../src/mainwindow.cpp:2490 ../src/mainwindow.cpp:2868
+#, fuzzy
+msgid "Greek and English"
+msgstr "Liste de nom grecs"
+
+#: ../src/mainwindow.cpp:2495 ../src/mainwindow.cpp:2878
+#: ../src/usfmtools.cpp:759
+msgid "Cross References"
+msgstr "Références croisées"
+
+#: ../src/mainwindow.cpp:2822 ../templates/stylesheet.xml:3169
+#, fuzzy
+msgid "Concordance"
+msgstr "_Concordance"
+
+#: ../src/mainwindow.cpp:2831
+#, fuzzy
+msgid "Sorted by _Words"
+msgstr "Tri par _mot"
+
+#: ../src/mainwindow.cpp:2836
+msgid "Sorted by _Frequency"
+msgstr ""
+
+#: ../src/mainwindow.cpp:2857
+msgid "Analysis"
+msgstr ""
+
+#: ../src/mainwindow.cpp:3055
 msgid ""
 "This note has references.\n"
 "Would you like to load these in the references list?"
@@ -5757,24 +5854,24 @@ msgstr ""
 "Cette note a des références.\n"
 "Souhaitez-vous les charger dans la liste de références ?"
 
-#: ../src/mainwindow.cpp:2978
+#: ../src/mainwindow.cpp:3105
 msgid "Sending to Toolbox: "
 msgstr "Envoie à la boîte à outils : "
 
-#: ../src/mainwindow.cpp:3091
+#: ../src/mainwindow.cpp:3218
 msgid ""
 "A note can be deleted by clicking on the [delete] link in the notes view"
 msgstr ""
 "Une note peut être supprimée en cliquant sur le lien [supprimer] dans la "
 "fenêtre des notes"
 
-#: ../src/mainwindow.cpp:3548
+#: ../src/mainwindow.cpp:3675
 msgid "To make this work, enable spelling checking in the project"
 msgstr ""
 "Pour faire fonctionner cela, activer la vérification orthographique dans le "
 "projet"
 
-#: ../src/mainwindow.cpp:3557
+#: ../src/mainwindow.cpp:3684
 msgid ""
 "There are no more spelling errors in this chapter\n"
 "Would you like to go to the"
@@ -5782,96 +5879,96 @@ msgstr ""
 "Il n'y a plus d'erreurs d'orthographe dans ce chapitre\n"
 "Voulez-vous aller à la"
 
-#: ../src/mainwindow.cpp:3559
+#: ../src/mainwindow.cpp:3686
 msgid "next"
 msgstr "suivant"
 
-#: ../src/mainwindow.cpp:3561
+#: ../src/mainwindow.cpp:3688
 msgid "previous"
 msgstr "précédent"
 
-#: ../src/mainwindow.cpp:3562
+#: ../src/mainwindow.cpp:3689
 msgid " chapter or chapters?"
 msgstr " chapitre ou chapitres ?"
 
-#: ../src/mainwindow.cpp:3606
+#: ../src/mainwindow.cpp:3733
 msgid "There is nothing to be checked"
 msgstr "Il n'y a rien à vérifier"
 
-#: ../src/mainwindow.cpp:3764
+#: ../src/mainwindow.cpp:3891
 msgid "Would you like to insert a new chapter?"
 msgstr "Souhaitez-vous insérer un nouveau chapitre ?"
 
-#: ../src/mainwindow.cpp:4105
+#: ../src/mainwindow.cpp:4232
 msgid "Soft hyphen"
 msgstr "Trait d'union conditionnel"
 
-#: ../src/mainwindow.cpp:4107
+#: ../src/mainwindow.cpp:4234
 msgid "No-break space"
 msgstr "Espace insécable"
 
-#: ../src/mainwindow.cpp:4109
+#: ../src/mainwindow.cpp:4236
 msgid "Left double quotation mark"
 msgstr "Guillemet apostrophe double ouvrant"
 
-#: ../src/mainwindow.cpp:4111
+#: ../src/mainwindow.cpp:4238
 msgid "Right double quotation mark"
 msgstr "Guillemet apostrophe double fermant"
 
-#: ../src/mainwindow.cpp:4113
+#: ../src/mainwindow.cpp:4240
 msgid "Left single quotation mark"
 msgstr "Guillemet apostrophe simple ouvrant"
 
-#: ../src/mainwindow.cpp:4115
+#: ../src/mainwindow.cpp:4242
 msgid "Right single quotation mark"
 msgstr "Guillemet apostrophe simple fermant"
 
-#: ../src/mainwindow.cpp:4117
+#: ../src/mainwindow.cpp:4244
 msgid "Left-pointing double angle quotation mark"
 msgstr "Guillemet typographique ouvrant"
 
-#: ../src/mainwindow.cpp:4119
+#: ../src/mainwindow.cpp:4246
 msgid "Right-pointing double angle quotation mark"
 msgstr "Guillemet typographique fermant"
 
-#: ../src/mainwindow.cpp:4120
+#: ../src/mainwindow.cpp:4247
 msgid "Insert character"
 msgstr "Insérer un caractère"
 
-#: ../src/mainwindow.cpp:4120
+#: ../src/mainwindow.cpp:4247
 msgid "Insert special character"
 msgstr "Insérer un caractère spécial"
 
-#: ../src/mainwindow.cpp:4810
+#: ../src/mainwindow.cpp:4936
 msgid "Delete resource"
 msgstr "Supprimer la ressource"
 
-#: ../src/mainwindow.cpp:4812
+#: ../src/mainwindow.cpp:4938
 msgid "Are you sure you want to delete resource "
 msgstr "Êtes-vous certain de vouloir supprimer la ressource "
 
-#: ../src/mainwindow.cpp:5448
+#: ../src/mainwindow.cpp:5575
 msgid "Chapter should now be in desired view"
 msgstr "Le chapitre devrait maintenant être dans l'aperçu souhaité"
 
-#: ../src/mainwindow.cpp:5636
+#: ../src/mainwindow.cpp:5763
 msgid "Project (through internal typesetter)"
 msgstr "Projet (par une composition interne)"
 
-#: ../src/mainwindow.cpp:5637
+#: ../src/mainwindow.cpp:5764
 msgid "Project (through ptx2pdf typesetter)"
 msgstr "Projet (par une composition ptx2pdf)"
 
-#: ../src/mainwindow.cpp:5638 ../src/print_parallel_bible.cpp:47
+#: ../src/mainwindow.cpp:5765 ../src/print_parallel_bible.cpp:47
 #: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr "Parallèle biblique"
 
-#: ../src/mainwindow.cpp:5641
+#: ../src/mainwindow.cpp:5768
 msgid "Select what to print"
 msgstr "Sélectionner quoi imprimer"
 
-#: ../src/mainwindow.cpp:5701
+#: ../src/mainwindow.cpp:5828
 msgid "There are no references to print"
 msgstr "Il n'y a pas de références à imprimer"
 
@@ -6150,7 +6247,7 @@ msgstr "Ce qui a été importé reste déjà"
 msgid "Verse text could not be imported"
 msgstr "Le texte du verset n'a pas pu être importé"
 
-#: ../src/opendocument.cpp:68
+#: ../src/opendocument.cpp:69
 msgid "Exporting to OpenDocument"
 msgstr "Exportation au format OpenDocument"
 
@@ -6186,7 +6283,7 @@ msgstr "Notes avec des erreurs de structure : "
 msgid "Current one"
 msgstr "Celui en cours"
 
-#: ../src/ot-quotations.cpp:178
+#: ../src/ot-quotations.cpp:178 ../templates/stylesheet.xml:2053
 msgid "Quotation"
 msgstr "Citation"
 
@@ -6387,17 +6484,13 @@ msgstr "Imprimer les références parallèles"
 msgid "Ready printing the parallel references"
 msgstr "Prêt à mprimer les références parallèles"
 
-#: ../src/printproject.cpp:91 ../src/printproject2.cpp:89
+#: ../src/printproject2.cpp:89 ../src/printproject.cpp:91
 msgid ""
 "There were no books to print\n"
 "Select some books and try again"
 msgstr ""
 "Il n'y avait pas de livres à imprimer\n"
 "Sélectionnez des livres et essayez à nouveau"
-
-#: ../src/project_memory.cpp:115
-msgid "Loading "
-msgstr "Chargement de "
 
 #: ../src/projectconfig.cpp:238 ../src/projectconfig.cpp:239
 msgid " Bibledit project"
@@ -6414,6 +6507,10 @@ msgstr "fr"
 #: ../src/projectconfig.cpp:257
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: ../src/project_memory.cpp:117
+msgid "Loading "
+msgstr "Chargement de "
 
 #: ../src/projectutils.cpp:146
 msgid " does not exist"
@@ -7180,30 +7277,30 @@ msgstr ""
 msgid "Install a supported text viewer"
 msgstr "Installez un visionneur de texte approprié"
 
-#: ../src/tiny_utilities.cpp:105
+#: ../src/tiny_utilities.cpp:106
 msgid "yes"
 msgstr "oui"
 
-#: ../src/tiny_utilities.cpp:107
+#: ../src/tiny_utilities.cpp:108
 msgid "no"
 msgstr "non"
 
-#: ../src/tiny_utilities.cpp:184
+#: ../src/tiny_utilities.cpp:201
 msgid "Using non-standard datafolder "
 msgstr "Utilisation d'un dossier de données non standard"
 
-#: ../src/tiny_utilities.cpp:188
+#: ../src/tiny_utilities.cpp:205
 msgid "This data folder has no name. Resetting to "
 msgstr "Ce dossier de données n'a pas de nom. Réinitialisation à "
 
-#: ../src/tiny_utilities.cpp:194
+#: ../src/tiny_utilities.cpp:211
 msgid ""
 "There are not enough access permissions for this data folder. Resetting to "
 msgstr ""
 "Il n'y a pas assez d'autorisations d'accès pour ce dossier de données. "
 "Réinitialisation à "
 
-#: ../src/urltransport.cpp:148
+#: ../src/urltransport.cpp:149
 msgid "Webserver Access: "
 msgstr "Accès au serveur web :"
 
@@ -7274,10 +7371,6 @@ msgstr "Éléments poétique"
 msgid "Table Elements"
 msgstr "Tableau"
 
-#: ../src/usfmtools.cpp:759
-msgid "Cross References"
-msgstr "Références croisées"
-
 #: ../src/usfmtools.cpp:764
 msgid "Extended Study Notes"
 msgstr "Notes d'étude étendues"
@@ -7328,11 +7421,31 @@ msgstr ""
 "L'impression ne peut pas continuer.\n"
 "Ajoutez les styles suivants à la feuille de style :"
 
-#: ../src/utilities.cpp:794
+#: ../src/utilities.cpp:794 ../src/utilities.cpp:837
 msgid "Error opening file "
 msgstr "Erreur durant l'ouverture du fichier"
 
-#: ../src/utilities.cpp:826
+#: ../src/utilities.cpp:795 ../src/utilities.cpp:838
+#, fuzzy
+msgid "error opening file"
+msgstr "Erreur durant l'ouverture du fichier"
+
+#: ../src/utilities.cpp:830
+#, fuzzy
+msgid "Could not open file "
+msgstr "Échec de la décompression du fichier"
+
+#: ../src/utilities.cpp:842
+#, fuzzy
+msgid "Error reading all bytes in file "
+msgstr "Une erreur est survenue durant la lecture du fichier xml"
+
+#: ../src/utilities.cpp:843
+#, fuzzy
+msgid "error reading all bytes in file"
+msgstr "Une erreur est survenue durant la lecture du fichier xml"
+
+#: ../src/utilities.cpp:867
 msgid "Error creating file "
 msgstr "Erreur durant la création du fichier"
 
@@ -7352,15 +7465,15 @@ msgstr "Minute"
 msgid "Second"
 msgstr "Seconde"
 
-#: ../src/windowcheckkeyterms.cpp:42
+#: ../src/windowcheckkeyterms.cpp:43
 msgid "Check keyterms"
 msgstr "Vérifier les mots-clés"
 
-#: ../src/windowcheckkeyterms.cpp:63 ../src/windowtabbed.cpp:79
+#: ../src/windowcheckkeyterms.cpp:64 ../src/windowtabbed.cpp:78
 msgid "_Collection"
 msgstr "_Collection"
 
-#: ../src/windowcheckkeyterms.cpp:107 ../src/windowtabbed.cpp:123
+#: ../src/windowcheckkeyterms.cpp:108 ../src/windowtabbed.cpp:122
 msgid ""
 "Case\n"
 "sensitive"
@@ -7368,36 +7481,28 @@ msgstr ""
 "Sensible\n"
 " à la casse"
 
-#: ../src/windowcheckkeyterms.cpp:111 ../src/windowtabbed.cpp:127
+#: ../src/windowcheckkeyterms.cpp:112 ../src/windowtabbed.cpp:126
 msgid "Rendering"
 msgstr "Rendu"
 
-#: ../src/windowcheckkeyterms.cpp:145 ../src/windowcheckkeyterms.cpp:454
-#: ../src/windowtabbed.cpp:200 ../src/windowtabbed.cpp:509
+#: ../src/windowcheckkeyterms.cpp:146 ../src/windowcheckkeyterms.cpp:461
+#: ../src/windowtabbed.cpp:322 ../src/windowtabbed.cpp:631
 msgid "keyterm "
 msgstr "Mot clé"
 
-#: ../src/windowcheckkeyterms.cpp:372 ../src/windowtabbed.cpp:427
+#: ../src/windowcheckkeyterms.cpp:373 ../src/windowtabbed.cpp:549
 msgid "<Enter new rendering here>"
 msgstr "<Entrez un nouveau rendu ici>"
 
-#: ../src/windowcheckkeyterms.cpp:470 ../src/windowtabbed.cpp:525
-msgid "goto "
-msgstr "aller à "
-
-#: ../src/windowcheckkeyterms.cpp:479 ../src/windowtabbed.cpp:534
-msgid "send"
-msgstr "envoyer"
-
-#: ../src/windowcheckkeyterms.cpp:489 ../src/windowtabbed.cpp:544
+#: ../src/windowcheckkeyterms.cpp:498 ../src/windowtabbed.cpp:666
 msgid "Biblical"
 msgstr "Biblique"
 
-#: ../src/windowcheckkeyterms.cpp:490 ../src/windowtabbed.cpp:545
+#: ../src/windowcheckkeyterms.cpp:499 ../src/windowtabbed.cpp:667
 msgid "Hebrew"
 msgstr "Hébreux"
 
-#: ../src/windowcheckkeyterms.cpp:492 ../src/windowtabbed.cpp:547
+#: ../src/windowcheckkeyterms.cpp:501 ../src/windowtabbed.cpp:669
 msgid ""
 "Key Terms in Biblical Hebrew: The entries are an experimental sample set, "
 "not yet fully reviewed and approved. The KTBH team would welcome feed-back "
@@ -7408,13 +7513,15 @@ msgstr ""
 "L'équipe de KTBH souhaite recevoir les commentaires à l'adresse "
 "christopher_samuel@sil.org."
 
-#: ../src/windowcheckkeyterms.cpp:541 ../src/windowtabbed.cpp:596
+#: ../src/windowcheckkeyterms.cpp:554 ../src/windowcheckkeyterms.cpp:673
+#, fuzzy
+msgid "[Index]"
+msgstr "Index"
+
+#: ../src/windowcheckkeyterms.cpp:556 ../src/windowcheckkeyterms.cpp:675
+#: ../src/windowtabbed.cpp:718
 msgid "[Send to references window]"
 msgstr "[Envoyer vers la fenêtre des références]"
-
-#: ../src/windowcheckkeyterms.cpp:604 ../src/windowtabbed.cpp:659
-msgid "<empty>"
-msgstr "<vide>"
 
 #: ../src/windowcheckusfm.cpp:36
 msgid "Check USFM"
@@ -7848,9 +7955,13 @@ msgstr "Ouvrir la feuille de style"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../src/windowtabbed.cpp:185
-msgid "Concordance features are almost ready..."
-msgstr "Les fonctionnalités de concordances seront bientôt disponible…"
+#: ../src/windowtabbed.cpp:647
+msgid "goto "
+msgstr "aller à "
+
+#: ../src/windowtabbed.cpp:656
+msgid "send"
+msgstr "envoyer"
 
 #: ../src/wordlist.cpp:49
 msgid "General word list"
@@ -7864,7 +7975,7 @@ msgstr "Liste de nom hébreux"
 msgid "Greek word list"
 msgstr "Liste de nom grecs"
 
-#: ../src/wordlist.cpp:76
+#: ../src/wordlist.cpp:76 ../templates/stylesheet.xml:3696
 msgid "Index"
 msgstr "Index"
 
@@ -8219,11 +8330,6 @@ msgstr "Correction en groupe"
 msgid "label"
 msgstr "étiquette"
 
-# Cette ligne ne semble pas utile à la traduction
-#: ../templates/gtkbuilder.floatingwindow.xml:67
-msgid "x"
-msgstr ""
-
 #: ../templates/gtkbuilder.gotoreferencedialog.xml:7
 msgid "Go to reference"
 msgstr "Aller à la référence"
@@ -8530,6 +8636,7 @@ msgid "created by"
 msgstr "Créée par"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:404
+#: ../templates/stylesheet.xml:2270
 msgid "Text"
 msgstr "Texte"
 
@@ -8632,6 +8739,1513 @@ msgstr "question"
 #: ../templates/gtkbuilder.yesnoalwaysdialog.xml:45
 msgid "_Remember my choice throughout this session"
 msgstr "_Se souvenir de mon choix durant cette session"
+
+#: ../templates/stylesheet.xml:5 ../templates/stylesheet.xml:1153
+msgid "Major Title Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:6
+#, fuzzy
+msgid "Introduction major title, level 2"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:36
+msgid "Margin, No First Line Indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:37
+msgid "Paragraph text, with no first line indent (may occur after poetry)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:67
+msgid "* Secondary Language or Text Source"
+msgstr ""
+
+#: ../templates/stylesheet.xml:68
+msgid ""
+"To represent where the original text is in a secondary language or from an "
+"alternate text source"
+msgstr ""
+
+#: ../templates/stylesheet.xml:98
+#, fuzzy
+msgid "* Endnote"
+msgstr "Notes de fin"
+
+#: ../templates/stylesheet.xml:99
+msgid "An Endnote text item."
+msgstr ""
+
+#: ../templates/stylesheet.xml:129
+#, fuzzy
+msgid "Table of Contents"
+msgstr "débute la table des matières"
+
+#: ../templates/stylesheet.xml:130
+#, fuzzy
+msgid "Front matter table of contents."
+msgstr "débute la table des matières"
+
+#: ../templates/stylesheet.xml:160
+#, fuzzy
+msgid "Outline Level 2"
+msgstr "Plan"
+
+#: ../templates/stylesheet.xml:161
+#, fuzzy
+msgid "Introduction outline text, level 2"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:191 ../templates/stylesheet.xml:192
+msgid "Closure of an Epistle"
+msgstr ""
+
+#: ../templates/stylesheet.xml:222
+#, fuzzy
+msgid "* Small Caps"
+msgstr "Petite_s capitales"
+
+#: ../templates/stylesheet.xml:223
+msgid "A character style, for small capitalization text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:253
+#, fuzzy
+msgid "Paragraph Mark"
+msgstr "Paragraphes"
+
+#: ../templates/stylesheet.xml:254
+msgid "(*) A Footnote additional paragraph marker."
+msgstr ""
+
+#: ../templates/stylesheet.xml:284
+msgid "* Emphasized Text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:285
+msgid "A character style, use emphasized text style"
+msgstr ""
+
+#: ../templates/stylesheet.xml:315
+#, fuzzy
+msgid "* Footnote Mark"
+msgstr "Notes de bas de page"
+
+#: ../templates/stylesheet.xml:316
+msgid "An additional footnote marker location for a previous footnote."
+msgstr ""
+
+#: ../templates/stylesheet.xml:346 ../templates/stylesheet.xml:2115
+#, fuzzy
+msgid "Poetry Level 1"
+msgstr "Éléments poétique"
+
+#: ../templates/stylesheet.xml:347
+msgid "Introduction poetry text, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:377
+#, fuzzy
+msgid "* Bold Text"
+msgstr "Organiser le texte"
+
+#: ../templates/stylesheet.xml:378
+msgid "A character style, use bold text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:408 ../templates/stylesheet.xml:967
+msgid "Blank Line"
+msgstr ""
+
+#: ../templates/stylesheet.xml:409
+msgid ""
+"May be used to explicitely indicate additional white space between "
+"paragraphs. Poetry text stanza break (e.g. stanza break)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:440
+#, fuzzy
+msgid "Publication Data"
+msgstr "débute la publication des données"
+
+#: ../templates/stylesheet.xml:441
+#, fuzzy
+msgid "Front matter publication data."
+msgstr "débute la publication des données"
+
+#: ../templates/stylesheet.xml:471
+#, fuzzy
+msgid "Paragraph"
+msgstr "Paragraphes"
+
+#: ../templates/stylesheet.xml:472
+#, fuzzy
+msgid "Introduction prose paragraph"
+msgstr "Introduction : Paragraphes et poésie"
+
+#: ../templates/stylesheet.xml:502 ../templates/stylesheet.xml:1867
+msgid "Indented, Level 1, First Line Indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:503
+msgid ""
+"Paragraph text, level 1 indent (if sinlge level), with first line indent; "
+"often used for discourse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:533
+#, fuzzy
+msgid "Preface"
+msgstr "Préférences"
+
+#: ../templates/stylesheet.xml:534
+#, fuzzy
+msgid "Front matter preface."
+msgstr "Introduction principale"
+
+#: ../templates/stylesheet.xml:564
+msgid "Spine"
+msgstr ""
+
+#: ../templates/stylesheet.xml:565
+#, fuzzy
+msgid "Other peripheral materials - spine."
+msgstr "Éléments externes"
+
+#: ../templates/stylesheet.xml:595 ../templates/stylesheet.xml:2549
+#, fuzzy
+msgid "Section Heading Level 2"
+msgstr "est un en-tête de section"
+
+#: ../templates/stylesheet.xml:596
+#, fuzzy
+msgid "Introduction section heading, level 2"
+msgstr "Introduction : Titres et en-têtes"
+
+#: ../templates/stylesheet.xml:626
+msgid "Paragraph, quote from text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:627
+msgid "Introduction prose paragraph, quote from the body text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:657
+#, fuzzy
+msgid "Cover"
+msgstr "Proverbes"
+
+#: ../templates/stylesheet.xml:658
+#, fuzzy
+msgid "Other peripheral materials - cover."
+msgstr "Éléments externes"
+
+#: ../templates/stylesheet.xml:688
+msgid "Front/Back Matter Paragraph Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:689
+msgid "Front or back matter text paragraph, level 2 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:719
+msgid "Indented Paragraph, first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:720
+msgid "Introduction prose paragraph, indented, with first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:750
+msgid "Indented, Level 3, First Line Indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:751
+msgid ""
+"Paragraph text, level 3 indent, with first line indent; often used for "
+"discourse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:781
+#, fuzzy
+msgid "Section Heading Level 4"
+msgstr "est un en-tête de section"
+
+#: ../templates/stylesheet.xml:782
+#, fuzzy
+msgid "A section heading, level 4"
+msgstr "est un en-tête de section"
+
+#: ../templates/stylesheet.xml:812
+msgid "[Uncommon] Major Title Ending Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:813
+msgid "A secondary title occurring before or after the 'ending' main title"
+msgstr ""
+
+#: ../templates/stylesheet.xml:843 ../templates/stylesheet.xml:1898
+msgid "Major Section Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:844
+msgid "A major section division heading, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:874
+#, fuzzy
+msgid "Right Running Header"
+msgstr "est un en-tête courant"
+
+#: ../templates/stylesheet.xml:875
+#, fuzzy
+msgid "Running header text, right side of page"
+msgstr "Imprimer dans l'en-tête en cours d'exécution de la page de droite"
+
+#: ../templates/stylesheet.xml:905 ../templates/stylesheet.xml:1557
+#, fuzzy
+msgid "Outline Level 1"
+msgstr "Plan"
+
+#: ../templates/stylesheet.xml:906
+msgid "Introduction outline text, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:936
+#, fuzzy
+msgid "Outline References Range"
+msgstr "Gestion des références bibliques"
+
+#: ../templates/stylesheet.xml:937
+msgid ""
+"Introduction references range for outline entry; for marking references "
+"separately"
+msgstr ""
+
+#: ../templates/stylesheet.xml:968
+#, fuzzy
+msgid "Introduction blank line"
+msgstr "Introduction : Titres et en-têtes"
+
+#: ../templates/stylesheet.xml:998
+msgid "* DC Target Refs"
+msgstr ""
+
+#: ../templates/stylesheet.xml:999
+msgid "Cross-reference target reference(s), Apocrypha only."
+msgstr ""
+
+#: ../templates/stylesheet.xml:1029
+#, fuzzy
+msgid "Chapter Number"
+msgstr "Numéro de chapitre"
+
+#: ../templates/stylesheet.xml:1060
+msgid "Paragraph, no first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1061
+msgid ""
+"Introduction prose paragraph, with no first line indent (may occur after "
+"poetry)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1091
+msgid "List Entry Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1092
+msgid "A list entry, level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1122
+msgid "List Entry Level 4"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1123
+msgid "A list entry, level 4"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1154
+msgid "A secondary title with less important information than the main title."
+msgstr ""
+
+#: ../templates/stylesheet.xml:1184
+#, fuzzy
+msgid "Publication Information"
+msgstr "Informations d'identification"
+
+#: ../templates/stylesheet.xml:1185
+msgid ""
+"Publication information - Lang,Credit,Version,Copies,Publisher,Id,Logo Not "
+"yet supported in Bibledit."
+msgstr ""
+
+#: ../templates/stylesheet.xml:1216
+#, fuzzy
+msgid "Section Heading Range References"
+msgstr "Imprimer les références parallèles"
+
+#: ../templates/stylesheet.xml:1217
+msgid "A section division references range heading"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1247
+#, fuzzy
+msgid "Outline Title"
+msgstr "Plan"
+
+#: ../templates/stylesheet.xml:1248
+#, fuzzy
+msgid "Introduction outline title"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:1278
+#, fuzzy
+msgid "* Cross Reference"
+msgstr "Références croisées"
+
+#: ../templates/stylesheet.xml:1279
+#, fuzzy
+msgid "A list of cross references."
+msgstr "est une référence"
+
+#: ../templates/stylesheet.xml:1309
+msgid "Acrostic Heading/Marker"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1310
+msgid "Poetry text, Acrostic marker/heading"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1340 ../templates/stylesheet.xml:2487
+#: ../templates/stylesheet.xml:4223 ../templates/stylesheet.xml:4316
+#, fuzzy
+msgid "Section Heading Level 1"
+msgstr "est un en-tête de section"
+
+#: ../templates/stylesheet.xml:1341
+msgid "Introduction section heading, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1371
+#, fuzzy
+msgid "Right Aligned"
+msgstr "Marge de _droite"
+
+#: ../templates/stylesheet.xml:1372
+msgid "Poetry text, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1402 ../templates/stylesheet.xml:2425
+msgid "Major Title Level 3"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1403
+#, fuzzy
+msgid "Introduction major title, level 3"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:1433
+msgid "* Translational Addition"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1434
+msgid "For a translational addition to the text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1464
+#, fuzzy
+msgid "* Footnote"
+msgstr "Notes de bas de page"
+
+#: ../templates/stylesheet.xml:1465
+msgid "A Footnote text item."
+msgstr ""
+
+#: ../templates/stylesheet.xml:1495
+#, fuzzy
+msgid "Chapter Description"
+msgstr "Description"
+
+#: ../templates/stylesheet.xml:1496
+msgid "Chapter Description (Publishing option D, e.g. in Russian Bibles)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1526
+#, fuzzy
+msgid "Embedded Verse Number"
+msgstr "Numéro de verset"
+
+#: ../templates/stylesheet.xml:1527
+msgid "(*) A verse number within the footnote text."
+msgstr ""
+
+#: ../templates/stylesheet.xml:1558
+msgid "Introduction outline text, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1588
+msgid "Embedded Text, Indent Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1589
+msgid "Poetry text, embedded, level 2 indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1619
+msgid "Major Section Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1620
+msgid "A major section division heading, level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1650
+msgid "Indented, No First Line Indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1651
+msgid ""
+"Paragraph text, indented, with no first line indent; often used for discourse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1681
+#, fuzzy
+msgid "Outline Level 3"
+msgstr "Plan"
+
+#: ../templates/stylesheet.xml:1682
+#, fuzzy
+msgid "Introduction outline text, level 3"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:1712
+msgid "* Keyword"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1713
+#, fuzzy
+msgid "For a keyword"
+msgstr "Tri par _mot"
+
+#: ../templates/stylesheet.xml:1743 ../templates/stylesheet.xml:2673
+#, fuzzy
+msgid "Running Header"
+msgstr "est un en-tête courant"
+
+#: ../templates/stylesheet.xml:1744
+msgid "Running header text for a book"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1774
+msgid "* Selah"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1775
+msgid "Poetry text, Selah"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1805
+msgid "Embedded Text, Indent Level 1, Single Level Only"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1806
+msgid "Poetry text, embedded, level 1 indent (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1836
+msgid "* Deuterocanonical/LXX Additions"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1837
+msgid "Deuterocanonical/LXX additions or insertions in the Protocanonical text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1868
+msgid ""
+"Paragraph text, level 1 indent (if multiple levels), with first line indent; "
+"often used for discourse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1899
+msgid "A major section division heading, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1929
+msgid "* Figure/Illustration/Map"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1930
+msgid "Illustration [Columns to span, height, filename, caption text]"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1960
+#, fuzzy
+msgid "Outline Level 4"
+msgstr "Plan"
+
+#: ../templates/stylesheet.xml:1961
+#, fuzzy
+msgid "Introduction outline text, level 4"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:1991
+msgid "Front/Back Matter Paragraph Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:1992
+msgid "Front or back matter text paragraph, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2022
+#, fuzzy
+msgid "* Italic Text"
+msgstr "_Italique"
+
+#: ../templates/stylesheet.xml:2023
+msgid "A character style, use italic text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2054
+msgid "(*) A cross-reference quotation from the scripture text."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2084
+msgid "* Acrostic Letter"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2085
+msgid ""
+"Poetry text, Acrostic markup of the first character of a line of acrostic "
+"poetry"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2116
+msgid "Introduction poetry text, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2146
+#, fuzzy
+msgid "Origin Reference"
+msgstr "Imprimer les références"
+
+#: ../templates/stylesheet.xml:2147
+msgid "(*) The cross reference origin reference."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2177
+msgid "* Proper Name"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2178
+#, fuzzy
+msgid "For a proper name"
+msgstr "Nom du nouveau projet"
+
+#: ../templates/stylesheet.xml:2208
+#, fuzzy
+msgid "Reference"
+msgstr "Références"
+
+#: ../templates/stylesheet.xml:2209
+msgid "(*) The origin reference for the footnote."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2239
+msgid "* Ordinal number text portion"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2240
+msgid "For the text portion of an ordinal number"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2271
+msgid "(*) Footnote text."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2301
+msgid "Quotation or Alternate Rendering"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2302
+msgid "(*) A footnote scripture quote."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2332
+msgid "Indented Paragraph, no first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2333
+msgid "Introduction prose paragraph text, indented, with no first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2363
+msgid "Major Title level 4"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2364
+msgid "A small secondary title sometimes occuring within parentheses"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2394
+#, fuzzy
+msgid "Major Section Range References"
+msgstr "Tri des références : "
+
+#: ../templates/stylesheet.xml:2395
+msgid "A major section division references range heading"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2426
+msgid "A secondary title, less important than the main title"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2456
+#, fuzzy
+msgid "* Normal Text"
+msgstr "Couleur normale du texte "
+
+#: ../templates/stylesheet.xml:2457
+msgid "A character style, use normal text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2488
+msgid "Introduction section heading, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2518
+msgid "* Quoted Text, OT in NT"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2519
+#, fuzzy
+msgid "For Old Testament quoted text appearing in the New Testament"
+msgstr ""
+"Citations de l'Ancien Testament dans le Nouveau Testament dans le projet "
+
+#: ../templates/stylesheet.xml:2550
+msgid "A section heading, level 2 (e.g. Proverbs 22-24)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2580
+msgid "List Entry Level 3"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2581
+msgid "A list entry, level 3"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2611
+#, fuzzy
+msgid "Target References"
+msgstr "Imprimer les références"
+
+#: ../templates/stylesheet.xml:2612
+msgid "(*) The cross reference target reference(s)."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2642
+msgid "Embedded Text, Indent Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2643
+msgid "Poetry text, embedded, level 1 indent (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2674
+#, fuzzy
+msgid "Running header text"
+msgstr "est un en-tête courant"
+
+#: ../templates/stylesheet.xml:2704
+msgid "Embedded Text Refrain"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2705
+msgid "Embedded text refrain (e.g. Then all the people shall say, \"Amen!\")"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2735
+msgid "Indented, Level 2, First Line Indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2736
+msgid ""
+"Paragraph text, level 2 indent, with first line indent; often used for "
+"discourse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2766
+msgid "* Publishing alternate verse"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2767
+msgid ""
+"Published verse marker - this is a verse marking that would be used in the "
+"published text."
+msgstr ""
+
+#: ../templates/stylesheet.xml:2797 ../templates/stylesheet.xml:4037
+msgid "List Entry Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2798
+msgid "A list entry, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2828
+msgid "Paragraph, right aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2829
+#, fuzzy
+msgid "Introduction prose paragraph, right aligned"
+msgstr "Introduction : Paragraphes et poésie"
+
+#: ../templates/stylesheet.xml:2859
+msgid "Remark"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2860
+#, fuzzy
+msgid "Comments and remarks"
+msgstr "Espaces et sauts"
+
+#: ../templates/stylesheet.xml:2890 ../templates/stylesheet.xml:3603
+#: ../templates/stylesheet.xml:4130 ../templates/stylesheet.xml:4285
+msgid "Major Title Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2891
+msgid "Introduction major title, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2921
+msgid "Major Title Level 4"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2922
+msgid "Introduction major title, level 4 (usually within parenthesis)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2952
+msgid "Indent Level 1, Single Level Only"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2953
+msgid "Poetry text, level 1 indent (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2983
+msgid "Indent Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:2984
+msgid "Poetry text, level 2 indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3014
+msgid "Explanatory or Bridge Text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3015
+msgid ""
+"Introduction explanatory or bridge text (e.g. explanation of missing book in "
+"Short Old Testament)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3045
+#, fuzzy
+msgid "Poetry Level 3"
+msgstr "Éléments poétique"
+
+#: ../templates/stylesheet.xml:3046
+#, fuzzy
+msgid "Introduction poetry text, level 3"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:3076
+#, fuzzy
+msgid "Centered"
+msgstr "Centré"
+
+#: ../templates/stylesheet.xml:3077
+#, fuzzy
+msgid "Poetry text, centered"
+msgstr "Éléments poétique"
+
+#: ../templates/stylesheet.xml:3107
+msgid "Indent Level 3"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3108
+msgid "Poetry text, level 3 indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3138
+#, fuzzy
+msgid "Label Text"
+msgstr "Texte brut"
+
+#: ../templates/stylesheet.xml:3139
+msgid ""
+"(*) A footnote label text item, for marking or \"labelling\" the type or "
+"alternate translation being provided in the note."
+msgstr ""
+
+#: ../templates/stylesheet.xml:3170
+#, fuzzy
+msgid "Back matter concordance."
+msgstr "débute la concordance"
+
+#: ../templates/stylesheet.xml:3200
+msgid "* Quoted book title"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3201
+#, fuzzy
+msgid "For the quoted name of a book"
+msgstr "Impossible d'obtenir les noms des livres"
+
+#: ../templates/stylesheet.xml:3231
+msgid "Embedded Text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3232
+#, fuzzy
+msgid "Embedded text paragraph"
+msgstr "Recommencer le paragraphe"
+
+#: ../templates/stylesheet.xml:3262
+msgid "Descriptive Title, Hebrew Subtitle"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3263
+msgid "A Hebrew text heading, to provide description (e.g. Psalms)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3293
+msgid "* Liturgical note"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3294
+msgid "For a comment or note inserted for liturgical use"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3324
+msgid "Paragraph, quote from text, no first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3325
+msgid ""
+"Introduction prose paragraph, quote from the body text, with no first line "
+"indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3355 ../templates/stylesheet.xml:4254
+msgid "[Uncommon] Major Title Ending Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3356
+msgid ""
+"The main title of the book repeated at the end of the book (if multiple "
+"levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3386
+#, fuzzy
+msgid "End Marker"
+msgstr "Balise de fin "
+
+#: ../templates/stylesheet.xml:3387
+#, fuzzy
+msgid "Introduction ending marker"
+msgstr "Introduction : Titres et en-têtes"
+
+#: ../templates/stylesheet.xml:3417
+msgid "Page Break"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3418
+msgid ""
+"Page Break used for new reader portions and children bibles where content is "
+"controlled by the page"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3448
+#, fuzzy
+msgid "Alternate Rendering"
+msgstr "Rendu"
+
+#: ../templates/stylesheet.xml:3449
+msgid "(*) A footnote alternate rendering for a portion of scripture text."
+msgstr ""
+
+#: ../templates/stylesheet.xml:3479
+#, fuzzy
+msgid "Section Heading Level 3"
+msgstr "est un en-tête de section"
+
+#: ../templates/stylesheet.xml:3480
+msgid "A section heading, level 3 (e.g. Genesis \"The First Day\")"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3510
+#, fuzzy
+msgid "Short Table of Contents Text"
+msgstr "est une petite table des matières"
+
+#: ../templates/stylesheet.xml:3511
+#, fuzzy
+msgid "Short table of contents text"
+msgstr "est une petite table des matières"
+
+#: ../templates/stylesheet.xml:3541
+msgid "Embedded Text, Indent Level 3"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3542
+msgid "Poetry text, embedded, level 3 indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3572
+#, fuzzy
+msgid "* Transliterated Word"
+msgstr "mot hébreu indéclinable translittéré"
+
+#: ../templates/stylesheet.xml:3573
+#, fuzzy
+msgid "For transliterated words"
+msgstr "mot hébreu indéclinable translittéré"
+
+#: ../templates/stylesheet.xml:3604
+msgid "Introduction major title, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3634
+msgid "Embedded Text Closing"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3635
+#, fuzzy
+msgid "Embedded text closing"
+msgstr "Couleur du texte sélectionné"
+
+#: ../templates/stylesheet.xml:3665
+#, fuzzy
+msgid "Glossary"
+msgstr "débute  le glossaire"
+
+#: ../templates/stylesheet.xml:3666
+#, fuzzy
+msgid "Back matter glossary."
+msgstr "Informations de fin de livre"
+
+#: ../templates/stylesheet.xml:3697
+#, fuzzy
+msgid "Back matter index."
+msgstr "Informations de fin de livre"
+
+#: ../templates/stylesheet.xml:3727
+msgid "Concordance Keyword Level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3728
+msgid "Concordance main entry text or keyword, level 2"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3758
+#, fuzzy
+msgid "Long Table of Contents Text"
+msgstr "est une longue table des matières"
+
+#: ../templates/stylesheet.xml:3759
+#, fuzzy
+msgid "Long table of contents text"
+msgstr "est une longue table des matières"
+
+#: ../templates/stylesheet.xml:3789
+msgid "Embedded Text Opening"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3790
+msgid "Embedded text opening"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3820
+#, fuzzy
+msgid "Normal, First Line Indent"
+msgstr "Retrait de la première ligne"
+
+#: ../templates/stylesheet.xml:3821
+msgid "Paragraph text, with first line indent"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3851
+#, fuzzy
+msgid "Left Running Header"
+msgstr "est un en-tête courant"
+
+#: ../templates/stylesheet.xml:3852
+#, fuzzy
+msgid "Running header text, left side of page"
+msgstr "Imprimer dans l'en-tête en cours d'exécution de la page de gauche"
+
+#: ../templates/stylesheet.xml:3882
+msgid "* Name of Deity"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3883
+#, fuzzy
+msgid "For name of diety"
+msgstr "Pour une société biblique"
+
+#: ../templates/stylesheet.xml:3913
+msgid "Speaker"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3914
+msgid "A heading, to identify the speaker (e.g. Job)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3944
+msgid "* DC text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3945
+msgid "Footnote text, applies to Apocrypha only."
+msgstr ""
+
+#: ../templates/stylesheet.xml:3975 ../templates/stylesheet.xml:4410
+msgid "Keyword"
+msgstr ""
+
+#: ../templates/stylesheet.xml:3976
+#, fuzzy
+msgid "(*) A cross reference keyword."
+msgstr "est une référence"
+
+#: ../templates/stylesheet.xml:4006
+#, fuzzy
+msgid "Map Index"
+msgstr "Index"
+
+#: ../templates/stylesheet.xml:4007
+#, fuzzy
+msgid "Back matter map index."
+msgstr "Commence l'index de carte"
+
+#: ../templates/stylesheet.xml:4038
+msgid "A list entry, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4068
+msgid "Indent Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4069
+msgid "Poetry text, level 1 indent (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4099
+msgid "* Author Signature (Epistles)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4100
+msgid "For the signature of the author of an Epistle"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4131
+msgid "The main title of the book (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4161
+#, fuzzy
+msgid "* Alternate verse number"
+msgstr "est un numéro de verset"
+
+#: ../templates/stylesheet.xml:4162
+msgid ""
+"Second (alternate) verse number (for coding dual numeration in Psalms; see "
+"also NRSV Exo 22.1-4)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4192
+msgid "Centered (for Inscription)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4193
+msgid "Paragraph text, centered (for Inscription)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4224
+msgid "A section heading, level 1 (if multiple levels)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4255
+msgid ""
+"The main title of the book repeated at the end of the book (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4286
+msgid "The main title of the book (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4317
+msgid "A section heading, level 1 (if single level)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4348
+#, fuzzy
+msgid "Front matter introduction."
+msgstr "débute l'introduction"
+
+#: ../templates/stylesheet.xml:4378
+#, fuzzy
+msgid "Encoding"
+msgstr "Chargement de "
+
+#: ../templates/stylesheet.xml:4379
+msgid ""
+"File encoding information Bibledit disregards this marker, as all text in "
+"Bibledit are in UTF-8 encoding."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4411
+msgid "(*) A footnote keyword."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4441
+msgid "* BoldItalic Text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4442
+msgid "A character style, use bold + italic text"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4472
+#, fuzzy
+msgid "Poetry Level 2"
+msgstr "Éléments poétique"
+
+#: ../templates/stylesheet.xml:4473
+#, fuzzy
+msgid "Introduction poetry text, level 2"
+msgstr "Introduction : Autres éléments"
+
+#: ../templates/stylesheet.xml:4503
+msgid "No Break with Previous Paragraph"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4504
+msgid ""
+"Paragraph text, with no break from previous paragraph text (at chapter "
+"boundary)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4534
+msgid "Concordance Keyword Level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4535
+msgid "Concordance main entry text or keyword, level 1"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4565
+msgid "[Uncommon] Major Title at Introduction End"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4566
+#, fuzzy
+msgid "Introduction major title at introduction end"
+msgstr "Introduction : Titres et en-têtes"
+
+#: ../templates/stylesheet.xml:4596
+#, fuzzy
+msgid "Identification"
+msgstr "Notification"
+
+#: ../templates/stylesheet.xml:4597
+msgid ""
+"File identification information (BOOKID, FILENAME, EDITOR, MODIFICATION DATE)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4627
+#, fuzzy
+msgid "Verse Number"
+msgstr "Numéro de verset"
+
+#: ../templates/stylesheet.xml:4628
+msgid "A verse number (Necessary for normal Bibledit operation)"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4658
+msgid "* Words of Jesus"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4659
+msgid "For marking the words of Jesus"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4689
+#, fuzzy
+msgid "Book Abbreviation"
+msgstr "Abréviation"
+
+#: ../templates/stylesheet.xml:4690
+msgid "Book Abbreviation (not yet supported by Bibledit)."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4720
+#, fuzzy
+msgid "Inline Quotation References"
+msgstr "Validation des références"
+
+#: ../templates/stylesheet.xml:4721
+msgid ""
+"A cross-reference indicating the source text for the preceding quotation."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4751
+#, fuzzy
+msgid "Row"
+msgstr "Rm"
+
+#: ../templates/stylesheet.xml:4752
+msgid "A new table row."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4782
+#, fuzzy
+msgid "Column 1 Heading"
+msgstr "est un en-tête de colonne"
+
+#: ../templates/stylesheet.xml:4783
+msgid "A table heading, column 1."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4813
+#, fuzzy
+msgid "Column 2 Heading"
+msgstr "est un en-tête de colonne"
+
+#: ../templates/stylesheet.xml:4814
+msgid "A table heading, column 2."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4844
+#, fuzzy
+msgid "Column 3 Heading"
+msgstr "est un en-tête de colonne"
+
+#: ../templates/stylesheet.xml:4845
+msgid "A table heading, column 3."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4875
+#, fuzzy
+msgid "Column 4 Heading"
+msgstr "est un en-tête de colonne"
+
+#: ../templates/stylesheet.xml:4876
+msgid "A table heading, column 4."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4906
+msgid "Column 1 Heading, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4907
+msgid "A table heading, column 1, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4937
+msgid "Column 2 Heading, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4938
+msgid "A table heading, column 2, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4968
+msgid "Column 3 Heading, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:4969
+msgid "A table heading, column 3, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:4999
+msgid "Column 4 Heading, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5000
+msgid "A table heading, column 4, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5030
+#, fuzzy
+msgid "Column 1 Cell"
+msgstr "numéro de colonne"
+
+#: ../templates/stylesheet.xml:5031
+msgid "A table cell item, column 1."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5061
+#, fuzzy
+msgid "Column 2 Cell"
+msgstr "numéro de colonne"
+
+#: ../templates/stylesheet.xml:5062
+msgid "A table cell item, column 2."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5092
+#, fuzzy
+msgid "Column 3 Cell"
+msgstr "numéro de colonne"
+
+#: ../templates/stylesheet.xml:5093
+msgid "A table cell item, column 3."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5123
+#, fuzzy
+msgid "Column 4 Cell"
+msgstr "numéro de colonne"
+
+#: ../templates/stylesheet.xml:5124
+msgid "A table cell item, column 4."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5154
+msgid "Column 1 Cell, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5155
+msgid "A table cell item, column 1, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5185
+msgid "Column 2 Cell, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5186
+msgid "A table cell item, column 2, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5216
+msgid "Column 3 Cell, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5217
+msgid "A table cell item, column 3, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5247
+msgid "Column 4 Cell, Right Aligned"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5248
+msgid "A table cell item, column 4, right aligned."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5278
+#, fuzzy
+msgid "Alternate Chapter Number"
+msgstr "Entrer un numéro de chapitre"
+
+#: ../templates/stylesheet.xml:5279
+msgid ""
+"Second (alternate) chapter number (for coding dual versification; useful for "
+"places where different traditions of chapter breaks need to be supported in "
+"the same translation). Bibledit does nothing with this marker yet."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5309
+msgid "Chapter Publishing Label"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5310
+msgid ""
+"Chapter label used for translations that add a word such as \"Chapter\" "
+"before chapter numbers (e.g. Psalms)."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5340
+#, fuzzy
+msgid "Publishing Alternate Chapter Number"
+msgstr "Entrer un numéro de chapitre"
+
+#: ../templates/stylesheet.xml:5341
+msgid ""
+"Published chapter number (this is a chapter marking that would be used in "
+"the published text)."
+msgstr ""
+
+#: ../templates/stylesheet.xml:5371
+#, fuzzy
+msgid "* CJK Prounciation"
+msgstr "Ponctuation"
+
+#: ../templates/stylesheet.xml:5372
+msgid "For indicating pronunciation in CJK texts"
+msgstr ""
+
+#: ../templates/stylesheet.xml:5402
+#, fuzzy
+msgid "* Hebrew Wordlist Entry"
+msgstr "Entrée de liste de mot hébreux"
+
+#: ../templates/stylesheet.xml:5403
+#, fuzzy
+msgid "A Hebrew wordlist text item."
+msgstr "Entrée de liste de mot hébreux"
+
+#: ../templates/stylesheet.xml:5433
+#, fuzzy
+msgid "* Greek Wordlist Entry"
+msgstr "Entrée de liste de mot grecs"
+
+#: ../templates/stylesheet.xml:5434
+#, fuzzy
+msgid "A Greek Wordlist text item."
+msgstr "Entrée de liste de mot grecs"
+
+#: ../templates/stylesheet.xml:5464
+#, fuzzy
+msgid "* Subject Index Entry"
+msgstr "Entrée d'index de sujet"
+
+#: ../templates/stylesheet.xml:5465
+#, fuzzy
+msgid "A subject index text item."
+msgstr "Entrée d'index de sujet"
+
+#: ../templates/stylesheet.xml:5495
+#, fuzzy
+msgid "* Wordlist Entry"
+msgstr "Entrée de liste de mot grecs"
+
+#: ../templates/stylesheet.xml:5496
+#, fuzzy
+msgid "A wordlist text item."
+msgstr "est une liste de mot"
+
+#: ../templates/stylesheet.xml:5526
+#, fuzzy
+msgid "Parallel References"
+msgstr "Imprimer les références parallèles"
+
+#: ../templates/stylesheet.xml:5527
+#, fuzzy
+msgid "Parallel reference(s)"
+msgstr "Imprimer les références parallèles"
+
+#~ msgid "Concordance features are almost ready..."
+#~ msgstr "Les fonctionnalités de concordances seront bientôt disponible…"
 
 #~ msgid "ok"
 #~ msgstr "ok"

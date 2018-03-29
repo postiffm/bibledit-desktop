@@ -1,9 +1,26 @@
+Initial Setup
+
+The files stylesheetxml.its stylesheetxml.loc
+need to be installed into /usr/share/gettext/its/ or wherever
+gettext stuff is at. I tried to use the argument --its=FILE
+to specify where the .its file is, and xgettext sort of works,
+but after it processes the strings, it segfaults, so I gave up
+on that method.
+
+So...
+sudo cp stylesheet.its /usr/share/gettext/its/
+sudo cp stylesheet.loc /usr/share/gettext/its/
+
+I may have to dial the stylesheet.loc back a bit
+so that instead of *.xml, it does stylesheet.xml only.
+
 To create a new version of bibledit.pot, do this:
 
 xgettext -k_ ../src/*.cpp -o test.pot
 xgettext -j -k_ ../git/*.cpp -o test.pot
 xgettext -j -k_ ../shutdown/*.cpp -o test.pot
 xgettext -j --language=glade ../templates/gtkbuilder.*.xml -o test.pot
+xgettext -j ../templates/stylesheet.xml -o test.pot
 
 (run these commands by doing sh ./getStrings.sh)
 
@@ -21,7 +38,6 @@ Once you are happy with the diff of test.pot and bibledit.pot, then do
 this:
 
 mv test.pot bibledit-desktop.pot
-git commit -a -m "Updated bibledit-desktop.pot to new sources."
 
 Now, that is the "portable object template (.pot)." But you also have to
 update the language files, that is, the .po files. So, for French, do this:
@@ -30,5 +46,16 @@ msgmerge fr.po bibledit-desktop.pot > fr.po.new
 compare fr.po.new with the old fr.po and see if you like the changes.
 If so,
 mv fr.po.new fr.po
-git commit -a -m "Updated French translation file to match new sources. Now we need to update the translations."
 
+git commit -a
+and give this message in the editor:
+
+Internationalization update
+
+Update bibledit-desktop.pot to new sources.
+Add capability to internationalize templates/stylesheet.xml
+with new .its and .loc files for xgettext
+Update French translation file to match new sources.
+Now we need to update the translations.
+
+and push to the remote repository

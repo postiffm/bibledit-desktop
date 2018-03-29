@@ -3415,7 +3415,7 @@ Not yet supported in Bibledit.</info>
  <style marker="pb">
   <marker>pb</marker>
  <name translatable="yes">Page Break</name>
-  <info translatable="yes">Page Break used for new reader portions and children's bibles where content is controlled by the page</info>
+  <info translatable="yes">Page Break used for new reader portions and children bibles where content is controlled by the page</info>
   <type>11</type>
   <subtype>0</subtype>
   <fontsize>12</fontsize>
@@ -4096,7 +4096,7 @@ Not yet supported in Bibledit.</info>
  </style>
  <style marker="sig">
   <marker>sig</marker>
- <name translatable="yes">* Author's Signature (Epistles)</name>
+ <name translatable="yes">* Author Signature (Epistles)</name>
   <info translatable="yes">For the signature of the author of an Epistle</info>
   <type>4</type>
   <subtype>0</subtype>
