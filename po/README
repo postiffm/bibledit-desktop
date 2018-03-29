@@ -48,7 +48,7 @@ If so,
 mv fr.po.new fr.po
 
 git commit -a
-and give this message in the editor:
+and give a message like this in the editor:
 
 Internationalization update
 
@@ -56,6 +56,6 @@ Update bibledit-desktop.pot to new sources.
 Add capability to internationalize templates/stylesheet.xml
 with new .its and .loc files for xgettext
 Update French translation file to match new sources.
-Now we need to update the translations.
+Now we need to update the French translation.
 
 and push to the remote repository
