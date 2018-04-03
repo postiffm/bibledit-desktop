@@ -88,7 +88,7 @@ Genesis 5:12 ==> 1 Chronicles 1:2 Luke 3:37
 Genesis 5:15 ==> 1 Chronicles 1:2 Luke 3:37 
 Genesis 5:18 ==> 1 Chronicles 1:3 Luke 3:37 Jude 1:14 
 Genesis 5:21 ==> 1 Chronicles 1:3 Luke 3:37 
-Genesis 5:22 ==> 2 Kings 20:3 Psalms 116:9 Micah 6:8 Malachi 2:6 Colossians 2:12 
+Genesis 5:22 ==> 2 Kings 20:3 Psalms 116:9 Micah 6:8 Malachi 2:6 1 Thessalonians 2:12 
 Genesis 5:24 ==> 2 Kings 2:1 2 Kings 2:11 Hebrews 11:5 Jude 1:14 
 Genesis 5:25 ==> 1 Chronicles 1:3 Luke 3:36 
 Genesis 5:29 ==> 1 Chronicles 1:4 Luke 3:36 
@@ -1253,7 +1253,7 @@ Exodus 16:4 ==> Genesis 22:1 Exodus 15:25 Deuteronomy 8:2-3 Deuteronomy 8:16 Neh
 Exodus 16:5 ==> Exodus 16:22 Leviticus 25:21 
 Exodus 16:6 ==> Exodus 6:7 
 Exodus 16:7 ==> Exodus 16:10 Exodus 16:12 Leviticus 9:6 Numbers 11:1 Numbers 11:18 Numbers 14:27 Numbers 16:11 Numbers 16:19 Numbers 16:42 Numbers 17:5 Deuteronomy 5:24 1 Kings 8:11 Psalms 43:2 Isaiah 6:3 Isaiah 35:2 Isaiah 40:5 Ezekiel 1:28 Habakkuk 2:14 Haggai 2:7 John 11:4 John 11:40 
-Exodus 16:8 ==> Numbers 23:21 Deuteronomy 33:5 Judges 8:23 1 Samuel 8:7 Matthew 10:40 Luke 10:16 Romans 13:2 Colossians 4:8 
+Exodus 16:8 ==> Numbers 23:21 Deuteronomy 33:5 Judges 8:23 1 Samuel 8:7 Matthew 10:40 Luke 10:16 Romans 13:2 1 Thessalonians 4:8 
 Exodus 16:9 ==> Numbers 16:16 
 Exodus 16:10 ==> Exodus 13:21 Exodus 16:7 Numbers 16:19 1 Kings 8:10 2 Chronicles 7:1 Ezekiel 10:4 John 11:4 
 Exodus 16:12 ==> Exodus 6:7 Exodus 16:7-8 Numbers 14:27 1 Kings 20:28 Joel 3:17 
@@ -1981,7 +1981,7 @@ Leviticus 11:28 ==> Hebrews 9:10
 Leviticus 11:29 ==> Isaiah 66:17 
 Leviticus 11:32 ==> Numbers 19:11 
 Leviticus 11:40 ==> Hebrews 9:10 
-Leviticus 11:44 ==> Exodus 6:2 Exodus 6:7 Exodus 22:31 Exodus 31:13 Numbers 15:40 Joshua 3:5 Joshua 24:19 1 Samuel 2:2 1 Chronicles 15:12 2 Chronicles 29:5 Job 6:10 Psalms 99:3 Isaiah 43:3 Ezekiel 20:5 Ephesians 1:4 Colossians 4:7 1 Peter 1:15-16 
+Leviticus 11:44 ==> Exodus 6:2 Exodus 6:7 Exodus 22:31 Exodus 31:13 Numbers 15:40 Joshua 3:5 Joshua 24:19 1 Samuel 2:2 1 Chronicles 15:12 2 Chronicles 29:5 Job 6:10 Psalms 99:3 Isaiah 43:3 Ezekiel 20:5 Ephesians 1:4 1 Thessalonians 4:7 1 Peter 1:15-16 
 Leviticus 11:45 ==> Genesis 17:7 Exodus 19:6 1 Peter 1:16 
 Leviticus 12:2 ==> Isaiah 64:6 Ezekiel 18:6 
 Leviticus 12:3 ==> Genesis 17:10 Exodus 22:30 Luke 1:59 
@@ -2251,7 +2251,7 @@ Leviticus 25:11 ==> Leviticus 27:17
 Leviticus 25:13 ==> Leviticus 27:24 
 Leviticus 25:14 ==> 1 Samuel 12:3-4 1 Corinthians 6:8 
 Leviticus 25:15 ==> Leviticus 27:18-23 
-Leviticus 25:17 ==> Job 31:16 Proverbs 22:4 Jeremiah 7:5 Zechariah 7:10 Colossians 4:6 
+Leviticus 25:17 ==> Job 31:16 Proverbs 22:4 Jeremiah 7:5 Zechariah 7:10 1 Thessalonians 4:6 
 Leviticus 25:18 ==> Genesis 26:5 Deuteronomy 12:10 Psalms 4:8 Jeremiah 23:6 Ezekiel 28:26 
 Leviticus 25:19 ==> Deuteronomy 11:14 Isaiah 55:10 
 Leviticus 25:20 ==> Matthew 6:25-34 
@@ -5097,7 +5097,7 @@ Ruth 4:22 ==> 1 Samuel 16:1 Isaiah 11:1
 1 Samuel 11:14 ==> Joshua 10:43 
 1 Samuel 11:15 ==> Joshua 5:9 2 Samuel 19:15 
 1 Samuel 12:1 ==> 1 Samuel 8:7 1 Samuel 8:9 1 Samuel 8:22 1 Samuel 10:24 1 Samuel 11:14-15 
-1 Samuel 12:3 ==> Exodus 18:21 Exodus 23:8 Leviticus 25:14 Numbers 16:15 2 Samuel 1:14 Acts 20:33 Colossians 2:5 
+1 Samuel 12:3 ==> Exodus 18:21 Exodus 23:8 Leviticus 25:14 Numbers 16:15 2 Samuel 1:14 Acts 20:33 1 Thessalonians 2:5 
 1 Samuel 12:5 ==> Genesis 31:50 Exodus 22:4 Acts 23:9 
 1 Samuel 12:6 ==> Exodus 3:10 Micah 6:4 
 1 Samuel 12:7 ==> Joshua 24:1 Judges 5:11 Isaiah 1:18 Jeremiah 2:9 Ezekiel 17:20 Micah 6:1-5 
@@ -5280,7 +5280,7 @@ Ruth 4:22 ==> 1 Samuel 16:1 Isaiah 11:1
 1 Samuel 20:42 ==> Genesis 31:50 2 Samuel 1:26 2 Samuel 9:1 Proverbs 18:24 Isaiah 48:1 Acts 15:33 
 1 Samuel 21:1 ==> Nehemiah 11:32 Isaiah 10:32 
 1 Samuel 21:4 ==> Exodus 19:15 Leviticus 15:18 Leviticus 24:8-9 Matthew 12:4 
-1 Samuel 21:5 ==> Deuteronomy 23:9-11 Joshua 3:5 2 Samuel 11:11 Colossians 4:4 
+1 Samuel 21:5 ==> Deuteronomy 23:9-11 Joshua 3:5 2 Samuel 11:11 1 Thessalonians 4:4 
 1 Samuel 21:6 ==> Exodus 25:30 Matthew 12:3-4 Mark 2:25-28 Luke 6:3-5 
 1 Samuel 22:1 ==> Genesis 38:1 
 1 Samuel 22:2 ==> 2 Samuel 15:20 
@@ -7097,7 +7097,7 @@ Ruth 4:22 ==> 1 Samuel 16:1 Isaiah 11:1
 1 Chronicles 15:25 ==> 2 Samuel 6:12-13 2 Chronicles 1:4 Jeremiah 3:16 
 1 Chronicles 15:26 ==> Numbers 23:1-4 Numbers 23:29 
 1 Chronicles 15:27 ==> 1 Samuel 2:18 1 Samuel 2:28 
-1 Chronicles 15:28 ==> Exodus 19:13 1 Kings 1:39 Zechariah 4:7 Colossians 4:16 
+1 Chronicles 15:28 ==> Exodus 19:13 1 Kings 1:39 Zechariah 4:7 1 Thessalonians 4:16 
 1 Chronicles 16:2 ==> Exodus 39:43 Numbers 6:23-27 1 Kings 8:14 
 1 Chronicles 16:3 ==> Isaiah 16:7 
 1 Chronicles 16:7 ==> Psalms 47:7 
@@ -8302,7 +8302,7 @@ Job 1:16 ==> Genesis 18:17 Leviticus 10:2 Numbers 11:1-3 1 Kings 18:38 2 Kings 1
 Job 1:17 ==> Genesis 11:28 
 Job 1:19 ==> Job 16:7 Psalms 11:6 Ezekiel 17:10 Hosea 13:15 Matthew 7:25 
 Job 1:20 ==> Genesis 37:29 Ezekiel 27:31 Mark 14:63 1 Peter 5:6 
-Job 1:21 ==> Judges 10:15 Ruth 1:21 1 Samuel 2:7 Ecclesiastes 7:14 Ephesians 5:20 Colossians 5:18 
+Job 1:21 ==> Judges 10:15 Ruth 1:21 1 Samuel 2:7 Ecclesiastes 7:14 Ephesians 5:20 1 Thessalonians 5:18 
 Job 1:22 ==> Psalms 39:1 Proverbs 10:19 Isaiah 53:7 Romans 9:20 
 Job 2:1 ==> Genesis 6:2 
 Job 2:2 ==> Genesis 3:1 
@@ -8570,7 +8570,7 @@ Job 15:16 ==> Leviticus 5:2 Proverbs 19:28
 Job 15:18 ==> Deuteronomy 32:7 
 Job 15:19 ==> Genesis 12:1 Joel 3:17 
 Job 15:20 ==> Isaiah 2:12 Isaiah 8:22 Jeremiah 46:10 Obadiah 1:15 Zephaniah 1:7 
-Job 15:21 ==> Job 18:11 Isaiah 13:3 Jeremiah 6:25 Jeremiah 51:25 Jeremiah 51:53 Jeremiah 51:56 Colossians 5:3 
+Job 15:21 ==> Job 18:11 Isaiah 13:3 Jeremiah 6:25 Jeremiah 51:25 Jeremiah 51:53 Jeremiah 51:56 1 Thessalonians 5:3 
 Job 15:22 ==> Job 15:30 Amos 5:19-20 
 Job 15:23 ==> Ezekiel 39:17 Matthew 24:28 Luke 17:37 
 Job 15:24 ==> Isaiah 8:22 
@@ -8599,7 +8599,7 @@ Job 16:15 ==> Genesis 37:34
 Job 16:16 ==> Psalms 6:6 Isaiah 52:14 
 Job 16:17 ==> Job 27:4 
 Job 16:18 ==> Genesis 4:10 Isaiah 26:21 Hebrews 11:4 
-Job 16:19 ==> Romans 1:9 Colossians 2:5 
+Job 16:19 ==> Romans 1:9 1 Thessalonians 2:5 
 Job 16:20 ==> Lamentations 2:19 John 15:15 Romans 8:34 
 Job 16:21 ==> 1 Kings 8:45 Isaiah 45:9 
 Job 17:1 ==> Psalms 143:4 Ecclesiastes 12:1-7 Isaiah 38:12 
@@ -8627,7 +8627,7 @@ Job 18:16 ==> Genesis 27:28 Isaiah 5:24 Amos 2:9 Malachi 4:1
 Job 18:17 ==> Deuteronomy 9:14 Deuteronomy 32:26 Proverbs 2:22 Proverbs 10:7 Isaiah 49:15 
 Job 18:19 ==> Psalms 37:28 Isaiah 1:4 Isaiah 14:22 Jeremiah 22:30 
 Job 18:20 ==> Psalms 37:13 Isaiah 52:14 Ezekiel 7:7 Ezekiel 27:35 
-Job 18:21 ==> Colossians 4:5 Titus 1:16 
+Job 18:21 ==> 1 Thessalonians 4:5 Titus 1:16 
 Job 19:3 ==> Genesis 31:7 
 Job 19:5 ==> Psalms 35:26 
 Job 19:7 ==> Psalms 5:2 Psalms 22:2 Habakkuk 1:2-4 
@@ -8711,7 +8711,7 @@ Job 23:10 ==> Psalms 1:6 Psalms 7:9 Psalms 119:168 Psalms 139:1-3 1 Peter 1:7
 Job 23:11 ==> Psalms 17:5 Psalms 44:18 
 Job 23:12 ==> Matthew 4:4 John 4:32 John 4:34 
 Job 23:13 ==> Psalms 115:3 Isaiah 55:11 
-Job 23:14 ==> Colossians 3:3 1 Peter 4:12 
+Job 23:14 ==> 1 Thessalonians 3:3 1 Peter 4:12 
 Job 23:15 ==> Joshua 24:14 Ecclesiastes 3:14 
 Job 23:16 ==> Exodus 3:6 Deuteronomy 20:3 Revelation 6:16 
 Job 24:1 ==> Isaiah 2:12 Acts 1:7 2 Peter 3:7 
@@ -8860,7 +8860,7 @@ Job 32:9 ==> Psalms 119:100 1 Corinthians 1:26
 Job 32:13 ==> Jeremiah 9:23 
 Job 32:18 ==> Acts 4:20 1 Corinthians 9:16 
 Job 32:19 ==> Jeremiah 20:9 Matthew 9:17 
-Job 32:21 ==> Leviticus 19:15 2 Chronicles 19:7 Proverbs 29:5 Colossians 2:5 
+Job 32:21 ==> Leviticus 19:15 2 Chronicles 19:7 Proverbs 29:5 1 Thessalonians 2:5 
 Job 32:22 ==> Psalms 12:2-4 
 Job 33:4 ==> Genesis 2:7 
 Job 33:6 ==> Acts 14:15 James 5:17 
@@ -8886,7 +8886,7 @@ Job 33:29 ==> Ephesians 1:11 Philippians 2:13
 Job 33:30 ==> Psalms 56:13 Ephesians 5:14 James 5:19-20 
 Job 33:31 ==> Jeremiah 23:18 
 Job 33:33 ==> Psalms 34:11 Proverbs 10:8 
-Job 34:4 ==> Colossians 5:21 Hebrews 5:14 
+Job 34:4 ==> 1 Thessalonians 5:21 Hebrews 5:14 
 Job 34:6 ==> Jeremiah 10:19 
 Job 34:10 ==> Genesis 18:25 Deuteronomy 32:4 Psalms 92:15 Romans 3:5 
 Job 34:11 ==> Jeremiah 17:10 Ezekiel 33:20 Matthew 16:27 
@@ -9470,7 +9470,7 @@ Psalms 33:19 ==> Job 5:20
 Psalms 33:20 ==> Psalms 27:14 
 Psalms 33:21 ==> 1 Samuel 2:1 Psalms 30:1 Joel 2:23 
 Psalms 33:22 ==> Psalms 6:4 
-Psalms 34:1 ==> Psalms 71:6 Ephesians 5:20 Colossians 5:18 
+Psalms 34:1 ==> Psalms 71:6 Ephesians 5:20 1 Thessalonians 5:18 
 Psalms 34:2 ==> Psalms 69:32 Psalms 119:74 Jeremiah 9:24 1 Corinthians 1:31 
 Psalms 34:3 ==> Exodus 15:2 Daniel 4:37 Romans 15:6 
 Psalms 34:4 ==> Exodus 32:11 Psalms 72:2 
@@ -9813,7 +9813,7 @@ Psalms 55:10 ==> 1 Samuel 19:11 Hosea 7:6 Acts 9:24
 Psalms 55:11 ==> Psalms 5:9 Psalms 10:7 
 Psalms 55:13 ==> 2 Samuel 15:12 
 Psalms 55:14 ==> Psalms 42:4 Acts 1:16-17 
-Psalms 55:15 ==> Psalms 49:14 Psalms 64:7 Proverbs 6:15 Isaiah 29:5 Colossians 5:3 
+Psalms 55:15 ==> Psalms 49:14 Psalms 64:7 Proverbs 6:15 Isaiah 29:5 1 Thessalonians 5:3 
 Psalms 55:17 ==> Psalms 5:3 Psalms 141:2 Acts 3:1 Acts 10:3 Acts 10:9 Acts 10:10 
 Psalms 55:19 ==> Exodus 5:18 Deuteronomy 33:27 Psalms 36:1 Psalms 78:59 
 Psalms 55:20 ==> Psalms 7:4 Psalms 41:9 
@@ -12637,7 +12637,7 @@ Isaiah 20:2 ==> 1 Samuel 19:24 2 Kings 1:8 Micah 1:8
 Isaiah 20:3 ==> Genesis 10:6 Isaiah 8:18 Isaiah 18:1 Isaiah 37:9 Jeremiah 7:25 
 Isaiah 20:4 ==> Isaiah 19:4 Jeremiah 46:19 Hosea 2:3 Nahum 3:5 Nahum 3:10 
 Isaiah 20:5 ==> 2 Kings 18:21 Isaiah 30:3-5 Ezekiel 29:16 
-Isaiah 20:6 ==> 1 Samuel 30:15-17 2 Kings 18:21 Isaiah 30:7 Matthew 23:33 Colossians 5:3 Hebrews 2:3 
+Isaiah 20:6 ==> 1 Samuel 30:15-17 2 Kings 18:21 Isaiah 30:7 Matthew 23:33 1 Thessalonians 5:3 Hebrews 2:3 
 Isaiah 21:1 ==> Isaiah 13:1 Isaiah 14:23 Jeremiah 51:42 Daniel 11:40 Zechariah 9:14 
 Isaiah 21:2 ==> Genesis 10:22 Isaiah 33:1 Jeremiah 25:25 
 Isaiah 21:3 ==> Psalms 48:6 Isaiah 13:8 Isaiah 26:17 Jeremiah 30:6 John 16:21 
@@ -12796,12 +12796,12 @@ Isaiah 29:1 ==> 1 Samuel 15:22 Isaiah 1:14 Isaiah 22:12-13
 Isaiah 29:2 ==> Isaiah 3:26 Lamentations 2:5 
 Isaiah 29:3 ==> 2 Kings 25:1 Zechariah 14:2 Luke 19:43-44 
 Isaiah 29:4 ==> 1 Samuel 28:7 Isaiah 8:19 Isaiah 47:12 
-Isaiah 29:5 ==> Psalms 1:4 Isaiah 17:14 Colossians 5:3 
+Isaiah 29:5 ==> Psalms 1:4 Isaiah 17:14 1 Thessalonians 5:3 
 Isaiah 29:6 ==> Exodus 19:16 Leviticus 10:2 Zechariah 14:1-5 Matthew 24:7 Mark 13:8 Luke 21:11 Revelation 6:12 
 Isaiah 29:7 ==> Job 20:8 Zechariah 12:9 
 Isaiah 29:8 ==> Isaiah 17:12-14 Isaiah 65:13 Zechariah 12:3 
 Isaiah 29:9 ==> Deuteronomy 28:29 Psalms 60:3 Isaiah 51:17 Isaiah 51:21-23 Jeremiah 13:13 Habakkuk 1:5 
-Isaiah 29:10 ==> 1 Samuel 9:9 Isaiah 6:9 Isaiah 6:10 Jeremiah 51:57 Micah 3:6-7 Romans 11:8 Colossians 5:6-7 2 Thessalonians 2:9-11 
+Isaiah 29:10 ==> 1 Samuel 9:9 Isaiah 6:9 Isaiah 6:10 Jeremiah 51:57 Micah 3:6-7 Romans 11:8 1 Thessalonians 5:6-7 2 Thessalonians 2:9-11 
 Isaiah 29:11 ==> Daniel 8:26 Matthew 13:11 Revelation 5:1-2 
 Isaiah 29:13 ==> Isaiah 58:2-4 Jeremiah 12:2 Ezekiel 33:31 Haggai 2:12-14 Matthew 15:8-9 Mark 7:6-7 Colossians 2:22 
 Isaiah 29:14 ==> Job 5:13 Isaiah 6:9 Isaiah 6:10 Jeremiah 8:9 1 Corinthians 1:19 
@@ -13193,9 +13193,9 @@ Isaiah 47:5 ==> Isaiah 13:9 Lamentations 1:1 Revelation 17:18-Revelation 18:2
 Isaiah 47:6 ==> Deuteronomy 13:15 Jeremiah 2:7 
 Isaiah 47:7 ==> Deuteronomy 32:29 Isaiah 10:13 Daniel 4:30 
 Isaiah 47:8 ==> Isaiah 32:9 Lamentations 1:1 Revelation 18:7 
-Isaiah 47:9 ==> Jeremiah 15:8 Malachi 3:5 Colossians 5:3 Revelation 9:21 Revelation 18:8-10 
+Isaiah 47:9 ==> Jeremiah 15:8 Malachi 3:5 1 Thessalonians 5:3 Revelation 9:21 Revelation 18:8-10 
 Isaiah 47:10 ==> Job 15:31 Isaiah 5:21 Isaiah 44:20 
-Isaiah 47:11 ==> Isaiah 10:3 Luke 17:27 Colossians 5:3 
+Isaiah 47:11 ==> Isaiah 10:3 Luke 17:27 1 Thessalonians 5:3 
 Isaiah 47:12 ==> Isaiah 47:9 
 Isaiah 47:13 ==> Isaiah 57:10 Jeremiah 51:58 Habakkuk 2:13 
 Isaiah 47:14 ==> Isaiah 5:24 Isaiah 10:17 Isaiah 30:30 Jeremiah 51:30 Jeremiah 51:32 
@@ -13399,7 +13399,7 @@ Isaiah 59:13 ==> Isaiah 46:8 Matthew 10:33 Mark 7:21-22 Titus 1:16
 Isaiah 59:14 ==> Isaiah 29:21 Habakkuk 1:4 
 Isaiah 59:15 ==> Isaiah 5:7 Jeremiah 7:28 Daniel 8:12 
 Isaiah 59:16 ==> Isaiah 41:28 Isaiah 53:12 Ezekiel 22:30 
-Isaiah 59:17 ==> Ezekiel 5:13 Ephesians 6:14 Ephesians 6:17 Colossians 5:8 
+Isaiah 59:17 ==> Ezekiel 5:13 Ephesians 6:14 Ephesians 6:17 1 Thessalonians 5:8 
 Isaiah 59:18 ==> Numbers 10:35 Job 34:11 Isaiah 34:8 Matthew 16:27 
 Isaiah 59:19 ==> Isaiah 24:15 Isaiah 49:12 Matthew 8:11 
 Isaiah 59:20 ==> Job 19:25 Isaiah 52:8 Isaiah 60:16 Ezekiel 18:30-31 Acts 2:38-39 Romans 11:26 
@@ -13439,7 +13439,7 @@ Isaiah 61:10 ==> Exodus 28:2 Exodus 28:4 1 Samuel 2:1 2 Chronicles 6:41 Psalms 1
 Isaiah 61:11 ==> Isaiah 45:8 Isaiah 55:10 Isaiah 58:11 
 Isaiah 62:1 ==> Esther 4:14 Proverbs 4:18 Isaiah 1:26 
 Isaiah 62:2 ==> Psalms 67:2 Isaiah 61:9 Isaiah 65:15 Revelation 2:17 
-Isaiah 62:3 ==> Isaiah 28:5 Colossians 2:19 
+Isaiah 62:3 ==> Isaiah 28:5 1 Thessalonians 2:19 
 Isaiah 62:4 ==> Leviticus 26:43 Isaiah 49:19 Isaiah 54:5 Jeremiah 3:14 Hosea 2:19-20 Zephaniah 3:17 Malachi 3:12 
 Isaiah 62:5 ==> Song of Solomon 3:11 Isaiah 61:10 Isaiah 65:19 Jeremiah 31:12 Zephaniah 3:17 
 Isaiah 62:6 ==> Isaiah 52:8 Isaiah 56:10 
@@ -13517,7 +13517,7 @@ Isaiah 66:9 ==> Genesis 18:14 Isaiah 37:3
 Isaiah 66:10 ==> Deuteronomy 32:43 Psalms 26:8 Psalms 137:6 Romans 15:10 
 Isaiah 66:11 ==> Genesis 49:25 Numbers 11:12 Isaiah 60:16 
 Isaiah 66:12 ==> Psalms 72:3-7 Isaiah 48:18 Isaiah 60:4-5 
-Isaiah 66:13 ==> Isaiah 49:13 2 Corinthians 1:4 Colossians 2:7 
+Isaiah 66:13 ==> Isaiah 49:13 2 Corinthians 1:4 1 Thessalonians 2:7 
 Isaiah 66:14 ==> Ezra 8:31 Isaiah 25:9 Joel 2:23 
 Isaiah 66:15 ==> Deuteronomy 28:20 2 Kings 2:1 Isaiah 1:31 
 Isaiah 66:16 ==> Isaiah 30:30 Jeremiah 2:35 Ezekiel 36:5 Amos 7:4 Malachi 4:1 
@@ -13573,7 +13573,7 @@ Jeremiah 2:26 ==> Jeremiah 32:32 Jeremiah 48:27 Lamentations 1:7 Ezekiel 16:54 E
 Jeremiah 2:27 ==> Judges 10:10 1 Kings 14:9 2 Chronicles 29:6 Isaiah 37:20 Jeremiah 3:9 Jeremiah 10:8 Jeremiah 18:17 Ezekiel 8:16 Hosea 5:15 
 Jeremiah 2:28 ==> Deuteronomy 32:37 2 Kings 17:29 Isaiah 40:19-20 Isaiah 45:20 
 Jeremiah 2:29 ==> Jeremiah 5:1 Daniel 9:11 Micah 3:11 
-Jeremiah 2:30 ==> Leviticus 26:23 Nehemiah 9:26 Acts 7:52 Colossians 2:15 
+Jeremiah 2:30 ==> Leviticus 26:23 Nehemiah 9:26 Acts 7:52 1 Thessalonians 2:15 
 Jeremiah 2:31 ==> Job 21:14 Isaiah 45:19 
 Jeremiah 2:32 ==> Deuteronomy 32:18 Isaiah 57:11 
 Jeremiah 2:34 ==> 2 Kings 21:16 Proverbs 6:17 
@@ -15706,7 +15706,7 @@ Ezekiel 36:23 ==> Numbers 6:27 Psalms 46:10 Isaiah 5:16 Ezekiel 20:14 Ezekiel 38
 Ezekiel 36:24 ==> Isaiah 43:5-6 Ezekiel 34:13 Ezekiel 37:21 
 Ezekiel 36:25 ==> Leviticus 14:5-7 Numbers 19:13-20 Isaiah 4:4 Hebrews 9:13 Hebrews 10:22 
 Ezekiel 36:26 ==> Psalms 51:10 Jeremiah 24:7 Ezekiel 11:19 Ezekiel 18:31 2 Corinthians 5:17 
-Ezekiel 36:27 ==> Isaiah 44:3 Isaiah 59:21 Joel 2:28-29 John 3:5 Colossians 4:8 
+Ezekiel 36:27 ==> Isaiah 44:3 Isaiah 59:21 Joel 2:28-29 John 3:5 1 Thessalonians 4:8 
 Ezekiel 36:28 ==> Jeremiah 30:22 Ezekiel 11:17 Zechariah 8:8 
 Ezekiel 36:29 ==> Ezekiel 34:27-29 
 Ezekiel 36:30 ==> Leviticus 26:4-5 
@@ -16118,7 +16118,7 @@ Daniel 6:6 ==> Nehemiah 2:3
 Daniel 6:7 ==> Psalms 59:3 Daniel 3:2 Daniel 3:6 
 Daniel 6:8 ==> Esther 1:19 Esther 3:12 Esther 8:10 
 Daniel 6:10 ==> 1 Kings 8:29 1 Kings 8:44 1 Kings 8:48-49 Psalms 55:17 Psalms 95:6 Matthew 6:6 Acts 5:29 
-Daniel 6:11 ==> 1 Kings 8:48-50 Psalms 37:32-33 Psalms 55:17 Colossians 5:17-18 
+Daniel 6:11 ==> 1 Kings 8:48-50 Psalms 37:32-33 Psalms 55:17 1 Thessalonians 5:17-18 
 Daniel 6:12 ==> Esther 1:19 Daniel 3:8-12 Acts 16:19-21 
 Daniel 6:13 ==> Esther 3:8 Ezekiel 14:14 Daniel 2:25 
 Daniel 6:14 ==> Mark 6:26 
@@ -17317,7 +17317,7 @@ Matthew 3:16 ==> Isaiah 11:2 Ezekiel 1:1 John 1:51 Acts 7:56 Revelation 4:1
 Matthew 3:17 ==> Deuteronomy 4:12 Psalms 2:7 Isaiah 42:1 Matthew 17:5 Mark 1:11 Luke 3:22 Acts 13:33 Hebrews 1:1-5 2 Peter 1:17 
 Matthew 4:1 ==> Genesis 3:1-7 Hebrews 4:15 
 Matthew 4:2 ==> Exodus 34:28 1 Kings 19:8 
-Matthew 4:3 ==> Mark 3:11 Luke 1:35 John 1:34 John 1:49 Acts 9:20 Romans 1:4 Colossians 3:5 1 John 5:10-13 1 John 5:20 Revelation 2:18 
+Matthew 4:3 ==> Mark 3:11 Luke 1:35 John 1:34 John 1:49 Acts 9:20 Romans 1:4 1 Thessalonians 3:5 1 John 5:10-13 1 John 5:20 Revelation 2:18 
 Matthew 4:4 ==> Deuteronomy 8:3 John 4:34 
 Matthew 4:5 ==> Nehemiah 11:1 Daniel 9:24 
 Matthew 4:6 ==> Psalms 91:11-12 
@@ -17426,7 +17426,7 @@ Matthew 9:18 ==> Mark 5:23
 Matthew 9:20 ==> Mark 3:10 Luke 6:19 
 Matthew 9:22 ==> Mark 10:52 Luke 7:50 John 16:33 
 Matthew 9:23 ==> 2 Chronicles 35:25 Jeremiah 9:17-18 
-Matthew 9:24 ==> Psalms 76:5 Daniel 12:2 John 11:11-14 Acts 20:10 1 Corinthians 11:30 Colossians 4:13-16 
+Matthew 9:24 ==> Psalms 76:5 Daniel 12:2 John 11:11-14 Acts 20:10 1 Corinthians 11:30 1 Thessalonians 4:13-16 
 Matthew 9:25 ==> Luke 7:14 
 Matthew 9:26 ==> Mark 1:28 Luke 4:14 Luke 4:37 
 Matthew 9:27 ==> Mark 10:47 
@@ -17550,7 +17550,7 @@ Matthew 16:3 ==> Luke 12:54-56
 Matthew 16:6 ==> Luke 12:1 
 Matthew 16:12 ==> Acts 4:1 
 Matthew 16:14 ==> Mark 6:15 John 1:21 
-Matthew 16:16 ==> Psalms 42:2 Jeremiah 10:10 Acts 14:15 2 Corinthians 6:16 Colossians 1:9 1 Timothy 3:15 Hebrews 10:31 
+Matthew 16:16 ==> Psalms 42:2 Jeremiah 10:10 Acts 14:15 2 Corinthians 6:16 1 Thessalonians 1:9 1 Timothy 3:15 Hebrews 10:31 
 Matthew 16:17 ==> 1 Corinthians 15:50 Ephesians 6:12 Hebrews 2:14 
 Matthew 16:18 ==> John 1:42 Ephesians 2:20 
 Matthew 16:19 ==> Isaiah 22:22 John 20:23 Revelation 3:7 
@@ -17558,7 +17558,7 @@ Matthew 16:20 ==> Mark 8:30
 Matthew 16:21 ==> Psalms 22:6 Isaiah 53:3 Hosea 6:2 Mark 9:31 Luke 9:22 Luke 9:51 Luke 17:25 John 2:19 John 18:22 Acts 2:23 1 Corinthians 15:3-4 
 Matthew 16:24 ==> Luke 14:27 
 Matthew 16:25 ==> John 12:25 
-Matthew 16:27 ==> Job 34:11 Psalms 62:12 Jeremiah 17:10 Ezekiel 18:20 Luke 17:30 John 14:3 Acts 1:11 1 Corinthians 1:7 1 Corinthians 3:12-15 2 Corinthians 5:10 Colossians 2:19 Revelation 1:7 Revelation 22:12 
+Matthew 16:27 ==> Job 34:11 Psalms 62:12 Jeremiah 17:10 Ezekiel 18:20 Luke 17:30 John 14:3 Acts 1:11 1 Corinthians 1:7 1 Corinthians 3:12-15 2 Corinthians 5:10 1 Thessalonians 2:19 Revelation 1:7 Revelation 22:12 
 Matthew 17:5 ==> Acts 3:22-23 
 Matthew 17:9 ==> Mark 8:30 
 Matthew 17:11 ==> Malachi 4:6 Luke 1:16-17 
@@ -17666,7 +17666,7 @@ Matthew 23:23 ==> Leviticus 27:30 Micah 6:8 Luke 11:42
 Matthew 23:25 ==> Mark 7:4 Luke 11:39 
 Matthew 23:27 ==> Luke 11:44 Acts 23:3 
 Matthew 23:29 ==> Luke 11:47-48 
-Matthew 23:32 ==> Ezekiel 20:4 Colossians 2:16 
+Matthew 23:32 ==> Ezekiel 20:4 1 Thessalonians 2:16 
 Matthew 23:34 ==> Luke 11:49 
 Matthew 23:35 ==> Genesis 4:8 2 Chronicles 24:21 Zechariah 1:1 Hebrews 11:4 
 Matthew 23:36 ==> Luke 11:50-51 
@@ -17691,7 +17691,7 @@ Matthew 24:27 ==> Luke 17:24 Luke 17:30
 Matthew 24:28 ==> Luke 17:37 
 Matthew 24:29 ==> Isaiah 13:10 Ezekiel 32:7 Joel 2:10 Joel 2:31 Zephaniah 1:15 Revelation 6:12-13 
 Matthew 24:30 ==> Revelation 1:7 
-Matthew 24:31 ==> Isaiah 27:13 Zechariah 9:14 Colossians 4:16 Revelation 8:2 
+Matthew 24:31 ==> Isaiah 27:13 Zechariah 9:14 1 Thessalonians 4:16 Revelation 8:2 
 Matthew 24:33 ==> James 5:9 
 Matthew 24:36 ==> Acts 1:7 
 Matthew 24:37 ==> Genesis 6:5 
@@ -17701,11 +17701,11 @@ Matthew 24:40 ==> Luke 17:34
 Matthew 24:41 ==> Luke 17:35 
 Matthew 24:42 ==> Luke 12:40 
 Matthew 24:43 ==> Luke 12:39 
-Matthew 24:44 ==> Colossians 5:6 
+Matthew 24:44 ==> 1 Thessalonians 5:6 
 Matthew 24:46 ==> Revelation 16:15 
 Matthew 24:49 ==> Luke 21:34 
 Matthew 25:1 ==> Luke 12:35-38 Acts 20:8 Revelation 4:5 
-Matthew 25:5 ==> Colossians 5:6 
+Matthew 25:5 ==> 1 Thessalonians 5:6 
 Matthew 25:8 ==> Luke 12:35 
 Matthew 25:10 ==> Revelation 19:9 
 Matthew 25:13 ==> Mark 13:35 Luke 12:40 
@@ -17855,7 +17855,7 @@ Mark 3:27 ==> Isaiah 49:24-25
 Mark 3:29 ==> Matthew 12:31-32 Luke 12:10 
 Mark 4:8 ==> John 15:5 Colossians 1:6 
 Mark 4:9 ==> Matthew 11:15 
-Mark 4:11 ==> Matthew 3:2 1 Corinthians 5:12-13 Colossians 4:5 Colossians 4:12 1 Timothy 3:7 
+Mark 4:11 ==> Matthew 3:2 1 Corinthians 5:12-13 Colossians 4:5 1 Thessalonians 4:12 1 Timothy 3:7 
 Mark 4:12 ==> Isaiah 6:9 Isaiah 6:10 Matthew 13:13-15 
 Mark 4:14 ==> Luke 1:2 Acts 4:31 Philippians 1:14 
 Mark 4:15 ==> Matthew 4:10 
@@ -17946,7 +17946,7 @@ Mark 8:32 ==> John 18:20
 Mark 8:33 ==> Matthew 4:10 
 Mark 8:34 ==> Matthew 10:38 Luke 14:27 
 Mark 8:35 ==> John 12:25 
-Mark 8:38 ==> Matthew 8:20 Luke 12:9 Colossians 2:19 
+Mark 8:38 ==> Matthew 8:20 Luke 12:9 1 Thessalonians 2:19 
 Mark 9:1 ==> Matthew 24:30 Luke 22:18 
 Mark 9:2 ==> Matthew 4:21 
 Mark 9:3 ==> Matthew 28:3 
@@ -17971,7 +17971,7 @@ Mark 9:45 ==> Matthew 5:29
 Mark 9:47 ==> Matthew 5:29 
 Mark 9:48 ==> Isaiah 66:24 Matthew 25:41 
 Mark 9:49 ==> Leviticus 2:13 
-Mark 9:50 ==> Matthew 5:13 Luke 14:34-35 Romans 12:18 2 Corinthians 13:11 Colossians 4:6 Colossians 5:13 
+Mark 9:50 ==> Matthew 5:13 Luke 14:34-35 Romans 12:18 2 Corinthians 13:11 Colossians 4:6 1 Thessalonians 5:13 
 Mark 10:1 ==> Matthew 4:23 John 10:40 
 Mark 10:4 ==> Deuteronomy 24:1-4 Matthew 5:31 
 Mark 10:5 ==> Psalms 95:8 Hebrews 3:15 
@@ -18057,7 +18057,7 @@ Mark 13:26 ==> Revelation 1:7
 Mark 13:27 ==> Zechariah 2:6 
 Mark 13:30 ==> Luke 17:25 
 Mark 13:31 ==> Matthew 5:18 
-Mark 13:32 ==> Acts 1:7 Colossians 5:1-2 
+Mark 13:32 ==> Acts 1:7 1 Thessalonians 5:1-2 
 Mark 13:34 ==> Matthew 25:14 
 Mark 13:37 ==> Luke 12:37 
 Mark 14:1 ==> Matthew 12:14 John 11:55 
@@ -18486,7 +18486,7 @@ Luke 12:32 ==> Matthew 14:27 Matthew 25:34
 Luke 12:33 ==> Matthew 6:20 Acts 2:45 James 5:2 
 Luke 12:34 ==> Matthew 6:21 
 Luke 12:37 ==> Matthew 20:28 
-Luke 12:39 ==> Matthew 6:19 Colossians 5:2 2 Peter 3:10 Revelation 3:3 
+Luke 12:39 ==> Matthew 6:19 1 Thessalonians 5:2 2 Peter 3:10 Revelation 3:3 
 Luke 12:40 ==> Mark 13:33 
 Luke 12:47 ==> Deuteronomy 25:2 
 Luke 12:48 ==> Leviticus 5:17 Numbers 15:27-30 
@@ -18548,7 +18548,7 @@ Luke 15:25 ==> Psalms 69:4
 Luke 15:28 ==> Jonah 4:1 
 Luke 15:30 ==> Proverbs 29:3 
 Luke 15:32 ==> Malachi 3:17 
-Luke 16:8 ==> Psalms 17:14 Psalms 18:26 John 12:36 Ephesians 5:8 Colossians 5:5 
+Luke 16:8 ==> Psalms 17:14 Psalms 18:26 John 12:36 Ephesians 5:8 1 Thessalonians 5:5 
 Luke 16:9 ==> Matthew 19:21 
 Luke 16:10 ==> Matthew 25:21 Matthew 25:23 
 Luke 16:13 ==> Matthew 6:24 
@@ -18562,7 +18562,7 @@ Luke 16:20 ==> Acts 3:2
 Luke 16:21 ==> Matthew 15:27 
 Luke 16:24 ==> Matthew 5:22 
 Luke 16:25 ==> Psalms 17:14 
-Luke 16:28 ==> Acts 2:40 Colossians 4:6 
+Luke 16:28 ==> Acts 2:40 1 Thessalonians 4:6 
 Luke 16:29 ==> John 1:45 Acts 15:21 
 Luke 17:1 ==> Matthew 5:29 Matthew 18:7 
 Luke 17:2 ==> Matthew 5:29 Mark 10:24 
@@ -18584,13 +18584,13 @@ Luke 17:24 ==> Matthew 24:27
 Luke 17:25 ==> Matthew 16:21 Mark 13:30 
 Luke 17:26 ==> Genesis 6:5-8 
 Luke 17:28 ==> Genesis 19:1-28 
-Luke 17:30 ==> Matthew 10:23 1 Corinthians 1:7 Colossians 2:19 2 Thessalonians 1:7 2 Peter 3:4 Revelation 1:7 
+Luke 17:30 ==> Matthew 10:23 1 Corinthians 1:7 1 Thessalonians 2:19 2 Thessalonians 1:7 2 Peter 3:4 Revelation 1:7 
 Luke 17:31 ==> Matthew 24:17-18 
 Luke 17:32 ==> Genesis 19:26 
 Luke 17:33 ==> John 12:25 
 Luke 17:35 ==> Matthew 24:41 
 Luke 17:37 ==> Matthew 24:28 
-Luke 18:1 ==> Isaiah 40:31 Acts 1:14 Romans 1:10 Ephesians 6:18 Colossians 4:2 Colossians 5:17 
+Luke 18:1 ==> Isaiah 40:31 Acts 1:14 Romans 1:10 Ephesians 6:18 Colossians 4:2 1 Thessalonians 5:17 
 Luke 18:3 ==> Isaiah 1:17 
 Luke 18:7 ==> Exodus 22:23 Psalms 88:1 Revelation 6:10 
 Luke 18:8 ==> Matthew 8:20 Matthew 16:27 
@@ -18672,7 +18672,7 @@ Luke 21:26 ==> Matthew 24:29
 Luke 21:27 ==> Matthew 8:20 Revelation 1:7 
 Luke 21:31 ==> Matthew 3:2 
 Luke 21:33 ==> Matthew 5:18 
-Luke 21:34 ==> Mark 4:19 Colossians 5:2-7 
+Luke 21:34 ==> Mark 4:19 1 Thessalonians 5:2-7 
 Luke 21:36 ==> Matthew 26:41 
 Luke 21:37 ==> Matthew 21:1 Matthew 26:55 Mark 11:19 
 Luke 21:38 ==> John 8:2 
@@ -18902,7 +18902,7 @@ John 6:39 ==> Isaiah 27:3 Jeremiah 23:4
 John 6:40 ==> Matthew 25:46 
 John 6:42 ==> Luke 4:22 
 John 6:44 ==> Jeremiah 31:3 
-John 6:45 ==> Isaiah 54:13 Jeremiah 31:33-34 1 Corinthians 2:13 Colossians 4:9 Hebrews 8:10-11 1 John 2:27 
+John 6:45 ==> Isaiah 54:13 Jeremiah 31:33-34 1 Corinthians 2:13 1 Thessalonians 4:9 Hebrews 8:10-11 1 John 2:27 
 John 6:47 ==> Matthew 25:46 
 John 6:51 ==> Hebrews 10:10 
 John 6:53 ==> Matthew 8:20 
@@ -19039,7 +19039,7 @@ John 12:21 ==> Matthew 11:21
 John 12:23 ==> Matthew 26:18 
 John 12:24 ==> 1 Corinthians 15:36 
 John 12:25 ==> Matthew 10:39 Matthew 25:46 Mark 8:35 Luke 14:26 
-John 12:26 ==> 2 Corinthians 5:8 Philippians 1:23 Colossians 4:17 
+John 12:26 ==> 2 Corinthians 5:8 Philippians 1:23 1 Thessalonians 4:17 
 John 12:27 ==> Matthew 11:25 Matthew 26:38-39 
 John 12:28 ==> Matthew 3:17 
 John 12:30 ==> Exodus 19:9 
@@ -19073,7 +19073,7 @@ John 13:26 ==> Matthew 10:4
 John 13:27 ==> Luke 22:3 
 John 13:30 ==> Luke 22:53 
 John 13:31 ==> Matthew 8:20 1 Peter 4:11 
-John 13:34 ==> Leviticus 19:18 Ephesians 5:2 Colossians 4:9 1 Peter 1:22 1 John 2:7-11 1 John 4:10-11 
+John 13:34 ==> Leviticus 19:18 Ephesians 5:2 1 Thessalonians 4:9 1 Peter 1:22 1 John 2:7-11 1 John 4:10-11 
 John 13:35 ==> 1 John 3:14 
 John 13:36 ==> 2 Peter 1:14 
 John 14:1 ==> Psalms 4:5 
@@ -19116,7 +19116,7 @@ John 16:10 ==> Acts 3:14 Romans 1:17 1 Peter 3:18
 John 16:12 ==> Mark 4:33 1 Corinthians 3:2 
 John 16:13 ==> Psalms 25:5 
 John 16:20 ==> Mark 16:10 Luke 23:27 
-John 16:21 ==> Isaiah 13:8 Micah 4:9 Colossians 5:3 
+John 16:21 ==> Isaiah 13:8 Micah 4:9 1 Thessalonians 5:3 
 John 16:22 ==> Jeremiah 31:12 
 John 16:23 ==> Matthew 7:7 
 John 16:24 ==> Matthew 7:7 
@@ -19232,7 +19232,7 @@ Acts 2:5 ==> Luke 2:25
 Acts 2:9 ==> Romans 16:5 1 Corinthians 16:19 2 Corinthians 1:8 1 Peter 1:1 Revelation 1:4 
 Acts 2:10 ==> Matthew 27:32 
 Acts 2:13 ==> 1 Corinthians 14:23 Ephesians 5:18 
-Acts 2:15 ==> Colossians 5:7 
+Acts 2:15 ==> 1 Thessalonians 5:7 
 Acts 2:16 ==> Joel 2:28-32 
 Acts 2:17 ==> Numbers 11:25 Isaiah 44:3 Ezekiel 39:29 John 7:37-39 
 Acts 2:19 ==> Luke 21:11 
@@ -19375,7 +19375,7 @@ Acts 7:48 ==> 1 Kings 8:27 2 Chronicles 2:6 Mark 5:7
 Acts 7:49 ==> Matthew 5:34-35 
 Acts 7:50 ==> Isaiah 66:1-2 
 Acts 7:51 ==> Exodus 32:9 Deuteronomy 10:16 Jeremiah 4:4 
-Acts 7:52 ==> Matthew 5:12 Colossians 2:15 
+Acts 7:52 ==> Matthew 5:12 1 Thessalonians 2:15 
 Acts 7:53 ==> Galatians 3:19 Hebrews 2:2 
 Acts 7:55 ==> Mark 16:19 Luke 1:15 
 Acts 7:56 ==> Matthew 3:16 Matthew 8:20 
@@ -19395,7 +19395,7 @@ Acts 8:24 ==> Exodus 8:8 Numbers 21:7 1 Kings 13:6 Jeremiah 42:2
 Acts 8:27 ==> 1 Kings 8:41-43 Psalms 68:31 Isaiah 56:3-5 Zephaniah 3:10 John 12:20 
 Acts 8:33 ==> Isaiah 53:7-8 
 Acts 8:35 ==> Matthew 5:2 Luke 24:27 
-Acts 8:39 ==> 1 Kings 18:12 2 Kings 2:16 Ezekiel 3:12 Ezekiel 3:14 2 Corinthians 12:2 Colossians 4:17 Revelation 12:5 
+Acts 8:39 ==> 1 Kings 18:12 2 Kings 2:16 Ezekiel 3:12 Ezekiel 3:14 2 Corinthians 12:2 1 Thessalonians 4:17 Revelation 12:5 
 Acts 9:2 ==> Isaiah 17:1 Jeremiah 49:23 
 Acts 9:3 ==> 1 Corinthians 15:8 
 Acts 9:4 ==> Isaiah 6:8 
@@ -19493,10 +19493,10 @@ Acts 13:38 ==> Luke 24:47
 Acts 13:39 ==> John 3:15 Romans 3:28 
 Acts 13:41 ==> Habakkuk 1:5 
 Acts 13:43 ==> Romans 3:24 
-Acts 13:45 ==> Colossians 2:16 1 Peter 4:4 Jude 1:10 
+Acts 13:45 ==> 1 Thessalonians 2:16 1 Peter 4:4 Jude 1:10 
 Acts 13:46 ==> Matthew 21:41 Romans 11:11 
 Acts 13:47 ==> Isaiah 49:6 Luke 2:32 
-Acts 13:50 ==> Colossians 2:16 
+Acts 13:50 ==> 1 Thessalonians 2:16 
 Acts 13:51 ==> Matthew 10:14 
 Acts 13:52 ==> Luke 1:15 
 Acts 14:3 ==> John 4:48 
@@ -19505,11 +19505,11 @@ Acts 14:9 ==> Matthew 9:28
 Acts 14:10 ==> Ezekiel 2:1 
 Acts 14:12 ==> Exodus 7:1 
 Acts 14:14 ==> Mark 14:63 
-Acts 14:15 ==> Genesis 1:1 1 Samuel 12:21 Psalms 146:6 Matthew 16:16 Colossians 1:9 Revelation 14:7 
+Acts 14:15 ==> Genesis 1:1 1 Samuel 12:21 Psalms 146:6 Matthew 16:16 1 Thessalonians 1:9 Revelation 14:7 
 Acts 14:16 ==> Psalms 81:12 Micah 4:5 
 Acts 14:17 ==> Deuteronomy 11:14 Job 5:10 Psalms 4:7 Psalms 65:10 Romans 1:20 
 Acts 14:19 ==> 2 Corinthians 11:25 2 Timothy 3:11 
-Acts 14:22 ==> John 16:33 Colossians 3:3 2 Timothy 3:12 
+Acts 14:22 ==> John 16:33 1 Thessalonians 3:3 2 Timothy 3:12 
 Acts 14:27 ==> 1 Corinthians 16:9 2 Corinthians 2:12 Colossians 4:3 Revelation 3:8 
 Acts 15:1 ==> Galatians 2:12 Galatians 5:2-3 
 Acts 15:5 ==> Matthew 3:7 
@@ -19523,38 +19523,38 @@ Acts 15:17 ==> Amos 9:11-12
 Acts 15:18 ==> Isaiah 45:21 
 Acts 15:20 ==> Genesis 9:4 Leviticus 3:17 Deuteronomy 12:16 Deuteronomy 12:23 1 Corinthians 8:7-13 1 Corinthians 10:7-8 Revelation 2:14 Revelation 2:20 
 Acts 15:21 ==> 2 Corinthians 3:14-15 
-Acts 15:22 ==> 2 Corinthians 1:19 Colossians 1:1 1 Peter 5:12 
+Acts 15:22 ==> 2 Corinthians 1:19 1 Thessalonians 1:1 1 Peter 5:12 
 Acts 15:23 ==> Luke 2:2 James 1:1 
 Acts 15:24 ==> Galatians 1:7 Galatians 5:10 
 Acts 15:26 ==> 1 Corinthians 15:30 
 Acts 15:33 ==> 1 Samuel 1:17 Mark 5:34 Luke 7:50 1 Corinthians 16:11 
 Acts 15:41 ==> Luke 2:2 
-Acts 16:1 ==> 1 Corinthians 4:17 2 Corinthians 1:1 2 Corinthians 1:19 Philippians 1:1 Philippians 2:19 Colossians 3:2 Colossians 3:6 1 Timothy 1:2 1 Timothy 1:18 2 Timothy 1:2 2 Timothy 1:5-6 
+Acts 16:1 ==> 1 Corinthians 4:17 2 Corinthians 1:1 2 Corinthians 1:19 Philippians 1:1 Philippians 2:19 1 Thessalonians 3:2 1 Thessalonians 3:6 1 Timothy 1:2 1 Timothy 1:18 2 Timothy 1:2 2 Timothy 1:5-6 
 Acts 16:3 ==> Galatians 2:3 
 Acts 16:6 ==> Galatians 1:2 
 Acts 16:7 ==> Romans 8:9 Galatians 4:6 Philippians 1:19 1 Peter 1:11 
 Acts 16:8 ==> 2 Corinthians 2:12 2 Timothy 4:13 
-Acts 16:9 ==> Romans 15:26 1 Corinthians 16:5 Colossians 1:7-8 
-Acts 16:12 ==> Philippians 1:1 Colossians 2:2 
+Acts 16:9 ==> Romans 15:26 1 Corinthians 16:5 1 Thessalonians 1:7-8 
+Acts 16:12 ==> Philippians 1:1 1 Thessalonians 2:2 
 Acts 16:14 ==> Luke 24:45 Revelation 1:11 
 Acts 16:16 ==> Deuteronomy 18:11 1 Samuel 28:3 1 Samuel 28:7 
 Acts 16:17 ==> Mark 5:7 
 Acts 16:18 ==> Mark 16:17 
 Acts 16:19 ==> James 2:6 
 Acts 16:21 ==> Esther 3:8 
-Acts 16:22 ==> 2 Corinthians 11:25 Colossians 2:2 
+Acts 16:22 ==> 2 Corinthians 11:25 1 Thessalonians 2:2 
 Acts 16:24 ==> Job 13:27 Jeremiah 20:2-3 
 Acts 16:25 ==> Psalms 119:55 Psalms 119:62 Ephesians 5:19 
 Acts 16:31 ==> John 3:15 Romans 11:14 
 Acts 16:39 ==> Matthew 8:34 Luke 8:37 
-Acts 17:1 ==> Philippians 4:16 Colossians 1:1 2 Thessalonians 1:1 2 Timothy 4:10 
+Acts 17:1 ==> Philippians 4:16 1 Thessalonians 1:1 2 Thessalonians 1:1 2 Timothy 4:10 
 Acts 17:3 ==> Luke 24:26 Luke 24:46 
-Acts 17:5 ==> Romans 16:21 Colossians 2:16 
+Acts 17:5 ==> Romans 16:21 1 Thessalonians 2:16 
 Acts 17:6 ==> Matthew 24:14 
 Acts 17:7 ==> Luke 23:2 John 19:12 
 Acts 17:11 ==> Deuteronomy 29:29 Luke 16:29 John 5:39 
 Acts 17:13 ==> Hebrews 4:12 
-Acts 17:15 ==> Colossians 3:1 
+Acts 17:15 ==> 1 Thessalonians 3:1 
 Acts 17:19 ==> Mark 1:27 
 Acts 17:23 ==> John 4:22 
 Acts 17:24 ==> Deuteronomy 10:14 1 Kings 8:27 Isaiah 42:5 Isaiah 66:1-2 Matthew 11:25 
@@ -19567,13 +19567,13 @@ Acts 17:30 ==> Luke 24:47 Romans 3:25 Titus 2:11-12 1 Peter 1:14
 Acts 17:31 ==> Psalms 9:8 Psalms 96:13 Matthew 10:15 
 Acts 18:1 ==> 1 Corinthians 1:2 2 Corinthians 1:1 2 Corinthians 1:23 2 Timothy 4:20 
 Acts 18:2 ==> Romans 16:3 2 Corinthians 16:19 2 Timothy 4:19 
-Acts 18:3 ==> 1 Corinthians 4:12 Colossians 2:9 2 Thessalonians 3:8 
+Acts 18:3 ==> 1 Corinthians 4:12 1 Thessalonians 2:9 2 Thessalonians 3:8 
 Acts 18:6 ==> 2 Samuel 1:16 Ezekiel 3:17-19 Ezekiel 33:4 Matthew 10:14 
 Acts 18:8 ==> Mark 5:22 1 Corinthians 1:14 
 Acts 18:9 ==> Matthew 14:27 
 Acts 18:10 ==> Matthew 28:20 
 Acts 18:11 ==> Hebrews 4:12 
-Acts 18:12 ==> Romans 15:26 1 Corinthians 16:15 2 Corinthians 9:2 Colossians 1:7-8 
+Acts 18:12 ==> Romans 15:26 1 Corinthians 16:15 2 Corinthians 9:2 1 Thessalonians 1:7-8 
 Acts 18:17 ==> 1 Corinthians 1:1 
 Acts 18:18 ==> Numbers 6:2 Numbers 6:5 Numbers 6:18 Luke 2:2 Romans 16:1 
 Acts 18:19 ==> 1 Corinthians 15:32 Ephesians 1:1 1 Timothy 1:3 Revelation 1:11 Revelation 2:1 
@@ -19590,7 +19590,7 @@ Acts 19:22 ==> Romans 16:23 2 Timothy 4:20
 Acts 19:26 ==> Deuteronomy 4:28 Psalms 115:4 Isaiah 44:10-20 Jeremiah 10:3-5 1 Corinthians 8:4 Revelation 9:20 
 Acts 19:29 ==> Romans 16:23 1 Corinthians 1:14 Colossians 4:10 Philemon 1:24 
 Acts 19:37 ==> Romans 2:22 
-Acts 20:3 ==> Luke 2:2 2 Corinthians 11:26 Colossians 2:16 
+Acts 20:3 ==> Luke 2:2 2 Corinthians 11:26 1 Thessalonians 2:16 
 Acts 20:4 ==> Ephesians 6:21 Colossians 4:7 2 Timothy 4:20 Titus 3:12 
 Acts 20:7 ==> Matthew 14:19 1 Corinthians 16:2 Revelation 1:10 
 Acts 20:10 ==> 1 Kings 17:21 2 Kings 4:34 Matthew 9:23-24 
@@ -19605,7 +19605,7 @@ Acts 20:26 ==> Ezekiel 3:17-19
 Acts 20:28 ==> John 21:16 Romans 3:25 1 Corinthians 6:20 1 Corinthians 10:32 1 Timothy 3:1 
 Acts 20:29 ==> Ezekiel 34:5 Matthew 7:15 
 Acts 20:32 ==> Matthew 25:34 Ephesians 1:4 Colossians 1:12 Hebrews 9:15 1 Peter 1:4 
-Acts 20:33 ==> 1 Samuel 12:3 1 Corinthians 9:12 2 Corinthians 2:17 Colossians 2:5 
+Acts 20:33 ==> 1 Samuel 12:3 1 Corinthians 9:12 2 Corinthians 2:17 1 Thessalonians 2:5 
 Acts 20:36 ==> Luke 22:41 
 Acts 20:37 ==> Luke 15:20 
 Acts 21:3 ==> Luke 2:2 
@@ -19619,7 +19619,7 @@ Acts 21:20 ==> Romans 10:2 Galatians 1:14 Philippians 3:6
 Acts 21:21 ==> 1 Corinthians 7:18-19 
 Acts 21:23 ==> Numbers 6:2 Numbers 6:5 Numbers 6:18 
 Acts 21:26 ==> Numbers 6:13-20 
-Acts 21:27 ==> Jeremiah 26:8 Colossians 2:16 
+Acts 21:27 ==> Jeremiah 26:8 1 Thessalonians 2:16 
 Acts 21:28 ==> Matthew 24:15 
 Acts 21:29 ==> 2 Timothy 4:20 
 Acts 21:33 ==> Ephesians 6:20 2 Timothy 2:9 
@@ -19645,17 +19645,17 @@ Acts 23:11 ==> Matthew 14:27
 Acts 23:18 ==> Ephesians 3:1 
 Acts 23:26 ==> Luke 1:3 
 Acts 24:3 ==> Luke 1:3 
-Acts 24:9 ==> Colossians 2:16 
+Acts 24:9 ==> 1 Thessalonians 2:16 
 Acts 24:15 ==> Matthew 25:46 
 Acts 24:17 ==> Romans 15:25-28 1 Corinthians 16:1-4 1 Corinthians 16:15 2 Corinthians 8:1-4 Galatians 2:10 
-Acts 24:25 ==> Jeremiah 36:16 Galatians 5:23 Colossians 5:6 1 Peter 4:7 2 Peter 1:6 
+Acts 24:25 ==> Jeremiah 36:16 Galatians 5:23 1 Thessalonians 5:6 1 Peter 4:7 2 Peter 1:6 
 Acts 25:7 ==> Mark 15:3 Luke 23:2 Luke 23:10 
 Acts 25:19 ==> Acts 18:15 Acts 23:29 
 Acts 26:2 ==> Psalms 119:46 
 Acts 26:4 ==> Galatians 1:13-14 Philippians 3:5 
 Acts 26:5 ==> Philippians 3:5 
 Acts 26:6 ==> Romans 15:8 
-Acts 26:7 ==> Colossians 3:10 1 Timothy 5:5 James 1:1 
+Acts 26:7 ==> 1 Thessalonians 3:10 1 Timothy 5:5 James 1:1 
 Acts 26:9 ==> John 15:21 John 16:2 1 Timothy 1:13 
 Acts 26:11 ==> Matthew 10:17 
 Acts 26:14 ==> John 5:2 
@@ -19693,15 +19693,15 @@ Romans 1:3 ==> Matthew 1:1 John 1:14
 Romans 1:4 ==> Matthew 4:3 
 Romans 1:5 ==> Acts 6:7 Acts 9:15 
 Romans 1:6 ==> Jude 1:1 Revelation 17:14 
-Romans 1:7 ==> Acts 9:13 1 Corinthians 1:3 Ephesians 1:2 Colossians 1:4 
-Romans 1:8 ==> 1 Corinthians 1:4 Ephesians 1:16 Colossians 2:13 
+Romans 1:7 ==> Acts 9:13 1 Corinthians 1:3 Ephesians 1:2 1 Thessalonians 1:4 
+Romans 1:8 ==> 1 Corinthians 1:4 Ephesians 1:16 1 Thessalonians 2:13 
 Romans 1:9 ==> Jeremiah 42:5 Philippians 1:8 2 Timothy 1:3 
 Romans 1:10 ==> 1 Samuel 12:23 Luke 18:1 Acts 1:14 Ephesians 1:16 Philippians 1:4 Colossians 1:9 2 Thessalonians 1:11 2 Timothy 1:3 Philemon 1:4 
 Romans 1:11 ==> 1 Corinthians 1:7 
 Romans 1:14 ==> 1 Corinthians 9:16 
 Romans 1:16 ==> John 3:15 1 Corinthians 1:18 2 Timothy 1:8 
 Romans 1:17 ==> Habakkuk 2:4 Galatians 3:11 Philippians 3:9 Hebrews 10:38 
-Romans 1:18 ==> John 3:36 Ephesians 5:6 Colossians 3:6 Colossians 1:10 Revelation 19:15 
+Romans 1:18 ==> John 3:36 Ephesians 5:6 Colossians 3:6 1 Thessalonians 1:10 Revelation 19:15 
 Romans 1:19 ==> Acts 14:17 
 Romans 1:20 ==> Psalms 19:1-6 
 Romans 1:21 ==> Genesis 8:21 Jeremiah 2:5 Ephesians 4:17-18 
@@ -19709,7 +19709,7 @@ Romans 1:22 ==> 1 Corinthians 1:20 1 Corinthians 1:27
 Romans 1:23 ==> Deuteronomy 4:16-17 Jeremiah 2:11 Acts 17:29 
 Romans 1:24 ==> Psalms 81:12 Ephesians 4:19 1 Peter 4:3 
 Romans 1:25 ==> Isaiah 44:20 Jeremiah 10:14 2 Corinthians 11:31 
-Romans 1:26 ==> Leviticus 18:22-23 Ephesians 4:19 Colossians 4:5 
+Romans 1:26 ==> Leviticus 18:22-23 Ephesians 4:19 1 Thessalonians 4:5 
 Romans 1:27 ==> Leviticus 18:22 1 Corinthians 6:9 
 Romans 1:29 ==> 1 Timothy 5:13 3 John 1:10 
 Romans 1:30 ==> 2 Timothy 3:2 
@@ -19735,7 +19735,7 @@ Romans 2:25 ==> Jeremiah 4:4 Galatians 5:3
 Romans 2:26 ==> 1 Corinthians 7:19 
 Romans 2:27 ==> Matthew 12:41-42 
 Romans 2:28 ==> Matthew 3:9 John 8:39 Galatians 6:15 
-Romans 2:29 ==> Deuteronomy 30:6 John 5:44 1 Corinthians 4:5 2 Corinthians 3:6 2 Corinthians 10:18 Galatians 1:10 Philippians 3:3 Colossians 2:11 Colossians 2:4 
+Romans 2:29 ==> Deuteronomy 30:6 John 5:44 1 Corinthians 4:5 2 Corinthians 3:6 2 Corinthians 10:18 Galatians 1:10 Philippians 3:3 Colossians 2:11 1 Thessalonians 2:4 
 Romans 3:2 ==> Deuteronomy 4:8 Psalms 147:19 Acts 7:38 
 Romans 3:3 ==> 2 Timothy 2:13 Hebrews 4:2 
 Romans 3:4 ==> Psalms 51:4 Psalms 116:11 John 3:33 
@@ -19839,7 +19839,7 @@ Romans 8:20 ==> Genesis 3:17-19
 Romans 8:21 ==> Acts 3:21 2 Peter 3:13 Revelation 21:1 
 Romans 8:22 ==> Jeremiah 12:4 
 Romans 8:23 ==> 2 Corinthians 5:5 Galatians 5:5 
-Romans 8:24 ==> Colossians 5:8 Titus 3:7 
+Romans 8:24 ==> 1 Thessalonians 5:8 Titus 3:7 
 Romans 8:25 ==> Psalms 37:7 
 Romans 8:26 ==> Ephesians 6:18 
 Romans 8:27 ==> Revelation 2:23 
@@ -19896,7 +19896,7 @@ Romans 10:13 ==> Joel 2:32 Acts 2:21
 Romans 10:15 ==> Isaiah 52:7 Nahum 1:15 
 Romans 10:16 ==> Isaiah 53:1 John 12:38 Hebrews 4:2 
 Romans 10:17 ==> Galatians 3:2 Galatians 3:5 Colossians 3:16 
-Romans 10:18 ==> Psalms 19:4 Matthew 24:14 Colossians 1:6 Colossians 1:23 Colossians 1:8 
+Romans 10:18 ==> Psalms 19:4 Matthew 24:14 Colossians 1:6 Colossians 1:23 1 Thessalonians 1:8 
 Romans 10:19 ==> Deuteronomy 32:21 
 Romans 10:20 ==> Isaiah 65:1 
 Romans 10:21 ==> Isaiah 65:2 Jeremiah 35:17 
@@ -19907,7 +19907,7 @@ Romans 11:8 ==> Deuteronomy 29:4 Isaiah 29:10 Matthew 13:13-15
 Romans 11:10 ==> Psalms 69:22-23 
 Romans 11:11 ==> Acts 13:46 
 Romans 11:13 ==> Acts 9:15 
-Romans 11:14 ==> Matthew 1:21 Luke 2:11 John 3:17 Acts 4:12 1 Corinthians 1:21 1 Corinthians 10:33 Colossians 2:16 1 Timothy 2:4 Titus 3:5 
+Romans 11:14 ==> Matthew 1:21 Luke 2:11 John 3:17 Acts 4:12 1 Corinthians 1:21 1 Corinthians 10:33 1 Thessalonians 2:16 1 Timothy 2:4 Titus 3:5 
 Romans 11:15 ==> Luke 15:24 Luke 15:32 
 Romans 11:16 ==> Leviticus 23:10 Leviticus 23:17 Numbers 15:18-21 
 Romans 11:17 ==> Jeremiah 11:16 John 15:2 Acts 2:39 Ephesians 2:11-13 
@@ -19916,7 +19916,7 @@ Romans 11:20 ==> 1 Corinthians 10:12 2 Corinthians 1:24 1 Timothy 6:17 1 Peter 1
 Romans 11:22 ==> John 15:2 1 Corinthians 15:2 Colossians 1:23 Hebrews 3:6 
 Romans 11:23 ==> 2 Corinthians 3:16 
 Romans 11:24 ==> Jeremiah 11:16 
-Romans 11:25 ==> Luke 21:24 1 Corinthians 10:1 2 Corinthians 1:8 Colossians 4:13 
+Romans 11:25 ==> Luke 21:24 1 Corinthians 10:1 2 Corinthians 1:8 1 Thessalonians 4:13 
 Romans 11:26 ==> Isaiah 45:17 Jeremiah 31:34 
 Romans 11:27 ==> Isaiah 59:20-21 Hebrews 8:10 Hebrews 8:12 
 Romans 11:28 ==> Deuteronomy 7:8 
@@ -19934,8 +19934,8 @@ Romans 12:5 ==> 1 Corinthians 6:15 Ephesians 2:16
 Romans 12:6 ==> 1 Corinthians 7:7 Ephesians 4:11 1 Peter 4:10 
 Romans 12:7 ==> Ephesians 4:11 
 Romans 12:8 ==> Acts 11:23 2 Corinthians 8:2 
-Romans 12:9 ==> 2 Corinthians 6:6 Colossians 5:21-22 1 Timothy 1:5 
-Romans 12:10 ==> Philippians 2:3 Colossians 4:9 1 Peter 1:22 
+Romans 12:9 ==> 2 Corinthians 6:6 1 Thessalonians 5:21-22 1 Timothy 1:5 
+Romans 12:10 ==> Philippians 2:3 1 Thessalonians 4:9 1 Peter 1:22 
 Romans 12:11 ==> Acts 18:25 
 Romans 12:12 ==> Hebrews 10:32 
 Romans 12:13 ==> 1 Timothy 3:2 Hebrews 13:2 1 Peter 4:9 
@@ -19949,14 +19949,14 @@ Romans 12:20 ==> Exodus 23:4 Proverbs 25:21-22 Matthew 5:44 Luke 6:27
 Romans 13:1 ==> John 19:11 Titus 3:1 1 Peter 2:3 1 Peter 2:14 
 Romans 13:2 ==> Exodus 16:8 
 Romans 13:3 ==> 1 Peter 2:14 
-Romans 13:4 ==> Colossians 4:6 
+Romans 13:4 ==> 1 Thessalonians 4:6 
 Romans 13:5 ==> Proverbs 24:21 
 Romans 13:6 ==> Matthew 22:17 
 Romans 13:7 ==> Matthew 17:25 Luke 23:2 
 Romans 13:8 ==> Matthew 5:43 John 13:34 Colossians 3:14 
 Romans 13:9 ==> Exodus 20:13-15 Exodus 20:17 Leviticus 19:18 Deuteronomy 5:17-19 Deuteronomy 5:21 Matthew 5:43 Matthew 7:12 
 Romans 13:11 ==> 1 Corinthians 7:29-31 Ephesians 5:14 James 5:8 1 Peter 4:7 1 John 2:18 
-Romans 13:12 ==> Colossians 5:8 Hebrews 10:25 1 John 2:8 
+Romans 13:12 ==> 1 Thessalonians 5:8 Hebrews 10:25 1 John 2:8 
 Romans 13:13 ==> Luke 21:34 Galatians 5:20 Ephesians 5:18 1 Peter 4:3 
 Romans 13:14 ==> Galatians 3:27 Galatians 5:24 Ephesians 4:24 Colossians 3:10 
 Romans 14:1 ==> 1 Corinthians 8:9-12 
@@ -19980,7 +19980,7 @@ Romans 14:19 ==> 2 Corinthians 12:19 Ephesians 4:12 Ephesians 4:29 2 Timothy 2:2
 Romans 14:20 ==> Acts 10:15 1 Corinthians 8:9-12 
 Romans 14:21 ==> Matthew 5:29 
 Romans 14:22 ==> 1 John 3:21 
-Romans 15:1 ==> Colossians 5:14 
+Romans 15:1 ==> 1 Thessalonians 5:14 
 Romans 15:2 ==> 1 Corinthians 10:24 
 Romans 15:3 ==> Psalms 69:9 2 Corinthians 8:9 
 Romans 15:5 ==> 2 Corinthians 13:11 Ephesians 4:3 Philippians 2:2 Colossians 3:14 1 Peter 3:8 
@@ -19990,7 +19990,7 @@ Romans 15:9 ==> 2 Samuel 22:50 Psalms 18:49 Matthew 9:8
 Romans 15:10 ==> Deuteronomy 32:43 Isaiah 66:10 
 Romans 15:11 ==> Psalms 117:1 
 Romans 15:12 ==> Isaiah 11:10 Matthew 12:21 Revelation 5:5 
-Romans 15:13 ==> 1 Corinthians 2:4 Colossians 1:5 
+Romans 15:13 ==> 1 Corinthians 2:4 1 Thessalonians 1:5 
 Romans 15:14 ==> 2 Corinthians 8:7 Ephesians 5:9 2 Peter 1:12 
 Romans 15:16 ==> Isaiah 66:20 
 Romans 15:17 ==> Philippians 3:3 Hebrews 2:17 
@@ -20006,7 +20006,7 @@ Romans 15:27 ==> 1 Corinthians 9:11
 Romans 15:30 ==> 2 Corinthians 1:11 Galatians 5:22 Colossians 1:8 Colossians 4:12 
 Romans 15:31 ==> Acts 9:13 Acts 24:17 2 Corinthians 1:10 2 Thessalonians 3:2 2 Timothy 3:11 2 Peter 2:9 
 Romans 15:32 ==> Acts 18:21 1 Corinthians 16:18 Philemon 1:7 
-Romans 15:33 ==> 2 Corinthians 13:11 Philippians 4:9 Colossians 5:23 2 Thessalonians 3:16 Hebrews 13:20 
+Romans 15:33 ==> 2 Corinthians 13:11 Philippians 4:9 1 Thessalonians 5:23 2 Thessalonians 3:16 Hebrews 13:20 
 Romans 16:1 ==> Acts 18:18 2 Corinthians 3:1 
 Romans 16:2 ==> Acts 9:13 Philippians 2:29 
 Romans 16:3 ==> Acts 18:2 1 Corinthians 1:30 1 Corinthians 16:19 2 Corinthians 5:17 2 Timothy 4:19 
@@ -20019,7 +20019,7 @@ Romans 16:16 ==> Acts 9:13 1 Corinthians 16:20 2 Corinthians 13:12 1 Peter 5:14
 Romans 16:17 ==> Matthew 18:15-17 1 Corinthians 5:11 Galatians 1:8-9 2 Thessalonians 3:6 2 Thessalonians 3:14 1 Timothy 1:3 2 Timothy 3:5 Titus 3:10 2 John 1:10 
 Romans 16:18 ==> Isaiah 30:10 Philippians 3:19 Colossians 2:4 
 Romans 16:19 ==> 1 Corinthians 14:20 
-Romans 16:20 ==> Matthew 4:10 Galatians 6:18 Colossians 5:28 Revelation 22:21 
+Romans 16:20 ==> Matthew 4:10 Galatians 6:18 1 Thessalonians 5:28 Revelation 22:21 
 Romans 16:21 ==> Acts 13:1 Acts 16:1 Acts 17:5 
 Romans 16:23 ==> Acts 19:29 2 Timothy 4:20 
 Romans 16:25 ==> Colossians 1:26 1 Timothy 3:16 2 Timothy 2:8 Jude 1:24 
@@ -20032,8 +20032,8 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 1:5 ==> 2 Corinthians 8:7 2 Corinthians 9:11 
 1 Corinthians 1:6 ==> 1 Timothy 2:6 
 1 Corinthians 1:7 ==> Romans 1:11 Titus 2:13 2 Peter 3:12 Revelation 1:7 
-1 Corinthians 1:8 ==> Philippians 1:6 Philippians 1:10 Colossians 3:13 Colossians 5:2 
-1 Corinthians 1:9 ==> Isaiah 49:7 Romans 8:28 Colossians 5:24 Hebrews 10:23 
+1 Corinthians 1:8 ==> Philippians 1:6 Philippians 1:10 1 Thessalonians 3:13 1 Thessalonians 5:2 
+1 Corinthians 1:9 ==> Isaiah 49:7 Romans 8:28 1 Thessalonians 5:24 Hebrews 10:23 
 1 Corinthians 1:10 ==> Romans 7:1 
 1 Corinthians 1:11 ==> Acts 11:14 
 1 Corinthians 1:12 ==> John 1:42 Acts 18:24 
@@ -20075,7 +20075,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 3:5 ==> Acts 18:24 2 Corinthians 6:4 Ephesians 3:7 Colossians 1:23 Colossians 1:25 
 1 Corinthians 3:6 ==> Acts 18:4-11 
 1 Corinthians 3:8 ==> Matthew 25:21 
-1 Corinthians 3:9 ==> Isaiah 61:3 Mark 16:20 2 Corinthians 1:1 2 Corinthians 1:6 Ephesians 2:20-22 Colossians 3:2 1 Peter 2:5 
+1 Corinthians 3:9 ==> Isaiah 61:3 Mark 16:20 2 Corinthians 1:1 2 Corinthians 1:6 Ephesians 2:20-22 1 Thessalonians 3:2 1 Peter 2:5 
 1 Corinthians 3:10 ==> Romans 12:3 Romans 15:20 Ephesians 2:20 
 1 Corinthians 3:11 ==> Isaiah 28:16 Ephesians 2:20 
 1 Corinthians 3:13 ==> Jeremiah 23:28-29 Malachi 3:3 2 Corinthians 5:10 2 Timothy 1:12 
@@ -20089,7 +20089,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 3:23 ==> 2 Corinthians 10:7 Galatians 3:29 
 1 Corinthians 4:1 ==> Romans 16:25 Titus 1:7 
 1 Corinthians 4:4 ==> Acts 23:1 Romans 2:13 2 Corinthians 10:18 
-1 Corinthians 4:5 ==> Job 12:22 Matthew 7:1-2 Romans 2:29 Colossians 2:19 
+1 Corinthians 4:5 ==> Job 12:22 Matthew 7:1-2 Romans 2:29 1 Thessalonians 2:19 
 1 Corinthians 4:7 ==> Joel 3:27 Romans 12:3 Romans 12:6 
 1 Corinthians 4:8 ==> Revelation 3:17-18 
 1 Corinthians 4:9 ==> Psalms 71:7 Romans 8:36 Hebrews 10:33 
@@ -20105,7 +20105,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 4:20 ==> Romans 14:17 Romans 15:13 
 1 Corinthians 4:21 ==> 2 Corinthians 1:23 
 1 Corinthians 5:1 ==> Deuteronomy 22:30 
-1 Corinthians 5:3 ==> Colossians 2:5 Colossians 2:17 
+1 Corinthians 5:3 ==> Colossians 2:5 1 Thessalonians 2:17 
 1 Corinthians 5:4 ==> 2 Thessalonians 3:6 
 1 Corinthians 5:5 ==> Matthew 4:10 1 Timothy 1:20 
 1 Corinthians 5:6 ==> Matthew 16:6 Matthew 16:12 Galatians 5:9 James 4:16 
@@ -20120,20 +20120,20 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 6:5 ==> Acts 1:15 
 1 Corinthians 6:6 ==> Romans 7:1 2 Corinthians 6:14-15 1 Timothy 5:8 
 1 Corinthians 6:7 ==> Matthew 5:39-40 
-1 Corinthians 6:8 ==> Colossians 4:6 
+1 Corinthians 6:8 ==> 1 Thessalonians 4:6 
 1 Corinthians 6:9 ==> Leviticus 18:20 Leviticus 18:22 Deuteronomy 22:22 Matthew 25:34 Galatians 6:7 James 1:16 
 1 Corinthians 6:10 ==> 1 Timothy 1:10 Revelation 21:8 
 1 Corinthians 6:11 ==> Acts 22:16 Romans 4:25 Ephesians 2:2 
 1 Corinthians 6:13 ==> Romans 12:1 Colossians 2:22 
-1 Corinthians 6:14 ==> Acts 2:24 Romans 6:5 Ephesians 1:14 Ephesians 1:20 Colossians 4:16 
+1 Corinthians 6:14 ==> Acts 2:24 Romans 6:5 Ephesians 1:14 Ephesians 1:20 1 Thessalonians 4:16 
 1 Corinthians 6:15 ==> Romans 12:5 
 1 Corinthians 6:16 ==> Genesis 2:24 Matthew 19:5 Ephesians 5:31 
 1 Corinthians 6:17 ==> John 17:21 Romans 8:9-11 Galatians 2:20 
-1 Corinthians 6:18 ==> Romans 6:12 Galatians 5:19 Ephesians 5:3 Colossians 4:3 Hebrews 13:4 
+1 Corinthians 6:18 ==> Romans 6:12 Galatians 5:19 Ephesians 5:3 1 Thessalonians 4:3 Hebrews 13:4 
 1 Corinthians 6:19 ==> John 2:21 Romans 14:7 
 1 Corinthians 6:20 ==> Matthew 20:28 Acts 20:28 Philippians 1:20 Revelation 5:9 
 1 Corinthians 7:3 ==> Exodus 21:10 1 Peter 3:7 
-1 Corinthians 7:5 ==> Exodus 19:15 1 Samuel 21:4-5 Matthew 4:10 Colossians 3:5 
+1 Corinthians 7:5 ==> Exodus 19:15 1 Samuel 21:4-5 Matthew 4:10 1 Thessalonians 3:5 
 1 Corinthians 7:6 ==> 2 Corinthians 8:8 
 1 Corinthians 7:7 ==> Matthew 19:11-12 Romans 12:16 
 1 Corinthians 7:9 ==> 1 Timothy 5:14 
@@ -20254,13 +20254,13 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 13:1 ==> Mark 16:17 
 1 Corinthians 13:2 ==> Matthew 17:20 Acts 11:27 2 Corinthians 8:7 Ephesians 4:11 
 1 Corinthians 13:3 ==> Daniel 3:28 Luke 19:8 Acts 2:45 
-1 Corinthians 13:4 ==> Colossians 5:14 
+1 Corinthians 13:4 ==> 1 Thessalonians 5:14 
 1 Corinthians 13:5 ==> Job 14:16-17 Proverbs 10:12 1 Peter 4:8 
 1 Corinthians 13:6 ==> 2 Thessalonians 2:12 3 John 1:3-4 
 1 Corinthians 13:10 ==> Philippians 3:12 
 1 Corinthians 13:11 ==> Psalms 131:2 
 1 Corinthians 13:12 ==> Genesis 32:30 Job 19:26 Job 26:14 Galatians 4:9 1 John 3:2 
-1 Corinthians 13:13 ==> Matthew 22:37-40 Romans 5:2-5 Galatians 5:6 Ephesians 4:2-5 Colossians 1:4-5 Colossians 1:3 Hebrews 6:10-12 1 John 4:7-12 1 John 4:16 
+1 Corinthians 13:13 ==> Matthew 22:37-40 Romans 5:2-5 Galatians 5:6 Ephesians 4:2-5 Colossians 1:4-5 1 Thessalonians 1:3 Hebrews 6:10-12 1 John 4:7-12 1 John 4:16 
 1 Corinthians 14:1 ==> Ephesians 4:11 
 1 Corinthians 14:2 ==> Mark 16:17 
 1 Corinthians 14:3 ==> Romans 14:19 
@@ -20294,14 +20294,14 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 15:9 ==> Acts 8:3 Acts 15:10 2 Corinthians 12:11 Ephesians 3:8 Philippians 2:13 Colossians 1:29 1 Timothy 1:15 
 1 Corinthians 15:11 ==> Galatians 2:6 
 1 Corinthians 15:12 ==> John 11:24 2 Timothy 2:18 
-1 Corinthians 15:14 ==> Colossians 4:14 
+1 Corinthians 15:14 ==> 1 Thessalonians 4:14 
 1 Corinthians 15:15 ==> Acts 2:24 
 1 Corinthians 15:17 ==> Romans 4:25 
 1 Corinthians 15:18 ==> Matthew 9:24 
 1 Corinthians 15:20 ==> Matthew 9:24 Acts 26:23 1 Peter 1:3 
 1 Corinthians 15:21 ==> Romans 5:12 
 1 Corinthians 15:22 ==> Romans 5:14-18 
-1 Corinthians 15:23 ==> Colossians 2:19 
+1 Corinthians 15:23 ==> 1 Thessalonians 2:19 
 1 Corinthians 15:24 ==> Daniel 2:44 Romans 8:38 2 Peter 1:11 
 1 Corinthians 15:25 ==> Isaiah 9:7 Matthew 22:44 
 1 Corinthians 15:26 ==> 2 Timothy 1:10 Revelation 20:14 
@@ -20342,9 +20342,9 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 1 Corinthians 16:10 ==> Acts 16:1 
 1 Corinthians 16:11 ==> Acts 15:33 3 John 1:6 
 1 Corinthians 16:12 ==> Acts 18:24 
-1 Corinthians 16:13 ==> Galatians 5:1 Ephesians 6:10 Philippians 1:27 Colossians 3:8 Titus 1:9 
+1 Corinthians 16:13 ==> Galatians 5:1 Ephesians 6:10 Philippians 1:27 1 Thessalonians 3:8 Titus 1:9 
 1 Corinthians 16:15 ==> Acts 9:13 Acts 18:12 Acts 24:17 Romans 16:5 
-1 Corinthians 16:16 ==> Colossians 5:12 Hebrews 13:17 
+1 Corinthians 16:16 ==> 1 Thessalonians 5:12 Hebrews 13:17 
 1 Corinthians 16:17 ==> 2 Corinthians 11:9 Philippians 2:30 
 1 Corinthians 16:18 ==> Romans 15:32 Philippians 2:29 Philemon 1:7 
 1 Corinthians 16:19 ==> Acts 2:9 Acts 18:2 Romans 16:5 
@@ -20360,7 +20360,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 1:9 ==> Jeremiah 17:5 Jeremiah 17:7 John 5:21 
 2 Corinthians 1:10 ==> Romans 15:31 1 Timothy 4:10 
 2 Corinthians 1:11 ==> Romans 15:30 2 Corinthians 4:15 Philippians 1:19 
-2 Corinthians 1:12 ==> Acts 23:1 1 Corinthians 1:17 Colossians 2:10 
+2 Corinthians 1:12 ==> Acts 23:1 1 Corinthians 1:17 1 Thessalonians 2:10 
 2 Corinthians 1:14 ==> 1 Corinthians 1:8 
 2 Corinthians 1:15 ==> Romans 1:11 Romans 1:13 1 Corinthians 4:19 
 2 Corinthians 1:16 ==> Acts 16:9 Acts 19:21 1 Corinthians 16:5-7 1 Corinthians 16:11 3 John 1:6 
@@ -20376,12 +20376,12 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 2:6 ==> 1 Corinthians 5:4-5 
 2 Corinthians 2:7 ==> Galatians 6:1 Ephesians 4:32 Colossians 3:13 
 2 Corinthians 2:11 ==> Matthew 4:10 Luke 22:31 1 Peter 5:8-9 
-2 Corinthians 2:12 ==> Acts 14:27 Romans 1:1 Colossians 3:2 
+2 Corinthians 2:12 ==> Acts 14:27 Romans 1:1 1 Thessalonians 3:2 
 2 Corinthians 2:13 ==> Acts 16:9 Galatians 2:1 Galatians 2:3 Titus 1:4 
 2 Corinthians 2:14 ==> Romans 6:17 Ephesians 5:2 Philippians 4:18 
 2 Corinthians 2:15 ==> Genesis 8:21 Exodus 29:18 Numbers 15:3 1 Corinthians 1:18 
 2 Corinthians 2:16 ==> Luke 2:34 John 3:36 
-2 Corinthians 2:17 ==> Acts 20:33 1 Corinthians 5:8 Colossians 2:5 
+2 Corinthians 2:17 ==> Acts 20:33 1 Corinthians 5:8 1 Thessalonians 2:5 
 2 Corinthians 3:1 ==> Acts 18:27 Romans 16:1 1 Corinthians 16:3 
 2 Corinthians 3:2 ==> 1 Corinthians 9:2 
 2 Corinthians 3:3 ==> Proverbs 3:3 Jeremiah 31:33 Ezekiel 36:26 Matthew 16:16 
@@ -20407,7 +20407,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 4:10 ==> Romans 6:6 
 2 Corinthians 4:11 ==> Romans 8:36 
 2 Corinthians 4:13 ==> Psalms 116:10 1 Corinthians 12:9 
-2 Corinthians 4:14 ==> Acts 2:24 Ephesians 5:27 Colossians 1:22 Colossians 4:14 Jude 1:24 
+2 Corinthians 4:14 ==> Acts 2:24 Ephesians 5:27 Colossians 1:22 1 Thessalonians 4:14 Jude 1:24 
 2 Corinthians 4:16 ==> Isaiah 40:31 Romans 7:22 Colossians 3:10 
 2 Corinthians 4:17 ==> Romans 8:18 1 Peter 1:6-7 
 2 Corinthians 4:18 ==> Romans 8:24 Hebrews 11:1 
@@ -20417,7 +20417,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 5:5 ==> Romans 8:23 Ephesians 1:13-14 
 2 Corinthians 5:7 ==> 1 Corinthians 13:12 
 2 Corinthians 5:8 ==> John 12:26 Galatians 4:20 
-2 Corinthians 5:9 ==> Romans 14:18 Ephesians 5:10 Colossians 1:10 Colossians 4:1 
+2 Corinthians 5:9 ==> Romans 14:18 Ephesians 5:10 Colossians 1:10 1 Thessalonians 4:1 
 2 Corinthians 5:10 ==> Matthew 16:27 Acts 10:42 Romans 2:16 Ephesians 6:8 
 2 Corinthians 5:11 ==> Job 23:15 Hebrews 10:31 Jude 1:23 
 2 Corinthians 5:14 ==> Romans 6:6-7 Galatians 2:20 Colossians 3:3 
@@ -20431,18 +20431,18 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 6:2 ==> Isaiah 49:8 Isaiah 55:6 
 2 Corinthians 6:3 ==> Matthew 5:24 1 Corinthians 8:9 1 Corinthians 8:13 
 2 Corinthians 6:5 ==> Acts 4:11 Acts 16:23 
-2 Corinthians 6:6 ==> Romans 12:9 1 Corinthians 2:4 Colossians 1:5 1 Timothy 1:5 
+2 Corinthians 6:6 ==> Romans 12:9 1 Corinthians 2:4 1 Thessalonians 1:5 1 Timothy 1:5 
 2 Corinthians 6:7 ==> Romans 13:12 Ephesians 6:10-18 
 2 Corinthians 6:8 ==> Matthew 27:63 1 Corinthians 4:10 1 Corinthians 4:13 
 2 Corinthians 6:9 ==> Romans 8:36 
 2 Corinthians 6:10 ==> Matthew 5:12 Romans 8:32 1 Corinthians 3:21 
-2 Corinthians 6:13 ==> Colossians 2:11 
+2 Corinthians 6:13 ==> 1 Thessalonians 2:11 
 2 Corinthians 6:14 ==> 1 Corinthians 5:9 1 Corinthians 5:10 1 Corinthians 6:6 Ephesians 5:7 Ephesians 5:11 1 John 1:6 
 2 Corinthians 6:15 ==> 1 Corinthians 6:6 1 Corinthians 10:21 
 2 Corinthians 6:16 ==> Exodus 29:45 Leviticus 26:12 Jeremiah 32:38 Ezekiel 37:27 1 Corinthians 3:16 1 Corinthians 6:19 1 Corinthians 10:21 Revelation 21:3 
 2 Corinthians 6:17 ==> Isaiah 52:11 Ezekiel 20:34 Revelation 18:4 
 2 Corinthians 6:18 ==> 2 Samuel 7:8 1 Chronicles 17:13 Isaiah 43:6 Jeremiah 31:1 Romans 8:14 
-2 Corinthians 7:1 ==> 1 Corinthians 10:14 Colossians 4:7 1 Peter 1:15-16 
+2 Corinthians 7:1 ==> 1 Corinthians 10:14 1 Thessalonians 4:7 1 Peter 1:15-16 
 2 Corinthians 7:3 ==> Philippians 1:7 
 2 Corinthians 7:5 ==> Deuteronomy 32:25 Acts 16:9 
 2 Corinthians 7:10 ==> Acts 11:18 
@@ -20465,7 +20465,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 8:19 ==> Acts 14:23 1 Corinthians 16:3-4 
 2 Corinthians 8:21 ==> Romans 12:17 Titus 2:14 
 2 Corinthians 8:23 ==> Philippians 2:25 Philemon 1:17 
-2 Corinthians 9:1 ==> Acts 9:13 Acts 24:17 Colossians 4:9 
+2 Corinthians 9:1 ==> Acts 9:13 Acts 24:17 1 Thessalonians 4:9 
 2 Corinthians 9:2 ==> Acts 18:12 
 2 Corinthians 9:3 ==> 1 Corinthians 16:2 
 2 Corinthians 9:4 ==> Romans 15:26 
@@ -20534,7 +20534,7 @@ Romans 16:27 ==> 1 Timothy 1:7 1 Timothy 6:16
 2 Corinthians 12:12 ==> John 4:48 
 2 Corinthians 12:13 ==> 1 Corinthians 9:12 1 Corinthians 9:18 
 2 Corinthians 12:14 ==> Proverbs 19:14 1 Corinthians 4:14-15 
-2 Corinthians 12:15 ==> Philippians 2:17 Colossians 2:8 
+2 Corinthians 12:15 ==> Philippians 2:17 1 Thessalonians 2:8 
 2 Corinthians 12:19 ==> Romans 9:1 Romans 14:19 1 Corinthians 10:14 
 2 Corinthians 12:20 ==> Romans 1:29-30 1 Corinthians 1:11 1 Corinthians 14:33 Galatians 5:20 
 2 Corinthians 12:21 ==> 1 Corinthians 6:18 
@@ -20568,7 +20568,7 @@ Galatians 1:18 ==> Acts 9:22-23 Acts 9:26-27
 Galatians 1:19 ==> Matthew 13:55 Acts 15:13 
 Galatians 1:20 ==> Romans 1:9 Romans 9:1 
 Galatians 1:21 ==> Luke 2:2 Acts 6:9 
-Galatians 1:22 ==> Romans 16:3 Colossians 2:14 
+Galatians 1:22 ==> Romans 16:3 1 Thessalonians 2:14 
 Galatians 1:23 ==> Acts 6:7 Acts 8:3 
 Galatians 1:24 ==> Matthew 9:8 
 Galatians 2:1 ==> Acts 15:2 2 Corinthians 2:13 
@@ -20576,7 +20576,7 @@ Galatians 2:2 ==> 1 Corinthians 2:10 1 Corinthians 9:24
 Galatians 2:3 ==> 1 Corinthians 9:21 2 Corinthians 2:13 
 Galatians 2:4 ==> Acts 1:16 2 Corinthians 11:26 Jude 1:4 
 Galatians 2:6 ==> 1 Corinthians 15:11 Revelation 2:23 
-Galatians 2:7 ==> Colossians 2:4 
+Galatians 2:7 ==> 1 Thessalonians 2:4 
 Galatians 2:8 ==> Acts 1:25 1 Corinthians 1:1 
 Galatians 2:9 ==> Acts 9:15 Acts 15:13 1 Timothy 3:15 Revelation 3:12 
 Galatians 2:10 ==> Acts 24:17 
@@ -20618,15 +20618,15 @@ Galatians 4:4 ==> Luke 2:27 John 3:17 Romans 5:6 Ephesians 1:10
 Galatians 4:5 ==> John 1:12 Romans 3:24 
 Galatians 4:6 ==> Acts 16:7 Romans 5:5 
 Galatians 4:7 ==> Romans 8:17 
-Galatians 4:8 ==> 2 Chronicles 13:9 Isaiah 37:19 Jeremiah 2:11 Romans 1:28 1 Corinthians 1:21 1 Corinthians 8:4-5 Colossians 4:5 2 Thessalonians 1:8 
+Galatians 4:8 ==> 2 Chronicles 13:9 Isaiah 37:19 Jeremiah 2:11 Romans 1:28 1 Corinthians 1:21 1 Corinthians 8:4-5 1 Thessalonians 4:5 2 Thessalonians 1:8 
 Galatians 4:9 ==> 1 Corinthians 8:3 Colossians 2:20 
 Galatians 4:10 ==> Romans 14:5 Colossians 2:16 
-Galatians 4:11 ==> Colossians 3:5 
+Galatians 4:11 ==> 1 Thessalonians 3:5 
 Galatians 4:12 ==> Romans 7:1 
 Galatians 4:13 ==> 1 Corinthians 2:3 
 Galatians 4:14 ==> Matthew 10:40 
 Galatians 4:16 ==> Amos 5:10 
-Galatians 4:19 ==> Romans 8:29 Ephesians 4:13 Colossians 2:11 
+Galatians 4:19 ==> Romans 8:29 Ephesians 4:13 1 Thessalonians 2:11 
 Galatians 4:21 ==> Romans 2:12 
 Galatians 4:22 ==> Genesis 16:15 
 Galatians 4:23 ==> Genesis 17:16-21 Romans 9:7-8 Hebrews 11:11 
@@ -20640,7 +20640,7 @@ Galatians 5:2 ==> Acts 15:1
 Galatians 5:3 ==> Romans 2:25 James 2:10 
 Galatians 5:4 ==> Romans 3:28 Hebrews 12:15 2 Peter 3:17 
 Galatians 5:5 ==> Romans 8:23-24 
-Galatians 5:6 ==> Romans 16:3 1 Corinthians 7:19 Colossians 1:3 James 2:22 
+Galatians 5:6 ==> Romans 16:3 1 Corinthians 7:19 1 Thessalonians 1:3 James 2:22 
 Galatians 5:7 ==> 1 Corinthians 9:24 
 Galatians 5:8 ==> Romans 8:28 
 Galatians 5:9 ==> 1 Corinthians 5:6 
@@ -20706,7 +20706,7 @@ Ephesians 2:8 ==> Romans 3:2
 Ephesians 2:9 ==> Deuteronomy 9:5 Romans 4:2 1 Corinthians 1:29 2 Timothy 1:9 Titus 3:5 
 Ephesians 2:10 ==> Isaiah 29:23 Titus 2:14 
 Ephesians 2:11 ==> Colossians 2:11 
-Ephesians 2:12 ==> Isaiah 14:1 Galatians 3:17 Colossians 4:13 
+Ephesians 2:12 ==> Isaiah 14:1 Galatians 3:17 1 Thessalonians 4:13 
 Ephesians 2:13 ==> Colossians 1:20 
 Ephesians 2:14 ==> John 14:27 1 Corinthians 2:14 Galatians 3:28 
 Ephesians 2:16 ==> 2 Corinthians 5:18 Colossians 1:20 
@@ -20756,7 +20756,7 @@ Ephesians 4:24 ==> Romans 6:4
 Ephesians 4:25 ==> Romans 12:5 Colossians 3:9 
 Ephesians 4:26 ==> Psalms 4:4 Matthew 5:22 
 Ephesians 4:27 ==> 2 Corinthians 2:10 
-Ephesians 4:28 ==> Galatians 6:10 Colossians 4:11 
+Ephesians 4:28 ==> Galatians 6:10 1 Thessalonians 4:11 
 Ephesians 4:29 ==> Matthew 12:36 Romans 14:19 Colossians 3:8 
 Ephesians 4:30 ==> Colossians 3:8 1 Peter 2:1 
 Ephesians 4:32 ==> 1 Peter 3:8 
@@ -20792,15 +20792,15 @@ Ephesians 6:7 ==> Colossians 3:33
 Ephesians 6:8 ==> Matthew 16:27 Colossians 3:24 
 Ephesians 6:9 ==> Job 31:13 Acts 10:34 
 Ephesians 6:10 ==> Haggai 2:4 1 Corinthians 16:13 2 Timothy 2:1 
-Ephesians 6:11 ==> Romans 13:12 Colossians 5:8 
+Ephesians 6:11 ==> Romans 13:12 1 Thessalonians 5:8 
 Ephesians 6:12 ==> Romans 8:38 Hebrews 2:14 
 Ephesians 6:13 ==> 2 Corinthians 6:7 
-Ephesians 6:14 ==> Isaiah 11:5 Isaiah 54:11 Colossians 5:8 
+Ephesians 6:14 ==> Isaiah 11:5 Isaiah 54:11 1 Thessalonians 5:8 
 Ephesians 6:15 ==> Isaiah 52:7 Romans 10:15 
 Ephesians 6:16 ==> Matthew 5:37 1 John 5:4 
 Ephesians 6:17 ==> Isaiah 49:2 Isaiah 59:17 Hebrews 4:12 
 Ephesians 6:18 ==> Matthew 26:41 Luke 18:1 Colossians 1:3 
-Ephesians 6:19 ==> Romans 16:25 Colossians 5:25 
+Ephesians 6:19 ==> Romans 16:25 1 Thessalonians 5:25 
 Ephesians 6:20 ==> Acts 21:33 
 Ephesians 6:21 ==> Acts 20:4 
 Ephesians 6:22 ==> Colossians 4:29 
@@ -20813,7 +20813,7 @@ Philippians 1:5 ==> Acts 2:42 Acts 16:12-40
 Philippians 1:6 ==> Psalms 138:8 1 Corinthians 1:8 
 Philippians 1:7 ==> Acts 21:33 2 Corinthians 7:3 2 Peter 1:13 
 Philippians 1:8 ==> Romans 1:9 
-Philippians 1:9 ==> Ephesians 1:17 Colossians 3:12 
+Philippians 1:9 ==> Ephesians 1:17 1 Thessalonians 3:12 
 Philippians 1:10 ==> 1 Corinthians 1:8 
 Philippians 1:11 ==> James 3:18 
 Philippians 1:13 ==> Acts 21:33 
@@ -20825,7 +20825,7 @@ Philippians 1:21 ==> Galatians 2:20
 Philippians 1:23 ==> John 12:26 2 Timothy 4:6 
 Philippians 1:27 ==> 1 Corinthians 16:13 Ephesians 4:1 Jude 1:3 
 Philippians 1:29 ==> Matthew 5:11-12 Acts 5:41 
-Philippians 1:30 ==> Acts 16:19-40 Colossians 2:2 Hebrews 10:32 
+Philippians 1:30 ==> Acts 16:19-40 1 Thessalonians 2:2 Hebrews 10:32 
 Philippians 2:1 ==> 2 Corinthians 13:14 Colossians 3:12 
 Philippians 2:2 ==> John 3:29 Romans 15:5 
 Philippians 2:3 ==> Romans 12:10 Galatians 5:26 1 Peter 5:5 
@@ -20840,8 +20840,8 @@ Philippians 2:11 ==> John 13:13
 Philippians 2:12 ==> 2 Corinthians 7:15 
 Philippians 2:13 ==> Ezra 1:5 1 Corinthians 12:6 Galatians 2:8 Ephesians 1:5 Hebrews 13:21 
 Philippians 2:14 ==> 1 Corinthians 10:10 1 Peter 4:9 
-Philippians 2:15 ==> Matthew 5:45 Matthew 5:48 Acts 2:40 Ephesians 5:1 Colossians 3:13 
-Philippians 2:16 ==> 1 Corinthians 1:8 1 Corinthians 9:24 Colossians 2:19 
+Philippians 2:15 ==> Matthew 5:45 Matthew 5:48 Acts 2:40 Ephesians 5:1 1 Thessalonians 3:13 
+Philippians 2:16 ==> 1 Corinthians 1:8 1 Corinthians 9:24 1 Thessalonians 2:19 
 Philippians 2:17 ==> Romans 15:16 2 Corinthians 6:10 2 Corinthians 12:15 2 Timothy 4:6 
 Philippians 2:19 ==> Acts 16:1 
 Philippians 2:20 ==> 1 Corinthians 16:10 
@@ -20863,7 +20863,7 @@ Philippians 3:11 ==> John 11:24 Romans 6:5 Revelation 20:5-6
 Philippians 3:12 ==> 1 Corinthians 13:10 1 Timothy 6:12 
 Philippians 3:13 ==> Luke 9:62 
 Philippians 3:14 ==> Romans 8:28 1 Corinthians 9:24 Hebrews 6:1 
-Philippians 3:15 ==> 1 Corinthians 2:6 Galatians 5:10 Ephesians 1:17 Colossians 4:9 
+Philippians 3:15 ==> 1 Corinthians 2:6 Galatians 5:10 Ephesians 1:17 1 Thessalonians 4:9 
 Philippians 3:17 ==> 1 Corinthians 4:16 1 Timothy 4:12 
 Philippians 3:18 ==> Galatians 6:12 
 Philippians 3:19 ==> Romans 16:18 Colossians 3:2 Jude 1:13 
@@ -20881,11 +20881,11 @@ Philippians 4:11 ==> 1 Timothy 6:6 1 Timothy 6:8 Hebrews 13:5
 Philippians 4:12 ==> 1 Corinthians 4:11 2 Corinthians 11:9 
 Philippians 4:13 ==> 2 Corinthians 12:9 1 Timothy 1:12 2 Timothy 4:17 
 Philippians 4:15 ==> 2 Corinthians 11:8-9 
-Philippians 4:16 ==> Acts 17:1 Colossians 2:9 
+Philippians 4:16 ==> Acts 17:1 1 Thessalonians 2:9 
 Philippians 4:17 ==> 1 Corinthians 9:11-12 
 Philippians 4:18 ==> 2 Corinthians 2:14 
 Philippians 4:19 ==> Romans 2:4 2 Corinthians 9:8 
-Philippians 4:20 ==> Romans 11:36 Galatians 1:4 Colossians 1:3 
+Philippians 4:20 ==> Romans 11:36 Galatians 1:4 1 Thessalonians 1:3 
 Philippians 4:21 ==> Galatians 1:2 
 Philippians 4:22 ==> Acts 9:13 
 Philippians 4:23 ==> Romans 16:20 Galatians 6:18 
@@ -20893,7 +20893,7 @@ Colossians 1:1 ==> 1 Corinthians 1:1 2 Corinthians 1:1
 Colossians 1:2 ==> Romans 1:7 
 Colossians 1:3 ==> Romans 1:8 
 Colossians 1:4 ==> Acts 9:13 Galatians 5:6 Ephesians 1:15 
-Colossians 1:5 ==> Colossians 5:8 2 Timothy 2:15 
+Colossians 1:5 ==> 1 Thessalonians 5:8 2 Timothy 2:15 
 Colossians 1:6 ==> John 15:16 Romans 10:18 
 Colossians 1:7 ==> Philemon 1:23 
 Colossians 1:8 ==> Romans 15:30 
@@ -20974,115 +20974,115 @@ Colossians 4:15 ==> Romans 16:5
 Colossians 4:16 ==> 2 Thessalonians 3:14 1 Timothy 4:13 
 Colossians 4:17 ==> 2 Timothy 4:5 Philemon 1:2 
 Colossians 4:18 ==> 1 Corinthians 16:21 1 Timothy 6:21 2 Timothy 4:22 Titus 3:15 Hebrews 13:25 
-Colossians 1:1 ==> Acts 15:22 Acts 16:1 Romans 1:7 2 Thessalonians 1:1 
-Colossians 1:2 ==> Romans 1:8 Ephesians 5:20 
-Colossians 1:3 ==> Romans 8:25 1 Corinthians 13:13 Galatians 5:6 Philippians 4:20 2 Thessalonians 1:11 James 2:14-26 
-Colossians 1:4 ==> Colossians 3:12 2 Thessalonians 2:13 
-Colossians 1:5 ==> Romans 1:6 Romans 15:13 2 Corinthians 2:12 2 Thessalonians 2:14 
-Colossians 1:6 ==> 1 Corinthians 4:16 2 Corinthians 6:10 
-Colossians 1:7 ==> Acts 16:4 Acts 18:12 1 Timothy 4:12 
-Colossians 1:8 ==> Romans 1:8 2 Thessalonians 3:1 
-Colossians 1:9 ==> Matthew 16:16 Galatians 4:8 
-Colossians 1:10 ==> Romans 1:18 1 Corinthians 1:7 
-Colossians 2:1 ==> 2 Thessalonians 1:10 
-Colossians 2:2 ==> Acts 4:19 Acts 16:22-23 Acts 17:1-9 Philippians 1:30 
-Colossians 2:3 ==> 2 Corinthians 2:17 2 Corinthians 4:2 
-Colossians 2:4 ==> Romans 2:29 Galatians 2:7 1 Timothy 1:11 Revelation 2:23 
-Colossians 2:5 ==> Acts 20:33 Romans 1:9 
-Colossians 2:6 ==> John 5:41 John 5:44 1 Corinthians 9:1-2 2 Corinthians 11:7-11 
-Colossians 2:8 ==> Romans 1:1 2 Corinthians 12:15 1 John 3:16 
-Colossians 2:9 ==> Acts 18:3 2 Thessalonians 3:8 
-Colossians 2:10 ==> Romans 1:9 2 Corinthians 1:12 
-Colossians 2:11 ==> 1 Corinthians 4:14 Galatians 4:19 1 Timothy 1:2 Philemon 1:10 1 John 2:1 
-Colossians 2:12 ==> Romans 8:28 Ephesians 4:1 
-Colossians 2:13 ==> Romans 1:8 Hebrews 4:12 
-Colossians 2:14 ==> Galatians 1:22 2 Thessalonians 1:4 
-Colossians 2:15 ==> Matthew 5:12 Luke 24:20 
-Colossians 2:16 ==> Matthew 23:32 
-Colossians 2:17 ==> 1 Corinthians 5:3 Colossians 2:5 
-Colossians 2:18 ==> Matthew 4:10 Romans 1:13 
-Colossians 2:19 ==> Isaiah 62:3 Matthew 16:27 Luke 17:30 1 Corinthians 1:7 2 Corinthians 1:14 Philippians 4:1 2 Thessalonians 1:8 1 Peter 1:7 1 John 2:28 Revelation 1:7 
-Colossians 2:20 ==> 2 Corinthians 1:11 
-Colossians 3:1 ==> Acts 17:15 
-Colossians 3:2 ==> Acts 16:1 1 Corinthians 3:9 2 Corinthians 2:12 
-Colossians 3:3 ==> Mark 4:17 John 16:33 Acts 9:16 Romans 5:3 2 Corinthians 1:4 2 Timothy 3:12 
-Colossians 3:5 ==> Matthew 4:3 Galatians 2:2 Philippians 2:16 
-Colossians 3:6 ==> Acts 16:1 Acts 18:5 
-Colossians 3:8 ==> 1 Corinthians 16:13 
-Colossians 3:10 ==> 2 Timothy 1:3 
-Colossians 3:11 ==> Philippians 4:20 
-Colossians 3:12 ==> Philippians 1:4 2 Thessalonians 1:3 
-Colossians 3:13 ==> Psalms 15:2 Philippians 2:15 Philippians 4:20 2 Thessalonians 1:7 1 Timothy 6:14 2 Peter 3:14 
-Colossians 4:1 ==> 2 Corinthians 5:9 2 Corinthians 13:11 Ephesians 4:1 2 Thessalonians 3:1 
-Colossians 4:3 ==> 1 Corinthians 6:18 Ephesians 5:17 
-Colossians 4:4 ==> 1 Corinthians 7:2 1 Corinthians 7:9 
-Colossians 4:5 ==> Romans 1:26 Galatians 4:8 Ephesians 4:17 
-Colossians 4:6 ==> Deuteronomy 32:35 1 Corinthians 6:8 Hebrews 10:30-31 
-Colossians 4:7 ==> 1 Peter 1:15 
-Colossians 4:8 ==> Romans 5:5 2 Corinthians 1:22 Galatians 4:6 1 John 3:24 
-Colossians 4:9 ==> John 6:45 John 13:34 Romans 12:10 
-Colossians 4:10 ==> Acts 16:9 
-Colossians 4:11 ==> Ephesians 4:28 
-Colossians 4:12 ==> Mark 4:11 
-Colossians 4:13 ==> Matthew 9:24 Romans 11:25 Ephesians 2:12 
-Colossians 4:14 ==> Romans 14:9 1 Corinthians 15:3-4 
-Colossians 4:15 ==> 1 Corinthians 1:7 1 Corinthians 15:52 
-Colossians 4:16 ==> Matthew 16:27 2 Thessalonians 2:1 Revelation 14:13 
-Colossians 4:17 ==> John 12:26 Revelation 1:7 
-Colossians 5:1 ==> Acts 1:7 
-Colossians 5:2 ==> Luke 12:39 1 Corinthians 1:8 
-Colossians 5:3 ==> Isaiah 29:5 2 Thessalonians 1:9 
-Colossians 5:4 ==> John 2:8 Acts 26:18 
-Colossians 5:5 ==> Luke 16:8 
-Colossians 5:6 ==> Matthew 25:13 Acts 24:25 Romans 13:11 
-Colossians 5:7 ==> Romans 13:13 2 Peter 2:13 
-Colossians 5:8 ==> Isaiah 59:17 Romans 8:24 Ephesians 6:14 
-Colossians 5:9 ==> 2 Thessalonians 2:13-14 
-Colossians 5:10 ==> 2 Corinthians 5:15 
-Colossians 5:11 ==> Ephesians 4:29 
-Colossians 5:12 ==> Romans 16:6 Romans 16:12 Hebrews 13:17 
-Colossians 5:13 ==> Mark 9:50 
-Colossians 5:14 ==> 1 Corinthians 8:7 2 Thessalonians 3:6-7 
-Colossians 5:15 ==> Romans 12:17 1 Peter 3:9 
-Colossians 5:16 ==> Philippians 4:4 
-Colossians 5:17 ==> Luke 18:1 
-Colossians 5:18 ==> Ephesians 5:20 
-Colossians 5:19 ==> Ephesians 4:30 
-Colossians 5:21 ==> 1 John 4:1 
-Colossians 5:23 ==> Hebrews 4:12 
-Colossians 5:24 ==> 1 Corinthians 1:9 
-Colossians 5:25 ==> 2 Thessalonians 3:1 Hebrews 13:18 
-Colossians 5:26 ==> Romans 16:16 
-Colossians 5:27 ==> 2 Thessalonians 3:14 1 Timothy 4:13 
-Colossians 5:28 ==> Romans 16:20 
-2 Thessalonians 1:1 ==> Colossians 1:1 
+1 Thessalonians 1:1 ==> Acts 15:22 Acts 16:1 Romans 1:7 2 Thessalonians 1:1 
+1 Thessalonians 1:2 ==> Romans 1:8 Ephesians 5:20 
+1 Thessalonians 1:3 ==> Romans 8:25 1 Corinthians 13:13 Galatians 5:6 Philippians 4:20 2 Thessalonians 1:11 James 2:14-26 
+1 Thessalonians 1:4 ==> Colossians 3:12 2 Thessalonians 2:13 
+1 Thessalonians 1:5 ==> Romans 1:6 Romans 15:13 2 Corinthians 2:12 2 Thessalonians 2:14 
+1 Thessalonians 1:6 ==> 1 Corinthians 4:16 2 Corinthians 6:10 
+1 Thessalonians 1:7 ==> Acts 16:4 Acts 18:12 1 Timothy 4:12 
+1 Thessalonians 1:8 ==> Romans 1:8 2 Thessalonians 3:1 
+1 Thessalonians 1:9 ==> Matthew 16:16 Galatians 4:8 
+1 Thessalonians 1:10 ==> Romans 1:18 1 Corinthians 1:7 
+1 Thessalonians 2:1 ==> 2 Thessalonians 1:10 
+1 Thessalonians 2:2 ==> Acts 4:19 Acts 16:22-23 Acts 17:1-9 Philippians 1:30 
+1 Thessalonians 2:3 ==> 2 Corinthians 2:17 2 Corinthians 4:2 
+1 Thessalonians 2:4 ==> Romans 2:29 Galatians 2:7 1 Timothy 1:11 Revelation 2:23 
+1 Thessalonians 2:5 ==> Acts 20:33 Romans 1:9 
+1 Thessalonians 2:6 ==> John 5:41 John 5:44 1 Corinthians 9:1-2 2 Corinthians 11:7-11 
+1 Thessalonians 2:8 ==> Romans 1:1 2 Corinthians 12:15 1 John 3:16 
+1 Thessalonians 2:9 ==> Acts 18:3 2 Thessalonians 3:8 
+1 Thessalonians 2:10 ==> Romans 1:9 2 Corinthians 1:12 
+1 Thessalonians 2:11 ==> 1 Corinthians 4:14 Galatians 4:19 1 Timothy 1:2 Philemon 1:10 1 John 2:1 
+1 Thessalonians 2:12 ==> Romans 8:28 Ephesians 4:1 
+1 Thessalonians 2:13 ==> Romans 1:8 Hebrews 4:12 
+1 Thessalonians 2:14 ==> Galatians 1:22 2 Thessalonians 1:4 
+1 Thessalonians 2:15 ==> Matthew 5:12 Luke 24:20 
+1 Thessalonians 2:16 ==> Matthew 23:32 
+1 Thessalonians 2:17 ==> 1 Corinthians 5:3 Colossians 2:5 
+1 Thessalonians 2:18 ==> Matthew 4:10 Romans 1:13 
+1 Thessalonians 2:19 ==> Isaiah 62:3 Matthew 16:27 Luke 17:30 1 Corinthians 1:7 2 Corinthians 1:14 Philippians 4:1 2 Thessalonians 1:8 1 Peter 1:7 1 John 2:28 Revelation 1:7 
+1 Thessalonians 2:20 ==> 2 Corinthians 1:11 
+1 Thessalonians 3:1 ==> Acts 17:15 
+1 Thessalonians 3:2 ==> Acts 16:1 1 Corinthians 3:9 2 Corinthians 2:12 
+1 Thessalonians 3:3 ==> Mark 4:17 John 16:33 Acts 9:16 Romans 5:3 2 Corinthians 1:4 2 Timothy 3:12 
+1 Thessalonians 3:5 ==> Matthew 4:3 Galatians 2:2 Philippians 2:16 
+1 Thessalonians 3:6 ==> Acts 16:1 Acts 18:5 
+1 Thessalonians 3:8 ==> 1 Corinthians 16:13 
+1 Thessalonians 3:10 ==> 2 Timothy 1:3 
+1 Thessalonians 3:11 ==> Philippians 4:20 
+1 Thessalonians 3:12 ==> Philippians 1:4 2 Thessalonians 1:3 
+1 Thessalonians 3:13 ==> Psalms 15:2 Philippians 2:15 Philippians 4:20 2 Thessalonians 1:7 1 Timothy 6:14 2 Peter 3:14 
+1 Thessalonians 4:1 ==> 2 Corinthians 5:9 2 Corinthians 13:11 Ephesians 4:1 2 Thessalonians 3:1 
+1 Thessalonians 4:3 ==> 1 Corinthians 6:18 Ephesians 5:17 
+1 Thessalonians 4:4 ==> 1 Corinthians 7:2 1 Corinthians 7:9 
+1 Thessalonians 4:5 ==> Romans 1:26 Galatians 4:8 Ephesians 4:17 
+1 Thessalonians 4:6 ==> Deuteronomy 32:35 1 Corinthians 6:8 Hebrews 10:30-31 
+1 Thessalonians 4:7 ==> 1 Peter 1:15 
+1 Thessalonians 4:8 ==> Romans 5:5 2 Corinthians 1:22 Galatians 4:6 1 John 3:24 
+1 Thessalonians 4:9 ==> John 6:45 John 13:34 Romans 12:10 
+1 Thessalonians 4:10 ==> Acts 16:9 
+1 Thessalonians 4:11 ==> Ephesians 4:28 
+1 Thessalonians 4:12 ==> Mark 4:11 
+1 Thessalonians 4:13 ==> Matthew 9:24 Romans 11:25 Ephesians 2:12 
+1 Thessalonians 4:14 ==> Romans 14:9 1 Corinthians 15:3-4 
+1 Thessalonians 4:15 ==> 1 Corinthians 1:7 1 Corinthians 15:52 
+1 Thessalonians 4:16 ==> Matthew 16:27 2 Thessalonians 2:1 Revelation 14:13 
+1 Thessalonians 4:17 ==> John 12:26 Revelation 1:7 
+1 Thessalonians 5:1 ==> Acts 1:7 
+1 Thessalonians 5:2 ==> Luke 12:39 1 Corinthians 1:8 
+1 Thessalonians 5:3 ==> Isaiah 29:5 2 Thessalonians 1:9 
+1 Thessalonians 5:4 ==> John 2:8 Acts 26:18 
+1 Thessalonians 5:5 ==> Luke 16:8 
+1 Thessalonians 5:6 ==> Matthew 25:13 Acts 24:25 Romans 13:11 
+1 Thessalonians 5:7 ==> Romans 13:13 2 Peter 2:13 
+1 Thessalonians 5:8 ==> Isaiah 59:17 Romans 8:24 Ephesians 6:14 
+1 Thessalonians 5:9 ==> 2 Thessalonians 2:13-14 
+1 Thessalonians 5:10 ==> 2 Corinthians 5:15 
+1 Thessalonians 5:11 ==> Ephesians 4:29 
+1 Thessalonians 5:12 ==> Romans 16:6 Romans 16:12 Hebrews 13:17 
+1 Thessalonians 5:13 ==> Mark 9:50 
+1 Thessalonians 5:14 ==> 1 Corinthians 8:7 2 Thessalonians 3:6-7 
+1 Thessalonians 5:15 ==> Romans 12:17 1 Peter 3:9 
+1 Thessalonians 5:16 ==> Philippians 4:4 
+1 Thessalonians 5:17 ==> Luke 18:1 
+1 Thessalonians 5:18 ==> Ephesians 5:20 
+1 Thessalonians 5:19 ==> Ephesians 4:30 
+1 Thessalonians 5:21 ==> 1 John 4:1 
+1 Thessalonians 5:23 ==> Hebrews 4:12 
+1 Thessalonians 5:24 ==> 1 Corinthians 1:9 
+1 Thessalonians 5:25 ==> 2 Thessalonians 3:1 Hebrews 13:18 
+1 Thessalonians 5:26 ==> Romans 16:16 
+1 Thessalonians 5:27 ==> 2 Thessalonians 3:14 1 Timothy 4:13 
+1 Thessalonians 5:28 ==> Romans 16:20 
+2 Thessalonians 1:1 ==> 1 Thessalonians 1:1 
 2 Thessalonians 1:2 ==> Romans 1:7 
-2 Thessalonians 1:3 ==> Romans 1:8 Ephesians 5:20 Colossians 3:12 
-2 Thessalonians 1:4 ==> 2 Corinthians 7:14 Colossians 1:3 Colossians 1:6 
+2 Thessalonians 1:3 ==> Romans 1:8 Ephesians 5:20 1 Thessalonians 3:12 
+2 Thessalonians 1:4 ==> 2 Corinthians 7:14 1 Thessalonians 1:3 1 Thessalonians 1:6 
 2 Thessalonians 1:5 ==> Luke 20:35 Philippians 1:28 
 2 Thessalonians 1:6 ==> Luke 18:7-8 Colossians 3:25 Revelation 6:10 
 2 Thessalonians 1:7 ==> Hebrews 10:27 2 Peter 3:7 Jude 1:14 Revelation 1:14 
 2 Thessalonians 1:8 ==> Romans 2:8 2 Corinthians 2:12 Galatians 4:8 
-2 Thessalonians 1:9 ==> Philippians 3:19 Colossians 5:3 2 Thessalonians 2:8 2 Peter 3:7 
+2 Thessalonians 1:9 ==> Philippians 3:19 1 Thessalonians 5:3 2 Thessalonians 2:8 2 Peter 3:7 
 2 Thessalonians 1:10 ==> John 17:10 1 Corinthians 3:13 
-2 Thessalonians 1:11 ==> Romans 8:28 Romans 15:14 Colossians 1:3 
+2 Thessalonians 1:11 ==> Romans 8:28 Romans 15:14 1 Thessalonians 1:3 
 2 Thessalonians 1:12 ==> Isaiah 24:15 Philippians 2:9-11 
-2 Thessalonians 2:1 ==> Mark 13:27 Colossians 4:15-17 
+2 Thessalonians 2:1 ==> Mark 13:27 1 Thessalonians 4:15-17 
 2 Thessalonians 2:2 ==> 1 Corinthians 1:8 2 Timothy 2:18 
 2 Thessalonians 2:3 ==> Matthew 24:10 Mark 13:5 Revelation 13:5-6 
 2 Thessalonians 2:4 ==> Isaiah 14:13-14 Ezekiel 28:2 1 Corinthians 8:5 
-2 Thessalonians 2:5 ==> Colossians 3:4 
+2 Thessalonians 2:5 ==> 1 Thessalonians 3:4 
 2 Thessalonians 2:8 ==> Isaiah 11:4 Luke 17:30 Revelation 2:16 
 2 Thessalonians 2:9 ==> Matthew 4:10 Matthew 24:24 John 4:48 Revelation 13:13 
 2 Thessalonians 2:10 ==> Proverbs 3:17-19 1 Corinthians 1:18 
 2 Thessalonians 2:11 ==> Matthew 24:5 Mark 13:5 Romans 1:25 Romans 1:28 
 2 Thessalonians 2:12 ==> Romans 1:32 
-2 Thessalonians 2:13 ==> Romans 1:8 Ephesians 1:4 Colossians 5:9 1 Peter 1:2 
-2 Thessalonians 2:14 ==> Romans 8:28 Colossians 1:5 
+2 Thessalonians 2:13 ==> Romans 1:8 Ephesians 1:4 1 Thessalonians 5:9 1 Peter 1:2 
+2 Thessalonians 2:14 ==> Romans 8:28 1 Thessalonians 1:5 
 2 Thessalonians 2:15 ==> 1 Corinthians 16:13 
 2 Thessalonians 2:16 ==> John 3:16 Philippians 4:20 
-2 Thessalonians 2:17 ==> Colossians 3:2 2 Thessalonians 3:3 
-2 Thessalonians 3:1 ==> Colossians 4:1 Colossians 5:25 
+2 Thessalonians 2:17 ==> 1 Thessalonians 3:2 2 Thessalonians 3:3 
+2 Thessalonians 3:1 ==> 1 Thessalonians 4:1 1 Thessalonians 5:25 
 2 Thessalonians 3:2 ==> Romans 15:31 
 2 Thessalonians 3:3 ==> Matthew 5:37 1 Corinthians 1:9 
 2 Thessalonians 3:4 ==> 2 Corinthians 2:3 
@@ -21091,17 +21091,17 @@ Colossians 5:28 ==> Romans 16:20
 2 Thessalonians 3:7 ==> 1 Corinthians 4:16 
 2 Thessalonians 3:8 ==> Acts 18:3 Ephesians 4:28 
 2 Thessalonians 3:9 ==> 1 Corinthians 9:4-14 1 Corinthians 9:16 
-2 Thessalonians 3:10 ==> Colossians 3:4 
+2 Thessalonians 3:10 ==> 1 Thessalonians 3:4 
 2 Thessalonians 3:11 ==> 1 Timothy 5:13 
-2 Thessalonians 3:12 ==> Ephesians 4:28 Colossians 4:1 
+2 Thessalonians 3:12 ==> Ephesians 4:28 1 Thessalonians 4:1 
 2 Thessalonians 3:13 ==> Galatians 6:9 
 2 Thessalonians 3:14 ==> Romans 16:17 1 Corinthians 4:14 
-2 Thessalonians 3:15 ==> Galatians 6:1 Colossians 5:14 
+2 Thessalonians 3:15 ==> Galatians 6:1 1 Thessalonians 5:14 
 2 Thessalonians 3:16 ==> Ruth 2:4 Romans 15:33 
 2 Thessalonians 3:17 ==> 1 Corinthians 16:21 
 2 Thessalonians 3:18 ==> Romans 16:20 
 1 Timothy 1:1 ==> Titus 1:3 
-1 Timothy 1:2 ==> Acts 16:1 1 Corinthians 4:17 Colossians 2:11 
+1 Timothy 1:2 ==> Acts 16:1 1 Corinthians 4:17 1 Thessalonians 2:11 
 1 Timothy 1:3 ==> Acts 16:9 Galatians 1:4 Galatians 1:7 
 1 Timothy 1:4 ==> 2 Timothy 4:4 Titus 1:1 
 1 Timothy 1:5 ==> Galatians 5:6 2 Timothy 1:5 
@@ -21109,10 +21109,10 @@ Colossians 5:28 ==> Romans 16:20
 1 Timothy 1:8 ==> Romans 7:12 
 1 Timothy 1:9 ==> Galatians 3:9 Galatians 3:19 Galatians 5:23 
 1 Timothy 1:10 ==> 2 Timothy 1:13 Titus 1:9 
-1 Timothy 1:11 ==> Galatians 2:7 Colossians 2:4 Titus 1:3 
+1 Timothy 1:11 ==> Galatians 2:7 1 Thessalonians 2:4 Titus 1:3 
 1 Timothy 1:12 ==> Acts 9:15 Philippians 4:13 
 1 Timothy 1:13 ==> Acts 8:3 Acts 26:9 
-1 Timothy 1:14 ==> 2 Corinthians 4:15 Colossians 1:3 2 Timothy 1:13 
+1 Timothy 1:14 ==> 2 Corinthians 4:15 1 Thessalonians 1:3 2 Timothy 1:13 
 1 Timothy 1:15 ==> Mark 2:17 2 Timothy 2:11 Titus 3:8 
 1 Timothy 1:16 ==> Matthew 25:46 John 3:15 Romans 2:4 
 1 Timothy 1:17 ==> Romans 11:36 Colossians 1:15 Jude 1:25 Revelation 15:3 
@@ -21154,8 +21154,8 @@ Colossians 5:28 ==> Romans 16:20
 1 Timothy 4:7 ==> 2 Timothy 2:16 
 1 Timothy 4:8 ==> Matthew 6:33 Mark 10:29-30 
 1 Timothy 4:10 ==> Matthew 16:16 Luke 1:47 
-1 Timothy 4:12 ==> Colossians 1:7 2 Thessalonians 3:9 2 Timothy 1:7 Titus 2:7 1 Peter 5:3 
-1 Timothy 4:13 ==> Luke 4:16 Acts 13:14-16 Colossians 4:16 Colossians 5:27 
+1 Timothy 4:12 ==> 1 Thessalonians 1:7 2 Thessalonians 3:9 2 Timothy 1:7 Titus 2:7 1 Peter 5:3 
+1 Timothy 4:13 ==> Luke 4:16 Acts 13:14-16 Colossians 4:16 1 Thessalonians 5:27 
 1 Timothy 4:14 ==> Acts 6:6 2 Timothy 1:6 
 1 Timothy 4:16 ==> Romans 11:14 
 1 Timothy 5:1 ==> Leviticus 19:32 Titus 2:2 
@@ -21167,7 +21167,7 @@ Colossians 5:28 ==> Romans 16:20
 1 Timothy 5:13 ==> Romans 1:29 2 Thessalonians 3:11 
 1 Timothy 5:14 ==> 1 Corinthians 7:9 
 1 Timothy 5:15 ==> Matthew 4:10 
-1 Timothy 5:17 ==> Acts 11:30 Philippians 2:29 Colossians 5:12 
+1 Timothy 5:17 ==> Acts 11:30 Philippians 2:29 1 Thessalonians 5:12 
 1 Timothy 5:18 ==> Deuteronomy 25:4 Leviticus 19:13 Matthew 10:10 Luke 10:7 1 Corinthians 9:7 1 Corinthians 9:14 
 1 Timothy 5:19 ==> Matthew 18:16 Acts 11:30 
 1 Timothy 5:20 ==> Deuteronomy 13:11 2 Timothy 4:2 Titus 1:13 
@@ -21205,7 +21205,7 @@ Colossians 5:28 ==> Romans 16:20
 2 Timothy 1:10 ==> 1 Corinthians 15:26 1 Corinthians 15:54 Ephesians 1:9 
 2 Timothy 1:11 ==> Acts 9:15 1 Timothy 2:7 
 2 Timothy 1:12 ==> Mark 8:38 1 Corinthians 1:8 1 Timothy 6:20 
-2 Timothy 1:13 ==> Romans 6:17 Colossians 1:3 1 Timothy 1:10 Titus 1:9 
+2 Timothy 1:13 ==> Romans 6:17 1 Thessalonians 1:3 1 Timothy 1:10 Titus 1:9 
 2 Timothy 1:14 ==> Romans 8:9 
 2 Timothy 1:15 ==> Acts 2:9 
 2 Timothy 1:16 ==> Mark 8:38 Acts 21:33 
@@ -21274,7 +21274,7 @@ Titus 1:2 ==> Numbers 23:19 2 Timothy 1:9 Hebrews 6:18
 Titus 1:3 ==> Luke 1:47 2 Corinthians 1:1 1 Timothy 2:6 
 Titus 1:4 ==> Romans 1:7 2 Corinthians 2:13 1 Timothy 1:2 
 Titus 1:5 ==> Acts 27:7 
-Titus 1:6 ==> Colossians 3:13 1 Timothy 3:2 
+Titus 1:6 ==> 1 Thessalonians 3:13 1 Timothy 3:2 
 Titus 1:7 ==> 1 Corinthians 4:1 1 Timothy 3:1 
 Titus 1:8 ==> 2 Timothy 3:3 
 Titus 1:9 ==> 1 Timothy 1:10 1 Timothy 1:19 2 Timothy 1:13 
@@ -21316,10 +21316,10 @@ Philemon 1:1 ==> 2 Corinthians 1:1 Ephesians 3:1 Philippians 2:25
 Philemon 1:2 ==> Romans 16:5 Philippians 2:25 Colossians 4:17 
 Philemon 1:3 ==> Romans 1:7 
 Philemon 1:4 ==> Romans 1:8 Romans 1:10 
-Philemon 1:5 ==> Colossians 1:4 Colossians 3:6 
+Philemon 1:5 ==> Colossians 1:4 1 Thessalonians 3:6 
 Philemon 1:7 ==> Romans 15:32 1 Corinthians 16:18 2 Corinthians 7:4 2 Corinthians 7:13 
 Philemon 1:9 ==> 1 Corinthians 1:10 Ephesians 3:1 
-Philemon 1:10 ==> Acts 21:33 Colossians 4:9 Colossians 2:11 
+Philemon 1:10 ==> Acts 21:33 Colossians 4:9 1 Thessalonians 2:11 
 Philemon 1:13 ==> Acts 21:33 
 Philemon 1:14 ==> 2 Corinthians 9:7 1 Peter 5:2 
 Philemon 1:16 ==> Matthew 23:8 1 Corinthians 7:22 1 Timothy 6:2 
@@ -21378,7 +21378,7 @@ Hebrews 3:16 ==> Numbers 14:2
 Hebrews 3:17 ==> Numbers 14:29 1 Corinthians 10:5 
 Hebrews 3:18 ==> Numbers 14:20-23 Deuteronomy 1:34-35 
 Hebrews 3:19 ==> Psalms 78:22 John 3:36 
-Hebrews 4:1 ==> Colossians 2:13 
+Hebrews 4:1 ==> 1 Thessalonians 2:13 
 Hebrews 4:3 ==> Deuteronomy 1:34-35 Psalms 95:11 
 Hebrews 4:4 ==> Genesis 2:2-3 Exodus 20:11 Exodus 31:17 
 Hebrews 4:5 ==> Psalms 45:11 
@@ -21386,7 +21386,7 @@ Hebrews 4:6 ==> Colossians 2:16-17
 Hebrews 4:7 ==> Psalms 95:7-8 
 Hebrews 4:8 ==> Joshua 22:4 
 Hebrews 4:10 ==> Leviticus 23:3 Revelation 14:13 
-Hebrews 4:12 ==> Isaiah 55:11 Jeremiah 23:29 Mark 4:14 Luke 5:1 John 10:35 Acts 7:38 Acts 12:24 1 Corinthians 14:24-25 Ephesians 6:17 Colossians 2:13 2 Timothy 2:9 1 Peter 1:23 1 John 2:14 Revelation 1:2 Revelation 1:9 
+Hebrews 4:12 ==> Isaiah 55:11 Jeremiah 23:29 Mark 4:14 Luke 5:1 John 10:35 Acts 7:38 Acts 12:24 1 Corinthians 14:24-25 Ephesians 6:17 1 Thessalonians 2:13 2 Timothy 2:9 1 Peter 1:23 1 John 2:14 Revelation 1:2 Revelation 1:9 
 Hebrews 4:13 ==> Psalms 33:13-15 Proverbs 5:21 Jeremiah 16:17 Daniel 2:22 
 Hebrews 4:14 ==> Matthew 4:3 
 Hebrews 4:15 ==> 2 Corinthians 5:21 Ephesians 3:12 
@@ -21408,7 +21408,7 @@ Hebrews 6:5 ==> Psalms 34:8
 Hebrews 6:6 ==> Matthew 4:3 John 5:16 
 Hebrews 6:8 ==> Genesis 3:17-18 Isaiah 5:6 Isaiah 27:4 
 Hebrews 6:9 ==> 1 Corinthians 10:14 
-Hebrews 6:10 ==> Matthew 10:40 Matthew 10:42 Colossians 1:3 
+Hebrews 6:10 ==> Matthew 10:40 Matthew 10:42 1 Thessalonians 1:3 
 Hebrews 6:12 ==> 2 Thessalonians 1:4 James 1:3 Revelation 13:10 
 Hebrews 6:13 ==> Genesis 22:16 Luke 1:73 
 Hebrews 6:14 ==> Genesis 22:17 
@@ -21486,7 +21486,7 @@ Hebrews 10:29 ==> Matthew 4:3 Matthew 26:28 1 Corinthians 6:11 Ephesians 4:30 Re
 Hebrews 10:30 ==> Deuteronomy 32:35-36 Psalms 135:14 
 Hebrews 10:31 ==> Isaiah 19:16 Matthew 16:16 2 Corinthians 5:11 
 Hebrews 10:32 ==> Philippians 1:29-30 
-Hebrews 10:33 ==> 1 Corinthians 4:9 Philippians 4:14 Colossians 2:14 
+Hebrews 10:33 ==> 1 Corinthians 4:9 Philippians 4:14 1 Thessalonians 2:14 
 Hebrews 10:34 ==> 1 Peter 1:4-5 
 Hebrews 10:35 ==> Ephesians 3:12 
 Hebrews 10:36 ==> Romans 5:3 James 1:3-4 James 1:12 2 Peter 1:6 
@@ -21566,7 +21566,7 @@ Hebrews 13:9 ==> Ephesians 4:14 Colossians 2:7 Colossians 2:16
 Hebrews 13:10 ==> 1 Corinthians 9:13 
 Hebrews 13:11 ==> Exodus 29:14 Leviticus 4:12 Leviticus 4:21 Leviticus 16:15 
 Hebrews 13:12 ==> John 19:17 Ephesians 5:26 
-Hebrews 13:18 ==> Acts 23:1 Colossians 5:25 
+Hebrews 13:18 ==> Acts 23:1 1 Thessalonians 5:25 
 Hebrews 13:19 ==> Philemon 1:22 
 Hebrews 13:20 ==> Genesis 9:16 Isaiah 55:3 Ezekiel 37:26 Matthew 26:28 John 10:11 Acts 2:24 Romans 15:33 
 Hebrews 13:21 ==> Romans 11:36 2 Corinthians 9:8 Philippians 2:13 1 John 3:22 
@@ -21614,7 +21614,7 @@ James 2:17 ==> Galatians 5:6
 James 2:18 ==> Matthew 7:16-17 Romans 3:28 
 James 2:19 ==> Deuteronomy 6:4 Matthew 8:29 Mark 12:24 Luke 4:34 1 Corinthians 8:4-6 
 James 2:21 ==> Genesis 22:9 Genesis 22:12 
-James 2:22 ==> Colossians 1:3 Hebrews 11:17 
+James 2:22 ==> 1 Thessalonians 1:3 Hebrews 11:17 
 James 2:23 ==> Genesis 15:6 2 Chronicles 20:7 Isaiah 41:8 Romans 4:3 
 James 2:25 ==> Hebrews 11:31 
 James 3:1 ==> Matthew 7:1 Romans 2:21 Ephesians 4:11 
@@ -21672,7 +21672,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 Peter 1:4 ==> Acts 20:32 Romans 8:17 Colossians 1:5 2 Timothy 4:8 
 1 Peter 1:5 ==> 1 Samuel 2:9 John 10:28 Romans 11:8-18 
 1 Peter 1:6 ==> Romans 5:2 James 1:1 
-1 Peter 1:7 ==> Isaiah 48:10 2 Corinthians 4:17 Colossians 2:19 James 1:3 
+1 Peter 1:7 ==> Isaiah 48:10 2 Corinthians 4:17 1 Thessalonians 2:19 James 1:3 
 1 Peter 1:8 ==> John 20:20 
 1 Peter 1:9 ==> Romans 6:22 
 1 Peter 1:10 ==> Matthew 13:17 Matthew 26:24 
@@ -21680,7 +21680,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 Peter 1:12 ==> Luke 24:44 Romans 4:24 
 1 Peter 1:13 ==> Acts 24:25 1 Corinthians 1:7 Hebrews 3:6 
 1 Peter 1:14 ==> Romans 12:21 Ephesians 4:18 
-1 Peter 1:15 ==> Isaiah 35:8 Colossians 4:7 1 John 3:3 
+1 Peter 1:15 ==> Isaiah 35:8 1 Thessalonians 4:7 1 John 3:3 
 1 Peter 1:16 ==> Leviticus 11:44-45 Leviticus 19:2 
 1 Peter 1:17 ==> Matthew 6:9 Matthew 16:27 Hebrews 11:13 Hebrews 12:28 
 1 Peter 1:18 ==> Matthew 20:28 1 Corinthians 6:20 Galatians 4:3 
@@ -21721,7 +21721,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 Peter 3:6 ==> Genesis 18:12 
 1 Peter 3:7 ==> Ephesians 5:25-33 Colossians 3:19 
 1 Peter 3:8 ==> Romans 12:10 Romans 15:5 Ephesians 4:2 
-1 Peter 3:9 ==> Matthew 5:44 Romans 8:28 Romans 12:17 Colossians 5:15 Hebrews 6:14 
+1 Peter 3:9 ==> Matthew 5:44 Romans 8:28 Romans 12:17 1 Thessalonians 5:15 Hebrews 6:14 
 1 Peter 3:12 ==> Psalms 34:12-16 
 1 Peter 3:13 ==> Titus 2:14 
 1 Peter 3:14 ==> Isaiah 8:12-13 
@@ -21739,7 +21739,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 Peter 4:8 ==> Proverbs 10:12 James 5:20 
 1 Peter 4:9 ==> Romans 12:13 Philippians 2:14 
 1 Peter 4:10 ==> Romans 12:6-7 1 Corinthians 4:2 
-1 Peter 4:11 ==> Romans 11:36 Ephesians 6:10 Colossians 2:4 
+1 Peter 4:11 ==> Romans 11:36 Ephesians 6:10 1 Thessalonians 2:4 
 1 Peter 4:13 ==> Matthew 5:12 Romans 8:17 2 Corinthians 1:5 
 1 Peter 4:14 ==> Matthew 5:11 John 15:21 
 1 Peter 4:16 ==> Acts 5:41 
@@ -21765,7 +21765,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 2 Peter 1:4 ==> 2 Corinthians 7:1 Ephesians 4:24 Hebrews 12:10 James 1:27 1 John 3:2 
 2 Peter 1:5 ==> Colossians 2:3 
 2 Peter 1:6 ==> Acts 24:25 Hebrews 10:36 
-2 Peter 1:7 ==> Romans 12:10 Colossians 3:12 
+2 Peter 1:7 ==> Romans 12:10 1 Thessalonians 3:12 
 2 Peter 1:8 ==> John 15:2 Colossians 1:10 Titus 3:14 
 2 Peter 1:9 ==> Matthew 1:21 Ephesians 5:26 1 John 2:11 
 2 Peter 1:10 ==> Jude 1:24 
@@ -21781,7 +21781,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 2 Peter 1:21 ==> 2 Samuel 23:2 Acts 1:16 2 Timothy 3:16 1 Peter 1:11 
 2 Peter 2:1 ==> Jeremiah 6:13 Matthew 7:15 1 Corinthians 6:20 1 Timothy 4:1 Jude 1:4 
 2 Peter 2:2 ==> Jude 1:4 
-2 Peter 2:3 ==> 2 Corinthians 2:17 Colossians 2:5 
+2 Peter 2:3 ==> 2 Corinthians 2:17 1 Thessalonians 2:5 
 2 Peter 2:4 ==> Genesis 6:1-4 1 Timothy 3:6 Jude 1:6 Revelation 20:1-2 
 2 Peter 2:5 ==> Genesis 6:5-8 Genesis 6:19 Hebrews 11:7 1 Peter 3:20 
 2 Peter 2:6 ==> Genesis 19:24-25 Numbers 26:10 Matthew 10:15 Romans 9:29 Jude 1:7 
@@ -21790,7 +21790,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 2 Peter 2:10 ==> Jude 1:8 Jude 1:16 Jude 1:18 
 2 Peter 2:11 ==> Jude 1:9 
 2 Peter 2:12 ==> Jude 1:10 
-2 Peter 2:13 ==> Romans 13:13 1 Corinthians 11:20-21 Colossians 5:7 Jude 1:12 
+2 Peter 2:13 ==> Romans 13:13 1 Corinthians 11:20-21 1 Thessalonians 5:7 Jude 1:12 
 2 Peter 2:14 ==> Ephesians 2:3 James 1:8 
 2 Peter 2:15 ==> Numbers 22:4-20 Deuteronomy 23:4 Jude 1:11 Revelation 2:14 
 2 Peter 2:16 ==> Numbers 22:21-30 
@@ -21811,7 +21811,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 2 Peter 3:9 ==> Romans 2:4 1 Timothy 2:4 Hebrews 2:3 Hebrews 10:37 Revelation 2:21 
 2 Peter 3:10 ==> Isaiah 34:4 Matthew 24:35 Luke 12:39 2 Thessalonians 1:7 Hebrews 12:27 Revelation 21:1 
 2 Peter 3:12 ==> Psalms 50:3 Isaiah 65:17 1 Corinthians 1:7 Revelation 21:1 
-2 Peter 3:14 ==> Colossians 3:13 
+2 Peter 3:14 ==> 1 Thessalonians 3:13 
 2 Peter 3:15 ==> Romans 2:4 Ephesians 3:3 
 2 Peter 3:16 ==> Psalms 56:5 Jeremiah 23:36 James 1:8 
 2 Peter 3:17 ==> 1 Corinthians 10:12 Revelation 2:5 
@@ -21833,7 +21833,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 John 2:5 ==> John 14:15 
 1 John 2:6 ==> Matthew 11:29 
 1 John 2:7 ==> 1 Corinthians 10:14 
-1 John 2:8 ==> John 1:9 John 13:34 Romans 13:12 Ephesians 5:8 Colossians 5:5 Hebrews 10:25 
+1 John 2:8 ==> John 1:9 John 13:34 Romans 13:12 Ephesians 5:8 1 Thessalonians 5:5 Hebrews 10:25 
 1 John 2:9 ==> Leviticus 19:17 
 1 John 2:10 ==> Psalms 119:165 
 1 John 2:11 ==> John 11:9 
@@ -21851,7 +21851,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 John 2:24 ==> John 14:23 2 John 1:9 
 1 John 2:25 ==> Matthew 25:46 
 1 John 2:27 ==> John 15:4 1 Corinthians 2:12 
-1 John 2:28 ==> Ephesians 3:12 Colossians 3:4 Colossians 2:19 
+1 John 2:28 ==> Ephesians 3:12 Colossians 3:4 1 Thessalonians 2:19 
 1 John 2:29 ==> John 1:13 
 1 John 3:1 ==> John 3:16 
 1 John 3:2 ==> John 1:12 John 17:24 Romans 8:29 1 Corinthians 10:14 2 Corinthians 3:18 Colossians 3:4 2 Peter 1:4 
@@ -21864,13 +21864,13 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 John 3:12 ==> Genesis 4:8 Psalms 38:20 Proverbs 29:10 Matthew 5:37 
 1 John 3:13 ==> John 15:18-19 
 1 John 3:14 ==> John 5:24 
-1 John 3:16 ==> John 10:11 John 10:13 John 10:15 Philippians 2:17 Colossians 2:8 
+1 John 3:16 ==> John 10:11 John 10:13 John 10:15 Philippians 2:17 1 Thessalonians 2:8 
 1 John 3:17 ==> Deuteronomy 15:7-8 James 2:15 
 1 John 3:18 ==> Ezekiel 33:31 Romans 12:9 
 1 John 3:21 ==> 1 Corinthians 10:14 Ephesians 3:12 
 1 John 3:22 ==> Matthew 7:7 John 8:29 John 14:15 Hebrews 13:21 
 1 John 3:23 ==> Luke 24:47 John 1:12 John 6:29 John 13:34 1 Corinthians 6:11 
-1 John 3:24 ==> Colossians 4:8 
+1 John 3:24 ==> 1 Thessalonians 4:8 
 1 John 4:1 ==> Jeremiah 29:8 Matthew 7:15 1 Corinthians 10:14 2 Thessalonians 2:2 
 1 John 4:2 ==> John 1:14 1 Corinthians 12:3 
 1 John 4:3 ==> 2 John 1:7 
@@ -21903,7 +21903,7 @@ James 5:20 ==> Romans 11:14 1 Peter 4:8
 1 John 5:18 ==> Matthew 5:37 John 1:13 
 1 John 5:19 ==> John 12:31 
 1 John 5:20 ==> Matthew 25:46 Luke 24:45 John 17:3 
-1 John 5:21 ==> 1 Corinthians 10:14 Colossians 1:9 
+1 John 5:21 ==> 1 Corinthians 10:14 1 Thessalonians 1:9 
 2 John 1:1 ==> John 8:32 Acts 11:30 Romans 16:13 1 Timothy 2:4 1 Peter 5:13 
 2 John 1:2 ==> John 14:17 2 Peter 1:12 1 John 1:8 
 2 John 1:3 ==> Romans 1:7 
@@ -21934,7 +21934,7 @@ Jude 1:5 ==> Numbers 14:29 1 Corinthians 10:1-5 Hebrews 3:16 2 Peter 1:12-13 1 J
 Jude 1:6 ==> 2 Peter 2:4 2 Peter 2:9 
 Jude 1:7 ==> Matthew 10:15 Matthew 25:41 2 Peter 3:7 
 Jude 1:8 ==> 2 Peter 2:10 
-Jude 1:9 ==> Daniel 10:13 Daniel 10:21 Zechariah 3:2 Colossians 4:16 Revelation 12:7 
+Jude 1:9 ==> Daniel 10:13 Daniel 10:21 Zechariah 3:2 1 Thessalonians 4:16 Revelation 12:7 
 Jude 1:10 ==> 2 Peter 2:12 
 Jude 1:11 ==> Hebrews 11:4 2 Peter 2:15 1 John 3:12 
 Jude 1:12 ==> Matthew 15:13 Ephesians 4:14 2 Peter 2:13 2 Peter 2:17 
@@ -21955,7 +21955,7 @@ Revelation 1:3 ==> Luke 11:28 Romans 13:11
 Revelation 1:4 ==> Isaiah 11:2 Romans 1:7 
 Revelation 1:5 ==> Isaiah 55:4 John 18:37 Romans 3:25 Romans 8:37 Colossians 1:18 1 Timothy 6:15 
 Revelation 1:6 ==> Romans 11:36 Romans 15:6 1 Peter 2:5 
-Revelation 1:7 ==> Daniel 7:13 Matthew 16:27 Luke 17:30 John 19:34 John 19:37 1 Corinthians 1:7 Colossians 2:19 
+Revelation 1:7 ==> Daniel 7:13 Matthew 16:27 Luke 17:30 John 19:34 John 19:37 1 Corinthians 1:7 1 Thessalonians 2:19 
 Revelation 1:9 ==> Acts 14:22 2 Corinthians 1:7 Philippians 4:14 2 Timothy 2:12 Hebrews 4:12 
 Revelation 1:10 ==> Acts 20:7 
 Revelation 1:11 ==> Acts 16:14 Acts 18:19 Colossians 2:1 
@@ -21981,7 +21981,7 @@ Revelation 2:17 ==> Isaiah 56:5 John 6:49-50 John 16:33
 Revelation 2:18 ==> Matthew 4:3 Acts 16:14 
 Revelation 2:20 ==> 1 Kings 16:31 2 Kings 9:7 Acts 15:20 
 Revelation 2:21 ==> Romans 2:4-5 2 Peter 3:9 
-Revelation 2:23 ==> 1 Samuel 16:7 1 Kings 8:39 Psalms 139:1-2 Psalms 139:23 Proverbs 21:2 Jeremiah 17:10 Matthew 16:27 Luke 16:15 Romans 8:27 Colossians 2:4 
+Revelation 2:23 ==> 1 Samuel 16:7 1 Kings 8:39 Psalms 139:1-2 Psalms 139:23 Proverbs 21:2 Jeremiah 17:10 Matthew 16:27 Luke 16:15 Romans 8:27 1 Thessalonians 2:4 
 Revelation 2:24 ==> Acts 15:28 
 Revelation 2:25 ==> Matthew 16:27 
 Revelation 2:26 ==> Psalms 2:8 Matthew 10:22 John 16:33 
@@ -22116,7 +22116,7 @@ Revelation 14:8 ==> Isaiah 21:9 Jeremiah 51:8
 Revelation 14:10 ==> Isaiah 51:17 Jeremiah 25:15 Jeremiah 51:7 
 Revelation 14:11 ==> Isaiah 34:10 
 Revelation 14:12 ==> John 14:15 Hebrews 6:12 
-Revelation 14:13 ==> 1 Corinthians 15:18 Colossians 4:16 
+Revelation 14:13 ==> 1 Corinthians 15:18 1 Thessalonians 4:16 
 Revelation 14:14 ==> Daniel 7:13 Matthew 17:5 
 Revelation 14:15 ==> Jeremiah 51:33 Joel 3:13 Mark 4:29 
 Revelation 14:20 ==> Genesis 49:11 Deuteronomy 32:14 Isaiah 63:3 Joel 3:13 Hebrews 13:12 
@@ -22185,7 +22185,7 @@ Revelation 20:1 ==> Luke 8:31
 Revelation 20:2 ==> Isaiah 24:22 Matthew 4:10 2 Peter 2:4 
 Revelation 20:3 ==> Daniel 6:17 Matthew 27:66 
 Revelation 20:4 ==> Daniel 7:9 Matthew 19:28 Hebrews 4:12 
-Revelation 20:5 ==> Luke 14:14 Philippians 3:11 Colossians 4:16 
+Revelation 20:5 ==> Luke 14:14 Philippians 3:11 1 Thessalonians 4:16 
 Revelation 20:6 ==> 1 Peter 2:5 
 Revelation 20:8 ==> Isaiah 11:12 Ezekiel 7:2 Hebrews 11:12 
 Revelation 20:9 ==> Ezekiel 38:9 Ezekiel 38:22 
