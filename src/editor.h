@@ -248,7 +248,7 @@ public:
   // Scrolling control and verse highlighting.
 public:
 private:
-  void scroll_to_insertion_point_on_screen(bool doVerseHighlighting);
+  void scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews);
   void highlightCurrVerse(vector <GtkWidget *> &textviews);
   ustring currHighlightedVerse;
   GtkTextTag * verse_highlight_tag;

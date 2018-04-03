@@ -317,13 +317,14 @@ void Editor2::chapter_load(const Reference &ref)
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
   currHighlightedVerse = "0";
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs);
-  if (textviews.empty()) {
+  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  if (!textviews.empty()) {
     give_focus (textviews[0]);
     GtkTextIter iter;
     gtk_text_buffer_get_start_iter(focused_paragraph->textbuffer, &iter);
     gtk_text_buffer_place_cursor(focused_paragraph->textbuffer, &iter);
-    scroll_to_insertion_point_on_screen(/*highlight?*/true);
+    scroll_to_insertion_point_on_screen(textviews);
+    highlightCurrVerse(textviews);
   }
   DEBUG("W6 Scrolled to 1:1")  
   // Store size of actions buffer so we know whether the chapter changed.
@@ -636,7 +637,9 @@ void Editor2::textview_move_cursor(GtkTextView * textview, GtkMovementStep step,
   textview_move_cursor_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_textview_move_cursor_delayed), gpointer(this), NULL);
   // Act on paragraph crossing.
   paragraph_crossing_act (step, count);
-  scroll_to_insertion_point_on_screen(/*highlight?*/true);
+  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  scroll_to_insertion_point_on_screen(textviews);
+  highlightCurrVerse(textviews);
 }
 
 bool Editor2::on_textview_move_cursor_delayed(gpointer user_data)
@@ -2099,17 +2102,16 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
   bool moved = false;
   if (focused_paragraph) {
     GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
-    vector <GtkWidget *>
-    widgets = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     do {
       moved = spellingchecker->move_cursor_to_spelling_error (textbuffer, next, extremity);
       if (!moved) {
         GtkWidget * textview = focused_paragraph->textview;
         textbuffer = NULL;
         if (next) {
-          textview = editor_get_next_textview (widgets, textview);
+          textview = editor_get_next_textview (textviews, textview);
         } else {
-          textview = editor_get_previous_textview (widgets, textview);
+          textview = editor_get_previous_textview (textviews, textview);
         }
         if (textview) {
           give_focus (textview);
@@ -2123,14 +2125,16 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
         }
       }
     } while (!moved && textbuffer);
-  }
-  if (moved) {
-    scroll_to_insertion_point_on_screen(/*highlight?*/true);
+
+    if (moved) {
+      scroll_to_insertion_point_on_screen(textviews);
+      highlightCurrVerse(textviews);
+    }
   }
   return moved;
 }
 
-void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
+void Editor2::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews)
 {
 	//DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
 	//ustring debug_verse_number = verse_number_get();
@@ -2155,10 +2159,16 @@ void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 	// Total window height.
 	gdouble total_window_height = gtk_adjustment_get_upper (adjustment);
 
-	// Get all the textviews.
-	vector <GtkWidget *>
-	textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+	// Formerly, we would get all the textviews.
+    // Now, we take that as an incoming argument so the vector doesn't have to be
+    // rebuilt scrom scratch as frequently.
 
+    // TESTING: Does this help with scrolling to teh right position, and not 
+    // jumping to "verse 0" at some random times? The theory is that gtk_widget_get_allocation
+    // is not returning the right sizes because the widgets have not been fully drawn yet.
+    // Somehow, a timeout handler handled this in a previous iteration.
+    while (gtk_events_pending()) gtk_main_iteration();
+    
 	// Offset of insertion point starting from top.
 	gint insertion_point_offset = 0;
 	{
@@ -2229,8 +2239,6 @@ void Editor2::scroll_to_insertion_point_on_screen(bool doVerseHighlighting)
 	//DEBUG("adjustment->lower = " + std::to_string(double(adjustment->lower)))
 	//DEBUG("adjustment->upper = " + std::to_string(double(adjustment->upper)))
 	gtk_adjustment_set_value (adjustment, adjustment_value);
-
-	if (doVerseHighlighting) { highlightCurrVerse(textviews); }
 }
 
 void Editor2::highlightCurrVerse(vector <GtkWidget *> &textviews)
@@ -3051,7 +3059,10 @@ gboolean Editor2::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
   if (!keyboard_any_cursor_move(event)) {
 	// This handles the case where the insertion point is off the screen
 	// and the user begins typing, as in after he slides the scroll bar so his work moves out of the viewport.
-	scroll_to_insertion_point_on_screen(/*highlight?*/false); // don't highlight verses. Subsequent cursor-move signal will do that if there was a cursor move and not a regular key press.
+    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+	scroll_to_insertion_point_on_screen(textviews);
+    // Usually after we call above, we highlight verses. This time, don't highlight verses. 
+    // Subsequent cursor-move signal will do that if there was a cursor move and not a regular key press.
   }
   // Else, in the case of a cursor movement key, scroll_to_insertion will be called by the move-cursor handler.
 
@@ -3248,7 +3259,9 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
   }
   DEBUG("W8 about to scroll to insertion point");
   // Scroll the insertion point onto the screen
-  scroll_to_insertion_point_on_screen(/*highlight?*/true);
+  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  scroll_to_insertion_point_on_screen(textviews);
+  highlightCurrVerse(textviews);
   DEBUG("W9 scrolled to insertion point");
   
   // Highlight search words.
@@ -3273,28 +3286,30 @@ bool Editor2::on_signal_if_verse_changed_timeout(gpointer data)
 // to change the verse number they are showing.
 void Editor2::signal_if_verse_changed_timeout()
 {
-  //DEBUG("Signal verse_changed_timeout")
-  // Proceed if verse tracking is on.
-  if (verse_tracking_on) {
-    // Proceed if there's a focused paragraph.
-    if (focused_paragraph) {
-      // Proceed if there's no selection.
-      if (!gtk_text_buffer_get_has_selection (focused_paragraph->textbuffer)) {
-        // Emit a signal if the verse number at the insertion point changed.
-        ustring verse_number = verse_number_get();
-        if (verse_number != current_verse_number) {
-	  DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
-          current_verse_number = verse_number;
-	  current_reference.verse_set(verse_number);
-	  scroll_to_insertion_point_on_screen(/*highlight?*/true); // ??
-	  // Need I highligh search words now?
-          if (new_verse_signal) {
-            gtk_button_clicked(GTK_BUTTON(new_verse_signal));
-          }
+    //DEBUG("Signal verse_changed_timeout")
+    // Proceed if verse tracking is on.
+    if (verse_tracking_on) {
+        // Proceed if there's a focused paragraph.
+        if (focused_paragraph) {
+            // Proceed if there's no selection.
+            if (!gtk_text_buffer_get_has_selection (focused_paragraph->textbuffer)) {
+                // Emit a signal if the verse number at the insertion point changed.
+                ustring verse_number = verse_number_get();
+                if (verse_number != current_verse_number) {
+                    DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
+                    current_verse_number = verse_number;
+                    current_reference.verse_set(verse_number);
+                    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+                    scroll_to_insertion_point_on_screen(textviews);
+                    highlightCurrVerse(textviews);
+                    // Need I highligh search words now?
+                    if (new_verse_signal) {
+                        gtk_button_clicked(GTK_BUTTON(new_verse_signal));
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 
