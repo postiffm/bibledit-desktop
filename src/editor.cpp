@@ -390,6 +390,7 @@ void Editor2::text_load (ustring text, ustring character_style, bool note_mode)
   // Update gui.
   if (!note_mode) {
     signal_if_styles_changed();
+    DEBUG("1 Calling signal_if_verse_changed");
     signal_if_verse_changed();
   }
 
@@ -657,6 +658,7 @@ void Editor2::textview_move_cursor_delayed()
   //DEBUG("debug_verse_number "+debug_verse_number)
   textview_move_cursor_id = 0;
   signal_if_styles_changed();
+  DEBUG("2 Calling signal_if_verse_changed");
   signal_if_verse_changed(); // for SOME cursor moves the verse will change; for no regular letter keystrokes
 }
 
@@ -885,6 +887,7 @@ void Editor2::textview_grab_focus_delayed() // Todo
   //DEBUG("Signal grab_focus_delayed")
   textview_grab_focus_event_id = 0;
   signal_if_styles_changed();
+  DEBUG("3 Calling signal_if_verse_changed");
   signal_if_verse_changed(); // rarely will this cause a verse to actually change
   show_quick_references();
 }
@@ -3214,6 +3217,7 @@ void Editor2::textview_button_press_delayed ()
 {
   textview_button_press_event_id = 0;
   signal_if_styles_changed();
+  DEBUG("4 Calling signal_if_verse_changed");
   signal_if_verse_changed(); // rarely will cause verse to change
 }
 
