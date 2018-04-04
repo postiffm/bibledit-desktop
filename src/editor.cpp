@@ -316,17 +316,24 @@ void Editor2::chapter_load(const Reference &ref)
   DEBUG("W5 Inserted chapter load boundary")
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
-  currHighlightedVerse = "0";
+  currHighlightedVerse = "0"; // this means "the proper verse has not yet been highlighted"
   vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  highlightCurrVerse(textviews); // now it is highlighted
+  scroll_to_insertion_point_on_screen(textviews);
+#if 0
   if (!textviews.empty()) {
     give_focus (textviews[0]);
+    DEBUG("W6 Just give_focus")
     GtkTextIter iter;
     gtk_text_buffer_get_start_iter(focused_paragraph->textbuffer, &iter);
     gtk_text_buffer_place_cursor(focused_paragraph->textbuffer, &iter);
+    DEBUG("W6.1 About to scroll")
     scroll_to_insertion_point_on_screen(textviews);
-    highlightCurrVerse(textviews);
+    DEBUG("W6.2 About to highlight")
+    highlightCurrVerse(textviews); // now it is highlighted
   }
-  DEBUG("W6 Scrolled to 1:1")  
+#endif
+  DEBUG("W7 Scrolled to 1:1")  
   // Store size of actions buffer so we know whether the chapter changed.
   editor_actions_size_at_no_save = actions_done.size();
 }
@@ -2139,7 +2146,7 @@ bool Editor2::move_cursor_to_spelling_error (bool next, bool extremity)
 
 void Editor2::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews)
 {
-	//DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
+    //DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
 	//ustring debug_verse_number = verse_number_get();
 	//DEBUG("debug_verse_number "+debug_verse_number)
 	if (!focused_paragraph) { return; }
@@ -2166,7 +2173,7 @@ void Editor2::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textview
     // Now, we take that as an incoming argument so the vector doesn't have to be
     // rebuilt scrom scratch as frequently.
 
-    // TESTING: Does this help with scrolling to teh right position, and not 
+    // TESTING: Does this help with scrolling to the right position, and not 
     // jumping to "verse 0" at some random times? The theory is that gtk_widget_get_allocation
     // is not returning the right sizes because the widgets have not been fully drawn yet.
     // Somehow, a timeout handler handled this in a previous iteration.
@@ -3416,6 +3423,9 @@ gboolean Editor2::on_caller_button_press (GtkWidget *widget)
 
 bool Editor2::has_focus ()
 // Returns whether the editor has focus.
+// Recursively defined in the sense that it has focues
+// if any of its children widgets (paragraphs or notes)
+// have focus.
 {
   vector <GtkWidget *> widgets = editor_get_widgets (vbox_paragraphs);
   for (unsigned int i = 0; i < widgets.size(); i++) {
