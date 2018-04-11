@@ -22,8 +22,9 @@
 // the existing library and not have to maintain it, and also benefit from 
 // improvements they make in it.
 
-// Documentation links on the webi have been flaky. I am currently 
+// Documentation links on the web have been flaky. I am currently 
 // using https://developer.gnome.org/glibmm/2.53/classGlib_1_1ustring.html
+// or you can use DevHelp on Linux.
  
 #ifndef INCLUDED_USTRING_H
 #define INCLUDED_USTRING_H
