@@ -181,20 +181,6 @@ int main(int argc, char *argv[])
   gw_message(_("Finished URLTransport"));
   concordance = NULL;
   refbibles = NULL;
-  /*
-  We used a trick to get Bibledit to operate as a true activity on OLPC. 
-  The problem is that any regular X11 program that is started, 
-  eg by os.system in an activity.py, appears as an extra icon in the "wheel" on the home screen, 
-  and sugar doesn't see it as being connected in any way with the original activity that started it. 
-  It will also have a generic icon.
-  So I decided to use GTK's cross-process embedding (GtkSocket/GtkPlug) 
-  to make the Bibledit window be a pane inside the Python activity's window. 
-  This uses the XEmbed protocol behind the scenes, and requires a window ID to be passed to Bibledit. 
-  You can then quit Bibledit from the File menu, and the activity goes away, 
-  or you can Stop the activity and Bibledit goes away.
-  I changed Bibledit to accept a --xembed argument with a window ID. 
-  If that argument is present, it then creates a plug for its main window instead of a normal top-level window.   
-  */
   // Accelerators.
   accelerator_group = gtk_accel_group_new();
   // Window.

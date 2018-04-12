@@ -332,8 +332,8 @@ void Editor2::chapter_load(const Reference &ref)
     DEBUG("W6.2 About to highlight")
     highlightCurrVerse(textviews); // now it is highlighted
   }
-#endif
   DEBUG("W7 Scrolled to 1:1")  
+#endif
   // Store size of actions buffer so we know whether the chapter changed.
   editor_actions_size_at_no_save = actions_done.size();
 }
