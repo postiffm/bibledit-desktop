@@ -16,6 +16,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install gitk
   apt-get install build-essential
   apt-get install libgtk2.0-dev
+  #apt-get install libgtk-3-dev
   apt-get install rcs
   apt-get install sqlite3
   apt-get install libglibmm-2.4-dev libglibmm-2.4
@@ -24,8 +25,10 @@ if apt-get --version 2> /dev/null; then
   apt-get install libenchant-dev
   apt-get install libgtkhtml3.14-dev
   apt-get install libgtksourceview2.0-dev
+  #apt-get install libgtksourceview-3.0
   #apt-get install libwebkit-dev
   apt-get install libwebkitgtk-dev
+  #apt-get install libwebkitgtk-3.0
   apt-get install texlive-xetex
   #apt-get install php5-cli <-- not available Ubuntu 17.04
   apt-get install php7.0-cli

@@ -23,7 +23,7 @@ AC_PROG_CXX
 #AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
 AC_HEADER_STDC
-PKG_CHECK_MODULES(GTK, gtk+-2.0 gdk-2.0,,AC_MSG_ERROR(Gtk2 development version is needed.))
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.24.0 gdk-2.0,,AC_MSG_ERROR(Gtk2 development version >= 2.24.0 is needed.))
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
