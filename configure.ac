@@ -304,7 +304,7 @@ AM_CONDITIONAL(WIN32, test x$win32 = xtrue)
 
 
 packagedatadir=share/${PACKAGE}
-packagedocdir=doc/${PACKAGE}
+#packagedocdir=doc/${PACKAGE}
 AC_SUBST(packagedatadir)
 
 
@@ -328,7 +328,6 @@ fi
 AC_CONFIG_FILES([Makefile 
 		  man/Makefile 
 		  pix/Makefile 
-		  doc/Makefile 
 		  src/Makefile 
 		  scripts/Makefile
 		  templates/Makefile
