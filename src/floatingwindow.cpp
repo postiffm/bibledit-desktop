@@ -429,7 +429,11 @@ void FloatingWindow::display(bool startup)
   if (!startup) {
 
     // Step 1: The area rectangle where the window should fit in is defined. 
+#if GTK_CHECK_VERSION(3,0,0)
     GdkRectangle area_rectangle;
+#else
+    cairo_rectangle_int_t area_rectangle;
+#endif
     area_rectangle.x = 0;
     area_rectangle.y = 0;
     area_rectangle.width = 0;
@@ -448,7 +452,15 @@ void FloatingWindow::display(bool startup)
     for (unsigned int i = 0; i < settings->session.open_floating_windows.size(); i++) {
       FloatingWindow * floating_window = (FloatingWindow *) settings->session.open_floating_windows[i];
       GdkRectangle rectangle = floating_window->rectangle_get();
+#if GTK_CHECK_VERSION(3,0,0)
       cairo_region_t *region = cairo_region_create_rectangle(&rectangle);
+#else
+      cairo_rectangle_int_t cairo_rectangle = {
+              rectangle.x, rectangle.y,
+              rectangle.width, rectangle.height
+      };
+      cairo_region_t *region = cairo_region_create_rectangle(&cairo_rectangle);
+#endif
       cairo_region_subtract(available_region, region);
       cairo_region_destroy(region);
     }
@@ -458,12 +470,23 @@ void FloatingWindow::display(bool startup)
     // A rectangle is considered suitable if it has at least 10% of the width, and 10% of the height of the area rectangle.
     gint rectangle_count = cairo_region_num_rectangles(available_region);
     for (int i = 0; i < rectangle_count; ++i) {
+#if GTK_CHECK_VERSION(3,0,0)
       GdkRectangle rectangle;
+#else
+      cairo_rectangle_int_t rectangle;
+#endif
       cairo_region_get_rectangle(available_region, i, &rectangle);
       if (rectangle.width >= (area_rectangle.width / 10)) {
         if (rectangle.height >= (area_rectangle.height / 10)) {
           if ((rectangle.width * rectangle.height) > (my_gdk_rectangle.width * my_gdk_rectangle.height)) {
+#if GTK_CHECK_VERSION(3,0,0)
             my_gdk_rectangle = rectangle;
+#else
+            my_gdk_rectangle.x = rectangle.x;
+            my_gdk_rectangle.y = rectangle.y;
+            my_gdk_rectangle.width = rectangle.width;
+            my_gdk_rectangle.height = rectangle.height;
+#endif
           }
         }
       }
