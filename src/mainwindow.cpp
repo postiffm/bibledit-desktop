@@ -149,7 +149,7 @@
  */
 
 
-MainWindow::MainWindow(unsigned long xembed, GtkAccelGroup * _accelerator_group, Settings *_settings, URLTransport *_urltransport, VCS *_vcs):
+MainWindow::MainWindow(GtkAccelGroup * _accelerator_group, Settings *_settings, URLTransport *_urltransport, VCS *_vcs):
 navigation(0), httpd(0)
 {
   // Store pointers to the settings, etc. so we don't have to rely on "extern" declarations of them
@@ -254,17 +254,7 @@ navigation(0), httpd(0)
 
   // GUI build.
 
-  // Main window, xembed is used on the XO machine.
-  if (xembed) {
-    window_main = gtk_plug_new(GdkNativeWindow(xembed));
-	// In 64-bit compilation, we get this error at xembed:
-	// mainwindow.cpp: In constructor 'MainWindow::MainWindow(long unsigned int, GtkAccelGroup*, Settings*, URLTransport*, VCS*)':
-    // mainwindow.cpp:251:54: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-    // window_main = gtk_plug_new(GdkNativeWindow(xembed));
-
-  } else {
-    window_main = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  }
+  window_main = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
   // Size and position of window and screen layout.
   ScreenLayoutDimensions * dimensions = new ScreenLayoutDimensions (window_main);

@@ -142,7 +142,7 @@ void ProgressWindow::pulse()
 
 void ProgressWindow::hide()
 {
-  gtk_widget_hide_all(progresswindow);
+  gtk_widget_hide(progresswindow);
   gui();
 }
 

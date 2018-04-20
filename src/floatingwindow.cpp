@@ -24,6 +24,7 @@
 #include "directories.h"
 #include "dialogradiobutton.h"
 #include <glib/gi18n.h>
+#include <gdk/gdk.h>
 
 FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ustring title_in, bool startup)
 // Base class for each floating window.
@@ -428,7 +429,11 @@ void FloatingWindow::display(bool startup)
   if (!startup) {
 
     // Step 1: The area rectangle where the window should fit in is defined. 
+#if GTK_CHECK_VERSION(3,0,0)
     GdkRectangle area_rectangle;
+#else
+    cairo_rectangle_int_t area_rectangle;
+#endif
     area_rectangle.x = 0;
     area_rectangle.y = 0;
     area_rectangle.width = 0;
@@ -441,37 +446,54 @@ void FloatingWindow::display(bool startup)
     }
 
     // Step 2: An available region is made of that whole area.
-    GdkRegion *available_region = gdk_region_rectangle(&area_rectangle);
+    cairo_region_t *available_region = cairo_region_create_rectangle(&area_rectangle);
 
     // Step 3: The regions of each of the open windows is substracted from the available region.
     for (unsigned int i = 0; i < settings->session.open_floating_windows.size(); i++) {
       FloatingWindow * floating_window = (FloatingWindow *) settings->session.open_floating_windows[i];
       GdkRectangle rectangle = floating_window->rectangle_get();
-      GdkRegion *region = gdk_region_rectangle(&rectangle);
-      gdk_region_subtract(available_region, region);
-      gdk_region_destroy(region);
+#if GTK_CHECK_VERSION(3,0,0)
+      cairo_region_t *region = cairo_region_create_rectangle(&rectangle);
+#else
+      cairo_rectangle_int_t cairo_rectangle = {
+              rectangle.x, rectangle.y,
+              rectangle.width, rectangle.height
+      };
+      cairo_region_t *region = cairo_region_create_rectangle(&cairo_rectangle);
+#endif
+      cairo_region_subtract(available_region, region);
+      cairo_region_destroy(region);
     }
 
     // Step 4: The rectangles that the area region consists of are requested,
     // and the biggest suitable rectangle is chosen for the window.
     // A rectangle is considered suitable if it has at least 10% of the width, and 10% of the height of the area rectangle.
-    GdkRectangle *gdk_rectangles = NULL;
-    gint rectangle_count = 0;
-    gdk_region_get_rectangles(available_region, &gdk_rectangles, &rectangle_count);
+    gint rectangle_count = cairo_region_num_rectangles(available_region);
     for (int i = 0; i < rectangle_count; ++i) {
-      GdkRectangle & rectangle = gdk_rectangles[i];
+#if GTK_CHECK_VERSION(3,0,0)
+      GdkRectangle rectangle;
+#else
+      cairo_rectangle_int_t rectangle;
+#endif
+      cairo_region_get_rectangle(available_region, i, &rectangle);
       if (rectangle.width >= (area_rectangle.width / 10)) {
         if (rectangle.height >= (area_rectangle.height / 10)) {
           if ((rectangle.width * rectangle.height) > (my_gdk_rectangle.width * my_gdk_rectangle.height)) {
+#if GTK_CHECK_VERSION(3,0,0)
             my_gdk_rectangle = rectangle;
+#else
+            my_gdk_rectangle.x = rectangle.x;
+            my_gdk_rectangle.y = rectangle.y;
+            my_gdk_rectangle.width = rectangle.width;
+            my_gdk_rectangle.height = rectangle.height;
+#endif
           }
         }
       }
     }
-    g_free(gdk_rectangles);
 
     // Step 5: The available region is destroyed.
-    gdk_region_destroy(available_region);
+    cairo_region_destroy(available_region);
 
     // Step 6: If no area big enough is found, then the window that takes most space in the area is chosen, 
     // the longest side is halved, and the new window is put in that freed area.

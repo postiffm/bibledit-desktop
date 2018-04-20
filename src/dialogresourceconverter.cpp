@@ -384,7 +384,7 @@ void ResourceConverterDialog::build_entry_combo_entry(GtkWidget * &image_ok, Gtk
   gtk_widget_show(label_combo);
   gtk_box_pack_start(GTK_BOX(hbox), label_combo, FALSE, FALSE, 0);
 
-  combo = gtk_combo_box_new_text();
+  combo = gtk_combo_box_text_new();
   gtk_widget_show(combo);
   gtk_box_pack_start(GTK_BOX(hbox), combo, TRUE, TRUE, 0);
 

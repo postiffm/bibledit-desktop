@@ -80,7 +80,7 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   gtk_box_pack_start (GTK_BOX (hbox_collection), label_collection, FALSE, FALSE, 0);
   gtk_misc_set_alignment (GTK_MISC (label_collection), 0, 0.5);
 
-  combobox_collection = gtk_combo_box_new_text ();
+  combobox_collection = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_collection);
   gtk_box_pack_start (GTK_BOX (hbox_collection), combobox_collection, TRUE, TRUE, 0);
 

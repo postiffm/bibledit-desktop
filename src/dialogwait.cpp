@@ -72,7 +72,7 @@ gboolean WaitDialog::static_on_timeout(gpointer data)
 
 bool WaitDialog::on_timeout()
 {
-  gtk_widget_hide_all(waitdialog);
+  gtk_widget_hide(waitdialog);
   gtk_dialog_response(GTK_DIALOG(waitdialog), GTK_RESPONSE_OK);
   return false;
 }

@@ -415,7 +415,7 @@ ResourceAssistant::ResourceAssistant(const ustring& resource_template) :
   gtk_widget_show (hbox_tester);
   gtk_box_pack_start (GTK_BOX (vbox_url), hbox_tester, FALSE, FALSE, 0);
 
-  combobox_test_book = gtk_combo_box_new_text ();
+  combobox_test_book = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_test_book);
   gtk_box_pack_start (GTK_BOX (hbox_tester), combobox_test_book, FALSE, FALSE, 0);
 
@@ -428,7 +428,7 @@ ResourceAssistant::ResourceAssistant(const ustring& resource_template) :
   vector <unsigned int> nt_ids = books_type_to_ids (btNewTestament);
   combobox_set_string (combobox_test_book, books_id_to_localname (nt_ids[0]));
 
-  combobox_test_chapter = gtk_combo_box_new_text ();
+  combobox_test_chapter = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_test_chapter);
   gtk_box_pack_start (GTK_BOX (hbox_tester), combobox_test_chapter, FALSE, FALSE, 0);
 
@@ -439,7 +439,7 @@ ResourceAssistant::ResourceAssistant(const ustring& resource_template) :
   combobox_set_strings (combobox_test_chapter, chapters);
   combobox_set_index (combobox_test_chapter, 0);
   
-  combobox_test_verse = gtk_combo_box_new_text ();
+  combobox_test_verse = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_test_verse);
   gtk_box_pack_start (GTK_BOX (hbox_tester), combobox_test_verse, FALSE, FALSE, 0);
 

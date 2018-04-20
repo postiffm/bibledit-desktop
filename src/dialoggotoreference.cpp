@@ -215,7 +215,7 @@ void GotoReferenceDialog::on_okbutton_clicked(GtkButton * button, gpointer user_
 gboolean GotoReferenceDialog::on_key_press_event(GtkWidget * widget, GdkEventKey * event, gpointer user_data)
 {
   if (keyboard_control_state (event)) {
-    if (event->keyval == GDK_g) {
+    if (event->keyval == GDK_KEY_g) {
       ((GotoReferenceDialog *) user_data)->on_control_g();
     }
   }

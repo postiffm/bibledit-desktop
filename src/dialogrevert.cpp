@@ -72,11 +72,11 @@ RevertDialog::RevertDialog(Reference * reference)
   gtk_widget_show(table1);
   gtk_box_pack_start(GTK_BOX(vbox1), table1, FALSE, TRUE, 0);
 
-  comboboxbook = gtk_combo_box_new_text();
+  comboboxbook = gtk_combo_box_text_new();
   gtk_widget_show(comboboxbook);
   gtk_table_attach(GTK_TABLE(table1), comboboxbook, 0, 1, 1, 2, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
-  comboboxchapter = gtk_combo_box_new_text();
+  comboboxchapter = gtk_combo_box_text_new();
   gtk_widget_show(comboboxchapter);
   gtk_table_attach(GTK_TABLE(table1), comboboxchapter, 1, 2, 1, 2, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), (GtkAttachOptions) (GTK_FILL), 0, 0);
 

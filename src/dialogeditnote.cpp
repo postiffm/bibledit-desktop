@@ -103,7 +103,7 @@ EditNoteDialog::EditNoteDialog(Editor2 * editor)
   gtk_box_pack_start(GTK_BOX(hbox7), label4, FALSE, FALSE, 0);
   gtk_misc_set_alignment(GTK_MISC(label4), 0, 0.5);
 
-  combobox1 = gtk_combo_box_new_text();
+  combobox1 = gtk_combo_box_text_new();
   gtk_widget_show(combobox1);
   gtk_box_pack_start(GTK_BOX(hbox7), combobox1, TRUE, TRUE, 0);
 

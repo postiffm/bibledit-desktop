@@ -69,7 +69,7 @@ private:
   VCS *vcs;
 
 public:
-  MainWindow(unsigned long xembed, GtkAccelGroup *_accelerator_group, Settings *_settings, URLTransport *_urltransport, VCS *_vcs);
+  MainWindow(GtkAccelGroup *_accelerator_group, Settings *_settings, URLTransport *_urltransport, VCS *_vcs);
   ~MainWindow();
   int run();
 protected:

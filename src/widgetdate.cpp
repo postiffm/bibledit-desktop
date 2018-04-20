@@ -54,7 +54,7 @@ If showtime is true it shows the time also.
   calendar1 = gtk_calendar_new();
   gtk_widget_show(calendar1);
   gtk_box_pack_start(GTK_BOX(vbox2), calendar1, TRUE, TRUE, 0);
-  gtk_calendar_display_options(GTK_CALENDAR(calendar1), GtkCalendarDisplayOptions(GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS));
+  gtk_calendar_set_display_options(GTK_CALENDAR(calendar1), GtkCalendarDisplayOptions(GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS));
 
   label_time = NULL;
   if (showtime) {

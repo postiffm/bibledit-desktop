@@ -61,7 +61,7 @@ void combobox_clear_strings(GtkWidget * combobox)
 // Clear the strings loaded in the combobox.
 {
   for (int i = combobox_get_string_count(combobox) - 1; i >= 0; i--)
-    gtk_combo_box_remove_text(GTK_COMBO_BOX(combobox), i);
+    gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combobox), i);
 }
 
 vector < ustring > combobox_get_strings(GtkWidget * combobox)
@@ -89,14 +89,14 @@ void combobox_set_strings(GtkWidget * combobox, const vector < ustring > &string
 {
   combobox_clear_strings(combobox);
   for (unsigned int i = 0; i < strings.size(); i++)
-    gtk_combo_box_append_text(GTK_COMBO_BOX(combobox), strings[i].c_str());
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox), strings[i].c_str());
 }
 
 void combobox_set_strings(GtkWidget * combobox, const vector < unsigned int >&strings)
 {
   combobox_clear_strings(combobox);
   for (unsigned int i = 0; i < strings.size(); i++)
-    gtk_combo_box_append_text(GTK_COMBO_BOX(combobox), convert_to_string(strings[i]).c_str());
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox), convert_to_string(strings[i]).c_str());
 }
 
 void combobox_set_string(GtkWidget * combobox, const ustring & string)

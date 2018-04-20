@@ -68,7 +68,7 @@ protected:
   void on_focus ();
   const gchar * action_text_1;
   const gchar * action_text_2;
-  static void on_notebook1_switch_page (GtkNotebook *notebook, GtkNotebookPage *page, guint page_num, gpointer user_data);
+  static void on_notebook1_switch_page (GtkNotebook *notebook, GtkWidget *page, guint page_num, gpointer user_data);
   void on_switch_page ();
   ustring initialfocus;
 };

@@ -183,17 +183,6 @@ int main(int argc, char *argv[])
   refbibles = NULL;
   // Accelerators.
   accelerator_group = gtk_accel_group_new();
-  // Window.
-  unsigned long xembed = 0;
-  if (argc > 2 && strcmp(argv[1], "--xembed") == 0) {
-    xembed = strtoul(argv[2], &argv[2], 0);
-    if (*argv[2] != 0) {
-      /// Translators: please leave the '%s' as is.
-      fprintf(stderr, _("Bad xembed value: %s\n"), argv[2]);
-      return 0;
-    }
-  }
-  gw_message("Checked for --xembed");
   // Upgrade data.
   upgrade();
   gw_message("Finished upgrade");
@@ -201,7 +190,7 @@ int main(int argc, char *argv[])
   gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit-desktop.xpm").c_str(), NULL);
   gw_message("Set up window icon fallback");
   // Start the gui.
-  MainWindow *mainwindow = new MainWindow(xembed, accelerator_group, settings, urltransport, vcs);
+  MainWindow *mainwindow = new MainWindow(accelerator_group, settings, urltransport, vcs);
   gw_message("Finished initialization...running gtk_main");
   gtk_main();
   delete mainwindow;

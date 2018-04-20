@@ -237,7 +237,7 @@ ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowSty
   gtk_assistant_set_page_type (GTK_ASSISTANT (assistant), vbox_online_bible_bible, GTK_ASSISTANT_PAGE_CONTENT);
   gtk_assistant_set_page_complete (GTK_ASSISTANT (assistant), vbox_online_bible_bible, false);
 
-  combobox_online_bible_bible = gtk_combo_box_new_text ();
+  combobox_online_bible_bible = gtk_combo_box_text_new ();
   gtk_widget_show (combobox_online_bible_bible);
   gtk_box_pack_start (GTK_BOX (vbox_online_bible_bible), combobox_online_bible_bible, false, false, 0);
 
