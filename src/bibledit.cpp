@@ -72,6 +72,7 @@ CrossReferences *crossrefs;
 int main(int argc, char *argv[])
 {
   // Internationalization: initialize gettext
+  setlocale (LC_ALL, ""); // per instructions at https://www.gnu.org/software/gettext/FAQ.html
   bindtextdomain(GETTEXT_PACKAGE, BIBLEDIT_LOCALEDIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
   textdomain(GETTEXT_PACKAGE);
