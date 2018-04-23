@@ -115,7 +115,7 @@ fi
 
 # I find I sometimes need time to kill a previous instance of the program or
 # something else, and this warning wakes me up to that need.
-echo "I assume you are running this from your-home/bibledit/gtk."
+echo "I assume you are running this from your-home/bibledit-desktop."
 echo "I also assume this shell is running in elevated/administrator mode!"
 echo "If not, hit Ctrl-C now and correct those problems!"
 sleep 3
