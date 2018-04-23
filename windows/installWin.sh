@@ -132,7 +132,7 @@ cp -R ./windows/bibledit.ico "$BIN"
 # Added 3/7/2017
 echo "Copying language / i18n packages to $SHARE/locale and scripts..."
 mkdir -v -p "$SHARE/locale/fr/LC_MESSAGES"
-cp ./po/fr.gmo "$SHARE/locale/fr/LC_MESSAGES/bibledit.mo"
+cp ./po/fr.gmo "$SHARE/locale/fr/LC_MESSAGES/bibledit-desktop.mo"
 cp ./windows/bibledit-fr.cmd "$BIN"
 # Above added 3/7/2017
 
