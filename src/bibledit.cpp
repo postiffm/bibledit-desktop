@@ -47,6 +47,7 @@
 #include <libintl.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <locale.h>
 #include <errno.h>
 #include "options.h"
 //#ifdef WIN32
@@ -154,7 +155,23 @@ int main(int argc, char *argv[])
   // Call after the stdout/stderr redirects above
   options->print();
   Directories->print();
+  // Print what we know about the language setup
+  gw_message("BIBLEDIT_LOCALEDIR " + ustring(BIBLEDIT_LOCALEDIR));
   
+  ustring language, lang;
+  
+  char *cplanguage = getenv("LANGUAGE");
+  if (cplanguage == NULL) { language="LANGUAGE variable not specified"; }
+  else { language = ustring(cplanguage); }
+  gw_message("LANGUAGE      \t" + language);
+  
+  char *cplang = getenv("LANG");
+  if (cplang == NULL) { lang="LANG variable not specified"; }
+  else { lang = ustring(cplang); }      
+  gw_message("LANG          \t" + lang);
+  gw_message("LC_ALL        \t" + ustring(setlocale(LC_ALL, NULL)));
+  gw_message("LC_CTYPE      \t" + ustring(setlocale(LC_CTYPE, NULL)));
+
   // Check on runtime requirements.
   runtime_initialize ();
   // Initialize the xml library.
