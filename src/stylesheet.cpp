@@ -74,7 +74,8 @@ Stylesheet::Stylesheet(const ustring & name_in)
 	{
 	  xmlChar *text = xmlTextReaderValue(reader);
 	  if (text) {
-	    value = (gchar *) text;
+	    value = gettext( (gchar *) text); // Internationalize stylesheet "name" field with gettext call.
+        // The info field could stand to be translated as well, but we don't seem to use it here.
 	    xmlFree(text);
 	  }	
 	  break;
