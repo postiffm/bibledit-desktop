@@ -1,11 +1,11 @@
 # French translation strings for bibledit-desktop.
-# Copyright (C) 2015 Matt Postiff
+# Copyright (C) 2018 Matt Postiff, Cyrille L'Africain
 # This file is distributed under the same license as the bibledit package.
-# Matt Postiff <postiffm@umich.edu>, 2015.
+# Matt Postiff <postiffm@umich.edu>.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.13\n"
+"Project-Id-Version: 4.14\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
 "POT-Creation-Date: 2018-03-29 16:14-0400\n"
 "PO-Revision-Date: 2018-03-01 20:09+0100\n"
