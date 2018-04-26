@@ -9,7 +9,6 @@
     <property name="modal">True</property>
     <property name="window_position">center-always</property>
     <property name="type_hint">dialog</property>
-    <property name="has_separator">False</property>
     <signal name="delete_event" handler="on_progressdialog_delete_event"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
