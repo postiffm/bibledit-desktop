@@ -3,6 +3,10 @@
 # Build Cross Reference Database, (C) Matt Postiff, 2018
 # Take a list of verses like the following and create a compact binary
 # database from it.
+#
+# Usage: buildcrf.pl ../BiblesInternational/bi.txt
+# Output by default goes to bi.crf
+# Be careful to not overwrite bi.crf accidentally!
 
 # Input:
 #Genesis
@@ -28,7 +32,7 @@
 # "complex range operator." vs=0 indicates an entire chapter
 # is being cross-referenced.
 
-# In the cross-reference file format, the first listed 
+# In the cross-reference file format (.crf), the first listed 
 # verse is the verse that is the subject of the
 # cross references (Genesis 1:1). Following are 32-bits
 # per verse that are cross-references from Genesis 1:1.

@@ -2,6 +2,14 @@
 
 # Read Cross Reference Database and print
 
+# Usage: readcrf.pl infile
+# Example: readcrf.pl ../BiblesInternational/bi.crf
+# Output is verse ==> cross references
+# Example: readcrf.pl ../BiblesInternational/repeated_phrases.rpf
+# In the later example, the output looks just like above, but
+# the verses listed are all ones that contain common phrases so the
+# ==> symbol is unnecessary.
+
 $books{1} = "Genesis";
 $books{2} = "Exodus";
 $books{3} = "Leviticus";
@@ -69,7 +77,8 @@ $books{64} = "3 John";
 $books{65} = "Jude";
 $books{66} = "Revelation";
 
-open(my $fh, '<:raw', 'bi.crf') or die "Unable to open: $!";
+$infile = shift(@ARGV);
+open(my $fh, '<:raw', $infile) or die "Unable to open for input: $!";
 $startNewList = 1;
 
 while (1) {

@@ -4,6 +4,6 @@
 crossref_dir = $(pkgdatadir)/bibles
 
 # Files to install
-crossref__DATA = bi.crf
+crossref__DATA = bi.crf repeated_phrases.rpf
 
 CLEANFILES = *~

@@ -9,6 +9,10 @@ Makefile.am   - Autotools Makefile template that tells how to install
                 the cross-reference data file (bi.crf is the only one at
                 the moment). If you change this, run autoconf, automake,
                 and then ./configure in the bibledit-desktop directory.
+repeated_phrases.py - script to generate the next file. Run this on
+		      http://www.gutenberg.org/cache/epub/10/pg10.txt
+phrasesN.txt  - phrases of N or more words in KJV that repeat
+repeated_phrases.rpf - repeated phrase file, binary encoded version of above
 
 Key Terms Data
 --------------------
