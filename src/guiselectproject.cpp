@@ -23,8 +23,9 @@
 #include "projectutils.h"
 #include "dialoglistview.h"
 
-SelectProjectGui::SelectProjectGui(int dummy)
+SelectProjectGui::SelectProjectGui(GtkWindow *_transient_parent)
 {
+    transient_parent = _transient_parent;
 }
 
 SelectProjectGui::~SelectProjectGui()
@@ -68,7 +69,7 @@ void SelectProjectGui::on_button_clicked(GtkButton * button, gpointer user_data)
 
 void SelectProjectGui::on_button()
 {
-  if (project_select(project)) {
+  if (project_select(project, transient_parent)) {
     gtk_button_set_label(GTK_BUTTON(button), project.c_str());
   }
 }

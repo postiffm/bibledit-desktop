@@ -27,17 +27,20 @@
 #include "utilities.h"
 #include <glib/gi18n.h>
 
-NewStylesheetDialog::NewStylesheetDialog(const ustring & worksheet)
+NewStylesheetDialog::NewStylesheetDialog(const ustring & worksheet, GtkWindow *transient_parent)
 {
   myworksheet = worksheet;
 
   Shortcuts shortcuts(0);
 
   newstylesheetdialog = gtk_dialog_new();
-  if (!worksheet.empty())
+  gtk_window_set_transient_for(GTK_WINDOW(newstylesheetdialog), transient_parent);
+  if (!worksheet.empty()) {
     gtk_window_set_title(GTK_WINDOW(newstylesheetdialog), _("New style"));
-  else
+  }
+  else {
     gtk_window_set_title(GTK_WINDOW(newstylesheetdialog), _("New stylesheet"));
+  }
   gtk_window_set_position(GTK_WINDOW(newstylesheetdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (newstylesheetdialog));

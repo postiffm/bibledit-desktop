@@ -26,7 +26,7 @@
 class Text2PdfDialog
 {
 public:
-  Text2PdfDialog(vector <ustring> * commands);
+  Text2PdfDialog(vector <ustring> * commands, GtkWindow *transient_parent);
   ~Text2PdfDialog();
   int run();
   ustring entered_value;

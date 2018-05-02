@@ -29,7 +29,7 @@
 class WordlistDialog
 {
 public:
-  WordlistDialog (int dummy);
+  WordlistDialog (GtkWindow *transient_parent);
   ~WordlistDialog ();
   int run ();
 protected:

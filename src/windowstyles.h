@@ -35,6 +35,7 @@ public:
   WindowStyles(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, GtkWidget *stl, GtkWidget *stl_menu, GtkWidget *stl_expand_all, GtkWidget *stl_collapse_all, GtkWidget *stl_insert, GtkWidget *stl_edit_mode, GtkWidget *stl_new, GtkWidget *stl_properties, GtkWidget *stl_delete, GtkWidget *stlsheet_switch, GtkWidget *stlsheet_new, GtkWidget *stlsheet_delete, GtkWidget *stlsheet_rename);
   virtual ~WindowStyles();
   void load(const ustring& stylesheet);
+  GtkWindow *transient_parent;
   GtkWidget *apply_signal;
   GtkWidget *open_signal;
   GtkWidget *edited_signal;

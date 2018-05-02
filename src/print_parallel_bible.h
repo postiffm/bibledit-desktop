@@ -24,7 +24,7 @@
 #include "ustring.h"
 #include "usfm.h"
 
-void view_parallel_bible_pdf();
+void view_parallel_bible_pdf(GtkWindow *transient_parent);
 void view_parallel_bible_pdf_v2();
 
 #endif

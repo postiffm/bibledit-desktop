@@ -29,7 +29,7 @@
 class StylesheetDialog
 {
 public:
-  StylesheetDialog (const ustring& stylesheet, const ustring& style);
+  StylesheetDialog (const ustring& stylesheet, const ustring& style, GtkWindow *transient_parent);
   ~ StylesheetDialog ();
   int run ();
   ustring name;

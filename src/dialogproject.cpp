@@ -51,7 +51,7 @@
 #define NEW_PROJECT _("New Project")
 
 
-ProjectDialog::ProjectDialog (bool newproject)
+ProjectDialog::ProjectDialog (bool newproject, GtkWindow *transient_parent)
 {
   DEBUG("New ProjectDialog with newproject=" + std::to_string(newproject))
   // Settings.
@@ -78,6 +78,7 @@ ProjectDialog::ProjectDialog (bool newproject)
   Shortcuts shortcuts(0);
 
   projectdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(projectdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(projectdialog), _("Project properties"));
   gtk_window_set_position(GTK_WINDOW(projectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(projectdialog), TRUE);
@@ -699,7 +700,7 @@ void ProjectDialog::on_button_depend_clicked(GtkButton * button, gpointer user_d
 void ProjectDialog::on_button_depend()
 {
   ustring project(dependent_project());
-  if (project_select(project)) {
+  if (project_select(project, GTK_WINDOW(projectdialog))) {
     gtk_button_set_label(GTK_BUTTON(button_depend), project.c_str());
   }
 }
@@ -738,7 +739,7 @@ void ProjectDialog::on_button_dictionaries_clicked(GtkButton * button, gpointer 
 
 void ProjectDialog::on_button_dictionaries()
 {
-  DictionaryDialog dialog(currentprojectname);
+  DictionaryDialog dialog(currentprojectname, GTK_WINDOW(projectdialog));
   dialog.run();
 }
 

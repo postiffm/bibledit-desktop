@@ -29,7 +29,7 @@
 #include "gwrappers.h"
 #include <glib/gi18n.h>
 
-ReferenceExchangeDialog::ReferenceExchangeDialog(int dummy)
+ReferenceExchangeDialog::ReferenceExchangeDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
   Shortcuts shortcuts (0);
@@ -38,6 +38,7 @@ ReferenceExchangeDialog::ReferenceExchangeDialog(int dummy)
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.referenceexchangedialog.xml").c_str(), NULL);
 
   dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(dialog), transient_parent);
 
   entry_url = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "entry_url"));
   gtk_entry_set_text (GTK_ENTRY (entry_url), settings->genconfig.bibledit_web_url_get().c_str());

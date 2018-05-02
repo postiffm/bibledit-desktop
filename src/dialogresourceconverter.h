@@ -31,7 +31,7 @@
 class ResourceConverterDialog
 {
 public:
-  ResourceConverterDialog (const ustring& working_directory);
+  ResourceConverterDialog (const ustring& working_directory, GtkWindow *transient_parent);
   ~ResourceConverterDialog ();
   int run ();
   ResourceConversionType resource_conversion_type;

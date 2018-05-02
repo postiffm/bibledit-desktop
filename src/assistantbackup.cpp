@@ -414,7 +414,7 @@ void BackupAssistant::on_button_bible_name_clicked (GtkButton *button, gpointer 
 
 void BackupAssistant::on_button_bible_name ()
 {
-  project_select(bible_name);
+  project_select(bible_name, GTK_WINDOW(assistant));
   on_assistant_prepare (vbox_bible_name);
 }
 
@@ -427,7 +427,7 @@ void BackupAssistant::on_button_resource_name_clicked (GtkButton *button, gpoint
 
 void BackupAssistant::on_button_resource_name ()
 {
-  ustring name = resource_select (NULL);
+  ustring name = resource_select (NULL, GTK_WINDOW(assistant));
   if (!name.empty()) {
     resource_name = name;
   }

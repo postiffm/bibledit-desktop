@@ -29,7 +29,7 @@
 class ProjectDialog
 {
 public:
-  ProjectDialog (bool newproject);
+  ProjectDialog (bool newproject, GtkWindow *transient_parent);
   ~ProjectDialog ();
   int run ();
   ustring newprojectname;

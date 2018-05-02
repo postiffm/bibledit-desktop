@@ -29,7 +29,7 @@
 class NotesTransferDialog
 {
 public:
-  NotesTransferDialog (int dummy);
+  NotesTransferDialog (GtkWindow *transient_parent);
   ~NotesTransferDialog ();
   int run ();
 protected:

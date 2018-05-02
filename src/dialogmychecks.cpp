@@ -28,7 +28,7 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-MyChecksDialog::MyChecksDialog(WindowReferences * references_window)
+MyChecksDialog::MyChecksDialog(WindowReferences * references_window, GtkWindow *transient_parent)
 {
   // Save variables.
   my_references_window = references_window;
@@ -38,6 +38,7 @@ MyChecksDialog::MyChecksDialog(WindowReferences * references_window)
 
   // Build gui.
   mychecksdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(mychecksdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(mychecksdialog), _("My checks"));
   gtk_window_set_position(GTK_WINDOW(mychecksdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(mychecksdialog), TRUE);
@@ -276,46 +277,46 @@ void MyChecksDialog::on_okbutton()
   bool keep_going = true;
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_chapters_verses(NULL, &results);
+      keep_going = scripture_checks_chapters_verses(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_validate_usfms(NULL, &results);
+      keep_going = scripture_checks_validate_usfms(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_count_usfms(false);
+      keep_going = scripture_checks_count_usfms(false, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_compare_usfms(NULL, &results);
+      keep_going = scripture_checks_compare_usfms(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_count_characters(false);
+      keep_going = scripture_checks_count_characters(false, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_unwanted_patterns(NULL, &results);
+      keep_going = scripture_checks_unwanted_patterns(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_capitalization(NULL, &results);
+      keep_going = scripture_checks_capitalization(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_repetition(NULL, &results);
+      keep_going = scripture_checks_repetition(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_unwanted_words(NULL, &results);
+      keep_going = scripture_checks_unwanted_words(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_word_inventory(false);
+      keep_going = scripture_checks_word_inventory(false, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_matching_pairs(NULL, &results);
+      keep_going = scripture_checks_matching_pairs(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_usfm_spacing(NULL, &results);
+      keep_going = scripture_checks_usfm_spacing(NULL, &results, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_references_inventory(false);
+      keep_going = scripture_checks_references_inventory(false, GTK_WINDOW(mychecksdialog));
   if (bitpattern_take(pattern))
     if (keep_going)
-      keep_going = scripture_checks_validate_references(NULL, &results);
+      keep_going = scripture_checks_validate_references(NULL, &results, GTK_WINDOW(mychecksdialog));
   // Display checking results.
   if (keep_going)
     checks_display_references_comments(results.references, results.comments, my_references_window);

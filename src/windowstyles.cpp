@@ -45,6 +45,7 @@ WindowStyles::WindowStyles(GtkWidget * parent_layout, GtkAccelGroup *accelerator
 FloatingWindow(parent_layout, widStyles, _("Stylesheet"), startup)
 // Styles window.
 {
+  transient_parent = GTK_WINDOW(parent_layout);
   // Variables.
   style = stl;
   style_menu = stl_menu;
@@ -577,7 +578,7 @@ void WindowStyles::on_style_new()
     return;
   if (mystylesheet.empty())
     return;
-  NewStylesheetDialog dialog(mystylesheet);
+  NewStylesheetDialog dialog(mystylesheet, transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   // Some people will insert the backslash too: remove it.
@@ -626,7 +627,7 @@ void WindowStyles::on_style_properties()
   if (style.empty())
     return;
   // Edit the style.
-  StylesheetDialog dialog(mystylesheet, style);
+  StylesheetDialog dialog(mystylesheet, style, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Reopen sheet and focus the style.
     reload();
@@ -701,7 +702,7 @@ void WindowStyles::on_stylesheet_new_activate(GtkMenuItem * menuitem, gpointer u
 void WindowStyles::on_stylesheet_new()
 {
   // Show dialog. Bail out on Cancel.
-  NewStylesheetDialog dialog("");
+  NewStylesheetDialog dialog("", transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   // New sheet.
@@ -719,7 +720,7 @@ void WindowStyles::on_stylesheet_delete_activate(GtkMenuItem * menuitem, gpointe
 
 void WindowStyles::on_stylesheet_delete()
 {
-  OpenStylesheetDialog dialog(osdtDelete, mystylesheet);
+  OpenStylesheetDialog dialog(osdtDelete, mystylesheet, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     if (gtkw_dialog_question(NULL, _("Do you really want to delete stylesheet ") + dialog.stylesheet + _("?")) == GTK_RESPONSE_YES) {
       stylesheet_delete(dialog.stylesheet);
@@ -737,7 +738,7 @@ void WindowStyles::on_stylesheet_rename_activate(GtkMenuItem * menuitem, gpointe
 void WindowStyles::on_stylesheet_rename()
 {
   // Ask for a new name.
-  EntryDialog dialog(_("Rename stylesheet"), _("Give a new name for this stylesheet"), mystylesheet);
+  EntryDialog dialog(_("Rename stylesheet"), _("Give a new name for this stylesheet"), mystylesheet, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Check whether the new name does not already exist.
     if (!stylesheet_exists(dialog.entered_value)) {
@@ -793,7 +794,7 @@ void WindowStyles::on_stylesheet_switch_activate(GtkMenuItem * menuitem, gpointe
 
 void WindowStyles::on_stylesheet_switch()
 {
-  OpenStylesheetDialog dialog(osdtSwitch, mystylesheet);
+  OpenStylesheetDialog dialog(osdtSwitch, mystylesheet, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Open the sheet.
     stylesheet_open(dialog.stylesheet);

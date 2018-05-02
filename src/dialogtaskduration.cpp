@@ -27,7 +27,7 @@
 #include "screen.h"
 #include <glib/gi18n.h>
 
-TaskDurationDialog::TaskDurationDialog(vector < ustring > *tasks, vector < double >*durations)
+TaskDurationDialog::TaskDurationDialog(vector < ustring > *tasks, vector < double >*durations, GtkWindow *transient_parent)
 {
   // Initialize variables
   mytasks = tasks;
@@ -37,6 +37,7 @@ TaskDurationDialog::TaskDurationDialog(vector < ustring > *tasks, vector < doubl
   Shortcuts shortcuts(0);
 
   taskdurationdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(taskdurationdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(taskdurationdialog), _("Task Duration Setup"));
   gtk_window_set_position(GTK_WINDOW(taskdurationdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(taskdurationdialog), GDK_WINDOW_TYPE_HINT_DIALOG);

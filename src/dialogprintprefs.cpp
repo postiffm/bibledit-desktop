@@ -26,12 +26,13 @@
 #include "help.h"
 #include <glib/gi18n.h>
 
-PrintPreferencesDialog::PrintPreferencesDialog(int dummy)
+PrintPreferencesDialog::PrintPreferencesDialog(GtkWindow *transient_parent)
 {
   // Settings
   extern Settings *settings;
 
   dialogprintpreferences = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(dialogprintpreferences), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dialogprintpreferences), _("Printing preferences"));
   gtk_window_set_position(GTK_WINDOW(dialogprintpreferences), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(dialogprintpreferences), TRUE);

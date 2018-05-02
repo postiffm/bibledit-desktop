@@ -33,13 +33,14 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-ReplaceDialog::ReplaceDialog(int dummy)
+ReplaceDialog::ReplaceDialog(GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   extern Settings *settings;
 
   replacedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(replacedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(replacedialog), _("Replace"));
   gtk_window_set_position(GTK_WINDOW(replacedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(replacedialog), TRUE);
@@ -260,7 +261,7 @@ void ReplaceDialog::on_selectbutton_clicked2()
 // The user can select which books to search and replace in.
 {
   extern Settings *settings;
-  SelectBooksDialog dialog(false);
+  SelectBooksDialog dialog(false, GTK_WINDOW(replacedialog));
   dialog.selectables(selectable_books);
   dialog.selection_set(settings->session.selected_books);
   if (dialog.run() == GTK_RESPONSE_OK) {

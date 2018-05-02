@@ -32,11 +32,12 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-FindNoteDialog::FindNoteDialog(int dummy)
+FindNoteDialog::FindNoteDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 
   findnotedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(findnotedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(findnotedialog), _("Find in project notes"));
   gtk_window_set_position(GTK_WINDOW(findnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(findnotedialog), TRUE);

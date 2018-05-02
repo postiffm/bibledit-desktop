@@ -30,7 +30,7 @@
 class EditNoteDialog
 {
 public:
-  EditNoteDialog (Editor2 * editor);
+  EditNoteDialog (Editor2 * editor, GtkWindow *transient_parent);
   ~EditNoteDialog ();
   int run ();
 protected:

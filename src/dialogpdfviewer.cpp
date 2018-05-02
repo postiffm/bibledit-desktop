@@ -26,11 +26,12 @@
 #include "pdfviewer.h"
 #include <glib/gi18n.h>
 
-PDFViewerDialog::PDFViewerDialog(int dummy)
+PDFViewerDialog::PDFViewerDialog(GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   pdfviewerdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(pdfviewerdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(pdfviewerdialog), _("PDF Viewer"));
   gtk_window_set_position(GTK_WINDOW(pdfviewerdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(pdfviewerdialog), TRUE);

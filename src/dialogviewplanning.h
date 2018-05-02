@@ -31,7 +31,7 @@
 class ViewPlanningDialog
 {
 public:
-  ViewPlanningDialog (int dummy);
+  ViewPlanningDialog (GtkWindow *transient_parent);
   ~ViewPlanningDialog ();
   int run ();
 protected:

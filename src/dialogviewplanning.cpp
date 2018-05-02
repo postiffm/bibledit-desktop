@@ -24,11 +24,12 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-ViewPlanningDialog::ViewPlanningDialog(int dummy)
+ViewPlanningDialog::ViewPlanningDialog(GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   viewstatusdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(viewstatusdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(viewstatusdialog), _("View Planning"));
   gtk_window_set_position(GTK_WINDOW(viewstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(viewstatusdialog), TRUE);

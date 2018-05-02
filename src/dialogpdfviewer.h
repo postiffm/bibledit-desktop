@@ -29,7 +29,7 @@
 class PDFViewerDialog
 {
 public:
-  PDFViewerDialog (int dummy);
+  PDFViewerDialog (GtkWindow *transient_parent);
   ~PDFViewerDialog ();
   int run ();
 protected:

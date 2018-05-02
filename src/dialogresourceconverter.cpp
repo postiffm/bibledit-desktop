@@ -43,7 +43,7 @@
 #include "combobox.h"
 #include <glib/gi18n.h>
 
-ResourceConverterDialog::ResourceConverterDialog(const ustring & working_directory)
+ResourceConverterDialog::ResourceConverterDialog(const ustring & working_directory, GtkWindow *transient_parent)
 {
   // Initialize variables.
   workingdirectory = working_directory;
@@ -59,6 +59,7 @@ ResourceConverterDialog::ResourceConverterDialog(const ustring & working_directo
 
   // Dialog.  
   resourceconverterdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(resourceconverterdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(resourceconverterdialog), _("Resource Converter"));
   gtk_window_set_position(GTK_WINDOW(resourceconverterdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(resourceconverterdialog), TRUE);
@@ -424,7 +425,7 @@ void ResourceConverterDialog::on_type_button(bool no_ask)
     for (unsigned int i = 0; i < rctEnd; i++) {
       types.push_back(resource_conversion_type_to_text((ResourceConversionType) i));
     }
-    ListviewDialog dialog(_("Select resource conversion type"), types, resource_conversion_type_to_text(resource_conversion_type), false, NULL);
+    ListviewDialog dialog(_("Select resource conversion type"), types, resource_conversion_type_to_text(resource_conversion_type), false, NULL, GTK_WINDOW(resourceconverterdialog));
     if (dialog.run() == GTK_RESPONSE_OK) {
       dialog_ok = true;
       resource_conversion_type = resource_conversion_text_to_type(dialog.focus);
@@ -558,7 +559,7 @@ void ResourceConverterDialog::on_open_file_button()
   // List all files in the working directory.
   ReadFiles rf(workingdirectory, "", "");
   // Select a file.
-  ListviewDialog dialog(_("Select file"), rf.files, filename, true, NULL);
+  ListviewDialog dialog(_("Select file"), rf.files, filename, true, NULL, GTK_WINDOW(resourceconverterdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Store filename, read it.
     filename = dialog.focus;

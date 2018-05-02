@@ -45,6 +45,7 @@ WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
 // Project notes window.
 {
   // Initialize variables.
+  transient_parent = GTK_WINDOW(parent_layout);
   note_editor = NULL;
   redisplay_source_id = 0;
   displayprojectnotes = NULL;
@@ -889,7 +890,7 @@ void WindowNotes::on_button_more_clicked (GtkButton * button, gpointer user_data
 
 void WindowNotes::on_button_more ()
 {
-  ProjectNoteDialog dialog(vbox_client, projects, project, created_on, created_by, edited_on, logbook);
+  ProjectNoteDialog dialog(vbox_client, projects, project, created_on, created_by, edited_on, logbook, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     project = dialog.project;
   }

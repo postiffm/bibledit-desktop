@@ -45,7 +45,7 @@
 #include "stylesheetutils.h"
 #include <glib/gi18n.h>
 
-void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring > *extra_projects, vector < Reference > references, bool keep_verses_together_within_page, vector < ustring > *remarks, bool highlight)
+void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring > *extra_projects, vector < Reference > references, bool keep_verses_together_within_page, vector < ustring > *remarks, bool highlight, GtkWindow *transient_parent)
 /*
  Formats the references in "references", and highlights all words in
  "session->highlights*" and shows them in a pdf viewer.
@@ -74,7 +74,7 @@ void view_parallel_references_pdf(ProjectMemory & main_project, vector < ustring
   Mapping mapping(projectconfig->versification_get(), 0);
 
   // The converter.
-  Text2Pdf text2pdf(gw_build_filename(Directories->get_temp(), "document.pdf"), settings->genconfig.print_engine_use_intermediate_text_get());
+  Text2Pdf text2pdf(gw_build_filename(Directories->get_temp(), "document.pdf"), settings->genconfig.print_engine_use_intermediate_text_get(), transient_parent);
 
   // Page.
   text2pdf.page_size_set(settings->genconfig.paper_width_get(), settings->genconfig.paper_height_get());

@@ -30,7 +30,7 @@
 class NewStylesheetDialog
 {
 public:
-  NewStylesheetDialog (const ustring& worksheet);
+  NewStylesheetDialog (const ustring& worksheet, GtkWindow *transient_parent);
   ~NewStylesheetDialog ();
   int run ();
   ustring name;

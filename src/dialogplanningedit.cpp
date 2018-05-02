@@ -34,7 +34,7 @@
 #include "planning.h"
 
 
-PlanningEditDialog::PlanningEditDialog(unsigned int book, unsigned int chapter)
+PlanningEditDialog::PlanningEditDialog(unsigned int book, unsigned int chapter, GtkWindow *transient_parent)
 {
   // Initialize variables
   mybook = book;
@@ -46,7 +46,7 @@ PlanningEditDialog::PlanningEditDialog(unsigned int book, unsigned int chapter)
 
   Shortcuts shortcuts(0);
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  planningeditdialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
 
   button_status = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "button_status"));
   shortcuts.button (button_status);
@@ -56,7 +56,7 @@ PlanningEditDialog::PlanningEditDialog(unsigned int book, unsigned int chapter)
   shortcuts.button (button_tasks);
   g_signal_connect((gpointer) button_tasks, "clicked", G_CALLBACK(on_button_tasks_clicked), gpointer(this));
 
-  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, NULL);
+  InDialogHelp * indialoghelp = new InDialogHelp(planningeditdialog, gtkbuilder, &shortcuts, NULL);
 
   cancelbutton = indialoghelp->cancelbutton;
   shortcuts.stockbutton (cancelbutton);
@@ -76,13 +76,13 @@ PlanningEditDialog::PlanningEditDialog(unsigned int book, unsigned int chapter)
 PlanningEditDialog::~PlanningEditDialog()
 {
   g_object_unref (gtkbuilder);
-  gtk_widget_destroy(dialog);
+  gtk_widget_destroy(planningeditdialog);
 }
 
 
 int PlanningEditDialog::run()
 {
-  return gtk_dialog_run(GTK_DIALOG(dialog));
+  return gtk_dialog_run(GTK_DIALOG(planningeditdialog));
 }
 
 
@@ -94,7 +94,7 @@ void PlanningEditDialog::on_button_status_clicked(GtkButton * button, gpointer u
 void PlanningEditDialog::on_button_status()
 {
   extern Settings *settings;
-  EditStatusDialog dialog(settings->genconfig.project_get(), mybook, mychapter);
+  EditStatusDialog dialog(settings->genconfig.project_get(), mybook, mychapter, GTK_WINDOW(planningeditdialog));
   dialog.run();
 }
 
@@ -108,7 +108,7 @@ void PlanningEditDialog::on_button_tasks_clicked(GtkButton * button, gpointer us
 void PlanningEditDialog::on_button_tasks()
 {
   extern Settings *settings;
-  planning_edit(settings->genconfig.project_get());
+  planning_edit(settings->genconfig.project_get(), GTK_WINDOW(planningeditdialog));
 }
 
 

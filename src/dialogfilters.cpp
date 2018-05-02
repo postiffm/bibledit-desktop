@@ -31,13 +31,14 @@
 #include "unixwrappers.h"
 #include <glib/gi18n.h>
 
-FiltersDialog::FiltersDialog(int dummy)
+FiltersDialog::FiltersDialog(GtkWindow *transient_parent)
 {
   rulesbuffer_changed_event_id = 0;
 
   Shortcuts shortcuts(0);
 
   filterdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(filterdialog), transient_parent);
   gtk_widget_set_size_request(filterdialog, 640, 640);
   gtk_window_set_title(GTK_WINDOW(filterdialog), _("Filters"));
   gtk_window_set_position(GTK_WINDOW(filterdialog), GTK_WIN_POS_CENTER_ON_PARENT);
@@ -273,7 +274,7 @@ void FiltersDialog::on_button_new_clicked(GtkButton * button, gpointer user_data
 void FiltersDialog::on_button_new()
 {
   // Enter the name of the new script.
-  EntryDialog namedialog(_("New script"), _("Enter the name of the new script"), "");
+  EntryDialog namedialog(_("New script"), _("Enter the name of the new script"), "", GTK_WINDOW(filterdialog));
   if (namedialog.run() != GTK_RESPONSE_OK)
     return;
 
@@ -285,7 +286,7 @@ void FiltersDialog::on_button_new()
   vector < ustring > types;
   for (unsigned int i = 0; i < stEnd; i++)
     types.push_back(script_get_named_type((ScriptType) i));
-  RadiobuttonDialog typedialog(_("Script type"), _("Select the type of the script"), types, 0, false);
+  RadiobuttonDialog typedialog(_("Script type"), _("Select the type of the script"), types, 0, false, GTK_WINDOW(filterdialog));
   if (typedialog.run() != GTK_RESPONSE_OK)
     return;
 

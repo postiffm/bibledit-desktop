@@ -29,7 +29,7 @@
 class OutpostDialog
 {
 public:
-  OutpostDialog (int dummy);
+  OutpostDialog (GtkWindow *transient_parent);
   ~OutpostDialog ();
   int run ();
   bool changed;

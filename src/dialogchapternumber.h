@@ -28,7 +28,7 @@
 class ChapterNumberDialog
 {
 public:
-  ChapterNumberDialog (int dummy);
+  ChapterNumberDialog (GtkWindow *transient_parent);
   ~ChapterNumberDialog ();
   int run ();
 protected:

@@ -50,6 +50,7 @@ WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_g
   FloatingWindow(parent_layout, widMerge, _("Merge"), startup)
 // Window for merging changes.  
 {
+  transient_parent = GTK_WINDOW(parent_layout);
   // Save and initialize variables.
   load_gui_event_id = 0;
   editors_changed_event_id = 0;
@@ -592,7 +593,7 @@ void WindowMerge::on_button_merge()
   labels.push_back(_("Merge ") + book_chapter + _(" of project ") + current_edited_project + _(" and ") + current_master_project + ",\n" + _("and approve of each change as compared to project ") + current_master_project);
   labels.push_back(_("Copy ") + book_chapter + _(" of project ") + current_master_project + _(" to project ") + current_edited_project);
   labels.push_back(_("Copy everything of project ") + current_master_project + _(" to project ") + current_edited_project);
-  RadiobuttonDialog dialog(_("Select action"), _("Select the type of merge or copy to be done"), labels, settings->session.merge_action, false);
+  RadiobuttonDialog dialog(_("Select action"), _("Select the type of merge or copy to be done"), labels, settings->session.merge_action, false, transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   // Store action taken.
@@ -765,7 +766,7 @@ void WindowMerge::merge_edited_into_master(bool approve)
 
   // If there are conflicts, resolve them.
   if (merge_result.find(merge_conflict_markup(1)) != string::npos) {
-    MergeDialog dialog(merge_result);
+    MergeDialog dialog(merge_result, transient_parent);
     if (dialog.run() == GTK_RESPONSE_OK) {
       merge_result = dialog.reconciled_text;
     }

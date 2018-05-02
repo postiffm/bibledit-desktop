@@ -26,7 +26,7 @@
 #include "gwrappers.h"
 
 
-ReferenceSettingsDialog::ReferenceSettingsDialog(int dummy)
+ReferenceSettingsDialog::ReferenceSettingsDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
   Shortcuts shortcuts(0);
@@ -35,6 +35,7 @@ ReferenceSettingsDialog::ReferenceSettingsDialog(int dummy)
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.referencesettingsdialog.xml").c_str(), NULL);
 
   dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(dialog), transient_parent);
 
   checkbutton_verse_text = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "checkbutton_verse_text"));
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_verse_text), settings->genconfig.reference_window_show_verse_text_get());

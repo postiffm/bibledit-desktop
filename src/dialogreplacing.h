@@ -30,7 +30,7 @@
 class ReplacingDialog
 {
 public:
-  ReplacingDialog (const vector <Reference>& references_in);
+  ReplacingDialog (const vector <Reference>& references_in, GtkWindow *transient_parent);
   ~ ReplacingDialog ();
   int run ();
 protected:

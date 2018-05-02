@@ -28,7 +28,7 @@
 class DateDialog
 {
 public:
-  DateDialog (guint32 * seconds_since_epoch, bool showtime = false);
+  DateDialog (guint32 * seconds_since_epoch, GtkWindow *transient_parent, bool showtime = false);
   ~DateDialog ();
   int run ();
 protected:

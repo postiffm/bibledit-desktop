@@ -34,7 +34,7 @@
 #include "combobox.h"
 #include <glib/gi18n.h>
 
-EditNoteDialog::EditNoteDialog(Editor2 * editor)
+EditNoteDialog::EditNoteDialog(Editor2 * editor, GtkWindow *transient_parent)
 {
   // Save variables.
   myeditor = editor;
@@ -43,6 +43,7 @@ EditNoteDialog::EditNoteDialog(Editor2 * editor)
   Shortcuts shortcuts(0);
 
   editnotedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(editnotedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editnotedialog), _("Edit note"));
   gtk_window_set_position(GTK_WINDOW(editnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
 

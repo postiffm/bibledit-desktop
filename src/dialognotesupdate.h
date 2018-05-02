@@ -29,7 +29,7 @@
 class NotesUpdateDialog
 {
 public:
-  NotesUpdateDialog (int dummy);
+  NotesUpdateDialog (GtkWindow *transient_parent);
   ~NotesUpdateDialog ();
   int run ();
 protected:

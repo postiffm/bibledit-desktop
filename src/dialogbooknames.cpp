@@ -33,12 +33,13 @@
 enum { COLUMN_BIBLEDIT, COLUMN_EDITABLE, COLUMN_URL, NUM_COLUMNS };
 
 
-BooknamesDialog::BooknamesDialog(const map <unsigned int, ustring>& books, const gchar * info, const gchar * heading2)
+BooknamesDialog::BooknamesDialog(const map <unsigned int, ustring>& books, const gchar * info, const gchar * heading2, GtkWindow *transient_parent)
 {
   // Shortcuts.
   Shortcuts shortcuts(0);
 
   resourcebooksdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(resourcebooksdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(resourcebooksdialog), _("Books"));
   gtk_window_set_position(GTK_WINDOW(resourcebooksdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(resourcebooksdialog), TRUE);

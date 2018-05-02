@@ -28,7 +28,7 @@
 #include "help.h"
 #include <glib/gi18n.h>
 
-NotesDialog::NotesDialog(int dummy)
+NotesDialog::NotesDialog(GtkWindow *transient_parent)
 {
   // Read all the categories and add possible new ones in the database.
   ReadText rt(notes_categories_filename());
@@ -36,6 +36,7 @@ NotesDialog::NotesDialog(int dummy)
   notes_categories_add_from_database(categories);
 
   notesdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(notesdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(notesdialog), _("Project notes"));
   gtk_window_set_position(GTK_WINDOW(notesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(notesdialog), TRUE);
@@ -202,7 +203,7 @@ void NotesDialog::on_buttonadd_clicked(GtkButton * button, gpointer user_data)
 
 void NotesDialog::on_add_category()
 {
-  EntryDialog dialog(_("New category name"), _("Enter a new category."), "");
+  EntryDialog dialog(_("New category name"), _("Enter a new category."), "", GTK_WINDOW(notesdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     vector < ustring > categories = listview_get_strings(treeview1);
     categories.push_back(dialog.entered_value);

@@ -29,7 +29,7 @@
 class EditDictionaryDialog
 {
 public:
-  EditDictionaryDialog (const ustring& dictionary);
+  EditDictionaryDialog (const ustring& dictionary, GtkWindow *transient_parent);
   ~EditDictionaryDialog ();
   int run ();
 protected:

@@ -54,14 +54,15 @@
 #include "java.h"
 #include <glib/gi18n.h>
 
-void export_to_usfm (const ustring& project, ustring location, bool zip, bool combined)
+void export_to_usfm (const ustring& project, ustring location, bool zip, bool combined, GtkWindow *transient_parent)
 {
   // (Temporal) output directory.
   ustring tempdir = gw_build_filename(Directories->get_temp(), "usfm-export");
   unix_rmdir(tempdir);
   gw_mkdir_with_parents(tempdir);
-  if (!zip)
+  if (!zip) {
     gw_mkdir_with_parents(location);
+  }
 
   // Configuration.
   extern Settings *settings;
@@ -71,7 +72,7 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
   vector <unsigned int> books = project_get_books(project);
   {
     set <unsigned int> selectedbooks (books.begin(), books.end());
-    SelectBooksDialog dialog(false);
+    SelectBooksDialog dialog(false, GTK_WINDOW(transient_parent));
     dialog.language(projectconfig->language_get());
     dialog.selection_set(selectedbooks);
     if (dialog.run() != GTK_RESPONSE_OK) {
@@ -678,7 +679,7 @@ directory: Where to put the module.
 }
 
 
-void export_to_opendocument(const ustring& project, const ustring& filename)
+void export_to_opendocument(const ustring& project, const ustring& filename, GtkWindow *transient_parent)
 {
   // Configurations.
   extern Settings *settings;
@@ -688,7 +689,7 @@ void export_to_opendocument(const ustring& project, const ustring& filename)
   vector < unsigned int >books = project_get_books(project);
   set < unsigned int >selectedbooks(books.begin(), books.end());
   {
-    SelectBooksDialog dialog(false);
+    SelectBooksDialog dialog(false, transient_parent);
     dialog.language(projectconfig->language_get());
     dialog.selection_set(selectedbooks);
     if (dialog.run() != GTK_RESPONSE_OK)
@@ -706,7 +707,7 @@ void export_to_opendocument(const ustring& project, const ustring& filename)
     vector < ustring > labels;
     labels.push_back(_("Single file"));
     labels.push_back(_("Multiple files"));
-    RadiobuttonDialog dialog(_("Save method"), _("Multiple books have been selected.\nShould these be saved to a single file or to multiple files?"), labels, 0, false);
+    RadiobuttonDialog dialog(_("Save method"), _("Multiple books have been selected.\nShould these be saved to a single file or to multiple files?"), labels, 0, false, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return;
     singlefile = dialog.selection == 0;

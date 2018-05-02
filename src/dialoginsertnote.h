@@ -30,7 +30,7 @@
 class InsertNoteDialog
 {
 public:
-  InsertNoteDialog (NoteType dialogtype);
+  InsertNoteDialog (NoteType dialogtype, GtkWindow *transient_parent);
   ~InsertNoteDialog ();
   int run ();
 

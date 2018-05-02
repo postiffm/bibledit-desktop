@@ -28,7 +28,7 @@
 #include "screen.h"
 #include <glib/gi18n.h>
 
-EditStatusDialog::EditStatusDialog(const ustring & project_in, unsigned int book, unsigned int chapter)
+EditStatusDialog::EditStatusDialog(const ustring & project_in, unsigned int book, unsigned int chapter, GtkWindow *transient_parent)
 {
   // Initialize variables.
   project = project_in;
@@ -44,6 +44,7 @@ EditStatusDialog::EditStatusDialog(const ustring & project_in, unsigned int book
 
   // Build dialog.  
   editstatusdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(editstatusdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editstatusdialog), _("Edit Status"));
   gtk_window_set_position(GTK_WINDOW(editstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(editstatusdialog), TRUE);
@@ -573,5 +574,3 @@ void EditStatusDialog::on_okbutton()
   // Save status.
   projectstatus->save();
 }
-
-

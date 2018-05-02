@@ -35,7 +35,7 @@
 #include "xetex.h"
 
 
-XeTeXDialog::XeTeXDialog(int dummy)
+XeTeXDialog::XeTeXDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
   ProjectConfiguration *projectconfig = settings->projectconfig(settings->genconfig.project_get());
@@ -43,7 +43,8 @@ XeTeXDialog::XeTeXDialog(int dummy)
   gtkbuilder = gtk_builder_new ();
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.xetexdialog.xml").c_str(), NULL);
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  xetexdialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(xetexdialog), transient_parent);
 
   label_portion = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_portion"));
 
@@ -86,7 +87,7 @@ XeTeXDialog::XeTeXDialog(int dummy)
   shaping_engine_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(radiobutton_shaping_engine_arab));
   shaping_engine_set (projectconfig->xetex_shaping_engine_get());
 
-  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, NULL, "file/print/project");
+  InDialogHelp * indialoghelp = new InDialogHelp(xetexdialog, gtkbuilder, NULL, "file/print/project");
   cancelbutton = indialoghelp->cancelbutton;
   okbutton = indialoghelp->okbutton;
   gtk_widget_grab_focus(okbutton);
@@ -99,13 +100,13 @@ XeTeXDialog::XeTeXDialog(int dummy)
 
 XeTeXDialog::~XeTeXDialog()
 {
-  gtk_widget_destroy(dialog);
+  gtk_widget_destroy(xetexdialog);
 }
 
 
 int XeTeXDialog::run()
 {
-  return gtk_dialog_run(GTK_DIALOG(dialog));
+  return gtk_dialog_run(GTK_DIALOG(xetexdialog));
 }
 
 
@@ -141,7 +142,7 @@ void XeTeXDialog::on_button_portion_clicked(GtkButton * button, gpointer user_da
 
 void XeTeXDialog::on_button_portion()
 {
-  SelectBooksDialog dialog(true);
+  SelectBooksDialog dialog(true, GTK_WINDOW(xetexdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     set_gui();
   }

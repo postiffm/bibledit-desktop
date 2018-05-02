@@ -30,7 +30,7 @@ enum OpenStylesheetDialogType {osdtSwitch, osdtDelete};
 class OpenStylesheetDialog
 {
 public:
-  OpenStylesheetDialog (OpenStylesheetDialogType dialogtype, const ustring & currentstylesheet);
+  OpenStylesheetDialog (OpenStylesheetDialogType dialogtype, const ustring & currentstylesheet, GtkWindow *transient_parent);
   ~OpenStylesheetDialog ();
   int run ();
   ustring stylesheet;

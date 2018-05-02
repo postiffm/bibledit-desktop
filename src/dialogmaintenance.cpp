@@ -26,9 +26,10 @@
 #include "htmlbrowser.h"
 #include <glib/gi18n.h>
 
-MaintenanceDialog::MaintenanceDialog(int dummy)
+MaintenanceDialog::MaintenanceDialog(GtkWindow *transient_parent)
 {
   dialog = gtk_dialog_new ();
+  gtk_window_set_transient_for(GTK_WINDOW(dialog), transient_parent);
   gtk_window_set_title (GTK_WINDOW (dialog), _("Maintenance"));
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);

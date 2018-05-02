@@ -27,7 +27,7 @@
 class WaitDialog
 {
 public:
-  WaitDialog (int milliseconds, int width, int height);
+  WaitDialog (int milliseconds, int width, int height, GtkWindow *transient_parent);
   ~WaitDialog ();
   int run ();
 protected:

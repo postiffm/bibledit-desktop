@@ -29,7 +29,7 @@
 class GuiDialog
 {
 public:
-  GuiDialog (int dummy);
+  GuiDialog (GtkWindow *transient_parent);
   ~GuiDialog ();
   int run ();
 protected:

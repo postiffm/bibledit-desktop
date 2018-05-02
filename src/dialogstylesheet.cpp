@@ -72,13 +72,14 @@
  */
 
 
-StylesheetDialog::StylesheetDialog(const ustring & stylesheet, const ustring & style)
+StylesheetDialog::StylesheetDialog(const ustring & stylesheet, const ustring & style, GtkWindow *transient_parent)
 {
   // Save variables.
   mystylesheet = stylesheet;
   mystyle = style;
 
   stylesheetdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(stylesheetdialog), transient_parent);
   ustring s;
   s = _("Stylesheet ") + stylesheet + _(", style ") + style;
   gtk_window_set_title(GTK_WINDOW(stylesheetdialog), s.c_str());

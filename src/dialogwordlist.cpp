@@ -28,7 +28,7 @@
 #include "gtkwrappers.h"
 #include <glib/gi18n.h>
 
-WordlistDialog::WordlistDialog(int dummy)
+WordlistDialog::WordlistDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 

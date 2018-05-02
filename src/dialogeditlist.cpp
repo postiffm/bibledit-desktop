@@ -31,13 +31,14 @@
 #include "dialoglistviewm.h"
 #include <glib/gi18n.h>
 
-EditListDialog::EditListDialog(vector <ustring> * lines, const ustring & title, const ustring & info, bool remove, bool add, bool sort, bool import, bool exprt, bool duplicates, bool reorderable, vector <ustring> * addables)
+EditListDialog::EditListDialog(vector <ustring> * lines, const ustring & title, const ustring & info, bool remove, bool add, bool sort, bool import, bool exprt, bool duplicates, bool reorderable, vector <ustring> * addables, GtkWindow *transient_parent)
 {
   // Save variables.
   mylines = lines;
   myaddables = addables;
 
   editlistdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(editlistdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editlistdialog), title.c_str());
   gtk_window_set_position(GTK_WINDOW(editlistdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(editlistdialog), TRUE);
@@ -318,7 +319,7 @@ void EditListDialog::on_add()
 // Adds tasks.
 {
   if (myaddables) {
-    ListviewMDialog dialog(_("Select a task to add"), *myaddables, false, NULL);
+    ListviewMDialog dialog(_("Select a task to add"), *myaddables, false, NULL, GTK_WINDOW(editlistdialog));
     if (dialog.run() == GTK_RESPONSE_OK) {
       for (unsigned int i = 0; i < dialog.foci.size(); i++) {
         GtkTreeIter iter;
@@ -327,7 +328,7 @@ void EditListDialog::on_add()
       }
     }
   } else {
-    EntryDialog dialog(_("New value"), _("Enter a new value"), "");
+    EntryDialog dialog(_("New value"), _("Enter a new value"), "", GTK_WINDOW(editlistdialog));
     if (dialog.run() == GTK_RESPONSE_OK) {
       GtkTreeIter iter;
       gtk_list_store_append(liststore, &iter);

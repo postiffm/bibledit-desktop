@@ -30,7 +30,7 @@ enum ImportFormat {ifUnknown, ifBibleditNotesVersion3, ifScriptureNotesVersion20
 class ImportNotesDialog
 {
 public:
-  ImportNotesDialog (int dummy);
+  ImportNotesDialog (GtkWindow *transient_parent);
   ~ ImportNotesDialog ();
   int run ();
 protected:

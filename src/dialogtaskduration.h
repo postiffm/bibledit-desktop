@@ -29,7 +29,7 @@
 class TaskDurationDialog
 {
 public:
-  TaskDurationDialog (vector <ustring> * tasks, vector <double> * durations);
+  TaskDurationDialog (vector <ustring> * tasks, vector <double> * durations, GtkWindow *transient_parent);
   ~TaskDurationDialog ();
   int run ();
 protected:

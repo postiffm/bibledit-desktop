@@ -700,9 +700,9 @@ void ExportAssistant::on_assistant_apply ()
             case eutEverything:
             {
               if (get_compressed ()) {
-                export_to_usfm(bible_name, filename, /*compressed*/true, get_combined());
+                export_to_usfm(bible_name, filename, /*compressed*/true, get_combined(), GTK_WINDOW(assistant));
               } else {
-                export_to_usfm(bible_name, foldername, /*compressed*/false, get_combined());
+                export_to_usfm(bible_name, foldername, /*compressed*/false, get_combined(), GTK_WINDOW(assistant));
               }
               break;
             }
@@ -780,7 +780,7 @@ void ExportAssistant::on_assistant_apply ()
         {
           extern Settings *settings;
           settings->genconfig.references_file_set(filename);
-          export_to_opendocument(bible_name, filename);
+          export_to_opendocument(bible_name, filename, GTK_WINDOW(assistant));
           break;
         }
         case ebtGoBible:
@@ -1000,7 +1000,7 @@ void ExportAssistant::on_button_bible_name_clicked (GtkButton *button, gpointer 
 
 void ExportAssistant::on_button_bible_name ()
 {
-  project_select(bible_name);
+  project_select(bible_name, GTK_WINDOW(assistant));
   on_assistant_prepare (vbox_bible_name);
   sword_values_set ();
 }
@@ -1014,7 +1014,7 @@ void ExportAssistant::on_button_date_time_clicked (GtkButton *button, gpointer u
 
 void ExportAssistant::on_button_date_time ()
 {
-  DateDialog dialog(&date_time, true);
+  DateDialog dialog(&date_time, GTK_WINDOW(assistant), true);
   dialog.run();
   on_assistant_prepare (vbox_date_time);
 }

@@ -30,7 +30,7 @@
 class ReferenceSettingsDialog
 {
 public:
-  ReferenceSettingsDialog (int dummy);
+  ReferenceSettingsDialog (GtkWindow *transient_parent);
   ~ReferenceSettingsDialog ();
   int run();
 protected:

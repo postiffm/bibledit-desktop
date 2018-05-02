@@ -28,13 +28,14 @@
 #include "utilities.h"
 #include <glib/gi18n.h>
 
-MergeDialog::MergeDialog(const ustring & text)
+MergeDialog::MergeDialog(const ustring & text, GtkWindow *transient_parent)
 {
   event_textbuffer = 0;
 
   extern Settings *settings;
 
   mergedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(mergedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(mergedialog), _("Merge"));
   gtk_window_set_position(GTK_WINDOW(mergedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(mergedialog), TRUE);

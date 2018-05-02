@@ -32,9 +32,10 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-AreaDialog::AreaDialog(int dummy)
+AreaDialog::AreaDialog(GtkWindow *transient_parent)
 {
   areadialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(areadialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(areadialog), _("Area selection"));
   gtk_window_set_position(GTK_WINDOW(areadialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(areadialog), TRUE);

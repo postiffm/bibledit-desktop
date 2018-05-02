@@ -26,7 +26,7 @@
 class ProjectNoteDialog
 {
 public:
-  ProjectNoteDialog(GtkWidget * parent, const vector <ustring>& projects_in, const ustring& project_in, const ustring& created_on, const ustring& created_by, const ustring& edited_on, const ustring& logbook);
+  ProjectNoteDialog(GtkWidget * parent, const vector <ustring>& projects_in, const ustring& project_in, const ustring& created_on, const ustring& created_by, const ustring& edited_on, const ustring& logbook, GtkWindow *transient_parent);
   ~ProjectNoteDialog();
   int run();
   ustring project;

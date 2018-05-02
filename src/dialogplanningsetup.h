@@ -29,12 +29,12 @@
 class PlanningSetupDialog
 {
 public:
-  PlanningSetupDialog (int dummy);
+  PlanningSetupDialog (GtkWindow *transient_parent);
   ~PlanningSetupDialog ();
   int run ();
 protected:
   GtkBuilder *gtkbuilder;
-  GtkWidget *dialog;
+  GtkWidget *planningsetupdialog;
   GtkWidget *button_start;
   GtkWidget *button_tasks;
   GtkWidget *button_time;

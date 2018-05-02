@@ -25,11 +25,12 @@
 #include "screen.h"
 
 
-RadiobuttonDialog::RadiobuttonDialog(const ustring & title, const ustring & info, const vector < ustring > &labels, unsigned int selection, bool autoscale)
+RadiobuttonDialog::RadiobuttonDialog(const ustring & title, const ustring & info, const vector < ustring > &labels, unsigned int selection, bool autoscale, GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   radiobuttondialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(radiobuttondialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(radiobuttondialog), title.c_str());
   gtk_window_set_position(GTK_WINDOW(radiobuttondialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(radiobuttondialog), TRUE);

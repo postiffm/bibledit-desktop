@@ -37,7 +37,7 @@
 #include "constants.h"
 #include <glib/gi18n.h>
 
-void compare_with(WindowReferences * references_window, const ustring & project, const ustring & secondproject, bool print_changes_only)
+void compare_with(WindowReferences * references_window, const ustring & project, const ustring & secondproject, bool print_changes_only, GtkWindow *transient_parent)
 {
   // Load the project, and the second project.
   ProjectMemory projectmemory(project, true);
@@ -62,11 +62,11 @@ void compare_with(WindowReferences * references_window, const ustring & project,
     compare_get_changes(comparedprojectmemory, references);
     references_window->set (references, project, NULL);
     comparedprojectmemory.name = project;
-    view_parallel_references_pdf(comparedprojectmemory, NULL, references, true, &additions_deletions, true);
+    view_parallel_references_pdf(comparedprojectmemory, NULL, references, true, &additions_deletions, true, transient_parent);
   } else {
     // Print whole modified project, plus additions / deletions.
     // No bold, as bold might interfere with the marking of additions, which are in bold too.
-    PrintProject printproject(&comparedprojectmemory);
+    PrintProject printproject(&comparedprojectmemory, transient_parent);
     printproject.portion_project(project);
     for (unsigned int i = 0; i < additions_deletions.size(); i++) {
       printproject.comment(additions_deletions[i]);

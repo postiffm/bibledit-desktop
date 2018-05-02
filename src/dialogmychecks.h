@@ -30,7 +30,7 @@
 class MyChecksDialog
 {
 public:
-  MyChecksDialog (WindowReferences * references_window);
+  MyChecksDialog (WindowReferences * references_window, GtkWindow *transient_parent);
   ~MyChecksDialog ();
   int run ();
 protected:

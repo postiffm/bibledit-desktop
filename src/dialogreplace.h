@@ -29,7 +29,7 @@
 class ReplaceDialog
 {
 public:
-  ReplaceDialog (int dummy);
+  ReplaceDialog (GtkWindow *transient_parent);
   ~ ReplaceDialog ();
   int run ();
   vector <Reference> results;

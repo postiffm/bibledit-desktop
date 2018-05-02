@@ -29,7 +29,7 @@
 #include "portion_utils.h"
 #include <glib/gi18n.h>
 
-void view_parallel_bible_pdf()
+void view_parallel_bible_pdf(GtkWindow *transient_parent)
 {
   // Log.
   gw_message(_("Printing Parallel Bible"));
@@ -118,7 +118,7 @@ void view_parallel_bible_pdf()
 
   // Do the printing.
   ProjectMemory projectmemory(settings->genconfig.project_get(), true);
-  view_parallel_references_pdf(projectmemory, &project_names, references, settings->genconfig.parallel_bible_keep_verses_together_get(), &messages, false);
+  view_parallel_references_pdf(projectmemory, &project_names, references, settings->genconfig.parallel_bible_keep_verses_together_get(), &messages, false, transient_parent);
 
   // Log: ready.
   gw_message(_("Ready printing the Parallel Bible"));

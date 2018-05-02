@@ -35,6 +35,7 @@ class WindowMerge : public FloatingWindow
 {
 public:
   WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  GtkWindow *transient_parent;
   virtual ~WindowMerge();
 protected:
   GtkWidget *notebook1;

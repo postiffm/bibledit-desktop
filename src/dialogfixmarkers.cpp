@@ -25,11 +25,12 @@
 #include "fixmarkers.h"
 #include <glib/gi18n.h>
 
-FixMarkersDialog::FixMarkersDialog(int dummy)
+FixMarkersDialog::FixMarkersDialog(GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   fixmarkersdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(fixmarkersdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(fixmarkersdialog), _("Simple text corrections"));
   gtk_window_set_position(GTK_WINDOW(fixmarkersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 

@@ -24,11 +24,12 @@
 #include "color.h"
 #include <glib/gi18n.h>
 
-FontColorDialog::FontColorDialog(bool initial_use_default_font, const ustring & initial_font, unsigned int initial_line_spacing, bool initial_use_default_color, unsigned int initial_normal_text_color, unsigned int initial_background_color, unsigned int initial_selected_text_color, unsigned int initial_selection_color)
+FontColorDialog::FontColorDialog(bool initial_use_default_font, const ustring & initial_font, unsigned int initial_line_spacing, bool initial_use_default_color, unsigned int initial_normal_text_color, unsigned int initial_background_color, unsigned int initial_selected_text_color, unsigned int initial_selection_color, GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
 
   fontcolordialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(fontcolordialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(fontcolordialog), _("Font and Color"));
   gtk_window_set_position(GTK_WINDOW(fontcolordialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(fontcolordialog), TRUE);

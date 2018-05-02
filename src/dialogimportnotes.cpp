@@ -40,9 +40,10 @@
 #define TEMP_FILE "bibledit.import.notes"
 
 
-ImportNotesDialog::ImportNotesDialog(int dummy)
+ImportNotesDialog::ImportNotesDialog(GtkWindow *transient_parent)
 {
   importnotesdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(importnotesdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(importnotesdialog), "Import Notes");
   gtk_window_set_position(GTK_WINDOW(importnotesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(importnotesdialog), TRUE);
@@ -278,7 +279,7 @@ void ImportNotesDialog::set_gui()
   case 4:
     {
       // Some eye candy, because the process might take time.
-      WaitDialog wd(500, 450, 300);
+      WaitDialog wd(500, 450, 300, GTK_WINDOW(importnotesdialog));
       wd.run();
       // Make known corrections to the xml file.
       make_known_corrections_to_xml_file();

@@ -37,6 +37,7 @@
 GuiNavigation::GuiNavigation(int dummy): track(0)
 {
   // Initialize members.
+  transient_parent = NULL;
   parentToolbar = NULL;
   new_reference_signal = NULL;
   button_list_back = NULL;
@@ -71,12 +72,13 @@ GuiNavigation::~GuiNavigation()
 }
 
 
-void GuiNavigation::build(GtkWidget * toolbar)
+void GuiNavigation::build(GtkWidget * toolbar, GtkWindow *_transient_parent)
 {
   parentToolbar = toolbar; // Save this so we have something to attach
 			   // children widgets to (like error message
 			   // dialogs), as well as the following
 			   // contents.
+  transient_parent = _transient_parent;
   // Signalling buttons, but not visible.
   GtkToolItem *toolitem_delayed = gtk_tool_item_new();
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem_delayed), -1);
@@ -1065,7 +1067,7 @@ void GuiNavigation::on_list_back ()
   for (unsigned int i = 0; i < references.size(); i++) {
     labels.push_back (references[i].human_readable (language));
   }
-  RadiobuttonDialog dialog (_("Go back"), _("Where would you like to go back to?"), labels, 0, true);
+  RadiobuttonDialog dialog (_("Go back"), _("Where would you like to go back to?"), labels, 0, true, transient_parent);
   if (dialog.run () == GTK_RESPONSE_OK) {
     for (unsigned int i = 0; i <= dialog.selection; i++) {
       on_back();
@@ -1082,7 +1084,7 @@ void GuiNavigation::on_list_forward ()
   for (unsigned int i = 0; i < references.size(); i++) {
     labels.push_back (references[i].human_readable (language));
   }
-  RadiobuttonDialog dialog (_("Go forward"), _("Where would you like to go forward to?"), labels, 0, true);
+  RadiobuttonDialog dialog (_("Go forward"), _("Where would you like to go forward to?"), labels, 0, true, transient_parent);
   if (dialog.run () == GTK_RESPONSE_OK) {
     for (unsigned int i = 0; i <= dialog.selection; i++) {
       on_forward();

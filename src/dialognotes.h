@@ -28,7 +28,7 @@
 class NotesDialog
 {
 public:
-  NotesDialog (int dummy);
+  NotesDialog (GtkWindow *transient_parent);
   ~NotesDialog ();
   int run ();
 protected:

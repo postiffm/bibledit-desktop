@@ -35,6 +35,7 @@ class WindowNotes : public FloatingWindow
 {
 public:
   WindowNotes(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
+  GtkWindow *transient_parent;
   virtual ~WindowNotes();
   void go_to (Reference& reference);
   void new_note ();

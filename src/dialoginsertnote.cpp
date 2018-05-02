@@ -40,13 +40,14 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-InsertNoteDialog::InsertNoteDialog(NoteType dialogtype)
+InsertNoteDialog::InsertNoteDialog(NoteType dialogtype, GtkWindow *transient_parent)
 {
   extern Settings *settings;
   mydialogtype = dialogtype;
   allow_entry_activate = true;
 
   insertnotedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(insertnotedialog), transient_parent);
   ustring title = _("Insert ");
   switch (dialogtype) {
   case indtFootnote:
@@ -772,7 +773,7 @@ void InsertNoteDialog::on_button_template_new_clicked(GtkButton * button, gpoint
 
 void InsertNoteDialog::on_button_template_new()
 {
-  EntryDialog dialog(_("Template"), _("Enter a name for a new template"), "");
+  EntryDialog dialog(_("Template"), _("Enter a name for a new template"), "", GTK_WINDOW(insertnotedialog));
   dialog.run();
   GwSpawn spawn("touch");
   spawn.arg(gw_build_filename(Directories->get_configuration(), template_filename_get(dialog.entered_value)));

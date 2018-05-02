@@ -33,7 +33,7 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
+ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in, GtkWindow *transient_parent)
 {
   extern Settings *settings;
   searchfor = settings->session.searchword;
@@ -44,6 +44,7 @@ ReplacingDialog::ReplacingDialog(const vector < Reference > &references_in)
   mylanguage = projectconfig->language_get();
 
   replacedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(replacedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(replacedialog), _("Replace"));
   gtk_window_set_destroy_with_parent(GTK_WINDOW(replacedialog), TRUE);
 
@@ -382,4 +383,3 @@ void ReplacingDialog::accept_change()
 			data);
   }
 }
-

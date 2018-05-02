@@ -30,7 +30,7 @@
 
 enum { COLUMN_ABBREV, COLUMN_EDITABLE, COLUMN_TEXT, NUM_COLUMNS };
 
-TidyDialog::TidyDialog(int dummy)
+TidyDialog::TidyDialog(GtkWindow *transient_parent)
 {
   // Get configurations.
   extern Settings *settings;
@@ -40,6 +40,7 @@ TidyDialog::TidyDialog(int dummy)
   Shortcuts shortcuts(0);
 
   tidydialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(tidydialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(tidydialog), _("Tidy Text"));
   gtk_window_set_position(GTK_WINDOW(tidydialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(tidydialog), TRUE);

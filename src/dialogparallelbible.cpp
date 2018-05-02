@@ -36,7 +36,7 @@
 #include "screen.h"
 
 
-ParallelBibleDialog::ParallelBibleDialog(int dummy)
+ParallelBibleDialog::ParallelBibleDialog(GtkWindow *transient_parent)
 {
   gtkbuilder = gtk_builder_new ();
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.parallelbibledialog.xml").c_str(), NULL);
@@ -44,8 +44,8 @@ ParallelBibleDialog::ParallelBibleDialog(int dummy)
   Shortcuts shortcuts(0);
   extern Settings *settings;
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
-
+  parallelbibledialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(parallelbibledialog), transient_parent);
   label_main_project = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_main_project"));
   gtk_label_set_text (GTK_LABEL (label_main_project), settings->genconfig.project_get().c_str());
 
@@ -71,7 +71,7 @@ ParallelBibleDialog::ParallelBibleDialog(int dummy)
   shortcuts.label(label_button_chapters);
 
   hbox_select_bibles_gui = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "hbox_select_bibles_gui"));
-  select_bibles_gui = new SelectBiblesGui (hbox_select_bibles_gui, shortcuts);
+  select_bibles_gui = new SelectBiblesGui (hbox_select_bibles_gui, shortcuts, GTK_WINDOW(parallelbibledialog));
   vector <ustring> bibles = settings->genconfig.parallel_bible_projects_get();
   vector <bool> enabled = settings->genconfig.parallel_bible_enabled_get();
   select_bibles_gui->set (enabled, bibles);
@@ -84,7 +84,7 @@ ParallelBibleDialog::ParallelBibleDialog(int dummy)
   shortcuts.button(checkbutton_include_verse0);
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_include_verse0), settings->genconfig.parallel_bible_include_verse_zero_get());
 
-  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, NULL);
+  InDialogHelp * indialoghelp = new InDialogHelp(parallelbibledialog, gtkbuilder, &shortcuts, NULL);
   cancelbutton = indialoghelp->cancelbutton;
   okbutton = indialoghelp->okbutton;
   gtk_widget_grab_default(okbutton);
@@ -92,9 +92,9 @@ ParallelBibleDialog::ParallelBibleDialog(int dummy)
   g_signal_connect((gpointer) okbutton, "clicked", G_CALLBACK(on_okbutton_clicked), gpointer(this));
 
   shortcuts.process();
-  gtk_widget_show(dialog);
+  gtk_widget_show(parallelbibledialog);
   
-  new DialogAutoScaler (dialog, G_MAXINT);
+  new DialogAutoScaler (parallelbibledialog, G_MAXINT);
 }
 
 
@@ -102,13 +102,13 @@ ParallelBibleDialog::~ParallelBibleDialog()
 {
   delete select_bibles_gui;
   g_object_unref (gtkbuilder);
-  gtk_widget_destroy(dialog);
+  gtk_widget_destroy(parallelbibledialog);
 }
 
 
 int ParallelBibleDialog::run()
 {
-  return gtk_dialog_run(GTK_DIALOG(dialog));
+  return gtk_dialog_run(GTK_DIALOG(parallelbibledialog));
 }
 
 
@@ -141,7 +141,7 @@ void ParallelBibleDialog::on_button_chapters_clicked(GtkButton * button, gpointe
 void ParallelBibleDialog::on_button_chapters()
 {
   extern Settings *settings;
-  SelectChaptersDialog dialog(settings->genconfig.project_get(), settings->genconfig.book_get(), gtk_label_get_text(GTK_LABEL(label_chapters)));
+  SelectChaptersDialog dialog(settings->genconfig.project_get(), settings->genconfig.book_get(), gtk_label_get_text(GTK_LABEL(label_chapters)), GTK_WINDOW(parallelbibledialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     gtk_label_set_text(GTK_LABEL(label_chapters), dialog.new_selection.c_str());
   }

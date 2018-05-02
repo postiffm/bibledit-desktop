@@ -479,7 +479,7 @@ bool project_book_exists(const ustring & project, unsigned int book)
   return g_file_test(directory.c_str(), G_FILE_TEST_IS_DIR);
 }
 
-bool project_select(ustring & newproject)
+bool project_select(ustring & newproject, GtkWindow *transient_parent)
 // Shows the select project dialog. 
 // newproject: gets the new project if one was chosen.
 // Returns true if a project was chosen.
@@ -504,7 +504,7 @@ bool project_select(ustring & newproject)
     extern Settings *settings;
     focusedproject = settings->genconfig.project_get();
   }
-  ListviewDialog dialog(_("Open project"), editable_projects, focusedproject, true, NULL);
+  ListviewDialog dialog(_("Open project"), editable_projects, focusedproject, true, NULL, transient_parent);
   dialog.two_pages(_("Editable"), _("Non-editable"), non_editable_projects, true);
   dialog.tab_switcher(GDK_KEY_O, GDK_CONTROL_MASK, _("Ctrl-O"), _("to display the editable projects"), _("to display the non-editable projects"));
   if (dialog.run() == GTK_RESPONSE_OK) {

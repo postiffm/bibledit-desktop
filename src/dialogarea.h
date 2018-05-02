@@ -29,7 +29,7 @@
 class AreaDialog
 {
 public:
-  AreaDialog (int dummy);
+  AreaDialog (GtkWindow *transient_parent);
   ~AreaDialog ();
   int run ();
 protected:

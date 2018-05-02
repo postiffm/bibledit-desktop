@@ -43,11 +43,12 @@
 #include "usfm2text.h"
 #include <glib/gi18n.h>
 
-PrintProject::PrintProject(ProjectMemory * project)
+PrintProject::PrintProject(ProjectMemory * project, GtkWindow *_transient_parent)
 {
   myproject = project;
   scriptureportions = NULL;
   nobold = false;
+  transient_parent = _transient_parent;
 }
 
 
@@ -88,7 +89,7 @@ void PrintProject::print()
   }
   scriptureportions = new ScripturePortions(portionproject);
   if (scriptureportions->books.empty()) {
-    gtkw_dialog_info(NULL, _("There were no books to print\nSelect some books and try again"));
+    gtkw_dialog_info(GTK_WIDGET(transient_parent), _("There were no books to print\nSelect some books and try again"));
     return;
   }
   // Settings.
@@ -96,7 +97,7 @@ void PrintProject::print()
   ProjectConfiguration *projectconfig = settings->projectconfig(myproject->name);
 
   // Create Text to PDF and Usfm to Text converters.
-  Text2Pdf text2pdf(gw_build_filename(Directories->get_temp(), projectconfig->project + ".pdf"), settings->genconfig.print_engine_use_intermediate_text_get());
+  Text2Pdf text2pdf(gw_build_filename(Directories->get_temp(), projectconfig->project + ".pdf"), settings->genconfig.print_engine_use_intermediate_text_get(), transient_parent);
   Usfm2Text usfm2text(&text2pdf, true);
 
   // Styles.

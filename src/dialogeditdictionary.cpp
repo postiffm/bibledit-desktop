@@ -32,12 +32,13 @@
 #include "screen.h"
 #include <glib/gi18n.h>
 
-EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary)
+EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary, GtkWindow *transient_parent)
 {
   mydictionary = dictionary;
   Shortcuts shortcuts(0);
 
   textviewdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(textviewdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(textviewdialog), _("Edit Dictionary"));
   gtk_window_set_position(GTK_WINDOW(textviewdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(textviewdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -305,7 +306,7 @@ void EditDictionaryDialog::on_button_import_dict_clicked(GtkButton * button, gpo
 void EditDictionaryDialog::on_button_import_dict()
 {
   vector < ustring > dictionaries = get_other_editable_dictionaries();
-  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL);
+  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL, GTK_WINDOW(textviewdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring filename = spelling_dictionary_filename(dialog.focus);
     ReadText rt(filename, true, false);
@@ -349,7 +350,7 @@ void EditDictionaryDialog::on_button_export_dict_clicked(GtkButton * button, gpo
 void EditDictionaryDialog::on_button_export_dict()
 {
   vector < ustring > dictionaries = get_other_editable_dictionaries();
-  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL);
+  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL, GTK_WINDOW(textviewdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring filename = spelling_dictionary_filename(dialog.focus);
     vector < ustring > lines;

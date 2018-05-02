@@ -30,7 +30,7 @@
 class SelectBooksDialog
 {
 public:
-  SelectBooksDialog (bool showportions, GtkWindow *parent=NULL, ustring project="");
+  SelectBooksDialog (bool showportions, GtkWindow *transient_parent, ustring project="");
   ~SelectBooksDialog ();
   void language (const ustring& language);
   void selectables (vector <unsigned int>& selectablebooks);

@@ -31,7 +31,7 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-SelectChaptersDialog::SelectChaptersDialog(const ustring & project, unsigned int book, const ustring & currentselection)
+SelectChaptersDialog::SelectChaptersDialog(const ustring & project, unsigned int book, const ustring & currentselection, GtkWindow *transient_parent)
 {
   // Save / check variables.
   myproject = project;
@@ -41,6 +41,7 @@ SelectChaptersDialog::SelectChaptersDialog(const ustring & project, unsigned int
   Shortcuts shortcuts(0);
 
   selectchaptersdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(selectchaptersdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(selectchaptersdialog), _("Select portion"));
   gtk_window_set_position(GTK_WINDOW(selectchaptersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(selectchaptersdialog), TRUE);

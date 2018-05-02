@@ -65,10 +65,10 @@ vector < unsigned int >checks_generate_booknames()
 }
 
 
-bool scripture_checks_chapters_verses(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_chapters_verses(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (results == NULL) {
-    CheckDialog dialog(cdtChaptersVerses);
+    CheckDialog dialog(cdtChaptersVerses, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -85,10 +85,10 @@ bool scripture_checks_chapters_verses(WindowReferences * references_window, Coll
 }
 
 
-bool scripture_checks_count_usfms(bool gui)
+bool scripture_checks_count_usfms(bool gui, GtkWindow *transient_parent)
 {
   if (gui) {
-    CheckDialog dialog(cdtMarkersCount);
+    CheckDialog dialog(cdtMarkersCount, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -103,10 +103,10 @@ DisplayCheckingResults display(_("Marker Count"));
 }
 
 
-bool scripture_checks_validate_usfms(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_validate_usfms(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtMarkersValidate);
+    CheckDialog dialog(cdtMarkersValidate, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -122,10 +122,10 @@ bool scripture_checks_validate_usfms(WindowReferences * references_window, Colle
 }
 
 
-bool scripture_checks_compare_usfms(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_compare_usfms(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtMarkersCompare);
+    CheckDialog dialog(cdtMarkersCompare, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -140,10 +140,10 @@ bool scripture_checks_compare_usfms(WindowReferences * references_window, Collec
   return true;
 }
 
-bool scripture_checks_count_characters(bool gui)
+bool scripture_checks_count_characters(bool gui, GtkWindow *transient_parent)
 {
   if (gui) {
-    CheckDialog dialog(cdtCharactersCount);
+    CheckDialog dialog(cdtCharactersCount, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -160,10 +160,10 @@ DisplayCheckingResults display(_("Character Count"));
 }
 
 
-bool scripture_checks_unwanted_patterns(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_unwanted_patterns(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtUnwantedPatterns);
+    CheckDialog dialog(cdtUnwantedPatterns, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -179,10 +179,10 @@ bool scripture_checks_unwanted_patterns(WindowReferences * references_window, Co
 }
 
 
-bool scripture_checks_capitalization(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_capitalization(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtWordsCapitalization);
+    CheckDialog dialog(cdtWordsCapitalization, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -199,10 +199,10 @@ bool scripture_checks_capitalization(WindowReferences * references_window, Colle
 }
 
 
-bool scripture_checks_repetition(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_repetition(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtWordsRepetition);
+    CheckDialog dialog(cdtWordsRepetition, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -224,10 +224,10 @@ bool scripture_checks_repetition(WindowReferences * references_window, CollectCh
 }
 
 
-bool scripture_checks_matching_pairs(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_matching_pairs(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtMatchingPairs);
+    CheckDialog dialog(cdtMatchingPairs, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -243,10 +243,10 @@ bool scripture_checks_matching_pairs(WindowReferences * references_window, Colle
 }
 
 
-bool scripture_checks_unwanted_words(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_unwanted_words(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtWordsUnwanted);
+    CheckDialog dialog(cdtWordsUnwanted, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -262,10 +262,10 @@ bool scripture_checks_unwanted_words(WindowReferences * references_window, Colle
 }
 
 
-bool scripture_checks_word_inventory(bool gui)
+bool scripture_checks_word_inventory(bool gui, GtkWindow *transient_parent)
 {
   if (gui) {
-    CheckDialog dialog(cdtWordsCount);
+    CheckDialog dialog(cdtWordsCount, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -279,10 +279,10 @@ DisplayCheckingResults display(_("Word Inventory"));
 }
 
 
-bool scripture_checks_usfm_spacing(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_usfm_spacing(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtMarkersSpacing);
+    CheckDialog dialog(cdtMarkersSpacing, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -334,10 +334,10 @@ ustring checks_unwanted_words_get_filename(const ustring & project)
 }
 
 
-bool scripture_checks_references_inventory(bool gui)
+bool scripture_checks_references_inventory(bool gui, GtkWindow *transient_parent)
 {
   if (gui) {
-    CheckDialog dialog(cdtReferencesInventory);
+    CheckDialog dialog(cdtReferencesInventory, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -351,10 +351,10 @@ DisplayCheckingResults display(_("References Inventory"));
 }
 
 
-bool scripture_checks_validate_references(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_validate_references(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtReferencesValidate);
+    CheckDialog dialog(cdtReferencesValidate, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }
@@ -370,9 +370,9 @@ bool scripture_checks_validate_references(WindowReferences * references_window, 
 }
 
 
-void scripture_checks_nt_quotations_from_ot(WindowReferences * references_window)
+void scripture_checks_nt_quotations_from_ot(WindowReferences * references_window, GtkWindow *transient_parent)
 {
-  CheckDialog dialog(cdtNTQuotationsFromOT);
+  CheckDialog dialog(cdtNTQuotationsFromOT, transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   extern Settings *settings;
@@ -384,9 +384,9 @@ ustring main_heading = _("Old Testament quotations in the New Testament, project
 }
 
 
-void scripture_checks_synoptic_parallels_from_nt(WindowReferences * references_window)
+void scripture_checks_synoptic_parallels_from_nt(WindowReferences * references_window, GtkWindow *transient_parent)
 {
-  CheckDialog dialog(cdtSynopticParallelsNT);
+  CheckDialog dialog(cdtSynopticParallelsNT, transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK) {
     return;
   }
@@ -408,9 +408,9 @@ ustring main_heading = _("Synoptic parallel passages of the New Testament, proje
 }
 
 
-void scripture_checks_parallels_from_ot(WindowReferences * references_window)
+void scripture_checks_parallels_from_ot(WindowReferences * references_window, GtkWindow *transient_parent)
 {
-  CheckDialog dialog(cdtParallelsOT);
+  CheckDialog dialog(cdtParallelsOT, transient_parent);
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   extern Settings *settings;
@@ -422,10 +422,10 @@ ustring main_heading = _("Parallel passages of the Old Testament, project ") + s
 }
 
 
-bool scripture_checks_sentence_structure(WindowReferences * references_window, CollectCheckingResults * results)
+bool scripture_checks_sentence_structure(WindowReferences * references_window, CollectCheckingResults * results, GtkWindow *transient_parent)
 {
   if (!results) {
-    CheckDialog dialog(cdtSentenceStructure);
+    CheckDialog dialog(cdtSentenceStructure, transient_parent);
     if (dialog.run() != GTK_RESPONSE_OK)
       return false;
   }

@@ -34,7 +34,7 @@ enum EditStatusType {estNone, estBook, estBooks, estChapter, estChapters, estVer
 class EditStatusDialog
 {
 public:
-  EditStatusDialog(const ustring& project_in, unsigned int book, unsigned int chapter);
+  EditStatusDialog(const ustring& project_in, unsigned int book, unsigned int chapter, GtkWindow *transient_parent);
   ~EditStatusDialog();
   int run();
 protected:

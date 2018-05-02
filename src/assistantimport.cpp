@@ -564,7 +564,7 @@ void ImportAssistant::on_button_bible_name_clicked (GtkButton *button, gpointer 
 
 void ImportAssistant::on_button_bible_name ()
 {
-  project_select(bible_name);
+  project_select(bible_name, GTK_WINDOW(assistant));
   on_assistant_prepare (vbox_bible_name);
 }
 

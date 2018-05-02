@@ -733,7 +733,7 @@ void ResourceAssistant::on_button_bookset_clicked (GtkButton *button, gpointer u
 void ResourceAssistant::on_button_bookset (bool update_gui_only)
 {
   if (!update_gui_only) {
-    BooknamesDialog dialog(books, _("Enter the abbreviations for the books"), _("Abbreviations"));
+    BooknamesDialog dialog(books, _("Enter the abbreviations for the books"), _("Abbreviations"), GTK_WINDOW(assistant));
     if (dialog.run() == GTK_RESPONSE_OK) {
       books = dialog.newbooks;
     }
@@ -756,7 +756,7 @@ void ResourceAssistant::on_button_books_import ()
   vector <ustring> filenames;
   vector <ustring> resources = resource_get_resources(filenames, false);
   quick_sort(resources, filenames, 0, resources.size());
-  ListviewDialog dialog(_("Import from resource"), resources, "", false, NULL);
+  ListviewDialog dialog(_("Import from resource"), resources, "", false, NULL, GTK_WINDOW(assistant));
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring resource = dialog.focus;
     ustring filename;
@@ -782,7 +782,7 @@ void ResourceAssistant::on_button_bookset2_clicked (GtkButton *button, gpointer 
 void ResourceAssistant::on_button_bookset2 (bool update_gui_only)
 {
   if (!update_gui_only) {
-    BooknamesDialog dialog(books2, _("Enter the second abbreviations for the books"), _("Abbreviations"));
+    BooknamesDialog dialog(books2, _("Enter the second abbreviations for the books"), _("Abbreviations"), GTK_WINDOW(assistant));
     if (dialog.run() == GTK_RESPONSE_OK) {
       books2 = dialog.newbooks;
     }
@@ -805,7 +805,7 @@ void ResourceAssistant::on_button_books2_import ()
   vector < ustring > filenames;
   vector < ustring > resources = resource_get_resources(filenames, false);
   quick_sort(resources, filenames, 0, resources.size());
-  ListviewDialog dialog(_("Import from resource"), resources, "", false, NULL);
+  ListviewDialog dialog(_("Import from resource"), resources, "", false, NULL, GTK_WINDOW(assistant));
   if (dialog.run() == GTK_RESPONSE_OK) {
     ustring resource = dialog.focus;
     ustring filename;
@@ -830,7 +830,7 @@ void ResourceAssistant::on_button_anchors_clicked (GtkButton *button, gpointer u
 
 void ResourceAssistant::on_button_anchors ()
 {
-  ResourceConverterDialog dialog(working_directory ());
+  ResourceConverterDialog dialog(working_directory (), GTK_WINDOW(assistant));
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Modify the url constructor by adding the anchor to it, except if one is already there.
     ustring constructor = url_constructor ();

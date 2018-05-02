@@ -30,12 +30,12 @@
 class ShowNotesDialog
 {
 public:
-  ShowNotesDialog (int dummy);
+  ShowNotesDialog (GtkWindow *transient_parent);
   ~ShowNotesDialog ();
   int run();
 protected:
   GtkBuilder *gtkbuilder;
-  GtkWidget *dialog;
+  GtkWidget *shownotesdialog;
   GtkWidget *radiobutton_current_verse;
   GtkWidget *radiobutton_current_chapter;
   GtkWidget *radiobutton_current_book;

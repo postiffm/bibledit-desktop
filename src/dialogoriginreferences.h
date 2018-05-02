@@ -30,7 +30,7 @@
 class OriginReferencesDialog
 {
 public:
-  OriginReferencesDialog (int dummy);
+  OriginReferencesDialog (GtkWindow *transient_parent);
   ~OriginReferencesDialog ();
   int run ();
 protected:

@@ -24,9 +24,10 @@
 #include "combobox.h"
 #include <glib/gi18n.h>
 
-ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring > &projects_in, const ustring & project_in, const ustring & created_on, const ustring & created_by, const ustring & edited_on, const ustring & logbook)
+ProjectNoteDialog::ProjectNoteDialog(GtkWidget * parent, const vector < ustring > &projects_in, const ustring & project_in, const ustring & created_on, const ustring & created_by, const ustring & edited_on, const ustring & logbook, GtkWindow *transient_parent)
 {
   dialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(dialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dialog), _("Project note"));
   gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);

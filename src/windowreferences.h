@@ -38,6 +38,7 @@ public:
   void set (vector <Reference>& refs, const ustring& project_in, vector <ustring> * comments_in);
   vector <Reference> get ();
   GtkWidget * signal_button;
+  GtkWindow *transient_parent;
   Reference reference;
   void save(const ustring& filename);
   void goto_next ();

@@ -26,7 +26,7 @@
 #include "help.h"
 #include <glib/gi18n.h>
 
-OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, const ustring & currentstylesheet)
+OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, const ustring & currentstylesheet, GtkWindow *transient_parent)
 {
   // Get all stylesheets and the title.
   vector < ustring > stylesheets;
@@ -54,6 +54,7 @@ OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, 
   }
 
   openstyledialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(openstyledialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(openstyledialog), title.c_str());
   gtk_window_set_position(GTK_WINDOW(openstyledialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(openstyledialog), TRUE);

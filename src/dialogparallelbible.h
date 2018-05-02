@@ -32,12 +32,12 @@
 class ParallelBibleDialog
 {
 public:
-  ParallelBibleDialog (int dummy);
+  ParallelBibleDialog (GtkWindow *transient_parent);
   ~ParallelBibleDialog ();
   int run ();
 protected:
   GtkBuilder *gtkbuilder;
-  GtkWidget *dialog;
+  GtkWidget *parallelbibledialog;
   GtkWidget *label_main_project;
   GtkWidget *label_book;
   GtkWidget *label_chapters;

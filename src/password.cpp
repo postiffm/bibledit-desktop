@@ -32,7 +32,7 @@ void password_edit(GtkWidget * window)
 
   // If the password is set, first ask for the current password before proceeding.
   if (!currentpassword.empty()) {
-    EntryDialog dialog(_("Password"), _("Please provide the current password before proceeding"), "");
+    EntryDialog dialog(_("Password"), _("Please provide the current password before proceeding"), "", GTK_WINDOW(window));
     dialog.text_invisible();
     if (dialog.run() != GTK_RESPONSE_OK)
       return;
@@ -63,7 +63,7 @@ void password_edit(GtkWidget * window)
   // Set another password.
   ustring password1;
   {
-    EntryDialog dialog1(_("Password"), _("Provide a new password"), "");
+    EntryDialog dialog1(_("Password"), _("Provide a new password"), "", GTK_WINDOW(window));
     dialog1.always_ok();
     dialog1.text_invisible();
     if (dialog1.run() != GTK_RESPONSE_OK)
@@ -72,7 +72,7 @@ void password_edit(GtkWidget * window)
   }
   ustring password2;
   {
-    EntryDialog dialog2(_("Password"), _("Repeat this password"), "");
+    EntryDialog dialog2(_("Password"), _("Repeat this password"), "", GTK_WINDOW(window));
     dialog2.always_ok();
     dialog2.text_invisible();
     if (dialog2.run() != GTK_RESPONSE_OK)
@@ -109,7 +109,7 @@ bool password_pass(GtkWidget * window)
     return true;
 
   // Request the user to provide the password.
-  EntryDialog dialog(_("Password"), _("Provide the administrator's password"), "");
+  EntryDialog dialog(_("Password"), _("Provide the administrator's password"), "", GTK_WINDOW(window));
   dialog.text_invisible();
   if (dialog.run() != GTK_RESPONSE_OK)
     return false;

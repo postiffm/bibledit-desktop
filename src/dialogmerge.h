@@ -30,7 +30,7 @@
 class MergeDialog
 {
 public:
-  MergeDialog (const ustring& text);
+  MergeDialog (const ustring& text, GtkWindow *transient_parent);
   ~MergeDialog ();
   int run ();
   ustring reconciled_text;

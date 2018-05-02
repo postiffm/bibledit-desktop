@@ -35,12 +35,13 @@
 enum { COLUMN_BOOK, NUM_COLUMNS };
 
 
-BookDialog::BookDialog(const ustring & project)
+BookDialog::BookDialog(const ustring & project, GtkWindow *transient_parent)
 {
   // Store data.
   myproject = project;
 
   bookdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(bookdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(bookdialog), _("Books"));
   gtk_window_set_position(GTK_WINDOW(bookdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(bookdialog), TRUE);

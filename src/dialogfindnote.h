@@ -28,7 +28,7 @@
 class FindNoteDialog
 {
 public:
-  FindNoteDialog (int dummy);
+  FindNoteDialog (GtkWindow *transient_parent);
   ~FindNoteDialog ();
   int run ();
   vector<unsigned int> ids;

@@ -23,11 +23,12 @@
 
 
 #include "libraries.h"
+#include <gtk/gtk.h>
 #include <glib.h>
 #include "htmlwriter.h"
 
 
-void planning_edit (const ustring& project);
+void planning_edit (const ustring& project, GtkWindow *transient_parent);
 ustring planning_assemble_task (unsigned int book, const ustring& task);
 void planning_disassemble_task (ustring assembled_task, unsigned int& book, ustring& task);
 void planning_produce_report (const ustring& project, HtmlWriter & htmlwriter);

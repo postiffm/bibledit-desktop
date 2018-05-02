@@ -39,13 +39,14 @@
 #define RESULTS_SHARE  _("Share them with the ones already in the references window")
 
 
-SearchSpecialDialog::SearchSpecialDialog(int dummy)
+SearchSpecialDialog::SearchSpecialDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 
   accel_group = gtk_accel_group_new();
 
   searchspecialdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(searchspecialdialog), transient_parent);
   gtk_widget_add_accelerator(searchspecialdialog, "activate_focus", accel_group, GDK_KEY_F, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   gtk_window_set_title(GTK_WINDOW(searchspecialdialog), _("Find"));
   gtk_window_set_position(GTK_WINDOW(searchspecialdialog), GTK_WIN_POS_CENTER_ON_PARENT);
@@ -470,7 +471,7 @@ void SearchSpecialDialog::on_button_books_clicked(GtkButton * button, gpointer u
 void SearchSpecialDialog::on_books()
 {
   extern Settings *settings;
-  SelectBooksDialog dialog(false);
+  SelectBooksDialog dialog(false, GTK_WINDOW(searchspecialdialog));
   dialog.selection_set(settings->session.selected_books);
   if (dialog.run() == GTK_RESPONSE_OK) {
     settings->session.selected_books = dialog.selectionset;
@@ -493,7 +494,7 @@ void SearchSpecialDialog::on_button_area_clicked(GtkButton * button, gpointer us
 
 void SearchSpecialDialog::on_button_area()
 {
-  AreaDialog dialog(0);
+  AreaDialog dialog(GTK_WINDOW(searchspecialdialog));
   dialog.run();
   set_gui();
 }

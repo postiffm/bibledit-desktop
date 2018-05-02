@@ -21,14 +21,14 @@
 #ifndef INCLUDED_COMPAREUTILS_H
 #define INCLUDED_COMPAREUTILS_H
 
-
+#include <gtk/gtk.h>
 #include "libraries.h"
 #include "progresswindow.h"
 #include "project_memory.h"
 #include "windowreferences.h"
 
 
-void compare_with (WindowReferences * references_window, const ustring& project, const ustring& secondproject, bool print_changes_only);
+void compare_with (WindowReferences * references_window, const ustring& project, const ustring& secondproject, bool print_changes_only, GtkWindow *transient_parent);
 bool compare_projects (ProjectMemory& originalproject, ProjectMemory& secondproject, ProjectMemory& outputproject);
 void compare_get_changes (ProjectMemory& project, vector <Reference>& changed_references);
 void compare_get_additions_deletions (ProjectMemory& originalproject, ProjectMemory& secondproject, vector<ustring>& results);

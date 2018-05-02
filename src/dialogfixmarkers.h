@@ -29,7 +29,7 @@
 class FixMarkersDialog
 {
 public:
-  FixMarkersDialog (int dummy);
+  FixMarkersDialog (GtkWindow *transient_parent);
   ~FixMarkersDialog ();
   int run ();
 protected:

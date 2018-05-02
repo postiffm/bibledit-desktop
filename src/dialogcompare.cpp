@@ -33,7 +33,7 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-CompareDialog::CompareDialog(WindowReferences * references_window)
+CompareDialog::CompareDialog(WindowReferences * references_window, GtkWindow *transient_parent)
 {
   // Store variables
   my_references_window = references_window;
@@ -42,6 +42,7 @@ CompareDialog::CompareDialog(WindowReferences * references_window)
   Shortcuts shortcuts(0);
 
   comparedialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(comparedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(comparedialog), _("Compare project"));
   gtk_window_set_position(GTK_WINDOW(comparedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(comparedialog), TRUE);
@@ -191,7 +192,7 @@ void CompareDialog::on_okbutton_clicked()
   settings->genconfig.project_to_compare_with_set(selectsecondprojectgui->project);
   settings->genconfig.print_changes_only_set(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton1)));
   // Run comparison.
-  compare_with(my_references_window, selectfirstprojectgui->project, selectsecondprojectgui->project, settings->genconfig.print_changes_only_get());
+  compare_with(my_references_window, selectfirstprojectgui->project, selectsecondprojectgui->project, settings->genconfig.print_changes_only_get(), GTK_WINDOW(comparedialog));
 }
 
 

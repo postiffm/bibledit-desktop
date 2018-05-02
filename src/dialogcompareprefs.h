@@ -29,7 +29,7 @@
 class ComparePreferencesDialog
 {
 public:
-  ComparePreferencesDialog (int dummy);
+  ComparePreferencesDialog (GtkWindow *transient_parent);
   ~ComparePreferencesDialog ();
   int run ();
 protected:

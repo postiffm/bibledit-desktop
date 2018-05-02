@@ -28,12 +28,12 @@
 class ListviewMDialog
 {
 public:
-  ListviewMDialog (const ustring& title, vector<ustring>& list, bool sortlist, gchar * help);
+  ListviewMDialog (const ustring& title, vector<ustring>& list, bool sortlist, gchar * help, GtkWindow *transient_parent);
   ~ListviewMDialog ();
   int run ();
   vector <ustring> foci;
 protected:
-  GtkWidget *dialog;
+  GtkWidget *listviewmdialog;
   GtkWidget *dialog_vbox1;
   GtkWidget *vbox1;
   GtkWidget *label1;

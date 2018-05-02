@@ -25,10 +25,12 @@
 #include "dialoglistview.h"
 #include <glib/gi18n.h>
 
-SelectBiblesGui::SelectBiblesGui(GtkWidget * box, Shortcuts& shortcuts)
+SelectBiblesGui::SelectBiblesGui(GtkWidget * box, Shortcuts& shortcuts, GtkWindow *_transient_parent)
 {
+  transient_parent = _transient_parent;
   // Create the GUI.
   vbox = gtk_vbox_new (FALSE, 0);
+  gtk_window_set_transient_for(GTK_WINDOW(vbox), transient_parent);
   gtk_widget_show (vbox);
   gtk_box_pack_start(GTK_BOX(box), vbox, TRUE, TRUE, 0);
 
@@ -132,7 +134,7 @@ void SelectBiblesGui::on_button_add_clicked(GtkButton * button, gpointer user_da
 void SelectBiblesGui::on_button_add()
 {
   ustring bible;
-  if (project_select(bible)) {
+  if (project_select(bible, transient_parent)) {
     add_bible (true, bible);
   }
 }

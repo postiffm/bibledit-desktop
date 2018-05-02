@@ -34,7 +34,7 @@
 #include "books.h"
 #include <glib/gi18n.h>
 
-ShowNotesDialog::ShowNotesDialog(int dummy)
+ShowNotesDialog::ShowNotesDialog(GtkWindow *transient_parent)
 {
   event_id = 0;
   extern Settings *settings;
@@ -42,8 +42,9 @@ ShowNotesDialog::ShowNotesDialog(int dummy)
   gtkbuilder = gtk_builder_new ();
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.showprojectnotesdialog.xml").c_str(), NULL);
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
-
+  shownotesdialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(shownotesdialog), transient_parent);
+  
   GSList *verse_reference_group = NULL;
 
   radiobutton_current_verse = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "radiobutton_current_verse"));
@@ -182,7 +183,7 @@ ShowNotesDialog::ShowNotesDialog(int dummy)
   label_result = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_result"));
 
   Shortcuts shortcuts(0);
-  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, "view/project-notes");
+  InDialogHelp * indialoghelp = new InDialogHelp(shownotesdialog, gtkbuilder, &shortcuts, "view/project-notes");
   shortcuts.process();
   cancelbutton = indialoghelp->cancelbutton;
   okbutton = indialoghelp->okbutton;
@@ -195,13 +196,13 @@ ShowNotesDialog::ShowNotesDialog(int dummy)
 
 ShowNotesDialog::~ShowNotesDialog()
 {
-  gtk_widget_destroy(dialog);
+  gtk_widget_destroy(shownotesdialog);
 }
 
 
 int ShowNotesDialog::run()
 {
-  return gtk_dialog_run(GTK_DIALOG(dialog));
+  return gtk_dialog_run(GTK_DIALOG(shownotesdialog));
 }
 
 
@@ -226,7 +227,7 @@ void ShowNotesDialog::on_okbutton_clicked(GtkButton * button, gpointer user_data
 void ShowNotesDialog::on_from_date()
 {
   guint seconds = date_time_julian_to_seconds(from_day);
-  DateDialog dialog(&seconds);
+  DateDialog dialog(&seconds, GTK_WINDOW(shownotesdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     from_day = date_time_seconds_to_julian(seconds);
     set_gui();
@@ -237,7 +238,7 @@ void ShowNotesDialog::on_from_date()
 void ShowNotesDialog::on_to_date()
 {
   guint seconds = date_time_julian_to_seconds(to_day);
-  DateDialog dialog(&seconds);
+  DateDialog dialog(&seconds, GTK_WINDOW(shownotesdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     to_day = date_time_seconds_to_julian(seconds);
     set_gui();

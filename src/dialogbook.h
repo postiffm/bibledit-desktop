@@ -29,7 +29,7 @@
 class BookDialog
 {
 public:
-  BookDialog (const ustring& project);
+  BookDialog (const ustring& project, GtkWindow *transient_parent);
   ~BookDialog ();
   int run ();
 protected:

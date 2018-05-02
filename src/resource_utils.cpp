@@ -324,7 +324,7 @@ ustring resource_url_enter_reference(const ustring& constructor, map <unsigned i
 }
 
 
-ustring resource_select (ustring * filename)
+ustring resource_select (ustring * filename, GtkWindow *transient_parent)
 // This allows the user to select a resource.
 // It returns the name of the resource that was selected.
 // filename: If a pointer is passed, it give the filename of the selected resource.
@@ -333,7 +333,7 @@ ustring resource_select (ustring * filename)
   vector <ustring> filenames;
   vector <ustring> resources = resource_get_resources(filenames, false);
   quick_sort(resources, filenames, 0, resources.size());
-  ListviewDialog dialog(_("Open resource"), resources, "", false, NULL);
+  ListviewDialog dialog(_("Open resource"), resources, "", false, NULL, transient_parent);
   if (dialog.run() == GTK_RESPONSE_OK) {
     resource = dialog.focus;
   }

@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RESOURCE_UTILS_H
 #define INCLUDED_RESOURCE_UTILS_H
 
-
+#include <gtk/gtk.h>
 #include "libraries.h"
 #include <glib.h>
 #include "reference.h"
@@ -58,7 +58,7 @@ map <unsigned int, ustring> resource_get_books(const ustring& templatefile);
 const gchar * resource_template_books2_group();
 map <unsigned int, ustring> resource_get_books2(const ustring& templatefile);
 
-ustring resource_select (ustring * filename);
+ustring resource_select (ustring * filename, GtkWindow *transient_parent);
 
 
 #endif

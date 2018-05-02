@@ -29,7 +29,7 @@
 class TextReplacementDialog
 {
 public:
-  TextReplacementDialog (int dummy);
+  TextReplacementDialog (GtkWindow *transient_parent);
   ~TextReplacementDialog ();
   int run ();
 protected:

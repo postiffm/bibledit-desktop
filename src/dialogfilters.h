@@ -30,7 +30,7 @@
 class FiltersDialog
 {
 public:
-  FiltersDialog (int dummy);
+  FiltersDialog (GtkWindow *transient_parent);
   ~FiltersDialog ();
   int run ();
 protected:

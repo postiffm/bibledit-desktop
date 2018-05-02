@@ -25,7 +25,7 @@
 class PrintPreferencesDialog
 {
 public:
-  PrintPreferencesDialog(int dummy);
+  PrintPreferencesDialog(GtkWindow *transient_parent);
   ~PrintPreferencesDialog();
   int run();
 protected:

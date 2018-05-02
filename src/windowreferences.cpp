@@ -49,6 +49,7 @@ WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkAccelGroup *acc
   FloatingWindow(parent_layout, widReferences, _("References"), startup), reference(0, 0, "")
 // Window for showing the quick references.  
 {
+  transient_parent = GTK_WINDOW(parent_layout);
   lower_boundary = 0;
   upper_boundary = 0;
   active_entry = -1;
@@ -151,7 +152,7 @@ void WindowReferences::open()
     if (i == 2)
       searchword3 = import_references_searchwords[i];
   }
-  Entry3Dialog dialog2(_("Search for"), true, _("Optionally enter _1st searchword"), searchword1, _("Optionally enter _2nd searchword"), searchword2, _("Optionally enter _3rd searchword"), searchword3);
+  Entry3Dialog dialog2(_("Search for"), true, _("Optionally enter _1st searchword"), searchword1, _("Optionally enter _2nd searchword"), searchword2, _("Optionally enter _3rd searchword"), searchword3, transient_parent);
   int result = dialog2.run();
   if (result == GTK_RESPONSE_OK) {
     searchword1 = dialog2.entered_value1;
@@ -489,7 +490,7 @@ void WindowReferences::load_webview (const gchar *url)
   else if (active_url.find ("hidden") == 0) {
     // Manage the hidden references.
     vector < ustring > hidden_references = references_hidden_ones_load(project);
-    EditListDialog dialog(&hidden_references, _("Hidden references"), _("of references and comments that will never be shown in the reference area."), true, false, true, false, false, false, false, NULL);
+    EditListDialog dialog(&hidden_references, _("Hidden references"), _("of references and comments that will never be shown in the reference area."), true, false, true, false, false, false, false, NULL, transient_parent);
     if (dialog.run() == GTK_RESPONSE_OK) {
       references_hidden_ones_save(project, hidden_references);
     }
@@ -504,7 +505,7 @@ void WindowReferences::load_webview (const gchar *url)
 
   else if (active_url.find ("settings") == 0) {
     // Make settings.
-    ReferenceSettingsDialog dialog (0);
+    ReferenceSettingsDialog dialog (transient_parent);
     dialog.run();
     html_write_references (htmlwriter);
   }

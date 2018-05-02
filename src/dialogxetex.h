@@ -29,12 +29,12 @@
 class XeTeXDialog
 {
 public:
-  XeTeXDialog (int dummy);
+  XeTeXDialog (GtkWindow *transient_parent);
   ~XeTeXDialog ();
   int run ();
 protected:
   GtkBuilder *gtkbuilder;
-  GtkWidget *dialog;
+  GtkWidget *xetexdialog;
   GtkWidget *label_portion;
   
   GtkWidget *button_portion;

@@ -28,7 +28,7 @@
 class ListviewDialog
 {
 public:
-  ListviewDialog (const ustring& title, vector<ustring>& list, const ustring& focus, bool sortlist, gchar * help);
+  ListviewDialog (const ustring& title, vector<ustring>& list, const ustring& focus, bool sortlist, gchar * help, GtkWindow *transient_parent);
   ~ListviewDialog ();
   void two_pages (const gchar * tab1, const gchar * tab2, vector<ustring>& list, bool sortlist);
   void tab_switcher (guint accel_key, GdkModifierType accel_mods, const gchar * acceleratortext, const gchar * actiontext1, const gchar * actiontext2);

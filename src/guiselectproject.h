@@ -29,7 +29,8 @@
 class SelectProjectGui
 {
 public:
-  SelectProjectGui (int dummy);
+  SelectProjectGui (GtkWindow *_transient_parent);
+  GtkWindow *transient_parent;
   ~SelectProjectGui ();
   void build (GtkWidget * box, const gchar * labeltext, const ustring& project_in);
   void focus();

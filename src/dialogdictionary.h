@@ -29,7 +29,7 @@
 class DictionaryDialog
 {
 public:
-  DictionaryDialog (const ustring& project);
+  DictionaryDialog (const ustring& project, GtkWindow *transient_parent);
   ~DictionaryDialog ();
   int run ();
 protected:

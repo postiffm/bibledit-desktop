@@ -292,7 +292,5 @@ ustring ChangesAssistant::copy_project_and_move_back_in_history (const ustring& 
 
 void ChangesAssistant::view_changes(const ustring& current_stage_project, const ustring& previous_stage_project)
 {
-  compare_with(my_references_window, previous_stage_project, current_stage_project, true);
+  compare_with(my_references_window, previous_stage_project, current_stage_project, true, GTK_WINDOW(assistant));
 }
-
-

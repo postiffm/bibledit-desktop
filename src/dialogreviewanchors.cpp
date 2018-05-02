@@ -28,7 +28,7 @@
 #include "books.h"
 #include <glib/gi18n.h>
 
-ReviewAnchorsDialog::ReviewAnchorsDialog(vector < unsigned int >*books, vector < unsigned int >*chapters, vector < unsigned int >*verses, vector < unsigned int >*linenumbers)
+ReviewAnchorsDialog::ReviewAnchorsDialog(vector < unsigned int >*books, vector < unsigned int >*chapters, vector < unsigned int >*verses, vector < unsigned int >*linenumbers, GtkWindow *transient_parent)
 // Reviews anchors that would be placed in a file for the Resource Viewer.
 {
   // Initialize variables.
@@ -41,6 +41,7 @@ ReviewAnchorsDialog::ReviewAnchorsDialog(vector < unsigned int >*books, vector <
   Shortcuts shortcuts(0);
 
   reviewanchorsdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(reviewanchorsdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(reviewanchorsdialog), _("Review anchors"));
   gtk_window_set_position(GTK_WINDOW(reviewanchorsdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(reviewanchorsdialog), TRUE);

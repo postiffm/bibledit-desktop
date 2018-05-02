@@ -29,7 +29,7 @@
 class ReferenceExchangeDialog
 {
 public:
-  ReferenceExchangeDialog (int dummy);
+  ReferenceExchangeDialog (GtkWindow *transient_parent);
   ~ReferenceExchangeDialog ();
   int run ();
 protected:

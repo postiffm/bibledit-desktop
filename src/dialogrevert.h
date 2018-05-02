@@ -31,7 +31,7 @@
 class RevertDialog
 {
 public:
-  RevertDialog (Reference * reference);
+  RevertDialog (Reference * reference, GtkWindow *transient_parent);
   ~RevertDialog ();
   int run ();
 protected:

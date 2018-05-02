@@ -24,11 +24,12 @@
 #include "help.h"
 
 
-EntryDialog::EntryDialog(const ustring & title, const ustring & info, const ustring & value)
+EntryDialog::EntryDialog(const ustring & title, const ustring & info, const ustring & value, GtkWindow *transient_parent)
 {
   my_always_ok = false;
 
   entrydialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(entrydialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(entrydialog), title.c_str());
   gtk_window_set_position(GTK_WINDOW(entrydialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(entrydialog), TRUE);

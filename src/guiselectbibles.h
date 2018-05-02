@@ -30,7 +30,8 @@
 class SelectBiblesGui
 {
 public:
-  SelectBiblesGui (GtkWidget * box, Shortcuts& shortcuts);
+  SelectBiblesGui (GtkWidget * box, Shortcuts& shortcuts, GtkWindow *_transient_parent);
+  GtkWindow *transient_parent;
   ~SelectBiblesGui ();
   void set (const vector <bool>& enabled, const vector <ustring>& bible);
   void get (vector <bool>& enabled, vector <ustring>& bible);

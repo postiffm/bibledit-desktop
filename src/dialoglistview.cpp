@@ -28,7 +28,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 
-ListviewDialog::ListviewDialog(const ustring & title, vector <ustring> &list, const ustring & focus, bool sortlist, gchar * help)
+ListviewDialog::ListviewDialog(const ustring & title, vector <ustring> &list, const ustring & focus, bool sortlist, gchar * help, GtkWindow *transient_parent)
 // This dialog shows "list".
 // If the user selects one out of that, it returns it in "focus".
 {
@@ -39,6 +39,7 @@ ListviewDialog::ListviewDialog(const ustring & title, vector <ustring> &list, co
 
   // Build dialog.
   listviewdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(listviewdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(listviewdialog), title.c_str());
   gtk_window_set_position(GTK_WINDOW(listviewdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(listviewdialog), TRUE);

@@ -29,12 +29,12 @@
 class PlanningEditDialog
 {
 public:
-  PlanningEditDialog (unsigned int book, unsigned int chapter);
+  PlanningEditDialog (unsigned int book, unsigned int chapter, GtkWindow *transient_parent);
   ~PlanningEditDialog ();
   int run ();
 protected:
   GtkBuilder *gtkbuilder;
-  GtkWidget *dialog;
+  GtkWidget *planningeditdialog;
   GtkWidget *button_status;
   GtkWidget *button_tasks;
   GtkWidget *cancelbutton;

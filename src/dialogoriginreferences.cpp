@@ -28,13 +28,14 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-OriginReferencesDialog::OriginReferencesDialog(int dummy)
+OriginReferencesDialog::OriginReferencesDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 
   Shortcuts shortcuts(0);
 
   originreferencesdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(originreferencesdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(originreferencesdialog), _("Bible notes mass update"));
   gtk_window_set_position(GTK_WINDOW(originreferencesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(originreferencesdialog), TRUE);

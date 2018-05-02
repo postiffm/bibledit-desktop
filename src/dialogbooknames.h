@@ -29,7 +29,7 @@
 class BooknamesDialog
 {
 public:
-  BooknamesDialog (const map <unsigned int, ustring>& books, const gchar * info, const gchar * heading2);
+  BooknamesDialog (const map <unsigned int, ustring>& books, const gchar * info, const gchar * heading2, GtkWindow *transient_parent);
   ~BooknamesDialog ();
   int run ();
   map <unsigned int, ustring> newbooks;

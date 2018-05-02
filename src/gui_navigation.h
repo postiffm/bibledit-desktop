@@ -31,12 +31,13 @@
 
 class GuiNavigation
 {
- private:
-  GtkWidget *parentToolbar;
+private:
+   GtkWindow *transient_parent;
+   GtkWidget *parentToolbar;
 public:
   GuiNavigation (int dummy);
   ~GuiNavigation ();
-  void build (GtkWidget * toolbar);
+  void build (GtkWidget * toolbar, GtkWindow *_transient_parent);
   void sensitive (bool sensitive);
   void set_project (const ustring& value, bool force);
   void clampref (Reference& reference);

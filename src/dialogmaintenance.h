@@ -32,7 +32,7 @@
 class MaintenanceDialog
 {
 public:
-  MaintenanceDialog (int dummy);
+  MaintenanceDialog (GtkWindow *transient_parent);
   ~MaintenanceDialog ();
   int run ();
 protected:

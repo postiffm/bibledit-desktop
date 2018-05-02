@@ -29,7 +29,7 @@
 class SelectChaptersDialog
 {
 public:
-  SelectChaptersDialog (const ustring& project, unsigned int book, const ustring& currentselection);
+  SelectChaptersDialog (const ustring& project, unsigned int book, const ustring& currentselection, GtkWindow *transient_parent);
   ~SelectChaptersDialog ();
   int run ();
   ustring new_selection;

@@ -28,7 +28,7 @@
 class ReviewAnchorsDialog
 {
 public:
-  ReviewAnchorsDialog (vector <unsigned int> * books, vector<unsigned int> * chapters, vector<unsigned int> * verses, vector <unsigned int> * linenumbers);
+  ReviewAnchorsDialog (vector <unsigned int> * books, vector<unsigned int> * chapters, vector<unsigned int> * verses, vector <unsigned int> * linenumbers, GtkWindow *transient_parent);
   ~ReviewAnchorsDialog ();
   int run ();
 protected:

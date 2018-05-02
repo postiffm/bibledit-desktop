@@ -31,7 +31,7 @@ public:
   Entry3Dialog (const string& title, bool allow_empty_values, 
                 const string& info1, const ustring& value1,
                 const string& info2, const ustring& value2,
-                const string& info3, const ustring& value3);
+                const string& info3, const ustring& value3, GtkWindow *transient_parent);
   virtual ~Entry3Dialog ();
   virtual int run ();
   ustring entered_value1;

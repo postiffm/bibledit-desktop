@@ -37,12 +37,13 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-OutpostDialog::OutpostDialog(int dummy)
+OutpostDialog::OutpostDialog(GtkWindow *transient_parent)
 {
   // Save and initialize variables.
 
   // Build GUI.
   outpostdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(outpostdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(outpostdialog), _("Windows Outpost Setup"));
   gtk_window_set_position(GTK_WINDOW(outpostdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 

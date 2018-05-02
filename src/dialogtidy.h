@@ -29,7 +29,7 @@
 class TidyDialog
 {
 public:
-  TidyDialog (int dummy);
+  TidyDialog (GtkWindow *transient_parent);
   ~TidyDialog ();
   int run ();
 protected:

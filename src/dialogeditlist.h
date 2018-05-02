@@ -31,7 +31,7 @@ public:
   EditListDialog (vector<ustring> * lines, 
                   const ustring& title, const ustring& info,
                   bool remove, bool add, bool sort, bool import, bool exprt, bool duplicates, bool reorderable,
-                  vector<ustring> * addables);
+                  vector<ustring> * addables, GtkWindow *transient_parent);
   ~EditListDialog ();
   int run ();
 protected:

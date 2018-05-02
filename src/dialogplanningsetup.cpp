@@ -31,7 +31,7 @@
 #include "directories.h"
 #include <glib/gi18n.h>
 
-PlanningSetupDialog::PlanningSetupDialog(int dummy)
+PlanningSetupDialog::PlanningSetupDialog(GtkWindow *transient_parent)
 {
   // Initialize variables
   extern Settings *settings;
@@ -48,8 +48,8 @@ PlanningSetupDialog::PlanningSetupDialog(int dummy)
 
   Shortcuts shortcuts(0);
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
-
+  planningsetupdialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(planningsetupdialog), transient_parent);
   button_start = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "button_start"));
   shortcuts.button (button_start);
   g_signal_connect((gpointer) button_start, "clicked", G_CALLBACK(on_button_start_clicked), gpointer(this));
@@ -62,7 +62,7 @@ PlanningSetupDialog::PlanningSetupDialog(int dummy)
   shortcuts.button (button_time);
   g_signal_connect((gpointer) button_time, "clicked", G_CALLBACK(on_button_time_clicked), gpointer(this));
 
-  InDialogHelp * indialoghelp = new InDialogHelp(dialog, gtkbuilder, &shortcuts, NULL);
+  InDialogHelp * indialoghelp = new InDialogHelp(planningsetupdialog, gtkbuilder, &shortcuts, NULL);
 
   cancelbutton = indialoghelp->cancelbutton;
   shortcuts.stockbutton (cancelbutton);
@@ -82,13 +82,13 @@ PlanningSetupDialog::PlanningSetupDialog(int dummy)
 PlanningSetupDialog::~PlanningSetupDialog()
 {
   g_object_unref (gtkbuilder);
-  gtk_widget_destroy(dialog);
+  gtk_widget_destroy(planningsetupdialog);
 }
 
 
 int PlanningSetupDialog::run()
 {
-  return gtk_dialog_run(GTK_DIALOG(dialog));
+  return gtk_dialog_run(GTK_DIALOG(planningsetupdialog));
 }
 
 
@@ -100,7 +100,7 @@ void PlanningSetupDialog::on_button_start_clicked(GtkButton * button, gpointer u
 void PlanningSetupDialog::on_button_start()
 {
   guint seconds = date_time_julian_to_seconds(startdate);
-  DateDialog dialog(&seconds);
+  DateDialog dialog(&seconds, GTK_WINDOW(planningsetupdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     startdate = date_time_seconds_to_julian(seconds);
     gui();
@@ -117,7 +117,7 @@ void PlanningSetupDialog::on_button_tasks_clicked(GtkButton * button, gpointer u
 void PlanningSetupDialog::on_button_tasks()
 {
   // Run the dialog for editing the tasks.
-  EditListDialog dialog(&tasks, _("Tasks"), _("of tasks - add, remove, or re-order them"), true, true, false, false, false, false, true, NULL);
+  EditListDialog dialog(&tasks, _("Tasks"), _("of tasks - add, remove, or re-order them"), true, true, false, false, false, false, true, NULL, GTK_WINDOW(planningsetupdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Get the appropriate values for the durations, aligned to the tasks.
     durations.clear();
@@ -145,7 +145,7 @@ void PlanningSetupDialog::on_button_time_clicked(GtkButton * button, gpointer us
 
 void PlanningSetupDialog::on_button_time()
 {
-  TaskDurationDialog dialog(&tasks, &durations);
+  TaskDurationDialog dialog(&tasks, &durations, GTK_WINDOW(planningsetupdialog));
   dialog.run();
 }
 

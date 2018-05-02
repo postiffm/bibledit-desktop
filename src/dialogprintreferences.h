@@ -31,7 +31,7 @@
 class PrintReferencesDialog
 {
 public:
-  PrintReferencesDialog (int dummy);
+  PrintReferencesDialog (GtkWindow *transient_parent);
   ~PrintReferencesDialog ();
   int run ();
 protected:

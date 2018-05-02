@@ -40,7 +40,7 @@ enum CheckDialogType {cdtChaptersVerses,
 class CheckDialog
 {
 public:
-  CheckDialog (CheckDialogType checkdialogtype);
+  CheckDialog (CheckDialogType checkdialogtype, GtkWindow *transient_parent);
   ~CheckDialog ();
   int run ();
 protected:

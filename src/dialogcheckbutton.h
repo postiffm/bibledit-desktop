@@ -29,7 +29,7 @@
 class CheckbuttonDialog
 {
 public:
-  CheckbuttonDialog (const ustring& title, const ustring& info, const vector <ustring>& labels, ustring bitpattern);
+  CheckbuttonDialog (const ustring& title, const ustring& info, const vector <ustring>& labels, ustring bitpattern, GtkWindow *transient_parent);
   ~CheckbuttonDialog ();
   int run ();
   ustring bitpattern;

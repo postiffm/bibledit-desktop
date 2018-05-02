@@ -29,7 +29,7 @@
 class SearchSpecialDialog
 {
 public:
-  SearchSpecialDialog(int dummy);
+  SearchSpecialDialog(GtkWindow *transient_parent);
   ~ SearchSpecialDialog();
   int run();
 protected:

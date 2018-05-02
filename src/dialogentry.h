@@ -29,7 +29,7 @@
 class EntryDialog
 {
 public:
-  EntryDialog (const ustring& title, const ustring& info, const ustring& value);
+  EntryDialog (const ustring& title, const ustring& info, const ustring& value, GtkWindow *transient_parent);
   ~EntryDialog ();
   int run ();
   ustring entered_value;

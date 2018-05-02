@@ -36,7 +36,7 @@
 #include "books.h"
 #include <glib/gi18n.h>
 
-CheckDialog::CheckDialog(CheckDialogType checkdialogtype)
+CheckDialog::CheckDialog(CheckDialogType checkdialogtype, GtkWindow *transient_parent)
 {
   // Save and initialize variables.
   mycheckdialogtype = checkdialogtype;
@@ -44,6 +44,7 @@ CheckDialog::CheckDialog(CheckDialogType checkdialogtype)
   const ustring project_name = settings->genconfig.project_get().c_str();
 
   checkdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(checkdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(checkdialog), project_name.c_str());
   gtk_window_set_position(GTK_WINDOW(checkdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(checkdialog), TRUE);
@@ -324,7 +325,7 @@ void CheckDialog::on_button_books_clicked(GtkButton * button, gpointer user_data
 void CheckDialog::on_booksbutton()
 {
   extern Settings *settings;
-  SelectBooksDialog dialog(false);
+  SelectBooksDialog dialog(false, GTK_WINDOW(checkdialog));
   dialog.selectables(selectable_books);
   dialog.selection_set(settings->session.selected_books);
   if (dialog.run() == GTK_RESPONSE_OK) {
@@ -384,7 +385,7 @@ void CheckDialog::on_button_area_clicked(GtkButton * button, gpointer user_data)
 
 void CheckDialog::on_area()
 {
-  AreaDialog dialog(0);
+  AreaDialog dialog(GTK_WINDOW(checkdialog));
   dialog.run();
   gtk_label_set_text(GTK_LABEL(label_area), area_information().c_str());
 }
@@ -563,7 +564,7 @@ void CheckDialog::on_button_unwanted_patterns()
 {
   extern Settings *settings;
   ReadText rt(checks_unwanted_patterns_get_filename(settings->genconfig.project_get()), true, false);
-  EditListDialog dialog(&rt.lines, _("Unwanted patterns"), _("of patterns that are not wanted"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Unwanted patterns"), _("of patterns that are not wanted"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_unwanted_patterns_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -836,7 +837,7 @@ void CheckDialog::capitalization_abbreviations_edit()
 {
   extern Settings *settings;
   ReadText rt(checks_abbreviations_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Abbreviations"), _("of abbreviations"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Abbreviations"), _("of abbreviations"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_abbreviations_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -862,7 +863,7 @@ void CheckDialog::button_capitalization_prefixes_edit()
 {
   extern Settings *settings;
   ReadText rt(checks_uncapitalized_prefixes_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Uncapitalized prefixes"), _("of uncapitalized prefixes"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Uncapitalized prefixes"), _("of uncapitalized prefixes"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_uncapitalized_prefixes_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -877,7 +878,7 @@ void CheckDialog::capitalization_suffixes_edit()
 {
   extern Settings *settings;
   ReadText rt(checks_capitalized_suffixes_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Capitalized suffixes"), _("of capitalized suffixes"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Capitalized suffixes"), _("of capitalized suffixes"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_capitalized_suffixes_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -987,7 +988,7 @@ void CheckDialog::on_button_repetition_show()
 {
   extern Settings *settings;
   ReadText rt(checks_repetition_show_only_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Repeating words"), _("of contiguous repeating words to show only in the report"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Repeating words"), _("of contiguous repeating words to show only in the report"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_repetition_show_only_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -1012,7 +1013,7 @@ void CheckDialog::on_button_repetition_ignore()
 {
   extern Settings *settings;
   ReadText rt(checks_repetition_ignore_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Repeating words"), _("of contiguous repeating words to ignore or text between these pairs of words"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Repeating words"), _("of contiguous repeating words to ignore or text between these pairs of words"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_repetition_ignore_get_filename(settings->genconfig.project_get()), rt.lines);
   }
@@ -1069,7 +1070,7 @@ void CheckDialog::on_button_unwanted_words()
 {
   extern Settings *settings;
   ReadText rt(checks_unwanted_words_get_filename(settings->genconfig.project_get()), true);
-  EditListDialog dialog(&rt.lines, _("Unwanted words"), _("of whole words that are not wanted"), true, true, true, true, true, true, false, NULL);
+  EditListDialog dialog(&rt.lines, _("Unwanted words"), _("of whole words that are not wanted"), true, true, true, true, true, true, false, NULL, GTK_WINDOW(checkdialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     write_lines(checks_unwanted_words_get_filename(settings->genconfig.project_get()), rt.lines);
   }

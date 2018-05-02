@@ -29,12 +29,13 @@
 #include "gwrappers.h"
 #include <glib/gi18n.h>
 
-GuiDialog::GuiDialog(int dummy)
+GuiDialog::GuiDialog(GtkWindow *transient_parent)
 {
   Shortcuts shortcuts(0);
   gtkbuilder = gtk_builder_new ();
   gtk_builder_add_from_file (gtkbuilder, gw_build_filename (Directories->get_package_data(), "gtkbuilder.guidialog.xml").c_str(), NULL);
   featuresdialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "guidialog"));
+  gtk_window_set_transient_for(GTK_WINDOW(featuresdialog), transient_parent);
   radiobutton_basic = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "radiobutton_basic"));
   shortcuts.button(radiobutton_basic);
   radiobutton_full = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "radiobutton_full"));

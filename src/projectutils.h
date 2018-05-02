@@ -21,7 +21,7 @@
 #ifndef INCLUDED_PROJECTUTILS_H
 #define INCLUDED_PROJECTUTILS_H
 
-
+#include <gtk/gtk.h>
 #include "libraries.h"
 #include "categorize.h"
 #include "sqlite_reader.h"
@@ -55,7 +55,7 @@ vector<unsigned int> project_get_chapters (const ustring& project, unsigned int 
 vector<ustring> project_get_verses (const ustring& project, unsigned int book, unsigned int chapter);
 bool project_book_exists (const ustring& project, unsigned int book);
 
-bool project_select (ustring& newproject);
+bool project_select (ustring& newproject, GtkWindow *transient_parent);
 
 
 #endif

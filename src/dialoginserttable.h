@@ -29,7 +29,7 @@
 class InsertTableDialog
 {
 public:
-  InsertTableDialog (const ustring& project);
+  InsertTableDialog (const ustring& project, GtkWindow *transient_parent);
   ~InsertTableDialog ();
   int run ();
   ustring rawtext;

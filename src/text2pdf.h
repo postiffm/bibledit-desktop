@@ -33,7 +33,8 @@
 class Text2Pdf
 {
 public:
-  Text2Pdf(const ustring& pdf_file, bool use_intermediate_text);
+  Text2Pdf(const ustring& pdf_file, bool use_intermediate_text, GtkWindow *transient_parent);
+  GtkWindow *transient_parent;
   ~Text2Pdf();
 
   // Initialization.

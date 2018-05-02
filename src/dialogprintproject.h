@@ -29,7 +29,7 @@
 class PrintProjectDialog
 {
 public:
-  PrintProjectDialog (int dummy);
+  PrintProjectDialog (GtkWindow *transient_parent);
   ~PrintProjectDialog ();
   int run ();
 protected:

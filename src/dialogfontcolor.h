@@ -36,7 +36,7 @@ public:
                    unsigned int initial_normal_text_color, 
                    unsigned int initial_background_color,
                    unsigned int initial_selected_text_color, 
-                   unsigned int initial_selection_color);
+                   unsigned int initial_selection_color, GtkWindow *transient_parent);
   ~FontColorDialog ();
   int run ();
   bool new_use_default_font;

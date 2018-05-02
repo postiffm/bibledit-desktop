@@ -41,10 +41,11 @@
 #include "dialogtext2pdf.h"
 #include <glib/gi18n.h>
 
-Text2Pdf::Text2Pdf(const ustring & pdf_file, bool use_intermediate_text)
+Text2Pdf::Text2Pdf(const ustring & pdf_file, bool use_intermediate_text, GtkWindow *_transient_parent)
 // Converts text code to a pdf file.
 {
   // Initializers.
+  transient_parent = _transient_parent;
   pdffile = pdf_file;
   initialize_variables();
   intermediate_text_pointer = NULL;
@@ -1050,7 +1051,7 @@ void Text2Pdf::intermediate_interpreter()
 {
   // Review or edit the intermediate commands.
   if (intermediate_text_pointer) {
-    Text2PdfDialog dialog(&intermediate_text);
+    Text2PdfDialog dialog(&intermediate_text, transient_parent);
     dialog.run();
   }
   // Clear flag. Without that we enter an infinite loop.

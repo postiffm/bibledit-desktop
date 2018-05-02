@@ -30,10 +30,11 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-ChapterNumberDialog::ChapterNumberDialog(int dummy)
+ChapterNumberDialog::ChapterNumberDialog(GtkWindow *transient_parent)
 {
   // Build gui.  
   dialogchapternumber = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(dialogchapternumber), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dialogchapternumber), _("Insert Chapter"));
   gtk_window_set_position(GTK_WINDOW(dialogchapternumber), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(dialogchapternumber), GDK_WINDOW_TYPE_HINT_DIALOG);

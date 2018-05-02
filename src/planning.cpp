@@ -31,7 +31,7 @@
 #include "versification.h"
 #include <glib/gi18n.h>
 
-void planning_edit(const ustring & project)
+void planning_edit(const ustring & project, GtkWindow *transient_parent)
 // Edits the planning.
 {
   extern Settings *settings;
@@ -48,7 +48,7 @@ void planning_edit(const ustring & project)
       addables.push_back(planning_assemble_task(addable_books[i], addable_tasks[i]));
     }
   }
-  EditListDialog dialog(&tasks, _("Planned Tasks"), _("of planned tasks: add, remove or reorder them"), true, true, false, false, false, false, true, &addables);
+  EditListDialog dialog(&tasks, _("Planned Tasks"), _("of planned tasks: add, remove or reorder them"), true, true, false, false, false, false, true, &addables, GTK_WINDOW(transient_parent));
   if (dialog.run() == GTK_RESPONSE_OK) {
     settings->projectconfig(project)->planning_tasks_set(tasks);
   }

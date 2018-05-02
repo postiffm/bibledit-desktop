@@ -34,13 +34,14 @@
 #include "shortcuts.h"
 #include <glib/gi18n.h>
 
-PrintProjectDialog::PrintProjectDialog(int dummy)
+PrintProjectDialog::PrintProjectDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 
   Shortcuts shortcuts(0);
 
   printprojectdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(printprojectdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(printprojectdialog), _("Print project"));
   gtk_window_set_position(GTK_WINDOW(printprojectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(printprojectdialog), TRUE);
@@ -182,7 +183,7 @@ void PrintProjectDialog::on_button_portion_clicked(GtkButton * button, gpointer 
 
 void PrintProjectDialog::on_button_portion()
 {
-  SelectBooksDialog dialog(true);
+  SelectBooksDialog dialog(true, GTK_WINDOW(printprojectdialog ));
   if (dialog.run() == GTK_RESPONSE_OK) {
     gui_reorder_include();
   }

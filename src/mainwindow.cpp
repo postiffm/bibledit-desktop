@@ -1837,7 +1837,7 @@ navigation(0), httpd(0)
   if (about1)
     g_signal_connect((gpointer) about1, "activate", G_CALLBACK(on_about1_activate), gpointer(this));
   g_signal_connect ((gpointer) scrolledwindow_layout, "size_allocate",  G_CALLBACK (on_scrolledwindow_layout_size_allocate), gpointer (this));
-  navigation.build(toolbar);
+  navigation.build(toolbar, GTK_WINDOW(window_main));
   g_signal_connect((gpointer) navigation.new_reference_signal, "clicked", G_CALLBACK(on_navigation_new_reference_clicked), gpointer(this));
 
   // Start Outpost.
@@ -1979,7 +1979,7 @@ void MainWindow::open()
 {
   // Get new project, bail out if none.
   ustring newproject;
-  if (!project_select(newproject)) {
+  if (!project_select(newproject, GTK_WINDOW(window_main))) {
     return;
   }
   // Open editor.
@@ -1995,7 +1995,7 @@ void MainWindow::on_new1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void MainWindow::newproject ()
 {
-  ProjectDialog projectdialog(true);
+  ProjectDialog projectdialog(true, GTK_WINDOW(window_main));
   if (projectdialog.run() == GTK_RESPONSE_OK) {
     on_file_project_open(projectdialog.newprojectname, false);
     // Focus the desired book.
@@ -2014,7 +2014,7 @@ void MainWindow::editproject ()
 {
   save_editors();
   // Show project dialog.
-  ProjectDialog projectdialog(false);
+  ProjectDialog projectdialog(false, GTK_WINDOW(window_main));
   if (projectdialog.run() == GTK_RESPONSE_OK) {
     // Get focused project window.
     WindowEditor *editor_window = last_focused_editor_window();
@@ -2061,7 +2061,7 @@ void MainWindow::deleteproject ()
 	}
   }
   // User interface.
-  ListviewDialog dialog(_("Delete project"), projects, "", true, NULL);
+  ListviewDialog dialog(_("Delete project"), projects, "", true, NULL, GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     int result;
     result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + "?");
@@ -2092,7 +2092,7 @@ void MainWindow::on_system_log1_activate(GtkMenuItem * menuitem, gpointer user_d
 void MainWindow::viewlog()
 {
   if (!syslogdialog) {
-	syslogdialog = new SystemlogDialog(0);
+	syslogdialog = new SystemlogDialog(0); // this is not really a "dialog" that is modal. It sits to the side and Bibledit can be used while this dialog is open
   }
   // This window can float while the user does other things, so the syslogdialog has some 
   // persistent state to manage this feature. It takes care of killing the window, restarting a 
@@ -2236,7 +2236,7 @@ void MainWindow::menu_replace()
   // Start find/replace dialog.
   vector < Reference > results;
   {
-    ReplaceDialog replacedialog(0);
+    ReplaceDialog replacedialog(GTK_WINDOW(window_main));
     if (replacedialog.run() == GTK_RESPONSE_OK) {
       results.assign(replacedialog.results.begin(), replacedialog.results.end());
       if (window_references) {
@@ -2248,7 +2248,7 @@ void MainWindow::menu_replace()
   }
   // Replace text.
   if (results.size()) {
-    ReplacingDialog replacedialog(results);
+    ReplacingDialog replacedialog(results, GTK_WINDOW(window_main));
     replacedialog.run();
     reload_all_editors(false);
   } else {
@@ -2272,7 +2272,7 @@ void MainWindow::menu_findspecial()
   // Start dialog.
   {
 	DEBUG("Now run search special dialog")
-    SearchSpecialDialog dialog(0);
+    SearchSpecialDialog dialog(GTK_WINDOW(window_main));
     if (dialog.run() != GTK_RESPONSE_OK) { return; }
   }
   // Carry out the search. 
@@ -2317,7 +2317,7 @@ void MainWindow::on_notes_preferences_activate(GtkMenuItem * menuitem, gpointer 
 
 void MainWindow::on_notes_preferences()
 {
-  NotesDialog dialog(0);
+  NotesDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -2330,7 +2330,7 @@ void MainWindow::on_copy_project_to()
 // Copy project to another one.
 {
   save_editors();
-  EntryDialog dialog(_("New project name"), _("Enter a name of a non-existent project\nwhere this project will be copied to."), settings->genconfig.project_get());
+  EntryDialog dialog(_("New project name"), _("Enter a name of a non-existent project\nwhere this project will be copied to."), settings->genconfig.project_get(), GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Does the project exist?
     if ((project_exists(dialog.entered_value)) || (dialog.entered_value == "data")) {
@@ -2364,7 +2364,7 @@ void MainWindow::on_compare_with()
 {
   save_editors();
   show_references_window();
-  CompareDialog dialog(window_references);
+  CompareDialog dialog(window_references, GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -2376,7 +2376,7 @@ void MainWindow::on_printingprefs_activate(GtkMenuItem * menuitem, gpointer user
 
 void MainWindow::on_printing_preferences()
 {
-  PrintPreferencesDialog dialog(0);
+  PrintPreferencesDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -2387,7 +2387,7 @@ void MainWindow::on_prefs_books_activate(GtkMenuItem * menuitem, gpointer user_d
 
 void MainWindow::on_prefs_books()
 {
-  BookDialog dialog(settings->genconfig.project_get());
+  BookDialog dialog(settings->genconfig.project_get(), GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     reload_all_editors(false);
   }
@@ -2400,7 +2400,7 @@ void MainWindow::on_preferences_tidy_text_activate(GtkMenuItem * menuitem, gpoin
 
 void MainWindow::on_preferences_tidy_text()
 {
-  TidyDialog dialog(0);
+  TidyDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -3073,7 +3073,7 @@ void MainWindow::on_reference_exchange1_activate(GtkMenuItem * menuitem, gpointe
 
 void MainWindow::on_reference_exchange()
 {
-  ReferenceExchangeDialog dialog(0);
+  ReferenceExchangeDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -3106,7 +3106,7 @@ void MainWindow::on_preferences_windows_outpost_activate(GtkMenuItem * menuitem,
 void MainWindow::on_preferences_windows_outpost()
 {
   // Dialog for making settings.
-  OutpostDialog dialog(0);
+  OutpostDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
   if (dialog.changed) {
     // Changes were made: destroy and recreate the object.
@@ -3232,7 +3232,7 @@ void MainWindow::on_viewnotes_activate(GtkMenuItem * menuitem, gpointer user_dat
 
 void MainWindow::on_view_notes()
 {
-  ShowNotesDialog dialog(0);
+  ShowNotesDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     view_project_notes();
     notes_redisplay();
@@ -3253,7 +3253,7 @@ void MainWindow::on_find_in_notes1_activate(GtkMenuItem * menuitem, gpointer use
 
 void MainWindow::find_in_notes()
 {
-  FindNoteDialog findnotedialog(0);
+  FindNoteDialog findnotedialog(GTK_WINDOW(window_main));
   if (findnotedialog.run() == GTK_RESPONSE_OK) {
     view_project_notes();
     if (window_notes) {
@@ -3264,7 +3264,7 @@ void MainWindow::find_in_notes()
 
 void MainWindow::on_import_notes()
 {
-  ImportNotesDialog dialog(0);
+  ImportNotesDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_APPLY) {
     view_project_notes();
     notes_redisplay();
@@ -3368,7 +3368,7 @@ void MainWindow::on_menu_check_markers_validate()
 {
   save_editors();
   show_references_window();
-  scripture_checks_validate_usfms(window_references, NULL);
+  scripture_checks_validate_usfms(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3381,7 +3381,7 @@ void MainWindow::on_count_usfms1_activate(GtkMenuItem * menuitem, gpointer user_
 void MainWindow::on_menu_check_markers_count()
 {
   save_editors();
-  scripture_checks_count_usfms(true);
+  scripture_checks_count_usfms(true, GTK_WINDOW(window_main));
 }
 
 void MainWindow::on_compare_usfm1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -3393,7 +3393,7 @@ void MainWindow::on_menu_check_markers_compare()
 {
   save_editors();
   show_references_window();
-  scripture_checks_compare_usfms(window_references, NULL);
+  scripture_checks_compare_usfms(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 void MainWindow::on_chapters_and_verses1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -3406,7 +3406,7 @@ void MainWindow::on_menu_check_chapters_and_verses()
 {
   save_editors();
   show_references_window();
-  scripture_checks_chapters_verses(window_references, NULL);
+  scripture_checks_chapters_verses(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3419,7 +3419,7 @@ void MainWindow::on_count_characters_activate(GtkMenuItem * menuitem, gpointer u
 void MainWindow::on_count_characters()
 {
   save_editors();
-  scripture_checks_count_characters(true);
+  scripture_checks_count_characters(true, GTK_WINDOW(window_main));
 }
 
 
@@ -3433,7 +3433,7 @@ void MainWindow::on_unwanted_patterns()
 {
   save_editors();
   show_references_window();
-  scripture_checks_unwanted_patterns(window_references, NULL);
+  scripture_checks_unwanted_patterns(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3447,7 +3447,7 @@ void MainWindow::on_check_capitalization()
 {
   save_editors();
   show_references_window();
-  scripture_checks_capitalization(window_references, NULL);
+  scripture_checks_capitalization(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3461,7 +3461,7 @@ void MainWindow::on_check_repetition()
 {
   save_editors();
   show_references_window();
-  scripture_checks_repetition(window_references, NULL);
+  scripture_checks_repetition(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3475,7 +3475,7 @@ void MainWindow::on_check_matching_pairs()
 {
   save_editors();
   show_references_window();
-  scripture_checks_matching_pairs(window_references, NULL);
+  scripture_checks_matching_pairs(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3489,7 +3489,7 @@ void MainWindow::on_unwanted_words()
 {
   save_editors();
   show_references_window();
-  scripture_checks_unwanted_words(window_references, NULL);
+  scripture_checks_unwanted_words(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3502,7 +3502,7 @@ void MainWindow::on_word_count_inventory_activate(GtkMenuItem * menuitem, gpoint
 void MainWindow::on_word_count_inventory()
 {
   save_editors();
-  scripture_checks_word_inventory(true);
+  scripture_checks_word_inventory(true, GTK_WINDOW(window_main));
 }
 
 
@@ -3554,7 +3554,7 @@ void MainWindow::on_my_checks()
 {
   save_editors();
   show_references_window();
-  MyChecksDialog dialog(window_references);
+  MyChecksDialog dialog(window_references, GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -3569,7 +3569,7 @@ void MainWindow::on_check_markers_spacing()
 {
   save_editors();
   show_references_window();
-  scripture_checks_usfm_spacing(window_references, NULL);
+  scripture_checks_usfm_spacing(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3581,7 +3581,7 @@ void MainWindow::on_check_references_inventory_activate(GtkMenuItem * menuitem, 
 void MainWindow::on_check_references_inventory()
 {
   save_editors();
-  scripture_checks_references_inventory(true);
+  scripture_checks_references_inventory(true, GTK_WINDOW(window_main));
 }
 
 
@@ -3595,7 +3595,7 @@ void MainWindow::on_check_references_validate()
 {
   save_editors();
   show_references_window();
-  scripture_checks_validate_references(window_references, NULL);
+  scripture_checks_validate_references(window_references, NULL, GTK_WINDOW(window_main));
 }
 
 
@@ -3608,7 +3608,7 @@ void MainWindow::on_check_nt_quotations_from_the_ot()
 {
   save_editors();
   show_references_window();
-  scripture_checks_nt_quotations_from_ot(window_references);
+  scripture_checks_nt_quotations_from_ot(window_references, GTK_WINDOW(window_main));
 }
 
 void MainWindow::on_synoptic_parallel_passages_from_the_nt_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -3620,7 +3620,7 @@ void MainWindow::on_synoptic_parallel_passages_from_the_nt()
 {
   save_editors();
   show_references_window();
-  scripture_checks_synoptic_parallels_from_nt(window_references);
+  scripture_checks_synoptic_parallels_from_nt(window_references, GTK_WINDOW(window_main));
 }
 
 void MainWindow::on_parallels_from_the_ot_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -3632,7 +3632,7 @@ void MainWindow::on_parallels_from_the_ot()
 {
   save_editors();
   show_references_window();
-  scripture_checks_parallels_from_ot(window_references);
+  scripture_checks_parallels_from_ot(window_references, GTK_WINDOW(window_main));
 }
 
 
@@ -3881,7 +3881,7 @@ void MainWindow::on_style_apply (ustring marker)
     if (gtkw_dialog_question(window_main, _("Would you like to insert a new chapter?"), GTK_RESPONSE_YES) == GTK_RESPONSE_YES) {
       // Insert a new chapter.
       save_editors();
-      ChapterNumberDialog dialog(true);
+      ChapterNumberDialog dialog(GTK_WINDOW(window_main));
       if (dialog.run() == GTK_RESPONSE_OK) {
         reload_all_editors(false);
       } else {
@@ -3895,7 +3895,7 @@ void MainWindow::on_style_apply (ustring marker)
     if (editor_window->last_focused_type() == etvtBody) {
       if (style.type == stFootEndNote) {
         if (style.subtype == fentFootnote) {
-          InsertNoteDialog dialog(indtFootnote);
+          InsertNoteDialog dialog(indtFootnote, GTK_WINDOW(window_main));
           if (dialog.run() == GTK_RESPONSE_OK) {
             editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
@@ -3904,7 +3904,7 @@ void MainWindow::on_style_apply (ustring marker)
           style_was_treated_specially = true;
         }
         if (style.subtype == fentEndnote) {
-          InsertNoteDialog dialog(indtEndnote);
+          InsertNoteDialog dialog(indtEndnote, GTK_WINDOW(window_main));
           if (dialog.run() == GTK_RESPONSE_OK) {
             editor_window->insert_note(style.marker, dialog.rawtext_get());
           } else {
@@ -3914,7 +3914,7 @@ void MainWindow::on_style_apply (ustring marker)
         }
       }
       if (style.type == stCrossreference) {
-        InsertNoteDialog dialog(indtCrossreference);
+        InsertNoteDialog dialog(indtCrossreference, GTK_WINDOW(window_main));
         if (dialog.run() == GTK_RESPONSE_OK) {
           editor_window->insert_note(style.marker, dialog.rawtext_get());
         } else {
@@ -3929,7 +3929,7 @@ void MainWindow::on_style_apply (ustring marker)
   {
     if (editor_window->last_focused_type() == etvtBody) {
       if (style.type == stTableElement) {
-        InsertTableDialog dialog(editor_window->project());
+        InsertTableDialog dialog(editor_window->project(), GTK_WINDOW(window_main));
         if (dialog.run() == GTK_RESPONSE_OK) {
           editor_window->insert_table(dialog.rawtext);
         } else {
@@ -4007,7 +4007,7 @@ void MainWindow::on_edit_bible_note()
   if (editor_window) {
     Editor2 * editor = editor_window->editor_get();
     if (editor) {
-      EditNoteDialog dialog(editor);
+      EditNoteDialog dialog(editor, GTK_WINDOW(window_main));
       dialog.run();
     }
   }
@@ -4055,7 +4055,7 @@ void MainWindow::on_notes_transfer_activate(GtkMenuItem * menuitem, gpointer use
 void MainWindow::on_notes_transfer()
 {
   save_editors();
-  NotesTransferDialog dialog(0);
+  NotesTransferDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK)
     notes_redisplay();
 }
@@ -4070,7 +4070,7 @@ void MainWindow::on_tool_origin_references_in_bible_notes_activate(GtkMenuItem *
 void MainWindow::on_tool_origin_references_in_bible_notes()
 {
   save_editors();
-  OriginReferencesDialog dialog(0);
+  OriginReferencesDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK)
     reload_all_editors(false);
 }
@@ -4084,7 +4084,7 @@ void MainWindow::on_tool_project_notes_mass_update1_activate(GtkMenuItem * menui
 
 void MainWindow::on_tool_project_notes_mass_update()
 {
-  NotesUpdateDialog dialog(0);
+  NotesUpdateDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     notes_redisplay();
   }
@@ -4100,7 +4100,7 @@ void MainWindow::on_tool_generate_word_lists_activate(GtkMenuItem * menuitem, gp
 void MainWindow::on_tool_generate_word_lists()
 {
   save_editors();
-  WordlistDialog dialog(0);
+  WordlistDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK)
     reload_all_editors(false);
 }
@@ -4117,7 +4117,7 @@ void MainWindow::on_tool_transfer_project_notes_to_text()
 // and does that for each verse.
 {
   save_editors();
-  XferNotes2TextDialog dialog(0);
+  XferNotes2TextDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     reload_all_editors(false);
   }
@@ -4132,7 +4132,7 @@ void MainWindow::on_tools_maintenance_activate (GtkMenuItem *menuitem, gpointer 
 
 void MainWindow::on_tools_maintenance ()
 {
-  MaintenanceDialog dialog (0);
+  MaintenanceDialog dialog (GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -4146,7 +4146,7 @@ void MainWindow::on_preferences_gui_activate(GtkMenuItem * menuitem, gpointer us
 void MainWindow::on_preferences_gui()
 {
   if (password_pass(window_main)) {
-    GuiDialog dialog(0);
+    GuiDialog dialog(GTK_WINDOW(window_main));
     dialog.run();
   }
 }
@@ -4173,7 +4173,7 @@ void MainWindow::on_tool_simple_text_corrections_activate(GtkMenuItem * menuitem
 void MainWindow::on_tool_simple_text_corrections()
 {
   save_editors();
-  FixMarkersDialog dialog(0);
+  FixMarkersDialog dialog(GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK)
     reload_all_editors(false);
 }
@@ -4187,7 +4187,7 @@ void MainWindow::on_preferences_text_replacement_activate(GtkMenuItem * menuitem
 
 void MainWindow::on_preferences_text_replacement()
 {
-  TextReplacementDialog dialog(0);
+  TextReplacementDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -4200,7 +4200,7 @@ void MainWindow::on_pdf_viewer1_activate(GtkMenuItem * menuitem, gpointer user_d
 
 void MainWindow::on_pdf_viewer()
 {
-  PDFViewerDialog dialog(0);
+  PDFViewerDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -4234,7 +4234,7 @@ void MainWindow::on_insert_special_character()
   descriptions.push_back(_("Left-pointing double angle quotation mark"));
   characters.push_back("»");
   descriptions.push_back(_("Right-pointing double angle quotation mark"));
-  RadiobuttonDialog dialog(_("Insert character"), _("Insert special character"), descriptions, settings->session.special_character_selection, false);
+  RadiobuttonDialog dialog(_("Insert character"), _("Insert special character"), descriptions, settings->session.special_character_selection, false, GTK_WINDOW(window_main));
   if (dialog.run() != GTK_RESPONSE_OK)
     return;
   settings->session.special_character_selection = dialog.selection;
@@ -4250,7 +4250,7 @@ void MainWindow::on_preferences_compare_activate(GtkMenuItem * menuitem, gpointe
 
 void MainWindow::on_preferences_compare()
 {
-  ComparePreferencesDialog dialog (0);
+  ComparePreferencesDialog dialog (GTK_WINDOW(window_main));
   dialog.run ();
 }
 
@@ -4509,7 +4509,7 @@ void MainWindow::on_edit_revert_activate(GtkMenuItem * menuitem, gpointer user_d
 void MainWindow::on_edit_revert()
 {
   save_editors();
-  RevertDialog dialog(&navigation.reference);
+  RevertDialog dialog(&navigation.reference, GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     reload_all_editors(false);
   }
@@ -4610,9 +4610,10 @@ void MainWindow::on_text_font()
     selectioncolour = projectconfig->editor_selection_color_get();
   }
   // Display font selection dialog. 
-  FontColorDialog dialog(defaultfont, fontname, linespacing, defaultcolour, normaltextcolour, backgroundcolour, selectedtextcolour, selectioncolour);
-  if (dialog.run() != GTK_RESPONSE_OK)
+  FontColorDialog dialog(defaultfont, fontname, linespacing, defaultcolour, normaltextcolour, backgroundcolour, selectedtextcolour, selectioncolour, GTK_WINDOW(window_main));
+  if (dialog.run() != GTK_RESPONSE_OK) {
     return;
+  }
 
   // Save font, and set it.
   settings->genconfig.text_editor_font_default_set(dialog.new_use_default_font);
@@ -4746,7 +4747,7 @@ void MainWindow::on_edit_planning_activate(GtkMenuItem * menuitem, gpointer user
 
 void MainWindow::on_edit_planning()
 {
-  PlanningEditDialog dialog (navigation.reference.book_get(), navigation.reference.chapter_get());
+  PlanningEditDialog dialog (navigation.reference.book_get(), navigation.reference.chapter_get(), GTK_WINDOW(window_main));
   dialog.run ();
 }
 
@@ -4757,7 +4758,7 @@ void MainWindow::on_view_planning_activate(GtkMenuItem * menuitem, gpointer user
 
 void MainWindow::on_view_planning()
 {
-  ViewPlanningDialog dialog(0);
+  ViewPlanningDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -4768,7 +4769,7 @@ void MainWindow::on_preferences_planning_activate(GtkMenuItem * menuitem, gpoint
 
 void MainWindow::on_preferences_planning()
 {
-  PlanningSetupDialog dialog(0);
+  PlanningSetupDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -4839,7 +4840,7 @@ void MainWindow::on_file_resources_open(ustring resource, bool startup)
 {
   // If no resource is given, select a new one.
   if (resource.empty ()) {
-    resource = resource_select (NULL);
+    resource = resource_select (NULL, GTK_WINDOW(window_main));
   }
   if (resource.empty())
     return;
@@ -4923,7 +4924,7 @@ void MainWindow::on_file_resources_delete()
 {
   vector < ustring > filenames;
   vector < ustring > resources = resource_get_resources(filenames, false);
-  ListviewDialog dialog(_("Delete resource"), resources, "", false, NULL);
+  ListviewDialog dialog(_("Delete resource"), resources, "", false, NULL, GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + "?");
     if (result == GTK_RESPONSE_YES) {
@@ -5716,7 +5717,7 @@ void MainWindow::on_preferences_filters_activate(GtkMenuItem * menuitem, gpointe
 
 void MainWindow::on_preferences_filters()
 {
-  FiltersDialog dialog(0);
+  FiltersDialog dialog(GTK_WINDOW(window_main));
   dialog.run();
 }
 
@@ -5755,7 +5756,7 @@ void MainWindow::on_print()
     labels.push_back(_("Parallel Bible"));
     labels.push_back(_("References"));
     //labels.push_back("Test usfm2pdf");
-    RadiobuttonDialog dialog(_("Print"), _("Select what to print"), labels, settings->genconfig.print_job_get(), false);
+    RadiobuttonDialog dialog(_("Print"), _("Select what to print"), labels, settings->genconfig.print_job_get(), false, GTK_WINDOW(window_main));
     if (dialog.run() != GTK_RESPONSE_OK) {
       return;
 	}
@@ -5770,19 +5771,19 @@ void MainWindow::on_print()
     case 0: // Project through internal typesetter.
     {
       {
-        PrintProjectDialog dialog(0);
+        PrintProjectDialog dialog(GTK_WINDOW(window_main));
         if (dialog.run() != GTK_RESPONSE_OK)
           return;
       }
       ProjectMemory projectmemory(settings->genconfig.project_get(), true);
-      PrintProject printproject(&projectmemory);
+      PrintProject printproject(&projectmemory, GTK_WINDOW(window_main));
       printproject.print();
       break;
     }
     case 1: // Project through XeTeX
     {
       {
-        XeTeXDialog dialog(0);
+        XeTeXDialog dialog(GTK_WINDOW(window_main));
         if (dialog.run() != GTK_RESPONSE_OK)
           return;
       }
@@ -5794,11 +5795,11 @@ void MainWindow::on_print()
     case 2: // Parallel Bible.
     {
       {
-        ParallelBibleDialog dialog(0);
+        ParallelBibleDialog dialog(GTK_WINDOW(window_main));
         if (dialog.run() != GTK_RESPONSE_OK)
           return;
       }
-      view_parallel_bible_pdf();
+      view_parallel_bible_pdf(GTK_WINDOW(window_main));
       break;
     }
     case 3: // References.
@@ -5807,7 +5808,7 @@ void MainWindow::on_print()
       show_references_window();
       // Show dialog.
       {
-        PrintReferencesDialog dialog(0);
+        PrintReferencesDialog dialog(GTK_WINDOW(window_main));
         if (dialog.run() != GTK_RESPONSE_OK)
           return;
       }
@@ -5820,7 +5821,7 @@ void MainWindow::on_print()
         // Run the function for printing the references.
         vector < ustring > extra_projects = settings->genconfig.print_references_projects_get();
         ProjectMemory projectmemory(settings->genconfig.project_get(), true);
-        view_parallel_references_pdf(projectmemory, &extra_projects, refs, true, NULL, true);
+        view_parallel_references_pdf(projectmemory, &extra_projects, refs, true, NULL, true, GTK_WINDOW(window_main));
       }
       break;
     }

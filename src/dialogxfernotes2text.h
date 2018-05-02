@@ -29,7 +29,7 @@
 class XferNotes2TextDialog
 {
 public:
-  XferNotes2TextDialog (int dummy);
+  XferNotes2TextDialog (GtkWindow *transient_parent);
   ~XferNotes2TextDialog ();
   int run ();
 protected:

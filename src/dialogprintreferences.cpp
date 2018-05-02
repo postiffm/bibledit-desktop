@@ -33,11 +33,12 @@
 #include "tiny_utilities.h"
 #include <glib/gi18n.h>
 
-PrintReferencesDialog::PrintReferencesDialog(int dummy)
+PrintReferencesDialog::PrintReferencesDialog(GtkWindow *transient_parent)
 {
   extern Settings *settings;
 
   printreferencesdialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(printreferencesdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(printreferencesdialog), _("Print References"));
   gtk_window_set_position(GTK_WINDOW(printreferencesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(printreferencesdialog), TRUE);

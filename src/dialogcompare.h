@@ -29,7 +29,7 @@
 class CompareDialog
 {
 public:
-  CompareDialog(WindowReferences * references_window);
+  CompareDialog(WindowReferences * references_window, GtkWindow *transient_parent);
   ~CompareDialog();
   int run();
 protected:

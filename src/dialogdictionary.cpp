@@ -38,12 +38,13 @@
 enum { COLUMN_BOOK, NUM_COLUMNS };
 
 
-DictionaryDialog::DictionaryDialog(const ustring & project)
+DictionaryDialog::DictionaryDialog(const ustring & project, GtkWindow *transient_parent)
 {
   // Store data.
   myproject = project;
 
   dictionarydialog = gtk_dialog_new();
+  gtk_window_set_transient_for(GTK_WINDOW(dictionarydialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dictionarydialog), _("Dictionaries"));
   gtk_window_set_position(GTK_WINDOW(dictionarydialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(dictionarydialog), TRUE);
@@ -196,7 +197,7 @@ void DictionaryDialog::on_button_add()
   }
 
   // Display these.
-  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL);
+  ListviewDialog dialog(_("Select a dictionary"), dictionaries, "", false, NULL, GTK_WINDOW(dictionarydialog));
   if (dialog.run() == GTK_RESPONSE_OK) {
     // Add to the list.
     GtkTreeIter iter;
@@ -244,7 +245,7 @@ void DictionaryDialog::on_button_edit_clicked(GtkButton * button, gpointer user_
 void DictionaryDialog::on_button_edit()
 {
   // Edit dictionary.
-  EditDictionaryDialog dialog(listview_get_active_string(treeview_dictionaries));
+  EditDictionaryDialog dialog(listview_get_active_string(treeview_dictionaries), GTK_WINDOW(dictionarydialog));
   dialog.run();
 }
 

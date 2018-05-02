@@ -34,7 +34,7 @@
 class PrintProject
 {
 public:
-  PrintProject(ProjectMemory * project);
+  PrintProject(ProjectMemory * project, GtkWindow *_transient_parent);
   ~PrintProject();
   void portion_project(const ustring& project);
   void comment(const ustring& text);
@@ -46,6 +46,7 @@ private:
   ScripturePortions * scriptureportions;
   vector <ustring> comments;
   bool nobold;
+  GtkWindow *transient_parent;
 };
 
 
