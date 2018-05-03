@@ -26,8 +26,8 @@
 #include "combobox.h"
 #include <glib/gi18n.h>
 
-DeleteKeytermsAssistant::DeleteKeytermsAssistant(int dummy) :
-  AssistantBase(_("Keyterms"), _("deletekeyterms"))
+DeleteKeytermsAssistant::DeleteKeytermsAssistant(GtkWindow *transient_parent) :
+  AssistantBase(_("Keyterms"), _("deletekeyterms"), transient_parent)
 // Assistant for deleting keyterms.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);

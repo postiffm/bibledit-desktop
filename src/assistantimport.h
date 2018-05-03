@@ -38,7 +38,7 @@
 class ImportAssistant : public AssistantBase
 {
 public:
-  ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost);
+  ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost, GtkWindow *transient_parent);
   virtual ~ImportAssistant();
   bool import_notes;
 private:

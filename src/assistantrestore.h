@@ -31,7 +31,7 @@
 class RestoreAssistant : public AssistantBase
 {
 public:
-  RestoreAssistant(int dummy);
+  RestoreAssistant(GtkWindow *transient_parent);
   virtual ~RestoreAssistant();
 private:
   // Assistant page preparation.

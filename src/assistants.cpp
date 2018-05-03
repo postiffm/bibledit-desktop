@@ -28,7 +28,7 @@
 #include "htmlbrowser.h"
 #include <glib/gi18n.h>
 
-AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic, bool showintro)
+AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic, GtkWindow *transient_parent, bool showintro)
 // Base class for each assistant. This base is designed by default to show an introduction
 // to the Assistant (think "wizard" in old Windows terms). This introduction can be turned
 // off to avoid the extra click. If you do, just make the first page of your assistant 
@@ -48,9 +48,13 @@ AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic, bool
 
   // Create the assistant.
   assistant = gtk_assistant_new();
-  gtk_widget_show (assistant);
-  gtk_window_set_modal (GTK_WINDOW (assistant), true);
+  gtk_window_set_transient_for(GTK_WINDOW(assistant), transient_parent);
   gtk_window_set_title (GTK_WINDOW (assistant), title.c_str());
+  gtk_window_set_modal (GTK_WINDOW (assistant), TRUE);
+  gtk_window_set_position (GTK_WINDOW(assistant), GTK_WIN_POS_CENTER_ON_PARENT);
+  gtk_window_set_destroy_with_parent(GTK_WINDOW(assistant), TRUE);
+
+  gtk_widget_show (assistant);
 
   // Let it remain above other windows.
   gdk_window_set_keep_above (gtk_widget_get_root_window (assistant), true);

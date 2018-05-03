@@ -36,7 +36,7 @@
 class ExportAssistant : public AssistantBase
 {
 public:
-  ExportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window);
+  ExportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, GtkWindow *transient_parent);
   virtual ~ExportAssistant();
   bool sword_module_created;
 private:

@@ -34,8 +34,8 @@
 #include "utilities.h"
 #include <glib/gi18n.h>
 
-ChangesAssistant::ChangesAssistant(WindowReferences * references_window) :
-  AssistantBase(_("Changes"), _("changes"))
+ChangesAssistant::ChangesAssistant(WindowReferences * references_window, GtkWindow *transient_parent) :
+  AssistantBase(_("Changes"), _("changes"), transient_parent)
 // Assistant for adding keyterms.
 {
   my_references_window = references_window;

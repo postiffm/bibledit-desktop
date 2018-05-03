@@ -32,7 +32,7 @@
 class ChangesAssistant : public AssistantBase
 {
 public:
-  ChangesAssistant(WindowReferences * references_window);
+  ChangesAssistant(WindowReferences * references_window, GtkWindow *transient_parent);
   virtual ~ChangesAssistant();
 private:
   GtkWidget *vbox1;

@@ -3338,7 +3338,7 @@ void MainWindow::on_file_export_activate (GtkMenuItem *menuitem, gpointer user_d
 void MainWindow::on_file_export ()
 {
   save_editors();
-  export_assistant = new ExportAssistant (window_references, window_styles, window_check_keyterms);
+  export_assistant = new ExportAssistant (window_references, window_styles, window_check_keyterms, GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) export_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4412,7 +4412,7 @@ void MainWindow::on_keyterms_delete_activate(GtkMenuItem *menuitem, gpointer use
 
 void MainWindow::on_keyterms_delete()
 {
-  delete_keyterms_assistant = new DeleteKeytermsAssistant (0);
+  delete_keyterms_assistant = new DeleteKeytermsAssistant (GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) delete_keyterms_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4439,7 +4439,7 @@ void MainWindow::on_file_backup_activate(GtkMenuItem * menuitem, gpointer user_d
 void MainWindow::on_file_backup()
 {
   save_editors();
-  backup_assistant = new BackupAssistant (0);
+  backup_assistant = new BackupAssistant (GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) backup_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4450,7 +4450,7 @@ void MainWindow::on_file_restore_activate(GtkMenuItem * menuitem, gpointer user_
 
 void MainWindow::on_file_restore()
 {
-  restore_assistant = new RestoreAssistant (0);
+  restore_assistant = new RestoreAssistant (GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) restore_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4478,7 +4478,7 @@ void MainWindow::on_preferences_remote_repository_activate(GtkMenuItem * menuite
 void MainWindow::on_preferences_remote_repository()
 {
   save_editors();
-  remote_repository_assistant = new RemoteRepositoryAssistant (0);
+  remote_repository_assistant = new RemoteRepositoryAssistant (GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) remote_repository_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4495,7 +4495,7 @@ void MainWindow::on_project_changes()
   save_editors();
   // Do the actual changes dialog. 
   show_references_window();
-  changes_assistant = new ChangesAssistant (window_references);
+  changes_assistant = new ChangesAssistant (window_references, GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) changes_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4895,7 +4895,7 @@ void MainWindow::on_file_resources_new_activate(GtkMenuItem * menuitem, gpointer
 void MainWindow::on_file_resources_new()
 {
   // Start the assistant.
-  resource_assistant = new ResourceAssistant ("");
+  resource_assistant = new ResourceAssistant ("", GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) resource_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 
@@ -4909,7 +4909,7 @@ void MainWindow::on_file_resources_edit()
   WindowResource *focused_resource_window = last_focused_resource_window();
   if (focused_resource_window) {
     ustring templatefile = focused_resource_window->resource->template_get();
-    resource_assistant = new ResourceAssistant (templatefile);
+    resource_assistant = new ResourceAssistant (templatefile, GTK_WINDOW(window_main));
     g_signal_connect ((gpointer) resource_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
   }
 }
@@ -6355,7 +6355,7 @@ void MainWindow::on_file_import ()
   WindowReferences * references_window = window_references;
   if (!project_notes_management_enabled)
     references_window = NULL;
-  import_assistant = new ImportAssistant (references_window, styles_window, window_check_keyterms, windowsoutpost);
+  import_assistant = new ImportAssistant (references_window, styles_window, window_check_keyterms, windowsoutpost, GTK_WINDOW(window_main));
   g_signal_connect ((gpointer) import_assistant->signal_button, "clicked", G_CALLBACK (on_assistant_ready_signal), gpointer (this));
 }
 

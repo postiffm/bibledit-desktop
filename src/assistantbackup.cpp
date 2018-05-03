@@ -36,8 +36,8 @@
 #include "resource_utils.h"
 #include <glib/gi18n.h>
 
-BackupAssistant::BackupAssistant(int dummy) :
-  AssistantBase(_("Backup"), _("backup"), /*showintro*/false)
+BackupAssistant::BackupAssistant(GtkWindow *transient_parent) :
+  AssistantBase(_("Backup"), _("backup"), transient_parent, /*showintro*/false)
 // Backup assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);

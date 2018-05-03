@@ -31,7 +31,7 @@
 class ResourceAssistant : public AssistantBase
 {
 public:
-  ResourceAssistant(const ustring& resource_template);
+  ResourceAssistant(const ustring& resource_template, GtkWindow *transient_parent);
   virtual ~ResourceAssistant();
   ustring new_resource_get ();
   ustring edited_resource_get ();

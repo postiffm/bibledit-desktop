@@ -30,7 +30,7 @@
 class RemoteRepositoryAssistant : public AssistantBase
 {
 public:
-  RemoteRepositoryAssistant(int dummy);
+  RemoteRepositoryAssistant(GtkWindow *transient_parent);
   virtual ~RemoteRepositoryAssistant();
 private:
   // Our data.

@@ -36,8 +36,8 @@
 #include "restore.h"
 #include <glib/gi18n.h>
 
-RestoreAssistant::RestoreAssistant(int dummy) :
-  AssistantBase(_("Restore"), _("restore"))
+RestoreAssistant::RestoreAssistant(GtkWindow *transient_parent) :
+  AssistantBase(_("Restore"), _("restore"), transient_parent)
 // Restore assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);

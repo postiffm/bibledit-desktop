@@ -30,7 +30,7 @@
 class DeleteKeytermsAssistant : public AssistantBase
 {
 public:
-  DeleteKeytermsAssistant(int dummy);
+  DeleteKeytermsAssistant(GtkWindow *transient_parent);
   virtual ~DeleteKeytermsAssistant();
 private:
   GtkWidget *vbox1;

@@ -39,8 +39,8 @@
 #include "resource_conversion_utils.h"
 #include <glib/gi18n.h>
 
-ResourceAssistant::ResourceAssistant(const ustring& resource_template) :
-  AssistantBase(_("Resource editor"), _("resource_editor"))
+ResourceAssistant::ResourceAssistant(const ustring& resource_template, GtkWindow *transient_parent) :
+  AssistantBase(_("Resource editor"), _("resource_editor"), transient_parent)
 // Assistant for editing or creating a resource.
 {
   // Since this Assistant contains browsers, it needs a bigger size.

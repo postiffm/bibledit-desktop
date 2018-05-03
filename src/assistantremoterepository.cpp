@@ -35,8 +35,8 @@
 #include "notes_utils.h"
 #include <glib/gi18n.h>
 
-RemoteRepositoryAssistant::RemoteRepositoryAssistant(int dummy) :
-  AssistantBase(_("Remote repository setup"), _("menu-preferences/dialog-remote-repository"))
+RemoteRepositoryAssistant::RemoteRepositoryAssistant(GtkWindow *transient_parent) :
+  AssistantBase(_("Remote repository setup"), _("menu-preferences/dialog-remote-repository"), transient_parent)
 // Assistant for managing the remote repository.
 {
   // Configuration and initialization.

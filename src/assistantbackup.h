@@ -31,7 +31,7 @@
 class BackupAssistant : public AssistantBase
 {
 public:
-  BackupAssistant(int dummy);
+  BackupAssistant(GtkWindow *transient_parent);
   virtual ~BackupAssistant();
 private:
   // Assistant page preparation.

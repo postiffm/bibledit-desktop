@@ -38,8 +38,8 @@
 #include "keyterms.h"
 #include <glib/gi18n.h>
 
-ExportAssistant::ExportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window) :
-  AssistantBase(_("Export"), _("export"))
+ExportAssistant::ExportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, GtkWindow *transient_parent) :
+  AssistantBase(_("Export"), _("export"), transient_parent)
 // Export assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);

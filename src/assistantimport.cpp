@@ -43,8 +43,8 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost) :
-  AssistantBase(_("Import"), _("import"), /*showintro*/false)
+ImportAssistant::ImportAssistant(WindowReferences * references_window, WindowStyles * styles_window, WindowCheckKeyterms * check_keyterms_window, WindowsOutpost * windows_outpost, GtkWindow *transient_parent) :
+  AssistantBase(_("Import"), _("import"), transient_parent, /*showintro*/false)
 // Import assistant.
 {
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (assistant), GtkAssistantPageFunc (assistant_forward_function), gpointer(this), NULL);
