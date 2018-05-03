@@ -2125,11 +2125,11 @@ void MainWindow::on_about1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void MainWindow::showabout()
 {
-  gtk_show_about_dialog(GTK_WINDOW(window_main),
+  gtk_show_about_dialog(GTK_WINDOW(window_main),  // This window does not behave like other child dialogs, but not sure why.
                         "version", PACKAGE_VERSION,
                         "website", PACKAGE_BUGREPORT,
                         "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"),
-			"translator-credits", _("translator-credits"),
+			            "translator-credits", _("translator-credits"),
                         "license",
 			_("This program is free software; you can redistribute it and/or modify\n"
                         "it under the terms of the GNU General Public License as published by\n"
