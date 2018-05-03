@@ -43,18 +43,7 @@ bool replace_text (ustring& line, const ustring& look_for, const ustring& replac
 bool replace_text_between (ustring& line, const ustring& start, const ustring& end, const ustring& replacement);
 template<typename T1, typename T2> void quick_sort(vector<T1> &one, vector <T2> &two, unsigned int beg, unsigned int end);
 template<typename T1> void quick_sort(vector<T1> &one, vector <bool> &two, unsigned int beg, unsigned int end);
-/*
-void quick_sort (vector<unsigned int>& one, vector<ustring>& two,      unsigned int beg, unsigned int end);
-void quick_sort (vector<ustring>& one,      vector<unsigned int>& two, unsigned int beg, unsigned int end);
-void quick_sort (vector<unsigned int>& one, vector<unsigned int>& two, unsigned int beg, unsigned int end);
-void quick_sort (vector<size_t>& one,       vector<size_t>& two,       unsigned int beg, unsigned int end);
-void quick_sort (vector<unsigned int>& one, vector<bool>& two,         unsigned int beg, unsigned int end);
-void quick_sort (vector<int>& one,          vector<unsigned int>& two, unsigned int beg, unsigned int end);
-void quick_sort (vector<ustring>& one,      vector<ustring>& two,      unsigned int beg, unsigned int end);
-void quick_sort (vector<ustring>& one,      vector<bool>& two,         unsigned int beg, unsigned int end);
-void quick_sort (vector<ustring>& one,                                 unsigned int beg, unsigned int end);
-void quick_sort (vector<long unsigned int>& one, vector<long unsigned int>& two, unsigned int beg, unsigned int end);
-*/
+
 gchar * de_windows_notepad (gchar * contents);
 void de_byte_order_mark (ustring& line);
 ustring spaces (unsigned int count);
