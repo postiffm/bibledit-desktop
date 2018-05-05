@@ -21,6 +21,7 @@
 #include "libraries.h"
 #include "utilities.h"
 #include <glib.h>
+#include <glibmm.h>
 #include "constants.h"
 #include "gwrappers.h"
 #include "directories.h"
@@ -596,13 +597,23 @@ WriteText::~WriteText()
 
 
 void WriteText::text(const ustring & text)
-// Write the text. For calculating the lenght, do not use text.length(),
+// Write the text. For calculating the length, do not use text.length(),
 // because this gives the number of unicode characters, not the length in bytes. 
 // Use strlen () instead.
 {
   if (write(fd, text.c_str(), strlen(text.c_str()))) ;
 }
 
+void WriteText::text2CodePage1252(const ustring & text)
+{
+  // Above, ::text grabs text.c_str() and writes it. This does an automatic charset conversion
+  // to UTF-8. So, for instance, a 0xe9 (e with acute), gets converted to c3a9, which is the
+  // same character but in Unicode. Below shows how to convert ustring in a 1252 charset compliant way.
+  // This took a couple of hours to figure out. See export_utils.cpp in the bibleworks export method.
+  std::string str = Glib::convert(text.raw(), /*to*/"CP1252", /*from*/"UTF-8");
+  // str stores characters as bytes, so str.length() works here
+  write(fd, str.c_str(), str.length());
+}
 
 Parse::Parse(const ustring & line, bool remove_punctuation, const ustring & separator)
 // Parses a line of text in its separate words.

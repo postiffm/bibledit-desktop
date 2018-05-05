@@ -142,6 +142,74 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
   }
 }
 
+// This is incomplete, but pretty good. If the Glib::convert() function works (see utilities.cpp), then
+// I don't have to do all this work.
+map<gunichar, char> cvt;
+
+void Codepage1252Setup(void)
+{
+  // Populate the map
+  // See http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
+  cvt[0x201A] = 0x82; // 8218 single low-9 quote mark U+201A
+                      // Latin small f with hook tail, unused in Bible
+  cvt[0x201E] = 0x84; // 8222 double low-9 quote mark U+201E  
+  cvt[0x2026] = 0x85; // horizontal ellipsis; unlikely in Bible but perhaps in unfinished translation
+  cvt[0x2020] = 0x86; // single dagger
+  cvt[0x2021] = 0x87; // double dagger
+  cvt[0x02C6] = 0x88; // modifier letter circumflex accent (probably unused)
+  cvt[0x2030] = 0x89; // per mille sign
+  cvt[0x0160] = 0x8A; // latin capital S with caron
+  cvt[0x2039] = 0x8B; // single left-pointing angle quote mark
+  cvt[0x0152] = 0x8C; // latin capital ligature OE
+             // 0x8D unassigned
+  cvt[0x017D] = 0x8E; // latin capital Z with caron (small u above)
+             // 0x8F unassigned
+             // 0x90 unassigned
+  cvt[0x2018] = 0x91; // 8216 left single quote mark U+2018
+  cvt[0x2019] = 0x92; // 8217 right single quote mark U+2019
+  cvt[0x201C] = 0x93; // 8220 left double quote mark U+201C
+  cvt[0x201D] = 0x94; // 8221 right duoble quote mark U+201D
+  cvt[0x2022] = 0x95; // bullet
+  cvt[0x2013] = 0x96; // 8211 en dash U+2013
+  cvt[0x2014] = 0x97; // Em dash
+  cvt[0x02DC] = 0x98; // small tilde (somewhat raised)
+  cvt[0x2122] = 0x99; // trade mark sign
+  cvt[0x0161] = 0x9A; // latin small s with caron (small u above)
+  cvt[0x203A] = 0x9B; // single right-pointing angle quote mark
+  cvt[0x0153] = 0x9C; // latin small ligature OE (not 0E zero-E)
+             // 0x9D unassigned
+  cvt[0x017E] = 0x9E; // latin small z with caron (small u above)
+  cvt[0x0178] = 0x9F; // latin capital Y with diaeresis (two dots above)
+
+  cvt[0xc3ab] = 0xeb; // 50091 small e with diaeresis U+C3AB
+  cvt[0xc3a9] = 0xe9; // small e with acute
+  cvt[0xc3a4] = 0xe4; // small a with diaeresis
+  cvt[0xc3bc] = 0xfc; // small u with diaeresis 
+}
+// Ready to be confused? Here goes.
+// 1. In the USFM file for a project, I have a 0xc3a9, e with acute.
+// 2. When I see that character here, it comes to me as a single 0xE9.
+// 3. When I print that character out, someone converts it to 0xc3a9 again.
+ustring convertUnicodeToCodepage1252(ustring &verse)
+{
+  ustring newverse;
+
+  // Iterate the string and replace
+  for (Glib::ustring::iterator it = verse.begin(); it != verse.end(); it++) {
+    gunichar ch = *it;
+    printf("ch=%08X or %c\n", ch, ch);
+    if (cvt.find(ch) != cvt.end()) { newverse.push_back(cvt[ch]); }
+    else {
+        newverse.push_back(ch);
+        if ((unsigned int)ch > (unsigned int)0x000000ff) {
+          gw_warning("Multibyte char " + std::to_string((unsigned int)ch));
+        }
+    }
+  }
+  
+  return newverse;
+}
+
 void export_to_bibleworks(const ustring& project, const ustring& filename)
 /*
 Exports a whole project to a file that is fit for being imported by the 
@@ -156,6 +224,7 @@ This done in this manner:
 Yes, this is a bit rough, I know...
 */
 {
+  Codepage1252Setup();
   if (!filename.empty()) {
     // Progress bar.
     ProgressWindow progresswindow(_("Export"), true);
@@ -184,23 +253,34 @@ Yes, this is a bit rough, I know...
           // Get the chapter and handle it.
           vector < ustring > lines;
           lines = project_retrieve_chapter(project, scripture_books[bk], chapters[ch]);
+          // In Preferences | Text Replacement, the user can say whether to replace text before a print/export.
+          // In addition, the user can give a list of characters to replace with other characters, e.g. >> with ".
           text_replacement(lines);
+          // In addition, we have to do a lower-level text replacement that ensures that no unicode characters
+          // remain in the Bibleworks output file. For instance, in Luxembourgish, a c3ab character is often 
+          // used in the text, but in Bibledit 4.14 and earlier, it remained in the Bibleworks output file. That is wrong, since Glenn Weaver
+          // at Bibleworks confirmed 5/2/2018 that Bibleworks input has to be 8-bit characters (ASCII text format
+          // is how he stated it), but more specifically Windows codepage 1252. The c3ab character is a small 
+          // e with diaeresis (two dots over it). This has to be translated to 0xeb, which in 1252 is also the e with two dots.
+
           CategorizeChapterVerse ccv(lines);
           for (unsigned int vs = 0; vs < ccv.verse.size(); vs++) {
             // Do not export verse 0.
             if (ccv.verse[vs] == "0") { continue; }
-            // Bibledit does not handle combined verses like 1-4a., etc. So make
+            // Bibleworks does not handle combined verses like 1-4a., etc. So make
             // a simple verse.
             ustring verse = number_in_string(ccv.verse[vs]);
             // Remove the verse number from the line itself, except when the verse
             // was not a simple one, e.g. it was something like verse 1-3.
             size_t position = ccv.line[vs].find(" ");
-            if (position != string::npos)
+            if (position != string::npos) {
               ccv.line[vs].erase(0, ++position);
+            }
             if (verse == ccv.verse[vs]) {
               position = ccv.line[vs].find(" ");
-              if (position != string::npos)
+              if (position != string::npos) {
                 ccv.line[vs].erase(0, ++position);
+              }
             }
             CategorizeLine cat_line(ccv.line[vs]);
             // Output verse.
@@ -210,7 +290,14 @@ Yes, this is a bit rough, I know...
             wt.text(":");
             wt.text(verse);
             wt.text(" ");
-            wt.text(cat_line.verse);
+            // ustring oldverse = cat_line.verse;
+            // ustring newVerse = convertUnicodeToCodepage1252(oldverse);
+            //wt.text(newVerse);
+            // Bibleworks does not (as of 5/5/2018) support Unicode input to the version
+            // database compiler. So, we have to export the text in Windows 1252 charset,
+            // which supports most European languages. Reference: Luxembourgish translation
+            // provided by Glenn Kerr, Bibles International.
+            wt.text2CodePage1252(cat_line.verse);
             wt.text("\n");
           }
         }

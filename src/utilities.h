@@ -106,6 +106,7 @@ public:
   WriteText (const ustring & file, bool append=false);
   ~WriteText ();
   void text (const ustring& text);
+  void text2CodePage1252(const ustring& text);
 private:
   int fd;
 };
