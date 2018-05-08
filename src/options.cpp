@@ -45,7 +45,7 @@ Options::Options(int argc, char **argv)
       /* getopt_long stores the option index here. */
       int longindex = 0;
       
-      c = getopt_long (argc, argv, "d", // we accept -d or --debug[=N]
+      c = getopt_long_only (argc, argv, "d", // we accept -d or --debug[=N]
                        long_options, &longindex);
       
       /* Detect the end of the options. */

@@ -40,6 +40,12 @@ bool check_bibledit_startup_okay (int argc, char *argv[])
   }
 #endif
 
+  // Show dialog if there were command options that were unknown
+  if (options->unknownArgsPresent()) {
+    ustring unknownArgs = options->buildUnknownArgsList();
+    gtkw_dialog_info(NULL, "Unknown command line arguments are ignored: " + unknownArgs);
+  }
+  
   // Check arguments whether to bypass the check on another instance of bibledit.  
   if (options->debug > 0) {
     global_debug_level = 1;

@@ -6505,13 +6505,6 @@ bool MainWindow::on_windows_startup()
   }
   // We're through.
   
-  // Show dialog if there were command options that were unused
-  if (options->unknownArgsPresent()) {
-    ustring unknownArgs = options->buildUnknownArgsList();
-    gtkw_dialog_info(window_main, "Unknown command line arguments: " + unknownArgs);
-  }
-
-  
   return false;
 }
 
