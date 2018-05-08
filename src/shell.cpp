@@ -32,6 +32,11 @@
 bool program_is_running(const ustring & commandline)
 // Returns true if the program given on "commandline" is running.
 {
+  // If you are running gdb /usr/bin/bibledit-desktop, then process that will count
+  // for one instantiation since the name bibledit-desktop appears in it. Then the 
+  // program itself will count for a second instantiation. This is why we provide
+  // the --debug parameter, among other reasons, so that this instantiation count 
+  // can be ignored.
   return (programs_running_count(commandline) > 0);
 }
 
