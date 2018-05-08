@@ -7,6 +7,7 @@ bibles_dir = $(pkgdatadir)/bibles
 bibles_byzascii_dir = $(bibles_dir)/byzascii
 bibles_sblgnt_dir = $(bibles_dir)/sblgnt
 bibles_engleb_dir = $(bibles_dir)/engleb
+bibles_engmtv_dir = $(bibles_dir)/engmtv
 
 # Files to install
 bibles_byzascii__DATA = byzascii/1CO_BYZ.txt  byzascii/2CO_BYZ.txt  byzascii/3JO_BYZ.txt  byzascii/HEB_BYZ.txt \
@@ -33,5 +34,6 @@ bibles_engleb__DATA   = engleb/Gen.txt  engleb/Exo.txt  engleb/Lev.txt  engleb/N
 			engleb/Php.txt  engleb/Col.txt  engleb/1Th.txt  engleb/2Th.txt   engleb/1Tim.txt engleb/2Tim.txt engleb/Tit.txt \
 			engleb/Phm.txt  engleb/Heb.txt  engleb/Jam.txt  engleb/1Pe.txt   engleb/2Pe.txt  engleb/1Jn.txt  engleb/2Jn.txt \
 			engleb/3Jn.txt  engleb/Jude.txt engleb/Rev.txt
+bibles_engmtv         = engmtv/NewTestamentBibleworks.txt engmtv/NewTestamentOutline.txt
 
 CLEANFILES = *~
