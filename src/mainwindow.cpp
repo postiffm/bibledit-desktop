@@ -129,6 +129,7 @@
 #include <glib/gi18n.h>
 #include "chapterview.h"
 #include "debug.h"
+#include "gtkwrappers.h"
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -6503,6 +6504,14 @@ bool MainWindow::on_windows_startup()
     focused_project_last_session.clear();
   }
   // We're through.
+  
+  // Show dialog if there were command options that were unused
+  if (options->unknownArgsPresent()) {
+    ustring unknownArgs = options->buildUnknownArgsList();
+    gtkw_dialog_info(window_main, "Unknown command line arguments: " + unknownArgs);
+  }
+
+  
   return false;
 }
 

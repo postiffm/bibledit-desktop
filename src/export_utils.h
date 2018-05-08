@@ -35,7 +35,9 @@ enum ExportUsfmChangesType {euctSinceLast, euctSinceDateTime};
 
 void export_to_usfm (const ustring& project, ustring location, bool zip, bool combined, GtkWindow *transient_parent);
 void export_to_usfm_changes (const ustring& project, int time_from, ustring comment);
+#if 0
 ustring convertUnicodeToCodepage1252(ustring &verse);
+#endif
 void export_to_bibleworks (const ustring& project, const ustring& filename);
 void export_translation_notes (const ustring& filename, const vector<unsigned int> & ids_to_display, bool export_all);
 void export_to_osis_recommended (const ustring& project, const ustring& filename);
@@ -44,6 +46,5 @@ void export_to_osis_for_go_bible_creator (const ustring& project, const ustring&
 void export_to_sword (const ustring& project, ustring directory);
 void export_to_opendocument (const ustring& project, const ustring& filename, GtkWindow *transient_parent);
 void export_to_go_bible (const ustring& project, const ustring& foldername);
-
 
 #endif

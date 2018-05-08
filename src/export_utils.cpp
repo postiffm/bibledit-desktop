@@ -142,11 +142,13 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
   }
 }
 
+#if 0
 // This is incomplete, but pretty good. If the Glib::convert() function works (see utilities.cpp), then
 // I don't have to do all this work.
 map<gunichar, char> cvt;
 
 void Codepage1252Setup(void)
+// This must be called before convertUnicodeToCodepage1252 will function.
 {
   // Populate the map
   // See http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
@@ -209,6 +211,7 @@ ustring convertUnicodeToCodepage1252(ustring &verse)
   
   return newverse;
 }
+#endif
 
 void export_to_bibleworks(const ustring& project, const ustring& filename)
 /*
@@ -224,7 +227,7 @@ This done in this manner:
 Yes, this is a bit rough, I know...
 */
 {
-  Codepage1252Setup();
+  //Codepage1252Setup();
   if (!filename.empty()) {
     // Progress bar.
     ProgressWindow progresswindow(_("Export"), true);

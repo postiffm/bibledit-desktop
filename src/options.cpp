@@ -37,42 +37,43 @@ Options::Options(int argc, char **argv)
   
   while (1) {
       static struct option long_options[] =
-        {
-	  // name,  has_arg,             flag, val
+      {
+          // name,  has_arg,             flag, val
           {"debug", optional_argument,   NULL, 'd'},
           {0, 0, 0, 0}
-        };
+      };
       /* getopt_long stores the option index here. */
-      int option_index = 0;
-
+      int longindex = 0;
+      
       c = getopt_long (argc, argv, "d", // we accept -d or --debug[=N]
-                       long_options, &option_index);
-
+                       long_options, &longindex);
+      
       /* Detect the end of the options. */
       if (c == -1) { break; }
-
+      
       switch (c) {
-      case 'd':
-	// for --debug, we set debug to 1, or to the long option value passed
-	printf ("Option --%s", long_options[option_index].name);
-	if (optarg) {
-	  printf (" with arg %s", optarg);
-	  debug = atoi(optarg);
-	}
-	else {
-	  // for -d, we just set debug to 1
-	  debug = 1;
-	}
-	printf ("\n");
-	break;
-
-      case 0:
-      case '?':
-      default:
-	abort ();
-	break;
+          case 'd':
+              // for --debug, we set debug to 1, or to the long option value passed
+              printf ("Option --%s", long_options[longindex].name);
+              if (optarg) {
+                  printf (" with arg %s", optarg);
+                  debug = atoi(optarg);
+              }
+              else {
+                  // for -d, we just set debug to 1
+                  debug = 1;
+              }
+              printf ("\n");
+              break;
+              
+          case 0:
+          case '?':
+          default:
+              gw_warning(ustring("Unknown command-line option ") + ustring(argv[optind-1]));
+              unknownArgs.push_back(argv[optind-1]);
+              break;
       }
-    }
+  }
 
   /* Print any remaining command line arguments (not options). */
   if (optind < argc) {
@@ -92,4 +93,22 @@ void Options::print(void)
   for(auto const& value: extraArgs) {
     gw_message("Argument "+ ustring(value));
   }
+  for(auto const& value: unknownArgs) {
+    gw_message("Unknown argument "+ ustring(value));
+  }
+}
+
+bool Options::unknownArgsPresent(void)
+{
+  if (unknownArgs.size() > 0) { return true; }
+  else { return false; }
+}
+
+ustring Options::buildUnknownArgsList(void)
+{
+  ustring retval;
+  for(auto const& value: unknownArgs) {
+    retval.append(ustring(value) + " ");
+  }
+  return retval;
 }

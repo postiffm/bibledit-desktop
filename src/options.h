@@ -21,15 +21,19 @@
 #define INCLUDED_OPTIONS_H
 
 #include <vector>
+#include "ustring.h"
 using namespace std;
 
 class Options {
  public:
   Options(int argc, char **argv);
   void print(void);
+  bool unknownArgsPresent(void);
+  ustring buildUnknownArgsList(void);
   int debug;   // --debug[=N]
  private:
-  vector<char *> extraArgs;  
+   vector<char *> extraArgs;  
+   vector<char *> unknownArgs;
 };
 
 extern Options *options; // defined in bibledit.cpp
