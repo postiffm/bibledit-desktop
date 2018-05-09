@@ -169,6 +169,6 @@ while ($ln = <$inf>) {
 	# I believe this is part of the EMTV Bible outline
 	$outline = $ln;
 	$nextvs = $vs+1;
-	print $outlinef "$outline..........$book $ch:$nextvs\n";
+	print $outlinef "$book $ch:$nextvs $outline\n";
     }
 }
