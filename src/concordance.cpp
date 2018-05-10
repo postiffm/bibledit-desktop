@@ -757,7 +757,7 @@ void book_engmtv::load(void)
     ReadText rt(Directories->get_package_data() + "/bibles/engmtv/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
-        
+
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
          //  Extract chapter and verse,  and leading space. The lines are always
@@ -881,71 +881,34 @@ void book::load(void)
   // instantiations of it.
 }
 
-ustring bible_byz::retrieve_verse(const Reference &ref)
-{
-    unsigned int booknum = ref.book_get();
-    // 1. Does this Bible support this book? SBLGNT only has books 40-66.
-    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
-        
-    check_book_in_range(booknum);
-    
-    //  NOTICE SIMILARITY THIS METHOD TO NEXT,  same except new book_byz statement
-    
-    // 2. Have we already loaded this book? If not, load it and save it for next time around
-    if (books[booknum] == NULL) {
-        books[booknum] = new book_byz((bible*)this, books_id_to_localname(booknum),  booknum);
-        books[booknum]->load();
-    }
-    return books[booknum]->retrieve_verse(ref);
+bool bible::validateBookNum(const unsigned int booknum)
+{ // maybe should make this a do-nothing, or bible as pure virtual
+  if ((booknum < 1) || (booknum > 66)) { return false; }
+  return true;
 }
 
-ustring bible_sblgnt::retrieve_verse(const Reference &ref)
+bool bible_byz::validateBookNum(const unsigned int booknum)
 {
-    unsigned int booknum = ref.book_get();
-    // 1. Does this Bible support this book? SBLGNT only has books 40-66.
-    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
-        
-    check_book_in_range(booknum);
-
-    // 2. Have we already loaded this book? If not, load it and save it for next time around
-    if (books[booknum] == NULL) {
-        books[booknum] = new book_sblgnt(this, books_id_to_localname(booknum),  booknum);
-        books[booknum]->load();
-    }
-    return books[booknum]->retrieve_verse(ref);
+  if ((booknum < 40) || (booknum > 66)) { return false; }
+  return true;
 }
 
-ustring bible_engmtv::retrieve_verse(const Reference &ref)
+bool bible_sblgnt::validateBookNum(const unsigned int booknum)
 {
-    unsigned int booknum = ref.book_get();
-    // 1. Does this Bible support this book? EMTV only has books 40-66.
-    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
-        
-    check_book_in_range(booknum);
-
-    // 2. Have we already loaded this book? If not, load it and save it for next time around
-    if (books[booknum] == NULL) {
-        books[booknum] = new book_engmtv(this, books_id_to_localname(booknum),  booknum);
-        books[booknum]->load();
-    }
-    return books[booknum]->retrieve_verse(ref);
+  if ((booknum < 40) || (booknum > 66)) { return false; }
+  return true;
 }
 
-//  Remember,  books[0] is unused,  so books[1..66] are valid
-ustring bible_leb::retrieve_verse(const Reference &ref)
+bool bible_engmtv::validateBookNum(const unsigned int booknum)
 {
-    unsigned int booknum = ref.book_get();
-    // 1. Does this Bible support this book? LEB has books 1-66.
-    if ((booknum < 1) || (booknum > 66)) { return "Book doesn't exist"; }
-        
-    check_book_in_range(booknum);
+  if ((booknum < 40) || (booknum > 66)) { return false; }
+  return true;
+}
 
-    // 2. Have we already loaded this book? If not, load it and save it for next time around
-    if (books[booknum] == NULL) {
-        books[booknum] = new book_leb(this, books_id_to_localname(booknum),  booknum);
-        books[booknum]->load();
-    }
-    return books[booknum]->retrieve_verse(ref);
+bool bible_leb::validateBookNum(const unsigned int booknum)
+{
+  if ((booknum < 1) || (booknum > 66)) { return false; }
+  return true;
 }
 
 //  There has to be a better name for this method
@@ -958,6 +921,41 @@ void bible::check_book_in_range(unsigned int booknum)
         // books[0] exists, but is unused. So we resize books to 2 elements.
       books.resize(booknum+1);
     }
+}
+
+book *bible::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return NULL; } // do nothing...can't really instantiate a base class bible
+
+book *bible_byz::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_byz(this, _bookname,  _booknum); }
+
+book *bible_sblgnt::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_sblgnt(this, _bookname,  _booknum); }
+
+book *bible_engmtv::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_engmtv(this, _bookname,  _booknum); }
+
+book *bible_leb::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_leb(this, _bookname,  _booknum); }
+
+// This knows how to retrieve a verse from any bible, i.e. those who have inherited from the base bible class
+ustring bible::retrieve_verse(const Reference &ref)
+{
+    unsigned int booknum = ref.book_get();
+    // 1. Does this Bible support this book? For instance, SBLGNT only has books 40-66.
+    if (!validateBookNum(booknum)) { return "Book doesn't exist"; }
+        
+    check_book_in_range(booknum);
+    
+    // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (books[booknum] == NULL) {
+        // createNewBook(...) is specialized in each particular bible class, since it knows
+        // what kind of book it needs. So whatever type of bible "this" is, it will create
+        // the right kind of book for that bible.
+        books[booknum] = createNewBook(this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref); 
 }
 
 void book::check_chapter_in_range(unsigned int chapnum)
@@ -980,12 +978,6 @@ void chapter::check_verse_in_range(unsigned int vsnum)
         // books[0] exists, but is unused. So we resize books to 2 elements.
       verses.resize(vsnum+1);
     }
-}
-
-// This virtual method should probably be abstract,  making the class as a whole abstract...
-ustring bible::retrieve_verse(const Reference &ref)
-{
-   return "Unknown Bible type in retrieve_verse";
 }
 
 void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)

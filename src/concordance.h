@@ -149,31 +149,37 @@ class bible {
   
 protected: // so derived bibles can access it
   void check_book_in_range(unsigned int booknum);
+  virtual bool validateBookNum(const unsigned int booknum);
+  virtual book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
   ustring font;
 };
 
 class bible_byz : public bible {
 public:
     bible_byz(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };
 
 class bible_sblgnt : public bible {
 public:
     bible_sblgnt(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };
 
 class bible_engmtv : public bible {
 public:
     bible_engmtv(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };
 
 class bible_leb : public bible {
 public:
     bible_leb(const ustring &_proj, const ustring &_font);
-    ustring retrieve_verse(const Reference &ref); // overrides base class
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };
 
 // To store Bibles International cross-references
