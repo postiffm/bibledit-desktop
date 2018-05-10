@@ -80,6 +80,12 @@ public:
   void load(void);
 };
 
+class book_engmtv : public book {
+public:
+  book_engmtv(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+  void load(void);
+};
+
 class book_leb : public book {
 public:
   book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
@@ -155,6 +161,12 @@ public:
 class bible_sblgnt : public bible {
 public:
     bible_sblgnt(const ustring &_proj, const ustring &_font);
+    ustring retrieve_verse(const Reference &ref); // overrides base class
+};
+
+class bible_engmtv : public bible {
+public:
+    bible_engmtv(const ustring &_proj, const ustring &_font);
     ustring retrieve_verse(const Reference &ref); // overrides base class
 };
 

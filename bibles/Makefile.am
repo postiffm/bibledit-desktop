@@ -34,6 +34,14 @@ bibles_engleb__DATA   = engleb/Gen.txt  engleb/Exo.txt  engleb/Lev.txt  engleb/N
 			engleb/Php.txt  engleb/Col.txt  engleb/1Th.txt  engleb/2Th.txt   engleb/1Tim.txt engleb/2Tim.txt engleb/Tit.txt \
 			engleb/Phm.txt  engleb/Heb.txt  engleb/Jam.txt  engleb/1Pe.txt   engleb/2Pe.txt  engleb/1Jn.txt  engleb/2Jn.txt \
 			engleb/3Jn.txt  engleb/Jude.txt engleb/Rev.txt
-bibles_engmtv         = engmtv/NewTestamentBibleworks.txt engmtv/NewTestamentOutline.txt
+bibles_engmtv__DATA   = engmtv/NewTestamentBibleworks.txt engmtv/NewTestamentOutline.txt \
+			engmtv/1Co.txt  engmtv/2Th.txt  engmtv/Jam.txt \
+			engmtv/1Jo.txt  engmtv/2Ti.txt  engmtv/Joh.txt engmtv/Phi.txt \
+			engmtv/1Pe.txt  engmtv/3Jo.txt  engmtv/Jud.txt engmtv/Phm.txt \
+			engmtv/1Th.txt  engmtv/Act.txt  engmtv/Luk.txt \
+			engmtv/1Ti.txt  engmtv/Col.txt  engmtv/Mar.txt \
+			engmtv/2Co.txt  engmtv/Eph.txt  engmtv/Mat.txt engmtv/Rev.txt \
+			engmtv/2Jo.txt  engmtv/Gal.txt  engmtv/Rom.txt \
+			engmtv/2Pe.txt  engmtv/Heb.txt  engmtv/Tit.txt
 
 CLEANFILES = *~

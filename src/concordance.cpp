@@ -42,6 +42,11 @@ book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, unsigned int _bo
   // nothing special needs done       
 }
 
+book_engmtv::book_engmtv(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
+{
+  // nothing special needs done       
+}
+
 book_leb::book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
   // nothing special needs done       
@@ -233,6 +238,11 @@ bible_byz::bible_byz(const ustring &_proj, const ustring &_font) : bible (_proj,
 }
 
 bible_sblgnt::bible_sblgnt(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
+{
+  // Nothing special to do here   
+}
+
+bible_engmtv::bible_engmtv(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here   
 }
@@ -507,15 +517,16 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
 
 //  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These 
 //  are shown in the Analysis window as an aid to the translator.
-//  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV,  ?
+//  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV, English Majority Text (EMTV),
 //  Second goal is to include another tab for translator notes from the NET or other
 //  resources.
 
 ReferenceBibles::ReferenceBibles() : bibles(10)
 {
-  bibles[0] = new bible_byz("BYZ", "Symbol");    //  Byzantine Majority Text, Pierpont/Robinson
-  bibles[1] = new bible_sblgnt("SBL", "Symbol"); //  SBL Greek NT
-  bibles[2] = new bible_leb("LEB", "Times");     //  Lexham English Bible
+  bibles[0] = new bible_byz("BYZ", "Symbol");    // Byzantine Majority Text, Pierpont/Robinson
+  bibles[1] = new bible_sblgnt("SBL", "Symbol"); // SBL Greek NT
+  bibles[2] = new bible_engmtv("EMT", "Times");  // English Majority Text Version, Paul Esposito
+  bibles[3] = new bible_leb("LEB", "Times");     // Lexham English Bible
   // I have room for 7 other Bibles at the moment; see above constructor line
 }
 
@@ -524,6 +535,7 @@ ReferenceBibles::~ReferenceBibles()
     delete bibles[0];
     delete bibles[1];
     delete bibles[2];
+    delete bibles[3];
 }
 
 ustring verse::retrieve_verse(const Reference &ref) 
@@ -726,7 +738,54 @@ void book_sblgnt::load(void)
     }
 }
 
-// Load SBL Greek NT Text from shared resource directory
+// Load English Majority Text version from shared resource directory
+void book_engmtv::load(void)
+{
+    ustring filenames[27] = { "Mat.txt", "Mar.txt", "Luk.txt", "Joh.txt", "Act.txt", 
+                              "Rom.txt", "1Co.txt", "2Co.txt", "Gal.txt", "Eph.txt", "Phi.txt", 
+                              "Col.txt", "1Th.txt", "2Th.txt", "1Ti.txt", "2Ti.txt", "Tit.txt", 
+                              "Phm.txt", "Heb.txt", "Jam.txt", "1Pe.txt", "2Pe.txt", "1Jn.txt", 
+                              "2Jn.txt", "3Jn.txt", "Jud.txt", "Rev.txt" };
+
+    // We know our book number and localized name already
+    unsigned int bookidx = booknum - 40;
+    if ((bookidx < 0) ||  (bookidx > 26)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+   
+    //  From utilities.cpp
+    ReadText rt(Directories->get_package_data() + "/bibles/engmtv/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    unsigned int currchapnum = 0;
+    chapter *currchap = NULL;
+        
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         //  Extract chapter and verse,  and leading space. The lines are always
+         //  well formed: Book<space>1:5<space>Verse text.
+         //  Remove book name from the line
+         size_t spaceposition = it.find_first_of(" ");
+         it.erase(0,  spaceposition+1);
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         size_t tabposition = it.find_first_of(" ");
+         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
+         unsigned int versenum = convert_to_int(versestring);
+         it.erase(0, tabposition+1);
+         if (chapnum != currchapnum) {
+             chapter *newchap = new chapter(this,  chapnum);
+             chapters.push_back(newchap);
+             currchap = newchap;
+             currchapnum = chapnum;
+             //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         currchap->verses.push_back(newverse); //  append verse to current chapter
+         //newverse->print(); // debug
+    }
+}
+
+// Load Lexham English Bible text from shared resource directory
 void book_leb::load(void)
 {
     ustring filenames[66] = {
@@ -855,6 +914,23 @@ ustring bible_sblgnt::retrieve_verse(const Reference &ref)
     }
     return books[booknum]->retrieve_verse(ref);
 }
+
+ustring bible_engmtv::retrieve_verse(const Reference &ref)
+{
+    unsigned int booknum = ref.book_get();
+    // 1. Does this Bible support this book? EMTV only has books 40-66.
+    if ((booknum < 40) || (booknum > 66)) { return "Book doesn't exist"; }
+        
+    check_book_in_range(booknum);
+
+    // 2. Have we already loaded this book? If not, load it and save it for next time around
+    if (books[booknum] == NULL) {
+        books[booknum] = new book_engmtv(this, books_id_to_localname(booknum),  booknum);
+        books[booknum]->load();
+    }
+    return books[booknum]->retrieve_verse(ref);
+}
+
 //  Remember,  books[0] is unused,  so books[1..66] are valid
 ustring bible_leb::retrieve_verse(const Reference &ref)
 {
@@ -914,7 +990,10 @@ ustring bible::retrieve_verse(const Reference &ref)
 
 void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
 {
+    ProgressWindow progresswindow (_("Loading reference Bibles"), false);
+    progresswindow.set_iterate (0, 1, bibles.size());
     for (auto it : bibles) {
+        progresswindow.iterate();
         bible *b = it;
         if (b == NULL) { break; }
         ustring verse;
@@ -1009,7 +1088,13 @@ CrossReferences::CrossReferences()
     book *bk = NULL;
     chapter *ch = NULL;
     verse_xref *vs = NULL;
+
+    ProgressWindow progresswindow (_("Loading cross-reference data"), false);
+    progresswindow.set_iterate (0, 1, num32BitWords>>10); // shifting by 10 is dividing by appx 1000 (1024)
+
     for (i = 0; i < num32BitWords; i++) {
+        // Logic is this: whenever last 10 bits of counter i are zero, iterate
+        if ((i&0x3FF) == 0) { progresswindow.iterate(); }
         unsigned int encoded = *dataptr;
         dataptr++; // should advance by 4 bytes for next time around
         if (encoded == 0) { startNewList = true; continue; }
