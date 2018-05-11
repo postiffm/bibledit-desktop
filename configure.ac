@@ -3,7 +3,7 @@
 
 
 AC_PREREQ(2.63)
-AC_INIT([bibledit-desktop],[4.14],[https://github.com/postiffm/bibledit-desktop])
+AC_INIT([bibledit-desktop],[4.15],[https://github.com/postiffm/bibledit-desktop])
 AC_CANONICAL_TARGET
 AC_CANONICAL_SYSTEM
 ac_default_prefix=/usr
