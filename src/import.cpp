@@ -145,5 +145,3 @@ void import_usfm_file (const ustring& file, unsigned int book, const ustring& pr
   // Store in project.
   project_store_book(project, book, ccv);
 }
-
-
