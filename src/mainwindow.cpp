@@ -2065,9 +2065,9 @@ void MainWindow::deleteproject ()
   ListviewDialog dialog(_("Delete project"), projects, "", true, NULL, GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
     int result;
-    result = gtkw_dialog_question(window_main, _("Are you sure you want to delete project ") + dialog.focus + "?");
+    result = gtkw_dialog_question(dialog.listviewdialog, _("Are you sure you want to delete project ") + dialog.focus + "?");
     if (result == GTK_RESPONSE_YES) {
-      result = gtkw_dialog_question(window_main, _("Are you really sure to delete project ") + dialog.focus + _(", something worth perhaps years of work?"));
+      result = gtkw_dialog_question(dialog.listviewdialog, _("Are you really sure to delete project ") + dialog.focus + _(", something worth perhaps years of work?"));
     }
     if (result == GTK_RESPONSE_YES) {
       project_delete(dialog.focus);
@@ -3678,7 +3678,7 @@ void MainWindow::on_check_spelling_error(bool next, bool extremity)
   else
     msg.append (_("previous"));
   msg.append (_(" chapter or chapters?"));
-  if (gtkw_dialog_question (NULL, msg) != GTK_RESPONSE_YES)
+  if (gtkw_dialog_question (window_main, msg) != GTK_RESPONSE_YES)
     return;
   if (next) {
     navigation.nextchapter();
@@ -4927,7 +4927,7 @@ void MainWindow::on_file_resources_delete()
   vector < ustring > resources = resource_get_resources(filenames, false);
   ListviewDialog dialog(_("Delete resource"), resources, "", false, NULL, GTK_WINDOW(window_main));
   if (dialog.run() == GTK_RESPONSE_OK) {
-    int result = gtkw_dialog_question(NULL, _("Are you sure you want to delete resource ") + dialog.focus + "?");
+    int result = gtkw_dialog_question(dialog.listviewdialog, _("Are you sure you want to delete resource ") + dialog.focus + "?");
     if (result == GTK_RESPONSE_YES) {
       ustring filename;
       for (unsigned int i = 0; i < resources.size(); i++) {
