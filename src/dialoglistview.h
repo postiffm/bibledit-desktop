@@ -34,6 +34,7 @@ public:
   void tab_switcher (guint accel_key, GdkModifierType accel_mods, const gchar * acceleratortext, const gchar * actiontext1, const gchar * actiontext2);
   int run ();
   ustring focus;
+  friend class MainWindow;
 protected:
   GtkWidget *listviewdialog;
   GtkWidget *dialog_vbox1;
