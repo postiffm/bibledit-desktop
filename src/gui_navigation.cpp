@@ -33,6 +33,7 @@
 #include "dialogradiobutton.h"
 #include <glib/gi18n.h>
 #include "completion.h"
+#include "combo_with_arrows.h"
 
 GuiNavigation::GuiNavigation(int dummy): track(0)
 {
@@ -49,19 +50,10 @@ GuiNavigation::GuiNavigation(int dummy): track(0)
   button_list_forward = NULL;
   image_list_forward = NULL;
   combo_book = NULL;
-  spinbutton_book_adj = NULL;
-  spinbutton_book = NULL;
   combo_chapter = NULL;
-  spinbutton_chapter_adj = NULL;
-  spinbutton_chapter = NULL;
   combo_verse = NULL;
-  spinbutton_verse_adj = NULL;
-  spinbutton_verse = NULL;
   entry_free = NULL;
   settingcombos = false;
-  spinbutton_book_previous_value = 0;
-  spinbutton_chapter_previous_value = 0;
-  spinbutton_verse_previous_value = 0;
   delayer_event_id = 0;
   track_event_id = 0;
 }
@@ -142,85 +134,34 @@ void GuiNavigation::build(GtkWidget * toolbar, GtkWindow *_transient_parent)
   gtk_widget_show(GTK_WIDGET(toolitem3));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem3), -1);
 
-  combo_book = gtk_combo_box_text_new();
+  combo_book = bibledit_combo_with_arrows_new();
   gtk_widget_show(combo_book);
   gtk_container_add(GTK_CONTAINER(toolitem3), combo_book);
   gtk_widget_set_can_focus (combo_book, false);
-  gtk_combo_box_set_wrap_width ((GtkComboBox*)combo_book, 6);
-
-  GtkToolItem *toolitem4 = gtk_tool_item_new();
-  gtk_widget_show(GTK_WIDGET(toolitem4));
-  gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem4), -1);
-
-  spinbutton_book_adj = gtk_adjustment_new(0, -1e+06, 1e+06, 1, 10, 0);
-  spinbutton_book = gtk_spin_button_new(GTK_ADJUSTMENT(spinbutton_book_adj), 1, 0);
-  gtk_widget_show(spinbutton_book);
-  gtk_container_add(GTK_CONTAINER(toolitem4), spinbutton_book);
-  gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spinbutton_book), TRUE);
-  gtk_editable_set_editable(GTK_EDITABLE(spinbutton_book), false);
-  gtk_entry_set_visibility(GTK_ENTRY(spinbutton_book), false);
-  gtk_entry_set_invisible_char(GTK_ENTRY(spinbutton_book), 0);
-  gtk_entry_set_width_chars(GTK_ENTRY(spinbutton_book), 0);
-  gtk_widget_set_can_focus (spinbutton_book, false);
+  bibledit_combo_with_arrows_set_wrap_width (
+      BIBLEDIT_COMBO_WITH_ARROWS (combo_book), 6);
 
   GtkToolItem *toolitem6 = gtk_tool_item_new();
   gtk_widget_show(GTK_WIDGET(toolitem6));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem6), -1);
 
-  combo_chapter = gtk_combo_box_text_new();
+  combo_chapter = bibledit_combo_with_arrows_new();
   gtk_widget_show(combo_chapter);
   gtk_container_add(GTK_CONTAINER(toolitem6), combo_chapter);
   gtk_widget_set_can_focus (combo_chapter, false);
-  gtk_combo_box_set_wrap_width ((GtkComboBox*)combo_chapter, 6);
+  bibledit_combo_with_arrows_set_wrap_width (
+      BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter), 6);
 
   GtkToolItem *toolitem5 = gtk_tool_item_new();
   gtk_widget_show(GTK_WIDGET(toolitem5));
   gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem5), -1);
 
-  spinbutton_chapter_adj = gtk_adjustment_new(0, -1e+06, 1e+06, 1, 10, 0);
-  spinbutton_chapter = gtk_spin_button_new(GTK_ADJUSTMENT(spinbutton_chapter_adj), 1, 0);
-  gtk_widget_show(spinbutton_chapter);
-  gtk_container_add(GTK_CONTAINER(toolitem5), spinbutton_chapter);
-  gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spinbutton_chapter), TRUE);
-  gtk_editable_set_editable(GTK_EDITABLE(spinbutton_chapter), false);
-  gtk_entry_set_visibility(GTK_ENTRY(spinbutton_chapter), false);
-  gtk_entry_set_invisible_char(GTK_ENTRY(spinbutton_chapter), 0);
-  gtk_entry_set_width_chars(GTK_ENTRY(spinbutton_chapter), 0);
-  gtk_widget_set_can_focus (spinbutton_chapter, false);
-
-  GtkToolItem *toolitem8 = gtk_tool_item_new();
-  gtk_widget_show(GTK_WIDGET(toolitem8));
-  gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem8), -1);
-
-  combo_verse = gtk_combo_box_text_new();
+  combo_verse = bibledit_combo_with_arrows_new();
   gtk_widget_show(combo_verse);
-  gtk_container_add(GTK_CONTAINER(toolitem8), combo_verse);
+  gtk_container_add(GTK_CONTAINER(toolitem5), combo_verse);
   gtk_widget_set_can_focus (combo_verse, false);
-  gtk_combo_box_set_wrap_width ((GtkComboBox*)combo_verse, 6);
-
-  GtkToolItem *toolitem7 = gtk_tool_item_new();
-  gtk_widget_show(GTK_WIDGET(toolitem7));
-  gtk_toolbar_insert(GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(toolitem7), -1);
-
-  spinbutton_verse_adj = gtk_adjustment_new(0, -1e+06, 1e+06, 1, 10, 0);
-  spinbutton_verse = gtk_spin_button_new(GTK_ADJUSTMENT(spinbutton_verse_adj), 1, 0);
-  gtk_widget_show(spinbutton_verse);
-  gtk_container_add(GTK_CONTAINER(toolitem7), spinbutton_verse);
-  gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spinbutton_verse), TRUE);
-  gtk_editable_set_editable(GTK_EDITABLE(spinbutton_verse), false);
-  gtk_entry_set_visibility(GTK_ENTRY(spinbutton_verse), false);
-  gtk_entry_set_invisible_char(GTK_ENTRY(spinbutton_verse), 0);
-  gtk_entry_set_width_chars(GTK_ENTRY(spinbutton_verse), 0);
-  gtk_widget_set_can_focus (spinbutton_verse, false);
-
-  // Resize the spinbuttons.
-  gint defaultheight;
-  GtkRequisition sizerequisition;
-  gtk_widget_size_request(combo_verse, &sizerequisition);
-  defaultheight = (int)(sizerequisition.height * 0.8);
-  gtk_widget_set_size_request(spinbutton_book, int (defaultheight * 0.7), -1);
-  gtk_widget_set_size_request(spinbutton_chapter, int (defaultheight * 0.7), -1);
-  gtk_widget_set_size_request(spinbutton_verse, int (defaultheight * 0.7), -1);
+  bibledit_combo_with_arrows_set_wrap_width (
+      BIBLEDIT_COMBO_WITH_ARROWS (combo_verse), 6);
 
   // Jump to verse (basically same as Go to reference dialog, built right into the main window navigation toolbar
   GtkSeparatorToolItem *separator = (GtkSeparatorToolItem*)gtk_separator_tool_item_new();
@@ -253,11 +194,8 @@ void GuiNavigation::build(GtkWidget * toolbar, GtkWindow *_transient_parent)
   g_signal_connect((gpointer) button_forward, "clicked", G_CALLBACK(on_button_forward_clicked), gpointer(this));
   g_signal_connect((gpointer) button_list_forward, "clicked", G_CALLBACK(on_button_list_forward_clicked), gpointer(this));
   g_signal_connect((gpointer) combo_book, "changed", G_CALLBACK(on_combo_book_changed), gpointer(this));
-  g_signal_connect((gpointer) spinbutton_book, "value_changed", G_CALLBACK(on_spinbutton_book_value_changed), gpointer(this));
   g_signal_connect((gpointer) combo_chapter, "changed", G_CALLBACK(on_combo_chapter_changed), gpointer(this));
-  g_signal_connect((gpointer) spinbutton_chapter, "value_changed", G_CALLBACK(on_spinbutton_chapter_value_changed), gpointer(this));
   g_signal_connect((gpointer) combo_verse, "changed", G_CALLBACK(on_combo_verse_changed), gpointer(this));
-  g_signal_connect((gpointer) spinbutton_verse, "value_changed", G_CALLBACK(on_spinbutton_verse_value_changed), gpointer(this));
 }
 
 
@@ -269,19 +207,19 @@ void GuiNavigation::sensitive(bool sensitive)
   tracker_sensitivity();
   // Set the sensitivity of the reference controls.
   gtk_widget_set_sensitive(combo_book, sensitive);
-  gtk_widget_set_sensitive(spinbutton_book, sensitive);
   gtk_widget_set_sensitive(combo_chapter, sensitive);
-  gtk_widget_set_sensitive(spinbutton_chapter, sensitive);
   gtk_widget_set_sensitive(combo_verse, sensitive);
-  gtk_widget_set_sensitive(spinbutton_verse, sensitive);
   if (!sensitive) {
     // We are programatically going to change the comboboxes, 
     // and therefore don't want a signal during that operation.
     settingcombos = true;
     project.clear();
-    gtk_combo_box_set_active(GTK_COMBO_BOX(combo_book), -1);
-    gtk_combo_box_set_active(GTK_COMBO_BOX(combo_chapter), -1);
-    gtk_combo_box_set_active(GTK_COMBO_BOX(combo_verse), -1);
+    bibledit_combo_with_arrows_set_active(
+            BIBLEDIT_COMBO_WITH_ARROWS(combo_book), -1);
+    bibledit_combo_with_arrows_set_active(
+            BIBLEDIT_COMBO_WITH_ARROWS(combo_chapter), -1);
+    bibledit_combo_with_arrows_set_active(
+            BIBLEDIT_COMBO_WITH_ARROWS(combo_verse), -1);
     settingcombos = false;
   }
 }
@@ -345,9 +283,13 @@ void GuiNavigation::clampref(Reference & reference)
 
 Reference GuiNavigation::get_current_ref (void)
 {
-  unsigned int currentbook = books_name_to_id(language, combobox_get_active_string(combo_book));
-  unsigned int currentchapter = convert_to_int(combobox_get_active_string(combo_chapter));
-  ustring currentverse = combobox_get_active_string(combo_verse);
+  GtkWidget *combo;
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book));
+  unsigned int currentbook = books_name_to_id(language, combobox_get_active_string(combo));
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter));
+  unsigned int currentchapter = convert_to_int(combobox_get_active_string(combo));
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_verse));
+  ustring currentverse = combobox_get_active_string(combo);
   return Reference(currentbook, currentchapter, currentverse);
 }
 
@@ -401,10 +343,13 @@ void GuiNavigation::display (const Reference & ref)
 
 void GuiNavigation::nextbook()
 {
-  vector <ustring> strings = combobox_get_strings(combo_book);
+  GtkWidget *combo;
+
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book));
+  vector <ustring> strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
-  ustring ubook = combobox_get_active_string(combo_book);
+  ustring ubook = combobox_get_active_string(combo);
   unsigned int index = 0;
   for (unsigned int i = 0; i < strings.size(); i++) {
     if (ubook == strings[i])
@@ -437,11 +382,14 @@ void GuiNavigation::nextbook()
 
 void GuiNavigation::previousbook()
 {
+  GtkWidget *combo;
+
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book));
   // TO DO: Lot of common code with nextbook; combine for maintenance purposes
-  vector < ustring > strings = combobox_get_strings(combo_book);
+  vector < ustring > strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
-  ustring ubook = combobox_get_active_string(combo_book);
+  ustring ubook = combobox_get_active_string(combo);
   unsigned int index = 0;
   for (unsigned int i = 0; i < strings.size(); i++) {
     if (ubook == strings[i])
@@ -473,8 +421,10 @@ void GuiNavigation::previousbook()
 
 void GuiNavigation::nextchapter()
 {
-  reference.chapter_set(convert_to_int(combobox_get_active_string(combo_chapter)));
-  vector <ustring> strings = combobox_get_strings(combo_chapter);
+  GtkWidget *combo;
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter));
+  reference.chapter_set(convert_to_int(combobox_get_active_string(combo)));
+  vector <ustring> strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
   unsigned int index = 0;
@@ -503,8 +453,10 @@ void GuiNavigation::nextchapter()
 
 void GuiNavigation::previouschapter()
 {
-  reference.chapter_set(convert_to_int(combobox_get_active_string(combo_chapter)));
-  vector <ustring> strings = combobox_get_strings(combo_chapter);
+  GtkWidget *combo;
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter));
+  reference.chapter_set(convert_to_int(combobox_get_active_string(combo)));
+  vector <ustring> strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
   unsigned int index = 0;
@@ -532,8 +484,10 @@ void GuiNavigation::previouschapter()
 
 void GuiNavigation::nextverse()
 {
-  ustring verse = combobox_get_active_string(combo_verse);
-  vector < ustring > strings = combobox_get_strings(combo_verse);
+  GtkWidget *combo;
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_verse));
+  ustring verse = combobox_get_active_string(combo);
+  vector < ustring > strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
   unsigned int index = 0;
@@ -554,8 +508,10 @@ void GuiNavigation::nextverse()
 
 void GuiNavigation::previousverse()
 {
-  ustring verse = combobox_get_active_string(combo_verse);
-  vector < ustring > strings = combobox_get_strings(combo_verse);
+  GtkWidget *combo;
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_verse));
+  ustring verse = combobox_get_active_string(combo);
+  vector < ustring > strings = combobox_get_strings(combo);
   if (strings.size() == 0)
     return;
   unsigned int index = 0;
@@ -616,24 +572,6 @@ void GuiNavigation::on_combo_verse_changed(GtkComboBox * combobox, gpointer user
 }
 
 
-void GuiNavigation::on_spinbutton_book_value_changed(GtkSpinButton * spinbutton, gpointer user_data)
-{
-  ((GuiNavigation *) user_data)->on_spinbutton_book();
-}
-
-
-void GuiNavigation::on_spinbutton_chapter_value_changed(GtkSpinButton * spinbutton, gpointer user_data)
-{
-  ((GuiNavigation *) user_data)->on_spinbutton_chapter();
-}
-
-
-void GuiNavigation::on_spinbutton_verse_value_changed(GtkSpinButton * spinbutton, gpointer user_data)
-{
-  ((GuiNavigation *) user_data)->on_spinbutton_verse();
-}
-
-
 void GuiNavigation::on_back()
 {
   if (track.previous_reference_available()) {
@@ -658,9 +596,12 @@ void GuiNavigation::on_forward()
 
 void GuiNavigation::on_combo_book()
 {
+  GtkWidget *combo;
+
   if (settingcombos)
     return;
-  reference.book_set(books_name_to_id(language, combobox_get_active_string(combo_book)));
+  combo = bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book));
+  reference.book_set(books_name_to_id(language, combobox_get_active_string(combo)));
   if (!references_memory_retrieve (reference, false)) {
     reference.chapter_set(1);
     reference.verse_set("1");
@@ -678,7 +619,8 @@ void GuiNavigation::on_combo_chapter()
 {
   if (settingcombos)
     return;
-  reference.chapter_set(convert_to_int(combobox_get_active_string(combo_chapter)));
+  reference.chapter_set(convert_to_int(combobox_get_active_string(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter)))));
   if (!references_memory_retrieve (reference, true)) {
     reference.verse_set("1");
   }
@@ -692,59 +634,9 @@ void GuiNavigation::on_combo_chapter()
 void GuiNavigation::on_combo_verse()
 {
   if (settingcombos) { return; }
-  reference.verse_set(combobox_get_active_string(combo_verse));
+  reference.verse_set(combobox_get_active_string(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_verse))));
   signal();
-}
-
-
-void GuiNavigation::on_spinbutton_book()
-{
-  if (settingcombos)
-    return;
-  int value = int (gtk_adjustment_get_value(GTK_ADJUSTMENT(spinbutton_book_adj)));
-  bool next = (value < spinbutton_book_previous_value);
-  unsigned int amount = abs(value - spinbutton_book_previous_value);
-  for (unsigned int i = 0; i < amount; i++) {
-    if (next)
-      nextbook();
-    else
-      previousbook();
-  }
-  spinbutton_book_previous_value = value;
-}
-
-
-void GuiNavigation::on_spinbutton_chapter()
-{
-  if (settingcombos)
-    return;
-  int value = int (gtk_adjustment_get_value(GTK_ADJUSTMENT(spinbutton_chapter_adj)));
-  bool next = (value < spinbutton_chapter_previous_value);
-  unsigned int amount = abs(value - spinbutton_chapter_previous_value);
-  for (unsigned int i = 0; i < amount; i++) {
-    if (next)
-      nextchapter();
-    else
-      previouschapter();
-  }
-  spinbutton_chapter_previous_value = value;
-}
-
-
-void GuiNavigation::on_spinbutton_verse()
-{
-  if (settingcombos)
-    return;
-  int value = int (gtk_adjustment_get_value(GTK_ADJUSTMENT(spinbutton_verse_adj)));
-  bool next = (value < spinbutton_verse_previous_value);
-  unsigned int amount = abs(value - spinbutton_verse_previous_value);
-  for (unsigned int i = 0; i < amount; i++) {
-    if (next)
-      nextverse();
-    else
-      previousverse();
-  }
-  spinbutton_verse_previous_value = value;
 }
 
 
@@ -779,7 +671,9 @@ void GuiNavigation::load_books()
     ustring localizedbook = books_id_to_name(language, books[i]);
     localizedbooks.push_back(localizedbook);
   }
-  combobox_set_strings(combo_book, localizedbooks);
+  combobox_set_strings(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book)),
+      localizedbooks);
   settingcombos = false;
 }
 
@@ -788,7 +682,9 @@ void GuiNavigation::set_book(unsigned int book)
 {
   settingcombos = true;
   ustring localizedbook = books_id_to_name(language, book);
-  combobox_set_string(combo_book, localizedbook);
+  combobox_set_string(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_book)),
+      localizedbook);
   settingcombos = false;
 }
 
@@ -797,7 +693,9 @@ void GuiNavigation::load_chapters(unsigned int book)
 {
   settingcombos = true;
   vector < unsigned int >chapters = project_get_chapters(project, book);
-  combobox_set_strings(combo_chapter, chapters);
+  combobox_set_strings(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter)),
+      chapters);
   settingcombos = false;
 }
 
@@ -805,7 +703,9 @@ void GuiNavigation::load_chapters(unsigned int book)
 void GuiNavigation::set_chapter(unsigned int chapter)
 {
   settingcombos = true;
-  combobox_set_string(combo_chapter, chapter);
+  combobox_set_string(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_chapter)),
+      chapter);
   settingcombos = false;
 }
 
@@ -814,7 +714,9 @@ void GuiNavigation::load_verses(unsigned int book, unsigned int chapter)
 {
   settingcombos = true;
   vector < ustring > verses = project_get_verses(project, book, chapter);
-  combobox_set_strings(combo_verse, verses);
+  combobox_set_strings(
+      bibledit_combo_with_arrows_get_gtk_combo (BIBLEDIT_COMBO_WITH_ARROWS (combo_verse)),
+      verses);
   settingcombos = false;
 }
 
@@ -829,10 +731,12 @@ void GuiNavigation::set_verse(const ustring & verse)
   // Retrieve all verses the combobox has. 
   // If it has our verse, set it, and we're done.
   bool done = false;
-  vector < ustring > verses = combobox_get_strings(combo_verse);
+  GtkWidget *combo = bibledit_combo_with_arrows_get_gtk_combo (
+      BIBLEDIT_COMBO_WITH_ARROWS (combo_verse));
+  vector < ustring > verses = combobox_get_strings(combo);
   for (unsigned int i = 0; i < verses.size(); i++) {
     if (verse == verses[i]) {
-      combobox_set_string(combo_verse, verse);
+      combobox_set_string(combo, verse);
       done = true;
     }
   }
@@ -843,7 +747,7 @@ void GuiNavigation::set_verse(const ustring & verse)
       vector < unsigned int >combined_verses = verse_range_sequence(verses[i]);
       for (unsigned int i2 = 0; i2 < combined_verses.size(); i2++) {
         if (verse_int == combined_verses[i2]) {
-          combobox_set_string(combo_verse, verses[i]);
+          combobox_set_string(combo, verses[i]);
           done = true;
         }
       }
