@@ -213,8 +213,8 @@ private:
   // 3. Unique word ==> count of occurrences. Same info as #1, but sorted automatically.
   std::map<std::string, int> sortedWordCounts;
   void writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter);
-  void writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter);
-
+  void boldface(ustring src, const ustring &boldstr, HtmlWriter2 &htmlwriter);
+  void writeVerses(vector<int> &locations, const ustring &word, HtmlWriter2 &htmlwriter);
 };
 
 class ReferenceBibles {

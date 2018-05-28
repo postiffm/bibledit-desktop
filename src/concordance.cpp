@@ -473,7 +473,55 @@ void Concordance::writeFrequencySortedHtml(HtmlWriter2 &htmlwriter)
   return;
 }
 
-void Concordance::writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter)
+// Find all occurrences of boldstr in src, and insert <b>...</b> around them
+void Concordance::boldface(ustring src, const ustring &boldstr, HtmlWriter2 &htmlwriter)
+{
+    // Two problems: 1. I don't find different capitalizations; 2. <b> is not interpreted properly, so just prints as is.
+#if 0
+    ustring::size_type idx = 0;
+    while (idx != ustring::npos) {
+      idx = src.find(boldstr, idx);
+      //cout << "idx=" << idx << endl;
+      if (idx != ustring::npos) {
+          src.insert(idx, "<b>");
+          idx = idx+3+boldstr.size();
+          src.insert(idx,"</b>");
+          idx = idx+4;
+      }
+    }
+#endif
+    // Walk the string and print out its parts, inserting <b> and </b> as needed.
+    ustring::size_type idx1 = 0, idx2 = 0;
+    ustring srcLower = src.lowercase();
+    while (idx1 != ustring::npos) {
+      // Idea of this code is to walk srcLower to match the lower-case strings
+      // stored in the concordance, and then extract the same-indexed portions
+      // from the original string so the original capitalization remains.
+      idx2 = srcLower.find(boldstr, /*len*/idx1);
+      ustring part;
+      if (idx2 != ustring::npos) {
+          part = src.substr(idx1, idx2-idx1);
+          htmlwriter.text_add(part);
+          htmlwriter.bold_open();
+          idx1 = idx2;
+          idx2 = idx2 + boldstr.size();
+          part = src.substr(idx1, /*len*/idx2-idx1);
+          htmlwriter.text_add(part);
+          htmlwriter.bold_close();
+          idx1 = idx2;
+      }
+      else { /* idx2 is at end of string */
+        part = src.substr(idx1/*, len=npos*/);
+        htmlwriter.text_add(part);
+        idx1 = idx2;
+      }
+    }
+    // There is one known problem with this, and that is that if I have, say "said to my LORD,..."
+    // then when the htmlwriter inserts the bold code, I get "said to my LORD<space>,..."
+    // and I don't know why that space is there. Perhaps something with webkit?
+}
+
+void Concordance::writeVerses(vector<int> &locations, const ustring &word, HtmlWriter2 &htmlwriter)
 {
   // Get data about the project.
   extern Settings *settings;
@@ -498,7 +546,8 @@ void Concordance::writeVerses(vector<int> &locations, HtmlWriter2 &htmlwriter)
           CategorizeLine cl(verse);
           cl.remove_verse_number(bibleref.verse_get());
           verse = cl.verse;
-          htmlwriter.text_add(" " + verse);
+          boldface(verse, word, htmlwriter); // put in bold every time the word occurs
+          //htmlwriter.text_add(" " + verse);
         }
         htmlwriter.paragraph_close();
     }
@@ -512,7 +561,7 @@ void Concordance::writeSingleWordListHtml(const ustring &word,  HtmlWriter2 &htm
     htmlwriter.heading_close();
 
     std::vector<int> &locations = wordLocations[word];
-    writeVerses(locations, htmlwriter);
+    writeVerses(locations, word, htmlwriter);
 }
 
 //  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These 
