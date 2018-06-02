@@ -2,6 +2,7 @@ bin_PROGRAMS = bibledit-desktop bibledit-rdwrt
 
 bibledit_desktop_SOURCES = \
   bibledit.cpp \
+  combo_with_arrows.cpp \
   concordance.cpp \
   options.cpp \
   chapterview.cpp \
