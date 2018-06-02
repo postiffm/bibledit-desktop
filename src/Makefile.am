@@ -3,6 +3,7 @@ bin_PROGRAMS = bibledit-desktop bibledit-rdwrt
 bibledit_desktop_SOURCES = \
   bibledit.cpp \
   biblebookchapterverse.cpp \
+  combo_with_arrows.cpp \
   concordance.cpp \
   crossrefs.cpp \
   referencebibles.cpp \
