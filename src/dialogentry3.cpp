@@ -30,7 +30,7 @@ Entry3Dialog::Entry3Dialog(const string & title, bool allow_empty_values, const 
   entry3dialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(entry3dialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(entry3dialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(entry3dialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(entry3dialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(entry3dialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(entry3dialog));

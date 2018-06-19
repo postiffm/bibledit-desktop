@@ -49,7 +49,7 @@ SearchSpecialDialog::SearchSpecialDialog(GtkWindow *transient_parent)
   gtk_window_set_transient_for(GTK_WINDOW(searchspecialdialog), transient_parent);
   gtk_widget_add_accelerator(searchspecialdialog, "activate_focus", accel_group, GDK_KEY_F, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   gtk_window_set_title(GTK_WINDOW(searchspecialdialog), _("Find"));
-  gtk_window_set_position(GTK_WINDOW(searchspecialdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(searchspecialdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(searchspecialdialog), TRUE);
   gtk_window_set_type_hint(GTK_WINDOW(searchspecialdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 

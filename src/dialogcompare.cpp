@@ -44,7 +44,7 @@ CompareDialog::CompareDialog(WindowReferences * references_window, GtkWindow *tr
   comparedialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(comparedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(comparedialog), _("Compare project"));
-  gtk_window_set_position(GTK_WINDOW(comparedialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(comparedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(comparedialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(comparedialog));

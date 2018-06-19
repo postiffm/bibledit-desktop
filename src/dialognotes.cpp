@@ -38,7 +38,7 @@ NotesDialog::NotesDialog(GtkWindow *transient_parent)
   notesdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(notesdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(notesdialog), _("Project notes"));
-  gtk_window_set_position(GTK_WINDOW(notesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(notesdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(notesdialog), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(notesdialog), TRUE);
 

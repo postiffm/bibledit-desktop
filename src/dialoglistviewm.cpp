@@ -36,7 +36,7 @@ ListviewMDialog::ListviewMDialog(const ustring & title, vector <ustring> &list, 
   listviewmdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(listviewmdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(listviewmdialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(listviewmdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(listviewmdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(listviewmdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(listviewmdialog));

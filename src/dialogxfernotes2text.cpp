@@ -41,7 +41,7 @@ XferNotes2TextDialog::XferNotes2TextDialog(GtkWindow *transient_parent)
   notestransferdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(notestransferdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(notestransferdialog), _("Transfer Project Notes To Text"));
-  gtk_window_set_position(GTK_WINDOW(notestransferdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(notestransferdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(notestransferdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (notestransferdialog));

@@ -83,7 +83,7 @@ StylesheetDialog::StylesheetDialog(const ustring & stylesheet, const ustring & s
   ustring s;
   s = _("Stylesheet ") + stylesheet + _(", style ") + style;
   gtk_window_set_title(GTK_WINDOW(stylesheetdialog), s.c_str());
-  gtk_window_set_position(GTK_WINDOW(stylesheetdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(stylesheetdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(stylesheetdialog), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(stylesheetdialog), TRUE);
   gtk_window_set_type_hint(GTK_WINDOW(stylesheetdialog), GDK_WINDOW_TYPE_HINT_DIALOG);

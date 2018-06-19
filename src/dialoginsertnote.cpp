@@ -61,7 +61,7 @@ InsertNoteDialog::InsertNoteDialog(NoteType dialogtype, GtkWindow *transient_par
     break;
   }
   gtk_window_set_title(GTK_WINDOW(insertnotedialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(insertnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(insertnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(insertnotedialog), TRUE);
   gtk_window_set_resizable(GTK_WINDOW(insertnotedialog), FALSE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(insertnotedialog), TRUE);

@@ -40,7 +40,7 @@ EditDictionaryDialog::EditDictionaryDialog(const ustring & dictionary, GtkWindow
   textviewdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(textviewdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(textviewdialog), _("Edit Dictionary"));
-  gtk_window_set_position(GTK_WINDOW(textviewdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(textviewdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_type_hint(GTK_WINDOW(textviewdialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(textviewdialog));

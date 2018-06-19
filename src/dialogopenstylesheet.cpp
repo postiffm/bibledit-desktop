@@ -56,7 +56,7 @@ OpenStylesheetDialog::OpenStylesheetDialog(OpenStylesheetDialogType dialogtype, 
   openstyledialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(openstyledialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(openstyledialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(openstyledialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(openstyledialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(openstyledialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(openstyledialog));

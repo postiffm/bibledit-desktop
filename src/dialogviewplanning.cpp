@@ -31,7 +31,7 @@ ViewPlanningDialog::ViewPlanningDialog(GtkWindow *transient_parent)
   viewstatusdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(viewstatusdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(viewstatusdialog), _("View Planning"));
-  gtk_window_set_position(GTK_WINDOW(viewstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(viewstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(viewstatusdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (viewstatusdialog));

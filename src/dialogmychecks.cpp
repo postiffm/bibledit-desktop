@@ -40,7 +40,7 @@ MyChecksDialog::MyChecksDialog(WindowReferences * references_window, GtkWindow *
   mychecksdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(mychecksdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(mychecksdialog), _("My checks"));
-  gtk_window_set_position(GTK_WINDOW(mychecksdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(mychecksdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(mychecksdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(mychecksdialog));

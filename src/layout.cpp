@@ -87,7 +87,7 @@ void ScreenLayoutDimensions::verify()
     settings->genconfig.window_y_position_set(y);
   }
   gtk_window_set_default_size (GTK_WINDOW (mywindow), width, height);
-  gtk_window_set_position (GTK_WINDOW (mywindow), GTK_WIN_POS_NONE);
+  //gtk_window_set_position (GTK_WINDOW (mywindow), GTK_WIN_POS_NONE);
 }
 
 

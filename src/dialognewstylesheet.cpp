@@ -41,7 +41,7 @@ NewStylesheetDialog::NewStylesheetDialog(const ustring & worksheet, GtkWindow *t
   else {
     gtk_window_set_title(GTK_WINDOW(newstylesheetdialog), _("New stylesheet"));
   }
-  gtk_window_set_position(GTK_WINDOW(newstylesheetdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(newstylesheetdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (newstylesheetdialog));
   gtk_widget_show(dialog_vbox1);

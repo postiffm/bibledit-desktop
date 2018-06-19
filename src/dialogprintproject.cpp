@@ -43,7 +43,7 @@ PrintProjectDialog::PrintProjectDialog(GtkWindow *transient_parent)
   printprojectdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(printprojectdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(printprojectdialog), _("Print project"));
-  gtk_window_set_position(GTK_WINDOW(printprojectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(printprojectdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(printprojectdialog), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(printprojectdialog), TRUE);
   gtk_window_set_type_hint(GTK_WINDOW(printprojectdialog), GDK_WINDOW_TYPE_HINT_DIALOG);

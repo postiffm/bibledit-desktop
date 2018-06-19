@@ -36,7 +36,7 @@ WordlistDialog::WordlistDialog(GtkWindow *transient_parent)
 
   wordlistdialog = gtk_dialog_new();
   gtk_window_set_title(GTK_WINDOW(wordlistdialog), _("Wordlists"));
-  gtk_window_set_position(GTK_WINDOW(wordlistdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(wordlistdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(wordlistdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (wordlistdialog));

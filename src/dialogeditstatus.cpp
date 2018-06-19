@@ -46,7 +46,7 @@ EditStatusDialog::EditStatusDialog(const ustring & project_in, unsigned int book
   editstatusdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(editstatusdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editstatusdialog), _("Edit Status"));
-  gtk_window_set_position(GTK_WINDOW(editstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(editstatusdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(editstatusdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (editstatusdialog));

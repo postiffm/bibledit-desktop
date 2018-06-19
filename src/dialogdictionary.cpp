@@ -46,7 +46,7 @@ DictionaryDialog::DictionaryDialog(const ustring & project, GtkWindow *transient
   dictionarydialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(dictionarydialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dictionarydialog), _("Dictionaries"));
-  gtk_window_set_position(GTK_WINDOW(dictionarydialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(dictionarydialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(dictionarydialog), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(dictionarydialog), TRUE);
 

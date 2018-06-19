@@ -41,7 +41,7 @@ FiltersDialog::FiltersDialog(GtkWindow *transient_parent)
   gtk_window_set_transient_for(GTK_WINDOW(filterdialog), transient_parent);
   gtk_widget_set_size_request(filterdialog, 640, 640);
   gtk_window_set_title(GTK_WINDOW(filterdialog), _("Filters"));
-  gtk_window_set_position(GTK_WINDOW(filterdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(filterdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(filterdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (filterdialog));

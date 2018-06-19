@@ -32,7 +32,7 @@ Text2PdfDialog::Text2PdfDialog(vector < ustring > *commands, GtkWindow *transien
   text2pdfdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(text2pdfdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(text2pdfdialog), _("Formatter commands"));
-  gtk_window_set_position(GTK_WINDOW(text2pdfdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(text2pdfdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(text2pdfdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (text2pdfdialog));

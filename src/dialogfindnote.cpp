@@ -39,7 +39,7 @@ FindNoteDialog::FindNoteDialog(GtkWindow *transient_parent)
   findnotedialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(findnotedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(findnotedialog), _("Find in project notes"));
-  gtk_window_set_position(GTK_WINDOW(findnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(findnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(findnotedialog), TRUE);
   // Next one added to Glade's code.
   gtk_window_set_destroy_with_parent(GTK_WINDOW(findnotedialog), TRUE);

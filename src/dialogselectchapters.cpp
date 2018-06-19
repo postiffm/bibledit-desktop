@@ -43,7 +43,7 @@ SelectChaptersDialog::SelectChaptersDialog(const ustring & project, unsigned int
   selectchaptersdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(selectchaptersdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(selectchaptersdialog), _("Select portion"));
-  gtk_window_set_position(GTK_WINDOW(selectchaptersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(selectchaptersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(selectchaptersdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(selectchaptersdialog));

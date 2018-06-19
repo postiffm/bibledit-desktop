@@ -32,7 +32,7 @@ FixMarkersDialog::FixMarkersDialog(GtkWindow *transient_parent)
   fixmarkersdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(fixmarkersdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(fixmarkersdialog), _("Simple text corrections"));
-  gtk_window_set_position(GTK_WINDOW(fixmarkersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(fixmarkersdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(fixmarkersdialog));
   gtk_widget_show(dialog_vbox1);

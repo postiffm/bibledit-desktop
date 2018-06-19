@@ -45,7 +45,7 @@ EditNoteDialog::EditNoteDialog(Editor2 * editor, GtkWindow *transient_parent)
   editnotedialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(editnotedialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editnotedialog), _("Edit note"));
-  gtk_window_set_position(GTK_WINDOW(editnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(editnotedialog), GTK_WIN_POS_CENTER_ON_PARENT);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(editnotedialog));
   gtk_widget_show(dialog_vbox1);

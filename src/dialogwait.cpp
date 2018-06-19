@@ -28,7 +28,7 @@ WaitDialog::WaitDialog(int milliseconds, int width, int height, GtkWindow *trans
   waitdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(waitdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(waitdialog), _("Please wait ..."));
-  gtk_window_set_position(GTK_WINDOW(waitdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(waitdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(waitdialog), TRUE);
   if (width && height) {
     gtk_window_set_default_size(GTK_WINDOW(waitdialog), width, height);

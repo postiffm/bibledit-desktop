@@ -34,7 +34,7 @@ PrintPreferencesDialog::PrintPreferencesDialog(GtkWindow *transient_parent)
   dialogprintpreferences = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(dialogprintpreferences), transient_parent);
   gtk_window_set_title(GTK_WINDOW(dialogprintpreferences), _("Printing preferences"));
-  gtk_window_set_position(GTK_WINDOW(dialogprintpreferences), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(dialogprintpreferences), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(dialogprintpreferences), TRUE);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(dialogprintpreferences), TRUE);
   gtk_window_set_type_hint(GTK_WINDOW(dialogprintpreferences), GDK_WINDOW_TYPE_HINT_DIALOG);

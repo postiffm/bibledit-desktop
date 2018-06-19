@@ -67,7 +67,7 @@ bookset: Indicator for the caller's relevant books.
     title.append(_(" and portions"));
   }
   gtk_window_set_title(GTK_WINDOW(selectbooksdialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(selectbooksdialog), GTK_WIN_POS_CENTER_ALWAYS); // was GTK_WIN_POS_CENTER_ON_PARENT
+  //gtk_window_set_position(GTK_WINDOW(selectbooksdialog), GTK_WIN_POS_CENTER_ALWAYS); // was GTK_WIN_POS_CENTER_ON_PARENT
   gtk_window_set_modal(GTK_WINDOW(selectbooksdialog), TRUE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(selectbooksdialog));

@@ -40,7 +40,7 @@ EditListDialog::EditListDialog(vector <ustring> * lines, const ustring & title, 
   editlistdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(editlistdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(editlistdialog), title.c_str());
-  gtk_window_set_position(GTK_WINDOW(editlistdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(editlistdialog), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_modal(GTK_WINDOW(editlistdialog), TRUE);
   gtk_window_set_resizable(GTK_WINDOW(editlistdialog), FALSE);
 

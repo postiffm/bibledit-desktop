@@ -51,7 +51,7 @@ AssistantBase::AssistantBase(const ustring& title, const gchar * helptopic, GtkW
   gtk_window_set_transient_for(GTK_WINDOW(assistant), transient_parent);
   gtk_window_set_title (GTK_WINDOW (assistant), title.c_str());
   gtk_window_set_modal (GTK_WINDOW (assistant), TRUE);
-  gtk_window_set_position (GTK_WINDOW(assistant), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position (GTK_WINDOW(assistant), GTK_WIN_POS_CENTER_ON_PARENT);
   gtk_window_set_destroy_with_parent(GTK_WINDOW(assistant), TRUE);
 
   gtk_widget_show (assistant);

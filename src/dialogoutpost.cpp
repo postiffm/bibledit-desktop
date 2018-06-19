@@ -45,7 +45,7 @@ OutpostDialog::OutpostDialog(GtkWindow *transient_parent)
   outpostdialog = gtk_dialog_new();
   gtk_window_set_transient_for(GTK_WINDOW(outpostdialog), transient_parent);
   gtk_window_set_title(GTK_WINDOW(outpostdialog), _("Windows Outpost Setup"));
-  gtk_window_set_position(GTK_WINDOW(outpostdialog), GTK_WIN_POS_CENTER_ON_PARENT);
+  //gtk_window_set_position(GTK_WINDOW(outpostdialog), GTK_WIN_POS_CENTER_ON_PARENT);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG(outpostdialog));
   gtk_widget_show(dialog_vbox1);
