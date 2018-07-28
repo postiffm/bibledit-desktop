@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: 4.14\n"
 "Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
 "POT-Creation-Date: 2018-03-29 16:14-0400\n"
-"PO-Revision-Date: 2018-03-01 20:09+0100\n"
+"PO-Revision-Date: 2018-07-28 18:58+0100\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../src/assistantbackup.cpp:40
 msgid "Backup"
@@ -120,7 +120,7 @@ msgstr "Modifications"
 
 #: ../src/assistantchanges.cpp:38
 msgid "changes"
-msgstr "Modifications"
+msgstr "modifications"
 
 #: ../src/assistantchanges.cpp:52
 msgid "You can view the changes that have been made in the project."
@@ -128,7 +128,7 @@ msgstr "Vous pouvez voir les modifications réalisées dans ce projet."
 
 #: ../src/assistantchanges.cpp:59
 msgid "Which changes would you like to see?"
-msgstr "Quelles modifications souhaitez-vous voir ? "
+msgstr "Quelles modifications souhaitez-vous voir ?"
 
 #: ../src/assistantchanges.cpp:65
 msgid "The ones made since my last review"
@@ -190,7 +190,7 @@ msgstr "Parcours de l'historique"
 
 #: ../src/assistantchanges.cpp:256
 msgid " as it was on "
-msgstr "comme cela était le "
+msgstr " comme cela était le "
 
 #: ../src/assistantdeletekeyterms.cpp:30 ../src/assistantexport.cpp:103
 #: ../src/assistantimport.cpp:108
@@ -232,7 +232,7 @@ msgstr "Exporter"
 
 #: ../src/assistantexport.cpp:42
 msgid "export"
-msgstr "Exporter"
+msgstr "exporter"
 
 #: ../src/assistantexport.cpp:50
 msgid "This helps you exporting your data"
@@ -359,11 +359,11 @@ msgstr "Format paratext"
 
 #: ../src/assistantexport.cpp:419
 msgid "Include keyterms without a rendering"
-msgstr "Inclure les mots-clés sans rendu"
+msgstr "Inclure les mots-clés sans interprétation"
 
 #: ../src/assistantexport.cpp:424
 msgid "Include keyterms without a rendering?"
-msgstr "Inclure les mots-clés sans rendu ?"
+msgstr "Inclure les mots-clés sans interprétation ?"
 
 #: ../src/assistantexport.cpp:440
 msgid "Export Options"
@@ -440,7 +440,7 @@ msgstr "Quel type de données souhaitez-vous importer ?"
 
 #: ../src/assistantimport.cpp:190
 msgid "BibleWorks Exported Database"
-msgstr "  Base de données exportée de BibleWorks"
+msgstr "Base de données exportée de BibleWorks"
 
 #: ../src/assistantimport.cpp:196
 msgid "Online Bible Text"
@@ -586,7 +586,7 @@ msgstr "Quel type de fichier êtes-vous en train d'importer ?"
 
 #: ../src/assistantimport.cpp:801
 msgid "Standard textfile"
-msgstr "fichier texte standard"
+msgstr "Fichier texte standard"
 
 #: ../src/assistantimport.cpp:819
 msgid "Key Terms in Biblical Hebrew Project"
@@ -638,7 +638,7 @@ msgstr "Quel type de dépôt souhaitez-vous paramétrer ?"
 
 #: ../src/assistantremoterepository.cpp:81
 msgid "_Use remote repository"
-msgstr "_Utiliser le dépôt distant"
+msgstr "_Utiliser un dépôt distant"
 
 #: ../src/assistantremoterepository.cpp:85
 msgid "Would you like to use a remote repository?"
@@ -776,7 +776,7 @@ msgstr "git add a échoué dans l'ajout des données au dépôt"
 
 #: ../src/assistantremoterepository.cpp:634
 msgid "git commit fails to commit data to the repository"
-msgstr "La propagation des données dans le dépôt par git commit a échoué"
+msgstr "la propagation des données dans le dépôt par git commit a échoué"
 
 #: ../src/assistantremoterepository.cpp:649
 msgid "cannot read data in repository"
@@ -784,7 +784,7 @@ msgstr "impossible de lire les données du dépôt"
 
 #: ../src/assistantremoterepository.cpp:659
 msgid "unexpected data in repository"
-msgstr "Données innatendues dans le dépôt"
+msgstr "données inattendues dans le dépôt"
 
 #: ../src/assistantremoterepository.cpp:678
 msgid "git --bare fetch fails to fetch data into remote repository"
@@ -793,7 +793,7 @@ msgstr ""
 
 #: ../src/assistantremoterepository.cpp:701
 msgid "git clone fails to clone the repository"
-msgstr "git clone  pas réussi à "
+msgstr "git clone n'a pas réussi à cloner le dépôt"
 
 #: ../src/assistantremoterepository.cpp:727
 msgid "git pull from remote repository failed"
@@ -821,7 +821,7 @@ msgstr "Clonage du dépôt en cours"
 
 #: ../src/assistantremoterepository.cpp:855
 msgid "The data has been cloned, you can go forward"
-msgstr "Est-ce la bonne Bible ?"
+msgstr "Les données ont été clonées, vous pouvez continuer"
 
 #: ../src/assistantremoterepository.cpp:858
 msgid "Cloning the data failed, please try again"
@@ -843,7 +843,7 @@ msgstr "L'accès en écriture a été autorisé, vous pouvez poursuivre"
 msgid "No write access. Please check the system log for more information"
 msgstr ""
 "Pas d'accès en écriture. Veuillez vérifier le fichier journal système pour "
-"plus d'information "
+"plus d'information"
 
 #: ../src/assistantremoterepository.cpp:983
 msgid "Pushing your data"
@@ -871,7 +871,7 @@ msgstr "_Éditeur de ressource"
 
 #: ../src/assistantresource.cpp:78
 msgid "Step by step you will be "
-msgstr "Pas à pas vous serez"
+msgstr "Pas à pas vous serez "
 
 #: ../src/assistantresource.cpp:80
 msgid "creating a new Resource"
@@ -956,7 +956,7 @@ msgstr "Ajout de fichiers"
 
 #: ../src/assistantresource.cpp:675
 msgid "Files in resource: "
-msgstr "Fichiers dans la ressource :"
+msgstr "Fichiers dans la ressource : "
 
 #: ../src/assistantresource.cpp:692
 msgid "Adding directory"
@@ -964,7 +964,7 @@ msgstr "Ajout de dossiers"
 
 #: ../src/assistantresource.cpp:698
 msgid "Directories in resource: "
-msgstr "Dossier dans la ressource :"
+msgstr "Dossier dans la ressource : "
 
 #: ../src/assistantresource.cpp:736
 msgid "Enter the abbreviations for the books"
@@ -1065,11 +1065,11 @@ msgstr "Tri des références : "
 
 #: ../src/bibledit.cpp:170
 msgid "Finished booklocalizations"
-msgstr ""
+msgstr "Localisation des livres terminée"
 
 #: ../src/bibledit.cpp:181
 msgid "Finished URLTransport"
-msgstr ""
+msgstr "URLTransport terminée"
 
 #: ../src/bibledit.cpp:206
 #, c-format
@@ -1794,7 +1794,7 @@ msgstr "Vérification des chapitres et des versets"
 
 #: ../src/check_chapters_verses.cpp:111
 msgid "Chapter out of sequence following "
-msgstr "Chapitre hors de la série suivant "
+msgstr "Interruption dans la numérotation, après le "
 
 #: ../src/check_chapters_verses.cpp:118
 msgid "Extra chapter or wrong versification"
@@ -1802,7 +1802,7 @@ msgstr "Chapitre excédentaire ou mauvaise versification"
 
 #: ../src/check_chapters_verses.cpp:128
 msgid "Less than "
-msgstr "moins de  "
+msgstr "Moins de "
 
 #: ../src/check_chapters_verses.cpp:128
 msgid " chapters or wrong versification"
@@ -1834,7 +1834,7 @@ msgstr "Verset excédentaire ou mauvaise versification"
 
 #: ../src/check_chapters_verses.cpp:225
 msgid "beginning"
-msgstr "Commencement"
+msgstr "commencement"
 
 #: ../src/check_chapters_verses.cpp:229
 msgid "Verse out of sequence following "
@@ -1862,19 +1862,19 @@ msgstr "Chapitre en excédent"
 
 #: ../src/check_compare_usfm.cpp:154
 msgid "Missing chapter"
-msgstr "chapitre manquant"
+msgstr "Chapitre manquant"
 
 #: ../src/check_compare_usfm.cpp:170
 msgid "Extra verse"
-msgstr "verset en excédent"
+msgstr "Verset en excédent"
 
 #: ../src/check_compare_usfm.cpp:177
 msgid "Missing verse"
-msgstr "verset manquant"
+msgstr "Verset manquant"
 
 #: ../src/check_compare_usfm.cpp:205
 msgid "Markers differ: "
-msgstr "Les balises ne correspondent pas :"
+msgstr "Les balises ne correspondent pas : "
 
 #: ../src/check_count_characters.cpp:49
 msgid "Counting characters"
@@ -1902,7 +1902,7 @@ msgstr "Le texte de la balise "
 
 #: ../src/check_markers_spacing.cpp:104
 msgid " ends with more than one space"
-msgstr "termine avec plus d'un espace"
+msgstr " termine avec plus d'une espace"
 
 #: ../src/check_markers_spacing.cpp:108
 msgid " doesn't end with a space"
@@ -1980,7 +1980,7 @@ msgstr "Nombre total d'un mot filtré : "
 
 #: ../src/checks.cpp:77
 msgid "Click on a word to see the places where it occurs."
-msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît. "
+msgstr "Cliquez sur un mot pour voir les emplacements ou il apparaît."
 
 #: ../src/checks.cpp:82
 msgid "Word"
@@ -2018,7 +2018,7 @@ msgstr "Décimal"
 
 #: ../src/checks.cpp:152
 msgid "Hexadecimal"
-msgstr "Hexadécimal "
+msgstr "Hexadécimal"
 
 #: ../src/checks.cpp:183 ../src/scripturechecks.cpp:348
 msgid "References Inventory"
@@ -2049,7 +2049,7 @@ msgstr "Le texte ne commance pas avec une majuscule"
 
 #: ../src/check_sentence_structure.cpp:379
 msgid "A new sentence starts within a sentence"
-msgstr "Une nouvelle phrase commence dans une phrase "
+msgstr "Une nouvelle phrase commence dans une phrase"
 
 #: ../src/check_sentence_structure.cpp:385
 msgid "A sentence ends where none was started"
@@ -2081,11 +2081,11 @@ msgstr "Validation des références"
 
 #: ../src/check_validate_refs.cpp:121
 msgid " does not fit in the versification system"
-msgstr "ne rentre pas dans le système de versification"
+msgstr " ne rentre pas dans le système de versification"
 
 #: ../src/check_validate_refs.cpp:127
 msgid " contains no text"
-msgstr "ne contient pas de texte"
+msgstr " ne contient pas de texte"
 
 #: ../src/check_validate_refs.cpp:151
 msgid "Unrecognized chapter "
@@ -2093,7 +2093,7 @@ msgstr "Chapitre non reconnu "
 
 #: ../src/check_validate_refs.cpp:151
 msgid " and verse "
-msgstr "et verset "
+msgstr " et verset "
 
 #: ../src/check_validate_usfm.cpp:54
 msgid "Validating markers"
@@ -2109,7 +2109,7 @@ msgstr "La ligne ID est trop courte : "
 
 #: ../src/check_validate_usfm.cpp:118
 msgid "Unknown id "
-msgstr "id inconnue "
+msgstr "Id inconnue "
 
 #: ../src/check_validate_usfm.cpp:120
 msgid "Non-uppercase id code"
@@ -2125,7 +2125,7 @@ msgstr "Balise de fin non conforme "
 
 #: ../src/check_validate_usfm.cpp:378
 msgid "Unknown USFM "
-msgstr "USFM inconnu"
+msgstr "USFM inconnu "
 
 #: ../src/check_validate_usfm.cpp:384
 msgid "Marker "
@@ -2187,25 +2187,23 @@ msgstr "Décompression"
 
 #: ../src/concordance.cpp:368
 msgid "Concordance Sorted by Words"
-msgstr ""
+msgstr "Concordance triée par mots"
 
 #: ../src/concordance.cpp:371
 msgid "Building Concordance Data"
-msgstr ""
+msgstr "Création des données de concordance"
 
 #: ../src/concordance.cpp:401
-#, fuzzy
 msgid "Unique words = "
-msgstr "Nombre de mot unique : "
+msgstr "Nombre de mot unique = "
 
 #: ../src/concordance.cpp:404
-#, fuzzy
 msgid "Total words = "
-msgstr "Nombre total des mots : "
+msgstr "Nombre total des mots = "
 
 #: ../src/concordance.cpp:434
 msgid "Concordance Sorted by Frequency"
-msgstr ""
+msgstr "Concordance triée par fréquence"
 
 #: ../src/concordance.cpp:485 ../src/concordance.cpp:934
 #: ../src/concordance.cpp:1118 ../src/windowcheckkeyterms.cpp:622
@@ -2214,32 +2212,28 @@ msgid "<empty>"
 msgstr "<vide>"
 
 #: ../src/concordance.cpp:501
-#, fuzzy
 msgid "Concordance Entry for "
-msgstr "_Concordance"
+msgstr "Entrée de concordance for "
 
 #: ../src/concordance.cpp:993
-#, fuzzy
 msgid "Cannot open file "
-msgstr "Erreur durant l'ouverture du fichier"
+msgstr "Ne peut pas ouvrir le fichier "
 
 #: ../src/concordance.cpp:1055
-#, fuzzy
 msgid "Cross references for "
-msgstr "Correspondances"
+msgstr "Références croisées pour "
 
 #: ../src/concordance.cpp:1060
 msgid "Could not open cross-reference file "
-msgstr ""
+msgstr "Ne peut pas ouvrir le fichier de références croisées "
 
 #: ../src/concordance.cpp:1066
 msgid "Invalid reference; therefore not looking up cross references"
-msgstr ""
+msgstr "Référence invalide donc ne recherchant pas de références croisées"
 
 #: ../src/concordance.cpp:1081
-#, fuzzy
 msgid "No cross references"
-msgstr "une référence ou un renvoi"
+msgstr "Pas références croisées"
 
 #: ../src/dialogarea.cpp:38
 msgid "Area selection"
@@ -2335,7 +2329,7 @@ msgstr "Texte de verset"
 
 #: ../src/dialogarea.cpp:267
 msgid " Areas"
-msgstr "Aires"
+msgstr " Aires"
 
 #: ../src/dialogarea.cpp:276
 msgid "No areas selected"
@@ -2533,7 +2527,7 @@ msgstr "Sélectionner la _zone"
 
 #: ../src/dialogcheck.cpp:406
 msgid "Compare _with: "
-msgstr "Comparer _avec :"
+msgstr "Comparer _avec : "
 
 #: ../src/dialogcheck.cpp:412
 msgid "Compare _all markers"
@@ -2768,10 +2762,9 @@ msgstr "Comparer le projet"
 
 #: ../src/dialogcompare.cpp:56
 msgid "First, select the original (base) project"
-msgstr ""
+msgstr "D'abord, sélectionnez le projet original (de base)"
 
 #: ../src/dialogcompare.cpp:64
-#, fuzzy
 msgid ""
 "Next, select a project to compare to the original project with\n"
 "and then press OK"
@@ -2895,11 +2888,11 @@ msgstr "Il n'y pas pas de double"
 
 #: ../src/dialogeditlist.cpp:414
 msgid "Do you want to remove "
-msgstr "Souhaitez-vous supprimer"
+msgstr "Souhaitez-vous supprimer "
 
 #: ../src/dialogeditlist.cpp:414
 msgid " duplicates?"
-msgstr "les doubles ?"
+msgstr " les doubles ?"
 
 #: ../src/dialogeditnote.cpp:46
 msgid "Edit note"
@@ -3005,11 +2998,11 @@ msgstr "Corrections de texte simple"
 
 #: ../src/dialogfixmarkers.cpp:39
 msgid "This tool can make some automatic simple text corrections."
-msgstr "Cet outil peut faire de simples corrections de texte automatiquement"
+msgstr "Cet outil peut faire de simples corrections de texte automatiquement."
 
 #: ../src/dialogfixmarkers.cpp:48
 msgid "Insert a space after an opening USFM marker that doesn't have one"
-msgstr "Insère une espace manquante après une balise USFM qui n'en a pas."
+msgstr "Insère une espace manquante après une balise USFM qui n'en a pas"
 
 #: ../src/dialogfontcolor.cpp:32
 msgid "Font and Color"
@@ -3029,7 +3022,7 @@ msgstr "Utiliser la couleur par défaut"
 
 #: ../src/dialogfontcolor.cpp:84
 msgid "Normal text color"
-msgstr "Couleur normale du texte "
+msgstr "Couleur normale du texte"
 
 #: ../src/dialogfontcolor.cpp:91
 msgid "Background color"
@@ -3221,7 +3214,7 @@ msgstr "Maintenance"
 msgid "Some actions may have great impact on Bibledit-Desktop. Use with care."
 msgstr ""
 "Certaines actions risquent d'avoir un gros impact sur Bibledit-Desktop. "
-"Utilisez cet outil avec précaution. "
+"Utilisez cet outil avec précaution."
 
 #: ../src/dialogmerge.cpp:38 ../src/windowmerge.cpp:50
 msgid "Merge"
@@ -3280,7 +3273,7 @@ msgstr "Répétition"
 
 #: ../src/dialogmychecks.cpp:138
 msgid "Unwanted"
-msgstr "indésirable"
+msgstr "Indésirable"
 
 #: ../src/dialogmychecks.cpp:154
 msgid "Punctuation"
@@ -3803,7 +3796,7 @@ msgstr "Créé par"
 
 #: ../src/dialogprojectnote.cpp:61
 msgid "Edited on"
-msgstr "Édité le "
+msgstr "Édité le"
 
 #: ../src/dialogprojectnote.cpp:66
 msgid "Logbook"
@@ -3919,7 +3912,7 @@ msgstr "Sélectionner un fichier"
 
 #: ../src/dialogresourceconverter.cpp:582
 msgid " lines"
-msgstr "lignes"
+msgstr " lignes"
 
 #: ../src/dialogresourceconverter.cpp:584
 msgid "Open a file for conversion"
@@ -3935,7 +3928,7 @@ msgstr "Écrire les ancres"
 
 #: ../src/dialogresourceconverter.cpp:736
 msgid "Anchors in file: "
-msgstr "Ancres dans le fichier :"
+msgstr "Ancres dans le fichier : "
 
 #: ../src/dialogrevert.cpp:56
 msgid "Revert"
@@ -4228,7 +4221,7 @@ msgstr "débute un autre paragraphe"
 
 #: ../src/dialogstylesheet.cpp:328
 msgid "starts a crossreference"
-msgstr "Debute un renvoi"
+msgstr "débute une référence croisée"
 
 #: ../src/dialogstylesheet.cpp:368
 msgid "is a main title"
@@ -4276,7 +4269,7 @@ msgstr "débute l'index"
 
 #: ../src/dialogstylesheet.cpp:449
 msgid "starts map index"
-msgstr "Commence l'index de carte"
+msgstr "commence l'index de carte"
 
 #: ../src/dialogstylesheet.cpp:455
 msgid "starts cover"
@@ -4284,7 +4277,7 @@ msgstr "débute la couverture"
 
 #: ../src/dialogstylesheet.cpp:461
 msgid "starts spine"
-msgstr "Débute le dos du livre"
+msgstr "débute le quatrième de couverture"
 
 #: ../src/dialogstylesheet.cpp:482
 msgid "identifies the book"
@@ -4328,7 +4321,7 @@ msgstr "est la publication de la balise de chapitre"
 
 #: ../src/dialogstylesheet.cpp:558
 msgid "starts a new row"
-msgstr "Commence une nouvelle ligne"
+msgstr "commence une nouvelle ligne"
 
 #: ../src/dialogstylesheet.cpp:564
 msgid "is a column heading"
@@ -4519,7 +4512,7 @@ msgstr "cellule"
 
 #: ../src/dialogstylesheet.cpp:2706
 msgid "Column number"
-msgstr "numéro de colonne"
+msgstr "Numéro de colonne"
 
 #: ../src/dialogstylesheet.cpp:2723
 msgid "Print this in running header of left page"
@@ -4903,7 +4896,7 @@ msgstr "à la table"
 
 #: ../src/editor.cpp:1717
 msgid " style"
-msgstr "au style"
+msgstr " au style"
 
 #: ../src/editor.cpp:1725
 msgid "Only note related styles apply"
@@ -4940,11 +4933,11 @@ msgstr "Exportation"
 
 #: ../src/export_utils.cpp:219
 msgid "Converting to BibleWorks: "
-msgstr "Convertion en  BibleWorks :"
+msgstr "Convertion en  BibleWorks : "
 
 #: ../src/export_utils.cpp:443
 msgid "Export: "
-msgstr "Exportation :"
+msgstr "Exportation : "
 
 #: ../src/export_utils.cpp:557
 msgid "The SWORD compiler osis2mod was not found."
@@ -5012,23 +5005,23 @@ msgstr "Nettoyage de l'index verrouillé "
 
 #: ../src/git.cpp:82
 msgid "Cleaning out folder "
-msgstr "Nettoyage du dossier"
+msgstr "Nettoyage du dossier "
 
 #: ../src/git.cpp:83
 msgid "Tidying up project "
-msgstr "Organisation du projet en cours"
+msgstr "Organisation du projet "
 
 #: ../src/git.cpp:106
 msgid "Resolving conflict for project "
-msgstr "Résolution de conflits dans le projet"
+msgstr "Résolution de conflits dans le projet "
 
 #: ../src/git.cpp:106 ../src/readwrite.cpp:109
 msgid " book "
-msgstr "livre"
+msgstr " livre "
 
 #: ../src/git-exec.cpp:34
 msgid "Updating data in folder "
-msgstr "Mise à jour des données dans le dossier"
+msgstr "Mise à jour des données dans le dossier "
 
 #: ../src/gtkwrappers.cpp:86
 msgid "Select a folder"
@@ -5044,7 +5037,7 @@ msgstr "Enregistrer sous"
 
 #: ../src/gtkwrappers.cpp:229
 msgid "Trying to open "
-msgstr "Tentative d'ouverture"
+msgstr "Tentative d'ouverture "
 
 #: ../src/gui.cpp:35
 msgid "Done:"
@@ -5132,15 +5125,15 @@ msgstr "<p>Aucun résultat de la recherche.</p>"
 
 #: ../src/import.cpp:64
 msgid "Data from "
-msgstr "Données depuis"
+msgstr "Données depuis "
 
 #: ../src/import.cpp:64
 msgid " is not valid UTF8."
-msgstr "n'est pas de l'UTF8 valide."
+msgstr " n'est pas de l'UTF8 valide."
 
 #: ../src/import.cpp:101
 msgid "Unknown book in file "
-msgstr "Livre inconnu dans le fichier"
+msgstr "Livre inconnu dans le fichier "
 
 #: ../src/import.cpp:112
 msgid "File "
@@ -5181,7 +5174,7 @@ msgstr "Références :"
 
 #: ../src/kjv.cpp:37 ../src/kjv.cpp:51
 msgid "Sword King James Bible with Strong's lemmata"
-msgstr "Bible Sword King James avec le lemmata Strong "
+msgstr "Bible Sword King James avec le lemme Strong"
 
 #: ../src/kjv.cpp:54
 msgid ""
@@ -5190,9 +5183,9 @@ msgid ""
 "verses, among other things. Importing consists of two steps: exporting it "
 "from Sword and creating a database out of it."
 msgstr ""
-"La  King James Bible du projet Sword est utile pour les numéros de Strong "
-"qui sont marqués dans le texte. Bibledit-Desktop utilise ceci pour trouver "
-"des versets connexes, entre autres choses. L'importation consiste en deux "
+"La King James Bible du projet Sword est utile pour les numéros de Strong qui "
+"sont marqués dans le texte. Bibledit-Desktop utilise ceci pour trouver des "
+"versets connexes, entre autres choses. L'importation consiste en deux "
 "étapes : l'exportation de Sword et la création d'une base de données."
 
 #: ../src/kjv.cpp:57
@@ -5246,7 +5239,7 @@ msgstr "Ne trouve pas le fichier d'entrée"
 
 #: ../src/kjv.cpp:106 ../src/mechonmamre.cpp:128
 msgid "Using file "
-msgstr "Utilisation du fichier"
+msgstr "Utilisation du fichier "
 
 #: ../src/kjv.cpp:114
 msgid "Importing data into the database at "
@@ -5472,7 +5465,7 @@ msgstr "_Concordance"
 
 #: ../src/mainwindow.cpp:960
 msgid "_Analysis window"
-msgstr ""
+msgstr "Fenêtre d'_analyse"
 
 #: ../src/mainwindow.cpp:964
 msgid "_Outline"
@@ -5748,13 +5741,12 @@ msgid ", something worth perhaps years of work?"
 msgstr ", qui peut constituer des années de travail ?"
 
 #: ../src/mainwindow.cpp:2141
-#, fuzzy
 msgid "Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"
-msgstr "Droit d'auteur (c) 2003-2013 Teus Benschop and 2015-2017 Matt Postiff"
+msgstr "Droit d'auteur (c) 2003-2013 Teus Benschop et 2014-2018 Matt Postiff"
 
 #: ../src/mainwindow.cpp:2142
 msgid "translator-credits"
-msgstr "Crédits-traducteur : L'Africain"
+msgstr "crédits-traducteur : L'Africain"
 
 #: ../src/mainwindow.cpp:2144
 msgid ""
@@ -5819,9 +5811,8 @@ msgid "The project has been copied to a new project named\n"
 msgstr "Le projet a été copié vers un nouveau projet appelé\n"
 
 #: ../src/mainwindow.cpp:2490 ../src/mainwindow.cpp:2868
-#, fuzzy
 msgid "Greek and English"
-msgstr "Liste de nom grecs"
+msgstr "Grec et anglais"
 
 #: ../src/mainwindow.cpp:2495 ../src/mainwindow.cpp:2878
 #: ../src/usfmtools.cpp:759
@@ -5829,22 +5820,20 @@ msgid "Cross References"
 msgstr "Références croisées"
 
 #: ../src/mainwindow.cpp:2822 ../templates/stylesheet.xml:3169
-#, fuzzy
 msgid "Concordance"
-msgstr "_Concordance"
+msgstr "Concordance"
 
 #: ../src/mainwindow.cpp:2831
-#, fuzzy
 msgid "Sorted by _Words"
-msgstr "Tri par _mot"
+msgstr "Trié par _mots"
 
 #: ../src/mainwindow.cpp:2836
 msgid "Sorted by _Frequency"
-msgstr ""
+msgstr "Trié par _fréquence"
 
 #: ../src/mainwindow.cpp:2857
 msgid "Analysis"
-msgstr ""
+msgstr "Analyse"
 
 #: ../src/mainwindow.cpp:3055
 msgid ""
@@ -5984,7 +5973,7 @@ msgid ""
 msgstr ""
 "La Bible hébraïque de Mechon Mamre procure un texte hébreux qui peut être "
 "très utile pour la traduction de la Bible. Bibledit-Desktop peut importer ce "
-"texte. Cela consiste en deux étapes : le télécharger et l'importer"
+"texte. Cela consiste en deux étapes : le télécharger et l'importer."
 
 #: ../src/mechonmamre.cpp:74
 msgid "1. Downloading the text"
@@ -6056,7 +6045,7 @@ msgstr "Une Bible existe déjà avec ce nom : "
 
 #: ../src/mechonmamre.cpp:195
 msgid "Creating a new Bible called \""
-msgstr "création d'une nouvelle Bible appelée \""
+msgstr "Création d'une nouvelle Bible appelée « "
 
 #: ../src/mechonmamre.cpp:209
 msgid "Creating books"
@@ -6068,7 +6057,7 @@ msgstr "Importation de chapitres"
 
 #: ../src/mechonmamre.cpp:232
 msgid "Importing "
-msgstr "Importation en cours"
+msgstr "Importation "
 
 #: ../src/mechonmamre.cpp:232
 msgid " from file "
@@ -6148,7 +6137,7 @@ msgstr "Ne peut se connecter au serveur web local"
 
 #: ../src/nanohttp.cpp:38
 msgid "Local web server returned unusual code: "
-msgstr "Le serveur web local a retourné un code inhabituel :"
+msgstr "Le serveur web local a retourné un code inhabituel : "
 
 #: ../src/notes_utils.cpp:461
 msgid "[delete]"
@@ -6172,7 +6161,7 @@ msgstr "Référence "
 
 #: ../src/notes_utils.cpp:615
 msgid " is not valid and has been removed."
-msgstr "n'est pas valide et a été  supprimé."
+msgstr " n'est pas valide et a été supprimé."
 
 #: ../src/notes_utils.cpp:634
 msgid "No issue"
@@ -6289,7 +6278,7 @@ msgstr "Citation"
 
 #: ../src/ot-quotations.cpp:185
 msgid "Quoted here"
-msgstr "cité ici"
+msgstr "Cité ici"
 
 #: ../src/ot-quotations.cpp:189
 msgid "Parallel passage"
@@ -6297,7 +6286,7 @@ msgstr "Passage parallèle"
 
 #: ../src/ot-quotations.cpp:210
 msgid " from Septuagint"
-msgstr "de Septuagint"
+msgstr " de Septuagint"
 
 #: ../src/paratext.cpp:37
 msgid "# Exported from Bibledit-Desktop"
@@ -6370,7 +6359,7 @@ msgid ""
 "Viewer"
 msgstr ""
 "Installez un  lecteur pdf approprié ou configurez le vôtre dans les "
-"Préférences → Visionneuse PDF "
+"Préférences → Visionneuse PDF"
 
 #: ../src/planning.cpp:51
 msgid "Planned Tasks"
@@ -6398,7 +6387,7 @@ msgstr "et "
 
 #: ../src/planning.cpp:103
 msgid " percent of the work has been done. "
-msgstr " pourcent du travail éffectué."
+msgstr " pourcent du travail effectué. "
 
 #: ../src/planning.cpp:113
 msgid ""
@@ -6494,7 +6483,7 @@ msgstr ""
 
 #: ../src/projectconfig.cpp:238 ../src/projectconfig.cpp:239
 msgid " Bibledit project"
-msgstr "Projet Bibledit"
+msgstr " Projet Bibledit"
 
 #: ../src/projectconfig.cpp:240
 msgid "GNU General Public License"
@@ -6514,7 +6503,7 @@ msgstr "Chargement de "
 
 #: ../src/projectutils.cpp:146
 msgid " does not exist"
-msgstr "n'existe pas"
+msgstr " n'existe pas"
 
 #: ../src/projectutils.cpp:507
 msgid "Open project"
@@ -6530,11 +6519,11 @@ msgstr "Ctrl-O"
 
 #: ../src/projectutils.cpp:509
 msgid "to display the editable projects"
-msgstr "pour afficher les projets éditables."
+msgstr "pour afficher les projets éditables"
 
 #: ../src/projectutils.cpp:509
 msgid "to display the non-editable projects"
-msgstr "pour afficher les projets non éditables."
+msgstr "pour afficher les projets non éditables"
 
 #: ../src/readwrite.cpp:76
 msgid "Read/write data needs 5 parameters"
@@ -6542,7 +6531,7 @@ msgstr "Les données en lecture/écriture ont besoin de 5 paramètres"
 
 #: ../src/readwrite.cpp:85
 msgid "Project does not exist: "
-msgstr "Le projet n'existe pas :"
+msgstr "Le projet n'existe pas : "
 
 #: ../src/readwrite.cpp:96
 msgid "Book "
@@ -6550,7 +6539,7 @@ msgstr "Livre "
 
 #: ../src/readwrite.cpp:96 ../src/readwrite.cpp:109
 msgid " does not exist in project "
-msgstr "n'existe pas dans le projet"
+msgstr " n'existe pas dans le projet "
 
 #: ../src/reporting.cpp:40
 msgid "status"
@@ -6574,7 +6563,7 @@ msgstr ""
 
 #: ../src/reporting.cpp:70
 msgid "Advisor Check"
-msgstr ""
+msgstr "Vérification du conseiller"
 
 #: ../src/reporting.cpp:71
 msgid "First Revision"
@@ -6606,11 +6595,11 @@ msgstr "Quatrième révision"
 
 #: ../src/reporting.cpp:78
 msgid "First Read Through"
-msgstr ""
+msgstr "Première lecture à travers"
 
 #: ../src/reporting.cpp:79
 msgid "Second Read Through"
-msgstr ""
+msgstr "Deuxième lecture à travers"
 
 #: ../src/reporting.cpp:80
 msgid "Publish"
@@ -6622,11 +6611,11 @@ msgstr "Révision post-publication"
 
 #: ../src/reporting.cpp:457
 msgid "Status for chapter "
-msgstr "État du chapitre"
+msgstr "État du chapitre "
 
 #: ../src/reporting.cpp:554
 msgid "Printing status for book "
-msgstr "Impression de l'état pour le livre"
+msgstr "Impression de l'état pour le livre "
 
 #: ../src/reporting.cpp:569
 msgid "Loading status"
@@ -6646,7 +6635,7 @@ msgstr "Rapport d'état"
 
 #: ../src/reporting.cpp:770
 msgid "Status Report "
-msgstr "Rapport d'état"
+msgstr "Rapport d'état "
 
 #: ../src/reporting.cpp:795
 msgid "Project Percentage Complete"
@@ -6715,7 +6704,7 @@ msgstr "Actuellement Bible-Desktop a "
 
 #: ../src/restore.cpp:63
 msgid " notes. Would you like to overwrite these?"
-msgstr "des notes. Voulez-vous les écraser ?"
+msgstr " des notes. Voulez-vous les écraser ?"
 
 #: ../src/restore.cpp:65
 msgid "Restore has overwritten the existing notes"
@@ -6763,87 +6752,87 @@ msgstr "Il n'a donc pu être restauré"
 
 #: ../src/robinson.cpp:33
 msgid " first person"
-msgstr "première personne"
+msgstr " première personne"
 
 #: ../src/robinson.cpp:35
 msgid " second person"
-msgstr "deuxième personne"
+msgstr " deuxième personne"
 
 #: ../src/robinson.cpp:37
 msgid " third person"
-msgstr "troisième personne"
+msgstr " troisième personne"
 
 #: ../src/robinson.cpp:54
 msgid " nominative"
-msgstr "Nominatif"
+msgstr " Nominatif"
 
 #: ../src/robinson.cpp:56
 msgid " vocative"
-msgstr "vocatif"
+msgstr " vocatif"
 
 #: ../src/robinson.cpp:58
 msgid " genitive"
-msgstr "génitif"
+msgstr " génitif"
 
 #: ../src/robinson.cpp:60
 msgid " dative"
-msgstr "datif"
+msgstr " datif"
 
 #: ../src/robinson.cpp:62
 msgid " accusative"
-msgstr "accusatif"
+msgstr " accusatif"
 
 #: ../src/robinson.cpp:64
 msgid " case \""
-msgstr "casse \""
+msgstr " casse \""
 
 #: ../src/robinson.cpp:75
 msgid " singular"
-msgstr "singulier"
+msgstr " singulier"
 
 #: ../src/robinson.cpp:77
 msgid " plural"
-msgstr "pluriel"
+msgstr " pluriel"
 
 #: ../src/robinson.cpp:80
 msgid " number \""
-msgstr "numéro \""
+msgstr " numéro « "
 
 #: ../src/robinson.cpp:92
 msgid " masculine"
-msgstr "masculin"
+msgstr " masculin"
 
 #: ../src/robinson.cpp:94
 msgid " feminine"
-msgstr "féminin"
+msgstr " féminin"
 
 #: ../src/robinson.cpp:96
 msgid " neuter"
-msgstr "neutre"
+msgstr " neutre"
 
 #: ../src/robinson.cpp:99
 msgid " gender \""
-msgstr "genre \""
+msgstr " genre « "
 
 #: ../src/robinson.cpp:117
 msgid " superlative"
-msgstr "superlatif"
+msgstr " superlatif"
 
 #: ../src/robinson.cpp:120
 msgid " comparative"
-msgstr "comparatif"
+msgstr " comparatif"
 
 #: ../src/robinson.cpp:123
 msgid " abbreviated"
-msgstr "abrégé"
+msgstr " abrégé"
 
 #: ../src/robinson.cpp:126
 msgid " interrogative"
-msgstr "interrogatif"
+msgstr " interrogatif"
 
 #: ../src/robinson.cpp:129
 msgid " negative"
-msgstr "négatif"
+msgstr " négatif"
 
 #: ../src/robinson.cpp:132
 msgid ""
@@ -6854,7 +6843,7 @@ msgstr ""
 
 #: ../src/robinson.cpp:135
 msgid " Attic Greek form"
-msgstr "Forme grecque attique"
+msgstr " Forme grecque attique"
 
 #: ../src/robinson.cpp:138
 msgid " letter indeclinable"
@@ -6862,7 +6851,7 @@ msgstr " lettre indéclinable"
 
 #: ../src/robinson.cpp:141
 msgid " proper indeclinable"
-msgstr "propre indéclinable"
+msgstr " propre indéclinable"
 
 #: ../src/robinson.cpp:144
 msgid " other indeclinable"
@@ -6874,111 +6863,111 @@ msgstr " nombre indéclinable"
 
 #: ../src/robinson.cpp:150
 msgid " apocopated form"
-msgstr "forme apocope"
+msgstr " forme apocope"
 
 #: ../src/robinson.cpp:153
 msgid " Aeolic"
-msgstr "Éolien"
+msgstr " Éolien"
 
 #: ../src/robinson.cpp:156
 msgid " middle significance"
-msgstr "importance moyenne"
+msgstr " importance moyenne"
 
 #: ../src/robinson.cpp:161
 msgid " unknown suffix \""
-msgstr "suffixe inconnu \""
+msgstr " suffixe inconnu \""
 
 #: ../src/robinson.cpp:175
 msgid " second"
-msgstr "deuxième"
+msgstr " deuxième"
 
 #: ../src/robinson.cpp:181
 msgid " present"
-msgstr "présent"
+msgstr " présent"
 
 #: ../src/robinson.cpp:183
 msgid " imperfect"
-msgstr "imparfait"
+msgstr " imparfait"
 
 #: ../src/robinson.cpp:185
 msgid " future"
-msgstr "futur"
+msgstr " futur"
 
 #: ../src/robinson.cpp:187
 msgid " aorist"
-msgstr "aoriste"
+msgstr " aoriste"
 
 #: ../src/robinson.cpp:189
 msgid " perfect"
-msgstr "parfait"
+msgstr " parfait"
 
 #: ../src/robinson.cpp:191
 msgid " pluperfect"
-msgstr "plus que parfait"
+msgstr " plus que parfait"
 
 #: ../src/robinson.cpp:193
 msgid " no tense stated (adverbial imperative)"
-msgstr "pas de temps (impératif adverbial)"
+msgstr " pas de temps (impératif adverbial)"
 
 #: ../src/robinson.cpp:209
 msgid " active"
-msgstr "actif"
+msgstr " actif"
 
 #: ../src/robinson.cpp:211
 msgid " middle"
-msgstr "moyen"
+msgstr " moyen"
 
 #: ../src/robinson.cpp:213
 msgid " passive"
-msgstr "passif"
+msgstr " passif"
 
 #: ../src/robinson.cpp:215
 msgid " middle or passive"
-msgstr "moyen ou passif"
+msgstr " moyen ou passif"
 
 #: ../src/robinson.cpp:217
 msgid " middle deponent"
-msgstr "déponent moyen"
+msgstr " déponent moyen"
 
 #: ../src/robinson.cpp:219
 msgid " passive deponent"
-msgstr "déponent passif"
+msgstr " déponent passif"
 
 #: ../src/robinson.cpp:221
 msgid " middle or passive deponent"
-msgstr "déponent moyen ou passif"
+msgstr " déponent moyen ou passif"
 
 #: ../src/robinson.cpp:223
 msgid " no voice stated"
-msgstr "pas de voix"
+msgstr " pas de voix"
 
 #: ../src/robinson.cpp:225
 msgid " impersonal active"
-msgstr "impersonnel actif"
+msgstr " impersonnel actif"
 
 #: ../src/robinson.cpp:241
 msgid " indicative"
-msgstr "indicatif"
+msgstr " indicatif"
 
 #: ../src/robinson.cpp:243
 msgid " subjunctive"
-msgstr "subjonctif"
+msgstr " subjonctif"
 
 #: ../src/robinson.cpp:245
 msgid " optative"
-msgstr "optatif"
+msgstr " optatif"
 
 #: ../src/robinson.cpp:247
 msgid " imperative"
-msgstr "impératif"
+msgstr " impératif"
 
 #: ../src/robinson.cpp:249
 msgid " infinitive"
-msgstr "infinitif"
+msgstr " infinitif"
 
 #: ../src/robinson.cpp:251
 msgid " participle"
-msgstr "participe"
+msgstr " participe"
 
 #: ../src/robinson.cpp:283
 msgid "adjective"
@@ -6986,7 +6975,7 @@ msgstr "adjectif"
 
 #: ../src/robinson.cpp:296
 msgid "adverb or adverb and particle combined"
-msgstr "Adverbe ou adverbe et particule combinée"
+msgstr "adverbe ou adverbe et particule combinée"
 
 #: ../src/robinson.cpp:302
 msgid "indeclinable Aramaic transliterated word"
@@ -7046,7 +7035,7 @@ msgstr "particule, particule disjonctive"
 
 #: ../src/robinson.cpp:424
 msgid "correlative or interrogative pronoun"
-msgstr "Pronom corrélatif ou interrogatif"
+msgstr "pronom corrélatif ou interrogatif"
 
 #: ../src/robinson.cpp:433
 msgid "relative pronoun"
@@ -7074,11 +7063,11 @@ msgstr "Ne peut trouver le programme \""
 
 #: ../src/runtime.cpp:40
 msgid "\". Install package "
-msgstr "\". Isntaller le paquet"
+msgstr "\". Installer le paquet "
 
 #: ../src/runtime.cpp:40
 msgid " to resolve this."
-msgstr "pour résoudre cela."
+msgstr " pour résoudre cela."
 
 #: ../src/scripts.cpp:31
 msgid "straight through"
@@ -7086,7 +7075,7 @@ msgstr "directement par"
 
 #: ../src/scripts.cpp:146
 msgid "Error in script "
-msgstr "Erreur dans le script"
+msgstr "Erreur dans le script "
 
 #: ../src/scripts.cpp:195
 msgid "Can't read script file"
@@ -7106,7 +7095,7 @@ msgstr "La validation de l'UTF-8 a échoué"
 
 #: ../src/scripts.cpp:326
 msgid "Sed rules"
-msgstr "règles Sed"
+msgstr "Règles Sed"
 
 #: ../src/scripts.cpp:329
 msgid "TECkit mapping"
@@ -7215,7 +7204,7 @@ msgstr " : mise à jour des statistiques"
 
 #: ../src/statistics.cpp:91
 msgid " creating"
-msgstr "création"
+msgstr " création"
 
 #: ../src/style.cpp:40 ../src/style.cpp:82
 msgid "Unified Standard Format Marker"
@@ -7287,7 +7276,7 @@ msgstr "non"
 
 #: ../src/tiny_utilities.cpp:201
 msgid "Using non-standard datafolder "
-msgstr "Utilisation d'un dossier de données non standard"
+msgstr "Utilisation d'un dossier de données non standard "
 
 #: ../src/tiny_utilities.cpp:205
 msgid "This data folder has no name. Resetting to "
@@ -7302,7 +7291,7 @@ msgstr ""
 
 #: ../src/urltransport.cpp:149
 msgid "Webserver Access: "
-msgstr "Accès au serveur web :"
+msgstr "Accès au serveur web : "
 
 #: ../src/usfm2osis.cpp:157
 #, c-format
@@ -7325,7 +7314,7 @@ msgstr "Traitement en cours"
 
 #: ../src/usfm2text.cpp:1578 ../src/usfm2xetex.cpp:1622
 msgid "Picture does not exist: "
-msgstr "L'image n'existe pas :"
+msgstr "L'image n'existe pas : "
 
 #: ../src/usfmstandard.cpp:43
 msgid "Can't find USFM standard file"
@@ -7401,15 +7390,15 @@ msgstr "Styles non standard"
 
 #: ../src/usfmtools.cpp:821
 msgid " - a book identifier"
-msgstr "- un identifiant de livre"
+msgstr " - un identifiant de livre"
 
 #: ../src/usfmtools.cpp:824
 msgid " - a chapter number"
-msgstr "- un numéro de chapitre"
+msgstr " - un numéro de chapitre"
 
 #: ../src/usfmtools.cpp:827
 msgid " - a verse number"
-msgstr "- un numéro de verset"
+msgstr " - un numéro de verset"
 
 #: ../src/usfmtools.cpp:831
 msgid ""
@@ -7423,31 +7412,27 @@ msgstr ""
 
 #: ../src/utilities.cpp:794 ../src/utilities.cpp:837
 msgid "Error opening file "
-msgstr "Erreur durant l'ouverture du fichier"
+msgstr "Erreur durant l'ouverture du fichier "
 
 #: ../src/utilities.cpp:795 ../src/utilities.cpp:838
-#, fuzzy
 msgid "error opening file"
-msgstr "Erreur durant l'ouverture du fichier"
+msgstr "erreur durant l'ouverture du fichier"
 
 #: ../src/utilities.cpp:830
-#, fuzzy
 msgid "Could not open file "
-msgstr "Échec de la décompression du fichier"
+msgstr "N'a pas pu pas ouvrir le fichier "
 
 #: ../src/utilities.cpp:842
-#, fuzzy
 msgid "Error reading all bytes in file "
-msgstr "Une erreur est survenue durant la lecture du fichier xml"
+msgstr "Erreur de lecture des bits dans le fichier "
 
 #: ../src/utilities.cpp:843
-#, fuzzy
 msgid "error reading all bytes in file"
-msgstr "Une erreur est survenue durant la lecture du fichier xml"
+msgstr "erreur de lecture des bits dans le fichier"
 
 #: ../src/utilities.cpp:867
 msgid "Error creating file "
-msgstr "Erreur durant la création du fichier"
+msgstr "Erreur durant la création du fichier "
 
 #: ../src/widgetdate.cpp:70
 msgid "Time"
@@ -7483,16 +7468,16 @@ msgstr ""
 
 #: ../src/windowcheckkeyterms.cpp:112 ../src/windowtabbed.cpp:126
 msgid "Rendering"
-msgstr "Rendu"
+msgstr "Interprétation"
 
 #: ../src/windowcheckkeyterms.cpp:146 ../src/windowcheckkeyterms.cpp:461
 #: ../src/windowtabbed.cpp:322 ../src/windowtabbed.cpp:631
 msgid "keyterm "
-msgstr "Mot clé"
+msgstr "mot-clé "
 
 #: ../src/windowcheckkeyterms.cpp:373 ../src/windowtabbed.cpp:549
 msgid "<Enter new rendering here>"
-msgstr "<Entrez un nouveau rendu ici>"
+msgstr "<Entrez une nouvelle interprétation ici>"
 
 #: ../src/windowcheckkeyterms.cpp:498 ../src/windowtabbed.cpp:666
 msgid "Biblical"
@@ -7514,9 +7499,8 @@ msgstr ""
 "christopher_samuel@sil.org."
 
 #: ../src/windowcheckkeyterms.cpp:554 ../src/windowcheckkeyterms.cpp:673
-#, fuzzy
 msgid "[Index]"
-msgstr "Index"
+msgstr "[Index]"
 
 #: ../src/windowcheckkeyterms.cpp:556 ../src/windowcheckkeyterms.cpp:675
 #: ../src/windowtabbed.cpp:718
@@ -7557,7 +7541,7 @@ msgstr ""
 
 #: ../src/windowcheckusfm.cpp:389
 msgid "Inactive. To activate, open or focus a project, and view the USFM code."
-msgstr "Inactif. Pour l'activer ouvrez un projet et affichez le code USFM"
+msgstr "Inactif. Pour l'activer ouvrez un projet et affichez le code USFM."
 
 #: ../src/windowcheckusfm.cpp:399
 msgid "There is no text. Put text into the editor"
@@ -7590,7 +7574,7 @@ msgstr "Ce verset "
 
 #: ../src/windowcheckusfm.cpp:503
 msgid " is out of sequence"
-msgstr "est hors série"
+msgstr " est hors série"
 
 #: ../src/windowcheckusfm.cpp:519
 msgid "Verses that are not at the start of a line: "
@@ -7602,7 +7586,7 @@ msgstr "Tout semble correct."
 
 #: ../src/windowdata.cpp:90
 msgid "WindowData object "
-msgstr "Objet WindowData"
+msgstr "Objet WindowData "
 
 #: ../src/windoweditor.cpp:436
 msgid "Style "
@@ -7708,7 +7692,7 @@ msgstr " ont été copiés dans le projet "
 
 #: ../src/windowmerge.cpp:909
 msgid "Changes approval, "
-msgstr "Modifications à approuver"
+msgstr "Modifications à approuver, "
 
 #: ../src/windowmerge.cpp:923
 msgid "The chapters are ready for approving the individual changes"
@@ -7802,7 +7786,7 @@ msgstr "Références cachées"
 msgid ""
 "of references and comments that will never be shown in the reference area."
 msgstr ""
-" de références et de commentaires qui ne doivent jamais être montrés dans la "
+"de références et de commentaires qui ne doivent jamais être montrés dans la "
 "fenêtre de références."
 
 #: ../src/windowreferences.cpp:639
@@ -7921,7 +7905,7 @@ msgstr "Ne peut se connecter aux fenêtres d'avant-poste"
 
 #: ../src/windowsoutpost.cpp:535
 msgid "Outpost opens "
-msgstr "L'avant-poste ouvre"
+msgstr "L'avant-poste ouvre "
 
 #: ../src/windowstyles.cpp:389
 msgid "Recently Used"
@@ -7993,11 +7977,11 @@ msgstr "Entrées unique : "
 
 #: ../src/wordlist.cpp:180
 msgid "Word list inserted in "
-msgstr "Liste de mots insérée dans"
+msgstr "Liste de mots insérée dans "
 
 #: ../src/wordlist.cpp:183
 msgid "Invalid word list location in "
-msgstr "Liste de mot invalide située dans"
+msgstr "Liste de mot invalide située dans "
 
 #: ../src/wordlist.cpp:191
 msgid "No place found to insert the word list"
@@ -8067,7 +8051,7 @@ msgstr "% Impression recto verso"
 
 #: ../src/xetex.cpp:147
 msgid "Font mapping file "
-msgstr "Fichier de l'organisation des polices"
+msgstr "Fichier de l'organisation des polices "
 
 #: ../src/xetex.cpp:147
 msgid " should have the .tec suffix - ignoring this file"
@@ -8198,7 +8182,7 @@ msgstr "% Appelants numériques pour \\"
 #: ../src/xetex.cpp:282 ../src/xetex.cpp:287 ../src/xetex.cpp:316
 #: ../src/xetex.cpp:321
 msgid " notes"
-msgstr "notes"
+msgstr " notes"
 
 #: ../src/xetex.cpp:287
 #, no-c-format
@@ -8236,7 +8220,7 @@ msgstr ""
 #: ../src/xetex.cpp:390
 msgid "All the data for this document is available in temporal folder "
 msgstr ""
-"Toutes les données de ce document sont disponible dans un dossier temporaire"
+"Toutes les données de ce document sont disponible dans un dossier temporaire "
 
 #: ../src/xetex.cpp:391
 msgid ""
@@ -8456,7 +8440,7 @@ msgstr "<tout>"
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:254
 msgid "Keep all parallel verses together on the page"
-msgstr "Garder ensemble tous les versets parallèles sur la page "
+msgstr "Garder ensemble tous les versets parallèles sur la page"
 
 #: ../templates/gtkbuilder.parallelbibledialog.xml:269
 msgid "Include verses 0"
@@ -8480,7 +8464,7 @@ msgstr "Tâches planifiées du projet"
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:7
 msgid "Planning Setup"
-msgstr "Paramètres du programme "
+msgstr "Paramètres du programme"
 
 #: ../templates/gtkbuilder.planningsetupdialog.xml:28
 msgid "Durations"
@@ -8517,7 +8501,7 @@ msgid ""
 "(example: http://localhost/bibledit)"
 msgstr ""
 "Bibledit-Web URL locale ou  d'un site Web distant :\n"
-"(exemple : http:// ocalhost/bibledit)"
+"(exemple : http://localhost/bibledit)"
 
 #: ../templates/gtkbuilder.referenceexchangedialog.xml:50
 msgid ""
@@ -8633,7 +8617,7 @@ msgstr "date de création"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:378
 msgid "created by"
-msgstr "Créée par"
+msgstr "créée par"
 
 #: ../templates/gtkbuilder.showprojectnotesdialog.xml:404
 #: ../templates/stylesheet.xml:2270
@@ -8742,1420 +8726,1383 @@ msgstr "_Se souvenir de mon choix durant cette session"
 
 #: ../templates/stylesheet.xml:5 ../templates/stylesheet.xml:1153
 msgid "Major Title Level 2"
-msgstr ""
+msgstr "Titre principal de niveau 2"
 
 #: ../templates/stylesheet.xml:6
-#, fuzzy
 msgid "Introduction major title, level 2"
-msgstr "Introduction : Autres éléments"
+msgstr "Titre principal d'introduction, niveau 2"
 
 #: ../templates/stylesheet.xml:36
 msgid "Margin, No First Line Indent"
-msgstr ""
+msgstr "Marge pas de retrait de la première ligne"
 
 #: ../templates/stylesheet.xml:37
 msgid "Paragraph text, with no first line indent (may occur after poetry)"
 msgstr ""
+"Texte de paragraphe, sans retrait de première ligne (peut arriver après de "
+"le poésie)"
 
 #: ../templates/stylesheet.xml:67
 msgid "* Secondary Language or Text Source"
-msgstr ""
+msgstr "* Langue secondaire ou texte source"
 
 #: ../templates/stylesheet.xml:68
 msgid ""
 "To represent where the original text is in a secondary language or from an "
 "alternate text source"
 msgstr ""
+"Pour signifier où se trouve le texte original dans une langue secondaire ou "
+"bien dans un autre texte source"
 
 #: ../templates/stylesheet.xml:98
-#, fuzzy
 msgid "* Endnote"
-msgstr "Notes de fin"
+msgstr "* Notes de fin"
 
 #: ../templates/stylesheet.xml:99
 msgid "An Endnote text item."
-msgstr ""
+msgstr "Un élément texte de note de fin."
 
 #: ../templates/stylesheet.xml:129
-#, fuzzy
 msgid "Table of Contents"
-msgstr "débute la table des matières"
+msgstr "Table des matières"
 
 #: ../templates/stylesheet.xml:130
-#, fuzzy
 msgid "Front matter table of contents."
-msgstr "débute la table des matières"
+msgstr "Table des matières dans l'avant-propos."
 
 #: ../templates/stylesheet.xml:160
-#, fuzzy
 msgid "Outline Level 2"
-msgstr "Plan"
+msgstr "Plan niveau 2"
 
 #: ../templates/stylesheet.xml:161
-#, fuzzy
 msgid "Introduction outline text, level 2"
-msgstr "Introduction : Autres éléments"
+msgstr "Texte de plan d'introduction, niveau 2"
 
 #: ../templates/stylesheet.xml:191 ../templates/stylesheet.xml:192
 msgid "Closure of an Epistle"
-msgstr ""
+msgstr "Conclusion d'une épître"
 
 #: ../templates/stylesheet.xml:222
-#, fuzzy
 msgid "* Small Caps"
-msgstr "Petite_s capitales"
+msgstr "* Petites capitales"
 
 #: ../templates/stylesheet.xml:223
 msgid "A character style, for small capitalization text"
-msgstr ""
+msgstr "Style de caractère, pour texte en petite capitale"
 
 #: ../templates/stylesheet.xml:253
-#, fuzzy
 msgid "Paragraph Mark"
-msgstr "Paragraphes"
+msgstr "Balise de paragraphe"
 
 #: ../templates/stylesheet.xml:254
 msgid "(*) A Footnote additional paragraph marker."
-msgstr ""
+msgstr "(*) Une balise paragraphe supplémentaire de note de bas de page."
 
 #: ../templates/stylesheet.xml:284
 msgid "* Emphasized Text"
-msgstr ""
+msgstr "* Texte mis en relief"
 
 #: ../templates/stylesheet.xml:285
 msgid "A character style, use emphasized text style"
-msgstr ""
+msgstr "Style de caractère, utilise le style de texte mis en relief"
 
 #: ../templates/stylesheet.xml:315
-#, fuzzy
 msgid "* Footnote Mark"
-msgstr "Notes de bas de page"
+msgstr "* Balise de notes de bas de page"
 
 #: ../templates/stylesheet.xml:316
 msgid "An additional footnote marker location for a previous footnote."
 msgstr ""
+"Un emplacement de balise de note de bas de page supplémentaire pour une note "
+"de bas de page précédente."
 
 #: ../templates/stylesheet.xml:346 ../templates/stylesheet.xml:2115
-#, fuzzy
 msgid "Poetry Level 1"
-msgstr "Éléments poétique"
+msgstr "Poésie de niveau 1"
 
 #: ../templates/stylesheet.xml:347
 msgid "Introduction poetry text, level 1 (if single level)"
-msgstr ""
+msgstr "Texte d'introduction poétique, niveau 1 (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:377
-#, fuzzy
 msgid "* Bold Text"
-msgstr "Organiser le texte"
+msgstr "* Texte en gras"
 
 #: ../templates/stylesheet.xml:378
 msgid "A character style, use bold text"
-msgstr ""
+msgstr "Style de caractère en gras"
 
 #: ../templates/stylesheet.xml:408 ../templates/stylesheet.xml:967
 msgid "Blank Line"
-msgstr ""
+msgstr "Ligne blanche"
 
 #: ../templates/stylesheet.xml:409
 msgid ""
 "May be used to explicitely indicate additional white space between "
 "paragraphs. Poetry text stanza break (e.g. stanza break)"
 msgstr ""
+"Peut être utilisé pour indiquer explicitement un espace blanc supplémentaire "
+"entre les paragraphes ( par ex. une strophe de poésie)"
 
 #: ../templates/stylesheet.xml:440
-#, fuzzy
 msgid "Publication Data"
-msgstr "débute la publication des données"
+msgstr "Données de publication"
 
 #: ../templates/stylesheet.xml:441
-#, fuzzy
 msgid "Front matter publication data."
-msgstr "débute la publication des données"
+msgstr "Données de publication dans l'introduction principale."
 
 #: ../templates/stylesheet.xml:471
-#, fuzzy
 msgid "Paragraph"
-msgstr "Paragraphes"
+msgstr "Paragraphe"
 
 #: ../templates/stylesheet.xml:472
-#, fuzzy
 msgid "Introduction prose paragraph"
-msgstr "Introduction : Paragraphes et poésie"
+msgstr "Paragraphe d'introduction en prose"
 
 #: ../templates/stylesheet.xml:502 ../templates/stylesheet.xml:1867
 msgid "Indented, Level 1, First Line Indent"
-msgstr ""
+msgstr "Avec retrait de niveau 1, retrait de la première ligne"
 
 #: ../templates/stylesheet.xml:503
 msgid ""
 "Paragraph text, level 1 indent (if sinlge level), with first line indent; "
 "often used for discourse"
 msgstr ""
+"Texte de paragraphe niveau 1 avec retrait (si un seul niveau), avec "
+"indentation de première ligne ; souvent utilisé pour le discours"
 
 #: ../templates/stylesheet.xml:533
-#, fuzzy
 msgid "Preface"
-msgstr "Préférences"
+msgstr "Préface"
 
 #: ../templates/stylesheet.xml:534
-#, fuzzy
 msgid "Front matter preface."
-msgstr "Introduction principale"
+msgstr "Préface."
 
 #: ../templates/stylesheet.xml:564
 msgid "Spine"
-msgstr ""
+msgstr "Quatrième de couverture"
 
 #: ../templates/stylesheet.xml:565
-#, fuzzy
 msgid "Other peripheral materials - spine."
-msgstr "Éléments externes"
+msgstr "Autre éléments périphériques - quatrième de couverture."
 
 #: ../templates/stylesheet.xml:595 ../templates/stylesheet.xml:2549
-#, fuzzy
 msgid "Section Heading Level 2"
-msgstr "est un en-tête de section"
+msgstr "Titre de section niveau 2"
 
 #: ../templates/stylesheet.xml:596
-#, fuzzy
 msgid "Introduction section heading, level 2"
-msgstr "Introduction : Titres et en-têtes"
+msgstr "Titre de section d'introduction de niveau 2"
 
 #: ../templates/stylesheet.xml:626
 msgid "Paragraph, quote from text"
-msgstr ""
+msgstr "Paragraphe, texte comme citation"
 
 #: ../templates/stylesheet.xml:627
 msgid "Introduction prose paragraph, quote from the body text"
-msgstr ""
+msgstr "Paragraphe d'introduction en prose, cité depuis le corps de texte"
 
 #: ../templates/stylesheet.xml:657
-#, fuzzy
 msgid "Cover"
-msgstr "Proverbes"
+msgstr "Couverture"
 
 #: ../templates/stylesheet.xml:658
-#, fuzzy
 msgid "Other peripheral materials - cover."
-msgstr "Éléments externes"
+msgstr "Autre éléments périphériques - couverture."
 
 #: ../templates/stylesheet.xml:688
 msgid "Front/Back Matter Paragraph Level 2"
-msgstr ""
+msgstr "Paragraphe d'introduction et de conclusion de niveau 2"
 
 #: ../templates/stylesheet.xml:689
 msgid "Front or back matter text paragraph, level 2 (if multiple levels)"
 msgstr ""
+"Paragraphe d'introduction ou de conclusion de niveau 2 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:719
 msgid "Indented Paragraph, first line indent"
-msgstr ""
+msgstr "Paragraphe en retrait, avec retrait de première ligne"
 
 #: ../templates/stylesheet.xml:720
 msgid "Introduction prose paragraph, indented, with first line indent"
 msgstr ""
+"Texte d'introduction de paragraphe en prose, en retrait et abec retrait de "
+"première ligne"
 
 #: ../templates/stylesheet.xml:750
 msgid "Indented, Level 3, First Line Indent"
-msgstr ""
+msgstr "Avec retrait de niveau 3, retrait de la première ligne"
 
 #: ../templates/stylesheet.xml:751
 msgid ""
 "Paragraph text, level 3 indent, with first line indent; often used for "
 "discourse"
 msgstr ""
+"Texte de paragraphe niveau 3 avec retrait, avec indentation de première "
+"ligne ; souvent utilisé pour le discours"
 
 #: ../templates/stylesheet.xml:781
-#, fuzzy
 msgid "Section Heading Level 4"
-msgstr "est un en-tête de section"
+msgstr "Titre de section niveau 4"
 
 #: ../templates/stylesheet.xml:782
-#, fuzzy
 msgid "A section heading, level 4"
-msgstr "est un en-tête de section"
+msgstr "Un titre de section de niveau 4"
 
 #: ../templates/stylesheet.xml:812
 msgid "[Uncommon] Major Title Ending Level 2"
-msgstr ""
+msgstr "[Inhabituel] Titre principal de niveau 2 fermant"
 
 #: ../templates/stylesheet.xml:813
 msgid "A secondary title occurring before or after the 'ending' main title"
 msgstr ""
+"Un titre secondaire apparaissant avant ou après le titre principal 'fermant'"
 
 #: ../templates/stylesheet.xml:843 ../templates/stylesheet.xml:1898
 msgid "Major Section Level 1"
-msgstr ""
+msgstr "Section principale niveau 1"
 
 #: ../templates/stylesheet.xml:844
 msgid "A major section division heading, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Titre majeur de division de section de niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:874
-#, fuzzy
 msgid "Right Running Header"
-msgstr "est un en-tête courant"
+msgstr "Titre courant droit"
 
 #: ../templates/stylesheet.xml:875
-#, fuzzy
 msgid "Running header text, right side of page"
-msgstr "Imprimer dans l'en-tête en cours d'exécution de la page de droite"
+msgstr "Texte d'en-tête courant, page de droite"
 
 #: ../templates/stylesheet.xml:905 ../templates/stylesheet.xml:1557
-#, fuzzy
 msgid "Outline Level 1"
-msgstr "Plan"
+msgstr "Plan niveau 1"
 
 #: ../templates/stylesheet.xml:906
 msgid "Introduction outline text, level 1 (if single level)"
-msgstr ""
+msgstr "Texte de plan d'introduction, niveau 1 (si un niveau)"
 
 #: ../templates/stylesheet.xml:936
-#, fuzzy
 msgid "Outline References Range"
-msgstr "Gestion des références bibliques"
+msgstr "Plan plage de références"
 
 #: ../templates/stylesheet.xml:937
 msgid ""
 "Introduction references range for outline entry; for marking references "
 "separately"
 msgstr ""
+"Entrée de plage de références du plan d'introduction ; pour marquer les "
+"références séparément"
 
 #: ../templates/stylesheet.xml:968
-#, fuzzy
 msgid "Introduction blank line"
-msgstr "Introduction : Titres et en-têtes"
+msgstr "Ligne blanche dans l'introduction"
 
 #: ../templates/stylesheet.xml:998
 msgid "* DC Target Refs"
-msgstr ""
+msgstr "* Refs cibles pour les DC"
 
 #: ../templates/stylesheet.xml:999
 msgid "Cross-reference target reference(s), Apocrypha only."
 msgstr ""
+"Référence croisée de(s) référence(s) cible(s), uniquement pour les "
+"apocryphes."
 
 #: ../templates/stylesheet.xml:1029
-#, fuzzy
 msgid "Chapter Number"
 msgstr "Numéro de chapitre"
 
 #: ../templates/stylesheet.xml:1060
 msgid "Paragraph, no first line indent"
-msgstr ""
+msgstr "Paragraphe, sans retrait de première ligne"
 
 #: ../templates/stylesheet.xml:1061
 msgid ""
 "Introduction prose paragraph, with no first line indent (may occur after "
 "poetry)"
 msgstr ""
+"Texte de paragraphe d'introduction en prose, sans retrait de première ligne "
+"(peut arriver après de le poésie)"
 
 #: ../templates/stylesheet.xml:1091
 msgid "List Entry Level 2"
-msgstr ""
+msgstr "Rubrique de liste niveau 2"
 
 #: ../templates/stylesheet.xml:1092
 msgid "A list entry, level 2"
-msgstr ""
+msgstr "Une rubrique de liste niveau 2"
 
 #: ../templates/stylesheet.xml:1122
 msgid "List Entry Level 4"
-msgstr ""
+msgstr "Rubrique de liste de niveau 4"
 
 #: ../templates/stylesheet.xml:1123
 msgid "A list entry, level 4"
-msgstr ""
+msgstr "Une rubrique de liste, niveau 4"
 
 #: ../templates/stylesheet.xml:1154
 msgid "A secondary title with less important information than the main title."
 msgstr ""
+"Un titre secondaire, avec des informations moins important que le titre "
+"principal."
 
 #: ../templates/stylesheet.xml:1184
-#, fuzzy
 msgid "Publication Information"
-msgstr "Informations d'identification"
+msgstr "Informations de publication"
 
 #: ../templates/stylesheet.xml:1185
 msgid ""
 "Publication information - Lang,Credit,Version,Copies,Publisher,Id,Logo Not "
 "yet supported in Bibledit."
 msgstr ""
+"Inforamation de publication - Lang,Crédit,Version,Copies,Éditeur,Id,Logo, "
+"pas encore supporté par Bibledit."
 
 #: ../templates/stylesheet.xml:1216
-#, fuzzy
 msgid "Section Heading Range References"
-msgstr "Imprimer les références parallèles"
+msgstr "Titre de section de plage de références"
 
 #: ../templates/stylesheet.xml:1217
 msgid "A section division references range heading"
-msgstr ""
+msgstr "Titre de division de section de plage de références"
 
 #: ../templates/stylesheet.xml:1247
-#, fuzzy
 msgid "Outline Title"
-msgstr "Plan"
+msgstr "Titre de plan"
 
 #: ../templates/stylesheet.xml:1248
-#, fuzzy
 msgid "Introduction outline title"
-msgstr "Introduction : Autres éléments"
+msgstr "Introduction titre de plan"
 
 #: ../templates/stylesheet.xml:1278
-#, fuzzy
 msgid "* Cross Reference"
-msgstr "Références croisées"
+msgstr "* Référence croisée"
 
 #: ../templates/stylesheet.xml:1279
-#, fuzzy
 msgid "A list of cross references."
-msgstr "est une référence"
+msgstr "Une liste de références croisées."
 
 #: ../templates/stylesheet.xml:1309
 msgid "Acrostic Heading/Marker"
-msgstr ""
+msgstr "Titre/marque acrostiche"
 
 #: ../templates/stylesheet.xml:1310
 msgid "Poetry text, Acrostic marker/heading"
-msgstr ""
+msgstr "Texte de poésie, balise d'acrostiche ou de titre"
 
 #: ../templates/stylesheet.xml:1340 ../templates/stylesheet.xml:2487
 #: ../templates/stylesheet.xml:4223 ../templates/stylesheet.xml:4316
-#, fuzzy
 msgid "Section Heading Level 1"
-msgstr "est un en-tête de section"
+msgstr "Titre de section niveau 1"
 
 #: ../templates/stylesheet.xml:1341
 msgid "Introduction section heading, level 1 (if single level)"
-msgstr ""
+msgstr "Titre de section d'introduction, niveau 1 (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:1371
-#, fuzzy
 msgid "Right Aligned"
-msgstr "Marge de _droite"
+msgstr "Aligné à droite"
 
 #: ../templates/stylesheet.xml:1372
 msgid "Poetry text, Right Aligned"
-msgstr ""
+msgstr "Texte de poésie aligné à droite"
 
 #: ../templates/stylesheet.xml:1402 ../templates/stylesheet.xml:2425
 msgid "Major Title Level 3"
-msgstr ""
+msgstr "Titre principal de niveau 3"
 
 #: ../templates/stylesheet.xml:1403
-#, fuzzy
 msgid "Introduction major title, level 3"
-msgstr "Introduction : Autres éléments"
+msgstr "Titre principal d'introduction niveau 3"
 
 #: ../templates/stylesheet.xml:1433
 msgid "* Translational Addition"
-msgstr ""
+msgstr "* Addition translationnelle"
 
 #: ../templates/stylesheet.xml:1434
 msgid "For a translational addition to the text"
-msgstr ""
+msgstr "Pour une addition translationnelle dans le texte"
 
 #: ../templates/stylesheet.xml:1464
-#, fuzzy
 msgid "* Footnote"
-msgstr "Notes de bas de page"
+msgstr "* Notes de bas de page"
 
 #: ../templates/stylesheet.xml:1465
 msgid "A Footnote text item."
-msgstr ""
+msgstr "Un élément texte de note de bas de page."
 
 #: ../templates/stylesheet.xml:1495
-#, fuzzy
 msgid "Chapter Description"
-msgstr "Description"
+msgstr "Description de chapitre"
 
 #: ../templates/stylesheet.xml:1496
 msgid "Chapter Description (Publishing option D, e.g. in Russian Bibles)"
 msgstr ""
+"Description de chapitre (Option de publication D, par exemple dans les "
+"Bibles russes)."
 
 #: ../templates/stylesheet.xml:1526
-#, fuzzy
 msgid "Embedded Verse Number"
-msgstr "Numéro de verset"
+msgstr "Numéro de verset incorporé"
 
 #: ../templates/stylesheet.xml:1527
 msgid "(*) A verse number within the footnote text."
-msgstr ""
+msgstr "(*) Un numéro de verset dans le texte de la note de bas de page."
 
 #: ../templates/stylesheet.xml:1558
 msgid "Introduction outline text, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Texte de plan d'introduction, niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:1588
 msgid "Embedded Text, Indent Level 2"
-msgstr ""
+msgstr "Texte incorporé, avec retrait niveau 2"
 
 #: ../templates/stylesheet.xml:1589
 msgid "Poetry text, embedded, level 2 indent"
-msgstr ""
+msgstr "Texte de poésie incorporé, avec retrait de niveau 2"
 
 #: ../templates/stylesheet.xml:1619
 msgid "Major Section Level 2"
-msgstr ""
+msgstr "Section principale de niveau 2"
 
 #: ../templates/stylesheet.xml:1620
 msgid "A major section division heading, level 2"
-msgstr ""
+msgstr "Titre majeur de division de section de niveau 2"
 
 #: ../templates/stylesheet.xml:1650
 msgid "Indented, No First Line Indent"
-msgstr ""
+msgstr "Avec retrait, sans retrait de première ligne"
 
 #: ../templates/stylesheet.xml:1651
 msgid ""
 "Paragraph text, indented, with no first line indent; often used for discourse"
 msgstr ""
+"Texte de paragraphe, en retrait, sans retrait de première ligne, souvent "
+"utilisé pour le discours"
 
 #: ../templates/stylesheet.xml:1681
-#, fuzzy
 msgid "Outline Level 3"
-msgstr "Plan"
+msgstr "Plan niveau 3"
 
 #: ../templates/stylesheet.xml:1682
-#, fuzzy
 msgid "Introduction outline text, level 3"
-msgstr "Introduction : Autres éléments"
+msgstr "Introduction texte de plan, niveau 3"
 
 #: ../templates/stylesheet.xml:1712
 msgid "* Keyword"
-msgstr ""
+msgstr "* Mot-clé"
 
 #: ../templates/stylesheet.xml:1713
-#, fuzzy
 msgid "For a keyword"
-msgstr "Tri par _mot"
+msgstr "Pour un mot-clé"
 
 #: ../templates/stylesheet.xml:1743 ../templates/stylesheet.xml:2673
-#, fuzzy
 msgid "Running Header"
-msgstr "est un en-tête courant"
+msgstr "Titre courant"
 
 #: ../templates/stylesheet.xml:1744
 msgid "Running header text for a book"
-msgstr ""
+msgstr "Texte du titre courant pour un livre"
 
 #: ../templates/stylesheet.xml:1774
 msgid "* Selah"
-msgstr ""
+msgstr "* Pause"
 
 #: ../templates/stylesheet.xml:1775
 msgid "Poetry text, Selah"
-msgstr ""
+msgstr "Texte de poésie, Pause"
 
 #: ../templates/stylesheet.xml:1805
 msgid "Embedded Text, Indent Level 1, Single Level Only"
-msgstr ""
+msgstr "Texte incorporé avec retrait niveau 1, un seul niveau uniquement"
 
 #: ../templates/stylesheet.xml:1806
 msgid "Poetry text, embedded, level 1 indent (if single level)"
-msgstr ""
+msgstr "Texte de poésie, incorporée, niveau 1 avec retrait (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:1836
 msgid "* Deuterocanonical/LXX Additions"
-msgstr ""
+msgstr "* Deutérocanonique / additions de la LXX"
 
 #: ../templates/stylesheet.xml:1837
 msgid "Deuterocanonical/LXX additions or insertions in the Protocanonical text"
 msgstr ""
+"Deutérocanonique / additions ou insertions de la LXX dans le texte "
+"protocanonique"
 
 #: ../templates/stylesheet.xml:1868
 msgid ""
 "Paragraph text, level 1 indent (if multiple levels), with first line indent; "
 "often used for discourse"
 msgstr ""
+"Texte de paragraphe niveau 1 avec retrait (si un plusieurs niveaux), avec "
+"indentation de première ligne ; souvent utilisé pour le discours"
 
 #: ../templates/stylesheet.xml:1899
 msgid "A major section division heading, level 1 (if single level)"
-msgstr ""
+msgstr "Titre majeur de division de section de niveau 1 (si un unique niveau)"
 
 #: ../templates/stylesheet.xml:1929
 msgid "* Figure/Illustration/Map"
-msgstr ""
+msgstr "Image / illustration / carte"
 
 #: ../templates/stylesheet.xml:1930
 msgid "Illustration [Columns to span, height, filename, caption text]"
 msgstr ""
+"Illustration [colonnes à étendre, hauteur, nom de fichier, texte de légende]"
 
 #: ../templates/stylesheet.xml:1960
-#, fuzzy
 msgid "Outline Level 4"
-msgstr "Plan"
+msgstr "Plan niveau 4"
 
 #: ../templates/stylesheet.xml:1961
-#, fuzzy
 msgid "Introduction outline text, level 4"
-msgstr "Introduction : Autres éléments"
+msgstr "Introduction texte de plan, niveau 4"
 
 #: ../templates/stylesheet.xml:1991
 msgid "Front/Back Matter Paragraph Level 1"
-msgstr ""
+msgstr "Paragraphe d'introduction et de conclusion de niveau 1"
 
 #: ../templates/stylesheet.xml:1992
 msgid "Front or back matter text paragraph, level 1 (if multiple levels)"
 msgstr ""
+"Texte de paragraphe d'introduction ou de conclusion de niveau 1 (si "
+"plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:2022
-#, fuzzy
 msgid "* Italic Text"
-msgstr "_Italique"
+msgstr "* Texte en italique"
 
 #: ../templates/stylesheet.xml:2023
 msgid "A character style, use italic text"
-msgstr ""
+msgstr "Style de caractère en italique"
 
 #: ../templates/stylesheet.xml:2054
 msgid "(*) A cross-reference quotation from the scripture text."
-msgstr ""
+msgstr "(*) Une citation de référence croisée du texte de l'Écriture."
 
 #: ../templates/stylesheet.xml:2084
 msgid "* Acrostic Letter"
-msgstr ""
+msgstr "* Lettre acrostiche"
 
 #: ../templates/stylesheet.xml:2085
 msgid ""
 "Poetry text, Acrostic markup of the first character of a line of acrostic "
 "poetry"
 msgstr ""
+"Texte de poésie, balisage acrostiche du premier caractère d'une ligne de "
+"poésie acrostiche"
 
 #: ../templates/stylesheet.xml:2116
 msgid "Introduction poetry text, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Texte d'introduction poétique, niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:2146
-#, fuzzy
 msgid "Origin Reference"
-msgstr "Imprimer les références"
+msgstr "Référence d'origine"
 
 #: ../templates/stylesheet.xml:2147
 msgid "(*) The cross reference origin reference."
-msgstr ""
+msgstr "(*) Référence d'origine de la référence croisée."
 
 #: ../templates/stylesheet.xml:2177
 msgid "* Proper Name"
-msgstr ""
+msgstr "* Nom propre"
 
 #: ../templates/stylesheet.xml:2178
-#, fuzzy
 msgid "For a proper name"
-msgstr "Nom du nouveau projet"
+msgstr "Pour un nom propre"
 
 #: ../templates/stylesheet.xml:2208
-#, fuzzy
 msgid "Reference"
 msgstr "Références"
 
 #: ../templates/stylesheet.xml:2209
 msgid "(*) The origin reference for the footnote."
-msgstr ""
+msgstr "(*) Référence d'origine de la note de bas de page."
 
 #: ../templates/stylesheet.xml:2239
 msgid "* Ordinal number text portion"
-msgstr ""
+msgstr "* Portion de texte d'adjectif numéral ordinal"
 
 #: ../templates/stylesheet.xml:2240
 msgid "For the text portion of an ordinal number"
-msgstr ""
+msgstr "Pour la partie de texte d'un adjectif numéral ordinal"
 
 #: ../templates/stylesheet.xml:2271
 msgid "(*) Footnote text."
-msgstr ""
+msgstr "(*) Texte de note de bas de page."
 
 #: ../templates/stylesheet.xml:2301
 msgid "Quotation or Alternate Rendering"
-msgstr ""
+msgstr "Citation ou autre interprétation"
 
 #: ../templates/stylesheet.xml:2302
 msgid "(*) A footnote scripture quote."
-msgstr ""
+msgstr "(*) Citation scripturaire dans une note de bas de page."
 
 #: ../templates/stylesheet.xml:2332
 msgid "Indented Paragraph, no first line indent"
-msgstr ""
+msgstr "Paragraphe en retrait, sans retrait de première ligne"
 
 #: ../templates/stylesheet.xml:2333
 msgid "Introduction prose paragraph text, indented, with no first line indent"
 msgstr ""
+"Texte d'introduction de paragraphe en prose, avec retrait et sans retrait de "
+"première ligne"
 
 #: ../templates/stylesheet.xml:2363
 msgid "Major Title level 4"
-msgstr ""
+msgstr "Titre principal de niveau 4"
 
 #: ../templates/stylesheet.xml:2364
 msgid "A small secondary title sometimes occuring within parentheses"
-msgstr ""
+msgstr "Un petit titre secondaire apparaissant parfois entre parenthèses"
 
 #: ../templates/stylesheet.xml:2394
-#, fuzzy
 msgid "Major Section Range References"
-msgstr "Tri des références : "
+msgstr "Section majeure de la plage de références"
 
 #: ../templates/stylesheet.xml:2395
 msgid "A major section division references range heading"
-msgstr ""
+msgstr "Titre majeur de division de section pour une plage de références"
 
 #: ../templates/stylesheet.xml:2426
 msgid "A secondary title, less important than the main title"
-msgstr ""
+msgstr "Un titre secondaire, moins important que le titre principal"
 
 #: ../templates/stylesheet.xml:2456
-#, fuzzy
 msgid "* Normal Text"
-msgstr "Couleur normale du texte "
+msgstr "* Texte normal"
 
 #: ../templates/stylesheet.xml:2457
 msgid "A character style, use normal text"
-msgstr ""
+msgstr "Style de caractère, utilise le style de texte normal"
 
 #: ../templates/stylesheet.xml:2488
 msgid "Introduction section heading, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Titre de section d'introduction, niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:2518
 msgid "* Quoted Text, OT in NT"
-msgstr ""
+msgstr "* Citation de texte de l'AT dans le NT"
 
 #: ../templates/stylesheet.xml:2519
-#, fuzzy
 msgid "For Old Testament quoted text appearing in the New Testament"
-msgstr ""
-"Citations de l'Ancien Testament dans le Nouveau Testament dans le projet "
+msgstr "Citations de l'Ancien Testament qui apparaît dans le Nouveau Testament"
 
 #: ../templates/stylesheet.xml:2550
 msgid "A section heading, level 2 (e.g. Proverbs 22-24)"
-msgstr ""
+msgstr "Titre de section de niveau 2 (ex. Proverbes 22-24)"
 
 #: ../templates/stylesheet.xml:2580
 msgid "List Entry Level 3"
-msgstr ""
+msgstr "Rubrique de liste de niveau 3"
 
 #: ../templates/stylesheet.xml:2581
 msgid "A list entry, level 3"
-msgstr ""
+msgstr "Une rubrique de liste de niveau 3"
 
 #: ../templates/stylesheet.xml:2611
-#, fuzzy
 msgid "Target References"
-msgstr "Imprimer les références"
+msgstr "Référence cible"
 
 #: ../templates/stylesheet.xml:2612
 msgid "(*) The cross reference target reference(s)."
-msgstr ""
+msgstr "(*) La référence croisée de(s) référence(s) cible(s)"
 
 #: ../templates/stylesheet.xml:2642
 msgid "Embedded Text, Indent Level 1"
-msgstr ""
+msgstr "Texte incorporée avec retrait de niveau 1"
 
 #: ../templates/stylesheet.xml:2643
 msgid "Poetry text, embedded, level 1 indent (if multiple levels)"
-msgstr ""
+msgstr "Texte poétique incorporé de niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:2674
-#, fuzzy
 msgid "Running header text"
-msgstr "est un en-tête courant"
+msgstr "Texte du titre courant"
 
 #: ../templates/stylesheet.xml:2704
 msgid "Embedded Text Refrain"
-msgstr ""
+msgstr "Texte de refrain incorporé"
 
 #: ../templates/stylesheet.xml:2705
 msgid "Embedded text refrain (e.g. Then all the people shall say, \"Amen!\")"
 msgstr ""
+"Texte de refrain incorporé, (par ex. Alors tout le peuple pourra dire, "
+"Amen !)"
 
 #: ../templates/stylesheet.xml:2735
 msgid "Indented, Level 2, First Line Indent"
-msgstr ""
+msgstr "Avec retrait de niveau 2, retrait de la première ligne"
 
 #: ../templates/stylesheet.xml:2736
 msgid ""
 "Paragraph text, level 2 indent, with first line indent; often used for "
 "discourse"
 msgstr ""
+"Texte de paragraphe niveau 2 avec retrait, avec indentation de première "
+"ligne ; souvent utilisé pour le discours"
 
 #: ../templates/stylesheet.xml:2766
 msgid "* Publishing alternate verse"
-msgstr ""
+msgstr "Publication de numéros de versets alternatifs"
 
 #: ../templates/stylesheet.xml:2767
 msgid ""
 "Published verse marker - this is a verse marking that would be used in the "
 "published text."
 msgstr ""
+"Balise de verse pour la publication - ce est un verset signalant qu'il sera "
+"utilisé dans le texte publié."
 
 #: ../templates/stylesheet.xml:2797 ../templates/stylesheet.xml:4037
 msgid "List Entry Level 1"
-msgstr ""
+msgstr "Rubrique de liste de niveau 1"
 
 #: ../templates/stylesheet.xml:2798
 msgid "A list entry, level 1 (if single level)"
-msgstr ""
+msgstr "Rubrique de liste de niveau 1 (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:2828
 msgid "Paragraph, right aligned"
-msgstr ""
+msgstr "Paragraphe aligné à droite"
 
 #: ../templates/stylesheet.xml:2829
-#, fuzzy
 msgid "Introduction prose paragraph, right aligned"
-msgstr "Introduction : Paragraphes et poésie"
+msgstr "Paragraphe d'introduction en prose aligné à droite"
 
 #: ../templates/stylesheet.xml:2859
 msgid "Remark"
-msgstr ""
+msgstr "Remarque"
 
 #: ../templates/stylesheet.xml:2860
-#, fuzzy
 msgid "Comments and remarks"
-msgstr "Espaces et sauts"
+msgstr "Commentaires et remarques"
 
 #: ../templates/stylesheet.xml:2890 ../templates/stylesheet.xml:3603
 #: ../templates/stylesheet.xml:4130 ../templates/stylesheet.xml:4285
 msgid "Major Title Level 1"
-msgstr ""
+msgstr "Titre principal de niveau 1"
 
 #: ../templates/stylesheet.xml:2891
 msgid "Introduction major title, level 1 (if single level)"
-msgstr ""
+msgstr "Titre principal d'introduction, niveau 1 (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:2921
 msgid "Major Title Level 4"
-msgstr ""
+msgstr "Titre principal de niveau 4"
 
 #: ../templates/stylesheet.xml:2922
 msgid "Introduction major title, level 4 (usually within parenthesis)"
 msgstr ""
+"Titre majeur d'introduction de niveau 4 (généralement entre parenthèses)"
 
 #: ../templates/stylesheet.xml:2952
 msgid "Indent Level 1, Single Level Only"
-msgstr ""
+msgstr "Retrait de niveau 1, si uniquement un niveau"
 
 #: ../templates/stylesheet.xml:2953
 msgid "Poetry text, level 1 indent (if single level)"
-msgstr ""
+msgstr "Texte de poésie de niveau 1 avec retrait (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:2983
 msgid "Indent Level 2"
-msgstr ""
+msgstr "Retrait de niveau 2"
 
 #: ../templates/stylesheet.xml:2984
 msgid "Poetry text, level 2 indent"
-msgstr ""
+msgstr "Texte de poésie de niveau 2 avec retrait"
 
 #: ../templates/stylesheet.xml:3014
 msgid "Explanatory or Bridge Text"
-msgstr ""
+msgstr "Texte explicatif ou de transition"
 
 #: ../templates/stylesheet.xml:3015
 msgid ""
 "Introduction explanatory or bridge text (e.g. explanation of missing book in "
 "Short Old Testament)"
 msgstr ""
+"Introduction explicative ou texte de transition (p. ex. d'un livre manquant "
+"dans l'Ancien Testament réduit)"
 
 #: ../templates/stylesheet.xml:3045
-#, fuzzy
 msgid "Poetry Level 3"
-msgstr "Éléments poétique"
+msgstr "Poésie de niveau 3"
 
 #: ../templates/stylesheet.xml:3046
-#, fuzzy
 msgid "Introduction poetry text, level 3"
-msgstr "Introduction : Autres éléments"
+msgstr "Texte d'introduction poétique niveau 3"
 
 #: ../templates/stylesheet.xml:3076
-#, fuzzy
 msgid "Centered"
 msgstr "Centré"
 
 #: ../templates/stylesheet.xml:3077
-#, fuzzy
 msgid "Poetry text, centered"
-msgstr "Éléments poétique"
+msgstr "Texte poétique centré"
 
 #: ../templates/stylesheet.xml:3107
 msgid "Indent Level 3"
-msgstr ""
+msgstr "Retrait de niveau 3"
 
 #: ../templates/stylesheet.xml:3108
 msgid "Poetry text, level 3 indent"
-msgstr ""
+msgstr "Texte de poésie de niveau 3 avec retrait"
 
 #: ../templates/stylesheet.xml:3138
-#, fuzzy
 msgid "Label Text"
-msgstr "Texte brut"
+msgstr "Texte étiquette"
 
 #: ../templates/stylesheet.xml:3139
 msgid ""
 "(*) A footnote label text item, for marking or \"labelling\" the type or "
 "alternate translation being provided in the note."
 msgstr ""
+"(*) Un élément de texte d'étiquette de pied de page, pour marquer ou "
+"\"étiqueter\" le type ou l'autre traduction procurée à la note."
 
 #: ../templates/stylesheet.xml:3170
-#, fuzzy
 msgid "Back matter concordance."
-msgstr "débute la concordance"
+msgstr "Concordance dans la conclusion."
 
 #: ../templates/stylesheet.xml:3200
 msgid "* Quoted book title"
-msgstr ""
+msgstr "* Citation de titre de livre"
 
 #: ../templates/stylesheet.xml:3201
-#, fuzzy
 msgid "For the quoted name of a book"
-msgstr "Impossible d'obtenir les noms des livres"
+msgstr "Pour une citation du nom de livre"
 
 #: ../templates/stylesheet.xml:3231
 msgid "Embedded Text"
-msgstr ""
+msgstr "Texte incorporé"
 
 #: ../templates/stylesheet.xml:3232
-#, fuzzy
 msgid "Embedded text paragraph"
-msgstr "Recommencer le paragraphe"
+msgstr "Texte de paragraphe incorporé"
 
 #: ../templates/stylesheet.xml:3262
 msgid "Descriptive Title, Hebrew Subtitle"
-msgstr ""
+msgstr "Titre descriptif ou sous-titre hébreu"
 
 #: ../templates/stylesheet.xml:3263
 msgid "A Hebrew text heading, to provide description (e.g. Psalms)"
-msgstr ""
+msgstr "En-têtes de texte hébreux donnant une description (ex. Psaumes)"
 
 #: ../templates/stylesheet.xml:3293
 msgid "* Liturgical note"
-msgstr ""
+msgstr "* Note liturgique"
 
 #: ../templates/stylesheet.xml:3294
 msgid "For a comment or note inserted for liturgical use"
-msgstr ""
+msgstr "Pour une note ou un commentaire inséré pour un usage liturgique"
 
 #: ../templates/stylesheet.xml:3324
 msgid "Paragraph, quote from text, no first line indent"
-msgstr ""
+msgstr "Paragraphe, texte comme citation, sans retrait de première ligne"
 
 #: ../templates/stylesheet.xml:3325
 msgid ""
 "Introduction prose paragraph, quote from the body text, with no first line "
 "indent"
 msgstr ""
+"Paragraphe d'introduction en prose, cité depuis le corps du texte, avec "
+"retrait de première ligne"
 
 #: ../templates/stylesheet.xml:3355 ../templates/stylesheet.xml:4254
 msgid "[Uncommon] Major Title Ending Level 1"
-msgstr ""
+msgstr "[Inhabituel] Titre principal de niveau 1 fermant"
 
 #: ../templates/stylesheet.xml:3356
 msgid ""
 "The main title of the book repeated at the end of the book (if multiple "
 "levels)"
 msgstr ""
+"Le titre principal du livre répété à la fin du livre (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:3386
-#, fuzzy
 msgid "End Marker"
-msgstr "Balise de fin "
+msgstr "Balise de fin"
 
 #: ../templates/stylesheet.xml:3387
-#, fuzzy
 msgid "Introduction ending marker"
-msgstr "Introduction : Titres et en-têtes"
+msgstr "Balise de fin d'introduction"
 
 #: ../templates/stylesheet.xml:3417
 msgid "Page Break"
-msgstr ""
+msgstr "Saut de page"
 
 #: ../templates/stylesheet.xml:3418
 msgid ""
 "Page Break used for new reader portions and children bibles where content is "
 "controlled by the page"
 msgstr ""
+"Saut de page utilisé pour les nouvelles portions de lecteur et les bibles "
+"pour enfants où le contenu est contrôlé par la page"
 
 #: ../templates/stylesheet.xml:3448
-#, fuzzy
 msgid "Alternate Rendering"
-msgstr "Rendu"
+msgstr "Interprétation alternative"
 
 #: ../templates/stylesheet.xml:3449
 msgid "(*) A footnote alternate rendering for a portion of scripture text."
 msgstr ""
+"(*) Une autre interprétation de note de bas de page pour une portion du "
+"texte de l'Écriture"
 
 #: ../templates/stylesheet.xml:3479
-#, fuzzy
 msgid "Section Heading Level 3"
-msgstr "est un en-tête de section"
+msgstr "Titre de section niveau 3"
 
 #: ../templates/stylesheet.xml:3480
 msgid "A section heading, level 3 (e.g. Genesis \"The First Day\")"
-msgstr ""
+msgstr "Un titre de section de niveau 3 (par ex. Genèse « Le premier jour »)"
 
 #: ../templates/stylesheet.xml:3510
-#, fuzzy
 msgid "Short Table of Contents Text"
-msgstr "est une petite table des matières"
+msgstr "Texte de table des matières sommaire"
 
 #: ../templates/stylesheet.xml:3511
-#, fuzzy
 msgid "Short table of contents text"
-msgstr "est une petite table des matières"
+msgstr "Texte de table des matières sommaire"
 
 #: ../templates/stylesheet.xml:3541
 msgid "Embedded Text, Indent Level 3"
-msgstr ""
+msgstr "Texte incorporé, avec retrait niveau 3"
 
 #: ../templates/stylesheet.xml:3542
 msgid "Poetry text, embedded, level 3 indent"
-msgstr ""
+msgstr "Texte de poésie incorporé de niveau 3 avec retrait"
 
 #: ../templates/stylesheet.xml:3572
-#, fuzzy
 msgid "* Transliterated Word"
-msgstr "mot hébreu indéclinable translittéré"
+msgstr "* Mot translittéré"
 
 #: ../templates/stylesheet.xml:3573
-#, fuzzy
 msgid "For transliterated words"
-msgstr "mot hébreu indéclinable translittéré"
+msgstr "Pour des mots translittérés"
 
 #: ../templates/stylesheet.xml:3604
 msgid "Introduction major title, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Titre principal d'introduction, niveau 1 (si un plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:3634
 msgid "Embedded Text Closing"
-msgstr ""
+msgstr "Texte incorporé fermant"
 
 #: ../templates/stylesheet.xml:3635
-#, fuzzy
 msgid "Embedded text closing"
-msgstr "Couleur du texte sélectionné"
+msgstr "Texte incorporé fermant"
 
 #: ../templates/stylesheet.xml:3665
-#, fuzzy
 msgid "Glossary"
-msgstr "débute  le glossaire"
+msgstr "Glossaire"
 
 #: ../templates/stylesheet.xml:3666
-#, fuzzy
 msgid "Back matter glossary."
-msgstr "Informations de fin de livre"
+msgstr "Glossaire de fin."
 
 #: ../templates/stylesheet.xml:3697
-#, fuzzy
 msgid "Back matter index."
-msgstr "Informations de fin de livre"
+msgstr "Index de fin."
 
 #: ../templates/stylesheet.xml:3727
 msgid "Concordance Keyword Level 2"
-msgstr ""
+msgstr "Mot-clé de concordance de niveau 2"
 
 #: ../templates/stylesheet.xml:3728
 msgid "Concordance main entry text or keyword, level 2"
-msgstr ""
+msgstr "Mot-clé ou entrée principale de concordance de niveau 2"
 
 #: ../templates/stylesheet.xml:3758
-#, fuzzy
 msgid "Long Table of Contents Text"
-msgstr "est une longue table des matières"
+msgstr "Texte de table des matières longue"
 
 #: ../templates/stylesheet.xml:3759
-#, fuzzy
 msgid "Long table of contents text"
-msgstr "est une longue table des matières"
+msgstr "Texte de table des matières longue"
 
 #: ../templates/stylesheet.xml:3789
 msgid "Embedded Text Opening"
-msgstr ""
+msgstr "Texte incorporé ouvrant"
 
 #: ../templates/stylesheet.xml:3790
 msgid "Embedded text opening"
-msgstr ""
+msgstr "Texte incorporé ouvrant"
 
 #: ../templates/stylesheet.xml:3820
-#, fuzzy
 msgid "Normal, First Line Indent"
-msgstr "Retrait de la première ligne"
+msgstr "Normal avec retrait de la première ligne"
 
 #: ../templates/stylesheet.xml:3821
 msgid "Paragraph text, with first line indent"
-msgstr ""
+msgstr "Texte de paragraphe, avec retrait de première ligne"
 
 #: ../templates/stylesheet.xml:3851
-#, fuzzy
 msgid "Left Running Header"
-msgstr "est un en-tête courant"
+msgstr "Titre courant gauche"
 
 #: ../templates/stylesheet.xml:3852
-#, fuzzy
 msgid "Running header text, left side of page"
-msgstr "Imprimer dans l'en-tête en cours d'exécution de la page de gauche"
+msgstr "Texte d'en-tête courant, page de gauche"
 
 #: ../templates/stylesheet.xml:3882
 msgid "* Name of Deity"
-msgstr ""
+msgstr "* Nom divin"
 
 #: ../templates/stylesheet.xml:3883
-#, fuzzy
 msgid "For name of diety"
-msgstr "Pour une société biblique"
+msgstr "Pour le nom de la divinité"
 
 #: ../templates/stylesheet.xml:3913
 msgid "Speaker"
-msgstr ""
+msgstr "Orateur"
 
 #: ../templates/stylesheet.xml:3914
 msgid "A heading, to identify the speaker (e.g. Job)"
-msgstr ""
+msgstr "Un titre pour identifier l'orateur (par ex. Job)"
 
 #: ../templates/stylesheet.xml:3944
 msgid "* DC text"
-msgstr ""
+msgstr "* Texte de DC"
 
 #: ../templates/stylesheet.xml:3945
 msgid "Footnote text, applies to Apocrypha only."
-msgstr ""
+msgstr "Texte de note de bas de page appliqué uniquement aux apocryphes."
 
 #: ../templates/stylesheet.xml:3975 ../templates/stylesheet.xml:4410
 msgid "Keyword"
-msgstr ""
+msgstr "Mot-clé"
 
 #: ../templates/stylesheet.xml:3976
-#, fuzzy
 msgid "(*) A cross reference keyword."
-msgstr "est une référence"
+msgstr "(*) Un mot-clé d'un référence."
 
 #: ../templates/stylesheet.xml:4006
-#, fuzzy
 msgid "Map Index"
-msgstr "Index"
+msgstr "Index de carte"
 
 #: ../templates/stylesheet.xml:4007
-#, fuzzy
 msgid "Back matter map index."
-msgstr "Commence l'index de carte"
+msgstr "Index de carte dans la conclusion."
 
 #: ../templates/stylesheet.xml:4038
 msgid "A list entry, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Rubrique de liste de niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:4068
 msgid "Indent Level 1"
-msgstr ""
+msgstr "Retrait de niveau 1"
 
 #: ../templates/stylesheet.xml:4069
 msgid "Poetry text, level 1 indent (if multiple levels)"
-msgstr ""
+msgstr "Texte poétique, niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:4099
 msgid "* Author Signature (Epistles)"
-msgstr ""
+msgstr "* Signature de l'auteur (d'une épître)"
 
 #: ../templates/stylesheet.xml:4100
 msgid "For the signature of the author of an Epistle"
-msgstr ""
+msgstr "Pour la signature de l'auteur d'une épître"
 
 #: ../templates/stylesheet.xml:4131
 msgid "The main title of the book (if multiple levels)"
-msgstr ""
+msgstr "Titre principal du livre (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:4161
-#, fuzzy
 msgid "* Alternate verse number"
-msgstr "est un numéro de verset"
+msgstr "* Numéro de verset alternatif"
 
 #: ../templates/stylesheet.xml:4162
 msgid ""
 "Second (alternate) verse number (for coding dual numeration in Psalms; see "
 "also NRSV Exo 22.1-4)"
 msgstr ""
+"Seconde (ou alternative) versification (pour encoder une double numérotation "
+"des Psaumes ; voir aussi NRSV Ex 22,1-4)"
 
 #: ../templates/stylesheet.xml:4192
 msgid "Centered (for Inscription)"
-msgstr ""
+msgstr "Centré (pour une inscription)"
 
 #: ../templates/stylesheet.xml:4193
 msgid "Paragraph text, centered (for Inscription)"
-msgstr ""
+msgstr "Texte de paragraphe centré (pour une inscription)"
 
 #: ../templates/stylesheet.xml:4224
 msgid "A section heading, level 1 (if multiple levels)"
-msgstr ""
+msgstr "Titre de section de niveau 1 (si plusieurs niveaux)"
 
 #: ../templates/stylesheet.xml:4255
 msgid ""
 "The main title of the book repeated at the end of the book (if single level)"
 msgstr ""
+"Le titre principal du livre répété à la fin du livre (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:4286
 msgid "The main title of the book (if single level)"
 msgstr ""
+"Paragraphe d'introduction en prose, italique du corps du texte, sans retrait "
+"de première ligne"
 
 #: ../templates/stylesheet.xml:4317
 msgid "A section heading, level 1 (if single level)"
-msgstr ""
+msgstr "Titre de section de niveau 1 (si un seul niveau)"
 
 #: ../templates/stylesheet.xml:4348
-#, fuzzy
 msgid "Front matter introduction."
-msgstr "débute l'introduction"
+msgstr "Introduction de l'avant-propos."
 
 #: ../templates/stylesheet.xml:4378
-#, fuzzy
 msgid "Encoding"
-msgstr "Chargement de "
+msgstr "Encodage"
 
 #: ../templates/stylesheet.xml:4379
 msgid ""
 "File encoding information Bibledit disregards this marker, as all text in "
 "Bibledit are in UTF-8 encoding."
 msgstr ""
+"Informations d'encodage de fichier Bibledit ne tient aucun compte de cette "
+"balise puisque tout le texte est encodé en UTF-8 sous Bibledit."
 
 #: ../templates/stylesheet.xml:4411
 msgid "(*) A footnote keyword."
-msgstr ""
+msgstr "(*) Mot-clé de note de bas de page."
 
 #: ../templates/stylesheet.xml:4441
 msgid "* BoldItalic Text"
-msgstr ""
+msgstr "* Texte en italique et en gras"
 
 #: ../templates/stylesheet.xml:4442
 msgid "A character style, use bold + italic text"
-msgstr ""
+msgstr "Style de caractère en gras et en italique"
 
 #: ../templates/stylesheet.xml:4472
-#, fuzzy
 msgid "Poetry Level 2"
-msgstr "Éléments poétique"
+msgstr "Poésie de niveau 2"
 
 #: ../templates/stylesheet.xml:4473
-#, fuzzy
 msgid "Introduction poetry text, level 2"
-msgstr "Introduction : Autres éléments"
+msgstr "Texte d'introduction poétique, niveau 2"
 
 #: ../templates/stylesheet.xml:4503
 msgid "No Break with Previous Paragraph"
-msgstr ""
+msgstr "Pas de saut avec le paragraphe précédent"
 
 #: ../templates/stylesheet.xml:4504
 msgid ""
 "Paragraph text, with no break from previous paragraph text (at chapter "
 "boundary)"
 msgstr ""
+"Texte du paragraphe, sans rupture avec le texte du paragraphe précédent (à "
+"la limite du chapitre)"
 
 #: ../templates/stylesheet.xml:4534
 msgid "Concordance Keyword Level 1"
-msgstr ""
+msgstr "Mot-clé de concordance de niveau 1"
 
 #: ../templates/stylesheet.xml:4535
 msgid "Concordance main entry text or keyword, level 1"
-msgstr ""
+msgstr "Mot-clé ou entrée principale de concordance de niveau 1"
 
 #: ../templates/stylesheet.xml:4565
 msgid "[Uncommon] Major Title at Introduction End"
-msgstr ""
+msgstr "[Inhabituel] Titre principal d'introduction fermant"
 
 #: ../templates/stylesheet.xml:4566
-#, fuzzy
 msgid "Introduction major title at introduction end"
-msgstr "Introduction : Titres et en-têtes"
+msgstr "Titre majeur d'introduction à la fin de l'introduction"
 
 #: ../templates/stylesheet.xml:4596
-#, fuzzy
 msgid "Identification"
-msgstr "Notification"
+msgstr "Identifiant"
 
 #: ../templates/stylesheet.xml:4597
 msgid ""
 "File identification information (BOOKID, FILENAME, EDITOR, MODIFICATION DATE)"
 msgstr ""
+"Informations d'identification du fichier (nom du fichier, nom du livre, "
+"langue, dernière édition, date)"
 
 #: ../templates/stylesheet.xml:4627
-#, fuzzy
 msgid "Verse Number"
 msgstr "Numéro de verset"
 
 #: ../templates/stylesheet.xml:4628
 msgid "A verse number (Necessary for normal Bibledit operation)"
 msgstr ""
+"Un numéro de verset (Nécessaire pour les opérations normales de Bibledit)"
 
 #: ../templates/stylesheet.xml:4658
 msgid "* Words of Jesus"
-msgstr ""
+msgstr "* Nom de Jésus"
 
 #: ../templates/stylesheet.xml:4659
 msgid "For marking the words of Jesus"
-msgstr ""
+msgstr "Pour marquer le nom de Jésus"
 
 #: ../templates/stylesheet.xml:4689
-#, fuzzy
 msgid "Book Abbreviation"
-msgstr "Abréviation"
+msgstr "Abréviation de livre"
 
 #: ../templates/stylesheet.xml:4690
 msgid "Book Abbreviation (not yet supported by Bibledit)."
-msgstr ""
+msgstr "Abréviation de livre (pas encore pris en charge par Bibledit)."
 
 #: ../templates/stylesheet.xml:4720
-#, fuzzy
 msgid "Inline Quotation References"
-msgstr "Validation des références"
+msgstr "Références en italique dans texte"
 
 #: ../templates/stylesheet.xml:4721
 msgid ""
 "A cross-reference indicating the source text for the preceding quotation."
 msgstr ""
+"Une référence croisée indiquant le texte source de la citation précédente."
 
 #: ../templates/stylesheet.xml:4751
-#, fuzzy
 msgid "Row"
-msgstr "Rm"
+msgstr "Rangée"
 
 #: ../templates/stylesheet.xml:4752
 msgid "A new table row."
-msgstr ""
+msgstr "Une nouvelle rangée de tableau."
 
 #: ../templates/stylesheet.xml:4782
-#, fuzzy
 msgid "Column 1 Heading"
-msgstr "est un en-tête de colonne"
+msgstr "Titre de colonne 1"
 
 #: ../templates/stylesheet.xml:4783
 msgid "A table heading, column 1."
-msgstr ""
+msgstr "Un titre de tableau, colonne 1."
 
 #: ../templates/stylesheet.xml:4813
-#, fuzzy
 msgid "Column 2 Heading"
-msgstr "est un en-tête de colonne"
+msgstr "Titre de colonne 2"
 
 #: ../templates/stylesheet.xml:4814
 msgid "A table heading, column 2."
-msgstr ""
+msgstr "Un titre de tableau, colonne 2."
 
 #: ../templates/stylesheet.xml:4844
-#, fuzzy
 msgid "Column 3 Heading"
-msgstr "est un en-tête de colonne"
+msgstr "Titre de colonne 3"
 
 #: ../templates/stylesheet.xml:4845
 msgid "A table heading, column 3."
-msgstr ""
+msgstr "Un titre de tableau, colonne 3."
 
 #: ../templates/stylesheet.xml:4875
-#, fuzzy
 msgid "Column 4 Heading"
-msgstr "est un en-tête de colonne"
+msgstr "Titre de colonne 4"
 
 #: ../templates/stylesheet.xml:4876
 msgid "A table heading, column 4."
-msgstr ""
+msgstr "Un titre de tableau, colonne 4."
 
 #: ../templates/stylesheet.xml:4906
 msgid "Column 1 Heading, Right Aligned"
-msgstr ""
+msgstr "Titre de colonne 1, aligné à droite"
 
 #: ../templates/stylesheet.xml:4907
 msgid "A table heading, column 1, right aligned."
-msgstr ""
+msgstr "Un titre de tableau colonne 1, aligné à droite."
 
 #: ../templates/stylesheet.xml:4937
 msgid "Column 2 Heading, Right Aligned"
-msgstr ""
+msgstr "Titre de colonne 2, aligné à droite"
 
 #: ../templates/stylesheet.xml:4938
 msgid "A table heading, column 2, right aligned."
-msgstr ""
+msgstr "Titre de tableau colonne 2, aligné à droite."
 
 #: ../templates/stylesheet.xml:4968
 msgid "Column 3 Heading, Right Aligned"
-msgstr ""
+msgstr "Titre de colonne 3, aligné à droite"
 
 #: ../templates/stylesheet.xml:4969
 msgid "A table heading, column 3, right aligned."
-msgstr ""
+msgstr "Titre de tableau colonne 3, aligné à droite."
 
 #: ../templates/stylesheet.xml:4999
 msgid "Column 4 Heading, Right Aligned"
-msgstr ""
+msgstr "Titre de colonne 4, aligné à droite"
 
 #: ../templates/stylesheet.xml:5000
 msgid "A table heading, column 4, right aligned."
-msgstr ""
+msgstr "Titre de tableau colonne 4, aligné à droite."
 
 #: ../templates/stylesheet.xml:5030
-#, fuzzy
 msgid "Column 1 Cell"
-msgstr "numéro de colonne"
+msgstr "Cellule de colonne 1"
 
 #: ../templates/stylesheet.xml:5031
 msgid "A table cell item, column 1."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 1."
 
 #: ../templates/stylesheet.xml:5061
-#, fuzzy
 msgid "Column 2 Cell"
-msgstr "numéro de colonne"
+msgstr "Cellule de colonne 2"
 
 #: ../templates/stylesheet.xml:5062
 msgid "A table cell item, column 2."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 2."
 
 #: ../templates/stylesheet.xml:5092
-#, fuzzy
 msgid "Column 3 Cell"
-msgstr "numéro de colonne"
+msgstr "Cellule de colonne 3"
 
 #: ../templates/stylesheet.xml:5093
 msgid "A table cell item, column 3."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 3."
 
 #: ../templates/stylesheet.xml:5123
-#, fuzzy
 msgid "Column 4 Cell"
-msgstr "numéro de colonne"
+msgstr "Cellule de colonne 4"
 
 #: ../templates/stylesheet.xml:5124
 msgid "A table cell item, column 4."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 4."
 
 #: ../templates/stylesheet.xml:5154
 msgid "Column 1 Cell, Right Aligned"
-msgstr ""
+msgstr "Cellule de colonne 1, alignée à droite"
 
 #: ../templates/stylesheet.xml:5155
 msgid "A table cell item, column 1, right aligned."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 1, aligné à droite."
 
 #: ../templates/stylesheet.xml:5185
 msgid "Column 2 Cell, Right Aligned"
-msgstr ""
+msgstr "Cellule de colonne 2, alignée à droite"
 
 #: ../templates/stylesheet.xml:5186
 msgid "A table cell item, column 2, right aligned."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 2, aligné à droite."
 
 #: ../templates/stylesheet.xml:5216
 msgid "Column 3 Cell, Right Aligned"
-msgstr ""
+msgstr "Cellule de colonne 3, alignée à droite"
 
 #: ../templates/stylesheet.xml:5217
 msgid "A table cell item, column 3, right aligned."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 3, aligné à droite."
 
 #: ../templates/stylesheet.xml:5247
 msgid "Column 4 Cell, Right Aligned"
-msgstr ""
+msgstr "Cellule de colonne 4, alignée à droite"
 
 #: ../templates/stylesheet.xml:5248
 msgid "A table cell item, column 4, right aligned."
-msgstr ""
+msgstr "Un élément de cellule de tableau, colonne 4, aligné à droite."
 
 #: ../templates/stylesheet.xml:5278
-#, fuzzy
 msgid "Alternate Chapter Number"
-msgstr "Entrer un numéro de chapitre"
+msgstr "Numéro de chapitre alternatif"
 
 #: ../templates/stylesheet.xml:5279
 msgid ""
@@ -10163,86 +10110,82 @@ msgid ""
 "places where different traditions of chapter breaks need to be supported in "
 "the same translation). Bibledit does nothing with this marker yet."
 msgstr ""
+"Second (ou autre) numéro de chapitre. Pour baliser la double versification. "
+"Utile pour les endroits où différentes traditions de chapitrage doivent être "
+"supportées dans la même traduction. Bibledit ne fait rien avec cette balise "
+"pour le moment."
 
 #: ../templates/stylesheet.xml:5309
 msgid "Chapter Publishing Label"
-msgstr ""
+msgstr "Édition des étiquettes de chapitre"
 
 #: ../templates/stylesheet.xml:5310
 msgid ""
 "Chapter label used for translations that add a word such as \"Chapter\" "
 "before chapter numbers (e.g. Psalms)."
 msgstr ""
+"Étiquette de chapitre, utilisé pour les traductions qui ajoutent un mot "
+"comme « Chapitre » avant le numéro de chapitre (par exemple les Psaumes)."
 
 #: ../templates/stylesheet.xml:5340
-#, fuzzy
 msgid "Publishing Alternate Chapter Number"
-msgstr "Entrer un numéro de chapitre"
+msgstr "Publication de numéros de chapitre alternatifs"
 
 #: ../templates/stylesheet.xml:5341
 msgid ""
 "Published chapter number (this is a chapter marking that would be used in "
 "the published text)."
 msgstr ""
+"Caractère de chapitre pour la publication  (Correspond à une balise de "
+"chapitre alternative, qui peut être utilisée pour l'édition du texte)."
 
 #: ../templates/stylesheet.xml:5371
-#, fuzzy
 msgid "* CJK Prounciation"
-msgstr "Ponctuation"
+msgstr "* Ponctuation CJK"
 
 #: ../templates/stylesheet.xml:5372
 msgid "For indicating pronunciation in CJK texts"
-msgstr ""
+msgstr "Pour indiquer la prononciation dans les textes CJK"
 
 #: ../templates/stylesheet.xml:5402
-#, fuzzy
 msgid "* Hebrew Wordlist Entry"
-msgstr "Entrée de liste de mot hébreux"
+msgstr "* Entrée de liste de mot hébreux"
 
 #: ../templates/stylesheet.xml:5403
-#, fuzzy
 msgid "A Hebrew wordlist text item."
-msgstr "Entrée de liste de mot hébreux"
+msgstr "Élément de liste de mot hébreux."
 
 #: ../templates/stylesheet.xml:5433
-#, fuzzy
 msgid "* Greek Wordlist Entry"
-msgstr "Entrée de liste de mot grecs"
+msgstr "* Entrée de liste de mot grecs"
 
 #: ../templates/stylesheet.xml:5434
-#, fuzzy
 msgid "A Greek Wordlist text item."
-msgstr "Entrée de liste de mot grecs"
+msgstr "Un élément de liste de mot grecs."
 
 #: ../templates/stylesheet.xml:5464
-#, fuzzy
 msgid "* Subject Index Entry"
-msgstr "Entrée d'index de sujet"
+msgstr "* Entrée d'index de thème"
 
 #: ../templates/stylesheet.xml:5465
-#, fuzzy
 msgid "A subject index text item."
-msgstr "Entrée d'index de sujet"
+msgstr "Élément texte d'index de thème."
 
 #: ../templates/stylesheet.xml:5495
-#, fuzzy
 msgid "* Wordlist Entry"
-msgstr "Entrée de liste de mot grecs"
+msgstr "* Entrée d'index"
 
 #: ../templates/stylesheet.xml:5496
-#, fuzzy
 msgid "A wordlist text item."
-msgstr "est une liste de mot"
+msgstr "Un élément texte de liste de mot."
 
 #: ../templates/stylesheet.xml:5526
-#, fuzzy
 msgid "Parallel References"
-msgstr "Imprimer les références parallèles"
+msgstr "Références parallèles"
 
 #: ../templates/stylesheet.xml:5527
-#, fuzzy
 msgid "Parallel reference(s)"
-msgstr "Imprimer les références parallèles"
+msgstr "Référence(s) parallèle(s)"
 
 #~ msgid "Concordance features are almost ready..."
 #~ msgstr "Les fonctionnalités de concordances seront bientôt disponible…"
