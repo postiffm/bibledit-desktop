@@ -159,10 +159,10 @@ class bible {
   virtual ustring retrieve_verse(const Reference &ref);
   void font_set(const ustring &_font);
   ustring font_get(void);
+  virtual bool validateBookNum(const unsigned int booknum);
   
 protected: // so derived bibles can access it
   void check_book_in_range(unsigned int booknum);
-  virtual bool validateBookNum(const unsigned int booknum);
   virtual book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
   ustring font;
 };

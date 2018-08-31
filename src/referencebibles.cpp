@@ -67,9 +67,12 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
         //  I assume the following post-condition to the above statement:
         //  the verse is loaded into the bible,  book,  chapter,  and the
         //  the verse contains only the text of the verse,  no x:y prefix
-        if (verse.empty()) {
-            htmlwriter.paragraph_open();
-            verse.append(_("<empty>"));
+        if (!b->validateBookNum(ref.book_get()) || verse.empty()) {
+            // If the book is not valid in this Bible (say it is only NT, no OT), or
+            // the verse happens to be emptyp for some reason, do not print anything
+//            htmlwriter.paragraph_open();
+//            verse.append(_("<empty>"));
+//            htmlwriter.paragraph_close();
         }
         else {
               replace_text(verse, "\n", " ");
@@ -78,7 +81,8 @@ void ReferenceBibles::write(const Reference &ref,  HtmlWriter2 &htmlwriter)
               htmlwriter.font_open(b->font_get().c_str());
               htmlwriter.text_add(verse);
               htmlwriter.font_close();
+              htmlwriter.paragraph_close();
             }
-        htmlwriter.paragraph_close();
+        
       }
 }
