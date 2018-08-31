@@ -130,6 +130,9 @@
 #include "chapterview.h"
 #include "debug.h"
 #include "gtkwrappers.h"
+#include "concordance.h"
+#include "crossrefs.h"
+#include "referencebibles.h"
 #ifdef WIN32
 #include <windows.h>
 #endif

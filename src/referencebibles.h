@@ -17,8 +17,8 @@
  **  
  */
 
-#ifndef INCLUDED_CONCORDANCE_H
-#define INCLUDED_CONCORDANCE_H
+#ifndef INCLUDED_REFBIBLES_H
+#define INCLUDED_REFBIBLES_H
 
 #include "ustring.h"
 #include <glibmm/iochannel.h>
@@ -47,33 +47,13 @@
 #include "utilities.h"
 #include "biblebookchapterverse.h"
 
-using namespace std;
-using namespace Glib;
-
-class Concordance {
- public:
-  Concordance(const ustring &_projname);
-  ~Concordance();
-  void clear(void);
-  void writeAlphabeticSortedHtml(HtmlWriter2 &htmlwriter);
-  void writeFrequencySortedHtml(HtmlWriter2 &htmlwriter);
-  void writeSingleWordListHtml(const ustring &word, HtmlWriter2 &htmlwriter);
-  void readExcludedWords(const ustring &filename);
+class ReferenceBibles {
+public:
+  ReferenceBibles();
+  ~ReferenceBibles();
+  void write(const Reference &ref, HtmlWriter2 &htmlwriter);
 private:
-  ustring projname;
-  bible bbl;
-  // The set of words that we are NOT interested in showing
-  unordered_set<string> excludedWords;
-  // 1. Unique word ==> count of occurrences
-  std::unordered_map<std::string, int, std::hash<std::string>> wordCounts;
-  // 2. Unique word ==> vector of integers. These integers are coded to contain the
-  // book, chapter, and verse location in 24 bits.
-  std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> wordLocations;
-  // 3. Unique word ==> count of occurrences. Same info as #1, but sorted automatically.
-  std::map<std::string, int> sortedWordCounts;
-  void writeVerseLinks(unsigned int num, vector<int> &locations, HtmlWriter2 &htmlwriter);
-  void boldface(ustring src, const ustring &boldstr, HtmlWriter2 &htmlwriter);
-  void writeVerses(vector<int> &locations, const ustring &word, HtmlWriter2 &htmlwriter);
+  vector<bible *> bibles;
 };
 
 #endif

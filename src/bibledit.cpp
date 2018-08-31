@@ -50,6 +50,9 @@
 #include <locale.h>
 #include <errno.h>
 #include "options.h"
+#include "concordance.h"
+#include "referencebibles.h"
+#include "crossrefs.h"
 //#ifdef WIN32
 //#include <Windows.h>
 //#endif

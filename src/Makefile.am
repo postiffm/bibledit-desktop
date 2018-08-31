@@ -2,7 +2,10 @@ bin_PROGRAMS = bibledit-desktop bibledit-rdwrt
 
 bibledit_desktop_SOURCES = \
   bibledit.cpp \
+  biblebookchapterverse.cpp \
   concordance.cpp \
+  crossrefs.cpp \
+  referencebibles.cpp \
   options.cpp \
   chapterview.cpp \
   utilities.cpp \
@@ -284,7 +287,10 @@ bibledit_desktop_SOURCES = \
 
 bibledit_rdwrt_SOURCES = \
   bibledit-rdwrt.cpp \
+  biblebookchapterverse.cpp \
   concordance.cpp \
+  crossrefs.cpp \
+  referencebibles.cpp \
   options.cpp \
   chapterview.cpp \
   utilities.cpp \
