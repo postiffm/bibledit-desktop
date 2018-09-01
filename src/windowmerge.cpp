@@ -46,11 +46,11 @@
 #include "snapshots.h"
 #include <glib/gi18n.h>
 
-WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
+WindowMerge::WindowMerge(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup):
   FloatingWindow(parent_layout, widMerge, _("Merge"), startup)
 // Window for merging changes.  
 {
-  transient_parent = GTK_WINDOW(parent_layout);
+  transient_parent = _transient_parent; // this should go into floatingwindow
   // Save and initialize variables.
   load_gui_event_id = 0;
   editors_changed_event_id = 0;

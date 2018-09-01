@@ -2795,7 +2795,7 @@ void MainWindow::on_view_references ()
   on_window_references_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(view_references))) {
 	DEBUG("Create new references window")
-    window_references = new WindowReferences(layout, accelerator_group, windows_startup_pointer != G_MAXINT, references_management_enabled);
+    window_references = new WindowReferences(layout, GTK_WINDOW(window_main), accelerator_group, windows_startup_pointer != G_MAXINT, references_management_enabled);
     g_signal_connect((gpointer) window_references->delete_signal_button, "clicked", G_CALLBACK(on_window_references_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_references->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_references->signal_button, "clicked", G_CALLBACK(on_window_references_signal_button_clicked), gpointer(this));
@@ -3166,7 +3166,7 @@ void MainWindow::view_project_notes()
     window_notes->focus_set();
   } else {
     // New notes window.
-    window_notes = new WindowNotes(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
+    window_notes = new WindowNotes(layout, GTK_WINDOW(window_main), accelerator_group, windows_startup_pointer != G_MAXINT);
     g_signal_connect((gpointer) window_notes->delete_signal_button, "clicked", G_CALLBACK(on_window_notes_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_notes->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_notes->references_available_signal_button, "clicked", G_CALLBACK(on_window_notes_references_available_button_clicked), gpointer(this));
@@ -3783,7 +3783,7 @@ void MainWindow::display_window_styles()
     gtk_widget_show(style_delete);
     gtk_widget_show(menu_stylesheet);
     // Open the window.
-    window_styles = new WindowStyles(layout, accelerator_group, windows_startup_pointer != G_MAXINT, style, style_menu, stylesheets_expand_all, stylesheets_collapse_all, style_insert, stylesheet_edit_mode, style_new, style_properties, style_delete, stylesheet_switch, stylesheets_new, stylesheets_delete, stylesheets_rename);
+    window_styles = new WindowStyles(layout, GTK_WINDOW(window_main), accelerator_group, windows_startup_pointer != G_MAXINT, style, style_menu, stylesheets_expand_all, stylesheets_collapse_all, style_insert, stylesheet_edit_mode, style_new, style_properties, style_delete, stylesheet_switch, stylesheets_new, stylesheets_delete, stylesheets_rename);
     g_signal_connect((gpointer) window_styles->delete_signal_button, "clicked", G_CALLBACK(on_window_styles_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_styles->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_styles->apply_signal, "clicked", G_CALLBACK(on_style_button_apply_clicked), gpointer(this));
@@ -5627,7 +5627,7 @@ void MainWindow::on_file_projects_merge()
 {
   on_window_merge_delete_button();
   if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(file_projects_merge))) {
-    window_merge = new WindowMerge(layout, accelerator_group, windows_startup_pointer != G_MAXINT);
+    window_merge = new WindowMerge(layout, GTK_WINDOW(window_main), accelerator_group, windows_startup_pointer != G_MAXINT);
     g_signal_connect((gpointer) window_merge->delete_signal_button,    "clicked", G_CALLBACK(on_window_merge_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_merge->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_merge->editors_get_text_button, "clicked", G_CALLBACK(on_merge_window_get_text_button_clicked), gpointer(this));

@@ -33,7 +33,7 @@
 class WindowReferences : public FloatingWindow
 {
 public:
-  WindowReferences(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, bool reference_management_enabled);
+  WindowReferences(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup, bool reference_management_enabled);
   virtual ~WindowReferences();
   void set (vector <Reference>& refs, const ustring& project_in, vector <ustring> * comments_in);
   vector <Reference> get ();

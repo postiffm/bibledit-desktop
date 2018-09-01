@@ -45,11 +45,11 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, bool reference_management_enabled):
+WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup, bool reference_management_enabled):
   FloatingWindow(parent_layout, widReferences, _("References"), startup), reference(0, 0, "")
 // Window for showing the quick references.  
 {
-  transient_parent = GTK_WINDOW(parent_layout);
+  transient_parent = _transient_parent; // this should go into the FloatingWindow base class, as all derived classes will need this intelligence.
   lower_boundary = 0;
   upper_boundary = 0;
   active_entry = -1;

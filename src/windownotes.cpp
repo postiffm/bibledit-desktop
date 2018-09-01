@@ -40,12 +40,12 @@
 #include "dialogyesnoalways.h"
 #include <glib/gi18n.h>
 
-WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup):
+WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup):
   FloatingWindow(parent_layout, widNotes, _("Project notes"), startup)
 // Project notes window.
 {
   // Initialize variables.
-  transient_parent = GTK_WINDOW(parent_layout);
+  transient_parent = _transient_parent; // this should go into floating window
   note_editor = NULL;
   redisplay_source_id = 0;
   displayprojectnotes = NULL;
