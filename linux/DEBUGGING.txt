@@ -3,6 +3,11 @@ It assumes you have already gone through the BUILDING process
 and the INSTALLING process.
 Written by Matt Postiff, postiffm@umich.edu, 8/25/2016
 
+Debugging the GTK3 version of Bibledit-Desktop
+----------------------------------------------------------------
+Run the following command:
+GTK_DEBUG=interactive ../bin/bibledit-desktop --debug &
+
 Debugging with Emacs + GDB
 ----------------------------------------------------------------
 M-x gud-gdb
