@@ -176,6 +176,9 @@ int main(int argc, char *argv[])
   gw_message("LC_ALL        \t" + ustring(setlocale(LC_ALL, NULL)));
   gw_message("LC_CTYPE      \t" + ustring(setlocale(LC_CTYPE, NULL)));
 
+  gw_message("GTK version   \t" + std::to_string(gtk_get_major_version()) + "." +
+                                  std::to_string(gtk_get_minor_version()) + "." +
+	                          std::to_string(gtk_get_micro_version()));
   // Check on runtime requirements.
   runtime_initialize ();
   // Initialize the xml library.
