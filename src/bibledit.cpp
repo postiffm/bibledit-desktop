@@ -197,6 +197,7 @@ int main(int argc, char *argv[])
   styles = new Styles(0);
   // Version control object.
   vcs = new VCS(0);
+  gw_message(_("Finished versifications, mappings, styles, and VCS"));
   // URLTransport object.
   urltransport = new URLTransport(0);
   gw_message(_("Finished URLTransport"));

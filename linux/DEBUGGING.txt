@@ -8,6 +8,17 @@ Debugging the GTK3 version of Bibledit-Desktop
 Run the following command:
 GTK_DEBUG=interactive ../bin/bibledit-desktop --debug &
 
+Installing Developer Documentation
+----------------------------------------------------------------
+You can run devhelp to get easy access to documentation.
+If you are missing some docs, figure out how to install them
+for the library that you are working on. For example:
+
+sudo apt-get install libsoup2.4-doc
+
+Then those docs will appear in devhelp.
+
+
 Debugging with Emacs + GDB
 ----------------------------------------------------------------
 M-x gud-gdb

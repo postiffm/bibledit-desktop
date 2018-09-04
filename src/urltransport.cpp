@@ -40,8 +40,8 @@ URLTransport::URLTransport(int dummy)
   // the messages get posted out of order, and this may cause confusion in particular
   // when doing the various git commands out of order.
   session = soup_session_new_with_options (SOUP_SESSION_USER_AGENT, "bibledit/1.0",
-                                           SOUP_SESSION_MAX_CONNS, "50",
-                                           SOUP_SESSION_MAX_CONNS_PER_HOST, "50",
+                                           SOUP_SESSION_MAX_CONNS, 50,
+                                           SOUP_SESSION_MAX_CONNS_PER_HOST, 50,
                                            NULL);
   //SoupLogger *logger;
   //logger = soup_logger_new(SOUP_LOGGER_LOG_HEADERS, -1);
