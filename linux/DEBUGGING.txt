@@ -18,6 +18,14 @@ sudo apt-get install libsoup2.4-doc
 
 Then those docs will appear in devhelp.
 
+Debugging a Library Problem
+----------------------------------------------------------------
+For example, if you have a problem that originates in glib,
+you can install the glib2-debug package, put a breakpoint in
+g_log(), and start in a debugger.
+
+For example:
+(bibledit-desktop:36665): GLib-GObject-WARNING **: ...
 
 Debugging with Emacs + GDB
 ----------------------------------------------------------------
