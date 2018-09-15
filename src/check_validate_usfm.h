@@ -38,6 +38,10 @@ public:
   vector<ustring> comments;
   bool cancelled;
 private:
+  // Be very careful with these next three. They were a source of a crash
+  // discovered 9/14/2018 where book was used uninitialized in the constructor.
+  // They are used in lots of places throughout the class methods, so it is 
+  // inconvenient to pass them all over the place.
   unsigned int book;
   unsigned int chapter;
   ustring verse;

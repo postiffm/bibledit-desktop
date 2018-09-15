@@ -40,6 +40,10 @@ checksheet: check whether markers are in the stylesheet of the project.
   // Init variables.
   cancelled = false;
   mychecksheet = checksheet;
+  book = 0;
+  chapter = 0;
+  verse = "";
+  
   // Get a list of the books to check. If no books were given, take them all.
   vector < unsigned int >mybooks(books.begin(), books.end());
   if (mybooks.empty())
@@ -58,7 +62,7 @@ checksheet: check whether markers are in the stylesheet of the project.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_localname(book));
+      progresswindow->set_text(books_id_to_localname(bk));
       if (progresswindow->cancel) {
         cancelled = true;
         return;

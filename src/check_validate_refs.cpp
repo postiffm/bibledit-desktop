@@ -39,6 +39,9 @@ gui: whether to show graphical progressbar.
 {
   // The variables and settings.
   cancelled = false;
+  book = 0;
+  chapter = 0;
+  verse = "";
   myproject = project;
   extern Settings *settings;
   ProjectConfiguration *projectconfig = settings->projectconfig(project);
@@ -60,6 +63,7 @@ gui: whether to show graphical progressbar.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
     if (gui) {
       progresswindow->iterate();
+      progresswindow->set_text(books_id_to_localname(bk));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
@@ -88,16 +92,17 @@ gui: whether to show graphical progressbar.
 CheckValidateReferences::~CheckValidateReferences()
 {
   // Clean up.
-  if (progresswindow)
+  if (progresswindow) {
     delete progresswindow;
+  }
+  progresswindow = NULL;
 }
 
 void CheckValidateReferences::check(const ustring & text)
 // Do the actual check of one verse.
 {
   // Bail out if the verse is empty.
-  if (text.empty())
-    return;
+  if (text.empty()) { return; }
 
   // Extract the references and check them all.
   ReferencesScanner refscanner(language, book, text);
@@ -107,10 +112,12 @@ void CheckValidateReferences::check(const ustring & text)
     bool reference_fits = true;
     unsigned int highest_chapter = 0;
     vector < unsigned int >chapters = versification_get_chapters(versification, refscanner.references[i].book_get());
-    if (!chapters.empty())
+    if (!chapters.empty()) {
       highest_chapter = chapters[chapters.size() - 1];
-    if (refscanner.references[i].chapter_get() > highest_chapter)
+    }
+    if (refscanner.references[i].chapter_get() > highest_chapter) {
       reference_fits = false;
+    }
     unsigned int last_verse = convert_to_int(versification_get_last_verse(versification, 
 									  refscanner.references[i].book_get(),
 									  refscanner.references[i].chapter_get()));
