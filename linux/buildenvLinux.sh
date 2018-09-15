@@ -52,3 +52,10 @@ echo "sudo apt-get update"
 echo "sudo apt-get install cppreference-doc-en-html"
 echo "sudo apt-get install libxml2-doc"
 echo "sudo apt-get install libgtk2.0-doc"
+
+# This is an error that threw me for some reason for a while
+# % ./configure
+# checking for WEBKIT... no
+# configure: error: libwebkit development version >= 1.0.0 is needed.
+# What we need is this:
+#sudo apt-get install libwebkitgtk-dev
