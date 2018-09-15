@@ -106,7 +106,7 @@ void CheckValidateReferences::check(const ustring & text)
 
   // Extract the references and check them all.
   ReferencesScanner refscanner(language, book, text);
-  for (unsigned int i = 0; i < references.size(); i++) {
+  for (unsigned int i = 0; i < refscanner.references.size(); i++) {
 
     // Check whether the reference fits within the limits of the versification system.
     bool reference_fits = true;
@@ -149,7 +149,7 @@ void CheckValidateReferences::check(const ustring & text)
         ustring myverse = number_in_string(mytext);
         mytext.erase(0, myverse.length());
         bool referencefound = false;
-        for (unsigned int i = 0; i < references.size(); i++) {
+        for (unsigned int i = 0; i < refscanner.references.size(); i++) {
           if (refscanner.references[i].chapter_get() == mychapter)
             if (refscanner.references[i].verse_get() == myverse)
               referencefound = true;
