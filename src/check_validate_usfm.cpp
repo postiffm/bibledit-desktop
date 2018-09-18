@@ -46,8 +46,9 @@ checksheet: check whether markers are in the stylesheet of the project.
   
   // Get a list of the books to check. If no books were given, take them all.
   vector < unsigned int >mybooks(books.begin(), books.end());
-  if (mybooks.empty())
+  if (mybooks.empty()) {
     mybooks = project_get_books(project);
+  }
   // Get all styles in the attached stylesheet.
   vector <ustring> styless = stylesheet_get_markers(stylesheet_get_actual (), NULL);
   for (unsigned int i = 0; i < styless.size(); i++)
@@ -60,15 +61,15 @@ checksheet: check whether markers are in the stylesheet of the project.
   }
   // Check each book.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
+    book = mybooks[bk];
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_localname(bk));
+      progresswindow->set_text(books_id_to_localname(book));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
       }
     }
-    book = mybooks[bk];
     // Check each chapter.
     vector <unsigned int> chapters = project_get_chapters(project, book);
     for (unsigned int ch = 0; ch < chapters.size(); ch++) {
@@ -91,8 +92,10 @@ checksheet: check whether markers are in the stylesheet of the project.
 
 CheckValidateUsfm::~CheckValidateUsfm()
 {
-  if (progresswindow)
+  if (progresswindow) {
     delete progresswindow;
+  }
+  progresswindow = NULL;
 }
 
 

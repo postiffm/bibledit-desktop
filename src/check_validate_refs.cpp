@@ -50,8 +50,9 @@ gui: whether to show graphical progressbar.
 
   // Get a list of the books to check. If no books were given, take them all.
   vector < unsigned int >mybooks(books.begin(), books.end());
-  if (mybooks.empty())
+  if (mybooks.empty()) {
     mybooks = project_get_books(project);
+  }
 
   // GUI.
   progresswindow = NULL;
@@ -61,15 +62,15 @@ gui: whether to show graphical progressbar.
   }
   // Go through each book.
   for (unsigned int bk = 0; bk < mybooks.size(); bk++) {
+    book = mybooks[bk];
     if (gui) {
       progresswindow->iterate();
-      progresswindow->set_text(books_id_to_localname(bk));
+      progresswindow->set_text(books_id_to_localname(book));
       if (progresswindow->cancel) {
         cancelled = true;
         return;
       }
     }
-    book = mybooks[bk];
 
     // Go through each chapter.
     vector < unsigned int >chapters = project_get_chapters(project, book);
