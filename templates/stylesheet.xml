@@ -4719,8 +4719,8 @@ Bibledit disregards this marker, as all text in Bibledit are in UTF-8 encoding.<
   <marker>rq</marker>
  <name translatable="yes">Inline Quotation References</name>
   <info translatable="yes">A cross-reference indicating the source text for the preceding quotation.</info>
-  <type>3</type>
-  <subtype>3</subtype>
+  <type>4</type>
+  <subtype>0</subtype>
   <fontsize>12</fontsize>
   <italic>on</italic>
   <bold>off</bold>
