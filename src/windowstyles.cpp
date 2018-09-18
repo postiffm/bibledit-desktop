@@ -190,11 +190,13 @@ WindowStyles::~WindowStyles()
 void WindowStyles::load(const ustring & stylesheet)
 {
   // Only load a new sheet if there's a change.
-  if (stylesheet == mystylesheet)
+  if (stylesheet == mystylesheet) {
     return;
+  }
   // If there was a previous stylesheet, save its usage data.
-  if (!mystylesheet.empty())
+  if (!mystylesheet.empty()) {
     store_recently_used_data();
+  }
   // Save new sheet
   mystylesheet = stylesheet;
   // The actual loading is done with a delay, to make it easier for Gtk.
@@ -214,8 +216,9 @@ bool WindowStyles::on_load_timeout(gpointer data)
 void WindowStyles::reload()
 {
   // If no sheet, bail out.
-  if (mystylesheet.empty())
+  if (mystylesheet.empty()) {
     return;
+  }
 
   // (Re)load the styles.
   extern Styles *styles;

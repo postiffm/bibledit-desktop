@@ -340,6 +340,9 @@ void usfm_remove_inline_text_markers(ustring & line, UsfmInlineMarkers * inline_
   }
 }
 
+// These lists are not at all exhaustive even for USFM 2.4.
+// To do: go through these and fill these out to match the standard.
+
 #define NUMBER_OF_MARKERS_IdentificationInformation 10
 char *USFM_MARKERS_IdentificationInformation[NUMBER_OF_MARKERS_IdentificationInformation] = {
   (char *)"id",
@@ -387,7 +390,7 @@ char *USFM_MARKERS_IntroductionParagraphsPoetry[NUMBER_OF_MARKERS_IntroductionPa
   (char *)"iq4"
 };
 
-#define NUMBER_OF_MARKERS_IntroductionOtherElements 8
+#define NUMBER_OF_MARKERS_IntroductionOtherElements 11
 char *USFM_MARKERS_IntroductionOtherElements[NUMBER_OF_MARKERS_IntroductionOtherElements] = {
   (char *)"iot",
   (char *)"io",
@@ -396,7 +399,10 @@ char *USFM_MARKERS_IntroductionOtherElements[NUMBER_OF_MARKERS_IntroductionOther
   (char *)"io3",
   (char *)"io4",
   (char *)"ior",
-  (char *)"ie"
+  (char *)"ie",
+  (char *)"ili",
+  (char *)"ili1",
+  (char *)"ili2"
 };
 
 #define NUMBER_OF_MARKERS_Titles 11

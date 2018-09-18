@@ -243,12 +243,20 @@ void CheckValidateUsfm::check(const ustring & text)
     } else if (marker == "k2") {
     } else if (marker == "k") {
       check_on_endmarker(line, marker, false);
-    } else if (marker == "li1") {
-    } else if (marker == "li2") {
-    } else if (marker == "li3") {
-    } else if (marker == "li4") {
-    } else if (marker == "lit") {
     } else if (marker == "li") {
+        check_marker_context(line, marker);
+    } else if (marker == "li1") {
+        check_marker_context(line, marker);
+    } else if (marker == "li2") {
+        check_marker_context(line, marker);
+    } else if (marker == "li3") {
+        check_marker_context(line, marker);
+    } else if (marker == "li4") {
+        check_marker_context(line, marker);
+    } else if (marker == "ili") {
+    } else if (marker == "ili1") {
+    } else if (marker == "ili2") {
+    } else if (marker == "lit") {
     } else if (marker == "maps") {
     } else if (marker == "mi") {
     } else if (marker == "mr") {
@@ -314,6 +322,7 @@ void CheckValidateUsfm::check(const ustring & text)
     } else if (marker == "restore") {
     } else if (marker == "r") {
     } else if (marker == "rq") {
+      check_on_endmarker(line, marker, false);
     } else if (marker == "s1") {
     } else if (marker == "s2") {
     } else if (marker == "s3") {
@@ -474,12 +483,15 @@ void CheckValidateUsfm::check(const ustring & text)
         || (marker == "k1")
         || (marker == "k2")
         || (marker == "k")
+        || (marker == "li")
         || (marker == "li1")
         || (marker == "li2")
         || (marker == "li3")
         || (marker == "li4")
+        || (marker == "ili")
+        || (marker == "ili1")
+        || (marker == "ili2")
         || (marker == "lit")
-        || (marker == "li")
         || (marker == "maps")
         || (marker == "mi")
         || (marker == "mr")
@@ -595,6 +607,16 @@ void CheckValidateUsfm::check(const ustring & text)
   }
 }
 
+void CheckValidateUsfm::check_marker_context(ustring & line, const ustring & marker)
+{
+    // This is very crude as far as language checking goes, and for a very crude feature of the 
+    // USFM language. \\li is not allowed in introductory material, i.e. chapter 0. It has to 
+    // be \ili. This styling does allow for different styles of indentation in Bible text
+    // versus introduction text, but it is a bit overkill anyway.
+    if ((chapter == 0) && ((marker == "li") || (marker == "li1") || (marker == "li2") || (marker == "li3") || (marker == "li4"))) {
+      message(marker + _(": This marker cannot be used in chapter 0"));   
+    }
+}
 
 void CheckValidateUsfm::check_on_endmarker(ustring & line, const ustring & marker, bool optional)
 // This test is ran by any marker that needs an endmarker.
