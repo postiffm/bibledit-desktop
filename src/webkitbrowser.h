@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include "reference.h"
 #include "types.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 
 class WebkitBrowser
