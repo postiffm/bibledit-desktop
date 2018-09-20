@@ -208,7 +208,7 @@ AC_SUBST(GTKSOURCEVIEW_CFLAGS)
 AC_SUBST(GTKSOURCEVIEW_LIBS)
 
 
-PKG_CHECK_MODULES(WEBKITGTK, webkitgtk-3.0 >= 1.0.0,,AC_MSG_ERROR(libwebkitgtk-3.0 development version >= 1.0.0 is needed.))
+PKG_CHECK_MODULES(WEBKITGTK, webkit2gtk-4.0 >= 2.20,,AC_MSG_ERROR(libwebkit2gtk-4.0 development version >= 2.20 is needed.))
 AC_SUBST(WEBKITGTK_CFLAGS)
 AC_SUBST(WEBKITGTK_LIBS)
 
