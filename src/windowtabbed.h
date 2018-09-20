@@ -74,8 +74,6 @@ private:
 			   WebKitPolicyDecision    *decision,
 			   WebKitPolicyDecisionType decision_type);
 
-    //    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-    //void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
 };
 
@@ -84,7 +82,6 @@ class WindowTabbed : public FloatingWindow
 public:
     WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
     virtual ~WindowTabbed();
-    void Concordance(const ustring &projname);
     void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);    // create a new tab, fill with given content
     void updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml); // update existing tab, all new content
     bool tabExists(const ustring &tabTitle) const;
