@@ -27,7 +27,7 @@
 #include "reference.h"
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 
 enum RelatedItemType {ritNone, ritKeytermId, ritStrongNumber, ritParallels};

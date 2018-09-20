@@ -28,7 +28,7 @@
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
 #include "editor.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 
 class WindowCheckKeyterms : public FloatingWindow
