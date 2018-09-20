@@ -334,13 +334,13 @@ extern Concordance *concordance;
 
 void SingleTab::html_link_clicked (const gchar * url)
 {
-  // Store scrolling position for the now active url.
+  // Store scrolling position for the now active url. (Is this duplicated from above?)
   //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   //scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
 
   //DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
   //DEBUG("active_url="+active_url+" new url="+ustring(url))
-  
+
   // New url.
   //parent->active_url = url;
   ustring myurl = url;
