@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2016 Matt Postiff.
+ ** Copyright (©) 2016-2018 Matt Postiff.
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
 #include "editor.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 //----------------------------------------------------------------------------------
 // The tabbed window is a GTK notebook that can display information about the text
@@ -62,8 +62,20 @@ private:
     
     // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
     static void on_close_button_clicked (GtkButton *button, gpointer user_data);
-    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-    void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+    // You might think in the floating window base class, but some windows are webviews, and others are other custom things,
+    // so that might not work too well!
+    static gboolean
+      on_decide_policy_cb (WebKitWebView           *web_view,
+			   WebKitPolicyDecision    *decision,
+			   WebKitPolicyDecisionType decision_type,
+			   gpointer                 user_data);
+
+    void decide_policy_cb (WebKitWebView           *web_view,
+			   WebKitPolicyDecision    *decision,
+			   WebKitPolicyDecisionType decision_type);
+
+    //    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
+    //void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
 };
 
@@ -95,6 +107,5 @@ public:
     void setReady(bool _ready) { ready = _ready; }
     bool getReady(void)        { return ready; }
 };
-
 
 #endif
