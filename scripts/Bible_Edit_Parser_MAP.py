@@ -1,3 +1,6 @@
+# This seems to work fine on MacOS and Linux, but not Windows 10.
+# The issue is Hebrew characters. The error msg "Unicode deode error...codec cannot decode bytes 0x9d...position 72"
+
 import os
 
 filename = "data" #this will eventually need to be whatever the user is inputing from Bible edit
