@@ -1,20 +1,20 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 
@@ -70,7 +70,7 @@ void quick_sort(vector < unsigned int >&one, vector < Reference > &two, unsigned
 
 void sort_references(vector < Reference > &references)
 /*
- Sorts all references from Genesis to Revelation. 
+ Sorts all references from Genesis to Revelation.
  Sorts on book first, then chapter, and finally verse.
  */
 {
@@ -97,8 +97,8 @@ void decode_reference(const ustring & reference, ustring & book, ustring & chapt
  * - book
  * - chapter
  * - verse
- * 
- * E.g. "Song of Solomon 1:1" becomes "Song of Solomon", 
+ *
+ * E.g. "Song of Solomon 1:1" becomes "Song of Solomon",
  * chapter "1" and verse "1".
  */
 {
@@ -125,7 +125,7 @@ void decode_reference(const ustring & reference, ustring & book, ustring & chapt
 
 bool reference_discover_internal(const Reference &oldRef, // inRef was unsigned int oldbook, unsigned int oldchapter, const ustring & oldverse
 				 const ustring &reference,
-				 Reference &newRef, // outRef was unsigned int &newbook, unsigned int &newchapter, ustring & newverse, 
+				 Reference &newRef, // outRef was unsigned int &newbook, unsigned int &newchapter, ustring & newverse,
 				 bool consult_memory)
 
 /*
@@ -293,15 +293,15 @@ bool reference_discover_internal(const Reference &oldRef, // inRef was unsigned 
 //-------------------------------------------------------------------------------
 bool reference_discover(const Reference &oldRef, // inRef was unsigned int oldbook, unsigned int oldchapter, const ustring & oldverse
 			const ustring &reference,
-			Reference &newRef, // outRef was unsigned int &newbook, unsigned int &newchapter, ustring & newverse, 
+			Reference &newRef, // outRef was unsigned int &newbook, unsigned int &newchapter, ustring & newverse,
 			bool consult_memory)
 {
-  /* 
+  /*
      This is the new function "reference_discover". It uses the previous one which
      has now been renamed "reference_discover_internal".
      This new function iterates even more over a referencereference_discover, and is able to cut
-     off bits at the beginning that would not be a references. This occurs when 
-     loading a file with references saved by BibleWorks. It has a format as 
+     off bits at the beginning that would not be a references. This occurs when
+     loading a file with references saved by BibleWorks. It has a format as
      shown here:
 
      BWRL 1
@@ -310,17 +310,26 @@ bool reference_discover(const Reference &oldRef, // inRef was unsigned int oldbo
      KJV 1Ch 6:36
      KJV 1Co 1:1     I think is the shortest example we might see of this sort, 11 bytes long
 
-     In this example the "KJV" needs to be taken out and then the reference will 
+     In this example the "KJV" needs to be taken out and then the reference will
      appear cleanly.
-     
+
      If "consult_memory" is true, it tries to find out from the verses memory where to go.
    */
   // Do the discovery.
   bool result;
-  result = reference_discover_internal(oldRef, reference, newRef, consult_memory);
+
+  /* clean up the string spaces */
+  ustring reference_formatted = reference;
+
+  ustring::size_type pos;
+  while (( pos = reference_formatted.find( "  " )) != ustring::npos ) {
+    reference_formatted = reference_formatted.replace( pos, 2, " " );
+  }
+
+  result = reference_discover_internal(oldRef, reference_formatted, newRef, consult_memory);
   if (!result) {
-    if (reference.length() >= 11) {
-      ustring adaptedreference(reference);
+    if (reference_formatted.length() >= 11) {
+      ustring adaptedreference(reference_formatted);
       adaptedreference.erase(0, 4); // erase the Bible version "KJV " and try again
       result = reference_discover_internal(oldRef, adaptedreference, newRef, consult_memory);
     }
@@ -427,8 +436,8 @@ unsigned int book_find_valid_internal(const ustring & rawbook)
       return index;
     }
   }
-  // Not yet found. 
-  // Go through the language of the project, and see if the book is among the 
+  // Not yet found.
+  // Go through the language of the project, and see if the book is among the
   // booknames or abbreviations.
   {
     extern Settings *settings;
@@ -468,9 +477,9 @@ unsigned int book_find_valid(const ustring & rawbook)
 // Returns the id of the raw book. Returns 0 if no book was found.
 {
   // It uses a mechanism to speed up discovery of the book.
-  // We keep a list of raw books in memory, 
+  // We keep a list of raw books in memory,
   // and a list of the ids that have been assigned to those raw books.
-  // If the same raw book is passed again, we just return the previously 
+  // If the same raw book is passed again, we just return the previously
   // discovered id.
   static vector < unsigned int >assigned_ids;
   static vector < ustring > raw_books;
@@ -523,7 +532,7 @@ unsigned int reference_to_numerical_equivalent(const Reference & reference)
 
 ustring book_chapter_verse_to_reference(const ustring & book, int chapter, const ustring & verse)
 /*
- Changes a bookname, with a chapter number, and a verse number, 
+ Changes a bookname, with a chapter number, and a verse number,
  to a full references, e.g. "Genesis 1:1a-4".
  */
 {
@@ -571,7 +580,7 @@ vector < int >verses_encode(const ustring & verse)
  This encodes a verse into a number of integers. As we may have ranges of verses,
  like 1b-5, or 1b,2, we handle these ranges or sequences by converting them to
  a series of integers values, each integer value representing half of a verse.
- So verse 0 becomes then "0, 1", and verse 1 will be "2, 3". Verse 1a will be 
+ So verse 0 becomes then "0, 1", and verse 1 will be "2, 3". Verse 1a will be
  "2".
  */
 {
