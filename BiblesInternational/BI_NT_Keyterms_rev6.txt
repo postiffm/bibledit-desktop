@@ -1,4 +1,4 @@
-﻿BI NT Keyterms﻿ v. 5
+﻿BI NT Keyterms﻿ v. 6
 [keyterm]
 BI10000 3956*   ALL, ALL (KINDS OF), ALL (THINGS)
 [references]
