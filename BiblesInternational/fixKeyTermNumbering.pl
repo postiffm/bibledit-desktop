@@ -56,10 +56,20 @@ while ($line = <$fh>) {
 	$ktNumber++;
 	print $line;
     }
+    # A keyterm like BI10441 3142   TESTIMONY
+    # It does NOT have an 'a' or 'A' at the end of it.
     elsif ($line =~ /^\s*BI[0-9]+\s/) {
 	$line =~ s/^BI[0-9]+\s/BI$ktNumber /;
 	print $line;
     }
+    # A keyterm like BI10432A 5368*   HOSPITABLE, LOVE GUESTS
+    # It DOES have an 'a' or 'A' at the end of it.
+    elsif ($line =~ /^\s*BI[0-9]+[a-zA-Z]\s/) {
+	$line =~ s/^BI[0-9]+[a-zA-Z]\s/BI$ktNumber /;
+	print $line;
+    }
+    # Just a line containing a Bible reference or other stuff we want to
+    # pass on to the output. Almost not adjustment, except fix leading spaces.
     else {
 	$line =~ s/^\s+(.+)/$1/;  # Remove leading spaces from lines that have stuff
 	# Trying not to remove blank lines.
