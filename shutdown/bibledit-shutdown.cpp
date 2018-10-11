@@ -96,7 +96,7 @@ int main (int argc, char *argv[])
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
   g_signal_connect ((gpointer) window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
 
-  GtkWidget * vbox = gtk_vbox_new (FALSE, 10);
+  GtkWidget * vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
   gtk_widget_show (vbox);
   gtk_container_add (GTK_CONTAINER (window), vbox);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 30);
@@ -109,7 +109,7 @@ int main (int argc, char *argv[])
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
-  GtkWidget * button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+  GtkWidget * button = gtk_button_new_with_label ("_Cancel");
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
   g_signal_connect ((gpointer) button, "clicked", G_CALLBACK (gtk_main_quit), NULL);
