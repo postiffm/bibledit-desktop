@@ -52,7 +52,7 @@ int main (int argc, char *argv[])
   GtkWidget * scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-  GtkWidget * vbox = gtk_vbox_new(FALSE,1);
+  GtkWidget * vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,1);
   gtk_container_add (GTK_CONTAINER (window), vbox);
   gtk_container_add (GTK_CONTAINER (vbox), scrolledwindow);
 
