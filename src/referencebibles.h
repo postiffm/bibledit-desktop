@@ -51,9 +51,11 @@ class ReferenceBibles {
 public:
   ReferenceBibles();
   ~ReferenceBibles();
-  void write(const Reference &ref, HtmlWriter2 &htmlwriter);
+  void write_bibles(const Reference &ref, HtmlWriter2 &htmlwriter);
+  void write_apparatus(const Reference &ref, HtmlWriter2 &htmlwriter);
 private:
   vector<bible *> bibles;
+  vector<bible *> apparatus;
 };
 
 #endif

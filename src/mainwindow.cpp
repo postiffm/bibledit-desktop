@@ -2479,10 +2479,15 @@ void MainWindow::on_navigation_new_reference()
   // Analysis window...contains reference Bibles, cross references, and other stuff (later)
   if (window_analysis) {
     HtmlWriter2 html("");
-    refbibles->write(navigation.reference, html);
+    refbibles->write_bibles(navigation.reference, html);
     html.finish();
     window_analysis->updateTab(_("Greek and English"), html);
     
+    html.clear(); html.init("");
+    refbibles->write_apparatus(navigation.reference, html);
+    html.finish();
+    window_analysis->updateTab(_("Apparatus"), html);
+
     html.clear(); html.init("");
     crossrefs->write(navigation.reference, html);
     html.finish();
@@ -2857,10 +2862,15 @@ void MainWindow::on_view_analysis ()
     
     HtmlWriter2 html("");
     // Load reference Bible data
-    refbibles->write(navigation.reference, html);
+    refbibles->write_bibles(navigation.reference, html);
     html.finish();
     window_analysis->newTab(_("Greek and English"), html);
     
+    html.clear(); html.init("");
+    refbibles->write_apparatus(navigation.reference, html);
+    html.finish();
+    window_analysis->newTab(_("Apparatus"), html);
+
     // Cross References
     if (!crossrefs) {
       crossrefs = new CrossReferences();   
