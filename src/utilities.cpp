@@ -503,11 +503,12 @@ ReadFiles::~ReadFiles()
 }
 
 
-ReadText::ReadText(const ustring & file, bool silent, bool trimAll, bool trimEnding)
+ReadText::ReadText(const ustring & file, bool silent, bool trimAll, bool trimEnding, bool supressBlanks)
 {
-  // Reads the text and stores it line by line, trimmed, into "lines".
-  // If "silent" is true, then no exception will be thrown in case of an error.
-  // The lines will be trimmed if "trimming" is true.
+  // Reads the text and stores it line by line, trimmed, into lines storage.
+  // If silent is true, then no exception will be thrown in case of an error.
+  // If trimAll is true, whitespace at beginningn and end will be trimmed off.
+  // If trimEnding is true, whitespace at end will be trimmed off.
   ifstream in(file.c_str());
   if (!in) {
     if (!silent) {
@@ -524,7 +525,10 @@ ReadText::ReadText(const ustring & file, bool silent, bool trimAll, bool trimEnd
     else if (trimEnding) {
       s = trimEnd(s);
     }
-    lines.push_back(s);
+    if (supressBlanks && (s == "")) {
+        // this is a blank line that we don't want to see
+    }
+    else { lines.push_back(s); } // most times, this line will execute
   }
 }
 

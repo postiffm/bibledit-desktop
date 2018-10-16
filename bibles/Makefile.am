@@ -6,6 +6,7 @@ bibles_dir = $(pkgdatadir)/bibles
 # Destination sub-directories
 bibles_byzascii_dir = $(bibles_dir)/byzascii
 bibles_sblgnt_dir = $(bibles_dir)/sblgnt
+bibles_sblapp_dir = $(bibles_dir)/sblgnt
 bibles_engleb_dir = $(bibles_dir)/engleb
 bibles_engmtv_dir = $(bibles_dir)/engmtv
 
@@ -24,6 +25,13 @@ bibles_sblgnt__DATA   = sblgnt/61-Mt.txt  sblgnt/62-Mk.txt  sblgnt/63-Lk.txt  sb
 			sblgnt/77-Tit.txt sblgnt/78-Phm.txt sblgnt/79-Heb.txt sblgnt/80-Jas.txt \
 			sblgnt/81-1Pe.txt sblgnt/82-2Pe.txt sblgnt/83-1Jn.txt sblgnt/84-2Jn.txt \
 			sblgnt/85-3Jn.txt sblgnt/86-Jud.txt sblgnt/87-Re.txt  sblgnt/license.txt
+bibles_sblapp__DATA   = sblgnt/61-Mt-APP.txt sblgnt/62-Mk-APP.txt sblgnt/63-Lk-APP.txt sblgnt/64-Jn-APP.txt \
+			sblgnt/65-Ac-APP.txt sblgnt/66-Ro-APP.txt sblgnt/67-1Co-APP.txt sblgnt/68-2Co-APP.txt \
+			sblgnt/69-Ga-APP.txt sblgnt/70-Eph-APP.txt sblgnt/71-Php-APP.txt sblgnt/72-Col-APP.txt \
+			sblgnt/73-1Th-APP.txt sblgnt/74-2Th-APP.txt sblgnt/75-1Ti-APP.txt sblgnt/76-2Ti-APP.txt \
+			sblgnt/77-Tit-APP.txt sblgnt/78-Phm-APP.txt sblgnt/79-Heb-APP.txt sblgnt/80-Jas-APP.txt \
+			sblgnt/81-1Pe-APP.txt sblgnt/82-2Pe-APP.txt sblgnt/83-1Jn-APP.txt sblgnt/84-2Jn-APP.txt \
+			sblgnt/85-3Jn-APP.txt sblgnt/86-Jud-APP.txt sblgnt/87-Re-APP.txt  sblgnt/license.txt
 bibles_engleb__DATA   = engleb/Gen.txt  engleb/Exo.txt  engleb/Lev.txt  engleb/Num.txt   engleb/Deut.txt engleb/Josh.txt engleb/Judg.txt \
 			engleb/Ruth.txt engleb/1Sa.txt  engleb/2Sa.txt  engleb/1Ki.txt   engleb/2Ki.txt  engleb/1Ch.txt  engleb/2Ch.txt \
 			engleb/Ezra.txt engleb/Neh.txt  engleb/Esth.txt engleb/Job.txt   engleb/Psal.txt engleb/Prov.txt engleb/Eccl.txt \

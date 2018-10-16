@@ -37,6 +37,11 @@ book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, unsigned int _bo
   // nothing special needs done       
 }
 
+book_sblgntapp::book_sblgntapp(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
+{
+  // nothing special needs done
+}
+
 book_engmtv::book_engmtv(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
   // nothing special needs done       
@@ -237,6 +242,11 @@ bible_byz::bible_byz(const ustring &_proj, const ustring &_font) : bible (_proj,
 bible_sblgnt::bible_sblgnt(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here   
+}
+
+bible_sblgntapp::bible_sblgntapp(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
+{
+  // Nothing special to do here
 }
 
 bible_engmtv::bible_engmtv(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
@@ -496,6 +506,85 @@ void book_sblgnt::load(void)
     }
 }
 
+// Load SBL Greek NT Text from shared resource directory
+void book_sblgntapp::load(void)
+{
+    ustring filenames[27] = { "61-Mt-APP.txt", "62-Mk-APP.txt", "63-Lk-APP.txt", "64-Jn-APP.txt",
+                              "65-Ac-APP.txt", "66-Ro-APP.txt", "67-1Co-APP.txt", "68-2Co-APP.txt",
+                              "69-Ga-APP.txt", "70-Eph-APP.txt", "71-Php-APP.txt", "72-Col-APP.txt",
+                              "73-1Th-APP.txt", "74-2Th-APP.txt", "75-1Ti-APP.txt", "76-2Ti-APP.txt",
+                              "77-Tit-APP.txt", "78-Phm-APP.txt", "79-Heb-APP.txt", "80-Jas-APP.txt",
+                              "81-1Pe-APP.txt", "82-2Pe-APP.txt", "83-1Jn-APP.txt", "84-2Jn-APP.txt",
+                              "85-3Jn-APP.txt", "86-Jud-APP.txt", "87-Re-APP.txt" };
+
+    // We know our book number and localized name already
+    unsigned int i = 0;
+    unsigned int bookidx = booknum - 40;
+    if ((bookidx < 0) ||  (bookidx > 26)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+
+    //  From utilities.cpp
+    ReadText rt(Directories->get_package_data() + "/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimAll*/true, /*trimEnd*/true, /*supressBlanks*/true);
+    unsigned int currchapnum = 0;
+    unsigned int currversenum = 0;
+    chapter *currchap = NULL;
+    int linecnt = 0;
+
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         // First lines are boilerplate, like this:
+         // <blank>
+         // Matthew Apparatus Data
+         // Order of edition citation: WH Treg NIV RP
+         // <blank>
+         // Not counting blanks because supressBlanks=true above, so line 0 and 1 must be ignored.
+         if (linecnt <= 1) { linecnt++; continue; }
+         //  Extract chapter and verse,  and leading space. The lines are always
+         //  well formed: Book<space>1:5<tab>Verse text.
+         //  Remove book name from the line
+         size_t spaceposition = it.find_first_of(" ");
+         it.erase(0,  spaceposition+1);
+         // Extract chapter number
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         // Extract verse number
+         size_t tabposition = it.find_first_of("\t");
+         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
+         unsigned int versenum = convert_to_int(versestring);
+         // Erase everything up to and including the tab
+         it.erase(0, tabposition+1);
+         if ((chapnum != currchapnum) && (currchapnum-chapnum > 0)) {
+           // "Fill in" blank chapter numbers
+           for (i=currchapnum+1; i<=chapnum; i++) {
+             chapter *newchap = new chapter(this, i);
+             chapters.push_back(newchap);
+             currchap = newchap;
+           }
+           currchapnum = chapnum;
+           currversenum = 0; // when we get to a new chapter, have to reset the verse number
+
+           cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+
+         if ((versenum != currversenum) && (versenum-currversenum>0)) {
+           if (versenum-currversenum>1) {
+           for (i=currversenum+1; i<versenum; i++) {
+             verse *newverse = new verse(currchap, i, ustring("No apparatus notes for ") + std::to_string(chapnum) + ":" + std::to_string(i)); //  takes a copy of the ustring text (it)
+             currchap->verses.push_back(newverse); //  append verse to current chapter
+             newverse->print(); // debug
+           }
+           }
+           verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+           currchap->verses.push_back(newverse); //  append verse to current chapter
+           currversenum = versenum;
+
+           cerr << "Created new verse " << versenum << " from " << filenames[bookidx] << endl;
+         }
+    }
+}
+
 // Load English Majority Text version from shared resource directory
 void book_engmtv::load(void)
 {
@@ -657,6 +746,12 @@ bool bible_sblgnt::validateBookNum(const unsigned int booknum)
   return true;
 }
 
+bool bible_sblgntapp::validateBookNum(const unsigned int booknum)
+{
+  if ((booknum < 40) || (booknum > 66)) { return false; }
+  return true;
+}
+
 bool bible_engmtv::validateBookNum(const unsigned int booknum)
 {
   if ((booknum < 40) || (booknum > 66)) { return false; }
@@ -689,6 +784,9 @@ book *bible_byz::createNewBook(bible *_bbl, const ustring &_bookname, unsigned i
 
 book *bible_sblgnt::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
 { return new book_sblgnt(this, _bookname,  _booknum); }
+
+book *bible_sblgntapp::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_sblgntapp(this, _bookname,  _booknum); }
 
 book *bible_engmtv::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
 { return new book_engmtv(this, _bookname,  _booknum); }

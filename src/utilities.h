@@ -78,7 +78,7 @@ private:
 class ReadText
 {
 public:
-  ReadText (const ustring & file, bool silent = false, bool trimAll = true, bool trimEnding=false);
+  ReadText (const ustring & file, bool silent = false, bool trimAll = true, bool trimEnding=false, bool supressBlanks=false);
   ~ReadText ();
   vector < ustring > lines;
 private:

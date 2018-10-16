@@ -93,6 +93,12 @@ public:
   void load(void);
 };
 
+class book_sblgntapp : public book {
+public:
+  book_sblgntapp(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+  void load(void);
+};
+
 class book_engmtv : public book {
 public:
   book_engmtv(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
@@ -177,6 +183,13 @@ public:
 class bible_sblgnt : public bible {
 public:
     bible_sblgnt(const ustring &_proj, const ustring &_font);
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+};
+
+class bible_sblgntapp : public bible {
+public:
+    bible_sblgntapp(const ustring &_proj, const ustring &_font);
     bool validateBookNum(const unsigned int booknum);
     book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };
