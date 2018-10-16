@@ -46,12 +46,12 @@ ReferenceBibles::~ReferenceBibles()
 {
   uint8_t i;
 
-  for (i=0; bibles.size(); i++) {
+  for (i=0; i < bibles.size(); i++) {
     delete bibles.at(i);
   }
   bibles.clear();
 
-  for (i=0; apparatus.size(); i++) {
+  for (i=0; i < apparatus.size(); i++) {
     delete apparatus.at(i);
   }
   apparatus.clear();
