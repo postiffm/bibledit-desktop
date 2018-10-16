@@ -318,6 +318,7 @@ void CheckValidateUsfm::check(const ustring & text)
     } else if (marker == "qm") {
     } else if (marker == "qr") {
     } else if (marker == "qs") {
+      check_on_endmarker(line, marker, false);
     } else if (marker == "qt") {
       check_on_endmarker(line, marker, false);
     } else if (marker == "q") {

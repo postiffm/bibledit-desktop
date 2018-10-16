@@ -40,9 +40,9 @@
 #include "keyboard.h"
 #include "tiny_utilities.h"
 #include "git.h"
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
+//#include <gtksourceview/gtksourcelanguage.h>
+//#include <gtksourceview/gtksourcelanguagemanager.h>
+//#include <gtksourceview/gtksourcestyleschememanager.h>
 #include "progresswindow.h"
 #include <glib/gi18n.h>
 
