@@ -24,8 +24,6 @@
 
 #include <gtk/gtk.h>
 #include "types.h"
-#include "editor_aids.h"
-
 
 class InsertNoteDialog
 {

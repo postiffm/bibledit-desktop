@@ -80,6 +80,8 @@ private:
 bool usfm_is_id (const ustring& marker);
 bool usfm_is_chapter (const ustring& marker);
 bool usfm_is_verse (const ustring& marker);
-
+const gchar * unknown_style();
+const gchar * note_starting_style ();
+const gchar * usfm_clipboard_code ();
 
 #endif

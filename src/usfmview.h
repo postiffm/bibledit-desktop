@@ -28,7 +28,6 @@
 #include "reference.h"
 #include "style.h"
 #include "types.h"
-#include "editor_aids.h"
 #include <gtksourceview/gtksourceview.h>
 #include "spelling.h"
 #include "chapterview.h"

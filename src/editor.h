@@ -21,6 +21,7 @@
 #ifndef INCLUDED_EDITOR2_H
 #define INCLUDED_EDITOR2_H
 
+enum EditorMovementType {emtForward, emtBack, emtUp, emtDown};
 
 #include "libraries.h"
 #include <glib.h>
@@ -28,7 +29,7 @@
 #include "reference.h"
 #include "style.h"
 #include "types.h"
-#include "editor_aids.h"
+#include "libraries.h"
 #include "highlight.h"
 #include "spelling.h"
 #include "editoractions.h"
@@ -285,6 +286,50 @@ private:
 
 };
 
+void marker_get_type_and_subtype(const ustring& project, const ustring& marker, StyleType& type, int& subtype);
+
+EditorNoteType note_type_get(const ustring& project, const ustring& marker);
+NoteNumberingType note_numbering_type_get(const ustring& project, const ustring& marker);
+ustring note_numbering_user_sequence_get(const ustring& project, const ustring& marker);
+
+gint table_get_n_rows(GtkTable * table);
+gint table_get_n_columns(GtkTable * table);
+
+void usfm_internal_add_text(ustring& text, const ustring& addition);
+void usfm_internal_get_text_close_character_style(ustring& text, const ustring& project, const ustring& style);
+ustring usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, const ustring& project);
+
+void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
+ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring& verse_marker, const ustring& project, GtkWidget * parent_box);
+bool get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
+vector <ustring> get_character_styles_between_iterators (GtkTextIter startiter, GtkTextIter enditer);
+
+void textbuffer_apply_named_tag(GtkTextBuffer *buffer, const ustring& name, const GtkTextIter *start, const GtkTextIter *end);
+void textbuffer_insert_with_named_tags(GtkTextBuffer *buffer, GtkTextIter *iter, const ustring& text, ustring first_tag_name, ustring second_tag_name);
+
+void clear_and_destroy_editor_actions (deque <EditorAction *>& actions);
+void on_container_tree_callback_destroy (GtkWidget *widget, gpointer user_data);
+void editor_text_append(GtkTextBuffer * textbuffer, const ustring & text, const ustring & paragraph_style, const ustring & character_style);
+
+gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action);
+void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset);
+
+bool text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+bool text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+
+EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action);
+EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles);
+void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
+
+vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox,
+                                         GType of_type = G_TYPE_NONE);
+GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
+                                      GtkWidget * textview);
+GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
+                                          GtkWidget * textview);
+void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
+
+bool iterator_includes_note_caller (GtkTextIter iter);
+bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
 
 #endif
-

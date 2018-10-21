@@ -26,8 +26,13 @@
 #include "utilities.h"
 #include "tiny_utilities.h"
 #include "projectutils.h"
-#include "editor_aids.h"
 #include <glib/gi18n.h>
+
+// In editor.cpp...need fwd declarations here
+// TO DO: Should not need this. It is because the code is sphaghetti code
+// that this has become necessary.
+bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
+void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
 
 ustring spelling_global_dictionary()
 {

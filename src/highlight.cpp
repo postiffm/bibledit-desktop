@@ -31,6 +31,12 @@
 #include "xmlutils.h"
 #include "debug.h"
 
+// In editor.cpp...need fwd declarations here
+// TO DO: Should not need this. It is because the code is sphaghetti code
+// that this has become necessary.
+void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
+ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring& verse_marker, const ustring& project, GtkWidget * parent_box);
+
 Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
 {
   // Save and initialize variables.

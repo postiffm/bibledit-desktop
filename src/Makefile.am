@@ -172,7 +172,6 @@ bibledit_desktop_SOURCES = \
   dialogpdfviewer.cpp \
   displayprojectnotes.cpp \
   styles.cpp \
-  editor_aids.cpp \
   dialoginserttable.cpp \
   git.cpp \
   usfm2xslfo_utils.cpp \
@@ -418,7 +417,6 @@ bibledit_rdwrt_SOURCES = \
   check_parallel_passages.cpp \
   displayprojectnotes.cpp \
   styles.cpp \
-  editor_aids.cpp \
   git.cpp \
   usfm2xslfo_utils.cpp \
   hyphenate.cpp \

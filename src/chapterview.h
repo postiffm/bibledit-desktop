@@ -21,11 +21,11 @@
 #define INCLUDED_CHAPTERVIEW_H
 
 #include "reference.h"
-#include "editor_aids.h"
 
 // The various views that we support
 
 enum viewType { vtNone, vtFormatted, vtUSFM, vtExperimental };
+enum EditorTextViewType {etvtBody, etvtNote, etvtTable};
 
 // Define the interface that must be implemented for a chapter-based
 // text view of the Bible. Right now we have a usfmview and a somewhat

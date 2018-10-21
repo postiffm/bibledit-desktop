@@ -20,7 +20,16 @@
 
 #include "editoractions.h"
 #include "gwrappers.h"
-#include "editor_aids.h"
+#include "usfm.h"
+
+// Defined in editor.h, so need fwd declarations.
+// TO DO: Should not need this. It is because the code is sphaghetti code
+// that this has become necessary.
+vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox,
+                                         GType of_type = G_TYPE_NONE);
+void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
+vector <ustring> get_character_styles_between_iterators (GtkTextIter startiter, GtkTextIter enditer);
+void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
 
 EditorAction::EditorAction(EditorActionType type_in)
 {

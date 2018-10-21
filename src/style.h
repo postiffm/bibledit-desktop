@@ -25,6 +25,7 @@
 #include "libraries.h"
 #include <glib.h> 
 
+enum EditorNoteType {entFootnote, entEndnote, entCrossreference};
 
 enum StyleType {
   stIdentifier, stNotUsedComment, stNotUsedRunningHeader, stStartsParagraph, stInlineText, 
@@ -145,5 +146,23 @@ public:
   ustring userstring3;
 };
 
+bool style_get_plaintext(StyleType type, int subtype);
+bool style_get_paragraph(StyleType type, int subtype);
+bool style_get_starts_new_line_in_editor(StyleType type, int subtype);
+bool style_get_starts_new_line_in_usfm(StyleType type, int subtype);
+bool style_get_displays_marker(StyleType type, int subtype);
+bool style_get_starts_character_style(StyleType type, int subtype);
+bool style_get_starts_verse_number(StyleType type, int subtype);
+ustring style_get_verse_marker(const ustring& project);
+bool style_get_starts_footnote(StyleType type, int subtype);
+bool style_get_starts_endnote(StyleType type, int subtype);
+bool style_get_starts_crossreference(StyleType type, int subtype);
+bool style_get_starts_note_content(StyleType type, int subtype);
+ustring style_get_default_note_style(const ustring& project, EditorNoteType type);
+ustring style_get_paragraph_note_style(const ustring& project);
+bool style_get_starts_table_row(StyleType type, int subtype);
+ustring style_get_table_row_marker(const ustring& project);
+bool style_get_starts_table_cell(StyleType type, int subtype);
+ustring style_get_table_cell_marker(const ustring& project, int column);
 
 #endif

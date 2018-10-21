@@ -25,7 +25,6 @@
 #include "libraries.h"
 #include <glib.h>
 #include <gtk/gtk.h>
-#include "editor_aids.h"
 #include "htmlwriter2.h"
 
 

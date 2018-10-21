@@ -21,7 +21,6 @@
 #include <glib.h>
 #include "dialoginserttable.h"
 #include "help.h"
-#include "editor_aids.h"
 #include "usfmtools.h"
 #include <glib/gi18n.h>
 

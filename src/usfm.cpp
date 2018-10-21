@@ -296,3 +296,21 @@ bool usfm_is_verse(const ustring & marker)
 {
   return (marker == "v");
 }
+
+const gchar *unknown_style()
+// Gives the name of the style that is for markers that are not in the stylesheet.
+{
+  return "unknown";
+}
+
+const gchar * note_starting_style ()
+// Gives the name of the style that a note caller in the text starts with.
+{
+  return "note";
+}
+
+const gchar * usfm_clipboard_code ()
+// Gives the clipboard text that signifies that no text was copied, but USFM code only.
+{
+  return "<USFM>";
+}
