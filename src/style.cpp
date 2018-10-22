@@ -123,7 +123,7 @@ Style::~Style()
   }
 }
 
-bool style_get_plaintext(StyleType type, int subtype)
+bool Style::get_plaintext(StyleType type, int subtype)
 /*
  Returns the property "plain text" of a certain style when displayed in the Editor.
  Plain text means that this style is to be displayed in the editor using
@@ -185,12 +185,12 @@ bool style_get_plaintext(StyleType type, int subtype)
 }
 
 
-bool style_get_paragraph(StyleType type, int subtype)
+bool Style::get_paragraph(StyleType type, int subtype)
 /*
  Returns true if the combination of the "type" and the"subtype" is
  a paragraph style, as opposed to a character style.
 
- Note that there is another function, "style_get_starts_new_line_in_editor", 
+ Note that there is another function, Style::get_starts_new_line_in_editor, 
  which has a slightly different use. Let these two not be confused.
 
  This function says whether a style is a paragraph style, and the other 
@@ -268,7 +268,7 @@ bool style_get_paragraph(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_new_line_in_editor(StyleType type, int subtype)
+bool Style::get_starts_new_line_in_editor(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a new line in the formatted view.
 {
@@ -344,7 +344,7 @@ bool style_get_starts_new_line_in_editor(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_new_line_in_usfm(StyleType type, int subtype)
+bool Style::get_starts_new_line_in_usfm(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a new line in the usfm code.
 {
@@ -418,7 +418,7 @@ bool style_get_starts_new_line_in_usfm(StyleType type, int subtype)
 }
 
 
-bool style_get_displays_marker(StyleType type, int subtype)
+bool Style::get_displays_marker(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" should display
 // the marker in the formatted view.
 {
@@ -496,7 +496,7 @@ bool style_get_displays_marker(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_character_style(StyleType type, int subtype)
+bool Style::get_starts_character_style(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // (or ends, of course) a character style in the formatted view.
 {
@@ -571,7 +571,7 @@ bool style_get_starts_character_style(StyleType type, int subtype)
   return starts_character_style;
 }
 
-bool style_get_starts_verse_number(StyleType type, int subtype)
+bool Style::get_starts_verse_number(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a verse number.
 {
@@ -608,8 +608,8 @@ bool style_get_starts_verse_number(StyleType type, int subtype)
   // Return the outcome.
   return starts_verse_number;
 }
-
-ustring style_get_verse_marker(const ustring & project)
+// To Do: Very inefficient. Need direct lookup.
+ustring Style::get_verse_marker(const ustring & project)
 // Gets the verse marker, normally the "v".
 {
   ustring stylesheet = stylesheet_get_actual ();
@@ -617,7 +617,7 @@ ustring style_get_verse_marker(const ustring & project)
   Usfm *usfm = styles->usfm(stylesheet);
   ustring style = "v";
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (style_get_starts_verse_number(usfm->styles[i].type, usfm->styles[i].subtype)) {
+    if (Style::get_starts_verse_number(usfm->styles[i].type, usfm->styles[i].subtype)) {
       style = usfm->styles[i].marker;
       break;
     }
@@ -626,7 +626,7 @@ ustring style_get_verse_marker(const ustring & project)
 }
 
 
-bool style_get_starts_footnote(StyleType type, int subtype)
+bool Style::get_starts_footnote(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a footnote.
 {
@@ -661,7 +661,7 @@ bool style_get_starts_footnote(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_endnote(StyleType type, int subtype)
+bool Style::get_starts_endnote(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // an endnote.
 {
@@ -696,7 +696,7 @@ bool style_get_starts_endnote(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_crossreference(StyleType type, int subtype)
+bool Style::get_starts_crossreference(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a crossreference.
 {
@@ -731,7 +731,7 @@ bool style_get_starts_crossreference(StyleType type, int subtype)
 }
 
 
-bool style_get_starts_note_content(StyleType type, int subtype)
+bool Style::get_starts_note_content(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // note content.
 {
@@ -772,7 +772,7 @@ bool style_get_starts_note_content(StyleType type, int subtype)
 }
 
 
-ustring style_get_default_note_style(const ustring & project, EditorNoteType type)
+ustring Style::get_default_note_style(const ustring & project, EditorNoteType type)
 {
   ustring stylesheet = stylesheet_get_actual ();
   extern Styles *styles;
@@ -814,7 +814,7 @@ ustring style_get_default_note_style(const ustring & project, EditorNoteType typ
 }
 
 
-ustring style_get_paragraph_note_style(const ustring & project)
+ustring Style::get_paragraph_note_style(const ustring & project)
 // Gets the style that starts a new paragraph in a footnote or endnote.
 {
   ustring stylesheet = stylesheet_get_actual ();
@@ -830,7 +830,7 @@ ustring style_get_paragraph_note_style(const ustring & project)
 }
 
 
-bool style_get_starts_table_row(StyleType type, int subtype)
+bool Style::get_starts_table_row(StyleType type, int subtype)
 {
   bool starts_row = false;
   switch (type) {
@@ -863,7 +863,7 @@ bool style_get_starts_table_row(StyleType type, int subtype)
   return starts_row;
 }
 
-ustring style_get_table_row_marker(const ustring & project)
+ustring Style::get_table_row_marker(const ustring & project)
 // Get the marker that starts a new row in a table.
 {
   ustring stylesheet = stylesheet_get_actual ();
@@ -871,7 +871,7 @@ ustring style_get_table_row_marker(const ustring & project)
   Usfm *usfm = styles->usfm(stylesheet);
   ustring style = "tr";
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (style_get_starts_table_row(usfm->styles[i].type, usfm->styles[i].subtype)) {
+    if (Style::get_starts_table_row(usfm->styles[i].type, usfm->styles[i].subtype)) {
       style = usfm->styles[i].marker;
       break;
     }
@@ -879,7 +879,7 @@ ustring style_get_table_row_marker(const ustring & project)
   return style;
 }
 
-bool style_get_starts_table_cell(StyleType type, int subtype)
+bool Style::get_starts_table_cell(StyleType type, int subtype)
 {
   bool starts_cell = false;
   switch (type) {
@@ -914,7 +914,7 @@ bool style_get_starts_table_cell(StyleType type, int subtype)
 
 #include "tiny_utilities.h"
 
-ustring style_get_table_cell_marker(const ustring & project, int column)
+ustring Style::get_table_cell_marker(const ustring & project, int column)
 // Get the marker that starts a cell in a table in "column".
 // Column starts with 1 for the first column.
 {
@@ -923,7 +923,7 @@ ustring style_get_table_cell_marker(const ustring & project, int column)
   Usfm *usfm = styles->usfm(stylesheet);
   ustring style = "tc" + convert_to_string(column);
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (style_get_starts_table_cell(usfm->styles[i].type, usfm->styles[i].subtype)) {
+    if (Style::get_starts_table_cell(usfm->styles[i].type, usfm->styles[i].subtype)) {
       if (usfm->styles[i].subtype == tetCell) {
         if (usfm->styles[i].userint1 == column) {
           style = usfm->styles[i].marker;
@@ -933,63 +933,4 @@ ustring style_get_table_cell_marker(const ustring & project, int column)
     }
   }
   return style;
-}
-
-EditorNoteType note_type_get(const ustring & project, const ustring & marker)
-// Gets the type of the note, e.g. a footnote.
-{
-  EditorNoteType notetype = entFootnote;
-  ustring stylesheet = stylesheet_get_actual ();
-  extern Styles *styles;
-  Usfm *usfm = styles->usfm(stylesheet);
-  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (usfm->styles[i].marker == marker) {
-      if (usfm->styles[i].type == stFootEndNote) {
-        if (usfm->styles[i].subtype == fentFootnote) {
-          notetype = entFootnote;
-        }
-        if (usfm->styles[i].subtype == fentEndnote) {
-          notetype = entFootnote;
-        }
-      }
-      if (usfm->styles[i].type == stCrossreference) {
-        notetype = entCrossreference;
-      }
-    }
-  }
-  return notetype;
-}
-
-NoteNumberingType note_numbering_type_get(const ustring & project, const ustring & marker)
-/*
- Gets the numbering type of a note, for example, the numbering could be numerical
- or alphabetical.
- */
-{
-  NoteNumberingType numbering = nntNumerical;
-  ustring stylesheet = stylesheet_get_actual ();
-  extern Styles *styles;
-  Usfm *usfm = styles->usfm(stylesheet);
-  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (usfm->styles[i].marker == marker) {
-      numbering = (NoteNumberingType) usfm->styles[i].userint1;
-    }
-  }
-  return numbering;
-}
-
-
-ustring note_numbering_user_sequence_get(const ustring & project, const ustring & marker)
-// Gets the sequence of characters from which the note caller should be taken.
-{
-  ustring sequence;
-  ustring stylesheet = stylesheet_get_actual ();
-  extern Styles *styles;
-  Usfm *usfm = styles->usfm(stylesheet);
-  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (usfm->styles[i].marker == marker) {
-      sequence = usfm->styles[i].userstring1;
-    }
-  }
-  return sequence;
 }

@@ -680,7 +680,7 @@ ustring Editor2::verse_number_get()
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_mark(focused_paragraph->textbuffer, &iter, gtk_text_buffer_get_insert(focused_paragraph->textbuffer));
     // Get verse number.
-    number = get_verse_number_at_iterator(iter, style_get_verse_marker(project), project, vbox_paragraphs);
+    number = get_verse_number_at_iterator(iter, Style::get_verse_marker(project), project, vbox_paragraphs);
     //DEBUG("current_verse_number="+current_verse_number+" and returning number="+number)
   }
   return number;
@@ -1162,16 +1162,16 @@ void Editor2::create_or_update_formatting_data()
   // Therefore paragraph styles are created first, then the other ones.
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
     // Get the properties of this style.
-    bool paragraphstyle = style_get_paragraph(usfm->styles[i].type, usfm->styles[i].subtype);
-    bool plaintext = style_get_plaintext(usfm->styles[i].type, usfm->styles[i].subtype);
+    bool paragraphstyle = Style::get_paragraph(usfm->styles[i].type, usfm->styles[i].subtype);
+    bool plaintext = Style::get_plaintext(usfm->styles[i].type, usfm->styles[i].subtype);
     // Create a text style, only paragraph styles.
     if (paragraphstyle)
       create_or_update_text_style(&(usfm->styles[i]), true, plaintext, font_size_multiplier);
   }
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
     // Get the properties of this style.
-    bool paragraphstyle = style_get_paragraph(usfm->styles[i].type, usfm->styles[i].subtype);
-    bool plaintext = style_get_plaintext(usfm->styles[i].type, usfm->styles[i].subtype);
+    bool paragraphstyle = Style::get_paragraph(usfm->styles[i].type, usfm->styles[i].subtype);
+    bool plaintext = Style::get_plaintext(usfm->styles[i].type, usfm->styles[i].subtype);
     // Create a text style, the non-paragraph styles.
     if (!paragraphstyle)
       create_or_update_text_style(&(usfm->styles[i]), false, plaintext, font_size_multiplier);
@@ -1464,7 +1464,7 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
 
   // Intelligent verse handling.
   if (!character_style_to_be_applied.empty()) {
-    ustring verse_style = style_get_verse_marker(project);
+    ustring verse_style = Style::get_verse_marker(project);
     if (character_style_to_be_applied == verse_style) {
       gunichar character = g_utf8_get_char(text);
       // When the cursor is at a verse, and the user types a space,
@@ -1812,7 +1812,7 @@ void Editor2::apply_style(const ustring & marker)
   GtkTextBuffer *textbuffer = focused_paragraph->textbuffer;
   GtkWidget *textview = focused_paragraph->textview;
 
-  if (style_get_starts_new_line_in_editor(type, subtype)) {
+  if (Style::get_starts_new_line_in_editor(type, subtype)) {
     // Handle a paragraph style.
     apply_editor_action (new EditorActionChangeParagraphStyle (marker, focused_paragraph));
   } else {
@@ -2302,7 +2302,7 @@ void Editor2::highlightCurrVerse(vector <GtkWidget *> &textviews)
 	if (current_verse_number != "0") {
 		GtkWidget * textview;
 		GtkTextIter startiter, enditer;
-		if (get_iterator_at_verse_number (current_verse_number, style_get_verse_marker(project), vbox_paragraphs, startiter, textview)) {
+		if (get_iterator_at_verse_number (current_verse_number, Style::get_verse_marker(project), vbox_paragraphs, startiter, textview)) {
 			GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
 			enditer = startiter;
 			gtk_text_iter_forward_chars (&enditer, current_verse_number.length());
@@ -2497,7 +2497,7 @@ void Editor2::editor_start_new_standard_paragraph (const ustring& marker_text)
   StyleType type;
   int subtype;
   marker_get_type_and_subtype(project, marker_text, type, subtype);
-  if (style_get_displays_marker(type, subtype)) {
+  if (Style::get_displays_marker(type, subtype)) {
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
     EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
     apply_editor_action (insert_action);
@@ -2753,7 +2753,7 @@ ustring Editor2::usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter
         int subtype;
         marker_get_type_and_subtype(project, new_character_style, type, subtype);
         // Normally a character style does not start a new line, but a verse (\v) does.
-        if (style_get_starts_new_line_in_usfm(type, subtype)) {
+        if (Style::get_starts_new_line_in_usfm(type, subtype)) {
           usfm_internal_add_text(text, "\n");
         }
         // A space after an opening marker gets erased in USFM: move it forward.
@@ -2862,7 +2862,7 @@ bool Editor2::editor_starts_character_style(ustring & line, ustring & character_
         StyleType type;
         int subtype;
         marker_get_type_and_subtype(project, marker_text, type, subtype);
-        if (style_get_starts_character_style(type, subtype)) {
+        if (Style::get_starts_character_style(type, subtype)) {
           character_style = marker_text;
           line.erase(0, marker_length);
           return true;
@@ -2882,7 +2882,7 @@ bool Editor2::editor_ends_character_style(ustring & line, ustring & character_st
         StyleType type;
         int subtype;
         marker_get_type_and_subtype(project, marker_text, type, subtype);
-        if (style_get_starts_character_style(type, subtype)) {
+        if (Style::get_starts_character_style(type, subtype)) {
           character_style.clear();
           line.erase(0, marker_length);
           return true;
@@ -2903,7 +2903,7 @@ bool Editor2::text_starts_note_raw(ustring & line, ustring & character_style, co
         StyleType type;
         int subtype;
         marker_get_type_and_subtype(project, marker_text, type, subtype);
-        if (style_get_starts_footnote(type, subtype) || style_get_starts_endnote(type, subtype) || style_get_starts_crossreference(type, subtype)) {
+        if (Style::get_starts_footnote(type, subtype) || Style::get_starts_endnote(type, subtype) || Style::get_starts_crossreference(type, subtype)) {
           // Proceed if the endmarker is in the text too.
           ustring endmarker = usfm_get_full_closing_marker(marker_text);
           size_t endmarkerpos = line.find(endmarker);
@@ -2973,7 +2973,7 @@ void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_te
   apply_editor_action (note_paragraph); 
 
   // Note paragraph style.
-  ustring paragraph_style (style_get_default_note_style(project, note_type));
+  ustring paragraph_style (Style::get_default_note_style(project, note_type));
   EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (paragraph_style, note_paragraph);
   apply_editor_action (style_action);
 
@@ -3287,7 +3287,7 @@ void Editor2::go_to_verse(const ustring& number, bool focus)
     // Get the iterator and textview that contain the verse number.
     GtkTextIter iter;
     GtkWidget * textview;
-    if (get_iterator_at_verse_number (number, style_get_verse_marker(project), vbox_paragraphs, iter, textview)) {
+    if (get_iterator_at_verse_number (number, Style::get_verse_marker(project), vbox_paragraphs, iter, textview)) {
       if (focus) {
       }
       give_focus (textview);
@@ -3569,7 +3569,7 @@ void usfm_internal_get_text_close_character_style(ustring & text, const ustring 
   int subtype;
   marker_get_type_and_subtype(project, style, type, subtype);
   // A verse number, normally the \v, does not have a closing marker.
-  if (!style_get_starts_verse_number(type, subtype)) {
+  if (!Style::get_starts_verse_number(type, subtype)) {
     usfm_internal_add_text(text, usfm_get_full_closing_marker(style));
   }
 }
@@ -3637,18 +3637,18 @@ ustring usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, const ust
       int subtype;
       if (new_character_style.empty()) {
         marker_get_type_and_subtype(project, previous_character_style, type, subtype);
-        if (style_get_starts_note_content(type, subtype)) {
+        if (Style::get_starts_note_content(type, subtype)) {
           note_content_closing = true;
         }
-        if (style_get_starts_character_style(type, subtype)) {
+        if (Style::get_starts_character_style(type, subtype)) {
           note_content_with_endmarker_closing = true;
         }
       } else {
         marker_get_type_and_subtype(project, new_character_style, type, subtype);
-        if (style_get_starts_note_content(type, subtype)) {
+        if (Style::get_starts_note_content(type, subtype)) {
           note_content_opening = true;
         }
-        if (style_get_starts_character_style(type, subtype)) {
+        if (Style::get_starts_character_style(type, subtype)) {
           note_content_with_endmarker_opening = true;
         }
       }
@@ -4046,7 +4046,7 @@ bool text_starts_paragraph (const ustring& project, ustring& line, const ustring
         StyleType type;
         int subtype;
         marker_get_type_and_subtype(project, marker, type, subtype);
-        if (style_get_starts_new_line_in_editor(type, subtype)) {
+        if (Style::get_starts_new_line_in_editor(type, subtype)) {
           line.erase(0, marker_length);
           return true;
         }
@@ -4065,7 +4065,7 @@ bool text_starts_verse (const ustring& project, ustring& line, const ustring& ma
         StyleType type;
         int subtype;
         marker_get_type_and_subtype(project, marker_text, type, subtype);
-        if (style_get_starts_verse_number(type, subtype)) {
+        if (Style::get_starts_verse_number(type, subtype)) {
           line.erase (0, marker_length);
           return true;
         }
@@ -4198,4 +4198,63 @@ void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, Gtk
   }
   // Transfer the widget to the parking lot. It is kept alive.
   gtk_widget_reparent (widget, parking);
+}
+
+EditorNoteType note_type_get(const ustring & project, const ustring & marker)
+// Gets the type of the note, e.g. a footnote.
+{
+  EditorNoteType notetype = entFootnote;
+  ustring stylesheet = stylesheet_get_actual ();
+  extern Styles *styles;
+  Usfm *usfm = styles->usfm(stylesheet);
+  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
+    if (usfm->styles[i].marker == marker) {
+      if (usfm->styles[i].type == stFootEndNote) {
+        if (usfm->styles[i].subtype == fentFootnote) {
+          notetype = entFootnote;
+        }
+        if (usfm->styles[i].subtype == fentEndnote) {
+          notetype = entFootnote;
+        }
+      }
+      if (usfm->styles[i].type == stCrossreference) {
+        notetype = entCrossreference;
+      }
+    }
+  }
+  return notetype;
+}
+
+NoteNumberingType note_numbering_type_get(const ustring & project, const ustring & marker)
+/*
+ Gets the numbering type of a note, for example, the numbering could be numerical
+ or alphabetical.
+ */
+{
+  NoteNumberingType numbering = nntNumerical;
+  ustring stylesheet = stylesheet_get_actual ();
+  extern Styles *styles;
+  Usfm *usfm = styles->usfm(stylesheet);
+  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
+    if (usfm->styles[i].marker == marker) {
+      numbering = (NoteNumberingType) usfm->styles[i].userint1;
+    }
+  }
+  return numbering;
+}
+
+
+ustring note_numbering_user_sequence_get(const ustring & project, const ustring & marker)
+// Gets the sequence of characters from which the note caller should be taken.
+{
+  ustring sequence;
+  ustring stylesheet = stylesheet_get_actual ();
+  extern Styles *styles;
+  Usfm *usfm = styles->usfm(stylesheet);
+  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
+    if (usfm->styles[i].marker == marker) {
+      sequence = usfm->styles[i].userstring1;
+    }
+  }
+  return sequence;
 }

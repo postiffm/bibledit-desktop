@@ -60,7 +60,7 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
     bool started = false;
     bool ended = false;
     bool start = true;
-    ustring verse_style = style_get_verse_marker(project);
+    ustring verse_style = Style::get_verse_marker(project);
     DEBUG("W9.1.2 starting loop");  
     while (!gtk_text_iter_is_end(&iter)) {
       ustring paragraph_style, character_style;

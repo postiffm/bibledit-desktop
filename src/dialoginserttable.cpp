@@ -117,9 +117,9 @@ void InsertTableDialog::on_okbutton()
   unsigned int columns = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton_columns));
 
   for (unsigned int row = 0; row < rows; row++) {
-    rawtext.append(usfm_get_full_opening_marker(style_get_table_row_marker(myproject)));
+    rawtext.append(usfm_get_full_opening_marker(Style::get_table_row_marker(myproject)));
     for (unsigned int column = 1; column <= columns; column++) {
-      rawtext.append(usfm_get_full_opening_marker(style_get_table_cell_marker(myproject, column)));
+      rawtext.append(usfm_get_full_opening_marker(Style::get_table_cell_marker(myproject, column)));
     }
   }
 }

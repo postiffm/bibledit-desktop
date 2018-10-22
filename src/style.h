@@ -107,28 +107,37 @@ public:
   ustring userstring2;
   ustring userstring3;
 private:
+  // TO DO: Eventually I believe I can get rid of these two fields.
   ustring mystylesheet;
   bool mywrite;
   void init(const ustring& stylesheet, const ustring& style, bool write);
-};
 
-bool    style_get_plaintext(StyleType type, int subtype);
-bool    style_get_paragraph(StyleType type, int subtype);
-bool    style_get_starts_new_line_in_editor(StyleType type, int subtype);
-bool    style_get_starts_new_line_in_usfm(StyleType type, int subtype);
-bool    style_get_displays_marker(StyleType type, int subtype);
-bool    style_get_starts_character_style(StyleType type, int subtype);
-bool    style_get_starts_verse_number(StyleType type, int subtype);
-ustring style_get_verse_marker(const ustring& project);
-bool    style_get_starts_footnote(StyleType type, int subtype);
-bool    style_get_starts_endnote(StyleType type, int subtype);
-bool    style_get_starts_crossreference(StyleType type, int subtype);
-bool    style_get_starts_note_content(StyleType type, int subtype);
-ustring style_get_default_note_style(const ustring& project, EditorNoteType type);
-ustring style_get_paragraph_note_style(const ustring& project);
-bool    style_get_starts_table_row(StyleType type, int subtype);
-ustring style_get_table_row_marker(const ustring& project);
-bool    style_get_starts_table_cell(StyleType type, int subtype);
-ustring style_get_table_cell_marker(const ustring& project, int column);
+public:
+    // These methods are very simple and need no Style object to function
+    // properly. I just stuffed them into this namespace because they 
+    // fit best here. Prior to this, all were called style_... which
+    // indicated to me that they belonged with tey style code.
+    // TO DO: We could debate whether some of these (or all) belong in the 
+    // stylesheet or styles.cpp file. Probably all that access the global
+    // stylesheet and styles should be moved elsewhere.
+    static bool    get_plaintext(StyleType type, int subtype);
+    static bool    get_paragraph(StyleType type, int subtype);
+    static bool    get_starts_new_line_in_editor(StyleType type, int subtype);
+    static bool    get_starts_new_line_in_usfm(StyleType type, int subtype);
+    static bool    get_displays_marker(StyleType type, int subtype);
+    static bool    get_starts_character_style(StyleType type, int subtype);
+    static bool    get_starts_verse_number(StyleType type, int subtype);
+    static ustring get_verse_marker(const ustring& project);
+    static bool    get_starts_footnote(StyleType type, int subtype);
+    static bool    get_starts_endnote(StyleType type, int subtype);
+    static bool    get_starts_crossreference(StyleType type, int subtype);
+    static bool    get_starts_note_content(StyleType type, int subtype);
+    static ustring get_default_note_style(const ustring& project, EditorNoteType type);
+    static ustring get_paragraph_note_style(const ustring& project);
+    static bool    get_starts_table_row(StyleType type, int subtype);
+    static ustring get_table_row_marker(const ustring& project);
+    static bool    get_starts_table_cell(StyleType type, int subtype);
+    static ustring get_table_cell_marker(const ustring& project, int column);
+};
 
 #endif
