@@ -110,16 +110,26 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   g_signal_connect((gpointer) spellingchecker->check_signal, "clicked", G_CALLBACK(on_button_spelling_recheck_clicked), gpointer(this));
   load_dictionaries();
 
+  // The formatted editor GUI is structured like this:
+  // vbox_client -> vbox = vbox_in -> scrolledwindow -> viewport -> vbox_viewport -> vbox_paragraphs
+  //                                                                              -> hseparator
+  //                                                                              -> vbox_notes
+  //                               -> vbox_parking_lot (don't know about this)
+  // This seems far too complex. But we have to have the viewport and vbox_viewport to 
+  // contain the three separate portions of the text. I tried every possible combination without the viewport,
+  // but weh ave to manually add it, at least in GTK2.
+  
   // The basic GUI, which actually is empty until text will be loaded in it.
   scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow);
   gtk_box_pack_start(GTK_BOX(vbox_in), scrolledwindow, true, true, 0);
+  // TO DO: Fix next line to turn off horizontal scrolling if needed
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   viewport = gtk_viewport_new (NULL, NULL);
   gtk_widget_show (viewport);
   gtk_container_add (GTK_CONTAINER (scrolledwindow), viewport);
-  
+
   vbox_viewport = gtk_vbox_new (false, 0);
   gtk_widget_show(vbox_viewport);
   gtk_container_add (GTK_CONTAINER (viewport), vbox_viewport);
@@ -128,7 +138,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   vbox_paragraphs = gtk_vbox_new (false, 0);
   gtk_widget_show(vbox_paragraphs);
   gtk_box_pack_start(GTK_BOX(vbox_viewport), vbox_paragraphs, false, false, 0);
-
+  
   last_focused_widget = vbox_paragraphs;
 
   // The separator between text and notes.
@@ -2189,7 +2199,8 @@ void Editor2::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textview
 	// when changing from USFM view back to formatted view.
 
 	// Adjustment.
-	GtkAdjustment * adjustment = gtk_viewport_get_vadjustment (GTK_VIEWPORT (viewport));
+	//GtkAdjustment * adjustment = gtk_viewport_get_vadjustment (GTK_VIEWPORT (viewport));
+	GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW(scrolledwindow));
 
 	// Visible window height.
 	gdouble visible_window_height = gtk_adjustment_get_page_size (adjustment);
