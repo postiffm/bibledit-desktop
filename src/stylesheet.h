@@ -33,12 +33,12 @@ public:
   ~Stylesheet ();
   void save ();
   ustring name;
-  StyleV2 * style (const ustring& marker);
-  vector <StyleV2 *> styles;
+  Style * style (const ustring& marker);
+  vector <Style *> styles;
   void erase (const ustring& marker);
-  void insert (StyleV2 * style);
+  void insert (Style * style);
 private:
-  map <ustring, StyleV2 *> styles_map;
+  map <ustring, Style *> styles_map;
 };
 
 

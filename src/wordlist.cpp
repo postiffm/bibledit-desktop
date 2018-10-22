@@ -82,7 +82,7 @@ Wordlist::Wordlist(WordlistType wordlist)
   extern Styles * styles;
   Stylesheet * stylesheet = styles->stylesheet (stylesheet_get_actual ());
   for (unsigned int i = 0; i < stylesheet->styles.size(); i++) {
-    StyleV2 * style = stylesheet->styles[i];
+    Style * style = stylesheet->styles[i];
     if (style->type == stStartsParagraph) {
       if (style->subtype != ptNormalParagraph) {
         section_markers.insert (style->marker);

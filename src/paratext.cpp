@@ -54,7 +54,7 @@ void ExportParatextStylesheet::convert (const ustring& name)
   
   // Go through the markers.
   for (unsigned int i = 0; i < sheet->styles.size(); i++) {
-    StyleV2 * style = sheet->styles[i];
+    Style * style = sheet->styles[i];
     marker = style->marker;
     if (marker == "id") {
     } else if (marker == "ide") {

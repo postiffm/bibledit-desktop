@@ -257,7 +257,7 @@ void XeTeX::write_document_tex_file ()
   // Go through the stylesheet looking for note markers.
   for (unsigned int i = 0; i < sheet->styles.size(); i++) {
     bool retrieve_note_data = false;
-    StyleV2 * style = sheet->styles[i];
+    Style * style = sheet->styles[i];
     if (style->type == stFootEndNote) {
       if ((style->subtype == fentFootnote) || (style->subtype == fentEndnote)) {
         retrieve_note_data = true;

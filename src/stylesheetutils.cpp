@@ -237,10 +237,10 @@ void stylesheet_new_style(const ustring & stylesheet, const ustring & marker)
   // If the style is in the standard template, copy it over into the stylesheet.
   Stylesheet * standard = styles->stylesheet ("");
   for (unsigned int i = 0; i < standard->styles.size(); i++) {
-    StyleV2 * style = standard->styles[i];
+    Style * style = standard->styles[i];
     if (style->marker == marker) {
       // Make deep copy and store it into the stylesheet.
-      StyleV2 * newstyle = new StyleV2 (*style);
+      Style * newstyle = new Style (*style);
       sheet->insert (newstyle);
       sheet->save();
       return;
@@ -248,8 +248,7 @@ void stylesheet_new_style(const ustring & stylesheet, const ustring & marker)
   }
 
   // Create a default new style for the marker.
-  StyleV2 * style = new StyleV2 (0);
-  style->marker = marker;
+  Style *style = new Style(marker);
   sheet->insert (style);
   sheet->save();  
 }
@@ -260,7 +259,7 @@ void stylesheet_save_style(const ustring & stylesheet, const ustring & marker, c
 {
   extern Styles * styles;
   Stylesheet * sheet = styles->stylesheet (stylesheet);
-  StyleV2 * style = sheet->style(marker);
+  Style * style = sheet->style(marker);
   style->name = name;
   style->info = info;
   style->type = type;
@@ -421,87 +420,27 @@ void stylesheet_set_recently_used(const ustring & stylesheet, vector <ustring>& 
 }
 
 
-void stylesheet_save_style(const ustring & stylesheet, const Style & style)
+void stylesheet_save_style(const ustring & stylesheet, const Style & style_in)
 {
   extern Styles * styles;
   Stylesheet * sheet = styles->stylesheet (stylesheet);
-  StyleV2 * stylev2 = sheet->style (style.marker);
-  if (stylev2) {
-    stylev2->marker = style.marker;
-    stylev2->name = style.name;
-    stylev2->info = style.info;
-    stylev2->type = style.type;
-    stylev2->subtype = style.subtype;
-    stylev2->fontsize = style.fontsize;
-    stylev2->italic = style.italic;
-    stylev2->bold = style.bold;
-    stylev2->underline = style.underline;
-    stylev2->smallcaps = style.smallcaps;
-    stylev2->superscript = style.superscript;
-    stylev2->justification = style.justification;
-    stylev2->spacebefore = style.spacebefore;
-    stylev2->spaceafter = style.spaceafter;
-    stylev2->leftmargin = style.leftmargin;
-    stylev2->rightmargin = style.rightmargin;
-    stylev2->firstlineindent = style.firstlineindent;
-    stylev2->spancolumns = style.spancolumns;
-    stylev2->color = style.color;
-    stylev2->print = style.print;
-    stylev2->userbool1 = style.userbool1;
-    stylev2->userbool2 = style.userbool2;
-    stylev2->userbool3 = style.userbool3;
-    stylev2->userint1 = style.userint1;
-    stylev2->userint2 = style.userint2;
-    stylev2->userint3 = style.userint3;
-    stylev2->userstring1 = style.userstring1;
-    stylev2->userstring2 = style.userstring2;
-    stylev2->userstring3 = style.userstring3;
-  }
+  Style * style_out = sheet->style (style_in.marker);
+  if (style_out) { (*style_out) = style_in; } // deep copy
   sheet->save();
 }
 
 
-void stylesheet_load_style(const ustring & stylesheet, Style& style)
+void stylesheet_load_style(const ustring & stylesheet, Style& style_to_load)
 /*
 Reads one Style.
 stylesheet: which stylesheet to read from. If no stylesheet is given, it reads from the template.
-style: the Style object to read. The marker is already given in the object.
+style: the Style object to read. The marker is given in it.
 */
 {
   extern Styles * styles;
   Stylesheet * sheet = styles->stylesheet (stylesheet);
-  StyleV2 * stylev2 = sheet->style (style.marker);
-  if (stylev2) {
-    style.marker = stylev2->marker;
-    style.name = stylev2->name;
-    style.info = stylev2->info;
-    style.type = stylev2->type;
-    style.subtype = stylev2->subtype;
-    style.fontsize = stylev2->fontsize;
-    style.italic = stylev2->italic;
-    style.bold = stylev2->bold;
-    style.underline = stylev2->underline;
-    style.smallcaps = stylev2->smallcaps;
-    style.superscript = stylev2->superscript;
-    style.justification = stylev2->justification;
-    style.spacebefore = stylev2->spacebefore;
-    style.spaceafter = stylev2->spaceafter;
-    style.leftmargin = stylev2->leftmargin;
-    style.rightmargin = stylev2->rightmargin;
-    style.firstlineindent = stylev2->firstlineindent;
-    style.spancolumns = stylev2->spancolumns;
-    style.color = stylev2->color;
-    style.print = stylev2->print;
-    style.userbool1 = stylev2->userbool1;
-    style.userbool2 = stylev2->userbool2;
-    style.userbool3 = stylev2->userbool3;
-    style.userint1 = stylev2->userint1;
-    style.userint2 = stylev2->userint2;
-    style.userint3 = stylev2->userint3;
-    style.userstring1 = stylev2->userstring1;
-    style.userstring2 = stylev2->userstring2;
-    style.userstring3 = stylev2->userstring3;
-  }
+  Style * style = sheet->style (style_to_load.marker);
+  if (style) { style_to_load = (*style); } // deep copy
 }
 
 

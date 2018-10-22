@@ -53,7 +53,7 @@ Stylesheet::Stylesheet(const ustring & name_in)
   ustring value;
   xmlTextReaderPtr reader = xmlNewTextReader(inputbuffer, NULL);
   if (reader) {
-    StyleV2 * style = NULL;
+    Style * style = NULL;
     while ((xmlTextReaderRead(reader) == 1)) {
       switch (xmlTextReaderNodeType(reader)) {
       case XML_READER_TYPE_ELEMENT:
@@ -62,8 +62,7 @@ Stylesheet::Stylesheet(const ustring & name_in)
 	  if (!xmlStrcmp(element_name, BAD_CAST "style")) {
 	    char *attribute = (char *)xmlTextReaderGetAttribute(reader, BAD_CAST "marker");
 	    if (attribute) {
-	      style = new StyleV2 (0);
-	      style->marker = attribute;
+	      style = new Style (attribute);
 	      free(attribute);
 	    }
 	  }
@@ -192,7 +191,7 @@ void Stylesheet::save ()
   // Get the combined information, and write it to the document.
   for (unsigned int i = 0; i < styles.size(); i++) {
 
-    StyleV2 * style = styles[i];
+    Style * style = styles[i];
 
     // Open a style for the marker
     xmlTextWriterStartElement(writer, BAD_CAST "style");
@@ -334,11 +333,11 @@ void Stylesheet::save ()
 }
 
 
-StyleV2 * Stylesheet::style (const ustring& marker)
+Style * Stylesheet::style (const ustring& marker)
 // This returns the style for "marker" if the marker is in the stylesheet.
 // Else it returns NULL..
 {
-  StyleV2 * style = styles_map[marker];
+  Style * style = styles_map[marker];
   return style;
 }
 
@@ -346,11 +345,13 @@ StyleV2 * Stylesheet::style (const ustring& marker)
 void Stylesheet::erase (const ustring& marker)
 // Erases the Style for "marker".
 {
-  StyleV2 * style_to_erase = style (marker);
-  if (style_to_erase == NULL)
-    return;
+  Style * style_to_erase = style (marker);
+  if (style_to_erase == NULL) { return; }
   
-  vector <StyleV2 *> styles2 = styles;
+  // TO DO: There has to be a better way to do this other than
+  // copying the entire the whole style database, deleting the
+  // original, and rebuilding it from the copy.
+  vector <Style *> styles2 = styles;
   styles.clear();
   for (unsigned int i = 0; i < styles2.size(); i++) {
     if (styles2[i] != style_to_erase) {
@@ -362,7 +363,7 @@ void Stylesheet::erase (const ustring& marker)
 }
 
 
-void Stylesheet::insert (StyleV2 * style)
+void Stylesheet::insert (Style * style)
 // Inserts "style" into the stylesheet.
 {
   styles.push_back (style);

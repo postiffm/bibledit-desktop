@@ -67,12 +67,15 @@ enum WordListElementType {
   wltSubjectIndexEntry
 };
 
-
+// Note: A "style" is associated with a usfm "marker."
+// A usfm marker has a print style associated with it (indent, font size, etc.)
 class Style
-// Manages settings for one style. DEPRECATED - Use StyleV2 instead for new code.
 {
 public:
-  Style (const ustring& stylesheet, const ustring& style, bool write);
+  Style (const ustring& stylesheet, const ustring& _marker, bool write);
+  Style (const ustring& _marker);
+  // TO DO: write an explicit copy constructor
+  Style & operator=(const Style &right);
   ~Style ();
   ustring marker;
   ustring name;
@@ -106,63 +109,26 @@ public:
 private:
   ustring mystylesheet;
   bool mywrite;
+  void init(const ustring& stylesheet, const ustring& style, bool write);
 };
 
-
-class StyleV2
-// Manages settings for one style.
-{
-public:
-  StyleV2 (int dummy);
-  ~StyleV2 ();
-  ustring marker;
-  ustring name;
-  ustring info;
-  StyleType type;
-  int subtype;
-  double fontsize;
-  ustring italic;
-  ustring bold;
-  ustring underline;
-  ustring smallcaps;
-  bool superscript;
-  ustring justification;
-  double spacebefore;
-  double spaceafter;
-  double leftmargin;
-  double rightmargin;
-  double firstlineindent;
-  bool spancolumns;
-  unsigned int color;
-  bool print;
-  bool userbool1;
-  bool userbool2;
-  bool userbool3;
-  int userint1;
-  int userint2;
-  int userint3;
-  ustring userstring1;
-  ustring userstring2;
-  ustring userstring3;
-};
-
-bool style_get_plaintext(StyleType type, int subtype);
-bool style_get_paragraph(StyleType type, int subtype);
-bool style_get_starts_new_line_in_editor(StyleType type, int subtype);
-bool style_get_starts_new_line_in_usfm(StyleType type, int subtype);
-bool style_get_displays_marker(StyleType type, int subtype);
-bool style_get_starts_character_style(StyleType type, int subtype);
-bool style_get_starts_verse_number(StyleType type, int subtype);
+bool    style_get_plaintext(StyleType type, int subtype);
+bool    style_get_paragraph(StyleType type, int subtype);
+bool    style_get_starts_new_line_in_editor(StyleType type, int subtype);
+bool    style_get_starts_new_line_in_usfm(StyleType type, int subtype);
+bool    style_get_displays_marker(StyleType type, int subtype);
+bool    style_get_starts_character_style(StyleType type, int subtype);
+bool    style_get_starts_verse_number(StyleType type, int subtype);
 ustring style_get_verse_marker(const ustring& project);
-bool style_get_starts_footnote(StyleType type, int subtype);
-bool style_get_starts_endnote(StyleType type, int subtype);
-bool style_get_starts_crossreference(StyleType type, int subtype);
-bool style_get_starts_note_content(StyleType type, int subtype);
+bool    style_get_starts_footnote(StyleType type, int subtype);
+bool    style_get_starts_endnote(StyleType type, int subtype);
+bool    style_get_starts_crossreference(StyleType type, int subtype);
+bool    style_get_starts_note_content(StyleType type, int subtype);
 ustring style_get_default_note_style(const ustring& project, EditorNoteType type);
 ustring style_get_paragraph_note_style(const ustring& project);
-bool style_get_starts_table_row(StyleType type, int subtype);
+bool    style_get_starts_table_row(StyleType type, int subtype);
 ustring style_get_table_row_marker(const ustring& project);
-bool style_get_starts_table_cell(StyleType type, int subtype);
+bool    style_get_starts_table_cell(StyleType type, int subtype);
 ustring style_get_table_cell_marker(const ustring& project, int column);
 
 #endif

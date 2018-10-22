@@ -29,21 +29,30 @@
 #include "constants.h"
 #include <glib/gi18n.h>
 
-Style::Style(const ustring & stylesheet, const ustring & style, bool write)
-// Reads a style from the database. Deprecated, use StyleV2 instead for new code.
+Style::Style(const ustring & stylesheet, const ustring& marker, bool write)
 {
-  // Save variables.
+  init(/*stylesheet*/stylesheet, /*usfm marker*/marker, /*write*/write);
+}
+
+Style::Style(const ustring& marker)
+{
+  init(/*stylesheet*/"", /*usfm marker*/marker, /*write*/false);
+}
+
+void Style::init(const ustring& stylesheet, const ustring& _marker, bool write)
+{
   mystylesheet = stylesheet;
-  marker = style;
+  marker = _marker;
   mywrite = write;
-  // Set default values.
   name = _("Marker");
   info = _("Unified Standard Format Marker");
+  type = stInlineText;
+  subtype = 0;
   fontsize = 12;
   italic = OFF;
   bold = OFF;
   underline = OFF;
-  underline = OFF;
+  smallcaps = OFF;
   superscript = false;
   justification = LEFT;
   spacebefore = 0;
@@ -52,8 +61,6 @@ Style::Style(const ustring & stylesheet, const ustring & style, bool write)
   rightmargin = 0;
   firstlineindent = 0;
   spancolumns = false;
-  type = stInlineText;
-  subtype = 0;
   color = 0;
   print = true;
   userbool1 = false;
@@ -62,8 +69,50 @@ Style::Style(const ustring & stylesheet, const ustring & style, bool write)
   userint1 = 0;
   userint2 = 0;
   userint3 = 0;
-  // Read values from the database.
-  stylesheet_load_style(mystylesheet, *this);
+  userstring1 = "";
+  userstring2 = "";
+  userstring3 = "";
+  // Read style values from the database; this was part of a formerly decprecated method. Watch for issues.
+  if (mystylesheet != "") { stylesheet_load_style(mystylesheet, *this); }
+}
+
+// Copy another style into this one
+Style & Style::operator=(const Style &right)
+{
+  if (this != &right) { // don't do anything in case of self-assignment
+    mystylesheet = right.mystylesheet;
+    marker = right.marker;
+    mywrite = right.mywrite;
+    name = right.name;
+    info = right.info;
+    type = right.type;
+    subtype = right.subtype;
+    fontsize = right.fontsize;
+    italic = right.italic;
+    bold = right.bold;
+    underline = right.underline;
+    smallcaps = right.smallcaps;
+    superscript = right.superscript;
+    justification = right.justification;
+    spacebefore = right.spacebefore;
+    spaceafter = right.spaceafter;
+    leftmargin = right.leftmargin;
+    rightmargin = right.rightmargin;
+    firstlineindent = right.firstlineindent;
+    spancolumns = right.spancolumns;
+    color = right.color;
+    print = right.print;
+    userbool1 = right.userbool1;
+    userbool2 = right.userbool2;
+    userbool3 = right.userbool3;
+    userint1 = right.userint1;
+    userint2 = right.userint2;
+    userint3 = right.userint3;
+    userstring1 = right.userstring1;
+    userstring2 = right.userstring2;
+    userstring3 = right.userstring3;
+  }
+  return *this;
 }
 
 Style::~Style()
@@ -73,45 +122,6 @@ Style::~Style()
     stylesheet_save_style(mystylesheet, *this);
   }
 }
-
-
-StyleV2::StyleV2(int dummy)
-// Contains the values for the style of one marker.
-{
-  // Set default values.
-  name = _("Marker");
-  info = _("Unified Standard Format Marker");
-  fontsize = 12;
-  italic = OFF;
-  bold = OFF;
-  underline = OFF;
-  underline = OFF;
-  superscript = false;
-  justification = LEFT;
-  spacebefore = 0;
-  spaceafter = 0;
-  leftmargin = 0;
-  rightmargin = 0;
-  firstlineindent = 0;
-  spancolumns = false;
-  type = stInlineText;
-  subtype = 0;
-  color = 0;
-  print = true;
-  userbool1 = false;
-  userbool2 = false;
-  userbool3 = false;
-  userint1 = 0;
-  userint2 = 0;
-  userint3 = 0;
-}
-
-
-StyleV2::~StyleV2()
-{
-}
-
-
 
 bool style_get_plaintext(StyleType type, int subtype)
 /*
