@@ -117,7 +117,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   //                               -> vbox_parking_lot (don't know about this)
   // This seems far too complex. But we have to have the viewport and vbox_viewport to 
   // contain the three separate portions of the text. I tried every possible combination without the viewport,
-  // but weh ave to manually add it, at least in GTK2.
+  // but we have to manually add it, at least in GTK2.
   
   // The basic GUI, which actually is empty until text will be loaded in it.
   scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
@@ -312,7 +312,7 @@ void Editor2::chapter_load(const Reference &ref)
   for (unsigned int i = 0; i < actions_done.size(); i++) {
     EditorAction * action = actions_done[i];
     if ((action->type == eatCreateParagraph) ||
-	(action->type == eatCreateNoteParagraph)) {
+        (action->type == eatCreateNoteParagraph)) {
       EditorActionCreateParagraph * paragraph = static_cast <EditorActionCreateParagraph *> (action);
       EditorActionDeleteText * trim_action = paragraph_delete_last_character_if_space (paragraph);
       if (trim_action) {
@@ -2815,7 +2815,7 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   if ((marker_found) && (marker_pos == 0)) {
     // It should not occur that a marker is right at the start and was not handled.
     // It gets handled here to prevent an infinite loop.
-	// ACTUALLY: This happens as "standard practice" when the user inserts a new footenote.
+	// ACTUALLY: This happens as "standard practice" when the user inserts a new footnote.
 	// Like \f + \fr 6:12 \f* or something like that. That seems malformed according to the 
 	// USFM standard, but it is what we are getting from the note insert dialog.
 	//DEBUG("Case 1")

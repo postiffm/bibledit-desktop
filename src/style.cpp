@@ -269,7 +269,7 @@ bool Style::get_paragraph(StyleType type, int subtype)
 
 
 bool Style::get_starts_new_line_in_editor(StyleType type, int subtype)
-// Returns true if the combination of the "type" and the"subtype" starts
+// Returns true if the combination of the "type" and the "subtype" starts
 // a new line in the formatted view.
 {
   // Set default value to starting a new line.
