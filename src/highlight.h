@@ -27,11 +27,13 @@
 #include <gtk/gtk.h>
 #include "htmlwriter2.h"
 
+class Editor2; // fwd declaration
 
 class Highlight
 {
 public:
-  Highlight (GtkTextBuffer * buffer, 
+  Highlight (Editor2 *_parent_editor,
+             GtkTextBuffer * buffer, 
              GtkWidget * textview, 
              const ustring& project, 
              GtkTextTag * tag,
@@ -41,6 +43,7 @@ public:
   bool locations_ready;
   void highlight ();
 private:
+  Editor2 *parent_editor;
   bool interrupt_thread;
   GtkTextTag * mytag;
   GtkTextBuffer * maintextbuffer;

@@ -106,7 +106,7 @@ Editor2::Editor2(GtkWidget * vbox_in, const ustring & project_in)
   create_or_update_formatting_data();
 
   // Spelling checker.
-  spellingchecker = new SpellingChecker(texttagtable);
+  spellingchecker = new SpellingChecker(this, texttagtable);
   g_signal_connect((gpointer) spellingchecker->check_signal, "clicked", G_CALLBACK(on_button_spelling_recheck_clicked), gpointer(this));
   load_dictionaries();
 
@@ -322,7 +322,7 @@ void Editor2::chapter_load(const Reference &ref)
   }
   DEBUG("W4 Cleaned up extra spaces")
   // Insert the chapter load boundary.
-  apply_editor_action (new EditorAction (eatLoadChapterBoundary));
+  apply_editor_action (new EditorAction (this, eatLoadChapterBoundary));
   DEBUG("W5 Inserted chapter load boundary")
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
@@ -1104,7 +1104,7 @@ gboolean Editor2::textview_button_press_event(GtkWidget * widget, GdkEventButton
   return false;
 }
 
-bool iterator_includes_note_caller (GtkTextIter iter)
+bool Editor2::iterator_includes_note_caller (GtkTextIter iter)
 // Check whether the iter points right after a note caller.
 {
   if (!gtk_text_iter_backward_char (&iter))
@@ -1116,7 +1116,7 @@ bool iterator_includes_note_caller (GtkTextIter iter)
   return true;
 }
 
-bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer)
+bool Editor2::move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer)
 // If the iterator is after a note caller, it moves the iterator till it is before the note caller.
 // Return true if the two iterators contain some text.
 {
@@ -1532,10 +1532,10 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
       gint initial_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
       gint accumulated_offset = initial_offset;
       for (unsigned int i = 0; i < text.size(); i++) {
-        EditorActionInsertText * insert_action = new EditorActionInsertText (focused_paragraph, accumulated_offset, text[i]);
+        EditorActionInsertText * insert_action = new EditorActionInsertText (this, focused_paragraph, accumulated_offset, text[i]);
         apply_editor_action (insert_action);
         if (!styles[i].empty()) {
-          EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(focused_paragraph, styles[i], accumulated_offset, text[i].length());
+          EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, focused_paragraph, styles[i], accumulated_offset, text[i].length());
           apply_editor_action (style_action);
         }
         accumulated_offset += text[i].length();
@@ -1553,7 +1553,7 @@ void Editor2::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   }
   
   // Insert the One Action boundary.
-  apply_editor_action (new EditorAction (eatOneActionBoundary));
+  apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 
   // The pos_iter variable that was passed to this function was invalidated because text was removed and added.
   // Here it is validated again. This prevents critical errors within Gtk.
@@ -1610,7 +1610,7 @@ void Editor2::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
       text.append (text_to_be_deleted[i]);
     }
     gint offset = gtk_text_iter_get_offset (start);
-    EditorActionDeleteText * delete_action = new EditorActionDeleteText(focused_paragraph, offset, text.length());
+    EditorActionDeleteText * delete_action = new EditorActionDeleteText(this, focused_paragraph, offset, text.length());
     apply_editor_action (delete_action);
   }
   
@@ -1622,8 +1622,8 @@ void Editor2::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
         GtkTextIter iter;
         gtk_text_buffer_get_end_iter (paragraph_action->textbuffer, &iter);
         gint length = gtk_text_iter_get_offset (&iter);
-        apply_editor_action (new EditorActionDeleteText (paragraph_action, 0, length));
-        apply_editor_action (new EditorActionDeleteParagraph(paragraph_action));
+        apply_editor_action (new EditorActionDeleteText (this, paragraph_action, 0, length));
+        apply_editor_action (new EditorActionDeleteParagraph(this, paragraph_action));
       }
     }
   }
@@ -1633,7 +1633,7 @@ void Editor2::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
   styles_to_be_deleted.clear();
 
   // Insert the One Action boundary.
-  apply_editor_action (new EditorAction (eatOneActionBoundary));
+  apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 
   // Care about textbuffer signals again.
   disregard_text_buffer_signals--;
@@ -1824,7 +1824,7 @@ void Editor2::apply_style(const ustring & marker)
 
   if (Style::get_starts_new_line_in_editor(type, subtype)) {
     // Handle a paragraph style.
-    apply_editor_action (new EditorActionChangeParagraphStyle (marker, focused_paragraph));
+    apply_editor_action (new EditorActionChangeParagraphStyle (this, marker, focused_paragraph));
   } else {
     // Handle a character style.
     // Find the iterator at the start and at the end of the text to be put in this style.
@@ -1864,14 +1864,14 @@ void Editor2::apply_style(const ustring & marker)
     // Apply the new character style
     gint startoffset = gtk_text_iter_get_offset (&startiter);
     gint endoffset = gtk_text_iter_get_offset (&enditer);
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(focused_paragraph, style, startoffset, endoffset - startoffset);
+    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, focused_paragraph, style, startoffset, endoffset - startoffset);
     apply_editor_action (style_action);
     // Store this character style so it can be re-used when the user starts typing text.
     character_style_on_start_typing = style;
   }
   
   // One Action boundary.
-  apply_editor_action (new EditorAction (eatOneActionBoundary));
+  apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 
   // Update gui.
   signal_if_styles_changed();
@@ -1959,7 +1959,7 @@ void Editor2::highlight_searchwords()
 */
   DEBUG("W9.1 about to highlight search words");  
   // MAP: Here's how I think it should be done, more synchronously instead of threaded.
-  highlight = new Highlight(focused_paragraph->textbuffer, focused_paragraph->textview, project, reference_tag, current_verse_number);
+  highlight = new Highlight(this, focused_paragraph->textbuffer, focused_paragraph->textview, project, reference_tag, current_verse_number);
   // The time-consuming part of highlighting is to determine what bits
   // of text to highlight. Because it takes time, and the program
   // should continue to respond, it is [was] done in a thread. MAP:
@@ -2497,11 +2497,11 @@ void Editor2::editor_start_new_standard_paragraph (const ustring& marker_text)
 // This function deals with a marker that starts a standard paragraph.
 {
   // Create a new paragraph.
-  EditorActionCreateParagraph * paragraph = new EditorActionCreateParagraph (vbox_paragraphs);
+  EditorActionCreateParagraph * paragraph = new EditorActionCreateParagraph (this, vbox_paragraphs);
   apply_editor_action (paragraph); 
 
   // The new paragraph markup.
-  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (marker_text, paragraph);
+  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (this, marker_text, paragraph);
   apply_editor_action (style_action);
 
   // Some styles insert their marker: Do that here if appropriate.
@@ -2510,7 +2510,7 @@ void Editor2::editor_start_new_standard_paragraph (const ustring& marker_text)
   marker_get_type_and_subtype(project, marker_text, type, subtype);
   if (Style::get_displays_marker(type, subtype)) {
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-    EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
+    EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
     apply_editor_action (insert_action);
   }
 }
@@ -2567,9 +2567,9 @@ void Editor2::editor_start_verse(ustring& line, ustring& marker_text, ustring& c
   // Insert the verse number.
   paragraph = focused_paragraph;
   gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-  EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, versenumber);
+  EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, versenumber);
   apply_editor_action (insert_action);
-  EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (paragraph, marker_text, insertion_offset, versenumber.length());
+  EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, paragraph, marker_text, insertion_offset, versenumber.length());
   apply_editor_action (style_action);
 }
 
@@ -2846,7 +2846,7 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   // Insert the text.
   paragraph = focused_paragraph;
   gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-  EditorActionInsertText * insert_action = new EditorActionInsertText (paragraph, insertion_offset, insertion);
+  EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, insertion);
   //DEBUG("about to apply_editor_action (insert_action) insertion="+insertion)
 
   // BUG occurs in the next call: footnote is somehow magically
@@ -2859,7 +2859,7 @@ void Editor2::editor_text_fallback (ustring& line, ustring& character_style, siz
   //DEBUG("chapter just after apply_editor_action="+chaptertext)
   if (!character_style.empty()) {
 	//DEBUG("Applying style to new inserted text")
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (paragraph, character_style, insertion_offset, insertion.length());
+    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, paragraph, character_style, insertion_offset, insertion.length());
     apply_editor_action (style_action);
   }
 }
@@ -2961,9 +2961,9 @@ void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_te
     style.superscript = true;
     create_or_update_text_style(&style, false, false, font_size_multiplier);
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
-    EditorActionInsertText * insert_action = new EditorActionInsertText (focused_paragraph, insertion_offset, caller_in_text);
+    EditorActionInsertText * insert_action = new EditorActionInsertText (this, focused_paragraph, insertion_offset, caller_in_text);
     apply_editor_action (insert_action);
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (focused_paragraph, caller_style, insertion_offset, caller_in_text.length());
+    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, focused_paragraph, caller_style, insertion_offset, caller_in_text.length());
     apply_editor_action (style_action);
   }
 
@@ -2980,12 +2980,12 @@ void Editor2::editor_start_note_raw (ustring raw_note, const ustring & marker_te
   }
 
   // New note paragraph.
-  EditorActionCreateNoteParagraph * note_paragraph = new EditorActionCreateNoteParagraph (vbox_notes, marker_text, caller_in_usfm, caller_in_text, caller_style);
+  EditorActionCreateNoteParagraph * note_paragraph = new EditorActionCreateNoteParagraph (this, vbox_notes, marker_text, caller_in_usfm, caller_in_text, caller_style);
   apply_editor_action (note_paragraph); 
 
   // Note paragraph style.
   ustring paragraph_style (Style::get_default_note_style(project, note_type));
-  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (paragraph_style, note_paragraph);
+  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (this, paragraph_style, note_paragraph);
   apply_editor_action (style_action);
 
   // Load remaining text of the note.
@@ -3232,10 +3232,10 @@ void Editor2::combine_paragraphs(EditorActionCreateParagraph * first_paragraph, 
 		for (unsigned int i = 0; i < text.size(); i++) {
 			gtk_text_buffer_get_end_iter (textbuffer, &enditer);
 			gint offset = gtk_text_iter_get_offset (&enditer);
-			EditorActionInsertText * insert_action = new EditorActionInsertText (first_paragraph, offset, text[i]);
+			EditorActionInsertText * insert_action = new EditorActionInsertText (this, first_paragraph, offset, text[i]);
 			apply_editor_action (insert_action);
 			if (!styles[i].empty()) {
-				EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(first_paragraph, styles[i], offset, text[i].length());
+				EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, first_paragraph, styles[i], offset, text[i].length());
 				apply_editor_action (style_action);
 			}
 		}
@@ -3245,10 +3245,10 @@ void Editor2::combine_paragraphs(EditorActionCreateParagraph * first_paragraph, 
 		// current_paragraph (which has focus), otherwise the blinking cursor is lost.
 		give_focus (first_paragraph->textview);
 		// Remove the second paragraph.
-		apply_editor_action (new EditorActionDeleteParagraph(second_paragraph));
+		apply_editor_action (new EditorActionDeleteParagraph(this, second_paragraph));
 		// WAS HERE BUT LOST cursor: give_focus (first_paragraph->textview);
 		// Insert the One Action boundary.
-		apply_editor_action (new EditorAction (eatOneActionBoundary));
+		apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 	}
 }
 
@@ -3499,7 +3499,7 @@ void Editor2::give_focus (GtkWidget * widget)
 // TO DO: With static variables in here, this is a candidate to move into the Editor2 class.
 // More TO DO: The "speedup" or caching mechanism here indicates that this information should be stored in a static table.
 // This table could be created with a more robust usfm language setup in bibledit.
-void marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
+void Editor2::marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
 /*
  Given a "project", and a "marker", this function gives the "type" and the 
  "subtype" of the style of that marker.
@@ -3541,21 +3541,21 @@ void marker_get_type_and_subtype(const ustring & project, const ustring & marker
   }
 }
 
-gint table_get_n_rows(GtkTable * table)
+gint Editor2::table_get_n_rows(GtkTable * table)
 {
   gint n_rows = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(table), "n_rows"));
   return n_rows;
 }
 
 
-gint table_get_n_columns(GtkTable * table)
+gint Editor2::table_get_n_columns(GtkTable * table)
 {
   gint n_columns = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(table), "n_columns"));
   return n_columns;
 }
 
 
-void usfm_internal_add_text(ustring & text, const ustring & addition)
+void Editor2::usfm_internal_add_text(ustring & text, const ustring & addition)
 // This is an internal function that adds an addition to already existing
 // USFM text.
 {
@@ -3572,7 +3572,7 @@ void usfm_internal_add_text(ustring & text, const ustring & addition)
 }
 
 
-void usfm_internal_get_text_close_character_style(ustring & text, const ustring & project, const ustring & style)
+void Editor2::usfm_internal_get_text_close_character_style(ustring & text, const ustring & project, const ustring & style)
 // Adds the USFM code for a character style that closes.
 {
   // Get the type and the subtype.
@@ -3586,7 +3586,7 @@ void usfm_internal_get_text_close_character_style(ustring & text, const ustring 
 }
 
 
-ustring usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, const ustring & project)
+ustring Editor2::usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, const ustring & project)
 {
   // Variable to hold the note text.
   ustring notetext;
@@ -3724,7 +3724,7 @@ ustring usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, const ust
 }
 
 
-void get_styles_at_iterator(GtkTextIter iter, ustring & paragraph_style, ustring & character_style)
+void Editor2::get_styles_at_iterator(GtkTextIter iter, ustring & paragraph_style, ustring & character_style)
 {
   // Get the applicable styles.
   // This is done by getting the names of the styles at the iterator.
@@ -3761,7 +3761,7 @@ void get_styles_at_iterator(GtkTextIter iter, ustring & paragraph_style, ustring
 }
 
 
-vector <ustring> get_character_styles_between_iterators (GtkTextIter startiter, GtkTextIter enditer)
+vector <ustring> Editor2::get_character_styles_between_iterators (GtkTextIter startiter, GtkTextIter enditer)
 // Gets the character styles between two iterators given.
 // To do this properly, it is assumed that the first style encountered will always be the paragraph style,
 // and the second the character style.
@@ -3779,170 +3779,7 @@ vector <ustring> get_character_styles_between_iterators (GtkTextIter startiter, 
   return styles;
 }
 
-
-bool get_verse_number_at_iterator_internal (GtkTextIter iter, const ustring & verse_marker, ustring& verse_number)
-// This function looks at the iterator for the verse number.
-// If a verse number is not found, it iterates back till one is found.
-// If the iterator can't go back any further, and no verse number was found, it returns false.
-// If a verse number is found, it returns true and stores it in parameter "verse_number".
-{
-  // Look for the v style while iterating backward.
-  bool verse_style_found = false;
-  do {
-    ustring paragraph_style, character_style;
-    get_styles_at_iterator(iter, paragraph_style, character_style);
-    if (character_style == verse_marker) {
-      verse_style_found = true;
-    }
-  } while (!verse_style_found && gtk_text_iter_backward_char(&iter));
-  // If the verse style is not in this textbuffer, bail out.
-  if (!verse_style_found) {
-    return false;
-  }
-  // The verse number may consist of more than one character.
-  // Therefore iterate back to the start of the verse style.
-  // For convenience, it iterates back to the start of any style.
-  while (!gtk_text_iter_begins_tag (&iter, NULL)) {
-    gtk_text_iter_backward_char (&iter);
-  }
-  // Extract the verse number.
-  GtkTextIter enditer = iter;
-  gtk_text_iter_forward_chars(&enditer, 10);
-  verse_number = gtk_text_iter_get_slice(&iter, &enditer);
-  size_t position = verse_number.find(" ");
-  position = CLAMP(position, 0, verse_number.length());
-  verse_number.erase (position, 10);
-  // Indicate that a verse number was found.
-  return true;
-}
-
-
-ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box)
-/* 
-This function returns the verse number at the iterator.
-It also takes into account a situation where the cursor is on a heading.
-The user expects a heading to belong to the next verse. 
-*/
-{
-  // Get the paragraph style at the iterator, in case it is in a heading.
-  ustring paragraph_style_at_cursor;
-  {
-    ustring dummy;
-    get_styles_at_iterator(iter, paragraph_style_at_cursor, dummy);
-  }
-  
-  // Verse-related variables.
-  ustring verse_number = "0";
-  bool verse_number_found = false;
-  GtkWidget * textview = NULL;
-
-  vector <GtkWidget *>
-  widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
-
-  do {
-    // Try to find a verse number in the GtkTextBuffer the "iter" points to.
-    verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
-    // If the verse number was not found, look through the previous GtkTextBuffer.
-    if (!verse_number_found) {
-      // If the "textview" is not yet set, look for the current one.
-      if (textview == NULL) {
-        GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        for (unsigned int i = 0; i < widgets.size(); i++) {
-          if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
-            textview = widgets[i];
-            break;
-          }
-        }
-      }
-      // Look for the previous GtkTextView.
-      textview = editor_get_previous_textview (widgets, textview);
-      // Start looking at the end of that textview.
-      if (textview) {
-        GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-        gtk_text_buffer_get_end_iter (textbuffer, &iter);
-      }
-    }
-  } while (!verse_number_found && textview);
-
-  // Optional: If the cursor is on a title/heading, increase verse number.
-  if (!project.empty()) {
-    StyleType type;
-    int subtype;
-    marker_get_type_and_subtype(project, paragraph_style_at_cursor, type, subtype);
-    if (type == stStartsParagraph) {
-      switch (subtype) {
-        case ptMainTitle:
-        case ptSubTitle:
-        case ptSectionHeading:
-        {
-          unsigned int vs = convert_to_int (verse_number);
-          vs++;
-          verse_number = convert_to_string (vs);
-          break;
-        }
-        case ptNormalParagraph:
-        {
-          break;
-        }
-      }
-    }
-  }
-
-  // Return the verse number found.
-  return verse_number;
-}
-
-
-bool get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search)
-// This returns the iterator and textview where "verse_number" starts.
-// Returns true if the verse was found, else false.
-{
-  // Go through all textviews.
-  vector <GtkWidget *>
-  textviews = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
-  for (unsigned int i = 0; i < textviews.size(); i++) {
-    // Handle this textview.
-    textview = textviews[i];
-    // Search from start of buffer.
-    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-    gtk_text_buffer_get_start_iter (textbuffer, &iter);
-    // Verse 0 or empty: beginning of chapter.
-    if ((verse_number == "0") || (verse_number.empty())) {
-      return true;
-    }
-    // Go through the buffer and find out about the verse.
-    do {
-      ustring paragraph_style, character_style, verse_at_iter;
-      get_styles_at_iterator(iter, paragraph_style, character_style);
-      if (character_style == verse_marker) {
-        verse_at_iter = get_verse_number_at_iterator(iter, verse_marker, "", parent_box);
-        if (verse_number == verse_at_iter) {
-          return true;
-        }
-      }
-      // Optionally do a deep search: whether the verse is in a sequence or range of verses.
-      if (deep_search && !verse_at_iter.empty()) {
-        unsigned int verse_int = convert_to_int(verse_at_iter);
-        vector <unsigned int> combined_verses = verse_range_sequence(verse_number);
-        for (unsigned int i2 = 0; i2 < combined_verses.size(); i2++) {
-          if (verse_int == combined_verses[i2]) {
-            return true;
-          }
-        }
-      }
-    } while (gtk_text_iter_forward_char(&iter));
-  }
-  // If we haven't done the deep search yet, do it now.
-  if (!deep_search) {
-    if (get_iterator_at_verse_number (verse_number, verse_marker, parent_box, iter, textview, true)) {
-      return true;
-    }
-  }
-  // Verse was not found.
-  return false;
-}
-
-void textbuffer_apply_named_tag(GtkTextBuffer * buffer, const ustring & name, const GtkTextIter * start, const GtkTextIter * end)
+void Editor2::textbuffer_apply_named_tag(GtkTextBuffer * buffer, const ustring & name, const GtkTextIter * start, const GtkTextIter * end)
 // Applies the tag on the textbuffer, if the tag exists.
 // Else applies the "unknown" style.
 {
@@ -3956,7 +3793,7 @@ void textbuffer_apply_named_tag(GtkTextBuffer * buffer, const ustring & name, co
   }
 }
 
-void textbuffer_insert_with_named_tags(GtkTextBuffer * buffer, GtkTextIter * iter, const ustring & text, ustring first_tag_name, ustring second_tag_name)
+void Editor2::textbuffer_insert_with_named_tags(GtkTextBuffer * buffer, GtkTextIter * iter, const ustring & text, ustring first_tag_name, ustring second_tag_name)
 // Inserts text into the buffer applying one or two named tags at the same time.
 // If a tag does not exist, it applies the "unknown" style instead.
 {
@@ -3977,7 +3814,7 @@ void textbuffer_insert_with_named_tags(GtkTextBuffer * buffer, GtkTextIter * ite
 }
 
 
-void clear_and_destroy_editor_actions (deque <EditorAction *>& actions)
+void Editor2::clear_and_destroy_editor_actions (deque <EditorAction *>& actions)
 {
   for (unsigned int i = 0; i < actions.size(); i++) {
     EditorAction * action = actions[i];
@@ -3987,13 +3824,13 @@ void clear_and_destroy_editor_actions (deque <EditorAction *>& actions)
 }
 
 
-void on_container_tree_callback_destroy (GtkWidget *widget, gpointer user_data)
+void Editor2::on_container_tree_callback_destroy (GtkWidget *widget, gpointer user_data)
 {
   gtk_widget_destroy (widget);
 }
 
 
-void editor_text_append(GtkTextBuffer * textbuffer, const ustring & text, const ustring & paragraph_style, const ustring & character_style)
+void Editor2::editor_text_append(GtkTextBuffer * textbuffer, const ustring & text, const ustring & paragraph_style, const ustring & character_style)
 // This function appends text to the textbuffer.
 // It inserts the text at the cursor.
 {
@@ -4005,7 +3842,7 @@ void editor_text_append(GtkTextBuffer * textbuffer, const ustring & text, const 
 }
 
 
-gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action)
+gint Editor2::editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action)
 {
   gint offset = 0;
   if (paragraph_action) {
@@ -4018,7 +3855,7 @@ gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * 
 }
 
 
-void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset)
+void Editor2::editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset)
 {
   if (paragraph_action) {
     GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (paragraph_action->textview));
@@ -4029,7 +3866,7 @@ void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * 
 }
 
 
-EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action)
+EditorActionDeleteText * Editor2::paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action)
 // Creates an action for deleting text for the last character in the text buffer if it is a space.
 {
   if (paragraph_action) {
@@ -4041,7 +3878,7 @@ EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCr
       gunichar last_character = gtk_text_iter_get_char(&iter);
       if (g_unichar_isspace(last_character)) {
         gint offset = gtk_text_iter_get_offset (&iter);
-        return new EditorActionDeleteText (paragraph_action, offset, 1);
+        return new EditorActionDeleteText (this, paragraph_action, offset, 1);
       }
     }
   }
@@ -4049,7 +3886,7 @@ EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCr
 }
 
 
-bool text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
+bool Editor2::text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
 {
   if (marker_found) {
     if (marker_pos == 0) {
@@ -4068,7 +3905,7 @@ bool text_starts_paragraph (const ustring& project, ustring& line, const ustring
 }
 
 
-bool text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
+bool Editor2::text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
 {
   if (marker_found) {
     if (marker_pos == 0) {
@@ -4086,10 +3923,7 @@ bool text_starts_verse (const ustring& project, ustring& line, const ustring& ma
   return false;  
 }
 
-
-typedef pair<vector<GtkWidget *> *, GType> widget_search_t;
-
-void on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data)
+void Editor2::on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data)
 {
   widget_search_t *search_data = static_cast<widget_search_t*> (user_data);
   vector <GtkWidget*> *widgets = search_data->first;
@@ -4105,7 +3939,7 @@ void on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data)
  * widgets of type of_type are returned. If of_type is G_TYPE_NONE (default
  * value) then all widgets are returned.
  */
-vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type)
+vector <GtkWidget *> Editor2::editor_get_widgets (GtkWidget * vbox, GType of_type)
 {
   vector <GtkWidget *> widgets;
   widget_search_t search_data = make_pair(&widgets, of_type);
@@ -4117,7 +3951,7 @@ vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type)
 }
 
 
-GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
+GtkWidget * Editor2::editor_get_next_textview (const vector <GtkWidget *> &widgets,
                                       GtkWidget * textview)
 {
   for (unsigned int i = 0; i < widgets.size(); i++) {
@@ -4129,7 +3963,7 @@ GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
 }
 
 
-GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
+GtkWidget * Editor2::editor_get_previous_textview (const vector <GtkWidget *> &widgets,
                                           GtkWidget * textview)
 // Gets the textview that precedes the "current" one in the vector.
 {
@@ -4142,7 +3976,7 @@ GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
 }
 
 
-EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles)
+EditorActionDeleteText * Editor2::paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles)
 // This function accepts a paragraph, and gives a list of text and their associated character styles
 // from the insertion point to the end of the buffer.
 // It returns the EditorAction that would be required to erase that text from the paragraph.
@@ -4158,13 +3992,13 @@ EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(Edi
   get_text_and_styles_between_iterators(&startiter, &enditer, text, styles);
   EditorActionDeleteText * delete_action = NULL;
   if (end_offset > start_offset) {
-    delete_action = new EditorActionDeleteText(paragraph, start_offset, end_offset - start_offset);
+    delete_action = new EditorActionDeleteText(this, paragraph, start_offset, end_offset - start_offset);
   }
   return delete_action;
 }
 
 
-void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles)
+void Editor2::get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles)
 // This function gives a list of the text and character styles between two iterators.
 // The "text" variable contains a chunks of text with the same style.
 {
@@ -4197,7 +4031,7 @@ void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter 
 }
 
 
-void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking)
+void Editor2::editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking)
 // Do the administration of parking a widget.
 {
   // Look for the widget's offset within its parent.
@@ -4211,7 +4045,7 @@ void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, Gtk
   gtk_widget_reparent (widget, parking);
 }
 
-EditorNoteType note_type_get(const ustring & project, const ustring & marker)
+EditorNoteType Editor2::note_type_get(const ustring & project, const ustring & marker)
 // Gets the type of the note, e.g. a footnote.
 {
   EditorNoteType notetype = entFootnote;
@@ -4236,7 +4070,7 @@ EditorNoteType note_type_get(const ustring & project, const ustring & marker)
   return notetype;
 }
 
-NoteNumberingType note_numbering_type_get(const ustring & project, const ustring & marker)
+NoteNumberingType Editor2::note_numbering_type_get(const ustring & project, const ustring & marker)
 /*
  Gets the numbering type of a note, for example, the numbering could be numerical
  or alphabetical.
@@ -4255,7 +4089,7 @@ NoteNumberingType note_numbering_type_get(const ustring & project, const ustring
 }
 
 
-ustring note_numbering_user_sequence_get(const ustring & project, const ustring & marker)
+ustring Editor2::note_numbering_user_sequence_get(const ustring & project, const ustring & marker)
 // Gets the sequence of characters from which the note caller should be taken.
 {
   ustring sequence;

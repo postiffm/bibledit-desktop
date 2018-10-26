@@ -21,18 +21,11 @@
 #include "editoractions.h"
 #include "gwrappers.h"
 #include "usfm.h"
+#include "editor.h"
 
-// Defined in editor.h, so need fwd declarations.
-// TO DO: Should not need this. It is because the code is sphaghetti code
-// that this has become necessary.
-vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox,
-                                         GType of_type = G_TYPE_NONE);
-void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
-vector <ustring> get_character_styles_between_iterators (GtkTextIter startiter, GtkTextIter enditer);
-void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
-
-EditorAction::EditorAction(EditorActionType type_in)
+EditorAction::EditorAction(Editor2 *_parent_editor, EditorActionType type_in)
 {
+  parent_editor = _parent_editor;
   // The type of this EditorAction.
   type = type_in;
 }
@@ -40,6 +33,7 @@ EditorAction::EditorAction(EditorActionType type_in)
 
 EditorAction::~EditorAction ()
 {
+  parent_editor = NULL;    
 }
 
 
@@ -66,8 +60,8 @@ void EditorAction::redo (deque <EditorAction *>& done, deque <EditorAction *>& u
 }
 
 
-EditorActionCreateParagraph::EditorActionCreateParagraph(GtkWidget * vbox) :
-EditorAction (eatCreateParagraph)
+EditorActionCreateParagraph::EditorActionCreateParagraph(Editor2 *_parent_editor, GtkWidget * vbox) :
+EditorAction (_parent_editor, eatCreateParagraph)
 {
   // Pointer to the GtkTextView is created on apply.
   textview = NULL;
@@ -88,6 +82,7 @@ EditorActionCreateParagraph::~EditorActionCreateParagraph ()
     gtk_widget_destroy (textview);
     textview = NULL;
   }
+  parent_vbox = NULL;
 }
 
 
@@ -113,7 +108,7 @@ void EditorActionCreateParagraph::apply (GtkTextTagTable * texttagtable, bool ed
   // Move the widget to the right position, 
   // which is next to the currently focused paragraph.
   // This move is important since a new paragraph can be created anywhere among the current ones.
-  vector <GtkWidget *> widgets = editor_get_widgets (parent_vbox);
+  vector <GtkWidget *> widgets = parent_editor->editor_get_widgets (parent_vbox);
   gint new_paragraph_offset = 0;
   if (focused_paragraph) {
     for (unsigned int i = 0; i < widgets.size(); i++) {
@@ -135,7 +130,7 @@ void EditorActionCreateParagraph::apply (GtkTextTagTable * texttagtable, bool ed
 void EditorActionCreateParagraph::undo (GtkWidget * parking_vbox, GtkWidget *& to_focus)
 {
   // Remove the widget by parking it in an invisible location. It is kept alive.
-  editor_park_widget (parent_vbox, textview, offset_at_delete, parking_vbox);
+  parent_editor->editor_park_widget (parent_vbox, textview, offset_at_delete, parking_vbox);
   // Focus textview.
   to_focus = textview;
 }
@@ -151,8 +146,8 @@ void EditorActionCreateParagraph::redo (GtkWidget *& to_focus)
 }
 
 
-EditorActionChangeParagraphStyle::EditorActionChangeParagraphStyle(const ustring& style, EditorActionCreateParagraph * parent_action) :
-EditorAction (eatChangeParagraphStyle)
+EditorActionChangeParagraphStyle::EditorActionChangeParagraphStyle(Editor2 *_parent_editor, const ustring& style, EditorActionCreateParagraph * parent_action) :
+EditorAction (_parent_editor, eatChangeParagraphStyle)
 {
   // The EditorAction object that created the paragraph whose style it going to be set.
   paragraph = parent_action;
@@ -199,7 +194,7 @@ void EditorActionChangeParagraphStyle::set_style (const ustring& style)
   gtk_text_buffer_get_end_iter (paragraph->textbuffer, &enditer);
   // Apply the style in such a way that the paragraph style is always applied first, 
   // then after that the character styles.
-  vector <ustring> current_character_styles = get_character_styles_between_iterators (startiter, enditer);
+  vector <ustring> current_character_styles = parent_editor->get_character_styles_between_iterators (startiter, enditer);
   gtk_text_buffer_remove_all_tags (paragraph->textbuffer, &startiter, &enditer);
   gtk_text_buffer_apply_tag_by_name (paragraph->textbuffer, style.c_str(), &startiter, &enditer);
   for (unsigned int i = 0; i < current_character_styles.size(); i++) {
@@ -213,8 +208,8 @@ void EditorActionChangeParagraphStyle::set_style (const ustring& style)
 }
 
 
-EditorActionInsertText::EditorActionInsertText(EditorActionCreateParagraph * parent_action, gint offset_in, const ustring& text_in) :
-EditorAction (eatInsertText)
+EditorActionInsertText::EditorActionInsertText(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, const ustring& text_in) :
+EditorAction (_parent_editor, eatInsertText)
 {
   // The paragraph to operate on.
   paragraph = parent_action;
@@ -267,8 +262,8 @@ void EditorActionInsertText::redo (GtkWidget *& to_focus)
 }
 
 
-EditorActionDeleteText::EditorActionDeleteText(EditorActionCreateParagraph * parent_action, gint offset_in, gint length_in) :
-EditorAction (eatDeleteText)
+EditorActionDeleteText::EditorActionDeleteText(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, gint length_in) :
+EditorAction (_parent_editor, eatDeleteText)
 {
   // The paragraph to operate on.
   paragraph = parent_action;
@@ -292,7 +287,7 @@ void EditorActionDeleteText::apply (GtkWidget *& to_focus)
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &startiter, offset);
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &enditer, offset + length);
   // Save existing content.
-  get_text_and_styles_between_iterators(&startiter, &enditer, deleted_text, deleted_styles);
+  parent_editor->get_text_and_styles_between_iterators(&startiter, &enditer, deleted_text, deleted_styles);
   // Delete text.
   gtk_text_buffer_delete (paragraph->textbuffer, &startiter, &enditer);
   // Focus widget.
@@ -345,8 +340,8 @@ void EditorActionDeleteText::redo (GtkWidget *& to_focus)
 }
 
 
-EditorActionChangeCharacterStyle::EditorActionChangeCharacterStyle(EditorActionCreateParagraph * parent_action, const ustring& style_in, gint offset_in, gint length_in) :
-EditorAction (eatChangeCharacterStyle)
+EditorActionChangeCharacterStyle::EditorActionChangeCharacterStyle(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, const ustring& style_in, gint offset_in, gint length_in) :
+EditorAction (_parent_editor, eatChangeCharacterStyle)
 {
   // The identifier of the paragraph to operate on.
   paragraph = parent_action;
@@ -373,7 +368,7 @@ void EditorActionChangeCharacterStyle::apply (GtkWidget *& to_focus)
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &startiter, offset);
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &enditer, offset + length);
   // Get the styles applied now, and store these so as to track the state of this bit of text.
-  previous_styles = get_character_styles_between_iterators (startiter, enditer);
+  previous_styles = parent_editor->get_character_styles_between_iterators (startiter, enditer);
   // The new styles to apply.
   vector <ustring> new_styles;
   for (gint i = 0; i < length; i++) {
@@ -408,7 +403,7 @@ void EditorActionChangeCharacterStyle::redo (GtkWidget *& to_focus)
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &startiter, offset);
   gtk_text_buffer_get_iter_at_offset (paragraph->textbuffer, &enditer, offset + length);
   // Get the styles applied now, and store these so as to track the state of this bit of text.
-  vector <ustring> styles_to_delete = get_character_styles_between_iterators (startiter, enditer);
+  vector <ustring> styles_to_delete = parent_editor->get_character_styles_between_iterators (startiter, enditer);
   // The new styles to apply.
   vector <ustring> new_styles;
   for (gint i = 0; i < length; i++) {
@@ -439,8 +434,8 @@ void EditorActionChangeCharacterStyle::change_styles (const vector <ustring>& ol
 }
 
 
-EditorActionDeleteParagraph::EditorActionDeleteParagraph(EditorActionCreateParagraph * paragraph_in) :
-EditorAction (eatDeleteParagraph)
+EditorActionDeleteParagraph::EditorActionDeleteParagraph(Editor2 *_parent_editor, EditorActionCreateParagraph * paragraph_in) :
+EditorAction (_parent_editor, eatDeleteParagraph)
 {
   // The identifier of the paragraph to operate on.
   paragraph = paragraph_in;
@@ -462,7 +457,7 @@ void EditorActionDeleteParagraph::apply (GtkWidget * parking_vbox, GtkWidget *& 
     EditorActionCreateNoteParagraph * note_paragraph = static_cast <EditorActionCreateNoteParagraph *> (paragraph);
     widget_to_park = note_paragraph->hbox;
   }
-  editor_park_widget (paragraph->parent_vbox, widget_to_park, offset, parking_vbox);
+  parent_editor->editor_park_widget (paragraph->parent_vbox, widget_to_park, offset, parking_vbox);
 }
 
 
@@ -491,12 +486,12 @@ void EditorActionDeleteParagraph::redo (GtkWidget * parking_vbox, GtkWidget *& t
     widget_to_park = note_paragraph->hbox;
   }
   gint dummy;
-  editor_park_widget (paragraph->parent_vbox, widget_to_park, dummy, parking_vbox);
+  parent_editor->editor_park_widget (paragraph->parent_vbox, widget_to_park, dummy, parking_vbox);
 }
 
 
-EditorActionCreateNoteParagraph::EditorActionCreateNoteParagraph(GtkWidget * vbox, const ustring& marker_in, const ustring& caller_usfm_in, const ustring& caller_text_in, const ustring& identifier_in) :
-EditorActionCreateParagraph (vbox)
+EditorActionCreateNoteParagraph::EditorActionCreateNoteParagraph(Editor2 *_parent_editor, GtkWidget * vbox, const ustring& marker_in, const ustring& caller_usfm_in, const ustring& caller_text_in, const ustring& identifier_in) :
+EditorActionCreateParagraph (_parent_editor, vbox)
 {
   // Change the type to a note paragraph.
   type = eatCreateNoteParagraph;
@@ -567,7 +562,7 @@ void EditorActionCreateNoteParagraph::apply (GtkTextTagTable * texttagtable, boo
 
   // Move the widget to the right position. To be calculated.
   /*
-    vector <GtkWidget *> widgets = editor_get_widgets (parent_vbox);
+    vector <GtkWidget *> widgets = parent_editor->editor_get_widgets (parent_vbox);
     gint new_paragraph_offset = 0;
     if (focused_paragraph) {
       for (unsigned int i = 0; i < widgets.size(); i++) {
@@ -590,7 +585,7 @@ void EditorActionCreateNoteParagraph::apply (GtkTextTagTable * texttagtable, boo
 void EditorActionCreateNoteParagraph::undo (GtkWidget * parking_vbox, GtkWidget *& to_focus)
 {
   // Remove the widget by parking it in an invisible location. It is kept alive.
-  editor_park_widget (parent_vbox, textview, offset_at_delete, parking_vbox);
+  parent_editor->editor_park_widget (parent_vbox, textview, offset_at_delete, parking_vbox);
   // Focus textview.
   to_focus = textview;
 }

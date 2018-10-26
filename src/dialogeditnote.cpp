@@ -247,11 +247,11 @@ void EditNoteDialog::on_okbutton1_clicked(GtkButton * button, gpointer user_data
 void EditNoteDialog::on_okbutton()
 {
   // Get the old note type.
-  EditorNoteType oldnotetype = note_type_get(myeditor->project_get(), note_paragraph->opening_closing_marker);
+  EditorNoteType oldnotetype = myeditor->note_type_get(myeditor->project_get(), note_paragraph->opening_closing_marker);
 
   // Get and store the new note marker and type.
   note_paragraph->opening_closing_marker = get_marker(combobox_get_active_string(combobox1));
-  EditorNoteType newnotetype = note_type_get(myeditor->project_get(), note_paragraph->opening_closing_marker);
+  EditorNoteType newnotetype = myeditor->note_type_get(myeditor->project_get(), note_paragraph->opening_closing_marker);
 
   // Change the caller, if needed.
   NumberingType numberingtype = (NumberingType) numbering_get();
@@ -314,10 +314,10 @@ void EditNoteDialog::on_okbutton()
         gtk_text_buffer_remove_tag_by_name(note_paragraph->textbuffer, character_style.c_str(), &iter, &iter2);
       }
       if (!paragraph_style.empty()) {
-        textbuffer_apply_named_tag(note_paragraph->textbuffer, switch_marker(paragraph_style, switch_to_xref), &iter, &iter2);
+        myeditor->textbuffer_apply_named_tag(note_paragraph->textbuffer, switch_marker(paragraph_style, switch_to_xref), &iter, &iter2);
       }
       if (!character_style.empty()) {
-        textbuffer_apply_named_tag(note_paragraph->textbuffer, switch_marker(character_style, switch_to_xref), &iter, &iter2);
+        myeditor->textbuffer_apply_named_tag(note_paragraph->textbuffer, switch_marker(character_style, switch_to_xref), &iter, &iter2);
       }
 
       gtk_text_iter_forward_char(&iter);

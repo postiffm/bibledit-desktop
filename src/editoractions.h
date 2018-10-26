@@ -45,24 +45,27 @@ enum EditorActionApplication {
   eaaRedo
 };
 
+class Editor2;
 
 class EditorAction
 {
 public:
-  EditorAction(EditorActionType type_in);
+  EditorAction(Editor2 *_parent_editor, EditorActionType type_in);
   virtual ~EditorAction();
   void apply (deque <EditorAction *>& done);
   void undo (deque <EditorAction *>& done, deque <EditorAction *>& undone);
   void redo (deque <EditorAction *>& done, deque <EditorAction *>& undone);
   EditorActionType type;
 private:
+protected:
+  Editor2 *parent_editor;
 };
 
 
 class EditorActionCreateParagraph : public EditorAction
 {
 public:
-  EditorActionCreateParagraph(GtkWidget * vbox);
+  EditorActionCreateParagraph(Editor2 *_parent_editor, GtkWidget * vbox);
   virtual ~EditorActionCreateParagraph();
   friend class EditorActionCreateNoteParagraph;
   friend class EditorActionDeleteParagraph;
@@ -81,7 +84,7 @@ private:
 class EditorActionChangeParagraphStyle : public EditorAction
 {
 public:
-  EditorActionChangeParagraphStyle(const ustring& style, EditorActionCreateParagraph * parent_action);
+  EditorActionChangeParagraphStyle(Editor2 *_parent_editor, const ustring& style, EditorActionCreateParagraph * parent_action);
   virtual ~EditorActionChangeParagraphStyle();
   void apply (GtkWidget *& to_focus);
   void undo (GtkWidget *& to_focus);
@@ -97,7 +100,7 @@ private:
 class EditorActionInsertText : public EditorAction
 {
 public:
-  EditorActionInsertText(EditorActionCreateParagraph * parent_action, gint offset_in, const ustring& text_in);
+  EditorActionInsertText(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, const ustring& text_in);
   virtual ~EditorActionInsertText();
   void apply (GtkWidget *& to_focus);
   void undo (GtkWidget *& to_focus);
@@ -112,7 +115,7 @@ private:
 class EditorActionDeleteText : public EditorAction
 {
 public:
-  EditorActionDeleteText(EditorActionCreateParagraph * parent_action, gint offset_in, gint length_in);
+  EditorActionDeleteText(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, gint length_in);
   virtual ~EditorActionDeleteText();
   EditorActionCreateParagraph * paragraph;
   void apply (GtkWidget *& to_focus);
@@ -129,7 +132,7 @@ private:
 class EditorActionChangeCharacterStyle : public EditorAction
 {
 public:
-  EditorActionChangeCharacterStyle(EditorActionCreateParagraph * parent_action, const ustring& style_in, gint offset_in, gint length_in);
+  EditorActionChangeCharacterStyle(Editor2 *_parent_editor, EditorActionCreateParagraph * parent_action, const ustring& style_in, gint offset_in, gint length_in);
   virtual ~EditorActionChangeCharacterStyle();
   void apply (GtkWidget *& to_focus);
   void undo (GtkWidget *& to_focus);
@@ -147,7 +150,7 @@ private:
 class EditorActionDeleteParagraph : public EditorAction
 {
 public:
-  EditorActionDeleteParagraph(EditorActionCreateParagraph * paragraph_in);
+  EditorActionDeleteParagraph(Editor2 *_parent_editor, EditorActionCreateParagraph * paragraph_in);
   virtual ~EditorActionDeleteParagraph();
   void apply(GtkWidget * parking_vbox, GtkWidget *& to_focus);
   void undo (GtkWidget *& to_focus);
@@ -161,7 +164,7 @@ private:
 class EditorActionCreateNoteParagraph : public EditorActionCreateParagraph
 {
 public:
-  EditorActionCreateNoteParagraph(GtkWidget * vbox, const ustring& marker_in, const ustring& caller_usfm_in, const ustring& caller_text_in, const ustring& identifier_in);
+  EditorActionCreateNoteParagraph(Editor2 *_parent_editor, GtkWidget * vbox, const ustring& marker_in, const ustring& caller_usfm_in, const ustring& caller_text_in, const ustring& identifier_in);
   virtual ~EditorActionCreateNoteParagraph();
   void apply (GtkTextTagTable * texttagtable, bool editable, EditorActionCreateParagraph * focused_paragraph, GtkWidget *& to_focus);
   void undo  (GtkWidget * parking_vbox, GtkWidget *& to_focus);

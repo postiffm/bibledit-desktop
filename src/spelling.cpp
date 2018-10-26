@@ -27,12 +27,7 @@
 #include "tiny_utilities.h"
 #include "projectutils.h"
 #include <glib/gi18n.h>
-
-// In editor.cpp...need fwd declarations here
-// TO DO: Should not need this. It is because the code is sphaghetti code
-// that this has become necessary.
-bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
-void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
+#include "editor.h"
 
 ustring spelling_global_dictionary()
 {
@@ -109,9 +104,9 @@ const gchar *spelling_tag_name()
   return _("misspelling");
 }
 
-
-SpellingChecker::SpellingChecker(GtkTextTagTable * texttagtable)
+SpellingChecker::SpellingChecker(Editor2 *_parent_editor, GtkTextTagTable * texttagtable)
 {
+  parent_editor = _parent_editor;
   misspelling_tag = gtk_text_tag_new(spelling_tag_name());
   gtk_text_tag_table_add(texttagtable, misspelling_tag);
   g_object_unref(misspelling_tag);
@@ -205,7 +200,7 @@ void SpellingChecker::collect_words(GtkTextBuffer * textbuffer)
     startiter = enditer;
     gtk_text_iter_backward_word_start(&startiter);
     GtkTextIter moved_enditer;
-    if (move_end_iterator_before_note_caller_and_validate (startiter, enditer, moved_enditer)) {
+    if (parent_editor && parent_editor->move_end_iterator_before_note_caller_and_validate (startiter, enditer, moved_enditer)) {
       check_word(textbuffer, &startiter, &moved_enditer);
     }
   }
@@ -487,14 +482,16 @@ void SpellingChecker::right_clicked_word_get_extends(GtkTextIter * start, GtkTex
 {
   // Get the boundaries.
   *start = right_clicked_iter;
-  if (!gtk_text_iter_starts_word(start))
+  if (!gtk_text_iter_starts_word(start)) {
     gtk_text_iter_backward_word_start(start);
+  }
   *end = *start;
-  if (gtk_text_iter_inside_word(end))
+  if (gtk_text_iter_inside_word(end)) {
     gtk_text_iter_forward_word_end(end);
+  }
     
-  // Exclude note callers that follow.
-  move_end_iterator_before_note_caller_and_validate (* start, * end, * end);
+  // Exclude note callers that follow. (For USFMView, parent_editor is NULL, so not used.)
+  if (parent_editor) { parent_editor->move_end_iterator_before_note_caller_and_validate (* start, * end, * end); }
 }
 
 
@@ -589,17 +586,19 @@ void SpellingChecker::replace_word(GtkWidget * menuitem)
   const char *newword = gtk_label_get_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (menuitem))));
 
   // Get a list of the styles applied to the old word.
+#if 0
   vector < ustring > paragraph_styles;
   vector < ustring > character_styles;
   GtkTextIter iter = start;
   do {
     ustring paragraphstyle, characterstyle;
-    get_styles_at_iterator(iter, paragraphstyle, characterstyle);
+    // Remember that for USFMView, parent_editor is NULL at the present time.
+    parent_editor->get_styles_at_iterator(iter, paragraphstyle, characterstyle);
     paragraph_styles.push_back(paragraphstyle);
     character_styles.push_back(characterstyle);
     gtk_text_iter_forward_char(&iter);
   } while (!gtk_text_iter_equal(&iter, &end));
-
+#endif
   // Get the offset of the start of the word.
   unsigned int offset = gtk_text_iter_get_offset(&start);
 
@@ -614,7 +613,7 @@ void SpellingChecker::replace_word(GtkWidget * menuitem)
   // Free the memory used.
   g_free(oldword);
 
-/*
+#if 0
   // Apply the tags of the old word to the new. This has been disabled for just now. It should use EditorActions.
   // If there are not enough tags, keep repeating the last one.
   ustring unewword(newword);
@@ -638,7 +637,7 @@ void SpellingChecker::replace_word(GtkWidget * menuitem)
     if (!characterstyle.empty())
       gtk_text_buffer_apply_tag_by_name(buffer, characterstyle.c_str(), &start, &end);
   }
-  */
+#endif
 }
 
 

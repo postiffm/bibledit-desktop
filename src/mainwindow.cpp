@@ -3685,12 +3685,15 @@ void MainWindow::on_check_spelling_error(bool next, bool extremity)
     return;
     
   // No next (or previous) error in the current chapter. Ask whether the user wishes to go to other chapter.
-  ustring msg = _("There are no more spelling errors in this chapter\nWould you like to go to the");
-  if (next)
-    msg.append (_("next"));
-  else
-    msg.append (_("previous"));
-  msg.append (_(" chapter or chapters?"));
+  ustring msg;
+  if (next) {
+    msg.append (_("There are no more spelling errors in this chapter\nWould you like to go to the next chapter or chapters?"));
+  }
+  else {
+      // Remember, we tolerate duplication of text in these human-readable messages because they have to be translated
+      // into other languages, and splitting them into pieces doesn't always work in those languages like it does in English.
+    msg.append (_("There are no more spelling errors in this chapter\nWould you like to go to the previous chapter or chapters?"));
+  }
   if (gtkw_dialog_question (window_main, msg) != GTK_RESPONSE_YES)
     return;
   if (next) {

@@ -30,16 +30,12 @@
 #include "date_time_utils.h"
 #include "xmlutils.h"
 #include "debug.h"
+#include "editor.h"
 
-// In editor.cpp...need fwd declarations here
-// TO DO: Should not need this. It is because the code is sphaghetti code
-// that this has become necessary.
-void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
-ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring& verse_marker, const ustring& project, GtkWidget * parent_box);
-
-Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
+Highlight::Highlight(Editor2 *_parent_editor, GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
 {
   // Save and initialize variables.
+  parent_editor = _parent_editor;
   maintextbuffer = buffer;
   maintextview = GTK_TEXT_VIEW(textview);
   mytag = tag;
@@ -64,10 +60,10 @@ Highlight::Highlight(GtkTextBuffer * buffer, GtkWidget * textview, const ustring
     DEBUG("W9.1.2 starting loop");  
     while (!gtk_text_iter_is_end(&iter)) {
       ustring paragraph_style, character_style;
-      get_styles_at_iterator(iter, paragraph_style, character_style);
+      parent_editor->get_styles_at_iterator(iter, paragraph_style, character_style);
       if (start || (character_style == verse_style)) {
         DEBUG("W9.1.3 in if inside loop");
-        ustring verse_at_iter = get_verse_number_at_iterator(iter, verse_style, "", gtk_widget_get_parent(textview));
+        ustring verse_at_iter = parent_editor->get_verse_number_at_iterator(iter, verse_style, "", gtk_widget_get_parent(textview));
 	// Above results in two errors:
 	// Gtk-CRITICAL **: IA__gtk_container_foreach: assertion 'GTK_IS_CONTAINER (container)' failed
 	// Need to fix these.

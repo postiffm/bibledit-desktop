@@ -37,11 +37,12 @@ bool spelling_dictionary_editable (const ustring& dictionary);
 ustring spelling_dictionary_filename (ustring dictionary);
 const gchar * spelling_tag_name ();
 
+class Editor2;
 
 class SpellingChecker
 {
 public:
-  SpellingChecker (GtkTextTagTable *texttagtable);
+  SpellingChecker (Editor2 *_parent_editor, GtkTextTagTable *texttagtable);
   ~SpellingChecker ();
   GtkTextTag *misspelling_tag;
   void attach (GtkWidget * textview);
@@ -53,6 +54,7 @@ public:
   vector <ustring> get_misspellings (GtkTextBuffer * textbuffer);
   void add_to_dictionary (const gchar * word);
 private:
+  Editor2 *parent_editor;
   void collect_words (GtkTextBuffer* textbuffer);
   bool includes_note_caller (GtkTextIter & iter);
   void check_word (GtkTextBuffer* textbuffer, GtkTextIter *start, GtkTextIter *end);
