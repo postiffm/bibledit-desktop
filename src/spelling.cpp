@@ -104,7 +104,7 @@ const gchar *spelling_tag_name()
   return _("misspelling");
 }
 
-SpellingChecker::SpellingChecker(Editor2 *_parent_editor, GtkTextTagTable * texttagtable)
+SpellingChecker::SpellingChecker(ChapterView *_parent_editor, GtkTextTagTable * texttagtable)
 {
   parent_editor = _parent_editor;
   misspelling_tag = gtk_text_tag_new(spelling_tag_name());
@@ -200,7 +200,7 @@ void SpellingChecker::collect_words(GtkTextBuffer * textbuffer)
     startiter = enditer;
     gtk_text_iter_backward_word_start(&startiter);
     GtkTextIter moved_enditer;
-    if (parent_editor && parent_editor->move_end_iterator_before_note_caller_and_validate (startiter, enditer, moved_enditer)) {
+    if (parent_editor->move_end_iterator_before_note_caller_and_validate (startiter, enditer, moved_enditer)) {
       check_word(textbuffer, &startiter, &moved_enditer);
     }
   }
@@ -491,7 +491,7 @@ void SpellingChecker::right_clicked_word_get_extends(GtkTextIter * start, GtkTex
   }
     
   // Exclude note callers that follow. (For USFMView, parent_editor is NULL, so not used.)
-  if (parent_editor) { parent_editor->move_end_iterator_before_note_caller_and_validate (* start, * end, * end); }
+  parent_editor->move_end_iterator_before_note_caller_and_validate (* start, * end, * end);
 }
 
 

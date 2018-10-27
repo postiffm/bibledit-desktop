@@ -101,7 +101,7 @@ USFMView::USFMView(GtkWidget * vbox, const ustring & project_in)
 
   // Spelling checker.
   GtkTextTagTable * texttagtable = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (sourcebuffer));
-  spellingchecker = new SpellingChecker(NULL, texttagtable); // NULL is a bit of a hack for now. MAP 10/25/2018
+  spellingchecker = new SpellingChecker(this, texttagtable); // NULL is a bit of a hack for now. MAP 10/25/2018
   g_signal_connect((gpointer) spellingchecker->check_signal, "clicked", G_CALLBACK(on_button_spelling_recheck_clicked), gpointer(this));
   load_dictionaries();
   spellingchecker->attach(sourceview);

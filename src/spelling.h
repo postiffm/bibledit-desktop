@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <enchant.h>
+#include "chapterview.h"
 
 
 ustring spelling_global_dictionary ();
@@ -42,7 +43,7 @@ class Editor2;
 class SpellingChecker
 {
 public:
-  SpellingChecker (Editor2 *_parent_editor, GtkTextTagTable *texttagtable);
+  SpellingChecker (ChapterView *_parent_editor, GtkTextTagTable *texttagtable);
   ~SpellingChecker ();
   GtkTextTag *misspelling_tag;
   void attach (GtkWidget * textview);
@@ -54,7 +55,7 @@ public:
   vector <ustring> get_misspellings (GtkTextBuffer * textbuffer);
   void add_to_dictionary (const gchar * word);
 private:
-  Editor2 *parent_editor;
+  ChapterView *parent_editor;
   void collect_words (GtkTextBuffer* textbuffer);
   bool includes_note_caller (GtkTextIter & iter);
   void check_word (GtkTextBuffer* textbuffer, GtkTextIter *start, GtkTextIter *end);

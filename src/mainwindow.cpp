@@ -3669,8 +3669,7 @@ void MainWindow::on_check_spelling_error(bool next, bool extremity)
 {
   // Get the editor window, if not, bail out.
   WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window)
-    return;
+  if (!editor_window) { return; }
 
   // If the project has spelling switched off, bail out.
   ustring project = editor_window->project();
@@ -3681,8 +3680,9 @@ void MainWindow::on_check_spelling_error(bool next, bool extremity)
   }
     
   // Go to the next (or previous) spelling error. If it's there, bail out.
-  if (editor_window->move_cursor_to_spelling_error (next, extremity))
+  if (editor_window->move_cursor_to_spelling_error (next, extremity)) {
     return;
+  }
     
   // No next (or previous) error in the current chapter. Ask whether the user wishes to go to other chapter.
   ustring msg;
@@ -3694,8 +3694,9 @@ void MainWindow::on_check_spelling_error(bool next, bool extremity)
       // into other languages, and splitting them into pieces doesn't always work in those languages like it does in English.
     msg.append (_("There are no more spelling errors in this chapter\nWould you like to go to the previous chapter or chapters?"));
   }
-  if (gtkw_dialog_question (window_main, msg) != GTK_RESPONSE_YES)
+  if (gtkw_dialog_question (window_main, msg) != GTK_RESPONSE_YES) {
     return;
+  }
   if (next) {
     navigation.nextchapter();
     check_spelling_at_start = true;

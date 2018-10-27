@@ -286,7 +286,6 @@ private:
   void marker_get_type_and_subtype(const ustring& project, const ustring& marker, StyleType& type, int& subtype);
 
 public:
-  void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
   EditorNoteType note_type_get(const ustring& project, const ustring& marker);
 private:
   NoteNumberingType note_numbering_type_get(const ustring& project, const ustring& marker);
@@ -331,11 +330,6 @@ private:
                                             GtkWidget * textview);
 public:
   void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
-private:
-  bool iterator_includes_note_caller (GtkTextIter iter);
-public:
-  bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
-  
 };
 
 #endif

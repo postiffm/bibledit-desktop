@@ -20,6 +20,7 @@
 #ifndef INCLUDED_CHAPTERVIEW_H
 #define INCLUDED_CHAPTERVIEW_H
 
+#include <gtk/gtk.h>
 #include "reference.h"
 
 // The various views that we support
@@ -74,6 +75,9 @@ class ChapterView
   virtual bool move_cursor_to_spelling_error(bool next, bool extremity) = 0;
   virtual void load_dictionaries() = 0;
   virtual void go_to_verse(const ustring &versenum, bool focus=false) = 0;
+  void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
+  bool iterator_includes_note_caller (GtkTextIter iter);
+  bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
 };
 
 #endif
