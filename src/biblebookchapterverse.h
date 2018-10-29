@@ -1,26 +1,26 @@
 /*
  ** Copyright (©) 2018- Matt Postiff.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 #ifndef INCLUDED_BIBLEBOOKCHAPTERVERSE_H
 #define INCLUDED_BIBLEBOOKCHAPTERVERSE_H
 
-// This file contains the code to store an entire Bible in a 
+// This file contains the code to store an entire Bible in a
 // hierarchical form:
 // bible
 //   |
@@ -32,7 +32,7 @@
 //                                                    |
 //                                                    +--- int vsnum and ustring text
 //
-// verse_xref is a bit different. Instead of a ustring text, it contains a vector of integer 
+// verse_xref is a bit different. Instead of a ustring text, it contains a vector of integer
 // data which are specially-encoded cross-references
 
 #include "ustring.h"
@@ -120,11 +120,13 @@ class chapter {
   public:
 	book *bk;    // back pointer to the containing book; chapter does NOT own book for garbage collection purposes
 	int chapnum;     // the chapter number
-	vector<verse *> verses;
+	map<unsigned int,verse *> verses;
 	// project, book, chapter (57 = Philemon, 1 = chapter 1)
   public:
     chapter(book *_bk, int _num);
     ~chapter();
+    bool find_verse( uint32_t verseNum );
+    bool map_verse( uint32_t verseNum, verse *newVerse );
     void check_verse_in_range(unsigned int vsnum);
 	void load(int book, int chapter,
               std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,      std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations);
@@ -166,7 +168,7 @@ class bible {
   void font_set(const ustring &_font);
   ustring font_get(void);
   virtual bool validateBookNum(const unsigned int booknum);
-  
+
 protected: // so derived bibles can access it
   void check_book_in_range(unsigned int booknum);
   virtual book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
