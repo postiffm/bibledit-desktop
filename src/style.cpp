@@ -934,3 +934,49 @@ ustring Style::get_table_cell_marker(const ustring & project, int column)
   }
   return style;
 }
+
+// TO DO: This method probably belongs somewhere else. It was in editoraids.cpp, then briefly in Editor2, now moved
+// here because it is not really an editor function.
+// More TO DO: The "speedup" or caching mechanism here indicates that this information should be stored in a static table.
+// This table could be created with a more robust usfm language setup in bibledit.
+void Style::marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
+/*
+ Given a "project", and a "marker", this function gives the "type" and the 
+ "subtype" of the style of that marker.
+ */
+{
+  // Code for speeding up the lookup process.
+  static ustring speed_project;
+  static ustring speed_marker;
+  static StyleType speed_type = stNotUsedComment;
+  static int speed_subtype = 0;
+  if (project == speed_project) {
+    if (marker == speed_marker) {
+      type = speed_type;
+      subtype = speed_subtype;
+      return;
+    }
+  }
+  
+  // Store both keys in the speedup system.
+  speed_project = project;
+  speed_marker = marker;
+
+  // Lookup the values.
+  ustring stylesheet = stylesheet_get_actual ();
+  extern Styles *styles;
+  Usfm *usfm = styles->usfm(stylesheet);
+  type = stIdentifier;
+  subtype = itComment;
+  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
+    if (marker == usfm->styles[i].marker) {
+      // Values found.
+      type = usfm->styles[i].type;
+      subtype = usfm->styles[i].subtype;
+      // Store values in the speedup system.
+      speed_type = type;
+      speed_subtype = subtype;
+      break;
+    }
+  }
+}

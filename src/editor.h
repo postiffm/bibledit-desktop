@@ -241,8 +241,6 @@ public:
   static bool on_signal_if_verse_changed_timeout(gpointer data);
   void signal_if_verse_changed_timeout();
   ustring verse_number_get();
-  bool    get_verse_number_at_iterator_internal (GtkTextIter iter, const ustring & verse_marker, ustring& verse_number);
-  ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box);
   bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
 
   
@@ -283,8 +281,6 @@ private:
   static gboolean on_caller_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data);
   gboolean on_caller_button_press (GtkWidget *widget);
 
-  void marker_get_type_and_subtype(const ustring& project, const ustring& marker, StyleType& type, int& subtype);
-
 public:
   EditorNoteType note_type_get(const ustring& project, const ustring& marker);
 private:
@@ -318,16 +314,6 @@ private:
 public:  
   void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
 
-  typedef pair<vector<GtkWidget *> *, GType> widget_search_t;
-  
-  static void on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data);
-public:
-  vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type = G_TYPE_NONE);
-private:
-  GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
-                                        GtkWidget * textview);
-  GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
-                                            GtkWidget * textview);
 public:
   void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
 };

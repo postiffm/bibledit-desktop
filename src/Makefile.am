@@ -270,6 +270,7 @@ bibledit_desktop_SOURCES = \
   floatingwindow.cpp \
   windowdata.cpp \
   editor.cpp \
+  editor3.cpp \
   editoractions.cpp \
   nanohttp.cpp \
   urltransport.cpp \
@@ -482,6 +483,7 @@ bibledit_rdwrt_SOURCES = \
   floatingwindow.cpp \
   windowdata.cpp \
   editor.cpp \
+  editor3.cpp \
   editoractions.cpp \
   nanohttp.cpp \
   urltransport.cpp \

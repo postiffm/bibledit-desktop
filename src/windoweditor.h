@@ -27,7 +27,7 @@
 #include "floatingwindow.h"
 #include "usfmview.h"
 #include "editor.h"
-
+#include "editor3.h"
 
 class WindowEditor : public FloatingWindow
 {
@@ -110,7 +110,7 @@ protected:
   ChapterView * currView; // this is either NULL or equal to one of the following editor/view pointers
   Editor2 * editor2;
   USFMView * usfmview;
-  // eventually, experimental editor goes here for no-paragraph-division view
+  Editor3 * editor3; // experimental editor goes here: no-paragraph-division view
 
   static void on_new_verse_signalled(GtkButton *button, gpointer user_data);
   void on_new_verse();

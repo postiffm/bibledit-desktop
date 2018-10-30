@@ -696,127 +696,6 @@ ustring Editor2::verse_number_get()
   return number;
 }
 
-bool Editor2::get_verse_number_at_iterator_internal (GtkTextIter iter, const ustring & verse_marker, ustring& verse_number)
-// This function looks at the iterator for the verse number.
-// If a verse number is not found, it iterates back till one is found.
-// If the iterator can't go back any further, and no verse number was found, it returns false.
-// If a verse number is found, it returns true and stores it in parameter "verse_number".
-{
-  // Look for the v style while iterating backward.
-  //DEBUG("3debug_verse_number "+verse_number)
-  bool verse_style_found = false;
-  do {
-    ustring paragraph_style, character_style;
-    get_styles_at_iterator(iter, paragraph_style, character_style);
-    if (character_style == verse_marker) {
-      verse_style_found = true;
-    }
-  } while (!verse_style_found && gtk_text_iter_backward_char(&iter));
-  // If the verse style is not in this textbuffer, bail out.
-  if (!verse_style_found) {
-    return false;
-  }
-  // The verse number may consist of more than one character.
-  // Therefore iterate back to the start of the verse style.
-  // For convenience, it iterates back to the start of any style.
-  while (!gtk_text_iter_begins_tag (&iter, NULL)) {
-    gtk_text_iter_backward_char (&iter);
-  }
-  // Extract the verse number.
-  GtkTextIter enditer = iter;
-  gtk_text_iter_forward_chars(&enditer, 10);
-  verse_number = gtk_text_iter_get_slice(&iter, &enditer);
-  //DEBUG("4debug_verse_number "+verse_number)
-  size_t position = verse_number.find(" ");
-  position = CLAMP(position, 0, verse_number.length());
-  verse_number.erase (position, 10);
-  //DEBUG("5debug_verse_number "+verse_number)
-  // Indicate that a verse number was found.
-  return true;
-}
-
-
-ustring Editor2::get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box)
-/* 
-This function returns the verse number at the iterator.
-It also takes into account a situation where the cursor is on a heading.
-The user expects a heading to belong to the next verse. 
-*/
-{
-  // Get the paragraph style at the iterator, in case it is in a heading.
-  ustring paragraph_style_at_cursor;
-  {
-    ustring dummy;
-    get_styles_at_iterator(iter, paragraph_style_at_cursor, dummy);
-  }
-  
-  // Verse-related variables.
-  ustring verse_number = "0";
-  bool verse_number_found = false;
-  GtkWidget * textview = NULL;
-
-  vector <GtkWidget *>
-  widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
-
-  do {
-    // Try to find a verse number in the GtkTextBuffer the "iter" points to.
-    verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
-    // If the verse number was not found, look through the previous GtkTextBuffer.
-    if (!verse_number_found) {
-      // If the "textview" is not yet set, look for the current one.
-      if (textview == NULL) {
-        GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
-        for (unsigned int i = 0; i < widgets.size(); i++) {
-          if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
-            textview = widgets[i];
-            break;
-          }
-        }
-      }
-      // Look for the previous GtkTextView.
-      textview = editor_get_previous_textview (widgets, textview);
-      // Start looking at the end of that textview.
-      if (textview) {
-        GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-        gtk_text_buffer_get_end_iter (textbuffer, &iter);
-      }
-    }
-
-	//DEBUG("1debug_verse_number "+verse_number)
-
-  } while (!verse_number_found && textview);
-  
-  // Optional: If the cursor is on a title/heading, increase verse number.
-  if (!project.empty()) {
-    StyleType type;
-    int subtype;
-    marker_get_type_and_subtype(project, paragraph_style_at_cursor, type, subtype);
-    if (type == stStartsParagraph) {
-      switch (subtype) {
-        case ptMainTitle:
-        case ptSubTitle:
-        case ptSectionHeading:
-        {
-          unsigned int vs = convert_to_int (verse_number);
-          vs++;
-          verse_number = convert_to_string (vs);
-          break;
-        }
-        case ptNormalParagraph:
-        {
-          break;
-        }
-      }
-    }
-  }
- 
-  //DEBUG("2debug_verse_number "+verse_number)
-
-  // Return the verse number found.
-  return verse_number;
-}
-
-
 bool Editor2::get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search)
 // This returns the iterator and textview where "verse_number" starts.
 // Returns true if the verse was found, else false.
@@ -1711,7 +1590,7 @@ void Editor2::apply_style(const ustring & marker)
   // Get the type and subtype of the marker.
   StyleType type;
   int subtype;
-  marker_get_type_and_subtype(project, marker, type, subtype);
+  Style::marker_get_type_and_subtype(project, marker, type, subtype);
 
   /*
   Get the type of textview that was focused last, 
@@ -2478,7 +2357,7 @@ void Editor2::editor_start_new_standard_paragraph (const ustring& marker_text)
   // Some styles insert their marker: Do that here if appropriate.
   StyleType type;
   int subtype;
-  marker_get_type_and_subtype(project, marker_text, type, subtype);
+  Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
   if (Style::get_displays_marker(type, subtype)) {
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
     EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
@@ -2500,7 +2379,7 @@ void Editor2::editor_start_verse(ustring& line, ustring& marker_text, ustring& c
   if (paragraph) {
     StyleType type;
     int subtype;
-    marker_get_type_and_subtype(project, paragraph->style, type, subtype);
+    Style::marker_get_type_and_subtype(project, paragraph->style, type, subtype);
     if (type == stStartsParagraph) {
       if (subtype == ptNormalParagraph) {
         in_normal_paragraph = true;
@@ -2512,7 +2391,7 @@ void Editor2::editor_start_verse(ustring& line, ustring& marker_text, ustring& c
     ustring marker_text = "nb";
     StyleType type;
     int subtype;
-    marker_get_type_and_subtype(project, marker_text, type, subtype);
+    Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
     if (type == stStartsParagraph) {
       if (subtype != ptNormalParagraph) {
         // Create new paragraph.
@@ -2733,7 +2612,7 @@ ustring Editor2::usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter
         // Get the type and the subtype.
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, new_character_style, type, subtype);
+        Style::marker_get_type_and_subtype(project, new_character_style, type, subtype);
         // Normally a character style does not start a new line, but a verse (\v) does.
         if (Style::get_starts_new_line_in_usfm(type, subtype)) {
           usfm_internal_add_text(text, "\n");
@@ -2843,7 +2722,7 @@ bool Editor2::editor_starts_character_style(ustring & line, ustring & character_
       if (is_opener) {
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, marker_text, type, subtype);
+        Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_character_style(type, subtype)) {
           character_style = marker_text;
           line.erase(0, marker_length);
@@ -2863,7 +2742,7 @@ bool Editor2::editor_ends_character_style(ustring & line, ustring & character_st
       if (!is_opener) {
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, marker_text, type, subtype);
+        Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_character_style(type, subtype)) {
           character_style.clear();
           line.erase(0, marker_length);
@@ -2884,7 +2763,7 @@ bool Editor2::text_starts_note_raw(ustring & line, ustring & character_style, co
       if (is_opener) {
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, marker_text, type, subtype);
+        Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_footnote(type, subtype) || Style::get_starts_endnote(type, subtype) || Style::get_starts_crossreference(type, subtype)) {
           // Proceed if the endmarker is in the text too.
           ustring endmarker = usfm_get_full_closing_marker(marker_text);
@@ -3467,51 +3346,6 @@ void Editor2::give_focus (GtkWidget * widget)
 
 // From old editor_aids.cpp
 
-// TO DO: With static variables in here, this is a candidate to move into the Editor2 class.
-// More TO DO: The "speedup" or caching mechanism here indicates that this information should be stored in a static table.
-// This table could be created with a more robust usfm language setup in bibledit.
-void Editor2::marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
-/*
- Given a "project", and a "marker", this function gives the "type" and the 
- "subtype" of the style of that marker.
- */
-{
-  // Code for speeding up the lookup process.
-  static ustring speed_project;
-  static ustring speed_marker;
-  static StyleType speed_type = stNotUsedComment;
-  static int speed_subtype = 0;
-  if (project == speed_project) {
-    if (marker == speed_marker) {
-      type = speed_type;
-      subtype = speed_subtype;
-      return;
-    }
-  }
-  
-  // Store both keys in the speedup system.
-  speed_project = project;
-  speed_marker = marker;
-
-  // Lookup the values.  
-  ustring stylesheet = stylesheet_get_actual ();
-  extern Styles *styles;
-  Usfm *usfm = styles->usfm(stylesheet);
-  type = stIdentifier;
-  subtype = itComment;
-  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (marker == usfm->styles[i].marker) {
-      // Values found.
-      type = usfm->styles[i].type;
-      subtype = usfm->styles[i].subtype;
-      // Store values in the speedup system.
-      speed_type = type;
-      speed_subtype = subtype;
-      break;
-    }
-  }
-}
-
 gint Editor2::table_get_n_rows(GtkTable * table)
 {
   gint n_rows = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(table), "n_rows"));
@@ -3549,7 +3383,7 @@ void Editor2::usfm_internal_get_text_close_character_style(ustring & text, const
   // Get the type and the subtype.
   StyleType type;
   int subtype;
-  marker_get_type_and_subtype(project, style, type, subtype);
+  Style::marker_get_type_and_subtype(project, style, type, subtype);
   // A verse number, normally the \v, does not have a closing marker.
   if (!Style::get_starts_verse_number(type, subtype)) {
     usfm_internal_add_text(text, usfm_get_full_closing_marker(style));
@@ -3618,7 +3452,7 @@ ustring Editor2::usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, 
       StyleType type;
       int subtype;
       if (new_character_style.empty()) {
-        marker_get_type_and_subtype(project, previous_character_style, type, subtype);
+        Style::marker_get_type_and_subtype(project, previous_character_style, type, subtype);
         if (Style::get_starts_note_content(type, subtype)) {
           note_content_closing = true;
         }
@@ -3626,7 +3460,7 @@ ustring Editor2::usfm_get_note_text(GtkTextIter startiter, GtkTextIter enditer, 
           note_content_with_endmarker_closing = true;
         }
       } else {
-        marker_get_type_and_subtype(project, new_character_style, type, subtype);
+        Style::marker_get_type_and_subtype(project, new_character_style, type, subtype);
         if (Style::get_starts_note_content(type, subtype)) {
           note_content_opening = true;
         }
@@ -3826,7 +3660,7 @@ bool Editor2::text_starts_paragraph (const ustring& project, ustring& line, cons
       if (is_opener) {
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, marker, type, subtype);
+        Style::marker_get_type_and_subtype(project, marker, type, subtype);
         if (Style::get_starts_new_line_in_editor(type, subtype)) {
           line.erase(0, marker_length);
           return true;
@@ -3845,7 +3679,7 @@ bool Editor2::text_starts_verse (const ustring& project, ustring& line, const us
       if (is_opener) {
         StyleType type;
         int subtype;
-        marker_get_type_and_subtype(project, marker_text, type, subtype);
+        Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_verse_number(type, subtype)) {
           line.erase (0, marker_length);
           return true;
@@ -3854,58 +3688,6 @@ bool Editor2::text_starts_verse (const ustring& project, ustring& line, const us
     }
   }
   return false;  
-}
-
-void Editor2::on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data)
-{
-  widget_search_t *search_data = static_cast<widget_search_t*> (user_data);
-  vector <GtkWidget*> *widgets = search_data->first;
-  GType type = search_data->second;
-
-  if (type == G_TYPE_NONE || G_TYPE_CHECK_INSTANCE_TYPE (widget, type))
-    widgets->push_back (widget);
-}
-
-
-/**
- * Retrieves all widgets being children of the container vbox. Only the
- * widgets of type of_type are returned. If of_type is G_TYPE_NONE (default
- * value) then all widgets are returned.
- */
-vector <GtkWidget *> Editor2::editor_get_widgets (GtkWidget * vbox, GType of_type)
-{
-  vector <GtkWidget *> widgets;
-  widget_search_t search_data = make_pair(&widgets, of_type);
-
-  gtk_container_foreach(GTK_CONTAINER (vbox),
-                        on_editor_get_widgets_callback, &search_data);
-
-  return widgets;
-}
-
-
-GtkWidget * Editor2::editor_get_next_textview (const vector <GtkWidget *> &widgets,
-                                      GtkWidget * textview)
-{
-  for (unsigned int i = 0; i < widgets.size(); i++) {
-    if (textview == widgets[i])
-      if (i < widgets.size() - 1)
-        return widgets[i+1];
-  }
-  return NULL;
-}
-
-
-GtkWidget * Editor2::editor_get_previous_textview (const vector <GtkWidget *> &widgets,
-                                          GtkWidget * textview)
-// Gets the textview that precedes the "current" one in the vector.
-{
-  for (unsigned int i = 0; i < widgets.size(); i++) {
-    if (textview == widgets[i])
-      if (i)
-        return widgets[i-1];
-  }
-  return NULL;
 }
 
 

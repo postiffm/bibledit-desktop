@@ -26,13 +26,14 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include "htmlwriter2.h"
+#include "chapterview.h"
 
 class Editor2; // fwd declaration
 
 class Highlight
 {
 public:
-  Highlight (Editor2 *_parent_editor,
+  Highlight (ChapterView *_parent_editor,
              GtkTextBuffer * buffer, 
              GtkWidget * textview, 
              const ustring& project, 
@@ -43,7 +44,7 @@ public:
   bool locations_ready;
   void highlight ();
 private:
-  Editor2 *parent_editor;
+  ChapterView *parent_editor;
   bool interrupt_thread;
   GtkTextTag * mytag;
   GtkTextBuffer * maintextbuffer;

@@ -30,8 +30,5 @@ Use External Terminal=false
 Working Directory=file:///home/postiffm/.bibledit/
 isExecutable=true
 
-[MakeBuilder]
-Abort on First Error=false
-
 [Project]
 VersionControlSupport=kdevgit

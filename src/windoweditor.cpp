@@ -91,6 +91,16 @@ void WindowEditor::cleanup(void)
     g_signal_handler_disconnect ((gpointer) usfmview->reload_signal, hID5);
     g_signal_handler_disconnect ((gpointer) usfmview->changed_signal, hID6);
   }
+  else if (editor3) {
+    g_signal_handler_disconnect ((gpointer) editor3->new_verse_signal, hID1);
+    g_signal_handler_disconnect ((gpointer) editor3->new_styles_signal, hID2);
+    g_signal_handler_disconnect ((gpointer) editor3->quick_references_button, hID3);
+    g_signal_handler_disconnect ((gpointer) editor3->word_double_clicked_signal, hID4);
+    g_signal_handler_disconnect ((gpointer) editor3->reload_signal, hID5);
+    g_signal_handler_disconnect ((gpointer) editor3->changed_signal, hID6);
+    g_signal_handler_disconnect ((gpointer) editor3->spelling_checked_signal, hID7);
+    g_signal_handler_disconnect ((gpointer) editor3->new_widget_signal, hID8);
+  }
 
   hID1 = 0;  hID2 = 0;  hID3 = 0;  hID4 = 0;
   hID5 = 0;  hID6 = 0;  hID7 = 0;  hID8 = 0;
@@ -105,6 +115,7 @@ void WindowEditor::cleanup(void)
 
   if (editor2)  { delete editor2;  editor2 = NULL; }
   if (usfmview) { delete usfmview; usfmview = NULL; }
+  if (editor3)  { delete editor3;  editor3 = NULL; }
   // Parent class FloatingWindow destroys vbox_client, which should also destroy vbox,
   // but if we are in the middle of switching views, I want to clean up everything and
   // start over as much as possible.
@@ -517,7 +528,7 @@ void WindowEditor::switch_view ()
     // If I comment out above, program doesn't show right verse, but it also doesn't crash in Warao!
     DEBUG("reference="+reference.human_readable(""))
     DEBUG("book="+std::to_string(reference.book_get())+" ch="+std::to_string(reference.chapter_get())+" v="+reference.verse_get())
-      cleanup();  // something does not get cleaned up sufficiently to make this work...see MainWindow::on_view_chapteras for details
+    cleanup();  // something does not get cleaned up sufficiently to make this work...see MainWindow::on_view_chapteras for details
     init(); // trying to put *this object back into the same state it was at startup...since for Warao, the first editor window works properly
   }
 
@@ -538,8 +549,8 @@ void WindowEditor::switch_view ()
     hID7 = g_signal_connect ((gpointer) editor2->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
     hID8 = g_signal_connect ((gpointer) editor2->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
     last_focused_widget = editor2->last_focused_widget;			      	
-    break;								      	
-    									      	
+    break;
+
   case vtUSFM:
     usfmview = new USFMView (vbox, projectname);
     currView = usfmview;
@@ -553,7 +564,19 @@ void WindowEditor::switch_view ()
     last_focused_widget = usfmview->sourceview;
     break;
 
-  case vtExperimental:
+  case vtExperimental: // for now, just like vtFormatted, Editor2, but will be morphing
+    editor3 = new Editor3 (vbox, projectname);
+    currView = editor3;
+    connect_focus_signals (editor3->scrolledwindow);
+    hID1 = g_signal_connect ((gpointer) editor3->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
+    hID2 = g_signal_connect ((gpointer) editor3->new_styles_signal, "clicked", G_CALLBACK(on_new_styles_signalled), gpointer(this));
+    hID3 = g_signal_connect ((gpointer) editor3->quick_references_button, "clicked", G_CALLBACK(on_quick_references_signalled), gpointer(this));
+    hID4 = g_signal_connect ((gpointer) editor3->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
+    hID5 = g_signal_connect ((gpointer) editor3->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
+    hID6 = g_signal_connect ((gpointer) editor3->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
+    hID7 = g_signal_connect ((gpointer) editor3->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
+    hID8 = g_signal_connect ((gpointer) editor3->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
+    last_focused_widget = editor3->last_focused_widget;		
     break;
   }
   // Main widget grabs focus.
