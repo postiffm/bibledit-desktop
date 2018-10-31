@@ -83,7 +83,8 @@ public:
   void create_or_update_formatting_data();
   void set_font();
 
-  Editor2 * editor_get();
+  Editor2 * editor2_get();
+  Editor3 * editor3_get();
 
   // The signalling instance                The handler_id
   GtkWidget * new_verse_signal;             gulong hID1;

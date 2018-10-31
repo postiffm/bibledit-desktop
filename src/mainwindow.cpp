@@ -4025,10 +4025,13 @@ void MainWindow::on_edit_bible_note()
 {
   WindowEditor *editor_window = last_focused_editor_window();
   if (editor_window) {
-    Editor2 * editor = editor_window->editor_get();
-    if (editor) {
-      EditNoteDialog dialog(editor, GTK_WINDOW(window_main));
+    Editor2 * editor2 = editor_window->editor2_get();
+    if (editor2) {
+      EditNoteDialog dialog(editor2, GTK_WINDOW(window_main));
       dialog.run();
+    }
+    if (editor_window->editor3_get()) {
+      gtkw_dialog_error(window_main, _("Experimental view does not support editing notes"));
     }
   }
 }
@@ -5505,8 +5508,11 @@ void MainWindow::on_editor_changed()
   if (window_check_keyterms) {
     WindowEditor *editor_window = last_focused_editor_window();
     if (editor_window) {
-      Editor2 * editor = editor_window->editor_get();
-      window_check_keyterms->text_changed(editor);
+      Editor2 * editor2 = editor_window->editor2_get();
+      window_check_keyterms->text_changed(editor2);
+    }
+    if (editor_window->editor3_get()) {
+      gtkw_dialog_error(window_main, _("Experimental view does not talk to the Keyterms check window"));
     }
   }
 }

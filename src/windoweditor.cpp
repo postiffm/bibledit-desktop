@@ -137,7 +137,7 @@ void WindowEditor::go_to(const Reference & reference)
 // Let the editor go to a reference.
 {
   DEBUG("1 ref="+reference.human_readable(""))
-  if (editor2 || usfmview) { // we know currView is set in this case
+  if (editor3 || editor2 || usfmview) { // we know currView is set in this case
 
     // Find out what needs to be changed: book, chapter and/or verse.
     bool new_book = false;
@@ -178,6 +178,12 @@ void WindowEditor::go_to(const Reference & reference)
       if (editor2->go_to_new_reference_highlight) {
         editor2->highlight_searchwords();
         editor2->go_to_new_reference_highlight = false;
+      }
+    }
+    if (editor3) {
+      if (editor3->go_to_new_reference_highlight) {
+        editor3->highlight_searchwords();
+        editor3->go_to_new_reference_highlight = false;
       }
     }
   }
@@ -232,6 +238,10 @@ EditorTextViewType WindowEditor::last_focused_type()
   if (editor2) {
     return editor2->last_focused_type();
   }
+  if (editor3) {
+    return editor3->last_focused_type();
+  }
+
   return etvtBody;
 }
 
@@ -240,6 +250,9 @@ vector <Reference> WindowEditor::quick_references()
 {
   if (editor2) {
     return editor2->quick_references_get();
+  }
+  if (editor3) {
+    return editor3->quick_references_get();
   }
   gw_warning("Returning empty Reference vector from WindowEditor::quick_references");
   vector <Reference> dummy;
@@ -303,6 +316,11 @@ void WindowEditor::go_to_new_reference_highlight_set()
   if (editor2) {
     editor2->go_to_new_reference_highlight = true;
   }
+  if (editor3) {
+    editor3->go_to_new_reference_highlight = true;
+  }
+
+    
 }
 
 
@@ -380,6 +398,9 @@ set <ustring> WindowEditor::get_styles_at_cursor()
   if (editor2) {
     return editor2->get_styles_at_cursor();
   }
+  if (editor3) {
+    return editor3->get_styles_at_cursor();
+  }
   gw_warning("Returning dummy ustring set from WindowEditor::get_styles_at_cursor");
   set <ustring> dummy;
   return dummy;
@@ -398,12 +419,20 @@ void WindowEditor::set_font()
 }
 
 
-Editor2 * WindowEditor::editor_get()
+Editor2 * WindowEditor::editor2_get()
 {
-  if (usfmview) {
+  if (usfmview || editor3) {
     return NULL;
   }
   return editor2; // if editor2 is NULL, we want to return NULL anyway
+}
+
+Editor3 * WindowEditor::editor3_get()
+{
+  if (usfmview || editor2) {
+    return NULL;
+  }
+  return editor3; // if editor3 is NULL, we want to return NULL anyway
 }
 
 
