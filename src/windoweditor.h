@@ -32,7 +32,8 @@
 class WindowEditor : public FloatingWindow
 {
 public:
-  WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt);
+  WindowEditor(const ustring& project_name, const ustring &window_title, 
+               GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt);
   virtual ~WindowEditor();
  private:
   void init(void);

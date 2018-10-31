@@ -63,6 +63,8 @@ public:
   DEFINE_GENCONFIG_H (vector<int>, window_ids);
   DEFINE_GENCONFIG_H (vector<ustring>, window_titles);
   DEFINE_GENCONFIG_H (vector<bool>, window_shows);
+  DEFINE_GENCONFIG_H (vector<ustring>, editor_projects);
+  DEFINE_GENCONFIG_H (vector<int>, editor_view_types);
   DEFINE_GENCONFIG_H (ustring, project);
   DEFINE_GENCONFIG_H (int, book);
   DEFINE_GENCONFIG_H (ustring, chapter);

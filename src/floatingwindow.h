@@ -83,9 +83,13 @@ private:
   static gboolean on_label_close_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data);
   gboolean on_label_close_button_press (GdkEventButton *event);
 
-public:  
+private:  
   ustring title;
+  void title_setfocused (bool focused);
 public:
+  void title_change (const ustring &newtitle);
+  ustring title_get(void);
+
   WindowID window_id;
 
   // Focus tools.
@@ -103,7 +107,6 @@ public:
 private:
   static gboolean on_widget_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data);
   void on_widget_button_press (GtkWidget *widget, GdkEventButton *event);
-  void title_set (bool focused);
 public:
   void connect_focus_signals (GtkWidget * widget);
 private:

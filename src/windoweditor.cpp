@@ -29,8 +29,9 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-WindowEditor::WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt):
-FloatingWindow(parent_layout, widEditor, project_name, startup)
+WindowEditor::WindowEditor(const ustring& project_name, const ustring &window_title, 
+                           GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt):
+FloatingWindow(parent_layout, widEditor, window_title, startup)
 // Text editor.
 {
   // Initialize variables.
@@ -45,6 +46,7 @@ void WindowEditor::init(void)
   currView = NULL;
   editor2 = NULL;
   usfmview = NULL;
+  editor3 = NULL;
 
   // Signalling buttons.
   new_verse_signal = gtk_button_new();
@@ -581,6 +583,15 @@ void WindowEditor::switch_view ()
   }
   // Main widget grabs focus.
   gtk_widget_grab_focus (last_focused_widget);
+
+  ustring viewName = "un-initialized";
+  switch (currvt) {
+      case vtNone:         viewName = _("None"); break;
+      case vtFormatted:    viewName = _("Formatted View"); break;
+      case vtUSFM:         viewName = _("USFM View");      break;
+      case vtExperimental: viewName = _("Experimental View"); break;
+  }
+  title_change(projectname + " - " + viewName);
 
   // This call causes a hang in Warao Ps 139, but I do not find a
   // particular call in this routine that messes up.  It is

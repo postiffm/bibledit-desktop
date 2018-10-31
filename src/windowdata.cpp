@@ -22,6 +22,7 @@
 #include "settings.h"
 #include "gwrappers.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 WindowData::WindowData(bool save_on_destroy)
 {
@@ -37,7 +38,9 @@ WindowData::WindowData(bool save_on_destroy)
   ids = settings->genconfig.window_ids_get();
   titles = settings->genconfig.window_titles_get();
   shows = settings->genconfig.window_shows_get();
-
+  editor_projects = settings->genconfig.editor_projects_get();
+  editor_view_types = settings->genconfig.editor_view_types_get();
+  
   // If the configuration file has been fiddled with, then it may occur that the data is not consistent.
   // Check on this.
   bool data_consistent = true;
@@ -53,7 +56,13 @@ WindowData::WindowData(bool save_on_destroy)
     data_consistent = false;
   if (titles.size() != shows.size())
     data_consistent = false;
+  if (shows.size() != editor_projects.size())
+    data_consistent = false;
+  if (editor_projects.size() != editor_view_types.size())
+    data_consistent = false;
+
   if (!data_consistent) {
+    DEBUG("Saved window data is inconsistent")
     // Clear it all out.
     widths.clear();
     heights.clear();
@@ -62,6 +71,7 @@ WindowData::WindowData(bool save_on_destroy)
     ids.clear();
     titles.clear();
     shows.clear();
+    editor_projects.clear();
     // And save it.
     my_save_on_destroy = true;
   }
@@ -80,6 +90,8 @@ WindowData::~WindowData()
     settings->genconfig.window_ids_set(ids);
     settings->genconfig.window_titles_set(titles);
     settings->genconfig.window_shows_set(shows);
+    settings->genconfig.editor_projects_set(editor_projects);
+    settings->genconfig.editor_view_types_set(editor_view_types);
   }
 }
 
@@ -89,8 +101,6 @@ void WindowData::debug()
 {
   cout << _("WindowData object ") << this << " state" << endl;
   for (unsigned int i = 0; i < widths.size(); i++) {
-    cout << "window " << i << ", width " << widths[i] << ", height " << heights[i] << ", x " << x_positions[i] << ", y " << y_positions[i] << ", id " << ids[i] << ", title " << titles[i] << ", show " << shows[i] << endl;
+    cout << "window " << i << ", width " << widths[i] << ", height " << heights[i] << ", x " << x_positions[i] << ", y " << y_positions[i] << ", id " << ids[i] << ", title " << titles[i] << ", show " << shows[i] << ", editor_project " << editor_projects[i] << ", editor_view_type " << editor_view_types[i] << endl;
   }
 }
-
-

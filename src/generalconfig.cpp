@@ -88,6 +88,8 @@ GeneralConfiguration::GeneralConfiguration(bool save_on_destroy)
   INITIALIZE(window_ids);
   INITIALIZE(window_titles);
   INITIALIZE(window_shows);
+  INITIALIZE(editor_projects);
+  INITIALIZE(editor_view_types);
   INITIALIZE(project);
   INITIALIZE(book);
   INITIALIZE(chapter);
@@ -237,6 +239,8 @@ void GeneralConfiguration::save()
   SAVE_VALUE(window_ids);
   SAVE_VALUE(window_titles);
   SAVE_VALUE(window_shows);
+  SAVE_VALUE(editor_projects);
+  SAVE_VALUE(editor_view_types);
   SAVE_VALUE(project);
   SAVE_VALUE(book);
   SAVE_VALUE(chapter);
@@ -469,6 +473,8 @@ IMPLEMENT(vector < int >, vector_int_get, window_y_positions, NULL)
 IMPLEMENT(vector < int >, vector_int_get, window_ids, NULL)
 IMPLEMENT(vector < ustring >, vector_string_get, window_titles, NULL)
 IMPLEMENT(vector < bool >, vector_bool_get, window_shows, NULL)
+IMPLEMENT(vector < ustring >, vector_string_get, editor_projects, NULL)
+IMPLEMENT(vector < int >, vector_int_get, editor_view_types, NULL)
 IMPLEMENT(ustring, string_get, project, "")
 IMPLEMENT(int, int_get, book, 0)
 IMPLEMENT(ustring, string_get, chapter, "")

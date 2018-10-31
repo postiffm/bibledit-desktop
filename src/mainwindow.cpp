@@ -1987,7 +1987,8 @@ void MainWindow::open()
     return;
   }
   // Open editor.
-  on_file_project_open(newproject, false);
+  // First arg is project name, second is window title; for now, default it to the same as project name
+  on_file_project_open(newproject, newproject);
 }
 
 
@@ -2001,7 +2002,8 @@ void MainWindow::newproject ()
 {
   ProjectDialog projectdialog(true, GTK_WINDOW(window_main));
   if (projectdialog.run() == GTK_RESPONSE_OK) {
-    on_file_project_open(projectdialog.newprojectname, false);
+    // First arg is project name, second is window title; for now, default it to the same as project name
+    on_file_project_open(projectdialog.newprojectname, projectdialog.newprojectname);
     // Focus the desired book.
     navigation.display (Reference (projectdialog.focusbook, 1, "1"));
   }
@@ -5272,24 +5274,24 @@ WindowEditor *MainWindow::last_focused_editor_window()
 }
 
 
-void MainWindow::on_file_project_open(const ustring & project, bool startup)
+void MainWindow::on_file_project_open(const ustring & project, const ustring& window_title, bool startup, viewType opening_vt)
 // Opens an editor.
 {
   // If the editor already displays, present it and bail out.
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
-    if (project == editor_windows[i]->title) {
+    if (project == editor_windows[i]->projectname_get()) {
       editor_windows[i]->focus_set();
       return;
     }
   }
 
-  add_new_editor_window(project, startup, vtFormatted);
+  add_new_editor_window(project, window_title, startup, opening_vt);
 }
 
-void MainWindow::add_new_editor_window(const ustring & project, bool startup, viewType vt)
+void MainWindow::add_new_editor_window(const ustring & project, const ustring& window_title, bool startup, viewType vt)
 {
   // Display a new editor.
-  WindowEditor *editor_window = new WindowEditor(project, layout, accelerator_group, startup, vt);
+  WindowEditor *editor_window = new WindowEditor(project, window_title, layout, accelerator_group, startup, vt);
   g_signal_connect((gpointer) editor_window->delete_signal_button,    "clicked", G_CALLBACK(on_window_editor_delete_button_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->focus_in_signal_button,  "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
   g_signal_connect((gpointer) editor_window->new_verse_signal,        "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
@@ -5556,12 +5558,13 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
 
   // Only do something if we are "turning on" a view
   viewType vt = vtNone;
-  if      (menuitem == (GtkRadioMenuItem *)view_formatted)    { vt = vtFormatted;  }
-  else if (menuitem == (GtkRadioMenuItem *)view_usfm_code)    { vt = vtUSFM; }
+  if      (menuitem == (GtkRadioMenuItem *)view_formatted)    { vt = vtFormatted; }
+  else if (menuitem == (GtkRadioMenuItem *)view_usfm_code)    { vt = vtUSFM;      }
   else if (menuitem == (GtkRadioMenuItem *)view_experimental) { vt = vtExperimental; }
 
   debug_view("1", menuitem, vt);
   WindowEditor *editor_window = last_focused_editor_window();
+
   if (editor_window && (editor_window->vt_get() != vt)) {
     // Used to be we just called vt_set and let it do what it wanted.
     // However, the "Warao Psalms" bug exposed some problem in how
@@ -5572,8 +5575,12 @@ void MainWindow::on_view_chapteras(GtkRadioMenuItem *menuitem)
     // is changed. It is fast enough to not be noticeable. MAP 8/30/2016.
     ustring project = editor_window->projectname_get();
     on_window_editor_delete_button(GTK_BUTTON(editor_window->delete_signal_button));
+    // Next two lines are commented because we do this differently, as explained above.
+    // Changing the existing window title will not matter since we create an entirely new window.
     //editor_window->vt_set(vt);
-    add_new_editor_window(project, /*startup*/true, vt); // trying the startup=true switch to see if window positioning is better
+    //editor_window->title_change(project + " - " + viewName);
+    // First arg is project name, second is window title; for now, default it to the same as project name
+    add_new_editor_window(project, project, /*startup*/true, vt); // trying the startup=true switch to see if window positioning is better
     debug_view("2", menuitem, vt);
     // There are objects that act on USFM view or formatted view only.
     // Inform these about a possible change.
@@ -5679,10 +5686,10 @@ void MainWindow::on_merge_window_get_text_button()
 {
   if (window_merge) {
     for (unsigned int i = 0; i < editor_windows.size(); i++) {
-      if (editor_windows[i]->title == window_merge->current_master_project) {
+      if (editor_windows[i]->projectname_get() == window_merge->current_master_project) {
         window_merge->main_project_data = editor_windows[i]->get_chapter();
       }
-      if (editor_windows[i]->title == window_merge->current_edited_project) {
+      if (editor_windows[i]->projectname_get() == window_merge->current_edited_project) {
         window_merge->edited_project_data = editor_windows[i]->get_chapter();
       }
     }
@@ -6430,7 +6437,8 @@ bool MainWindow::on_windows_startup()
   while ((windows_startup_pointer < window_data.ids.size()) && !window_started) {
     if (window_data.shows[windows_startup_pointer]) {
       WindowID id = WindowID(window_data.ids[windows_startup_pointer]);
-      ustring title = window_data.titles[windows_startup_pointer];
+      ustring window_title = window_data.titles[windows_startup_pointer];
+      ustring project = window_data.editor_projects[windows_startup_pointer];
       switch (id) {
       case widShowRelatedVerses:
         {
@@ -6444,7 +6452,7 @@ bool MainWindow::on_windows_startup()
         }
       case widResource:
         {
-          on_file_resources_open(title, true);
+          on_file_resources_open(window_title, true);
           break;
         }
       case widOutline:
@@ -6474,7 +6482,13 @@ bool MainWindow::on_windows_startup()
         }
       case widEditor:
         {
-          on_file_project_open(title, true);
+          // Formerly passed window_title as project name; but title is not the same as the project name.
+          // Title is part of the view; project name is part of the model/data.
+          // We also load the prior viewType so that we can restore the last view. It is stored as an
+          // int, but needs to be transformed into a viewType enum, thus the cast and range check.
+          viewType priorvt = static_cast<viewType>(window_data.editor_view_types[windows_startup_pointer]);
+          if ((priorvt > vtExperimental) || (priorvt< vtNone)) { priorvt = vtFormatted; } // default if out of range
+          on_file_project_open(project, window_title, true, priorvt);
           break;
         }
       case widMenu:
@@ -6514,7 +6528,7 @@ bool MainWindow::on_windows_startup()
   // At the end of all focus the right editor, the one that had focus last time on shutdown.
   if (focused_project_last_session.empty()) {
     for (unsigned int i = 0; i < editor_windows.size(); i++) {
-      if (focused_project_last_session == editor_windows[i]->title) {
+      if (focused_project_last_session == editor_windows[i]->projectname_get()) {
         editor_windows[i]->focus_set();
       }
     }
@@ -6586,6 +6600,7 @@ void MainWindow::shutdown_windows()
     delete editor_window;
     editor_windows.erase(editor_windows.begin());
   }
+  // TO DO: Add concordance and analysis windows too
   // Check USFM.
   if (window_check_usfm) {
     window_check_usfm->shutdown();
@@ -6633,30 +6648,40 @@ void MainWindow::on_window_focus_button(GtkButton * button)
   store_last_focused_tool_button (button);
   
   // Focus the relevant window.
-  if (window_show_related_verses)
+  if (window_show_related_verses) {
     window_show_related_verses->focus_set (window_show_related_verses->focus_in_signal_button == widget);
-  if (window_merge)
+  }
+  if (window_merge) {
     window_merge->focus_set (window_merge->focus_in_signal_button == widget);
-  for (unsigned int i = 0; i < resource_windows.size(); i++)
+  }
+  for (unsigned int i = 0; i < resource_windows.size(); i++) {
     resource_windows[i]->focus_set (resource_windows[i]->focus_in_signal_button == widget);
-  if (window_outline)
+  }
+  if (window_outline) {
     window_outline->focus_set (window_outline->focus_in_signal_button == widget);
-  if (window_check_keyterms)
+  }
+  if (window_check_keyterms) {
     window_check_keyterms->focus_set (window_check_keyterms->focus_in_signal_button == widget);
-  if (window_styles)
+  }
+  if (window_styles) {
     window_styles->focus_set (window_styles->focus_in_signal_button == widget);
-  if (window_notes)
+  }
+  if (window_notes) {
     window_notes->focus_set (window_notes->focus_in_signal_button == widget);
-  if (window_references)
+  }
+  if (window_references) {
     window_references->focus_set (window_references->focus_in_signal_button == widget);
+  }
   if (window_concordance) {
 	  window_concordance->focus_set (window_concordance->focus_in_signal_button == widget);
   }
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
     editor_windows[i]->focus_set (editor_windows[i]->focus_in_signal_button == widget);
   }
-  if (window_check_usfm)
+  // TO DO: Add concordance and analysis windows too
+  if (window_check_usfm) {
     window_check_usfm->focus_set (window_check_usfm->focus_in_signal_button == widget);
+  }
 }
 
 
@@ -6780,5 +6805,3 @@ void MainWindow::on_interprocess_communications_listener_button(GtkButton *butto
   }
   interprocess_communications_initiate_listener_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, milliseconds, GSourceFunc(on_interprocess_communications_initiate_listener_timeout), gpointer(this), NULL);
 }
-
-

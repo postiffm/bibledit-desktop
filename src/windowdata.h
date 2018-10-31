@@ -42,6 +42,9 @@ public:
   vector<int> y_positions;
   vector<int> ids;
   vector<ustring> titles;
+  // Next two are only relevant for editor windows for now (widEditor).
+  vector<ustring> editor_projects;
+  vector<int> editor_view_types;
   vector<bool> shows;
   void debug();
 private:
