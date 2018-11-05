@@ -570,7 +570,7 @@ bool Style::get_starts_character_style(StyleType type, int subtype)
   // Return the outcome.
   return starts_character_style;
 }
-
+// To Do: Simplify this code to return (type == stVerseNumber);
 bool Style::get_starts_verse_number(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a verse number.
