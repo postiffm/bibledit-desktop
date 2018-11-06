@@ -115,7 +115,7 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   // vbox_client -> vbox = vbox_in -> scrolledwindow -> viewport -> vbox_viewport -> vbox_paragraphs
   //                                                                              -> hseparator
   //                                                                              -> vbox_notes
-  //                               -> vbox_parking_lot (don't know about this)
+  //                               -> vbox_parking_lot
   // This seems far too complex. But we have to have the viewport and vbox_viewport to 
   // contain the three separate portions of the text. I tried every possible combination without the viewport,
   // but we have to manually add it, at least in GTK2.
@@ -349,6 +349,45 @@ void Editor3::chapter_load(const Reference &ref)
   editor_actions_size_at_no_save = actions_done.size();
 }
 
+bool Editor3::text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
+{
+  if (marker_found && (marker_pos == 0) && is_opener) {
+      if (Style::get_starts_new_line_in_editor(type, subtype)) {
+          line.erase(0, marker_length);
+          return true;
+      }
+  }
+  return false;
+}
+
+
+bool Editor3::text_starts_verse (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
+{
+  if (marker_found && (marker_pos == 0) && is_opener) {
+      if (Style::get_starts_verse_number(type, subtype)) {
+          line.erase (0, marker_length);
+          return true;
+      }
+  }
+  return false;  
+}
+
+// Add text to the end of a GtkTextBuffer and return iterators pointing to start
+// and end of it.
+void Editor3::gtk_text_buffer_append_with_markers (GtkTextBuffer *textbuffer, const ustring& text, GtkTextIter &startiter, GtkTextIter &enditer)
+{
+    gtk_text_buffer_get_end_iter(textbuffer, &startiter);
+    gtk_text_buffer_insert (textbuffer, &startiter, text.c_str(), -1);
+    gtk_text_buffer_get_end_iter(textbuffer, &enditer);
+}
+
+// Same as above, but don't pass or update start/end markers.
+void Editor3::gtk_text_buffer_append (GtkTextBuffer *textbuffer, const ustring& text)
+{
+    GtkTextIter iter;
+    gtk_text_buffer_get_end_iter(textbuffer, &iter);
+    gtk_text_buffer_insert (textbuffer, &iter, text.c_str(), -1); 
+}
 
 void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
 // This loads text into the formatted editor.
@@ -359,25 +398,102 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   // Clean away possible new lines.
   replace_text (text, "\n", " ");
   DEBUG("W2 text="+text)
+  
+  bool start = true;
+  GtkWidget * textview;
+  GtkTextBuffer * textbuffer;
+
+  // The textbuffer is the data store or "model." It uses the text tag table.
+  textbuffer = gtk_text_buffer_new(texttagtable);
+
+  // The text view is the "view" for editing.
+  textview = gtk_text_view_new_with_buffer(textbuffer);
+  gtk_widget_show(textview);
+
+  // Add textview to the GUI.
+  gtk_box_pack_start(GTK_BOX(vbox_paragraphs), textview, false, false, 0);
+
+  // Set up our textview defaults.
+  gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview), FALSE);
+  gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview), GTK_WRAP_WORD);
+  gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), editable);
+  gtk_text_view_set_left_margin(GTK_TEXT_VIEW(textview), 5);
+  gtk_text_view_set_right_margin(GTK_TEXT_VIEW(textview), 5);
+  gtk_text_view_set_indent(GTK_TEXT_VIEW(textview), 10);
+  gtk_text_view_set_pixels_below_lines(GTK_TEXT_VIEW(textview), 5);
+  
+  // Set font
+  set_font_textview (textview);
+  
   // Load the text into the editor by creating and applying editor actions.
   ustring marker_text;
   size_t marker_pos;
   size_t marker_length;
   bool is_opener = false;
   bool marker_found;
+  ustring style = "";
   while (!text.empty()) {
     marker_found = usfm_search_marker(text, marker_text, marker_pos, marker_length, is_opener);
     bool handled = false;
     if (marker_found) { DEBUG("TL1: " + marker_text); } else { DEBUG("TL1: No marker: " + text); }
+    
+    StyleType type;
+    int subtype;
+    Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
+    
+    // The next chunk of text is just text, up to the next marker,
+    // or the end of the chapter.
+    if (marker_pos != 0 || !marker_found) { 
+      // Text between markers is added to the view/model.
+      ustring text_betw_markers = text.substr(0, marker_pos);
+      GtkTextIter startiter, enditer;
+      gtk_text_buffer_append_with_markers(textbuffer, text_betw_markers, startiter, enditer);
+      gtk_text_buffer_apply_tag_by_name (textbuffer, style.c_str(), &startiter, &enditer);
+      text.erase(0, marker_pos);
+    }
+    else if (marker_found && (marker_pos == 0) && is_opener) {
+      // Opening USFM marker
+      // New "style" has to be applied.
+      style.clear(); // I think...
+      style = marker_text;
+      if (Style::get_displays_marker(type, subtype)) {
+        GtkTextIter startiter, enditer;
+        gtk_text_buffer_append_with_markers(textbuffer, usfm_get_full_opening_marker (marker_text), startiter, enditer);
+        gtk_text_buffer_apply_tag_by_name (textbuffer, style.c_str(), &startiter, &enditer);      
+      }
+      if (Style::get_starts_new_line_in_editor(type, subtype) && !start) {
+        gtk_text_buffer_append(textbuffer, "\n"); // don't add newline if just at start of buffer
+      }
+      text.erase(0, marker_length);
+    }
+    else if (marker_found && (marker_pos == 0) && !is_opener) {
+        // Closing USFM marker...style is already marked as a tag in the textview
+        style.clear();
+        text.erase(0, marker_length);
+    }
+    else {
+      ustring snippet = text.substr(0, 25);
+      gtkw_dialog_error(scrolledwindow, "Unexpected USFM in text_load: " + snippet + "...");
+    }
+
+    start = false;
+#if 0
+
+    if (!handled && !note_mode && text_starts_paragraph (text, type, subtype, marker_pos, marker_length, is_opener, marker_found)) {
+        character_style.clear();
+        editor_start_new_standard_paragraph (marker_text);
+        handled = true;
+    }
+
     if (!handled && !note_mode) {
-      if (text_starts_paragraph (project, text, marker_text, marker_pos, marker_length, is_opener, marker_found)) {
+      if (text_starts_paragraph (text, marker_pos, marker_length, is_opener, marker_found)) {
         character_style.clear();
         editor_start_new_standard_paragraph (marker_text);
         handled = true;
       }
     }
     if (!handled && !note_mode) {
-      if (text_starts_verse (project, text, marker_text, marker_pos, marker_length, is_opener, marker_found)) {
+      if (text_starts_verse (text, marker_pos, marker_length, is_opener, marker_found)) {
         editor_start_verse (text, marker_text, character_style);
         handled = true;
       }
@@ -404,12 +520,14 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
 	  //DEBUG("about to editor_text_fallback text="+text)
       editor_text_fallback (text, character_style, marker_pos, marker_found);
     }
+#endif
   }
 
+  textviewbuffer_create_actions (textbuffer, textview); // setup callbacks, fonts, etc. only after text is ready
+  
   // Update gui.
   if (!note_mode) {
     signal_if_styles_changed();
-    DEBUG("1 Calling signal_if_verse_changed");
     signal_if_verse_changed();
   }
 
@@ -2313,7 +2431,38 @@ void Editor3::apply_editor_action (EditorAction * action, EditorActionApplicatio
   disregard_text_buffer_signals--;
 }
 
+void Editor3::textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview)
+{
+  // Connect text buffer signals.
+  g_signal_connect_after(G_OBJECT(textbuffer), "insert-text",  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
+  g_signal_connect      (G_OBJECT(textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
+  g_signal_connect_after(G_OBJECT(textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
+  g_signal_connect      (G_OBJECT(textbuffer), "changed",      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
+  // Connect spelling checker.
+  spellingchecker->attach(textview);
+  // Connect text view signals.
+  g_signal_connect_after((gpointer) textview, "move_cursor",         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
+  g_signal_connect      ((gpointer) textview, "motion-notify-event", G_CALLBACK(on_motion_notify_event),      gpointer(this));
+  g_signal_connect_after((gpointer) textview, "grab-focus",          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
+  g_signal_connect      ((gpointer) textview, "key-press-event",     G_CALLBACK(on_textview_key_press_event), gpointer(this));
+  //EXPERIMENTALg_signal_connect((gpointer) paragraph_action->textview, "key-release-event", G_CALLBACK(on_textview_key_release_event), gpointer(this));
+  g_signal_connect      ((gpointer) textview, "button_press_event",  G_CALLBACK(on_textview_button_press_event), gpointer(this));
 
+  // Signal the parent window to connect to the signals of the text view.
+  new_widget_pointer = textview;
+  gtk_button_clicked (GTK_BUTTON (new_widget_signal));
+  // Extra bits to be done for a note.
+#if 0
+  if (type == eatCreateNoteParagraph) {
+    // Cast the object to the right type.
+    EditorActionCreateNoteParagraph * note_action = static_cast <EditorActionCreateNoteParagraph *> (paragraph_action);
+    // Connect signal for note caller in note.
+    g_signal_connect ((gpointer) note_action->eventbox, "button_press_event", G_CALLBACK (on_caller_button_press_event), gpointer (this));
+}  
+#endif
+}
+
+// About to be obsolete
 void Editor3::paragraph_create_actions (EditorActionCreateParagraph * paragraph_action)
 {
   // Connect text buffer signals.
@@ -2719,69 +2868,57 @@ void Editor3::editor_text_fallback (ustring& line, ustring& character_style, siz
 
 bool Editor3::editor_starts_character_style(ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
 {
-  if (marker_found) {
-    if (marker_pos == 0) {
-      if (is_opener) {
+    if (marker_found && (marker_pos == 0) && (is_opener)) {
         StyleType type;
         int subtype;
         Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_character_style(type, subtype)) {
-          character_style = marker_text;
-          line.erase(0, marker_length);
-          return true;
+            character_style = marker_text;
+            line.erase(0, marker_length);
+            return true;
         }
-      }
     }
-  }
-  return false;
+    return false;
 }
 
 
 bool Editor3::editor_ends_character_style(ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
 {
-  if (marker_found) {
-    if (marker_pos == 0) {
-      if (!is_opener) {
+    if (marker_found && (marker_pos == 0) && (is_opener)) {
         StyleType type;
         int subtype;
         Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_character_style(type, subtype)) {
-          character_style.clear();
-          line.erase(0, marker_length);
-          return true;
+            character_style.clear();
+            line.erase(0, marker_length);
+            return true;
         }
-      }
     }
-  }
-  return false;
+    return false;
 }
 
 
 bool Editor3::text_starts_note_raw(ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found, ustring& raw_note)
 // This function determines whether the text starts a footnote, an endnote, or a crossreference.
 {
-  if (marker_found) {
-    if (marker_pos == 0) {
-      if (is_opener) {
+    if (marker_found && (marker_pos == 0) && (is_opener)) {
         StyleType type;
         int subtype;
         Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
         if (Style::get_starts_footnote(type, subtype) || Style::get_starts_endnote(type, subtype) || Style::get_starts_crossreference(type, subtype)) {
-          // Proceed if the endmarker is in the text too.
-          ustring endmarker = usfm_get_full_closing_marker(marker_text);
-          size_t endmarkerpos = line.find(endmarker);
-          if (endmarkerpos != string::npos) {
-            // Get raw note text and erase it from the input buffer.
-            raw_note = line.substr(marker_length, endmarkerpos - endmarker.length());
-            line.erase(0, endmarkerpos + endmarker.length());
-            // The information was processed: return true
-            return true;
-          }
+            // Proceed if the endmarker is in the text too.
+            ustring endmarker = usfm_get_full_closing_marker(marker_text);
+            size_t endmarkerpos = line.find(endmarker);
+            if (endmarkerpos != string::npos) {
+                // Get raw note text and erase it from the input buffer.
+                raw_note = line.substr(marker_length, endmarkerpos - endmarker.length());
+                line.erase(0, endmarkerpos + endmarker.length());
+                // The information was processed: return true
+                return true;
+            }
         }
-      }
     }
-  }
-  return false;
+    return false;
 }
 
 void Editor3::get_next_note_caller_and_style (EditorNoteType type, ustring& caller, ustring& style, bool restart)
@@ -2809,7 +2946,7 @@ void Editor3::editor_start_note_raw (ustring raw_note, const ustring & marker_te
   {
     get_next_note_caller_and_style (note_type, caller_in_text, caller_style, false);
     Style style ("", caller_style, false);
-	//DEBUG("caller_style="+caller_style)
+    //DEBUG("caller_style="+caller_style)
     style.superscript = true;
     create_or_update_text_style(&style, false, false, font_size_multiplier);
     gint insertion_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
@@ -3174,6 +3311,7 @@ void Editor3::go_to_verse(const ustring& number, bool focus)
 
 void Editor3::signal_if_verse_changed ()
 {
+  DEBUG("Set up verse_changed_timeout signal")
   gw_destroy_source(signal_if_verse_changed_event_id);
   signal_if_verse_changed_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_signal_if_verse_changed_timeout), gpointer(this), NULL);
 }
@@ -3188,7 +3326,7 @@ bool Editor3::on_signal_if_verse_changed_timeout(gpointer data)
 // to change the verse number they are showing.
 void Editor3::signal_if_verse_changed_timeout()
 {
-    //DEBUG("Signal verse_changed_timeout")
+    DEBUG("Called verse_changed_timeout")
     // Proceed if verse tracking is on.
     if (verse_tracking_on) {
         // Proceed if there's a focused paragraph.
@@ -3652,36 +3790,6 @@ Editor3::EditorActionDeleteText * Editor3::paragraph_delete_last_character_if_sp
     }
   }
   return NULL;
-}
-
-
-bool Editor3::text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
-{
-  if (marker_found && (marker_pos == 0) && is_opener) {
-      StyleType type;
-      int subtype;
-      Style::marker_get_type_and_subtype(project, marker, type, subtype);
-      if (Style::get_starts_new_line_in_editor(type, subtype)) {
-          line.erase(0, marker_length);
-          return true;
-      }
-  }
-  return false;
-}
-
-
-bool Editor3::text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found)
-{
-  if (marker_found && (marker_pos == 0) && is_opener) {
-      StyleType type;
-      int subtype;
-      Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
-      if (Style::get_starts_verse_number(type, subtype)) {
-          line.erase (0, marker_length);
-          return true;
-      }
-  }
-  return false;  
 }
 
 Editor3::EditorActionDeleteText * Editor3::paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles)

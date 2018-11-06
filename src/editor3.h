@@ -210,15 +210,21 @@ private:
   GtkWidget *hseparator;
   GtkWidget *vbox_notes;
   GtkWidget *vbox_parking_lot;
-  void text_load (ustring text, ustring character_style, bool note_mode);
   deque <EditorAction *> actions_done;
   deque <EditorAction *> actions_undone;
   void apply_editor_action (EditorAction * action, EditorActionApplication application = eaaInitial);
   void paragraph_create_actions (EditorActionCreateParagraph * paragraph_action);
+  void textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview);
 public:
   EditorActionCreateParagraph * focused_paragraph;
 private:
-  bool usfm_starts_new_paragraph (ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+    
+  bool text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+  bool text_starts_verse (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+  void gtk_text_buffer_append_with_markers (GtkTextBuffer *textbuffer, const ustring& text, GtkTextIter &startiter, GtkTextIter &enditer);
+  void gtk_text_buffer_append (GtkTextBuffer *textbuffer, const ustring& text);
+  void text_load (ustring text, ustring character_style, bool note_mode);
+  
   void editor_start_new_standard_paragraph (const ustring& marker_text);
   void editor_start_verse (ustring& line, ustring& marker_text, ustring& character_style);
   bool editor_starts_character_style (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
@@ -463,9 +469,6 @@ private:
   
   gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action);
   void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset);
-  
-  bool text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
-  bool text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   
   EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action);
   EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles);
