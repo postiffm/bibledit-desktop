@@ -223,6 +223,7 @@ private:
   bool text_starts_verse (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   void gtk_text_buffer_append_with_markers (GtkTextBuffer *textbuffer, const ustring& text, GtkTextIter &startiter, GtkTextIter &enditer);
   void gtk_text_buffer_append (GtkTextBuffer *textbuffer, const ustring& text);
+  GtkWidget *create_text_view(GtkWidget *parent_vbox);
   void text_load (ustring text, ustring character_style, bool note_mode);
   
   void editor_start_new_standard_paragraph (const ustring& marker_text);
