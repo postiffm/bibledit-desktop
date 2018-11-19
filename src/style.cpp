@@ -28,6 +28,7 @@
 #include "stylesheetutils.h"
 #include "constants.h"
 #include <glib/gi18n.h>
+#include "gtkwrappers.h"
 
 Style::Style(const ustring & stylesheet, const ustring& marker, bool write)
 {
@@ -570,6 +571,28 @@ bool Style::get_starts_character_style(StyleType type, int subtype)
   // Return the outcome.
   return starts_character_style;
 }
+
+bool Style::get_starts_nested_character_style(const ustring& project, const ustring& marker_text)
+{
+    if (marker_text[0] == '+') {
+        // All markers that start with \+ are nested character markers,
+        // e.g. \+add...\+add*. I do some extra checking to make sure
+        // that this is in fact a character marker.
+        ustring marker_text_without_plus = marker_text.substr(1,ustring::npos);
+        StyleType type;
+        int subtype;
+        Style::marker_get_type_and_subtype(project, marker_text_without_plus, type, subtype);
+        if (Style::get_starts_character_style(type, subtype)) {
+          return true;
+        }
+        else {
+          gtkw_dialog_error (NULL, marker_text + ": Nested marker is not of character type");
+          return false;
+        }
+    }
+    return false;
+}
+
 // To Do: Simplify this code to return (type == stVerseNumber);
 bool Style::get_starts_verse_number(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
@@ -945,13 +968,17 @@ void Style::marker_get_type_and_subtype(const ustring & project, const ustring &
  "subtype" of the style of that marker.
  */
 {
+  // What marker should be looked up? Usually marker, but if marker[0] = "+", then remove it
+  ustring marker_lookup = marker;
+  if (marker[0] == '+') { marker_lookup = marker.substr(1,ustring::npos); }
+
   // Code for speeding up the lookup process.
   static ustring speed_project;
   static ustring speed_marker;
   static StyleType speed_type = stNotUsedComment;
   static int speed_subtype = 0;
   if (project == speed_project) {
-    if (marker == speed_marker) {
+    if (marker_lookup == speed_marker) {
       type = speed_type;
       subtype = speed_subtype;
       return;
@@ -960,7 +987,7 @@ void Style::marker_get_type_and_subtype(const ustring & project, const ustring &
   
   // Store both keys in the speedup system.
   speed_project = project;
-  speed_marker = marker;
+  speed_marker = marker_lookup;
 
   // Lookup the values.
   ustring stylesheet = stylesheet_get_actual ();
@@ -969,7 +996,7 @@ void Style::marker_get_type_and_subtype(const ustring & project, const ustring &
   type = stIdentifier;
   subtype = itComment;
   for (unsigned int i = 0; i < usfm->styles.size(); i++) {
-    if (marker == usfm->styles[i].marker) {
+    if (marker_lookup == usfm->styles[i].marker) {
       // Values found.
       type = usfm->styles[i].type;
       subtype = usfm->styles[i].subtype;

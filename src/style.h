@@ -126,6 +126,7 @@ public:
     static bool    get_starts_new_line_in_usfm(StyleType type, int subtype);
     static bool    get_displays_marker(StyleType type, int subtype);
     static bool    get_starts_character_style(StyleType type, int subtype);
+    static bool    get_starts_nested_character_style(const ustring& project, const ustring& marker_text);
     static bool    get_starts_verse_number(StyleType type, int subtype);
     static ustring get_verse_marker(const ustring& project);
     static bool    get_starts_footnote(StyleType type, int subtype);

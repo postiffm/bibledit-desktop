@@ -477,6 +477,8 @@ GtkWidget *Editor3::create_text_view(GtkWidget *parent_vbox)
     
     return textview;
 }    
+#define DEBUG_STYLES(NUM) { ustring charstyles; for (auto style : v_character_style) { charstyles.append(style); charstyles.append(" "); }\
+  DEBUG("TL" #NUM ": STYLES: p=" + paragraph_style + " c=" + charstyles + " TEXT=" + text.substr(0, 25) + "..."); }
 
 void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
 // This loads text into the formatted editor.
@@ -487,6 +489,13 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   // Clean new lines
   replace_text (text, "\n", " ");
   DEBUG("W2 text="+text)
+  
+  //------------------------------------------------------------------------------
+  // The character_style is the starting character style. But then there is the
+  // possibility of nested character styles. So we have to keep track of that.
+  //------------------------------------------------------------------------------
+  vector <ustring> v_character_style;
+  if (character_style != "") { v_character_style.push_back(character_style); }
   
   bool start = true;
   
@@ -503,56 +512,73 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   GtkTextBuffer *notetextbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(notetextview));
  
   //------------------------------------------------------------------------------
-  // Load the text into the editor by creating and applying editor actions.
+  // Load the text into the editor chunk by chunk. Chunks are delimited by 
+  // USFM markers.
   //------------------------------------------------------------------------------
   ustring marker_text;
   size_t marker_pos;
   size_t marker_length;
   bool is_opener = false;
   bool marker_found;
-  ustring style = "";
+  ustring paragraph_style = "";
   while (!text.empty()) {
     marker_found = usfm_search_marker(text, marker_text, marker_pos, marker_length, is_opener);
-    bool handled = false;
     if (marker_found) { DEBUG("TL1: " + marker_text); } else { DEBUG("TL1: No marker: " + text); }
     
     StyleType type;
     int subtype;
     Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
     
+    //------------------------------------------------------------------------------
     // The next chunk of text is just text, up to the next marker,
     // or the end of the chapter.
+    //------------------------------------------------------------------------------
     if (marker_pos != 0 || !marker_found) { 
       // Text between markers is added to the view/model.
       ustring text_betw_markers = text.substr(0, marker_pos);
       GtkTextIter startiter, enditer;
       gtk_text_buffer_append_with_markers(textbuffer, text_betw_markers, startiter, enditer);
-      gtk_text_buffer_apply_tag_by_name (textbuffer, style.c_str(), &startiter, &enditer);
-      gtk_text_buffer_apply_tag_by_name (textbuffer, character_style.c_str(), &startiter, &enditer);
+      gtk_text_buffer_apply_tag_by_name (textbuffer, paragraph_style.c_str(), &startiter, &enditer);
+      for (auto style : v_character_style) {
+        gtk_text_buffer_apply_tag_by_name (textbuffer, style.c_str(), &startiter, &enditer);
+      }
       text.erase(0, marker_pos);
+      DEBUG("Added text="+text_betw_markers);
+      DEBUG_STYLES(7);
     }
+    //------------------------------------------------------------------------------
+    // We found a new opening USFM marker at the start of the remaining text. Process
+    // it, depending on the particular type to guide our specific actions.
+    //------------------------------------------------------------------------------
     else if (marker_found && (marker_pos == 0) && is_opener) {
-        // Opening USFM marker
-        
-        DEBUG("TL2: Styles: p=" + style + " c=" + character_style + " " + text.substr(0, 25) + "...");
+        DEBUG_STYLES(2);
         if (Style::get_displays_marker(type, subtype)) {
             GtkTextIter startiter, enditer;
             gtk_text_buffer_append_with_markers(textbuffer, usfm_get_full_opening_marker (marker_text), startiter, enditer);
-            gtk_text_buffer_apply_tag_by_name (textbuffer, style.c_str(), &startiter, &enditer);      
+            gtk_text_buffer_apply_tag_by_name (textbuffer, paragraph_style.c_str(), &startiter, &enditer);      
         }
         if (Style::get_starts_new_line_in_editor(type, subtype) && !start) {
             gtk_text_buffer_append(textbuffer, "\n"); // but don't add newline if just at start of buffer
         }
         
-        if (Style::get_starts_character_style(type, subtype)) {
-            character_style = marker_text;
-            DEBUG("TL3: Styles: p=" + style + " c=" + character_style + " " + text.substr(0, 25) + "...");
+        if (Style::get_starts_nested_character_style(project, marker_text)) {
+            // If this is a nested style, add it to the active list of styles
+            ustring marker_text_wo_plus = marker_text.substr(1,ustring::npos);
+            v_character_style.push_back(marker_text_wo_plus);
             text.erase(0, marker_length);
+            DEBUG_STYLES(6);
+        }
+        else if (Style::get_starts_character_style(type, subtype)) {
+            // If this is NOT a nested style, clear the active list of styles and add it as new one
+            v_character_style.clear();
+            v_character_style.push_back(marker_text);
+            text.erase(0, marker_length);
+            DEBUG_STYLES(3);
         }
         else if (Style::get_paragraph(type, subtype)) { // starts a paragraph style; maybe need rename
-            style = marker_text;
-            DEBUG("TL4: Styles: p=" + style + " c=" + character_style + " " + text.substr(0, 25) + "...");
+            paragraph_style = marker_text;
             text.erase(0, marker_length);
+            DEBUG_STYLES(4);
         }
         else if (Style::get_starts_verse_number(type, subtype)) {
             // Grab the verse number and process the whole thing \v_#, since it is a special case in USFM
@@ -601,11 +627,13 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
             text.erase(0, marker_length);
         }
     }
+    //------------------------------------------------------------------------------
+    // Closing USFM marker...style is already marked as a tag in the textview.
+    //------------------------------------------------------------------------------
     else if (marker_found && (marker_pos == 0) && !is_opener) {
-        // Closing USFM marker...style is already marked as a tag in the textview
-        character_style.clear();
-        DEBUG("TL5: Styles: p=" + style + " c=" + character_style + " " + text.substr(0, 25) + "...");
+        v_character_style.pop_back();
         text.erase(0, marker_length);
+        DEBUG_STYLES(5);
     }
     else {
       ustring snippet = text.substr(0, 25);
