@@ -112,9 +112,9 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   load_dictionaries();
 
   // The formatted editor GUI is structured like this:
-  // vbox_client -> vbox = vbox_in -> scrolledwindow -> viewport -> vbox_viewport -> vbox_paragraphs
+  // vbox_client -> vbox = vbox_in -> scrolledwindow -> viewport -> vbox_viewport -> vbox_paragraphs -> textview w/ textbuffer model
   //                                                                              -> hseparator
-  //                                                                              -> vbox_notes
+  //                                                                              -> vbox_notes      -> notetextview w/ notetextbuffer model
   //                               -> vbox_parking_lot
   // This seems far too complex. But we have to have the viewport and vbox_viewport to 
   // contain the three separate portions of the text. I tried every possible combination without the viewport,
@@ -140,6 +140,9 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   gtk_widget_show(vbox_paragraphs);
   gtk_box_pack_start(GTK_BOX(vbox_viewport), vbox_paragraphs, false, false, 0);
   
+  textview = NULL;
+  textbuffer = NULL;
+  
   last_focused_widget = vbox_paragraphs;
 
   // The separator between text and notes.
@@ -151,6 +154,9 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   vbox_notes = gtk_vbox_new (false, 0);
   gtk_widget_show(vbox_notes);
   gtk_box_pack_start(GTK_BOX(vbox_viewport), vbox_notes, false, false, 0);
+
+  notetextview = NULL;
+  notetextbuffer = NULL;
   
   // Create the invisible parking lot where GtkTextViews get parked while not in use.
   vbox_parking_lot = gtk_vbox_new (false, 0);
@@ -220,25 +226,20 @@ Editor3::~Editor3()
   delete spellingchecker;
 
   // Destroy the signalling buttons.
-  gtk_widget_destroy(new_verse_signal);
-  new_verse_signal = NULL;
-  gtk_widget_destroy(new_styles_signal);
-  new_styles_signal = NULL;
-  gtk_widget_destroy(word_double_clicked_signal);
-  word_double_clicked_signal = NULL;
-  gtk_widget_destroy(reload_signal);
-  reload_signal = NULL;
-  gtk_widget_destroy(changed_signal);
-  changed_signal = NULL;
-  gtk_widget_destroy(quick_references_button);
-  quick_references_button = NULL;
-  gtk_widget_destroy(spelling_checked_signal);
-  spelling_checked_signal = NULL;
-  gtk_widget_destroy(new_widget_signal);
-  new_widget_signal = NULL;
+  gtk_widget_destroy(new_verse_signal);           new_verse_signal = NULL;
+  gtk_widget_destroy(new_styles_signal);          new_styles_signal = NULL;
+  gtk_widget_destroy(word_double_clicked_signal); word_double_clicked_signal = NULL;
+  gtk_widget_destroy(reload_signal);              reload_signal = NULL;
+  gtk_widget_destroy(changed_signal);             changed_signal = NULL;
+  gtk_widget_destroy(quick_references_button);    quick_references_button = NULL;
+  gtk_widget_destroy(spelling_checked_signal);    spelling_checked_signal = NULL;
+  gtk_widget_destroy(new_widget_signal);          new_widget_signal = NULL;
 
   // Destroy the texttag tables.
   g_object_unref(texttagtable);
+  
+  g_object_unref(textview);        textview = NULL;     textbuffer = NULL;
+  g_object_unref(notetextview);    notetextview = NULL; notetextbuffer = NULL;
 
   // Destroy possible highlight object.
   if (highlight) { 
@@ -476,7 +477,8 @@ GtkWidget *Editor3::create_text_view(GtkWidget *parent_vbox)
     set_font_textview (textview);
     
     return textview;
-}    
+}
+
 #define DEBUG_STYLES(NUM) { ustring charstyles; for (auto style : v_character_style) { charstyles.append(style); charstyles.append(" "); }\
   DEBUG("TL" #NUM ": STYLES: p=" + paragraph_style + " c=" + charstyles + " TEXT=" + text.substr(0, 25) + "..."); }
 
@@ -502,14 +504,14 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   //------------------------------------------------------------------------------
   // Create textview/textbuffer for the Bible text
   //------------------------------------------------------------------------------
-  GtkWidget *textview = create_text_view(vbox_paragraphs);
-  GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
+  textview = create_text_view(vbox_paragraphs);
+  textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
   
   //------------------------------------------------------------------------------
   // Create textview/textbuffer for the footnotes/endnotes/xrefs
   //------------------------------------------------------------------------------
-  GtkWidget *notetextview = create_text_view(vbox_notes);
-  GtkTextBuffer *notetextbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(notetextview));
+  notetextview = create_text_view(vbox_notes);
+  notetextbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(notetextview));
  
   //------------------------------------------------------------------------------
   // Load the text into the editor chunk by chunk. Chunks are delimited by 
@@ -4596,5 +4598,3 @@ gboolean Editor3::EditorActionCreateNoteParagraph::on_caller_leave_notify (GdkEv
   gdk_window_set_cursor(gdk_window, NULL);
   return false;
 }
-
-

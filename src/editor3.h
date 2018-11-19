@@ -206,10 +206,22 @@ public:
 private:
   GtkWidget *viewport;
   GtkWidget *vbox_viewport;
+  
+  // Where the text of the Bible is shown
   GtkWidget *vbox_paragraphs;
+  GtkWidget *textview;
+  GtkTextBuffer *textbuffer;
+
   GtkWidget *hseparator;
+
+  // Where the footnotes/endnotes/cross-refs are shown
   GtkWidget *vbox_notes;
+  GtkWidget *notetextview;
+  GtkTextBuffer *notetextbuffer;
+  
+  // Where the undo information is stored
   GtkWidget *vbox_parking_lot;
+  
   deque <EditorAction *> actions_done;
   deque <EditorAction *> actions_undone;
   void apply_editor_action (EditorAction * action, EditorActionApplication application = eaaInitial);
