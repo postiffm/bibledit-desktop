@@ -96,6 +96,7 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   keyStrokeNum_paragraph_crossing_processed = 0;
   verse_restarts_paragraph = false;
   focused_paragraph = NULL;
+  focused_textview = NULL;
   disregard_text_buffer_signals = 0;
   textbuffer_delete_range_was_fired = false;
   verse_tracking_on = false;
@@ -240,6 +241,7 @@ Editor3::~Editor3()
   
   g_object_unref(textview);        textview = NULL;     textbuffer = NULL;
   g_object_unref(notetextview);    notetextview = NULL; notetextbuffer = NULL;
+  focused_textview = NULL;         focused_paragraph = NULL;
 
   // Destroy possible highlight object.
   if (highlight) { 
@@ -291,7 +293,6 @@ void Editor3::chapter_load(const Reference &ref)
 
   // Get rid of possible previous widgets with their data.
   gtk_container_foreach(GTK_CONTAINER(vbox_paragraphs), on_container_tree_callback_destroy, gpointer(this));
-  focused_paragraph = NULL;
   DEBUG("W1 Destroyed supposedly all prior widgets")
   // Make one long line containing the whole chapter.
   // This is done so as to exclude any possibility that the editor does not
@@ -329,9 +330,9 @@ void Editor3::chapter_load(const Reference &ref)
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
   currHighlightedVerse = "0"; // this means "the proper verse has not yet been highlighted"
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-  highlightCurrVerse(textviews); // now it is highlighted
-  scroll_to_insertion_point_on_screen(textviews);
+  //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  highlightCurrVerse(textview); // now it is highlighted
+  scroll_to_insertion_point_on_screen(textview);
 #if 0
   if (!textviews.empty()) {
     give_focus (textviews[0]);
@@ -506,7 +507,9 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   //------------------------------------------------------------------------------
   textview = create_text_view(vbox_paragraphs);
   textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
-  
+  focused_paragraph = NULL;
+  focused_textview = GTK_TEXT_VIEW(textview);
+
   //------------------------------------------------------------------------------
   // Create textview/textbuffer for the footnotes/endnotes/xrefs
   //------------------------------------------------------------------------------
@@ -589,6 +592,7 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
             ustring versenum = text.substr(0, spaceaftervnum);
             GtkTextIter startiter, enditer;
             gtk_text_buffer_append_with_markers(textbuffer, versenum, startiter, enditer);
+            gtk_text_buffer_apply_tag_by_name (textbuffer, paragraph_style.c_str(), &startiter, &enditer);
             gtk_text_buffer_apply_tag_by_name (textbuffer, "v", &startiter, &enditer);
             text.erase(0, spaceaftervnum); // eat #
         }
@@ -896,10 +900,10 @@ void Editor3::textview_move_cursor(GtkTextView * textview, GtkMovementStep step,
   gw_destroy_source(textview_move_cursor_id);
   textview_move_cursor_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 100, GSourceFunc(on_textview_move_cursor_delayed), gpointer(this), NULL);
   // Act on paragraph crossing.
-  paragraph_crossing_act (step, count);
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-  scroll_to_insertion_point_on_screen(textviews);
-  highlightCurrVerse(textviews);
+//  paragraph_crossing_act (step, count);
+  //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+  scroll_to_insertion_point_on_screen(GTK_WIDGET(textview));
+  highlightCurrVerse(GTK_WIDGET(textview));
 }
 
 bool Editor3::on_textview_move_cursor_delayed(gpointer user_data)
@@ -926,30 +930,109 @@ ustring Editor3::verse_number_get()
 {
   // Default verse number.
   ustring number = "1"; // was "0"
-  // Proceed if there's a focused paragraph.
-  if (focused_paragraph) {
+  if (focused_textview) {
     // Get an iterator at the cursor location of the focused textview.
     GtkTextIter iter;
-    gtk_text_buffer_get_iter_at_mark(focused_paragraph->textbuffer, &iter, gtk_text_buffer_get_insert(focused_paragraph->textbuffer));
+    GtkTextBuffer * focused_textbuffer = gtk_text_view_get_buffer (focused_textview);
+    gtk_text_buffer_get_iter_at_mark(focused_textbuffer, &iter, gtk_text_buffer_get_insert(focused_textbuffer));
     // Get verse number.
-    number = get_verse_number_at_iterator(iter, Style::get_verse_marker(project), project, vbox_paragraphs);
+    number = get_verse_number_at_iterator(iter, Style::get_verse_marker(project), project);
     //DEBUG("current_verse_number="+current_verse_number+" and returning number="+number)
   }
   return number;
 }
 
-bool Editor3::get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search)
+ustring Editor3::get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project)
+/*
+This function returns the verse number at the iterator.
+It also takes into account a situation where the cursor is on a heading.
+The user expects a heading to belong to the next verse. 
+*/
+{
+  // Get the paragraph style at the iterator, in case it is in a heading.
+  ustring paragraph_style_at_cursor;
+  {
+    ustring dummy;
+    get_styles_at_iterator(iter, paragraph_style_at_cursor, dummy);
+  }
+  
+  // Verse-related variables.
+  ustring verse_number = "0";
+  bool verse_number_found = false;
+//  GtkWidget * textview = NULL;
+
+  verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
+
+#ifdef OLDSTUFF
+  
+  vector <GtkWidget *>
+  widgets = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
+
+  do {
+    // Try to find a verse number in the GtkTextBuffer the "iter" points to.
+    verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
+    // If the verse number was not found, look through the previous GtkTextBuffer.
+    if (!verse_number_found) {
+      // If the "textview" is not yet set, look for the current one.
+      if (textview == NULL) {
+        GtkTextBuffer * textbuffer = gtk_text_iter_get_buffer (&iter);
+        for (unsigned int i = 0; i < widgets.size(); i++) {
+          if (textbuffer == gtk_text_view_get_buffer (GTK_TEXT_VIEW (widgets[i]))) {
+            textview = widgets[i];
+            break;
+          }
+        }
+      }
+      // Look for the previous GtkTextView.
+      textview = editor_get_previous_textview (widgets, textview);
+      // Start looking at the end of that textview.
+      if (textview) {
+        GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+        gtk_text_buffer_get_end_iter (textbuffer, &iter);
+      }
+    }
+
+	//DEBUG("1debug_verse_number "+verse_number)
+
+  } while (!verse_number_found && textview);
+#endif
+  
+  // Optional: If the cursor is on a title/heading, increase verse number.
+  if (!project.empty()) {
+    StyleType type;
+    int subtype;
+    Style::marker_get_type_and_subtype(project, paragraph_style_at_cursor, type, subtype);
+    if (type == stStartsParagraph) {
+      switch (subtype) {
+        case ptMainTitle:
+        case ptSubTitle:
+        case ptSectionHeading:
+        {
+          unsigned int vs = convert_to_int (verse_number);
+          vs++;
+          verse_number = convert_to_string (vs);
+          break;
+        }
+        case ptNormalParagraph:
+        {
+          break;
+        }
+      }
+    }
+  }
+ 
+  //DEBUG("2debug_verse_number "+verse_number)
+
+  // Return the verse number found.
+  return verse_number;
+}
+
+
+bool Editor3::get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkTextIter & iter, GtkWidget *& textview, bool deep_search)
 // This returns the iterator and textview where "verse_number" starts.
 // Returns true if the verse was found, else false.
 {
-  // Go through all textviews.
-  vector <GtkWidget *>
-  textviews = editor_get_widgets (parent_box, GTK_TYPE_TEXT_VIEW);
-  for (unsigned int i = 0; i < textviews.size(); i++) {
-    // Handle this textview.
-    textview = textviews[i];
     // Search from start of buffer.
-    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
     gtk_text_buffer_get_start_iter (textbuffer, &iter);
     // Verse 0 or empty: beginning of chapter.
     if ((verse_number == "0") || (verse_number.empty())) {
@@ -960,7 +1043,7 @@ bool Editor3::get_iterator_at_verse_number (const ustring& verse_number, const u
       ustring paragraph_style, character_style, verse_at_iter;
       get_styles_at_iterator(iter, paragraph_style, character_style);
       if (character_style == verse_marker) {
-        verse_at_iter = get_verse_number_at_iterator(iter, verse_marker, "", parent_box);
+        verse_at_iter = get_verse_number_at_iterator(iter, verse_marker, "");
         if (verse_number == verse_at_iter) {
           return true;
         }
@@ -976,10 +1059,10 @@ bool Editor3::get_iterator_at_verse_number (const ustring& verse_number, const u
         }
       }
     } while (gtk_text_iter_forward_char(&iter));
-  }
+  
   // If we haven't done the deep search yet, do it now.
   if (!deep_search) {
-    if (get_iterator_at_verse_number (verse_number, verse_marker, parent_box, iter, textview, true)) {
+    if (get_iterator_at_verse_number (verse_number, verse_marker, iter, textview, true)) {
       return true;
     }
   }
@@ -997,12 +1080,17 @@ void Editor3::textview_grab_focus(GtkWidget * widget)
 {
   //DEBUG("Signal grab_focus")
   // Store the paragraph action that created the widget
-  EditorActionCreateParagraph *new_focused_paragraph = widget2paragraph_action (widget);
+#ifdef OLDSTUFF
+    EditorActionCreateParagraph *new_focused_paragraph = widget2paragraph_action (widget);
   //DEBUG("focused_paragraph="+std::to_string(int(focused_paragraph))+" new_focused_paragraph="+std::to_string(int(new_focused_paragraph)))
   focused_paragraph = new_focused_paragraph;
+#endif
+  focused_textview = GTK_TEXT_VIEW(widget);
+  
   // Clear the character style that was going to be applied when the user starts typing.
   character_style_on_start_typing.clear();
-  // Further processing of the focus grab is done with a delay.
+  // Further processing of the focus grab is done with a delay. Some of these events will be "ignored" if multiple 
+  // changes of focus happen within a very short time, so that only the last one should be done.
   gw_destroy_source(textview_grab_focus_event_id);
   textview_grab_focus_event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 10, GSourceFunc(on_textview_grab_focus_delayed), gpointer(this), NULL);
 }
@@ -1026,7 +1114,7 @@ void Editor3::textview_grab_focus_delayed() // Todo
   textview_grab_focus_event_id = 0;
   signal_if_styles_changed();
   DEBUG("3 Calling signal_if_verse_changed");
-  signal_if_verse_changed(); // rarely will this cause a verse to actually change
+  signal_if_verse_changed();
   show_quick_references();
 }
 
@@ -2241,10 +2329,11 @@ bool Editor3::move_cursor_to_spelling_error (bool next, bool extremity)
 {
   bool moved = false;
   if (focused_paragraph) {
-    GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
-    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+    //GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
+    //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     do {
       moved = spellingchecker->move_cursor_to_spelling_error (textbuffer, next, extremity);
+#ifdef OLDSTUFF
       if (!moved) {
         GtkWidget * textview = focused_paragraph->textview;
         textbuffer = NULL;
@@ -2264,23 +2353,25 @@ bool Editor3::move_cursor_to_spelling_error (bool next, bool extremity)
           gtk_text_buffer_place_cursor (textbuffer, &iter);
         }
       }
+#endif
     } while (!moved && textbuffer);
 
     if (moved) {
-      scroll_to_insertion_point_on_screen(textviews);
-      highlightCurrVerse(textviews);
+      scroll_to_insertion_point_on_screen(textview);
+      highlightCurrVerse(textview);
     }
   }
   return moved;
 }
 
-void Editor3::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews)
+// Maybe textview could be the textview or the notetextview
+void Editor3::scroll_to_insertion_point_on_screen(GtkWidget * textview)
 {
     //DEBUG("doVerseHighlighting="+std::to_string(int(doVerseHighlighting)))
 	//ustring debug_verse_number = verse_number_get();
 	//DEBUG("debug_verse_number "+debug_verse_number)
-	if (!focused_paragraph) { return; }
-	if (!focused_paragraph->textbuffer) { return; }
+//	if (!focused_paragraph) { return; }
+//	if (!focused_paragraph->textbuffer) { return; }
 
 	// Ensure that the screen has been fully displayed.
 	//while (gtk_events_pending()) { gtk_main_iteration(); }
@@ -2308,29 +2399,24 @@ void Editor3::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textview
     // jumping to "verse 0" at some random times? The theory is that gtk_widget_get_allocation
     // is not returning the right sizes because the widgets have not been fully drawn yet.
     // Somehow, a timeout handler handled this in a previous iteration.
-    while (gtk_events_pending()) gtk_main_iteration();
+    while (gtk_events_pending()) { gtk_main_iteration(); }
     
-	// Offset of insertion point starting from top.
-	gint insertion_point_offset = 0;
-	{
-		for (unsigned int i = 0; i < textviews.size(); i++) {
-			if (focused_paragraph->textview == textviews[i]) {
-				break;
-			}
-			GtkAllocation allocation;
-			gtk_widget_get_allocation (textviews[i], &allocation);
-			insertion_point_offset += allocation.height;
-		}
-		//GtkTextMark * gtktextmark = gtk_text_buffer_get_insert (focused_paragraph->textbuffer);
-		GtkTextMark * gtktextmark = gtk_text_buffer_get_mark (focused_paragraph->textbuffer, "insert");
-		GtkTextIter iter;
-		gtk_text_buffer_get_iter_at_mark (focused_paragraph->textbuffer, &iter, gtktextmark);
-		GdkRectangle rectangle;
-		gtk_text_view_get_iter_location (GTK_TEXT_VIEW (focused_paragraph->textview), &iter, &rectangle);
-		gint window_x, window_y;
-		gtk_text_view_buffer_to_window_coords (GTK_TEXT_VIEW (focused_paragraph->textview), GTK_TEXT_WINDOW_WIDGET, rectangle.x, rectangle.y, &window_x, &window_y);
-		insertion_point_offset += rectangle.y;
-	}
+    // Offset of insertion point starting from top.
+    gint insertion_point_offset = 0;
+    {
+        GtkAllocation allocation;
+        gtk_widget_get_allocation (textview, &allocation);
+        insertion_point_offset += allocation.height;
+        GtkTextMark * gtktextmark = gtk_text_buffer_get_insert (textbuffer);
+        //GtkTextMark * gtktextmark = gtk_text_buffer_get_mark (textbuffer, "insert");
+        GtkTextIter iter;
+        gtk_text_buffer_get_iter_at_mark (textbuffer, &iter, gtktextmark);
+        GdkRectangle rectangle;
+        gtk_text_view_get_iter_location (GTK_TEXT_VIEW (textview), &iter, &rectangle);
+        gint window_x, window_y;
+        gtk_text_view_buffer_to_window_coords (GTK_TEXT_VIEW (textview), GTK_TEXT_WINDOW_WIDGET, rectangle.x, rectangle.y, &window_x, &window_y);
+        insertion_point_offset += rectangle.y;
+    }
 
 	//DEBUG("Insertion point offset is " + std::to_string(int(insertion_point_offset)))
 	//DEBUG("Visible window height is "  + std::to_string(double(visible_window_height)))
@@ -2382,7 +2468,7 @@ void Editor3::scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textview
 	gtk_adjustment_set_value (adjustment, adjustment_value);
 }
 
-void Editor3::highlightCurrVerse(vector <GtkWidget *> &textviews)
+void Editor3::highlightCurrVerse(GtkWidget *textview)
 {
 	// Don't do unnecessary work: if verse is already highlighted, bail out
 	if (current_verse_number == currHighlightedVerse) { return; }
@@ -2391,28 +2477,24 @@ void Editor3::highlightCurrVerse(vector <GtkWidget *> &textviews)
 	// Highlighting is not necessary if you just pressed a letter key within the same verse you were in. Arrow keys, yes.
 
 	// Remove any previous verse number highlight.
-	// TO DO: This loop business is because there are multiple text buffers - one per paragraph -
-	// instead of one per chapter.
 	GtkTextIter startiter, enditer;
-	for (unsigned int i = 0; i < textviews.size(); i++) {
-		GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
-		gtk_text_buffer_get_start_iter (textbuffer, &startiter);
-		gtk_text_buffer_get_end_iter (textbuffer, &enditer);
-		gtk_text_buffer_remove_tag (textbuffer, verse_highlight_tag, &startiter, &enditer);
-	}
-
-	// Highlight the verse if it is non-zero.
-	if (current_verse_number != "0") {
-		GtkWidget * textview;
-		GtkTextIter startiter, enditer;
-		if (get_iterator_at_verse_number (current_verse_number, Style::get_verse_marker(project), vbox_paragraphs, startiter, textview)) {
-			GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-			enditer = startiter;
-			gtk_text_iter_forward_chars (&enditer, current_verse_number.length());
-			gtk_text_buffer_apply_tag (textbuffer, verse_highlight_tag, &startiter, &enditer);
-		}
-		currHighlightedVerse = current_verse_number;
-	}
+    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+    gtk_text_buffer_get_start_iter (textbuffer, &startiter);
+    gtk_text_buffer_get_end_iter (textbuffer, &enditer);
+    gtk_text_buffer_remove_tag (textbuffer, verse_highlight_tag, &startiter, &enditer);
+    
+    // Highlight the verse if it is non-zero.
+    if (current_verse_number != "0") {
+        //GtkWidget * textview;
+        GtkTextIter startiter, enditer;
+        if (get_iterator_at_verse_number (current_verse_number, Style::get_verse_marker(project), startiter, textview)) {
+            //GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+            enditer = startiter;
+            gtk_text_iter_forward_chars (&enditer, current_verse_number.length());
+            gtk_text_buffer_apply_tag (textbuffer, verse_highlight_tag, &startiter, &enditer);
+        }
+        currHighlightedVerse = current_verse_number;
+    }
 }
 
 void Editor3::apply_editor_action (EditorAction * action, EditorActionApplication application)
@@ -3158,15 +3240,15 @@ gboolean Editor3::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
 
   // Store data for paragraph crossing control.
   paragraph_crossing_textview_at_key_press = widget;
-  GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (widget));
+  //GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (widget));
   gtk_text_buffer_get_iter_at_mark(textbuffer, &paragraph_crossing_insertion_point_iterator_at_key_press, gtk_text_buffer_get_insert(textbuffer));
   //DEBUG("paragraph_crossing_insertion...="+std::to_string(int(gtk_text_iter_get_line_index(&paragraph_crossing_insertion_point_iterator_at_key_press))))
 
   if (!keyboard_any_cursor_move(event)) {
 	// This handles the case where the insertion point is off the screen
 	// and the user begins typing, as in after he slides the scroll bar so his work moves out of the viewport.
-    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-	scroll_to_insertion_point_on_screen(textviews);
+    //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+	scroll_to_insertion_point_on_screen(textview);
     // Usually after we call above, we highlight verses. This time, don't highlight verses. 
     // Subsequent cursor-move signal will do that if there was a cursor move and not a regular key press.
   }
@@ -3198,7 +3280,7 @@ gboolean Editor3::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
     if (keyboard_delete_pressed(event)) return true;
     if (keyboard_insert_pressed(event)) return true;
   }
-  
+
 	// Pressing Page Up while the cursor is in the note brings the user
 	// to the note caller in the text.
 	if (keyboard_page_up_pressed(event)) {
@@ -3344,36 +3426,28 @@ void Editor3::go_to_verse(const ustring& number, bool focus)
   // Ensure verse tracking is on.
   switch_verse_tracking_on ();
   DEBUG("W7 switched verse tracking on");
-  // Save the current verse. This prevents a race-condition.
+  // Save the go-to verse number as the new current one. This prevents a race condition.
   current_verse_number = number;
   current_reference.verse_set(number);
 
   // Only move the insertion point if it goes to another verse.
-  ustring computedVerse = verse_number_get();
-  if (number != computedVerse) {
+  ustring priorVerse = verse_number_get();
+  if (number != priorVerse) {
     //DEBUG("go_to_verse number="+number+" but verse_number_get=" + computedVerse)
     // Get the iterator and textview that contain the verse number.
     GtkTextIter iter;
-    GtkWidget * textview;
-    if (get_iterator_at_verse_number (number, Style::get_verse_marker(project), vbox_paragraphs, iter, textview)) {
-      if (focus) {
-      }
+    if (get_iterator_at_verse_number (number, Style::get_verse_marker(project), iter, textview)) {
       give_focus (textview);
-      GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
       gtk_text_buffer_place_cursor(textbuffer, &iter);
     }
   
   }
   DEBUG("W8 about to scroll to insertion point");
-  // Scroll the insertion point onto the screen
-  vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-  scroll_to_insertion_point_on_screen(textviews);
-  highlightCurrVerse(textviews);
+  scroll_to_insertion_point_on_screen(textview);
   DEBUG("W9 scrolled to insertion point");
-  
-  // Highlight search words.
+  highlightCurrVerse(textview);
   highlight_searchwords();
-  DEBUG("W10 highlighted search words");
+  DEBUG("W10 highlighted current verse and search words");
 }
 
 
@@ -3394,33 +3468,31 @@ bool Editor3::on_signal_if_verse_changed_timeout(gpointer data)
 // to change the verse number they are showing.
 void Editor3::signal_if_verse_changed_timeout()
 {
-    DEBUG("Called verse_changed_timeout")
+    DEBUG("Called signal_if_verse_changed_timeout")
     // Proceed if verse tracking is on.
-    if (verse_tracking_on) {
-        // Proceed if there's a focused paragraph.
-        if (focused_paragraph) {
+    if (verse_tracking_on && focused_textview) {
             // Proceed if there's no selection.
-            if (!gtk_text_buffer_get_has_selection (focused_paragraph->textbuffer)) {
+            if (!gtk_text_buffer_get_has_selection (gtk_text_view_get_buffer (focused_textview))) {
                 // Emit a signal if the verse number at the insertion point changed.
                 ustring verse_number = verse_number_get();
                 if (verse_number != current_verse_number) {
                     DEBUG("Changing from v"+current_verse_number+" to v"+verse_number+" as new current_verse_number")
                     current_verse_number = verse_number;
                     current_reference.verse_set(verse_number);
-                    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-                    scroll_to_insertion_point_on_screen(textviews);
-                    highlightCurrVerse(textviews);
+//                    vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
+                    scroll_to_insertion_point_on_screen(textview);
+                    highlightCurrVerse(textview);
                     // Need I highligh search words now?
                     if (new_verse_signal) {
                         gtk_button_clicked(GTK_BUTTON(new_verse_signal));
                     }
                 }
             }
-        }
+        
     }
 }
 
-
+#ifdef OLDSTUFF
 void Editor3::paragraph_crossing_act(GtkMovementStep step, gint count)
 {
   //DEBUG("Start of paragraph_crossing")
@@ -3478,7 +3550,7 @@ void Editor3::paragraph_crossing_act(GtkMovementStep step, gint count)
   //DEBUG("debug_verse_number "+debug_verse_number)
 
 }
-
+#endif
 
 gboolean Editor3::on_caller_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
@@ -3524,6 +3596,7 @@ bool Editor3::has_focus ()
 // if any of its children widgets (paragraphs or notes)
 // have focus.
 {
+#if 0
   vector <GtkWidget *> widgets = editor_get_widgets (vbox_paragraphs);
   for (unsigned int i = 0; i < widgets.size(); i++) {
     if (gtk_widget_has_focus (widgets[i]))
@@ -3532,6 +3605,10 @@ bool Editor3::has_focus ()
   widgets = editor_get_widgets (vbox_notes);
   for (unsigned int i = 0; i < widgets.size(); i++) {
     if (gtk_widget_has_focus (widgets[i]))
+      return true;
+  }
+#endif
+  if (gtk_widget_has_focus (textview) || gtk_widget_has_focus (notetextview)) {
       return true;
   }
   return false;
@@ -3546,7 +3623,8 @@ void Editor3::give_focus (GtkWidget * widget)
     gtk_widget_grab_focus (widget);
 	//DEBUG("Called give_focus and gtk_widget_grab_focus")
   } else {
-    // If the editor does not have focus, only the internal focus system is called, without actually having the widget grab focus.
+    // If the editor does not have focus, only the internal focus system is called, without actually having the widget grab focus
+      // as if the user clicked on .
     textview_grab_focus(widget);
 	//DEBUG("Called give_focus and textview_grab_focus")
   }
@@ -3575,8 +3653,7 @@ void Editor3::usfm_internal_add_text(ustring & text, const ustring & addition)
   // Special handling for adding an end-of-line.
   if (addition == "\n") {
     // No end-of-line is to be added at the beginning of the text.
-    if (text.empty())
-      return;
+    if (text.empty()) { return; }
     // Ensure that no white-space exists before the end-of-line.
     text = trim(text);
   }

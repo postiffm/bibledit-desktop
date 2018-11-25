@@ -229,6 +229,7 @@ private:
   void textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview);
 public:
   EditorActionCreateParagraph * focused_paragraph;
+  GtkTextView *focused_textview; // pointer to either textview or notetextview
 private:
     
   bool text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
@@ -419,20 +420,21 @@ public:
   static bool on_signal_if_verse_changed_timeout(gpointer data);
   void signal_if_verse_changed_timeout();
   ustring verse_number_get();
-  bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
+  ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project);
+  bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
 
   // Scrolling control and verse highlighting.
-public:
 private:
-  void scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews);
-  void highlightCurrVerse(vector <GtkWidget *> &textviews);
+  void scroll_to_insertion_point_on_screen(GtkWidget *textview);
+  void highlightCurrVerse(GtkWidget *textview);
   ustring currHighlightedVerse;
   GtkTextTag * verse_highlight_tag;
   
   // Moving from one textview to the other.
-public:
 private:
+#ifdef OLDSTUFF
   void paragraph_crossing_act(GtkMovementStep step, gint count);
+#endif
   GtkWidget * paragraph_crossing_textview_at_key_press;
   GtkTextIter paragraph_crossing_insertion_point_iterator_at_key_press;
   void combine_paragraphs(EditorActionCreateParagraph * first_paragraph, EditorActionCreateParagraph * second_paragraph);

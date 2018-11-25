@@ -24,6 +24,7 @@
 #include "spelling.h"
 #include "usfm.h"
 #include "style.h"
+//#include "debug.h"
 
 ChapterView::ChapterView()
 {
@@ -116,6 +117,7 @@ bool ChapterView::get_verse_number_at_iterator_internal (GtkTextIter iter, const
   do {
     ustring paragraph_style, character_style;
     get_styles_at_iterator(iter, paragraph_style, character_style);
+    //DEBUG("Style tags: p="+paragraph_style+" c="+character_style);
     if (character_style == verse_marker) {
       verse_style_found = true;
     }

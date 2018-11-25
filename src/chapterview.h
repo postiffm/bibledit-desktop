@@ -94,7 +94,7 @@ public:
 
 public:
   vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type = G_TYPE_NONE);
-  ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box);
+  virtual ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box);
 };
 
 #endif
