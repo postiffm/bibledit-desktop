@@ -1839,15 +1839,12 @@ set < ustring > Editor3::get_styles_at_cursor()
 {
   // The styles.
   set <ustring> styles;
-
-  // Carry on if there's a focused paragraph.
-  if (focused_paragraph) {
-    
-    GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
-
+  GtkTextBuffer *focused_textbuffer = gtk_text_view_get_buffer (focused_textview);
+  // Carry on if there's a focused textbuffer.
+  if (focused_textbuffer) {
     // Get the iterators at the selection bounds of the focused textview.
     GtkTextIter startiter, enditer;
-    gtk_text_buffer_get_selection_bounds(textbuffer, &startiter, &enditer);
+    gtk_text_buffer_get_selection_bounds(focused_textbuffer, &startiter, &enditer);
 
     // Get the applicable styles.
     // This is done by getting the names of the styles between these iterators.
@@ -1855,10 +1852,12 @@ set < ustring > Editor3::get_styles_at_cursor()
     do {
       ustring paragraphstyle, characterstyle;
       get_styles_at_iterator(iter, paragraphstyle, characterstyle);
-      if (!paragraphstyle.empty())
+      if (!paragraphstyle.empty()) {
         styles.insert(paragraphstyle);
-      if (!characterstyle.empty())
+      }
+      if (!characterstyle.empty()) {
         styles.insert(characterstyle);
+      }
       gtk_text_iter_forward_char(&iter);
     } while (gtk_text_iter_in_range(&iter, &startiter, &enditer));
 
