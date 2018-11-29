@@ -2404,9 +2404,6 @@ void Editor3::scroll_to_insertion_point_on_screen(GtkWidget * textview)
     // Offset of insertion point starting from top.
     gint insertion_point_offset = 0;
     {
-        GtkAllocation allocation;
-        gtk_widget_get_allocation (textview, &allocation);
-        insertion_point_offset += allocation.height;
         GtkTextMark * gtktextmark = gtk_text_buffer_get_insert (textbuffer);
         //GtkTextMark * gtktextmark = gtk_text_buffer_get_mark (textbuffer, "insert");
         GtkTextIter iter;
@@ -2418,9 +2415,9 @@ void Editor3::scroll_to_insertion_point_on_screen(GtkWidget * textview)
         insertion_point_offset += rectangle.y;
     }
 
-	//DEBUG("Insertion point offset is " + std::to_string(int(insertion_point_offset)))
-	//DEBUG("Visible window height is "  + std::to_string(double(visible_window_height)))
-	//DEBUG("Total window height is "    + std::to_string(double(total_window_height)))
+	DEBUG("Insertion point offset is " + std::to_string(int(insertion_point_offset)))
+	DEBUG("Visible window height is "  + std::to_string(double(visible_window_height)))
+	DEBUG("Total window height is "    + std::to_string(double(total_window_height)))
 	
 	// Set the adjustment to move the insertion point into 1/3th of
 	// the visible part of the window. TODO: This should be an option
@@ -2448,7 +2445,7 @@ void Editor3::scroll_to_insertion_point_on_screen(GtkWidget * textview)
 	//gdouble adjustment_value = insertion_point_offset - (visible_window_height * 0.33);
 	// While working within a viewport, we will not scroll
 	gdouble adjustment_value = gtk_adjustment_get_value(adjustment);
-	//DEBUG("adjustment_value " + std::to_string(double(adjustment_value)))
+	DEBUG("adjustment_value " + std::to_string(double(adjustment_value)))
 	if (insertion_point_offset < adjustment_value+20) {
 		adjustment_value = insertion_point_offset - 60;
 	}
@@ -2462,7 +2459,7 @@ void Editor3::scroll_to_insertion_point_on_screen(GtkWidget * textview)
 	else if (adjustment_value > (total_window_height - visible_window_height)) {
 		adjustment_value = total_window_height - visible_window_height;
 	}
-	//DEBUG("gtk_adjustment_set_value called with " + std::to_string(double(adjustment_value)))
+	DEBUG("gtk_adjustment_set_value called with " + std::to_string(double(adjustment_value)))
 	//DEBUG("adjustment->lower = " + std::to_string(double(adjustment->lower)))
 	//DEBUG("adjustment->upper = " + std::to_string(double(adjustment->upper)))
 	gtk_adjustment_set_value (adjustment, adjustment_value);
@@ -3422,7 +3419,7 @@ void Editor3::switch_verse_tracking_on ()
 void Editor3::go_to_verse(const ustring& number, bool focus)
 // Moves the insertion point of the editor to the verse number.
 {
-  //DEBUG("go_to_verse "+number+" current_verse_number was "+current_verse_number)
+  DEBUG("go_to_verse "+number+" current_verse_number was "+current_verse_number)
   // Ensure verse tracking is on.
   switch_verse_tracking_on ();
   DEBUG("W7 switched verse tracking on");
@@ -3432,13 +3429,19 @@ void Editor3::go_to_verse(const ustring& number, bool focus)
 
   // Only move the insertion point if it goes to another verse.
   ustring priorVerse = verse_number_get();
+  DEBUG("priorVerse="+priorVerse+" and go_to_verse number="+number)
   if (number != priorVerse) {
     //DEBUG("go_to_verse number="+number+" but verse_number_get=" + computedVerse)
     // Get the iterator and textview that contain the verse number.
     GtkTextIter iter;
+    DEBUG("Searching for iterator at verse "+number);
     if (get_iterator_at_verse_number (number, Style::get_verse_marker(project), iter, textview)) {
+      DEBUG("Found iterator at verse "+number)
       give_focus (textview);
       gtk_text_buffer_place_cursor(textbuffer, &iter);
+    }
+    else {
+      DEBUG("Did not find iterator at verse "+number)   
     }
   
   }
