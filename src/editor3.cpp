@@ -452,6 +452,11 @@ void Editor3::gtk_text_buffer_append (GtkTextBuffer *textbuffer, const ustring& 
 
 GtkWidget *Editor3::create_text_view(GtkWidget *parent_vbox)
 {
+    // Yes, these tromp on Editor3::textview and ::textbuffer vars of 
+    // the same name. But that's OK. The Editor3:: version of these
+    // are supposed to be assigned by the caller, since this helper
+    // method can produce any number of textviews (Bible text and 
+    // footnote areas, but there could be others).
     GtkWidget *textview;
     GtkTextBuffer *textbuffer;
     
@@ -466,12 +471,12 @@ GtkWidget *Editor3::create_text_view(GtkWidget *parent_vbox)
     gtk_box_pack_start(GTK_BOX(parent_vbox), textview, false, false, 0);
     
     // Set up our textview defaults.
-    gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview), FALSE);
-    gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview), GTK_WRAP_WORD);
-    gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), editable);
-    gtk_text_view_set_left_margin(GTK_TEXT_VIEW(textview), 5);
+    gtk_text_view_set_accepts_tab (GTK_TEXT_VIEW(textview), FALSE);
+    gtk_text_view_set_wrap_mode   (GTK_TEXT_VIEW(textview), GTK_WRAP_WORD);
+    gtk_text_view_set_editable    (GTK_TEXT_VIEW(textview), editable);
+    gtk_text_view_set_left_margin (GTK_TEXT_VIEW(textview), 5);
     gtk_text_view_set_right_margin(GTK_TEXT_VIEW(textview), 5);
-    gtk_text_view_set_indent(GTK_TEXT_VIEW(textview), 10);
+    gtk_text_view_set_indent      (GTK_TEXT_VIEW(textview), 10);
     gtk_text_view_set_pixels_below_lines(GTK_TEXT_VIEW(textview), 5);
     
     // Set font
@@ -674,8 +679,9 @@ void Editor3::chapter_save()
   if (!editable) { return; }
 
   // If the text was not changed, bail out.
-  if (editor_actions_size_at_no_save == actions_done.size()) { return; }
-    
+  //if (editor_actions_size_at_no_save == actions_done.size()) { return; }
+  // TO DO: Redo the above functionality
+
   // If the project is empty, bail out.
   if (project.empty()) { return; }
 
@@ -1867,17 +1873,19 @@ set < ustring > Editor3::get_styles_at_cursor()
   return styles;
 }
 
-
+// TO DO: I think this is unused here an in editor.cpp
 set < ustring > Editor3::styles_at_iterator(GtkTextIter iter)
 // Get all the styles that apply at the iterator.
 {
   set < ustring > styles;
   ustring paragraph_style, character_style;
   get_styles_at_iterator(iter, paragraph_style, character_style);
-  if (!paragraph_style.empty())
+  if (!paragraph_style.empty()) {
     styles.insert(paragraph_style);
-  if (!character_style.empty())
+  }
+  if (!character_style.empty()) {
     styles.insert(character_style);
+  }
   return styles;
 }
 
@@ -1885,13 +1893,14 @@ set < ustring > Editor3::styles_at_iterator(GtkTextIter iter)
 GtkTextBuffer *Editor3::last_focused_textbuffer()
 // Returns the focused textbuffer, or NULL if none.
 {
-  if (focused_paragraph) {
-    return focused_paragraph->textbuffer;
+  if (focused_textview) {
+    GtkTextBuffer *focused_textbuffer = gtk_text_view_get_buffer (focused_textview);
+    return focused_textbuffer;
   }
   return NULL;
 }
 
-
+// TO DO: Don't know what to do here
 EditorTextViewType Editor3::last_focused_type()
 // Returns the type of the textview that was focused most recently.
 // This could be the main body of text, or a note, or a table.
@@ -3452,7 +3461,9 @@ void Editor3::go_to_verse(const ustring& number, bool focus)
   DEBUG("W10 highlighted current verse and search words");
 }
 
-
+// The idea of this routine is that if a bunch of such signals are emitted close in time,
+// only the last one will actually "fire" and do something. This will erase the earlier 
+// timed signal and set a new one.
 void Editor3::signal_if_verse_changed ()
 {
   DEBUG("Set up verse_changed_timeout signal")
@@ -3611,8 +3622,10 @@ bool Editor3::has_focus ()
   }
 #endif
   if (gtk_widget_has_focus (textview) || gtk_widget_has_focus (notetextview)) {
-      return true;
+   DEBUG("One of the textviews has focus")
+   return true;
   }
+  DEBUG("Neither of the textviews has focus")
   return false;
 }
 
@@ -3620,6 +3633,7 @@ bool Editor3::has_focus ()
 void Editor3::give_focus (GtkWidget * widget)
 // Gives focus to a widget.
 {
+    DEBUG("Called ")
   if (has_focus ()) {
     // If the editor has focus, then the widget is actually given focus.
     gtk_widget_grab_focus (widget);

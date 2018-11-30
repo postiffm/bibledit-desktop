@@ -2579,13 +2579,13 @@ void MainWindow::on_new_verse_signalled(GtkButton * button, gpointer user_data)
 void MainWindow::on_editor_another_verse()
 // This one is called when an editor signals that the cursor is now on another verse.
 {
-  WindowEditor *last_focused_editor = last_focused_editor_window();
-  if (last_focused_editor) {
-    Reference reference(navigation.reference.book_get(),
-			navigation.reference.chapter_get(),
-			last_focused_editor->current_verse_number());
-    navigation.display(reference);
-  }
+    WindowEditor *last_focused_editor = last_focused_editor_window();
+    if (last_focused_editor) {
+        Reference reference(navigation.reference.book_get(),
+                            navigation.reference.chapter_get(),
+                            last_focused_editor->current_verse_number());
+        navigation.display(reference);
+    }
 }
 
 

@@ -579,7 +579,7 @@ void WindowEditor::switch_view ()
     hID6 = g_signal_connect ((gpointer) editor2->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
     hID7 = g_signal_connect ((gpointer) editor2->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
     hID8 = g_signal_connect ((gpointer) editor2->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
-    last_focused_widget = editor2->last_focused_widget;			      	
+    last_focused_widget = editor2->last_focused_widget;
     break;
 
   case vtUSFM:
@@ -607,7 +607,7 @@ void WindowEditor::switch_view ()
     hID6 = g_signal_connect ((gpointer) editor3->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
     hID7 = g_signal_connect ((gpointer) editor3->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
     hID8 = g_signal_connect ((gpointer) editor3->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
-    last_focused_widget = editor3->last_focused_widget;		
+    last_focused_widget = editor3->last_focused_widget;
     break;
   }
   // Main widget grabs focus.

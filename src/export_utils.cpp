@@ -93,6 +93,7 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
     // Progress info.
     progresswindow.iterate();
     vector <ustring> lines = project_retrieve_book(project, books[i]);
+    text_replacement(lines);
     ustring filename;
     if (combined) {
       filename = project + ".combined.usfm";
@@ -102,7 +103,7 @@ void export_to_usfm (const ustring& project, ustring location, bool zip, bool co
       sprintf (padded, "%02d", books[i]);
       ustring padded2 (padded);
       filename = padded2  + " " + books_id_to_localname(books[i]) + ".usfm";
-      replace_text (filename, " ", "_");
+      replace_text (filename, " ", "_"); // sometimes book name has a space that needs replaced ("2 Timothy")
     }
     if (zip) {  filename = gw_build_filename(tempdir, filename);  }
     else     {  filename = gw_build_filename(location, filename); }

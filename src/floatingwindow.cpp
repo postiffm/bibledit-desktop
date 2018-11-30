@@ -25,6 +25,7 @@
 #include "dialogradiobutton.h"
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
+#include "debug.h"
 
 FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ustring title_in, bool startup)
 // Base class for each floating window.
@@ -743,8 +744,10 @@ void FloatingWindow::on_widget_grab_focus(GtkWidget * widget, gpointer user_data
 
 void FloatingWindow::widget_grab_focus(GtkWidget * widget)
 {
+  DEBUG("Called ")
   if (widget != last_focused_widget) {
     focus_set ();
+    DEBUG("Changed focus ")
   }
   last_focused_widget = widget;
 }
