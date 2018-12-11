@@ -60,6 +60,7 @@ FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ust
   GtkWidget *eventbox_title;
   eventbox_title = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "eventbox_title"));
   label_title = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_title"));
+  title_change (title);
   title_setfocused (focused);
   g_signal_connect ((gpointer) eventbox_title, "button_press_event", G_CALLBACK (on_widget_button_press_event), gpointer (this));
   g_signal_connect ((gpointer) eventbox_title, "button_press_event", G_CALLBACK (on_title_bar_button_press_event), gpointer (this));
@@ -697,8 +698,8 @@ void FloatingWindow::on_widget_button_press (GtkWidget *widget, GdkEventButton *
 // Change the text of the window title
 void FloatingWindow::title_change (const ustring &newtitle)
 {
-   title = newtitle;
-   title_setfocused(focused);
+  title = newtitle;
+  gtk_label_set_label (GTK_LABEL (label_title), title.c_str());
 }
 
 ustring FloatingWindow::title_get (void)
@@ -706,33 +707,34 @@ ustring FloatingWindow::title_get (void)
   return title;
 }
 
-// Print the title atop the window, with highlight if focused
+// Update the style of the title atop the window, with highlight if focused
 void FloatingWindow::title_setfocused (bool focused)
 {
-#if 0
-  ustring spaces;
-  for (unsigned int i = 0; i < 500; i++) 
-    spaces.append (" ");
-  char *data;
-  data = g_strdup_printf("<span foreground=\"%s\" background=\"%s\" weight=\"%s\">     %s     %s</span>", 
-                         focused ? "white" : "black", 
-                         focused ? "blue" : "grey",
-                         focused ? "bold" : "normal",
-                         title.c_str(), 
-                         spaces.c_str());
-#endif
-  char *data;
-  data = g_strdup_printf("<span foreground=\"%s\" background=\"%s\" weight=\"%s\">     %s</span>", 
-                         focused ? "white" : "black", 
-                         focused ? "blue" : "grey",
-                         focused ? "bold" : "normal",
-                         title.c_str());
-  gtk_misc_set_alignment (GTK_MISC (label_title), 0.0, 0.5);
-  // above deprecated, but easieast way to do left align label;
-  // gtk_label_set_xalign (label1, 0.0) can be used in GTK+ 3.14 and newer
-  gtk_label_set_width_chars (GTK_LABEL(label_title), 250);
-  gtk_label_set_markup (GTK_LABEL (label_title), data);
-  g_free(data);
+  GdkColor color;
+
+  // Background
+  GtkWidget *parent = gtk_widget_get_parent (label_title);
+  if (GTK_IS_WIDGET (parent)) {
+    if (gdk_color_parse (focused ? "blue" : "grey", &color))
+      gtk_widget_modify_bg (parent, GTK_STATE_NORMAL, &color);
+  }
+
+  // Foreground
+  if (gdk_color_parse (focused ? "white" : "black", &color))
+    gtk_widget_modify_fg (label_title, GTK_STATE_NORMAL, &color);
+
+  // Font weight
+  if (focused) {
+    // Set it bold
+    PangoFontDescription *font_desc;
+    GtkStyle *style = gtk_widget_get_style (label_title);
+    font_desc = pango_font_description_copy (style->font_desc);
+    pango_font_description_set_weight (font_desc, PANGO_WEIGHT_BOLD);
+    gtk_widget_modify_font (label_title, font_desc);
+    pango_font_description_free (font_desc);
+  } else
+    // Restore the original font
+    gtk_widget_modify_font (label_title, NULL);
 }
 
 
