@@ -359,7 +359,7 @@ ustring chapter::retrieve_verse(const Reference &ref)
     /* check if the verse is mapped */
     if (find_verse( vs ) == false)
     {
-        return "Verse out of range";
+        return "No verse found";
     }
     else
     {
@@ -381,7 +381,7 @@ void verse::prepend(const ustring &addlText)
 
 void chapter::appendToLastVerse(const ustring &addlText)
 {
-    verse *lastVerse = verses.rbegin()->second;
+    verse *lastVerse = (verses.size() > 0) ? verses.rbegin()->second : NULL;
 
     if (lastVerse != NULL)
     {
@@ -395,7 +395,7 @@ void chapter::appendToLastVerse(const ustring &addlText)
 
 void chapter::prependToLastVerse(const ustring &addlText)
 {
-    verse *lastVerse = verses.rbegin()->second;
+    verse *lastVerse = (verses.size() > 0) ? verses.rbegin()->second : NULL;
 
     if (lastVerse != NULL)
     {
