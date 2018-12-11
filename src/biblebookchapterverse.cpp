@@ -1,20 +1,20 @@
 /*
  ** Copyright (©) 2018- Matt Postiff.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 #include "biblebookchapterverse.h"
@@ -29,12 +29,12 @@ book::book(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : chapt
 
 book_byz::book_byz(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
-  // nothing special needs done       
+  // nothing special needs done
 }
 
 book_sblgnt::book_sblgnt(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
-  // nothing special needs done       
+  // nothing special needs done
 }
 
 book_sblgntapp::book_sblgntapp(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
@@ -44,17 +44,17 @@ book_sblgntapp::book_sblgntapp(bible *_bbl, const ustring &_bookname, unsigned i
 
 book_engmtv::book_engmtv(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
-  // nothing special needs done       
+  // nothing special needs done
 }
 
 book_leb::book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
 {
-  // nothing special needs done       
+  // nothing special needs done
 }
 
 book_bixref::book_bixref(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : book(_bbl, _bookname, _booknum)
 {
-   // nothing special needs done   
+   // nothing special needs done
 }
 
 book::book() : chapters(1)
@@ -65,9 +65,8 @@ book::book() : chapters(1)
    booknum = 0;
 }
 
-chapter::chapter(book *_bk, int _num) : verses(1)
+chapter::chapter(book *_bk, int _num)
 {
-    // Note: verses[0] is unused; simply here to avoid the "off by one" indexing error
 	bk = _bk;
 	chapnum = _num;
 }
@@ -75,7 +74,7 @@ chapter::chapter(book *_bk, int _num) : verses(1)
 chapter::~chapter()
 {
     for (auto it: verses) {
-        delete it;
+        delete it.second;
     }
     verses.clear();
 }
@@ -86,7 +85,7 @@ book::~book()
     bookname = "";
     booknum = 0;
     for (auto it: chapters) {
-       delete it;   
+       delete it;
     }
 }
 
@@ -99,12 +98,12 @@ verse::verse(chapter *_ch, int _vs, ustring _txt)
 
 verse::~verse()
 {
-  // nothing to do here. just defining for "virtualness"   
+  // nothing to do here. just defining for "virtualness"
 }
 
 verse_xref::verse_xref(chapter *_ch, int _vsnum, ustring _txt) : verse(_ch, _vsnum, _txt)
 {
-   // nothing else needed for now   
+   // nothing else needed for now
 }
 
 verse_xref::~verse_xref()
@@ -130,7 +129,7 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 //     Usfm usfm(stylesheet_get_actual ());
 //     UsfmInlineMarkers usfm_inline_markers(usfm);
 //     usfm_remove_inline_text_markers(tmp, &usfm_inline_markers);
-    
+
 	string::size_type s = 0, e = 0; // start and end markers
     ustring delims(" \\,'`:;!?.\u0022()[]¶\t«»\u201c\u201d\u2018\u2019\u2014"); //  \u0022 is quotation mark; «» are Alt-0171 and 0187; \u201c\u201d are smart double quotes
 	ustring nonUSFMdelims(" ,'`:;!?.\u0022()[]¶\t«»\u201c\u201d\u2018\u2019\u2014");        // same list as above except without '\'
@@ -139,7 +138,7 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 	// 0xe2 80 94 (U+2014) is a long dash, looks like em-dash
 	// TO DO : configuration file that has delimiters in it, and "’s" kinds of things to strip out
 	// for the target language.
-	
+
 #define SKIP_DELIMS(idx) while(nonUSFMdelims.find_first_of(tmp[idx]) != ustring::npos) { idx++; /*cout << "Skipping " << idx-1 << " " << tmp[idx] << endl;*/ }
 #define SKIP_NONDELIMS while(nonUSFMdelims.find_first_of(tmp[i]) == ustring::npos) { i++; }
 
@@ -156,13 +155,13 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 			if (s >= e) { continue; }
 			ustring newWord = tmp.substr(s, e-s); // start pos, length
 			//cout << "Found new word at s=" << s << " e=" << e << ":" << newWord << ":" << endl;
-			
+
 			/* --------------------------------------------------------------------------
 			 * These are KJV-only modifications possible because I understand
 			 * English. Other things will have to be done for other languages,
 			 * or nothing at all.
-			   --------------------------------------------------------------------------*/			
-			
+			   --------------------------------------------------------------------------*/
+
 			ustring::size_type pos = newWord.find("’s");
 			bool found_apostrophe_s = (pos != ustring::npos);
 			if (found_apostrophe_s) {
@@ -177,7 +176,7 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 				newWord = newWord.substr(0, pos);
 				//cout << " replacing with " << newWord << endl;
 			}
-			
+
 			// Handle paragraph marker
 			pos = newWord.find("¶");
 			bool found_paragraph_marker = (pos != ustring::npos);
@@ -185,15 +184,15 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 				//cout << "Found paragraph marker" << endl;
 				newWord = newWord.substr(0, pos);
 			}
-			
+
 			/* --------------------------------------------------------------------------
 			 * End of KJV-specific modifications
 			   --------------------------------------------------------------------------*/
-			
+
 			if ((newWord[0] != '\\') && (newWord != "+")) { // + is footnote caller
                 words.push_back(newWord); // only add non-usfm words
             }
-			
+
 			// Advance past the splitting character unless it is the usfm delimiter '\'
 			if (tmp[e] != '\\') { e++; }
 			// Now if s has landed on a non-USFM delimiter, move fwd one
@@ -201,14 +200,14 @@ void verse::addToWordCount(std::unordered_map<std::string, int, std::hash<std::s
 			s=e; // ensure starting point is at last ending point
 		}
 	}
-	
+
 	// Print each word
 	for (auto &word : words) {
 		//cout << "Word: " << word << ":" << endl;
 		// TODO: The problem with lowercase is words like Lord, proper names, etc. need to remain uppercase, sometimes.
         ustring canonicalWord = word.lowercase();
 		wordCounts[canonicalWord]++;
-       
+
         // add word location to concordance
         // The idea is to construct an int with three 8-bit fields, like this:
         // |--------|   bk   |   ch   |   vs   |
@@ -226,22 +225,22 @@ bible::bible(const ustring &_proj, const ustring &_font) : books(1)
 
 void bible::font_set(const ustring &_font)
 {
-  font = font;   
+  font = font;
 }
 
 ustring bible::font_get(void)
 {
-  return font;   
-}  
+  return font;
+}
 
 bible_byz::bible_byz(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
-  // Nothing special to do here   
+  // Nothing special to do here
 }
 
 bible_sblgnt::bible_sblgnt(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
-  // Nothing special to do here   
+  // Nothing special to do here
 }
 
 bible_sblgntapp::bible_sblgntapp(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
@@ -251,12 +250,12 @@ bible_sblgntapp::bible_sblgntapp(const ustring &_proj, const ustring &_font) : b
 
 bible_engmtv::bible_engmtv(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
-  // Nothing special to do here   
+  // Nothing special to do here
 }
 
 bible_leb::bible_leb(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
-  // Nothing special to do here   
+  // Nothing special to do here
 }
 
 void bible::clear(void)
@@ -274,8 +273,46 @@ bible::~bible()
     clear();
 }
 
+bool chapter::find_verse( uint32_t verseNum )
+{
+    if (this->verses.find(verseNum) == this->verses.end())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool chapter::map_verse( uint32_t verseNum, verse *newVerse )
+{
+    if (newVerse != NULL)
+    {
+        /* Check and seeif the verse has already been mapped */
+        if (find_verse( verseNum ) == false)
+        {
+            /* The verse is not mapped so it can be mapped now */
+            this->verses[verseNum] = newVerse;
+            return true;
+        }
+        else
+        {
+            cerr <<  "ERROR: duplicate entry verse already exists : " << verseNum <<  endl;
+            delete newVerse;
+            newVerse = NULL;
+            return false;
+        }
+    }
+    else
+    {
+        cerr <<  "ERROR: verse object was null  : " << verseNum <<  endl;
+        return false;
+    }
+}
+
 //  This is for the concordance to load from an existing project
-void chapter::load(int book, int chapter, 
+void chapter::load(int book, int chapter,
                    std::unordered_map<std::string, int, std::hash<std::string>> &wordCounts,
                    std::unordered_map<std::string, std::vector<int>, std::hash<std::string>> &wordLocations)
 {
@@ -299,27 +336,35 @@ void chapter::load(int book, int chapter,
 				s.erase(0, endposition+1); // +1 grabs the space after the verse number
 			}
 			verse *newVerse = new verse(this, vscnt, s);
-			//newVerse.print();
-			verses.push_back(newVerse);
-			newVerse->addToWordCount(wordCounts, wordLocations);
+
+			if (map_verse( vscnt, newVerse ) != false)
+			{
+                    newVerse->addToWordCount(wordCounts, wordLocations);
+			}
 		}
 	}
 }
 
-ustring verse::retrieve_verse(const Reference &ref) 
+ustring verse::retrieve_verse(const Reference &ref)
 {
     //  This is a single verse,  so ref.verse_get() should equal vsnum
     //  Otherwise,  I don't use the ref parameter.
     return text;
 }
 
-ustring chapter::retrieve_verse(const Reference &ref) 
+ustring chapter::retrieve_verse(const Reference &ref)
 {
-    // I assume that the verse is not of the form 2:x-y,  but just 2:x
-    // 1. Check if the verse is in range
     unsigned int vs = ref.verse_get_single();
-    if ((vs == 0) ||  (vs >= verses.size())) { return "Verse out of range"; }
-    return verses[vs]->retrieve_verse(ref);
+
+    /* check if the verse is mapped */
+    if (find_verse( vs ) == false)
+    {
+        return "No verse found";
+    }
+    else
+    {
+        return verses[vs]->retrieve_verse(ref);
+    }
 }
 
 void verse::append(const ustring &addlText)
@@ -336,15 +381,30 @@ void verse::prepend(const ustring &addlText)
 
 void chapter::appendToLastVerse(const ustring &addlText)
 {
-    verse *lastVerse = verses[verses.size()-1];
-    lastVerse->append(addlText);
+    verse *lastVerse = (verses.size() > 0) ? verses.rbegin()->second : NULL;
+
+    if (lastVerse != NULL)
+    {
+        lastVerse->append(addlText);
+    }
+    else
+    {
+        cerr << "appendToLastVerse: no verse exists" << endl;
+    }
 }
 
 void chapter::prependToLastVerse(const ustring &addlText)
 {
-    // This was "invented" to handle adding the title of a Psalm to the beginning of verse 1 of the Psalm, like in LEB
-    verse *lastVerse = verses[verses.size()-1];
-    lastVerse->prepend(addlText);
+    verse *lastVerse = (verses.size() > 0) ? verses.rbegin()->second : NULL;
+
+    if (lastVerse != NULL)
+    {
+        lastVerse->prepend(addlText);
+    }
+    else
+    {
+        cerr << "appendToLastVerse: no verse exists" << endl;
+    }
 }
 
 ustring book::retrieve_verse(const Reference &ref)
@@ -376,31 +436,31 @@ void book_byz::byzasciiConvert(ustring &vs)
      gunichar newc;
      //  Convert to unicode font. This is easy because the BYZ is unaccented and in lowercase.
       switch (*cptr) {
-          case 'a' : newc = 945; break; 
-          case 'b' : newc = 946; break; 
-          case 'g' : newc = 947; break; 
-          case 'd' : newc = 948; break; 
-          case 'e' : newc = 949; break; 
-          case 'z' : newc = 950; break; 
-          case 'h' : newc = 951; break; 
+          case 'a' : newc = 945; break;
+          case 'b' : newc = 946; break;
+          case 'g' : newc = 947; break;
+          case 'd' : newc = 948; break;
+          case 'e' : newc = 949; break;
+          case 'z' : newc = 950; break;
+          case 'h' : newc = 951; break;
           case 'y' : newc = 952; break;                     // theta transform 'q' in ASCII
-          case 'i' : newc = 953; break; 
-          case 'k' : newc = 954; break; 
-          case 'l' : newc = 955; break; 
-          case 'm' : newc = 956; break; 
-          case 'n' : newc = 957; break; 
-          case 'x' : newc = 958; break; 
-          case 'o' : newc = 959; break; 
-          case 'p' : newc = 960; break; 
-          case 'r' : newc = 961; break; 
+          case 'i' : newc = 953; break;
+          case 'k' : newc = 954; break;
+          case 'l' : newc = 955; break;
+          case 'm' : newc = 956; break;
+          case 'n' : newc = 957; break;
+          case 'x' : newc = 958; break;
+          case 'o' : newc = 959; break;
+          case 'p' : newc = 960; break;
+          case 'r' : newc = 961; break;
           case 'v' : newc = 962; break;
-          case 's' : newc = 963; break; 
-          case 't' : newc = 964; break; 
-          case 'u' : newc = 965; break; 
-          case 'f' : newc = 966; break; 
-          case 'c' : newc = 967; break; 
+          case 's' : newc = 963; break;
+          case 't' : newc = 964; break;
+          case 'u' : newc = 965; break;
+          case 'f' : newc = 966; break;
+          case 'c' : newc = 967; break;
           case 'q' : newc = 968; break;                 // psi transform, 'y' in ASCII
-          case 'w' : newc = 969; break; 
+          case 'w' : newc = 969; break;
           case ' ' : newc = 32; break;                      //  space
           default  : newc = 8855;                           //&otimes;,  just to mark as not done
         }
@@ -415,21 +475,21 @@ void book_byz::load(void)
 {
   ustring filenames[27] = { "MT_BYZ.txt",  "MR_BYZ.txt",  "LU_BYZ.txt", "JOH_BYZ.txt", "AC_BYZ.txt",
             "RO_BYZ.txt",  "1CO_BYZ.txt", "2CO_BYZ.txt", "GA_BYZ.txt",  "EPH_BYZ.txt", "PHP_BYZ.txt", "COL_BYZ.txt",
-            "1TH_BYZ.txt", "2TH_BYZ.txt", "1TI_BYZ.txt", "2TI_BYZ.txt", "TIT_BYZ.txt", "PHM_BYZ.txt", 
-            "HEB_BYZ.txt", "JAS_BYZ.txt", "1PE_BYZ.txt", "2PE_BYZ.txt", "1JO_BYZ.txt", "2JO_BYZ.txt", "3JO_BYZ.txt", 
+            "1TH_BYZ.txt", "2TH_BYZ.txt", "1TI_BYZ.txt", "2TI_BYZ.txt", "TIT_BYZ.txt", "PHM_BYZ.txt",
+            "HEB_BYZ.txt", "JAS_BYZ.txt", "1PE_BYZ.txt", "2PE_BYZ.txt", "1JO_BYZ.txt", "2JO_BYZ.txt", "3JO_BYZ.txt",
             "JUDE_BYZ.txt", "RE_BYZ.txt" };
-    
+
     // We know our book number and localized name already
     unsigned int bookidx = booknum - 40;
     if ((bookidx < 0) ||  (bookidx > 26)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
-   
+
     //  From utilities.cpp
     ReadText rt(Directories->get_package_data() + "/bibles/byzascii/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
-    
+
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
          //  Extract chapter and verse,  and leading space. The lines are always
@@ -450,33 +510,34 @@ void book_byz::load(void)
              //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
          }
          byzasciiConvert(it);
-         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-         currchap->verses.push_back(newverse); //  append verse to current chapter
-         //newverse->print(); // debug
+         verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+        //newVerse.print(); // debug
+
+        currchap->map_verse( versenum, newVerse );
     }
 }
 
 // Load SBL Greek NT Text from shared resource directory
 void book_sblgnt::load(void)
 {
-    ustring filenames[27] = { "61-Mt.txt", "62-Mk.txt", "63-Lk.txt", "64-Jn.txt", "65-Ac.txt", 
-                              "66-Ro.txt", "67-1Co.txt", "68-2Co.txt", "69-Ga.txt", "70-Eph.txt", "71-Php.txt", 
-                              "72-Col.txt", "73-1Th.txt", "74-2Th.txt", "75-1Ti.txt", "76-2Ti.txt", "77-Tit.txt", 
-                              "78-Phm.txt", "79-Heb.txt", "80-Jas.txt", "81-1Pe.txt", "82-2Pe.txt", "83-1Jn.txt", 
+    ustring filenames[27] = { "61-Mt.txt", "62-Mk.txt", "63-Lk.txt", "64-Jn.txt", "65-Ac.txt",
+                              "66-Ro.txt", "67-1Co.txt", "68-2Co.txt", "69-Ga.txt", "70-Eph.txt", "71-Php.txt",
+                              "72-Col.txt", "73-1Th.txt", "74-2Th.txt", "75-1Ti.txt", "76-2Ti.txt", "77-Tit.txt",
+                              "78-Phm.txt", "79-Heb.txt", "80-Jas.txt", "81-1Pe.txt", "82-2Pe.txt", "83-1Jn.txt",
                               "84-2Jn.txt", "85-3Jn.txt", "86-Jud.txt", "87-Re.txt" };
-    
+
     // We know our book number and localized name already
     unsigned int bookidx = booknum - 40;
     if ((bookidx < 0) ||  (bookidx > 26)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
-   
+
     //  From utilities.cpp
     ReadText rt(Directories->get_package_data() + "/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
     int linecnt = 0;
-    
+
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
          // First line is title of book, we don't need them
@@ -500,9 +561,10 @@ void book_sblgnt::load(void)
              currchapnum = chapnum;
              //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
          }
-         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-         currchap->verses.push_back(newverse); //  append verse to current chapter
-         //newverse->print(); // debug
+         verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         //newVerse->print(); // debug
+
+        currchap->map_verse( versenum, newVerse );
     }
 }
 
@@ -527,7 +589,6 @@ void book_sblgntapp::load(void)
     //  From utilities.cpp
     ReadText rt(Directories->get_package_data() + "/bibles/sblgnt/" + filenames[bookidx], /*silent*/false, /*trimAll*/true, /*trimEnd*/true, /*supressBlanks*/true);
     unsigned int currchapnum = 0;
-    unsigned int currversenum = 0;
     chapter *currchap = NULL;
     int linecnt = 0;
 
@@ -563,35 +624,24 @@ void book_sblgntapp::load(void)
              currchap = newchap;
            }
            currchapnum = chapnum;
-           currversenum = 0; // when we get to a new chapter, have to reset the verse number
 
            cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
          }
 
-         if ((versenum != currversenum) && (versenum-currversenum>0)) {
-           if (versenum-currversenum>1) {
-           for (i=currversenum+1; i<versenum; i++) {
-             verse *newverse = new verse(currchap, i, ustring("No apparatus notes for ") + std::to_string(chapnum) + ":" + std::to_string(i)); //  takes a copy of the ustring text (it)
-             currchap->verses.push_back(newverse); //  append verse to current chapter
-             newverse->print(); // debug
-           }
-           }
-           verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-           currchap->verses.push_back(newverse); //  append verse to current chapter
-           currversenum = versenum;
+        verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+        //newVerse->print(); // debug
 
-           cerr << "Created new verse " << versenum << " from " << filenames[bookidx] << endl;
-         }
+        currchap->map_verse( versenum, newVerse );
     }
 }
 
 // Load English Majority Text version from shared resource directory
 void book_engmtv::load(void)
 {
-    ustring filenames[27] = { "Mat.txt", "Mar.txt", "Luk.txt", "Joh.txt", "Act.txt", 
-                              "Rom.txt", "1Co.txt", "2Co.txt", "Gal.txt", "Eph.txt", "Phi.txt", 
-                              "Col.txt", "1Th.txt", "2Th.txt", "1Ti.txt", "2Ti.txt", "Tit.txt", 
-                              "Phm.txt", "Heb.txt", "Jam.txt", "1Pe.txt", "2Pe.txt", "1Jn.txt", 
+    ustring filenames[27] = { "Mat.txt", "Mar.txt", "Luk.txt", "Joh.txt", "Act.txt",
+                              "Rom.txt", "1Co.txt", "2Co.txt", "Gal.txt", "Eph.txt", "Phi.txt",
+                              "Col.txt", "1Th.txt", "2Th.txt", "1Ti.txt", "2Ti.txt", "Tit.txt",
+                              "Phm.txt", "Heb.txt", "Jam.txt", "1Pe.txt", "2Pe.txt", "1Jn.txt",
                               "2Jn.txt", "3Jn.txt", "Jud.txt", "Rev.txt" };
 
     // We know our book number and localized name already
@@ -599,7 +649,7 @@ void book_engmtv::load(void)
     if ((bookidx < 0) ||  (bookidx > 26)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
-   
+
     //  From utilities.cpp
     ReadText rt(Directories->get_package_data() + "/bibles/engmtv/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
     unsigned int currchapnum = 0;
@@ -626,9 +676,10 @@ void book_engmtv::load(void)
              currchapnum = chapnum;
              //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
          }
-         verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-         currchap->verses.push_back(newverse); //  append verse to current chapter
-         //newverse->print(); // debug
+         verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         //newVerse->print(); // debug
+
+        currchap->map_verse( versenum, newVerse );
     }
 }
 
@@ -640,16 +691,16 @@ void book_leb::load(void)
         "Ruth.txt", "1Sa.txt",  "2Sa.txt",  "1Ki.txt",   "2Ki.txt",  "1Ch.txt",  "2Ch.txt",
         "Ezra.txt", "Neh.txt",  "Esth.txt", "Job.txt",   "Psal.txt", "Prov.txt", "Eccl.txt",
         "Song.txt", "Isa.txt",  "Jer.txt",  "Lam.txt",   "Ezek.txt", "Dan.txt",  "Hos.txt",
-        "Joel.txt", "Amos.txt", "Obad.txt", "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt", 
+        "Joel.txt", "Amos.txt", "Obad.txt", "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt",
         "Zeph.txt", "Hag.txt",  "Zech.txt", "Mal.txt",   "Matt.txt", "Mark.txt", "Luke.txt",
-        "John.txt", "Acts.txt", "Rom.txt",  "1Co.txt",   "2Co.txt",  "Gal.txt",  "Eph.txt", 
-        "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt", 
-        "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt", 
+        "John.txt", "Acts.txt", "Rom.txt",  "1Co.txt",   "2Co.txt",  "Gal.txt",  "Eph.txt",
+        "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt",
+        "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt",
         "3Jn.txt", "Jude.txt", "Rev.txt" };
 
-    // In Isaiah 22:5, LEB has a note that contains some transliterated Hebrew. This causes a Glib::ConvertError exception to 
-    // be thrown, but only in Windows. This was a known problem back several years ago. The recommended solution is to include <locale> 
-    // and to run the following line of code. Refer to https://mail.gnome.org/archives/gtkmm-list/2012-November/msg00021.html and 
+    // In Isaiah 22:5, LEB has a note that contains some transliterated Hebrew. This causes a Glib::ConvertError exception to
+    // be thrown, but only in Windows. This was a known problem back several years ago. The recommended solution is to include <locale>
+    // and to run the following line of code. Refer to https://mail.gnome.org/archives/gtkmm-list/2012-November/msg00021.html and
     // https://bugzilla.gnome.org/show_bug.cgi?id=661588
     //std::locale::global(std::locale(""));
     //setlocale(LC_ALL, "");
@@ -658,19 +709,19 @@ void book_leb::load(void)
     // as well as in verse::append and verse::prepend. That will avoid exposing the bug.
 
     //  bookidx points into the filenames[] array. It has to start at zero. booknum is from 1-66 (or more for apocrypha)
-    unsigned int bookidx = booknum - 1; 
+    unsigned int bookidx = booknum - 1;
     // We know our book number and localized name already
     if ((bookidx < 0) ||  (bookidx > 65)) {
       cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
     }
-    
+
     //  From utilities.cpp
     ReadText rt(Directories->get_package_data() + "/bibles/engleb/" + filenames[bookidx], /*silent*/false, /*trimAll*/false, /*trimEnd*/true);
     unsigned int currchapnum = 0;
     chapter *currchap = NULL;
     int linecnt = 0;
     ustring psalmTitle = "";
-    
+
     //  builds the chapters verse by verse
     for (auto &it: rt.lines) {
          // First 3 lines are title of book with dashed lines above and below, we don't need them
@@ -712,10 +763,15 @@ void book_leb::load(void)
                   psalmTitle = it;
              }
              else {
-               verse *newverse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
-               currchap->verses.push_back(newverse); //  append verse to current chapter
-               if (!psalmTitle.empty()) { currchap->prependToLastVerse(psalmTitle+"\n"); psalmTitle.clear(); }
-               //newverse->print(); // debug
+                verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+                //newVerse->print(); // debug
+
+                if (currchap->map_verse( versenum, newVerse ) != false)
+                {
+                    if (!psalmTitle.empty()) {
+                        currchap->prependToLastVerse(psalmTitle+"\n"); psalmTitle.clear();
+                    }
+                }
              }
          }
     }
@@ -767,7 +823,7 @@ bool bible_leb::validateBookNum(const unsigned int booknum)
 //  There has to be a better name for this method
 void bible::check_book_in_range(unsigned int booknum)
 {
-    // Is this book number in the range that we have already created in our vector? If not, 
+    // Is this book number in the range that we have already created in our vector? If not,
     // resize the vector.
     if (booknum >= books.size()) {
         // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
@@ -800,9 +856,9 @@ ustring bible::retrieve_verse(const Reference &ref)
     unsigned int booknum = ref.book_get();
     // 1. Does this Bible support this book? For instance, SBLGNT only has books 40-66.
     if (!validateBookNum(booknum)) { return "Book doesn't exist"; }
-        
+
     check_book_in_range(booknum);
-    
+
     // 2. Have we already loaded this book? If not, load it and save it for next time around
     if (books[booknum] == NULL) {
         // createNewBook(...) is specialized in each particular bible class, since it knows
@@ -811,12 +867,12 @@ ustring bible::retrieve_verse(const Reference &ref)
         books[booknum] = createNewBook(this, books_id_to_localname(booknum),  booknum);
         books[booknum]->load();
     }
-    return books[booknum]->retrieve_verse(ref); 
+    return books[booknum]->retrieve_verse(ref);
 }
 
 void book::check_chapter_in_range(unsigned int chapnum)
 {
-    // Is this chapter number in the range that we have already created in our vector? If not, 
+    // Is this chapter number in the range that we have already created in our vector? If not,
     // resize the vector.
     if (chapnum >= chapters.size()) {
         // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
@@ -827,12 +883,9 @@ void book::check_chapter_in_range(unsigned int chapnum)
 
 void chapter::check_verse_in_range(unsigned int vsnum)
 {
-    // Is this verse number in the range that we have already created in our vector? If not, 
-    // resize the vector.
-    if (vsnum >= verses.size()) {
-        // Suppose book = Genesis, #1, first time around. books.size() == 1 becuase
-        // books[0] exists, but is unused. So we resize books to 2 elements.
-      verses.resize(vsnum+1);
+    if (find_verse( vsnum ) == false)
+    {
+        verses[vsnum] =  NULL; /* add entry to be used by the caller */
     }
 }
 
@@ -856,10 +909,10 @@ vector<unsigned int> *bible_bixref::retrieve_xrefs(const Reference &ref)
     if ((chnum < 1) || (chnum >= bk->chapters.size())) {
 	    return NULL;
     }
-	
+
     chapter *ch = bk->chapters[ref.chapter_get()];
     unsigned int vsnum = ref.verse_get_single();
-    if ((vsnum < 1) || (vsnum >= ch->verses.size())) {
+    if (ch->find_verse( vsnum ) == false) {
 	    return NULL;
 	}
     verse_xref *vs = static_cast<verse_xref *>(ch->verses[vsnum]);
