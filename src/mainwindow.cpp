@@ -6681,6 +6681,10 @@ void MainWindow::on_window_focus_button(GtkButton * button)
   if (window_concordance) {
 	  window_concordance->focus_set (window_concordance->focus_in_signal_button == widget);
   }
+  if (window_analysis) {
+	  window_analysis->focus_set (window_analysis->focus_in_signal_button == widget);
+  }
+
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
     editor_windows[i]->focus_set (editor_windows[i]->focus_in_signal_button == widget);
   }
