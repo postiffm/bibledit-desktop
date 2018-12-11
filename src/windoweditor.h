@@ -27,12 +27,13 @@
 #include "floatingwindow.h"
 #include "usfmview.h"
 #include "editor.h"
-
+#include "editor3.h"
 
 class WindowEditor : public FloatingWindow
 {
 public:
-  WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt);
+  WindowEditor(const ustring& project_name, const ustring &window_title, 
+               GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt);
   virtual ~WindowEditor();
  private:
   void init(void);
@@ -82,7 +83,8 @@ public:
   void create_or_update_formatting_data();
   void set_font();
 
-  Editor2 * editor_get();
+  Editor2 * editor2_get();
+  Editor3 * editor3_get();
 
   // The signalling instance                The handler_id
   GtkWidget * new_verse_signal;             gulong hID1;
@@ -110,7 +112,7 @@ protected:
   ChapterView * currView; // this is either NULL or equal to one of the following editor/view pointers
   Editor2 * editor2;
   USFMView * usfmview;
-  // eventually, experimental editor goes here for no-paragraph-division view
+  Editor3 * editor3; // experimental editor goes here: no-paragraph-division view
 
   static void on_new_verse_signalled(GtkButton *button, gpointer user_data);
   void on_new_verse();

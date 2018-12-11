@@ -25,6 +25,7 @@
 #include "dialogradiobutton.h"
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
+#include "debug.h"
 
 FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ustring title_in, bool startup)
 // Base class for each floating window.
@@ -59,7 +60,7 @@ FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ust
   GtkWidget *eventbox_title;
   eventbox_title = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "eventbox_title"));
   label_title = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_title"));
-  title_set (focused);
+  title_setfocused (focused);
   g_signal_connect ((gpointer) eventbox_title, "button_press_event", G_CALLBACK (on_widget_button_press_event), gpointer (this));
   g_signal_connect ((gpointer) eventbox_title, "button_press_event", G_CALLBACK (on_title_bar_button_press_event), gpointer (this));
   g_signal_connect ((gpointer) eventbox_title, "button_release_event", G_CALLBACK (on_title_bar_button_release_event), gpointer (this));
@@ -422,8 +423,9 @@ void FloatingWindow::display(bool startup)
   }
 
   // Reject zero width and zero height values on startup.
-  if ((my_gdk_rectangle.width == 0) || (my_gdk_rectangle.height == 0))
+  if ((my_gdk_rectangle.width == 0) || (my_gdk_rectangle.height == 0)) {
     startup = false;
+  }
 
   // When a new window needs to be allocated, there are a few steps to be taken.
   if (!startup) {
@@ -532,6 +534,7 @@ void FloatingWindow::display(bool startup)
   settings->session.open_floating_windows.push_back(gpointer (this));
 }
 
+#include "windoweditor.h"
 
 void FloatingWindow::undisplay()
 // Does the bookkeeping needed for deleting a box.
@@ -555,6 +558,14 @@ void FloatingWindow::undisplay()
     window_params.heights.push_back(0);
     window_params.ids.push_back(window_id);
     window_params.titles.push_back(title);
+    if (window_id == widEditor) {
+      window_params.editor_projects.push_back(((WindowEditor*)this)->projectname_get());
+      window_params.editor_view_types.push_back(((WindowEditor*)this)->vt_get());
+    }
+    else { 
+      window_params.editor_projects.push_back("Project name (and view type) not used for non-editor windows"); 
+      window_params.editor_view_types.push_back(0); 
+    }
     window_params.shows.push_back(false);
   }
   // Set data for the window.
@@ -607,7 +618,7 @@ void FloatingWindow::focus_set(bool active)
     }
   }
   // Update title bar.
-  title_set (focused);
+  title_setfocused (focused);
   // Set the window on top of any others that share same intersection.
   // It has been observed that widgets that are last added to the layout are shown on top of any others.
   // Therefore remove the window from the layout, and add it again so that it becomes the last one added.
@@ -677,16 +688,28 @@ gboolean FloatingWindow::on_widget_button_press_event (GtkWidget *widget, GdkEve
   return FALSE;
 }
 
-
+// Tell the window if it is in focus now
 void FloatingWindow::on_widget_button_press (GtkWidget *widget, GdkEventButton *event)
 {
   focus_set ();
 }
 
-
-void FloatingWindow::title_set (bool focused)
-// Set the title.
+// Change the text of the window title
+void FloatingWindow::title_change (const ustring &newtitle)
 {
+   title = newtitle;
+   title_setfocused(focused);
+}
+
+ustring FloatingWindow::title_get (void)
+{
+  return title;
+}
+
+// Print the title atop the window, with highlight if focused
+void FloatingWindow::title_setfocused (bool focused)
+{
+#if 0
   ustring spaces;
   for (unsigned int i = 0; i < 500; i++) 
     spaces.append (" ");
@@ -697,6 +720,17 @@ void FloatingWindow::title_set (bool focused)
                          focused ? "bold" : "normal",
                          title.c_str(), 
                          spaces.c_str());
+#endif
+  char *data;
+  data = g_strdup_printf("<span foreground=\"%s\" background=\"%s\" weight=\"%s\">     %s</span>", 
+                         focused ? "white" : "black", 
+                         focused ? "blue" : "grey",
+                         focused ? "bold" : "normal",
+                         title.c_str());
+  gtk_misc_set_alignment (GTK_MISC (label_title), 0.0, 0.5);
+  // above deprecated, but easieast way to do left align label;
+  // gtk_label_set_xalign (label1, 0.0) can be used in GTK+ 3.14 and newer
+  gtk_label_set_width_chars (GTK_LABEL(label_title), 250);
   gtk_label_set_markup (GTK_LABEL (label_title), data);
   g_free(data);
 }
@@ -710,8 +744,10 @@ void FloatingWindow::on_widget_grab_focus(GtkWidget * widget, gpointer user_data
 
 void FloatingWindow::widget_grab_focus(GtkWidget * widget)
 {
+  DEBUG("Called ")
   if (widget != last_focused_widget) {
     focus_set ();
+    DEBUG("Changed focus ")
   }
   last_focused_widget = widget;
 }

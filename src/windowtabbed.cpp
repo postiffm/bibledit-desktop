@@ -150,9 +150,8 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
 
 WindowTabbed::~WindowTabbed()
 {
-    vector<SingleTab *> tabs;
     for (auto t: tabs) {
-      delete t;   
+      delete t;   // potentially a bug finder...before I had tabs redefined above this, so this loop did nothing.
     }
     newReference = NULL;
     active_url = "";

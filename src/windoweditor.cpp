@@ -29,8 +29,9 @@
 #include <glib/gi18n.h>
 #include "debug.h"
 
-WindowEditor::WindowEditor(const ustring& project_name, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt):
-FloatingWindow(parent_layout, widEditor, project_name, startup)
+WindowEditor::WindowEditor(const ustring& project_name, const ustring &window_title, 
+                           GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup, viewType vt):
+FloatingWindow(parent_layout, widEditor, window_title, startup)
 // Text editor.
 {
   // Initialize variables.
@@ -45,6 +46,7 @@ void WindowEditor::init(void)
   currView = NULL;
   editor2 = NULL;
   usfmview = NULL;
+  editor3 = NULL;
 
   // Signalling buttons.
   new_verse_signal = gtk_button_new();
@@ -91,6 +93,16 @@ void WindowEditor::cleanup(void)
     g_signal_handler_disconnect ((gpointer) usfmview->reload_signal, hID5);
     g_signal_handler_disconnect ((gpointer) usfmview->changed_signal, hID6);
   }
+  else if (editor3) {
+    g_signal_handler_disconnect ((gpointer) editor3->new_verse_signal, hID1);
+    g_signal_handler_disconnect ((gpointer) editor3->new_styles_signal, hID2);
+    g_signal_handler_disconnect ((gpointer) editor3->quick_references_button, hID3);
+    g_signal_handler_disconnect ((gpointer) editor3->word_double_clicked_signal, hID4);
+    g_signal_handler_disconnect ((gpointer) editor3->reload_signal, hID5);
+    g_signal_handler_disconnect ((gpointer) editor3->changed_signal, hID6);
+    g_signal_handler_disconnect ((gpointer) editor3->spelling_checked_signal, hID7);
+    g_signal_handler_disconnect ((gpointer) editor3->new_widget_signal, hID8);
+  }
 
   hID1 = 0;  hID2 = 0;  hID3 = 0;  hID4 = 0;
   hID5 = 0;  hID6 = 0;  hID7 = 0;  hID8 = 0;
@@ -105,6 +117,7 @@ void WindowEditor::cleanup(void)
 
   if (editor2)  { delete editor2;  editor2 = NULL; }
   if (usfmview) { delete usfmview; usfmview = NULL; }
+  if (editor3)  { delete editor3;  editor3 = NULL; }
   // Parent class FloatingWindow destroys vbox_client, which should also destroy vbox,
   // but if we are in the middle of switching views, I want to clean up everything and
   // start over as much as possible.
@@ -124,7 +137,7 @@ void WindowEditor::go_to(const Reference & reference)
 // Let the editor go to a reference.
 {
   DEBUG("1 ref="+reference.human_readable(""))
-  if (editor2 || usfmview) { // we know currView is set in this case
+  if (editor3 || editor2 || usfmview) { // we know currView is set in this case
 
     // Find out what needs to be changed: book, chapter and/or verse.
     bool new_book = false;
@@ -165,6 +178,12 @@ void WindowEditor::go_to(const Reference & reference)
       if (editor2->go_to_new_reference_highlight) {
         editor2->highlight_searchwords();
         editor2->go_to_new_reference_highlight = false;
+      }
+    }
+    if (editor3) {
+      if (editor3->go_to_new_reference_highlight) {
+        editor3->highlight_searchwords();
+        editor3->go_to_new_reference_highlight = false;
       }
     }
   }
@@ -219,6 +238,10 @@ EditorTextViewType WindowEditor::last_focused_type()
   if (editor2) {
     return editor2->last_focused_type();
   }
+  if (editor3) {
+    return editor3->last_focused_type();
+  }
+
   return etvtBody;
 }
 
@@ -227,6 +250,9 @@ vector <Reference> WindowEditor::quick_references()
 {
   if (editor2) {
     return editor2->quick_references_get();
+  }
+  if (editor3) {
+    return editor3->quick_references_get();
   }
   gw_warning("Returning empty Reference vector from WindowEditor::quick_references");
   vector <Reference> dummy;
@@ -290,6 +316,11 @@ void WindowEditor::go_to_new_reference_highlight_set()
   if (editor2) {
     editor2->go_to_new_reference_highlight = true;
   }
+  if (editor3) {
+    editor3->go_to_new_reference_highlight = true;
+  }
+
+    
 }
 
 
@@ -367,6 +398,9 @@ set <ustring> WindowEditor::get_styles_at_cursor()
   if (editor2) {
     return editor2->get_styles_at_cursor();
   }
+  if (editor3) {
+    return editor3->get_styles_at_cursor();
+  }
   gw_warning("Returning dummy ustring set from WindowEditor::get_styles_at_cursor");
   set <ustring> dummy;
   return dummy;
@@ -385,12 +419,20 @@ void WindowEditor::set_font()
 }
 
 
-Editor2 * WindowEditor::editor_get()
+Editor2 * WindowEditor::editor2_get()
 {
-  if (usfmview) {
+  if (usfmview || editor3) {
     return NULL;
   }
   return editor2; // if editor2 is NULL, we want to return NULL anyway
+}
+
+Editor3 * WindowEditor::editor3_get()
+{
+  if (usfmview || editor2) {
+    return NULL;
+  }
+  return editor3; // if editor3 is NULL, we want to return NULL anyway
 }
 
 
@@ -517,7 +559,7 @@ void WindowEditor::switch_view ()
     // If I comment out above, program doesn't show right verse, but it also doesn't crash in Warao!
     DEBUG("reference="+reference.human_readable(""))
     DEBUG("book="+std::to_string(reference.book_get())+" ch="+std::to_string(reference.chapter_get())+" v="+reference.verse_get())
-      cleanup();  // something does not get cleaned up sufficiently to make this work...see MainWindow::on_view_chapteras for details
+    cleanup();  // something does not get cleaned up sufficiently to make this work...see MainWindow::on_view_chapteras for details
     init(); // trying to put *this object back into the same state it was at startup...since for Warao, the first editor window works properly
   }
 
@@ -537,9 +579,9 @@ void WindowEditor::switch_view ()
     hID6 = g_signal_connect ((gpointer) editor2->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
     hID7 = g_signal_connect ((gpointer) editor2->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
     hID8 = g_signal_connect ((gpointer) editor2->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
-    last_focused_widget = editor2->last_focused_widget;			      	
-    break;								      	
-    									      	
+    last_focused_widget = editor2->last_focused_widget;
+    break;
+
   case vtUSFM:
     usfmview = new USFMView (vbox, projectname);
     currView = usfmview;
@@ -553,11 +595,32 @@ void WindowEditor::switch_view ()
     last_focused_widget = usfmview->sourceview;
     break;
 
-  case vtExperimental:
+  case vtExperimental: // for now, just like vtFormatted, Editor2, but will be morphing
+    editor3 = new Editor3 (vbox, projectname);
+    currView = editor3;
+    connect_focus_signals (editor3->scrolledwindow);
+    hID1 = g_signal_connect ((gpointer) editor3->new_verse_signal, "clicked", G_CALLBACK(on_new_verse_signalled), gpointer(this));
+    hID2 = g_signal_connect ((gpointer) editor3->new_styles_signal, "clicked", G_CALLBACK(on_new_styles_signalled), gpointer(this));
+    hID3 = g_signal_connect ((gpointer) editor3->quick_references_button, "clicked", G_CALLBACK(on_quick_references_signalled), gpointer(this));
+    hID4 = g_signal_connect ((gpointer) editor3->word_double_clicked_signal, "clicked", G_CALLBACK(on_word_double_click_signalled), gpointer(this));
+    hID5 = g_signal_connect ((gpointer) editor3->reload_signal, "clicked", G_CALLBACK(on_reload_signalled), gpointer(this));
+    hID6 = g_signal_connect ((gpointer) editor3->changed_signal, "clicked", G_CALLBACK(on_changed_signalled), gpointer(this));
+    hID7 = g_signal_connect ((gpointer) editor3->spelling_checked_signal, "clicked", G_CALLBACK(on_spelling_checked_signalled), gpointer(this));
+    hID8 = g_signal_connect ((gpointer) editor3->new_widget_signal, "clicked",	 G_CALLBACK(on_new_widget_signal_clicked), gpointer(this));
+    last_focused_widget = editor3->last_focused_widget;
     break;
   }
   // Main widget grabs focus.
   gtk_widget_grab_focus (last_focused_widget);
+
+  ustring viewName = "un-initialized";
+  switch (currvt) {
+      case vtNone:         viewName = _("None"); break;
+      case vtFormatted:    viewName = _("Formatted View"); break;
+      case vtUSFM:         viewName = _("USFM View");      break;
+      case vtExperimental: viewName = _("Experimental View"); break;
+  }
+  title_change(projectname + " - " + viewName);
 
   // This call causes a hang in Warao Ps 139, but I do not find a
   // particular call in this routine that messes up.  It is

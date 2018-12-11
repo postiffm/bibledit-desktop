@@ -32,7 +32,7 @@
 #include "debug.h"
 #include "editor.h"
 
-Highlight::Highlight(Editor2 *_parent_editor, GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
+Highlight::Highlight(ChapterView *_parent_editor, GtkTextBuffer * buffer, GtkWidget * textview, const ustring & project, GtkTextTag * tag, const ustring & verse)
 {
   // Save and initialize variables.
   parent_editor = _parent_editor;

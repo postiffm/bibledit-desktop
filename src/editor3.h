@@ -18,10 +18,10 @@
  */
 
 
-#ifndef INCLUDED_EDITOR2_H
-#define INCLUDED_EDITOR2_H
+#ifndef INCLUDED_EDITOR3_H
+#define INCLUDED_EDITOR3_H
 
-enum EditorMovementType {emtForward, emtBack, emtUp, emtDown};
+//enum EditorMovementType {emtForward, emtBack, emtUp, emtDown};
 
 #include "libraries.h"
 #include <glib.h>
@@ -32,14 +32,173 @@ enum EditorMovementType {emtForward, emtBack, emtUp, emtDown};
 #include "libraries.h"
 #include "highlight.h"
 #include "spelling.h"
-#include "editoractions.h"
 #include "chapterview.h"
 
-class Editor2 : public ChapterView // Editor2 has to implement the ChapterView interface
+class Editor3 : public ChapterView // Editor3 has to implement the ChapterView interface
 {
+private:
+    enum EditorActionType {
+        eatCreateParagraph,
+        eatChangeParagraphStyle,
+        eatInsertText,
+        eatDeleteText,
+        eatChangeCharacterStyle,
+        eatLoadChapterBoundary,
+        eatOneActionBoundary,
+        eatDeleteParagraph,
+        eatCreateNoteParagraph
+    };
+    
+    
+    enum EditorActionApplication {
+        eaaInitial,
+        eaaUndo,
+        eaaRedo
+    };
+    
+    class EditorAction
+    {
+    public:
+        EditorAction(Editor3 *_parent_editor, EditorActionType type_in);
+        virtual ~EditorAction();
+        void apply (deque <EditorAction *>& done);
+        void undo (deque <EditorAction *>& done, deque <EditorAction *>& undone);
+        void redo (deque <EditorAction *>& done, deque <EditorAction *>& undone);
+        EditorActionType type;
+    private:
+    protected:
+        Editor3 *parent_editor;
+    };
+    
+    // Fwd decls
+    class EditorActionCreateNoteParagraph;
+    class EditorActionDeleteParagraph;
+    
+    class EditorActionCreateParagraph : public EditorAction
+    {
+    public:
+        EditorActionCreateParagraph(Editor3 *_parent_editor, GtkWidget * vbox);
+        virtual ~EditorActionCreateParagraph();
+        friend class EditorActionCreateNoteParagraph;
+        friend class EditorActionDeleteParagraph;
+        void apply (GtkTextTagTable * texttagtable, bool editable, EditorActionCreateParagraph * focused_paragraph, GtkWidget *& to_focus);
+        void undo (GtkWidget * parking_vbox, GtkWidget *& to_focus);
+        void redo (GtkWidget *& to_focus);
+        GtkWidget * textview;
+        GtkTextBuffer * textbuffer;
+        ustring style;
+    private:
+        gint offset_at_delete;
+        GtkWidget * parent_vbox;
+    };
+    
+    
+    class EditorActionChangeParagraphStyle : public EditorAction
+    {
+    public:
+        EditorActionChangeParagraphStyle(Editor3 *_parent_editor, const ustring& style, EditorActionCreateParagraph * parent_action);
+        virtual ~EditorActionChangeParagraphStyle();
+        void apply (GtkWidget *& to_focus);
+        void undo (GtkWidget *& to_focus);
+        void redo (GtkWidget *& to_focus);
+    private:
+        EditorActionCreateParagraph * paragraph;
+        ustring previous_style;
+        ustring current_style;
+        void set_style (const ustring& style);
+    };
+    
+    
+    class EditorActionInsertText : public EditorAction
+    {
+    public:
+        EditorActionInsertText(Editor3 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, const ustring& text_in);
+        virtual ~EditorActionInsertText();
+        void apply (GtkWidget *& to_focus);
+        void undo (GtkWidget *& to_focus);
+        void redo (GtkWidget *& to_focus);
+    private:
+        EditorActionCreateParagraph * paragraph;
+        gint offset;
+        ustring text;
+    };
+    
+    
+    class EditorActionDeleteText : public EditorAction
+    {
+    public:
+        EditorActionDeleteText(Editor3 *_parent_editor, EditorActionCreateParagraph * parent_action, gint offset_in, gint length_in);
+        virtual ~EditorActionDeleteText();
+        EditorActionCreateParagraph * paragraph;
+        void apply (GtkWidget *& to_focus);
+        void undo (GtkWidget *& to_focus);
+        void redo (GtkWidget *& to_focus);
+    private:
+        gint offset;
+        gint length;
+        vector <ustring> deleted_text;
+        vector <ustring> deleted_styles;
+    };
+    
+    
+    class EditorActionChangeCharacterStyle : public EditorAction
+    {
+    public:
+        EditorActionChangeCharacterStyle(Editor3 *_parent_editor, EditorActionCreateParagraph * parent_action, const ustring& style_in, gint offset_in, gint length_in);
+        virtual ~EditorActionChangeCharacterStyle();
+        void apply (GtkWidget *& to_focus);
+        void undo (GtkWidget *& to_focus);
+        void redo (GtkWidget *& to_focus);
+    private:
+        EditorActionCreateParagraph * paragraph;
+        ustring style;
+        gint offset;
+        gint length;
+        vector <ustring> previous_styles;
+        void change_styles (const vector <ustring>& old_ones, const vector <ustring>& new_ones); 
+    };
+
+
+    class EditorActionDeleteParagraph : public EditorAction
+    {
+    public:
+        EditorActionDeleteParagraph(Editor3 *_parent_editor, EditorActionCreateParagraph * paragraph_in);
+        virtual ~EditorActionDeleteParagraph();
+        void apply(GtkWidget * parking_vbox, GtkWidget *& to_focus);
+        void undo (GtkWidget *& to_focus);
+        void redo (GtkWidget * parking_vbox, GtkWidget *& to_focus);
+    private:
+        EditorActionCreateParagraph * paragraph;
+        gint offset;
+    };
+    
+    
+    class EditorActionCreateNoteParagraph : public EditorActionCreateParagraph
+    {
+    public:
+        EditorActionCreateNoteParagraph(Editor3 *_parent_editor, GtkWidget * vbox, const ustring& marker_in, const ustring& caller_usfm_in, const ustring& caller_text_in, const ustring& identifier_in);
+        virtual ~EditorActionCreateNoteParagraph();
+        void apply (GtkTextTagTable * texttagtable, bool editable, EditorActionCreateParagraph * focused_paragraph, GtkWidget *& to_focus);
+        void undo  (GtkWidget * parking_vbox, GtkWidget *& to_focus);
+        void redo  (GtkWidget *& to_focus);
+        GtkWidget * hbox;
+        GtkWidget * eventbox;
+        ustring identifier;
+        ustring opening_closing_marker;
+        ustring caller_usfm;
+    private:
+        ustring caller_text;
+        GtkWidget * label;
+        static gboolean on_caller_enter_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data);
+        gboolean on_caller_enter_notify (GdkEventCrossing *event);
+        static gboolean on_caller_leave_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data);
+        gboolean on_caller_leave_notify (GdkEventCrossing *event);
+    };
+    
+    
 public:
-  Editor2(GtkWidget * vbox_in, const ustring& project_in);
-  ~Editor2();
+  Editor3(GtkWidget * vbox_in, const ustring& project_in);
+  ~Editor3();
   viewType vt_get() { return vtFormatted; }
   GtkWidget * new_widget_signal;
   GtkWidget * new_widget_pointer;
@@ -47,19 +206,39 @@ public:
 private:
   GtkWidget *viewport;
   GtkWidget *vbox_viewport;
+  
+  // Where the text of the Bible is shown
   GtkWidget *vbox_paragraphs;
+  GtkWidget *textview;
+  GtkTextBuffer *textbuffer;
+
   GtkWidget *hseparator;
+
+  // Where the footnotes/endnotes/cross-refs are shown
   GtkWidget *vbox_notes;
+  GtkWidget *notetextview;
+  GtkTextBuffer *notetextbuffer;
+  
+  // Where the undo information is stored
   GtkWidget *vbox_parking_lot;
-  void text_load (ustring text, ustring character_style, bool note_mode);
+  
   deque <EditorAction *> actions_done;
   deque <EditorAction *> actions_undone;
   void apply_editor_action (EditorAction * action, EditorActionApplication application = eaaInitial);
   void paragraph_create_actions (EditorActionCreateParagraph * paragraph_action);
+  void textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview);
 public:
   EditorActionCreateParagraph * focused_paragraph;
+  GtkTextView *focused_textview; // pointer to either textview or notetextview
 private:
-  bool usfm_starts_new_paragraph (ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+    
+  bool text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+  bool text_starts_verse (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
+  void gtk_text_buffer_append_with_markers (GtkTextBuffer *textbuffer, const ustring& text, GtkTextIter &startiter, GtkTextIter &enditer);
+  void gtk_text_buffer_append (GtkTextBuffer *textbuffer, const ustring& text);
+  GtkWidget *create_text_view(GtkWidget *parent_vbox);
+  void text_load (ustring text, ustring character_style, bool note_mode);
+  
   void editor_start_new_standard_paragraph (const ustring& marker_text);
   void editor_start_verse (ustring& line, ustring& marker_text, ustring& character_style);
   bool editor_starts_character_style (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
@@ -241,21 +420,21 @@ public:
   static bool on_signal_if_verse_changed_timeout(gpointer data);
   void signal_if_verse_changed_timeout();
   ustring verse_number_get();
-  bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkWidget * parent_box, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
+  ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project);
+  bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
 
-  
   // Scrolling control and verse highlighting.
-public:
 private:
-  void scroll_to_insertion_point_on_screen(vector <GtkWidget *> &textviews);
-  void highlightCurrVerse(vector <GtkWidget *> &textviews);
+  void scroll_to_insertion_point_on_screen(GtkWidget *textview);
+  void highlightCurrVerse(GtkWidget *textview);
   ustring currHighlightedVerse;
   GtkTextTag * verse_highlight_tag;
   
   // Moving from one textview to the other.
-public:
 private:
+#ifdef OLDSTUFF
   void paragraph_crossing_act(GtkMovementStep step, gint count);
+#endif
   GtkWidget * paragraph_crossing_textview_at_key_press;
   GtkTextIter paragraph_crossing_insertion_point_iterator_at_key_press;
   void combine_paragraphs(EditorActionCreateParagraph * first_paragraph, EditorActionCreateParagraph * second_paragraph);
@@ -306,14 +485,13 @@ private:
   gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action);
   void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset);
   
-  bool text_starts_paragraph (const ustring& project, ustring& line, const ustring& marker, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
-  bool text_starts_verse (const ustring& project, ustring& line, const ustring& marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
-  
   EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action);
   EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles);
 public:  
   void get_text_and_styles_between_iterators(GtkTextIter * startiter, GtkTextIter * enditer, vector <ustring>& text, vector <ustring>& styles);
 
+  typedef pair<vector<GtkWidget *> *, GType> widget_search_t;
+  
 public:
   void editor_park_widget (GtkWidget * vbox, GtkWidget * widget, gint& offset, GtkWidget * parking);
 };

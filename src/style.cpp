@@ -28,6 +28,7 @@
 #include "stylesheetutils.h"
 #include "constants.h"
 #include <glib/gi18n.h>
+#include "gtkwrappers.h"
 
 Style::Style(const ustring & stylesheet, const ustring& marker, bool write)
 {
@@ -571,6 +572,28 @@ bool Style::get_starts_character_style(StyleType type, int subtype)
   return starts_character_style;
 }
 
+bool Style::get_starts_nested_character_style(const ustring& project, const ustring& marker_text)
+{
+    if (marker_text[0] == '+') {
+        // All markers that start with \+ are nested character markers,
+        // e.g. \+add...\+add*. I do some extra checking to make sure
+        // that this is in fact a character marker.
+        ustring marker_text_without_plus = marker_text.substr(1,ustring::npos);
+        StyleType type;
+        int subtype;
+        Style::marker_get_type_and_subtype(project, marker_text_without_plus, type, subtype);
+        if (Style::get_starts_character_style(type, subtype)) {
+          return true;
+        }
+        else {
+          gtkw_dialog_error (NULL, marker_text + ": Nested marker is not of character type");
+          return false;
+        }
+    }
+    return false;
+}
+
+// To Do: Simplify this code to return (type == stVerseNumber);
 bool Style::get_starts_verse_number(StyleType type, int subtype)
 // Returns true if the combination of the "type" and the"subtype" starts
 // a verse number.
@@ -933,4 +956,54 @@ ustring Style::get_table_cell_marker(const ustring & project, int column)
     }
   }
   return style;
+}
+
+// TO DO: This method probably belongs somewhere else. It was in editoraids.cpp, then briefly in Editor2, now moved
+// here because it is not really an editor function.
+// More TO DO: The "speedup" or caching mechanism here indicates that this information should be stored in a static table.
+// This table could be created with a more robust usfm language setup in bibledit.
+void Style::marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype)
+/*
+ Given a "project", and a "marker", this function gives the "type" and the 
+ "subtype" of the style of that marker.
+ */
+{
+  // What marker should be looked up? Usually marker, but if marker[0] = "+", then remove it
+  ustring marker_lookup = marker;
+  if (marker[0] == '+') { marker_lookup = marker.substr(1,ustring::npos); }
+
+  // Code for speeding up the lookup process.
+  static ustring speed_project;
+  static ustring speed_marker;
+  static StyleType speed_type = stNotUsedComment;
+  static int speed_subtype = 0;
+  if (project == speed_project) {
+    if (marker_lookup == speed_marker) {
+      type = speed_type;
+      subtype = speed_subtype;
+      return;
+    }
+  }
+  
+  // Store both keys in the speedup system.
+  speed_project = project;
+  speed_marker = marker_lookup;
+
+  // Lookup the values.
+  ustring stylesheet = stylesheet_get_actual ();
+  extern Styles *styles;
+  Usfm *usfm = styles->usfm(stylesheet);
+  type = stIdentifier;
+  subtype = itComment;
+  for (unsigned int i = 0; i < usfm->styles.size(); i++) {
+    if (marker_lookup == usfm->styles[i].marker) {
+      // Values found.
+      type = usfm->styles[i].type;
+      subtype = usfm->styles[i].subtype;
+      // Store values in the speedup system.
+      speed_type = type;
+      speed_subtype = subtype;
+      break;
+    }
+  }
 }

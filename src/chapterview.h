@@ -75,9 +75,26 @@ class ChapterView
   virtual bool move_cursor_to_spelling_error(bool next, bool extremity) = 0;
   virtual void load_dictionaries() = 0;
   virtual void go_to_verse(const ustring &versenum, bool focus=false) = 0;
+  
+  // For spelling, and first one for highlighter too
   void get_styles_at_iterator(GtkTextIter iter, ustring& paragraph_style, ustring& character_style);
   bool iterator_includes_note_caller (GtkTextIter iter);
   bool move_end_iterator_before_note_caller_and_validate (GtkTextIter startiter, GtkTextIter enditer, GtkTextIter & moved_enditer);
+  
+  // For highlighter
+public:
+  GtkWidget * editor_get_next_textview (const vector <GtkWidget *> &widgets,
+                                        GtkWidget * textview);
+  GtkWidget * editor_get_previous_textview (const vector <GtkWidget *> &widgets,
+                                            GtkWidget * textview);
+  
+  typedef pair<vector<GtkWidget *> *, GType> widget_search_t;
+  static void on_editor_get_widgets_callback (GtkWidget *widget, gpointer user_data);
+  bool get_verse_number_at_iterator_internal (GtkTextIter iter, const ustring & verse_marker, ustring& verse_number);
+
+public:
+  vector <GtkWidget *> editor_get_widgets (GtkWidget * vbox, GType of_type = G_TYPE_NONE);
+  virtual ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project, GtkWidget * parent_box);
 };
 
 #endif

@@ -115,7 +115,7 @@ private:
 public:
     // These methods are very simple and need no Style object to function
     // properly. I just stuffed them into this namespace because they 
-    // fit best here. Prior to this, all were called style_... which
+    // fit better here. Prior to this, all were called style_... which
     // indicated to me that they belonged with tey style code.
     // TO DO: We could debate whether some of these (or all) belong in the 
     // stylesheet or styles.cpp file. Probably all that access the global
@@ -126,6 +126,7 @@ public:
     static bool    get_starts_new_line_in_usfm(StyleType type, int subtype);
     static bool    get_displays_marker(StyleType type, int subtype);
     static bool    get_starts_character_style(StyleType type, int subtype);
+    static bool    get_starts_nested_character_style(const ustring& project, const ustring& marker_text);
     static bool    get_starts_verse_number(StyleType type, int subtype);
     static ustring get_verse_marker(const ustring& project);
     static bool    get_starts_footnote(StyleType type, int subtype);
@@ -138,6 +139,7 @@ public:
     static ustring get_table_row_marker(const ustring& project);
     static bool    get_starts_table_cell(StyleType type, int subtype);
     static ustring get_table_cell_marker(const ustring& project, int column);
+    static void    marker_get_type_and_subtype(const ustring & project, const ustring & marker, StyleType & type, int &subtype);
 };
 
 #endif
