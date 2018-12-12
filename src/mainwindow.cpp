@@ -2642,6 +2642,16 @@ void MainWindow::on_tools_area_activate()
     }
   }
   // Skip editor windows.
+  if (window_concordance) {
+    if (focused_tool_button == window_concordance->focus_in_signal_button) {
+      window_concordance->focus_set ();
+    }
+  }
+  if (window_analysis) {
+    if (focused_tool_button == window_analysis->focus_in_signal_button) {
+      window_analysis->focus_set ();
+    }
+  }
   if (window_check_usfm) {
     if (focused_tool_button == window_check_usfm->focus_in_signal_button) {
       window_check_usfm->focus_set ();
@@ -6029,7 +6039,16 @@ void MainWindow::accelerator_close_window()
     }
   }
   handle_editor_focus();
-
+  if (window_concordance) {
+    if (window_concordance->focused) {
+      on_window_concordance_delete_button();
+    }
+  }
+  if (window_analysis) {
+    if (window_analysis->focused) {
+      on_window_analysis_delete_button();
+    }
+  }
   // Check USFM.
   if (window_check_usfm) {
     if (window_check_usfm->focused) {
@@ -6606,8 +6625,16 @@ void MainWindow::shutdown_windows()
     delete editor_window;
     editor_windows.erase(editor_windows.begin());
   }
-  // TO DO: Add concordance and analysis windows too
-  // Check USFM.
+  if (window_concordance) {
+    window_concordance->shutdown();
+    delete window_concordance;
+    window_concordance = NULL;
+  }
+  if (window_analysis) {
+    window_analysis->shutdown();
+    delete window_analysis;
+    window_analysis = NULL;
+  }
   if (window_check_usfm) {
     window_check_usfm->shutdown();
     delete window_check_usfm;
@@ -6684,11 +6711,9 @@ void MainWindow::on_window_focus_button(GtkButton * button)
   if (window_analysis) {
 	  window_analysis->focus_set (window_analysis->focus_in_signal_button == widget);
   }
-
   for (unsigned int i = 0; i < editor_windows.size(); i++) {
     editor_windows[i]->focus_set (editor_windows[i]->focus_in_signal_button == widget);
   }
-  // TO DO: Add concordance and analysis windows too
   if (window_check_usfm) {
     window_check_usfm->focus_set (window_check_usfm->focus_in_signal_button == widget);
   }
@@ -6735,6 +6760,17 @@ void MainWindow::store_last_focused_tool_button (GtkButton * button)
     }
   }
   // Skip editor windows.
+  if (window_concordance) {
+    if (widget == window_concordance->focus_in_signal_button) {
+      focused_tool_button = widget;
+    }
+  }
+  if (window_analysis) {
+    if (widget == window_analysis->focus_in_signal_button) {
+      focused_tool_button = widget;
+    }
+  }
+  
   if (window_check_usfm) {
     if (widget == window_check_usfm->focus_in_signal_button) {
       focused_tool_button = widget;
