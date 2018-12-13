@@ -710,31 +710,11 @@ ustring FloatingWindow::title_get (void)
 // Update the style of the title atop the window, with highlight if focused
 void FloatingWindow::title_setfocused (bool focused)
 {
-  GdkColor color;
-
-  // Background
-  GtkWidget *parent = gtk_widget_get_parent (label_title);
-  if (GTK_IS_WIDGET (parent)) {
-    if (gdk_color_parse (focused ? "blue" : "grey", &color))
-      gtk_widget_modify_bg (parent, GTK_STATE_NORMAL, &color);
-  }
-
-  // Foreground
-  if (gdk_color_parse (focused ? "white" : "black", &color))
-    gtk_widget_modify_fg (label_title, GTK_STATE_NORMAL, &color);
-
-  // Font weight
-  if (focused) {
-    // Set it bold
-    PangoFontDescription *font_desc;
-    GtkStyle *style = gtk_widget_get_style (label_title);
-    font_desc = pango_font_description_copy (style->font_desc);
-    pango_font_description_set_weight (font_desc, PANGO_WEIGHT_BOLD);
-    gtk_widget_modify_font (label_title, font_desc);
-    pango_font_description_free (font_desc);
-  } else
-    // Restore the original font
-    gtk_widget_modify_font (label_title, NULL);
+  GtkStyleContext *ctx = gtk_widget_get_style_context (vbox_window);
+  if (focused)
+    gtk_style_context_add_class (ctx, "focused");
+  else
+    gtk_style_context_remove_class (ctx, "focused");
 }
 
 
