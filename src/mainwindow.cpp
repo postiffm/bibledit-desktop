@@ -2904,6 +2904,18 @@ void MainWindow::on_view_analysis ()
   }
 }
 
+void MainWindow::show_analysis_window()
+{
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_analysis), TRUE);
+    window_analysis->focus_set ();
+}
+
+void MainWindow::show_concordance_window()
+{
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(view_concordance), TRUE);
+    window_concordance->focus_set ();
+}
+
 void MainWindow::show_references_window()
 {
   DEBUG("Called")
@@ -2975,8 +2987,9 @@ void MainWindow::on_window_references_signal_button()
     return;
   
   // Bail out if there's no references window.
-  if (!window_references)
+  if (!window_references) {
     return;
+  }
 
   // Focus the editor.
   editor_window->focus_set ();
@@ -3062,11 +3075,13 @@ void MainWindow::on_show_quick_references_signal_button_clicked(GtkButton * butt
 
 void MainWindow::on_show_quick_references_signal_button(GtkButton * button)
 {
-  if (!window_references)
+  if (!window_references) {
     return;
+  }
   WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window)
+  if (!editor_window) {
     return;
+  }
   // Ask whether the references should be made available.
   if (yes_no_always_dialog (_("This note has references.\nWould you like to load these in the references list?"), ynadtLoadReferences, false, true)) {
     vector <Reference> references = editor_window->quick_references();
@@ -6535,10 +6550,15 @@ bool MainWindow::on_windows_startup()
           // The window was removed since the external applications provide source text and do it much better than Bibledit.
           break;
         }
-	  case widTabbed:
-	    {
-		  // What kind of tabbed window? Bible text, or informational? Which tabs were opened?
-	    }
+      case widTabbed:
+      {
+          if (window_title == "Analysis") {
+              show_analysis_window();
+          }
+          else if (window_title == "Concordance") {
+              show_concordance_window();
+          }
+      }
       }
       window_started = true;
     }

@@ -461,8 +461,9 @@ protected:
   
   static void on_view_concordance_activate (GtkMenuItem *menuitem, gpointer user_data);
   void on_view_concordance ();
+  void show_concordance_window();
 
-  // Reference Bibles Window
+  // Analysis Window (reference Bibles, textual apparatuses, cross references)
   WindowTabbed * window_analysis; // reference Bibles will be displayed here
   
   static void on_window_analysis_delete_button_clicked(GtkButton *button, gpointer user_data);
@@ -472,6 +473,7 @@ protected:
 
   static void on_view_analysis_activate (GtkMenuItem *menuitem, gpointer user_data);
   void on_view_analysis ();
+  void show_analysis_window();
   
   void on_next_reference();
   void on_previous_reference();
