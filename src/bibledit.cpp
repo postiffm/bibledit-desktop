@@ -214,6 +214,22 @@ int main(int argc, char *argv[])
   // Window icon fallback.
   gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit-desktop.xpm").c_str(), NULL);
   gw_message("Set up window icon fallback");
+
+  // Load the GTK CSS
+  GError *error = NULL;
+  GtkCssProvider *css_provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_path(css_provider,
+      gw_build_filename(Directories->get_package_data(), "bibledit-desktop.css").c_str(),
+      &error);
+  if (error) {
+    gw_error("Error loading the GTK stylesheet file: bibledit-desktop.css");
+    return 1;
+  }
+  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+      GTK_STYLE_PROVIDER (css_provider),
+      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gw_message("Loaded the GTK stylesheet");
+
   // Start the gui.
   MainWindow *mainwindow = new MainWindow(accelerator_group, settings, urltransport, vcs);
   gw_message("Finished initialization...running gtk_main");
