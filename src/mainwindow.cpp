@@ -2479,7 +2479,11 @@ void MainWindow::on_navigation_new_reference()
   }
   
   // Analysis window...contains reference Bibles, cross references, and other stuff (later)
-  if (window_analysis) {
+  if (window_analysis && window_analysis->getReady()) {
+    // Note the second check--the window may not be ready because it was being prepared
+    // but not yet finished. This became a problem when I started up the analysis window
+    // automatically at program start...something is happening out of the normal expected
+    // order and too fast, so we have to check this.
     HtmlWriter2 html("");
     refbibles->write_bibles(navigation.reference, html);
     html.finish();
@@ -2849,6 +2853,8 @@ void MainWindow::on_view_concordance ()
     g_signal_connect((gpointer) window_concordance->delete_signal_button, "clicked", G_CALLBACK(on_window_concordance_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_concordance->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_concordance->signalVerseChange, "clicked", G_CALLBACK(on_window_concordance_signal_button_clicked), gpointer(this));
+
+    window_concordance->setReady(true);
   }
   else { // now the view_concordance is unchecked
     delete window_concordance; window_concordance = NULL;
@@ -2896,6 +2902,8 @@ void MainWindow::on_view_analysis ()
     g_signal_connect((gpointer) window_analysis->delete_signal_button, "clicked", G_CALLBACK(on_window_analysis_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_analysis->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_analysis->signalVerseChange, "clicked", G_CALLBACK(on_window_analysis_signal_button_clicked), gpointer(this));
+
+    window_analysis->setReady(true);
   }
   else { // now the view_analysis is unchecked
     delete window_analysis; window_analysis = NULL;

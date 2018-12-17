@@ -83,6 +83,10 @@ public:
     GtkWidget *vbox;
     GtkWidget *notebook;
     vector<SingleTab *> tabs;
+    bool ready;
+ public:
+    void setReady(bool _ready) { ready = _ready; }
+    bool getReady(void)        { return ready; }
     
 #if 0
 public:

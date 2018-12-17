@@ -61,6 +61,8 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   // Produce the signal to be given on a new reference.
   signalVerseChange = gtk_button_new();
   gtk_box_pack_start(GTK_BOX(vbox), signalVerseChange, FALSE, FALSE, 0);
+
+  ready = false;
   
 #if 0
   // Save / initialize variables.
