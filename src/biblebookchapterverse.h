@@ -111,6 +111,12 @@ public:
   void load(void);
 };
 
+class book_netbible : public book {
+public:
+  book_netbible(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+  void load(void);
+};
+
 class book_bixref : public book {
 public:
     book_bixref(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
@@ -206,6 +212,13 @@ public:
 class bible_leb : public bible {
 public:
     bible_leb(const ustring &_proj, const ustring &_font);
+    bool validateBookNum(const unsigned int booknum);
+    book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
+};
+
+class bible_netbible : public bible {
+public:
+    bible_netbible(const ustring &_proj, const ustring &_font);
     bool validateBookNum(const unsigned int booknum);
     book *createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum);
 };

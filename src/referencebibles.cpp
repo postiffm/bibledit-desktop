@@ -1,20 +1,20 @@
 /*
  ** Copyright (©) 2018- Matt Postiff.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 #include "referencebibles.h"
@@ -24,7 +24,7 @@
 #include <locale>
 #include "gtkwrappers.h"
 
-//  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These 
+//  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These
 //  are shown in the Analysis window as an aid to the translator.
 //  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV, English Majority Text (EMTV),
 //  Second goal is to include another tab for translator notes from the NET or other
@@ -37,6 +37,7 @@ ReferenceBibles::ReferenceBibles() : bibles()
   bibles.push_back( new bible_sblgnt("SBL", "Symbol") ); // SBL Greek NT
   bibles.push_back( new bible_engmtv("EMT", "Times") );  // English Majority Text Version, Paul Esposito
   bibles.push_back( new bible_leb("LEB", "Times") );     // Lexham English Bible
+  bibles.push_back( new bible_netbible("NET", "Times") );     // Netbible English Bible
 
   // Apparatus
   apparatus.push_back( new bible_sblgntapp("SBL", "Symbol") ); // SBL Greek NT
@@ -93,7 +94,7 @@ void ReferenceBibles::write_bibles(const Reference &ref,  HtmlWriter2 &htmlwrite
               htmlwriter.font_close();
               htmlwriter.paragraph_close();
             }
-        
+
       }
 }
 
