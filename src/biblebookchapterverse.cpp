@@ -651,8 +651,8 @@ void book_engmtv::load(void)
     ustring filenames[27] = { "Mat.txt", "Mar.txt", "Luk.txt", "Joh.txt", "Act.txt",
                               "Rom.txt", "1Co.txt", "2Co.txt", "Gal.txt", "Eph.txt", "Phi.txt",
                               "Col.txt", "1Th.txt", "2Th.txt", "1Ti.txt", "2Ti.txt", "Tit.txt",
-                              "Phm.txt", "Heb.txt", "Jam.txt", "1Pe.txt", "2Pe.txt", "1Jn.txt",
-                              "2Jn.txt", "3Jn.txt", "Jud.txt", "Rev.txt" };
+                              "Phm.txt", "Heb.txt", "Jam.txt", "1Pe.txt", "2Pe.txt", "1Jo.txt",
+                              "2Jo.txt", "3Jo.txt", "Jud.txt", "Rev.txt" };
 
     // We know our book number and localized name already
     unsigned int bookidx = booknum - 40;
