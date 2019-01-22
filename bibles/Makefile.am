@@ -9,6 +9,7 @@ bibles_sblgnt_dir = $(bibles_dir)/sblgnt
 bibles_sblapp_dir = $(bibles_dir)/sblgnt
 bibles_engleb_dir = $(bibles_dir)/engleb
 bibles_engmtv_dir = $(bibles_dir)/engmtv
+bibles_engnet_dir = $(bibles_dir)/engnet
 
 # Files to install
 bibles_byzascii__DATA = byzascii/1CO_BYZ.txt  byzascii/2CO_BYZ.txt  byzascii/3JO_BYZ.txt  byzascii/HEB_BYZ.txt \
@@ -51,5 +52,15 @@ bibles_engmtv__DATA   = engmtv/NewTestamentBibleworks.txt engmtv/NewTestamentOut
 			engmtv/2Co.txt  engmtv/Eph.txt  engmtv/Mat.txt engmtv/Rev.txt \
 			engmtv/2Jo.txt  engmtv/Gal.txt  engmtv/Rom.txt \
 			engmtv/2Pe.txt  engmtv/Heb.txt  engmtv/Tit.txt
+bibles_engnet__DATA   = engnet/Gen.txt  engnet/Exo.txt  engnet/Lev.txt  engnet/Num.txt   engnet/Deut.txt engnet/Josh.txt engnet/Judg.txt \
+			engnet/Ruth.txt engnet/1Sa.txt  engnet/2Sa.txt  engnet/1Ki.txt   engnet/2Ki.txt  engnet/1Ch.txt  engnet/2Ch.txt \
+			engnet/Ezra.txt engnet/Neh.txt  engnet/Esth.txt engnet/Job.txt   engnet/Psal.txt engnet/Prov.txt engnet/Eccl.txt \
+			engnet/Song.txt engnet/Isa.txt  engnet/Jer.txt  engnet/Lam.txt   engnet/Ezek.txt engnet/Dan.txt  engnet/Hos.txt \
+			engnet/Joel.txt engnet/Amos.txt engnet/Obad.txt engnet/Jonah.txt engnet/Mic.txt  engnet/Nah.txt  engnet/Hab.txt \
+			engnet/Zeph.txt engnet/Hag.txt  engnet/Zech.txt engnet/Mal.txt   engnet/Matt.txt engnet/Mark.txt engnet/Luke.txt \
+			engnet/John.txt engnet/Acts.txt engnet/Rom.txt  engnet/1Co.txt   engnet/2Co.txt  engnet/Gal.txt  engnet/Eph.txt \
+			engnet/Php.txt  engnet/Col.txt  engnet/1Th.txt  engnet/2Th.txt   engnet/1Tim.txt engnet/2Tim.txt engnet/Tit.txt \
+			engnet/Phm.txt  engnet/Heb.txt  engnet/Jam.txt  engnet/1Pe.txt   engnet/2Pe.txt  engnet/1Jn.txt  engnet/2Jn.txt \
+			engnet/3Jn.txt  engnet/Jude.txt engnet/Rev.txt
 
 CLEANFILES = *~

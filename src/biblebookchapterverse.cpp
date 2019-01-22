@@ -52,6 +52,11 @@ book_leb::book_leb(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
   // nothing special needs done
 }
 
+book_netbible::book_netbible(bible *_bbl, const ustring &_bookname, unsigned int _booknum): book(bbl,  _bookname,  _booknum)
+{
+  // nothing special needs done
+}
+
 book_bixref::book_bixref(bible *_bbl, const ustring &_bookname, unsigned int _booknum) : book(_bbl, _bookname, _booknum)
 {
    // nothing special needs done
@@ -254,6 +259,11 @@ bible_engmtv::bible_engmtv(const ustring &_proj, const ustring &_font) : bible (
 }
 
 bible_leb::bible_leb(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
+{
+  // Nothing special to do here
+}
+
+bible_netbible::bible_netbible(const ustring &_proj, const ustring &_font) : bible (_proj, _font)
 {
   // Nothing special to do here
 }
@@ -777,6 +787,61 @@ void book_leb::load(void)
     }
 }
 
+// Load net bible from bible.org
+void book_netbible::load(void)
+{
+    ustring filenames[66] = {
+        "Gen.txt",  "Exo.txt",  "Lev.txt",  "Num.txt",   "Deut.txt", "Josh.txt", "Judg.txt",
+        "Ruth.txt", "1Sa.txt",  "2Sa.txt",  "1Ki.txt",   "2Ki.txt",  "1Ch.txt",  "2Ch.txt",
+        "Ezra.txt", "Neh.txt",  "Esth.txt", "Job.txt",   "Psal.txt", "Prov.txt", "Eccl.txt",
+        "Song.txt", "Isa.txt",  "Jer.txt",  "Lam.txt",   "Ezek.txt", "Dan.txt",  "Hos.txt",
+        "Joel.txt", "Amos.txt", "Obad.txt", "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt",
+        "Zeph.txt", "Hag.txt",  "Zech.txt", "Mal.txt",   "Matt.txt", "Mark.txt", "Luke.txt",
+        "John.txt", "Acts.txt", "Rom.txt",  "1Co.txt",   "2Co.txt",  "Gal.txt",  "Eph.txt",
+        "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt",
+        "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt",
+        "3Jn.txt", "Jude.txt", "Rev.txt" };
+
+    //  bookidx points into the filenames[] array. It has to start at zero. booknum is from 1-66 (or more for apocrypha)
+    unsigned int bookidx = booknum - 1;
+    // We know our book number and localized name already
+    if ((bookidx < 0) ||  (bookidx > 65)) {
+      cerr <<  "ERROR: booknumber out of range: " <<  booknum <<  endl;
+    }
+
+    //  From utilities.cpp
+    ReadText rt(Directories->get_package_data() + "/bibles/engnet/" + filenames[bookidx], /*silent*/false, /*trimming*/true);
+    unsigned int currchapnum = 0;
+    chapter *currchap = NULL;
+
+    //  builds the chapters verse by verse
+    for (auto &it: rt.lines) {
+         //  Extract chapter and verse,  and leading space. The lines are always
+         //  well formed: Book<space>1:5<space>Verse text.
+         //  Remove book name from the line
+         size_t spaceposition = it.find_first_of(" ");
+         it.erase(0,  spaceposition+1);
+         size_t colonposition = it.find_first_of(":");
+         ustring chapstring = it.substr(0,  colonposition);
+         unsigned int chapnum = convert_to_int(chapstring);
+         size_t tabposition = it.find_first_of(" ");
+         ustring versestring = it.substr(colonposition+1, tabposition-colonposition-1);
+         unsigned int versenum = convert_to_int(versestring);
+         it.erase(0, tabposition+1);
+         if (chapnum != currchapnum) {
+             chapter *newchap = new chapter(this,  chapnum);
+             chapters.push_back(newchap);
+             currchap = newchap;
+             currchapnum = chapnum;
+             //cerr << "Created new chapter " << chapnum << " from " << filenames[bookidx] << endl;
+         }
+         verse *newVerse = new verse(currchap, versenum, it); //  takes a copy of the ustring text (it)
+         //newVerse->print(); // debug
+
+        currchap->map_verse( versenum, newVerse );
+    }
+}
+
 void book::load(void)
 {
   //  This stub can't do anything because it has to know exactly what kind of book it is loading
@@ -820,6 +885,12 @@ bool bible_leb::validateBookNum(const unsigned int booknum)
   return true;
 }
 
+bool bible_netbible::validateBookNum(const unsigned int booknum)
+{
+  if ((booknum < 1) || (booknum > 66)) { return false; }
+  return true;
+}
+
 //  There has to be a better name for this method
 void bible::check_book_in_range(unsigned int booknum)
 {
@@ -849,6 +920,9 @@ book *bible_engmtv::createNewBook(bible *_bbl, const ustring &_bookname, unsigne
 
 book *bible_leb::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
 { return new book_leb(this, _bookname,  _booknum); }
+
+book *bible_netbible::createNewBook(bible *_bbl, const ustring &_bookname, unsigned int _booknum)
+{ return new book_netbible(this, _bookname,  _booknum); }
 
 // This knows how to retrieve a verse from any bible, i.e. those who have inherited from the base bible class
 ustring bible::retrieve_verse(const Reference &ref)
