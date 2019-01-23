@@ -412,6 +412,7 @@ cp -R bibles/sblgnt "$BIBLES/"
 cp -R bibles/byzascii "$BIBLES/"
 cp -R bibles/engmtv "$BIBLES/"
 cp -R bibles/engleb "$BIBLES/"
+cp -R bibles/engnet "$BIBLES/"
 # Added 3/28/2018 to support new cross-reference database in Analysis window
 cp -R BiblesInternational/bi.crf "$BIBLES/"
 
