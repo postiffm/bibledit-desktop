@@ -36,6 +36,18 @@ run...
 (--fullname helps Emacs understand the file and line number
 information)
 
+Debugging with CodeBlocks
+----------------------------------------------------------------
+
+User Scott "pickle" Smith has gotten this to work. He had a problem
+where it always kept breaking on some unnamed function. I hit
+continue but keeps stopping. I step to the next line and it shows that
+its in libproxy. The break is also happening gtk_main. Got any ideas?
+
+The solution was turning on the proxy in yast with basically empty
+settings was enough to set the env vars and i dont get the exception
+anymore.
+
 Debugging with Nemiver, the Gnome+GDB Debugger
 ----------------------------------------------------------------
 1. Preparation
