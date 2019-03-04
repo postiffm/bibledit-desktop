@@ -58,6 +58,7 @@ private:
     friend class WindowTabbed;
     
     // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
+    static void on_close_button_clicked (GtkButton *button, gpointer user_data);
     static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
     void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
@@ -84,6 +85,9 @@ public:
     GtkWidget *notebook;
     vector<SingleTab *> tabs;
     bool ready;
+    static void on_page_removed_event(GtkNotebook *notebook,
+            GtkWidget *child, guint page_num, gpointer user_data);
+    void on_page_removed(const int page_num);
  public:
     void setReady(bool _ready) { ready = _ready; }
     bool getReady(void)        { return ready; }
