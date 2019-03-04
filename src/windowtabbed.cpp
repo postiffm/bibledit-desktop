@@ -55,6 +55,7 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   gtk_widget_show(notebook);
   gtk_notebook_set_tab_pos((GtkNotebook *)notebook, GTK_POS_TOP);
   gtk_container_add(GTK_CONTAINER(vbox), notebook);
+  g_signal_connect(notebook, "page-removed", G_CALLBACK(on_page_removed_event), this);
 
   //connect_focus_signals (notebook);
   
@@ -154,6 +155,10 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
 
 WindowTabbed::~WindowTabbed()
 {
+    // Disconnect the handler so it does not remove the items from tabs
+    // while we are iterating
+    g_signal_handlers_disconnect_by_func(notebook, (gpointer) on_page_removed_event, this);
+
     for (auto t: tabs) {
       delete t;   // potentially a bug finder...before I had tabs redefined above this, so this loop did nothing.
     }
@@ -176,8 +181,22 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
+	GtkWidget *box = gtk_hbox_new (FALSE, 2);
 	tab_label = gtk_label_new_with_mnemonic (title.c_str());
-	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, tab_label);
+	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
+
+	GtkWidget *button = gtk_button_new();
+	gtk_button_set_image(GTK_BUTTON (button),
+			gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU));
+	gtk_button_set_relief(GTK_BUTTON (button), GTK_RELIEF_NONE);
+	gtk_widget_set_can_focus(button, FALSE);
+	gtk_button_set_focus_on_click(GTK_BUTTON (button), FALSE);
+	g_signal_connect(button, "clicked",
+			G_CALLBACK (on_close_button_clicked), this);
+	gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
+
+	gtk_widget_show_all (box);
+	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, box);
 	
 	webview = webkit_web_view_new();
 	gtk_widget_show (webview);
@@ -223,10 +242,33 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
     existingTab->updateHtml(tabHtml);
 }
 
+void WindowTabbed::on_page_removed_event(GtkNotebook *notebook,
+		GtkWidget *child, guint page_num, gpointer user_data)
+{
+	((WindowTabbed*) user_data)->on_page_removed(page_num);
+}
+
+void WindowTabbed::on_page_removed(const int page_num) {
+	tabs.erase(tabs.begin() + page_num);
+}
+
 void SingleTab::updateHtml(HtmlWriter2 &html)
 {
    // cerr << "HTML=" << html.html.c_str() << endl;
    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL, NULL, NULL);
+}
+
+void SingleTab::on_close_button_clicked (GtkButton *button, gpointer user_data)
+{
+	SingleTab *_this = (SingleTab*) user_data;
+	// It is safe to delete the tab including the button while its click
+	// event is currently being processed because the signal handling
+	// framework keeps additional references to the button. It will be
+	// destroyed but its memory area will be kept allocated as long as
+	// the signal is being processed. It will be freed automatically when
+	// the signal processing is finished and all references are released.
+	// Also, note that this is a static method ("this" may not exist).
+	delete _this;
 }
 
 gboolean SingleTab::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, 
