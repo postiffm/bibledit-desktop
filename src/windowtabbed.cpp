@@ -250,6 +250,13 @@ void WindowTabbed::on_page_removed_event(GtkNotebook *notebook,
 
 void WindowTabbed::on_page_removed(const int page_num) {
 	tabs.erase(tabs.begin() + page_num);
+	// Was that the last tab? If yes close the window.
+	// It looks dangerous to emit a signal which eventually deletes this
+	// object from its non-static member function but it seems to work
+	// so far. Maybe because this is the last line of the function and
+	// we are not referring to this object which becomes invalid.
+	if (tabs.empty())
+		gtk_button_clicked(GTK_BUTTON(delete_signal_button));
 }
 
 void SingleTab::updateHtml(HtmlWriter2 &html)
