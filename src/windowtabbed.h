@@ -41,7 +41,8 @@ class WindowTabbed; // forward declaration
 
 // A tabbed (notebook) window can contain any number of SingleTab's. Each "thing" 
 // that is intended to go into a tab should inherit from this class. For instance,
-// a concordance tab "is" a SingleTab.
+// a concordance tab "is" a SingleTab. I don't have it implemented this way at
+// the moment, but theoretically it should be able to be implemented this way.
 class SingleTab
 {
 public:

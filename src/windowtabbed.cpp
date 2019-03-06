@@ -238,8 +238,15 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
             existingTab = it;
         }
     }
-    assert(existingTab != NULL);
-    existingTab->updateHtml(tabHtml);
+    // The user may have closed this tab. So, any work done to create
+    // the tabHtml has been wasted. But we can't display it because the
+    // tab is gone.
+    if (existingTab != NULL) {
+        existingTab->updateHtml(tabHtml);
+    }
+    else  {
+      gw_warning(_("Attempting to write to a closed tab: ") + tabTitle);
+    }
 }
 
 void WindowTabbed::on_page_removed_event(GtkNotebook *notebook,

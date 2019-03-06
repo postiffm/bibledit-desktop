@@ -2489,6 +2489,12 @@ void MainWindow::on_navigation_new_reference()
     html.finish();
     window_analysis->updateTab(_("Greek and English"), html);
     
+    // Normally, we expect all the analysis window tabs to be present.
+    // However, it is possible that one or more of these tabs has been
+    // closed by the user clicking the X button. The updateTab()
+    // method is smart enough to handle that case and not crash 
+    // the program.
+    
     html.clear(); html.init("");
     refbibles->write_apparatus(navigation.reference, html);
     html.finish();
