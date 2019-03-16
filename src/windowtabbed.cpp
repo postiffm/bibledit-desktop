@@ -185,15 +185,15 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	tab_label = gtk_label_new_with_mnemonic (title.c_str());
 	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
 
-	GtkWidget *button = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON (button),
+	close_button = gtk_button_new();
+	gtk_button_set_image(GTK_BUTTON (close_button),
 			gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU));
-	gtk_button_set_relief(GTK_BUTTON (button), GTK_RELIEF_NONE);
-	gtk_widget_set_can_focus(button, FALSE);
-	gtk_button_set_focus_on_click(GTK_BUTTON (button), FALSE);
-	g_signal_connect(button, "clicked",
+	gtk_button_set_relief(GTK_BUTTON (close_button), GTK_RELIEF_NONE);
+	gtk_widget_set_can_focus(close_button, FALSE);
+	gtk_button_set_focus_on_click(GTK_BUTTON (close_button), FALSE);
+	g_signal_connect(close_button, "clicked",
 			G_CALLBACK (on_close_button_clicked), this);
-	gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (box);
 	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, box);
@@ -249,6 +249,40 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
     }
 }
 
+bool WindowTabbed::tabExists(const ustring &tabTitle) const
+{
+	for (auto it : tabs) {
+		if (it->title == tabTitle)
+			return true;
+	}
+
+	// Tab not found
+	return false;
+}
+
+void WindowTabbed::setTabClosable(const ustring &tabTitle, const bool closable)
+{
+	for (auto it : tabs) {
+		if (it->title == tabTitle)
+			it->setClosable(closable);
+	}
+}
+
+/**
+ * Check if a tab is closable. If the tab does not exist the return value
+ * is undefined.
+ */
+bool WindowTabbed::isTabClosable(const ustring &tabTitle) const
+{
+	for (auto it : tabs) {
+		if (it->title == tabTitle)
+			return it->isClosable();
+	}
+
+	// Tab not found
+	return false;
+}
+
 void WindowTabbed::on_page_removed_event(GtkNotebook *notebook,
 		GtkWidget *child, guint page_num, gpointer user_data)
 {
@@ -270,6 +304,11 @@ void SingleTab::updateHtml(HtmlWriter2 &html)
 {
    // cerr << "HTML=" << html.html.c_str() << endl;
    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL, NULL, NULL);
+}
+
+void SingleTab::setClosable(const bool closable)
+{
+	gtk_widget_set_visible(close_button, closable);
 }
 
 void SingleTab::on_close_button_clicked (GtkButton *button, gpointer user_data)

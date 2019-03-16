@@ -49,11 +49,14 @@ public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
     ~SingleTab();
     void updateHtml(HtmlWriter2 &html);
+    void setClosable(const bool closable);
+    inline bool isClosable() const { return gtk_widget_get_visible(close_button); }
     // I might not have to store any of these...
     GtkWidget *scrolledwindow; // owned by the notebook, I think
     GtkWidget *tab_label; // owned by the notebook, I think
 	GtkWidget *webview; // owned by scrolled window
 private:
+    GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
     friend class WindowTabbed;
@@ -75,6 +78,9 @@ public:
     void Concordance(const ustring &projname);
     void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);    // create a new tab, fill with given content
     void updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml); // update existing tab, all new content
+    bool tabExists(const ustring &tabTitle) const;
+    void setTabClosable(const ustring &tabTitle, const bool closable);
+    bool isTabClosable(const ustring &tabTitle) const;
     GtkWidget * signalVerseChange;
     Reference *newReference; // for when a click in this window wants to navigate the program to a new Bible verse
   protected:
