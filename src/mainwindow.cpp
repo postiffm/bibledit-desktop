@@ -2850,11 +2850,13 @@ void MainWindow::on_view_concordance ()
     concordance->writeAlphabeticSortedHtml(html);
     html.finish();
     window_concordance->newTab(_("Sorted by _Words"), html);
+    window_concordance->setTabClosable(_("Sorted by _Words"), false);
  
     html.clear(); html.init("");
     concordance->writeFrequencySortedHtml(html);
     html.finish();
     window_concordance->newTab(_("Sorted by _Frequency"), html);
+    window_concordance->setTabClosable(_("Sorted by _Frequency"), false);
     
     g_signal_connect((gpointer) window_concordance->delete_signal_button, "clicked", G_CALLBACK(on_window_concordance_delete_button_clicked), gpointer(this));
     g_signal_connect((gpointer) window_concordance->focus_in_signal_button, "clicked", G_CALLBACK(on_window_focus_button_clicked), gpointer(this));
@@ -6570,7 +6572,9 @@ bool MainWindow::on_windows_startup()
               show_analysis_window();
           }
           else if (window_title == "Concordance") {
-              show_concordance_window();
+	    // Cannot do this because it needs to know which editor window
+	    // was active last. That is not yet determined.
+	    //show_concordance_window();
           }
       }
       }
