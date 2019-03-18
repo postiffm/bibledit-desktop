@@ -163,7 +163,6 @@ WindowTabbed::~WindowTabbed()
       delete t;   // potentially a bug finder...before I had tabs redefined above this, so this loop did nothing.
     }
     newReference = NULL;
-    active_url = "";
     myreference.assign(0, 0, "");
     title = "";
     gtk_widget_destroy(vbox);
@@ -182,7 +181,7 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
 	GtkWidget *box = gtk_hbox_new (FALSE, 2);
-	tab_label = gtk_label_new_with_mnemonic (title.c_str());
+	GtkWidget *tab_label = gtk_label_new_with_mnemonic (title.c_str());
 	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
 
 	close_button = gtk_button_new();
@@ -234,7 +233,7 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
     SingleTab *existingTab = NULL;
     // Find tab by its title, then update the html that it contains
     for (auto it : tabs) {
-        if (it->title == tabTitle) {
+        if (it->getTitle() == tabTitle) {
             existingTab = it;
         }
     }
@@ -252,7 +251,7 @@ void WindowTabbed::updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 bool WindowTabbed::tabExists(const ustring &tabTitle) const
 {
 	for (auto it : tabs) {
-		if (it->title == tabTitle)
+		if (it->getTitle() == tabTitle)
 			return true;
 	}
 
@@ -263,7 +262,7 @@ bool WindowTabbed::tabExists(const ustring &tabTitle) const
 void WindowTabbed::setTabClosable(const ustring &tabTitle, const bool closable)
 {
 	for (auto it : tabs) {
-		if (it->title == tabTitle)
+		if (it->getTitle() == tabTitle)
 			it->setClosable(closable);
 	}
 }
@@ -275,12 +274,19 @@ void WindowTabbed::setTabClosable(const ustring &tabTitle, const bool closable)
 bool WindowTabbed::isTabClosable(const ustring &tabTitle) const
 {
 	for (auto it : tabs) {
-		if (it->title == tabTitle)
+		if (it->getTitle() == tabTitle)
 			return it->isClosable();
 	}
 
 	// Tab not found
 	return false;
+}
+
+void WindowTabbed::gotoReference(const Reference & reference)
+{
+	myreference.assign (reference);
+	newReference = &myreference;
+	gtk_button_clicked(GTK_BUTTON(signalVerseChange));
 }
 
 void WindowTabbed::on_page_removed_event(GtkNotebook *notebook,
@@ -385,7 +391,7 @@ void SingleTab::html_link_clicked (const gchar * url)
   //DEBUG("active_url="+active_url+" new url="+ustring(url))
   
   // New url.
-  parent->active_url = url;
+  //parent->active_url = url;
   ustring myurl = url;
 
   // In the case that this link is a "goto [verse]" link, we can process it
@@ -394,9 +400,7 @@ void SingleTab::html_link_clicked (const gchar * url)
     // Signal the editors to go to a reference.
     myurl.erase (0, 5); // get rid of keyword "goto" and space
     cout << "Visiting verse >> " << myurl << endl;
-    parent->myreference.assign (get_reference (myurl));
-    parent->newReference = &parent->myreference;
-    gtk_button_clicked(GTK_BUTTON(parent->signalVerseChange)); // parent->signalVerseChange is in WindowTabbed, not in this single tab
+    parent->gotoReference (get_reference (myurl));
   }
   // Something more complicated like "concordance [some concordance word]" will mean that we have to 
   // send for help from the producer of the data that is presently in this tab.

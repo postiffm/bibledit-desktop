@@ -51,27 +51,25 @@ public:
     void updateHtml(HtmlWriter2 &html);
     void setClosable(const bool closable);
     inline bool isClosable() const { return gtk_widget_get_visible(close_button); }
+    inline const ustring &getTitle() const { return title; }
+private:
     // I might not have to store any of these...
     GtkWidget *scrolledwindow; // owned by the notebook, I think
-    GtkWidget *tab_label; // owned by the notebook, I think
 	GtkWidget *webview; // owned by scrolled window
-private:
     GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
-    friend class WindowTabbed;
     
     // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
     static void on_close_button_clicked (GtkButton *button, gpointer user_data);
     static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
     void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
-    Reference get_reference (const ustring& text);
+    static Reference get_reference (const ustring& text);
 };
 
 class WindowTabbed : public FloatingWindow
 {
-    friend class SingleTab;
 public:
     WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
     virtual ~WindowTabbed();
@@ -81,12 +79,11 @@ public:
     bool tabExists(const ustring &tabTitle) const;
     void setTabClosable(const ustring &tabTitle, const bool closable);
     bool isTabClosable(const ustring &tabTitle) const;
+    void gotoReference(const Reference & reference);
     GtkWidget * signalVerseChange;
     Reference *newReference; // for when a click in this window wants to navigate the program to a new Bible verse
-  protected:
-    ustring active_url;  
-    Reference myreference;
   private:
+    Reference myreference;
     ustring title;
     GtkWidget *vbox;
     GtkWidget *notebook;
