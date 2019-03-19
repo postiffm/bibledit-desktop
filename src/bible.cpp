@@ -91,38 +91,6 @@ void sort_references(vector < Reference > &references)
   }
 }
 
-void decode_reference(const ustring & reference, ustring & book, ustring & chapter, ustring & verse)
-/*
- * Decodes "reference" and provides:
- * - book
- * - chapter
- * - verse
- *
- * E.g. "Song of Solomon 1:1" becomes "Song of Solomon",
- * chapter "1" and verse "1".
- */
-{
-  try {
-    ustring ref(reference);
-    // Extract the book.
-    // Deal with books like "1 Samuel" or "Song of Solomon".
-    int booklength;
-    booklength = ref.rfind(" ");
-    book = ref.substr(0, booklength);
-    ref.erase(0, booklength);
-    ref = trim(ref);
-    // Extract chapter.
-    chapter = number_in_string(ref);
-    ref.erase(0, chapter.length() + 1);
-    ref = trim(ref);
-    // Extract verse.
-    verse = ref;
-  }
-  catch(exception & ex) {
-    cerr << ex.what() << endl;
-  }
-}
-
 bool reference_discover_internal(const Reference &oldRef, // inRef was unsigned int oldbook, unsigned int oldchapter, const ustring & oldverse
 				 const ustring &reference,
 				 Reference &newRef, // outRef was unsigned int &newbook, unsigned int &newchapter, ustring & newverse,

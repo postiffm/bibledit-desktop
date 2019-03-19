@@ -47,6 +47,9 @@ public:
   Reference (unsigned int book_in, unsigned int chapter_in, const ustring& verse_in);
   Reference (unsigned int book_in, unsigned int chapter_in, unsigned int verse_in);
   Reference (unsigned int encoded);
+  Reference (const ustring& text);
+
+  static void decode_reference(const ustring& text, ustring& book, ustring& chapter, ustring& verse);
 
   inline unsigned int book_get() const { return book; }
   inline unsigned int chapter_get() const { return chapter; }

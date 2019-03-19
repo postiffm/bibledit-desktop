@@ -27,8 +27,6 @@
 
 
 void sort_references (vector <Reference> &references);
-void decode_reference (const ustring & reference, ustring & book,
-                       ustring & chapter, ustring & verse);
 bool reference_discover(const Reference &oldRef, const ustring &reference,
                         Reference &newRef, bool consult_memory = false);
 unsigned int book_find_valid (const ustring & rawbook);

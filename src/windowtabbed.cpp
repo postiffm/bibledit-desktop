@@ -365,20 +365,6 @@ void SingleTab::navigation_policy_decision_requested (WebKitNetworkRequest *requ
   html_link_clicked (webkit_network_request_get_uri (request));
 }
 
-// This is reproduced from windowcheckkeyterms.cpp, and should be 
-// factored out into the reference class.
-Reference SingleTab::get_reference (const ustring& text)
-// Generates a reference out of the text.
-{
-  Reference ref;
-  ustring book, chapter, verse = ref.verse_get(); // not sure why verse_get is called?
-  decode_reference(text, book, chapter, verse); // probably also factor this out
-  ref.book_set( books_localname_to_id (book));
-  ref.chapter_set(convert_to_int (chapter));
-  ref.verse_set(verse);
-  return ref;
-}
-
 extern Concordance *concordance;
 
 void SingleTab::html_link_clicked (const gchar * url)
@@ -400,7 +386,7 @@ void SingleTab::html_link_clicked (const gchar * url)
     // Signal the editors to go to a reference.
     myurl.erase (0, 5); // get rid of keyword "goto" and space
     cout << "Visiting verse >> " << myurl << endl;
-    parent->gotoReference (get_reference (myurl));
+    parent->gotoReference (Reference(myurl));
   }
   // Something more complicated like "concordance [some concordance word]" will mean that we have to 
   // send for help from the producer of the data that is presently in this tab.
@@ -746,15 +732,6 @@ void WindowTabbed::html_link_clicked (const gchar * url)
     display_another_page = true;
   }
 
-  else if (active_url.find (_("goto ")) == 0) {
-    // Signal the editors to go to a reference.
-    ustring url = active_url;
-    url.erase (0, 5);
-    myreference.assign (get_reference (url));
-    new_reference_showing = &myreference;
-    gtk_button_clicked(GTK_BUTTON(signal));
-  }
-  
   else if (active_url.find (_("send")) == 0) {
     // Send the references to the references window.
     ustring url = active_url;
@@ -922,19 +899,6 @@ void WindowTabbed::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned int ke
     htmlwriter.text_add (information);
     htmlwriter.paragraph_close ();
   }
-}
-
-
-Reference WindowTabbed::get_reference (const ustring& text)
-// Generates a reference out of the text.
-{
-  Reference ref (0);
-  ustring book, chapter, verse = ref.verse_get();
-  decode_reference(text, book, chapter, verse);
-  ref.book_set(books_localname_to_id (book));
-  ref.chapter_set(convert_to_int (chapter));
-  ref.verse_set(verse);
-  return ref;
 }
 
 

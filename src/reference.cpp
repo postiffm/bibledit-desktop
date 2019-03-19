@@ -99,6 +99,50 @@ Reference::Reference (unsigned int encoded)
     }
 }
 
+Reference::Reference (const ustring& text)
+// Generates a reference from the given text. Expects text like "Genesis 1:1".
+{
+  Reference ref;
+  ustring textbook, textchapter, textverse;
+  decode_reference(text, textbook, textchapter, textverse);
+  book =  books_localname_to_id (textbook);
+  chapter = convert_to_int (textchapter);
+  verse = textverse;
+  reftype = multiVerse; // default...we are not yet smart enough to figure that out
+}
+
+void Reference::decode_reference(const ustring& text, ustring& book, ustring& chapter, ustring& verse)
+/*
+ * Decodes "text" and provides:
+ * - book
+ * - chapter
+ * - verse
+ *
+ * E.g. "Song of Solomon 1:1" becomes "Song of Solomon",
+ * chapter "1" and verse "1".
+ */
+{
+  try {
+    ustring ref(text);
+    // Extract the book.
+    // Deal with books like "1 Samuel" or "Song of Solomon".
+    int booklength;
+    booklength = ref.rfind(" ");
+    book = ref.substr(0, booklength);
+    ref.erase(0, booklength);
+    ref = trim(ref);
+    // Extract chapter.
+    chapter = number_in_string(ref);
+    ref.erase(0, chapter.length() + 1);
+    ref = trim(ref);
+    // Extract verse.
+    verse = ref;
+  }
+  catch(exception & ex) {
+    cerr << ex.what() << endl;
+  }
+}
+
 ustring Reference::human_readable(const ustring & language) const
 // Gives a reference in a human readable format. If no language is given,
 // it uses the default local name of the books.

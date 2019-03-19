@@ -55,7 +55,7 @@ public:
 private:
     // I might not have to store any of these...
     GtkWidget *scrolledwindow; // owned by the notebook, I think
-	GtkWidget *webview; // owned by scrolled window
+    GtkWidget *webview; // owned by scrolled window
     GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
@@ -65,7 +65,6 @@ private:
     static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
     void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
-    static Reference get_reference (const ustring& text);
 };
 
 class WindowTabbed : public FloatingWindow

@@ -682,7 +682,7 @@ Reference WindowCheckKeyterms::get_reference (const ustring& text)
 {
   Reference ref;
   ustring book, chapter, verse = ref.verse_get();
-  decode_reference(text, book, chapter, verse);
+  Reference::decode_reference(text, book, chapter, verse);
   ref.book_set( books_localname_to_id (book));
   ref.chapter_set(convert_to_int (chapter));
   ref.verse_set(verse);

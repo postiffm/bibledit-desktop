@@ -214,7 +214,7 @@ void notes_select(vector <unsigned int>& ids, unsigned int & id_cursor, const us
   int numerical_currentreference = 0;
   {
     ustring book, chapter, verse;
-    decode_reference(currentreference, book, chapter, verse);
+    Reference::decode_reference(currentreference, book, chapter, verse);
     vector <int>verses = verses_encode(verse);
     for (unsigned int i = 0; i < verses.size(); i++) {
       numerical_currentreference += verses[i];
@@ -243,7 +243,7 @@ void notes_select(vector <unsigned int>& ids, unsigned int & id_cursor, const us
       {
         // This selects any notes which refer to the current verse.
         ustring book, chapter, verse;
-        decode_reference(currentreference, book, chapter, verse);
+        Reference::decode_reference(currentreference, book, chapter, verse);
         unsigned int verse_zero;
         verse_zero = reference_to_numerical_equivalent(book, chapter, "0");
         vector < int >verses = verses_encode(verse);
@@ -263,7 +263,7 @@ void notes_select(vector <unsigned int>& ids, unsigned int & id_cursor, const us
       {
         // This selects any notes which refer to the current chapter.
         ustring book, chapter, verse;
-        decode_reference(currentreference, book, chapter, verse);
+        Reference::decode_reference(currentreference, book, chapter, verse);
         unsigned int verse_zero;
         verse_zero = reference_to_numerical_equivalent(book, chapter, "0");
         ustring this_chapter = convert_to_string(verse_zero);
@@ -281,7 +281,7 @@ void notes_select(vector <unsigned int>& ids, unsigned int & id_cursor, const us
       {
         // This selects any notes which refer to the current book.
         ustring book, chapter, verse;
-        decode_reference(currentreference, book, chapter, verse);
+        Reference::decode_reference(currentreference, book, chapter, verse);
         unsigned int verse_zero;
         verse_zero = reference_to_numerical_equivalent(book, chapter, "0");
         ustring this_book = convert_to_string(verse_zero);
