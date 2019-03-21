@@ -69,13 +69,10 @@ FloatingWindow::FloatingWindow(GtkWidget * layout_in, WindowID window_id_in, ust
   g_signal_connect ((gpointer) eventbox_title, "enter_notify_event", G_CALLBACK (on_titlebar_enter_notify_event), gpointer (this));
   g_signal_connect ((gpointer) eventbox_title, "leave_notify_event", G_CALLBACK (on_titlebar_leave_notify_event), gpointer (this));
     
-  GtkWidget *eventbox_close;
-  eventbox_close = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "eventbox_close"));
-  label_close = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "label_close"));
-  g_signal_connect ((gpointer) eventbox_close, "button_press_event", G_CALLBACK (on_widget_button_press_event), gpointer (this));
-  g_signal_connect ((gpointer) eventbox_close, "enter_notify_event", G_CALLBACK (on_label_close_enter_notify_event), gpointer (this));
-  g_signal_connect ((gpointer) eventbox_close, "leave_notify_event", G_CALLBACK (on_label_close_leave_notify_event), gpointer (this));
-  g_signal_connect ((gpointer) eventbox_close, "button_press_event", G_CALLBACK (on_label_close_button_press_event), gpointer (this));
+  GtkWidget *button_close;
+  button_close = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "button_close"));
+  g_signal_connect ((gpointer) button_close, "button_press_event", G_CALLBACK (on_widget_button_press_event), gpointer (this));
+  g_signal_connect ((gpointer) button_close, "clicked", G_CALLBACK (on_button_close_clicked), gpointer (this));
 
   GtkWidget *eventbox_client;
   eventbox_client = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "eventbox_client"));
@@ -348,50 +345,15 @@ void FloatingWindow::clear_previous_root_coordinates ()
 }
 
 
-gboolean FloatingWindow::on_label_close_enter_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data)
+void FloatingWindow::on_button_close_clicked (GtkButton *button, gpointer user_data)
 {
-  return ((FloatingWindow *) user_data)->on_label_close_enter_notify(event);
+  ((FloatingWindow *) user_data)->on_button_close ();
 }
 
 
-gboolean FloatingWindow::on_label_close_enter_notify (GdkEventCrossing *event)
-{
-  // Set the cursor to a shape that shows that the action label can be clicked.
-  GtkWidget *toplevel_widget = gtk_widget_get_toplevel(label_close);
-  GdkWindow *gdk_window = gtk_widget_get_window (toplevel_widget);
-  GdkCursor *cursor = gdk_cursor_new(GDK_HAND2);
-  gdk_window_set_cursor(gdk_window, cursor);
-  gdk_cursor_unref (cursor);
-  return false;
-}
-
-
-gboolean FloatingWindow::on_label_close_leave_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data)
-{
-  return ((FloatingWindow *) user_data)->on_label_close_leave_notify(event);
-}
-
-
-gboolean FloatingWindow::on_label_close_leave_notify (GdkEventCrossing *event)
-{
-  // Restore the original cursor.
-  GtkWidget * toplevel_widget = gtk_widget_get_toplevel(label_close);
-  GdkWindow *gdk_window = gtk_widget_get_window (toplevel_widget);
-  gdk_window_set_cursor(gdk_window, NULL);
-  return false;
-}
-
-
-gboolean FloatingWindow::on_label_close_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data)
-{
-  return ((FloatingWindow *) user_data)->on_label_close_button_press(event);
-}
-
-
-gboolean FloatingWindow::on_label_close_button_press (GdkEventButton *event)
+void FloatingWindow::on_button_close ()
 {
   gtk_button_clicked(GTK_BUTTON(delete_signal_button));
-  return false;
 }
 
 
