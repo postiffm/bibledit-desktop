@@ -39,8 +39,6 @@ private:
   GtkWidget *vbox_window;
 public:
   GtkWidget *label_title;
-private:
-  GtkWidget *label_close;
 public:
   GtkWidget *vbox_client;
 private:
@@ -74,14 +72,10 @@ private:
   gboolean on_statusbar_enter_notify (GdkEventCrossing *event);
   static gboolean on_statusbar_leave_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data);
   gboolean on_statusbar_leave_notify (GdkEventCrossing *event);
-  static gboolean on_label_close_enter_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data);
-  gboolean on_label_close_enter_notify (GdkEventCrossing *event);
-  static gboolean on_label_close_leave_notify_event (GtkWidget *widget, GdkEventCrossing *event, gpointer user_data);
-  gboolean on_label_close_leave_notify (GdkEventCrossing *event);
 
-  // Close link.
-  static gboolean on_label_close_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data);
-  gboolean on_label_close_button_press (GdkEventButton *event);
+  // Close button
+  static void on_button_close_clicked (GtkButton *button, gpointer user_data);
+  void on_button_close ();
 
 private:  
   ustring title;
