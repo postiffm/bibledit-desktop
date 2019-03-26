@@ -14,3 +14,11 @@
 	color: white;
 	font-weight: bold;
 }
+
+.floating-window .title-background, .floating-window>border {
+	border-top-left-radius: 7px;
+}
+
+.floating-window>border {
+	border-top-right-radius: 7px;
+}
