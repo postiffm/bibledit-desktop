@@ -97,10 +97,14 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	GtkWidget *tab_label = gtk_label_new_with_mnemonic (title.c_str());
 	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
 
+	GtkWidget *image = gtk_image_new_from_icon_name (
+			"window-close-symbolic", GTK_ICON_SIZE_MENU);
+	g_object_set (image, "use-fallback", TRUE, NULL);
 	close_button = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON (close_button),
-			gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU));
-	gtk_button_set_relief(GTK_BUTTON (close_button), GTK_RELIEF_NONE);
+	gtk_button_set_image (GTK_BUTTON (close_button), image);
+	GtkStyleContext *style_context = gtk_widget_get_style_context (close_button);
+	gtk_style_context_add_class (style_context, "titlebutton");
+	gtk_style_context_add_class (style_context, "close");
 	gtk_widget_set_can_focus(close_button, FALSE);
 	gtk_button_set_focus_on_click(GTK_BUTTON (close_button), FALSE);
 	g_signal_connect(close_button, "clicked",
