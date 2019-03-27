@@ -45,24 +45,24 @@ int main(void)
     string verse_chapone;
 
     vector<string> books = {
-                "1Ch",   "2Jn",   "Dan",   "Hab",   "Jonah",    "Mark",  "Psal",
-                "1Co",   "2Ki",   "Deut",  "Hag",   "Josh",     "Matt",  "Rev",
-                "1Jn",   "2Pe",   "Eccl",  "Heb",   "Jude",     "Mic",   "Rom",
-                "1Ki",   "2Sa",   "Eph",   "Hos",   "Judg",     "Nah",   "Ruth",
-                "1Pe",   "2Th",   "Esth",  "Isa",   "Lam",      "Neh",   "Song",
-                "1Sa",   "2Tim",  "Exo",   "Jam",   "Num",      "Tit",   "Zech",
-                "1Th",   "3Jn",   "Ezek",  "Jer",   "Lev",      "Obad",  "Zech",
-                "1Tim",  "Acts",  "Ezra",  "Job",   "Phm",      "Zeph",
-                "2Ch",   "Amos",  "Gal",   "Joel",  "Luke",     "Php",
-                "2Co",   "Col",   "Gen",   "John",  "Mal",      "Prov"
-            };
+        "Gen",      "Exo",      "Lev",      "Num",      "Deut",     "Josh",     "Judg",
+        "Ruth",     "1Sa",      "2Sa",      "1Ki",      "2Ki",      "1Ch",      "2Ch",
+        "Ezra",     "Neh",      "Esth",     "Job",      "Psa",      "Prov",     "Eccl",
+        "Song",     "Isa",      "Jer",      "Lam",      "Ezek",     "Dan",      "Hos",
+        "Joel",     "Amos",     "Oba",      "Jonah",    "Mic",      "Nah",      "Hab",
+        "Zeph",     "Hag",      "Zech",     "Mal",
+        "Matt",     "Mark",     "Luke",     "John",     "Acts",     "Rom",      "1Co",
+        "2Co",      "Gal",      "Eph",      "Php",      "Col",      "1Th",      "2Th",
+        "1Tim",     "2Tim",     "Tit",      "Phm",      "Heb",      "Jam",      "1Pe",
+        "2Pe",      "1Jn",      "2Jn",      "3Jn",      "Jude",     "Rev"
+    };
 
     //vector<string> books = { "3Jn" };
 
     if (mkdir("books", 0777) == -1)
         cout << "Error creating dir: " << strerror(errno) << endl;
     else
-        cout << "Directory created" < endl;
+        cout << "Directory created" << endl;
 
     curl = curl_easy_init();
     if (curl)

@@ -793,14 +793,14 @@ void book_netbible::load(void)
     ustring filenames[66] = {
         "Gen.txt",  "Exo.txt",  "Lev.txt",  "Num.txt",   "Deut.txt", "Josh.txt", "Judg.txt",
         "Ruth.txt", "1Sa.txt",  "2Sa.txt",  "1Ki.txt",   "2Ki.txt",  "1Ch.txt",  "2Ch.txt",
-        "Ezra.txt", "Neh.txt",  "Esth.txt", "Job.txt",   "Psal.txt", "Prov.txt", "Eccl.txt",
+        "Ezra.txt", "Neh.txt",  "Esth.txt", "Job.txt",   "Psa.txt",  "Prov.txt", "Eccl.txt",
         "Song.txt", "Isa.txt",  "Jer.txt",  "Lam.txt",   "Ezek.txt", "Dan.txt",  "Hos.txt",
-        "Joel.txt", "Amos.txt", "Obad.txt", "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt",
+        "Joel.txt", "Amos.txt", "Oba.txt",  "Jonah.txt", "Mic.txt",  "Nah.txt",  "Hab.txt",
         "Zeph.txt", "Hag.txt",  "Zech.txt", "Mal.txt",   "Matt.txt", "Mark.txt", "Luke.txt",
         "John.txt", "Acts.txt", "Rom.txt",  "1Co.txt",   "2Co.txt",  "Gal.txt",  "Eph.txt",
         "Php.txt",  "Col.txt",  "1Th.txt",  "2Th.txt",   "1Tim.txt", "2Tim.txt", "Tit.txt",
         "Phm.txt",  "Heb.txt",  "Jam.txt",  "1Pe.txt",   "2Pe.txt",  "1Jn.txt",  "2Jn.txt",
-        "3Jn.txt", "Jude.txt", "Rev.txt" };
+        "3Jn.txt",  "Jude.txt", "Rev.txt" };
 
     //  bookidx points into the filenames[] array. It has to start at zero. booknum is from 1-66 (or more for apocrypha)
     unsigned int bookidx = booknum - 1;
