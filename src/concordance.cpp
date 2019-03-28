@@ -201,20 +201,7 @@ void Concordance::writeFrequencySortedHtml(HtmlWriter2 &htmlwriter)
 // Find all occurrences of boldstr in src, and insert <b>...</b> around them
 void Concordance::boldface(ustring src, const ustring &boldstr, HtmlWriter2 &htmlwriter)
 {
-    // Two problems: 1. I don't find different capitalizations; 2. <b> is not interpreted properly, so just prints as is.
-#if 0
-    ustring::size_type idx = 0;
-    while (idx != ustring::npos) {
-      idx = src.find(boldstr, idx);
-      //cout << "idx=" << idx << endl;
-      if (idx != ustring::npos) {
-          src.insert(idx, "<b>");
-          idx = idx+3+boldstr.size();
-          src.insert(idx,"</b>");
-          idx = idx+4;
-      }
-    }
-#endif
+    // Make sure you find different capitalizations; and interpret <b> properly.
     // Walk the string and print out its parts, inserting <b> and </b> as needed.
     ustring::size_type idx1 = 0, idx2 = 0;
     ustring srcLower = src.lowercase();

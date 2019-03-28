@@ -273,30 +273,12 @@ ustring books_id_to_english(unsigned int id)
 {
   assert(books_table[id].id == id);
   return books_table[id].name;
-#if 0
-  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
-    if (id == books_table[i].id) {
-      DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].name)
-      return books_table[i].name;
-    }
-  }
-  return "";
-#endif
 }
 
 ustring books_id_to_localname(unsigned int id)
 {
   assert(books_table[id].id == id);
   return books_table[id].localname;
-#if 0
-  for (unsigned int i = 0; i < bookdata_books_count(); i++) {
-    if (id == books_table[i].id) {
-      DEBUG("Found id="+std::to_string(id)+" to be "+books_table[i].localname)
-      return books_table[i].localname;
-    }
-  }
-  return "";
-#endif
 }
 
 // This requires the compiler flag -std=c++11. This, in turn, requires

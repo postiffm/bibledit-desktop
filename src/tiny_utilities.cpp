@@ -354,30 +354,6 @@ void TinySpawn::run()
   }
 }
 
-#if 0
-ParseLine::ParseLine(const ustring & text)
-// Parses text into a vector of separate lines, each in a ustring
-{
-  ustring s = text;
-  size_t start = s.find_first_not_of(" \t\n\r");
-  size_t newlineposition = s.find("\n");
-  // Loop intial condition: start points to first non-whitespace and newlineposition points at
-  // following newline, if there is one, or end of string if not
-  while (newlineposition != string::npos) {
-    ustring line(s, start, newlineposition-start); // construct ustring as a copy of substring
-    lines.push_back(trimEnd(line)); // trim away any spaces or \r or \t that are just before the \n
-    start = newlineposition + 1;
-    start = s.find_first_not_of(" \t\n\r", start); // fast forward past any initial whitespace
-    newlineposition = s.find("\n", start);
-  }
-  if (start != string::npos) {
-    ustring line(s, start, string::npos); // construct ustring as a copy of substring
-    // very end was already trimmed at beginning of this routine
-    lines.push_back(line);
-  }
-}
-#endif
-
 ParseLine::ParseLine(const ustring & text)
 // Parses text into a vector of separate lines, each in a ustring
 {

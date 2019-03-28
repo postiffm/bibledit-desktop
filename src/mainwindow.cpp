@@ -3031,23 +3031,6 @@ void MainWindow::on_window_concordance_signal_button()
     navigation.display(myref);
     window_concordance->newReference = NULL;
   }
-  // I'm not sure what of the below I need
-#if 0
-  // Get the editor window. If none, bail out.
-  WindowEditor *editor_window = last_focused_editor_window();
-  if (!editor_window) { return; }
-  
-  // Bail out if there's no concordance window (how is this possible?)
-  if (!window_concordance) { return; }
-
-  // WHY DID I HAVE NEXT 3 locs commented?
-  // Focus the editor.
-  editor_window->focus_set ();
-
-  // Jump to the reference.
-  //navigation.display(window_concordance->reference);
-  editor_window->go_to_new_reference_highlight_set();
-#endif    
 }
 
 void MainWindow::on_window_analysis_signal_button_clicked(GtkButton * button, gpointer user_data)
