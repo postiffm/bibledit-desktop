@@ -229,7 +229,7 @@ $ln = <>; # eat the first line (headers)
 
 while ($ln = <>) {
     chomp($ln);
-    print $ln;
+    #print $ln;
     if ($ln =~ /^$/) { next; } # Skip blanks
     # Following is a regex that matches like Gen.1.1 or 1Sa.1.1
     $refpattern = qr/([1-3a-zA-Z]+)\.([0-9]+)\.([0-9]+)/;
@@ -241,13 +241,14 @@ while ($ln = <>) {
 	$bk2 = $4;
 	$ch2 = $5;
 	$vs2 = $6;
-	print "\tFound $bk1 $ch1:$vs1 ==> $bk2 $ch2:$vs2\n";
+	#print "\tFound $bk1 $ch1:$vs1 ==> $bk2 $ch2:$vs2\n";
 	# Before printing this verse reference, we have to print 4 bytes of zero to indicate that we have reached the end
 	# of a cross-reference list. But not the first four bytes of the file.
 	if (($bk1 != $currBk) || ($ch1 != $currCh) || ($vs1 != $currVs)) {
 	    # We need to make a change-over to a new "parent" verse. To mark that, we put an 0x0 at
 	    # the end of the previous list...except if this is the first verse, there is no previous
-	    # list, so we don't put a 0x0 first.n
+	    # list, so we don't put a 0x0 first.
+	    #print "CHANGING TO NEW PARENT $bk1 $ch1:$vs1\n";
 	    if ($verseCnt != 0) {
 		$enc = 0;
 		print $out pack('L<', $enc);
@@ -282,13 +283,15 @@ while ($ln = <>) {
 	$bk3 = $7;
 	$ch3 = $8;
 	$vs3 = $9;
-	# Repeated code...not good, but quick
-	print "\tFound $bk1 $ch1:$vs1 ==> $bk2 $ch2:$vs2 - $bk3 $ch3:$vs3 \n";
+	# Repeated code...not good...wasted my time with duplicated errors
+	#print "\tFound $bk1 $ch1:$vs1 ==> $bk2 $ch2:$vs2 - $bk3 $ch3:$vs3 \n";
 	# Before printing this verse reference, we have to print 4 bytes of zero to indicate that we have reached the end
 	# of a cross-reference list. But not the first four bytes of the file.
-	if (($verseCnt != 0) && (($bk1 != $currBk) || ($ch1 != currCh) || ($vs1 != currVs))) {
-	    $enc = 0;
-	    print $out pack('L<', $enc);
+	if (($bk1 != $currBk) || ($ch1 != $currCh) || ($vs1 != $currVs)) {
+	    if ($verseCnt != 0) {
+		$enc = 0;
+		print $out pack('L<', $enc);
+	    }
 	    $thisCrfCnt = 0; # reset counter
 	    $currBk = $bk1;
 	    $currBkNum = $abbrevs{$bk1};
