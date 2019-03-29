@@ -244,7 +244,7 @@ while ($ln = <>) {
 	print "\tFound $bk1 $ch1:$vs1 ==> $bk2 $ch2:$vs2\n";
 	# Before printing this verse reference, we have to print 4 bytes of zero to indicate that we have reached the end
 	# of a cross-reference list. But not the first four bytes of the file.
-	if (($bk1 != $currBk) || ($ch1 != currCh) || ($vs1 != currVs)) {
+	if (($bk1 != $currBk) || ($ch1 != $currCh) || ($vs1 != $currVs)) {
 	    # We need to make a change-over to a new "parent" verse. To mark that, we put an 0x0 at
 	    # the end of the previous list...except if this is the first verse, there is no previous
 	    # list, so we don't put a 0x0 first.n
