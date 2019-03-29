@@ -58,8 +58,10 @@ public:
   ~CrossReferences();
   void write(const Reference &ref, HtmlWriter2 &htmlwriter);   
 private:
+  bible_bixref *LoadXrefs(const ustring& filename, const ustring &xrefbiblename);
+  void WriteXrefs(bible_bixref *bbl_internal, const Reference &ref, HtmlWriter2 &htmlwriter);
   bible_bixref *bbl;
-  ustring crossref_file;
+  bible_bixref *bblopenxref;
 };
 
 #endif

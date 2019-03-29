@@ -29,38 +29,46 @@ extern book_record books_table[];
 
 CrossReferences::CrossReferences()
 {
+    bbl         = LoadXrefs("/bibles/bi.crf",              "BI_XREF");
+    bblopenxref = LoadXrefs("/bibles/open_bible_info.crf", "OPENBIBLE_XREF");
+}
+
+bible_bixref *CrossReferences::LoadXrefs(const ustring& filename, const ustring &xrefbiblename)
+{
     // Load the whole set of cross references. It is a lot of data--over half a megabyte
     // of memory, but the way it is stored in binary format (see linux/buildcrf.pl and 
     // linux/readcrf.pl) makes it fairly quick.
-    crossref_file = Directories->get_package_data() + "/bibles/bi.crf";
+    ustring crossref_file = Directories->get_package_data() + filename;
     ReadBinary rb(crossref_file);
     uint32_t *dataptr = rb.get_data();
     unsigned int num32BitWords = rb.get_num32BitWords();
     
+    bible_bixref *bbl_internal = nullptr;
+
     if ((dataptr == 0x0) || (num32BitWords == 0)) { 
         // There was a problem opening the file
-        bbl = 0x0;
+        bbl_internal = nullptr;
         gtkw_dialog_error(NULL, _("Cannot open file ") + crossref_file);
-        return;
+        return bbl_internal;
     }
     
-    bbl = new bible_bixref("BI_XREF");
+    bbl_internal = new bible_bixref(xrefbiblename);
     
     // Create empty books right now, since we know we are going to need them
-    bbl->books.resize(67, 0x0);
+    bbl_internal->books.resize(67, 0x0);
     unsigned int b;
     for (b = 1; b <= 66; b++) {
         ustring bookname = books_table[b].name;
-        bbl->books[b] = new book_bixref(bbl, bookname, b);
+        bbl_internal->books[b] = new book_bixref(bbl_internal, bookname, b);
     }
     
     unsigned int i;
     bool startNewList = true;
-    book *bk = NULL;
-    chapter *ch = NULL;
-    verse_xref *vs = NULL;
+    book *bk = nullptr;
+    chapter *ch = nullptr;
+    verse_xref *vs = nullptr;
 
-    ProgressWindow progresswindow (_("Loading cross-reference data"), false);
+    ProgressWindow progresswindow (_("Loading cross-reference data: ")+filename, false);
     progresswindow.set_iterate (0, 1, num32BitWords>>10); // shifting by 10 is dividing by appx 1000 (1024)
 
     for (i = 0; i < num32BitWords; i++) {
@@ -72,7 +80,7 @@ CrossReferences::CrossReferences()
         
         if (startNewList) {
             Reference ref(encoded);
-            bk = bbl->books[ref.book_get()];
+            bk = bbl_internal->books[ref.book_get()];
             bk->check_chapter_in_range(ref.chapter_get());
             ch = bk->chapters[ref.chapter_get()];
             if (ch == 0) {
@@ -94,26 +102,32 @@ CrossReferences::CrossReferences()
             vs->xrefs.push_back(encoded);
         }
     }
-    
     // When rb goes out of scope, destructor frees up the buffer that was read
-    
+    return bbl_internal;
 }
 
 CrossReferences::~CrossReferences()
 {
-    if (bbl) { delete bbl; bbl = NULL; }
+    if (bbl) { delete bbl; bbl = nullptr; }
+    if (bblopenxref) { delete bblopenxref; bblopenxref = nullptr; }
 }
 
 void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
 {
+    WriteXrefs(bbl, ref, htmlwriter);
+    WriteXrefs(bblopenxref, ref, htmlwriter);
+}
+
+void CrossReferences::WriteXrefs(bible_bixref *bbl_internal, const Reference &ref, HtmlWriter2 &htmlwriter)
+{
     vector <unsigned int> *xrefs; // could transfer over to uint32_t here and elsewhere
     htmlwriter.paragraph_open();
-    htmlwriter.text_add(_("Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
+    htmlwriter.text_add(bbl_internal->projname + _(": Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
     htmlwriter.paragraph_close();
 
-    if (bbl == 0x0) {
+    if (bbl_internal == 0x0) {
         htmlwriter.paragraph_open();
-        htmlwriter.text_add(_("Could not open cross-reference file ") + crossref_file);
+        htmlwriter.text_add(_("Could not open cross-reference file "));
         htmlwriter.paragraph_close();
         return;
     }
@@ -125,14 +139,14 @@ void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
     }
     
     try {
-        xrefs = bbl->retrieve_xrefs(ref); // this copies xrefs from the returned vector<>&
+        xrefs = bbl_internal->retrieve_xrefs(ref); // this copies xrefs from the returned vector<>&
     }
     catch (std::runtime_error &e) {
         htmlwriter.paragraph_open();
         htmlwriter.text_add(e.what());
         htmlwriter.paragraph_close();
     }
-    if ((xrefs == NULL) || (xrefs->empty())) {
+    if ((xrefs == nullptr) || (xrefs->empty())) {
         htmlwriter.paragraph_open();
         htmlwriter.text_add(_("No cross references"));
         htmlwriter.paragraph_close();
