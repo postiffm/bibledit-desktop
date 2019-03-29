@@ -4,7 +4,15 @@ Cross-Reference Data
 --------------------
 bi.txt        - cross reference data, text format, saved from MS Word
 bi.crf        - result of linux/buildcrf.pl bi.txt; binary file
-bilongcrf.txt - result of linux/readcrf.pl (which reads bi.crf)
+bilongcrf.txt - result of linux/readcrf.pl bi.crf
+	        This is mainly useful for debugging.
+open_bible_info_crf.txt - Open Bible cross reference data file.
+			Source: https://www.openbible.info/labs/cross-references/
+			Content is licensed under a Creative Commons Attribution License
+			(http://creativecommons.org/licenses/by/4.0/).
+open_bible_info.crf - result of linux/buildcrf_openxrefs.pl; binary file
+open_bible_info_longcrf.txt - result of linux/readcrf.pl open_bible_info.crf
+			    This is mainly useful for debugging.
 Makefile.am   - Autotools Makefile template that tells how to install
                 the cross-reference data file (bi.crf is the only one at
                 the moment). If you change this, run autoconf, automake,
