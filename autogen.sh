@@ -60,6 +60,7 @@ cp -f "$ACLOCAL/glibc21.m4" m4/
 cp -f "$ACLOCAL/iconv.m4" m4/
 cp -f "$ACLOCAL/lcmessage.m4" m4/
 cp -f "$ACLOCAL/progtest.m4" m4/
+cp -f "$ACLOCAL/ax_require_defined.m4" m4/
 # aclocal should handle this by itself, but it copies the stdcxx_11.m4 variant
 #cp -f "$AUTOCONFARCHIVE/ax_cxx_compile_stdcxx.m4" m4/
 # What to do about isc-posix.m4?
