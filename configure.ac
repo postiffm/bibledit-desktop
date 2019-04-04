@@ -19,8 +19,9 @@ AC_PROG_CC_STDC
 AC_PROG_CPP
 AC_LANG([C++])
 AC_PROG_CXX
-#Guess: this is not needed for gcc 6.3, since default mode is -std=gnu++14
-#AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+# This is still required to make sure that gcc is new enough and it supports
+# C++11. Also if any flags are required (e.g., -std=c++11), they are added.
+AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
 AC_HEADER_STDC
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.24.0 gdk-2.0,,AC_MSG_ERROR(Gtk2 development version >= 2.24.0 is needed.))
