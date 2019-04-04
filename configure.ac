@@ -156,7 +156,7 @@ if test x$FIND_CURL = xno; then
 fi
 
 
-PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.16.0,,AC_MSG_ERROR(glib development version >= 2.16.0 is needed.))
+PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.44.0,,AC_MSG_ERROR(glib development version >= 2.44.0 is needed.))
 AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
 
