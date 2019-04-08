@@ -231,7 +231,6 @@ public:
   EditorActionCreateParagraph * focused_paragraph;
   GtkTextView *focused_textview; // pointer to either textview or notetextview
 private:
-    
   bool text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   bool text_starts_verse (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   void gtk_text_buffer_append_with_markers (GtkTextBuffer *textbuffer, const ustring& text, GtkTextIter &startiter, GtkTextIter &enditer);

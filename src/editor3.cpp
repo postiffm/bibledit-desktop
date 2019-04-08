@@ -891,7 +891,7 @@ void Editor3::on_textview_move_cursor(GtkTextView * textview, GtkMovementStep st
   ((Editor3 *) user_data)->textview_move_cursor(textview, step, count);
 }
 
-// According to https://developer.gnome.org/gtk3/stable/GtkTextView.html#GtkTextView-move-cursor,
+// TO DO: According to https://developer.gnome.org/gtk3/stable/GtkTextView.html#GtkTextView-move-cursor,
 // "applications should not connect" to the move-cursor signal. But it is an integral component
 // of how things are done in Bibledit as of 4/25/2016.
 void Editor3::textview_move_cursor(GtkTextView * textview, GtkMovementStep step, gint count)
@@ -1602,7 +1602,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   ustring utext (text);
   
   // New lines in notes are not supported.
-  if (focused_paragraph->type == eatCreateNoteParagraph) {
+  if (focused_textview == GTK_TEXT_VIEW(notetextview)) {
     replace_text (utext, "\n", " ");
   }
   //DEBUG("utext="+utext)
@@ -1692,6 +1692,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
 	//DEBUG("about to text_load, text="+ustring(text))
 	//DEBUG("about to text_load, utext="+utext)
 	//DEBUG("about to text_load, character_style_to_be_applied="+character_style_to_be_applied)
+      // TO DO: below is an error...can't use text_load, because that does the whole chapter!!!
     text_load (text, character_style_to_be_applied, false);
   } else {
     // Load plain text. Handle new lines as well.
@@ -2794,7 +2795,7 @@ Editor3::EditorActionCreateParagraph * Editor3::widget2paragraph_action (GtkWidg
       if (paragraph_action->textview == widget) {
         return paragraph_action;
       }
-      if ((action->type == eatCreateNoteParagraph)) {
+      if (action->type == eatCreateNoteParagraph) {
         EditorActionCreateNoteParagraph * note_paragraph_action = static_cast <EditorActionCreateNoteParagraph *> (action);
         if (note_paragraph_action->hbox == widget) {
           return paragraph_action;
@@ -2814,7 +2815,7 @@ Editor3::EditorActionCreateNoteParagraph * Editor3::note2paragraph_action (const
 {
   for (unsigned int i = 0; i < actions_done.size(); i++) {
     EditorAction * action = actions_done[i];
-    if ((action->type == eatCreateNoteParagraph)) {
+    if (action->type == eatCreateNoteParagraph) {
       EditorActionCreateNoteParagraph * note_paragraph_action = static_cast <EditorActionCreateNoteParagraph *> (action);
       if (note_paragraph_action->identifier == note) {
         return note_paragraph_action;

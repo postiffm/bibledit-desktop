@@ -53,6 +53,7 @@
 #include "snapshots.h"
 #include "java.h"
 #include <glib/gi18n.h>
+#include "debug.h"
 
 void export_to_usfm (const ustring& project, ustring location, bool zip, bool combined, GtkWindow *transient_parent)
 {
@@ -765,7 +766,8 @@ directory: Where to put the module.
   unix_unlink(zipfile.c_str());
   command = "cd" + shell_quote_space(base_directory) + " && ";
   command.append("zip -r" + shell_quote_space(zipfile) + "*");
-  if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
+  int retval = system(command.c_str());  // This one does not work with GwSpawn because of the wildcards used.
+  DEBUG("Command " + command + " returned " + std::to_string(retval))
   unix_mv(zipfile, directory);
 }
 
@@ -918,7 +920,8 @@ void export_to_usfm_changes (const ustring& project, int time_from, ustring comm
 #else
     ustring command = "cd" + shell_quote_space(workingdirectory) + "; zip -r " + gw_path_get_basename(filename) + " *.usfm; rm *.usfm";
 #endif
-    if (system(command.c_str())) ; // This one does not work with GwSpawn because of the wildcards used.
+    int retval = system(command.c_str()); // This one does not work with GwSpawn because of the wildcards used.
+    DEBUG("Command " + command + " returned " + std::to_string(retval))
   }
 
   // Open web page with information: backup_is_ready.html.

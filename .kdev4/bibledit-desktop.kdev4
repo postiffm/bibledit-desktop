@@ -7,14 +7,14 @@ Launch Configurations=Launch Configuration 0
 [Launch][Launch Configuration 0]
 Configured Launch Modes=execute
 Configured Launchers=nativeAppLauncher
-Name=New Compiled Binary Launcher
+Name=Debug bibledit-desktop
 Type=Native Application
 
 [Launch][Launch Configuration 0][Data]
 Arguments=--debug
 Debugger Shell=
 Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
-Dependency Action=Nothing
+Dependency Action=Install
 Display Demangle Names=true
 Display Static Members=false
 EnvironmentGroup=
