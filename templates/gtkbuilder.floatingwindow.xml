@@ -1,7 +1,3 @@
-<!--
-  Note: No matter how ugly it looks don't reformat this file until we
-  fully port to GTK 3.x or otherwise you will get bad rebase conflicts.
--->
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
