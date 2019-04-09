@@ -35,7 +35,7 @@ class Highlight
 public:
   Highlight (ChapterView *_parent_editor,
              GtkTextBuffer * buffer, 
-             GtkWidget * textview, 
+             GtkWidget * textview,    // TO DO: change this to a GtkTextView *
              const ustring& project, 
              GtkTextTag * tag,
              const ustring& verse);

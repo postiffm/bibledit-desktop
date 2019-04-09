@@ -95,7 +95,6 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   keystrokeNum = 0;
   keyStrokeNum_paragraph_crossing_processed = 0;
   verse_restarts_paragraph = false;
-  focused_paragraph = NULL;
   focused_textview = NULL;
   disregard_text_buffer_signals = 0;
   textbuffer_delete_range_was_fired = false;
@@ -125,7 +124,7 @@ Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
   scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_show(scrolledwindow);
   gtk_box_pack_start(GTK_BOX(vbox_in), scrolledwindow, true, true, 0);
-  // TO DO: Fix next line to turn off horizontal scrolling if needed
+  // TODO: Fix next line to turn off horizontal scrolling if needed
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   viewport = gtk_viewport_new (NULL, NULL);
@@ -241,7 +240,7 @@ Editor3::~Editor3()
   
   g_object_unref(textview);        textview = NULL;     textbuffer = NULL;
   g_object_unref(notetextview);    notetextview = NULL; notetextbuffer = NULL;
-  focused_textview = NULL;         focused_paragraph = NULL;
+  focused_textview = NULL;
 
   // Destroy possible highlight object.
   if (highlight) { 
@@ -333,20 +332,7 @@ void Editor3::chapter_load(const Reference &ref)
   //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
   highlightCurrVerse(textview); // now it is highlighted
   scroll_to_insertion_point_on_screen(textview);
-#if 0
-  if (!textviews.empty()) {
-    give_focus (textviews[0]);
-    DEBUG("W6 Just give_focus")
-    GtkTextIter iter;
-    gtk_text_buffer_get_start_iter(focused_paragraph->textbuffer, &iter);
-    gtk_text_buffer_place_cursor(focused_paragraph->textbuffer, &iter);
-    DEBUG("W6.1 About to scroll")
-    scroll_to_insertion_point_on_screen(textviews);
-    DEBUG("W6.2 About to highlight")
-    highlightCurrVerse(textviews); // now it is highlighted
-  }
-  DEBUG("W7 Scrolled to 1:1")  
-#endif
+
   // Store size of actions buffer so we know whether the chapter changed.
   editor_actions_size_at_no_save = actions_done.size();
 }
@@ -512,7 +498,6 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   //------------------------------------------------------------------------------
   textview = create_text_view(vbox_paragraphs);
   textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
-  focused_paragraph = NULL;
   focused_textview = GTK_TEXT_VIEW(textview);
 
   //------------------------------------------------------------------------------
@@ -668,6 +653,15 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   }
 }
 
+ustring Editor3::chapter_get_ustring()
+{
+  GtkTextIter startiter, enditer;
+  gtk_text_buffer_get_start_iter(textbuffer, &startiter);
+  gtk_text_buffer_get_end_iter(textbuffer, &enditer);
+  ustring chapter_text = usfm_get_text(textbuffer, startiter, enditer);
+  replace_text(chapter_text, "  ", " "); // a minimal cleanup
+  return chapter_text;
+}
 
 void Editor3::chapter_save()
 // Handles saving the chapter.
@@ -680,7 +674,7 @@ void Editor3::chapter_save()
 
   // If the text was not changed, bail out.
   //if (editor_actions_size_at_no_save == actions_done.size()) { return; }
-  // TO DO: Redo the above functionality
+  // TODO: Fix the above functionality
 
   // If the project is empty, bail out.
   if (project.empty()) { return; }
@@ -798,11 +792,9 @@ ustring Editor3::text_get_selection()
 // and returns it as USFM code.
 {
   ustring text;
-  if (focused_paragraph) {
-    GtkTextIter startiter, enditer;
-    gtk_text_buffer_get_selection_bounds(focused_paragraph->textbuffer, &startiter, &enditer);
-    text = usfm_get_text(focused_paragraph->textbuffer, startiter, enditer);
-  }
+  GtkTextIter startiter, enditer;
+  gtk_text_buffer_get_selection_bounds(textbuffer, &startiter, &enditer);
+  text = usfm_get_text(textbuffer, startiter, enditer);
   return text;
 }
 
@@ -814,11 +806,6 @@ void Editor3::insert_text(const ustring &text)
   // If the text is not editable, bail out.
   if (!editable) { return; }
 
-  // If no paragraph is in focus, bail out.
-  if (!focused_paragraph) { return; }
-
-  // Buffer.    
-  GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
   // Erase selected text.
   gtk_text_buffer_delete_selection(textbuffer, true, editable);
   // Insert the text at the cursor.
@@ -855,15 +842,11 @@ void Editor3::show_quick_references_execute()
   // If we're not in a note, bail out.
   if (last_focused_type() != etvtNote) { return; }
 
-  // If we're not in a paragraph, bail out.
-  if (!focused_paragraph) { return; }
-
   // Get the text of the focused note.
-  GtkTextBuffer *note_buffer = focused_paragraph->textbuffer;
   GtkTextIter startiter, enditer;
-  gtk_text_buffer_get_start_iter(note_buffer, &startiter);
-  gtk_text_buffer_get_end_iter(note_buffer, &enditer);
-  gchar *txt = gtk_text_buffer_get_text(note_buffer, &startiter, &enditer, true);
+  gtk_text_buffer_get_start_iter(notetextbuffer, &startiter);
+  gtk_text_buffer_get_end_iter(notetextbuffer, &enditer);
+  gchar *txt = gtk_text_buffer_get_text(notetextbuffer, &startiter, &enditer, true);
   ustring note_text = txt;
   g_free(txt); // Postiff: plug memory leak because above allocates mem, then ustring copies from it
 
@@ -891,7 +874,7 @@ void Editor3::on_textview_move_cursor(GtkTextView * textview, GtkMovementStep st
   ((Editor3 *) user_data)->textview_move_cursor(textview, step, count);
 }
 
-// TO DO: According to https://developer.gnome.org/gtk3/stable/GtkTextView.html#GtkTextView-move-cursor,
+// TODO: According to https://developer.gnome.org/gtk3/stable/GtkTextView.html#GtkTextView-move-cursor,
 // "applications should not connect" to the move-cursor signal. But it is an integral component
 // of how things are done in Bibledit as of 4/25/2016.
 void Editor3::textview_move_cursor(GtkTextView * textview, GtkMovementStep step, gint count)
@@ -966,7 +949,7 @@ The user expects a heading to belong to the next verse.
   ustring verse_number = "0";
   bool verse_number_found = false;
 //  GtkWidget * textview = NULL;
-
+// TODO: Go carefully more through this logic
   verse_number_found = get_verse_number_at_iterator_internal (iter, verse_marker, verse_number);
 
 #ifdef OLDSTUFF
@@ -1086,13 +1069,11 @@ void Editor3::textview_grab_focus(GtkWidget * widget)
 {
   //DEBUG("Signal grab_focus")
   // Store the paragraph action that created the widget
-#ifdef OLDSTUFF
-    EditorActionCreateParagraph *new_focused_paragraph = widget2paragraph_action (widget);
-  //DEBUG("focused_paragraph="+std::to_string(int(focused_paragraph))+" new_focused_paragraph="+std::to_string(int(new_focused_paragraph)))
-  focused_paragraph = new_focused_paragraph;
-#endif
-  focused_textview = GTK_TEXT_VIEW(widget);
-  
+
+  focused_textview = GTK_TEXT_VIEW(widget); // on switch from text to note window, probably need to swap this.
+  // In Editor3, following should be true, since there are only two textviews
+  assert( (focused_textview == GTK_TEXT_VIEW(textview)) || (focused_textview == GTK_TEXT_VIEW(notetextview)) );  
+
   // Clear the character style that was going to be applied when the user starts typing.
   character_style_on_start_typing.clear();
   // Further processing of the focus grab is done with a delay. Some of these events will be "ignored" if multiple 
@@ -1609,16 +1590,21 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   // Get offset of text insertion point.
   gint text_insertion_offset = gtk_text_iter_get_offset (pos_iter) - utext.length();
 
+  //----------------------------------------------------------------------------------
+  // 1. Figure out what character style (= USFM codes) should be applied to the new text
+  //----------------------------------------------------------------------------------
+  
   // Variable for the character style that the routines below indicate should be applied to the inserted text.
   ustring character_style_to_be_applied;
 
-  /*
-  If text is inserted right before where a character style was in effect,
-  the GtkTextBuffer does not apply any style to that text.
-  The user expects that the character style that applies to the insertion point
-  will be applied to the new text as well. 
-  Do not extend a note style.
-  */
+  //----------------------------------------------------------------------------------
+  // STEP 1.1
+  //----------------------------------------------------------------------------------
+  // If text is inserted right BEFORE where a character style was in effect,
+  // the GtkTextBuffer does not apply any style to that text.
+  // The user expects that the character style that applies to the insertion point
+  // l be applied to the new text as well. 
+  // not extend a note style.
   if (character_style_to_be_applied.empty()) {
     ustring paragraph_style;
     GtkTextIter iter = *pos_iter;
@@ -1629,13 +1615,14 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
     }
   }
 
-  /*
-  If text is inserted right after where a character style is in effect,
-  the user expects this character style to be used for the inserted text as well.
-  This does not happen automatically in the GtkTextBuffer.
-  The code below cares for it.
-  Do not extend a note style.
-  */
+  //----------------------------------------------------------------------------------
+  // STEP 1.2
+  //----------------------------------------------------------------------------------
+  // If text is inserted right AFTER where a character style is in effect,
+  // the user expects this character style to be used for the inserted text as well.
+  // This does not happen automatically in the GtkTextBuffer.
+  // The code below cares for it.
+  // Do not extend a note style.
   if (character_style_to_be_applied.empty()) {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_offset (textbuffer, &iter, text_insertion_offset);
@@ -1648,17 +1635,20 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
     }
   }
 
-  /*
-  When a character style has been applied, and then the user starts typing,
-  he expects that this style is going to be applied to the text he types.
-  The code below cares for that.
-  */
+  //----------------------------------------------------------------------------------
+  // STEP 1.3
+  //----------------------------------------------------------------------------------
+  // When a character style has been previously applied, and then the user starts typing,
+  // he expects that this style is going to be applied to the text he types.
+  // The code below cares for that.
   if (character_style_to_be_applied.empty()) {
     character_style_to_be_applied = character_style_on_start_typing;
     character_style_on_start_typing.clear();
   }
 
-  // Intelligent verse handling.
+  //----------------------------------------------------------------------------------
+  // STEP 1.4: Handle the end of a verse number
+  //----------------------------------------------------------------------------------
   if (!character_style_to_be_applied.empty()) {
     ustring verse_style = Style::get_verse_marker(project);
     if (character_style_to_be_applied == verse_style) {
@@ -1676,6 +1666,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
     }
   }
 
+#ifdef OLD_STUFF
   // Remove the text that was inserted into the textbuffer.
   // Then, it needs to be inserted through Editor Actions.
   // This is for the Undo and Redo system.
@@ -1684,25 +1675,39 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   gtk_text_iter_backward_chars (&startiter, utext.length());
   gtk_text_buffer_delete (textbuffer, &startiter, pos_iter);
   disregard_text_buffer_signals--;
+#endif
+  
+  //----------------------------------------------------------------------------------
+  // STEP 2: Apply the style
+  //----------------------------------------------------------------------------------
+  // Previously, the text was removed, then added again.
+  // Instead, apply the style to the new text.
+  // Then record what we have done for the undo system.
+  GtkTextIter startiter = *pos_iter;
+  gtk_text_iter_backward_chars (&startiter, utext.length());
+  gtk_text_buffer_apply_tag_by_name(textbuffer, character_style_to_be_applied.c_str(), &startiter, pos_iter);
 
+#ifdef TODO
   // If there are one or more backslashes in the text, then USFM code is being entered.
   // Else treat it as if the user is typing text.
   if (utext.find ("\\") != string::npos) {
     // Load USFM code.
-	//DEBUG("about to text_load, text="+ustring(text))
-	//DEBUG("about to text_load, utext="+utext)
-	//DEBUG("about to text_load, character_style_to_be_applied="+character_style_to_be_applied)
-      // TO DO: below is an error...can't use text_load, because that does the whole chapter!!!
+//DEBUG("about to text_load, text="+ustring(text))
+//DEBUG("about to text_load, utext="+utext)
+//DEBUG("about to text_load, character_style_to_be_applied="+character_style_to_be_applied)
+      // TODO: below is an error...can't use text_load, because that does the whole chapter!!!
     text_load (text, character_style_to_be_applied, false);
   } else {
-    // Load plain text. Handle new lines as well.
-    size_t newlineposition = utext.find("\n");
-    while (newlineposition != string::npos) {
-      ustring line = utext.substr(0, newlineposition);
-      if (!line.empty()) {
-        text_load (line, character_style_to_be_applied, false);
+    // Load plain text. We used to "handle new lines as well" but what was done was to split into multiple textviews.
+    //size_t newlineposition = utext.find("\n");
+
+      if (!utext.empty()) {
+        text_load (utext, character_style_to_be_applied, false);
         character_style_to_be_applied.clear();
       }
+#endif
+
+#ifdef OLD_STUFF
       // Get markup after insertion point. New paragraph.
       ustring paragraph_style = unknown_style ();
       vector <ustring> text;
@@ -1730,20 +1735,15 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
       // Move insertion points to the proper position.
       editor_paragraph_insertion_point_set_offset (focused_paragraph, initial_offset);
       // Remove the part of the input text that has been handled.
-      utext.erase(0, newlineposition + 1);
-      newlineposition = utext.find("\n");
-    }
-    if (!utext.empty()) {
-      text_load (utext, character_style_to_be_applied, false);
-      character_style_to_be_applied.clear();
-    }
-  }
+#endif
+
+  //}
   
   // Insert the One Action boundary.
   apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 
   // The pos_iter variable that was passed to this function was invalidated because text was removed and added.
-  // Here it is validated again. This prevents critical errors within Gtk.
+  // Here it is validated again. This prevents critical errors within GTK.
   gtk_text_buffer_get_iter_at_offset (textbuffer, pos_iter, text_insertion_offset);
 }
 
@@ -1785,21 +1785,21 @@ void Editor3::on_buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIt
 void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter * start, GtkTextIter * end)
 {
   // Bail out if we don't care about textbuffer signals.
-  if (disregard_text_buffer_signals) {
-    return;
-  }
+  if (disregard_text_buffer_signals) { return; }
   disregard_text_buffer_signals++;
+  
   //DEBUG("Delete range after - about to delete text 'after'")
   // Delete the text.  
-  if (focused_paragraph) {
-    ustring text;
-    for (unsigned int i = 0; i < text_to_be_deleted.size(); i++) {
+  
+  ustring text;
+  // TODO: Need documentation on where text_to_be_deleted comes from, who initializes it, etc.
+  // Same with styles_to_be_deleted.
+  for (unsigned int i = 0; i < text_to_be_deleted.size(); i++) {
       text.append (text_to_be_deleted[i]);
-    }
-    gint offset = gtk_text_iter_get_offset (start);
-    EditorActionDeleteText * delete_action = new EditorActionDeleteText(this, focused_paragraph, offset, text.length());
-    apply_editor_action (delete_action);
   }
+  gint offset = gtk_text_iter_get_offset (start);
+  //TODO: EditorActionDeleteText * delete_action = new EditorActionDeleteText(this, focused_paragraph, offset, text.length());
+  // apply_editor_action (delete_action);
   
   // If there are any notes among the deleted text, delete these notes as well.
   for (unsigned int i = 0; i < styles_to_be_deleted.size(); i++) {
@@ -1824,6 +1824,7 @@ void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
 
   // Care about textbuffer signals again.
   disregard_text_buffer_signals--;
+
   // Turn off this mode
   textbuffer_delete_range_was_fired = false;
 }
@@ -1874,7 +1875,7 @@ set < ustring > Editor3::get_styles_at_cursor()
   return styles;
 }
 
-// TO DO: I think this is unused here an in editor.cpp
+// TODO: I think this is unused here an in editor.cpp
 set < ustring > Editor3::styles_at_iterator(GtkTextIter iter)
 // Get all the styles that apply at the iterator.
 {
@@ -1901,18 +1902,13 @@ GtkTextBuffer *Editor3::last_focused_textbuffer()
   return NULL;
 }
 
-// TO DO: Don't know what to do here
+// TODO: Don't know what to do here
 EditorTextViewType Editor3::last_focused_type()
 // Returns the type of the textview that was focused most recently.
-// This could be the main body of text, or a note, or a table.
+// This could be the main body of text, or a note, (or a table, but we don't support tables right now in Editor3).
 { 
-  if (focused_paragraph) {
-    if (focused_paragraph->type == eatCreateNoteParagraph) {
-      return etvtNote;
-    }
-  }
-  // return etvtTable;
-  return etvtBody;
+    if (focused_textview == GTK_TEXT_VIEW(textview)) { return etvtBody; }
+    else if (focused_textview == GTK_TEXT_VIEW(notetextview)) { return etvtNote; }
 }
 
 
@@ -1967,6 +1963,7 @@ void Editor3::apply_style(const ustring & marker)
     }
     case etvtTable:
     {
+      gw_warning(_("USFM tables are not supported in the experimental editor (Editor3)."));
       // Check that only a table element is going to be inserted.
       if (type != stTableElement) {
         style_application_ok = false;
@@ -1993,10 +1990,12 @@ void Editor3::apply_style(const ustring & marker)
     }
   }
   // Whether there's a paragraph to apply the style to.
+#ifdef OLD_STUFF
   if (!focused_paragraph) {
     style_application_ok = false;
     style_application_fault_reason = _("Cannot find paragraph");
   }
+#endif
   // If necessary give error message.
   if (!style_application_ok) {
     ustring message(_("This style cannot be applied here."));
@@ -2008,23 +2007,24 @@ void Editor3::apply_style(const ustring & marker)
   }
 
   // Get the active textbuffer and textview.
-  GtkTextBuffer *textbuffer = focused_paragraph->textbuffer;
-  GtkWidget *textview = focused_paragraph->textview;
+    GtkTextBuffer *focused_textbuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(focused_textview));
 
+#ifdef OLD_STUFF
   if (Style::get_starts_new_line_in_editor(type, subtype)) {
     // Handle a paragraph style.
     apply_editor_action (new EditorActionChangeParagraphStyle (this, marker, focused_paragraph));
   } else {
+#endif
     // Handle a character style.
     // Find the iterator at the start and at the end of the text to be put in this style.
     GtkTextIter iter, startiter, enditer;
     // If some text has been selected, take that.
-    if (gtk_text_buffer_get_selection_bounds(textbuffer, &startiter, &enditer)) {
+    if (gtk_text_buffer_get_selection_bounds(focused_textbuffer, &startiter, &enditer)) {
     } else {
       // No selection:
       // If the insertion point is inside a word, take that word.  
       // Else just take the insertion point.
-      gtk_text_buffer_get_iter_at_mark(textbuffer, &iter, gtk_text_buffer_get_insert(textbuffer));
+      gtk_text_buffer_get_iter_at_mark(focused_textbuffer, &iter, gtk_text_buffer_get_insert(focused_textbuffer));
       startiter = iter;
       enditer = iter;
       if (gtk_text_iter_inside_word(&iter) && !gtk_text_iter_starts_word(&iter)) {
@@ -2053,11 +2053,13 @@ void Editor3::apply_style(const ustring & marker)
     // Apply the new character style
     gint startoffset = gtk_text_iter_get_offset (&startiter);
     gint endoffset = gtk_text_iter_get_offset (&enditer);
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, focused_paragraph, style, startoffset, endoffset - startoffset);
-    apply_editor_action (style_action);
+    //TODO: EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, focused_paragraph, style, startoffset, endoffset - startoffset);
+    //apply_editor_action (style_action);
     // Store this character style so it can be re-used when the user starts typing text.
     character_style_on_start_typing = style;
+#ifdef OLD_STUFF
   }
+#endif
   
   // One Action boundary.
   apply_editor_action (new EditorAction (this, eatOneActionBoundary));
@@ -2084,10 +2086,8 @@ void Editor3::insert_note(const ustring & marker, const ustring & rawtext)
   usfmcode.append (rawtext);
   usfmcode.append (usfm_get_full_closing_marker (marker));
   //DEBUG("usfmcode="+usfmcode)
-  if (focused_paragraph) {
-	//DEBUG("Inserting note at cursor of focused paragraph")
-    gtk_text_buffer_insert_at_cursor (focused_paragraph->textbuffer, usfmcode.c_str(), -1);
-  }
+  //DEBUG("Inserting note at cursor of focused paragraph")
+  gtk_text_buffer_insert_at_cursor (gtk_text_view_get_buffer(focused_textview), usfmcode.c_str(), -1);
 }
 
 
@@ -2095,9 +2095,8 @@ void Editor3::insert_table(const ustring & rawtext)
 // Inserts a table in the editor.
 // rawtext: The raw text of the table, e.g. "\tr \tc1 \tc2 \tc3 \tc4 ".
 {
-  if (focused_paragraph) {
-    gtk_text_buffer_insert_at_cursor (focused_paragraph->textbuffer, rawtext.c_str(), -1);
-  }
+  gw_warning(_("USFM tables are not supported in the experimental editor (Editor3)."));
+  gtk_text_buffer_insert_at_cursor (gtk_text_view_get_buffer(focused_textview), rawtext.c_str(), -1);
 }
 
 
@@ -2122,11 +2121,12 @@ void Editor3::highlight_searchwords()
 	highlight = NULL;
   }
 
+#ifdef OLD_STUFF
   // Bail out if there's no focused paragraph.
   if (!focused_paragraph) {
     return;
   }
-
+#endif
   // This code is why the highlighting is slow. It does all the
   // operations essentially backward, waiting on a new thread to get
   // started and to its work before doing anything else. Thread
@@ -2148,7 +2148,7 @@ void Editor3::highlight_searchwords()
 */
   DEBUG("W9.1 about to highlight search words");  
   // MAP: Here's how I think it should be done, more synchronously instead of threaded.
-  highlight = new Highlight(this, focused_paragraph->textbuffer, focused_paragraph->textview, project, reference_tag, current_verse_number);
+  highlight = new Highlight(this, gtk_text_view_get_buffer(focused_textview), GTK_WIDGET(focused_textview), project, reference_tag, current_verse_number);
   // The time-consuming part of highlighting is to determine what bits
   // of text to highlight. Because it takes time, and the program
   // should continue to respond, it is [was] done in a thread. MAP:
@@ -2215,29 +2215,6 @@ void Editor3::highlight_thread_main()
     highlight->determine_locations();
   }
 }
-
-
-ustring Editor3::chapter_get_ustring()
-{
-  ustring chaptertext;
-  vector <GtkWidget *>
-  textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-  for (unsigned int i = 0; i < textviews.size(); i++) {
-    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textviews[i]));
-    GtkTextIter startiter, enditer;
-    gtk_text_buffer_get_start_iter(textbuffer, &startiter);
-    gtk_text_buffer_get_end_iter(textbuffer, &enditer);
-    ustring paragraph_text = usfm_get_text(textbuffer, startiter, enditer);
-    replace_text(paragraph_text, "  ", " ");
-    if (i) {
-      chaptertext.append ("\n");
-    }
-    chaptertext.append (paragraph_text);
-	//DEBUG("paragraph_text="+paragraph_text)
-  }
-  return chaptertext;
-}
-
 
 void Editor3::spelling_trigger()
 {
@@ -2337,12 +2314,14 @@ bool Editor3::move_cursor_to_spelling_error (bool next, bool extremity)
 // Returns true if it was found, else false.
 {
   bool moved = false;
+  moved = spellingchecker->move_cursor_to_spelling_error (gtk_text_view_get_buffer(focused_textview), next, extremity);
+#ifdef OLDSTUFF
   if (focused_paragraph) {
     //GtkTextBuffer * textbuffer = focused_paragraph->textbuffer;
     //vector <GtkWidget *> textviews = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
     do {
-      moved = spellingchecker->move_cursor_to_spelling_error (textbuffer, next, extremity);
-#ifdef OLDSTUFF
+      moved = spellingchecker->move_cursor_to_spelling_error (gtk_text_view_get_buffer(focused_textview), next, extremity);
+
       if (!moved) {
         GtkWidget * textview = focused_paragraph->textview;
         textbuffer = NULL;
@@ -2362,14 +2341,15 @@ bool Editor3::move_cursor_to_spelling_error (bool next, bool extremity)
           gtk_text_buffer_place_cursor (textbuffer, &iter);
         }
       }
-#endif
     } while (!moved && textbuffer);
+#endif
 
+//  }
     if (moved) {
-      scroll_to_insertion_point_on_screen(textview);
-      highlightCurrVerse(textview);
+        scroll_to_insertion_point_on_screen(textview);
+        highlightCurrVerse(textview);
     }
-  }
+    
   return moved;
 }
 
@@ -2519,6 +2499,8 @@ void Editor3::apply_editor_action (EditorAction * action, EditorActionApplicatio
 
     case eatCreateParagraph:
     {
+        gw_warning("Create Paragraph in body?");
+#ifdef OLD_STUFF
       EditorActionCreateParagraph * paragraph_action = static_cast <EditorActionCreateParagraph *> (action);
       switch (application) {
         case eaaInitial:
@@ -2530,6 +2512,7 @@ void Editor3::apply_editor_action (EditorAction * action, EditorActionApplicatio
         case eaaUndo: paragraph_action->undo (vbox_parking_lot, widget_that_should_grab_focus); break;
         case eaaRedo: paragraph_action->redo (widget_that_should_grab_focus); break;
       }
+#endif
       break;
     }
 
@@ -2601,6 +2584,8 @@ void Editor3::apply_editor_action (EditorAction * action, EditorActionApplicatio
 
     case eatCreateNoteParagraph:
     {
+        gw_warning("Create Paragraph in body?");
+#ifdef OLD_STUFF
       EditorActionCreateNoteParagraph * paragraph_action = static_cast <EditorActionCreateNoteParagraph *> (action);
       switch (application) {
         case eaaInitial:
@@ -2612,6 +2597,7 @@ void Editor3::apply_editor_action (EditorAction * action, EditorActionApplicatio
         case eaaUndo: paragraph_action->undo (vbox_parking_lot, widget_that_should_grab_focus); break;
         case eaaRedo: paragraph_action->redo (widget_that_should_grab_focus); break;
       }
+#endif
       break;
     }
 
@@ -2671,7 +2657,7 @@ void Editor3::textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidge
 }  
 #endif
 }
-
+#ifdef OLD_STUFF
 // About to be obsolete
 void Editor3::paragraph_create_actions (EditorActionCreateParagraph * paragraph_action)
 {
@@ -2702,7 +2688,7 @@ void Editor3::paragraph_create_actions (EditorActionCreateParagraph * paragraph_
     g_signal_connect ((gpointer) note_action->eventbox, "button_press_event", G_CALLBACK (on_caller_button_press_event), gpointer (this));
   }
 }
-
+#endif
 
 void Editor3::editor_start_new_standard_paragraph (const ustring& marker_text)
 // This function deals with a marker that starts a standard paragraph.
@@ -2724,64 +2710,6 @@ void Editor3::editor_start_new_standard_paragraph (const ustring& marker_text)
     EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
     apply_editor_action (insert_action);
   }
-}
-
-
-void Editor3::editor_start_verse(ustring& line, ustring& marker_text, ustring& character_style)
-{
-  // Clear any character style.
-  character_style.clear();
-
-  // Get the currently focused paragraph. In rare cases there may be none.
-  EditorActionCreateParagraph * paragraph = focused_paragraph;
-  
-  // A verse number should start in a normal paragraph, not a title or heading. Check for that.
-  bool in_normal_paragraph = false;
-  if (paragraph) {
-    StyleType type;
-    int subtype;
-    Style::marker_get_type_and_subtype(project, paragraph->style, type, subtype);
-    if (type == stStartsParagraph) {
-      if (subtype == ptNormalParagraph) {
-        in_normal_paragraph = true;
-      }
-    }
-  }
-  if (in_normal_paragraph) {
-    // Review marker \nb, proceed if it exists.
-    ustring marker_text = "nb";
-    StyleType type;
-    int subtype;
-    Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
-    if (type == stStartsParagraph) {
-      if (subtype != ptNormalParagraph) {
-        // Create new paragraph.
-        editor_start_new_standard_paragraph(marker_text);
-      }
-    }
-  }  
-
-  // Get the currently focused paragraph. In rare cases there may be none. If there's none, create one.
-  paragraph = focused_paragraph;
-  if (paragraph == NULL) {
-    editor_start_new_standard_paragraph (unknown_style());
-  }
-  // From here on we are sure there's an open paragraph.
-  
-  // Get verse number. Handle combined verses too, e.g. 10-12b, etc.
-  size_t position = line.find(" ");
-  if (position == string::npos)
-    position = line.length();
-  ustring versenumber = line.substr(0, position);
-  line.erase(0, position);
-  
-  // Insert the verse number.
-  paragraph = focused_paragraph;
-  gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-  EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, versenumber);
-  apply_editor_action (insert_action);
-  EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, paragraph, marker_text, insertion_offset, versenumber.length());
-  apply_editor_action (style_action);
 }
 
 
@@ -3016,65 +2944,6 @@ ustring Editor3::usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter
   return text;
 }
 
-
-void Editor3::editor_text_fallback (ustring& line, ustring& character_style, size_t marker_pos, bool marker_found)
-// This is a fallback function to load the text.
-{
-  // Storage for the string to insert.
-  ustring insertion;  
-
-  if ((marker_found) && (marker_pos == 0)) {
-    // It should not occur that a marker is right at the start and was not handled.
-    // It gets handled here to prevent an infinite loop.
-	// ACTUALLY: This happens as "standard practice" when the user inserts a new footnote.
-	// Like \f + \fr 6:12 \f* or something like that. That seems malformed according to the 
-	// USFM standard, but it is what we are getting from the note insert dialog.
-	//DEBUG("Case 1")
-    insertion = line.substr(0, 1);
-    line.erase(0, 1);
-  }
-  else if ((marker_found) && (marker_pos != string::npos) && (marker_pos > 0)) {
-    // Load text till the next marker.
-	//DEBUG("Case 2")
-    insertion = line.substr(0, marker_pos);
-    line.erase(0, marker_pos);
-  } 
-  else {
-    // No markup found: The whole line is loaded at once.
-	//DEBUG("Case 3")
-    insertion = line;
-    line.clear();
-  }
-  //DEBUG("insertion="+insertion)
-  
-  // Get the currently focused paragraph. If there's none, create one.
-  EditorActionCreateParagraph * paragraph = focused_paragraph;
-  if (paragraph == NULL) {
-	//DEBUG("about to editor_start_new_standard_paragraph")
-    editor_start_new_standard_paragraph (unknown_style());
-  }
-  
-  // Insert the text.
-  paragraph = focused_paragraph;
-  gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-  EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, insertion);
-  //DEBUG("about to apply_editor_action (insert_action) insertion="+insertion)
-
-  // BUG occurs in the next call: footnote is somehow magically
-  // changed from text=insertion to text=that of the first footnote in
-  // chapter? The issue was a static variable in editor_aids.cpp that
-  // has been now removed and method moved into this file.
-  apply_editor_action (insert_action);
-  // I may have jumped to a conclusion. The bug may occur in the next call, actually.
-  //ustring chaptertext = chapter_get_ustring();
-  //DEBUG("chapter just after apply_editor_action="+chaptertext)
-  if (!character_style.empty()) {
-	//DEBUG("Applying style to new inserted text")
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, paragraph, character_style, insertion_offset, insertion.length());
-    apply_editor_action (style_action);
-  }
-}
-
 void Editor3::get_next_note_caller_and_style (EditorNoteType type, ustring& caller, ustring& style, bool restart)
 // Gets the next note caller style.
 // Since note callers have sequential numbers, it needs another one for each note.
@@ -3091,61 +2960,11 @@ void Editor3::get_next_note_caller_and_style (EditorNoteType type, ustring& call
   style.append (notenum);
 }
 
-void Editor3::editor_start_note_raw (ustring raw_note, const ustring & marker_text)
-// Starts a note in the editor.
-{
-  // Type of the note.
-  EditorNoteType note_type = note_type_get (project, marker_text);
-
-  // Add a note caller in superscript.
-  ustring caller_in_text, caller_style;
-  {
-    get_next_note_caller_and_style (note_type, caller_in_text, caller_style, false);
-    Style style ("", caller_style, false);
-    //DEBUG("caller_style="+caller_style)
-    style.superscript = true;
-    create_or_update_text_style(&style, false, false, font_size_multiplier);
-    gint insertion_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
-    EditorActionInsertText * insert_action = new EditorActionInsertText (this, focused_paragraph, insertion_offset, caller_in_text);
-    apply_editor_action (insert_action);
-    EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle (this, focused_paragraph, caller_style, insertion_offset, caller_in_text.length());
-    apply_editor_action (style_action);
-  }
-
-  // Store currently focused standard paragraph so it can be restored after the note has been created.
-  EditorActionCreateParagraph * focused_standard_paragraph = focused_paragraph;
-
-  // Extract the USFM caller.
-  ustring caller_in_usfm;
-  if (!raw_note.empty()) {
-    caller_in_usfm = raw_note.substr(0, 1);
-    raw_note.erase(0, 1);
-	raw_note = trim(raw_note);
-	//DEBUG("raw_note="+raw_note)
-  }
-
-  // New note paragraph.
-  EditorActionCreateNoteParagraph * note_paragraph = new EditorActionCreateNoteParagraph (this, vbox_notes, marker_text, caller_in_usfm, caller_in_text, caller_style);
-  apply_editor_action (note_paragraph); 
-
-  // Note paragraph style.
-  ustring paragraph_style (Style::get_default_note_style(project, note_type));
-  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (this, paragraph_style, note_paragraph);
-  apply_editor_action (style_action);
-
-  // Load remaining text of the note.
-  text_load (raw_note, "", true);
-
-  // Restore the focus to the standard paragraph that had focus before the note was created.
-  give_focus (focused_standard_paragraph->textview);
-}
-
-
 void Editor3::copy_clipboard_intelligently ()
 // Copies the plain text to the clipboard, and copies both plain and usfm text to internal storage.
 {
   GtkTextIter startiter, enditer;
-  if (gtk_text_buffer_get_selection_bounds (focused_paragraph->textbuffer, &startiter, &enditer)) {
+  if (gtk_text_buffer_get_selection_bounds (gtk_text_view_get_buffer(focused_textview), &startiter, &enditer)) {
     clipboard_text_plain.clear();
     vector <ustring> text;
     vector <ustring> styles;
@@ -3174,12 +2993,10 @@ void Editor3::cut ()
 // Cut to clipboard.
 {
   if (editable) {
-    if (focused_paragraph) {
       // Copy the text to the clipboard in an intelligent manner.
       copy_clipboard_intelligently ();
       // Remove the text from the text buffer.
-      gtk_text_buffer_delete_selection (focused_paragraph->textbuffer, true, editable);
-    }
+      gtk_text_buffer_delete_selection (gtk_text_view_get_buffer(focused_textview), true, editable);
   }
 }
 
@@ -3187,10 +3004,8 @@ void Editor3::cut ()
 void Editor3::copy ()
 // Copy to clipboard.
 {
-  if (focused_paragraph) {
     // Copy the text to the clipboard in an intelligent manner.
     copy_clipboard_intelligently ();
-  }
 }
 
 
@@ -3199,29 +3014,28 @@ void Editor3::paste ()
 {
   // Proceed if the Editor is editable and there's a focused paragraph where to put the text into.
   if (editable) {
-    if (focused_paragraph) {
       // Get the text that would be pasted.
       GtkClipboard *clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
       gchar * text = gtk_clipboard_wait_for_text (clipboard);
       if (text) {
         ustring utext (text);
+        
         if ((utext == clipboard_text_plain) || (utext == usfm_clipboard_code ())) {
           // Since the text that would be pasted is the same as the plain text 
           // that results from the previous copy or cut operation, 
           // it inserts the equivalent usfm text instead.
           // Or if USFM code only was copied, nothing else, then take that too.
-          gtk_text_buffer_delete_selection (focused_paragraph->textbuffer, true, editable);
-          gtk_text_buffer_insert_at_cursor (focused_paragraph->textbuffer, clipboard_text_usfm.c_str(), -1);
+          gtk_text_buffer_delete_selection (gtk_text_view_get_buffer(focused_textview), true, editable);
+          gtk_text_buffer_insert_at_cursor (gtk_text_view_get_buffer(focused_textview), clipboard_text_usfm.c_str(), -1);
         } else {
           // The text that would be pasted differs from the plain text
           // that resulted from the previous copy or cut operation,
           // so insert the text that would be pasted as it is.
-          gtk_text_buffer_paste_clipboard(focused_paragraph->textbuffer, clipboard, NULL, true);
+          gtk_text_buffer_paste_clipboard(gtk_text_view_get_buffer(focused_textview), clipboard, NULL, true);
         }
         // Free memory.
         g_free (text);
       }
-    }
   }
 }
 
@@ -3275,7 +3089,7 @@ gboolean Editor3::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
   // The default bindings for copying to clipboard are Ctrl-c and Ctrl-Insert.
   // The default bindings for cutting to clipboard are Ctrl-x and Shift-Delete.
   // The default bindings for pasting from clipboard are Ctrl-v and Shift-Insert.
-  // TO DO: Set up a switch statement to handle all these cases.
+  // TODO: Set up a switch statement to handle all these cases.
   if (keyboard_control_state(event)) {
     if (event->keyval == GDK_KEY_c) return true;
     if (event->keyval == GDK_KEY_x) return true;
@@ -3290,10 +3104,8 @@ gboolean Editor3::textview_key_press_event(GtkWidget *widget, GdkEventKey *event
 	// Pressing Page Up while the cursor is in the note brings the user
 	// to the note caller in the text.
 	if (keyboard_page_up_pressed(event)) {
-		if (focused_paragraph) {
-			if (focused_paragraph->type == eatCreateNoteParagraph) {
-				on_caller_button_press (focused_paragraph->textview);
-			}
+		if (focused_textview == GTK_TEXT_VIEW(notetextview)) {
+				on_caller_button_press (notetextview);
 		}
 	}
 
@@ -3506,66 +3318,6 @@ void Editor3::signal_if_verse_changed_timeout()
     }
 }
 
-#ifdef OLDSTUFF
-void Editor3::paragraph_crossing_act(GtkMovementStep step, gint count)
-{
-  //DEBUG("Start of paragraph_crossing")
-  // Bail out if there's no paragraph.
-  if (focused_paragraph == NULL) {
-    return;
-  }
-  
-  // Explain: keystrokeNum tracks key presses. If we have done a paragraph_crossing_act
-  // before for this keystroke, then we don't to it again!
-  if (keystrokeNum == keyStrokeNum_paragraph_crossing_processed) {
-	  //DEBUG("Bailing out!")
-	  return;
-  }
-  keyStrokeNum_paragraph_crossing_processed = keystrokeNum;
-  
-  //DEBUG("count="+std::to_string(int(count)))
-  //ustring debug_verse_number = verse_number_get();
-  //DEBUG("debug_verse_number "+debug_verse_number)
-  
-  // Get the iterator at the insert position of the currently focused paragraph.
-  GtkTextIter iter;
-  gtk_text_buffer_get_iter_at_mark (focused_paragraph->textbuffer, &iter, gtk_text_buffer_get_insert (focused_paragraph->textbuffer));
-  //DEBUG("paragraph_crossing_insertion...="+std::to_string(int(gtk_text_iter_get_line_index(&paragraph_crossing_insertion_point_iterator_at_key_press))))
-  //DEBUG("iter...="+std::to_string(int(gtk_text_iter_get_line_index(&iter))))
-  // Bail out if there was real movement.
-  // BUG RIGHT HERE: 
-  if (!gtk_text_iter_equal (&paragraph_crossing_insertion_point_iterator_at_key_press, &iter)) {
-    return;
-  }
-  //DEBUG("After mvmt chk paragraph_crossing")
-  // Focus the crossed widget and place its cursor.  
-  vector <GtkWidget *>
-  widgets = editor_get_widgets (vbox_paragraphs, GTK_TYPE_TEXT_VIEW);
-  GtkWidget * crossed_widget;
-  if (count > 0) {
-    crossed_widget = editor_get_next_textview (widgets, focused_paragraph->textview);
-  } else {
-    crossed_widget = editor_get_previous_textview (widgets, focused_paragraph->textview);
-  }  
-   //debug_verse_number = verse_number_get();
-   //DEBUG("debug_verse_number "+debug_verse_number)
-
-  if (crossed_widget) {
-    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (crossed_widget));
-    if (count > 0) {
-      gtk_text_buffer_get_start_iter (textbuffer, &iter);
-    } else {
-      gtk_text_buffer_get_end_iter (textbuffer, &iter);
-    }
-    gtk_text_buffer_place_cursor (textbuffer, &iter);
-    give_focus (crossed_widget);
-  }
-  //debug_verse_number = verse_number_get();
-  //DEBUG("debug_verse_number "+debug_verse_number)
-
-}
-#endif
-
 gboolean Editor3::on_caller_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
   return ((Editor3 *) user_data)->on_caller_button_press(widget);
@@ -3573,7 +3325,7 @@ gboolean Editor3::on_caller_button_press_event (GtkWidget *widget, GdkEventButto
 
 
 gboolean Editor3::on_caller_button_press (GtkWidget *widget)
-// Called when the user clicks on a note caller at the bottom of the screen.
+// Called when the user clicks on a note at the bottom of the screen.
 // It will focus the note caller in the text.
 {
   // Look for the note paragraph.

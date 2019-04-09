@@ -225,10 +225,12 @@ private:
   deque <EditorAction *> actions_done;
   deque <EditorAction *> actions_undone;
   void apply_editor_action (EditorAction * action, EditorActionApplication application = eaaInitial);
+#ifdef OLD_STUFF
   void paragraph_create_actions (EditorActionCreateParagraph * paragraph_action);
+#endif
   void textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview);
 public:
-  EditorActionCreateParagraph * focused_paragraph;
+  //EditorActionCreateParagraph * focused_paragraph;
   GtkTextView *focused_textview; // pointer to either textview or notetextview
 private:
   bool text_starts_paragraph (ustring& line, StyleType type, int subtype, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
@@ -239,14 +241,11 @@ private:
   void text_load (ustring text, ustring character_style, bool note_mode);
   
   void editor_start_new_standard_paragraph (const ustring& marker_text);
-  void editor_start_verse (ustring& line, ustring& marker_text, ustring& character_style);
   bool editor_starts_character_style (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   bool editor_ends_character_style   (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   bool text_starts_note_raw          (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found, ustring& raw_note);
   void get_next_note_caller_and_style (EditorNoteType type, ustring& caller, ustring& style, bool restart);
   unsigned int note_style_num;
-  void editor_start_note_raw         (ustring raw_note, const ustring & marker_text);
-  void editor_text_fallback (ustring& line, ustring& character_style, size_t marker_pos, bool marker_found);
   EditorActionCreateParagraph * widget2paragraph_action (GtkWidget * widget);
   EditorActionCreateNoteParagraph * note2paragraph_action (const ustring& note);
   int disregard_text_buffer_signals;
