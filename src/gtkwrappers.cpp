@@ -67,6 +67,7 @@ void gtkw_dialog_error(GtkWidget * parent, const ustring & error)
 void gtkw_dialog_warning(GtkWidget * parent, const ustring & warning)
 {
   GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(parent), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, "%s", warning.c_str());
+  gtk_window_set_title(GTK_WINDOW(dialog), _("Warning"));
   gtk_dialog_run(GTK_DIALOG(dialog));
   gtk_widget_destroy(dialog);
 }

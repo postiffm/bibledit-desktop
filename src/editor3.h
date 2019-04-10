@@ -249,6 +249,7 @@ private:
   EditorActionCreateParagraph * widget2paragraph_action (GtkWidget * widget);
   EditorActionCreateNoteParagraph * note2paragraph_action (const ustring& note);
   int disregard_text_buffer_signals;
+  // These are filled every time a piece of text is deleted from the textview in buffer_delete_range_before
   vector <ustring> text_to_be_deleted;
   vector <ustring> styles_to_be_deleted;
   ustring usfm_get_text(GtkTextBuffer * textbuffer, GtkTextIter startiter, GtkTextIter enditer);

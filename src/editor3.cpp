@@ -518,8 +518,12 @@ void Editor3::text_load (ustring text, ustring character_style, bool note_mode)
   ustring paragraph_style = "";
   while (!text.empty()) {
     marker_found = usfm_search_marker(text, marker_text, marker_pos, marker_length, is_opener);
-    if (marker_found) { DEBUG("TL1: " + marker_text); } else { DEBUG("TL1: No marker: " + text); }
-    
+    if (marker_found) { 
+        DEBUG("TL1: " + marker_text);
+        assert(marker_length > 1); // if 1, means we have a marker like \\\\ (two slashes in a row...malformed)
+    }
+    else { DEBUG("TL1: No marker: " + text); }
+
     StyleType type;
     int subtype;
     Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
@@ -1561,7 +1565,10 @@ void Editor3::create_or_update_text_style(Style * style, bool paragraph, bool pl
   }
 }
 
-
+//----------------------------------------------------------------------------------
+// This is called *after* the text is inserted, and the default handler has shown it
+// in the GtkTextView.
+//----------------------------------------------------------------------------------
 void Editor3::on_buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter * pos_iter, gchar * text, gint length, gpointer user_data)
 {
   // The "length" parameter does not give the length as the number of characters 
@@ -1575,23 +1582,41 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
 // At this stage "pos_iter" points to the end of the inserted text.
 {
   // If text buffers signals are to be disregarded, bail out.
-  if (disregard_text_buffer_signals) {
-    return;
-  }
-  
-  // Text to work with.
+  if (disregard_text_buffer_signals) { return; }
+
   ustring utext (text);
   
-  // New lines in notes are not supported.
+  //----------------------------------------------------------------------------------
+  // STEP 0: Check for certain kinds of bad input
+  //----------------------------------------------------------------------------------
+  // 0.1: New lines in notes are not supported.
   if (focused_textview == GTK_TEXT_VIEW(notetextview)) {
     replace_text (utext, "\n", " ");
   }
+
+  // 0.2: If there are one or more backslashes in the text, then USFM code is being entered.
+  // Tell the user change the view in order to enter USFM manually. Do not add the text in this view. 
+  // It is too hard to manage.
+  ustring::size_type s = utext.find("\\");
+  DEBUG("utext=" + utext + "and find pos s=" + std::to_string(s))
+  if (s != string::npos) {
+      // TODO: A proper parent here. It is not easy to figure out which GtkWidget* to use.
+      gtkw_dialog_warning(NULL, _("If you wish to enter USFM code directly, please switch the view using View | Chapter as | USFM code"));
+      // Remove text just added
+      disregard_text_buffer_signals++;
+      GtkTextIter startiter = *pos_iter;
+      gtk_text_iter_backward_chars (&startiter, utext.length());
+      gtk_text_buffer_delete (textbuffer, &startiter, pos_iter);
+      disregard_text_buffer_signals--;
+      return;
+  }
+  
   //DEBUG("utext="+utext)
   // Get offset of text insertion point.
   gint text_insertion_offset = gtk_text_iter_get_offset (pos_iter) - utext.length();
 
   //----------------------------------------------------------------------------------
-  // 1. Figure out what character style (= USFM codes) should be applied to the new text
+  // STEP 1. Figure out what character style (= USFM codes) should be applied to the new text
   //----------------------------------------------------------------------------------
   
   // Variable for the character style that the routines below indicate should be applied to the inserted text.
@@ -1666,17 +1691,6 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
     }
   }
 
-#ifdef OLD_STUFF
-  // Remove the text that was inserted into the textbuffer.
-  // Then, it needs to be inserted through Editor Actions.
-  // This is for the Undo and Redo system.
-  disregard_text_buffer_signals++;
-  GtkTextIter startiter = *pos_iter;
-  gtk_text_iter_backward_chars (&startiter, utext.length());
-  gtk_text_buffer_delete (textbuffer, &startiter, pos_iter);
-  disregard_text_buffer_signals--;
-#endif
-  
   //----------------------------------------------------------------------------------
   // STEP 2: Apply the style
   //----------------------------------------------------------------------------------
@@ -1687,67 +1701,20 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   gtk_text_iter_backward_chars (&startiter, utext.length());
   gtk_text_buffer_apply_tag_by_name(textbuffer, character_style_to_be_applied.c_str(), &startiter, pos_iter);
 
-#ifdef TODO
-  // If there are one or more backslashes in the text, then USFM code is being entered.
-  // Else treat it as if the user is typing text.
-  if (utext.find ("\\") != string::npos) {
-    // Load USFM code.
-//DEBUG("about to text_load, text="+ustring(text))
-//DEBUG("about to text_load, utext="+utext)
-//DEBUG("about to text_load, character_style_to_be_applied="+character_style_to_be_applied)
-      // TODO: below is an error...can't use text_load, because that does the whole chapter!!!
-    text_load (text, character_style_to_be_applied, false);
-  } else {
-    // Load plain text. We used to "handle new lines as well" but what was done was to split into multiple textviews.
-    //size_t newlineposition = utext.find("\n");
 
-      if (!utext.empty()) {
-        text_load (utext, character_style_to_be_applied, false);
-        character_style_to_be_applied.clear();
-      }
-#endif
+  //----------------------------------------------------------------------------------
+  // STEP 3: Record undo/redo information
+  //----------------------------------------------------------------------------------
 
-#ifdef OLD_STUFF
-      // Get markup after insertion point. New paragraph.
-      ustring paragraph_style = unknown_style ();
-      vector <ustring> text;
-      vector <ustring> styles;        
-      if (focused_paragraph) {
-        paragraph_style = focused_paragraph->style;
-        EditorActionDeleteText * delete_action = paragraph_get_text_and_styles_after_insertion_point(focused_paragraph, text, styles);
-        if (delete_action) {
-          apply_editor_action (delete_action);
-        }
-      }      
-      editor_start_new_standard_paragraph (paragraph_style);
-      // Transfer anything from the previous paragraph to the new one.
-      gint initial_offset = editor_paragraph_insertion_point_get_offset (focused_paragraph);
-      gint accumulated_offset = initial_offset;
-      for (unsigned int i = 0; i < text.size(); i++) {
-        EditorActionInsertText * insert_action = new EditorActionInsertText (this, focused_paragraph, accumulated_offset, text[i]);
-        apply_editor_action (insert_action);
-        if (!styles[i].empty()) {
-          EditorActionChangeCharacterStyle * style_action = new EditorActionChangeCharacterStyle(this, focused_paragraph, styles[i], accumulated_offset, text[i].length());
-          apply_editor_action (style_action);
-        }
-        accumulated_offset += text[i].length();
-      }
-      // Move insertion points to the proper position.
-      editor_paragraph_insertion_point_set_offset (focused_paragraph, initial_offset);
-      // Remove the part of the input text that has been handled.
-#endif
-
-  //}
-  
-  // Insert the One Action boundary.
-  apply_editor_action (new EditorAction (this, eatOneActionBoundary));
-
+  // I am not sure the following is truly required now. MAP 4/8/2019.
   // The pos_iter variable that was passed to this function was invalidated because text was removed and added.
   // Here it is validated again. This prevents critical errors within GTK.
   gtk_text_buffer_get_iter_at_offset (textbuffer, pos_iter, text_insertion_offset);
 }
 
-
+//----------------------------------------------------------------------------------
+// This is called *before* the text is deleted.
+//----------------------------------------------------------------------------------
 void Editor3::on_buffer_delete_range_before(GtkTextBuffer * textbuffer, GtkTextIter * start, GtkTextIter * end, gpointer user_data)
 {
   ((Editor3 *) user_data)->buffer_delete_range_before(textbuffer, start, end);
@@ -1769,13 +1736,15 @@ void Editor3::buffer_delete_range_before(GtkTextBuffer * textbuffer, GtkTextIter
 
   // Make the end iterator the same as the start iterator, so that nothing gets deleted.
   // It will get deleted through EditorActions, so that Undo and Redo work.
-  * end = * start;
+  //TODO??? * end = * start;
 
   // Care about textbuffer signals again.
   disregard_text_buffer_signals--;
 }
 
-
+//----------------------------------------------------------------------------------
+// This is called *after* the text is deleted.
+//----------------------------------------------------------------------------------
 void Editor3::on_buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter * start, GtkTextIter * end, gpointer user_data)
 {
   ((Editor3 *) user_data)->buffer_delete_range_after(textbuffer, start, end);
@@ -1789,19 +1758,24 @@ void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
   disregard_text_buffer_signals++;
   
   //DEBUG("Delete range after - about to delete text 'after'")
-  // Delete the text.  
-  
+
+  //----------------------------------------------------------------------------------
+  // STEP 1. TODO Add text to undo deque
+  //----------------------------------------------------------------------------------
   ustring text;
-  // TODO: Need documentation on where text_to_be_deleted comes from, who initializes it, etc.
-  // Same with styles_to_be_deleted.
+  // text_to_be_deleted and styles_to_be_deleted are set in the buffer_delete_range_before method
   for (unsigned int i = 0; i < text_to_be_deleted.size(); i++) {
       text.append (text_to_be_deleted[i]);
   }
+
   gint offset = gtk_text_iter_get_offset (start);
   //TODO: EditorActionDeleteText * delete_action = new EditorActionDeleteText(this, focused_paragraph, offset, text.length());
   // apply_editor_action (delete_action);
-  
+
+  //----------------------------------------------------------------------------------
+  // STEP 2. Delete any notes cross-referenced in this text
   // If there are any notes among the deleted text, delete these notes as well.
+  //----------------------------------------------------------------------------------
   for (unsigned int i = 0; i < styles_to_be_deleted.size(); i++) {
     if (styles_to_be_deleted[i].find (note_starting_style ()) == 0) {
       EditorActionCreateNoteParagraph * paragraph_action = note2paragraph_action (styles_to_be_deleted[i]);
@@ -1809,8 +1783,8 @@ void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
         GtkTextIter iter;
         gtk_text_buffer_get_end_iter (paragraph_action->textbuffer, &iter);
         gint length = gtk_text_iter_get_offset (&iter);
-        apply_editor_action (new EditorActionDeleteText (this, paragraph_action, 0, length));
-        apply_editor_action (new EditorActionDeleteParagraph(this, paragraph_action));
+        //apply_editor_action (new EditorActionDeleteText (this, paragraph_action, 0, length));
+        //apply_editor_action (new EditorActionDeleteParagraph(this, paragraph_action));
       }
     }
   }
@@ -1820,7 +1794,7 @@ void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
   styles_to_be_deleted.clear();
 
   // Insert the One Action boundary.
-  apply_editor_action (new EditorAction (this, eatOneActionBoundary));
+  //apply_editor_action (new EditorAction (this, eatOneActionBoundary));
 
   // Care about textbuffer signals again.
   disregard_text_buffer_signals--;
