@@ -258,7 +258,7 @@ private:
   static gboolean on_textview_key_press_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
   gboolean textview_key_press_event(GtkWidget *widget, GdkEventKey *event);
   unsigned int keystrokeNum;
-  unsigned int keyStrokeNum_paragraph_crossing_processed;
+
   // Next two obsolete. We should NOT be processing things when the user releases a key, after holding
   // it down for an indeterminate length of time (like backspace or delete in particular)
   //static gboolean on_textview_key_release_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
@@ -434,9 +434,9 @@ private:
 #ifdef OLDSTUFF
   void paragraph_crossing_act(GtkMovementStep step, gint count);
 #endif
+  unsigned int keyStrokeNum_paragraph_crossing_processed;
   GtkWidget * paragraph_crossing_textview_at_key_press;
   GtkTextIter paragraph_crossing_insertion_point_iterator_at_key_press;
-  void combine_paragraphs(EditorActionCreateParagraph * first_paragraph, EditorActionCreateParagraph * second_paragraph);
   
   // Clipboard.
 public:

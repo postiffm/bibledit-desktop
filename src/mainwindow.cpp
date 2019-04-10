@@ -2222,9 +2222,11 @@ void MainWindow::menu_edit()
 
   // The Bible notes can only be edited when the cursor is in a note text.
   enable = false;
-  if (editor_window)
-    if (editor_window->last_focused_type() == etvtNote)
+  if (editor_window) {
+    if (editor_window->last_focused_type() == etvtNote) {
       enable = true;
+    }
+  }
   gtk_widget_set_sensitive(edit_bible_note, enable);
 }
 

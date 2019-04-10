@@ -1652,6 +1652,9 @@ void Editor2::apply_style(const ustring & marker)
       }
       break;
     }
+    case etvtUnknown:
+        gw_warning(_("Don't understand the unknown view type"));
+        break;
   }
   // Whether there's a paragraph to apply the style to.
   if (!focused_paragraph) {
