@@ -81,6 +81,7 @@ The following things need to be tested after a change was made to the Editor obj
 
 
 Editor3::Editor3(GtkWidget * vbox_in, const ustring & project_in)
+  : doing_redo(false), doing_undo(false)
 {
   // current_reference_set initializes itself via its constructor
   // Save and initialize variables.
@@ -1112,8 +1113,9 @@ void Editor3::undo() // Ctrl+Z is the accelerator
   if (can_undo()) {
        AnEdit *lastaction = edits_done.back();
        edits_done.pop_back();
+       doing_undo = true;
        lastaction->undo();
-       // Once we fix up deletetext action, we will not need to say the next:
+       doing_undo = false;
        edits_undone.push_back(lastaction);
        DEBUG("UNDO:edits_done.size="+std::to_string(edits_done.size()));
        DEBUG("UNDO:edits_undone.size="+std::to_string(edits_undone.size()));
@@ -1144,8 +1146,10 @@ void Editor3::redo() // Ctrl+Shift+Z is the accelerator
   if (can_redo()) {
        AnEdit *lastaction = edits_undone.back();
        edits_undone.pop_back();
+       doing_redo = true;
        lastaction->redo();
-       // We need not say edits_done.push_back(lastaction); because buffer_insert_text_after does it
+       doing_redo = false;
+       edits_done.push_back(lastaction);
        DEBUG("REDO:edits_done.size="+std::to_string(edits_done.size()));
        DEBUG("REDO:edits_undone.size="+std::to_string(edits_undone.size()));
   }
@@ -1614,7 +1618,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   // STEP 1: Record undo/redo information
   //----------------------------------------------------------------------------------
   AnEdit *insertaction = new InsertText(textbuffer, text_insertion_offset, utext);
-  edits_done.push_back(insertaction);
+  if (!doing_redo && !doing_undo) { edits_done.push_back(insertaction); }
  
   //----------------------------------------------------------------------------------
   // STEP 2: Check for certain kinds of bad input
@@ -1779,21 +1783,21 @@ void Editor3::buffer_delete_range_after(GtkTextBuffer * textbuffer, GtkTextIter 
   //DEBUG("Delete range after - about to delete text 'after'")
 
   //----------------------------------------------------------------------------------
-  // STEP 1. TODO Add text to undo deque
+  // STEP 1. TODO Add deleted text to undo deque
   //----------------------------------------------------------------------------------
   ustring text;
-  // text_to_be_deleted and styles_to_be_deleted are set in the buffer_delete_range_before method
+  // text_to_be_deleted and styles_to_be_deleted are initialized in the buffer_delete_range_before method
   for (unsigned int i = 0; i < text_to_be_deleted.size(); i++) {
       text.append (text_to_be_deleted[i]);
   }
 
   gint offset = gtk_text_iter_get_offset (start);
-  //TODO: EditorActionDeleteText * delete_action = new EditorActionDeleteText(this, focused_paragraph, offset, text.length());
-  // apply_editor_action (delete_action);
-
+  AnEdit *deleteaction = new DeleteText(textbuffer, offset, text);
+  if (!doing_redo && !doing_undo) { edits_done.push_back(deleteaction); }
+  
   //----------------------------------------------------------------------------------
-  // STEP 2. Delete any notes cross-referenced in this text
-  // If there are any notes among the deleted text, delete these notes as well.
+  // STEP 2. Delete any notes cross-referenced in this text.
+  // Thought: combine this with above deleteaction so that the action is all in one entry on the undo stack.
   //----------------------------------------------------------------------------------
   for (unsigned int i = 0; i < styles_to_be_deleted.size(); i++) {
     if (styles_to_be_deleted[i].find (note_starting_style ()) == 0) {
@@ -4276,7 +4280,7 @@ gboolean Editor3::EditorActionCreateNoteParagraph::on_caller_leave_notify (GdkEv
 }
 
 //----------------------------------------------------------------------
-// New, simplified undo and redo storage information
+// New, simplified undo and redo logic
 //----------------------------------------------------------------------
 Editor3::AnEdit::AnEdit(GtkTextBuffer *textbuffer_in)
 {
@@ -4326,16 +4330,22 @@ Editor3::DeleteText::DeleteText(GtkTextBuffer *textbuffer_in, gint offset_in, co
 
 void Editor3::DeleteText::describe(void)
 {
-   gw_message("Insertion of text: " + text);   
+   gw_message("Deletion of text: " + text);   
 }
 
 void Editor3::DeleteText::undo(void)
 {
-    
+  // Undo the deletion of text, that is, put it back again.
+  GtkTextIter startiter;
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &startiter, offset);
+  gtk_text_buffer_insert (textbuffer, &startiter, text.c_str(), -1);
 }
 
 void Editor3::DeleteText::redo(void)
 {
-    
+  GtkTextIter startiter, enditer;
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &startiter, offset);
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &enditer, offset + text.length());
+  gtk_text_buffer_delete (textbuffer, &startiter, &enditer);
 }
 

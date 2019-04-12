@@ -398,16 +398,20 @@ public:
   void apply_style(const ustring& marker);
 
   // Undo/redo
+public:
   void undo();
   void redo();
   bool can_undo();
   bool can_redo();
-  
+private:
   deque <AnEdit *> edits_done;
   deque <AnEdit *> edits_undone;
+  bool doing_redo; // signals to not add an action to the undo deque
+  bool doing_undo; // signals to not add an action to the redo deque
   void clear_and_destroy_editor_actions (deque <EditorAction *>& actions);
 
   // Highlighting (search results, not verse numbers)
+public:
   void highlight_searchwords();
   guint highlight_timeout_event_id;
   static bool on_highlight_timeout(gpointer data);
