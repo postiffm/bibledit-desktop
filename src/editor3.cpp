@@ -308,7 +308,8 @@ void Editor3::chapter_load(const Reference &ref)
   // Load in editor.
   text_load (line, "", false);
   DEBUG("W3 just did text_load") 
-  // Clean up extra spaces before the insertion points in all the
+
+  // OLD, MAYBE NEED TO REVIVE: Clean up extra spaces before the insertion points in all the
   // newly created textbuffers.
   for (unsigned int i = 0; i < actions_done.size(); i++) {
     EditorAction * action = actions_done[i];
@@ -323,7 +324,7 @@ void Editor3::chapter_load(const Reference &ref)
   }
   DEBUG("W4 Cleaned up extra spaces")
   // Insert the chapter load boundary.
-  apply_editor_action (new EditorAction (this, eatLoadChapterBoundary));
+  apply_editor_action (new EditorAction (this, eatLoadChapterBoundary)); // TODO: Remove
   DEBUG("W5 Inserted chapter load boundary")
   // Place cursor at the start and scroll it onto the screen.
   current_verse_number = current_reference.verse_get();
@@ -1106,9 +1107,23 @@ void Editor3::textview_grab_focus_delayed() // Todo
 }
 
 
-void Editor3::undo()
+void Editor3::undo() // Ctrl+Z is the accelerator
 {
-  // If edits were made, the last action on the stack is the OneActionBoundary.
+  if (can_undo()) {
+       AnEdit *lastaction = edits_done.back();
+       edits_done.pop_back();
+       lastaction->undo();
+       // Once we fix up deletetext action, we will not need to say the next:
+       edits_undone.push_back(lastaction);
+       DEBUG("UNDO:edits_done.size="+std::to_string(edits_done.size()));
+       DEBUG("UNDO:edits_undone.size="+std::to_string(edits_undone.size()));
+  }
+  else {
+    gtkw_dialog_warning(NULL, _("Undo queue is empty"));
+  }
+
+#ifdef OLD_STUFF
+// If edits were made, the last action on the stack is the OneActionBoundary.
   // Undo the actions on the stack, and stop at the second OneActionBoundary.
   unsigned int one_action_boundaries_encountered = 0;
   while (can_undo() && (one_action_boundaries_encountered <= 1)) {
@@ -1120,11 +1135,24 @@ void Editor3::undo()
       apply_editor_action (action, eaaUndo);
     }
   }
+#endif
 }
 
 
-void Editor3::redo()
+void Editor3::redo() // Ctrl+Shift+Z is the accelerator
 {
+  if (can_redo()) {
+       AnEdit *lastaction = edits_undone.back();
+       edits_undone.pop_back();
+       lastaction->redo();
+       // We need not say edits_done.push_back(lastaction); because buffer_insert_text_after does it
+       DEBUG("REDO:edits_done.size="+std::to_string(edits_done.size()));
+       DEBUG("REDO:edits_undone.size="+std::to_string(edits_undone.size()));
+  }
+  else {
+      gtkw_dialog_warning(NULL, _("Redo queue is empty"));
+  }
+#ifdef OLD_STUFF
   // Redo the actions on the stack till we encounter the OneActionBoundary.
   unsigned int one_action_boundaries_encountered = 0;
   while (can_redo() && (one_action_boundaries_encountered == 0)) {
@@ -1134,23 +1162,19 @@ void Editor3::redo()
     }
     apply_editor_action (action, eaaRedo);
   }
+#endif
 }
 
 
 bool Editor3::can_undo()
 {
-  bool undoable_actions_available = false;
-  if (!actions_done.empty()) {
-    EditorAction * last_action = actions_done[actions_done.size() - 1];
-    undoable_actions_available = (last_action->type != eatLoadChapterBoundary);
-  }
-  return undoable_actions_available;
+  return !edits_done.empty();
 }
 
 
 bool Editor3::can_redo()
 {
-  return !actions_undone.empty();
+  return !edits_undone.empty();
 }
 
 
@@ -1581,16 +1605,26 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   if (disregard_text_buffer_signals) { return; }
 
   ustring utext (text);
-  
+  //DEBUG("utext="+utext)
+
+  // Get offset of text insertion point.
+  gint text_insertion_offset = gtk_text_iter_get_offset (pos_iter) - utext.length();
+
   //----------------------------------------------------------------------------------
-  // STEP 0: Check for certain kinds of bad input
+  // STEP 1: Record undo/redo information
   //----------------------------------------------------------------------------------
-  // 0.1: New lines in notes are not supported.
+  AnEdit *insertaction = new InsertText(textbuffer, text_insertion_offset, utext);
+  edits_done.push_back(insertaction);
+ 
+  //----------------------------------------------------------------------------------
+  // STEP 2: Check for certain kinds of bad input
+  //----------------------------------------------------------------------------------
+  // 2.1: New lines in notes are not supported.
   if (focused_textview == GTK_TEXT_VIEW(notetextview)) {
     replace_text (utext, "\n", " ");
   }
 
-  // 0.2: If there are one or more backslashes in the text, then USFM code is being entered.
+  // 2.2: If there are one or more backslashes in the text, then USFM code is being entered.
   // Tell the user change the view in order to enter USFM manually. Do not add the text in this view. 
   // It is too hard to manage.
   ustring::size_type s = utext.find("\\");
@@ -1607,19 +1641,15 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
       return;
   }
   
-  //DEBUG("utext="+utext)
-  // Get offset of text insertion point.
-  gint text_insertion_offset = gtk_text_iter_get_offset (pos_iter) - utext.length();
-
   //----------------------------------------------------------------------------------
-  // STEP 1. Figure out what character style (= USFM codes) should be applied to the new text
+  // STEP 3. Figure out what character style (= USFM codes) should be applied to the new text
   //----------------------------------------------------------------------------------
   
   // Variable for the character style that the routines below indicate should be applied to the inserted text.
   ustring character_style_to_be_applied;
 
   //----------------------------------------------------------------------------------
-  // STEP 1.1
+  // STEP 3.1
   //----------------------------------------------------------------------------------
   // If text is inserted right BEFORE where a character style was in effect,
   // the GtkTextBuffer does not apply any style to that text.
@@ -1637,7 +1667,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   }
 
   //----------------------------------------------------------------------------------
-  // STEP 1.2
+  // STEP 3.2
   //----------------------------------------------------------------------------------
   // If text is inserted right AFTER where a character style is in effect,
   // the user expects this character style to be used for the inserted text as well.
@@ -1657,7 +1687,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   }
 
   //----------------------------------------------------------------------------------
-  // STEP 1.3
+  // STEP 3.3
   //----------------------------------------------------------------------------------
   // When a character style has been previously applied, and then the user starts typing,
   // he expects that this style is going to be applied to the text he types.
@@ -1668,7 +1698,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   }
 
   //----------------------------------------------------------------------------------
-  // STEP 1.4: Handle the end of a verse number
+  // STEP 3.4: Handle the end of a verse number
   //----------------------------------------------------------------------------------
   if (!character_style_to_be_applied.empty()) {
     ustring verse_style = Style::get_verse_marker(project);
@@ -1688,7 +1718,7 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   }
 
   //----------------------------------------------------------------------------------
-  // STEP 2: Apply the style
+  // STEP 4: Apply the style
   //----------------------------------------------------------------------------------
   // Previously, the text was removed, then added again.
   // Instead, apply the style to the new text.
@@ -1696,11 +1726,6 @@ void Editor3::buffer_insert_text_after(GtkTextBuffer * textbuffer, GtkTextIter *
   GtkTextIter startiter = *pos_iter;
   gtk_text_iter_backward_chars (&startiter, utext.length());
   gtk_text_buffer_apply_tag_by_name(textbuffer, character_style_to_be_applied.c_str(), &startiter, pos_iter);
-
-
-  //----------------------------------------------------------------------------------
-  // STEP 3: Record undo/redo information
-  //----------------------------------------------------------------------------------
 
   // I am not sure the following is truly required now. MAP 4/8/2019.
   // The pos_iter variable that was passed to this function was invalidated because text was removed and added.
@@ -2634,60 +2659,6 @@ void Editor3::textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidge
 }  
 #endif
 }
-#ifdef OLD_STUFF
-// About to be obsolete
-void Editor3::paragraph_create_actions (EditorActionCreateParagraph * paragraph_action)
-{
-  // Connect text buffer signals.
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "insert-text",  G_CALLBACK(on_buffer_insert_text_after),   gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_before), gpointer(this));
-  g_signal_connect_after(G_OBJECT(paragraph_action->textbuffer), "delete-range", G_CALLBACK(on_buffer_delete_range_after),  gpointer(this));
-  g_signal_connect      (G_OBJECT(paragraph_action->textbuffer), "changed",      G_CALLBACK(on_textbuffer_changed),         gpointer(this));
-  // Connect spelling checker.
-  spellingchecker->attach(paragraph_action->textview);
-  // Connect text view signals.
-  g_signal_connect_after((gpointer) paragraph_action->textview, "move_cursor",         G_CALLBACK(on_textview_move_cursor),     gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "motion-notify-event", G_CALLBACK(on_motion_notify_event),      gpointer(this));
-  g_signal_connect_after((gpointer) paragraph_action->textview, "grab-focus",          G_CALLBACK(on_textview_grab_focus),      gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "key-press-event",     G_CALLBACK(on_textview_key_press_event), gpointer(this));
-  //EXPERIMENTALg_signal_connect((gpointer) paragraph_action->textview, "key-release-event", G_CALLBACK(on_textview_key_release_event), gpointer(this));
-  g_signal_connect      ((gpointer) paragraph_action->textview, "button_press_event",  G_CALLBACK(on_textview_button_press_event), gpointer(this));
-  // Set font
-  set_font_textview (paragraph_action->textview);
-  // Signal the parent window to connect to the signals of the text view.
-  new_widget_pointer = paragraph_action->textview;
-  gtk_button_clicked (GTK_BUTTON (new_widget_signal));
-  // Extra bits to be done for a note.
-  if (paragraph_action->type == eatCreateNoteParagraph) {
-    // Cast the object to the right type.
-    EditorActionCreateNoteParagraph * note_action = static_cast <EditorActionCreateNoteParagraph *> (paragraph_action);
-    // Connect signal for note caller in note.
-    g_signal_connect ((gpointer) note_action->eventbox, "button_press_event", G_CALLBACK (on_caller_button_press_event), gpointer (this));
-  }
-}
-#endif
-
-void Editor3::editor_start_new_standard_paragraph (const ustring& marker_text)
-// This function deals with a marker that starts a standard paragraph.
-{
-  // Create a new paragraph.
-  EditorActionCreateParagraph * paragraph = new EditorActionCreateParagraph (this, vbox_paragraphs);
-  apply_editor_action (paragraph); 
-
-  // The new paragraph markup.
-  EditorActionChangeParagraphStyle * style_action = new EditorActionChangeParagraphStyle (this, marker_text, paragraph);
-  apply_editor_action (style_action);
-
-  // Some styles insert their marker: Do that here if appropriate.
-  StyleType type;
-  int subtype;
-  Style::marker_get_type_and_subtype(project, marker_text, type, subtype);
-  if (Style::get_displays_marker(type, subtype)) {
-    gint insertion_offset = editor_paragraph_insertion_point_get_offset (paragraph);
-    EditorActionInsertText * insert_action = new EditorActionInsertText (this, paragraph, insertion_offset, usfm_get_full_opening_marker (marker_text));
-    apply_editor_action (insert_action);
-  }
-}
 
 
 Editor3::EditorActionCreateParagraph * Editor3::widget2paragraph_action (GtkWidget * widget)
@@ -3546,17 +3517,6 @@ gint Editor3::editor_paragraph_insertion_point_get_offset (EditorActionCreatePar
 }
 
 
-void Editor3::editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset)
-{
-  if (paragraph_action) {
-    GtkTextBuffer * textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (paragraph_action->textview));
-    GtkTextIter iter;
-    gtk_text_buffer_get_iter_at_offset (textbuffer, &iter, offset);
-    gtk_text_buffer_place_cursor (textbuffer, &iter);
-  }
-}
-
-
 Editor3::EditorActionDeleteText * Editor3::paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action)
 // Creates an action for deleting text for the last character in the text buffer if it is a space.
 {
@@ -4314,3 +4274,68 @@ gboolean Editor3::EditorActionCreateNoteParagraph::on_caller_leave_notify (GdkEv
   gdk_window_set_cursor(gdk_window, NULL);
   return false;
 }
+
+//----------------------------------------------------------------------
+// New, simplified undo and redo storage information
+//----------------------------------------------------------------------
+Editor3::AnEdit::AnEdit(GtkTextBuffer *textbuffer_in)
+{
+     textbuffer = textbuffer_in;
+}
+
+Editor3::AnEdit::~AnEdit()
+{
+    // nothing to do
+}
+
+Editor3::InsertText::InsertText(GtkTextBuffer *textbuffer_in, gint offset_in, const ustring& text_in)
+  : AnEdit(textbuffer_in)
+{
+   offset = offset_in;
+   text = text_in;   
+}
+
+void Editor3::InsertText::describe(void)
+{
+   gw_message("Insertion of text: " + text);   
+}
+
+void Editor3::InsertText::undo(void)
+{
+  // Undo the insertion of text, that is, remove it.
+  GtkTextIter startiter, enditer;
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &startiter, offset);
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &enditer, offset + text.length());
+  gtk_text_buffer_delete (textbuffer, &startiter, &enditer);
+}
+
+void Editor3::InsertText::redo(void)
+{
+  // Redo the insertion of text, that is, put it back again.
+  GtkTextIter startiter;
+  gtk_text_buffer_get_iter_at_offset (textbuffer, &startiter, offset);
+  gtk_text_buffer_insert (textbuffer, &startiter, text.c_str(), -1);
+}
+
+Editor3::DeleteText::DeleteText(GtkTextBuffer *textbuffer_in, gint offset_in, const ustring& text_in)
+  : AnEdit(textbuffer_in)
+{
+   offset = offset_in;
+   text = text_in;   
+}
+
+void Editor3::DeleteText::describe(void)
+{
+   gw_message("Insertion of text: " + text);   
+}
+
+void Editor3::DeleteText::undo(void)
+{
+    
+}
+
+void Editor3::DeleteText::redo(void)
+{
+    
+}
+

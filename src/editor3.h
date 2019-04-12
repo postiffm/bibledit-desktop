@@ -37,6 +37,39 @@
 class Editor3 : public ChapterView // Editor3 has to implement the ChapterView interface
 {
 private:
+    class AnEdit { // A pure virtual class; cannot be instantiated
+    public:
+        AnEdit(GtkTextBuffer *textbuffer_in);
+        virtual ~AnEdit();
+        virtual void describe() = 0;
+        virtual void undo() = 0;
+        virtual void redo() = 0;
+    protected:
+        GtkTextBuffer *textbuffer;
+    };
+    
+    class InsertText : public AnEdit {
+    public:
+        InsertText(GtkTextBuffer *textbuffer_in, gint offset_in, const ustring& text_in);
+        void describe();
+        void undo();
+        void redo();
+    private:
+        gint offset;
+        ustring text;
+    };
+    
+    class DeleteText : public AnEdit {
+    public:
+        DeleteText(GtkTextBuffer *textbuffer_in, gint offset_in, const ustring& text_in);
+        void describe();
+        void undo();
+        void redo();
+    private:
+        gint offset;
+        ustring text;
+    };
+    
     enum EditorActionType {
         eatCreateParagraph,
         eatChangeParagraphStyle,
@@ -91,7 +124,6 @@ private:
         gint offset_at_delete;
         GtkWidget * parent_vbox;
     };
-    
     
     class EditorActionChangeParagraphStyle : public EditorAction
     {
@@ -225,9 +257,6 @@ private:
   deque <EditorAction *> actions_done;
   deque <EditorAction *> actions_undone;
   void apply_editor_action (EditorAction * action, EditorActionApplication application = eaaInitial);
-#ifdef OLD_STUFF
-  void paragraph_create_actions (EditorActionCreateParagraph * paragraph_action);
-#endif
   void textviewbuffer_create_actions (GtkTextBuffer *textbuffer, GtkWidget *textview);
 public:
   //EditorActionCreateParagraph * focused_paragraph;
@@ -240,7 +269,6 @@ private:
   GtkWidget *create_text_view(GtkWidget *parent_vbox);
   void text_load (ustring text, ustring character_style, bool note_mode);
   
-  void editor_start_new_standard_paragraph (const ustring& marker_text);
   bool editor_starts_character_style (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   bool editor_ends_character_style   (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found);
   bool text_starts_note_raw          (ustring & line, ustring & character_style, const ustring & marker_text, size_t marker_pos, size_t marker_length, bool is_opener, bool marker_found, ustring& raw_note);
@@ -374,6 +402,10 @@ public:
   void redo();
   bool can_undo();
   bool can_redo();
+  
+  deque <AnEdit *> edits_done;
+  deque <AnEdit *> edits_undone;
+  void clear_and_destroy_editor_actions (deque <EditorAction *>& actions);
 
   // Highlighting (search results, not verse numbers)
   void highlight_searchwords();
@@ -387,7 +419,6 @@ public:
 
   GtkWidget * changed_signal;
   ustring chapter_get_ustring();
-private:
 
   // Spelling check.
 public:
@@ -405,8 +436,6 @@ private:
   static void on_button_spelling_recheck_clicked(GtkButton *button, gpointer user_data);
 
   // Verse positioning and tracking.
-private:
-  ustring current_verse_number;
 public:
   void go_to_verse(const ustring& versenum, bool focus=false);
   GtkWidget * new_verse_signal;
@@ -421,6 +450,8 @@ public:
   ustring verse_number_get();
   ustring get_verse_number_at_iterator(GtkTextIter iter, const ustring & verse_marker, const ustring & project);
   bool    get_iterator_at_verse_number (const ustring& verse_number, const ustring& verse_marker, GtkTextIter & iter, GtkWidget *& textview, bool deep_search = false);
+private:
+  ustring current_verse_number;
 
   // Scrolling control and verse highlighting.
 private:
@@ -431,9 +462,6 @@ private:
   
   // Moving from one textview to the other.
 private:
-#ifdef OLDSTUFF
-  void paragraph_crossing_act(GtkMovementStep step, gint count);
-#endif
   unsigned int keyStrokeNum_paragraph_crossing_processed;
   GtkWidget * paragraph_crossing_textview_at_key_press;
   GtkTextIter paragraph_crossing_insertion_point_iterator_at_key_press;
@@ -477,12 +505,10 @@ public:
 private:
   void textbuffer_insert_with_named_tags(GtkTextBuffer *buffer, GtkTextIter *iter, const ustring& text, ustring first_tag_name, ustring second_tag_name);
   
-  void clear_and_destroy_editor_actions (deque <EditorAction *>& actions);
   static void on_container_tree_callback_destroy (GtkWidget *widget, gpointer user_data);
   void editor_text_append(GtkTextBuffer * textbuffer, const ustring & text, const ustring & paragraph_style, const ustring & character_style);
   
   gint editor_paragraph_insertion_point_get_offset (EditorActionCreateParagraph * paragraph_action);
-  void editor_paragraph_insertion_point_set_offset (EditorActionCreateParagraph * paragraph_action, gint offset);
   
   EditorActionDeleteText * paragraph_delete_last_character_if_space(EditorActionCreateParagraph * paragraph_action);
   EditorActionDeleteText * paragraph_get_text_and_styles_after_insertion_point(EditorActionCreateParagraph * paragraph, vector <ustring>& text, vector <ustring>& styles);
