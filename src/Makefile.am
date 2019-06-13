@@ -226,6 +226,7 @@ bibledit_desktop_SOURCES = \
   dialogprojectnote.cpp \
   windowreferences.cpp \
   windowtabbed.cpp \
+  webview_simple.cpp \
   windoweditor.cpp \
   compress.cpp \
   localizednumerals.cpp \
@@ -455,6 +456,7 @@ bibledit_rdwrt_SOURCES = \
   dialogtext2pdf.cpp \
   windowreferences.cpp \
   windowtabbed.cpp \
+  webview_simple.cpp \
   compress.cpp \
   localizednumerals.cpp \
   widgetdate.cpp \

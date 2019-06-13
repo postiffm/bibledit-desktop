@@ -29,9 +29,9 @@
 #include "htmlwriter2.h"
 #include "editor.h"
 #include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
-
-class WindowCheckKeyterms : public FloatingWindow
+class WindowCheckKeyterms : public FloatingWindow, webview_simple
 {
 public:
   WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
@@ -63,9 +63,17 @@ private:
   GtkTreeSelection *treeselect_renderings;
 
   // Callbacks.
-  static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-  void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
-  void html_link_clicked (const ustring& url, bool newCollection=false);
+  static gboolean
+    on_decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type,
+			 gpointer                 user_data);
+
+  // void decide_policy_cb (called by above) is provided by the base class webview_simple
+  // and the following has to be implemented by this class.
+  void webview_process_navigation (const ustring &url);
+  bool newCollection; // state to inform above about some special behavior
+  
   static void on_combobox_keyterm_collection_changed(GtkComboBox *combobox, gpointer user_data);
   static void keyterm_whole_word_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
   static void keyterm_case_sensitive_toggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer data);
@@ -85,7 +93,6 @@ private:
   // Data routines.
   ustring enter_new_rendering_here();
   void get_renderings(vector <ustring>& renderings, vector<bool>& wholewords, vector<bool>& casesensitives);
-  Reference get_reference (const ustring& text);
 
   // Variables.
   unsigned int keyword_id;
