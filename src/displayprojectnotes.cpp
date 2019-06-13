@@ -62,7 +62,7 @@ void DisplayProjectNotes::stop()
 void DisplayProjectNotes::show_buffer ()
 {
   // Displays the notes text buffer.
-  webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), note_buffer.c_str(), NULL, NULL, NULL);
+  webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), note_buffer.c_str(), NULL);
 }
 
 

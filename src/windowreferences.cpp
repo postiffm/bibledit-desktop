@@ -68,7 +68,7 @@ WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkWindow *_transi
   
   connect_focus_signals (webview);
 
-  g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+  g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_decide_policy_cb), gpointer(this));
   DEBUG("30")
   // Signal button.
   signal_button = gtk_button_new();
@@ -82,7 +82,7 @@ WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkWindow *_transi
   // Load previously saved references.
   load ();
   DEBUG("50")
-  load_webview ("");
+  webview_process_navigation ("");
   DEBUG("60")
 }
 
@@ -122,7 +122,7 @@ void WindowReferences::set (vector <Reference>& refs, const ustring& project_in,
       comments.push_back (comment);
     }
   }  
-  load_webview ("");
+  webview_process_navigation ("");
 }
 
 
@@ -277,7 +277,7 @@ void WindowReferences::load (const ustring & filename)
     cerr << _("Loading references: ") << ex.what() << endl;
   }
   // Load these.
-  load_webview ("");
+  webview_process_navigation ("");
 }
 
 
@@ -395,17 +395,22 @@ void WindowReferences::save(const ustring& filename)
 void WindowReferences::clear()
 {
   dismiss (false, true);
-  load_webview ("");
+  webview_process_navigation ("");
 }
 
 
-gboolean WindowReferences::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+WindowReferences::on_decide_policy_cb (WebKitWebView           *web_view,
+				       WebKitPolicyDecision    *decision,
+				       WebKitPolicyDecisionType decision_type,
+				       gpointer                 user_data)
 {
-  ((WindowReferences *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((WindowReferences *) user_data)->decide_policy_cb (web_view, decision, decision_type);
+  // For above, see webview_simple.cpp
   return true;
 }
 
-
+#if 0
 void WindowReferences::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
 // Callback for clicking a link.
 {
@@ -426,11 +431,12 @@ void WindowReferences::navigation_policy_decision_requested (WebKitNetworkReques
   webkit_web_policy_decision_ignore (policy_decision);
   
   // Load new page depending on the pseudo-link clicked.
-  load_webview (webkit_network_request_get_uri (request));
+  webview_process_navigation (webkit_network_request_get_uri (request));
 }
+#endif
 
-
-void WindowReferences::load_webview (const gchar *url)
+// Called by webview_simple::decide_policy_cb
+void WindowReferences::webview_process_navigation (const ustring &url)
 {
   // New url.
   active_url = url;
@@ -518,7 +524,7 @@ void WindowReferences::load_webview (const gchar *url)
   htmlwriter.finish();
   if (display_another_page) {
     // Load the page.
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);
+    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL);
     // Scroll to the position that possibly was stored while this url was last active.
     GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
@@ -821,23 +827,25 @@ void WindowReferences::goto_next_previous_internal(bool next)
 
   // Switch pages back till the reference to be selected is within the visible bounds.
   while (selection < (int)lower_boundary) {
-    load_webview ("prev");
+    webview_process_navigation ("prev");
   }
 
   // Switch pages forward till the references to be selected is within the visible bounds.
   while (selection >= (int)upper_boundary) {
-    load_webview ("next");
+    webview_process_navigation ("next");
   }
 
   // Go to the selected references.
   ustring url = "goto " + convert_to_string (selection);
-  load_webview (url.c_str());
+  webview_process_navigation (url.c_str());
 }
 
 
 void WindowReferences::copy ()
 {
-  webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (webview));
+  // I know, I should  use webkit_web_view_can_execute_editing_command() to check whether it's possible to execute the command.
+  webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (webview),
+					  WEBKIT_EDITING_COMMAND_COPY);
 }
 
 
@@ -847,7 +855,8 @@ void WindowReferences::set_fonts()
   if (!settings->genconfig.text_editor_font_default_get()) {
     PangoFontDescription *desired_font_description = pango_font_description_from_string(settings->genconfig.text_editor_font_name_get().c_str());
     const char * desired_font_family = pango_font_description_get_family (desired_font_description);
-    WebKitWebSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview));
+    WebKitSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview));
+    // I'm not sure the below is still correct...
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
     pango_font_description_free (desired_font_description);
   }

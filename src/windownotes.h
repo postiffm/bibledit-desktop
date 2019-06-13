@@ -29,9 +29,9 @@
 #include "note_editor.h"
 #include "displayprojectnotes.h"
 #include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
-
-class WindowNotes : public FloatingWindow
+class WindowNotes : public FloatingWindow, webview_simple
 {
 public:
   WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup);
@@ -126,13 +126,20 @@ private:
 
   void get_references_from_id (gint id);
 
-  static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-  void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
-  void html_link_clicked (const gchar * url);
+  static gboolean
+    on_decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type,
+			 gpointer                 user_data);
+
+  // void decide_policy_cb (called by above) is provided by the base class webview_simple
+  // and the following has to be implemented by this class.
+  void webview_process_navigation (const ustring &url);
+
   void delete_ids (const vector<gint>& ids);
 
-  static void on_document_load_finished (WebKitWebView *web_view, WebKitWebFrame *web_frame, gpointer user_data);
-  void document_load_finished ();
+  static void on_load_changed (WebKitWebView *web_view, WebKitLoadEvent load_event, gpointer user_data);
+  void load_finished (WebKitWebView *web_view, WebKitLoadEvent load_event);
 
   static void on_button_more_clicked (GtkButton *button, gpointer user_data);
   void on_button_more ();
