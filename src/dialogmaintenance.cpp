@@ -48,7 +48,7 @@ MaintenanceDialog::MaintenanceDialog(GtkWindow *transient_parent)
   gtk_widget_show (webview);
   gtk_container_add(GTK_CONTAINER(scrolledwindow), webview);
 
-  g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+  g_signal_connect((gpointer) webview, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
 
   dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG(dialog));
   gtk_widget_show (dialog_action_area1);
@@ -70,7 +70,7 @@ MaintenanceDialog::MaintenanceDialog(GtkWindow *transient_parent)
   gtk_widget_grab_default (okbutton);
   
   // Home page.
-  load_webview ("");
+  webview_process_navigation ( "" );
 }
 
 
@@ -85,38 +85,18 @@ int MaintenanceDialog::run()
   return gtk_dialog_run(GTK_DIALOG(dialog));
 }
 
-
-gboolean MaintenanceDialog::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+MaintenanceDialog::on_decide_policy_cb (WebKitWebView           *web_view,
+					WebKitPolicyDecision    *decision,
+					WebKitPolicyDecisionType decision_type,
+					gpointer                 user_data)
 {
-  ((MaintenanceDialog *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((MaintenanceDialog *) user_data)->decide_policy_cb (web_view, decision, decision_type);
+  // For above, see webview_simple.cpp
   return true;
 }
 
-
-void MaintenanceDialog::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
-{
-  // Store scrolling position for the now active url.
-  GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
-  scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
-
-  // Get the reason for this navigation policy request.
-  WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
-  
-  // If a new page if loaded, allow the navigation, and exit.
-  if (reason == WEBKIT_WEB_NAVIGATION_REASON_OTHER) {
-    webkit_web_policy_decision_use (policy_decision);
-    return;
-  }
-
-  // Don't follow pseudo-links clicked on this page.
-  webkit_web_policy_decision_ignore (policy_decision);
-  
-  // Load new page depending on the pseudo-link clicked.
-  load_webview (webkit_network_request_get_uri (request));
-}
-
-
-void MaintenanceDialog::load_webview (const gchar * url)
+void MaintenanceDialog::webview_process_navigation (const ustring &url /*gchar * url*/)
 {
   // New url.
   active_url = url;
@@ -168,7 +148,7 @@ void MaintenanceDialog::load_webview (const gchar * url)
   htmlwriter.finish();
   if (display_another_page) {
     // Load the page.
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);
+    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL);
     // Scroll to the position that possibly was stored while this url was last active.
     GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);

@@ -27,6 +27,7 @@
 #include "htmlwriter2.h"
 #include "editor.h"
 #include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
 //----------------------------------------------------------------------------------
 // The tabbed window is a GTK notebook that can display information about the text
@@ -60,7 +61,8 @@ private:
     ustring title;
     WindowTabbed *parent;
     
-    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
+    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify? Some of it is factored
+    // into webview_simple.h/cpp
     static void on_close_button_clicked (GtkButton *button, gpointer user_data);
     // You might think in the floating window base class, but some windows are webviews, and others are other custom things,
     // so that might not work too well!
@@ -70,11 +72,9 @@ private:
 			   WebKitPolicyDecisionType decision_type,
 			   gpointer                 user_data);
 
-    void decide_policy_cb (WebKitWebView           *web_view,
-			   WebKitPolicyDecision    *decision,
-			   WebKitPolicyDecisionType decision_type);
-
-    void html_link_clicked (const gchar * url);
+    // void decide_policy_cb (called by above) is provided by the base class webview_simple
+    // and the following has to be implemented by this class.
+    void webview_process_navigation (const ustring &url);
 };
 
 class WindowTabbed : public FloatingWindow

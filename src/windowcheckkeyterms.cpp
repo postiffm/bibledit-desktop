@@ -44,6 +44,7 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGrou
 // Window for checking keyterms.
 {
   // Save / initialize variables.
+  bool newCollection = false;
   keyword_id = 0;
   text_changed_event_id = 0;
   my_editor = NULL;
@@ -114,7 +115,7 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGrou
   treeselect_renderings = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_renderings));
   gtk_tree_selection_set_mode(treeselect_renderings, GTK_SELECTION_SINGLE);
 
-  g_signal_connect((gpointer) webview_terms, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+  g_signal_connect((gpointer) webview_terms, "navigation-policy-decision-requested", G_CALLBACK(on_decide_policy_cb), gpointer(this));
   g_signal_connect((gpointer) combobox_collection, "changed", G_CALLBACK(on_combobox_keyterm_collection_changed), gpointer(this));
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label_collection), combobox_collection);
@@ -144,7 +145,7 @@ WindowCheckKeyterms::~WindowCheckKeyterms()
 void WindowCheckKeyterms::go_to_term(unsigned int id)
 {
   ustring url = _("keyterm ") + convert_to_string (id);
-  html_link_clicked (url);
+  webview_process_navigation (url);
 }
 
 
@@ -152,7 +153,9 @@ void WindowCheckKeyterms::copy_clipboard()
 {
   if (gtk_widget_has_focus (webview_terms)) {
     // Copy text to the clipboard.
-    webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (webview_terms));
+    // I know, I should  use webkit_web_view_can_execute_editing_command() to check whether it's possible to execute the command.
+    webkit_web_view_execute_editing_command(WEBKIT_WEB_VIEW (webview_terms),
+					  WEBKIT_EDITING_COMMAND_COPY);
 
     // Add the selected text to the renderings.
     GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
@@ -191,7 +194,9 @@ void WindowCheckKeyterms::cell_edited(GtkCellRendererText * cell, const gchar * 
 
 void WindowCheckKeyterms::on_combobox_keyterm_collection()
 {
-  html_link_clicked(collection(), /*newCollection*/true);
+  newCollection = true;
+  webview_process_navigation(collection());
+  newCollection = false;
 }
 
 
@@ -244,7 +249,7 @@ void WindowCheckKeyterms::save_renderings()
   ustring project = settings->genconfig.project_get();
   keyterms_store_renderings(project, keyterm, category, renderings, wholewords, casesensitives);
   load_renderings();
-  html_link_clicked (last_keyword_url);
+  webview_process_navigation (last_keyword_url);
 }
 
 
@@ -403,24 +408,28 @@ ustring WindowCheckKeyterms::collection ()
   return combobox_get_active_string(combobox_collection);
 }
 
-
-gboolean WindowCheckKeyterms::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+WindowCheckKeyterms::on_decide_policy_cb (WebKitWebView           *web_view,
+					  WebKitPolicyDecision    *decision,
+					  WebKitPolicyDecisionType decision_type,
+					  gpointer                 user_data)
 {
-  ((WindowCheckKeyterms *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((WindowCheckKeyterms *) user_data)->decide_policy_cb (web_view, decision, decision_type);
   return true;
 }
 
 
+#if 0
 void WindowCheckKeyterms::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
 // Callback for clicking a link.
 {
-#if 0
+  //#if 0
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
   
   DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
-#endif
+    //#endif
   // Get the reason for this navigation policy request.
   WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
   
@@ -434,11 +443,13 @@ void WindowCheckKeyterms::navigation_policy_decision_requested (WebKitNetworkReq
   webkit_web_policy_decision_ignore (policy_decision);
   
   // Load new page depending on the pseudo-link clicked.
-  html_link_clicked (webkit_network_request_get_uri (request));
+  webview_process_navigation (webkit_network_request_get_uri (request));
 }
+#endif
 
+// Called by webview_simple::decide_policy_cb
 // newCollection=true if we are loading the index of an entirely new set of keywords
-void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollection)
+void WindowCheckKeyterms::webview_process_navigation (const ustring& url)
 {
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
@@ -478,7 +489,7 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
     // Signal the editors to go to a reference.
     ustring url = active_url;
     url.erase (0, 5);
-    myreference.assign (get_reference (url));
+    myreference.assign (Reference(url));
     new_reference_showing = &myreference;
     gtk_button_clicked(GTK_BUTTON(signal));
   }
@@ -521,7 +532,7 @@ void WindowCheckKeyterms::html_link_clicked (const ustring& url, bool newCollect
   htmlwriter.finish();
   if (display_another_page) {
     // Load the page.
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview_terms), htmlwriter.html.c_str(), NULL, NULL, NULL);
+    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview_terms), htmlwriter.html.c_str(), NULL);
     // Scroll to the position that possibly was stored while this url was last active.
     // In order to do this, we need to let the web_view window fully load, and after it
     // is done, then we can instruct it to change the vertical adjustment. I found this
@@ -594,7 +605,7 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
         // Extract the reference.
         htmlwriter.paragraph_close ();
         ustring original_reference_text = information.substr (0, pos);
-        Reference reference = get_reference (original_reference_text);
+        Reference reference = Reference(original_reference_text);
         // Remap the reference.
         {
           Mapping mapping(versification, reference.book_get());
@@ -677,19 +688,6 @@ void WindowCheckKeyterms::html_write_keyterms (HtmlWriter2& htmlwriter, unsigned
 }
 
 
-Reference WindowCheckKeyterms::get_reference (const ustring& text)
-// Generates a reference out of the text.
-{
-  Reference ref;
-  ustring book, chapter, verse = ref.verse_get();
-  Reference::decode_reference(text, book, chapter, verse);
-  ref.book_set( books_localname_to_id (book));
-  ref.chapter_set(convert_to_int (chapter));
-  ref.verse_set(verse);
-  return ref;
-}
-
-
 void WindowCheckKeyterms::reload_collections ()
 {
   vector <ustring> categories = keyterms_get_categories();
@@ -724,7 +722,7 @@ void WindowCheckKeyterms::on_text_changed ()
       my_editor->chapter_save ();
     }
     my_editor = NULL;
-    html_link_clicked (last_keyword_url);
+    webview_process_navigation (last_keyword_url);
   }
 }
 
@@ -735,7 +733,8 @@ void WindowCheckKeyterms::set_fonts()
   if (!settings->genconfig.text_editor_font_default_get()) {
     PangoFontDescription *desired_font_description = pango_font_description_from_string(settings->genconfig.text_editor_font_name_get().c_str());
     const char * desired_font_family = pango_font_description_get_family (desired_font_description);
-    WebKitWebSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_terms));
+    WebKitSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_terms));
+    // Not 100% sure on following...
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
     pango_font_description_free (desired_font_description);
   }

@@ -40,19 +40,13 @@ WindowShowRelatedVerses::WindowShowRelatedVerses(GtkWidget * parent_layout, GtkA
   thread_runs = false;
   event_id = 0;
 
-  scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-  gtk_widget_show(scrolledwindow);
-  gtk_container_add(GTK_CONTAINER(vbox_client), scrolledwindow);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow), GTK_SHADOW_IN);
-
   webview = webkit_web_view_new();
   gtk_widget_show(webview);
-  gtk_container_add(GTK_CONTAINER(scrolledwindow), webview);
+  gtk_container_add(GTK_CONTAINER(vbox_client), webview);
   
   connect_focus_signals (webview);
   
-  g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+  g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_decide_policy_cb), gpointer(this));
 
   last_focused_widget = webview;
   gtk_widget_grab_focus (last_focused_widget);
@@ -81,25 +75,32 @@ void WindowShowRelatedVerses::go_to(const ustring & project, const Reference & r
     //event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 1000, GSourceFunc(on_timeout), gpointer(this), NULL);
     // Call directly instead of overhead of above; seems to cut time in 
     // half to display the related words.
-    load_webview("");
+    //load_webview("");
+    webview_process_navigation ("");
   }
 }
 
-
-gboolean WindowShowRelatedVerses::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+WindowShowRelatedVerses::on_decide_policy_cb (WebKitWebView           *web_view,
+					      WebKitPolicyDecision    *decision,
+					      WebKitPolicyDecisionType decision_type,
+					      gpointer                 user_data)
 {
-  ((WindowShowRelatedVerses *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((WindowShowRelatedVerses *) user_data)->decide_policy_cb (web_view, decision, decision_type);
   return true;
 }
 
-
-void WindowShowRelatedVerses::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
+#if 0
+void WindowShowRelatedVerses::decide_policy_cb (WebKitWebView           *web_view,
+						WebKitPolicyDecision    *decision,
+						WebKitPolicyDecisionType decision_type)
 // Callback for clicking a link.
 {
+  //#if 0
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
-
+  //#endif
   // Get the reason for this navigation policy request.
   WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
   
@@ -113,11 +114,11 @@ void WindowShowRelatedVerses::navigation_policy_decision_requested (WebKitNetwor
   webkit_web_policy_decision_ignore (policy_decision);
   
   // Load new page depending on the pseudo-link clicked.
-  load_webview (webkit_network_request_get_uri (request));
+  webview_process_navigation (webkit_network_request_get_uri (request));
 }
-
-
-void WindowShowRelatedVerses::load_webview (const gchar * url)
+#endif
+// Called by webview_simple::decide_policy_cb
+void WindowShowRelatedVerses::webview_process_navigation (const ustring &url)
 {
   // New url.
   active_url = url;
@@ -241,10 +242,12 @@ void WindowShowRelatedVerses::load_webview (const gchar * url)
   htmlwriter.finish();
   if (display_another_page) {
     // Load the page.
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL, NULL, NULL);
+    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), htmlwriter.html.c_str(), NULL);
+    #if 0
     // Scroll to the position that possibly was stored while this url was last active.
     GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
+    #endif
   }
 }
 
@@ -259,7 +262,7 @@ void WindowShowRelatedVerses::thread_main(gpointer data)
 {
   thread_runs = false;
 }
-
+#if 0
 // These two methods only serve to slow down the rendering of show
 // related verses -- MAP 1/13/2015
 bool WindowShowRelatedVerses::on_timeout(gpointer user_data)
@@ -273,4 +276,4 @@ bool WindowShowRelatedVerses::timeout()
   load_webview ("");
   return false;
 }
-
+#endif
