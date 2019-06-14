@@ -78,7 +78,9 @@ checksheet: check whether markers are in the stylesheet of the project.
       // Check each verse.
       for (unsigned int vs = 0; vs < verses.size(); vs++) {
         verse = verses[vs];
-        ustring line = project_retrieve_verse(project, book, chapter, verse);
+	int errnum = 0; ustring errmsg = "";
+        ustring line = project_retrieve_verse(project, book, chapter, verse, &errnum, &errmsg);
+	if (errnum != 0) { message(errmsg); }
         // Check each line.
         ParseLine parseline(line);
         for (unsigned int ln = 0; ln < parseline.lines.size(); ln++) {

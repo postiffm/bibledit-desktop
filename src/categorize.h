@@ -26,6 +26,7 @@ class CategorizeChapterVerse
 {
 public:
   CategorizeChapterVerse(const vector<ustring>& lines);
+  bool missingChapterMarker;
   vector<unsigned int> chapter;
   vector<ustring> verse;
   vector<ustring> line;

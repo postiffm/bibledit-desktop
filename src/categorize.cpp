@@ -22,6 +22,8 @@
 #include "usfmtools.h"
 #include "tiny_utilities.h"
 #include "gwrappers.h"
+#include "gtkwrappers.h"
+#include <glib/gi18n.h>
 
 CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
 // Categorizes the lines by adding chapter and verse information to it.
@@ -29,6 +31,7 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
 // Gives one line per verse.
 {
   // Variables.
+  missingChapterMarker = false;
   unsigned int chapternumber = 0;
   ustring versenumber = "0";
   ustring text;
@@ -45,8 +48,9 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
       // Only accept the number if it is well-formed.
       if ((ln.substr(0, number_in_line.length()) == number_in_line) && (!number_in_line.empty())) {
         chapternumber = convert_to_int(number_in_line);
-        if (i == 0)
+        if (i == 0) {
           previous_chapter = chapternumber;     // For one-chapter texts
+	}
         versenumber = "0";
       }
     }
@@ -61,7 +65,11 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
       }
       // Handle case that the usfm file does not contain the \c 1.
       if ((versenumber != "0") && (chapternumber == 0)) {
+	missingChapterMarker = true;
         chapternumber = 1;
+	//gtkw_dialog_warning(NULL, "Chapter 1 has no \\c 1 marker. This is a USFM error.");
+	ustring msg = _("Chapter 1 has no \\c 1 marker. This is a USFM error.");
+	gw_warning(msg);
       }
     }
     // Store data.
@@ -72,12 +80,14 @@ CategorizeChapterVerse::CategorizeChapterVerse(const vector < ustring > &lines)
       previous_verse = versenumber;
     }
     // Save text.
-    if (!text.empty())
+    if (!text.empty()) {
       text.append("\n");
+    }
     text.append(lines[i]);
   }
-  if (!text.empty())
+  if (!text.empty()) {
     store(chapternumber, versenumber, text);
+  }
 }
 
 void CategorizeChapterVerse::store(unsigned int chapternumber, const ustring & versenumber, const ustring & text)
