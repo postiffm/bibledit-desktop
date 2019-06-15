@@ -48,6 +48,10 @@ while ($ln = <>) {
 	    print $ln, " has an empty book\n";
 	    print "Previous line: ", $lastln, "\n\n";
 	}
+	elsif ($book eq "-") {
+	    print $ln, " has a mal-formed book\n";
+	    print "Previous line: ", $lastln, "\n\n";
+	}
     }
     $lastln = $ln;
     #print "\n";
