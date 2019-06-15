@@ -46,7 +46,7 @@ void project_remove_book (const ustring& project, unsigned int book);
 void project_store_chapter (const ustring& project, unsigned int book, CategorizeChapterVerse& ccv);
 void project_remove_chapter (const ustring& project, unsigned int book, unsigned int chapter);
 void project_store_verse (const ustring& project, unsigned int book, unsigned int chapter, const ustring& verse, const ustring& data);
-ustring project_retrieve_verse (const ustring& project, unsigned int book, unsigned int chapter, const ustring& verse);
+ustring project_retrieve_verse (const ustring& project, unsigned int book, unsigned int chapter, const ustring& verse, int *errnum=NULL, ustring *errmsg=NULL);
 inline ustring project_retrieve_verse (const ustring& project, const Reference &ref) { return project_retrieve_verse(project, ref.book_get(), ref.chapter_get(), ref.verse_get()); }
 vector<ustring> project_retrieve_chapter (const ustring& project, unsigned int book, unsigned int chapter);
 vector<ustring> project_retrieve_book (const ustring& project, unsigned int book);

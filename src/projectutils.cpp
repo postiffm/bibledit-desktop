@@ -334,8 +334,9 @@ This is roughly the strategy to be followed to get the right verse.
       if (available_verses_sets[a].find(requested_verses[r]) != available_verses_sets[a].end()) {
         if (retrieved_verses.find(all_verses[a]) == retrieved_verses.end()) {
           retrieved_verses.insert(all_verses[a]);
-          if (!line.empty())
+          if (!line.empty()) {
             line.append("\n");
+	  }
           line.append(project_retrieve_verse(project, book, chapter, all_verses[a]));
         }
       }
@@ -346,12 +347,19 @@ This is roughly the strategy to be followed to get the right verse.
   return line;
 }
 
-ustring project_retrieve_verse(const ustring & project, unsigned int book, unsigned int chapter, const ustring & verse)
+ustring project_retrieve_verse(const ustring & project, unsigned int book, unsigned int chapter, const ustring & verse, int *errnum, ustring *errmsg)
 {
   // Retrieve the verse.
   ustring line;
+  // For some reason, verse="0" is a common case that is meaningless.
+  if (verse == "0") { return line; } // return an empty line
+  
   vector < ustring > lines = project_retrieve_chapter(project, book, chapter);
   CategorizeChapterVerse ccv(lines);
+  if ((ccv.missingChapterMarker == true) && errnum && errmsg) {
+    *errnum = 1;
+    *errmsg = _("There is a missing chapter marker \\c in this chapter");
+  }
   for (unsigned int i = 0; i < ccv.verse.size(); i++) {
     if (ccv.verse[i] == verse) {
       line = ccv.line[i];

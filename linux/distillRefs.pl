@@ -59,6 +59,12 @@ while ($ln = <>) {
 
 printf("%-15s %s\n", "Book", "Occurrences");
 printf("%-15s %s\n", "--------------", "-----------");
+$totalxRefCount = 0;
 foreach $book (keys %books) {
     printf("%-15s %d\n", $book, $books{$book});
+    $totalxRefCount += $books{$book};
 }
+
+print "Number of variations = ", scalar keys %books, "\n";
+print "Number of total xrefs = ", $totalxRefCount, "\n";
+
