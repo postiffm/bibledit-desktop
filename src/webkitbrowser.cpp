@@ -199,7 +199,7 @@ void WebkitBrowser::copy()
 
 void WebkitBrowser::go_to(const ustring & url)
 {
-  webkit_web_view_open (WEBKIT_WEB_VIEW(webview), url.c_str());
+  webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), url.c_str());
 }
 
 
