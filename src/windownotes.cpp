@@ -928,7 +928,7 @@ void WindowNotes::set_fonts ()
   if (!settings->genconfig.text_editor_font_default_get()) {
     PangoFontDescription *desired_font_description = pango_font_description_from_string (settings->genconfig.text_editor_font_name_get ().c_str());
     const char * desired_font_family = pango_font_description_get_family (desired_font_description);
-    WebKitWebSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_notes));
+    WebKitSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_notes));
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
     webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_note_editor));
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
