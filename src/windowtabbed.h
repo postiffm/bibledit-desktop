@@ -44,7 +44,7 @@ class WindowTabbed; // forward declaration
 // that is intended to go into a tab should inherit from this class. For instance,
 // a concordance tab "is" a SingleTab. I don't have it implemented this way at
 // the moment, but theoretically it should be able to be implemented this way.
-class SingleTab
+class SingleTab : webview_simple
 {
 public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
@@ -60,7 +60,7 @@ private:
     GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
-    
+
     // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify? Some of it is factored
     // into webview_simple.h/cpp
     static void on_close_button_clicked (GtkButton *button, gpointer user_data);

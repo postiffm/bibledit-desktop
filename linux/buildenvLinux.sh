@@ -25,7 +25,9 @@ if apt-get --version 2> /dev/null; then
   apt-get install libenchant-dev
   apt-get install libgtkhtml3.14-dev
   apt-get install libgtksourceview2.0-dev
-  #apt-get install libgtksourceview-3.0
+  apt-get install libgtksourceview-3.0
+  # Below installs -dev and -doc as well
+  apt-get install libwebkit2gtk-4.0
   #apt-get install libwebkit-dev
   apt-get install libwebkitgtk-dev
   #apt-get install libwebkitgtk-3.0
