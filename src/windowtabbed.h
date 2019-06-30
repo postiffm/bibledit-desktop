@@ -55,8 +55,7 @@ public:
     inline const ustring &getTitle() const { return title; }
 private:
     // I might not have to store any of these...
-    GtkWidget *scrolledwindow; // owned by the notebook, I think
-    GtkWidget *webview; // owned by scrolled window
+    GtkWidget *webview; // owned by notebook
     GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
