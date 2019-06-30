@@ -87,12 +87,6 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
     title = _title;
     parent = _parent;
 
-	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
-
 	GtkWidget *box = gtk_hbox_new (FALSE, 2);
 	GtkWidget *tab_label = gtk_label_new_with_mnemonic (title.c_str());
 	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
@@ -112,16 +106,13 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	gtk_box_pack_end (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (box);
-	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, box);
 	
 	webview = webkit_web_view_new();
+	gtk_notebook_append_page((GtkNotebook *)notebook, webview, box);
 	gtk_widget_show (webview);
-	gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
 
 	parent->connect_focus_signals (webview); // this routine is inherited from FloatingWindow
 
-    // NOTE: WebKit2: WebKitWebView is scrollable by itself, so you don't need to embed it in a GtkScrolledWindow.
-    
     webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL);
     // TO DO: Scroll to the position that possibly was stored while this url was last active.
     //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
@@ -135,9 +126,6 @@ SingleTab::~SingleTab()
     title = "";
     parent = NULL;
     gtk_widget_destroy(webview);
-    // I think the above should take care of all its kids (?) 
-    // and I believe that notebook will be taken care of in the parent when it
-    // destroys its stuff.
 }
 
 void WindowTabbed::newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
