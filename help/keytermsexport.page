@@ -1,0 +1,17 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="keytermsexport">
+<info>
+  <link type="guide" xref="file#export"/>
+      <desc>Export keyterms</desc>
+</info>
+
+  <title>File Menu</title>
+  <section id="exportkeyterms"><title>Export Keyterms
+      </title>
+      <p>
+        The keyterms can be exported to a web page. The collection of keyterms that the window for checking keyterms shows will be exported.
+      </p>
+  </section>
+       
+</page>

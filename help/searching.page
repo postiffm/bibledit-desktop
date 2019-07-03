@@ -1,0 +1,102 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="searching">
+<info>
+  <link type="guide" xref="index#tools"/>
+  <desc>How to use the searching tools.</desc>
+</info>
+  <title>06. Searching</title>
+<section id="introsearching"><title>Introduction
+    </title>
+      <p>
+        Through menu <gui>Edit</gui> the <gui>Find</gui> menu can be opened. The same can be done through the keyboard shortcut <keyseq><key>Ctrl</key><key>F</key></keyseq>.
+      </p>
+      <p>
+        A list of hits will show in the references window.
+      </p>
+</section>
+<section id="basicfind"><title>Basic Find
+    </title>
+      <p>
+        Menu <guiseq><gui>Edit</gui><gui>Find</gui></guiseq> (<keyseq><key>Ctrl</key><key>F</key></keyseq>) searches exacty (except case sensitive) for the sequence of characters entered into the Search for box, punctuation marks and spaces included. Case sensitive can be switched on or off. Searching can be limited to the current book.
+      </p>
+      <p>
+        Example: Searching for "ue. t" (without the quotation marks) shows all the references with the words: true. The.
+      </p>
+      <p>
+        Note that for the text to actually display, you have to hit one of the search results.
+      </p>
+</section>
+<section id="advancedfind"><title>Advanced Find
+    </title>
+      <p>
+        Menu <guiseq><gui>Edit</gui><gui>Find</gui></guiseq> (<keyseq><key>Ctrl</key><key>F</key></keyseq>) allows more complex searches than the Basic Find:
+      </p>
+      <list>
+      <item><p>Search box to enter text.
+      </p></item>
+      <item><p>Case sensitive: on or off.
+      </p></item>
+      <item><p>Search in curent book only: this limits searching to the current book.
+      </p></item>
+      <item><p>Interprete * and ? as wildcards: on or off.
+      </p></item>
+      <item><p>Match start of word: on or off.
+      </p></item>
+      <item><p>Match end of word: on or off.
+      </p></item>
+      <item><p>Select books: some books (all), for details see <link xref="print#printportion">Select books.</link>
+      </p></item>
+      <item><p>Which area of the text to search in.
+      </p></item>
+	<item><p>What to do with the search results. This gives the choice how the results will show up in the references window, see Loading results below.
+      </p></item>
+      </list>
+      <p>
+        There are two wildcards. The ? and the *. The ? means "any single character". If one were to search for "p?t", and ticks the option for wildcards, then the search will hit results like "pit" and "put". The * works similar, but means "zero or more characters".
+      </p>
+      <p>
+        Searches can be done in certain areas of the text. When searching in the raw USFM text, then one searches in the text as it is stored, e.g. one can search for markers too, like \add. When searching in all the text except the USFM codes, one searches in the text as it will appear on the paper when printed. This means that searching for markers is not possible, as these will be hidden on the paper. When searching in certain categories, one can limit searches to, let's say, only the introductions, or only the verse text, or only headings and identifiers, and so forth.
+      </p>
+</section>
+<section id="loadingresults"><title>Loading results
+    </title>
+      <p>
+        Once an advanced or BibleTime search has been done, one can decide how they interact with what is already in the references window.
+      </p>
+      <list>
+      <item><p>The search results can simply be loaded in the references window, and so replace anything that is already there.
+      </p></item>
+      <item><p>Or the search results can be added to the references already there.
+      </p></item>
+      <item><p>Or they can be removed from the references already loaded.
+      </p></item>
+      <item><p>Sharing the search results with what is already in the references window means that only the references that are the same will be kept in the references window, and the other ones will be discarded.
+      </p></item>
+      </list>
+      <p>
+        In the case that in a Special Find the option: 'Share them with the ones already in the references window' is chosen, and this special find with this option is repeated several times, several groups of characters can be highlighted in the text editor (as a result from the different searches) when a reference is activated in the references window.
+      </p>
+</section>
+<section id="findandreplace"><title>Find and Replace
+    </title>
+      <p>
+        Menu <guiseq><gui>Edit</gui><gui>Find and Replace</gui></guiseq> (<keyseq><key>Ctrl</key><key>R</key></keyseq>) searches for and replaces text. It goes like this:
+      </p>
+      <p>
+        Press <keyseq><key>Ctrl</key><key>R</key></keyseq> to start the find &amp; replace. Enter the word to search for, and the word to replace it with. Optionally make settings like case sensitive, searching in current book and/ or chapter, or <link xref="print#printportion">select the books</link> to operate on. Press Find to start the operation.
+      </p>
+      <p>
+        A new dialog will open. It shows the verse to be affected, e.g. Esther 6:5. It also shows the original text as it is before changing. This is in the top half of the dialog. Below that it shows the suggested text as it would be after change. If you want to make changes to the suggested replacement, then you can edit this in the lower half of the dialog.
+      </p>
+      <p>
+        Once you are satisfied that the change is going to be the one that you want, then you can press button <gui>Yes</gui>. Press <gui>No</gui> if you don't want to change this verse. Or press <gui>Cancel</gui> to stop changing. If you press button All, it would change this verse and all following relevant verses. Be careful with this option. It could change instances that you may not have wanted to change.
+      </p>
+</section>
+<section id="findingprojectnotes"><title>Finding Project Notes
+    </title>
+      <p>
+        See <link xref="notes#projectnotes">Project Notes</link> for more information.
+</p>
+</section>
+</page>

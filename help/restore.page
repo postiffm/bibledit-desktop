@@ -1,0 +1,16 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="restore">
+<info>
+  <link type="guide" xref="file#restore"/>
+</info>
+
+  <title>File Menu</title>
+      <section id="second"><title>Restore Assistant</title>
+
+      <p>
+        The Restore Assistant is available through menu <guiseq><gui>File</gui><gui>Restore</gui></guiseq>. You can restore a Bible, or the Notes, of Everything. When restoring everything, the data will be available after restarting Bibledit. More information is available with the <link xref="backup">Backup Assistant</link>, as Restore and Backup complement each other.
+      </p>
+                  </section>
+        
+</page>

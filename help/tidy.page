@@ -1,0 +1,31 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="tidy">
+<info>
+  <link type="guide" xref="preferences"/>
+  <desc>All about text tidying</desc>
+</info>
+
+  <title>Preferences Menu</title>
+             <section id="second"><title>Tidy Text Settings
+      </title>
+      <p>
+        Access the dialog through the menu <guiseq><gui>Preferences</gui><gui>Tidy text</gui></guiseq>.
+      </p>
+      <p>
+        The settings in this dialog are used while inserting Bible notes and work on the references in the notes. If the "tidy" function is ticked while inserting for example crossreferences, then the settings apply.
+      </p>
+      <p>
+        The various tidying functions are described below.
+      </p>
+<section id="third"><title>Translate certain text to book abbreviations
+      </title>
+      <p>
+        While inserting references, one might prefer to type, for example "Matthew 1.1". References are usually given in their abbreviated form in the footnotes. Therefore, it should be, for example, "Mat. 1.1". This translate function can do that for you. To make it work for the Matthew case, ensure that this function is ticked, scroll the llist of abbreviations down till you reach the Matthew abbreviation, click on the abbreviation, then click at the right side of it under the Texts column. The text now becomes editable. Enter "Matthew", and press Enter.
+      </p>
+      <p>
+        If you wish to enter several texts that all translate to the abbreviation of Matthew, type them this way: Matthew | Matth. | Mt.. This means that "Matthew", or "Matth." or "Mt." all get tidied to your language's abbreviation of the book of Matthew.
+      </p></section>
+      </section>
+       
+</page>

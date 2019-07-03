@@ -1,0 +1,69 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="sword">
+<info>
+  <link type="guide" xref="file#export"/>
+</info>
+
+  <title>File Menu</title>
+<section id="swordmodule"><title>Sword module</title>
+	<section id="swordintro"><title>Introduction
+      </title>
+      <p>
+        Bibledit can create a Sword module out of the USFM code.
+      </p>
+      <p>
+        Various settings can be made in relation to the SWORD module to be produced.
+      </p>
+      <p>
+        Normally you can leave the settings as they are. Changes can be made, however.
+      </p>
+	</section>
+	<section id="name"><title>Name
+      </title>
+      <p>
+        This is the name for the module.
+      </p>
+	</section>
+	<section id="description"><title>Description
+      </title>
+      <p>
+        This is a short (1 line) description of the module, such as its title.
+      </p>
+	</section>
+	<section id="about"><title>About
+      </title>
+      <p>
+        This is a lengthier description and may include copyright, source, etc. information.
+      </p>
+	</section>
+	<section id="license"><title>License
+      </title>
+      <p>
+        This describes the license under which the module is being distributed.
+      </p>
+	</section>
+	<section id="version"><title>Version
+      </title>
+      <p>
+        This is the module's revision number of the module. Incrementing it when changes are made alerts users of the SWORD Installers to the presence of updated modules. Please start with version 1.0 and increment by 0.1 for minor updates and by larger values for more major updates such as a new text source.
+      </p>
+	</section>
+	<section id="language"><title>Language
+      </title>
+      <p>
+        This is the primary language code of the module. You can enter a language by hand, following certain official standards which are recognized in the Sword system.
+      </p>
+      <p>
+        In Sword, they prefer to use ISO 639-1. These are two letter language codes. For example, the code "en" stands for "English". If a language does not exist in ISO 639-1, the ISO 639-2 standard can be used. If the language is not in that standard, IANA registered codes can be used, then Ethnologue codes (encoded as x-SIL-...), then ISO 639-3. The data for the latter is available at <link href="http://www.sil.org/iso639-3/download.asp"> sil.org</link>. All the language codes could have been included in Bibledit, but to avoid bloat this was not done. The user who wishes to uses a certain language needs to look its code up on the Internet, following the standards mentioned above.
+      </p>
+	</section>
+	<section id="installpath"><title>Install path
+      </title>
+      <p>
+        This is where Bibledit will install the module. This is the place where Sword readers expect the module to be installed.
+      </p>
+	</section>
+</section>
+         
+</page>

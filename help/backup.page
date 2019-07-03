@@ -1,0 +1,44 @@
+<page id="backup"  type="topic" xmlns="http://projectmallard.org/1.0/"
+xmlns:its="http://www.w3.org/2005/11/its">
+<info>
+  <link type="guide" xref="file#backup"/>
+</info>
+<title>File Menu</title>
+  <section id="Backup"><title>Backup</title>
+      <p>
+        This assistant is accessible through menu <guiseq><gui>File</gui><gui>Backup</gui></guiseq>.
+      </p>
+      <p>
+        A variety of data can be backed up through this assistant.
+      </p>
+    <section id="bible"><title>Bible</title>
+      <p>
+        When backing up up a Bible, normally the Bible now focused in the editor will be backed up. You can choose another one.
+      </p>
+    </section>
+    <section id="notes"><title>Notes</title>
+     
+      <p>  When backing up Notes, all the available notes will be backed up.</p>
+      
+    </section>
+    <section id="resource"><title>Resource</title>
+      <p>
+        When backing up a Resource, normally the Resource now focused will be backed up. You can choose another one.
+      </p>
+    </section>
+    <section id="everything"><title>Everything</title>
+      <p>
+        This backs up really everything Bibledit knows about.
+      </p>
+      <p>
+        Depending on the amount of data that you have , it may take a good while to create this backup.
+      </p>
+      <p>
+        This type of backup is recommended for safekeeping all your data, and when you'd like to transfer all your data from one computer to the other.
+      </p>
+      <p>
+        If Bibledit starts, and notices that it has no data, it will ask for a complete backup. A complete backup is one that was made with the "Everything" option.
+      </p>
+    </section>
+  </section>
+</page>

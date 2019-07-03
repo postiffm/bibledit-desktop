@@ -1,0 +1,54 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="data">
+<info>
+  <link type="guide" xref="index#tools"/>
+  <desc>How to save data.</desc>
+</info>
+
+  <title>11. Manage Data</title>
+    <section id="introductiondata"><title>Introduction</title>
+<p> Your data is valuable.
+</p><p>
+In Linux the directory where Bibledit normally stores all its data is:  <file>.bibledit</file> in the user's home directory, e.g. <file>/home/joe/.bibledit</file>.
+</p><p>
+On Windows it may be in <file>C:\Documents and Settings\&lt;user&gt;\.bibledit</file> or <file>C:\Users\&lt;user&gt;.</file>
+</p>
+
+<p>
+If your data consists of a Bible that you translate, many years of work may have gone into it. It deserves maximum safety.
+</p><p>
+Bibledit offers a variety of mechanisms that deal with your data.
+</p><p>
+First there is the mechanism of Backup. A <link xref="#backupdata">backup</link> makes an exact copy of your data and stores it onto some medium.
+</p><p>
+A <link xref="#restore">Restore</link> is the opposite of a backup. It takes that backup that was made earlier, and restores it into your data.
+</p><p>
+Then, there's <link xref="#import">Import</link>. It takes data in another format, and adds it to your own data.
+</p><p>
+Finally, there's <link xref="#export">Export</link>. It is the opposite of an import. It takes your data and exports it into another format.</p> 
+    </section>
+
+    <section id="backupdata"><title>
+Backup</title>
+<p>
+To keep your data safe, it is important to make regular backups of your work.
+</p><p>
+To make it easy to create a backup, Bibledit provides the <link xref="backup">Backup Assistant</link>.</p>
+    </section>
+    <section id="import"><title>Import</title>
+<p>
+Importing your data is an easy way of getting data into Bibledit. The <link xref="import">Import Assistant</link> helps you with this. </p>
+    </section>
+    <section id="export"><title>Export </title>
+      <p>Bibledit can export its data into other formats. The <link xref="export">Export
+        Assistant</link> helps with this process.
+        </p>
+    </section>        
+    <section id="restore"><title>
+ Restore</title>
+ <p>
+To keep your data safe, it is important to make regular backups of your work. These backups can be restored if there is a need for it. The <link xref="restore">Restore Assistant</link> helps you with it. </p>
+    </section>
+
+</page>

@@ -1,0 +1,24 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="keyterms">
+<info>
+  <link type="guide" xref="file#keyterms"/>
+  <desc>How open the keyterms feature.</desc>
+</info>
+
+  <title><guiseq><gui>File Menu</gui><gui>Keyterms</gui></guiseq></title>
+	<section id="deletekey"><title>Deleting keyterms
+      </title>
+      <p>
+        Keyterms can be deleted from Bibledit's database. This can be done through menu <guiseq><gui>File</gui><gui>Keyterms</gui><gui>Delete</gui></guiseq>.
+      </p>
+      <p>
+        After deleting a collection of keyterms, the change reflects in Bibledit after restart.
+      </p>
+      <p>
+        When all collections have been deleted, then Bibledit reverts to using the standard set of keyterms that came with the program.
+      </p>
+            </section>
+
+        
+</page>
