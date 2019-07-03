@@ -2114,7 +2114,7 @@ void MainWindow::on_help_main_activate(GtkMenuItem * menuitem, gpointer user_dat
 
 void MainWindow::on_help_main()
 {
-  gtkw_show_uri (html_server_url ("site/home.html"), false);
+  gtkw_show_uri (html_server_url ("site/index.html"), false);
 }
 
 // For F2 accelerator
