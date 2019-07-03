@@ -1,0 +1,44 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="lesson2">
+<info>
+    <link type="guide" xref="index#tutorials"/>
+       <desc>New Project, templates, navigation and goto.</desc>
+</info>
+
+<title>Lesson 2</title>
+
+ 
+ 
+
+<section id="Openbibledit"><title>Open Bibledit</title>
+<p>
+Click <guiseq><gui>File</gui><gui>Project</gui><gui>New</gui></guiseq>: This will open the New Project Dialog
+
+  </p>
+</section>
+<section id="choosebook"><title>Choose Books</title>
+<p>
+Click OK: This will create the new project
+ </p><p>
+The book of Matthew will open in a window below the menu window.
+ </p><p>
+To go to a different chapter, choose the chapter number from the Menu window.
+ </p><p>
+
+The fastest way to jump to a new reference in a different book is to use the Goto command.
+ </p><p>
+Press <keyseq><key>Ctrl<key></key>G</key></keyseq>: You will see the Goto reference dialog box.
+ </p><p>
+Practice typing in verses and jumping to a new verse and typing some more. </p><p>
+To close a project simply close the text window.  A project is automatically saved as you work on it.
+ </p><p>
+To open a project click <guiseq><gui>File</gui><gui>Project</gui><gui>Open</gui></guiseq> and choose the project you want to open
+ </p>
+</section>
+<section id="printinglesson2"><title>Printing</title>
+<p>
+To print a project in Bibledit click <guiseq><gui>File</gui><gui>Print</gui></guiseq> </p>
+</section>
+</page>
+

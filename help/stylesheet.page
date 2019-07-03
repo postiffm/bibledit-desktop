@@ -1,0 +1,29 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="stylesheet">
+<info>
+  <link type="guide" xref="file#styles"/>
+</info>
+
+  <title>File Menu</title>
+<section id="stylesheet"><title>Stylesheets
+      </title>
+	<section id="newstyle"><title>New stylesheet
+      </title>
+      <p>
+        This dialog is accessible through menu <guiseq><gui>File</gui><gui>Styles</gui><gui>Stylesheet</gui><gui>New</gui></guiseq>.
+      </p>
+      <p>
+        Give the name of the stylesheet that will be created, opened, and attached to the project.
+      </p>
+      <p>
+        Depending on the type of stylesheet that was selected, more or less styles will be contained in this new stylesheet.
+      </p>
+      <p>
+        A basic stylesheet contains only a handful of styles, and the full stylesheet contains them all.
+
+      </p>
+	</section>
+</section>
+       
+</page>

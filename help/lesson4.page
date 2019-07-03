@@ -1,0 +1,39 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+             id="lesson4">
+<info>
+    <link type="guide" xref="index#tutorials"/>
+       <desc>Multi views, Project notes, Import</desc>
+</info>
+
+<title> Lesson 4</title>
+<p> 
+
+
+To open a second project, go to <guiseq><gui>File</gui><gui>Project</gui></guiseq> open and choose another project to open.
+</p>
+<p>
+When 2 projects are open they both move to the same reference. 
+</p><p>
+A project note is a note about the current passage.  These can be reviewed later for checking.
+</p><p>
+To create a project note press <keyseq><key>CTRL</key><key>N</key></keyseq>.
+</p><p>
+The project notes window will open.
+
+ 
+</p><p>
+Type the note,
+
+ choose a category and click <key>Ok</key>
+
+ 
+
+ 
+</p><p>
+To review all the project notes click <guiseq><gui>View</gui><gui>Project notes</gui></guiseq> and choose the option: “any verse”.
+</p><p>
+Click <key>OK</key> </p>
+
+</page>
+

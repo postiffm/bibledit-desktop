@@ -1,0 +1,148 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="editing">
+<info>
+  <link type="guide" xref="index#first-steps"/>
+  <desc>All about the editing text.</desc>
+</info>
+<title>2. Editing text</title>
+  <section id="project">
+  <title>Project</title>
+      <p> Before any editing can be done, create a new <link
+          xref="project">project</link> and add books to it. See also
+        the  Project
+          Properties dialog (./project/project-properties.html). Or of there is an existing project,
+        open it. </p>
+  </section>
+  <section id="save">
+<title>Save</title>
+      <p> There is no need to save the text, because Bibledit takes care
+        of that. </p>
+  </section>
+  <section id="text">
+<title>Text</title>
+<p>Standard Format Markers are markers that are put in the text
+        to indicate the book, where a chapter starts, the verse, titles
+        and so on. </p>
+<p> A marker always starts with a backslash (\) at the beginning
+        of a line of text in the editor. The most commonly used Standard Format markers are:</p>
+	<code>\id Identifies the book
+\mt major title (if only one level is used. If more than one used:)
+\mt1 major title, level 1
+\mt2 major title, level 2 (equal to secondary title \st, but \st is no longer in use)
+\c chapter
+\s section heading
+\p paragraph
+\v verse
+</code>
+<p>Here follows a part of the book of John:</p>
+<code>\id JHN
+\mt2 The Gospel according to
+\mt1 John
+\c 1
+\s The Word became flesh
+\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.
+</code>
+<p>Explanation of markers used:</p>
+<code>\id JHN</code>
+<p> Identifies the book as John </p>
+<code>\mt2 The Gospel according to</code>
+<p> A major title, level 2, when printed it will have a font just
+        a bit smaller than \mt. </p>
+<code>\mt1 John</code>
+<p> A major title, level 1, when printed it will have a big font
+        suitable for such a title. </p>
+<code>\c 1</code>
+      <p>Indicates that chapter one starts here.</p>
+<code>\s The Word became flesh</code>
+<p>This is a section heading, and will be printed in the text as
+        a heading, usually in bold.</p>
+<code>
+\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.
+</code>
+<p>This is the text of verse one. </p>
+      <p> More information on <link xref="usfm">USFM</link>
+        is available. </p>
+  </section>
+  <section id="data2">
+<title>Data</title>
+      <p> All project data is stored in the <link
+          xref="data">data directory.</link> </p>
+  </section>
+  <section id="undo">
+<title>Undo and Redo</title>
+      
+      <p> As long as you stay in the same chapter, you can undo and redo
+        any changes made. See menu Edit, or use the <link
+          xref="keyboard">shortcuts</link>.
+      </p>
+  </section>
+  <section id="insertingbiblenotes">
+<title>Inserting Bible notes</title>
+      <p> All Bible notes can be inserted by choosing the appropriate
+        style. </p>
+      <p> A <link
+xref="insertmenu">new
+          window</link> will come up, where you can set what will be
+        inserted. </p>
+      <p> The numbering can be set to automatic, or no numbering at all,
+        or a certain character. </p>
+      <p> Further you can set whether to automatically insert the
+        current reference in the footnote. If you do insert it, then you
+        can set whether to include the chapter number, and the verse
+        number, and what the separator between them will be. A suffix
+        can be entered too. It will show how this is going to look in
+        the text. </p>
+      <p> The size of the text entry or entries can be set using the
+        "Size" arrows. </p>
+      <p> It is possible to save a certain footnote configuration in a
+        template. The "New" button will make a new template, and the
+        "Delete" button will delete the current one. If no template name is given, the default one will be used. Data is saved in a
+        template only on pressing the "Ok" button. </p>
+      <p> The same things apply to endnotes and crossreferences. </p>
+  </section>
+  <section id="changingbiblenotes">
+<title>Changing Bible notes</title> 
+      <p> A Bible note can be a footnote, an endnote, or a
+        crossreference. This type can be changed. To do that, place the
+        cursor somewhere in the note to be changed. Choose menu <guiseq><gui>Edit</gui><gui>Bible note</gui></guiseq>, and set the new type, and then press OK. </p>
+      <p> The numbering of the note can be changed in the same way. One
+        can for example change from automatic to manual numbering, and
+        vice versa. </p>
+  </section>
+  <section id="pictures">
+<title>Pictures</title>
+      <p> Bibledit has good support for the \fig marker. Pictures are
+        inserted manually, following the USFM standard. </p>
+      <p> At printing time, Bibledit looks for the picture file in
+        various ways. If an absolute path is given, then it will look
+        for the file there. If a relative path is given, it first looks
+        in &lt;<link xref="data">data directory</link>/pictures,
+        then among Bibledit's template files. </p>
+      <p> According to the USFM standard, the picture size can be set to
+        "col" or to "span". In addition to that, if the picture size has
+        not been set, Bibledit uses the intrinsic size of the picture.
+        The "span" property is not yet supported at this time. All other
+        properties are. </p>
+  </section>
+  <section id="view">
+<title>View</title>
+      <p> The text is displayed in formatted form. This means that the
+        raw USFM code is hidden, and instead the code is formatted and
+        is displayed in that form. </p>
+      <p> If the user wishes to view or edit the raw USFM code, there is
+        a setting for this in menu <guiseq><gui>View</gui><gui>USFM</gui></guiseq> code. If this menu entry
+        is ticked, the raw USFM code can be edited. If the tick is
+        removed it reverts to the normal formatted view. </p>
+      <p> In the formatted view, the stylesheet will determine what part
+        of the text is formatted and what is left unformatted. If the
+        stylesheet contains all the styles in the document, then
+        everything will be formatted. If a style is in the document, but
+        not in the stylesheet, than that particular style will be shown
+        unformatted, but the rest is still formatted. In this way, by
+        using various stylesheets with more or less styles, Bibledit can
+        be more or less formatted. In this way the user has a lot of
+        flexibility to fine-tune the view. Some styles will always be
+        unformatted. </p>
+  </section>
+</page>
