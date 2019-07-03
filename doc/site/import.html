@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>File Menu</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Bibledit-Desktop Help">
+      <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
+    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » <a class="trail" href="file.html" title="File Menu">File Menu</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">File Menu</span></h1></div>
+<div class="region">
+<div class="contents"></div>
+<div id="import" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title"> Import
+      </span></h2></div>
+<div class="region">
+<div class="contents"><p class="p">
+        The Import Assistant is available through menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Import</span></span>. It can import a variety of data into Bibledit. The various options are described below.
+      </p></div>
+<div id="importbible" class="sect"><div class="inner">
+<div class="hgroup"><h3 class="title"><span class="title">Import a Bible
+      </span></h3></div>
+<div class="region">
+<div class="contents"><p class="p">
+        Bibledit can import existing Biblical text. It imports various formats of the texts. These formats are described below.
+      </p></div>
+<div id="importusfm" class="sect"><div class="inner">
+<div class="hgroup"><h4 class="title"><span class="title">Bible - Unified Standard Format Markers
+      </span></h4></div>
+<div class="region"><div class="contents">
+<p class="p">
+        Bibledit can import <span class="link"><a href="usfm.html" title="USFM">USFM</a></span> text.
+      </p>
+<p class="p">
+        If it says that a file is not in Unicode, it is recommended to open this file in gedit, and then save it in UTF-8 format. The program "gedit" is an editor that comes with Linux. Other editors will work well too.
+      </p>
+</div></div>
+</div></div>
+<div id="bibleworksexported" class="sect"><div class="inner">
+<div class="hgroup"><h4 class="title"><span class="title">Bible - BibleWorks Exported Database
+      </span></h4></div>
+<div class="region"><div class="contents"><p class="p">
+        Bibledit can import text that has been exported from BibleWorks. This is how to do it: In BibleWorks choose <span class="guiseq"><span class="gui">Tools</span> ▸ <span class="gui">Export Database</span></span>. Export the Bible of your choice to a file and save it in Text format. Then do the Import in Bibledit.
+      </p></div></div>
+</div></div>
+<div id="onlinebible" class="sect"><div class="inner">
+<div class="hgroup"><h4 class="title"><span class="title">Bible - Online Bible Text
+      </span></h4></div>
+<div class="region"><div class="contents">
+<p class="p">
+        Data from the Online Bible can be imported. Bibledit contacts the Online Bible and retrieves data from it.
+      </p>
+<p class="p">
+        To get this to work, it is important to ensure that the Online Bible and Bibledit share their reference. If this works, it means that Bibledit can contact the Online Bible.
+      </p>
+<p class="p">
+        The Import Assistant has an option to import data from the Online Bible. After you choose this option, the Assistant will check that it can contact the Online Bible. If this is the case, the next step is to choose which Bible of the Online Bible to import. After that the import starts.
+      </p>
+<p class="p">
+        Import will take a very long time due to how the interface has been built.
+      </p>
+<p class="p">
+        You can cancel the import at any time. Whatever has been imported will be preserved. When continuing with the import next time, whatever has been imported already will not be imported again. That saves time.
+      </p>
+</div></div>
+</div></div>
+<div id="rawtext" class="sect"><div class="inner">
+<div class="hgroup"><h4 class="title"><span class="title">Bible - Raw Text
+      </span></h4></div>
+<div class="region"><div class="contents">
+<p class="p">
+        Importing raw text involves manual labour. The following steps would be required:
+      </p>
+<div class="steps"><div class="inner"><div class="region"><ol class="steps">
+<li class="steps"><p class="p">
+View the USFM code. This can be done through menu <span class="guiseq"><span class="gui">View</span> ▸ <span class="gui">USFM</span></span> code, or keyboard accelerator <span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>\</kbd></span></span> (Control-Backslash).
+      </p></li>
+<li class="steps"><p class="p">
+Switch on the USFM checker. See menu <span class="guiseq"><span class="gui">Check</span> ▸ <span class="gui">USFM</span></span>. This opens a new window.
+      </p></li>
+<li class="steps"><p class="p">
+Paste some good text in the editor.
+      </p></li>
+<li class="steps"><p class="p">
+Press button "Discover markup", and see how it goes.
+      </p></li>
+</ol></div></div></div>
+<p class="p">
+        If the markup is not discovered properly, you will need to enter the USFM codes by hand. The essential ones are \c, \p, \s and \v.
+      </p>
+<p class="p">
+        Keep doing this for each chapter of text you'd like to import.
+      </p>
+<p class="p">
+        At the end of all, when all text has been imported into a book, chapter 0 needs to be set as well, else without that Bibledit won't work well with the imported text. Setting chapter 0 is usually done by simply applying the "c" marker in the editor, choosing chapter 0, and pressing OK.
+      </p>
+<p class="p">
+        Note. At any stage in the text import process, the user can filter the text. Select the filter to apply, then click button "Filter text". Filters can be created through menu <span class="link"><a href="filters.html" title="Preferences MenuFilters"><span class="guiseq"><span class="gui">Preferences</span> ▸ <span class="gui">Filters</span></span></a></span>.
+      </p>
+<p class="p">
+        Note. There is an option "Verses are at line start". if this one is ticked, when discovering the markup, the engine only considers verses that are at the start of the line.
+      </p>
+<p class="p">
+        Note. In some raw text footnotes or cross references are included in the text. See the following example, where one would like to import the following raw text:
+      </p>
+<p class="p">
+        "5 Don't forget what happened to those people that the Lord rescued from Egypt. Some of them did not have faith, and he later destroyed them. Ex 12.51; Nu 14.29,30. 6 You also know about the angels who didn't do their work and left their proper places. God chained them with everlasting chains and is now keeping them in dark pits until the great day of judgment."
+      </p>
+<p class="p">
+        There is a cross reference in 5: Ex 12.51; Nu 14.29,30.
+      </p>
+<p class="p">
+        To import this raw text properly, you need to tick the option that the verse numbers are at the start of the line. Then recognize the text by clicking on the button. It will now have recognized only verse 5. You need to put a new line before verse 6, and manually add the \v before it. The switch to formatted view, and cut the cross reference to the clipboard. Then insert a new cross reference, and paste that text into the dialog.
+      </p>
+<p class="p">
+        The same technique can be used for footnotes or endnotes.
+      </p>
+</div></div>
+</div></div>
+</div>
+</div></div>
+<div id="importref" class="sect"><div class="inner">
+<div class="hgroup"><h3 class="title"><span class="title">Import References
+      </span></h3></div>
+<div class="region"><div class="contents"><p class="p">
+        This gives information about how to get a list of references into Bibledit, into the References Window.
+      </p></div></div>
+</div></div>
+<div id="importstylesheet" class="sect"><div class="inner">
+<div class="hgroup"><h3 class="title"><span class="title">Import a Stylesheet
+      </span></h3></div>
+<div class="region"><div class="contents"><p class="p">
+        This imports a stylesheet.
+      </p></div></div>
+</div></div>
+<div id="importnotes" class="sect"><div class="inner">
+<div class="hgroup"><h3 class="title"><span class="title">Import Notes
+      </span></h3></div>
+<div class="region"><div class="contents"><p class="p">
+        This imports project notes.
+      </p></div></div>
+</div></div>
+<div id="importkeyterms" class="sect"><div class="inner">
+<div class="hgroup"><h3 class="title"><span class="title">Import Keyterms
+      </span></h3></div>
+<div class="region"><div class="contents">
+<p class="p">
+        This allows you to import keyterms.
+      </p>
+<p class="p">
+        Extra keyterms can be imported. This is done through menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Keyterms</span> ▸ <span class="gui">Import</span></span>.
+      </p>
+<p class="p">
+        The file that will be imported has to adhere to certain standards. The various files with keyterms that come with Bibledit show what the format of the textfiles should be.
+      </p>
+<p class="p">
+        There are several different types of textfiles than can be imported.
+      </p>
+<div class="steps"><div class="inner"><div class="region"><ol class="steps">
+<li class="steps"><p class="p">
+There is the Standard textfile. Samples of this type of file are in the bibledit distribution or are installed in, normally, <span class="file">/usr/share/bibledit-desktop</span>. These files start with "keyterms" and have the "txt" extension. Looking for files like "keyterms*txt" will give them.
+      </p></li>
+<li class="steps"><p class="p">
+There is the OTKEY.DB file. A file with that name comes with the bibledit distribution.
+      </p></li>
+<li class="steps"><p class="p">
+There is the KTREF.DB file. A file with that name comes with the bibledit distribution.
+      </p></li>
+<li class="steps"><p class="p">
+There is the data produced by the <span class="link"><a href="http://www.ktbh-team.org/" title="http://www.ktbh-team.org/">"Key Terms in Biblical Hebrew" project</a></span>. This is supported too. It is included with bibledit as KTBH.pbu. If an update is available, you can import it through the Import function. At KTBH they would be very grateful if they could get some user feedback on our data. The KTBH project is still formally under review, and valuable user feedback is needed.
+      </p></li>
+</ol></div></div></div>
+<p class="p">
+        The keyterms will be imported into a collection. This should be a new collection, one that does not yet exist.
+      </p>
+<p class="p">
+        If you have messed up the keyterms by importing garbage, the collection that was imported can be <span class="link"><a href="keyterms.html" title="File MenuKeyterms">deleted</a></span> again.
+      </p>
+<p class="p">
+        Any keyterms that have been added become available after Bibledit has been restarted.
+      </p>
+<p class="p">
+        Any errors can be sent to the Bibledit bug trackers, apart from errors in the database provided by Key Terms in Biblical Hebrew project.
+      </p>
+</div></div>
+</div></div>
+</div>
+</div></div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links ">
+<a href="file.html" title="File Menu">File Menu</a><span class="desc"> — Menu file description.</span>
+</li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>
