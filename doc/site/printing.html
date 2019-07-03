@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>09. Printing</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Bibledit-Desktop Help">
+      <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
+    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">09. Printing</span></h1></div>
+<div class="region">
+<div class="contents"></div>
+<div id="introprinting" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Introduction
+
+      </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p"> Bibledit can print things like a list of references along with
+        the text, or the whole project, or part of the project, and so
+        on. </p>
+<p class="p"> Printing is done this way: Bibledit generates a .pdf file, and
+        then opens this file in a pdf viewer. From there it can be
+        printed. </p>
+</div></div>
+</div></div>
+<div id="fonts" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Font </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p"> The font to be used can be set under menu <span class="guiseq"><span class="gui">View</span> ▸ <span class="gui">Font and Colour</span> ▸ <span class="gui">Text.</span></span> </p>
+<p class="p"> Additional fonts could be looked for by searching the internet
+        for "Free Unicode fonts" or at <span class="link"><a href="http://scripts.sil.org/" title="http://scripts.sil.org/">http://scripts.sil.org</a></span>.
+      </p>
+</div></div>
+</div></div>
+<div id="line" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Line height
+      </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> In the dialog where the font can be selected, there is also a
+        setting for the line height, in percentages. Normally it is on
+        100%. Setting it to e.g. 200% gives the line a double height.
+        This would for example allow for text and notes to be written
+        between the lines on worksheets. </p></div></div>
+</div></div>
+<div id="biblenotesprinting" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Bible notes
+      </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> These are <span class="link"><a href="notes.html#biblenotes" title="Bible notes">footnotes,
+          endnotes, and crossreferences.</a></span> </p></div></div>
+</div></div>
+<div id="location" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Location
+        of .pdf files </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> The .pdf file for printing a project usually is <span class="link"><a href="data.html" title="11. Manage Data">temporary directory</a></span>/document.pdf.
+
+      </p></div></div>
+</div></div>
+<div id="columns" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Columns </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> Normally text is laid out in two columns. The stylesheet
+        editor allows the "span columns" property to be set. This means
+        that a certain piece of content spans the two columns. Biblical
+        content honours this setting, but content from the Front Matter
+        and the Back Matter is laid out in one column. </p></div></div>
+</div></div>
+<div id="newpages" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">New pages </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> Normally Bibledit prints all the books one after the other,
+        without starting them on a new page. This behaviour is
+        implemented so that normally not too much paper is used.
+        Bibledit can be set to print each new book on a new page, or,
+        going one step further, to have each book start on an odd page.
+        Settings for this are in the stylesheet, under the \id marker. </p></div></div>
+</div></div>
+<div id="notprintingstyles" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Not
+        printing styles </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> Some styles have the "print" property in the stylesheet
+        editor. If "print" is unticked, then this style won't be
+        printed. This comes in useful when there is some data in the
+        text that you don't want to print this time. Footnotes, for
+        example. The quickest way of doing this is to make two
+        stylesheets. One full stylesheet that prints everything. And one
+        adapted stylesheet that doesn't print footnotes. Just opening
+        another stylesheet in the editor, and printing, makes it work. </p></div></div>
+</div></div>
+<div id="hyphenation" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Hyphenation
+
+      </span></h2></div>
+<div class="region"><div class="contents"><p class="p"> Normally words are not hyphenated. But if a word does not look
+        well on the printout, and hyphenation is needed, the user can
+        insert a soft hyphen in that word. The "Insert" menu caters for
+        that. </p></div></div>
+</div></div>
+<div id="layout" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Layout
+        engines </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p"> Bibledit uses an internal engine to lay the text out on the
+        pages. Under normal circumstances the commands that are sent to
+        that engine during printing remain invisible. But there is a
+        setting to make these commands visible, to review or edit them.
+        The setting is under menu <span class="guiseq"><span class="gui">Preferences</span> ▸ <span class="gui">Printing</span></span>, tab
+        "Formatter". </p>
+<p class="p"> Bibledit can also make use of the <span class="link"><a href="https://scripts.sil.org/cms/scripts/page.php?item_id=XeTeX" title="https://scripts.sil.org/cms/scripts/page.php?item_id=XeTeX">ptx2pdf</a></span> macros together with the XeTeX
+        typesetter, but it is no longer supporter by SIL International. If you
+        have printed something through the ptx2pdf macros, then the
+        files that control this printout are available in
+        /tmp/bibledit/xetex. If you run "xetex document.tex" within that
+        directory, you can do the typesetting again. You can modify the
+        control files there, so as to fine-tune it to what you need. To
+        do complex non-Roman scripts like e.g., Farsi is, you will need
+        the latest version of XeTeX. With XeTeX you can
+        also print numerals in a different script. See the <span class="link"><a href="questions.html" title="2. Questions">Questions page</a></span> for more information.
+      </p>
+</div></div>
+</div></div>
+<div id="link" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Links </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p"> See also: </p>
+<p class="p"> <span class="link"><a href="questions.html" title="2. Questions">Questions</a></span> </p>
+<p class="p"> <span class="link"><a href="print.html#printportion" title="Print book portion dialog">Print
+          portion</a></span>
+      </p>
+</div></div>
+</div></div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html#tools" title="Advanced tools">Advanced tools</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>
