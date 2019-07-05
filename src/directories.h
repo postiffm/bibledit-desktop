@@ -45,6 +45,7 @@ class directories {
   ustring package_data;
   ustring home;
   ustring root;
+  ustring lockfile;
   ustring projects;
   ustring notes;
   ustring stylesheets;
@@ -119,6 +120,7 @@ private:
   // These should hold the correct platform path, with right style slashes
   ustring get_home ();            // Returns the user's home directory
   ustring get_root ();            // Returns the root directory of all data (get_home()/.bibledit)
+  ustring get_lockfile ();        // Returns the lockfile (get_home()/.bibledit/bibledit-desktop.lock)
   ustring get_projects ();        // Returns the directory with all the projects
   ustring get_notes ();           // Returns the directory with the notes
   ustring get_stylesheets ();     // Returns the directory with the stylesheets

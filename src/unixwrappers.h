@@ -32,5 +32,6 @@ void unix_rm(const ustring &location);
 void unix_unlink(const ustring &location);
 void unix_rmdir (const ustring& dir);
 void unix_kill (GPid pid);
+bool file_exists(const ustring & fn);
 
 #endif

@@ -95,3 +95,13 @@ void unix_kill(GPid pid)
   spawn.arg(convert_to_string(pid));
   spawn.run();
 }
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+bool file_exists(const ustring & fn)
+{
+  struct stat buffer;
+  return (stat(fn.c_str(), &buffer) == 0);
+}

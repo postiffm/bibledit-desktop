@@ -97,7 +97,8 @@ int main(int argc, char *argv[])
   Directories = new directories(argv[0]);
 
   // Check whether it is fine to start the program.
-  // If not, quit the program normally.
+  // If not, quit the program normally. Must come 
+  // after the Directories object is initialized.
   if (!check_bibledit_startup_okay(argc, argv)) {
     return 0;
   }
@@ -156,6 +157,12 @@ int main(int argc, char *argv[])
   gw_message("WIN32 was NOT defined in this build");
 #endif
 
+  // Create lock file, put our PID in it.
+  FILE *fp = fopen(Directories->get_lockfile().c_str(), "a");
+  fprintf(fp, "Bibledit-Desktop PID is %d\n", getpid());
+  fclose(fp);
+  gw_message("Wrote PID to lock file");
+  
   // Call after the stdout/stderr redirects above
   options->print();
   Directories->print();
@@ -217,6 +224,10 @@ int main(int argc, char *argv[])
   gtk_main();
   delete mainwindow;
 
+  // Remove lockfile
+  unix_unlink(Directories->get_lockfile());
+  gw_message("Removed lock file");
+  
   // Destroy the accelerator group.
   g_object_unref(G_OBJECT(accelerator_group));
   // Clean up XML library.
@@ -240,7 +251,7 @@ int main(int argc, char *argv[])
   delete Directories; // must be last, because above rely on it
   if (concordance) { delete concordance; }
   if (refbibles) { delete refbibles; }
-
+  
   // Quit.
   return 0;
 }

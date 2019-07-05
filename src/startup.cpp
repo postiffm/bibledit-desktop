@@ -20,10 +20,12 @@
 #include <config.h>
 #include "startup.h"
 #include "gtkwrappers.h"
+#include "unixwrappers.h"
 #include "shell.h"
 #include <glib/gi18n.h>
 #include "options.h"
 #include "debug.h"
+#include "directories.h"
 
 int global_debug_level;
 int debug_msg_no;
@@ -55,9 +57,21 @@ bool check_bibledit_startup_okay (int argc, char *argv[])
   }
 
   // See whether Bibledit itself is running already.
-  if (programs_running_count("bibledit-desktop") > 1) {
-    gtkw_dialog_error(NULL, _("Bibledit-Desktop is already running."));
-    return false;
+  // OLD CHECK: flawed because if a script used bibledit-desktop as an 
+  // argument, then this would fail even though another instances of 
+  // Bibledit was not really running.
+  //if (programs_running_count("bibledit-desktop") > 1) {
+  //  gtkw_dialog_error(NULL, _("Bibledit-Desktop is already running."));
+  //  return false;
+  //}
+
+  if (file_exists(Directories->get_lockfile()) == true) {
+      gw_message("Lock file exists");
+      gtkw_dialog_error(NULL, _("Bibledit-Desktop is already running. If you are sure it is not, remove the lockfile: ") + Directories->get_lockfile());
+      return false;
+  }
+  else {
+      gw_message("Lock file does not exist");
   }
   
   // See whether Bibledit is shutting down.

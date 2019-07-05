@@ -95,6 +95,10 @@ directories::directories(char *argv0)
   // The root directory of all data.
   root = tiny_directories_get_root();
   root = fix_slashes(root);
+  
+  // The lock file...is bibledit already running?
+  lockfile = gw_build_filename(root, "bibledit-desktop.lock");
+  lockfile = fix_slashes(lockfile);
 
   // Directory containing all the projects
   projects = tiny_directories_get_projects();
@@ -548,6 +552,7 @@ void directories::print()
 {
   gw_message(_("List of directories and other paths we know about:"));
   gw_message("Run directory: \t" + rundir);
+  gw_message("Lock file: \t" + lockfile);
   gw_message("Executable name: \t" + exename);
   gw_message("Package data: \t" + package_data);
   gw_message("Home: \t" + home);
@@ -614,6 +619,7 @@ void directories::check_structure()
 // Important directories in the user's home/.bibledit or temp
 ustring directories::get_home()               { return home; }
 ustring directories::get_root()               { return root; }
+ustring directories::get_lockfile()           { return lockfile; }
 ustring directories::get_projects()           { return projects; }
 ustring directories::get_notes()              { return notes; }
 ustring directories::get_stylesheets()        { return stylesheets; }
