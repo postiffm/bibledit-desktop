@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="projectnotes" xml:lang="fr">
+<info>
+  <link type="guide" xref="preferences#projectnotes"/>
+  <desc>How to add notes in projects</desc>
+</info>
+
+  <title>Preferences Menu</title>
+<section id="projectnotespref"><title>Project notes preferences
+      </title>
+      <p>
+        The dialog can be accessed through menu <guiseq><gui>Preferences</gui><gui>Project notes</gui></guiseq>.
+      </p>
+      <p>
+        It has two tabs where settings can be made.
+      </p>
+	<section id="shorcutsproject"><title>Shortcuts</title>
+      <p>
+        There are four <link xref="keyboard">shortcuts</link> for inserting standard text into a project note when it is being edited. The text that will be inserted can be defined in this tab.
+      </p>
+	</section>
+	<section id="categories"><title>Categories
+      </title>
+      <p>
+        Every project notes has a category assigned. The available categories can be viewed here. New ones can be added, or categories can be deleted. The order of the categories can be changed by draggging a category to another location, either above it or below it. Whenever a new note is created, the category that is at the top of the list is assigned to that note. If you'd like to assign another category to the note when creating that note, drag the one you need to the top of the list.
+      </p>
+	</section>
+</section>
+       
+</page>

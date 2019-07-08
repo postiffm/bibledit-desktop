@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="lesson3" xml:lang="fr">
+<info>
+    <link type="guide" xref="index#tutorials"/>
+       <desc>Editing (styles), Searching and Fotnotes.</desc>
+</info>
+<title>Lesson 3</title>
+	<section id="editingstyles"><title>Editing Styles</title>
+<p> 
+Styles are used to format text in Bibledit.
+</p><p>
+To open the styles window in Bibledit click <guiseq><gui>File</gui><gui>Styles</gui><gui>Open</gui></guiseq>
+
+ </p><p>
+
+Select the text that you want the style to be applied to and then double click the style name.
+</p>
+	</section>
+	<section id="searching"><title>Searching</title>
+<p>To search go to <guiseq><gui>Edit</gui><gui>Find</gui></guiseq> or <keyseq><key>CTRL</key><key>F</key></keyseq>.
+</p>
+<p>
+
+Type in the term you want to search for.
+</p><p>
+The references window will open with a list of references where that word occurs.  Double click the reference to jump to that verse.</p>
+	</section>
+	<section id="footnotes"><title>Footnotes</title>
+<p>To add a footnote place the cursor at the end of the word to be footnoted and double click the footnote style, then click <guiseq><gui>Ok</gui></guiseq>.
+</p><p>
+Type the note after the footnote number.
+ </p>
+ <p>To delete a footnote, delete the footnote number from the Bible text.
+</p>
+</section>
+
+</page>

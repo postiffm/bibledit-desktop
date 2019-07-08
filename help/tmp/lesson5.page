@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="lesson5" xml:lang="fr">
+<info>
+    <link type="guide" xref="index#tutorials"/>
+    <desc>Checkings, Export and Quotation Marks.</desc>
+</info>
+
+<title> Lesson 5</title>
+<section id="checkings"><title>Checkings</title>
+	<section id="chaptersverses"><title>Chapters and Verses</title>
+<p> 
+
+To check if the chapter and verse numbers are correct click <guiseq><gui>Check</gui><gui>Chapters and Verses</gui></guiseq>. A list of missing references will show in the references window.</p>
+
+</section>
+	<section id="keytermcheck"><title>Keyterm check</title>
+ <p>
+To check keyterms click <guiseq><gui>Check</gui><gui>Key terms</gui></guiseq>. This will show the keyterms window.
+</p><p>
+Select a keyterm. Double click the correct word in the red verses.
+ </p> 
+	</section>
+</section>
+<section id="exportforbacktrans"><title>
+Export for back translation</title>
+ <p>
+<guiseq><gui>File</gui><gui>Project</gui><gui>Export</gui><gui>Unified Standard Format markers</gui></guiseq>.
+
+Click your username in the left column, choose <guiseq><gui>My Documents</gui><gui>Adapt It Unicode Work</gui><gui>Export</gui></guiseq>. Then click Open.
+  </p>
+
+</section><section id="quotationmarks"><title>Quotation marks</title>
+
+ <p>Use &lt; and &gt; for single opening and closing quotes and &lt;&lt; and &gt;&gt; for double opening and closing quotes. Bibledit will automatically replace these symbols with curved quotation marks when the text is printed or exported. </p>
+</section>
+</page>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="bibledit-desktop" xml:lang="fr">
+<info>
+  <link type="guide" xref="index#introduction"/>
+  <desc>List of the Bibledit-Desktop features.</desc>
+</info>
+<title>1. Features</title>
+<p><app>Bibledit-Desktop</app> is a full-featured and mature desktop application.
+Features with:</p>
+<steps>
+<item><p>Native USFM text editor, several can be opened at once</p></item>
+<item><p>Project notes editor</p></item>
+<item><p>Chapter and book outline view</p></item>
+<item><p>Resizeable and moveable windows</p></item>
+<item><p>Easy application of styles</p></item>
+<item><p>Styles editor</p></item>
+<item><p>Selection and display of project notes by various parameters</p></item>
+<item><p>Online help</p></item>
+<item><p>Backup and restore</p></item>
+<item><p>Import and export</p></item>
+<item><p>Resources display</p></item>
+<item><p>Spelling check</p></item>
+<item><p>Simple or more advanced interface</p></item>
+<item><p>Merge projects.</p></item>
+<item><p>Collaboration through USB drive, or through the Internet</p></item>
+<item><p>Local or remote web application</p></item>
+<item><p>Interfaces to external programs including Xiphos and Bibletime.</p></item>
+</steps>
+<p>And so on, and so on.</p>
+<p>Bibledit was designed for a purpose: To give honour to God, and that people get access to the Word of God, and get saved through Jesus Christ.
+</p>
+<p>You are invited to contribute to these pages.</p>
+
+<p>Bibledit-Desktop is built with Gtk. It is a full-featured and mature desktop application.
+
+</p>
+</page>

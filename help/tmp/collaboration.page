@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="collaboration" xml:lang="fr">
+<info>
+  <link type="guide" xref="index#tools"/>
+  <desc>How to work in group on bibles with git.</desc> 
+</info>
+<title>02. Collaboration</title>
+  <section id="introduction">
+<title>Introduction</title>
+<p> 
+With Bibledit several users can work on one Bible at the same time.
+</p>
+<p> 
+The users collaborate through the network or a USB drive.
+</p>
+<p>
+Once everything has been set up, the user needs to Send/Receive the data, and the rest goes automatic. The user does not notice the mechanics of the collaboration, it all happens under the hood.
+</p>
+<p>
+There is a variety of methods for collaboration. The user who will set it all up needs to have sufficient knowledge of information technology.
+</p>
+<p>
+Bibledit stores all data locally. When collaboration is enabled, it also connects to a central repository. Through that repository the data gets shared between the users.
+</p>
+<p>
+Under the hood, Bibledit uses Git for collaboration. Git is a content manager. The user does not notice that Git is used. He does not operate it. Bibledit does it all for him. The only thing that the user notices is that the changes introduced by the other users appear on his screen too.
+</p>
+<p>
+There is a variety of repositories that can be used. Each of them has it own use, advantages and disadvantages. First of all there is the repository that resides on a file system. A USB flash drive can be used in this case. This flash drive can be physically moved from one user to the other, and so on, updating each user, and getting updated by each user. Secondly there is the repository that resides on the network. For internal networks a simple open network repository can be used. Whosoever knows where the repository resides can write to it. For public networks such as the internet a secure network repository would be recommended. This type of repository is locked down. Only those who have the keys to such a repository, or a username and password, can write to it. 
+</p>
+
+  	<section id="introsetup">
+<title>Setup</title>
+
+      <p>
+        The central part to collaboration is the repository. The system administrator will have <link xref="#repsetup">set the repository up</link>, will have <link xref="#repoinitilization">initialized it</link>, and issued its URL. If the repository is a secure one, <link xref="#keyssetup">set up the secure shell keys</link> to access it.
+      </p>
+      <p>
+        The repository is now ready for use. It remains to add users who make use of this repository and share their data through it.
+      </p>
+      <p>
+        In this tutorial it will be user Jim. In Bibledit, Jim opens the project he wishes to share with others, or he creates a new project. He goes to menu <link xref="remote"><guiseq><gui>Preferences</gui><gui>Remote repository</gui></guiseq></link>. and sets everything up. Jim can now work on Bibledit as before, and his data will be automatically updated in the repository.
+      </p>
+      	</section>
+  	<section id="collaborating">
+<title>Collaborating
+      </title>
+      <p>
+        Now we come to the purpose of everything, which is working together on one project.
+      </p>
+      <p>
+        This collaboration is very simple: Just work on your data as you did before. At times when you´d like to share your work with others, or when you'd like to see work done by others, choose menu File / Project / Send-Receive. Bibledit cares for everything, and everything will be updated and shared automatically.
+      </p>
+	</section>
+  	<section id="safety">
+<title>Safety
+      </title>
+      <p>
+        Suppose that two or more people collaborate on one project. One of them is a bad typist. He makes many errors. The bad typist has the potential the harm or destroy the project's data. If he makes serious mistakes in his own data, then the collaboration mechanism will propage his mistakes to the other members of the team. This is not a desirable situation.
+      </p>
+      <p>
+        Bibledit has a solution for this situation. You can use two mechanisms of Bibledit simultaneously.
+      </p>
+      <steps>
+      <item><p>Collaboration through the network or the USB stick.
+      </p></item>
+      <item><p><link xref="merge">Merging changes</link>.
+      </p></item>
+      </steps>
+      <p>
+        This is how to do it:
+      </p>
+<steps>
+      <item><p>The experienced person has project "master" that has the master copy of the Bible. Collaboration of the master project is switched off so that no changes can enter that project by mistake.
+      </p></item>
+      <item><p>The experienced person has project "messy" that initially is a copy of the master project. Collaboration is switched on.
+      </p></item>
+      <item><p>The unexperienced typist has project "messy" too, with collaboration switched on.
+      </p></item>
+      <item><p>The unexperienced typist makes changes in project "messy", and through collaboration these changes go into project "messy" of the experienced typist too. This all goes automatic.
+      </p></item>
+      <item><p>Once in a while the experienced person goes to the Merge tool. He opens project "master" and project "messy", reviews the changes as proposed in project "messy", makes any edits he likes, takes out any mistakes he does not like, and then finally merges the changes from "messy" into "master". This is done chapter by chapter. Once the merge is done, project "master" and "messy" are identical again in that particular chapter.
+      </p></item>
+      <item><p>Any changes entered or not entered propagate to the unexperienced typist again through the collaboration. If the unexperienced typist made a big mess in a certain chapter, through the collaboration this mess is cleared up again on his computer.
+      </p></item>
+</steps>
+        <note style="note">
+      <list>
+      <item><p>The collaboration system can conveniently be used for automatic backup.
+      </p></item>
+      <item><p>Collaboration of two projects on the same computer is possible if those projects have the same ancestor, that is, one is created by importing all the Biblebooks exported of the other one. This can be helpful for demo purposes and to test and learn to use this tool if only one computer is available.
+      </p></item>
+      <item><p>Sending and receiving the data of your Bible will happen automatically at intervals. Bibledit will receive any changes from the repository, and then send its own changes to that repository. To manually send and receive your Bible, use menu File / Send / receive.
+      </p></item>
+      <item><p>Using collaboration with merging data has advantages in the following situation: Think of the situation that a bad typist is out in the bush, and comes to town with his stick, and has little time for the master person to merge while he waits. So just plugging in he stick, a quick automatic merge, and away he goes again. Then if the master person has some time in the days or weeks following, he can then carefully go through the messy project, and merge it with the master project, taking his time for it, and doing an accurate job.
+      </p></item>
+      <item><p>There is not much need to maintain the git repository since Bibledit does run maintenance on it at regular times. But if you really like to compress the repository well, you can run "git gc --aggressive" in the repository. Note that Bibledit already runs "git gc" at regular times.
+      </p></item>
+      <item><p>If two or more users were to work on the same chapter at the same time, this would pose a problem for Bibledit. This type of collaboration is not supported. People should work on different chapters, or on the same chapters, but not simultaneously. Then the merging of the changes will work well.</p></item>
+        </list>
+      </note>
+      </section>
+  </section>
+  <section id="repsetup">
+<title>1. Repository setup</title>
+      <p> The repository is the heart or the central part of the
+        collaboration system. In this tutorial you will learn how to set up a repository. </p>
+        <p> There are several types of repositories. Each of them will be
+        described separately in this tutorial. </p>
+      <p> Depending on what system you use, you can either <link xref="#open-network">set up an
+          open network repository</link>, or a <link xref="#secure-network">secure
+          network repository</link>, or <link xref="#usbrepo">set up
+          a USB flash drive</link>.
+
+</p>
+	<section id="open-network">
+<title>Open network repository setup</title>
+<p>
+In this tutorial we are going to set up an open repository on the network.
+</p><p>
+To create the repository on we need a server. Any of your Linux computers that is attached to your network will do. In this tutorial we assume that the computer is accessible from the network through IP address 192.168.0.1. The user of this computer will be Jim.
+</p><p>
+To create the repository, login as user jim. Then open a terminal. The repository is going to be in Jim's home directory. In the terminal type the following:
+</p>
+<code>cd
+mkdir -p git/repository
+cd git/repository
+git --bare init --shared</code>
+<p>
+The repository is now there, but it is not yet accessible from the network.
+</p><p>
+To make the repository available to the network, type
+</p>
+<code>git daemon --export-all --base-path=/home/jim/git --detach --enable=receive-pack</code>
+<p>
+Each time that the server boots, it is necessary to execute the above command again. It would be easier to put the command in the boot script. Then it will automatically be started after boot.
+</p><p>
+To test access to the new repository from another computer on the network, type
+</p>
+<code>git ls-remote git://192.168.0.1/repository</code>
+<p>
+If everything is fine, no errors will occur.
+</p><p>
+The repository that was created in this tutorial has the following URL:
+</p>
+<code>git://192.168.0.1/repository</code>
+<p>
+The users that are going to use this repository need this URL. 
+</p>
+  	</section>
+	<section id="secure-network">
+<title>Secure network repository setup </title>
+<p>In this tutorial we are
+          going to set up a secure network repository.</p>
+    <p>  Doing this on gitlab.com is easy. Create an account there, and
+      then create a git repository.If your username is "joe", and your
+      password is "pazz", and the repository is "repo", then accessing
+      this repository through https works through this URL:</p> <code>https://joe:pazz@github.com/joe/repo.git</code>
+      <p>
+      Another type
+        of secure git repository can be created on for example sourceforge.net.</p>
+      <p>Open an account
+          on sourceforge.net. We will use the
+          username "joe" in this tutorial.</p>
+      <p> Register a new project on your personal account page on
+        sourceforge.net. Let's call this project "repo2". </p>
+      <p> Enable project feature "Git" on this project. This provides
+        the repository. </p>
+      <p> The next thing is to try whether you can read the repository
+        properly. To try that, open a terminal and issue the following
+        command: </p>
+<code>git ls-remote ssh://joe@repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+      <p> This command probably will ask for your password, and the
+        first time it could ask you whether you want to continue
+        connecting. But it should show no errors. If it completes
+        without errors, then your secure repository works well. </p>
+      <p> The repository that was created in this tutorial has the
+        following URL: </p>
+<code>ssh://user@repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+      <p> The users that are going to use this repository need this URL.
+        Where it says "user", each user would need to fill in his own
+        username.</p>
+      <p> Each user will need to open his or her own account on
+        sourceforge.net. After that, they need to open an e-mail from
+        sourceforge.net and click the link to activate their account.
+        Each user needs to be registered as a member of the project, in
+        this example, project "repo2". This is so that the user can
+        write to the repository.</p>
+      <p> So the moderator (or the person to first set up the
+        repository) will need to log onto to his account at
+        sourceforge.net, </p>
+<list>
+        <item><p>click on "" </p></item>
+        <item><p>choose the projects tab,</p></item>
+        <item><p>click on the project name,</p></item>
+        <item><p>then click View all files. </p></item>
+        <item><p>Now there will be a series of tabs at the top which expand if your mouse cursor hovers above them. Go to the last one,
+          Project Admin, and click Members. </p></item>
+        <item><p>Finally! From there you will be add any members who have
+          activated their accounts by clicking in the e-mail that was
+          sent to them. </p></item>
+        <item><p>After this,
+            each project member will be able to do the steps in <link xref="#keyssetup">Secure shell keys
+            setup </link>.
+        </p></item>
+      </list>
+    	</section>
+	<section id="keyssetup">
+<title>Secure shell keys setup</title>
+      <p>When your remote repository is a secure one, and you'd like Bibledit to use it, then is is necessary to set up secure shell keys. These keys allow easy access to the secure repository. Please follow the tutorial exactly.
+      </p>
+		<section id="keygeneration">
+<title>Generate the keys</title>
+      
+      <p>
+        The first thing to do is to generate the keys.
+      </p>
+      <p>
+        On your Linux workstation, open a termial and enter the following:</p><p>
+ <cmd>cd</cmd>       (to make sure you are in your home directory)</p>
+<code>ls .ssh    (to check if there is an .ssh directory)
+</code><p>
+If there is no .ssh directory, create one:</p>
+ <code>mkdir .ssh
+</code>
+<p>then:</p>
+      <code>cd .ssh
+ssh-keygen -t dsa -b 1024 -f bibledit-ssh-key
+</code>
+      <p>
+        It will respond as follows:</p>
+<code>
+Generating public/private dsa key pair.
+Enter passphrase (empty for no passphrase):
+</code>
+      <p>
+        At this stage press <key>Enter</key>. It will continue as follows:</p>
+       <code>
+Enter same passphrase again:
+</code><p>
+        Press Enter again. It will continue as below:</p>
+            <code>
+Your identification has been saved in bibledit-ssh-key.
+Your public key has been saved in bibledit-ssh-key.pub.
+</code>
+<p>        It will print some more lines of text. This is not relevant for our purpose.
+      </p>
+      <p>
+        This pair of keys is important. The pair is in the ".ssh" directory of your home directory. There is the private key, in a file called "bibledit-ssh-key", and the public key, in another file called "bibledit-ssh-key.pub". Store them safely.
+      </p>
+    		</section>
+    		<section id="enterkey">
+<title>Enter the keys
+      </title>
+      <p>
+        Open a personal account at <link href="https://www.sourceforge.net/">sourceforge.net</link>. Let's choose user name "repouser". Ask the project administrator whether he can add user "repouser" to the "repo2" project as a member. Joining this project will give you the capability to write to the repository.
+      </p>
+      <p>
+        After logging onto sourceforge.net, click “account” in the upper right, and choose the Services tab, then choose “Edit SSH Keys for Shell/CVS.” (If the moderator of the project has not yet added you as a member, this page will not have a link to “Edit SSH...”) In the section above, you generated a file "bibledit-ssh-key.pub". Open it in gedit. Select all the text and copy it to the clipboard. In the screen titled "SSH Keys", there is a place where it says "Authorized keys:". Paste the text from gedit into that space on the web page. After checking that everything looks fine, press button "Update". Synchronizing the keys into the system has a 10 minute delay.
+      </p>
+      <p>
+        The next step is to tell the secure shell where to find the private key when we connect to sourceforge.net, and to set a few other important options. To do that, open file ~/.ssh/config in gedit. Enter the entry for sourceforge.net, like so:
+      </p>
+      <code>
+Host *sourceforge.net
+IdentityFile ~/.ssh/bibledit-ssh-key
+BatchMode yes
+StrictHostKeyChecking no
+</code>
+      <p>
+        Save the file.
+      </p>
+      <p>
+        The above refers to a file called "bibledit-ssh-key". You have generated this key before.
+      </p>
+      <p>
+        If the delay of 10 minutes has expired, we can now try whether the key pair works well. In the terminal, try to access the repository at sourceforge:
+      </p>
+             <code>git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+
+      <p>
+        If it works then it will give no errors, and list a few commits. If it does that, then the keys works well. If it asks for a password, or if there are errors, follow the tutorial again to get everything right.
+      </p>
+    		</section>
+    		<section id="Reconfiguring">
+	<title>Reconfiguring Bibledit Collaboration after Changing Computers or Reinstalling Ubuntu</title>
+      <p>
+        After reinstalling Bibledit on your computer and copying your backed-up .bibledit directory, be sure you have copied the back-up of your .ssh directory.</p>
+
+        <note style="warning"><p>If after reinstalling Bibledit on your computer you have started Bibledit and edited your project since the remote repository was active, make an extra backup of the project now! When you reinitialize remote backup/sharing via Preferences Remote Repository, the Clone the Remote Repository will erase all your recent edits! </p>       </note>
+<p>
+        Then reboot. Following reboot (or if you have already rebooted multiple times since reinstalling the above), test this:
+      </p>
+        <code>git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</code>
+      <p>
+        This should yield no errors but something like this:
+      </p>
+
+<code>8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec HEAD
+8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec refs/heads/master</code>
+        
+    <p>  <em>If you get something like that (no errors),</em> then you ready to reinitialize remote backup/sharing via Preferences → Remote Repository. Second screen, choose the top option, Bible Repository. Choose all the defaults. You will be forced to clone the remote repository. (Did you make the backup above?!) Once that process completes, you will be sharing via the repository again. You can always check that changes are being written by logging into your sourceforge account, and check out the What's Happening page (visible when you click on your name at the upper right).</p>
+      <p><em>If you got an error message,</em> follow the steps below.</p>
+      <p>
+        In order to reconfigure Bibledit after changing computers or reinstalling an operating system, you might not be able to just copy and reuse a backup copy of your original .ssh directory and the config file. Also, it seems that just remaking the shell keys in the old .ssh directory will not work. Make a new .ssh directory and follow the steps above to create secure shell keys. You can copy and reuse the backed-up config file. Then replace your old ...key.pub at sourceforge.net/Services with your new key, then click to Update. During the 10 minute wait, reboot your computer. After rebooting and waiting for the key to be updated, test if you get an error message with:
+      </p>
+           <code>
+git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+
+		</section>
+	</section>
+  </section>
+  <section id="repoinitilization">
+	<title>2. Repository initialization</title>
+      <p>
+        Note: Newer versions of git, and Bibledit-Desktop version 4.2 and higher, no longer need what is written below.
+      </p>
+      <p>
+        In this tutorial you are going to see whether the repository can be cloned, and if not, then to put some data into it, then try to clone it again to see how it now goes.
+      </p>
+      <p>
+        Open a terminal, and issue the commands as given.
+      </p>
+      <code>
+cd
+</code>
+      <p>
+        In the tutorial about <link xref="#repsetup">setting up the repository</link>, the systems administrator had given the URL of the repository that was created. In the current tutorial we assume a URL of "file:///media/usbstick/repository". Of course others are possible, depending on what type of repository you have and where it resides. For example "ssh://user@repo2.git.sourceforge.net/gitroot/repo2/repo2".
+      </p>
+      <p>You need to put something into the repository. It does not matter what, anything will do. Let's proceed and put an empty file into the repository. Issue the commands as given:
+      </p>
+            <code>
+cd    
+mkdir repository
+cd repository
+git init
+</code>
+      <p>
+        It will say that an empty Git repository was initialized.
+      </p>
+      <code>
+touch file
+git add file
+git commit -a -m init
+</code>
+      <p>
+        It will say that an initial commit was created.
+      </p>
+      <code>
+git push --all file:///media/usbstick/repository
+</code>
+      <p>
+or for secure network repository:
+</p>
+      <code>
+git push --all ssh://sforgeuser@.repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+      <p>
+        It will give some information, which shows that data was written to the repository. No errors should occur. Example:
+      </p>
+
+                <code>Counting objects: 3, done.
+                Writing objects: 100% (3/3), 198 bytes, done.
+                Total 3 (delta 0), reused 0 (delta 0)
+                To ssh://warpok@tsederhana.git.sourceforge.net/gitroot/tsederhana/tsederhana
+                 * [new branch]      master -&gt; master</code>
+
+      <p>
+        Clean out the temporal directory:
+      </p>
+      <code>
+cd
+rm -rf repository
+</code>
+      <p>
+        Now try to clone the repository:
+      </p>
+      <code>
+git clone file:///media/usbstick/repository</code>
+<p>
+or for secure network repostory:</p>
+
+      <code>
+git clone ssh://sforgeuser@repo2.git.sourceforge.net/gitroot/repo2/repo2
+</code>
+      <p>
+        It should say that an empty Git repository was created, give some more information, and show that object were received. It is does this, and there are no errors, then everything is fine. Your repository has been initialized. Example:
+      </p>
+<code>Initialized empty Git repository in /home/oreo/tsederhana/.git/
+                      remote: Counting objects: 3, done.
+                      remote: Total 3 (delta 0), reused 0 (delta 0)
+                      Receiving objects: 100% (3/3), done.</code>
+  </section>  
+  <section id="usbrepo">
+  <title>3. USB flash drive repository setup</title>
+	<p>
+        In this document we will set up a repository on a USB flash drive, also called a USB stick.
+      </p>
+    <section id="formatting"><title>Formatting the stick
+      </title>
+      <p>
+        Normally a USB stick, as it comes out of the box, has been formatted with a FAT filesystem. Such a filesystem is not supported for collaboration. The stick needs to formatted to the ext3 filesystem for collaboration to work. How this is done will be described here.
+      </p>
+      <p>
+        Insert the stick into the computer, and wait a little till it gets mounted. It is supposed to mount automatically. If it does not mount on its own, then automatic mounting needs to be set up. Setting up automatic mounting goes beyond the scope of this tutorial.
+      </p>
+      <p>
+        In the terminal, give the command
+      </p>
+      <code>
+df
+</code>
+      <p>
+        The output of this command can be something like:</p>
+<code>
+Filesystem 1K-blocks      Used Available Use% Mounted on
+/dev/sda1   93539428  76882380  11905428  87% /
+udev           10240       104     10136   2% /dev
+tmpfs        1038428         0   1038428   0% /dev/shm
+/dev/hda      629742    629742         0 100% /media/cdrom0
+/dev/sdb5  306619956 189335920 101708620  66% /media/293gig
+/dev/sdc1  240362656  64350876 163801980  29% /media/250gb
+/dev/sdd1    1960684    660896   1200188  36% /media/usbdisk
+</code>
+
+      <p>
+        Looking through the list of mounting points, we assume that the USB stick that was inserted mounts at /media/usbdisk. From there we can see that the device is /dev/sdd1. Once we have that information, we are ready for the next step.
+      </p>
+      <p>
+        Before the stick can be formatted, it must be unmounted first. Issue the following command to unmount the stick:
+      </p>
+      <code>
+sudo umount /media/usbdisk
+</code>
+      <p>
+        The "sudo" in the command means that root privileges are needed to execute the command.
+      </p>
+      <p>
+        To format the USB stick to the ext3 filesystem, issue the following command:
+      </p>
+      <code>
+sudo mkfs.ext3 /dev/sdd1
+</code>
+      <p>
+        The formatting process will be visible and at the end some information about it will be given. At this point it is important to see if no errors occurred.
+      </p>
+      <p>
+        The formatting command is very powerful. One could even format the main drive of the computer, wiping out all information. Extreme care should be used to ensure that the USB stick is going to be formatted, and nothing else.
+      </p>
+    </section> 
+    <section id="labelling">
+    <title>Labelling the stick
+      </title>
+      <p>
+        A label needs to be written to the USB stick. The reason of this is so as to make sure that this stick will always mount at the same mounting point. In this tutorial we write the label "usbstick" to it.
+      </p>
+      <p>
+        We take it that the same device is being used as we used for formatting the stick. That is device /dev/sdd1. To write the label to the stick, issue the following two commands:
+      </p>
+      <code>
+sudo e2label /dev/sdd1 usbstick
+</code>
+      <code>
+sync
+</code>
+      <p>
+        After the label has been written to it, remove the stick from the computer, and insert it again. It should now mount to the name of the label. In this case it should mount under /media/usbstick.
+      </p>
+      <p>
+        This can be verified with command "df":
+      </p>
+      <code>
+df
+</code>
+      <p>
+        The output of this command:
+      </p>
+      <code>
+Filesystem 1K-blocks      Used Available Use% Mounted on
+/dev/sda1   93539428  76882380  11905428  87% /
+udev           10240       104     10136   2% /dev
+tmpfs        1038428         0   1038428   0% /dev/shm
+/dev/hda      629742    629742         0 100% /media/cdrom0
+/dev/sdb5  306619956 189335920 101708620  66% /media/293gig
+/dev/sdc1  240362656  64350876 163801980  29% /media/250gb
+/dev/sdd1    1960684    660896   1200188  36% /media/usbstick
+</code>
+      <p>
+        This shows that it now mounts under the new name.
+      </p>
+    </section> 
+    <section id="creatingonstick"><title>Creating the repository on the stick
+      </title>
+      <p>
+        The USB stick will hold the data repository.
+      </p>
+      <p>
+        To make this stick fit for collaboration, there are a few steps to be taken. These steps are:
+      </p>
+      
+      <p>
+        1. The first step will be to create a directory for the repository, and to make that directory writable. If we assume that the stick mounts at /media/usbstick, then the command to create a directory called "repository" is:
+      </p>
+      <code>
+sudo mkdir /media/usbstick/repository
+</code>
+      <p>
+        Notice the "sudo" command, which means that this usually needs to be done by user root. If this is done by an ordinary user, permission would be denied.
+      </p>
+      <p>
+        Once the directory for the repository is there, this directory needs to be made writable for ordinary users. This is the command:
+      </p>
+      <code>
+sudo chmod -R 0777 /media/usbstick/repository/
+</code>
+      <p>
+        Note the "sudo" again.
+      </p>
+      <p>
+        Now it is time to check whether the USB stick is writable. We do this by trying to create a file in the repository. If this succeeds, then it is writable. Here's the command:
+      </p>
+      <code>
+touch /media/usbstick/repository/testfile
+</code>
+      <p>
+        This command should complete without errors. After that the file needs to be removed again:
+      </p>
+      <code>
+rm /media/usbstick/repository/testfile
+</code>
+      <p>
+        2. The second step is to make the USB stick the current working directory. Type:
+      </p>
+      <code>
+cd /media/usbstick/repository
+</code>
+      <p>
+        3. The next step is to create a repository on the USB stick, and to copy the data to it.
+      </p>
+      <p>
+        To create a shared repository on the USB stick, type:
+      </p>
+      <code>
+git --bare init --shared
+</code>
+      <p>
+        Git will respond saying that an empty shared Git repository has been created.
+      </p>
+      <p>
+        Before removing the stick, ensure that the data gets written to it, by issuing the command
+      </p>
+      <code>
+sync
+</code>
+      <p>
+        This finishes setting up the repository on the USB flash drive.
+      </p>
+    </section>
+    <section id="repourl"><title>Repository URL
+      </title>
+      <p>
+        The repository that was created in this tutorial has the following URL:
+      </p>
+      <code>
+file:///media/usbstick/repository
+</code>
+      <p>
+        The users that are going to use this repository need this URL.
+      </p>
+    </section>
+  </section>
+ 
+  <section id="conflict">
+	<title>4. Conflict resolution </title>
+      <section id="introconflict">
+<title>Introduction</title>
+<p>Under normal circumstances, the users collaborate in one project. They send and receive their changes regularly. At times it may occur that two users make changes in the same chapter of text, or in the same project notes. After doing <gui>Send/Receive</gui>, a conflict may arise. Bibledit-Desktop does not know which of the two edits to take, either the edit of the first user or the edit of the second user. This is called a conflict. For Bible text, Bibledit-Desktop tries to resolve this conflict automatically, keeping one edit, and throwing away the other. But for project notes, this does not always work. Manual intervention is required to resolve this conflict.The rest of this page describes how to notice that a conflict has occurred in a project note, and how to manually resolve it.</p>
+	</section>
+	<section id="symptom">
+<title>Symptoms</title>
+      <p>The first symptom of a conflict is that the users get the impression that the collaboration system has stopped to work properly. The users make their edits. But these edits and changes do not propagate to the other users.If a conflict is suspected, then it is good to find out about it, whether this is indeed the case. A simple way of finding out is this:</p><list>
+<item><p>Shut down Bibledit, and start it again. This clears the system log.</p></item>
+<item><p>Send and receive the project notes. Do this through menu <guiseq><gui>File</gui><gui>Project notes</gui><gui>Send/Receive</gui></guiseq>.</p></item>
+<item><p>View the system log to see whether a conflict has occurred. Do this through menu <guiseq><gui>Help</gui><gui>System log</gui></guiseq>.</p></item></list>
+<p>
+ If there is a conflict, then the log shows something along those lines:</p><code>Auto-merging 78294313
+CONFLICT (content): Merge conflict in 78294313
+Automatic merge failed; fix conflicts and then commit the result.</code><p>The log shows that there is a conflict. Notice the number: 78294313. This is the number of the project note that has the conflict.</p>
+      </section>
+      <section id="resolution">
+<title>Resolution</title>
+      <p>There are several ways to resolve the conflict. A simple one is described below. It just throws away the edits that one user made, and takes the edits that the other users made. In other words, it takes the version that is already on the server, in the remote repository.The user who has the conflict does the following:Opens a terminal, and types the following series of commands, one by one, and presses Enter after each command:</p><code>cd
+cd .bibledit
+cd notes
+cd data
+git checkout --theirs 78294313</code><p>Notice that the number of the note that has the conflict is 78294313. This only works in this example. Your note number will be different. The note number was found above.Close the terminal.Start doing the sending and receiving in Bibledit-Desktop as usual. Collaboration should work again. You may view the system log, as described above, to ascertain that everything works well again.</p>
+      </section>
+  </section>   
+
+</page>

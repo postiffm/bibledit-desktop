@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="references" xml:lang="fr">
+<info>
+  <link type="guide" xref="index#tools"/>
+  <desc>All about the bible references management.</desc>
+</info>
+  <title>05. References</title>
+      <section id="introref"><title>Introduction      </title>
+      <p> When speaking about references, we refer to the list of
+        references available in the references window. It is a list of
+        verses, e.g. Genesis 2:2.
+      </p>
+      </section>
+      <section id="loadref"><title>How to load references? </title>
+      <p> References are loaded in the references window. </p>
+      <p> References can be loaded as a result of: </p>
+      <list>
+      <item><p>A <link xref="searching">search</link> operation. </p></item>
+      <item><p>Opening a list of references, through menu <guiseq><gui>View</gui><gui>References</gui></guiseq>, then click [actions] and then "Import a list of
+        references". </p></item>
+      <item><p>Checking. </p></item>
+      <item><p>Getting them from a projectnote. </p></item>
+      </list>
+      <p> When a list of references is opened, up to three words can be
+        chosen to be highlighted in the text editor, when a reference is
+        activated in the references window. </p>
+      </section>
+      <section id="gotoref"><title>How to go to a reference? </title>
+      <p> The references list is used to quickly navigate to the verse
+        referred to. Just click on the reference and Bibledit presents
+        that verse in the text editor. </p>
+      <p> Navigation aids: </p>
+      <list>
+      <item><p>Next Reference (<key>F6</key>): Actives the first reference, or if one
+        is active already (except the last one), the next one. </p></item>
+      <item><p>Previous Reference (<keyseq><key>Shift</key><key>F6</key></keyseq>) Actives the first reference,
+        or if one is active already (except the first one), the previous
+        one. </p></item>
+        </list>
+      </section>
+      <section id="saveref"><title>How to save references? </title>
+      <p> A list of references can be saved through menu, <guiseq><gui>File</gui><gui>Export</gui></guiseq>.
+        See <link xref="export">information
+          about exporting data</link>. </p>
+      </section>
+      <section id="hideref"><title>How to hide references? </title>
+      <p> Any references that are at present in the references window
+        can be hidden for the future. Click <gui>[actions]</gui>, then "Hide ...
+        from now on". It won't come back in the future. </p>
+      <p> The list of references that has been hidden can be seen and
+        edited via <gui>[actions]</gui>, then "Manage the hidden references". </p>
+      </section>
+      <section id="printref"><title>How to print references? </title>
+      <p> To print references, including the text they refer to, type
+        <keyseq><key>Ctrl</key><key>P</key></keyseq> or choose menu <guiseq><gui>File</gui><gui>Print</gui></guiseq>. Follow the screen. </p>
+      </section>
+      <section id="goback"><title>How to go back to an
+        original reference? </title>
+      <p> When working in a text and going to another reference, it is
+        important to have a way to go back to the original reference. </p>
+      <p> The <gui>Previous/Next</gui> in the toolbar (green arrows to the
+        left/right) can be used to go to the the original reference in
+        the text editor. This is the text before any reference of the
+        references window was activated.
+      </p>
+      </section>
+      <section id="copyclipboard"><title>How
+        to copy the references to the clipboard? </title>
+      <p> Select the text to copy with the mouse, and press <keyseq><key>Ctrl</key><key>C</key></keyseq>. This
+        will copy the selected text to the clipboard.</p>
+      </section>
+</page>
