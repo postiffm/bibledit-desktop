@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="preferences" xml:lang="fr">
+<info>
+  <link type="guide" xref="index#menu"/>
+     <desc>Menu Preferences description.</desc>
+</info>
+
+  <title>Preferences Menu</title>
+<section id="projectnotes">
+<title>Project Notes</title> 
+<p> 
+    
+  <link xref="projectnotes">Project Notes</link>   </p>
+</section> 
+<section id="windowsoutpost">
+          <title>Windows Outpost</title> 
+<p> 
+    
+  <link xref="outpost">Windows Outpost</link>   </p>
+</section> 
+<section id="tidytext">
+<title>Tidy Text</title> 
+<p> 
+    
+  <link xref="tidy">Tidy Text</link>   </p>
+</section> 
+
+<section id="remoterepo">
+<title>Remote Repository</title> 
+<p> 
+    
+  <link xref="remote">Remote Repository</link>   </p>         
+
+</section>      
+<section id="userinterface">
+<title>User Interface</title> 
+<p> 
+    
+  <link xref="userinterface">User Interface</link>   </p>         
+
+</section>    
+<section id="textreplacement">
+<title>Text Replacement</title> 
+<p> <link xref="replacement">Text Replacement</link>   </p>
+</section>  
+<section id="filters">
+<title>Filters</title> 
+<p> 
+    
+  <link xref="filters">Filters</link>   </p> 
+          <p> <link xref="tec">Teckit</link>   </p> 
+          <p> <link xref="regex">Regex</link>   </p>
+          <p> <link xref="sed">Sed</link>   </p>
+</section> 
+<section id="planning">
+          
+<title>Planning</title> 
+<p> 
+    
+  <link xref="planning">Planning</link>   </p> 
+</section> 
+</page>

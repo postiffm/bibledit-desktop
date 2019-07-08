@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" xmlns:e="http://projectmallard.org/experimental/" type="guide" style="2column task" id="index" xml:lang="fr">
+  
+  <info> 
+    <desc>Bible editor, checker to help bibles 
+    publishing.</desc>     
+
+    <title type="link" role="trail">
+      <media type="image" its:translate="no" src="images/biblesociety.jpeg"/>
+    </title>
+    <title type="text">Bibledit-Desktop Help</title>
+     
+    <credit type="author" its:translate="no">
+      <name>Teus Benschop</name>
+    </credit>
+    <credit type="author" its:translate="no">
+      <name>Matthew Postiff</name>
+    </credit>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+
+  </info> 
+     
+  <title its:translate="no">
+  <media type="image" its:translate="no" src="images/biblesociety.jpeg">
+    <span its:translate="yes">Bibledit-Desktop logo</span>
+  </media>Bibledit-Desktop Help
+  </title>
+  
+  <p><app>Bibledit-Desktop</app>, a tool for the Bible translator.</p>
+  
+  <section id="introduction" style="2column">
+    <title>Introduction</title>
+  </section>
+
+  <section id="first-steps" style="2column">
+    <title>First Steps</title>
+  </section>
+
+  <section id="tools" style="2column">
+    <title>Advanced tools</title>
+  </section>
+ 
+  <section id="menu" style="2column">
+    <title>Menu</title>
+    <p>Many of the pages under this Menu are called from dialogs and assistants within Bibledit. If you'd like to move one of these pages, it would help to inform the developer, so that appropriate adjustments can be made in the bibledit code. </p>
+  </section>
+
+  <section id="tutorials" style="2column">
+    <title>Tutorials</title>
+  </section>
+
+  <section id="informations" style="2column">
+    <title>Informations</title>
+  </section>
+</page>

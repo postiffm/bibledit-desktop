@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="lesson1" xml:lang="fr">
+<info>
+    <link type="guide" xref="index#tutorials"/>
+   <desc>Open, Close, and Help.</desc>
+</info>
+
+<title>Lesson 1</title>
+<p> 
+
+To start using Bibledit on Windows: Click Start-&gt;All Programs-&gt;Bibledit-&gt;Bibledit
+On Linux, look in the menu or use the <cmd>bibledit-desktop</cmd>.
+
+ </p><p>
+
+ 
+
+You will see the Bibledit Menu window open up
+ </p><p>
+To get help using Bibledit: Click <guiseq><gui>Help</gui><gui>Contents</gui></guiseq>
+ </p><p>
+The help webpage will open: Click the Tasks or the Tools link
+ </p><p>
+Bibledit help has 2 main sections Tasks and Tools
+ </p><p>
+The Tasks section discusses general Bibledit tasks that a user will typically want to do. 
+ </p><p>
+The Tools section describes each Bibedit menu item.
+ </p><p>
+ 
+For example, if I click Tasks and then Import then the help page shows a variety of topics about importing texts and where to get some standard Bible to import. If I click Tools and then Import then the help page shows a description of the Import text dialog that appears when you choose the <guiseq><gui>File</gui><gui>Project</gui><gui>Import</gui></guiseq> menu item.
+ </p><p>
+ 
+To close Bibledit click the X in the upper right corner of the Menu window </p>
+</page>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="import" xml:lang="fr">
+<info>
+  <link type="guide" xref="file"/>
+       <desc>How to import ressources.</desc>
+</info>
+
+<title>File Menu</title>
+  <section id="import"><title> Import
+      </title>
+      <p>
+        The Import Assistant is available through menu <guiseq><gui>File</gui><gui>Import</gui></guiseq>. It can import a variety of data into Bibledit. The various options are described below.
+      </p>
+    <section id="importbible"><title>Import a Bible
+      </title>
+      <p>
+        Bibledit can import existing Biblical text. It imports various formats of the texts. These formats are described below.
+      </p>
+    	<section id="importusfm"><title>Bible - Unified Standard Format Markers
+      </title>
+      <p>
+        Bibledit can import <link xref="usfm">USFM</link> text.
+      </p>
+      <p>
+        If it says that a file is not in Unicode, it is recommended to open this file in gedit, and then save it in UTF-8 format. The program "gedit" is an editor that comes with Linux. Other editors will work well too.
+      </p>
+    	</section>
+    	<section id="bibleworksexported"><title>Bible - BibleWorks Exported Database
+      </title>
+      <p>
+        Bibledit can import text that has been exported from BibleWorks. This is how to do it: In BibleWorks choose <guiseq><gui>Tools</gui><gui>Export Database</gui></guiseq>. Export the Bible of your choice to a file and save it in Text format. Then do the Import in Bibledit.
+      </p>
+    	</section>
+	<section id="onlinebible"><title>Bible - Online Bible Text
+      </title>
+      <p>
+        Data from the Online Bible can be imported. Bibledit contacts the Online Bible and retrieves data from it.
+      </p>
+      <p>
+        To get this to work, it is important to ensure that the Online Bible and Bibledit share their reference. If this works, it means that Bibledit can contact the Online Bible.
+      </p>
+      <p>
+        The Import Assistant has an option to import data from the Online Bible. After you choose this option, the Assistant will check that it can contact the Online Bible. If this is the case, the next step is to choose which Bible of the Online Bible to import. After that the import starts.
+      </p>
+      <p>
+        Import will take a very long time due to how the interface has been built.
+      </p>
+      <p>
+        You can cancel the import at any time. Whatever has been imported will be preserved. When continuing with the import next time, whatever has been imported already will not be imported again. That saves time.
+      </p>
+    	</section>
+    	<section id="rawtext"><title>Bible - Raw Text
+      </title>
+      <p>
+        Importing raw text involves manual labour. The following steps would be required:
+      </p>
+      <steps>
+      <item><p>
+View the USFM code. This can be done through menu <guiseq><gui>View</gui><gui>USFM</gui></guiseq> code, or keyboard accelerator <keyseq><key>Ctrl</key><key>\</key></keyseq> (Control-Backslash).
+      </p></item>
+      <item><p>
+Switch on the USFM checker. See menu <guiseq><gui>Check</gui><gui>USFM</gui></guiseq>. This opens a new window.
+      </p></item>
+      <item><p>
+Paste some good text in the editor.
+      </p></item>
+      <item><p>
+Press button "Discover markup", and see how it goes.
+      </p></item>
+      </steps>
+      <p>
+        If the markup is not discovered properly, you will need to enter the USFM codes by hand. The essential ones are \c, \p, \s and \v.
+      </p>
+      <p>
+        Keep doing this for each chapter of text you'd like to import.
+      </p>
+      <p>
+        At the end of all, when all text has been imported into a book, chapter 0 needs to be set as well, else without that Bibledit won't work well with the imported text. Setting chapter 0 is usually done by simply applying the "c" marker in the editor, choosing chapter 0, and pressing OK.
+      </p>
+      <p>
+        Note. At any stage in the text import process, the user can filter the text. Select the filter to apply, then click button "Filter text". Filters can be created through menu <link xref="filters"><guiseq><gui>Preferences</gui><gui>Filters</gui></guiseq></link>.
+      </p>
+      <p>
+        Note. There is an option "Verses are at line start". if this one is ticked, when discovering the markup, the engine only considers verses that are at the start of the line.
+      </p>
+      <p>
+        Note. In some raw text footnotes or cross references are included in the text. See the following example, where one would like to import the following raw text:
+      </p>
+      <p>
+        "5 Don't forget what happened to those people that the Lord rescued from Egypt. Some of them did not have faith, and he later destroyed them. Ex 12.51; Nu 14.29,30. 6 You also know about the angels who didn't do their work and left their proper places. God chained them with everlasting chains and is now keeping them in dark pits until the great day of judgment."
+      </p>
+      <p>
+        There is a cross reference in 5: Ex 12.51; Nu 14.29,30.
+      </p>
+      <p>
+        To import this raw text properly, you need to tick the option that the verse numbers are at the start of the line. Then recognize the text by clicking on the button. It will now have recognized only verse 5. You need to put a new line before verse 6, and manually add the \v before it. The switch to formatted view, and cut the cross reference to the clipboard. Then insert a new cross reference, and paste that text into the dialog.
+      </p>
+      <p>
+        The same technique can be used for footnotes or endnotes.
+      </p>
+    	</section>
+    </section>
+    <section id="importref"><title>Import References
+      </title>
+      <p>
+        This gives information about how to get a list of references into Bibledit, into the References Window.
+      </p>
+    </section>
+    <section id="importstylesheet"><title>Import a Stylesheet
+      </title>
+      <p>
+        This imports a stylesheet.
+      </p>
+    </section>
+    <section id="importnotes"><title>Import Notes
+      </title>
+      <p>
+        This imports project notes.
+      </p>
+    </section>
+    <section id="importkeyterms"><title>Import Keyterms
+      </title>
+      <p>
+        This allows you to import keyterms.
+      </p>
+           <p>
+        Extra keyterms can be imported. This is done through menu <guiseq><gui>File</gui><gui>Keyterms</gui><gui>Import</gui></guiseq>.
+      </p>
+      <p>
+        The file that will be imported has to adhere to certain standards. The various files with keyterms that come with Bibledit show what the format of the textfiles should be.
+      </p>
+      <p>
+        There are several different types of textfiles than can be imported.
+      </p>
+      <steps>
+      <item><p>
+There is the Standard textfile. Samples of this type of file are in the bibledit distribution or are installed in, normally, <file>/usr/share/bibledit-desktop</file>. These files start with "keyterms" and have the "txt" extension. Looking for files like "keyterms*txt" will give them.
+      </p></item>
+      <item><p>
+There is the OTKEY.DB file. A file with that name comes with the bibledit distribution.
+      </p></item>
+      <item><p>
+There is the KTREF.DB file. A file with that name comes with the bibledit distribution.
+      </p></item>
+      <item><p>
+There is the data produced by the <link href="http://www.ktbh-team.org/">"Key Terms in Biblical Hebrew" project</link>. This is supported too. It is included with bibledit as KTBH.pbu. If an update is available, you can import it through the Import function. At KTBH they would be very grateful if they could get some user feedback on our data. The KTBH project is still formally under review, and valuable user feedback is needed.
+      </p></item>
+      </steps>
+      <p>
+        The keyterms will be imported into a collection. This should be a new collection, one that does not yet exist.
+      </p>
+      <p>
+        If you have messed up the keyterms by importing garbage, the collection that was imported can be <link xref="keyterms">deleted</link> again.
+      </p>
+      <p>
+        Any keyterms that have been added become available after Bibledit has been restarted.
+      </p>
+      <p>
+        Any errors can be sent to the Bibledit bug trackers, apart from errors in the database provided by Key Terms in Biblical Hebrew project.
+      </p>
+    </section>
+  </section>
+       
+</page>

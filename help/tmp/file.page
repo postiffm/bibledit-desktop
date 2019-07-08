@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="file" xml:lang="fr">
+   
+<info>
+  <link type="guide" xref="index#menu"/>
+   <desc>Menu file description.</desc>
+</info>
+
+<title>File Menu</title>
+  <section id="project">
+<title>Project</title> 
+<p> 
+    
+  <link xref="project">Project</link>   </p>
+          <p> 
+    
+  <link xref="dictionaries">Dictionaries</link>   </p>  </section> 
+ <section id="styles">
+          <title>Styles</title> 
+<p> 
+    
+  <link xref="stylesheet">Styles</link>   </p> </section> 
+   <section id="keyterms">
+<title>Keyterms</title> 
+<p> 
+    
+  <link xref="keyterms">Keyterms</link>   </p>
+ </section> 
+ <section id="second">
+<title>Print</title> 
+<p> 
+    
+  <link xref="print">Print</link>   </p>         
+
+ </section>      
+ <section id="import">
+<title>Import</title> 
+<p> 
+    
+  <link xref="import">Import</link>   </p>         
+
+ </section>    
+ <section id="export">
+<title>Export</title> 
+<p> <link xref="export">Export</link>   </p>
+<p> <link xref="sword">Export Sword</link>   </p> 
+          <p> <link xref="keytermsexport">Export Keyterms</link>   </p> 
+           </section>  
+           <section id="backup">
+<title>Backup</title> 
+<p> 
+    
+  <link xref="backup">Backup</link>   </p> </section> 
+          <section id="restore">
+<title>Restore</title> 
+<p> 
+    
+  <link xref="restore">Restore</link>   </p> </section> 
+</page>

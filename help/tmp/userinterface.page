@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="userinterface" xml:lang="fr">
+<info>
+  <link type="guide" xref="preferences#userinterface"/>
+</info>
+  <title>Preferences Menu</title>
+<section id="userinterface"><title>User interface
+      </title>
+      <p>
+        The dialog for making settings for the user interface is accessible through menu <guiseq><gui>Preferences</gui><gui>User interface</gui></guiseq>.
+      </p>
+	<section id="features"><title>Features
+      </title>
+      <p>
+        Bibledit can be set to be a more advanced tool, or a tool with fewer options. In this way the features that Bibledit offers can be tailored to the user's needs. There are various settings for this.
+      </p><steps>
+      <item><p>When Bibledit is set with only the basics available, it becomes a very simple Bible editor. It has all user defined features switched off. See below for the user defined features.
+      </p></item>
+      <item><p>When Bibledit is set with all features available, it becomes a most powerful Bible editor.
+      </p></item>
+     <item> <p>When Bibledit is set with user defined features, the user can set which of the features are to be switched on.
+      </p></item></steps>
+      <p>
+        If for example all features are ticked, except of "Project management", then the user cannot manage a project, that is, the user cannot change projects, add or delete them.
+      </p>
+      <p>
+        If for example the "Project notes" are unticked, then the user cannot view or edit project notes.
+      </p>
+      <p>
+        There is a whole lot of other features that can be switched on or off. The best way to see how this works is just switch these off or on and see for yourself how Bibledit looks.
+      </p>
+	</section>
+	<section id="remembering"><title>Remembering most recent verse
+      </title>
+      <p>
+        There is an option to remember the most recent verse per chapter. When this option is ticket, it may affect navigation. An example will show how it works.
+      </p>
+      <p>
+        Let us imagine that the user works in Matthew 2:5. Bibledit will record that the most recent verse in Matthew 2 is verse 5. Next the user goes to Matthew 3:10. Bibledit will again record that the most recent verse in Matthew 3 is verse 10. When the user now instructs Bibledit to go to Matthew chapter 2, Bibledit will remember that the most recent verse in chapter 2 was verse 5. It will therefore go straight to verse 5. When the option is disabled, it would have gone to verse 1. Bibledit will also record that the most recent chapter in Matthew is chapter 2. If the user goes to John, then instructs Bibledit to go to Matthew, Bibledit will remember the most recent chapter and verse for Matthew, and will go straight to Matthew 2:5.
+      </p>
+	</section>
+</section>
+       
+</page>

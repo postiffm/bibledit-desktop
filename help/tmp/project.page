@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="project" xml:lang="fr">
+<info>
+  <link type="guide" xref="file#project"/>
+</info>
+
+  <title><guiseq><gui>File Menu</gui><gui>Project</gui></guiseq></title>
+	<section id="changesproject"><title>Changes
+      </title>
+      <p>
+        The assistant for viewing changes in a project is accessible through menu <guiseq><gui>File</gui><gui>Project</gui><gui>Changes</gui></guiseq>.
+      </p>
+      <p>
+        It can show you the changes that have been made in the project.
+      </p>
+      <p>
+        1. You can view the changes since your last review.
+      </p>
+      <p>
+        2. You can view the changes made a date and time to be chosen by you.
+      </p>
+      <p>
+        3. You can view the changes that have been made between two dates and times to be chosen by you.
+      </p>
+      <p>
+        After pressing Apply, some processing will be done and then the changes will be presented to you.
+      </p>
+      <p>
+        Note. If a change is made in the text, and the changes are requested straight after that, the change may not have been recorded yet. In that case wait a short while and do it again.
+      </p>
+	</section>
+	<section id="projectproperties"><title>
+            Project Properties </title>
+      <p> In this dialog you can set the properties of a project. </p>
+      <p> The dialog is accessible through menu <guiseq><gui>File</gui><gui>Project</gui><gui>Properties</gui></guiseq>. </p>
+      <p> You can change the name of the project. </p>
+      <p> By default a project is editable, but you can set it
+        non-editable. In that case the project cannot be changed or
+        deleted. </p>
+      <p> You can add or remove books. </p>
+      <p> When adding books, you can either import a book from file, or
+        add a book using an empty template. </p>
+      <p> You can set the versification system of the project, and the
+        language. If the language is set the names of the books of the
+        Bible can assume their localized names, instead of the English
+        names. Some of the languages may have a localization of the
+        numerals also. If this localization is there, the numbers of the
+        chapters and verses in the printout change, for example the 1
+        may become a Û±. </p>
+      <p> You can set that a project depends upon another one, and that
+        the dependency runs through a filter. This means that the text
+        of the original project is taken, runs through a filter that
+        changes the text, and then comes in the current project in the
+        new form. This can be useful for creating a diglot. The filters
+        can be managed in menu <guiseq><gui>Preferences</gui><gui>Filters</gui></guiseq>. </p>
+      <p> There is also a setting for whether to <link xref="spelling">check the spelling</link>
+        in the projects. If this option is ticked, then one or more
+        dictionaries should be selected through the "Dictionaries"
+        button. For dictionaries, see the <link xref="dictionaries">dictionaries</link> page.</p>
+	</section>
+        
+	<section id="sendreceive"><title>
+        Send / receive
+      </title><p>This sends and receives your Bibles. It works when you have enabled <link xref="collaboration">collaboration</link> for one or more Bibles. Normally the collaboration system send and receives the changes made in Bibles. It does that at intervals as set up by the user. When choosing <gui>Send / receive</gui> through the menu, sending and receiving Bibles is done immediately, regardless of the interval that was specified by the user.
+</p>
+	</section>
+
+        
+</page>

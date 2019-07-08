@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="topic" id="keyboard" xml:lang="fr">
+<info>
+  <link type="guide" xref="index#first-steps"/>
+  <desc>List of keyboard shortcuts.</desc>
+</info>
+
+  <title>7. Keyboard shortcuts
+      </title>
+      <p>
+        Accelerators are keystrokes that accelerate access to certain functions.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>X</key></keyseq>: Cut to clipboard.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>C</key></keyseq>: Copy to clipboard.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>V</key></keyseq>: Paste from clipboard.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Z</key></keyseq>: Undo.
+      </p>
+      <p>
+        <keyseq><key>Shift</key><key>Ctrl</key><key>Z</key></keyseq>: Redo.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>1, Ctrl</key><key>2, Ctrl</key><key>3, Ctrl</key><key>4</key></keyseq>: Insert standard text into project note.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>N</key></keyseq>: Create new project note.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>DownArrow</key></keyseq>: Go to next verse.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>UpArrow</key></keyseq>: Go to previous verse.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>PageDown</key></keyseq>: Go to next chapter.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>PageUp</key></keyseq>: Go to previous chapter.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Alt</key><key>PageDown</key></keyseq>: Go to next book.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Alt</key><key>PageUp</key></keyseq>: Go to previous book.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>RightArrow</key></keyseq>: Go to next reference in history.
+      </p>
+      <p>
+        <keyseq><key>Alt</key><key>LeftArrow</key></keyseq>: Go to previous reference in history.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>G</key></keyseq>: Go to reference.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>W</key></keyseq>: Close window.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>S</key></keyseq>: Go to styles window.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Q</key></keyseq>: Quit.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>F</key></keyseq>: Find.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>R</key></keyseq>: Replace.
+      </p>
+      <p>
+       <key>F5</key>: Present text editor.
+      </p>
+      <p>
+        <keyseq><key>Shift</key><key>F5</key></keyseq>: Present tools windows in sequence.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>F5</key></keyseq>: Present notes editor.
+      </p>
+      <p>
+       <key>F6</key>: Go to next reference in reference window.
+      </p>
+      <p>
+        <keyseq><key>Shift</key><key>F6</key></keyseq>: Go to previous reference in reference window.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Alt</key><key>RightArrow</key></keyseq>: Go to next project.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>Alt</key><key>LeftArrow</key></keyseq>: Go to previous project.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>O</key></keyseq>: Open project.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>P</key></keyseq>: Print.
+      </p>
+      <p>
+        <key>F1</key>: Main help.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>\</key></keyseq>: Toggle viewing USFM code.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>[</key></keyseq>: When editing a note, it increases the indentation.
+      </p>
+      <p>
+        <keyseq><key>Ctrl</key><key>]</key></keyseq>: When editing a note, it decreases the indentation.
+      </p>
+      <p>
+        <key>+</key> or <key>-</key> or <key>Left-Arrow</key> or <key>Right-Arrow</key>: When in a tree, to expand or collapse items.
+      </p>
+
+</page>
