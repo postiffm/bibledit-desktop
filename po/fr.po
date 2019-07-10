@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.14\n"
-"Report-Msgid-Bugs-To: https://github.com/postiffm/bibledit-desktop/issues\n"
-"POT-Creation-Date: 2018-03-29 16:14-0400\n"
-"PO-Revision-Date: 2019-04-21 22:18+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-08 17:49+0200\n"
+"PO-Revision-Date: 2019-07-10 21:33+0200\n"
 "Last-Translator: L'Africain\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -76,8 +76,8 @@ msgstr "Est-ce la bonne ressource ?"
 msgid "Resource name"
 msgstr "Nom de la ressource"
 
-#: ../src/assistantbackup.cpp:191 ../src/assistantexport.cpp:509
-#: ../src/assistantexport.cpp:541
+#: ../src/assistantbackup.cpp:191 ../src/assistantexport.cpp:512
+#: ../src/assistantexport.cpp:544
 msgid "Where would you like to save it?"
 msgstr "Où souhaitez-vous sauvegarder ?"
 
@@ -93,7 +93,7 @@ msgstr "La sauvegarde est terminée"
 msgid "The backup was completed successfully."
 msgstr "La sauvegarde a été effectuée avec succès."
 
-#: ../src/assistantbackup.cpp:272 ../src/assistantexport.cpp:618
+#: ../src/assistantbackup.cpp:272 ../src/assistantexport.cpp:621
 #: ../src/assistantimport.cpp:331
 msgid "No Bible selected"
 msgstr "Aucune Bible sélectionnée"
@@ -226,7 +226,7 @@ msgstr "Suppression en cours"
 msgid "Delete done."
 msgstr "Suppression terminée."
 
-#: ../src/assistantexport.cpp:42 ../src/export_utils.cpp:234
+#: ../src/assistantexport.cpp:42 ../src/export_utils.cpp:235
 msgid "Export"
 msgstr "Exporter"
 
@@ -244,7 +244,7 @@ msgstr "Que voulez-vous exporter ?"
 
 #: ../src/assistantexport.cpp:79 ../src/assistantimport.cpp:84
 #: ../src/checks.cpp:189 ../src/dialogmychecks.cpp:170
-#: ../src/mainwindow.cpp:5812 ../src/windowreferences.cpp:49
+#: ../src/mainwindow.cpp:5814 ../src/windowreferences.cpp:49
 msgid "References"
 msgstr "Références"
 
@@ -325,96 +325,96 @@ msgstr "Quelle est le nom du module ?"
 msgid "What is the description for the module?"
 msgstr "Quelle est la description du module ?"
 
-#: ../src/assistantexport.cpp:345
+#: ../src/assistantexport.cpp:345 ../src/assistantexport.cpp:348
 msgid "What can you say about the module?"
 msgstr "Que pouvez-vous dire au sujet du module ?"
 
-#: ../src/assistantexport.cpp:354
+#: ../src/assistantexport.cpp:357
 msgid "What is the license of the module?"
 msgstr "Quelle est la licence du module ?"
 
-#: ../src/assistantexport.cpp:363
+#: ../src/assistantexport.cpp:366
 msgid "What is the version of the module?"
 msgstr "Quelle est la version du module ?"
 
-#: ../src/assistantexport.cpp:372
+#: ../src/assistantexport.cpp:375
 msgid "What is the language of the module?"
 msgstr "Quelle est la langue du module ?"
 
-#: ../src/assistantexport.cpp:381
+#: ../src/assistantexport.cpp:384
 msgid "Where is the module to be installed?"
 msgstr "Où le module sera-t-il installé ?"
 
-#: ../src/assistantexport.cpp:394
+#: ../src/assistantexport.cpp:397
 msgid "What type of export do you choose?"
 msgstr "Quel type d'exportation avez-vous choisi ?"
 
-#: ../src/assistantexport.cpp:400
+#: ../src/assistantexport.cpp:403
 msgid "Standard Bibledit-Desktop format"
 msgstr "Format Bibledit-Desktop standard"
 
-#: ../src/assistantexport.cpp:406
+#: ../src/assistantexport.cpp:409
 msgid "Paratext format"
 msgstr "Format paratext"
 
-#: ../src/assistantexport.cpp:419
+#: ../src/assistantexport.cpp:422
 msgid "Include keyterms without a rendering"
 msgstr "Inclure les mots-clés sans interprétation"
 
-#: ../src/assistantexport.cpp:424
+#: ../src/assistantexport.cpp:427
 msgid "Include keyterms without a rendering?"
 msgstr "Inclure les mots-clés sans interprétation ?"
 
-#: ../src/assistantexport.cpp:440
+#: ../src/assistantexport.cpp:443
 msgid "Export Options"
 msgstr "Options d'exportation"
 
-#: ../src/assistantexport.cpp:444
+#: ../src/assistantexport.cpp:447
 msgid "Compress the backup"
 msgstr "Le compresser"
 
-#: ../src/assistantexport.cpp:448
+#: ../src/assistantexport.cpp:451
 msgid "For USFM, combine files into one"
 msgstr "Pour l'USFM, fusionner les fichiers en un"
 
-#: ../src/assistantexport.cpp:464
+#: ../src/assistantexport.cpp:467
 msgid "Please enter the date and time?"
 msgstr "Veuillez entrer la date et l'heure."
 
-#: ../src/assistantexport.cpp:499
+#: ../src/assistantexport.cpp:502
 msgid "Any comments on this export?"
 msgstr "Un commentaire au sujet de cette exportation ?"
 
-#: ../src/assistantexport.cpp:568
+#: ../src/assistantexport.cpp:571
 msgid "Export about to be done"
 msgstr "Exportation en cours"
 
-#: ../src/assistantexport.cpp:572
+#: ../src/assistantexport.cpp:575
 msgid "The export is about to be done"
 msgstr "L'exportation est sur le point d'être exécutée"
 
-#: ../src/assistantexport.cpp:576
+#: ../src/assistantexport.cpp:579
 msgid "Export in progress"
 msgstr "Exportation en cours"
 
-#: ../src/assistantexport.cpp:580
+#: ../src/assistantexport.cpp:583
 msgid "The export is in progress"
 msgstr "Progression de l'exportation"
 
-#: ../src/assistantexport.cpp:584
+#: ../src/assistantexport.cpp:587
 msgid "Export done"
 msgstr "Exportation terminée"
 
-#: ../src/assistantexport.cpp:588
+#: ../src/assistantexport.cpp:591
 msgid "The export was completed successfully."
 msgstr "L'exportation a été effectuée avec succès."
 
-#: ../src/assistantexport.cpp:656 ../src/assistantexport.cpp:677
+#: ../src/assistantexport.cpp:659 ../src/assistantexport.cpp:680
 #: ../src/assistantrestore.cpp:216
 msgid "(None)"
 msgstr "(Aucun)"
 
-#: ../src/assistantexport.cpp:791
+#: ../src/assistantexport.cpp:794
 msgid "The GoBibleCreator was not found. Install it. See the online help."
 msgstr "GoBibleCreator n'a pas été trouvé. Installez-le. Voir l'aide en ligne."
 
@@ -3124,7 +3124,7 @@ msgstr "une note de bas de page"
 msgid "endnote"
 msgstr "une note de fin"
 
-#: ../src/dialoginsertnote.cpp:60 ../src/editor3.cpp:1953
+#: ../src/dialoginsertnote.cpp:60 ../src/editor3.cpp:1950
 #: ../src/editor.cpp:1615
 msgid "crossreference"
 msgstr "une référence ou un renvoi"
@@ -4493,7 +4493,7 @@ msgid "with an odd number"
 msgstr "avec un nombre impair"
 
 #: ../src/dialogstylesheet.cpp:2535 ../src/dialogstylesheet.cpp:2550
-#: ../src/mainwindow.cpp:5814
+#: ../src/mainwindow.cpp:5816
 msgid "Print"
 msgstr "Imprimer"
 
@@ -4849,7 +4849,7 @@ msgstr "Ne peut trouver d'utilitaire gzip approprié"
 msgid "List of directories and other paths we know about:"
 msgstr "Liste des dossiers et autres chemins que nous connaissons :"
 
-#: ../src/editor3.cpp:701 ../src/editor.cpp:449 ../src/usfmview.cpp:224
+#: ../src/editor3.cpp:700 ../src/editor.cpp:449 ../src/usfmview.cpp:224
 msgid ""
 "The chapter is empty.\n"
 "Do you wish to delete this chapter?"
@@ -4857,18 +4857,18 @@ msgstr ""
 "Ce chapitre n'a pas de contenu.\n"
 "Voulez-vous le supprimer ?"
 
-#: ../src/editor3.cpp:738 ../src/editor.cpp:486 ../src/outline.cpp:174
+#: ../src/editor3.cpp:737 ../src/editor.cpp:486 ../src/outline.cpp:174
 #: ../src/readwrite.cpp:109 ../src/usfmview.cpp:268
 msgid "Chapter "
 msgstr "Le chapitre "
 
-#: ../src/editor3.cpp:738 ../src/editor.cpp:486 ../src/usfmview.cpp:268
+#: ../src/editor3.cpp:737 ../src/editor.cpp:486 ../src/usfmview.cpp:268
 msgid ""
 " was loaded, but it appears that the chapter number has been changed to "
 msgstr ""
 " a été chargé, mais il semble que le numéro de chapitre ait été changé en "
 
-#: ../src/editor3.cpp:738 ../src/editor.cpp:486 ../src/usfmview.cpp:268
+#: ../src/editor3.cpp:737 ../src/editor.cpp:486 ../src/usfmview.cpp:268
 msgid ""
 ".\n"
 "Do you wish to save the text as a different chapter, that is, as chapter "
@@ -4877,7 +4877,7 @@ msgstr ""
 "Souhaitez-vous enregistrer le texte comme un chapitre différent, dans ce cas "
 "comme chapitre "
 
-#: ../src/editor3.cpp:755 ../src/editor.cpp:503 ../src/usfmview.cpp:284
+#: ../src/editor3.cpp:754 ../src/editor.cpp:503 ../src/usfmview.cpp:284
 msgid ""
 "The new chapter number already exists\n"
 "Do you wish to overwrite it?"
@@ -4885,88 +4885,110 @@ msgstr ""
 "Le numéro de chapitre existe déjà\n"
 "Souhaitez-vous l'écraser ?"
 
-#: ../src/editor3.cpp:757 ../src/editor.cpp:505 ../src/usfmview.cpp:286
+#: ../src/editor3.cpp:756 ../src/editor.cpp:505 ../src/usfmview.cpp:286
 msgid "The changes have been discarded"
 msgstr "Les changements ont été annulés"
 
-#: ../src/editor3.cpp:1949 ../src/editor.cpp:1611
+#: ../src/editor3.cpp:1124
+msgid "Undo queue is empty"
+msgstr ""
+
+#: ../src/editor3.cpp:1157
+msgid "Redo queue is empty"
+msgstr ""
+
+#: ../src/editor3.cpp:1638
+msgid ""
+"If you wish to enter USFM code directly, please switch the view using View | "
+"Chapter as | USFM code"
+msgstr ""
+
+#: ../src/editor3.cpp:1945 ../src/editor.cpp:1611
 msgid "Trying to apply a "
 msgstr "Essaye de l'appliquer "
 
-#: ../src/editor3.cpp:1951 ../src/editor.cpp:1613
+#: ../src/editor3.cpp:1947 ../src/editor.cpp:1613
 msgid "foot- or endnote"
 msgstr "à la notes de bas de page ou de fin"
 
-#: ../src/editor3.cpp:1955 ../src/editor.cpp:1617
+#: ../src/editor3.cpp:1953 ../src/editor.cpp:1617
 msgid "table"
 msgstr "à la table"
 
-#: ../src/editor3.cpp:1956 ../src/editor.cpp:1618
+#: ../src/editor3.cpp:1955 ../src/editor.cpp:1618
 msgid " style"
 msgstr " au style"
 
-#: ../src/editor3.cpp:1964 ../src/editor.cpp:1626
+#: ../src/editor3.cpp:1963 ../src/editor.cpp:1626
 msgid "Only note related styles apply"
 msgstr "Seuls les styles liés aux notes s'appliquent"
+
+#: ../src/editor3.cpp:1968 ../src/editor3.cpp:2104
+msgid "USFM tables are not supported in the experimental editor (Editor3)."
+msgstr ""
 
 #: ../src/editor3.cpp:1972 ../src/editor.cpp:1634
 msgid "Only table styles apply"
 msgstr "Seuls les styles de table s'appliquent"
 
-#: ../src/editor3.cpp:1997 ../src/editor.cpp:1659
+#: ../src/editor3.cpp:1994 ../src/editor.cpp:1656
+msgid "Don't understand the unknown view type"
+msgstr ""
+
+#: ../src/editor3.cpp:2002 ../src/editor.cpp:1662
 msgid "Cannot find paragraph"
 msgstr "Ne peut trouver de paragraphe"
 
-#: ../src/editor3.cpp:2001 ../src/editor.cpp:1663
+#: ../src/editor3.cpp:2007 ../src/editor.cpp:1666
 msgid "This style cannot be applied here."
 msgstr "Ce style ne peut être appliqué ici."
 
-#: ../src/editor3.cpp:2323 ../src/editor.cpp:1985 ../src/usfmview.cpp:735
+#: ../src/editor3.cpp:2307 ../src/editor.cpp:1988 ../src/usfmview.cpp:735
 msgid "Adding words to dictionary"
 msgstr "Ajout de mots au dictionnaire"
 
-#: ../src/export_utils.cpp:86 ../src/export_utils.cpp:324
-#: ../src/export_utils.cpp:358 ../src/export_utils.cpp:662
+#: ../src/export_utils.cpp:87 ../src/export_utils.cpp:325
+#: ../src/export_utils.cpp:359 ../src/export_utils.cpp:663
 msgid "Exporting project"
 msgstr "Exportation du projet"
 
-#: ../src/export_utils.cpp:128
+#: ../src/export_utils.cpp:129
 msgid "Compressing USFM export"
 msgstr "Compression de l'exportation en USFM"
 
-#: ../src/export_utils.cpp:243 ../src/export_utils.cpp:544
+#: ../src/export_utils.cpp:244 ../src/export_utils.cpp:545
 msgid "Exporting"
 msgstr "Exportation"
 
-#: ../src/export_utils.cpp:311
+#: ../src/export_utils.cpp:312
 msgid "Converting to BibleWorks: "
 msgstr "Convertion en  BibleWorks : "
 
-#: ../src/export_utils.cpp:535
+#: ../src/export_utils.cpp:536
 msgid "Export: "
 msgstr "Exportation : "
 
-#: ../src/export_utils.cpp:649
+#: ../src/export_utils.cpp:650
 msgid "The SWORD compiler osis2mod was not found."
 msgstr "Le compilateur SWORD osis2mod n'a pas été trouvé."
 
-#: ../src/export_utils.cpp:753
+#: ../src/export_utils.cpp:755
 msgid "Compiling"
 msgstr "Compilation en cours"
 
-#: ../src/export_utils.cpp:799
+#: ../src/export_utils.cpp:802
 msgid "Single file"
 msgstr "Un seul fichier"
 
-#: ../src/export_utils.cpp:800
+#: ../src/export_utils.cpp:803
 msgid "Multiple files"
 msgstr "Plusieurs fichiers"
 
-#: ../src/export_utils.cpp:801
+#: ../src/export_utils.cpp:804
 msgid "Save method"
 msgstr "Méthode de sauvegarde"
 
-#: ../src/export_utils.cpp:801
+#: ../src/export_utils.cpp:804
 msgid ""
 "Multiple books have been selected.\n"
 "Should these be saved to a single file or to multiple files?"
@@ -4974,7 +4996,7 @@ msgstr ""
 "Plusieurs livres ont été sélectionnés.\n"
 "Doivent-ils être sauvés dans un seul fichier ou dans plusieurs ?"
 
-#: ../src/export_utils.cpp:824
+#: ../src/export_utils.cpp:827
 msgid ""
 "The export has completed,\n"
 "but the following markers could not be formatted properly:"
@@ -4982,11 +5004,11 @@ msgstr ""
 "L'exportation est terminée,\n"
 "Mais les balises suivantes ne peuvent pas être formatées proprement :"
 
-#: ../src/export_utils.cpp:879
+#: ../src/export_utils.cpp:882
 msgid "There was nothing to backup"
 msgstr "Il n'y avait rien à sauvegarder"
 
-#: ../src/export_utils.cpp:995
+#: ../src/export_utils.cpp:999
 msgid ""
 "There was an error producing the Go Bible.\n"
 "Please check the system log for more information."
@@ -5030,19 +5052,23 @@ msgstr " livre "
 msgid "Updating data in folder "
 msgstr "Mise à jour des données dans le dossier "
 
-#: ../src/gtkwrappers.cpp:86
+#: ../src/gtkwrappers.cpp:70
+msgid "Warning"
+msgstr ""
+
+#: ../src/gtkwrappers.cpp:87
 msgid "Select a folder"
 msgstr "Sélectionner un dossier"
 
-#: ../src/gtkwrappers.cpp:120 ../src/gtkwrappers.cpp:153
+#: ../src/gtkwrappers.cpp:121 ../src/gtkwrappers.cpp:154
 msgid "Select a file"
 msgstr "Sélectionnez un fichier"
 
-#: ../src/gtkwrappers.cpp:188
+#: ../src/gtkwrappers.cpp:189
 msgid "Save to file"
 msgstr "Enregistrer sous"
 
-#: ../src/gtkwrappers.cpp:229
+#: ../src/gtkwrappers.cpp:230
 msgid "Trying to open "
 msgstr "Tentative d'ouverture "
 
@@ -5787,15 +5813,15 @@ msgstr ""
 "logiciel libre\n"
 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\n"
 
-#: ../src/mainwindow.cpp:2261
+#: ../src/mainwindow.cpp:2263
 msgid "There was nothing to replace"
 msgstr "Il n'y avait rien à remplacer"
 
-#: ../src/mainwindow.cpp:2339
+#: ../src/mainwindow.cpp:2341
 msgid "New project name"
 msgstr "Nom du nouveau projet"
 
-#: ../src/mainwindow.cpp:2339
+#: ../src/mainwindow.cpp:2341
 msgid ""
 "Enter a name of a non-existent project\n"
 "where this project will be copied to."
@@ -5803,7 +5829,7 @@ msgstr ""
 "Entrez un nom de projet à créer\n"
 "où ce projet sera copié."
 
-#: ../src/mainwindow.cpp:2346
+#: ../src/mainwindow.cpp:2348
 msgid ""
 ": This project already exists.\n"
 "If you still intend to copy the project,\n"
@@ -5813,40 +5839,40 @@ msgstr ""
 "Si vous avez l'intention de le copier,\n"
 "supprimez-le d'abord."
 
-#: ../src/mainwindow.cpp:2353
+#: ../src/mainwindow.cpp:2355
 msgid "The project has been copied to a new project named\n"
 msgstr "Le projet a été copié vers un nouveau projet appelé\n"
 
-#: ../src/mainwindow.cpp:2490 ../src/mainwindow.cpp:2893
+#: ../src/mainwindow.cpp:2492 ../src/mainwindow.cpp:2895
 msgid "Greek and English"
 msgstr "Grec et anglais"
 
-#: ../src/mainwindow.cpp:2501 ../src/mainwindow.cpp:2898
+#: ../src/mainwindow.cpp:2503 ../src/mainwindow.cpp:2900
 msgid "Apparatus"
 msgstr "Appareil critique"
 
-#: ../src/mainwindow.cpp:2506 ../src/mainwindow.cpp:2908
+#: ../src/mainwindow.cpp:2508 ../src/mainwindow.cpp:2910
 #: ../src/usfmtools.cpp:765
 msgid "Cross References"
 msgstr "Références croisées"
 
-#: ../src/mainwindow.cpp:2843 ../templates/stylesheet.xml:3169
+#: ../src/mainwindow.cpp:2845 ../templates/stylesheet.xml:3169
 msgid "Concordance"
 msgstr "Concordance"
 
-#: ../src/mainwindow.cpp:2852 ../src/mainwindow.cpp:2853
+#: ../src/mainwindow.cpp:2854 ../src/mainwindow.cpp:2855
 msgid "Sorted by _Words"
 msgstr "Trié par _mots"
 
-#: ../src/mainwindow.cpp:2858 ../src/mainwindow.cpp:2859
+#: ../src/mainwindow.cpp:2860 ../src/mainwindow.cpp:2861
 msgid "Sorted by _Frequency"
 msgstr "Trié par _fréquence"
 
-#: ../src/mainwindow.cpp:2882
+#: ../src/mainwindow.cpp:2884
 msgid "Analysis"
 msgstr "Analyse"
 
-#: ../src/mainwindow.cpp:3085
+#: ../src/mainwindow.cpp:3087
 msgid ""
 "This note has references.\n"
 "Would you like to load these in the references list?"
@@ -5854,24 +5880,24 @@ msgstr ""
 "Cette note a des références.\n"
 "Souhaitez-vous les charger dans la liste de références ?"
 
-#: ../src/mainwindow.cpp:3135
+#: ../src/mainwindow.cpp:3137
 msgid "Sending to Toolbox: "
 msgstr "Envoie à la boîte à outils : "
 
-#: ../src/mainwindow.cpp:3248
+#: ../src/mainwindow.cpp:3250
 msgid ""
 "A note can be deleted by clicking on the [delete] link in the notes view"
 msgstr ""
 "Une note peut être supprimée en cliquant sur le lien [supprimer] dans la "
 "fenêtre des notes"
 
-#: ../src/mainwindow.cpp:3704
+#: ../src/mainwindow.cpp:3706
 msgid "To make this work, enable spelling checking in the project"
 msgstr ""
 "Pour faire fonctionner cela, activer la vérification orthographique dans le "
 "projet"
 
-#: ../src/mainwindow.cpp:3716
+#: ../src/mainwindow.cpp:3718
 msgid ""
 "There are no more spelling errors in this chapter\n"
 "Would you like to go to the next chapter or chapters?"
@@ -5879,7 +5905,7 @@ msgstr ""
 "Il n'y a plus de fautes d'orthographe dans ce chapitre\n"
 "Souhaitez-vous passer au(x) chapitre(s) suivant(s) ?"
 
-#: ../src/mainwindow.cpp:3721
+#: ../src/mainwindow.cpp:3723
 msgid ""
 "There are no more spelling errors in this chapter\n"
 "Would you like to go to the previous chapter or chapters?"
@@ -5887,94 +5913,94 @@ msgstr ""
 "Il n'y a plus de fautes d'orthographe dans ce chapitre\n"
 "Souhaitez-vous passer au(x) chapitre(s) précédent(s) ?"
 
-#: ../src/mainwindow.cpp:3767
+#: ../src/mainwindow.cpp:3769
 msgid "There is nothing to be checked"
 msgstr "Il n'y a rien à vérifier"
 
-#: ../src/mainwindow.cpp:3925
+#: ../src/mainwindow.cpp:3927
 msgid "Would you like to insert a new chapter?"
 msgstr "Souhaitez-vous insérer un nouveau chapitre ?"
 
-#: ../src/mainwindow.cpp:4058
+#: ../src/mainwindow.cpp:4060
 msgid "Experimental view does not support editing notes"
 msgstr "L'affichage expérimental ne supporte pas l'édition de notes"
 
-#: ../src/mainwindow.cpp:4269
+#: ../src/mainwindow.cpp:4271
 msgid "Soft hyphen"
 msgstr "Trait d'union conditionnel"
 
-#: ../src/mainwindow.cpp:4271
+#: ../src/mainwindow.cpp:4273
 msgid "No-break space"
 msgstr "Espace insécable"
 
-#: ../src/mainwindow.cpp:4273
+#: ../src/mainwindow.cpp:4275
 msgid "Left double quotation mark"
 msgstr "Guillemet apostrophe double ouvrant"
 
-#: ../src/mainwindow.cpp:4275
+#: ../src/mainwindow.cpp:4277
 msgid "Right double quotation mark"
 msgstr "Guillemet apostrophe double fermant"
 
-#: ../src/mainwindow.cpp:4277
+#: ../src/mainwindow.cpp:4279
 msgid "Left single quotation mark"
 msgstr "Guillemet apostrophe simple ouvrant"
 
-#: ../src/mainwindow.cpp:4279
+#: ../src/mainwindow.cpp:4281
 msgid "Right single quotation mark"
 msgstr "Guillemet apostrophe simple fermant"
 
-#: ../src/mainwindow.cpp:4281
+#: ../src/mainwindow.cpp:4283
 msgid "Left-pointing double angle quotation mark"
 msgstr "Guillemet typographique ouvrant"
 
-#: ../src/mainwindow.cpp:4283
+#: ../src/mainwindow.cpp:4285
 msgid "Right-pointing double angle quotation mark"
 msgstr "Guillemet typographique fermant"
 
-#: ../src/mainwindow.cpp:4284
+#: ../src/mainwindow.cpp:4286
 msgid "Insert character"
 msgstr "Insérer un caractère"
 
-#: ../src/mainwindow.cpp:4284
+#: ../src/mainwindow.cpp:4286
 msgid "Insert special character"
 msgstr "Insérer un caractère spécial"
 
-#: ../src/mainwindow.cpp:4974
+#: ../src/mainwindow.cpp:4976
 msgid "Delete resource"
 msgstr "Supprimer la ressource"
 
-#: ../src/mainwindow.cpp:4976
+#: ../src/mainwindow.cpp:4978
 msgid "Are you sure you want to delete resource "
 msgstr "Êtes-vous certain de vouloir supprimer la ressource "
 
-#: ../src/mainwindow.cpp:5539
+#: ../src/mainwindow.cpp:5541
 msgid "Experimental view does not talk to the Keyterms check window"
 msgstr ""
 "L'affichage expérimental ne communique pas avec la fenêtre de vérification "
 "des mots-clé"
 
-#: ../src/mainwindow.cpp:5621
+#: ../src/mainwindow.cpp:5623
 msgid "Chapter should now be in desired view"
 msgstr "Le chapitre devrait maintenant être dans l'aperçu souhaité"
 
-#: ../src/mainwindow.cpp:5809
+#: ../src/mainwindow.cpp:5811
 msgid "Project (through internal typesetter)"
 msgstr "Projet (par une composition interne)"
 
-#: ../src/mainwindow.cpp:5810
+#: ../src/mainwindow.cpp:5812
 msgid "Project (through ptx2pdf typesetter)"
 msgstr "Projet (par une composition ptx2pdf)"
 
-#: ../src/mainwindow.cpp:5811 ../src/print_parallel_bible.cpp:47
+#: ../src/mainwindow.cpp:5813 ../src/print_parallel_bible.cpp:47
 #: ../templates/gtkbuilder.parallelbibledialog.xml:7
 msgid "Parallel Bible"
 msgstr "Parallèle biblique"
 
-#: ../src/mainwindow.cpp:5814
+#: ../src/mainwindow.cpp:5816
 msgid "Select what to print"
 msgstr "Sélectionner quoi imprimer"
 
-#: ../src/mainwindow.cpp:5874
+#: ../src/mainwindow.cpp:5876
 msgid "There are no references to print"
 msgstr "Il n'y a pas de références à imprimer"
 
@@ -10238,118 +10264,3 @@ msgstr "Entrée d'introduction de liste de niveau 2"
 #: ../templates/stylesheet.xml:5623
 msgid "An introduction list entry, level 2"
 msgstr "Une entrée d'introduction de liste de niveau 2"
-
-#~ msgid "Bad xembed value: %s\n"
-#~ msgstr "Mauvaise valeur de xembed: %s\n"
-
-#~ msgid "Cross references for "
-#~ msgstr "Références croisées pour "
-
-#~ msgid ""
-#~ "There are no more spelling errors in this chapter\n"
-#~ "Would you like to go to the"
-#~ msgstr ""
-#~ "Il n'y a plus d'erreurs d'orthographe dans ce chapitre\n"
-#~ "Voulez-vous aller à la"
-
-#~ msgid "next"
-#~ msgstr "suivant"
-
-#~ msgid "previous"
-#~ msgstr "précédent"
-
-#~ msgid " chapter or chapters?"
-#~ msgstr " chapitre ou chapitres ?"
-
-#~ msgid "goto "
-#~ msgstr "aller à "
-
-#~ msgid "send"
-#~ msgstr "envoyer"
-
-#~ msgid "Concordance features are almost ready..."
-#~ msgstr "Les fonctionnalités de concordances seront bientôt disponible…"
-
-#~ msgid "ok"
-#~ msgstr "ok"
-
-#~ msgid "actions"
-#~ msgstr "actions"
-
-#~ msgid "dismiss cursor"
-#~ msgstr "libérer le curseur"
-
-#~ msgid "hide"
-#~ msgstr "masquer"
-
-#~ msgid "open"
-#~ msgstr "ouvrir"
-
-#~ msgid "A backup helps keep your data safe"
-#~ msgstr "Une sauvegarde vous permet de garder vos données en sécurité"
-
-#~ msgid "Would you like to compress it?"
-#~ msgstr "Voulez-vous le compresser ?"
-
-#~ msgid "This helps you importing data"
-#~ msgstr "Ceci va vous aider à importer des données"
-
-#~ msgid "Import about to be done"
-#~ msgstr "Importation prête à être lancée"
-
-#~ msgid ""
-#~ "After this window closes an opportunity will be offered to import "
-#~ "keyterms."
-#~ msgstr ""
-#~ "Après la fermeture de cette fenêtre il vous sera possible d'importer des "
-#~ "mots-clés."
-
-#~ msgid "importkeyterms"
-#~ msgstr "importationmotsclés"
-
-#~ msgid ""
-#~ "Text files that contain keyterms can be imported into the keyterms "
-#~ "database."
-#~ msgstr ""
-#~ "Le fichier texte contenant les mots-clés peut être importé dans la base "
-#~ "de données des mots-clés."
-
-#~ msgid "Which file would you like to import?"
-#~ msgstr "Quel fichier souhaitez-vous importer ?"
-
-#~ msgid "Ready for import"
-#~ msgstr "Prêt pour l'importation"
-
-#~ msgid "Importing..."
-#~ msgstr "Importation en cours…"
-
-#~ msgid "Import done."
-#~ msgstr "Importation terminée."
-
-#~ msgid "Diagnostics"
-#~ msgstr "Diagnostiques"
-
-#~ msgid "Tick the items to include in the diagnostics report"
-#~ msgstr "Cochez les éléments à inclure dans le rapport de diagnostic"
-
-#~ msgid ""
-#~ "\n"
-#~ "Project "
-#~ msgstr ""
-#~ "\n"
-#~ "Projet "
-
-#~ msgid "diagnostics"
-#~ msgstr "Diagnostiques"
-
-#~ msgid "."
-#~ msgstr "."
-
-#~ msgid "settings\", \"Settings"
-#~ msgstr "paramètres\", \"Paramètres"
-
-#~ msgid "website"
-#~ msgstr "site Web"
-
-#~ msgid "license"
-#~ msgstr "licence"
