@@ -33,7 +33,7 @@
         </child>
         <child>
           <object class="GtkButton" id="cancelbutton">
-            <property name="label" translatable="yes">gtk-cancel</property>
+            <property name="label" translatable="yes">Cancel</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="has_focus">True</property>
