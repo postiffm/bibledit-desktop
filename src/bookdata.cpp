@@ -35,7 +35,7 @@ book_record books_table[] =
 {
   //                            osis       paratxt bw      blue    onln      biblestudytools    id  type                onechapter
   {
-  "**EMPTY ID=0**",             "",        "",     "",     "",     "",       "",                 0, btUnknown,  false}, {
+  "",             "",        "",     "",     "",     "",       "",                 0, btUnknown,  false}, {
   "Genesis",                    "Gen",     "GEN",  "Gen",  "Gen",  "Ge",     "genesis",          1, btOldTestament,     false}, {
   "Exodus",                     "Exod",    "EXO",  "Exo",  "Exo",  "Ex",     "exodus",           2, btOldTestament,     false}, {
   "Leviticus",                  "Lev",     "LEV",  "Lev",  "Lev",  "Le",     "leviticus",        3, btOldTestament,     false}, {

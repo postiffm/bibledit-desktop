@@ -389,7 +389,7 @@ void books_init(void)
   // To fill books_table with correct names using gettext (see language.po translation file, such as fr.po)
   // The localname defaults to English; but if gettext rewrites it on the fly to say French, then it
   // is always French.
-  books_table[0].localname = _("**EMPTY ID=0**");   // no abbreviation for this
+  books_table[0].localname = "";   // no abbreviation for this
   books_table[1].localname = _("Genesis");		   books_table[1].localabbrev = _("Gen");
   books_table[2].localname = _("Exodus");		   books_table[2].localabbrev = _("Exo");
   books_table[3].localname = _("Leviticus");		   books_table[3].localabbrev = _("Lev");
