@@ -1,3 +1,4 @@
+SUBDIRS = hicolor
 appicondir = $(datadir)/pixmaps
 appicon_DATA = bibledit-desktop.xpm
 
