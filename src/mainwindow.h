@@ -360,13 +360,16 @@ protected:
   static void on_delete1_activate(GtkMenuItem * menuitem, gpointer user_data);
   void deleteproject();
   static void on_close1_activate(GtkMenuItem * menuitem, gpointer user_data);
-  static void on_quit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-  static void on_system_log1_activate(GtkMenuItem * menuitem, gpointer user_data);
+  static void on_quit1_activate(GSimpleAction *action,
+                                GVariant *parameter, gpointer user_data);
+  static void on_system_log1_activate(GSimpleAction *action,
+                                      GVariant *parameter, gpointer user_data);
   void viewlog();
   static void on_help_main_activate(GtkMenuItem * menuitem, gpointer user_data);
   void on_help_main();
   void on_jumpto_main(); // F2 accelerator focuses the Jump to: GtkEntry * box for quick kbd navigation
-  static void on_about1_activate(GtkMenuItem * menuitem, gpointer user_data);
+  static void on_about1_activate(GSimpleAction *action,
+                                 GVariant *parameter, gpointer user_data);
   void showabout();
   static void on_undo1_activate(GtkMenuItem * menuitem, gpointer user_data);
   void menu_accelerator_undo();
