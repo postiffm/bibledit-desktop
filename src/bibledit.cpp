@@ -261,6 +261,14 @@ static void startup_callback (GtkApplication *app, gpointer data)
       GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   gw_message("Loaded the GTK stylesheet");
 
+  // Initialize the app menu
+  GMenu *menu = g_menu_new ();
+  g_menu_append (menu, _("_System log"), "app.systemlog");
+  g_menu_append (menu, _("_About"), "app.about");
+  g_menu_append (menu, _("_Quit"), "app.quit");
+  gtk_application_set_app_menu (app, G_MENU_MODEL (menu));
+  g_object_unref (menu);
+
   // Start the gui.
   mainwindow = new MainWindow (accelerator_group, settings, urltransport, vcs);
   gw_message("Finished initialization...");
