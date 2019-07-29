@@ -256,10 +256,19 @@ navigation(0), httpd(0)
   gtk_accel_group_connect(accelerator_group, GDK_KEY_backslash, GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_view_usfm_code), gpointer(this), NULL));
   gtk_accel_group_connect(accelerator_group, GDK_KEY_T, GDK_CONTROL_MASK, GtkAccelFlags(0), g_cclosure_new_swap(G_CALLBACK(accelerator_activate_tile_windows), gpointer(this), NULL));
 
+  // Actions
+  GtkApplication* app = GTK_APPLICATION (g_application_get_default ());
+  GActionEntry actions[] = {
+      { "systemlog", on_system_log1_activate, NULL, NULL, NULL },
+      { "about", on_about1_activate, NULL, NULL, NULL },
+      { "quit", on_quit1_activate, NULL, NULL, NULL },
+  };
+  g_action_map_add_action_entries (G_ACTION_MAP (app),
+                                   actions, G_N_ELEMENTS (actions), this);
+
   // GUI build.
 
-  window_main = gtk_application_window_new (
-                GTK_APPLICATION (g_application_get_default ()));
+  window_main = gtk_application_window_new (app);
 
   // Size and position of window and screen layout.
   ScreenLayoutDimensions * dimensions = new ScreenLayoutDimensions (window_main);
@@ -1656,7 +1665,7 @@ navigation(0), httpd(0)
   if (close1)
     g_signal_connect((gpointer) close1, "activate", G_CALLBACK(on_close1_activate), gpointer(this));
   if (quit1)
-    g_signal_connect((gpointer) quit1, "activate", G_CALLBACK(on_quit1_activate), gpointer(this));
+    gtk_actionable_set_action_name (GTK_ACTIONABLE (quit1), "app.quit");
   if (menuitem_edit)
     g_signal_connect((gpointer) menuitem_edit, "activate", G_CALLBACK(on_edit1_activate), gpointer(this));
   if (cut1)
@@ -1838,9 +1847,9 @@ navigation(0), httpd(0)
   if (help_main)
     g_signal_connect((gpointer) help_main, "activate", G_CALLBACK(on_help_main_activate), gpointer(this));
   if (system_log1)
-    g_signal_connect((gpointer) system_log1, "activate", G_CALLBACK(on_system_log1_activate), gpointer(this));
+    gtk_actionable_set_action_name (GTK_ACTIONABLE (system_log1), "app.systemlog");
   if (about1)
-    g_signal_connect((gpointer) about1, "activate", G_CALLBACK(on_about1_activate), gpointer(this));
+    gtk_actionable_set_action_name (GTK_ACTIONABLE (about1), "app.about");
   g_signal_connect ((gpointer) scrolledwindow_layout, "size_allocate",  G_CALLBACK (on_scrolledwindow_layout_size_allocate), gpointer (this));
   navigation.build(toolbar, GTK_WINDOW(window_main));
   g_signal_connect((gpointer) navigation.new_reference_signal, "clicked", G_CALLBACK(on_navigation_new_reference_clicked), gpointer(this));
@@ -2086,12 +2095,14 @@ void MainWindow::on_close1_activate(GtkMenuItem * menuitem, gpointer user_data)
   ((MainWindow *) user_data)->accelerator_close_window();
 }
 
-void MainWindow::on_quit1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void MainWindow::on_quit1_activate(GSimpleAction *action,
+                                   GVariant *parameter, gpointer user_data)
 {
   ((MainWindow *) user_data)->initiate_shutdown();
 }
 
-void MainWindow::on_system_log1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void MainWindow::on_system_log1_activate(GSimpleAction *action,
+                                         GVariant *parameter, gpointer user_data)
 {
   ((MainWindow *) user_data)->viewlog();
 }
@@ -2126,7 +2137,8 @@ void MainWindow::on_jumpto_main()
 }
 
 
-void MainWindow::on_about1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void MainWindow::on_about1_activate(GSimpleAction *action,
+                                    GVariant *parameter, gpointer user_data)
 {
   ((MainWindow *) user_data)->showabout();
 }
