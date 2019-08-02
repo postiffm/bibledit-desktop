@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
   upgrade();
   gw_message("Finished upgrade");
   // Window icon fallback.
-  gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit-desktop.xpm").c_str(), NULL);
+  gtk_window_set_default_icon_name ("bibledit-desktop");
   gw_message("Set up window icon fallback");
 
   // Load the GTK CSS
