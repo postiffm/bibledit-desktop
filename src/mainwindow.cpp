@@ -2136,6 +2136,7 @@ void MainWindow::showabout()
                         "website", PACKAGE_BUGREPORT,
                         "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"),
 			            "translator-credits", _("translator-credits"),
+                        "logo-icon-name", "bibledit-desktop",
                         "license",
 			_("This program is free software; you can redistribute it and/or modify\n"
                         "it under the terms of the GNU General Public License as published by\n"
