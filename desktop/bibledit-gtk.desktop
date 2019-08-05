@@ -1,11 +1,10 @@
 [Desktop Entry]
-Name=Bibledit-Desktop
+Name=Bibledit-Gtk
 Comment=Bible Editor
-Icon=bibledit-desktop.xpm
-Exec=bibledit-desktop %F
+Icon=bibledit
+Exec=bibledit-gtk
 Type=Application
 Categories=Office;
 StartupNotify=true
 NoDisplay=false
 
-Name=bibledit-desktop.desktop
