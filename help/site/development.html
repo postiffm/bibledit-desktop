@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Development</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Bibledit-Desktop Help">
+      <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
+    </a> › <a class="trail" href="index.html#informations" title="Informations">Informations</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Development</span></h1></div>
+<div class="region">
+<div class="contents"></div>
+<div id="coderepo" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Code repository</span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">
+        The code is stored in a git repository. The repository is accessible from the <span class="link"><a href="https://github.com/postiffm/bibledit-desktop" title="https://github.com/postiffm/bibledit-desktop">github Project Page</a></span>. To view the code on the web, click on "Source Code" - and then "Browse Sources Repository" just below "Use Git". To use the repository in another way, click on "Source Code" - "Use Git". It will give some information there.
+      </p>
+<p class="p">
+        The code can be checked out from the repository. This code gives the latest versions of the Bibledit suite or programs. The code has not been thoroughly tested, but is supported.
+      </p>
+<p class="p">
+        To get the most recent code, do the following in a terminal.
+      </p>
+<div class="code"><pre class="contents ">git clone https://github.com/postiffm/bibledit-desktop.git</pre></div>
+<p class="p">
+        The above command clones the code repository to your local disk. It will create a directory called "bibledit-desktop". Go into that directory. Then do the normal sequences:</p>
+<div class="code"><pre class="contents ">./configure
+make
+sudo make install</pre></div>
+<p class="p">as is described in the <span class="link"><a href="https://github.com/postiffm/bibledit-desktop/wiki" title="https://github.com/postiffm/bibledit-desktop/wiki">installation documentation for Bibledit-Desktop</a></span>..
+      </p>
+<p class="p">
+        Note 1. If you are installing development versions often, to save bandwidth, it is possible to leave the directory "bibledit", created above, as it is. If that directory is left there, then next time there is no need to clone the whole repository. Just pulling the changes is enough:
+      </p>
+<div class="code"><pre class="contents ">cd bibledit
+$ git reset --hard
+$ git pull</pre></div>
+<div class="code"><pre class="contents ">Continue installation from here...</pre></div>
+<p class="p">
+        Note 2. For best results close Bibledit-Desktop while installing the new version.
+      </p>
+</div></div>
+</div></div>
+<div id="helpneeded" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Help needed
+      </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">
+        Help in developing Bibledit is welcome.
+      </p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">
+Do you like writing good documentation? Your help is welcome to maintain the helpfiles of Bibledit.
+      </p></li>
+<li class="list"><p class="p">
+You know how useful packages are? Making packages could be the thing you would like to help with.
+      </p></li>
+<li class="list"><p class="p">
+Are you good at testing? Your feedback is welcome and suggestions for new features too.
+      </p></li>
+</ul></div></div></div>
+</div></div>
+</div></div>
+<div id="bugsandfeaturerequests" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Bugs and feature requests
+      </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">
+        Github provides resources for developing Bibledit. The <span class="link"><a href="https://github.com/postiffm/bibledit-desktop/issues" title="https://github.com/postiffm/bibledit-desktop/issues">The Github Project Page</a></span> is the central point from where all these resources can be accessed.
+      </p>
+<p class="p">
+        To report a problem go to the <span class="link"><a href="https://github.com/postiffm/bibledit-desktop" title="https://github.com/postiffm/bibledit-desktop">The Github Project Page</a></span>, and click on "Issues". A list of open bugs will show, and you can see whether your bug has been reported already. If not, click "New issue" - "Submit", fill in the screen with detailed information on when the bug occurs, and the steps to be taken to reproduce it, and any other information that may be useful, and click the "Submit" button at the bottom of the screen. You need to open an account to do this, and then you'll be emailed whenever this bug is attended to.
+      </p>
+<p class="p">
+        Asking for a new feature works similar. Click on "Tasks". A list of tasks, that is, feature requests, will appear. If the feature you wish to have it not yet in, click "Tasks" - "Submit", and submit a new task.
+      </p>
+<p class="p">
+        When submitting bug reports it is sometimes useful to include the configuration and data of Bibledit-Desktop. This allows the programmer or tester to reproduce your bug, and so fix it. In a terminal type
+      </p>
+<div class="code"><pre class="contents ">tar -czf bibledit.tar.gz .bibledit</pre></div>
+<p class="p">
+        to create a file called bibledit.tar.gz. This file can be attached to the bug report.
+      </p>
+</div></div>
+</div></div>
+<div id="howitstarted" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">How it started
+      </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">
+        It started with an entry in the programmer's diary:
+      </p>
+<p class="p">
+        * Friday 30 May 2003. I made the decision to move from Windows to Linux. God will help here, and the future will show why this decision had to be taken. A lot of programming needs to be done to move the Bible translation programs to Linux.
+      </p>
+<p class="p">
+        I remember that at that time I had lost peace with God for a good while, was in great unrest of mind, and examined myself thoroughly to find out what it was, and then came to the above decision. It seemed to me a bit an unusual cause for this unrest, but nevertheless I could not find another one. After the decision was made and the actual move, I regained my peace.
+      </p>
+<p class="p">
+        In 2004 some programming work was done that aided Bible translation work, and as I foresaw a greater future use for this program, I called it Bibledit.
+      </p>
+<p class="p">
+        After that God gave sufficient energy to work on the project in the spare time. Others started to contribute too, and the project moved forward to where it is now.
+      </p>
+</div></div>
+</div></div>
+<div id="usingthedebugger" class="sect"><div class="inner">
+<div class="hgroup"><h2 class="title"><span class="title">Using the debugger
+      </span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">
+        When troubleshooting bibledit a core file may be requested.
+      </p>
+<p class="p">
+        A core file is a file created by the operating system when a program terminates unexpectedly, encounters a bug, or violates the operating system's protection mechanisms.
+      </p>
+<p class="p">
+        By default core files are not created on some Linux systems. Whether or not the operating system creates core files is controlled by the ulimit command. To see the current ulimit setting for core files, do the following:
+      </p>
+<div class="code"><pre class="contents ">ulimit -c 0</pre></div>
+<p class="p">
+        The ulimit command sets limits on the resource available to the bash shell. The -c parameter controls the size of core files. The value 0 indicates that core files are not created. To enable core file creation, increase the size limit of core files to a number greater than zero. For example:
+      </p>
+<div class="code"><pre class="contents ">ulimit -c 50000</pre></div>
+<p class="p">
+        allows core files and limits the file size to 50000 bytes.
+      </p>
+<p class="p">
+        If you need to enable core file creation temporarily to create a core file for a problem application, increase the ulimit at the command line and then run the application.
+      </p>
+<p class="p">
+        When bibledit causes a segmentation fault and leaves a core dump file, you can use gdb to look at the program state when it crashed. Use the core command to load a core file.The argument to the core command is the filename of the core dump file, which is usually "core.&lt;pid&gt;", making the full command core core.&lt;pid&gt;.
+      </p>
+<div class="code"><pre class="contents ">prompt &gt; bibledit
+Segmentation fault (core dumped)
+prompt &gt; gdb bibledit
+...
+(gdb) core core.&lt;pid&gt;...</pre></div>
+<p class="p">
+        If bibledit crashes repeatedly, an easier way is to start bibledit through the debugger, and then use the backtrace command to see what happened and when.
+      </p>
+<p class="p">
+        Open bibledit in the debugger:
+      </p>
+<div class="code"><pre class="contents ">gdb bibledit</pre></div>
+<p class="p">
+        Bibledit would not run in gdb normally and say that another copy is already running. To disable that check for another instance, and have it run in gdb, add the --debug argument to the commandline:
+      </p>
+<div class="code"><pre class="contents ">(gdb) set args --debug</pre></div>
+<p class="p">
+        Run it:
+      </p>
+<div class="code"><pre class="contents ">(gdb) run</pre></div>
+<p class="p">
+        If there is a problem, bibledit will freeze. Switch to the debugger. View the stack:
+      </p>
+<div class="code"><pre class="contents ">(gdb) backtrace</pre></div>
+<p class="p">
+        You can then contact the developer and inform him about what you see and when it happened.
+      </p>
+<p class="p">
+        Notes:
+      </p>
+<p class="p">
+        On Cygwin, gdb might get stopped and return you to the terminal. Enter "fg" to get the debugger back.
+      </p>
+</div></div>
+</div></div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html#informations" title="Informations">Informations</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

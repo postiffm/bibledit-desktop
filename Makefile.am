@@ -1,4 +1,4 @@
-SUBDIRS = man pix src scripts templates desktop windows tests shutdown usfm kjv xetex git php po bibles BiblesInternational
+SUBDIRS = man pix help src scripts templates desktop windows tests shutdown usfm kjv xetex git php po bibles BiblesInternational
 EXTRA_DIST = TODO FDL
 CLEANFILES = bibledit*.gz *~
 ACLOCAL_AMFLAGS = -I m4
