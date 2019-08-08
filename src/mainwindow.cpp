@@ -2114,6 +2114,7 @@ void MainWindow::on_help_main_activate(GtkMenuItem * menuitem, gpointer user_dat
 
 void MainWindow::on_help_main()
 {
+    //TODO change to open documentation corectly
   gtkw_show_uri (html_server_url ("site/index.html"), false);
 }
 
