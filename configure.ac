@@ -332,7 +332,8 @@ fi
 AC_CONFIG_FILES([Makefile 
 		  man/Makefile 
 		  pix/Makefile 
-		  doc/Makefile 
+		  help/Makefile
+          help/C/Makefile  
 		  src/Makefile 
 		  scripts/Makefile
 		  templates/Makefile

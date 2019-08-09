@@ -16,6 +16,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install gitk
   apt-get install build-essential
   apt-get install libgtk2.0-dev
+  apt-get install yelp yelp-tools #Dependencies for documentation compilation
   #apt-get install libgtk-3-dev
   apt-get install rcs
   apt-get install sqlite3
