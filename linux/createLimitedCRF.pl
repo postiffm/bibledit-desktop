@@ -94,6 +94,7 @@ my $startNewList = 1;
 open(my $crfAll,    ">", "crfAll.txt")    or die "Unable to open for output: $!";
 open(my $crfNTOnly, ">", "crfNTOnly.txt") or die "Unable to open for output: $!";
 open(my $crfNTPs,   ">", "crfNTPs.txt")   or die "Unable to open for output: $!";
+open(my $crfNTPsPro, ">", "crfNTPsPro.txt")   or die "Unable to open for output: $!";
 
 while (1) {
     # Read the encoded data and unpack it
@@ -111,8 +112,15 @@ while (1) {
     printRange(0, $crfAll, $bk, $ch, $vs, $vs2, $startNewList, 1, 66, 1, 66);
     printRange(1, $crfNTOnly, $bk, $ch, $vs, $vs2, $startNewList, 40, 66, 40, 66);
     printRange(2, $crfNTPs, $bk, $ch, $vs, $vs2, $startNewList, 40, 66, 19, 19);
+    printRange(3, $crfNTPsPro, $bk, $ch, $vs, $vs2, $startNewList, 40, 66, 19, 20);
+    
     if ($startNewList == 1) { $startNewList = 0; }
 }
+
+close($crfAll);
+close($crfNTOnly);
+close($crfNTPs);
+close($crfNTPsPro);
 
 # This array tells us as we walk through which CRFs we are currently skipping
 # because of "out of range" for the particular range set. So 0 is "all CRFs"
@@ -146,7 +154,7 @@ sub printRange {
 	
 	# 1. If this reference is the start of a list (a \xo, origin reference)
 	# then the rest of its list must be omitted.
-	$skipList[$listidx] = 1;
+	if ($startNewList) { $skipList[$listidx] = 1; }
 	if ($listidx == 0) { die "List Index is 0; should never happen for all CRFs."; }
 	
 	# 2. If on the other hand the reference is in the middle of a list
@@ -155,6 +163,7 @@ sub printRange {
     }
 }
 
+# Not using this now
 sub printAll {
     my ($fh,$bk,$ch,$vs,$vs2,$startNewList) = @_;
     if ($startNewList == 1) { print {$fh} "\n"; }
