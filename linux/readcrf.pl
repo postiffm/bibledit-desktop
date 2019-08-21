@@ -82,6 +82,7 @@ open(my $fh, '<:raw', $infile) or die "Unable to open for input: $!";
 $startNewList = 1;
 
 while (1) {
+    # Read the encoded data and unpack it
     my $bytes_read = read $fh, my $bytes, 4;
     if ($bytes_read != 4) { last; } # There should always be a multiple of 4 bytes
     my $enc = unpack("L<", $bytes);
@@ -90,6 +91,8 @@ while (1) {
     my $vs = ($enc >> 8) & 0xff;
     my $ch = ($enc >> 16) & 0xff;
     my $bk = ($enc >> 24) & 0xff;
+
+    # Decode and print the data
     print "$books{$bk} $ch:$vs";
     if ($vs2 == 0xff) { print "-"; }       # special case: 0xff is a "complex" range marker
     elsif ($vs2 != 0) { print "-$vs2 "; }  # otherwise, the second verse is end of a simple range
