@@ -149,6 +149,10 @@ sub printRange {
 	  print {$fh} "==> ";
       }
     }
+
+    # We may wish to use an output format like this for Paratext's sake
+    # MRK.4:22 [MAT.10:25 LUK.19:26]
+
     else {
 	# Book is out of range. 2 cases.
 	
@@ -174,7 +178,6 @@ sub printAll {
     if ($startNewList == 1) {
 	print {$fh} "==> ";
     }
-
 }
 
 #$enc = 0x18041700;
