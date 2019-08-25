@@ -30,7 +30,7 @@
 int global_debug_level;
 int debug_msg_no;
 
-bool check_bibledit_startup_okay (int argc, char *argv[])
+bool check_bibledit_startup_okay ()
 // Returns true if it is okay to start bibledit.
 {
   // Do not run as root (does not apply to Windows).

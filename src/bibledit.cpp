@@ -71,6 +71,12 @@ VCS *vcs;
 Concordance *concordance;
 ReferenceBibles *refbibles;
 CrossReferences *crossrefs;
+static MainWindow *mainwindow;
+
+// Forward declarations
+static void startup_callback (GtkApplication *app, gpointer data);
+static void shutdown_callback (GtkApplication *app, gpointer data);
+static void activate_callback (GtkApplication *app, gpointer data);
 
 int main(int argc, char *argv[])
 {
@@ -89,9 +95,27 @@ int main(int argc, char *argv[])
   // The type system is now initialised automatically.
   // g_type_init();
   // Initialize GTK
-  gtk_init(&argc, &argv);
+  // gtk_init is called internally by GtkApplication
+  // gtk_init(&argc, &argv);
+
+  GtkApplication *app;
+  app = gtk_application_new ("org.bibleditdesktop",
+                             G_APPLICATION_HANDLES_COMMAND_LINE);
+  g_signal_connect (app, "activate", G_CALLBACK (activate_callback), NULL);
+  g_signal_connect (app, "startup", G_CALLBACK (startup_callback), argv);
+  g_signal_connect (app, "shutdown", G_CALLBACK (shutdown_callback), NULL);
 
   options = new Options(argc, argv);
+
+  g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+  delete Directories; // must be last because other objects rely on it
+  return 0;
+}
+
+static void startup_callback (GtkApplication *app, gpointer data)
+{
+  char **argv = (char**) data;
 
   // Create a new directories 'factory' and initialize it with argv[0]
   Directories = new directories(argv[0]);
@@ -99,8 +123,8 @@ int main(int argc, char *argv[])
   // Check whether it is fine to start the program.
   // If not, quit the program normally. Must come 
   // after the Directories object is initialized.
-  if (!check_bibledit_startup_okay(argc, argv)) {
-    return 0;
+  if (!check_bibledit_startup_okay ()) {
+    exit (0);
   }
 
 #ifdef WIN32
@@ -147,7 +171,7 @@ int main(int argc, char *argv[])
 		dup2(stdout_copy, 1);
 		dup2(stderr_copy, 2);
 		perror("bibledit.cpp:main:dup(1) call failed");
-		return 1;
+		exit (1);
 	}
   }
   
@@ -230,7 +254,7 @@ int main(int argc, char *argv[])
       &error);
   if (error) {
     gw_error("Error loading the GTK stylesheet file: bibledit-desktop.css");
-    return 1;
+    exit (1);
   }
   gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
       GTK_STYLE_PROVIDER (css_provider),
@@ -238,9 +262,12 @@ int main(int argc, char *argv[])
   gw_message("Loaded the GTK stylesheet");
 
   // Start the gui.
-  MainWindow *mainwindow = new MainWindow(accelerator_group, settings, urltransport, vcs);
-  gw_message("Finished initialization...running gtk_main");
-  gtk_main();
+  mainwindow = new MainWindow (accelerator_group, settings, urltransport, vcs);
+  gw_message("Finished initialization...");
+}
+
+static void shutdown_callback (GtkApplication *app, gpointer data)
+{
   delete mainwindow;
 
   // Remove lockfile
@@ -267,12 +294,16 @@ int main(int argc, char *argv[])
   delete versifications;
   delete booklocalizations;
   delete settings;
-  delete Directories; // must be last, because above rely on it
   if (concordance) { delete concordance; }
   if (refbibles) { delete refbibles; }
-  
-  // Quit.
-  return 0;
+}
+
+static void activate_callback (GtkApplication *app, gpointer data)
+{
+	GtkWindow *window;
+
+	window = gtk_application_get_active_window (app);
+	gtk_window_present (window);
 }
 
 
