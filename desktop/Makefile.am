@@ -1,6 +1,6 @@
 applicationdir = $(datadir)/applications
 
-application_DATA = bibledit-desktop.desktop
+application_DATA = org.bibleditdesktop.desktop
 
 EXTRA_DIST = *
 CLEANFILES = *~

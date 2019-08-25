@@ -258,7 +258,8 @@ navigation(0), httpd(0)
 
   // GUI build.
 
-  window_main = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  window_main = gtk_application_window_new (
+                GTK_APPLICATION (g_application_get_default ()));
 
   // Size and position of window and screen layout.
   ScreenLayoutDimensions * dimensions = new ScreenLayoutDimensions (window_main);
@@ -6221,7 +6222,8 @@ void MainWindow::initiate_shutdown()
   shutting_down = true;
 
   // Shut down after a delay.
-  g_timeout_add(10, GSourceFunc(gtk_main_quit), NULL);
+  g_timeout_add (10, GSourceFunc (g_application_quit),
+                 g_application_get_default ());
 }
 
 
