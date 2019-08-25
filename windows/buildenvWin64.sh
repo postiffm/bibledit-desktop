@@ -72,7 +72,6 @@ pacman -S --noconfirm msys/libxml2-devel
 mkdir -v -p ~/$BUILD_DIR
 cd ~/$BUILD_DIR
 #git clone https://github.com/teusbenschop/bibledit.git
-#git clone https://github.com/postiffm/bibledit-gtk.git
 git clone https://github.com/postiffm/bibledit-desktop.git
 echo "Git cloned into the directory ~/$BUILD_DIR/bibledit-desktop"
 

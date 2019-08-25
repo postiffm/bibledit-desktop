@@ -9,7 +9,7 @@
 # Modified by Matt Postiff (postiffm@umich.edu)
 # Version 1.1 on March 28, 2016 for bibledit
 # Original: https://gist.github.com/Tomonobu3110/963cfc63d8a3b94b55cf
-# Usage example: linux/objdump-recursive.pl --uniq "/c/Program Files (x86)/Bibledit-4.9.3/editor/bin/bibledit-gtk.exe" | sort
+# Usage example: linux/objdump-recursive.pl --uniq "/c/Program Files (x86)/Bibledit-4.9.3/editor/bin/bibledit-desktop.exe" | sort
 #
 # This program performs recursive objdump checks for binaries and libraries
 # It recurses through entire objdump tree for every listed binary and library
