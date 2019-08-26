@@ -88,9 +88,8 @@ void SystemlogDialog::setup(void)
   Shortcuts shortcuts(0);
 
   dialog = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "dialog"));
-  
-  // Experimental - trying to make this window not modal, so it can float always to the side.
-  //gtk_window_set_modal(GTK_WINDOW(dialog), FALSE);
+  gtk_window_set_application (GTK_WINDOW (dialog),
+      GTK_APPLICATION (g_application_get_default ()));
   
   textview = GTK_WIDGET (gtk_builder_get_object (gtkbuilder, "textview"));
   gtk_widget_grab_focus(textview);
@@ -142,6 +141,15 @@ void SystemlogDialog::setup(void)
   // Keep loading the text repeatedly so as to show recent changes also.
   event_source_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 500, GSourceFunc(show_script_dialog_load), gpointer(this), NULL);
 
+  // Attach a signal that knows how to handle closing this dialog.
+  // The first one handles the ESC key
+  g_signal_connect ((gpointer) getDialog (), "key-press-event",
+			G_CALLBACK (on_system_log_key_press_activate), gpointer (this));
+  // This handles clicking the X of the window
+  g_signal_connect((gpointer)(getDialog()), "delete-event", G_CALLBACK (on_system_log_delete_event_activate), gpointer(this));
+  // This handles the "secondary" destroy signal that is emitted as a result of return FALSE from each of the above signal
+  // handlers.
+  g_signal_connect((gpointer)(getDialog()), "destroy",      G_CALLBACK (on_system_log_destroy_activate), gpointer(this));
 }
 
 void SystemlogDialog::close(void)
@@ -165,32 +173,20 @@ SystemlogDialog::~SystemlogDialog()
 int SystemlogDialog::run()
 {
 	//DEBUG("System log run")
-	// This run routine is not "non-modal" friendly, so we use another one
-	//return gtk_dialog_run(GTK_DIALOG(dialog)); 
 	if (!dialog) { setup(); }
 
-	// Attach a signal that knows how to handle closing this dialog.
-	// The first one handles the ESC key
-	g_signal_connect((gpointer)(getDialog()), "close",        G_CALLBACK (on_system_log_close_activate), gpointer(this));
-	// This handles clicking the X of the window
-	g_signal_connect((gpointer)(getDialog()), "delete-event", G_CALLBACK (on_system_log_delete_event_activate), gpointer(this));
-	// This handles the "secondary" destroy signal that is emitted as a result of return FALSE from each of the above signal
-	// handlers.
-	g_signal_connect((gpointer)(getDialog()), "destroy",      G_CALLBACK (on_system_log_destroy_activate), gpointer(this));
-    
-	gtk_widget_show_all(dialog);
+	gtk_window_present_with_time (GTK_WINDOW (dialog), GDK_CURRENT_TIME);
 	return 0;
 }
 
-gboolean SystemlogDialog::on_system_log_close_activate(GtkDialog *dlg, gpointer user_data)
+gboolean SystemlogDialog::on_system_log_key_press_activate(GtkWidget *dlg,
+		GdkEventKey *event, gpointer user_data)
 {
-  //DEBUG("System log saw close signal")
-  ((SystemlogDialog *) user_data)->on_system_log_close();
-     /* If you return FALSE in this "close" signal handler,
-     * GTK will emit the "destroy" signal. Returning TRUE means
-     * you don't want the window to be destroyed.
-     * This is useful for popping up 'are you sure you want to quit?'
-     * type dialogs. */
+  if (event->keyval == GDK_KEY_Escape) {
+    gtk_window_close (GTK_WINDOW (dlg));
+    return TRUE;
+  }
+
   return FALSE;
 }
 
@@ -200,7 +196,7 @@ void SystemlogDialog::on_system_log_close()
   // Do nothing, since we will catch the destroy signal next
 }
 
-gboolean SystemlogDialog::on_system_log_delete_event_activate(GtkDialog *dlg, gpointer user_data)
+gboolean SystemlogDialog::on_system_log_delete_event_activate(GtkWidget *dlg, gpointer user_data)
 {
    //DEBUG("System log saw delete-event signal")
    // Do nothing, since we will catch the destroy signal next
@@ -212,7 +208,7 @@ gboolean SystemlogDialog::on_system_log_delete_event_activate(GtkDialog *dlg, gp
 	return FALSE; 
 }
 
-void SystemlogDialog::on_system_log_destroy_activate(GtkDialog *dlg, gpointer user_data)
+void SystemlogDialog::on_system_log_destroy_activate(GtkWidget *dlg, gpointer user_data)
 {
 	//DEBUG("System log saw destroy signal")
 	((SystemlogDialog *) user_data)->on_system_log_destroy();
