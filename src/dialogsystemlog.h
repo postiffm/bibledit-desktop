@@ -46,7 +46,6 @@ public:
   static gboolean on_system_log_key_press_activate(GtkWidget *dlg, GdkEventKey *event, gpointer user_data);
   static gboolean on_system_log_delete_event_activate(GtkWidget *dlg, gpointer user_data);
   static void     on_system_log_destroy_activate(GtkWidget *dlg, gpointer user_data);
-  void on_system_log_close(void);
   void on_system_log_destroy(void);
   
 protected:

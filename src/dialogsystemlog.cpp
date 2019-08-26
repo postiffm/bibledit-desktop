@@ -190,12 +190,6 @@ gboolean SystemlogDialog::on_system_log_key_press_activate(GtkWidget *dlg,
   return FALSE;
 }
 
-void SystemlogDialog::on_system_log_close()
-{
-  //DEBUG("System log processing close signal")
-  // Do nothing, since we will catch the destroy signal next
-}
-
 gboolean SystemlogDialog::on_system_log_delete_event_activate(GtkWidget *dlg, gpointer user_data)
 {
    //DEBUG("System log saw delete-event signal")
