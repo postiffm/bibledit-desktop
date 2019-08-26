@@ -9,16 +9,16 @@
     <section id="introduction">
 	<title>Introduction</title>
 
-<p>Bibledit contains a number of tools to check the text. Most of these are accessible through menu Check.</p>
+<p>Bibledit-Desktop contains a number of tools to check the text. Most of these are accessible through menu <gui>Check</gui>.</p>
 
-<p>Any undesired checking results can be hidden for the future, so that they don't appear again if the same check is ran again. To hide such a result, right-click in the References Area, and choose "Hide from now on".</p>
+<p>Any undesired checking results can be hidden for the future, so that they don't appear again if the same check is ran again. To hide such a result, right-click in the <gui>References</gui> Area, and choose <gui>Hide from now on</gui>.</p>
     </section>
     <section id="character">
 	<title>Character inventory</title>
 
 <p>This check, accessible through the menu, <guiseq><gui>Check</gui><gui>Characters</gui><gui>Inventory</gui></guiseq>, gives a list of all characters in the project, and the count of each character.</p>
 
-<p>Due to newline handling on Linux the character counter will only include <file>U+000A</file> but not <file>U+000D</file>. After importing the file the U+000D completely disappears and so will not be counted.</p>
+<p>Due to newline handling on Linux the character counter will only include <file>U+000A</file> but not <file>U+000D</file>. After importing the file the <file>U+000D</file> completely disappears and so will not be counted.</p>
 
 <p>A character can occur anywhere in the output html file, depending on how sorting is done.</p>
 
@@ -29,11 +29,11 @@
     <section id="punctuation">
 	<title>Compare punctuation</title>
 
-<p>Paratext had a check called "Compare Punctuation". How do I compare punctuation in Bibledit?</p>
+<p>Paratext had a check called "Compare Punctuation". How do I compare punctuation in Bibledit-Desktop?</p>
 
-<p>Comparing punctuation in Bibledit is done through the Advanced Find functions.</p>
+<p>Comparing punctuation in Bibledit-Desktop is done through the Advanced Find functions.</p>
 
-<p>Open the first project, and search for e.g. a question mark. The search results will be loaded in the References Area.</p>
+<p>Open the first project, go in the menu, <guiseq><gui>Edit</gui><gui>Search</gui></guiseq> and tab <gui>Advanced</gui> and search for e.g. a question mark. The search results will be loaded in the <gui>References</gui> Area.</p>
 
 <p>Open the second project, and go to advanced search, and search for the question mark again. Remove the search results from the ones already in the References Area. The References Area will now contain the verses that do have the question mark in the first project, and not in the second.</p>
 
@@ -47,6 +47,8 @@
 <p>The check knows about 160 matching pairs of punctuation, and checks them all.</p>
 
 <p>Pairs that should not be checked can be ignored. No reports will be given on these characters.</p>
+<p>This checks, are accessible through the menu, <guiseq><gui>Check</gui><gui>Punctiation</gui><gui>Matching pairs</gui></guiseq>.
+</p>
     </section>
     <section id="unwanted">
 	<title>Check unwanted patterns</title>

@@ -6,7 +6,7 @@
   <desc>How to insert notes.</desc>
 </info>
 <title>4. Insert notes</title>
-<p> Bibledit supports a variety of notes that can be made during editing a Bible.</p>
+<p> Bibledit-Desktop supports a variety of notes that can be made during editing a Bible.</p>
 
 <steps>
 <item><p>Project notes: Notes on the translation project.</p></item>
@@ -33,21 +33,21 @@
       <p> When creating a new note or editing an existing one, the
         project notes window splits up into two so as to make space for
         a couple of controls. </p>
-      <p> Project notes can be deleted by clicking on the blue [delete]
+      <p> Project notes can be deleted by clicking on the blue <gui>[delete]</gui>
         link. </p>
       <p> Some keyboard shortcuts help while editing notes. An example
         will show how: The user edits the text of a project. To make a
         new note, he presses <keyseq><key>Ctrl</key><key>N</key></keyseq>. He types some text in the note. If
         he wishes to change to category of the note, he presses <keyseq><key>Ctrl</key><key>A</key></keyseq>,
-        then Enter to open the list of categories, then he makes a
-        selection with Up Arrow or Down Arrow and presses Enter to
+        then <key>Enter</key> to open the list of categories, then he makes a
+        selection with <key>Up Arrow</key> or <key>Down Arrow</key> and presses <key>Enter</key> to
         confirm the selection. If he wishes to add some references, he
         pressed <keyseq><key>Ctrl</key><key>R</key></keyseq> and types some references. <keyseq><key>Ctrl</key><key>O</key></keyseq> saves the note,
         and takes the user back to where he was editing the text. <keyseq><key>Ctrl</key><key>I</key></keyseq>
         puts the text in italics, <keyseq><key>Ctrl</key><key>B</key></keyseq> makes it bold, and <keyseq><key>Ctrl</key><key>U</key></keyseq>
         underlines it. </p>
       <p> When a project note is being edited, the creator of the note
-        can be retrieved through menu <guiseq><gui>View</gui><gui>More</gui></guiseq> information on current
+        can be retrieved through menu <guiseq><gui>View</gui><gui>Project notes</gui></guiseq> information on current
         note. Other information about this note is visible there as
         well, like the date it was created, and when it was edited. </p>
       <p> Each note falls into a category. The various categories and
@@ -58,10 +58,10 @@
  	<section id="findingnotes">
 <title>Finding project notes </title>
       
-      <p> Menu <guiseq><gui>Edit</gui><gui>Find</gui></guiseq> in Project notes (<keyseq><key>Ctrl</key><key>E</key></keyseq>, N) allows to do
+      <p> Menu <guiseq><gui>Edit</gui><gui>Find in Project notes</gui></guiseq> (<keyseq><key>Ctrl</key><key>E</key></keyseq> or <key>N</key>) allows to do
         Simple searches in the Project notes. </p>
       <p> This tool searches exacty (except case sensitive) for the
-        sequence of characters entered into the "Search for" box,
+        sequence of characters entered into the <gui>Search for</gui> box,
         punctuation marks and spaces included. Case sensitive can be
         switched on or off. </p>
 	</section>
@@ -76,10 +76,10 @@
         window. </p>
         <steps>
         <item>
-      <p>Open a note to edit it. In the menu choose <keyseq><key>Edit</key><key>Get
-        references from project note</key></keyseq>. </p></item>
+      <p>Open a note to edit it. In the menu choose <guiseq><gui>Edit</gui><gui>Get
+        references from project note</gui></guiseq>. </p></item>
         <item>
-      <p>Click on the blue word [references] of a note. </p></item>
+      <p>Click on the blue word <gui>[references]</gui> of a note. </p></item>
       </steps>
       <p> As a result the references will be loaded in the references
         window. Once there they can be activated and the text belonging
@@ -97,7 +97,7 @@
         checks, and so on. </p>
       <p> It would be a lot of work to copy and paste these notes into
         the project notes one verse at a time. </p>
-      <p> The tool "Transfer text to project", under the Tools menu,
+      <p> The tool <gui>Transfer text to project</gui>, under the <gui>Tools</gui> menu,
         helps you with this. </p>
       <p> It transfers all text that is in the currently opened project
         into the project notes. </p>
@@ -116,7 +116,7 @@
         notes </title>
 
       <p> The <link xref="projectnotes">settings
-          for which notes to show and how</link> are in the View menu. </p>
+          for which notes to show and how</link> are in the <gui>View</gui> menu. </p>
  	</section>    
 	<section id="exportingnotes">
 <title>Exporting note</title>
@@ -162,12 +162,10 @@ xref="remote">Remote
 </section>  
 <section id="biblenotes">
 <title>Bible notes </title>   
-	<section id="introbiblenotes">
-<title>Introduction</title>
 
      <p> A Bible note is a note that goes in the Biblical text. It can be a
-      footnote, or a cross reference, or an endnote.</p>
-	</section>  
+      footnote, or a crossreference, or an endnote.</p>
+
   
 	<section id="insertingbiblenotes">
 <title>Inserting</title>
@@ -187,7 +185,7 @@ xref="insertmenu">window</link>
       <p> Removing a note works as you would remove any text. </p>
       <p> Notes can be cut and paste in a text (which is only useful in
         the same verse, if a verse-reference (\fr or \xo) is included. </p>
-      <p> While editing a note, pressing Page Up takes you back to the
+      <p> While editing a note, pressing <key>Page Up</key> takes you back to the
         main body of text, to the place where the footnote starts. </p>
 	</section> 
 	<section id="printingbiblenotes">

@@ -64,7 +64,7 @@
 <section id="howchange"><title>How can I change something to the styles?
     </title>
       <p>
-        To start editing a style, check the Edit mode.
+        To start editing a style, check the <gui>Edit</gui> mode.
       </p>
       <p>
         When there is a small tick at the left of the Edit mode, like so: √ Edit mode, then the mode is checked, else it is unchecked.
@@ -76,7 +76,7 @@
 <section id="howcreate"><title>How can I create a new style?
     </title>
       <p>
-        Do it through function New.
+        Do it through function <gui>New</gui>.
       </p>
       <p>
         If the style is known in Bibledit's templates, it will fill all the values in for you. The values can be edited.
@@ -88,7 +88,7 @@
 <section id="howedit"><title>How can I edit a style?
     </title>
       <p>
-        Through function Properties.
+        Through function <gui>Properties</gui>.
       </p>
       <p>
         This will bring up a window where you can edit this style.
@@ -99,35 +99,38 @@
       <p>
         All styles should speak for themselves.
       </p>
-      <p>
-        Notes:
-      </p>
-      <p>
-        * Where there is the choice to span two columns, this refers to the two-column layout normally used in a Bible. A major header normally spans these two columns, but a minor header does not.
-      </p>
-      <p>
-        * A paragraph can be a main title, a subtitle, a section heading, a normal paragraph, and so on. At present these settings are used during exporting a project to SWORD.
-      </p>
+     
+<note style="help">
+     
+      <list>
+      <item><p>
+Where there is the choice to span two columns, this refers to the two-column layout normally used in a Bible. A major header normally spans these two columns, but a minor header does not.
+      </p></item>
+      <item><p>
+A paragraph can be a main title, a subtitle, a section heading, a normal paragraph, and so on. At present these settings are used during exporting a project to SWORD.
+      </p></item>
+      </list>
+      </note>
 </section>
 <section id="howdelete"><title>How to delete a style?
     </title>
       <p>
-        In the Styles Area, select the style or the styles you wish to delete, and choose the Delete function.
+        In the Styles Area, select the style or the styles you wish to delete, and choose the <gui>Delete</gui> function.
       </p>
 </section>
 <section id="whatrecently"><title>What are the recently used styles?
     </title>
       <p>
-        When a style has been inserted in the text, it will then also be displayed in the category "Recently Used", and will be accessible from there too. A maximum of 30 styles will be displayed. The styles are sorted on usage count, and the most used styles appear at the top of the list.
+        When a style has been inserted in the text, it will then also be displayed in the category <gui>Recently Used</gui>, and will be accessible from there too. A maximum of 30 styles will be displayed. The styles are sorted on usage count, and the most used styles appear at the top of the list.
       </p>
       <p>
-        When a style has been inserted in the text, it will then also be displayed in the category "Recently Used", and will be accessible from there too.
+        When a style has been inserted in the text, it will then also be displayed in the category <gui>Recently Used</gui>, and will be accessible from there too.
       </p>
       <p>
         These recently used styles are attached to the stylesheet. This implies that if another stylesheet is opened, the recently used styles may change.
       </p>
       <p>
-        These styles can be deleted. Just select the style or styles you wish to delete, and choose the Delete function. Or select the category itself, and delete it.
+        These styles can be deleted. Just select the style or styles you wish to delete, and choose the <gui>Delete</gui> function. Or select the category itself, and delete it.
       </p>
       <p>
         If any style is deleted, and this style happens to be in the recently used category, it will be removed from there also.
@@ -138,7 +141,7 @@
       <section id="switchstylesheet"><title>How do I switch to another stylesheet?
     </title>
       <p>
-        A stylesheet can be opened through function Stylesheet - Switch.
+        A stylesheet can be opened through function <guiseq><gui>Stylesheet</gui><gui>Switch</gui></guiseq>.
       </p>
       <p>
         The new stylesheet will be attached to the project that is open.
@@ -147,28 +150,28 @@
       <section id="createstylesheet"><title>How do I create a new stylesheet?
     </title>
       <p>
-        Choose function Stylesheet - New. <link xref="stylesheet">More information is available</link>.
+        Choose function <guiseq><gui>Stylesheet</gui><gui>New</gui></guiseq>. <link xref="stylesheet">More information is available</link>.
       </p>
       </section>
       <section id="renamestylesheet"><title>How do I rename a stylesheet?
     </title>
       <p>
-        Choose function Stylesheet - Rename.
+        Choose function <guiseq><gui>Stylesheet</gui><gui>Rename</gui></guiseq>.
       </p>
       </section>
       <section id="deletestylesheet"><title>How can I delete a stylesheet?
     </title>
       <p>
-        Choose function Stylesheet - Delete. A list of available stylesheets comes up. The one currently opened is not shown so that it cannot be deleted by accident. Select a stylesheet and press Ok. The selected stylesheet will be deleted.
+        Choose function <guiseq><gui>Stylesheet</gui><gui>Delete</gui></guiseq>. A list of available stylesheets comes up. The one currently opened is not shown so that it cannot be deleted by accident. Select a stylesheet and press Ok. The selected stylesheet will be deleted.
       </p>
       </section>
       <section id="eximportstylesheet"><title>How to export or import a stylesheet?
     </title>
       <p>
-        That's done through function Stylesheet - Export or Stylesheet - Import.
+        That's done through function <guiseq><gui>Stylesheet</gui><gui>Export</gui></guiseq> or <guiseq><gui>Stylesheet</gui><gui>Import</gui></guiseq>.
       </p>
       <p>
-        A stylesheet is exported as a database. This database contains all the individual styles that are in that stylesheet. It asks for a filename, adds the right extension to it, and then saves the file, for example, as "Standard.sql5".
+        A stylesheet is exported as a database. This database contains all the individual styles that are in that stylesheet. It asks for a filename, adds the right extension to it, and then saves the file, for example, as <file>Standard.sql5</file>.
       </p>
       <p>
         This same database can be imported in Bibledit.
@@ -211,16 +214,16 @@
         <item><p>Or right-click in the Stylesheet window and choose one of the functions from the Styles pop-up menu.
       </p></item>
 
-        <item><p>Or press Shift+F10 to open the Styles pop-up menu, and choose one of the functions.
+        <item><p>Or press <keyseq><key>Shift</key><key>F10</key></keyseq> to open the Styles pop-up menu, and choose one of the functions.
   </p>    </item></list>
       <p>
-        Double-click a style to insert it in the text, or when the Edit mode is on, to edit this style.
+        Double-click a style to insert it in the text, or when the <gui>Edit</gui> mode is on, to edit this style.
       </p>
       <p>
         If the focus is on a style you can press Enter to insert that style.
       </p>
       <p>
-        You can press Insert to create a new style, and Delete to remove a style, provided the Edit mode is on.
+        You can press <gui>Insert</gui> to create a new style, and <gui>Delete</gui> to remove a style, provided the <gui>Edit</gui> mode is on.
       </p>
 </section>
 <section id="workingwithstylesheet"><title>Working with stylesheets
