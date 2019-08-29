@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Bibledit-Desktop
 Comment=Bible Editor
-Icon=bibledit-desktop.xpm
+Icon=bibledit-desktop
 Exec=bibledit-desktop
 Type=Application
 Categories=Office;
