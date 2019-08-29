@@ -4,6 +4,7 @@
 # and after the run.
 
 # 1. Store the old version of the files. Maybe do this just once...
+#rm -rf ~/KJVdata
 #mkdir ~/KJVdata
 #cp -r ~/.bibledit/projects/KJV/data/* ~/KJVdata
 
