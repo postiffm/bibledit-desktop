@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Script to run Bibledit-Desktop, but prepare to compare files before
+# and after the run.
+
+# 1. Store the old version of the files. Maybe do this just once...
+#mkdir ~/KJVdata
+#cp -r ~/.bibledit/projects/KJV/data/* ~/KJVdata
+
+# 2. Run Bibledit-Desktop. The user will load some USFM and store it.
+../bin/bibledit-desktop --debug
+
+# 3. We will compare the project files now to what they were before.
+diff -r ~/KJVdata/ ~/.bibledit/projects/KJV/data
+
