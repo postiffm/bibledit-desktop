@@ -330,11 +330,7 @@ AC_CONFIG_FILES([Makefile
 		  man/Makefile 
 		  pix/Makefile 
 		  help/Makefile
-		  help/C/Makefile  
-		  pix/hicolor/Makefile
-		  pix/hicolor/16x16/Makefile
-		  pix/hicolor/48x48/Makefile
-		  pix/hicolor/96x96/Makefile
+          help/C/Makefile  
 		  src/Makefile 
 		  scripts/Makefile
 		  templates/Makefile
