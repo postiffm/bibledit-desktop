@@ -5,9 +5,6 @@ nobase_dist_icons_DATA = \
 	48x48/apps/bibledit-desktop.png \
 	96x96/apps/bibledit-desktop.png
 
-appicondir = $(datadir)/pixmaps
-appicon_DATA = bibledit-desktop.xpm
-
 dist_pkgdata_DATA = *.xpm *.jpeg *.ico *.svg *.gif *.png
 CLEANFILES = *~
 
