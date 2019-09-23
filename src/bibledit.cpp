@@ -58,7 +58,6 @@
 //#endif
 //#include "debug.h"
 
-Options *options;
 directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;
