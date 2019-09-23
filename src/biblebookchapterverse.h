@@ -54,7 +54,6 @@
 #include "usfmtools.h"
 #include "usfm-inline-markers.h"
 #include "bookdata.h"
-#include "options.h"
 #include "htmlwriter2.h"
 #include "utilities.h"
 
