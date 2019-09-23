@@ -7,7 +7,6 @@ bibledit_desktop_SOURCES = \
   concordance.cpp \
   crossrefs.cpp \
   referencebibles.cpp \
-  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \
