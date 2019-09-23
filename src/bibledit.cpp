@@ -49,10 +49,10 @@
 #include <glib/gi18n.h>
 #include <locale.h>
 #include <errno.h>
-#include "options.h"
 #include "concordance.h"
 #include "referencebibles.h"
 #include "crossrefs.h"
+#include "debug.h"
 //#ifdef WIN32
 //#include <Windows.h>
 //#endif
@@ -77,6 +77,10 @@ static MainWindow *mainwindow;
 static void startup_callback (GtkApplication *app, gpointer data);
 static void shutdown_callback (GtkApplication *app, gpointer data);
 static void activate_callback (GtkApplication *app, gpointer data);
+static gint command_line_options_callback (GApplication *application,
+		GVariantDict *options, gpointer user_data);
+static gboolean debug_callback (const gchar *option_name, const gchar *value,
+		gpointer data, GError **error);
 
 int main(int argc, char *argv[])
 {
@@ -100,12 +104,26 @@ int main(int argc, char *argv[])
 
   GtkApplication *app;
   app = gtk_application_new ("org.bibleditdesktop",
-                             G_APPLICATION_HANDLES_COMMAND_LINE);
+                             G_APPLICATION_FLAGS_NONE);
   g_signal_connect (app, "activate", G_CALLBACK (activate_callback), NULL);
   g_signal_connect (app, "startup", G_CALLBACK (startup_callback), argv);
   g_signal_connect (app, "shutdown", G_CALLBACK (shutdown_callback), NULL);
+  g_signal_connect (app, "handle-local-options",
+                    G_CALLBACK (command_line_options_callback), NULL);
 
-  options = new Options(argc, argv);
+  const GOptionEntry options[] = {
+		{ "version", 0, 0, G_OPTION_ARG_NONE, NULL,
+				_("Show version number"), NULL },
+		{"debug", 'd', G_OPTION_FLAG_OPTIONAL_ARG,
+				G_OPTION_ARG_CALLBACK, (gpointer) debug_callback,
+				_("Debug mode"),
+				// TRANSLATORS: This is used to construct the option
+				// description "--debug=[N]" in the help text, when
+				// a user runs "bibledit-desktop --help"
+				_("[N]") },
+		{ NULL }
+  };
+  g_application_add_main_option_entries (G_APPLICATION (app), options);
 
   g_application_run (G_APPLICATION (app), argc, argv);
   g_object_unref (app);
@@ -188,7 +206,6 @@ static void startup_callback (GtkApplication *app, gpointer data)
   gw_message("Wrote PID to lock file");
   
   // Call after the stdout/stderr redirects above
-  options->print();
   Directories->print();
   // Print what we know about the language setup
   gw_message("BIBLEDIT_LOCALEDIR " + ustring(BIBLEDIT_LOCALEDIR));
@@ -317,6 +334,62 @@ static void activate_callback (GtkApplication *app, gpointer data)
 
 	window = gtk_application_get_active_window (app);
 	gtk_window_present (window);
+}
+
+static gint command_line_options_callback (GApplication *application,
+		GVariantDict *options, gpointer user_data)
+{
+	if (g_variant_dict_contains (options, "version")) {
+		g_print ("Bibledit-Desktop " VERSION "\n");
+		return 0;	// No error but exit
+	}
+
+	return -1;	// Negative result means "continue"
+}
+
+static gboolean debug_callback (const gchar *option_name, const gchar *value,
+		gpointer data, GError **error)
+{
+	if (!strcmp (option_name, "--debug") || !strcmp (option_name, "-d"))
+	{
+		glong debug_level;
+
+		if (!value)
+			debug_level = 1;
+		else {
+			gchar *end;
+			errno = 0;
+			debug_level = strtol (value, &end, 0);
+
+			if (*value == '\0' || *end != '\0') {
+				g_set_error (error,
+							 G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
+							 _("Cannot parse integer value “%s” for %s"),
+							 value, option_name);
+				return FALSE;
+			}
+
+			if (errno == ERANGE) {
+				g_set_error (error,
+							 G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
+							 _("Integer value “%s” for %s out of range"),
+							 value, option_name);
+				return FALSE;
+			}
+		}
+
+		if (debug_level > 0) {
+			global_debug_level = 1;
+			debug_msg_no = 1;
+			DEBUG ("Debugging is turned on")
+		}
+		return TRUE;	// Success
+	}
+
+	g_set_error (error,
+				 G_OPTION_ERROR, G_OPTION_ERROR_UNKNOWN_OPTION,
+				 _("Unknown option %s"), option_name);
+	return FALSE;
 }
 
 
