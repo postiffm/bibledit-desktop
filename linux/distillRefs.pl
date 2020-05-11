@@ -29,7 +29,9 @@ while ($ln = <>) {
     $ln =~ s/\)//g;
     $ln =~ s/\n$//g;
     $ln =~ s/\r$//g;
-    @verses = split('[,;0123456789] ', $ln);
+    # Strip multiple spaces in a row
+    $ln =~ s/\s{1,}/ /g;
+    @verses = split('[\*,;0123456789] ', $ln);
     foreach $verse (@verses) {
 	#print "  ==>", $verse;
 	# The verses are in the format Tekikaga 20:13 (Rito NT)
