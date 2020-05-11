@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Tools Menu</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">Tools Menu</span></h1></div>
+    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Tools Menu</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="notesmassupdate" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Bible notes mass update</span></h2></div>
-<div class="region"><div class="contents">
+<div class="contents pagewide"></div>
+<section id="notesmassupdate"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Bible notes mass update</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Opinions vary on whether origin references in footnotes and crossreferences are useful. Some say that they are useful because they indicate the verse to which the note belongs. Others say that these references are just clutter and that the information is clearer without them.
       </p>
@@ -50,16 +54,15 @@
         Sometimes Bible notes don't have any markers in them at all, they are just plain text. To add the default markers to the note, choose option "Add missing text labels".
       </p>
 </div></div>
-</div></div>
-<div id="generatewordlist" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Generate Word lists
+</div></section><section id="generatewordlist"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Generate Word lists
       </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introwordlist" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Introduction
+<div class="contents pagewide"></div>
+<section id="introwordlist"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Introduction
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The dialog to generate the word lists is available through the menu, Tools, Generate word lists.
       </p>
@@ -70,11 +73,10 @@
         It goes through all the data in the project, collects the entries which have been marked, and then inserts the lists at a location defined by the user. Thus it can generate a glossary or topical index.
       </p>
 </div></div>
-</div></div>
-<div id="wordlistsettings" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Settings
+</div></section><section id="wordlistsettings"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Settings
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         There are three possible lists: a general word list, a Hebrew word lists, and a Greek word list.
       </p>
@@ -89,18 +91,16 @@
 <li class="list"><p class="p">Add the asterisk only to the first time this particular entry occurs in the section, see below.</p></li>
 </ul></div></div></div>
 </div></div>
-</div></div>
-<div id="operationgeneration" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Operation
+</div></section><section id="operationgeneration"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Operation
       </span></h3></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         Generating word lists is simple assuming that the right markers are already in the data: Just set the options, click button OK, and wait till it is through.
       </p></div></div>
-</div></div>
-<div id="entries" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Entries
+</div></section><section id="entries"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Entries
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The word list generator uses the entries that are in the data to collect the words to insert in the list.
       </p>
@@ -111,11 +111,10 @@
         When the word list generator runs, it will remove any asterisks (*) that were appended to the word. When the option "Add an asterisk to each word entry" has been selected, it will then add an asterisk after the word. If the option "the first time it occurs in a section" has been selected also, it will only add the asterisk where this particular entry occurs for the first time in the section. In this case, if for example the word "talent" occurs several times in a section, it will be given as "talent*" the first time, with the asterisk, and as "talent" the other times, without an asterisk. The section headings define the size of a section.
       </p>
 </div></div>
-</div></div>
-<div id="lists" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Lists
+</div></section><section id="lists"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Lists
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The lists of words can be inserted once or more than once in the data. The general word list will be inserted between the markers \zopenwordlist and \zclosewordlist. These markers ought to be on a separate line. If this couple of markers occurs in several places, the word lists will be inserted in several places too. If it occurs once, only one list will be generated, and if it does not occur at all, no list will be generated.
       </p>
@@ -125,21 +124,20 @@
 <p class="p">
         List of usfm markers that indicate the position of a word list:
       </p>
-<div class="code"><pre class="contents ">\zopenwordlist
+<div class="code"><pre class="contents"><code>\zopenwordlist
 \zclosewordlist
 \zopengreekwordlist
 \zclosegreekwordlist
 \zopenhebrewwordlist
-\zclosehebrewwordlist</pre></div>
+\zclosehebrewwordlist</code></pre></div>
 <p class="p">
         The markers that open and close a word list will need to be manually typed in the text at the right location. They are not part of the stylesheet.
       </p>
 </div></div>
-</div></div>
-<div id="example" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Example
+</div></section><section id="example"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Example
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Consider the following situation:
       </p>
@@ -148,32 +146,31 @@
       </p>
 <p class="p">
         At some place of the data, the list should be inserted, but it already contains some entries:</p>
-<div class="code"><pre class="contents ">\zopenwordlist
+<div class="code"><pre class="contents"><code>\zopenwordlist
 \p Hallelujah: Praise the Lord
 \p Rabi: Teacher
 \p Mamon
-\zclosewordlist</pre></div>
+\zclosewordlist</code></pre></div>
 <p class="p">       After running the word list generator, it will look so:
 </p>
-<div class="code"><pre class="contents ">\zopenwordlist
+<div class="code"><pre class="contents"><code>\zopenwordlist
 \p Hallelujah: Praise the Lord
 \rem Mamon
 \p Pentecost
 \p Rabi: Teacher
-\zclosewordlist</pre></div>
+\zclosewordlist</code></pre></div>
 <p class="p">Note the following: (1) the existing entries have been preserved, (2) a new one has been added, (3) one has been commented out, and (4) the entries have been sorted alphabetically.
       </p>
 <p class="p">
         Note also that any text before the first colon (:) is considered to be the actual entry. If there is no colon, then the whole text will be considered the entry.
       </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="transfert" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Transfer Project Notes to text
+</div></section><section id="transfert"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Transfer Project Notes to text
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The tool can be accessed through menu <span class="guiseq"><span class="gui">Tools</span> ▸ <span class="gui">Transfer project notes to text</span></span>.
       </p>
@@ -187,17 +184,14 @@
         This tool can be useful in cases that somebody wishes to have some way of printing a subset of project notes along with the text, so that checking questions could be printed on the same page as the verses they refer to. To do this, the notes can be imported in some temporal project, and then a "Parallel Bible" could be created that includes that temporal project that now contains the notes.
       </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#menu" title="Menu">Menu</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

@@ -5,21 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>06. Searching</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">06. Searching</span></h1></div>
+    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">06. Searching</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introsearching" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Introduction
+<div class="contents pagewide"></div>
+<section id="introsearching"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction
     </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Through menu <span class="gui">Edit</span> the <span class="gui">Find</span> menu can be opened. The same can be done through the keyboard shortcut <span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>F</kbd></span></span>.
       </p>
@@ -27,11 +31,10 @@
         A list of hits will show in the references window.
       </p>
 </div></div>
-</div></div>
-<div id="basicfind" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Basic Find
+</div></section><section id="basicfind"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Basic Find
     </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Menu <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Find</span></span> (<span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>F</kbd></span></span>) searches exacty (except case sensitive) for the sequence of characters entered into the Search for box, punctuation marks and spaces included. Case sensitive can be switched on or off. Searching can be limited to the current book.
       </p>
@@ -42,11 +45,10 @@
         Note that for the text to actually display, you have to hit one of the search results.
       </p>
 </div></div>
-</div></div>
-<div id="advancedfind" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Advanced Find
+</div></section><section id="advancedfind"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Advanced Find
     </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Menu <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Find</span></span> (<span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>F</kbd></span></span>) allows more complex searches than the Basic Find:
       </p>
@@ -77,11 +79,10 @@
         Searches can be done in certain areas of the text. When searching in the raw USFM text, then one searches in the text as it is stored, e.g. one can search for markers too, like \add. When searching in all the text except the USFM codes, one searches in the text as it will appear on the paper when printed. This means that searching for markers is not possible, as these will be hidden on the paper. When searching in certain categories, one can limit searches to, let's say, only the introductions, or only the verse text, or only headings and identifiers, and so forth.
       </p>
 </div></div>
-</div></div>
-<div id="loadingresults" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Loading results
+</div></section><section id="loadingresults"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Loading results
     </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Once an advanced or BibleTime search has been done, one can decide how they interact with what is already in the references window.
       </p>
@@ -99,11 +100,10 @@
         In the case that in a Special Find the option: 'Share them with the ones already in the references window' is chosen, and this special find with this option is repeated several times, several groups of characters can be highlighted in the text editor (as a result from the different searches) when a reference is activated in the references window.
       </p>
 </div></div>
-</div></div>
-<div id="findandreplace" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Find and Replace
+</div></section><section id="findandreplace"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Find and Replace
     </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Menu <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Find and Replace</span></span> (<span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>R</kbd></span></span>) searches for and replaces text. It goes like this:
       </p>
@@ -117,24 +117,20 @@
         Once you are satisfied that the change is going to be the one that you want, then you can press button <span class="gui">Yes</span>. Press <span class="gui">No</span> if you don't want to change this verse. Or press <span class="gui">Cancel</span> to stop changing. If you press button All, it would change this verse and all following relevant verses. Be careful with this option. It could change instances that you may not have wanted to change.
       </p>
 </div></div>
-</div></div>
-<div id="findingprojectnotes" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Finding Project Notes
+</div></section><section id="findingprojectnotes"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Finding Project Notes
     </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         See <span class="link"><a href="notes.html#projectnotes" title="Project notes">Project Notes</a></span> for more information.
 </p></div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#tools" title="Advanced tools">Advanced tools</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

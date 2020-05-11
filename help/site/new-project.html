@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>1. Start with a new project</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">1. Start with a new project</span></h1></div>
+    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">1. Start with a new project</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="creatingproj" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Creating a new project</span></h2></div>
-<div class="region"><div class="contents">
+<div class="contents pagewide"></div>
+<section id="creatingproj"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Creating a new project</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         To create a new project, choose Menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">New</span></span>. The <span class="link"><a href="project.html#projectproperties" title="Project Properties">Project Properties</a></span> dialog opens.
       </p>
@@ -26,10 +30,9 @@
         Type the name of the project, optionally make settings and add some books, and click <span class="gui">OK</span>.
       </p>
 </div></div>
-</div></div>
-<div id="addingbooks" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Adding books to the project</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="addingbooks"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Adding books to the project</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Adding books to the project can be done in two ways:
       </p>
@@ -40,40 +43,34 @@
       </p></li>
 </ol></div></div></div>
 </div></div>
-</div></div>
-<div id="deletingbooks" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Deleting books from the project</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="deletingbooks"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Deleting books from the project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         In menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">Properties</span></span>, books can be removed.
       </p></div></div>
-</div></div>
-<div id="openingproj" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Opening a project</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="openingproj"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Opening a project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         In the editor, just press <span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>O</kbd></span></span>, or do it through menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">Open</span></span>, and you'll be presented with a list of projects that can be opened. Click the project that you wish to open, or otherwise type the first few characters of the name of that project, and then press <span class="key"><kbd>Enter</kbd></span>.
       </p></div></div>
-</div></div>
-<div id="closiongproj" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Closing a project</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="closiongproj"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Closing a project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         A project can be closed with Ctrl+W, or via the menu, <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">Close</span></span>.
       </p></div></div>
-</div></div>
-<div id="copyingproj" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Copying a project</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="copyingproj"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Copying a project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         A project can be copied in its entirety to a new name. See menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">Copy to</span></span>. This new name will then be an exactly copy of it and can from now on be dealt with as all other projects.
       </p></div></div>
-</div></div>
-<div id="deletingproj" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Deleting a project</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="deletingproj"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Deleting a project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         Through menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Project</span> ▸ <span class="gui">Delete</span></span> a project can be deleted. The project that is currently open is not shown in the list of projects that can be deleted. Non-editable projects are not shown either.
       </p></div></div>
-</div></div>
-<div id="howtoprint" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to print a project?</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="howtoprint"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to print a project?</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Printing a project goes via menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Print</span></span>, then to select "Project".
       </p>
@@ -87,10 +84,9 @@
         See also <span class="link"><a href="printing.html" title="09. Printing">Printing.</a></span>
       </p>
 </div></div>
-</div></div>
-<div id="howtocompare" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to compare a project?</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="howtocompare"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to compare a project?</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         A whole project can be compared to another one. Any differences are highlighted.
       </p>
@@ -101,10 +97,9 @@
         If only the changes are printed, then the references, that have a change, will be loaded in the Reference Area for easy review.
       </p>
 </div></div>
-</div></div>
-<div id="howtoprintparallel" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to print parallel versions?</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="howtoprintparallel"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to print parallel versions?</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         See the File menu, then menu Print, then Parallel Bible.
       </p>
@@ -136,10 +131,9 @@
         At the end press button Ok to get the Bible in .pdf format.
       </p>
 </div></div>
-</div></div>
-<div id="modifychap" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to modify the chapters in a book of the project?</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="modifychap"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to modify the chapters in a book of the project?</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Add a new chapter to a book by inserting the "c" USFM marker, or by choosing <span class="guiseq"><span class="gui">Insert</span> ▸ <span class="gui">Chapter</span></span>.
       </p>
@@ -150,29 +144,24 @@
         To change the number of a chapter, choose <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Chapter number</span></span>. In the dialog that comes up, choose a new chapter number from the list or enter it manually, and then press OK.
       </p>
 </div></div>
-</div></div>
-<div id="makebackups" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to make backups of a project?</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="makebackups"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to make backups of a project?</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         See <span class="link"><a href="backup.html" title="File Menu">Backup</a></span>.
       </p></div></div>
-</div></div>
-<div id="viewchanges" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to view the changes made in a project?</span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="viewchanges"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to view the changes made in a project?</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         See <span class="link"><a href="project.html#changesproject" title="Changes">Changes</a></span>.
       </p></div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#first-steps" title="First Steps">First Steps</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

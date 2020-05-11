@@ -5,17 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>03. Keyterms</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">03. Keyterms</span></h1></div>
+    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">03. Keyterms</span></h1></div>
 <div class="region">
-<div class="contents">
+<div class="contents pagewide">
 <p class="p">
 To start checking terms in Bibledit, in the Checking menu choose <span class="gui">Keyterms</span>.
 </p>
@@ -61,25 +65,28 @@ In the renderings you can set whether a rendering is supposed to be a whole word
 <p class="p">
 To remove a rendering from the list, click once on the word to be removed, then press Enter, remove the word, and press Enter again.
   </p>
-<div class="note" title="Note"><div class="inner"><div class="region"><div class="contents"><div class="steps"><div class="inner"><div class="region"><ol class="steps">
+<div class="note" title="Note">
+<svg width="24" height="24" version="1.1">
+ <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+ <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><div class="steps"><div class="inner"><div class="region"><ol class="steps">
 <li class="steps"><p class="p">The keywords are divided into collections. If you select a particular collection, then the keyterms in the other collections are not displayed.</p></li>
 <li class="steps"><p class="p">The renderings are stored with the project.</p></li>
 <li class="steps"><p class="p">If the user clicks a verse, the editor will also display that verse.</p></li>
 <li class="steps"><p class="p">It is possible to have the keyterms in the active verse show up while you are translating. The renderings, if any have been entered, will show up too. This will help the translator, so that he can choose the same rendering if the same keyterms occurs in that verse. To show the keyterms, choose menu <span class="guiseq"><span class="gui">View</span> ▸ <span class="gui">Keyterms</span></span> in verse.</p></li>
 <li class="steps"><p class="p">New keyterms can be imported, existing keyterms can be exported, and collections of them can be deleted.</p></li>
 <li class="steps"><p class="p">Some references have the keyterms only implied by their context. That means that the key terms does not occur in the verse literally, but only by implications. To mark such verses correct, select a reasonable part of the verse and add it to the renderings. Then, the verse will be marked correct. Or just leave it as marked incorrect.</p></li>
-</ol></div></div></div></div></div></div></div>
+</ol></div></div></div></div></div></div>
 </div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#tools" title="Advanced tools">Advanced tools</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

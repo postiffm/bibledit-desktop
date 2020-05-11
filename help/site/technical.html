@@ -6,51 +6,51 @@
 <title>Technical Specifications
       </title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#informations" title="Informations">Informations</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">Technical Specifications
+    </a> › <a class="trail" href="index.html#informations" title="Informations">Informations</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Technical Specifications
       </span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introtech" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Introduction
+<div class="contents pagewide"></div>
+<section id="introtech"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         This page describes the internals of Bibledit. That is, it gives technical specifications and information about how Bibledit works internally.
       </p></div></div>
-</div></div>
-<div id="tempdir" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Temporary directory
+</div></section><section id="tempdir"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Temporary directory
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         The directory where Bibledit stores all temporary working data is in directory <span class="code">/tmp/bibledit
 </span>
 </p></div></div>
-</div></div>
-<div id="stylesheetsstore" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Stylesheets storage
+</div></section><section id="stylesheetsstore"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Stylesheets storage
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         The stylesheets, as templates, are xml files, stored in <span class="link"><a href="data.html" title="11. Manage Data">&lt;data directory&gt;</a></span>/stylesheets. Same for imported and exported stylesheets, except that they are zipped.
       </p></div></div>
-</div></div>
-<div id="datastore" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Data storage
+</div></section><section id="datastore"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Data storage
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         Data, that means, the USFM files, are internally stored as flat files, one file per chapter. This gives faster access to the data. The files are stored in <span class="link"><a href="data.html" title="11. Manage Data">&lt;data directory&gt;</a></span>/projects/&lt;project name&gt;, along with other files related to this project.
       </p></div></div>
-</div></div>
-<div id="outpostwindows" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Bibledit Windows Outpost
+</div></section><section id="outpostwindows"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Bibledit Windows Outpost
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The Outpost allows Bibledit to interact with Windows related stuff.
       </p>
@@ -66,51 +66,51 @@
 <p class="p">
         For diagnostics or control you can connect to it. In a terminal type:
       </p>
-<div class="code"><pre class="contents ">telnet localhost 51515</pre></div>
+<div class="code"><pre class="contents"><code>telnet localhost 51515</code></pre></div>
 <p class="p">
         The following commands are recognized.
       </p>
-<div class="code"><pre class="contents ">BibleWorksReferenceGet</pre></div>
+<div class="code"><pre class="contents"><code>BibleWorksReferenceGet</code></pre></div>
 <p class="p">
         This returns the reference that BibleWorks now displays.
       </p>
-<div class="code"><pre class="contents ">BibleWorksReferenceSet Mat 1:1</pre></div>
+<div class="code"><pre class="contents"><code>BibleWorksReferenceSet Mat 1:1</code></pre></div>
 <p class="p">
         This causes BibleWorks to scroll to Matthew 1:1.
       </p>
-<div class="code"><pre class="contents ">SantaFeFocusReferenceGet</pre></div>
+<div class="code"><pre class="contents"><code>SantaFeFocusReferenceGet</code></pre></div>
 <p class="p">
         This returns the reference that is displayed by programs that work with the SantaFeFocus system, such as Paratext.
       </p>
-<div class="code"><pre class="contents ">SantaFeFocusReferenceSet MAT 1:1</pre></div>
+<div class="code"><pre class="contents"><code>SantaFeFocusReferenceSet MAT 1:1</code></pre></div>
 <p class="p">
         This lets programs, that work with the SantaFeFocus system, display Matthew 1:1.
       </p>
-<div class="code"><pre class="contents ">SantaFeFocusWordSet Saviour</pre></div>
+<div class="code"><pre class="contents"><code>SantaFeFocusWordSet Saviour</code></pre></div>
 <p class="p">
         This lets programs like Toolbox, that work with the SantaFeFocus system, jump to the word "Saviour".
       </p>
-<div class="code"><pre class="contents ">Version</pre></div>
+<div class="code"><pre class="contents"><code>Version</code></pre></div>
 <p class="p">
         This gives the version number.
       </p>
-<div class="code"><pre class="contents ">Hide</pre></div>
+<div class="code"><pre class="contents"><code>Hide</code></pre></div>
 <p class="p">
         This hides Bibledit Windows Outpost.
       </p>
-<div class="code"><pre class="contents ">Show</pre></div>
+<div class="code"><pre class="contents"><code>Show</code></pre></div>
 <p class="p">
         This shows Bibledit Windows Outpost.
       </p>
-<div class="code"><pre class="contents ">Quit</pre></div>
+<div class="code"><pre class="contents"><code>Quit</code></pre></div>
 <p class="p">
         This disconnects from Bibledit Windows Outpost.
       </p>
-<div class="code"><pre class="contents ">Exit</pre></div>
+<div class="code"><pre class="contents"><code>Exit</code></pre></div>
 <p class="p">
         This exist Bibledit Windows Outpost.
       </p>
-<div class="code"><pre class="contents ">Open http://domain.org</pre></div>
+<div class="code"><pre class="contents"><code>Open http://domain.org</code></pre></div>
 <p class="p">
         This opens a html or pdf file. Works on Windows only.
       </p>
@@ -120,71 +120,69 @@
 <p class="p">
         Outpost version 1.7 and later have support for the Online Bible. See the examples below of what can be done with it.
       </p>
-<div class="code"><pre class="contents ">OLB Connect</pre></div>
+<div class="code"><pre class="contents"><code>OLB Connect</code></pre></div>
 <p class="p">
         Connects to the Online Bible.
       </p>
-<div class="code"><pre class="contents ">OLB GetVersionList</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetVersionList</code></pre></div>
 <p class="p">
         This gets the list of abbreviations of Bibles that the Online Bible provides, e.g. AV.
       </p>
-<div class="code"><pre class="contents ">OLB GetVersionTitleList</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetVersionTitleList</code></pre></div>
 <p class="p">
         This is like "GetVersionList", but it provides the full titles, e.g. AV - 1769 Authorized Version.
       </p>
-<div class="code"><pre class="contents ">OLB GetBookNamesForVersion</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetBookNamesForVersion</code></pre></div>
 <p class="p">
         This gets the list of names of the books that is in a certain version. The version is to be provided, e.g.: OLB GetBookNamesForVersion AV.
       </p>
-<div class="code"><pre class="contents ">OLB GetBookAbbreviationsForVersion</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetBookAbbreviationsForVersion</code></pre></div>
 <p class="p">
         This is like GetBookNamesForVersion, but it provides the abbreviations.
       </p>
-<div class="code"><pre class="contents ">OLB GetChapterCountForBook</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetChapterCountForBook</code></pre></div>
 <p class="p">
         This gets the number of chapters in a book. The version has to be provided, and the book abbreviation, e.g.: OLB GetChapterCountForBook AV Ge.
       </p>
-<div class="code"><pre class="contents ">OLB GetVerseCountForChapter</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetVerseCountForChapter</code></pre></div>
 <p class="p">
         This gets the number of verses in a chapter. The version has to be provided, then the book abbreviation, then the chapter number, e.g. "OLB GetVerseCountForChapter AV Ge 1".
       </p>
-<div class="code"><pre class="contents ">OLB GetVerseText</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetVerseText</code></pre></div>
 <p class="p">
         This gets the text of a verse, e.g.: OLB GetVerseText AV "Ge 1:1". Notice the use of quotes.
       </p>
-<div class="code"><pre class="contents ">OLB GetSearchList</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetSearchList</code></pre></div>
 <p class="p">
         This searches a version in for some text. Sample:
       </p>
-<div class="code"><pre class="contents ">OLB GetSearchList AV "Noah"</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetSearchList AV "Noah"</code></pre></div>
 <p class="p">
         You can add a "T" at the end to make it a phrase search, and a "F" to make it a word search. A space should be before the T or the F.
       </p>
-<div class="code"><pre class="contents ">OLB ShowPassage</pre></div>
+<div class="code"><pre class="contents"><code>OLB ShowPassage</code></pre></div>
 <p class="p">
         Scrolls the Online Bible to the passage, e.g.: OLB ShowPassage AV "Ge 2:4". Quotes are needed.
       </p>
-<div class="code"><pre class="contents ">OLB GetPassage</pre></div>
+<div class="code"><pre class="contents"><code>OLB GetPassage</code></pre></div>
 <p class="p">
         This receives the focused passage from the Online Bible.
       </p>
-<div class="code"><pre class="contents ">OLB Disconnect</pre></div>
+<div class="code"><pre class="contents"><code>OLB Disconnect</code></pre></div>
 <p class="p">
         Disconnects from the Online Bible.
       </p>
 </div></div>
-</div></div>
-<div id="floating" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Floating windows
+</div></section><section id="floating"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Floating windows
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         All the windows of Bibledit are floating and can be resized. If a new window is opened, then Bibledit will look for the largest available open space, and place the window there. It will also size the window so that it fills that open space. If there is no sufficient space available to place a window in, then Bibledit will look for the largest window, make it half the size, and place the new window in the open space so created.
       </p></div></div>
-</div></div>
-<div id="commandline" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Commandline parameters
+</div></section><section id="commandline"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Commandline parameters
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         --debug. For debugging in gdb.
       </p>
@@ -195,17 +193,14 @@
         -r|-w &lt;project&gt; &lt;book&gt; chapter|0 fileName. For reading from or writing to Bibledit USFM data. See source file readwrite.cpp for more information.
       </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#informations" title="Informations">Informations</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

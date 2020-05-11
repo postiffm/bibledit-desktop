@@ -5,21 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>File MenuKeyterms</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » <a class="trail" href="file.html" title="File Menu">File Menu</a> › <a class="trail" href="file.html#keyterms" title="Keyterms">Keyterms</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title"><span class="guiseq"><span class="gui">File Menu</span> ▸ <span class="gui">Keyterms</span></span></span></h1></div>
+    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » <a class="trail" href="file.html" title="File Menu">File Menu</a> › <a class="trail" href="file.html#keyterms" title="Keyterms">Keyterms</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title"><span class="guiseq"><span class="gui">File Menu</span> ▸ <span class="gui">Keyterms</span></span></span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="deletekey" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Deleting keyterms
+<div class="contents pagewide"></div>
+<section id="deletekey"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Deleting keyterms
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Keyterms can be deleted from Bibledit's database. This can be done through menu <span class="guiseq"><span class="gui">File</span> ▸ <span class="gui">Keyterms</span> ▸ <span class="gui">Delete</span></span>.
       </p>
@@ -30,17 +34,14 @@
         When all collections have been deleted, then Bibledit reverts to using the standard set of keyterms that came with the program.
       </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="file.html#keyterms" title="Keyterms">Keyterms</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

@@ -5,85 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>2. Editing text</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">2. Editing text</span></h1></div>
+    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">2. Editing text</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="project" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Project</span></h2></div>
-<div class="region"><div class="contents"><p class="p"> Before any editing can be done, create a new <span class="link"><a href="project.html" title="File MenuProject">project</a></span> and add books to it. See also
+<div class="contents pagewide"></div>
+<section id="project"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Project</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p"> Before any editing can be done, create a new <span class="link"><a href="project.html" title="File MenuProject">project</a></span> and add books to it. See also
         the  Project
           Properties dialog (./project/project-properties.html). Or of there is an existing project,
         open it. </p></div></div>
-</div></div>
-<div id="save" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Save</span></h2></div>
-<div class="region"><div class="contents"><p class="p"> There is no need to save the text, because Bibledit takes care
+</div></section><section id="save"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Save</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p"> There is no need to save the text, because Bibledit takes care
         of that. </p></div></div>
-</div></div>
-<div id="text" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Text</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="text"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Text</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">Standard Format Markers are markers that are put in the text
         to indicate the book, where a chapter starts, the verse, titles
         and so on. </p>
 <p class="p"> A marker always starts with a backslash (\) at the beginning
         of a line of text in the editor. The most commonly used Standard Format markers are:</p>
-<div class="code"><pre class="contents ">\id Identifies the book
+<div class="code"><pre class="contents"><code>\id Identifies the book
 \mt major title (if only one level is used. If more than one used:)
 \mt1 major title, level 1
 \mt2 major title, level 2 (equal to secondary title \st, but \st is no longer in use)
 \c chapter
 \s section heading
 \p paragraph
-\v verse</pre></div>
+\v verse</code></pre></div>
 <p class="p">Here follows a part of the book of John:</p>
-<div class="code"><pre class="contents ">\id JHN
+<div class="code"><pre class="contents"><code>\id JHN
 \mt2 The Gospel according to
 \mt1 John
 \c 1
 \s The Word became flesh
-\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.</pre></div>
+\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.</code></pre></div>
 <p class="p">Explanation of markers used:</p>
-<div class="code"><pre class="contents ">\id JHN</pre></div>
+<div class="code"><pre class="contents"><code>\id JHN</code></pre></div>
 <p class="p"> Identifies the book as John </p>
-<div class="code"><pre class="contents ">\mt2 The Gospel according to</pre></div>
+<div class="code"><pre class="contents"><code>\mt2 The Gospel according to</code></pre></div>
 <p class="p"> A major title, level 2, when printed it will have a font just
         a bit smaller than \mt. </p>
-<div class="code"><pre class="contents ">\mt1 John</pre></div>
+<div class="code"><pre class="contents"><code>\mt1 John</code></pre></div>
 <p class="p"> A major title, level 1, when printed it will have a big font
         suitable for such a title. </p>
-<div class="code"><pre class="contents ">\c 1</pre></div>
+<div class="code"><pre class="contents"><code>\c 1</code></pre></div>
 <p class="p">Indicates that chapter one starts here.</p>
-<div class="code"><pre class="contents ">\s The Word became flesh</pre></div>
+<div class="code"><pre class="contents"><code>\s The Word became flesh</code></pre></div>
 <p class="p">This is a section heading, and will be printed in the text as
         a heading, usually in bold.</p>
-<div class="code"><pre class="contents ">\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.</pre></div>
+<div class="code"><pre class="contents"><code>\v 1 In the beginning was the Word, and the Word was with God, and the Word was God.</code></pre></div>
 <p class="p">This is the text of verse one. </p>
 <p class="p"> More information on <span class="link"><a href="usfm.html" title="USFM">USFM</a></span>
         is available. </p>
 </div></div>
-</div></div>
-<div id="data2" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Data</span></h2></div>
-<div class="region"><div class="contents"><p class="p"> All project data is stored in the <span class="link"><a href="data.html" title="11. Manage Data">data directory.</a></span> </p></div></div>
-</div></div>
-<div id="undo" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Undo and Redo</span></h2></div>
-<div class="region"><div class="contents"><p class="p"> As long as you stay in the same chapter, you can undo and redo
+</div></section><section id="data2"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Data</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p"> All project data is stored in the <span class="link"><a href="data.html" title="11. Manage Data">data directory.</a></span> </p></div></div>
+</div></section><section id="undo"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Undo and Redo</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p"> As long as you stay in the same chapter, you can undo and redo
         any changes made. See menu Edit, or use the <span class="link"><a href="keyboard.html" title="7. Keyboard shortcuts">shortcuts</a></span>.
       </p></div></div>
-</div></div>
-<div id="insertingbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Inserting Bible notes</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="insertingbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Inserting Bible notes</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> All Bible notes can be inserted by choosing the appropriate
         style. </p>
 <p class="p"> A <span class="link"><a href="insertmenu.html" title="Insert Menu">new
@@ -105,10 +104,9 @@
         template only on pressing the "Ok" button. </p>
 <p class="p"> The same things apply to endnotes and crossreferences. </p>
 </div></div>
-</div></div>
-<div id="changingbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Changing Bible notes</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="changingbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Changing Bible notes</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> A Bible note can be a footnote, an endnote, or a
         crossreference. This type can be changed. To do that, place the
         cursor somewhere in the note to be changed. Choose menu <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Bible note</span></span>, and set the new type, and then press OK. </p>
@@ -116,10 +114,9 @@
         can for example change from automatic to manual numbering, and
         vice versa. </p>
 </div></div>
-</div></div>
-<div id="pictures" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Pictures</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="pictures"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Pictures</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Bibledit has good support for the \fig marker. Pictures are
         inserted manually, following the USFM standard. </p>
 <p class="p"> At printing time, Bibledit looks for the picture file in
@@ -133,10 +130,9 @@
         The "span" property is not yet supported at this time. All other
         properties are. </p>
 </div></div>
-</div></div>
-<div id="view" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">View</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="view"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">View</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> The text is displayed in formatted form. This means that the
         raw USFM code is hidden, and instead the code is formatted and
         is displayed in that form. </p>
@@ -155,17 +151,14 @@
         flexibility to fine-tune the view. Some styles will always be
         unformatted. </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#first-steps" title="First Steps">First Steps</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

@@ -5,21 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>02. Collaboration</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">02. Collaboration</span></h1></div>
+    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">02. Collaboration</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introduction" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Introduction</span></h2></div>
+<div class="contents pagewide"></div>
+<section id="introduction"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction</span></h2></div>
 <div class="region">
-<div class="contents">
+<div class="contents pagewide">
 <p class="p"> 
 With Bibledit several users can work on one Bible at the same time.
 </p>
@@ -42,9 +46,9 @@ Under the hood, Bibledit uses Git for collaboration. Git is a content manager. T
 There is a variety of repositories that can be used. Each of them has it own use, advantages and disadvantages. First of all there is the repository that resides on a file system. A USB flash drive can be used in this case. This flash drive can be physically moved from one user to the other, and so on, updating each user, and getting updated by each user. Secondly there is the repository that resides on the network. For internal networks a simple open network repository can be used. Whosoever knows where the repository resides can write to it. For public networks such as the internet a secure network repository would be recommended. This type of repository is locked down. Only those who have the keys to such a repository, or a username and password, can write to it. 
 </p>
 </div>
-<div id="introsetup" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Setup</span></h3></div>
-<div class="region"><div class="contents">
+<section id="introsetup"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Setup</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The central part to collaboration is the repository. The system administrator will have <span class="link"><a href="#repsetup" title="1. Repository setup">set the repository up</a></span>, will have <span class="link"><a href="#repoinitilization" title="2. Repository initialization">initialized it</a></span>, and issued its URL. If the repository is a secure one, <span class="link"><a href="#keyssetup" title="Secure shell keys setup">set up the secure shell keys</a></span> to access it.
       </p>
@@ -55,11 +59,10 @@ There is a variety of repositories that can be used. Each of them has it own use
         In this tutorial it will be user Jim. In Bibledit, Jim opens the project he wishes to share with others, or he creates a new project. He goes to menu <span class="link"><a href="remote.html" title="Preferences Menu"><span class="guiseq"><span class="gui">Preferences</span> ▸ <span class="gui">Remote repository</span></span></a></span>. and sets everything up. Jim can now work on Bibledit as before, and his data will be automatically updated in the repository.
       </p>
 </div></div>
-</div></div>
-<div id="collaborating" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Collaborating
+</div></section><section id="collaborating"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Collaborating
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Now we come to the purpose of everything, which is working together on one project.
       </p>
@@ -67,11 +70,10 @@ There is a variety of repositories that can be used. Each of them has it own use
         This collaboration is very simple: Just work on your data as you did before. At times when you´d like to share your work with others, or when you'd like to see work done by others, choose menu File / Project / Send-Receive. Bibledit cares for everything, and everything will be updated and shared automatically.
       </p>
 </div></div>
-</div></div>
-<div id="safety" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Safety
+</div></section><section id="safety"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Safety
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Suppose that two or more people collaborate on one project. One of them is a bad typist. He makes many errors. The bad typist has the potential the harm or destroy the project's data. If he makes serious mistakes in his own data, then the collaboration mechanism will propage his mistakes to the other members of the team. This is not a desirable situation.
       </p>
@@ -101,7 +103,11 @@ There is a variety of repositories that can be used. Each of them has it own use
 <li class="steps"><p class="p">Any changes entered or not entered propagate to the unexperienced typist again through the collaboration. If the unexperienced typist made a big mess in a certain chapter, through the collaboration this mess is cleared up again on his computer.
       </p></li>
 </ol></div></div></div>
-<div class="note" title="Note"><div class="inner"><div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
+<div class="note" title="Note">
+<svg width="24" height="24" version="1.1">
+ <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+ <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">The collaboration system can conveniently be used for automatic backup.
       </p></li>
 <li class="list"><p class="p">Collaboration of two projects on the same computer is possible if those projects have the same ancestor, that is, one is created by importing all the Biblebooks exported of the other one. This can be helpful for demo purposes and to test and learn to use this tool if only one computer is available.
@@ -113,15 +119,15 @@ There is a variety of repositories that can be used. Each of them has it own use
 <li class="list"><p class="p">There is not much need to maintain the git repository since Bibledit does run maintenance on it at regular times. But if you really like to compress the repository well, you can run "git gc --aggressive" in the repository. Note that Bibledit already runs "git gc" at regular times.
       </p></li>
 <li class="list"><p class="p">If two or more users were to work on the same chapter at the same time, this would pose a problem for Bibledit. This type of collaboration is not supported. People should work on different chapters, or on the same chapters, but not simultaneously. Then the merging of the changes will work well.</p></li>
-</ul></div></div></div></div></div></div></div>
-</div></div>
-</div></div>
+</ul></div></div></div></div></div></div>
 </div>
 </div></div>
-<div id="repsetup" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">1. Repository setup</span></h2></div>
+</div></section>
+</div>
+</div></section><section id="repsetup"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">1. Repository setup</span></h2></div>
 <div class="region">
-<div class="contents">
+<div class="contents pagewide">
 <p class="p"> The repository is the heart or the central part of the
         collaboration system. In this tutorial you will learn how to set up a repository. </p>
 <p class="p"> There are several types of repositories. Each of them will be
@@ -133,9 +139,9 @@ There is a variety of repositories that can be used. Each of them has it own use
 
 </p>
 </div>
-<div id="open-network" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Open network repository setup</span></h3></div>
-<div class="region"><div class="contents">
+<section id="open-network"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Open network repository setup</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
 In this tutorial we are going to set up an open repository on the network.
 </p>
@@ -145,46 +151,45 @@ To create the repository on we need a server. Any of your Linux computers that i
 <p class="p">
 To create the repository, login as user jim. Then open a terminal. The repository is going to be in Jim's home directory. In the terminal type the following:
 </p>
-<div class="code"><pre class="contents ">cd
+<div class="code"><pre class="contents"><code>cd
 mkdir -p git/repository
 cd git/repository
-git --bare init --shared</pre></div>
+git --bare init --shared</code></pre></div>
 <p class="p">
 The repository is now there, but it is not yet accessible from the network.
 </p>
 <p class="p">
 To make the repository available to the network, type
 </p>
-<div class="code"><pre class="contents ">git daemon --export-all --base-path=/home/jim/git --detach --enable=receive-pack</pre></div>
+<div class="code"><pre class="contents"><code>git daemon --export-all --base-path=/home/jim/git --detach --enable=receive-pack</code></pre></div>
 <p class="p">
 Each time that the server boots, it is necessary to execute the above command again. It would be easier to put the command in the boot script. Then it will automatically be started after boot.
 </p>
 <p class="p">
 To test access to the new repository from another computer on the network, type
 </p>
-<div class="code"><pre class="contents ">git ls-remote git://192.168.0.1/repository</pre></div>
+<div class="code"><pre class="contents"><code>git ls-remote git://192.168.0.1/repository</code></pre></div>
 <p class="p">
 If everything is fine, no errors will occur.
 </p>
 <p class="p">
 The repository that was created in this tutorial has the following URL:
 </p>
-<div class="code"><pre class="contents ">git://192.168.0.1/repository</pre></div>
+<div class="code"><pre class="contents"><code>git://192.168.0.1/repository</code></pre></div>
 <p class="p">
 The users that are going to use this repository need this URL. 
 </p>
 </div></div>
-</div></div>
-<div id="secure-network" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Secure network repository setup </span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="secure-network"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Secure network repository setup </span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">In this tutorial we are
           going to set up a secure network repository.</p>
 <p class="p">  Doing this on gitlab.com is easy. Create an account there, and
       then create a git repository.If your username is "joe", and your
       password is "pazz", and the repository is "repo", then accessing
       this repository through https works through this URL:</p>
-<div class="code"><pre class="contents ">https://joe:pazz@github.com/joe/repo.git</pre></div>
+<div class="code"><pre class="contents"><code>https://joe:pazz@github.com/joe/repo.git</code></pre></div>
 <p class="p">
       Another type
         of secure git repository can be created on for example sourceforge.net.</p>
@@ -198,14 +203,14 @@ The users that are going to use this repository need this URL.
 <p class="p"> The next thing is to try whether you can read the repository
         properly. To try that, open a terminal and issue the following
         command: </p>
-<div class="code"><pre class="contents ">git ls-remote ssh://joe@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git ls-remote ssh://joe@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p"> This command probably will ask for your password, and the
         first time it could ask you whether you want to continue
         connecting. But it should show no errors. If it completes
         without errors, then your secure repository works well. </p>
 <p class="p"> The repository that was created in this tutorial has the
         following URL: </p>
-<div class="code"><pre class="contents ">ssh://user@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>ssh://user@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p"> The users that are going to use this repository need this URL.
         Where it says "user", each user would need to fill in his own
         username.</p>
@@ -234,15 +239,14 @@ The users that are going to use this repository need this URL.
         </p></li>
 </ul></div></div></div>
 </div></div>
-</div></div>
-<div id="keyssetup" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Secure shell keys setup</span></h3></div>
+</div></section><section id="keyssetup"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Secure shell keys setup</span></h3></div>
 <div class="region">
-<div class="contents"><p class="p">When your remote repository is a secure one, and you'd like Bibledit to use it, then is is necessary to set up secure shell keys. These keys allow easy access to the secure repository. Please follow the tutorial exactly.
+<div class="contents pagewide"><p class="p">When your remote repository is a secure one, and you'd like Bibledit to use it, then is is necessary to set up secure shell keys. These keys allow easy access to the secure repository. Please follow the tutorial exactly.
       </p></div>
-<div id="keygeneration" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Generate the keys</span></h4></div>
-<div class="region"><div class="contents">
+<section id="keygeneration"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Generate the keys</span></h4></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The first thing to do is to generate the keys.
       </p>
@@ -250,35 +254,34 @@ The users that are going to use this repository need this URL.
         On your Linux workstation, open a termial and enter the following:</p>
 <p class="p">
  <span class="cmd">cd</span>       (to make sure you are in your home directory)</p>
-<div class="code"><pre class="contents ">ls .ssh    (to check if there is an .ssh directory)</pre></div>
+<div class="code"><pre class="contents"><code>ls .ssh    (to check if there is an .ssh directory)</code></pre></div>
 <p class="p">
 If there is no .ssh directory, create one:</p>
-<div class="code"><pre class="contents ">mkdir .ssh</pre></div>
+<div class="code"><pre class="contents"><code>mkdir .ssh</code></pre></div>
 <p class="p">then:</p>
-<div class="code"><pre class="contents ">cd .ssh
-ssh-keygen -t dsa -b 1024 -f bibledit-ssh-key</pre></div>
+<div class="code"><pre class="contents"><code>cd .ssh
+ssh-keygen -t dsa -b 1024 -f bibledit-ssh-key</code></pre></div>
 <p class="p">
         It will respond as follows:</p>
-<div class="code"><pre class="contents ">Generating public/private dsa key pair.
-Enter passphrase (empty for no passphrase):</pre></div>
+<div class="code"><pre class="contents"><code>Generating public/private dsa key pair.
+Enter passphrase (empty for no passphrase):</code></pre></div>
 <p class="p">
         At this stage press <span class="key"><kbd>Enter</kbd></span>. It will continue as follows:</p>
-<div class="code"><pre class="contents ">Enter same passphrase again:</pre></div>
+<div class="code"><pre class="contents"><code>Enter same passphrase again:</code></pre></div>
 <p class="p">
         Press Enter again. It will continue as below:</p>
-<div class="code"><pre class="contents ">Your identification has been saved in bibledit-ssh-key.
-Your public key has been saved in bibledit-ssh-key.pub.</pre></div>
+<div class="code"><pre class="contents"><code>Your identification has been saved in bibledit-ssh-key.
+Your public key has been saved in bibledit-ssh-key.pub.</code></pre></div>
 <p class="p">        It will print some more lines of text. This is not relevant for our purpose.
       </p>
 <p class="p">
         This pair of keys is important. The pair is in the ".ssh" directory of your home directory. There is the private key, in a file called "bibledit-ssh-key", and the public key, in another file called "bibledit-ssh-key.pub". Store them safely.
       </p>
 </div></div>
-</div></div>
-<div id="enterkey" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Enter the keys
+</div></section><section id="enterkey"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Enter the keys
       </span></h4></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Open a personal account at <span class="link"><a href="https://www.sourceforge.net/" title="https://www.sourceforge.net/">sourceforge.net</a></span>. Let's choose user name "repouser". Ask the project administrator whether he can add user "repouser" to the "repo2" project as a member. Joining this project will give you the capability to write to the repository.
       </p>
@@ -288,10 +291,10 @@ Your public key has been saved in bibledit-ssh-key.pub.</pre></div>
 <p class="p">
         The next step is to tell the secure shell where to find the private key when we connect to sourceforge.net, and to set a few other important options. To do that, open file ~/.ssh/config in gedit. Enter the entry for sourceforge.net, like so:
       </p>
-<div class="code"><pre class="contents ">Host *sourceforge.net
+<div class="code"><pre class="contents"><code>Host *sourceforge.net
 IdentityFile ~/.ssh/bibledit-ssh-key
 BatchMode yes
-StrictHostKeyChecking no</pre></div>
+StrictHostKeyChecking no</code></pre></div>
 <p class="p">
         Save the file.
       </p>
@@ -301,42 +304,44 @@ StrictHostKeyChecking no</pre></div>
 <p class="p">
         If the delay of 10 minutes has expired, we can now try whether the key pair works well. In the terminal, try to access the repository at sourceforge:
       </p>
-<div class="code"><pre class="contents ">git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p">
         If it works then it will give no errors, and list a few commits. If it does that, then the keys works well. If it asks for a password, or if there are errors, follow the tutorial again to get everything right.
       </p>
 </div></div>
-</div></div>
-<div id="Reconfiguring" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Reconfiguring Bibledit Collaboration after Changing Computers or Reinstalling Ubuntu</span></h4></div>
-<div class="region"><div class="contents">
+</div></section><section id="Reconfiguring"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Reconfiguring Bibledit Collaboration after Changing Computers or Reinstalling Ubuntu</span></h4></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         After reinstalling Bibledit on your computer and copying your backed-up .bibledit directory, be sure you have copied the back-up of your .ssh directory.</p>
-<div class="note note-warning" title="Warning"><div class="inner"><div class="region"><div class="contents"><p class="p">If after reinstalling Bibledit on your computer you have started Bibledit and edited your project since the remote repository was active, make an extra backup of the project now! When you reinitialize remote backup/sharing via Preferences Remote Repository, the Clone the Remote Repository will erase all your recent edits! </p></div></div></div></div>
+<div class="note note-warning" title="Warning">
+<svg width="24" height="24" version="1.1">
+ <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0-1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-8e-3a1.3872 1.3872 0 0 0 1.201-2.08l-8.619-14.916a1.3872 1.3872 0 0 0-1.136-0.6913 1.3872 1.3872 0 0 0-0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">If after reinstalling Bibledit on your computer you have started Bibledit and edited your project since the remote repository was active, make an extra backup of the project now! When you reinitialize remote backup/sharing via Preferences Remote Repository, the Clone the Remote Repository will erase all your recent edits! </p></div></div></div>
+</div>
 <p class="p">
         Then reboot. Following reboot (or if you have already rebooted multiple times since reinstalling the above), test this:
       </p>
-<div class="code"><pre class="contents ">git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p">
         This should yield no errors but something like this:
       </p>
-<div class="code"><pre class="contents ">8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec HEAD
-8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec refs/heads/master</pre></div>
+<div class="code"><pre class="contents"><code>8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec HEAD
+8dc8c3e57a42654f5b4cbc938811c6f0b3c2a1ec refs/heads/master</code></pre></div>
 <p class="p">  <span class="em">If you get something like that (no errors),</span> then you ready to reinitialize remote backup/sharing via Preferences → Remote Repository. Second screen, choose the top option, Bible Repository. Choose all the defaults. You will be forced to clone the remote repository. (Did you make the backup above?!) Once that process completes, you will be sharing via the repository again. You can always check that changes are being written by logging into your sourceforge account, and check out the What's Happening page (visible when you click on your name at the upper right).</p>
 <p class="p"><span class="em">If you got an error message,</span> follow the steps below.</p>
 <p class="p">
         In order to reconfigure Bibledit after changing computers or reinstalling an operating system, you might not be able to just copy and reuse a backup copy of your original .ssh directory and the config file. Also, it seems that just remaking the shell keys in the old .ssh directory will not work. Make a new .ssh directory and follow the steps above to create secure shell keys. You can copy and reuse the backed-up config file. Then replace your old ...key.pub at sourceforge.net/Services with your new key, then click to Update. During the 10 minute wait, reboot your computer. After rebooting and waiting for the key to be updated, test if you get an error message with:
       </p>
-<div class="code"><pre class="contents ">git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git ls-remote ssh://repouser@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="repoinitilization" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">2. Repository initialization</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="repoinitilization"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">2. Repository initialization</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Note: Newer versions of git, and Bibledit-Desktop version 4.2 and higher, no longer need what is written below.
       </p>
@@ -346,69 +351,68 @@ StrictHostKeyChecking no</pre></div>
 <p class="p">
         Open a terminal, and issue the commands as given.
       </p>
-<div class="code"><pre class="contents ">cd</pre></div>
+<div class="code"><pre class="contents"><code>cd</code></pre></div>
 <p class="p">
         In the tutorial about <span class="link"><a href="#repsetup" title="1. Repository setup">setting up the repository</a></span>, the systems administrator had given the URL of the repository that was created. In the current tutorial we assume a URL of "file:///media/usbstick/repository". Of course others are possible, depending on what type of repository you have and where it resides. For example "ssh://user@repo2.git.sourceforge.net/gitroot/repo2/repo2".
       </p>
 <p class="p">You need to put something into the repository. It does not matter what, anything will do. Let's proceed and put an empty file into the repository. Issue the commands as given:
       </p>
-<div class="code"><pre class="contents ">cd    
+<div class="code"><pre class="contents"><code>cd    
 mkdir repository
 cd repository
-git init</pre></div>
+git init</code></pre></div>
 <p class="p">
         It will say that an empty Git repository was initialized.
       </p>
-<div class="code"><pre class="contents ">touch file
+<div class="code"><pre class="contents"><code>touch file
 git add file
-git commit -a -m init</pre></div>
+git commit -a -m init</code></pre></div>
 <p class="p">
         It will say that an initial commit was created.
       </p>
-<div class="code"><pre class="contents ">git push --all file:///media/usbstick/repository</pre></div>
+<div class="code"><pre class="contents"><code>git push --all file:///media/usbstick/repository</code></pre></div>
 <p class="p">
 or for secure network repository:
 </p>
-<div class="code"><pre class="contents ">git push --all ssh://sforgeuser@.repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git push --all ssh://sforgeuser@.repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p">
         It will give some information, which shows that data was written to the repository. No errors should occur. Example:
       </p>
-<div class="code"><pre class="contents ">Counting objects: 3, done.
+<div class="code"><pre class="contents"><code>Counting objects: 3, done.
                 Writing objects: 100% (3/3), 198 bytes, done.
                 Total 3 (delta 0), reused 0 (delta 0)
                 To ssh://warpok@tsederhana.git.sourceforge.net/gitroot/tsederhana/tsederhana
-                 * [new branch]      master -&gt; master</pre></div>
+                 * [new branch]      master -&gt; master</code></pre></div>
 <p class="p">
         Clean out the temporal directory:
       </p>
-<div class="code"><pre class="contents ">cd
-rm -rf repository</pre></div>
+<div class="code"><pre class="contents"><code>cd
+rm -rf repository</code></pre></div>
 <p class="p">
         Now try to clone the repository:
       </p>
-<div class="code"><pre class="contents ">git clone file:///media/usbstick/repository</pre></div>
+<div class="code"><pre class="contents"><code>git clone file:///media/usbstick/repository</code></pre></div>
 <p class="p">
 or for secure network repostory:</p>
-<div class="code"><pre class="contents ">git clone ssh://sforgeuser@repo2.git.sourceforge.net/gitroot/repo2/repo2</pre></div>
+<div class="code"><pre class="contents"><code>git clone ssh://sforgeuser@repo2.git.sourceforge.net/gitroot/repo2/repo2</code></pre></div>
 <p class="p">
         It should say that an empty Git repository was created, give some more information, and show that object were received. It is does this, and there are no errors, then everything is fine. Your repository has been initialized. Example:
       </p>
-<div class="code"><pre class="contents ">Initialized empty Git repository in /home/oreo/tsederhana/.git/
+<div class="code"><pre class="contents"><code>Initialized empty Git repository in /home/oreo/tsederhana/.git/
                       remote: Counting objects: 3, done.
                       remote: Total 3 (delta 0), reused 0 (delta 0)
-                      Receiving objects: 100% (3/3), done.</pre></div>
+                      Receiving objects: 100% (3/3), done.</code></pre></div>
 </div></div>
-</div></div>
-<div id="usbrepo" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">3. USB flash drive repository setup</span></h2></div>
+</div></section><section id="usbrepo"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">3. USB flash drive repository setup</span></h2></div>
 <div class="region">
-<div class="contents"><p class="p">
+<div class="contents pagewide"><p class="p">
         In this document we will set up a repository on a USB flash drive, also called a USB stick.
       </p></div>
-<div id="formatting" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Formatting the stick
+<section id="formatting"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Formatting the stick
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Normally a USB stick, as it comes out of the box, has been formatted with a FAT filesystem. Such a filesystem is not supported for collaboration. The stick needs to formatted to the ext3 filesystem for collaboration to work. How this is done will be described here.
       </p>
@@ -418,31 +422,31 @@ or for secure network repostory:</p>
 <p class="p">
         In the terminal, give the command
       </p>
-<div class="code"><pre class="contents ">df</pre></div>
+<div class="code"><pre class="contents"><code>df</code></pre></div>
 <p class="p">
         The output of this command can be something like:</p>
-<div class="code"><pre class="contents ">Filesystem 1K-blocks      Used Available Use% Mounted on
+<div class="code"><pre class="contents"><code>Filesystem 1K-blocks      Used Available Use% Mounted on
 /dev/sda1   93539428  76882380  11905428  87% /
 udev           10240       104     10136   2% /dev
 tmpfs        1038428         0   1038428   0% /dev/shm
 /dev/hda      629742    629742         0 100% /media/cdrom0
 /dev/sdb5  306619956 189335920 101708620  66% /media/293gig
 /dev/sdc1  240362656  64350876 163801980  29% /media/250gb
-/dev/sdd1    1960684    660896   1200188  36% /media/usbdisk</pre></div>
+/dev/sdd1    1960684    660896   1200188  36% /media/usbdisk</code></pre></div>
 <p class="p">
         Looking through the list of mounting points, we assume that the USB stick that was inserted mounts at /media/usbdisk. From there we can see that the device is /dev/sdd1. Once we have that information, we are ready for the next step.
       </p>
 <p class="p">
         Before the stick can be formatted, it must be unmounted first. Issue the following command to unmount the stick:
       </p>
-<div class="code"><pre class="contents ">sudo umount /media/usbdisk</pre></div>
+<div class="code"><pre class="contents"><code>sudo umount /media/usbdisk</code></pre></div>
 <p class="p">
         The "sudo" in the command means that root privileges are needed to execute the command.
       </p>
 <p class="p">
         To format the USB stick to the ext3 filesystem, issue the following command:
       </p>
-<div class="code"><pre class="contents ">sudo mkfs.ext3 /dev/sdd1</pre></div>
+<div class="code"><pre class="contents"><code>sudo mkfs.ext3 /dev/sdd1</code></pre></div>
 <p class="p">
         The formatting process will be visible and at the end some information about it will be given. At this point it is important to see if no errors occurred.
       </p>
@@ -450,46 +454,44 @@ tmpfs        1038428         0   1038428   0% /dev/shm
         The formatting command is very powerful. One could even format the main drive of the computer, wiping out all information. Extreme care should be used to ensure that the USB stick is going to be formatted, and nothing else.
       </p>
 </div></div>
-</div></div>
-<div id="labelling" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Labelling the stick
+</div></section><section id="labelling"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Labelling the stick
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         A label needs to be written to the USB stick. The reason of this is so as to make sure that this stick will always mount at the same mounting point. In this tutorial we write the label "usbstick" to it.
       </p>
 <p class="p">
         We take it that the same device is being used as we used for formatting the stick. That is device /dev/sdd1. To write the label to the stick, issue the following two commands:
       </p>
-<div class="code"><pre class="contents ">sudo e2label /dev/sdd1 usbstick</pre></div>
-<div class="code"><pre class="contents ">sync</pre></div>
+<div class="code"><pre class="contents"><code>sudo e2label /dev/sdd1 usbstick</code></pre></div>
+<div class="code"><pre class="contents"><code>sync</code></pre></div>
 <p class="p">
         After the label has been written to it, remove the stick from the computer, and insert it again. It should now mount to the name of the label. In this case it should mount under /media/usbstick.
       </p>
 <p class="p">
         This can be verified with command "df":
       </p>
-<div class="code"><pre class="contents ">df</pre></div>
+<div class="code"><pre class="contents"><code>df</code></pre></div>
 <p class="p">
         The output of this command:
       </p>
-<div class="code"><pre class="contents ">Filesystem 1K-blocks      Used Available Use% Mounted on
+<div class="code"><pre class="contents"><code>Filesystem 1K-blocks      Used Available Use% Mounted on
 /dev/sda1   93539428  76882380  11905428  87% /
 udev           10240       104     10136   2% /dev
 tmpfs        1038428         0   1038428   0% /dev/shm
 /dev/hda      629742    629742         0 100% /media/cdrom0
 /dev/sdb5  306619956 189335920 101708620  66% /media/293gig
 /dev/sdc1  240362656  64350876 163801980  29% /media/250gb
-/dev/sdd1    1960684    660896   1200188  36% /media/usbstick</pre></div>
+/dev/sdd1    1960684    660896   1200188  36% /media/usbstick</code></pre></div>
 <p class="p">
         This shows that it now mounts under the new name.
       </p>
 </div></div>
-</div></div>
-<div id="creatingonstick" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Creating the repository on the stick
+</div></section><section id="creatingonstick"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Creating the repository on the stick
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The USB stick will hold the data repository.
       </p>
@@ -499,74 +501,71 @@ tmpfs        1038428         0   1038428   0% /dev/shm
 <p class="p">
         1. The first step will be to create a directory for the repository, and to make that directory writable. If we assume that the stick mounts at /media/usbstick, then the command to create a directory called "repository" is:
       </p>
-<div class="code"><pre class="contents ">sudo mkdir /media/usbstick/repository</pre></div>
+<div class="code"><pre class="contents"><code>sudo mkdir /media/usbstick/repository</code></pre></div>
 <p class="p">
         Notice the "sudo" command, which means that this usually needs to be done by user root. If this is done by an ordinary user, permission would be denied.
       </p>
 <p class="p">
         Once the directory for the repository is there, this directory needs to be made writable for ordinary users. This is the command:
       </p>
-<div class="code"><pre class="contents ">sudo chmod -R 0777 /media/usbstick/repository/</pre></div>
+<div class="code"><pre class="contents"><code>sudo chmod -R 0777 /media/usbstick/repository/</code></pre></div>
 <p class="p">
         Note the "sudo" again.
       </p>
 <p class="p">
         Now it is time to check whether the USB stick is writable. We do this by trying to create a file in the repository. If this succeeds, then it is writable. Here's the command:
       </p>
-<div class="code"><pre class="contents ">touch /media/usbstick/repository/testfile</pre></div>
+<div class="code"><pre class="contents"><code>touch /media/usbstick/repository/testfile</code></pre></div>
 <p class="p">
         This command should complete without errors. After that the file needs to be removed again:
       </p>
-<div class="code"><pre class="contents ">rm /media/usbstick/repository/testfile</pre></div>
+<div class="code"><pre class="contents"><code>rm /media/usbstick/repository/testfile</code></pre></div>
 <p class="p">
         2. The second step is to make the USB stick the current working directory. Type:
       </p>
-<div class="code"><pre class="contents ">cd /media/usbstick/repository</pre></div>
+<div class="code"><pre class="contents"><code>cd /media/usbstick/repository</code></pre></div>
 <p class="p">
         3. The next step is to create a repository on the USB stick, and to copy the data to it.
       </p>
 <p class="p">
         To create a shared repository on the USB stick, type:
       </p>
-<div class="code"><pre class="contents ">git --bare init --shared</pre></div>
+<div class="code"><pre class="contents"><code>git --bare init --shared</code></pre></div>
 <p class="p">
         Git will respond saying that an empty shared Git repository has been created.
       </p>
 <p class="p">
         Before removing the stick, ensure that the data gets written to it, by issuing the command
       </p>
-<div class="code"><pre class="contents ">sync</pre></div>
+<div class="code"><pre class="contents"><code>sync</code></pre></div>
 <p class="p">
         This finishes setting up the repository on the USB flash drive.
       </p>
 </div></div>
-</div></div>
-<div id="repourl" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Repository URL
+</div></section><section id="repourl"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Repository URL
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The repository that was created in this tutorial has the following URL:
       </p>
-<div class="code"><pre class="contents ">file:///media/usbstick/repository</pre></div>
+<div class="code"><pre class="contents"><code>file:///media/usbstick/repository</code></pre></div>
 <p class="p">
         The users that are going to use this repository need this URL.
       </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="conflict" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">4. Conflict resolution </span></h2></div>
+</div></section><section id="conflict"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">4. Conflict resolution </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introconflict" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Introduction</span></h3></div>
-<div class="region"><div class="contents"><p class="p">Under normal circumstances, the users collaborate in one project. They send and receive their changes regularly. At times it may occur that two users make changes in the same chapter of text, or in the same project notes. After doing <span class="gui">Send/Receive</span>, a conflict may arise. Bibledit-Desktop does not know which of the two edits to take, either the edit of the first user or the edit of the second user. This is called a conflict. For Bible text, Bibledit-Desktop tries to resolve this conflict automatically, keeping one edit, and throwing away the other. But for project notes, this does not always work. Manual intervention is required to resolve this conflict.The rest of this page describes how to notice that a conflict has occurred in a project note, and how to manually resolve it.</p></div></div>
-</div></div>
-<div id="symptom" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Symptoms</span></h3></div>
-<div class="region"><div class="contents">
+<div class="contents pagewide"></div>
+<section id="introconflict"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Introduction</span></h3></div>
+<div class="region"><div class="contents pagewide"><p class="p">Under normal circumstances, the users collaborate in one project. They send and receive their changes regularly. At times it may occur that two users make changes in the same chapter of text, or in the same project notes. After doing <span class="gui">Send/Receive</span>, a conflict may arise. Bibledit-Desktop does not know which of the two edits to take, either the edit of the first user or the edit of the second user. This is called a conflict. For Bible text, Bibledit-Desktop tries to resolve this conflict automatically, keeping one edit, and throwing away the other. But for project notes, this does not always work. Manual intervention is required to resolve this conflict.The rest of this page describes how to notice that a conflict has occurred in a project note, and how to manually resolve it.</p></div></div>
+</div></section><section id="symptom"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Symptoms</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">The first symptom of a conflict is that the users get the impression that the collaboration system has stopped to work properly. The users make their edits. But these edits and changes do not propagate to the other users.If a conflict is suspected, then it is good to find out about it, whether this is indeed the case. A simple way of finding out is this:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">Shut down Bibledit, and start it again. This clears the system log.</p></li>
@@ -575,36 +574,32 @@ tmpfs        1038428         0   1038428   0% /dev/shm
 </ul></div></div></div>
 <p class="p">
  If there is a conflict, then the log shows something along those lines:</p>
-<div class="code"><pre class="contents ">Auto-merging 78294313
+<div class="code"><pre class="contents"><code>Auto-merging 78294313
 CONFLICT (content): Merge conflict in 78294313
-Automatic merge failed; fix conflicts and then commit the result.</pre></div>
+Automatic merge failed; fix conflicts and then commit the result.</code></pre></div>
 <p class="p">The log shows that there is a conflict. Notice the number: 78294313. This is the number of the project note that has the conflict.</p>
 </div></div>
-</div></div>
-<div id="resolution" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Resolution</span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="resolution"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Resolution</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">There are several ways to resolve the conflict. A simple one is described below. It just throws away the edits that one user made, and takes the edits that the other users made. In other words, it takes the version that is already on the server, in the remote repository.The user who has the conflict does the following:Opens a terminal, and types the following series of commands, one by one, and presses Enter after each command:</p>
-<div class="code"><pre class="contents ">cd
+<div class="code"><pre class="contents"><code>cd
 cd .bibledit
 cd notes
 cd data
-git checkout --theirs 78294313</pre></div>
+git checkout --theirs 78294313</code></pre></div>
 <p class="p">Notice that the number of the note that has the conflict is 78294313. This only works in this example. Your note number will be different. The note number was found above.Close the terminal.Start doing the sending and receiving in Bibledit-Desktop as usual. Collaboration should work again. You may view the system log, as described above, to ascertain that everything works well again.</p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#tools" title="Advanced tools">Advanced tools</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

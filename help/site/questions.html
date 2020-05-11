@@ -5,21 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>2. Questions</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#introduction" title="Introduction">Introduction</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">2. Questions</span></h1></div>
+    </a> › <a class="trail" href="index.html#introduction" title="Introduction">Introduction</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">2. Questions</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="gethelp" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How
+<div class="contents pagewide"></div>
+<section id="gethelp"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How
         to get help from the Bibledit community? </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">Read all of this help.
 	</p></li>
@@ -34,19 +38,17 @@
         information for contacts to consult.
       </p>
 </div></div>
-</div></div>
-<div id="changeorder" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to change the order
+</div></section><section id="changeorder"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to change the order
         of the books? </span></h2></div>
-<div class="region"><div class="contents"><p class="p"> You can fully configure in which order Bibledit displays and
+<div class="region"><div class="contents pagewide"><p class="p"> You can fully configure in which order Bibledit displays and
         prints the books. This can be done in menu <span class="guiseq"><span class="gui">Preferences</span> ▸ <span class="gui">Books</span></span>.
         Drag the books in the order you desire, and then click <span class="guiseq"><span class="gui">OK</span></span> to
         save the settings. </p></div></div>
-</div></div>
-<div id="printtable" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to print a
+</div></section><section id="printtable"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to print a
         table of contents? </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> In the example below we're going to learn how to write a table
         of contents for a project consisting of several books. </p>
 <p class="p"> The table of contents comes in the book called Front Matter.
@@ -55,17 +57,16 @@
         have a USFM indicating this. Therefore, go to chapter 0 of each
         book and add the \toc2 marker to it. For example, in the book of
         Genesis, chapter 0 might look like </p>
-<div class="code"><pre class="contents ">\id GEN
+<div class="code"><pre class="contents"><code>\id GEN
 \h Genesis
-\toc2 Genesis</pre></div>
+\toc2 Genesis</code></pre></div>
 <p class="p"> Do this for all the books. </p>
 <p class="p"> Then print the project, and be sure to include all the books,
         including Front Matter. The table of contents will be there. </p>
 </div></div>
-</div></div>
-<div id="modifyplace" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to modify the place where Bibledit stores its data?</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="modifyplace"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to modify the place where Bibledit stores its data?</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Normally Bibledit stores its data in subdirectory <span class="file">.bibledit</span> of the user's home directory, e.g. in <span class="file">/home/joe/.bibledit</span>.
 </p>
 <p class="p">If it is desirable to have Bibledit store its data elsewhere,
@@ -84,15 +85,15 @@
 <p class="p"> Quit bibledit. </p>
 <p class="p"> Open a terminal. </p>
 <p class="p"> Type command: </p>
-<div class="code"><pre class="contents ">cd</pre></div>
+<div class="code"><pre class="contents"><code>cd</code></pre></div>
 <p class="p"> to go to your home directory. Let's say you prefer to store
         the data on <span class="file">/mnt/server/.bibledit</span> </p>
 <p class="p"> Type command:</p>
-<div class="code"><pre class="contents ">mv .bibledit /mnt/server/.bibledit</pre></div>
+<div class="code"><pre class="contents"><code>mv .bibledit /mnt/server/.bibledit</code></pre></div>
 <p class="p"> to preserve and move existing data. (When there is no existing
         data, this step is not needed.) </p>
 <p class="p"> Type command:</p>
-<div class="code"><pre class="contents ">touch .bibledit-datafolder-pointer</pre></div>
+<div class="code"><pre class="contents"><code>touch .bibledit-datafolder-pointer</code></pre></div>
 <p class="p"> to make a new file in the home directory, that will point to
         the new data directory. </p>
 <p class="p"> Open this hidden file in a text editor and put only this one
@@ -105,20 +106,18 @@
         partition. In such cases problems have been observed when
         special characters are used in the project name. </p>
 </div></div>
-</div></div>
-<div id="shortcuts" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How to move
+</div></section><section id="shortcuts"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to move
         about in Bibledit using the keyboard? </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Bibledit has several windows to work in. </p>
 <p class="p"> There are keyboard <span class="link"><a href="keyboard.html" title="7. Keyboard shortcuts">shortcuts</a></span>
         for moving between the windows. </p>
 </div></div>
-</div></div>
-<div id="versification" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How
+</div></section><section id="versification"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How
         to create a custom versification system or language? </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> If the versification system or language you need does not come
         with Bibledit, then you can create your own language or
         versification system and add it to Bibledit yourself. To do
@@ -141,37 +140,34 @@
         Bibledit. That way it becomes available to others in the next
         release. </p>
 </div></div>
-</div></div>
-<div id="countcrossref" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">How
+</div></section><section id="countcrossref"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How
         can I count the number of crossreferences in the project? </span></h2></div>
-<div class="region"><div class="contents"><p class="p"> This can be done through menu Tools, then Bible notes mass
+<div class="region"><div class="contents pagewide"><p class="p"> This can be done through menu Tools, then Bible notes mass
         update. Tick "Crossreferences", and leave the action to take as
         "Make no changes but give statistics only". After clicking <span class="gui">OK</span> it
         will give the number of crossreferences in the project.
       </p></div></div>
-</div></div>
-<div id="installation" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Installation      </span></h2></div>
+</div></section><section id="installation"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Installation      </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="noc" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">There is no
+<div class="contents pagewide"></div>
+<section id="noc"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">There is no
         acceptable C compiler in $path </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> This happens when you did not install a C compiler.Installing
+<div class="region"><div class="contents pagewide"><p class="p"> This happens when you did not install a C compiler.Installing
         Bibledit from source requires a C compiler. This compiler is
         part of development tools. The installation instructions for
         Linux, or for Macintosh, or Windows, give instructions on how to
         install such development tools. If you follow these
         instructions, the problem will be gone. For example, on Windows,
         you need to install package "gcc" in Cygwin. </p></div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="outpostproblem" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Problem
+</div></section><section id="outpostproblem"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Problem
         when Outpost runs on another host </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">When setting up the Outpost to run on another host, in the
         settings dialog, when I type in the name of the host, I get this
         error message: Host &lt;name&gt; cannot be contacted through the
@@ -196,36 +192,33 @@
         correspond with the one you entered. </p></li>
 </ol></div></div></div>
 </div></div>
-</div></div>
-<div id="generalquestion" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">General </span></h2></div>
+</div></section><section id="generalquestion"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">General </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="databasedisk" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">The
+<div class="contents pagewide"></div>
+<section id="databasedisk"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">The
         log says: CRITICAL **: database disk image is malformed </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> This message can be either from the text or the notes
+<div class="region"><div class="contents pagewide"><p class="p"> This message can be either from the text or the notes
         database. It has been seen in cases of malfunctioning hardware,
         such as unreliable memory. The solution is to solve the hardware
         problem first, and restore the text or the notes from a backup.
       </p></div></div>
-</div></div>
-<div id="unsupportedfile" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">The log says:
+</div></section><section id="unsupportedfile"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">The log says:
         CRITICAL**: unsupported file format </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> This is caused by downgrading from a newer version of sqlite3
+<div class="region"><div class="contents pagewide"><p class="p"> This is caused by downgrading from a newer version of sqlite3
         to an older version. This may occur when the data is moved from
         a newer version of Linux to an older version. A possible
         solution is to install the newest version of sqlite3 in your
         current system. It will then be able to read your data again. </p></div></div>
-</div></div>
-<div id="wontstard" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Bibledit won't start anymore
+</div></section><section id="wontstard"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Bibledit won't start anymore
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Try starting it from a terminal, and see what happens. In the
         terminal type: </p>
-<div class="code"><pre class="contents ">bibledit --debug</pre></div>
+<div class="code"><pre class="contents"><code>bibledit --debug</code></pre></div>
 <p class="p"> If it gives a segmentation fault, then there is a problem in
         your configuration. A simple way to get Bibledit running again
         is to delete the file <span class="file">./bibledit/settings</span> and
@@ -236,11 +229,11 @@
         configuration files, make a bug report, pack all your data in a
         gzipped tarball, and attach this file to the <span class="link"><a href="development.html" title="Development">bug report</a></span>. </p>
 <p class="p"> To go to the home directory, type </p>
-<div class="code"><pre class="contents ">cd</pre></div>
+<div class="code"><pre class="contents"><code>cd</code></pre></div>
 <p class="p"> To pack everything in a tarball, type </p>
-<div class="code"><pre class="contents ">tar -cvf bibledit.tar .bibledit</pre></div>
+<div class="code"><pre class="contents"><code>tar -cvf bibledit.tar .bibledit</code></pre></div>
 <p class="p"> Then compress the tarball: </p>
-<div class="code"><pre class="contents ">gzip bibledit.tar</pre></div>
+<div class="code"><pre class="contents"><code>gzip bibledit.tar</code></pre></div>
 <p class="p"> The resulting file is named bibledit.tar.gz and can be
         attached to the bug report. </p>
 <p class="p"> If the problem is not a segmentation fault, but it shows
@@ -253,13 +246,12 @@
         that already runs. Or reboot. Or else open a terminal and type
         "killalll bibledit-bin". </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="frozen" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Bibledit is frozen.
+</div></section><section id="frozen"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Bibledit is frozen.
         How to solve that? </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Question: I am completely stopped in my work. I opened a
         project, but the book of Philemon freezes Bibledit completely.
         When restarting it, the screen comes up, but none of the menus
@@ -268,40 +260,37 @@
         option to force-quit). </p>
 <p class="p"> Answer: You can change the project from the commandline. In a
         terminal, type this: </p>
-<div class="code"><pre class="contents ">bibledit --general-configuration --write --key project --value testproject</pre></div>
+<div class="code"><pre class="contents"><code>bibledit --general-configuration --write --key project --value testproject</code></pre></div>
 <p class="p"> Next time you start Bibledit, it will open project
         "testproject" - any name will do here. </p>
 <p class="p"> To change the whole configuration to default values type: </p>
-<div class="code"><pre class="contents ">bibledit --general-configuration --reset</pre></div>
+<div class="code"><pre class="contents"><code>bibledit --general-configuration --reset</code></pre></div>
 </div></div>
-</div></div>
-<div id="onlinehelp" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">The online help does not
+</div></section><section id="onlinehelp"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">The online help does not
         display </span></h2></div>
-<div class="region"><div class="contents"><p class="p"> Bibledit's online help depends on Bibledit's internal
+<div class="region"><div class="contents pagewide"><p class="p"> Bibledit's online help depends on Bibledit's internal
         webserver. The helpfiles only work while Bibledit is running. If
         you quit Bibledit, online help is not available. </p></div></div>
-</div></div>
-<div id="fieldworks" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">FieldWorks
+</div></section><section id="fieldworks"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">FieldWorks
         Language Explorer interferes with Cygwin/X </span></h2></div>
-<div class="region"><div class="contents"><p class="p"> When Bibledit is running on Windows, FLEx won't start. While
+<div class="region"><div class="contents pagewide"><p class="p"> When Bibledit is running on Windows, FLEx won't start. While
         FLEx runs, Bibledit will only start after a long delay due to a
         timeout. It won't have clipboard functionality. The problem is
         being looked into. The current workaround is to start FLEx
         first, and after that Bibledit. Alternatively you can start
         Cygwin's terminal through the Cygwin icon in the Bibledit menu,
         and in that terminal type "startx", and then "bibledit". </p></div></div>
-</div></div>
-<div id="projectquestion" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Project </span></h2></div>
+</div></section><section id="projectquestion"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Project </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="teckitmap" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">When
+<div class="contents pagewide"></div>
+<section id="teckitmap"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">When
         importing data in legacy encoding, can Bibledit use a TECkit
         map? </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Bibledit uses iconv, the standard utility on Linux to convert
         between various encodings. </p>
 <p class="p"> Iconv supports a huge amount of standard encodings. Iconv does
@@ -313,23 +302,21 @@
         there are a couple of characters not right, the search/replace
         functionality quickly fixes that. </p>
 </div></div>
-</div></div>
-<div id="printingquestion" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Printing </span></h3></div>
+</div></section><section id="printingquestion"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Printing </span></h3></div>
 <div class="region">
-<div class="contents"></div>
-<div id="howhtml" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Bibledit
+<div class="contents pagewide"></div>
+<section id="howhtml"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Bibledit
         produces .pdf output, but how do I get .html files? </span></h4></div>
-<div class="region"><div class="contents"><p class="p"> There are a couple of converters on the market, that convert
+<div class="region"><div class="contents pagewide"><p class="p"> There are a couple of converters on the market, that convert
         .pdf files to .html. Use a search engine and look for "PDF to
         HTML", including the quotation marks. This will give you a
         number of programs to try out. </p></div></div>
-</div></div>
-<div id="bold" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Bold does not show up in
+</div></section><section id="bold"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Bold does not show up in
         a printout </span></h4></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Question: </p>
 <p class="p"> Printing a Bibledit project to pdf format, using ArialUnicode
         and SIL Doulos for it, I had the following problem: </p>
@@ -344,25 +331,24 @@
 <p class="p"> SIL Doulos does not have bold. </p>
 <p class="p"> Try Charis SIL, that does have bold, and works fine with me. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="footnotedetached" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">The
+</div></section><section id="footnotedetached"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">The
         footnote caller is detached from the word it belongs to </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> If the USFM code is properly written, the footnote or
         crossreference caller is always connected to the word it belongs
         to. </p>
 <p class="p"> This is an example of proper code: </p>
-<div class="code"><pre class="contents ">Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</code></pre></div>
 <p class="p"> The following two examples of code will cause the footnote
         caller to detach from the word it belongs to: </p>
 <p class="p"> Example one: </p>
-<div class="code"><pre class="contents ">Joseph was a good man \f + \ft Or â€œkind manâ€.\f*</pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man \f + \ft Or â€œkind manâ€.\f*</code></pre></div>
 <p class="p"> Note the space between "man" and the "\f". </p>
 <p class="p"> Example two: </p>
-<div class="code"><pre class="contents ">Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</code></pre></div>
 <p class="p"> In USFM a new line is equal to a space, hence there is a space
         between "man" and the "\f" here also. </p>
 <p class="p"> Many older projects started a new line for each marker, also
@@ -374,11 +360,10 @@
         footnotes is no longer visible - only the note itself is
         visible. </p>
 </div></div>
-</div></div>
-<div id="footcaller" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">The footnote
+</div></section><section id="footcaller"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">The footnote
         caller touches the next word </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> If the caller at the bottom of the page touches the footnote
         text, then you can increase the left margin of the footnote
         text. In the stylesheet editor, edit the left margin of the
@@ -387,26 +372,24 @@
 <p class="p"> Same applies to the Crossreferences. Make the setting under
         marker \xt. </p>
 </div></div>
-</div></div>
-<div id="adobereader" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Adobe Reader
+</div></section><section id="adobereader"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Adobe Reader
         does not load a printed document </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> This may occur in case Adobe Reader has a document loaded
+<div class="region"><div class="contents pagewide"><p class="p"> This may occur in case Adobe Reader has a document loaded
         already. A subsequent document, printed by Bibledit, may not
         load in the Reader. Newer versions of the Reader do not have
         this problem. </p></div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="navigationquestion" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Navigation
+</div></section><section id="navigationquestion"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Navigation
       </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="bart" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">BART does not scroll
+<div class="contents pagewide"></div>
+<section id="bart"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">BART does not scroll
         with Bibledit </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> There can be various causes for this. </p>
 <p class="p"> Cause 1. Has Bibledit Windows Outpost been installed? </p>
 <p class="p"> Cause 2: Does it say "Windows Outpost: Connected" in the
@@ -428,11 +411,10 @@
         menu. It needs to be started each time before you start
         Bibledit. </p>
 </div></div>
-</div></div>
-<div id="scrolling" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Scrolling
+</div></section><section id="scrolling"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Scrolling
         does not work when the Outpost runs on another host </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Some points to check: </p>
 <p class="p"> 1. Ensure in the Windows Outpost preferences that Bibledit can
         contact the other host. </p>
@@ -443,18 +425,17 @@
         that this port is opened in your firewall on Windows. If this
         port is closed, Bibledit can't communicate with the Outpost. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="exportimportquestion" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Export
+</div></section><section id="exportimportquestion"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Export
         / Import </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="swordnotfound" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">It says that
+<div class="contents pagewide"></div>
+<section id="swordnotfound"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">It says that
         the SWORD compiler was not found </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> The SWORD compiler is part of the SWORD API. Bibledit uses
         this compiler to export a project to SWORD format. </p>
 <p class="p"> The most likely problem is that you did not install SWORD from
@@ -466,23 +447,21 @@
         compiler has been installed, but Bibledit still cannot find it,
         the problem might be that the compiler has not been installed in
         the program search path. Type </p>
-<div class="code"><pre class="contents ">echo $PATH</pre></div>
+<div class="code"><pre class="contents"><code>echo $PATH</code></pre></div>
 <p class="p"> in a terminal to see the program search path. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="segmented" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Segmented
+</div></section><section id="segmented"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Segmented
         verses like 1a do not show in SWORD export </span></h2></div>
-<div class="region"><div class="contents"><p class="p"> SWORD currently does not support segmented verses, like verse
+<div class="region"><div class="contents pagewide"><p class="p"> SWORD currently does not support segmented verses, like verse
         1a. To prevent problems Bibledit just takes any "a" or "b" out
         from the verse. SWORD needs to be updated to support this. </p></div></div>
-</div></div>
-<div id="marker" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Marker
+</div></section><section id="marker"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Marker
         «some marker» does not show properly in BibleTime </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Question: I have used the \mi formatting in the list of names
         in Acts 13:1. The output to BibleTime lists the \mi paragraphs
         on separate lines, but the font is changed from my default font
@@ -503,16 +482,15 @@
         information to BibleTime, pls. let the programmer of Bibledit
         know and he can put that information in. </p>
 </div></div>
-</div></div>
-<div id="logfile" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Logfile </span></h2></div>
+</div></section><section id="logfile"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Logfile </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="pango" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Pango-WARNING
+<div class="contents pagewide"></div>
+<section id="pango"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Pango-WARNING
 
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Question: When opening Bibledit and project NIV, the logfile
         says "(bibledit:7567): Pango-WARNING **: Error loading GSUB
         table 4097". I'm not sure what the warning means. The project
@@ -523,11 +501,10 @@
         <span class="link"><a href="http://www.pango.org/" title="http://www.pango.org/">www.pango.org</a></span>.
       </p>
 </div></div>
-</div></div>
-<div id="webserver" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Webserver: Address
+</div></section><section id="webserver"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Webserver: Address
         already in use </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Remark: On starting Bibledit sometimes the logfile says
         "Webserver: Address already in use". </p>
 <p class="p"> Reply: This happens after Bibledit crashed and is restarted
@@ -537,13 +514,12 @@
         Bibledit version 4.1 the internal webserver will have been
         replaced by a proper webserver such as Apache. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="printingnumerals" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Printing
+</div></section><section id="printingnumerals"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Printing
         numerals in a different script </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Question: How can I print the digits in Farsi script? </p>
 <p class="p"> Answer: According to the USFM standard one can use the \cp
         marker to print a different number for the chapter number. And
@@ -579,17 +555,14 @@
         good results.
       </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#introduction" title="Introduction">Introduction</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

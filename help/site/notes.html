@@ -5,41 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>4. Insert notes</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">4. Insert notes</span></h1></div>
+    </a> › <a class="trail" href="index.html#first-steps" title="First Steps">First Steps</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">4. Insert notes</span></h1></div>
 <div class="region">
-<div class="contents">
+<div class="contents pagewide">
 <p class="p"> Bibledit supports a variety of notes that can be made during editing a Bible.</p>
 <div class="steps"><div class="inner"><div class="region"><ol class="steps">
 <li class="steps"><p class="p">Project notes: Notes on the translation project.</p></li>
 <li class="steps"><p class="p">Bible notes: Notes on the Bible text, such as footnotes, endnotes and crossreferences. </p></li>
 </ol></div></div></div>
 </div>
-<div id="projectnotes" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Project notes</span></h2></div>
+<section id="projectnotes"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Project notes</span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="generalnotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">General </span></h3></div>
-<div class="region"><div class="contents">
+<div class="contents pagewide"></div>
+<section id="generalnotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">General </span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> During the process of translation many notes will be made that
         related to the project. </p>
 <p class="p"> Project notes are stored in a database, and are independent of
         any Bible text. That is, whichever project is opened or closed,
         the notes remain the same. </p>
 </div></div>
-</div></div>
-<div id="creatingnotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Creating and
+</div></section><section id="creatingnotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Creating and
         editing project notes </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> To make a new project note press <span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>N</kbd></span></span>. </p>
 <p class="p"> To edit an existing project note click on the blue
         reference(s) for that note. </p>
@@ -67,10 +70,9 @@
         the default category can be set in the <span class="link"><a href="projectnotes.html" title="Preferences Menu">preferences</a></span>.
       </p>
 </div></div>
-</div></div>
-<div id="findingnotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Finding project notes </span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="findingnotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Finding project notes </span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Menu <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Find</span></span> in Project notes (<span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>E</kbd></span></span>, N) allows to do
         Simple searches in the Project notes. </p>
 <p class="p"> This tool searches exacty (except case sensitive) for the
@@ -78,11 +80,10 @@
         punctuation marks and spaces included. Case sensitive can be
         switched on or off. </p>
 </div></div>
-</div></div>
-<div id="navigating" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Navigating
+</div></section><section id="navigating"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Navigating
         to the references of a note </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Project notes usually have one reference. This is the one for
         which the note was created. But additional references can be
         added as well. </p>
@@ -98,11 +99,10 @@
         window. Once there they can be activated and the text belonging
         to that reference will appear in the text editor. </p>
 </div></div>
-</div></div>
-<div id="transfering" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Transferring
+</div></section><section id="transfering"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Transferring
         text from the text editor into the project notes </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p"> Many people have one project with the actual text, and a
         separate project for their project notes. There is a historical
         reason for doing so. This separate project may have checking
@@ -117,24 +117,21 @@
         into the project notes. </p>
 <p class="p"> It takes a good while to do this. </p>
 </div></div>
-</div></div>
-<div id="noteschapter" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Notes overlapping
+</div></section><section id="noteschapter"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Notes overlapping
         chapters </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> If project notes need to overlap the chapter boundaries, the
+<div class="region"><div class="contents pagewide"><p class="p"> If project notes need to overlap the chapter boundaries, the
         reference can be manually entered like, for example: Luke
         2:2-3:3. Bibledit will divide this into two parts: Luke 2 verse
         2 to the end of the chapter, and Luke 3 verse 1 to 3. </p></div></div>
-</div></div>
-<div id="showing" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Showing
+</div></section><section id="showing"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Showing
         notes </span></h3></div>
-<div class="region"><div class="contents"><p class="p"> The <span class="link"><a href="projectnotes.html" title="Preferences Menu">settings
+<div class="region"><div class="contents pagewide"><p class="p"> The <span class="link"><a href="projectnotes.html" title="Preferences Menu">settings
           for which notes to show and how</a></span> are in the View menu. </p></div></div>
-</div></div>
-<div id="exportingnotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Exporting note</span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="exportingnotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Exporting note</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Project notes can be exported into some formats. </p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">Bibledit Notes version 3. This is the format used by the
@@ -146,10 +143,9 @@
 <p class="p"> To see how these formats looks, just export some text and open
         the exported text in a text editor. </p>
 </div></div>
-</div></div>
-<div id="sharingnotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Sharing notes </span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="sharingnotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Sharing notes </span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> The notes that you make on your computer can be shared with
         other members of the team. These notes you make will then also
         be available to the members of the team, and the notes made by
@@ -172,29 +168,26 @@
         automatically, though, by default it is done every hour, but you
         can change this in the remote repository assistant. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div id="biblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Bible notes </span></h2></div>
+</div></section><section id="biblenotes"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Bible notes </span></h2></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Introduction</span></h3></div>
-<div class="region"><div class="contents"><p class="p"> A Bible note is a note that goes in the Biblical text. It can be a
+<div class="contents pagewide"></div>
+<section id="introbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Introduction</span></h3></div>
+<div class="region"><div class="contents pagewide"><p class="p"> A Bible note is a note that goes in the Biblical text. It can be a
       footnote, or a cross reference, or an endnote.</p></div></div>
-</div></div>
-<div id="insertingbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Inserting</span></h3></div>
-<div class="region"><div class="contents"><p class="p"> Bible notes can be inserted manually by applying an
+</div></section><section id="insertingbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Inserting</span></h3></div>
+<div class="region"><div class="contents pagewide"><p class="p"> Bible notes can be inserted manually by applying an
         appropriate note style. For example, if the "f Footnote" style
         is applied, then a <span class="link"><a href="insertmenu.html" title="Insert Menu">window</a></span>
         comes up allowing insertion of this footnote. The same applies
         to endnotes and crossreferences. </p></div></div>
-</div></div>
-<div id="editingbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Editing</span></h3></div>
-<div class="region"><div class="contents">
+</div></section><section id="editingbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Editing</span></h3></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Bible notes are marked by a asterisk or character in the
         editor. Its text is visible at the bottom of it. </p>
 <p class="p"> The asterisk corresponds to no caller (-), the characters to
@@ -205,15 +198,14 @@
 <p class="p"> While editing a note, pressing Page Up takes you back to the
         main body of text, to the place where the footnote starts. </p>
 </div></div>
-</div></div>
-<div id="printingbiblenotes" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Printing </span></h3></div>
+</div></section><section id="printingbiblenotes"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Printing </span></h3></div>
 <div class="region">
-<div class="contents"><p class="p"> If a project is printed, it will show the footnotes, endnotes,
+<div class="contents pagewide"><p class="p"> If a project is printed, it will show the footnotes, endnotes,
         and crossreferences. Printing a list of references does not. </p></div>
-<div id="placement" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Placement </span></h4></div>
-<div class="region"><div class="contents">
+<section id="placement"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Placement </span></h4></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> Footnotes and crossreferences normally appear at the bottom of
         the page, inside the column they belong to. </p>
 <p class="p"> Endnotes normally are printed at the end of all other text.
@@ -229,10 +221,9 @@
         often as you wish. The \zendnotes marker needs to be typed by
         hand because it is not in the stylesheet. </p>
 </div></div>
-</div></div>
-<div id="caller" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Caller</span></h4></div>
-<div class="region"><div class="contents">
+</div></section><section id="caller"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Caller</span></h4></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> A Bible note has a caller. The style of the caller can be set
         in the markers, see <span class="link"><a href="usfm.html" title="USFM">USFM</a></span>
         under marker \f. For crossreferences set it under marker \x. </p>
@@ -255,10 +246,9 @@
         everything, or upon encountering a certain marker. See the style
         \fe to set this. </p>
 </div></div>
-</div></div>
-<div id="paragraph" class="sect"><div class="inner">
-<div class="hgroup"><h4 class="title"><span class="title">Paragraph </span></h4></div>
-<div class="region"><div class="contents">
+</div></section><section id="paragraph"><div class="inner">
+<div class="hgroup pagewide"><h4 class="title"><span class="title">Paragraph </span></h4></div>
+<div class="region"><div class="contents pagewide">
 <p class="p"> For a footnote, the \ft style has a full paragraph setting in
         the stylesheet. Here you can set how the normal footnote
         paragraph is going to look. For a crossreference, set the style
@@ -266,21 +256,18 @@
 <p class="p"> For a new paragraph in the footnote, the style can be set
         under the \fp marker. </p>
 </div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#first-steps" title="First Steps">First Steps</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

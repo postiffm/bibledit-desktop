@@ -5,23 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Filters: TECkit Language Reference</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » <a class="trail" href="preferences.html" title="Preferences Menu">Preferences Menu</a> › <a class="trail" href="preferences.html#filters" title="Filters">Filters</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">Filters: TECkit Language Reference</span></h1></div>
+    </a> › <a class="trail" href="index.html#menu" title="Menu">Menu</a> » <a class="trail" href="preferences.html" title="Preferences Menu">Preferences Menu</a> › <a class="trail" href="preferences.html#filters" title="Filters">Filters</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Filters: TECkit Language Reference</span></h1></div>
 <div class="region">
-<div class="contents"><p class="p">
+<div class="contents pagewide"><p class="p">
         This reference is not a full reference, but a partial one. It describes only that part of the TECkit language that is relevant for how Bibledit uses it. It was assembled while looking at and re-using the information provided with the TECkit package. This information is used with permission of the author of TECkit, and of SIL.
       </p></div>
-<div id="introtec" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Introduction
+<section id="introtec"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The TECkit language is built around simple mapping rules where a Unicode character on the left-hand side of the rule is mapped to or from a Unicode character on the right-hand side. From this basic structure, mapping rules can be extended by the use of character sequences rather than single characters on either side; by the addition of contextual constraints (environments) determining when a rule should apply; and by the use of character classes, optional and repeatable elements, grouping and alternation to express more complex patterns to be matched and processed.
       </p>
@@ -29,11 +33,10 @@
         The TECkit package, as used in Bibledit, is applied to text processing operations entirely dealing with Unicode data.
       </p>
 </div></div>
-</div></div>
-<div id="filestructure" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">File structure and conventions
+</div></section><section id="filestructure"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">File structure and conventions
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         A TECkit description file is strictly line-oriented; every statement is confined to a single logical line. To allow long rules to be broken across several lines, for easier editing, TECkit interprets a final backslash (\) as a “continuation character”; however, only quite complex mappings are likely to need rules that cannot readily be expressed in a single source line.
       </p>
@@ -56,11 +59,10 @@
         A complete TECkit mapping description consists of a header section followed by one or more mapping passes. The simplest Unicode mapping descriptions will contain just one Unicode pass, but for some complex mappings it may be necessary to perform pre- and/or post-processing such as character reordering in other passes. The LHS code space of each pass must correspond to the RHS code space of the pass before it.
       </p>
 </div></div>
-</div></div>
-<div id="headerinfo" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Header information
+</div></section><section id="headerinfo"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Header information
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The mapping file begins with header information, which consists of a number of pieces of information about the encoding and mapping, each specified by a keyword followed by a quoted string:
       </p>
@@ -196,63 +198,61 @@
 <p class="p">
         A typical example of the header information might be:
       </p>
-<div class="code"><pre class="contents ">  EncodingName          "Bibledit-NdebeleDiglot-2008"</pre></div>
-<div class="code"><pre class="contents ">  DescriptiveName       "Simple rules for transliteration"</pre></div>
-<div class="code"><pre class="contents ">  Version               "1"</pre></div>
-<div class="code"><pre class="contents ">  Contact               "mailto:author@domain.org"</pre></div>
-<div class="code"><pre class="contents ">  RegistrationAuthority "Bibledit International Ltd."</pre></div>
-<div class="code"><pre class="contents ">  RegistrationName      "Bibledit Ndebele Diglot"</pre></div>
-<div class="code"><pre class="contents ">  Copyright             "(c)2008 The Author (released under GPL3"</pre></div>
-<div class="code"><pre class="contents ">  LHSFlags              ()</pre></div>
-<div class="code"><pre class="contents ">  RHSFlags              (ExpectsNFD GeneratesNFD)</pre></div>
+<div class="code"><pre class="contents"><code>  EncodingName          "Bibledit-NdebeleDiglot-2008"</code></pre></div>
+<div class="code"><pre class="contents"><code>  DescriptiveName       "Simple rules for transliteration"</code></pre></div>
+<div class="code"><pre class="contents"><code>  Version               "1"</code></pre></div>
+<div class="code"><pre class="contents"><code>  Contact               "mailto:author@domain.org"</code></pre></div>
+<div class="code"><pre class="contents"><code>  RegistrationAuthority "Bibledit International Ltd."</code></pre></div>
+<div class="code"><pre class="contents"><code>  RegistrationName      "Bibledit Ndebele Diglot"</code></pre></div>
+<div class="code"><pre class="contents"><code>  Copyright             "(c)2008 The Author (released under GPL3"</code></pre></div>
+<div class="code"><pre class="contents"><code>  LHSFlags              ()</code></pre></div>
+<div class="code"><pre class="contents"><code>  RHSFlags              (ExpectsNFD GeneratesNFD)</code></pre></div>
 </div></div>
-</div></div>
-<div id="third" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Mapping passes
+</div></section><section id="third"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Mapping passes
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The heart of a mapping description is the series of mapping passes that relate characters or sequences on the LHS to those on the RHS. In simple cases there is just one pass.
       </p>
 <p class="p">
         Each pass begins with a header line that declares the encoding space in which it operates:
       </p>
-<div class="code"><pre class="contents ">  pass( pass-type )</pre></div>
+<div class="code"><pre class="contents"><code>  pass( pass-type )</code></pre></div>
 <p class="p">
         where pass-type is one of:
       </p>
-<div class="code"><pre class="contents ">  Byte</pre></div>
-<div class="code"><pre class="contents ">  Unicode</pre></div>
-<div class="code"><pre class="contents ">  Byte_Unicode</pre></div>
-<div class="code"><pre class="contents ">  Unicode_Byte</pre></div>
+<div class="code"><pre class="contents"><code>  Byte</code></pre></div>
+<div class="code"><pre class="contents"><code>  Unicode</code></pre></div>
+<div class="code"><pre class="contents"><code>  Byte_Unicode</code></pre></div>
+<div class="code"><pre class="contents"><code>  Unicode_Byte</code></pre></div>
 <p class="p">
         As Bibledit only works with UTF-8 encoded data, the pass-type should always be Unicode.
       </p>
 <p class="p">
         There are also special “normalization pass” types that can be used in special cases. To create a normalization pass, specify pass-type as one of:
       </p>
-<div class="code"><pre class="contents ">  NFC_fwd</pre></div>
-<div class="code"><pre class="contents ">  NFD_fwd</pre></div>
-<div class="code"><pre class="contents ">  NFC_rev</pre></div>
-<div class="code"><pre class="contents ">  NFD_rev</pre></div>
-<div class="code"><pre class="contents ">  NFC</pre></div>
-<div class="code"><pre class="contents ">  NFD</pre></div>
+<div class="code"><pre class="contents"><code>  NFC_fwd</code></pre></div>
+<div class="code"><pre class="contents"><code>  NFD_fwd</code></pre></div>
+<div class="code"><pre class="contents"><code>  NFC_rev</code></pre></div>
+<div class="code"><pre class="contents"><code>  NFD_rev</code></pre></div>
+<div class="code"><pre class="contents"><code>  NFC</code></pre></div>
+<div class="code"><pre class="contents"><code>  NFD</code></pre></div>
 <p class="p">
         As the names suggest, these apply the NFC or NFD Unicode normalization forms as part of the forward, reverse, or both processing “pipelines”. Most mappings will not need to include explicit normalization passes, as the ExpectsNFC or ExpectsNFD flag can be used to request pre-normalization of Unicode data before any mapping rules are applied, and applications using TECkit can explicitly request either NFC or NFD data when mapping to Unicode. The only reason to use a normalization pass in a mapping description would be to ensure that data is in a particular normalization form somewhere in the middle of a multi-pass Unicode transduction.
       </p>
 </div></div>
-</div></div>
-<div id="class" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Class definitions
+</div></section><section id="class"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Class definitions
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Character classes may be used to make the mapping description more readable and concise; suitable class definitions allow a single rule to express a whole set of related mappings. They are typically used in contextual constraints or as elements of rules that reorder character sequences.
       </p>
 <p class="p">
         Classes are defined with the UniClass statement:
       </p>
-<div class="code"><pre class="contents ">  UniClass [ name ] = ( unicodeSequence )</pre></div>
+<div class="code"><pre class="contents"><code>  UniClass [ name ] = ( unicodeSequence )</code></pre></div>
 <p class="p">
         Class names, always enclosed in square brackets, are “identifiers” that may contain letters, digits, and the underscore character; they may not begin with a digit. Unlike the keywords of the TECkit language, they are case-sensitive. The Unicode sequence is a space-separated list of character codes, similar to those used in mapping rules (see below), with the addition of a “range” notation: two character codes separated by .. represent the complete set of characters from the first to the second (inclusive).
       </p>
@@ -267,31 +267,29 @@
   UniClass [letter] = ( U+0041..U+005a U+0061..U+007a )
 </span></p>
 </div></div>
-</div></div>
-<div id="defaultsunmapped" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Defaults for unmapped characters
+</div></section><section id="defaultsunmapped"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Defaults for unmapped characters
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         In Unicode passes, any characters not explicitly matched by mapping rules will be output unchanged.
       </p></div></div>
-</div></div>
-<div id="mappingrules" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Mapping rules
+</div></section><section id="mappingrules"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Mapping rules
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         The actual mapping from Unicode to Unicode is expressed as a list of mapping rules. A mapping description actually contains two complete sets of mapping rules, one set that matches characters in the first Unicode text and generates Unicode, and the other set that match Unicode characters in the second text and generate Unicode for the first text. However, in most cases it is simplest to express both mappings at once, using bi-directional rules where either side of the rule can act as “match” with the other being “replacement”.
       </p>
 <p class="p">
         The general form of a mapping rule is:
       </p>
-<div class="code"><pre class="contents ">  lhsSeq [ / lhsContext ] operator rhsSeq [ / rhsContext ]</pre></div>
+<div class="code"><pre class="contents"><code>  lhsSeq [ / lhsContext ] operator rhsSeq [ / rhsContext ]</code></pre></div>
 <p class="p">
         Here, <span class="file">operator</span> indicates whether this rule is to be used only when mapping from the left-hand side to the right, from the right-hand side to the left, or (the most common case) in both directions:
       </p>
-<div class="code"><pre class="contents ">  &lt;&gt;   bidirectional mapping rule</pre></div>
-<div class="code"><pre class="contents ">  &gt;    unidirectional LHS-to-RHS rule</pre></div>
-<div class="code"><pre class="contents ">  &lt;    unidirectional RHS-to-LHS rule</pre></div>
+<div class="code"><pre class="contents"><code>  &lt;&gt;   bidirectional mapping rule</code></pre></div>
+<div class="code"><pre class="contents"><code>  &gt;    unidirectional LHS-to-RHS rule</code></pre></div>
+<div class="code"><pre class="contents"><code>  &lt;    unidirectional RHS-to-LHS rule</code></pre></div>
 <p class="p">
         The <span class="file">lhsSeq</span> and <span class="file">rhsSeq</span> parts of the rule are simple lists of character codes. These may be expressed as decimal numbers or as hexadecimal (prefixed with 0x). In Unicode sequences, characters may also be listed by their Unicode character names as found in <span class="link"><a href="http://www.unicode.org/Public/UNIDATA/UnicodeData.txt" title="http://www.unicode.org/Public/UNIDATA/UnicodeData.txt">http://www.unicode.org/Public/UNIDATA/UnicodeData.txt</a></span>, with all non-alphanumeric characters in the names converted to underscores; thus, for example, <span class="file">thai_character_ko_kai</span> may be used instead of 0x0E01 to make the mapping description file more self-documenting. The Unicode character names are not case-sensitive.
       </p>
@@ -304,25 +302,25 @@
 <p class="p">
         For contextually constrained mappings, the <span class="file">lhsContext</span> and <span class="file">rhsContext</span> parts of the mapping rule are used. These use a “slash … underscore” notation:
       </p>
-<div class="code"><pre class="contents ">  / preContextSeq _ postContextSeq</pre></div>
+<div class="code"><pre class="contents"><code>  / preContextSeq _ postContextSeq</code></pre></div>
 <p class="p">
         The match and replace strings and the pre- and post-contexts may be simple sequences of character codes, or may be more complex expressions using the following “regular expression” elements:
       </p>
-<div class="code"><pre class="contents ">  [cls]    match any character from the class cls</pre></div>
-<div class="code"><pre class="contents ">  .        match any single character</pre></div>
-<div class="code"><pre class="contents ">  #        match beginning or end of input text</pre></div>
-<div class="code"><pre class="contents ">  ^item    ‘not item’: match anything except the given item</pre></div>
+<div class="code"><pre class="contents"><code>  [cls]    match any character from the class cls</code></pre></div>
+<div class="code"><pre class="contents"><code>  .        match any single character</code></pre></div>
+<div class="code"><pre class="contents"><code>  #        match beginning or end of input text</code></pre></div>
+<div class="code"><pre class="contents"><code>  ^item    ‘not item’: match anything except the given item</code></pre></div>
 <p class="p">
         The 'not item' applies to single items only; negated groups are not supported.
       </p>
-<div class="code"><pre class="contents ">  (...)    grouping (for optionality or repeat counts)</pre></div>
-<div class="code"><pre class="contents ">  |        alternation (within group): match either preceding or following sequence</pre></div>
-<div class="code"><pre class="contents ">  {a,b}    match preceding item minimum a times, maximum b (0 ≤ a ≤ b ≤ 15)</pre></div>
-<div class="code"><pre class="contents ">  ?        match preceding item 0 or 1 times</pre></div>
-<div class="code"><pre class="contents ">  *        match preceding item 0 to 15 times</pre></div>
-<div class="code"><pre class="contents ">  +        match preceding item 1 to 15 times</pre></div>
-<div class="code"><pre class="contents ">  =tag     tag preceding item for match/replacement association</pre></div>
-<div class="code"><pre class="contents ">  @tag     duplicate the tagged item (including groups) from LHS</pre></div>
+<div class="code"><pre class="contents"><code>  (...)    grouping (for optionality or repeat counts)</code></pre></div>
+<div class="code"><pre class="contents"><code>  |        alternation (within group): match either preceding or following sequence</code></pre></div>
+<div class="code"><pre class="contents"><code>  {a,b}    match preceding item minimum a times, maximum b (0 ≤ a ≤ b ≤ 15)</code></pre></div>
+<div class="code"><pre class="contents"><code>  ?        match preceding item 0 or 1 times</code></pre></div>
+<div class="code"><pre class="contents"><code>  *        match preceding item 0 to 15 times</code></pre></div>
+<div class="code"><pre class="contents"><code>  +        match preceding item 1 to 15 times</code></pre></div>
+<div class="code"><pre class="contents"><code>  =tag     tag preceding item for match/replacement association</code></pre></div>
+<div class="code"><pre class="contents"><code>  @tag     duplicate the tagged item (including groups) from LHS</code></pre></div>
 <p class="p">
         The @tag can only occur on RHS. It is typically used to implement reordering.
       </p>
@@ -348,18 +346,17 @@
         The maximum potential length of any pre-context (considering all repeat counts) in a pass, plus the maximum potential match string, plus the maximum potential post-context, must not exceed 255 characters. Similarly, the maximum output that can be generated from any rule is limited to 255 characters.
       </p>
 </div></div>
-</div></div>
-<div id="macros" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Macros
+</div></section><section id="macros"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Macros
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         TECkit supports a simple macro facility; this may be used to define symbols that act as “shorthand” for frequently-used fragments of a mapping description, such as character classes that are needed in multiple passes, or sequences used in the context of multiple rules.
       </p>
 <p class="p">
         A macro is defined with a line of the form:
       </p>
-<div class="code"><pre class="contents ">  Define name &lt;arbitrary TECkit source&gt;</pre></div>
+<div class="code"><pre class="contents"><code>  Define name &lt;arbitrary TECkit source&gt;</code></pre></div>
 <p class="p">
         Following such a line, wherever such names are found in the description, these are treated as representing the specified source texts.
       </p>
@@ -372,56 +369,51 @@
 <p class="p">
         Note that macros must be defined before they are used, including any use in the definition of other macros; thus, it is legitimate to say:
       </p>
-<div class="code"><pre class="contents ">Define NUL   0x00</pre></div>
-<div class="code"><pre class="contents ">Define DEL   0x7F</pre></div>
-<div class="code"><pre class="contents ">Define ASCII NUL..DEL</pre></div>
+<div class="code"><pre class="contents"><code>Define NUL   0x00</code></pre></div>
+<div class="code"><pre class="contents"><code>Define DEL   0x7F</code></pre></div>
+<div class="code"><pre class="contents"><code>Define ASCII NUL..DEL</code></pre></div>
 <p class="p">
         But with the definitions rearranged so that NUL and DEL are not defined when they are used in the definition of ASCII, even if they are defined subsequently, the result will be a compile-time error:
       </p>
-<div class="code"><pre class="contents ">Define ASCII NUL..DEL</pre></div>
-<div class="code"><pre class="contents ">Define NUL   0x00</pre></div>
-<div class="code"><pre class="contents ">Define DEL   0x7F</pre></div>
-<div class="code"><pre class="contents ">ByteClass[asc] = (ASCII)</pre></div>
+<div class="code"><pre class="contents"><code>Define ASCII NUL..DEL</code></pre></div>
+<div class="code"><pre class="contents"><code>Define NUL   0x00</code></pre></div>
+<div class="code"><pre class="contents"><code>Define DEL   0x7F</code></pre></div>
+<div class="code"><pre class="contents"><code>ByteClass[asc] = (ASCII)</code></pre></div>
 <p class="p">
         This will generate an error on the ByteClass line, because the identifiers NUL and DEL found in the expansion of ASCII will be considered undefined.
       </p>
 </div></div>
-</div></div>
-<div id="unicode" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Unicode-only mappings
+</div></section><section id="unicode"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Unicode-only mappings
       </span></h2></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         The TECkit system, while targeted primarily at byte/Unicode conversion, is used by Bibledit for Unicode mapping operations. A mapping description need not contain a Byte_Unicode pass at all. If it contains only Unicode passes, both input and output are Unicode data.
       </p></div></div>
-</div></div>
-<div id="example" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Example
+</div></section><section id="example"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Example
       </span></h2></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         A simple example of a TECkit mapping may help you to start writing your own quickly.
       </p>
-<div class="code"><pre class="contents ">EncodingName "Example"
+<div class="code"><pre class="contents"><code>EncodingName "Example"
 pass (Unicode)
 ; This simple example transliterates the Latin characters a and b
 ; to the Greek α and β.
 U+0061  &gt;  U+03B1
-U+0062  &gt;  U+03B2</pre></div>
+U+0062  &gt;  U+03B2</code></pre></div>
 <p class="p">
         End of example.
       </p>
 </div></div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="preferences.html#filters" title="Filters">Filters</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>

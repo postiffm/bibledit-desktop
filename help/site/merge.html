@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>07. Merge different projects</title>
 <link rel="stylesheet" type="text/css" href="C.css">
-<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
 </head>
-<body><div class="page" role="main">
-<div class="header"><div class="trails" role="navigation"><div class="trail">
+<body><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Bibledit-Desktop Help">
       <span class="media"><span class="media media-image"><img src="images/biblesociety.jpeg" class="media media-inline" alt=""></span></span>
-    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div>
-<div class="body">
-<div class="hgroup"><h1 class="title"><span class="title">07. Merge different projects</span></h1></div>
+    </a> › <a class="trail" href="index.html#tools" title="Advanced tools">Advanced tools</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">07. Merge different projects</span></h1></div>
 <div class="region">
-<div class="contents"></div>
-<div id="introductiontomerge" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Introduction</span></h2></div>
-<div class="region"><div class="contents">
+<div class="contents pagewide"></div>
+<section id="introductiontomerge"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         At times there may be a need to branch off a translation project, so that two translation projects exists, the main one and the branch. Various people then can work on the branch. After some changes have been made, there may be a need to merge the branched project back into the main project.
       </p>
@@ -29,10 +33,9 @@
         Bibledit provides the "Merge" tool for the above scenarios and for any other scenario the user can use it for.
       </p>
 </div></div>
-</div></div>
-<div id="setup" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Setup</span></h2></div>
-<div class="region"><div class="contents">
+</div></section><section id="setup"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Setup</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">
         In order for data of two projects to be merged succesfully, both of the projects need to have what is called a common ancestor. That means that going back in the history of the projects, there must be a moment in time that the data of the projects was the same. Usually this is accomplished by:
       </p>
@@ -46,11 +49,10 @@
         So, the setup is simple. Just take one project, or export from one project and import it into the other one. The data of these two projects is now capable to be merged after some changes have been made in the text.
       </p>
 </div></div>
-</div></div>
-<div id="operation" class="sect"><div class="inner">
-<div class="hgroup"><h2 class="title"><span class="title">Operation</span></h2></div>
+</div></section><section id="operation"><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Operation</span></h2></div>
 <div class="region">
-<div class="contents">
+<div class="contents pagewide">
 <p class="p">
         So, how does the merge work?
       </p>
@@ -79,10 +81,10 @@
         It shows various possible actions to take. These are described below.
       </p>
 </div>
-<div id="mergechaptereditedproj" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Merge chapter of edited project and master project
+<section id="mergechaptereditedproj"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Merge chapter of edited project and master project
       </span></h3></div>
-<div class="region"><div class="contents">
+<div class="region"><div class="contents pagewide">
 <p class="p">
         Once the merge operation starts it looks through the history of both projects to find the common ancestor for this chapter. It then tries the merge operation. If all went fine, then that's it: The job has been done.
       </p>
@@ -93,39 +95,33 @@
         If all did not go well, then that means that there were changes in both of the projects that would affect one and the same place. Bibledit does not know in such a case which of the two changes is the correct one, and needs the user to select the correct text. A window will then open showing one or more pairs of buttons. Each button has a label showing the possible text. Clicking on the one button inserts the one text, and clicking the other button inserts the other text. If you click a button, it means that you approve of the text that is in its label. When all places have been corrected, then the OK button at the bottom of the window becomes active. Clicking that saves the text, and ends the merge operation.
       </p>
 </div></div>
-</div></div>
-<div id="mergechapter" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Merge chapter of edited project and master project, and approve of each change as compared to master project
+</div></section><section id="mergechapter"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Merge chapter of edited project and master project, and approve of each change as compared to master project
       </span></h3></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         This is an addition to the simple merge procedure as descibed above. The extra thing here is that changes are not automatically accepted. Each change must be approved of manually. A window becomes visible that allows to approve of change. If a button has a "+", then it means there is an addition to the master project. And if it has a "-", then that means that something was deleted from the master project. Approval of a change is made by just clicking the button. Once one or more changes have been approved, if the user clicks the "Save" button, then the changes will be saved in the master project. Change won't be saved to the edited project. If that is desired, as it usually is, then the merge operation should be repeated, with the option chosen to copy the chapter from the master project to the edited project.
       </p></div></div>
-</div></div>
-<div id="copychapter" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Copy chapter of master project to edited project
+</div></section><section id="copychapter"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Copy chapter of master project to edited project
       </span></h3></div>
-<div class="region"><div class="contents"><p class="p">
+<div class="region"><div class="contents pagewide"><p class="p">
         This copies a chapter from the master project to the edited project. The chapter to be copied is the one that is visible in the editor.
       </p></div></div>
-</div></div>
-<div id="copyeverything" class="sect"><div class="inner">
-<div class="hgroup"><h3 class="title"><span class="title">Copy everything of master project to edited project</span></h3></div>
-<div class="region"><div class="contents"><p class="p">
+</div></section><section id="copyeverything"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Copy everything of master project to edited project</span></h3></div>
+<div class="region"><div class="contents pagewide"><p class="p">
         This copies everything from the master project to the edited project. Useful for ensuring that the edited project is the same as the master.
       </p></div></div>
-</div></div>
+</div></section>
 </div>
-</div></div>
-<div class="sect sect-links" role="navigation">
-<div class="hgroup"></div>
-<div class="contents"><div class="links guidelinks"><div class="inner">
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">More Information</span></h2></div>
 <div class="region"><ul><li class="links "><a href="index.html#tools" title="Advanced tools">Advanced tools</a></li></ul></div>
 </div></div></div>
+</div></section>
 </div>
-</div>
-<div class="clear"></div>
-</div>
-<div class="footer"></div>
-</div></body>
+<div class="clear"></div></article><footer><div class="inner pagewide"></div></footer>
+</div></main></body>
 </html>
