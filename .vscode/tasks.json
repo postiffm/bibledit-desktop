@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Make: build bibledit-desktop",
+			"command": "/usr/bin/make",
+			"args": [
+				"-j2"
+			],
+			"options": {
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "shell",
+			"label": "Make: install bibledit-desktop",
+			"command": "/usr/bin/make",
+			"args": [
+				"install"
+			],
+			"options": {
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		}
+	]
+}
