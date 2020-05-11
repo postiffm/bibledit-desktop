@@ -49,16 +49,15 @@
 #include <glib/gi18n.h>
 #include <locale.h>
 #include <errno.h>
-#include "options.h"
 #include "concordance.h"
 #include "referencebibles.h"
 #include "crossrefs.h"
+#include "debug.h"
 //#ifdef WIN32
 //#include <Windows.h>
 //#endif
 //#include "debug.h"
 
-Options *options;
 directories *Directories;
 Settings *settings;
 BookLocalizations *booklocalizations;
@@ -71,6 +70,16 @@ VCS *vcs;
 Concordance *concordance;
 ReferenceBibles *refbibles;
 CrossReferences *crossrefs;
+static MainWindow *mainwindow;
+
+// Forward declarations
+static void startup_callback (GtkApplication *app, gpointer data);
+static void shutdown_callback (GtkApplication *app, gpointer data);
+static void activate_callback (GtkApplication *app, gpointer data);
+static gint command_line_options_callback (GApplication *application,
+		GVariantDict *options, gpointer user_data);
+static gboolean debug_callback (const gchar *option_name, const gchar *value,
+		gpointer data, GError **error);
 
 int main(int argc, char *argv[])
 {
@@ -89,9 +98,41 @@ int main(int argc, char *argv[])
   // The type system is now initialised automatically.
   // g_type_init();
   // Initialize GTK
-  gtk_init(&argc, &argv);
+  // gtk_init is called internally by GtkApplication
+  // gtk_init(&argc, &argv);
 
-  options = new Options(argc, argv);
+  GtkApplication *app;
+  app = gtk_application_new ("org.bibleditdesktop",
+                             G_APPLICATION_FLAGS_NONE);
+  g_signal_connect (app, "activate", G_CALLBACK (activate_callback), NULL);
+  g_signal_connect (app, "startup", G_CALLBACK (startup_callback), argv);
+  g_signal_connect (app, "shutdown", G_CALLBACK (shutdown_callback), NULL);
+  g_signal_connect (app, "handle-local-options",
+                    G_CALLBACK (command_line_options_callback), NULL);
+
+  const GOptionEntry options[] = {
+		{ "version", 0, 0, G_OPTION_ARG_NONE, NULL,
+				_("Show version number"), NULL },
+		{"debug", 'd', G_OPTION_FLAG_OPTIONAL_ARG,
+				G_OPTION_ARG_CALLBACK, (gpointer) debug_callback,
+				_("Debug mode"),
+				// TRANSLATORS: This is used to construct the option
+				// description "--debug=[N]" in the help text, when
+				// a user runs "bibledit-desktop --help"
+				_("[N]") },
+		{ NULL }
+  };
+  g_application_add_main_option_entries (G_APPLICATION (app), options);
+
+  g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+  delete Directories; // must be last because other objects rely on it
+  return 0;
+}
+
+static void startup_callback (GtkApplication *app, gpointer data)
+{
+  char **argv = (char**) data;
 
   // Create a new directories 'factory' and initialize it with argv[0]
   Directories = new directories(argv[0]);
@@ -99,8 +140,8 @@ int main(int argc, char *argv[])
   // Check whether it is fine to start the program.
   // If not, quit the program normally. Must come 
   // after the Directories object is initialized.
-  if (!check_bibledit_startup_okay(argc, argv)) {
-    return 0;
+  if (!check_bibledit_startup_okay ()) {
+    exit (0);
   }
 
 #ifdef WIN32
@@ -147,7 +188,7 @@ int main(int argc, char *argv[])
 		dup2(stdout_copy, 1);
 		dup2(stderr_copy, 2);
 		perror("bibledit.cpp:main:dup(1) call failed");
-		return 1;
+		exit (1);
 	}
   }
   
@@ -164,7 +205,6 @@ int main(int argc, char *argv[])
   gw_message("Wrote PID to lock file");
   
   // Call after the stdout/stderr redirects above
-  options->print();
   Directories->print();
   // Print what we know about the language setup
   gw_message("BIBLEDIT_LOCALEDIR " + ustring(BIBLEDIT_LOCALEDIR));
@@ -183,6 +223,14 @@ int main(int argc, char *argv[])
   gw_message("LC_ALL        \t" + ustring(setlocale(LC_ALL, NULL)));
   gw_message("LC_CTYPE      \t" + ustring(setlocale(LC_CTYPE, NULL)));
 
+  gw_message("GTK version   \t" + std::to_string(gtk_get_major_version()) + "." +
+                                  std::to_string(gtk_get_minor_version()) + "." +
+	                          std::to_string(gtk_get_micro_version()));
+
+  gw_message("WEBKIT2       \t" + std::to_string(webkit_get_major_version()) + "." +
+                                  std::to_string(webkit_get_minor_version()) + "." +
+	                          std::to_string(webkit_get_micro_version()));
+  
   // Check on runtime requirements.
   runtime_initialize ();
   // Initialize the xml library.
@@ -216,12 +264,39 @@ int main(int argc, char *argv[])
   upgrade();
   gw_message("Finished upgrade");
   // Window icon fallback.
-  gtk_window_set_default_icon_from_file(gw_build_filename(Directories->get_package_data(), "bibledit-desktop.xpm").c_str(), NULL);
+  gtk_window_set_default_icon_name ("bibledit-desktop");
   gw_message("Set up window icon fallback");
+
+  // Load the GTK CSS
+  GError *error = NULL;
+  GtkCssProvider *css_provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_path(css_provider,
+      gw_build_filename(Directories->get_package_data(), "bibledit-desktop.css").c_str(),
+      &error);
+  if (error) {
+    gw_error("Error loading the GTK stylesheet file: bibledit-desktop.css");
+    exit (1);
+  }
+  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+      GTK_STYLE_PROVIDER (css_provider),
+      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gw_message("Loaded the GTK stylesheet");
+
+  // Initialize the app menu
+  GMenu *menu = g_menu_new ();
+  g_menu_append (menu, _("_System log"), "app.systemlog");
+  g_menu_append (menu, _("_About"), "app.about");
+  g_menu_append (menu, _("_Quit"), "app.quit");
+  gtk_application_set_app_menu (app, G_MENU_MODEL (menu));
+  g_object_unref (menu);
+
   // Start the gui.
-  MainWindow *mainwindow = new MainWindow(accelerator_group, settings, urltransport, vcs);
-  gw_message("Finished initialization...running gtk_main");
-  gtk_main();
+  mainwindow = new MainWindow (accelerator_group, settings, urltransport, vcs);
+  gw_message("Finished initialization...");
+}
+
+static void shutdown_callback (GtkApplication *app, gpointer data)
+{
   delete mainwindow;
 
   // Remove lockfile
@@ -248,12 +323,72 @@ int main(int argc, char *argv[])
   delete versifications;
   delete booklocalizations;
   delete settings;
-  delete Directories; // must be last, because above rely on it
   if (concordance) { delete concordance; }
   if (refbibles) { delete refbibles; }
-  
-  // Quit.
-  return 0;
+}
+
+static void activate_callback (GtkApplication *app, gpointer data)
+{
+	GtkWindow *window;
+
+	window = gtk_application_get_active_window (app);
+	gtk_window_present (window);
+}
+
+static gint command_line_options_callback (GApplication *application,
+		GVariantDict *options, gpointer user_data)
+{
+	if (g_variant_dict_contains (options, "version")) {
+		g_print ("Bibledit-Desktop " VERSION "\n");
+		return 0;	// No error but exit
+	}
+
+	return -1;	// Negative result means "continue"
+}
+
+static gboolean debug_callback (const gchar *option_name, const gchar *value,
+		gpointer data, GError **error)
+{
+	if (!strcmp (option_name, "--debug") || !strcmp (option_name, "-d"))
+	{
+		glong debug_level;
+
+		if (!value)
+			debug_level = 1;
+		else {
+			gchar *end;
+			errno = 0;
+			debug_level = strtol (value, &end, 0);
+
+			if (*value == '\0' || *end != '\0') {
+				g_set_error (error,
+							 G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
+							 _("Cannot parse integer value “%s” for %s"),
+							 value, option_name);
+				return FALSE;
+			}
+
+			if (errno == ERANGE) {
+				g_set_error (error,
+							 G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
+							 _("Integer value “%s” for %s out of range"),
+							 value, option_name);
+				return FALSE;
+			}
+		}
+
+		if (debug_level > 0) {
+			global_debug_level = 1;
+			debug_msg_no = 1;
+			DEBUG ("Debugging is turned on")
+		}
+		return TRUE;	// Success
+	}
+
+	g_set_error (error,
+				 G_OPTION_ERROR, G_OPTION_ERROR_UNKNOWN_OPTION,
+				 _("Unknown option %s"), option_name);
+	return FALSE;
 }
 
 

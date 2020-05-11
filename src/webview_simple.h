@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2016 Matt Postiff.
+ ** Copyright (©) 2018 Matt Postiff.
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -17,25 +17,24 @@
  **  
  */
 
-#ifndef INCLUDED_OPTIONS_H
-#define INCLUDED_OPTIONS_H
+#ifndef INCLUDED_WEBVIEW_SIMPLE_H
+#define INCLUDED_WEBVIEW_SIMPLE_H
 
-#include <vector>
+#include <webkit2/webkit2.h>
 #include "ustring.h"
-using namespace std;
 
-class Options {
+// This class abstracts out some code that is common to several windows that
+// show simple content in a webview.
+class webview_simple {
  public:
-  Options(int argc, char **argv);
-  void print(void);
-  bool unknownArgsPresent(void);
-  ustring buildUnknownArgsList(void);
-  int debug;   // --debug[=N]
- private:
-   vector<char *> extraArgs;  
-   vector<char *> unknownArgs;
-};
+  void decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type);
 
-extern Options *options; // defined in bibledit.cpp
+  // Ensure that this class cannot be instantiated, using this
+  // pure virtual method. The derived class MUST implement
+  // this method for things to work.
+  virtual void webview_process_navigation (const ustring &url /*gchar * url*/) = 0;
+};
 
 #endif

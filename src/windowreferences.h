@@ -27,10 +27,10 @@
 #include "reference.h"
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
-
-class WindowReferences : public FloatingWindow
+class WindowReferences : public FloatingWindow, webview_simple
 {
 public:
   WindowReferences(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup, bool reference_management_enabled);
@@ -52,9 +52,16 @@ private:
   void open();
   void load (const ustring & filename);
   void clear();
-  static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-  void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
-  void load_webview (const gchar *url);
+  static gboolean
+    on_decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type,
+			 gpointer                 user_data);
+
+  // void decide_policy_cb (called by above) is provided by the base class webview_simple
+  // and the following has to be implemented by this class.
+  void webview_process_navigation (const ustring &url);
+
   ustring active_url;
   map <ustring, unsigned int> scrolling_position;
   void html_write_references (HtmlWriter2& htmlwriter);

@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2016 Matt Postiff.
+ ** Copyright (©) 2016-2018 Matt Postiff.
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -26,7 +26,8 @@
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
 #include "editor.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
 //----------------------------------------------------------------------------------
 // The tabbed window is a GTK notebook that can display information about the text
@@ -43,7 +44,7 @@ class WindowTabbed; // forward declaration
 // that is intended to go into a tab should inherit from this class. For instance,
 // a concordance tab "is" a SingleTab. I don't have it implemented this way at
 // the moment, but theoretically it should be able to be implemented this way.
-class SingleTab
+class SingleTab : webview_simple
 {
 public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
@@ -54,17 +55,25 @@ public:
     inline const ustring &getTitle() const { return title; }
 private:
     // I might not have to store any of these...
-    GtkWidget *scrolledwindow; // owned by the notebook, I think
-    GtkWidget *webview; // owned by scrolled window
+    GtkWidget *webview; // owned by notebook
     GtkWidget *close_button;
     ustring title;
     WindowTabbed *parent;
-    
-    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
+
+    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify? Some of it is factored
+    // into webview_simple.h/cpp
     static void on_close_button_clicked (GtkButton *button, gpointer user_data);
-    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-    void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
-    void html_link_clicked (const gchar * url);
+    // You might think in the floating window base class, but some windows are webviews, and others are other custom things,
+    // so that might not work too well!
+    static gboolean
+      on_decide_policy_cb (WebKitWebView           *web_view,
+			   WebKitPolicyDecision    *decision,
+			   WebKitPolicyDecisionType decision_type,
+			   gpointer                 user_data);
+
+    // void decide_policy_cb (called by above) is provided by the base class webview_simple
+    // and the following has to be implemented by this class.
+    void webview_process_navigation (const ustring &url);
 };
 
 class WindowTabbed : public FloatingWindow
@@ -72,7 +81,6 @@ class WindowTabbed : public FloatingWindow
 public:
     WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
     virtual ~WindowTabbed();
-    void Concordance(const ustring &projname);
     void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);    // create a new tab, fill with given content
     void updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml); // update existing tab, all new content
     bool tabExists(const ustring &tabTitle) const;
@@ -95,6 +103,5 @@ public:
     void setReady(bool _ready) { ready = _ready; }
     bool getReady(void)        { return ready; }
 };
-
 
 #endif

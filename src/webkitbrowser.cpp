@@ -1,20 +1,20 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 
@@ -150,7 +150,7 @@ WebkitBrowser::WebkitBrowser(GtkWidget * parent_vbox)
   gtk_progress_bar_set_ellipsize (GTK_PROGRESS_BAR (progressbar), PANGO_ELLIPSIZE_MIDDLE);
 
   // Set gui as if loading has finished, so that the sensitivitiy of buttons gets right.
-  load_finished (NULL, NULL);
+  load_finished (NULL);
 
   // Signals.
   g_signal_connect ((gpointer) button_back, "clicked", G_CALLBACK (on_button_back_clicked), gpointer (this));
@@ -160,11 +160,10 @@ WebkitBrowser::WebkitBrowser(GtkWidget * parent_vbox)
   g_signal_connect ((gpointer) button_home, "clicked", G_CALLBACK (on_button_home_clicked), gpointer (this));
   g_signal_connect ((gpointer) entry_url, "activate", G_CALLBACK (on_entry_url_activate), gpointer (this));
   g_signal_connect ((gpointer) button_enter, "clicked", G_CALLBACK (on_button_enter_clicked), gpointer (this));
-  g_signal_connect(G_OBJECT(webview), "grab_focus", G_CALLBACK(on_webview_grab_focus), gpointer(this));
-  g_signal_connect (G_OBJECT (webview), "load-committed", G_CALLBACK (load_commit_cb), gpointer(this));
-  g_signal_connect (G_OBJECT (webview), "load-started", G_CALLBACK (load_started_cb), gpointer(this));
-  g_signal_connect (G_OBJECT (webview), "load-progress-changed", G_CALLBACK (progress_change_cb), gpointer(this));
-  g_signal_connect (G_OBJECT (webview), "load-finished", G_CALLBACK (load_finished_cb), gpointer(this));
+  g_signal_connect (G_OBJECT (webview), "grab-focus", G_CALLBACK (on_webview_grab_focus), gpointer (this));
+  g_signal_connect (G_OBJECT (webview), "load-changed", G_CALLBACK (load_changed_cb), gpointer (this));
+  g_signal_connect (G_OBJECT (webview), "notify::estimated-load-progress",
+                    G_CALLBACK (progress_change_cb), gpointer(this));
   g_signal_connect (G_OBJECT (webview), "hovering-over-link", G_CALLBACK (link_hover_cb), gpointer(this));
 }
 
@@ -192,14 +191,14 @@ bool WebkitBrowser::focused()
 void WebkitBrowser::copy()
 {
   if (focused()) {
-    webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (webview));
+    webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview), WEBKIT_EDITING_COMMAND_COPY);
   }
 }
 
 
 void WebkitBrowser::go_to(const ustring & url)
 {
-  webkit_web_view_open (WEBKIT_WEB_VIEW(webview), url.c_str());
+  webkit_web_view_load_uri (WEBKIT_WEB_VIEW(webview), url.c_str());
 }
 
 
@@ -261,7 +260,7 @@ void WebkitBrowser::on_button_stop_clicked (GtkButton *button, gpointer user_dat
 void WebkitBrowser::on_button_stop ()
 {
   webkit_web_view_stop_loading (WEBKIT_WEB_VIEW(webview));
-  load_finished (NULL, NULL);
+  load_finished (NULL);
 }
 
 
@@ -298,30 +297,42 @@ void WebkitBrowser::on_entry_url ()
 }
 
 
-void WebkitBrowser::load_commit_cb (WebKitWebView* page, WebKitWebFrame* frame, gpointer data)
+void WebkitBrowser::load_changed_cb (WebKitWebView *web_view,
+                                     WebKitLoadEvent load_event, gpointer data)
 {
-  ((WebkitBrowser *) data)->load_commit(page, frame);
+  switch (load_event) {
+  case WEBKIT_LOAD_STARTED:
+    ((WebkitBrowser *) data)->load_started (web_view);
+    break;
+  case WEBKIT_LOAD_COMMITTED:
+    ((WebkitBrowser *) data)->load_commit (web_view);
+    break;
+  case WEBKIT_LOAD_FINISHED:
+    ((WebkitBrowser *) data)->load_finished (web_view);
+    break;
+  }
 }
 
 
-void WebkitBrowser::load_commit (WebKitWebView* page, WebKitWebFrame* frame)
+void WebkitBrowser::load_commit (WebKitWebView* page)
 {
-  const gchar* uri = webkit_web_frame_get_uri(frame);
+  const gchar* uri = webkit_web_view_get_uri (page);
   if (uri)
     gtk_entry_set_text (GTK_ENTRY (entry_url), uri);
 }
 
 
-void WebkitBrowser::progress_change_cb (WebKitWebView* page, gint progress, gpointer data)
+void WebkitBrowser::progress_change_cb (WebKitWebView* page, GParamSpec *pspec, gpointer data)
 {
+  gdouble progress = 1.0;
+  g_object_get (page, pspec->name, &progress, NULL);
   ((WebkitBrowser *) data)->progress_change(page, progress);
 }
 
 
-void WebkitBrowser::progress_change (WebKitWebView* page, gint progress)
+void WebkitBrowser::progress_change (WebKitWebView* page, gdouble progress)
 {
-  double percentage = CLAMP (progress, 0, 100);
-  double fraction = percentage / 100;
+  gdouble fraction = CLAMP (progress, 0.0, 1.0);
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progressbar), fraction);
 }
 
@@ -344,13 +355,7 @@ void WebkitBrowser::set_home_page (const ustring& url)
 }
 
 
-void WebkitBrowser::load_started_cb (WebKitWebView *page, WebKitWebFrame *frame, gpointer user_data)
-{
-  ((WebkitBrowser *) user_data)->load_started (page, frame);
-}
-
-
-void WebkitBrowser::load_started (WebKitWebView *page, WebKitWebFrame *frame)
+void WebkitBrowser::load_started (WebKitWebView *page)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progressbar), 0);
@@ -361,13 +366,7 @@ void WebkitBrowser::load_started (WebKitWebView *page, WebKitWebFrame *frame)
 }
 
 
-void WebkitBrowser::load_finished_cb (WebKitWebView *page, WebKitWebFrame *frame, gpointer user_data)
-{
-  ((WebkitBrowser *) user_data)->load_finished (page, frame);
-}
-
-
-void WebkitBrowser::load_finished (WebKitWebView *page, WebKitWebFrame *frame)
+void WebkitBrowser::load_finished (WebKitWebView *page)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
   gtk_widget_set_sensitive (button_refresh, true);

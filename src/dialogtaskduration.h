@@ -42,7 +42,7 @@ protected:
   GtkWidget *label5;
   GtkWidget *label6;
   GtkWidget *label_task;
-  GtkObject *spinbutton1_adj;
+  GtkAdjustment *spinbutton1_adj;
   GtkWidget *spinbutton1;
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton1;

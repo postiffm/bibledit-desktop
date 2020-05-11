@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2016 Matt Postiff.
+ ** Copyright (©) 2016-2018 Matt Postiff.
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -62,7 +62,6 @@ WindowTabbed::WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGr
   // Produce the signal to be given on a new reference.
   signalVerseChange = gtk_button_new();
   gtk_box_pack_start(GTK_BOX(vbox), signalVerseChange, FALSE, FALSE, 0);
-
   ready = false;
 }
 
@@ -87,20 +86,19 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 {
     title = _title;
     parent = _parent;
-	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	//gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
 	GtkWidget *box = gtk_hbox_new (FALSE, 2);
 	GtkWidget *tab_label = gtk_label_new_with_mnemonic (title.c_str());
 	gtk_box_pack_start (GTK_BOX (box), tab_label, TRUE, TRUE, 2);
 
+	GtkWidget *image = gtk_image_new_from_icon_name (
+			"window-close-symbolic", GTK_ICON_SIZE_MENU);
+	g_object_set (image, "use-fallback", TRUE, NULL);
 	close_button = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON (close_button),
-			gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU));
-	gtk_button_set_relief(GTK_BUTTON (close_button), GTK_RELIEF_NONE);
+	gtk_button_set_image (GTK_BUTTON (close_button), image);
+	GtkStyleContext *style_context = gtk_widget_get_style_context (close_button);
+	gtk_style_context_add_class (style_context, "titlebutton");
+	gtk_style_context_add_class (style_context, "close");
 	gtk_widget_set_can_focus(close_button, FALSE);
 	gtk_button_set_focus_on_click(GTK_BUTTON (close_button), FALSE);
 	g_signal_connect(close_button, "clicked",
@@ -108,35 +106,31 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	gtk_box_pack_end (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (box);
-	gtk_notebook_append_page((GtkNotebook *)notebook, scrolledwindow, box);
 	
 	webview = webkit_web_view_new();
+	gtk_notebook_append_page((GtkNotebook *)notebook, webview, box);
 	gtk_widget_show (webview);
-	gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
 
 	parent->connect_focus_signals (webview); // this routine is inherited from FloatingWindow
-    
-    webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL, NULL, NULL);
-    // Scroll to the position that possibly was stored while this url was last active.
+
+    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL);
+    // TO DO: Scroll to the position that possibly was stored while this url was last active.
     //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
     //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
     
-    g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
+    g_signal_connect((gpointer) webview, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
 }
 
 SingleTab::~SingleTab()
 {
     title = "";
     parent = NULL;
-    gtk_widget_destroy(scrolledwindow);
-    // I think the above should take care of all its kids (?) including webview,
-    // and I believe that notebook will be taken care of in the parent when it
-    // destroys its stuff.
+    gtk_widget_destroy(webview);
 }
 
 void WindowTabbed::newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml)
 {
-	// Create a new tab (notebook page)
+  // Create a new tab (notebook page)
     SingleTab *newTab = new SingleTab(tabTitle, tabHtml, notebook, this);
     tabs.push_back(newTab);
 }
@@ -222,7 +216,7 @@ void WindowTabbed::on_page_removed(const int page_num) {
 void SingleTab::updateHtml(HtmlWriter2 &html)
 {
    // cerr << "HTML=" << html.html.c_str() << endl;
-   webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL, NULL, NULL);
+   webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL);
 }
 
 void SingleTab::setClosable(const bool closable)
@@ -243,52 +237,29 @@ void SingleTab::on_close_button_clicked (GtkButton *button, gpointer user_data)
 	delete _this;
 }
 
-gboolean SingleTab::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, 
-                                                             WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+SingleTab::on_decide_policy_cb (WebKitWebView           *web_view,
+				WebKitPolicyDecision    *decision,
+				WebKitPolicyDecisionType decision_type,
+				gpointer                 user_data)
 {
-  ((SingleTab *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((SingleTab *) user_data)->decide_policy_cb (web_view, decision, decision_type);
+  // For above, see webview_simple.cpp
   return true;
-}
-
-
-void SingleTab::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, 
-                                                      WebKitWebPolicyDecision *policy_decision)
-// Callback for clicking a link.
-{
-#if 0
-  // Store scrolling position for the now active url.
-  GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
-  scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
-  
-  DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
-#endif
-  // Get the reason for this navigation policy request.
-  WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
-  
-  // If a new page is loaded, allow the navigation, and exit.
-  if (reason == WEBKIT_WEB_NAVIGATION_REASON_OTHER) {
-    webkit_web_policy_decision_use (policy_decision);
-    return;
-  }
-
-  // Don't follow pseudo-links clicked on this page.
-  webkit_web_policy_decision_ignore (policy_decision);
-  
-  // Load new page depending on the pseudo-link clicked.
-  html_link_clicked (webkit_network_request_get_uri (request));
 }
 
 extern Concordance *concordance;
 
-void SingleTab::html_link_clicked (const gchar * url)
+// Called by webview_simple::decide_policy_cb
+void SingleTab::webview_process_navigation (const ustring &url)
 {
-  // Store scrolling position for the now active url.
+  // Store scrolling position for the now active url. (Is this duplicated from above?)
   //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   //scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
 
   //DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
   //DEBUG("active_url="+active_url+" new url="+ustring(url))
-  
+
   // New url.
   //parent->active_url = url;
   ustring myurl = url;

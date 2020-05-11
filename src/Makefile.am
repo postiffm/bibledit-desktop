@@ -3,10 +3,10 @@ bin_PROGRAMS = bibledit-desktop bibledit-rdwrt
 bibledit_desktop_SOURCES = \
   bibledit.cpp \
   biblebookchapterverse.cpp \
+  combo_with_arrows.cpp \
   concordance.cpp \
   crossrefs.cpp \
   referencebibles.cpp \
-  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \
@@ -225,6 +225,7 @@ bibledit_desktop_SOURCES = \
   dialogprojectnote.cpp \
   windowreferences.cpp \
   windowtabbed.cpp \
+  webview_simple.cpp \
   windoweditor.cpp \
   compress.cpp \
   localizednumerals.cpp \
@@ -291,7 +292,6 @@ bibledit_rdwrt_SOURCES = \
   concordance.cpp \
   crossrefs.cpp \
   referencebibles.cpp \
-  options.cpp \
   chapterview.cpp \
   utilities.cpp \
   tiny_utilities.cpp \
@@ -454,6 +454,7 @@ bibledit_rdwrt_SOURCES = \
   dialogtext2pdf.cpp \
   windowreferences.cpp \
   windowtabbed.cpp \
+  webview_simple.cpp \
   compress.cpp \
   localizednumerals.cpp \
   widgetdate.cpp \
@@ -506,30 +507,31 @@ AM_CXXFLAGS += $(XML_CPPFLAGS)
 AM_CXXFLAGS += $(GOBJECT_CFLAGS)
 AM_CXXFLAGS += $(GTHREAD_CFLAGS)
 AM_CXXFLAGS += $(GLIB_CFLAGS)
-AM_CXXFLAGS += $(GTK_CFLAGS)
+AM_CXXFLAGS += $(GTK3_CFLAGS)
 AM_CXXFLAGS += $(SQLITE_CFLAGS)
 AM_CXXFLAGS += $(GLIBMM_CFLAGS)
 AM_CXXFLAGS += $(ENCHANT_CFLAGS)
 AM_CXXFLAGS += $(GTKSOURCEVIEW_CFLAGS)
-AM_CXXFLAGS += $(WEBKIT_CFLAGS)
+AM_CXXFLAGS += $(WEBKITGTK_CFLAGS)
 AM_CXXFLAGS += $(DBUSGLIB_CFLAGS)
 AM_CXXFLAGS += $(LIBSOUP_CFLAGS)
 AM_CXXFLAGS += "-DGTK_DISABLE_SINGLE_INCLUDES"
 AM_CXXFLAGS += "-DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED"
 AM_CXXFLAGS += "-DGSEAL_ENABLE"
 AM_CXXFLAGS += "-DGLIB_DISABLE_DEPRECATION_WARNINGS"
+AM_CXXFLAGS += "-w" # TODO: Remove this after finishing port to GTK3
 
 LIBS = -Wall 
 LIBS += $(XML_LIBS)
 LIBS += $(GOBJECT_LIBS)
 LIBS += $(GTHREAD_LIBS)
 LIBS += $(GLIB_LIBS)
-LIBS += $(GTK_LIBS)
+LIBS += $(GTK3_LIBS)
 LIBS += $(SQLITE_LIBS)
 LIBS += $(GLIBMM_LIBS)
 LIBS += $(ENCHANT_LIBS)
 LIBS += $(GTKSOURCEVIEW_LIBS)
-LIBS += $(WEBKIT_LIBS)
+LIBS += $(WEBKITGTK_LIBS)
 LIBS += $(DBUSGLIB_LIBS)
 LIBS += $(LIBSOUP_LIBS)
 

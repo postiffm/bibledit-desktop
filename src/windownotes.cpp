@@ -1,20 +1,20 @@
 /*
  ** Copyright (©) 2003-2013 Teus Benschop.
- **  
+ **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
  ** the Free Software Foundation; either version 3 of the License, or
  ** (at your option) any later version.
- **  
+ **
  ** This program is distributed in the hope that it will be useful,
  ** but WITHOUT ANY WARRANTY; without even the implied warranty of
  ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ** GNU General Public License for more details.
- **  
+ **
  ** You should have received a copy of the GNU General Public License
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- **  
+ **
  */
 
 
@@ -40,6 +40,8 @@
 #include "dialogyesnoalways.h"
 #include <glib/gi18n.h>
 
+#define DOM_FIX 0 // webkit_web_view_get_dom_document is not easily migrated from webkit to webkit2
+
 WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent, GtkAccelGroup *accelerator_group, bool startup):
   FloatingWindow(parent_layout, widNotes, _("Project notes"), startup)
 // Project notes window.
@@ -51,7 +53,7 @@ WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent
   displayprojectnotes = NULL;
   gui_source_id = 0;
   edited_note_id = 0;
-  
+
   GuiFeatures guifeatures(0);
 
   notebook1 = gtk_notebook_new();
@@ -205,9 +207,11 @@ WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent
   gtk_text_view_set_accepts_tab(GTK_TEXT_VIEW(textview_note_references), FALSE);
 
   connect_focus_signals (textview_note_references);
-  
-  g_signal_connect((gpointer) webview_notes, "navigation-policy-decision-requested", G_CALLBACK(on_navigation_policy_decision_requested), gpointer(this));
-  g_signal_connect((gpointer) webview_notes, "document-load-finished", G_CALLBACK (on_document_load_finished), gpointer(this));
+
+  g_signal_connect((gpointer) webview_notes, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
+
+  g_signal_connect((gpointer) webview_notes, "load-changed", G_CALLBACK (on_load_changed), gpointer(this));
+
   g_signal_connect((gpointer) button_note_ok, "clicked", G_CALLBACK(on_button_ok_clicked), gpointer(this));
   g_signal_connect((gpointer) button_note_cancel, "clicked", G_CALLBACK(on_button_cancel_clicked), gpointer(this));
   g_signal_connect((gpointer) button_more, "clicked", G_CALLBACK(on_button_more_clicked), gpointer(this));
@@ -231,7 +235,7 @@ WindowNotes::WindowNotes(GtkWidget * parent_layout, GtkWindow *_transient_parent
   // Main focused widget.
   last_focused_widget = webview_notes;
   gtk_widget_grab_focus (last_focused_widget);
-  
+
   // Set fonts.
   set_fonts ();
 }
@@ -301,8 +305,8 @@ void WindowNotes::notes_fill_edit_screen (int id, bool newnote)
   int date_modified;
   // Stored in object: ustring logbook;
   notes_read_one_from_file (id, note, project, references, category, date_created, user_created, date_modified, logbook);
-  
-  // Deal with the references of the notes.  
+
+  // Deal with the references of the notes.
   gtk_text_buffer_set_text(note_editor->textbuffer_references, "", -1);
   if (newnote) {
     // New note: get the current reference from the editor.
@@ -322,14 +326,14 @@ void WindowNotes::notes_fill_edit_screen (int id, bool newnote)
       gtk_text_buffer_insert_at_cursor(note_editor->textbuffer_references, "\n", -1);
     }
   }
-  
+
   // Display the note.
-  webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview_note_editor), note.c_str(), NULL, NULL, NULL);
+  webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview_note_editor), note.c_str(), NULL);
   webkit_web_view_set_editable (WEBKIT_WEB_VIEW (webview_note_editor), true);
 
   note_editor->store_original_data (note);
   gtk_text_buffer_set_modified(note_editor->textbuffer_references, false);
-  
+
   // Put all available categories into the category combo.
   {
     ReadText rt(notes_categories_filename());
@@ -415,11 +419,14 @@ void WindowNotes::togglebutton_note_edit_bold_toggled ()
 {
   /*
   The available commands for the execCommand function can be found in the WebKit source.
-  The implementation uses a table in the createCommandMap function in the EditorCommand.cpp source file. 
+  The implementation uses a table in the createCommandMap function in the EditorCommand.cpp source file.
   Look for the ones that say "supported" (as opposed  to supportedFromMenuOrKeyBinding).
   */
+  gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
   WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_note_editor));
   webkit_dom_document_exec_command (dom_document, "Bold", FALSE, "");
+#endif
 }
 
 
@@ -431,8 +438,11 @@ void WindowNotes::on_togglebutton_note_edit_italics_toggled(GtkToggleButton * to
 
 void WindowNotes::togglebutton_note_edit_italics_toggled()
 {
+  gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
   WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_note_editor));
   webkit_dom_document_exec_command (dom_document, "Italic", FALSE, "");
+#endif
 }
 
 
@@ -444,8 +454,11 @@ void WindowNotes::on_togglebutton_note_edit_underline_toggled(GtkToggleButton * 
 
 void WindowNotes::togglebutton_note_edit_underline_toggled()
 {
+  gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
   WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_note_editor));
   webkit_dom_document_exec_command (dom_document, "Underline", FALSE, "");
+#endif
 }
 
 
@@ -457,8 +470,11 @@ void WindowNotes::on_togglebutton_note_edit_strike_through_toggled(GtkToggleButt
 
 void WindowNotes::togglebutton_note_edit_strike_through_toggled()
 {
+  gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
   WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_note_editor));
   webkit_dom_document_exec_command (dom_document, "Strikethrough", FALSE, "");
+#endif
 }
 
 
@@ -525,7 +541,7 @@ void WindowNotes::on_gui ()
 {
   // Handle the gui part of displaying project notes.
   // These notes are displayed in a thread, and it is quite a hassle to make Gtk
-  // thread-safe, therefore rather than going through this hassle, we just 
+  // thread-safe, therefore rather than going through this hassle, we just
   // let the widgets be updated in the main thread.
   if (displayprojectnotes) {
     if (displayprojectnotes->ready) {
@@ -606,15 +622,18 @@ void WindowNotes::on_notes_button_ok()
 
   // ID (integer),
   // References (text), we take variable "encoded_references"
-  // Project (text) - done already.    
+  // Project (text) - done already.
   // Category (text)
   ustring category = combobox_get_active_string(combobox_note_category);
   // Note (text)
+  gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
   WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_note_editor));
   WebKitDOMHTMLElement * body_element = webkit_dom_document_get_body (dom_document);
   gchar * html = webkit_dom_html_element_get_inner_html (WEBKIT_DOM_HTML_ELEMENT (body_element));
   note_editor->receive_data_from_html_editor (html);
   ustring note = note_editor->clean_edited_data ();
+
   // Date created. Variabele note_info_date_created
   // Date modified.
   int date_modified;
@@ -672,10 +691,10 @@ void WindowNotes::on_notes_button_ok()
 
   // Store the note's id, so that this note can be displayed even if it normally would not have displayed.
   // The reason is that if a user edits a note, then clicks OK to store it, then it would disappear,
-  // then the user would wonder where that note went, whether he cancelled it by mistake. 
+  // then the user would wonder where that note went, whether he cancelled it by mistake.
   // For that reason the id of this note is stored, so that when displaying notes, this id should display as well.
   edited_note_id = note_editor->id;
-
+#endif
   // Do standard functions for both ok and cancel.
   on_notes_button_ok_cancel();
 }
@@ -692,7 +711,7 @@ void WindowNotes::on_notes_button_ok_cancel()
   gtk_text_buffer_set_text (note_editor->textbuffer_references, "", -1);
 
   // Clear the html editor.
-  webkit_web_view_load_string (WEBKIT_WEB_VIEW (webview_note_editor), "", NULL, NULL, NULL);
+  webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview_note_editor), "", NULL);
   webkit_web_view_set_editable (WEBKIT_WEB_VIEW (webview_note_editor), false);
 
   // Destroy NoteEditor object.
@@ -740,19 +759,23 @@ void WindowNotes::get_references_from_id(gint id)
 }
 
 
-gboolean WindowNotes::on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data)
+gboolean
+WindowNotes::on_decide_policy_cb (WebKitWebView           *web_view,
+				  WebKitPolicyDecision    *decision,
+				  WebKitPolicyDecisionType decision_type,
+				  gpointer                 user_data)
 {
-  ((WindowNotes *) user_data)->navigation_policy_decision_requested (request, navigation_action, policy_decision);
+  ((WindowNotes *) user_data)->decide_policy_cb (web_view, decision, decision_type);
   return true;
 }
 
-
+#if 0
 void WindowNotes::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
 // Callback for clicking a link.
 {
   // Get the reason for this navigation policy request.
   WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
-  
+
   // If a new page if loaded, allow the navigation, and exit.
   if (reason == WEBKIT_WEB_NAVIGATION_REASON_OTHER) {
     webkit_web_policy_decision_use (policy_decision);
@@ -761,13 +784,14 @@ void WindowNotes::navigation_policy_decision_requested (WebKitNetworkRequest *re
 
   // Don't follow pseudo-links clicked on this page.
   webkit_web_policy_decision_ignore (policy_decision);
-  
+
   // Load new page depending on the pseudo-link clicked.
-  html_link_clicked (webkit_network_request_get_uri (request));
+  webview_process_navigation (webkit_network_request_get_uri (request));
 }
+#endif
 
-
-void WindowNotes::html_link_clicked (const gchar * url)
+// Called by webview_simple::decide_policy_cb
+void WindowNotes::webview_process_navigation (const ustring &url)
 // Callback for clicking a link in the project notes.
 {
   ustring myurl(url);
@@ -819,8 +843,9 @@ void WindowNotes::cut()
 {
   // Cut to clipboard if editing.
   if (note_being_edited()) {
-    if (last_focused_widget == webview_note_editor)
-      webkit_web_view_cut_clipboard (WEBKIT_WEB_VIEW (webview_note_editor));
+    if (last_focused_widget == webview_note_editor) {
+      webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_note_editor), WEBKIT_EDITING_COMMAND_CUT);
+    }
     if (last_focused_widget == textview_note_references) {
       GtkClipboard *clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
       gtk_text_buffer_cut_clipboard(note_editor->textbuffer_references, clipboard, true);
@@ -834,13 +859,13 @@ void WindowNotes::copy ()
   // Copy to clipboard.
   if (note_being_edited()) {
     if (last_focused_widget == webview_note_editor)
-      webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (webview_note_editor));
+      webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_note_editor), WEBKIT_EDITING_COMMAND_COPY);
     if (last_focused_widget == textview_note_references) {
       GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
       gtk_text_buffer_copy_clipboard (note_editor->textbuffer_references, clipboard);
     }
   } else {
-    webkit_web_view_copy_clipboard (WEBKIT_WEB_VIEW (webview_notes));
+    webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_notes), WEBKIT_EDITING_COMMAND_COPY);
   }
 }
 
@@ -850,7 +875,7 @@ void WindowNotes::paste ()
   // Paste from clipboard if editing.
   if (note_being_edited()) {
     if (last_focused_widget == webview_note_editor)
-      webkit_web_view_paste_clipboard (WEBKIT_WEB_VIEW (webview_note_editor));
+      webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_note_editor), WEBKIT_EDITING_COMMAND_PASTE);
     if (last_focused_widget == textview_note_references) {
       GtkClipboard *clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
       gtk_text_buffer_paste_clipboard(note_editor->textbuffer_references, clipboard, NULL, true);
@@ -862,7 +887,7 @@ void WindowNotes::paste ()
 void WindowNotes::undo ()
 {
   if (note_being_edited()) {
-    webkit_web_view_undo (WEBKIT_WEB_VIEW (webview_note_editor));
+    webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_note_editor), WEBKIT_EDITING_COMMAND_UNDO);
   }
 }
 
@@ -870,7 +895,7 @@ void WindowNotes::undo ()
 void WindowNotes::redo ()
 {
   if (note_being_edited()) {
-    webkit_web_view_redo (WEBKIT_WEB_VIEW (webview_note_editor));
+    webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (webview_note_editor), WEBKIT_EDITING_COMMAND_REDO);
   }
 }
 
@@ -903,7 +928,7 @@ void WindowNotes::set_fonts ()
   if (!settings->genconfig.text_editor_font_default_get()) {
     PangoFontDescription *desired_font_description = pango_font_description_from_string (settings->genconfig.text_editor_font_name_get ().c_str());
     const char * desired_font_family = pango_font_description_get_family (desired_font_description);
-    WebKitWebSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_notes));
+    WebKitSettings * webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_notes));
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
     webkit_settings = webkit_web_view_get_settings (WEBKIT_WEB_VIEW (webview_note_editor));
     g_object_set (G_OBJECT (webkit_settings), "default-font-family", desired_font_family, NULL);
@@ -912,21 +937,45 @@ void WindowNotes::set_fonts ()
 }
 
 
-void WindowNotes::on_document_load_finished (WebKitWebView *web_view, WebKitWebFrame *web_frame, gpointer user_data)
+void WindowNotes::on_load_changed (WebKitWebView *web_view, WebKitLoadEvent load_event, gpointer user_data)
 {
-  ((WindowNotes *) user_data)->document_load_finished ();
+  ((WindowNotes *) user_data)->load_finished (web_view, load_event);
 }
 
 
-void WindowNotes::document_load_finished ()
+void WindowNotes::load_finished (WebKitWebView *web_view, WebKitLoadEvent load_event)
 {
-  // Position the cursor at the right anchor for the cursor.
-  WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_notes));
-  if (dom_document) {
-    WebKitDOMElement * dom_element = webkit_dom_document_get_element_by_id (dom_document, notes_cursor_anchor ());
-    if (dom_element) {
-      webkit_dom_element_scroll_into_view (dom_element, true);
+  // From WebKit2GTK+ Reference Manual
+  switch (load_event) {
+  case WEBKIT_LOAD_STARTED:
+    /* New load, we have now a provisional URI */
+    //provisional_uri = webkit_web_view_get_uri (web_view);
+    /* Here we could start a spinner or update the
+     * location bar with the provisional URI */
+    break;
+  case WEBKIT_LOAD_REDIRECTED:
+    //redirected_uri = webkit_web_view_get_uri (web_view);
+    break;
+  case WEBKIT_LOAD_COMMITTED:
+    /* The load is being performed. Current URI is
+     * the final one and it won't change unless a new
+     * load is requested or a navigation within the
+     * same page is performed */
+    //uri = webkit_web_view_get_uri (web_view);
+    break;
+  case WEBKIT_LOAD_FINISHED:
+    /* Load finished, we can now stop the spinner */
+    gtkw_dialog_warning(notebook1, "This DOM feature is disabled");
+#if DOM_FIX
+    WebKitDOMDocument * dom_document = webkit_web_view_get_dom_document (WEBKIT_WEB_VIEW (webview_notes));
+    if (dom_document) {
+      WebKitDOMElement * dom_element = webkit_dom_document_get_element_by_id (dom_document, notes_cursor_anchor ());
+      if (dom_element) {
+	webkit_dom_element_scroll_into_view (dom_element, true);
+      }
     }
+#endif
+    break;
   }
 }
 

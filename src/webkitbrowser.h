@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include "reference.h"
 #include "types.h"
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 
 class WebkitBrowser
@@ -97,16 +97,15 @@ private:
   void on_entry_url ();
   
   // Webkit callbacks.
-  static void load_commit_cb (WebKitWebView* page, WebKitWebFrame* frame, gpointer data);
-  void load_commit (WebKitWebView* page, WebKitWebFrame* frame);
-  static void progress_change_cb (WebKitWebView* page, gint progress, gpointer data);
-  void progress_change (WebKitWebView* page, gint progress);
+  static void load_changed_cb (WebKitWebView *web_view,
+                               WebKitLoadEvent load_event, gpointer data);
+  void load_commit (WebKitWebView* page);
+  static void progress_change_cb (WebKitWebView* page, GParamSpec *pspec, gpointer data);
+  void progress_change (WebKitWebView* page, gdouble progress);
   static void link_hover_cb (WebKitWebView* page, const gchar* title, const gchar* link, gpointer data);
   void link_hover (WebKitWebView* page, const gchar* title, const gchar* link);
-  static void load_started_cb (WebKitWebView *page, WebKitWebFrame *frame, gpointer user_data);
-  void load_started (WebKitWebView *page, WebKitWebFrame *frame);
-  static void load_finished_cb (WebKitWebView *page, WebKitWebFrame *frame, gpointer user_data);
-  void load_finished (WebKitWebView *page, WebKitWebFrame *frame);
+  void load_started (WebKitWebView *page);
+  void load_finished (WebKitWebView *page);
   
 };
 

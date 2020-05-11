@@ -103,7 +103,8 @@ DEST_USRBIN="/c/$PROGRAMFILES/Bibledit-$VERSION/usr/bin"
 # Take note: this is the 64-bit version of stuff
 DLLS="/$MINGWDIR/bin"
 THEMES="/$MINGWDIR/share/themes"
-ENGINES="/$MINGWDIR/lib/gtk-2.0"
+ICONS="/$MINGWDIR/share/icons"
+ENGINES="/$MINGWDIR/lib/gtk-3.0"
 MINGWBIN="/$MINGWDIR/bin"
 USRBIN="/usr/bin"
 
@@ -186,6 +187,15 @@ cp $DLLS/libenchant.dll "$BIN"
 #libenchant_myspell.dll libenchant_ispell.dll
 # which reside in /$MINGWDIR/lib/enchant/...
 cp $DLLS/libgdk-win32-2.0-0.dll "$BIN"
+# Below added 6/24/2016 in support of gtk3 transition
+cp $DLLS/libgdk-3-0.dll "$BIN"
+cp $DLLS/libcairo-gobject-2.dll "$BIN"
+cp $DLLS/libepoxy-0.dll "$BIN"
+cp $DLLS/libgtk-3-0.dll "$BIN"
+cp $DLLS/libgtksourceview-3.0-1.dll "$BIN"
+cp $DLLS/libwebkitgtk-3.0-0.dll "$BIN"
+cp $DLLS/libjavascriptcoregtk-3.0-0.dll "$BIN"
+# Above added 6/24/20116
 cp $DLLS/libglib-2.0-0.dll "$BIN"
 cp $DLLS/libgobject-2.0-0.dll "$BIN"
 cp $DLLS/libgtk-win32-2.0-0.dll "$BIN"
@@ -382,11 +392,12 @@ mv -f "$ETC/fonts/conf.avail" "$ETC/fonts/conf.d"
 
 # The DLL ieshims.dll is a special case. depends.exe says we need it, but we don't.
 
-echo "Copying themes and engines..."
+echo "Copying icons, themes and engines..."
 mkdir -v -p "$SHARE/themes"
 cp -R $THEMES/* "$SHARE/themes/"
-mkdir -v -p "$LIB/gtk-2.0"
-cp -R $ENGINES/* "$LIB/gtk-2.0/"
+mkdir -v -p "$LIB/gtk-3.0"
+cp -R $ENGINES/* "$LIB/gtk-3.0/"
+cp -R $ICONS "$SHARE/"
 
 echo "Copying templates, etc. to $SHARE/bibledit..."
 mkdir -v -p "$SHARE/bibledit"

@@ -1,0 +1,24 @@
+.floating-window .title-background {
+	background-color: grey;
+}
+
+.floating-window .title-label {
+	color: black;
+}
+
+.floating-window.focused .title-background {
+	background-color: blue;
+}
+
+.floating-window.focused .title-label {
+	color: white;
+	font-weight: bold;
+}
+
+.floating-window .title-background, .floating-window>border {
+	border-top-left-radius: 7px;
+}
+
+.floating-window>border {
+	border-top-right-radius: 7px;
+}
