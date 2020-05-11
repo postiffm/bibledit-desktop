@@ -33,8 +33,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install libwebkitgtk-dev
   #apt-get install libwebkitgtk-3.0
   apt-get install texlive-xetex
-  #apt-get install php5-cli <-- not available Ubuntu 17.04
-  apt-get install php7.0-cli
+  apt-get install php7.4-cli
   apt-get install curl
   apt-get install intltool
   apt-get install libtool

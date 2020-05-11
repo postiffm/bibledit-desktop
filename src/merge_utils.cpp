@@ -236,7 +236,7 @@ void merge_editor_and_file (vector <ustring> merge_base,
     gw_message (_("Cannot find PHP."));
     gw_message (_("Bibledit-Desktop needs PHP for improved collaboration and merging."));
     gw_message (_("Some changes were lost."));
-    gw_message (_("Install package php5-cli."));
+    gw_message (_("Install package php7.4-cli."));
     return;
   }
   ustring basefile = gw_build_filename (Directories->get_temp(), "mergebase.txt");

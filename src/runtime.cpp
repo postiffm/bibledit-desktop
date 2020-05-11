@@ -28,7 +28,7 @@ bool runtime_check_internal (RuntimeType type, ustring& message)
   ustring package;
   switch (type) {
     case rtXeTeX: package = "texlive-xetex"; break;
-    case rtPHP:   package = "php5-cli"; break;
+    case rtPHP:   package = "php7.4-cli"; break;
     case rtLast:  return true;
   }
   const gchar * program = runtime_program (type);
