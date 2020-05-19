@@ -15,9 +15,10 @@ echo "This script works on ubuntu Linux 17.04 LTS and Arch Linux"
 if apt-get --version 2> /dev/null; then
   apt-get install gitk
   apt-get install build-essential
-  apt-get install libgtk2.0-dev
+  #apt-get install libgtk2.0-dev
   apt-get install yelp yelp-tools #Dependencies for documentation compilation
-  #apt-get install libgtk-3-dev
+  apt-get install libgtk-3-dev
+    
   apt-get install rcs
   apt-get install sqlite3
   apt-get install libglibmm-2.4-dev libglibmm-2.4
@@ -25,13 +26,13 @@ if apt-get --version 2> /dev/null; then
   apt-get install libxml2-dev
   apt-get install libenchant-dev
   apt-get install libgtkhtml3.14-dev
-  apt-get install libgtksourceview2.0-dev
+  #apt-get install libgtksourceview2.0-dev
   apt-get install libgtksourceview-3.0
   # Below installs -dev and -doc as well
   apt-get install libwebkit2gtk-4.0
   #apt-get install libwebkit-dev
-  apt-get install libwebkitgtk-dev
-  #apt-get install libwebkitgtk-3.0
+  #apt-get install libwebkitgtk-dev
+  apt-get install libwebkitgtk-3.0
   apt-get install texlive-xetex
   apt-get install php7.4-cli
   apt-get install curl

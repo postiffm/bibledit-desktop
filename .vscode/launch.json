@@ -4,15 +4,16 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/postiffm/bibledit/bin/bibledit-desktop",
-            "args": [],
-            "stopAtEntry": true,
+            "args": ["--debug"],
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
+            //"environment": [ {"GTK_DEBUG":"interactive,resize"}],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [

@@ -31,8 +31,7 @@
 				"$gcc"
 			],
 			"group": {
-				"kind": "build",
-				"isDefault": false
+				"kind": "build"
 			}
 		}
 	]
