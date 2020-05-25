@@ -784,10 +784,8 @@ void WindowReferences::goto_next_previous_internal(bool next)
       selection = 0;
     }
   } else {
-    if (next)
-      selection++;
-    else
-      selection--;
+    if (next) { selection++; }
+    else      { selection--; }
   }
 
   // Bail out if before the start of the list.
