@@ -261,7 +261,6 @@ void SingleTab::webview_process_navigation (const ustring &url)
   //DEBUG("active_url="+active_url+" new url="+ustring(url))
 
   // New url.
-  //parent->active_url = url;
   ustring myurl = url;
 
   // In the case that this link is a "goto [verse]" link, we can process it
@@ -274,7 +273,7 @@ void SingleTab::webview_process_navigation (const ustring &url)
   }
   // Something more complicated like "concordance [some concordance word]" will mean that we have to 
   // send for help from the producer of the data that is presently in this tab.
-  // The link "keyword" tells us what to do.
+  // The link keyword == "concordance" tells us what to do.
   else if (myurl.find ("concordance ") == 0) {
     // Create a new concordance tab and fill it with the word list
     myurl.erase (0, 12); // get rid of keyword "concordance" and space
