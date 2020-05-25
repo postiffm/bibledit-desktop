@@ -68,7 +68,6 @@ WindowReferences::WindowReferences(GtkWidget * parent_layout, GtkWindow *_transi
   
   connect_focus_signals (webview);
 
-  //g_signal_connect((gpointer) webview, "navigation-policy-decision-requested", G_CALLBACK(on_decide_policy_cb), gpointer(this));
   g_signal_connect((gpointer) webview, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
   DEBUG("30")
   // Signal button.
