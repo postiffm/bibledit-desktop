@@ -27,7 +27,7 @@ if apt --version 2> /dev/null; then
   apt install libgtksourceview-3.0-1 libgtksourceview-3.0-dev
   # Below installs -dev and -doc as well
   apt install libwebkit2gtk-4.0-37 libwebkit2gtk-4.0-dev
-#I'm not sure this package very heavy is still mandadory. BBD works perfectly without it.
+# I'm not sure this package very heavy is still mandatory. BBD works perfectly without it.
 #  apt install texlive-xetex
   apt install php7.4-cli
   apt install curl
