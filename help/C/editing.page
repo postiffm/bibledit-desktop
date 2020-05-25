@@ -10,13 +10,12 @@
   <title>Project</title>
       <p> Before any editing can be done, create a new <link
           xref="project">project</link> and add books to it. See also
-        the  Project
-          Properties dialog (./project/project-properties.html). Or of there is an existing project,
+        the  <link xref="project#projectproperties"><gui>Project Properties</gui> dialog</link>. Or of there is an existing project,
         open it. </p>
   </section>
   <section id="save">
 <title>Save</title>
-      <p> There is no need to save the text, because Bibledit takes care
+      <p> There is no need to save the text, because Bibledit-Desktop takes care
         of that. </p>
   </section>
   <section id="text">
@@ -29,7 +28,7 @@
 	<code>\id Identifies the book
 \mt major title (if only one level is used. If more than one used:)
 \mt1 major title, level 1
-\mt2 major title, level 2 (equal to secondary title \st, but \st is no longer in use)
+\mt2 major title, level 2
 \c chapter
 \s section heading
 \p paragraph
@@ -73,7 +72,7 @@
 <title>Undo and Redo</title>
       
       <p> As long as you stay in the same chapter, you can undo and redo
-        any changes made. See menu Edit, or use the <link
+        any changes made. See menu <gui>Edit</gui>, or use the <link
           xref="keyboard">shortcuts</link>.
       </p>
   </section>
@@ -96,28 +95,27 @@ xref="insertmenu">new
       <p> The size of the text entry or entries can be set using the
         "Size" arrows. </p>
       <p> It is possible to save a certain footnote configuration in a
-        template. The "New" button will make a new template, and the
-        "Delete" button will delete the current one. If no template name is given, the default one will be used. Data is saved in a
-        template only on pressing the "Ok" button. </p>
+        template. The <gui>New</gui> button will make a new template, and the<gui>Delete</gui> button will delete the current one. If no template name is given, the default one will be used. Data is saved in a
+        template only on pressing the <gui>Ok</gui> button. </p>
       <p> The same things apply to endnotes and crossreferences. </p>
   </section>
   <section id="changingbiblenotes">
 <title>Changing Bible notes</title> 
       <p> A Bible note can be a footnote, an endnote, or a
         crossreference. This type can be changed. To do that, place the
-        cursor somewhere in the note to be changed. Choose menu <guiseq><gui>Edit</gui><gui>Bible note</gui></guiseq>, and set the new type, and then press OK. </p>
+        cursor somewhere in the note to be changed. Choose menu <guiseq><gui>Edit</gui><gui>Bible note</gui></guiseq>, and set the new type, and then press <gui>OK</gui>. </p>
       <p> The numbering of the note can be changed in the same way. One
         can for example change from automatic to manual numbering, and
         vice versa. </p>
   </section>
   <section id="pictures">
 <title>Pictures</title>
-      <p> Bibledit has good support for the \fig marker. Pictures are
+      <p> Bibledit-Desktop has good support for the \fig marker. Pictures are
         inserted manually, following the USFM standard. </p>
-      <p> At printing time, Bibledit looks for the picture file in
+      <p> At printing time, Bibledit-Desktop looks for the picture file in
         various ways. If an absolute path is given, then it will look
         for the file there. If a relative path is given, it first looks
-        in &lt;<link xref="data">data directory</link>/pictures,
+        in <file><link xref="data">data directory</link>/pictures</file>,
         then among Bibledit's template files. </p>
       <p> According to the USFM standard, the picture size can be set to
         "col" or to "span". In addition to that, if the picture size has
@@ -144,5 +142,7 @@ xref="insertmenu">new
         be more or less formatted. In this way the user has a lot of
         flexibility to fine-tune the view. Some styles will always be
         unformatted. </p>
+        <p>There is also the <gui>Experimental View</gui> which is under development.</p>
+        
   </section>
 </page>

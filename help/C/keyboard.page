@@ -27,7 +27,7 @@
         <keyseq><key>Shift</key><key>Ctrl</key><key>Z</key></keyseq>: Redo.
       </p>
       <p>
-        <keyseq><key>Ctrl</key><key>1, Ctrl</key><key>2, Ctrl</key><key>3, Ctrl</key><key>4</key></keyseq>: Insert standard text into project note.
+        <keyseq><key>Ctrl</key><key>1</key></keyseq>, <keyseq><key>Ctrl</key><key>2</key></keyseq>, <keyseq><key>Ctrl</key><key>3</key></keyseq>, <keyseq><key>Ctrl</key><key>4</key></keyseq>: Insert standard text into project note.
       </p>
       <p>
         <keyseq><key>Ctrl</key><key>N</key></keyseq>: Create new project note.
