@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <section id="introduction"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Introduction</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Bibledit contains a number of tools to check the text. Most of these are accessible through menu Check.</p>
-<p class="p">Any undesired checking results can be hidden for the future, so that they don't appear again if the same check is ran again. To hide such a result, right-click in the References Area, and choose "Hide from now on".</p>
+<p class="p">Bibledit-Desktop contains a number of tools to check the text. Most of these are accessible through menu <span class="gui">Check</span>.</p>
+<p class="p">Any undesired checking results can be hidden for the future, so that they don't appear again if the same check is ran again. To hide such a result, right-click in the <span class="gui">References</span> Area, and choose <span class="gui">Hide from now on</span>.</p>
 </div></div>
 </div></section><section id="character"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Character inventory</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p">This check, accessible through the menu, <span class="guiseq"><span class="gui">Check</span> ▸ <span class="gui">Characters</span> ▸ <span class="gui">Inventory</span></span>, gives a list of all characters in the project, and the count of each character.</p>
-<p class="p">Due to newline handling on Linux the character counter will only include <span class="file">U+000A</span> but not <span class="file">U+000D</span>. After importing the file the U+000D completely disappears and so will not be counted.</p>
+<p class="p">Due to newline handling on Linux the character counter will only include <span class="file">U+000A</span> but not <span class="file">U+000D</span>. After importing the file the <span class="file">U+000D</span> completely disappears and so will not be counted.</p>
 <p class="p">A character can occur anywhere in the output html file, depending on how sorting is done.</p>
 <p class="p">The file will be visible in the Internet browser, which will supply its own default font so as to ensure the character becomes visible. No particular font is enforced.</p>
 <p class="p">The check does not handle legacy encoded data. This is because anything with such data will be converted to Unicode when imported in Bibledit, and so the character counting check will never encounter anything else but Unicode.</p>
@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div></section><section id="punctuation"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Compare punctuation</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Paratext had a check called "Compare Punctuation". How do I compare punctuation in Bibledit?</p>
-<p class="p">Comparing punctuation in Bibledit is done through the Advanced Find functions.</p>
-<p class="p">Open the first project, and search for e.g. a question mark. The search results will be loaded in the References Area.</p>
+<p class="p">Paratext had a check called "Compare Punctuation". How do I compare punctuation in Bibledit-Desktop?</p>
+<p class="p">Comparing punctuation in Bibledit-Desktop is done through the Advanced Find functions.</p>
+<p class="p">Open the first project, go in the menu, <span class="guiseq"><span class="gui">Edit</span> ▸ <span class="gui">Search</span></span> and tab <span class="gui">Advanced</span> and search for e.g. a question mark. The search results will be loaded in the <span class="gui">References</span> Area.</p>
 <p class="p">Open the second project, and go to advanced search, and search for the question mark again. Remove the search results from the ones already in the References Area. The References Area will now contain the verses that do have the question mark in the first project, and not in the second.</p>
 <p class="p">Next do it the other way round. Search in the second project, then with advanced search in the first. The References Area will now contain the verses that do have the question mark in the second project, but not in the first.</p>
 </div></div>
@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p">Checks whether punctuation that is part of a pair makes a complete pair. For example, the opening bracket [ also needs the closing bracket ].</p>
 <p class="p">The check knows about 160 matching pairs of punctuation, and checks them all.</p>
 <p class="p">Pairs that should not be checked can be ignored. No reports will be given on these characters.</p>
+<p class="p">This checks, are accessible through the menu, <span class="guiseq"><span class="gui">Check</span> ▸ <span class="gui">Punctiation</span> ▸ <span class="gui">Matching pairs</span></span>.
+</p>
 </div></div>
 </div></section><section id="unwanted"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Check unwanted patterns</span></h2></div>

@@ -282,13 +282,36 @@ static void startup_callback (GtkApplication *app, gpointer data)
       GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   gw_message("Loaded the GTK stylesheet");
 
+  //------------------------------------------------------------
   // Initialize the app menu
+  //------------------------------------------------------------
   GMenu *menu = g_menu_new ();
   g_menu_append (menu, _("_System log"), "app.systemlog");
   g_menu_append (menu, _("_About"), "app.about");
   g_menu_append (menu, _("_Quit"), "app.quit");
   gtk_application_set_app_menu (app, G_MENU_MODEL (menu));
   g_object_unref (menu);
+
+  //------------------------------------------------------------
+  // Initialize the main menu
+  //------------------------------------------------------------
+
+#if 0
+  GtkBuilder *builder = gtk_builder_new_from_string (
+    "<interface>"
+    "  <menu id='menubar'>"
+    "    <submenu label='_Edit'>"
+    "      <item label='_Copy' action='win.copy'/>"
+    "      <item label='_Paste' action='win.paste'/>"
+    "    </submenu>"
+    "  </menu>"
+    "</interface>",
+    -1);
+
+  GMenuModel *menubar = G_MENU_MODEL (gtk_builder_get_object (builder, "menubar"));
+  gtk_application_set_menubar (GTK_APPLICATION (app), menubar);
+  g_object_unref (builder);
+#endif
 
   // Start the gui.
   mainwindow = new MainWindow (accelerator_group, settings, urltransport, vcs);

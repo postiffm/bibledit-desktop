@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="contents pagewide"></div>
 <section id="gethelp"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">How
-        to get help from the Bibledit community? </span></h2></div>
+        to get help from the Bibledit-Desktop community? </span></h2></div>
 <div class="region"><div class="contents pagewide">
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">Read all of this help.
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div></section><section id="changeorder"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">How to change the order
         of the books? </span></h2></div>
-<div class="region"><div class="contents pagewide"><p class="p"> You can fully configure in which order Bibledit displays and
+<div class="region"><div class="contents pagewide"><p class="p"> You can fully configure in which order Bibledit-Desktop displays and
         prints the books. This can be done in menu <span class="guiseq"><span class="gui">Preferences</span> ▸ <span class="gui">Books</span></span>.
         Drag the books in the order you desire, and then click <span class="guiseq"><span class="gui">OK</span></span> to
         save the settings. </p></div></div>
@@ -65,24 +65,24 @@ document.addEventListener('DOMContentLoaded', function() {
         including Front Matter. The table of contents will be there. </p>
 </div></div>
 </div></section><section id="modifyplace"><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">How to modify the place where Bibledit stores its data?</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">How to modify the place where Bibledit-Desktop stores its data?</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> Normally Bibledit stores its data in subdirectory <span class="file">.bibledit</span> of the user's home directory, e.g. in <span class="file">/home/joe/.bibledit</span>.
+<p class="p"> Normally Bibledit-Desktop stores its data in subdirectory <span class="file">.bibledit</span> of the user's home directory, e.g. in <span class="file">/home/joe/.bibledit</span>.
 </p>
-<p class="p">If it is desirable to have Bibledit store its data elsewhere,
+<p class="p">If it is desirable to have Bibledit-Desktop store its data elsewhere,
         the solution is simple:</p>
 <div class="steps"><div class="inner"><div class="region"><ol class="steps">
 <li class="steps"><p class="p">Move the current <span class="file">.bibledit</span> directory to the new directory.</p></li>
-<li class="steps"><p class="p">Create a symbolic link from .bibledit to that new
+<li class="steps"><p class="p">Create a symbolic link from <span class="file">.bibledit</span> to that new
         directory. </p></li>
 </ol></div></div></div>
-<p class="p"> There is a different way of pointing Bibledit to another data
+<p class="p"> There is a different way of pointing Bibledit-Desktop to another data
         directory. </p>
-<p class="p"> Changing is not done from within bibledit, but involves some
+<p class="p"> Changing is not done from within Bibledit-Desktop, but involves some
         manual work. This is done for the protection of your valuable
         data. To change the data directory to a new location, do the
         following: </p>
-<p class="p"> Quit bibledit. </p>
+<p class="p"> Quit Bibledit-Desktop. </p>
 <p class="p"> Open a terminal. </p>
 <p class="p"> Type command: </p>
 <div class="code"><pre class="contents"><code>cd</code></pre></div>
@@ -99,18 +99,22 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p"> Open this hidden file in a text editor and put only this one
         line in it: <span class="file">/mnt/server/.bibledit</span></p>
 <p class="p"> That's it. </p>
-<p class="p"> Removing file .bibledit-datafolder-pointer will cause bibledit
+<p class="p"> Removing file <span class="file">.bibledit-datafolder-pointer</span> will cause bibledit
         to use the standard datafolder again. </p>
 <p class="p"> See also information about the <span class="link"><a href="data.html" title="11. Manage Data">data</a></span>. </p>
-<p class="p"> Note: It is not recommended to store the data on a Windows
+<div class="note note-warning" title="Warning">
+<svg width="24" height="24" version="1.1">
+ <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0-1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-8e-3a1.3872 1.3872 0 0 0 1.201-2.08l-8.619-14.916a1.3872 1.3872 0 0 0-1.136-0.6913 1.3872 1.3872 0 0 0-0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">It is not recommended to store the data on a Windows
         partition. In such cases problems have been observed when
-        special characters are used in the project name. </p>
+        special characters are used in the project name. </p></div></div></div>
+</div>
 </div></div>
 </div></section><section id="shortcuts"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">How to move
-        about in Bibledit using the keyboard? </span></h2></div>
+        about in Bibledit-Desktop using the keyboard? </span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> Bibledit has several windows to work in. </p>
+<p class="p"> Bibledit-Desktop has several windows to work in. </p>
 <p class="p"> There are keyboard <span class="link"><a href="keyboard.html" title="7. Keyboard shortcuts">shortcuts</a></span>
         for moving between the windows. </p>
 </div></div>
@@ -120,15 +124,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="region"><div class="contents pagewide">
 <p class="p"> If the versification system or language you need does not come
         with Bibledit, then you can create your own language or
-        versification system and add it to Bibledit yourself. To do
+        versification system and add it to Bibledit-Desktop yourself. To do
         that, take an existing versification textfile or language
         textfile from <span class="file">/usr/share/bibledit-desktop</span>, edit it, and save it in
         the <span class="link"><a href="data.html" title="11. Manage Data">data directory</a></span>,
         subdirectory templates. </p>
-<p class="p"> Notes. </p>
+<div class="note" title="Note">
+<svg width="24" height="24" version="1.1">
+ <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+ <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents">
 <p class="p"> The versification files start with <span class="file">versification_</span>, the mapping
         files with <span class="file">mapping_</span>, and the language files with <span class="file">language_</span>. It
-        is important to keep that first bit, else Bibledit won't
+        is important to keep that first bit, else Bibledit-Desktop won't
         recognize the files. </p>
 <p class="p"> If the name of a template you added is the same as the name
         one of the templates that come with Bibledit, your template will
@@ -139,31 +147,16 @@ document.addEventListener('DOMContentLoaded', function() {
         sharing it with the community is to submit it for inclusion into
         Bibledit. That way it becomes available to others in the next
         release. </p>
+</div></div></div>
+</div>
 </div></div>
 </div></section><section id="countcrossref"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">How
         can I count the number of crossreferences in the project? </span></h2></div>
-<div class="region"><div class="contents pagewide"><p class="p"> This can be done through menu Tools, then Bible notes mass
-        update. Tick "Crossreferences", and leave the action to take as
+<div class="region"><div class="contents pagewide"><p class="p"> This can be done through menu <span class="guiseq"><span class="gui">Tools</span> ▸ <span class="gui">Bible notes mass update</span></span>. Tick "Crossreferences", and leave the action to take as
         "Make no changes but give statistics only". After clicking <span class="gui">OK</span> it
         will give the number of crossreferences in the project.
       </p></div></div>
-</div></section><section id="installation"><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Installation      </span></h2></div>
-<div class="region">
-<div class="contents pagewide"></div>
-<section id="noc"><div class="inner">
-<div class="hgroup pagewide"><h3 class="title"><span class="title">There is no
-        acceptable C compiler in $path </span></h3></div>
-<div class="region"><div class="contents pagewide"><p class="p"> This happens when you did not install a C compiler.Installing
-        Bibledit from source requires a C compiler. This compiler is
-        part of development tools. The installation instructions for
-        Linux, or for Macintosh, or Windows, give instructions on how to
-        install such development tools. If you follow these
-        instructions, the problem will be gone. For example, on Windows,
-        you need to install package "gcc" in Cygwin. </p></div></div>
-</div></section>
-</div>
 </div></section><section id="outpostproblem"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Problem
         when Outpost runs on another host </span></h2></div>
@@ -182,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="steps"><p class="p">If the IP number changes continually, enter a static IP
         number in Windows. </p></li>
 <li class="steps"><p class="p">Is the Outpost installed and running in Windows? It has to
-        be started manually, because Bibledit can't start it over the
+        be started manually, because Bibledit-Desktop can't start it over the
         network. </p></li>
 <li class="steps"><p class="p">Be sure that the Windows firewall does not block port 51515
         for incoming connections. </p></li>
@@ -213,17 +206,17 @@ document.addEventListener('DOMContentLoaded', function() {
         solution is to install the newest version of sqlite3 in your
         current system. It will then be able to read your data again. </p></div></div>
 </div></section><section id="wontstard"><div class="inner">
-<div class="hgroup pagewide"><h3 class="title"><span class="title">Bibledit won't start anymore
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Bibledit-Desktop won't start anymore
       </span></h3></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> Try starting it from a terminal, and see what happens. In the
         terminal type: </p>
 <div class="code"><pre class="contents"><code>bibledit --debug</code></pre></div>
 <p class="p"> If it gives a segmentation fault, then there is a problem in
-        your configuration. A simple way to get Bibledit running again
+        your configuration. A simple way to get Bibledit-Desktop running again
         is to delete the file <span class="file">./bibledit/settings</span> and
         <span class="file">./bibledit/configuration/configuration.xml</span>. You will loose all
-        your settings, but not your data, and Bibledit should start
+        your settings, but not your data, and Bibledit-Desktop should start
         again after that. </p>
 <p class="p"> If you wish to have this problem solved, before deleting your
         configuration files, make a bug report, pack all your data in a
@@ -241,19 +234,19 @@ document.addEventListener('DOMContentLoaded', function() {
         is in the <span class="link"><a href="data.html" title="11. Manage Data">temporary
           directory</a></span>. View the logfile to see what went wrong. </p>
 <p class="p"> If you try to start bibledit, and a warning comes up that says
-        that Bibledit is already running, then it means that Bibledit
+        that Bibledit-Desktop is already running, then it means that Bibledit
         already runs somehow. Try switching to that instance of Bibledit
-        that already runs. Or reboot. Or else open a terminal and type
-        "killalll bibledit-bin". </p>
+        that already runs. Or reboot. Or else open a terminal and type:</p>
+<div class="code"><pre class="contents"><code>killall bibledit-bin</code></pre></div>
 </div></div>
 </div></section>
 </div>
 </div></section><section id="frozen"><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Bibledit is frozen.
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Bibledit-Desktop is frozen.
         How to solve that? </span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> Question: I am completely stopped in my work. I opened a
-        project, but the book of Philemon freezes Bibledit completely.
+        project, but the book of Philemon freezes Bibledit-Desktop completely.
         When restarting it, the screen comes up, but none of the menus
         or buttons work. I cannot scroll. The only button that works is
         the one to exit the program (which brings up a box giving me the
@@ -270,55 +263,51 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h2 class="title"><span class="title">The online help does not
         display </span></h2></div>
 <div class="region"><div class="contents pagewide"><p class="p"> Bibledit's online help depends on Bibledit's internal
-        webserver. The helpfiles only work while Bibledit is running. If
+        webserver. The helpfiles only work while Bibledit-Desktop is running. If
         you quit Bibledit, online help is not available. </p></div></div>
 </div></section><section id="fieldworks"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">FieldWorks
         Language Explorer interferes with Cygwin/X </span></h2></div>
-<div class="region"><div class="contents pagewide"><p class="p"> When Bibledit is running on Windows, FLEx won't start. While
-        FLEx runs, Bibledit will only start after a long delay due to a
+<div class="region"><div class="contents pagewide"><p class="p"> When Bibledit-Desktop is running on Windows, FLEx won't start. While
+        FLEx runs, Bibledit-Desktop will only start after a long delay due to a
         timeout. It won't have clipboard functionality. The problem is
         being looked into. The current workaround is to start FLEx
         first, and after that Bibledit. Alternatively you can start
-        Cygwin's terminal through the Cygwin icon in the Bibledit menu,
+        Cygwin's terminal through the Cygwin icon in the Bibledit-Desktop menu,
         and in that terminal type "startx", and then "bibledit". </p></div></div>
 </div></section><section id="projectquestion"><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Project </span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Project</span></h2></div>
 <div class="region">
 <div class="contents pagewide"></div>
 <section id="teckitmap"><div class="inner">
 <div class="hgroup pagewide"><h3 class="title"><span class="title">When
-        importing data in legacy encoding, can Bibledit use a TECkit
+        importing data in legacy encoding, can Bibledit-Desktop use a TECkit
         map? </span></h3></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> Bibledit uses iconv, the standard utility on Linux to convert
+<p class="p"> Bibledit-Desktop uses iconv, the standard utility on Linux to convert
         between various encodings. </p>
 <p class="p"> Iconv supports a huge amount of standard encodings. Iconv does
         the same functions as TECkit does. </p>
-<p class="p"> Bibledit does not at present support a TECkit map, but that is
+<p class="p"> Bibledit-Desktop does not at present support a TECkit map, but that is
         going to change in the future. </p>
 <p class="p"> At conversion time the user sees how the text is going to
         look, and can change encodings until the result looks right. If
         there are a couple of characters not right, the search/replace
         functionality quickly fixes that. </p>
 </div></div>
-</div></section><section id="printingquestion"><div class="inner">
-<div class="hgroup pagewide"><h3 class="title"><span class="title">Printing </span></h3></div>
-<div class="region">
-<div class="contents pagewide"></div>
-<section id="howhtml"><div class="inner">
-<div class="hgroup pagewide"><h4 class="title"><span class="title">Bibledit
-        produces .pdf output, but how do I get .html files? </span></h4></div>
+</div></section><section id="howhtml"><div class="inner">
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Bibledit
+        produces .pdf output, but how do I get .html files? </span></h3></div>
 <div class="region"><div class="contents pagewide"><p class="p"> There are a couple of converters on the market, that convert
         .pdf files to .html. Use a search engine and look for "PDF to
         HTML", including the quotation marks. This will give you a
         number of programs to try out. </p></div></div>
 </div></section><section id="bold"><div class="inner">
-<div class="hgroup pagewide"><h4 class="title"><span class="title">Bold does not show up in
-        a printout </span></h4></div>
+<div class="hgroup pagewide"><h3 class="title"><span class="title">Bold does not show up in
+        a printout </span></h3></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> Question: </p>
-<p class="p"> Printing a Bibledit project to pdf format, using ArialUnicode
+<p class="p"> Printing a Bibledit-Desktop project to pdf format, using ArialUnicode
         and SIL Doulos for it, I had the following problem: </p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p">Feature Bold does not show up, </p></li>
@@ -331,8 +320,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p"> SIL Doulos does not have bold. </p>
 <p class="p"> Try Charis SIL, that does have bold, and works fine with me. </p>
 </div></div>
-</div></section>
-</div>
 </div></section><section id="footnotedetached"><div class="inner">
 <div class="hgroup pagewide"><h3 class="title"><span class="title">The
         footnote caller is detached from the word it belongs to </span></h3></div>
@@ -341,14 +328,15 @@ document.addEventListener('DOMContentLoaded', function() {
         crossreference caller is always connected to the word it belongs
         to. </p>
 <p class="p"> This is an example of proper code: </p>
-<div class="code"><pre class="contents"><code>Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</code></pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man\f + \ft Or “kind man”.\f*</code></pre></div>
 <p class="p"> The following two examples of code will cause the footnote
         caller to detach from the word it belongs to: </p>
 <p class="p"> Example one: </p>
-<div class="code"><pre class="contents"><code>Joseph was a good man \f + \ft Or â€œkind manâ€.\f*</code></pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man \f + \ft Or “kind man”.\f*</code></pre></div>
 <p class="p"> Note the space between "man" and the "\f". </p>
 <p class="p"> Example two: </p>
-<div class="code"><pre class="contents"><code>Joseph was a good man\f + \ft Or â€œkind manâ€.\f*</code></pre></div>
+<div class="code"><pre class="contents"><code>Joseph was a good man
+\f + \ft Or “kind man”.\f*</code></pre></div>
 <p class="p"> In USFM a new line is equal to a space, hence there is a space
         between "man" and the "\f" here also. </p>
 <p class="p"> Many older projects started a new line for each marker, also
@@ -356,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         All note markers (footnotes and cross-references) should not
         start on a new line, but follow immediately the word it belongs
         to (without even a space). </p>
-<p class="p"> Note that in newer versions of Bibledit the \f ... code for
+<p class="p"> Note that in newer versions of Bibledit-Desktop the \f ... code for
         footnotes is no longer visible - only the note itself is
         visible. </p>
 </div></div>
@@ -372,13 +360,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p"> Same applies to the Crossreferences. Make the setting under
         marker \xt. </p>
 </div></div>
-</div></section><section id="adobereader"><div class="inner">
-<div class="hgroup pagewide"><h3 class="title"><span class="title">Adobe Reader
-        does not load a printed document </span></h3></div>
-<div class="region"><div class="contents pagewide"><p class="p"> This may occur in case Adobe Reader has a document loaded
-        already. A subsequent document, printed by Bibledit, may not
-        load in the Reader. Newer versions of the Reader do not have
-        this problem. </p></div></div>
 </div></section>
 </div>
 </div></section><section id="navigationquestion"><div class="inner">
@@ -388,13 +369,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="contents pagewide"></div>
 <section id="bart"><div class="inner">
 <div class="hgroup pagewide"><h3 class="title"><span class="title">BART does not scroll
-        with Bibledit </span></h3></div>
+        with Bibledit-Desktop </span></h3></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> There can be various causes for this. </p>
-<p class="p"> Cause 1. Has Bibledit Windows Outpost been installed? </p>
+<p class="p"> Cause 1: Has Bibledit-Desktop Windows Outpost been installed? </p>
 <p class="p"> Cause 2: Does it say "Windows Outpost: Connected" in the
         logfile? </p>
-<p class="p"> Cause 3. When BART runs under Wine, did you install Bibledit
+<p class="p"> Cause 3: When BART runs under Wine, did you install Bibledit
         Windows Outpost in Wine too? Or when you installed BART in
         CrossOver Office, e.g. bottle "win98", did you install the
         Outpost in the same bottle too? The wine installation
@@ -416,14 +397,14 @@ document.addEventListener('DOMContentLoaded', function() {
         does not work when the Outpost runs on another host </span></h3></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> Some points to check: </p>
-<p class="p"> 1. Ensure in the Windows Outpost preferences that Bibledit can
+<p class="p"> 1. Ensure in the Windows Outpost preferences that Bibledit-Desktop can
         contact the other host. </p>
 <p class="p"> 2. Did you start the Outpost manually on the other host?
-        Bibledit won't be able to start it over the network, hence
+        Bibledit-Desktop won't be able to start it over the network, hence
         Outpost needs to be started manually. </p>
-<p class="p"> 3. Bibledit uses port 51515 to contact the Outpost. Ensure
+<p class="p"> 3. Bibledit-Desktop uses port 51515 to contact the Outpost. Ensure
         that this port is opened in your firewall on Windows. If this
-        port is closed, Bibledit can't communicate with the Outpost. </p>
+        port is closed, Bibledit-Desktop can't communicate with the Outpost. </p>
 </div></div>
 </div></section>
 </div>
@@ -436,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h3 class="title"><span class="title">It says that
         the SWORD compiler was not found </span></h3></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> The SWORD compiler is part of the SWORD API. Bibledit uses
+<p class="p"> The SWORD compiler is part of the SWORD API. Bibledit-Desktop uses
         this compiler to export a project to SWORD format. </p>
 <p class="p"> The most likely problem is that you did not install SWORD from
         source, but from a binary package. Binary packages do not always
@@ -444,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
         install the development version of libsword the compiler will be
         installed too. </p>
 <p class="p"> The compiler used is a program called osis2mod. If the
-        compiler has been installed, but Bibledit still cannot find it,
+        compiler has been installed, but Bibledit-Desktop still cannot find it,
         the problem might be that the compiler has not been installed in
         the program search path. Type </p>
 <div class="code"><pre class="contents"><code>echo $PATH</code></pre></div>
@@ -456,11 +437,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Segmented
         verses like 1a do not show in SWORD export </span></h2></div>
 <div class="region"><div class="contents pagewide"><p class="p"> SWORD currently does not support segmented verses, like verse
-        1a. To prevent problems Bibledit just takes any "a" or "b" out
+        1a. To prevent problems Bibledit-Desktop just takes any "a" or "b" out
         from the verse. SWORD needs to be updated to support this. </p></div></div>
 </div></section><section id="marker"><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Marker
-        «some marker» does not show properly in BibleTime </span></h2></div>
+        «some marker» does not show properly in Sword frontend</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"> Question: I have used the \mi formatting in the list of names
         in Acts 13:1. The output to BibleTime lists the \mi paragraphs
@@ -472,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
         display? (That might explain the lack of indenting, but it seems
         that the font should not change.) </p>
 <p class="p"> Answer: For any marker, not only the \mi one, the output
-        Bibledit generates for the Sword compiler can be seen in the <span class="link"><a href="data.html" title="11. Manage Data">temporary directory</a></span>/sword_osis_input.txt.
+        Bibledit-Desktop generates for the Sword compiler can be seen in the <span class="link"><a href="data.html" title="11. Manage Data">temporary directory</a></span>/sword_osis_input.txt.
         In this case, that of the \mi marker, it can be seen that no
         indenting information is passed to BibleTime, nor any font
         information. </p>
@@ -491,12 +472,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       </span></h3></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> Question: When opening Bibledit and project NIV, the logfile
+<p class="p"> Question: When opening Bibledit-Desktop and project NIV, the logfile
         says "(bibledit:7567): Pango-WARNING **: Error loading GSUB
         table 4097". I'm not sure what the warning means. The project
         goes ahead and opens. </p>
 <p class="p"> Reply: This is not an issue with Bibledit, but with the Pango
-        library Bibledit is using. Most likely you are using a font that
+        library Bibledit-Desktop is using. Most likely you are using a font that
         Pango has a problem with. Problems with Pango can be reported at
         <span class="link"><a href="http://www.pango.org/" title="http://www.pango.org/">www.pango.org</a></span>.
       </p>
@@ -505,13 +486,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h3 class="title"><span class="title">Webserver: Address
         already in use </span></h3></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"> Remark: On starting Bibledit sometimes the logfile says
+<p class="p"> Remark: On starting Bibledit-Desktop sometimes the logfile says
         "Webserver: Address already in use". </p>
-<p class="p"> Reply: This happens after Bibledit crashed and is restarted
+<p class="p"> Reply: This happens after Bibledit-Desktop crashed and is restarted
         after that. The internal webserver cannot function properly
         because the previous one is still running. To solve the problem,
-        quit and start Bibledit once more. It is hoped that as from
-        Bibledit version 4.1 the internal webserver will have been
+        quit and start Bibledit-Desktop once more. It is hoped that as from
+        Bibledit-Desktop version 4.1 the internal webserver will have been
         replaced by a proper webserver such as Apache. </p>
 </div></div>
 </div></section>
@@ -540,14 +521,14 @@ document.addEventListener('DOMContentLoaded', function() {
         proven to work with XeTeX. Other fonts might work as well. Once
         these two packages have been installed, open the Farsi text in
         Bibledit, and set the Arabic font in the View menu, so that the
-        text in the editor is real Farsi. The press Ctrl-P to print, and
-        choose the option to print via de pdf2ptx typesetter. In the
+        text in the editor is real Farsi. The press <span class="keyseq"><span class="key"><kbd>Ctrl</kbd></span>+<span class="key"><kbd>P</kbd></span></span> to print, and
+        choose the option to print via de <span class="gui">pdf2ptx</span> typesetter. In the
         Print Settings window, choose Options, and switch to the Mapping
-        tab. Select file "farsidigits.tec". If the Arab package was
+        tab. Select file <span class="file">farsidigits.tec</span>. If the Arab package was
         installed properly, then this TECkit mapping will be available
-        in folder
-        /usr/share/texmf-texlive/fonts/misc/xetex/fontmapping/polyglossia.
-        After pressing OK, everything should work out well, and after
+        in folder <span class="file">/usr/share/texmf-texlive/fonts/misc/xetex/fontmapping/polyglossia</span>.
+        </p>
+<p class="p">After pressing <span class="gui">OK</span>, everything should work out well, and after
         some time the Farsi document should show up. It is important to
         choose the "arab" shaping engine, so that the letters and words
         are properly spaced. On Ubuntu there is a package called
