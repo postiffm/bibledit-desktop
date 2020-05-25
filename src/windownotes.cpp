@@ -769,27 +769,6 @@ WindowNotes::on_decide_policy_cb (WebKitWebView           *web_view,
   return true;
 }
 
-#if 0
-void WindowNotes::navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision)
-// Callback for clicking a link.
-{
-  // Get the reason for this navigation policy request.
-  WebKitWebNavigationReason reason = webkit_web_navigation_action_get_reason (navigation_action);
-
-  // If a new page if loaded, allow the navigation, and exit.
-  if (reason == WEBKIT_WEB_NAVIGATION_REASON_OTHER) {
-    webkit_web_policy_decision_use (policy_decision);
-    return;
-  }
-
-  // Don't follow pseudo-links clicked on this page.
-  webkit_web_policy_decision_ignore (policy_decision);
-
-  // Load new page depending on the pseudo-link clicked.
-  webview_process_navigation (webkit_network_request_get_uri (request));
-}
-#endif
-
 // Called by webview_simple::decide_policy_cb
 void WindowNotes::webview_process_navigation (const ustring &url)
 // Callback for clicking a link in the project notes.
