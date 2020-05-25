@@ -115,7 +115,7 @@ WindowCheckKeyterms::WindowCheckKeyterms(GtkWidget * parent_layout, GtkAccelGrou
   treeselect_renderings = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_renderings));
   gtk_tree_selection_set_mode(treeselect_renderings, GTK_SELECTION_SINGLE);
 
-  g_signal_connect((gpointer) webview_terms, "navigation-policy-decision-requested", G_CALLBACK(on_decide_policy_cb), gpointer(this));
+  g_signal_connect((gpointer) webview_terms, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
   g_signal_connect((gpointer) combobox_collection, "changed", G_CALLBACK(on_combobox_keyterm_collection_changed), gpointer(this));
 
   gtk_label_set_mnemonic_widget(GTK_LABEL(label_collection), combobox_collection);
