@@ -28,6 +28,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install libgtkhtml3.14-dev
   #apt-get install libgtksourceview2.0-dev
   apt-get install libgtksourceview-3.0
+  apt-get install libgtksourceview-3.0-dev
   # Below installs -dev and -doc as well
   apt-get install libwebkit2gtk-4.0
   #apt-get install libwebkit-dev
