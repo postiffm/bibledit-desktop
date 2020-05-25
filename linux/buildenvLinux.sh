@@ -25,7 +25,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install libsqlite3-dev
   apt-get install libxml2-dev
   apt-get install libenchant-dev
-  apt-get install libgtkhtml3.14-dev
+  #apt-get install libgtkhtml3.14-dev
   #apt-get install libgtksourceview2.0-dev
   apt-get install libgtksourceview-3.0
   apt-get install libgtksourceview-3.0-dev
@@ -33,7 +33,7 @@ if apt-get --version 2> /dev/null; then
   apt-get install libwebkit2gtk-4.0
   #apt-get install libwebkit-dev
   #apt-get install libwebkitgtk-dev
-  apt-get install libwebkitgtk-3.0
+  #apt-get install libwebkitgtk-3.0
   apt-get install texlive-xetex
   apt-get install php7.4-cli
   apt-get install curl
