@@ -225,11 +225,11 @@ static void startup_callback (GtkApplication *app, gpointer data)
 
   gw_message("GTK version   \t" + std::to_string(gtk_get_major_version()) + "." +
                                   std::to_string(gtk_get_minor_version()) + "." +
-	                          std::to_string(gtk_get_micro_version()));
+	                                std::to_string(gtk_get_micro_version()));
 
   gw_message("WEBKIT2       \t" + std::to_string(webkit_get_major_version()) + "." +
                                   std::to_string(webkit_get_minor_version()) + "." +
-	                          std::to_string(webkit_get_micro_version()));
+	                                std::to_string(webkit_get_micro_version()));
   
   // Check on runtime requirements.
   runtime_initialize ();
@@ -390,25 +390,3 @@ static gboolean debug_callback (const gchar *option_name, const gchar *value,
 				 _("Unknown option %s"), option_name);
 	return FALSE;
 }
-
-
-/*
-
-Gtk3
-http://developer.gnome.org/gtk3/stable/gtk-migrating-2-to-3.html
-http://developer.gnome.org/gtk/2.24/
-
-Do not include individual headers: Done.
-Do not use deprecated symbols: Done.
-Use accessor functions instead of direct access: Done.
-Replace GDK_<keyname> with GDK_KEY_<keyname>: Done.
-Use GIO for launching applications: Done.
-Use cairo for drawing: Done.
-
-Gtk3 is available on Windows.
-
-Switching to Gtk3 needs the webkitgtk for gtk3 also, but we are going to move toward webkit2gtk (MAP 2/27/2018)
-
-pkg-config gtk+-3.0 --modversion
-
-*/
