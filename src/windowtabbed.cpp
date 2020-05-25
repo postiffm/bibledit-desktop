@@ -101,8 +101,7 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 	gtk_style_context_add_class (style_context, "close");
 	gtk_widget_set_can_focus(close_button, FALSE);
 	gtk_button_set_focus_on_click(GTK_BUTTON (close_button), FALSE);
-	g_signal_connect(close_button, "clicked",
-			G_CALLBACK (on_close_button_clicked), this);
+	g_signal_connect(close_button, "clicked", G_CALLBACK (on_close_button_clicked), this);
 	gtk_box_pack_end (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (box);
@@ -113,12 +112,12 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
 
 	parent->connect_focus_signals (webview); // this routine is inherited from FloatingWindow
 
-    webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL);
-    // TO DO: Scroll to the position that possibly was stored while this url was last active.
-    //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
-    //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
-    
-    g_signal_connect((gpointer) webview, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
+  webkit_web_view_load_html (WEBKIT_WEB_VIEW (webview), html.html.c_str(), NULL);
+  // TO DO: Scroll to the position that possibly was stored while this url was last active.
+  //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow));
+  //gtk_adjustment_set_value (adjustment, scrolling_position[active_url]);
+ 
+  g_signal_connect((gpointer) webview, "decide-policy", G_CALLBACK(on_decide_policy_cb), gpointer(this));
 }
 
 SingleTab::~SingleTab()
