@@ -17,9 +17,15 @@
 # Then adapted for Quechua which had a slightly different reference
 # style (periods after book names, and some other peculiarities.
 
+# Update 8/19/2020: encountered new usfm \rem, which starts with \r
+# and affects the parser below.
+
 while ($ln = <>) {
     # Strip leading filename (if using grep, it is like 40_Matthew.usfm)
     $ln =~ s/^.+\.usfm://;
+    $ln =~ s/^.+\.SFM://;
+    # If a comment line, skip entirely
+    if ($ln =~ /^\\rem/) { next; }
     #print $ln;
     # Strip leading \r, leading and trailing \rq...\rq*, parentheses
     $ln =~ s/.*\\r //;
