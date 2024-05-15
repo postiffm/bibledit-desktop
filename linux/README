@@ -14,5 +14,12 @@ autoupdate
 ./configure --prefix /home/postiffm/bibledit (or wherever you like)
 make
 sudo make install
-Run the program from /usr/bin/bibledit-desktop (was bibledit-gtk)
+
+Run the program from $prefix/bibledit-desktop
+
 I recommend you lock the icon in Ubuntu launcher.
+
+If you want some free Bibles to use in Bibledit, you can
+access them this way:
+
+git clone git@github.com:postiffm/bibles.git
