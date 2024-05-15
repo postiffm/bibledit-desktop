@@ -84,11 +84,8 @@ vector < ustring > config_xml_vector_string_get(const ustring & file, const ustr
   // a thread, so it is always good to have a mutex in place.
   // DEBUG("Locking mutex")
   // New 
-  static GMutex config_xml_vector_string_get_mutex = G_STATIC_MUTEX_INIT;
-  // New 
+  static GMutex config_xml_vector_string_get_mutex;
   g_mutex_lock (&config_xml_vector_string_get_mutex);
-  // Old static GStaticMutex config_xml_vector_string_get_mutex = G_STATIC_MUTEX_INIT;
-  // Old g_static_mutex_lock(&config_xml_vector_string_get_mutex);
 
   vector < ustring > value;
   if (g_file_test(file.c_str(), G_FILE_TEST_IS_REGULAR)) {
@@ -145,9 +142,7 @@ vector < ustring > config_xml_vector_string_get(const ustring & file, const ustr
   }
 
   // DEBUG("Unlocking mutex")
-  // New 
   g_mutex_unlock (&config_xml_vector_string_get_mutex);
-  // Old g_static_mutex_unlock(&config_xml_vector_string_get_mutex);
 
   return value;
 }

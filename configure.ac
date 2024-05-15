@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 
-AC_PREREQ(2.63)
+AC_PREREQ([2.71])
 AC_INIT([bibledit-desktop],[4.17],[https://github.com/postiffm/bibledit-desktop])
 AC_CANONICAL_TARGET
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_TARGET
 ac_default_prefix=/usr
 AC_CONFIG_SRCDIR([src])
 AM_INIT_AUTOMAKE([1.9 tar-ustar])
@@ -16,7 +16,6 @@ LT_INIT
 
 CXXFLAGS="-ggdb -O2 ${CXXFLAGS}"
 AC_PROG_CC
-AC_PROG_CC_STDC
 AC_PROG_CPP
 AC_LANG([C++])
 AC_PROG_CXX
@@ -24,7 +23,15 @@ AC_PROG_CXX
 # C++11. Also if any flags are required (e.g., -std=c++11), they are added.
 AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_PROG_CC
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 
 
 PKG_PROG_PKG_CONFIG
@@ -325,7 +332,6 @@ else
   AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${datarootdir}/${PACKAGE}",[PACKAGE_DATA_DIR])
 fi 
 
-
 AC_CONFIG_FILES([Makefile 
 		  man/Makefile 
 		  pix/Makefile 
@@ -348,8 +354,6 @@ AC_CONFIG_FILES([Makefile
 		  git/Makefile
 		  php/Makefile
 		  po/Makefile.in
-		  bibles/Makefile
-		  BiblesInternational/Makefile
 		])
 AC_OUTPUT
 

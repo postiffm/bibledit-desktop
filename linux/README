@@ -8,8 +8,10 @@ bibledit-desktop/linux/buildenvLinux.sh
 Doing the Build on Linux
 ------------------------
 cd bibledit-desktop
+# Update configure.ac to newer version of Autoconf
+autoupdate
 ./autogen.sh
-./configure
+./configure --prefix /home/postiffm/bibledit (or wherever you like)
 make
 sudo make install
 Run the program from /usr/bin/bibledit-desktop (was bibledit-gtk)
