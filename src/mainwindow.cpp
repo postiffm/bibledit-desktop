@@ -2148,7 +2148,7 @@ void MainWindow::showabout()
   gtk_show_about_dialog(GTK_WINDOW(window_main),  // This window does not behave like other child dialogs, but not sure why.
                         "version", PACKAGE_VERSION,
                         "website", PACKAGE_BUGREPORT,
-                        "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2014-2018 Matt Postiff"),
+                        "copyright", _("Copyright (c) 2003-2013 Teus Benschop and 2014-2024 Matt Postiff"),
 			            "translator-credits", _("translator-credits"),
                         "logo-icon-name", "bibledit-desktop",
                         "license",
