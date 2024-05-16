@@ -25,6 +25,7 @@ if apt --version 2> /dev/null; then
   apt install libsqlite3-dev
   apt install libxml2-dev
   apt install libenchant-dev
+  apt install libenchant-2-dev
   apt install libgtksourceview-3.0-1 libgtksourceview-3.0-dev
   # Below installs -dev and -doc as well
   apt install libwebkit2gtk-4.0-37 libwebkit2gtk-4.0-dev
