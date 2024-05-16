@@ -15,6 +15,7 @@ echo "This script works on ubuntu Linux 18.04 LTS and on Debian Unstable and Arc
 if apt --version 2> /dev/null; then
   apt install gitk
   apt install build-essential
+  apt install autopoint
   apt install autotools-dev
   apt install yelp yelp-tools #Dependencies for documentation compilation
   apt install libgtk-3-dev
