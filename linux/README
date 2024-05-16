@@ -2,7 +2,15 @@ Setting up the Build Environment on Linux
 -----------------------------------------
 Make sure you have git (on Ubuntu: sudo apt-get install git)
 cd ~
+mkdir bibledit ; cd bibledit
 git clone https://github.com/postiffm/bibledit-desktop.git
+git clone https://github.com/postiffm/bibles.git
+
+or if you use ssh keys and have them set up
+
+git clone git@github.com:postiffm/bibledit-desktop.git
+git clone git@github.com:postiffm/bibles.git
+
 bibledit-desktop/linux/buildenvLinux.sh
 
 Doing the Build on Linux
@@ -18,8 +26,3 @@ sudo make install
 Run the program from $prefix/bibledit-desktop
 
 I recommend you lock the icon in Ubuntu launcher.
-
-If you want some free Bibles to use in Bibledit, you can
-access them this way:
-
-git clone git@github.com:postiffm/bibles.git
