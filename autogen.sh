@@ -65,6 +65,15 @@ cp -f "$ACLOCAL/ax_require_defined.m4" m4/
 #cp -f "$AUTOCONFARCHIVE/ax_cxx_compile_stdcxx.m4" m4/
 # What to do about isc-posix.m4?
 
+# I ran into a problem on WSL:Ubuntu where gettext infrastructure mismatch: using
+# a Makefile.in.in from gettext version 0.19 but the autoconf macros are from 
+# getgext version 0.20
+# I ran 
+# gettextize -f       <= I do not know what this does
+# aclocal -I m4       <= nor this
+# ./configure --prefix=...
+# make
+
 #echo "Running glib-gettextize..."
 #echo "glib-gettextize----------------------------------" >> $LOG
 #echo "Ignore non-fatal messages" >> $LOG
