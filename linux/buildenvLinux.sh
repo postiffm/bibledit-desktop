@@ -31,7 +31,7 @@ if apt --version 2> /dev/null; then
   apt install libwebkit2gtk-4.0-37 libwebkit2gtk-4.0-dev
 # I'm not sure this package very heavy is still mandatory. BBD works perfectly without it.
 #  apt install texlive-xetex
-  apt install php7.4-cli
+  apt install php8.2-cli
   apt install curl
   apt install intltool
   apt install libtool

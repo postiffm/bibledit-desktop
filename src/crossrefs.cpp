@@ -120,17 +120,18 @@ void CrossReferences::write(const Reference &ref, HtmlWriter2 &htmlwriter)
 
 void CrossReferences::WriteXrefs(bible_bixref *bbl_internal, const Reference &ref, HtmlWriter2 &htmlwriter)
 {
-    vector <unsigned int> *xrefs; // could transfer over to uint32_t here and elsewhere
-    htmlwriter.paragraph_open();
-    htmlwriter.text_add(bbl_internal->projname + _(": Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
-    htmlwriter.paragraph_close();
-
     if (bbl_internal == 0x0) {
         htmlwriter.paragraph_open();
         htmlwriter.text_add(_("Could not open cross-reference file "));
         htmlwriter.paragraph_close();
         return;
     }
+
+    vector <unsigned int> *xrefs; // could transfer over to uint32_t here and elsewhere
+    htmlwriter.paragraph_open();
+    htmlwriter.text_add(bbl_internal->projname + _(": Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
+    htmlwriter.paragraph_close();
+
     if ((ref.book_get() == 0) || (ref.chapter_get() == 0) || (ref.verse_get_single() == 0)) {
         htmlwriter.paragraph_open();
         htmlwriter.text_add(_("Invalid reference; therefore not looking up cross references"));

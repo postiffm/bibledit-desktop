@@ -2916,7 +2916,7 @@ void MainWindow::on_view_analysis ()
 
     // Cross References
     if (!crossrefs) {
-      crossrefs = new CrossReferences();   
+      crossrefs = new CrossReferences();
     }
     
     html.clear(); html.init("");

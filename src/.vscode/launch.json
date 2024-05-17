@@ -1,12 +1,11 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
         {
-            "name": "(gdb) Launch",
+            "name": "gdb",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/usr/bin/bibledit-desktop",
+            "program": "/home/postiffm/bibledit/bin/bibledit-desktop",
             "args": [
                 "--debug"
             ],

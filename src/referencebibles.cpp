@@ -24,11 +24,16 @@
 #include <locale>
 #include "gtkwrappers.h"
 
-//  A small set of important Bibles is pre-stored within the Bibledit-Desktop package. These
-//  are shown in the Analysis window as an aid to the translator.
-//  Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV, English Majority Text (EMTV),
-//  Second goal is to include another tab for translator notes from the NET or other
-//  resources.
+// A small set of Bibles is available as a separate package:
+// Following assumes you have installed bibledit locally instead of in system directories
+// cd ~/bibledit/share/bibledit-desktop
+// git clone git@github.com:postiffm/bibles.git
+//   or
+// git clone https://github.com/postiffm/bibles.git
+// These are shown in the Analysis window as an aid to the translator.
+// Goal is to have BYZ (unaccented) first, then maybe NET, SBLGNT, ASV, English Majority Text (EMTV),
+// Second goal is to include another tab for translator notes from the NET or other
+// resources.
 
 ReferenceBibles::ReferenceBibles() : bibles()
 {
