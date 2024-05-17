@@ -395,7 +395,7 @@ void SpellingChecker::build_suggestion_menu (GtkWidget * menu, GtkTextBuffer *bu
             replacement_set.insert(suggestions[i]);
           }
         }
-        enchant_dict_free_suggestions(dicts[d], suggestions);
+        enchant_dict_free_string_list(dicts[d], suggestions);
       }
     }
   }
@@ -534,7 +534,7 @@ void SpellingChecker::add_to_dictionary(const gchar * word)
   }
 
   // Add it.
-  enchant_dict_add_to_pwl(personal_wordlist, word, strlen(word));
+  enchant_dict_add(personal_wordlist, word, strlen(word));
   correct_words.insert(word);
 }
 
