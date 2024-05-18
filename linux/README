@@ -8,9 +8,6 @@ git clone https://github.com/postiffm/bibles.git
 
 or if you use ssh keys and have them set up
 
-git clone git@github.com:postiffm/bibledit-desktop.git
-git clone git@github.com:postiffm/bibles.git
-
 bibledit-desktop/linux/buildenvLinux.sh
 
 Doing the Build on Linux
@@ -22,6 +19,12 @@ autoupdate
 ./configure --prefix /home/postiffm/bibledit (or wherever you like)
 make
 sudo make install
+
+Optional: Download some Bibles and Cross-reference resources
+------------------------------------------------------------
+cd ~/bibledit/share/bibledit-desktop
+git clone git@github.com:postiffm/bibles.git
+git clone git@github.com:postiffm/BiblesInternational.git
 
 Run the program from $prefix/bibledit-desktop
 
