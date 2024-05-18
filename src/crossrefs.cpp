@@ -29,8 +29,8 @@ extern book_record books_table[];
 
 CrossReferences::CrossReferences()
 {
-    bbl         = LoadXrefs("/bibles/bi.crf",              "BI_XREF");
-    bblopenxref = LoadXrefs("/bibles/open_bible_info.crf", "OPENBIBLE_XREF");
+    bbl         = LoadXrefs("/BiblesInternational/bi.crf",              "BI_XREF");
+    bblopenxref = LoadXrefs("/BiblesInternational/open_bible_info.crf", "OPENBIBLE_XREF");
 }
 
 bible_bixref *CrossReferences::LoadXrefs(const ustring& filename, const ustring &xrefbiblename)
@@ -128,9 +128,9 @@ void CrossReferences::WriteXrefs(bible_bixref *bbl_internal, const Reference &re
     }
 
     vector <unsigned int> *xrefs; // could transfer over to uint32_t here and elsewhere
-    htmlwriter.paragraph_open();
+    htmlwriter.heading_open(3);
     htmlwriter.text_add(bbl_internal->projname + _(": Cross references for ") + books_id_to_localname(ref.book_get()) + " " + std::to_string(ref.chapter_get()) + ":" + ref.verse_get());
-    htmlwriter.paragraph_close();
+    htmlwriter.heading_close();
 
     if ((ref.book_get() == 0) || (ref.chapter_get() == 0) || (ref.verse_get_single() == 0)) {
         htmlwriter.paragraph_open();
