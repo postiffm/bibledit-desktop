@@ -1,2 +1,6 @@
+2024-05-16  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* configure.ac (AM_GNU_GETTEXT_VERSION): Bump to 0.21.
+
 See doc/changelog.html or the online help.
 4.9.1	Initial cut at internationalization of the bibledit-gtk interface

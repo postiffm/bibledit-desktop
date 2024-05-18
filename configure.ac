@@ -236,7 +236,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"],
                    [The domain to use with gettext])
 
-AM_GNU_GETTEXT_VERSION([0.19.7])
+AM_GNU_GETTEXT_VERSION([0.21])
 AM_GNU_GETTEXT([external])
 
 BIBLEDIT_LOCALEDIR=[${datadir}/locale]

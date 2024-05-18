@@ -1,3 +1,12 @@
+2024-05-16  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.21.
+	* Rules-quot: Upgrade to gettext-0.21.
+	* en@boldquot.header: Upgrade to gettext-0.21.
+	* en@quot.header: Upgrade to gettext-0.21.
+	* insert-header.sin: Upgrade to gettext-0.21.
+	* remove-potcdate.sin: Upgrade to gettext-0.21.
+
 Version 0.2 Matt Postiff <postiffm@umich.edu> May 18, 2017
 	Second edition--removes intltool/intltoolilze, and uses
 	newer gettext method.
