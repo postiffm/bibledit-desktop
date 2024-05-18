@@ -2,7 +2,6 @@ The features that you feel Bibledit-Gtk ought to have become todo items.
 
 I'd like to put out a call for patches implementing the todo items.
 
-
 These are bug fixes or speed enhancements or features that we believe
 are worthy of someone's attention to improve bibledit-gtk. For
 additional information, please contact Pastor Matt Postiff
@@ -11,12 +10,6 @@ additional information, please contact Pastor Matt Postiff
 Roughly in order of priority
 
 Date Added Description
-5/16/2024 Cannot open file /home/postiffm/bibledit/share/bibledit-desktop/bibles/bi.crf
-	Need to redo how we install the bibles and shared resources. I can't remember
-	how to do this, but I have removed bibles/ from the distribution, and I plan
-	to remove BiblesInternational from there as well and have it as a separate 
-	repo. Same with open_bible_info.crf
-	Fixed crash in this case 5/17/2024.
 1/12/2015  Fix Settings:: and ProjectConfiguration:: to have a "SaveSettings"
 	   routine or some such so that they do NOT save state in their 
 	   destructors.

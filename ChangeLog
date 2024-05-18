@@ -1,3 +1,15 @@
+2024-05-16 
+	The ChangeLog file was scarcely updated. git history tells all the details.
+
+	I will try to move DONE items from the TODO file into this file.
+
+    Error opening file /home/postiffm/bibledit/share/bibledit-desktop/bibles/bi.crf
+	Need to redo how we install the bibles and shared resources. I have removed 
+	bibles/ from the distribution, and I plan to remove BiblesInternational from it 
+	as well and have it as a separate repo that has the xref and .crf files.
+	Fixed crash in this case 5/17/2024.
+	Done moving bibles and BiblesInternational 5/18/2024.
+
 2024-05-16  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* configure.ac (AM_GNU_GETTEXT_VERSION): Bump to 0.21.
