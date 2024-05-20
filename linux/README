@@ -4,11 +4,17 @@ Make sure you have git (on Ubuntu: sudo apt-get install git)
 cd ~
 mkdir bibledit ; cd bibledit
 git clone https://github.com/postiffm/bibledit-desktop.git
-git clone https://github.com/postiffm/bibles.git
 
-or if you use ssh keys and have them set up
+or if you use ssh keys and have them set up you can do
+git clone git@github.com:postiffm/bibledit-desktop.git
 
 bibledit-desktop/linux/buildenvLinux.sh
+
+You may have to install slightly different versions of some packages
+which are installed by the above shell script.
+For example, on my Windows Subsystem for Linux, I have to do
+sudo apt install php8.1-cli 
+because version 8.2 is not easily available.
 
 Doing the Build on Linux
 ------------------------
@@ -16,7 +22,7 @@ cd bibledit-desktop
 # Update configure.ac to newer version of Autoconf
 autoupdate
 ./autogen.sh
-./configure --prefix /home/postiffm/bibledit (or wherever you like)
+./configure --prefix /home/your-username/bibledit
 make
 sudo make install
 
@@ -26,6 +32,6 @@ cd ~/bibledit/share/bibledit-desktop
 git clone git@github.com:postiffm/bibles.git
 git clone git@github.com:postiffm/BiblesInternational.git
 
-Run the program from $prefix/bibledit-desktop
+Run the program from $prefix/bin/bibledit-desktop
 
 I recommend you lock the icon in Ubuntu launcher.
