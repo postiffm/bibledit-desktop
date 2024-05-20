@@ -5283,25 +5283,38 @@ void MainWindow::on_window_editor_delete_button_clicked(GtkButton * button, gpoi
   ((MainWindow *) user_data)->on_window_editor_delete_button(button);
 }
 
+void MainWindow::list_window_editors(void)
+{
+  DEBUG("There are " +  std::to_string(editor_windows.size()) + " editor windows");
+  for (auto it : editor_windows) {
+    if (!it) {
+      DEBUG("Editor window: NULL\n");
+    }
+    else { DEBUG("Editor window: " + it->projectname_get()); }
+  }
+}
 
 void MainWindow::on_window_editor_delete_button(GtkButton * button)
 {
   GtkWidget *widget = GTK_WIDGET(button);
-  vector < WindowEditor * >::iterator iterator = editor_windows.begin();
-  for (unsigned int i = 0; i < editor_windows.size(); i++) {
-    if (widget == editor_windows[i]->delete_signal_button) {
-      delete editor_windows[i];
-      editor_windows.erase(iterator);
+  list_window_editors();
+  vector < WindowEditor * >::iterator it;
+  for (it = editor_windows.begin(); it < editor_windows.end(); it++) {
+    if (widget == (*it)->delete_signal_button) {
+      delete (*it);               // call destructor
+      editor_windows.erase(it);   // remove from vector
       break;
     }
-    iterator++;
   }
+
   // When one of two or more editor windows is closed,
-  // a remaining one does not always focus. Focus one here.
+  // a remaining one does not always focus "on its own". Focus one here.
   if (!editor_windows.empty()) {
     editor_windows[0]->focus_set();
   }
   handle_editor_focus();
+
+  list_window_editors();
 }
 
 

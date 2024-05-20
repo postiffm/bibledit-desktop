@@ -697,6 +697,7 @@ protected:
 
   /* Text Editors */
   vector <WindowEditor *> editor_windows;
+  void list_window_editors(void);
   static void on_window_editor_delete_button_clicked(GtkButton *button, gpointer user_data);
   void on_window_editor_delete_button(GtkButton *button);
   WindowEditor * last_focused_editor_window();
