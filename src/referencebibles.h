@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2018- Matt Postiff.
+ ** Copyright (©) 2018-2024 Matt Postiff.
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by

@@ -1,5 +1,5 @@
 /*
-** Copyright (©) 2016 Matt Postiff, postiffm@umich.edu
+** Copyright (©) 2016-2024 Matt Postiff
 **  
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by

@@ -1,5 +1,5 @@
 /*
- ** Copyright (©) 2003-2013 Teus Benschop, 2015-2017 Matt Postiff
+ ** Copyright (©) 2003-2013 Teus Benschop, 2015-2024 Matt Postiff
  **  
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
